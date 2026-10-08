@@ -5,6 +5,7 @@ import { suggestUpgrades } from '../core/suggest.js';
 import { wildcardCost } from '../core/wildcards.js';
 import { deckInput, formatInput, loadDeck, resolveFormat } from './deckInput.js';
 import { asOfDate, metaContext, metaInput } from './metaInput.js';
+import { loadRecommendations, recommendationsInput } from './recsInput.js';
 import { guarded } from './result.js';
 
 const count = z.number().int().min(0);
@@ -35,6 +36,7 @@ export function registerUpgradeTools(server: McpServer, ctx: Context) {
         maxChangePercent: z.number().min(1).max(100).optional().describe('Overrides the intensity cap'),
         keepCards: z.array(z.string()).optional().describe('Card names that must not be cut'),
         meta: metaInput,
+        recommendations: recommendationsInput,
       },
     },
     guarded(async (args) => {
@@ -42,7 +44,9 @@ export function registerUpgradeTools(server: McpServer, ctx: Context) {
       const deck = await loadDeck(ctx, args);
       const index = await ctx.getIndex();
       const { meta, source } = await metaContext(ctx, args.meta, index, fmt.id);
+      const { recs, summary } = loadRecommendations(args.recommendations, index, deck, fmt.legalityKey);
       const result = suggestUpgrades(deck, fmt, index, {
+        recommendations: recs,
         mode: args.mode,
         wildcards: args.wildcards,
         maxSwaps: args.maxSwaps,
@@ -52,7 +56,7 @@ export function registerUpgradeTools(server: McpServer, ctx: Context) {
         meta,
         asOf: asOfDate(index),
       });
-      return { format: fmt.id, metaSource: source, ...result, unresolved: deck.unresolved };
+      return { format: fmt.id, metaSource: source, recommendations: summary, ...result, unresolved: deck.unresolved };
     }),
   );
 

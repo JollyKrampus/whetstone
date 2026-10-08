@@ -1,0 +1,26 @@
+TEST FIXTURE: imitates text copied from a commander page. Numbers are invented.
+Krenko, Mob Boss
+Commander
+Goblins Tokens
+High Synergy Cards
+Legion Warboss
+61% of 20.1k decks
++44% synergy
+Battle Cry Goblin
+48% of 20.1k decks
++39% synergy
+Krenko, Tin Street Kingpin
+55% of 20.1k decks
++36% synergy
+Top Cards
+Impact Tremors
+40% of 20.1k decks
++22% synergy
+Goblin Instigator
+37% of 20.1k decks
++30% synergy
+Creatures
+1 Skirk Prospector
+Some helpful sentence that is not a card.
+• Dragon Fodder
+View More

@@ -48,8 +48,9 @@
     "cheapMaxMv": 2
   },
   "commanderSynergy": {
-    "notes": "Share of nonland cards that share a theme with the commander's rules text (or a creature type it names) needed for full marks.",
+    "notes": "Share of nonland cards that share a theme with the commander's rules text (or a creature type it names) needed for full marks. When the user pastes a recommendation list (e.g. from EDHREC), the share of nonland cards on it counts half, against targetRecommendedShare.",
     "targetShare": 0.35,
+    "targetRecommendedShare": 0.4,
     "themes": {
       "tokens": "create[^.]*token",
       "+1/+1 counters": "\\+1/\\+1 counter",

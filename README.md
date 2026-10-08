@@ -105,6 +105,26 @@ Every tool takes a deck as either `text` (an Arena export) or `deck` (the object
 - **Some cards are never cut:** anything in `keepCards`, and the commander.
 - **In Brawl, every added card must support the commander's theme,** read from its rules text (tokens, sacrifice, +1/+1 counters, a creature type it names, …). The theme is reported as `commanderThemes`.
 
+### Commander recommendations (EDHREC)
+
+Grindstone never fetches EDHREC: its terms forbid automated access. Instead, open your commander's page yourself, select and copy it, and paste it into the chat. Claude passes it to `rate_power` and `suggest_upgrades` as `recommendations`:
+
+```json
+{ "text": "<whatever you pasted>", "commander": "Krenko, Mob Boss", "source": "EDHREC" }
+```
+
+The parser is forgiving:
+- **Card names:** any line that names a card counts.
+- **Stats:** "52% of 20.1k decks" and "+38% synergy" lines are attached to the card above them.
+- **Everything else:** headings and other page text are ignored.
+- **Plain lists:** a simple list, or an Arena-style one, works too.
+
+With a list:
+- **Adds lean toward recommended cards.** Their reasons say so ("on your recommendation list for Krenko, Mob Boss (61% of decks, +44% synergy)").
+- **Recommended cards already in the deck are cut last.**
+- **Brawl's commander-synergy score counts how much of the deck is on the list.**
+- **Commander mismatches are flagged:** if the list's commander isn't the deck's commander, the result's `recommendations.notes` says so.
+
 ## Editing the rubric
 
 All weights, thresholds, archetype targets and the Karsten source table live in [`rubric/power-rubric.json`](rubric/power-rubric.json) and [`rubric/brawl-rubric.json`](rubric/brawl-rubric.json). To tune them without editing the package, copy either file to your config directory's `rubric/` folder; that copy wins.

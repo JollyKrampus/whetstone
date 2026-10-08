@@ -96,7 +96,7 @@ export const brawlRubricSchema = z.object({
   targetsPer100: z.object({ lands: z.number(), ramp: z.number(), cardDraw: z.number(), interaction: z.number() }),
   manaBase,
   interaction,
-  commanderSynergy: z.object({ targetShare: z.number(), themes: z.record(z.string(), z.string()) }),
+  commanderSynergy: z.object({ targetShare: z.number(), targetRecommendedShare: z.number(), themes: z.record(z.string(), z.string()) }),
   cardQuality,
 });
 

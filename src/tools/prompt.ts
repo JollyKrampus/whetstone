@@ -30,6 +30,13 @@ export function registerTunePrompt(server: McpServer) {
                 '2. validate_deck: list every legality problem first.',
                 '3. analyze_deck: summarize the curve, mana (quote any Karsten shortfalls) and roles.',
                 '4. rate_power: give the tier and the weakest dimensions with their reasons.',
+                ...(/brawl/i.test(format)
+                  ? [
+                      "   For Brawl, ask me to paste my commander's EDHREC page (or any recommendation list). Don't fetch " +
+                        'EDHREC yourself; its terms forbid automated access. Pass what I paste as `recommendations` to ' +
+                        'rate_power and suggest_upgrades.',
+                    ]
+                  : []),
                 `5. Search the web for the current ${format} metagame on MTG Arena and collect 3-8 recent top decklists ` +
                   'in Arena export format, with meta share and win rate where available. Only use sites that allow it, and say where the lists came from.',
                 '6. compare_to_meta with those lists as metaLists, then rate_power again with them as meta.',

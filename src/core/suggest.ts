@@ -15,6 +15,7 @@ import type { FormatRules } from './formats.js';
 import type { MetaContext } from './meta.js';
 import { heuristicQuality } from './power.js';
 import { brawlRubric, constructedRubric } from './rubric.js';
+import { describeRecommendation, recommendationScore, type RecommendationList } from './recs.js';
 import { commanderThemes } from './themes.js';
 import { type CardRecord, type Color, COLORS, type Rarity } from './types.js';
 import { ARENA_MAX_COPIES, type WildcardCounts, zeroWildcards } from './wildcards.js';
@@ -42,6 +43,8 @@ export interface SuggestOptions {
   /** Overrides the intensity's cap on changed cards, as a percent of the deck. */
   maxChangePercent?: number;
   keepCards?: string[];
+  /** Pasted commander recommendations (e.g. from EDHREC); adds lean toward them. */
+  recommendations?: RecommendationList;
   meta?: MetaContext;
   asOf: string;
 }
@@ -78,6 +81,8 @@ interface Scored {
   value: number;
   quality: number;
   metaRate: number;
+  /** recommendationScore, 0 when off the pasted list (or there is none). */
+  rec: number;
 }
 
 export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: CardIndex, opts: SuggestOptions): SuggestResult {
@@ -89,6 +94,7 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
   const notes: string[] = [];
   if (!meta) notes.push('No meta lists supplied: card strength is estimated from popularity, rarity and age.');
 
+  const recs = opts.recommendations?.cards.size ? opts.recommendations : undefined;
   const metaRate = (c: CardRecord) => (meta ? (meta.playRate.get(c.oracleId) ?? 0) / (meta.maxNonlandRate || 1) : 0);
   const score = (c: CardRecord): Scored => {
     const quality = heuristicQuality(c, heuristics, opts.asOf);
@@ -96,7 +102,10 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
     let value: number;
     if (opts.mode === 'competitive') value = meta ? 0.6 * rate + 0.4 * quality : quality;
     else value = (meta ? 0.15 * rate + 0.85 * quality : quality) - CASUAL_COST_PENALTY[wildcardRarity(c)];
-    return { card: c, value, quality, metaRate: rate };
+    const rec = recs ? recommendationScore(recs, c) : 0;
+    // A pasted recommendation list is the user's own signal for this deck: weigh it as much as everything else.
+    if (recs) value = 0.5 * value + 0.5 * rec;
+    return { card: c, value, quality, metaRate: rate, rec };
   };
 
   const identity = deckIdentity(deck, analysis.colors.sources);
@@ -122,8 +131,10 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       const redundancy = roles.length ? Math.min(...roles.map((r) => roleCounts[r])) / 12 : 0.5;
       const mvOver = Math.max(0, castingMv(e.card) - (curveTarget + 1.5)) * 0.15;
       const absent = meta && s.metaRate === 0 ? 0.3 : 0;
-      const offTheme = themes && !themes.matches(e.card).length ? 0.3 : 0;
-      return { e, s, roles, cutScore: (1 - s.value) + 0.2 * Math.min(1, redundancy) + mvOver + absent + offTheme };
+      const onList = s.rec > 0;
+      const offTheme = themes && !themes.matches(e.card).length && !onList ? 0.3 : 0;
+      const recShift = recs ? (onList ? -0.3 : 0.2) : 0;
+      return { e, s, roles, cutScore: (1 - s.value) + 0.2 * Math.min(1, redundancy) + mvOver + absent + offTheme + recShift };
     })
     .sort((a, b) => b.cutScore - a.cutScore || cmp(a.e.name, b.e.name));
   const nonlandEntries = deck.main.filter((e) => !isLand(e.card)).length;
@@ -158,7 +169,8 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       if (Math.abs(castingMv(c) - mv) > 1 || isCreature(c) !== creature) continue;
       if (needsReach && !hasReach(c)) continue;
       const themeHits = themes ? themes.matches(c) : [];
-      if (themes && !themeHits.length) continue;
+      // Recommended cards count as on-plan even when the theme regexes miss them.
+      if (themes && !themeHits.length && !(recs && recs.cards.has(c.oracleId))) continue;
       const roles = tagRoles(c).map((t) => t.role);
       const shared = cut.roles.filter((r) => roles.includes(r));
       if (cut.roles.length && shared.length === 0) continue;
@@ -208,7 +220,14 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       cut: o.cut.e.name,
       add: o.add.card.name,
       qty: o.qty,
-      reason: reasonFor(o.cut.e, o.add, o.shared, meta, themes ? { commander: themes.commander, hits: o.themeHits } : null),
+      reason: reasonFor(
+        o.cut.e,
+        o.add,
+        o.shared,
+        meta,
+        themes ? { commander: themes.commander, hits: o.themeHits } : null,
+        recs ? describeRecommendation(recs, o.add.card) : null,
+      ),
       wildcardCost: { [o.rarity]: o.qty },
     });
   }
@@ -271,13 +290,16 @@ function reasonFor(
   shared: Role[],
   meta: MetaContext | undefined,
   theme: { commander: string; hits: string[] } | null,
+  recNote: string | null,
 ): string {
   const role = shared.length ? `fills the same ${shared.map((r) => ROLE_WORDS[r]).join('/')} role` : 'fills a similar slot';
   const cutMv = castingMv(cut.card);
   const addMv = castingMv(add.card);
   const mv = addMv < cutMv ? ` for ${cutMv - addMv} less mana` : addMv > cutMv ? ` at ${addMv - cutMv} more mana` : ' at the same mana value';
   let why: string;
-  if (meta && add.metaRate > 0) {
+  if (recNote) {
+    why = `and ${recNote}`;
+  } else if (meta && add.metaRate > 0) {
     const n = meta.lists.filter((l) => l.main.has(add.card.oracleId)).length;
     why = `and appears in ${n} of ${meta.lists.length} meta lists`;
   } else {

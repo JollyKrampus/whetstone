@@ -3,6 +3,7 @@ import { isBasicLand, isLand, wildcardRarity } from './cards.js';
 import { countCards, playEntries, type ResolvedDeck, type ResolvedEntry } from './deck.js';
 import type { FormatRules } from './formats.js';
 import type { MetaContext } from './meta.js';
+import type { RecommendationList } from './recs.js';
 import { simulateHands } from './simulate.js';
 import { commanderThemes } from './themes.js';
 import {
@@ -44,6 +45,8 @@ export interface RateOptions {
   meta?: MetaContext;
   /** Date the card data was taken (YYYY-MM-DD); recency is measured from here, not "now". */
   asOf: string;
+  /** Pasted commander recommendations (Brawl). */
+  recommendations?: RecommendationList;
   simulation?: ConsistencySignals;
 }
 
@@ -269,7 +272,7 @@ function rateBrawl(deck: ResolvedDeck, a: Analysis, r: BrawlRubric, opts: RateOp
   const t = r.targetsPer100;
   const dims: Dimension[] = [
     manaBase(a, r.manaBase, t.lands * scale, r.weights.manaBase),
-    commanderSynergy(deck, r),
+    commanderSynergy(deck, r, opts.recommendations),
     countDimension('Ramp', a.roles.counts.ramp, t.ramp * scale, r.weights.ramp, 'ramp spells'),
     countDimension('Card draw', a.roles.counts.card_draw, t.cardDraw * scale, r.weights.cardDraw, 'card draw sources'),
     interaction(a, r.interaction, t.interaction * scale, r.weights.interaction),
@@ -289,38 +292,41 @@ function countDimension(name: string, have: number, target: number, weight: numb
   };
 }
 
-function commanderSynergy(deck: ResolvedDeck, r: BrawlRubric): Dimension {
+function commanderSynergy(deck: ResolvedDeck, r: BrawlRubric, recs?: RecommendationList): Dimension {
   const p = r.commanderSynergy;
   const cmd = deck.commander;
   const weight = r.weights.commanderSynergy;
   if (!cmd) {
     return { name: 'Commander synergy', score: 0, weight, confidence: 'normal', reasons: ['No commander to build around.'] };
   }
+  const spells = deck.main.filter((e) => !isLand(e.card));
+  const total = countCards(spells) || 1;
   const themes = commanderThemes(deck, p.themes);
-  if (!themes) {
+  const reasons: string[] = [];
+  let themeScore: number | null = null;
+  if (themes) {
+    const share = countCards(spells.filter((e) => themes.matches(e.card).length > 0)) / total;
+    themeScore = 100 * Math.min(1, share / p.targetShare);
+    reasons.push(`${cmd.name} cares about: ${[...themes.themes, ...themes.tribes].join(', ')}.`);
+    reasons.push(`${pct(share)} of nonland cards support that (target ${pct(p.targetShare)}).`);
+  }
+  let recScore: number | null = null;
+  if (recs?.cards.size) {
+    const share = countCards(spells.filter((e) => recs.cards.has(e.oracleId))) / total;
+    recScore = 100 * Math.min(1, share / p.targetRecommendedShare);
+    reasons.push(`${pct(share)} of nonland cards are on your pasted recommendation list (target ${pct(p.targetRecommendedShare)}).`);
+  }
+  if (themeScore === null && recScore === null) {
     return {
       name: 'Commander synergy',
       score: 50,
       weight,
       confidence: 'low',
-      reasons: [`No clear theme found in ${cmd.name}'s text; synergy can't be measured.`],
+      reasons: [`No clear theme found in ${cmd.name}'s text; synergy can't be measured. Pasting a recommendation list helps.`],
     };
   }
-  const spells = deck.main.filter((e) => !isLand(e.card));
-  const hits = spells.filter((e) => themes.matches(e.card).length > 0);
-  const share = countCards(hits) / (countCards(spells) || 1);
-  const score = round(100 * Math.min(1, share / p.targetShare));
-  const named = [...themes.themes, ...themes.tribes];
-  return {
-    name: 'Commander synergy',
-    score,
-    weight,
-    confidence: 'normal',
-    reasons: [
-      `${cmd.name} cares about: ${named.join(', ')}.`,
-      `${pct(share)} of nonland cards support that (target ${pct(p.targetShare)}).`,
-    ],
-  };
+  const score = round(themeScore !== null && recScore !== null ? (themeScore + recScore) / 2 : (themeScore ?? recScore)!);
+  return { name: 'Commander synergy', score, weight, confidence: 'normal', reasons: reasons.slice(0, 3) };
 }
 
 function cmp(a: string, b: string) {
