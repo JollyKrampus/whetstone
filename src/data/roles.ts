@@ -34,7 +34,9 @@ interface Rule {
   test?: (c: CardRecord) => boolean;
 }
 
-const TARGET_THING = '(?:target|up to (?:one|two) target) (?:\\w+ )?(?:creature|permanent|nonland permanent|artifact|enchantment|planeswalker|battle)';
+// Removal means it can answer a creature (or any permanent); artifact/enchantment-only hate doesn't count.
+const TARGET_THING =
+  '(?:target|up to (?:one|two) target) (?:\\w+ )?(?:creature|permanent|nonland permanent|planeswalker|battle|artifact or creature|creature or planeswalker)';
 
 /**
  * Oracle-text heuristics for card roles. Each match is reported with its rule ID so users

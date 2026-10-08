@@ -10,7 +10,7 @@ import {
   constructedRubric,
   tierFor,
 } from './rubric.js';
-import type { Color } from './types.js';
+import type { CardRecord, Color } from './types.js';
 
 export interface Dimension {
   name: string;
@@ -148,25 +148,33 @@ function cardQuality(
     return { name: 'Card quality', score: round((100 * sum) / copies), weight, confidence: 'normal', reasons };
   }
 
-  const h = p.heuristic;
-  const asOf = Date.parse(opts.asOf);
-  const logBest = Math.log(h.popularityBest);
-  const logWorst = Math.log(h.popularityWorst);
-  const scored = spells.map((e) => {
-    const rank = e.card.edhrecRank;
-    const popularity = rank === null ? 0.2 : clamp((logWorst - Math.log(rank)) / (logWorst - logBest), 0, 1);
-    const years = (asOf - Date.parse(e.card.releasedAt)) / (365.25 * 24 * 3600 * 1000);
-    const recency =
-      years <= h.recencyFullYears ? 1 : years >= h.recencyZeroYears ? 0 : 1 - (years - h.recencyFullYears) / (h.recencyZeroYears - h.recencyFullYears);
-    const rarity = h.rarityValue[wildcardRarity(e.card)];
-    const q = h.popularityWeight * popularity + h.rarityWeight * rarity + h.recencyWeight * recency;
-    return { e, q };
-  });
+  const scored = spells.map((e) => ({ e, q: heuristicQuality(e.card, p.heuristic, opts.asOf) }));
   const score = round((100 * scored.reduce((s, x) => s + x.q * x.e.qty, 0)) / copies);
   const weakest = [...scored].sort((x, y) => x.q - y.q || cmp(x.e.name, y.e.name)).slice(0, 3).map((x) => x.e.name);
   const reasons = ['No meta lists supplied, so this is estimated from card popularity, rarity and age (low confidence).'];
   if (weakest.length) reasons.push(`Weakest by that estimate: ${weakest.join(', ')}.`);
   return { name: 'Card quality', score, weight, confidence: 'low', reasons };
+}
+
+/** 0-1 estimate of a card's strength from EDHREC popularity (log scale), rarity and age. */
+export function heuristicQuality(
+  card: CardRecord,
+  h: ConstructedRubric['cardQuality']['heuristic'],
+  asOf: string,
+): number {
+  const rank = card.edhrecRank;
+  const logBest = Math.log(h.popularityBest);
+  const logWorst = Math.log(h.popularityWorst);
+  const popularity = rank === null ? 0.2 : clamp((logWorst - Math.log(rank)) / (logWorst - logBest), 0, 1);
+  const years = (Date.parse(asOf) - Date.parse(card.releasedAt)) / (365.25 * 24 * 3600 * 1000);
+  const recency =
+    years <= h.recencyFullYears
+      ? 1
+      : years >= h.recencyZeroYears
+        ? 0
+        : 1 - (years - h.recencyFullYears) / (h.recencyZeroYears - h.recencyFullYears);
+  const rarity = h.rarityValue[wildcardRarity(card)];
+  return h.popularityWeight * popularity + h.rarityWeight * rarity + h.recencyWeight * recency;
 }
 
 // ---- 60-card formats -------------------------------------------------------------------

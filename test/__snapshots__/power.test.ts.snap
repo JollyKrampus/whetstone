@@ -93,11 +93,11 @@ exports[`rate_power rubric > rates t2-white-weenie as tier 2 1`] = `
       "confidence": "normal",
       "name": "Interaction",
       "reasons": [
-        "8 interactive spells (removal, counters, sweepers); about 9 suits this deck.",
-        "6 of them cost 2 or less.",
+        "4 interactive spells (removal, counters, sweepers); about 9 suits this deck.",
+        "2 of them cost 2 or less.",
         "Includes 2 sweepers.",
       ],
-      "score": 85,
+      "score": 46,
       "weight": 0.15,
     },
     {
@@ -123,7 +123,7 @@ exports[`rate_power rubric > rates t2-white-weenie as tier 2 1`] = `
   ],
   "label": "Casual",
   "rubric": "Constructed (60-card)",
-  "score": 45.2,
+  "score": 39.4,
   "tier": 2,
 }
 `;

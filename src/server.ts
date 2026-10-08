@@ -6,6 +6,7 @@ import { registerAnalyzeTools } from './tools/analyzeTools.js';
 import { registerDeckTools } from './tools/deckTools.js';
 import { registerPowerTools } from './tools/powerTools.js';
 import { registerSearch } from './tools/search.js';
+import { registerUpgradeTools } from './tools/upgradeTools.js';
 
 export function createServer(ctx: Context = defaultContext()): McpServer {
   const server = new McpServer({ name: 'grindstone-mcp', version: VERSION });
@@ -14,5 +15,6 @@ export function createServer(ctx: Context = defaultContext()): McpServer {
   registerDeckTools(server, ctx);
   registerAnalyzeTools(server, ctx);
   registerPowerTools(server, ctx);
+  registerUpgradeTools(server, ctx);
   return server;
 }
