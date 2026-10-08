@@ -3,6 +3,7 @@ import { frontTypeLine, isBasicLand, isLand, rulesText, wildcardRarity } from '.
 import { countCards, playEntries, type ResolvedDeck, type ResolvedEntry } from './deck.js';
 import type { FormatRules } from './formats.js';
 import type { MetaContext } from './meta.js';
+import { simulateHands } from './simulate.js';
 import {
   type BrawlRubric,
   brawlRubric,
@@ -33,6 +34,8 @@ export interface PowerRating {
 export interface ConsistencySignals {
   keepable7: number;
   landDropsOnCurve: number;
+  /** Turn through which `landDropsOnCurve` was measured. */
+  landDropTurn: number;
   colorAvailability: number;
 }
 
@@ -52,7 +55,21 @@ const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
 export function ratePower(deck: ResolvedDeck, fmt: FormatRules, opts: RateOptions): PowerRating {
   const a = analyzeDeck(deck, fmt);
-  return fmt.commander ? rateBrawl(deck, a, brawlRubric(), opts) : rateConstructed(deck, a, constructedRubric(), opts);
+  if (fmt.commander) return rateBrawl(deck, a, brawlRubric(), opts);
+  const r = constructedRubric();
+  let simulation = opts.simulation;
+  if (!simulation && a.deckSize >= 7) {
+    const sim = simulateHands(deck, { iterations: r.consistency.simulationIterations, seed: r.consistency.simulationSeed });
+    // Land drops matter up to the turn the curve tops out: about average mana value + 1.
+    const turn = Math.min(5, Math.max(2, Math.round(a.averageManaValue + 1))) as 2 | 3 | 4 | 5;
+    simulation = {
+      keepable7: sim.keepable7,
+      landDropsOnCurve: sim.landDrops[`turn${turn}`],
+      landDropTurn: turn,
+      colorAvailability: sim.colorAvailability,
+    };
+  }
+  return rateConstructed(deck, a, r, { ...opts, simulation });
 }
 
 function finish(rubric: { name: string; tiers: ConstructedRubric['tiers'] }, archetype: string, dims: Dimension[]): PowerRating {
@@ -235,7 +252,7 @@ function consistency(deck: ResolvedDeck, a: Analysis, r: ConstructedRubric, sim?
       3;
     score = simScore * p.simulationWeight + structure * p.structureWeight;
     reasons.push(
-      `Simulated: ${pct(sim.keepable7)} keepable 7-card hands, ${pct(sim.landDropsOnCurve)} hit land drops on curve through turn 4, ` +
+      `Simulated: ${pct(sim.keepable7)} keepable 7-card hands, ${pct(sim.landDropsOnCurve)} hit land drops on curve through turn ${sim.landDropTurn}, ` +
         `${pct(sim.colorAvailability)} average color availability on curve.`,
     );
   }

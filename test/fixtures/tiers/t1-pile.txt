@@ -2,8 +2,8 @@ About
 Name Big Pile
 
 Deck
-2 Shivan Dragon
-3 Fire Elemental
+3 Shivan Dragon
+4 Fire Elemental
 2 Colossal Dreadmaw
 1 Gigantosaurus
 1 Drakuseth, Maw of Flames
@@ -16,6 +16,7 @@ Deck
 1 Counterspell
 2 Delver of Secrets
 1 Opt
+
 3 Cultivate
 2 Impact Tremors
 1 Guttersnipe
@@ -25,6 +26,6 @@ Deck
 1 Temple Garden
 2 Wind-Scarred Crag
 8 Mountain
-6 Forest
+4 Forest
 4 Plains
 2 Island

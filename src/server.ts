@@ -6,6 +6,7 @@ import { registerAnalyzeTools } from './tools/analyzeTools.js';
 import { registerDeckTools } from './tools/deckTools.js';
 import { registerPowerTools } from './tools/powerTools.js';
 import { registerSearch } from './tools/search.js';
+import { registerSimTools } from './tools/simTools.js';
 import { registerUpgradeTools } from './tools/upgradeTools.js';
 
 export function createServer(ctx: Context = defaultContext()): McpServer {
@@ -16,5 +17,6 @@ export function createServer(ctx: Context = defaultContext()): McpServer {
   registerAnalyzeTools(server, ctx);
   registerPowerTools(server, ctx);
   registerUpgradeTools(server, ctx);
+  registerSimTools(server, ctx);
   return server;
 }
