@@ -1,0 +1,26 @@
+About
+Name Boros Pressure
+
+Deck
+4 Emberheart Challenger (BLB) 133
+4 Slickshot Show-Off (OTJ) 146
+4 Voice of Victory (TDM) 33
+4 Inti, Seneschal of the Sun (LCI) 151
+4 Razorkin Needlehead (DSK) 153
+4 Hired Claw (BLB) 140
+2 Sunspine Lynx (LCI) 168
+4 Burst Lightning (FDN) 192
+4 Lightning Strike (FDN) 198
+4 Shock (FDN) 207
+2 Stroke of Midnight (WOE) 33
+4 Sacred Foundry (GRN) 254
+4 Inspiring Vantage (OTJ) 269
+2 Sunbillow Verge (DSK) 264
+2 Elegant Parlor (MKM) 260
+6 Mountain (FDN) 279
+2 Plains (FDN) 272
+
+Sideboard
+3 Abrade (DFT) 112
+2 Boltwave (TDM) 102
+2 Cathar Commando (FDN) 139
