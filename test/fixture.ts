@@ -39,6 +39,9 @@ export function testContext(overrides: Partial<Context> = {}): Context {
         throw new Error('network disabled in tests');
       },
     }),
+    fetch: async () => {
+      throw new Error('network disabled in tests');
+    },
     online: false,
     cacheDir: dir,
     configDir: dir,

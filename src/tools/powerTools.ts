@@ -20,9 +20,9 @@ export function registerPowerTools(server: McpServer, ctx: Context) {
       const fmt = resolveFormat(args.format, args.deck);
       const deck = await loadDeck(ctx, args);
       const index = await ctx.getIndex();
-      const meta = await metaContext(args.meta, index);
+      const { meta, source } = await metaContext(ctx, args.meta, index, fmt.id);
       const rating = ratePower(deck, fmt, { meta, asOf: asOfDate(index) });
-      return { format: fmt.id, ...rating, unresolved: deck.unresolved };
+      return { format: fmt.id, metaSource: source, ...rating, unresolved: deck.unresolved };
     }),
   );
 }

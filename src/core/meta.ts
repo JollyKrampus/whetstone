@@ -1,6 +1,9 @@
+import { existsSync, readFileSync } from 'node:fs';
+import path from 'node:path';
+import { z } from 'zod';
 import type { CardIndex } from './cards.js';
 import { isLand } from './cards.js';
-import { type FuzzyLookup, parseAndResolve, type ResolvedDeck } from './deck.js';
+import { countCards, type FuzzyLookup, parseAndResolve, playEntries, type ResolvedDeck } from './deck.js';
 
 /** One meta decklist as supplied by the client or a local snapshot. */
 export interface MetaListInput {
@@ -67,4 +70,97 @@ export async function buildMeta(inputs: MetaListInput[], index: CardIndex, fuzzy
     if (card && !isLand(card)) maxNonlandRate = Math.max(maxNonlandRate, rate);
   }
   return { lists, playRate, maxNonlandRate, unresolved };
+}
+
+// ---- local snapshots -------------------------------------------------------------------
+
+export const snapshotSchema = z.object({
+  format: z.string(),
+  date: z.string().optional(),
+  source: z.string().optional(),
+  decks: z
+    .array(
+      z.object({
+        name: z.string().optional(),
+        archetype: z.string().optional(),
+        metaShare: z.number().optional(),
+        winRate: z.number().optional(),
+        list: z.string(),
+      }),
+    )
+    .min(1),
+});
+
+export type MetaSnapshot = z.infer<typeof snapshotSchema>;
+
+/** Reads `<config dir>/meta/<format>.json`, or returns null when there is none. */
+export function loadSnapshot(configDir: string, format: string): { snapshot: MetaSnapshot; path: string } | null {
+  const file = path.join(configDir, 'meta', `${format}.json`);
+  if (!existsSync(file)) return null;
+  const parsed = snapshotSchema.safeParse(JSON.parse(readFileSync(file, 'utf8')));
+  if (!parsed.success) throw new Error(`Invalid meta snapshot ${file}: ${parsed.error.message}`);
+  return { snapshot: parsed.data, path: file };
+}
+
+// ---- comparison ------------------------------------------------------------------------
+
+function nonlandCounts(deck: ResolvedDeck): Map<string, { name: string; qty: number }> {
+  const m = new Map<string, { name: string; qty: number }>();
+  for (const e of playEntries(deck)) {
+    if (isLand(e.card)) continue;
+    const cur = m.get(e.oracleId) ?? { name: e.name, qty: 0 };
+    cur.qty += e.qty;
+    m.set(e.oracleId, cur);
+  }
+  return m;
+}
+
+/** Shared nonland copies over the larger nonland count: 1 means the same spells. */
+export function overlap(a: Map<string, { qty: number }>, b: Map<string, { qty: number }>): number {
+  let shared = 0;
+  for (const [id, x] of a) shared += Math.min(x.qty, b.get(id)?.qty ?? 0);
+  const size = Math.max(countCards([...a.values()]), countCards([...b.values()]));
+  return size ? shared / size : 0;
+}
+
+export function compareToMeta(deck: ResolvedDeck, meta: MetaContext) {
+  const mine = nonlandCounts(deck);
+  const ranked = meta.lists
+    .map((l) => ({ list: l, cards: nonlandCounts(l.deck) }))
+    .map((x) => ({ ...x, overlap: overlap(mine, x.cards) }))
+    .sort((a, b) => b.overlap - a.overlap || b.list.weight - a.list.weight || (a.list.name < b.list.name ? -1 : 1));
+  const best = ranked[0];
+  if (!best) return null;
+
+  // Core cards: the closest list's nonland cards, plus anything in at least half the lists of its archetype.
+  const sameArchetype = ranked.filter((r) => r.list.archetype === best.list.archetype);
+  const core = new Map<string, { name: string; qty: number }>(best.cards);
+  for (const r of sameArchetype) {
+    for (const [id, c] of r.cards) {
+      const share = sameArchetype.filter((o) => o.cards.has(id)).length / sameArchetype.length;
+      if (share >= 0.5 && !core.has(id)) core.set(id, c);
+    }
+  }
+  const missingCore = [...core.entries()]
+    .map(([id, c]) => ({ name: c.name, metaQty: c.qty, deckQty: mine.get(id)?.qty ?? 0 }))
+    .filter((c) => c.deckQty < c.metaQty)
+    .sort((a, b) => b.metaQty - b.deckQty - (a.metaQty - a.deckQty) || (a.name < b.name ? -1 : 1));
+  const unusual = [...mine.entries()]
+    .filter(([id]) => !meta.playRate.has(id))
+    .map(([, c]) => ({ name: c.name, qty: c.qty }))
+    .sort((a, b) => b.qty - a.qty || (a.name < b.name ? -1 : 1));
+
+  const pct = (n: number) => Math.round(n * 1000) / 10;
+  return {
+    closest: {
+      name: best.list.name,
+      archetype: best.list.archetype,
+      overlapPercent: pct(best.overlap),
+      ...(best.list.winRate !== undefined ? { winRate: best.list.winRate } : {}),
+      shareOfSuppliedListsPercent: pct(best.list.weight),
+    },
+    ranking: ranked.map((r) => ({ name: r.list.name, archetype: r.list.archetype, overlapPercent: pct(r.overlap) })),
+    missingCore,
+    unusual,
+  };
 }

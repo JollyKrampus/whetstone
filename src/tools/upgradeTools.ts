@@ -35,7 +35,7 @@ export function registerUpgradeTools(server: McpServer, ctx: Context) {
       const fmt = resolveFormat(args.format, args.deck);
       const deck = await loadDeck(ctx, args);
       const index = await ctx.getIndex();
-      const meta = await metaContext(args.meta, index);
+      const { meta, source } = await metaContext(ctx, args.meta, index, fmt.id);
       const result = suggestUpgrades(deck, fmt, index, {
         mode: args.mode,
         wildcards: args.wildcards,
@@ -44,7 +44,7 @@ export function registerUpgradeTools(server: McpServer, ctx: Context) {
         meta,
         asOf: asOfDate(index),
       });
-      return { format: fmt.id, ...result, unresolved: deck.unresolved };
+      return { format: fmt.id, metaSource: source, ...result, unresolved: deck.unresolved };
     }),
   );
 
