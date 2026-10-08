@@ -4,6 +4,7 @@ import { VERSION } from './version.js';
 import { registerPing } from './tools/ping.js';
 import { registerAnalyzeTools } from './tools/analyzeTools.js';
 import { registerDeckTools } from './tools/deckTools.js';
+import { registerPowerTools } from './tools/powerTools.js';
 import { registerSearch } from './tools/search.js';
 
 export function createServer(ctx: Context = defaultContext()): McpServer {
@@ -12,5 +13,6 @@ export function createServer(ctx: Context = defaultContext()): McpServer {
   registerSearch(server, ctx);
   registerDeckTools(server, ctx);
   registerAnalyzeTools(server, ctx);
+  registerPowerTools(server, ctx);
   return server;
 }

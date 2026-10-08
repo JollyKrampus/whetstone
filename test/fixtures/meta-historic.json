@@ -1,0 +1,25 @@
+{
+  "format": "historic",
+  "date": "2026-10-01",
+  "source": "Hand-made test snapshot (not real meta data)",
+  "decks": [
+    {
+      "archetype": "Mono-Red Aggro",
+      "metaShare": 0.18,
+      "winRate": 0.54,
+      "list": "Deck\n4 Monastery Swiftspear\n4 Kumano Faces Kakkazan\n4 Phoenix Chick\n4 Heartfire Hero\n4 Emberheart Challenger\n4 Slickshot Show-Off\n4 Play with Fire\n4 Burst Lightning\n4 Shock\n2 Lightning Strike\n22 Mountain\n\nSideboard\n3 Abrade\n2 Fable of the Mirror-Breaker"
+    },
+    {
+      "archetype": "Boros Aggro",
+      "metaShare": 0.12,
+      "winRate": 0.52,
+      "list": "Deck\n4 Monastery Swiftspear\n4 Emberheart Challenger\n4 Voice of Victory\n4 Inti, Seneschal of the Sun\n4 Thalia's Lieutenant\n4 Adeline, Resplendent Cathar\n4 Play with Fire\n4 Lightning Helix\n4 Boros Charm\n2 Fateful Absence\n4 Sacred Foundry\n4 Inspiring Vantage\n4 Sundown Pass\n4 Mountain\n6 Plains"
+    },
+    {
+      "archetype": "Gruul Midrange",
+      "metaShare": 0.08,
+      "winRate": 0.5,
+      "list": "Deck\n4 Llanowar Elves\n4 Bonecrusher Giant\n4 Lovestruck Beast\n4 Fable of the Mirror-Breaker\n2 Embercleave\n4 Lightning Strike\n4 Ram Through\n2 Gigantosaurus\n4 Stomping Ground\n4 Rockfall Vale\n4 Fabled Passage\n8 Forest\n8 Mountain\n4 Burst Lightning"
+    }
+  ]
+}

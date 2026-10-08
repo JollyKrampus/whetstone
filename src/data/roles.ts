@@ -70,7 +70,8 @@ export const RULES: Rule[] = [
   {
     role: 'card_draw',
     id: 'draw-cards',
-    pattern: /(?<!target opponent |each opponent )\bdraws? (?:a|an additional|two|three|four|x|that many) cards?/,
+    // "draw", not "draws": "you draw" / "Draw a card", never "whenever an opponent draws a card".
+    pattern: /\bdraw (?:a|an additional|two|three|four|x|that many) cards?/,
   },
   { role: 'card_draw', id: 'impulse', pattern: /exile the top (?:card|two cards|three cards)[^.]*\. (?:until|you may play|you may cast)/ },
   { role: 'card_draw', id: 'investigate', pattern: /\binvestigate\b|create (?:a|two) clue tokens?/ },

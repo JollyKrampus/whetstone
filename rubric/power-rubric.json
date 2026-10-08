@@ -43,7 +43,7 @@
     "tappedWeight": 0.2,
     "shortfallPenalty": 2.0,
     "landTolerance": 1,
-    "pointsPerLandOff": 15,
+    "pointsPerLandOff": 20,
     "freeTappedLands": 2,
     "pointsPerTappedLand": 12
   },
