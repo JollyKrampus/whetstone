@@ -1,6 +1,8 @@
 import type { CardIndex } from './core/cards.js';
+import { setRubricSource } from './core/rubric.js';
 import { ensureIndex } from './data/bulk.js';
 import { cacheDir, configDir } from './data/paths.js';
+import { fileRubricSource } from './data/rubricFiles.js';
 import { type FetchLike, ScryfallClient } from './data/scryfall.js';
 
 /** Everything tools need from the outside world, injectable for tests. */
@@ -22,6 +24,8 @@ export function defaultContext(): Context {
   const dir = cacheDir();
   const log = (msg: string) => process.stderr.write(`${msg}\n`);
   let pending: Promise<CardIndex> | undefined;
+  // Rubric overrides in <config dir>/rubric/ win over the bundled defaults (as before).
+  setRubricSource(fileRubricSource(configDir()));
   return {
     scryfall,
     fetch: (url, init) => fetch(url, init),

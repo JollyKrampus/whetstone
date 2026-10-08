@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import type { Context } from '../context.js';
 import type { CardIndex } from '../core/cards.js';
-import { buildMeta, loadSnapshot, type MetaContext, type MetaListInput } from '../core/meta.js';
+import { buildMeta, type MetaContext, type MetaListInput } from '../core/meta.js';
+import { loadSnapshot } from '../data/snapshots.js';
 
 export const metaListSchema = z.object({
   name: z.string().optional(),
@@ -38,11 +39,4 @@ export async function metaContext(
   return { source: 'none' };
 }
 
-/** The data snapshot date (YYYY-MM-DD), used instead of "today" so results are reproducible. */
-export function asOfDate(index: CardIndex): string {
-  for (const candidate of [index.meta.snapshot, index.meta.builtAt]) {
-    const t = Date.parse(candidate);
-    if (!Number.isNaN(t)) return new Date(t).toISOString().slice(0, 10);
-  }
-  return '2026-01-01';
-}
+export { asOfDate } from '../core/cards.js';

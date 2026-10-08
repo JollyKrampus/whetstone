@@ -1,4 +1,4 @@
-import { hasRole, INTERACTION_ROLES, type Role, ROLES, tagRoles } from '../data/roles.js';
+import { hasRole, INTERACTION_ROLES, type Role, ROLES, tagRoles } from './roles.js';
 import {
   castingCost,
   castingMv,

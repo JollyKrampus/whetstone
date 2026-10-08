@@ -1,4 +1,4 @@
-import { type Role, tagRoles } from '../data/roles.js';
+import { type Role, tagRoles } from './roles.js';
 import { landColors, round } from './analyze.js';
 import { castingCost, castingMv, isBasicLand, isLand, isMdfcLand, normalizeName, pipsOf } from './cards.js';
 import { playEntries, type ResolvedDeck } from './deck.js';

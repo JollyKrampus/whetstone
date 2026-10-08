@@ -1,4 +1,4 @@
-import { ToolError } from '../tools/result.js';
+import { ToolError } from './errors.js';
 
 export interface FormatRules {
   id: string;

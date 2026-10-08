@@ -1,14 +1,8 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 
-/** Thrown inside tool code for problems the caller can fix (bad input, unknown format). */
-export class ToolError extends Error {
-  constructor(
-    message: string,
-    readonly details?: unknown,
-  ) {
-    super(message);
-  }
-}
+import { ToolError } from '../core/errors.js';
+
+export { ToolError };
 
 export function ok(value: unknown): CallToolResult {
   return {

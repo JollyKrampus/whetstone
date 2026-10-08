@@ -1,7 +1,6 @@
-import { existsSync, readFileSync } from 'node:fs';
-import path from 'node:path';
 import { z } from 'zod';
-import { configDir, packageRoot } from '../data/paths.js';
+import defaultBrawl from '../../rubric/brawl-rubric.json' with { type: 'json' };
+import defaultConstructed from '../../rubric/power-rubric.json' with { type: 'json' };
 
 const tiers = z.array(z.object({ tier: z.number(), label: z.string(), min: z.number() })).min(1);
 const karsten = z.object({
@@ -106,27 +105,40 @@ export type KarstenTable = z.infer<typeof karsten>;
 export type Archetype = keyof ConstructedRubric['archetypes'];
 
 /**
- * Rubric files are read from `<config dir>/rubric/` when present (so users can tune them
- * without touching the package), else from the package's own `rubric/` folder.
+ * Where rubric JSON comes from. The defaults are the package's own rubric/ files, bundled
+ * at build time, so this module needs no file system. The MCP server swaps in a source
+ * that prefers <config dir>/rubric/ overrides (see data/rubricFiles.ts); a browser app can
+ * pass rubric objects it loaded itself.
  */
-function rubricPath(file: string): string {
-  const override = path.join(configDir(), 'rubric', file);
-  return existsSync(override) ? override : path.join(packageRoot(), 'rubric', file);
+export interface RubricSource {
+  /** A stable key for caching (e.g. the file path the JSON came from). */
+  constructed(): { key: string; json: unknown };
+  brawl(): { key: string; json: unknown };
 }
 
+export const bundledRubrics: RubricSource = {
+  constructed: () => ({ key: 'bundled:power-rubric.json', json: defaultConstructed }),
+  brawl: () => ({ key: 'bundled:brawl-rubric.json', json: defaultBrawl }),
+};
+
+let source: RubricSource = bundledRubrics;
 const cache = new Map<string, unknown>();
 
-function load<T>(file: string, schema: z.ZodType<T>): T {
-  const p = rubricPath(file);
-  if (cache.has(p)) return cache.get(p) as T;
-  const parsed = schema.safeParse(JSON.parse(readFileSync(p, 'utf8')));
-  if (!parsed.success) throw new Error(`Invalid rubric ${p}: ${parsed.error.message}`);
-  cache.set(p, parsed.data);
+export function setRubricSource(next: RubricSource): void {
+  source = next;
+  cache.clear();
+}
+
+function load<T>(pick: { key: string; json: unknown }, schema: z.ZodType<T>): T {
+  if (cache.has(pick.key)) return cache.get(pick.key) as T;
+  const parsed = schema.safeParse(pick.json);
+  if (!parsed.success) throw new Error(`Invalid rubric ${pick.key}: ${parsed.error.message}`);
+  cache.set(pick.key, parsed.data);
   return parsed.data;
 }
 
-export const constructedRubric = () => load('power-rubric.json', constructedRubricSchema);
-export const brawlRubric = () => load('brawl-rubric.json', brawlRubricSchema);
+export const constructedRubric = () => load(source.constructed(), constructedRubricSchema);
+export const brawlRubric = () => load(source.brawl(), brawlRubricSchema);
 
 /** Sources needed for `pips` colored pips at mana value `mv`, scaled to the deck size. */
 export function karstenSources(table: KarstenTable, pips: number, mv: number, deckSize: number): number {

@@ -1,4 +1,4 @@
-import { ToolError } from '../tools/result.js';
+import { ToolError } from './errors.js';
 import { type CardIndex, frontTypeLine, normalizeName, wildcardRarity } from './cards.js';
 import { getFormat } from './formats.js';
 import { RARITIES, type CardRecord, type Color } from './types.js';

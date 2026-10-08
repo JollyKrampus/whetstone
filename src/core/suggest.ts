@@ -1,4 +1,4 @@
-import { type Role, tagRoles } from '../data/roles.js';
+import { type Role, tagRoles } from './roles.js';
 import { analyzeDeck } from './analyze.js';
 import {
   type CardIndex,

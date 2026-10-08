@@ -180,3 +180,12 @@ export function summarize(c: CardRecord) {
     text: c.oracleText,
   };
 }
+
+/** The data snapshot date (YYYY-MM-DD), used instead of "today" so results are reproducible. */
+export function asOfDate(index: { meta: IndexMeta }): string {
+  for (const candidate of [index.meta.snapshot, index.meta.builtAt]) {
+    const t = Date.parse(candidate);
+    if (!Number.isNaN(t)) return new Date(t).toISOString().slice(0, 10);
+  }
+  return '2026-01-01';
+}

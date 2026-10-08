@@ -1,5 +1,3 @@
-import { existsSync, readFileSync } from 'node:fs';
-import path from 'node:path';
 import { z } from 'zod';
 import type { CardIndex } from './cards.js';
 import { isLand } from './cards.js';
@@ -93,13 +91,11 @@ export const snapshotSchema = z.object({
 
 export type MetaSnapshot = z.infer<typeof snapshotSchema>;
 
-/** Reads `<config dir>/meta/<format>.json`, or returns null when there is none. */
-export function loadSnapshot(configDir: string, format: string): { snapshot: MetaSnapshot; path: string } | null {
-  const file = path.join(configDir, 'meta', `${format}.json`);
-  if (!existsSync(file)) return null;
-  const parsed = snapshotSchema.safeParse(JSON.parse(readFileSync(file, 'utf8')));
-  if (!parsed.success) throw new Error(`Invalid meta snapshot ${file}: ${parsed.error.message}`);
-  return { snapshot: parsed.data, path: file };
+/** Validates a parsed snapshot JSON (pure; file reading lives in data/snapshots.ts). */
+export function parseSnapshot(json: unknown, where = 'snapshot'): MetaSnapshot {
+  const parsed = snapshotSchema.safeParse(json);
+  if (!parsed.success) throw new Error(`Invalid meta snapshot ${where}: ${parsed.error.message}`);
+  return parsed.data;
 }
 
 // ---- comparison ------------------------------------------------------------------------
