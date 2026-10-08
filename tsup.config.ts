@@ -9,4 +9,6 @@ export default defineConfig({
   sourcemap: true,
   banner: { js: '#!/usr/bin/env node' },
   external: ['node:sqlite'],
+  // node:sqlite has no unprefixed alias, so keep every node: prefix.
+  removeNodeProtocol: false,
 });

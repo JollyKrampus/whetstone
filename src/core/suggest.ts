@@ -1,6 +1,15 @@
 import { type Role, tagRoles } from '../data/roles.js';
 import { analyzeDeck } from './analyze.js';
-import { type CardIndex, castingMv, isBasicLand, isCreature, isLand, normalizeName, wildcardRarity } from './cards.js';
+import {
+  type CardIndex,
+  castingMv,
+  isBasicLand,
+  isCreature,
+  isLand,
+  normalizeName,
+  rulesText,
+  wildcardRarity,
+} from './cards.js';
 import { playEntries, type ResolvedDeck, type ResolvedEntry } from './deck.js';
 import type { FormatRules } from './formats.js';
 import type { MetaContext } from './meta.js';
@@ -111,9 +120,12 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
   for (const cut of cuts) {
     const mv = castingMv(cut.e.card);
     const creature = isCreature(cut.e.card);
+    // Aggro burn doubles as reach; don't trade it for removal that can't hit players.
+    const needsReach = analysis.archetype === 'aggro' && hasReach(cut.e.card);
     const found: Option[] = [];
     for (const c of pool) {
       if (Math.abs(castingMv(c) - mv) > 1 || isCreature(c) !== creature) continue;
+      if (needsReach && !hasReach(c)) continue;
       const roles = tagRoles(c).map((t) => t.role);
       const shared = cut.roles.filter((r) => roles.includes(r));
       if (cut.roles.length && shared.length === 0) continue;
@@ -163,6 +175,11 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
   if (skippedForBudget) notes.push(`${skippedForBudget} otherwise-good swap(s) didn't fit the wildcard budget.`);
   if (!swaps.length) notes.push('No swap clearly improves the deck under these constraints.');
   return { mode: opts.mode, swaps, totalCost, budget, remaining, notes };
+}
+
+/** Can it damage a player directly? */
+export function hasReach(c: CardRecord): boolean {
+  return /damage to (?:any target|each opponent|target player|target opponent|any other target)/.test(rulesText(c));
 }
 
 /**

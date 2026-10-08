@@ -104,6 +104,14 @@ describe('suggest_upgrades', () => {
     for (const s of r.swaps) expect(index.lookup(s.add)!.colorIdentity.every((c) => c === 'W')).toBe(true);
   });
 
+  it('keeps burn that can hit players in aggro decks', async () => {
+    const { index, deck } = await setup('standard-boros.txt');
+    const r = suggestUpgrades(deck, getFormat('standard'), index, { mode: 'competitive', maxSwaps: 10, asOf: '2026-10-08' });
+    for (const s of r.swaps.filter((x) => ['Shock', 'Burst Lightning', 'Lightning Strike'].includes(x.cut))) {
+      expect(index.lookup(s.add)!.oracleText).toMatch(/any target|each opponent|target player|target opponent/);
+    }
+  });
+
   it('is deterministic', async () => {
     const { index, deck, meta } = await setup('tiers/t3-gruul.txt');
     const opts = { mode: 'casual' as const, meta, asOf: '2026-10-08', wildcards: { rare: 3 } };
