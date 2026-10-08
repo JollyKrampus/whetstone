@@ -16,7 +16,8 @@ export function registerUpgradeTools(server: McpServer, ctx: Context) {
       title: 'Suggest upgrades',
       description:
         'Suggest swaps (cut X, add Y) using cards legal in the format, on Arena, within the deck colors, filling the ' +
-        "same role at a similar mana value. `competitive` weighs meta presence heavily; `casual` weighs role fit and " +
+        'same role at a similar mana value. Changes are capped (`intensity`) so the deck stays recognizable, and in ' +
+        "Brawl every added card must support the commander's theme. `competitive` weighs meta presence heavily; `casual` weighs role fit and " +
         'penalizes wildcard cost. Picks the best value per wildcard and never exceeds `wildcards` (a rarity left out ' +
         'of `wildcards` is unlimited).',
       inputSchema: {
@@ -27,6 +28,11 @@ export function registerUpgradeTools(server: McpServer, ctx: Context) {
           .object({ mythic: count.optional(), rare: count.optional(), uncommon: count.optional(), common: count.optional() })
           .optional(),
         maxSwaps: z.number().int().min(1).max(20).optional().describe('Default 5'),
+        intensity: z
+          .enum(['light', 'normal', 'heavy'])
+          .optional()
+          .describe('How much the deck may change: light ≈7% of cards, normal ≈15% (default), heavy ≈30%'),
+        maxChangePercent: z.number().min(1).max(100).optional().describe('Overrides the intensity cap'),
         keepCards: z.array(z.string()).optional().describe('Card names that must not be cut'),
         meta: metaInput,
       },
@@ -40,6 +46,8 @@ export function registerUpgradeTools(server: McpServer, ctx: Context) {
         mode: args.mode,
         wildcards: args.wildcards,
         maxSwaps: args.maxSwaps,
+        intensity: args.intensity,
+        maxChangePercent: args.maxChangePercent,
         keepCards: args.keepCards,
         meta,
         asOf: asOfDate(index),

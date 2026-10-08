@@ -104,6 +104,34 @@ describe('suggest_upgrades', () => {
     for (const s of r.swaps) expect(index.lookup(s.add)!.colorIdentity.every((c) => c === 'W')).toBe(true);
   });
 
+  it('caps how much of the deck changes by intensity', async () => {
+    const { index, deck, meta } = await setup('tiers/t2-white-weenie.txt');
+    const limits = { light: 4, normal: 9, heavy: 18 } as const;
+    for (const intensity of ['light', 'normal', 'heavy'] as const) {
+      const r = suggestUpgrades(deck, historic, index, { mode: 'competitive', meta, maxSwaps: 20, intensity, asOf: '2026-10-08' });
+      const changed = r.swaps.reduce((n, s) => n + s.qty, 0);
+      expect(r.changes).toMatchObject({ cards: changed, limit: limits[intensity], deckSize: 60, intensity });
+      expect(changed).toBeLessThanOrEqual(limits[intensity]);
+    }
+    const custom = suggestUpgrades(deck, historic, index, { mode: 'competitive', meta, maxChangePercent: 2, asOf: '2026-10-08' });
+    expect(custom.changes.limit).toBe(1);
+    expect(custom.swaps.reduce((n, s) => n + s.qty, 0)).toBeLessThanOrEqual(1);
+  });
+
+  it("only adds cards that support the Brawl commander's theme", async () => {
+    const { index, deck } = await setup('standardbrawl-krenko.txt');
+    const r = suggestUpgrades(deck, getFormat('brawl'), index, { mode: 'casual', maxSwaps: 10, intensity: 'heavy', asOf: '2026-10-08' });
+    expect(r.commanderThemes).toMatchObject({ commander: 'Krenko, Mob Boss', tribes: ['Goblin'] });
+    expect(r.commanderThemes!.themes).toContain('tokens');
+    expect(r.swaps.length).toBeGreaterThan(0);
+    for (const s of r.swaps) {
+      const add = index.lookup(s.add)!;
+      expect(/Goblin/.test(add.typeLine) || /create[^.]*token/i.test(add.oracleText)).toBe(true);
+      expect(s.reason).toMatch(/Krenko, Mob Boss's/);
+      expect(s.qty).toBe(1);
+    }
+  });
+
   it('keeps burn that can hit players in aggro decks', async () => {
     const { index, deck } = await setup('standard-boros.txt');
     const r = suggestUpgrades(deck, getFormat('standard'), index, { mode: 'competitive', maxSwaps: 10, asOf: '2026-10-08' });

@@ -1,9 +1,10 @@
 import { type Analysis, analyzeDeck, type ColorRequirement, round } from './analyze.js';
-import { frontTypeLine, isBasicLand, isLand, rulesText, wildcardRarity } from './cards.js';
+import { isBasicLand, isLand, wildcardRarity } from './cards.js';
 import { countCards, playEntries, type ResolvedDeck, type ResolvedEntry } from './deck.js';
 import type { FormatRules } from './formats.js';
 import type { MetaContext } from './meta.js';
 import { simulateHands } from './simulate.js';
+import { commanderThemes } from './themes.js';
 import {
   type BrawlRubric,
   brawlRubric,
@@ -295,12 +296,8 @@ function commanderSynergy(deck: ResolvedDeck, r: BrawlRubric): Dimension {
   if (!cmd) {
     return { name: 'Commander synergy', score: 0, weight, confidence: 'normal', reasons: ['No commander to build around.'] };
   }
-  const cmdText = rulesText(cmd.card);
-  const themes = Object.entries(p.themes).filter(([, re]) => new RegExp(re).test(cmdText));
-  const spells = deck.main.filter((e) => !isLand(e.card));
-  const subtypes = new Set(spells.flatMap((e) => (frontTypeLine(e.card).split('—')[1] ?? '').trim().split(/\s+/)).filter(Boolean));
-  const tribes = [...subtypes].filter((t) => new RegExp(`\\b${t.toLowerCase()}s?\\b`).test(cmdText));
-  if (!themes.length && !tribes.length) {
+  const themes = commanderThemes(deck, p.themes);
+  if (!themes) {
     return {
       name: 'Commander synergy',
       score: 50,
@@ -309,15 +306,11 @@ function commanderSynergy(deck: ResolvedDeck, r: BrawlRubric): Dimension {
       reasons: [`No clear theme found in ${cmd.name}'s text; synergy can't be measured.`],
     };
   }
-  const regexes = themes.map(([, re]) => new RegExp(re));
-  const hits = spells.filter(
-    (e) =>
-      regexes.some((re) => re.test(rulesText(e.card))) ||
-      tribes.some((t) => (frontTypeLine(e.card).split('—')[1] ?? '').includes(t)),
-  );
+  const spells = deck.main.filter((e) => !isLand(e.card));
+  const hits = spells.filter((e) => themes.matches(e.card).length > 0);
   const share = countCards(hits) / (countCards(spells) || 1);
   const score = round(100 * Math.min(1, share / p.targetShare));
-  const named = [...themes.map(([k]) => k), ...tribes];
+  const named = [...themes.themes, ...themes.tribes];
   return {
     name: 'Commander synergy',
     score,

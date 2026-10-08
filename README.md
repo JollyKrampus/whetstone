@@ -63,7 +63,7 @@ The `tune_my_deck` prompt runs this whole sequence for you.
 | `validate_deck` | Deck/sideboard size, copy limits (singleton for Brawl), banned/restricted cards, Arena availability, commander color identity. |
 | `analyze_deck` | Curve, average mana value, lands, colored pips vs. sources (Karsten table), tapped lands, types, card roles (each with the rule that tagged it), interaction. |
 | `rate_power` | Tier 1–5 with a 0–100 score and per-dimension scores and reasons. |
-| `suggest_upgrades` | Cut X → add Y swaps for `casual` or `competitive` play, within your wildcard budget. |
+| `suggest_upgrades` | Cut X → add Y swaps for `casual` or `competitive` play, within your wildcard budget, without changing more of the deck than you allow. |
 | `wildcard_cost` | Wildcards needed by rarity, at each card's cheapest Arena printing. |
 | `compare_to_meta` | Closest meta archetype, overlap %, missing core cards, unusual inclusions. |
 | `search_cards` | Scryfall-style search over the local index (`t:creature id<=rw mv<=2 f:standard`). |
@@ -91,6 +91,19 @@ Every tool takes a deck as either `text` (an Arena export) or `deck` (the object
 60-card decks are scored on mana base, speed/curve, interaction, card quality and consistency. Brawl decks are scored on mana base, commander synergy, ramp, card draw, interaction and card quality.
 
 **Card quality is only as good as the meta data you give it.** With meta lists it measures how many of your cards top decks play. Without them it falls back to a rough popularity/rarity/age estimate. That estimate leans on EDHREC popularity, so it favors Commander staples, and it's marked `"confidence": "low"`.
+
+### Keeping your deck yours
+
+`suggest_upgrades` tunes the deck rather than rebuilding it:
+
+- **Swaps are one-for-one:** same creature/noncreature status, a shared role, within one mana.
+- **Changes are capped by `intensity`:**
+  - `light`: about 7% of the deck, cutting only from its weakest quarter.
+  - `normal` (default): about 15%, from the weakest half.
+  - `heavy`: about 30%.
+  - `maxChangePercent` sets an exact cap instead. The result reports `changes: { cards, limit }`.
+- **Some cards are never cut:** anything in `keepCards`, and the commander.
+- **In Brawl, every added card must support the commander's theme,** read from its rules text (tokens, sacrifice, +1/+1 counters, a creature type it names, …). The theme is reported as `commanderThemes`.
 
 ## Editing the rubric
 

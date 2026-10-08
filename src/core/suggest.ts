@@ -10,21 +10,37 @@ import {
   rulesText,
   wildcardRarity,
 } from './cards.js';
-import { playEntries, type ResolvedDeck, type ResolvedEntry } from './deck.js';
+import { countCards, playEntries, type ResolvedDeck, type ResolvedEntry } from './deck.js';
 import type { FormatRules } from './formats.js';
 import type { MetaContext } from './meta.js';
 import { heuristicQuality } from './power.js';
 import { brawlRubric, constructedRubric } from './rubric.js';
+import { commanderThemes } from './themes.js';
 import { type CardRecord, type Color, COLORS, type Rarity } from './types.js';
 import { ARENA_MAX_COPIES, type WildcardCounts, zeroWildcards } from './wildcards.js';
 
 export type Mode = 'casual' | 'competitive';
+export type Intensity = 'light' | 'normal' | 'heavy';
+
+/**
+ * Keeps the deck recognizable: at most `percent` of its cards change, and cuts come only
+ * from the weakest `cutPool` share of its nonland cards.
+ */
+export const INTENSITY: Record<Intensity, { percent: number; cutPool: number }> = {
+  light: { percent: 7, cutPool: 0.25 },
+  normal: { percent: 15, cutPool: 0.5 },
+  heavy: { percent: 30, cutPool: 1 },
+};
 
 export interface SuggestOptions {
   mode: Mode;
   /** Per-rarity budget; a rarity left out is unlimited. Omit entirely for no budget. */
   wildcards?: Partial<WildcardCounts>;
   maxSwaps?: number;
+  /** How much of the deck may change: light (~7%), normal (~15%, default), heavy (~30%). */
+  intensity?: Intensity;
+  /** Overrides the intensity's cap on changed cards, as a percent of the deck. */
+  maxChangePercent?: number;
   keepCards?: string[];
   meta?: MetaContext;
   asOf: string;
@@ -44,6 +60,10 @@ export interface SuggestResult {
   totalCost: WildcardCounts;
   budget: Partial<WildcardCounts> | null;
   remaining: Partial<WildcardCounts> | null;
+  /** Cards changed versus the cap that keeps the deck recognizable. */
+  changes: { cards: number; limit: number; deckSize: number; intensity: Intensity };
+  /** In Brawl, what every added card had to support. */
+  commanderThemes: { commander: string; themes: string[]; tribes: string[] } | null;
   notes: string[];
 }
 
@@ -81,12 +101,20 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
 
   const identity = deckIdentity(deck, analysis.colors.sources);
   const inDeck = new Set(playEntries(deck).map((e) => e.oracleId));
+  const intensity = opts.intensity ?? 'normal';
+  const deckSize = countCards(playEntries(deck));
+  const changeLimit = Math.max(1, Math.floor(((opts.maxChangePercent ?? INTENSITY[intensity].percent) / 100) * deckSize));
+  // Brawl: every add must support what the commander builds around.
+  const themes = fmt.commander ? commanderThemes(deck, brawlRubric().commanderSynergy.themes) : null;
+  if (fmt.commander && deck.commander && !themes) {
+    notes.push(`No clear theme found in ${deck.commander.name}'s text, so adds aren't limited to a theme.`);
+  }
   const curveTarget =
     analysis.archetype === 'brawl' ? 3.5 : constructedRubric().archetypes[analysis.archetype].avgMv;
 
   // 1. Cut candidates.
   const roleCounts = analysis.roles.counts;
-  const cuts = deck.main
+  const rankedCuts = deck.main
     .filter((e) => !isLand(e.card) && !isBasicLand(e.card) && !keep.has(normalizeName(e.name)) && !keep.has(normalizeName(e.card.faces[0]?.name ?? '')))
     .map((e) => {
       const s = score(e.card);
@@ -94,10 +122,12 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       const redundancy = roles.length ? Math.min(...roles.map((r) => roleCounts[r])) / 12 : 0.5;
       const mvOver = Math.max(0, castingMv(e.card) - (curveTarget + 1.5)) * 0.15;
       const absent = meta && s.metaRate === 0 ? 0.3 : 0;
-      return { e, s, roles, cutScore: (1 - s.value) + 0.2 * Math.min(1, redundancy) + mvOver + absent };
+      const offTheme = themes && !themes.matches(e.card).length ? 0.3 : 0;
+      return { e, s, roles, cutScore: (1 - s.value) + 0.2 * Math.min(1, redundancy) + mvOver + absent + offTheme };
     })
-    .sort((a, b) => b.cutScore - a.cutScore || cmp(a.e.name, b.e.name))
-    .slice(0, Math.max(maxSwaps * 2, 6));
+    .sort((a, b) => b.cutScore - a.cutScore || cmp(a.e.name, b.e.name));
+  const nonlandEntries = deck.main.filter((e) => !isLand(e.card)).length;
+  const cuts = rankedCuts.slice(0, Math.min(Math.max(maxSwaps * 2, 6), Math.ceil(INTENSITY[intensity].cutPool * nonlandEntries)));
 
   // 2. Add candidates for each cut, scored by gain over the card they replace.
   const pool = index.records.filter(
@@ -112,6 +142,7 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
     cut: (typeof cuts)[number];
     add: Scored;
     shared: Role[];
+    themeHits: string[];
     gain: number;
     qty: number;
     rarity: Rarity;
@@ -126,6 +157,8 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
     for (const c of pool) {
       if (Math.abs(castingMv(c) - mv) > 1 || isCreature(c) !== creature) continue;
       if (needsReach && !hasReach(c)) continue;
+      const themeHits = themes ? themes.matches(c) : [];
+      if (themes && !themeHits.length) continue;
       const roles = tagRoles(c).map((t) => t.role);
       const shared = cut.roles.filter((r) => roles.includes(r));
       if (cut.roles.length && shared.length === 0) continue;
@@ -134,7 +167,7 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       const gain = add.value - cut.s.value + (opts.mode === 'casual' ? 0.1 * roleFit : 0.05 * roleFit);
       if (gain <= 0.02) continue;
       const qty = fmt.maxCopies === 1 ? 1 : Math.min(cut.e.qty, ARENA_MAX_COPIES);
-      found.push({ cut, add, shared, gain, qty, rarity: wildcardRarity(c) });
+      found.push({ cut, add, shared, themeHits, gain, qty, rarity: wildcardRarity(c) });
     }
     found.sort((a, b) => b.gain - a.gain || cmp(a.add.card.name, b.add.card.name));
     options.push(...found.slice(0, CANDIDATES_PER_CUT));
@@ -152,9 +185,15 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
   const totalCost = zeroWildcards();
   const swaps: Swap[] = [];
   let skippedForBudget = 0;
+  let skippedForCap = 0;
+  let changed = 0;
   for (const o of options) {
     if (swaps.length >= maxSwaps) break;
     if (usedCuts.has(o.cut.e.oracleId) || usedAdds.has(o.add.card.oracleId)) continue;
+    if (changed + o.qty > changeLimit) {
+      skippedForCap++;
+      continue;
+    }
     const left = remaining?.[o.rarity];
     if (left !== undefined && left < o.qty) {
       skippedForBudget++;
@@ -164,17 +203,32 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
     usedCuts.add(o.cut.e.oracleId);
     usedAdds.add(o.add.card.oracleId);
     totalCost[o.rarity] += o.qty;
+    changed += o.qty;
     swaps.push({
       cut: o.cut.e.name,
       add: o.add.card.name,
       qty: o.qty,
-      reason: reasonFor(o.cut.e, o.add, o.shared, meta),
+      reason: reasonFor(o.cut.e, o.add, o.shared, meta, themes ? { commander: themes.commander, hits: o.themeHits } : null),
       wildcardCost: { [o.rarity]: o.qty },
     });
   }
   if (skippedForBudget) notes.push(`${skippedForBudget} otherwise-good swap(s) didn't fit the wildcard budget.`);
+  if (skippedForCap) {
+    notes.push(
+      `Stopped at ${changed} of ${deckSize} cards changed to keep the deck recognizable (${intensity} intensity, limit ${changeLimit}); raise intensity or maxChangePercent for more.`,
+    );
+  }
   if (!swaps.length) notes.push('No swap clearly improves the deck under these constraints.');
-  return { mode: opts.mode, swaps, totalCost, budget, remaining, notes };
+  return {
+    mode: opts.mode,
+    swaps,
+    totalCost,
+    budget,
+    remaining,
+    changes: { cards: changed, limit: changeLimit, deckSize, intensity },
+    commanderThemes: themes ? { commander: themes.commander, themes: themes.themes, tribes: themes.tribes } : null,
+    notes,
+  };
 }
 
 /** Can it damage a player directly? */
@@ -211,7 +265,13 @@ const ROLE_WORDS: Record<Role, string> = {
   lifegain: 'lifegain',
 };
 
-function reasonFor(cut: ResolvedEntry, add: Scored, shared: Role[], meta: MetaContext | undefined): string {
+function reasonFor(
+  cut: ResolvedEntry,
+  add: Scored,
+  shared: Role[],
+  meta: MetaContext | undefined,
+  theme: { commander: string; hits: string[] } | null,
+): string {
   const role = shared.length ? `fills the same ${shared.map((r) => ROLE_WORDS[r]).join('/')} role` : 'fills a similar slot';
   const cutMv = castingMv(cut.card);
   const addMv = castingMv(add.card);
@@ -223,7 +283,8 @@ function reasonFor(cut: ResolvedEntry, add: Scored, shared: Role[], meta: MetaCo
   } else {
     why = add.card.edhrecRank !== null ? 'and is a more widely played card' : 'and is a stronger card by rarity and age';
   }
-  return `${add.card.name} ${role}${mv}, ${why}.`;
+  const fits = theme?.hits.length ? `; it supports ${theme.commander}'s ${theme.hits.join('/')} theme` : '';
+  return `${add.card.name} ${role}${mv}, ${why}${fits}.`;
 }
 
 function cmp(a: string, b: string) {

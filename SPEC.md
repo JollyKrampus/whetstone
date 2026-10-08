@@ -18,6 +18,8 @@ These changes came from checking the current docs and data, as §0 required (Oct
 - **Rate limits.** Scryfall publishes hard limits: 500 ms between calls to `/cards/search`, `/cards/named`, `/cards/random` and `/cards/collection`; 100 ms for other endpoints; a 429 locks the client out for 30 seconds. The client spaces calls accordingly and retries once after the lockout. `*.scryfall.io` file downloads are unthrottled.
 - **Rules download.** The Comprehensive Rules file name changes with each release, so `lookup_rule` finds the current `.txt` link on `https://magic.wizards.com/en/rules`.
 - **Overrides.** Rubric files can be overridden from `<config dir>/rubric/`. Cache and config directories follow each OS's conventions (see README).
+- **Recognizable decks (added after v0.1.0).** `suggest_upgrades` takes `intensity` (`light` ≈7% of cards, `normal` ≈15%, `heavy` ≈30%) or `maxChangePercent`, and only cuts from the weakest share of the deck. In Brawl every add must support a theme read from the commander's text.
+- **EDHREC.** Not used beyond the `edhrec_rank` field Scryfall already provides. EDHREC's terms limit the site to personal, noncommercial use and forbid automated requests and copying, so Grindstone does not fetch from it.
 - **Extras beyond the spec:** `analyze_deck` reports tapped lands; `simulate_hands` reports exact hypergeometric opening-land odds next to the simulated ones; `rate_power`, `suggest_upgrades` and `compare_to_meta` report `metaSource`.
 
 ---
