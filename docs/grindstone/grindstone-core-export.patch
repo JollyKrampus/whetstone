@@ -1,0 +1,1219 @@
+diff --git a/package.json b/package.json
+index a3bed41..be69e6c 100644
+--- a/package.json
++++ b/package.json
+@@ -45,5 +45,17 @@
+     "typescript": "~6.0",
+     "typescript-eslint": "^8.71.1",
+     "vitest": "^5.0.3"
+-  }
++  },
++  "exports": {
++    ".": "./dist/index.js",
++    "./core": {
++      "types": "./dist/core.d.ts",
++      "import": "./dist/core.js"
++    },
++    "./rubric/*": "./rubric/*",
++    "./package.json": "./package.json"
++  },
++  "sideEffects": [
++    "./dist/index.js"
++  ]
+ }
+diff --git a/src/context.ts b/src/context.ts
+index f75598e..f0e5a32 100644
+--- a/src/context.ts
++++ b/src/context.ts
+@@ -1,6 +1,8 @@
+ import type { CardIndex } from './core/cards.js';
++import { setRubricSource } from './core/rubric.js';
+ import { ensureIndex } from './data/bulk.js';
+ import { cacheDir, configDir } from './data/paths.js';
++import { fileRubricSource } from './data/rubricFiles.js';
+ import { type FetchLike, ScryfallClient } from './data/scryfall.js';
+ 
+ /** Everything tools need from the outside world, injectable for tests. */
+@@ -22,6 +24,8 @@ export function defaultContext(): Context {
+   const dir = cacheDir();
+   const log = (msg: string) => process.stderr.write(`${msg}\n`);
+   let pending: Promise<CardIndex> | undefined;
++  // Rubric overrides in <config dir>/rubric/ win over the bundled defaults (as before).
++  setRubricSource(fileRubricSource(configDir()));
+   return {
+     scryfall,
+     fetch: (url, init) => fetch(url, init),
+diff --git a/src/core/aggregate.ts b/src/core/aggregate.ts
+new file mode 100644
+index 0000000..58485bd
+--- /dev/null
++++ b/src/core/aggregate.ts
+@@ -0,0 +1,142 @@
++import {
++  COLORS,
++  RARITIES,
++  type CardFace,
++  type CardRecord,
++  type Color,
++  type Rarity,
++} from './types.js';
++
++/*
++ * Pure fold of Scryfall card objects (one JSON object per line) into one CardRecord per
++ * oracle ID. Used by the MCP server's SQLite index (data/bulk.ts) and by any build step
++ * (e.g. a CI job) that wants the same records without node:sqlite.
++ */
++
++/** Layouts that are never deck cards. */
++const SKIP_LAYOUTS = new Set([
++  'token',
++  'double_faced_token',
++  'emblem',
++  'art_series',
++  'planar',
++  'scheme',
++  'vanguard',
++  'reversible_card',
++]);
++
++const RARITY_MAP: Record<string, Rarity> = {
++  common: 'common',
++  uncommon: 'uncommon',
++  rare: 'rare',
++  mythic: 'mythic',
++  special: 'rare',
++  bonus: 'rare',
++};
++
++/* eslint-disable @typescript-eslint/no-explicit-any */
++type RawCard = Record<string, any>;
++
++function lowerRarity(a: Rarity | null, b: Rarity): Rarity {
++  if (a === null) return b;
++  return RARITIES.indexOf(b) < RARITIES.indexOf(a) ? b : a;
++}
++
++function colorsOf(list: unknown): Color[] {
++  const set = new Set(Array.isArray(list) ? list : []);
++  return COLORS.filter((c) => set.has(c));
++}
++
++function faceOf(f: RawCard): CardFace {
++  return {
++    name: f.name,
++    manaCost: f.mana_cost ?? '',
++    typeLine: f.type_line ?? '',
++    oracleText: f.oracle_text ?? '',
++    ...(f.power !== undefined ? { power: f.power, toughness: f.toughness } : {}),
++  };
++}
++
++function fromPrinting(c: RawCard): CardRecord {
++  const faces: CardFace[] = Array.isArray(c.card_faces) ? c.card_faces.map(faceOf) : [];
++  const front = faces[0];
++  const faceColors = faces.length ? colorsOf(c.card_faces.flatMap((f: RawCard) => f.colors ?? [])) : [];
++  const pt =
++    c.power !== undefined
++      ? { power: c.power, toughness: c.toughness }
++      : front?.power !== undefined
++        ? { power: front.power, toughness: front.toughness }
++        : {};
++  return {
++    oracleId: c.oracle_id,
++    name: c.name,
++    layout: c.layout,
++    manaCost: c.mana_cost ?? front?.manaCost ?? '',
++    cmc: typeof c.cmc === 'number' ? c.cmc : 0,
++    typeLine: c.type_line ?? faces.map((f) => f.typeLine).join(' // '),
++    oracleText: c.oracle_text ?? faces.map((f) => f.oracleText).join('\n//\n'),
++    faces,
++    colors: c.colors ? colorsOf(c.colors) : faceColors,
++    colorIdentity: colorsOf(c.color_identity),
++    producedMana: Array.isArray(c.produced_mana) ? [...c.produced_mana].sort() : [],
++    keywords: Array.isArray(c.keywords) ? [...c.keywords].sort() : [],
++    legalities: c.legalities ?? {},
++    ...pt,
++    rarity: RARITY_MAP[c.rarity] ?? 'rare',
++    arenaRarity: null,
++    onArena: false,
++    arenaIds: [],
++    releasedAt: c.released_at,
++    latestReleasedAt: c.released_at,
++    edhrecRank: null,
++    gameChanger: Boolean(c.game_changer),
++  };
++}
++
++/**
++ * Folds every printing in a Scryfall bulk file (one JSON object per line) into one record
++ * per oracle ID. Arena availability, Arena IDs and the cheapest Arena rarity are
++ * aggregated across printings.
++ */
++export async function aggregateCards(lines: AsyncIterable<string> | Iterable<string>): Promise<CardRecord[]> {
++  const byOracle = new Map<string, CardRecord>();
++  const latestAny = new Map<string, string>();
++  for await (const raw of lines) {
++    const line = raw.trim().replace(/,$/, '');
++    if (!line || line === '[' || line === ']') continue;
++    const c = JSON.parse(line) as RawCard;
++    if (!c.oracle_id || SKIP_LAYOUTS.has(c.layout)) continue;
++    if (c.set_type === 'memorabilia' || c.set_type === 'token') continue;
++
++    let rec = byOracle.get(c.oracle_id);
++    if (!rec) {
++      rec = fromPrinting(c);
++      byOracle.set(c.oracle_id, rec);
++    }
++    const rarity = RARITY_MAP[c.rarity] ?? 'rare';
++    rec.rarity = lowerRarity(rec.rarity, rarity);
++    if (c.released_at < rec.releasedAt) rec.releasedAt = c.released_at;
++    if (c.released_at > (latestAny.get(c.oracle_id) ?? '')) latestAny.set(c.oracle_id, c.released_at);
++    if (typeof c.edhrec_rank === 'number') {
++      rec.edhrecRank = rec.edhrecRank === null ? c.edhrec_rank : Math.min(rec.edhrecRank, c.edhrec_rank);
++    }
++    const games: string[] = c.games ?? [];
++    if (games.includes('arena')) {
++      if (!rec.onArena || c.released_at > rec.latestReleasedAt) rec.latestReleasedAt = c.released_at;
++      rec.onArena = true;
++      rec.arenaRarity = lowerRarity(rec.arenaRarity, rarity);
++      if (typeof c.arena_id === 'number' && !rec.arenaIds.includes(c.arena_id)) rec.arenaIds.push(c.arena_id);
++    }
++  }
++  const out = [...byOracle.values()];
++  for (const rec of out) {
++    rec.arenaIds.sort((a, b) => a - b);
++    if (!rec.onArena) rec.latestReleasedAt = latestAny.get(rec.oracleId) ?? rec.releasedAt;
++  }
++  return out.sort(byNameThenId);
++}
++
++export function byNameThenId(a: CardRecord, b: CardRecord): number {
++  if (a.name !== b.name) return a.name < b.name ? -1 : 1;
++  return a.oracleId < b.oracleId ? -1 : a.oracleId > b.oracleId ? 1 : 0;
++}
+diff --git a/src/core/analyze.ts b/src/core/analyze.ts
+index 2a3fce5..f0e9e4f 100644
+--- a/src/core/analyze.ts
++++ b/src/core/analyze.ts
+@@ -1,4 +1,4 @@
+-import { hasRole, INTERACTION_ROLES, type Role, ROLES, tagRoles } from '../data/roles.js';
++import { hasRole, INTERACTION_ROLES, type Role, ROLES, tagRoles } from './roles.js';
+ import {
+   castingCost,
+   castingMv,
+diff --git a/src/core/cards.ts b/src/core/cards.ts
+index bb184c2..d17319d 100644
+--- a/src/core/cards.ts
++++ b/src/core/cards.ts
+@@ -180,3 +180,12 @@ export function summarize(c: CardRecord) {
+     text: c.oracleText,
+   };
+ }
++
++/** The data snapshot date (YYYY-MM-DD), used instead of "today" so results are reproducible. */
++export function asOfDate(index: { meta: IndexMeta }): string {
++  for (const candidate of [index.meta.snapshot, index.meta.builtAt]) {
++    const t = Date.parse(candidate);
++    if (!Number.isNaN(t)) return new Date(t).toISOString().slice(0, 10);
++  }
++  return '2026-01-01';
++}
+diff --git a/src/core/errors.ts b/src/core/errors.ts
+new file mode 100644
+index 0000000..5dd0648
+--- /dev/null
++++ b/src/core/errors.ts
+@@ -0,0 +1,9 @@
++/** Thrown for problems the caller can fix (bad input, unknown format). No MCP dependency. */
++export class ToolError extends Error {
++  constructor(
++    message: string,
++    readonly details?: unknown,
++  ) {
++    super(message);
++  }
++}
+diff --git a/src/core/formats.ts b/src/core/formats.ts
+index b9c68c5..52670e8 100644
+--- a/src/core/formats.ts
++++ b/src/core/formats.ts
+@@ -1,4 +1,4 @@
+-import { ToolError } from '../tools/result.js';
++import { ToolError } from './errors.js';
+ 
+ export interface FormatRules {
+   id: string;
+diff --git a/src/core/index.ts b/src/core/index.ts
+new file mode 100644
+index 0000000..9a43e7b
+--- /dev/null
++++ b/src/core/index.ts
+@@ -0,0 +1,25 @@
++/*
++ * grindstone-mcp/core: the deterministic deck math with no Node built-ins, no MCP SDK and
++ * no file or network access. Safe to bundle for browsers, workers and CI scripts.
++ * Callers supply the card records (CardIndex), meta lists and, optionally, rubric JSON.
++ */
++export * from './types.js';
++export * from './errors.js';
++export * from './cards.js';
++export * from './aggregate.js';
++export * from './parse.js';
++export * from './deck.js';
++export * from './formats.js';
++export * from './validate.js';
++export * from './roles.js';
++export * from './rubric.js';
++export * from './analyze.js';
++export * from './simulate.js';
++export * from './power.js';
++export * from './wildcards.js';
++export * from './themes.js';
++export * from './recs.js';
++export * from './meta.js';
++export * from './suggest.js';
++export * from './search.js';
++export * from './rules.js';
+diff --git a/src/core/meta.ts b/src/core/meta.ts
+index f21083a..cb31371 100644
+--- a/src/core/meta.ts
++++ b/src/core/meta.ts
+@@ -1,5 +1,3 @@
+-import { existsSync, readFileSync } from 'node:fs';
+-import path from 'node:path';
+ import { z } from 'zod';
+ import type { CardIndex } from './cards.js';
+ import { isLand } from './cards.js';
+@@ -93,13 +91,11 @@ export const snapshotSchema = z.object({
+ 
+ export type MetaSnapshot = z.infer<typeof snapshotSchema>;
+ 
+-/** Reads `<config dir>/meta/<format>.json`, or returns null when there is none. */
+-export function loadSnapshot(configDir: string, format: string): { snapshot: MetaSnapshot; path: string } | null {
+-  const file = path.join(configDir, 'meta', `${format}.json`);
+-  if (!existsSync(file)) return null;
+-  const parsed = snapshotSchema.safeParse(JSON.parse(readFileSync(file, 'utf8')));
+-  if (!parsed.success) throw new Error(`Invalid meta snapshot ${file}: ${parsed.error.message}`);
+-  return { snapshot: parsed.data, path: file };
++/** Validates a parsed snapshot JSON (pure; file reading lives in data/snapshots.ts). */
++export function parseSnapshot(json: unknown, where = 'snapshot'): MetaSnapshot {
++  const parsed = snapshotSchema.safeParse(json);
++  if (!parsed.success) throw new Error(`Invalid meta snapshot ${where}: ${parsed.error.message}`);
++  return parsed.data;
+ }
+ 
+ // ---- comparison ------------------------------------------------------------------------
+diff --git a/src/core/roles.ts b/src/core/roles.ts
+new file mode 100644
+index 0000000..b6f663f
+--- /dev/null
++++ b/src/core/roles.ts
+@@ -0,0 +1,138 @@
++import { frontTypeLine, isCreature, isLand, rulesText } from './cards.js';
++import type { CardRecord } from './types.js';
++
++export type Role =
++  | 'removal'
++  | 'counterspell'
++  | 'sweeper'
++  | 'card_draw'
++  | 'ramp'
++  | 'tutor'
++  | 'threat'
++  | 'protection'
++  | 'lifegain';
++
++export const ROLES: Role[] = [
++  'removal',
++  'counterspell',
++  'sweeper',
++  'card_draw',
++  'ramp',
++  'tutor',
++  'threat',
++  'protection',
++  'lifegain',
++];
++
++export const INTERACTION_ROLES: Role[] = ['removal', 'counterspell', 'sweeper'];
++
++interface Rule {
++  role: Role;
++  id: string;
++  /** Matched against lowercased rules text with reminder text removed. */
++  pattern?: RegExp;
++  test?: (c: CardRecord) => boolean;
++}
++
++// Removal means it can answer a creature (or any permanent); artifact/enchantment-only hate doesn't count.
++const TARGET_THING =
++  '(?:target|up to (?:one|two) target) (?:\\w+ )?(?:creature|permanent|nonland permanent|planeswalker|battle|artifact or creature|creature or planeswalker)';
++
++/**
++ * Oracle-text heuristics for card roles. Each match is reported with its rule ID so users
++ * can audit (and dispute) a tag. Order doesn't matter; a card can have several roles.
++ */
++export const RULES: Rule[] = [
++  { role: 'removal', id: 'destroy-target', pattern: new RegExp(`destroy ${TARGET_THING}`) },
++  { role: 'removal', id: 'exile-target', pattern: new RegExp(`exile ${TARGET_THING}`) },
++  {
++    role: 'removal',
++    id: 'damage-target',
++    pattern: /deals? (?:\d+|x|that much) damage to (?:any target|target (?:\w+ )?(?:creature|planeswalker)|up to one target creature)/,
++  },
++  { role: 'removal', id: 'bite', pattern: /deals? damage equal to (?:its|their|that creature's) power to (?:any other target|target creature|another target)/ },
++  { role: 'removal', id: 'fight', pattern: /fights? (?:target|up to one target|another target) creature/ },
++  { role: 'removal', id: 'minus-toughness', pattern: /target creature (?:an opponent controls )?gets -\d+\/-\d+/ },
++  { role: 'removal', id: 'edict', pattern: /(?:target|each) opponent sacrifices (?:a|an) (?:creature|nontoken creature|attacking creature|permanent)/ },
++  { role: 'removal', id: 'bounce', pattern: /return target (?:creature|nonland permanent)[^.]* to its owner's hand/ },
++  {
++    role: 'removal',
++    id: 'aura-lockdown',
++    pattern: /enchanted creature can't attack or block|enchanted creature can't attack, block/,
++  },
++  { role: 'counterspell', id: 'counter-target', pattern: /counter target (?:\w+ )*?spell/ },
++  {
++    role: 'sweeper',
++    id: 'destroy-all',
++    pattern: /(?:destroy|exile) all (?:other )?(?:creatures|nonland permanents|permanents|artifacts|enchantments)/,
++  },
++  { role: 'sweeper', id: 'damage-each', pattern: /deals? \d+ damage to each (?:creature|other creature|opponent and each creature)/ },
++  { role: 'sweeper', id: 'all-minus', pattern: /(?:all|each) (?:other )?creatures? (?:your opponents control )?gets? -\d+\/-\d+/ },
++  { role: 'sweeper', id: 'each-sacrifices', pattern: /each player sacrifices (?:all|a) creatures?/ },
++  {
++    role: 'card_draw',
++    id: 'draw-cards',
++    // "draw", not "draws": "you draw" / "Draw a card", never "whenever an opponent draws a card".
++    pattern: /\bdraw (?:a|an additional|two|three|four|x|that many) cards?/,
++  },
++  { role: 'card_draw', id: 'impulse', pattern: /exile the top (?:card|two cards|three cards)[^.]*\. (?:until|you may play|you may cast)/ },
++  { role: 'card_draw', id: 'investigate', pattern: /\binvestigate\b|create (?:a|two) clue tokens?/ },
++  { role: 'ramp', id: 'add-mana', test: (c) => !isLand(c) && /\{t\}(?:, [^:]*)?: add \{|add \{[wubrgc]\}|add one mana/.test(rulesText(c)) },
++  {
++    role: 'ramp',
++    id: 'land-search',
++    pattern: /search your library for (?:a|up to (?:one|two)) (?:basic )?(?:land|forest|plains|island|swamp|mountain)[^.]*onto the battlefield/,
++  },
++  { role: 'ramp', id: 'extra-land', pattern: /put a land card from your hand onto the battlefield|play an additional land/ },
++  { role: 'ramp', id: 'treasure', test: (c) => !isLand(c) && /create (?:a|two|three|x) (?:tapped )?treasure tokens?/.test(rulesText(c)) },
++  {
++    role: 'tutor',
++    id: 'search-card',
++    pattern: /search your library for (?:a|an) (?!basic land|land|forest|plains|island|swamp|mountain)(?:[\w-]+ )*?card/,
++  },
++  {
++    role: 'threat',
++    id: 'creature-power',
++    test: (c) => isCreature(c) && (Number(c.power) >= 2 || /\b(?:haste|flying|trample|double strike|prowess)\b/.test(rulesText(c))),
++  },
++  { role: 'threat', id: 'planeswalker', test: (c) => /\bPlaneswalker\b/.test(frontTypeLine(c)) },
++  { role: 'threat', id: 'vehicle-or-manland', pattern: /becomes? an? \d+\/\d+[^.]*creature|crew \d/ },
++  { role: 'threat', id: 'token-maker', test: (c) => !isCreature(c) && !isLand(c) && /create (?:a|two|three|x) \d+\/\d+[^.]*creature tokens?/.test(rulesText(c)) },
++  {
++    role: 'protection',
++    id: 'grant-protection',
++    pattern: /(?:target creature|creatures you control|target permanent|permanents you control)[^.]*gains? (?:hexproof|indestructible|protection|shroud|ward)/,
++  },
++  { role: 'protection', id: 'phase-out', pattern: /phases? out/ },
++  { role: 'lifegain', id: 'gain-life', pattern: /you gain (?:\d+|x|that much) life|gain life equal/ },
++  { role: 'lifegain', id: 'lifelink', test: (c) => c.keywords.includes('Lifelink') || /\blifelink\b/.test(rulesText(c)) },
++];
++
++export interface RoleTag {
++  role: Role;
++  rule: string;
++}
++
++const memo = new WeakMap<CardRecord, RoleTag[]>();
++
++export function tagRoles(c: CardRecord): RoleTag[] {
++  const hit = memo.get(c);
++  if (hit) return hit;
++  const text = rulesText(c);
++  const tags: RoleTag[] = [];
++  for (const r of RULES) {
++    if (tags.some((t) => t.role === r.role)) continue;
++    const match = r.test ? r.test(c) : r.pattern!.test(text);
++    if (match) tags.push({ role: r.role, rule: r.id });
++  }
++  memo.set(c, tags);
++  return tags;
++}
++
++export function hasRole(c: CardRecord, role: Role): boolean {
++  return tagRoles(c).some((t) => t.role === role);
++}
++
++export function isInteraction(c: CardRecord): boolean {
++  return tagRoles(c).some((t) => INTERACTION_ROLES.includes(t.role));
++}
+diff --git a/src/core/rubric.ts b/src/core/rubric.ts
+index fda3dc3..13baaa9 100644
+--- a/src/core/rubric.ts
++++ b/src/core/rubric.ts
+@@ -1,7 +1,6 @@
+-import { existsSync, readFileSync } from 'node:fs';
+-import path from 'node:path';
+ import { z } from 'zod';
+-import { configDir, packageRoot } from '../data/paths.js';
++import defaultBrawl from '../../rubric/brawl-rubric.json' with { type: 'json' };
++import defaultConstructed from '../../rubric/power-rubric.json' with { type: 'json' };
+ 
+ const tiers = z.array(z.object({ tier: z.number(), label: z.string(), min: z.number() })).min(1);
+ const karsten = z.object({
+@@ -106,27 +105,40 @@ export type KarstenTable = z.infer<typeof karsten>;
+ export type Archetype = keyof ConstructedRubric['archetypes'];
+ 
+ /**
+- * Rubric files are read from `<config dir>/rubric/` when present (so users can tune them
+- * without touching the package), else from the package's own `rubric/` folder.
++ * Where rubric JSON comes from. The defaults are the package's own rubric/ files, bundled
++ * at build time, so this module needs no file system. The MCP server swaps in a source
++ * that prefers <config dir>/rubric/ overrides (see data/rubricFiles.ts); a browser app can
++ * pass rubric objects it loaded itself.
+  */
+-function rubricPath(file: string): string {
+-  const override = path.join(configDir(), 'rubric', file);
+-  return existsSync(override) ? override : path.join(packageRoot(), 'rubric', file);
++export interface RubricSource {
++  /** A stable key for caching (e.g. the file path the JSON came from). */
++  constructed(): { key: string; json: unknown };
++  brawl(): { key: string; json: unknown };
+ }
+ 
++export const bundledRubrics: RubricSource = {
++  constructed: () => ({ key: 'bundled:power-rubric.json', json: defaultConstructed }),
++  brawl: () => ({ key: 'bundled:brawl-rubric.json', json: defaultBrawl }),
++};
++
++let source: RubricSource = bundledRubrics;
+ const cache = new Map<string, unknown>();
+ 
+-function load<T>(file: string, schema: z.ZodType<T>): T {
+-  const p = rubricPath(file);
+-  if (cache.has(p)) return cache.get(p) as T;
+-  const parsed = schema.safeParse(JSON.parse(readFileSync(p, 'utf8')));
+-  if (!parsed.success) throw new Error(`Invalid rubric ${p}: ${parsed.error.message}`);
+-  cache.set(p, parsed.data);
++export function setRubricSource(next: RubricSource): void {
++  source = next;
++  cache.clear();
++}
++
++function load<T>(pick: { key: string; json: unknown }, schema: z.ZodType<T>): T {
++  if (cache.has(pick.key)) return cache.get(pick.key) as T;
++  const parsed = schema.safeParse(pick.json);
++  if (!parsed.success) throw new Error(`Invalid rubric ${pick.key}: ${parsed.error.message}`);
++  cache.set(pick.key, parsed.data);
+   return parsed.data;
+ }
+ 
+-export const constructedRubric = () => load('power-rubric.json', constructedRubricSchema);
+-export const brawlRubric = () => load('brawl-rubric.json', brawlRubricSchema);
++export const constructedRubric = () => load(source.constructed(), constructedRubricSchema);
++export const brawlRubric = () => load(source.brawl(), brawlRubricSchema);
+ 
+ /** Sources needed for `pips` colored pips at mana value `mv`, scaled to the deck size. */
+ export function karstenSources(table: KarstenTable, pips: number, mv: number, deckSize: number): number {
+diff --git a/src/core/rules.ts b/src/core/rules.ts
+new file mode 100644
+index 0000000..4449b2a
+--- /dev/null
++++ b/src/core/rules.ts
+@@ -0,0 +1,102 @@
++/* Comprehensive Rules parsing and lookup: pure functions over the rules text. */
++
++export interface Rule {
++  number: string;
++  text: string;
++  examples: string[];
++}
++
++export interface RulesDoc {
++  effective?: string;
++  source: string;
++  rules: Rule[];
++  byNumber: Map<string, Rule>;
++  glossary: Map<string, { term: string; definition: string }>;
++}
++
++export function findRulesTxtUrl(html: string): string | null {
++  const m = /https:\/\/media\.wizards\.com\/[^"'<>\s]*?MagicCompRules[^"'<>]*?\.txt/i.exec(html);
++  return m ? m[0].replace(/ /g, '%20') : null;
++}
++
++const RULE_LINE = /^(\d{1,3}(?:\.\d+[a-z]?)?)\.?\s+(\S.*)$/;
++
++export function parseRules(text: string, source: string): RulesDoc {
++  const lines = text.replace(/\r\n?/g, '\n').split('\n').map((l) => l.trim());
++  const effective = /effective as of ([A-Z][a-z]+ \d{1,2}, \d{4})/.exec(text)?.[1];
++
++  // The table of contents repeats the headings, so the body starts at the second "1. Game Concepts".
++  const starts = lines.flatMap((l, i) => (/^1\.\s+Game Concepts$/.test(l) ? [i] : []));
++  const glossaryAt = lines.flatMap((l, i) => (l === 'Glossary' ? [i] : []));
++  const creditsAt = lines.flatMap((l, i) => (l === 'Credits' ? [i] : []));
++  const bodyStart = starts[1] ?? starts[0] ?? 0;
++  const glossaryStart = glossaryAt.find((i) => i > bodyStart) ?? lines.length;
++  const glossaryEnd = creditsAt.find((i) => i > glossaryStart) ?? lines.length;
++
++  const rules: Rule[] = [];
++  for (let i = bodyStart; i < glossaryStart; i++) {
++    const line = lines[i]!;
++    if (!line) continue;
++    if (/^Example:/.test(line)) {
++      rules[rules.length - 1]?.examples.push(line.replace(/^Example:\s*/, ''));
++      continue;
++    }
++    const m = RULE_LINE.exec(line);
++    if (m) rules.push({ number: m[1]!, text: m[2]!, examples: [] });
++    else if (rules.length) rules[rules.length - 1]!.text += ` ${line}`;
++  }
++
++  const glossary = new Map<string, { term: string; definition: string }>();
++  let term: string | null = null;
++  let def: string[] = [];
++  const flush = () => {
++    if (term && def.length) glossary.set(term.toLowerCase(), { term, definition: def.join(' ') });
++    term = null;
++    def = [];
++  };
++  for (let i = glossaryStart + 1; i < glossaryEnd; i++) {
++    const line = lines[i]!;
++    if (!line) flush();
++    else if (term === null) term = line;
++    else def.push(line);
++  }
++  flush();
++
++  return { ...(effective ? { effective } : {}), source, rules, byNumber: new Map(rules.map((r) => [r.number, r])), glossary };
++}
++
++/** A rule plus its subrules (e.g. 702.19 → 702.19a, 702.19b…); a section (702) lists its rules. */
++export function lookupNumber(doc: RulesDoc, number: string, limit = 40): Rule[] {
++  const key = number.trim().replace(/\.$/, '');
++  const exact = doc.byNumber.get(key);
++  const children = doc.rules.filter(
++    (r) => r.number !== key && (r.number.startsWith(`${key}.`) || (/\d$/.test(key) && new RegExp(`^${escape(key)}[a-z]$`).test(r.number))),
++  );
++  return [...(exact ? [exact] : []), ...children].slice(0, limit);
++}
++
++function escape(s: string) {
++  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
++}
++
++export function searchRules(doc: RulesDoc, query: string, limit = 10) {
++  const q = query.trim().toLowerCase();
++  const terms = q.split(/\s+/).filter((t) => t.length > 1);
++  const glossary = doc.glossary.get(q);
++  const scored = doc.rules
++    .map((r) => {
++      const text = r.text.toLowerCase();
++      let score = text.includes(q) ? 10 : 0;
++      for (const t of terms) if (text.includes(t)) score += 1;
++      return { r, score };
++    })
++    .filter((x) => x.score >= Math.max(1, terms.length))
++    .sort((a, b) => b.score - a.score || a.r.number.length - b.r.number.length || cmpRule(a.r.number, b.r.number))
++    .slice(0, limit)
++    .map((x) => x.r);
++  return { glossary: glossary ?? null, rules: scored };
++}
++
++function cmpRule(a: string, b: string) {
++  return a.localeCompare(b, 'en', { numeric: true });
++}
+diff --git a/src/core/search.ts b/src/core/search.ts
+index 7f5904d..53f0fe5 100644
+--- a/src/core/search.ts
++++ b/src/core/search.ts
+@@ -1,4 +1,4 @@
+-import { ToolError } from '../tools/result.js';
++import { ToolError } from './errors.js';
+ import { type CardIndex, frontTypeLine, normalizeName, wildcardRarity } from './cards.js';
+ import { getFormat } from './formats.js';
+ import { RARITIES, type CardRecord, type Color } from './types.js';
+diff --git a/src/core/simulate.ts b/src/core/simulate.ts
+index ee18846..19a25fe 100644
+--- a/src/core/simulate.ts
++++ b/src/core/simulate.ts
+@@ -1,4 +1,4 @@
+-import { type Role, tagRoles } from '../data/roles.js';
++import { type Role, tagRoles } from './roles.js';
+ import { landColors, round } from './analyze.js';
+ import { castingCost, castingMv, isBasicLand, isLand, isMdfcLand, normalizeName, pipsOf } from './cards.js';
+ import { playEntries, type ResolvedDeck } from './deck.js';
+diff --git a/src/core/suggest.ts b/src/core/suggest.ts
+index 7fab8ab..893a34a 100644
+--- a/src/core/suggest.ts
++++ b/src/core/suggest.ts
+@@ -1,4 +1,4 @@
+-import { type Role, tagRoles } from '../data/roles.js';
++import { type Role, tagRoles } from './roles.js';
+ import { analyzeDeck } from './analyze.js';
+ import {
+   type CardIndex,
+diff --git a/src/data/bulk.ts b/src/data/bulk.ts
+index 0bac07b..96e6afb 100644
+--- a/src/data/bulk.ts
++++ b/src/data/bulk.ts
+@@ -6,146 +6,13 @@ import type { ReadableStream as WebReadableStream } from 'node:stream/web';
+ import { DatabaseSync } from 'node:sqlite';
+ import zlib from 'node:zlib';
+ import { CardIndex } from '../core/cards.js';
+-import {
+-  COLORS,
+-  RARITIES,
+-  type CardFace,
+-  type CardRecord,
+-  type Color,
+-  type IndexMeta,
+-  type Rarity,
+-} from '../core/types.js';
++import { aggregateCards, byNameThenId } from '../core/aggregate.js';
++import type { CardRecord, IndexMeta } from '../core/types.js';
+ import type { ScryfallClient } from './scryfall.js';
+ 
+ const SCHEMA_VERSION = '1';
+ 
+-/** Layouts that are never deck cards. */
+-const SKIP_LAYOUTS = new Set([
+-  'token',
+-  'double_faced_token',
+-  'emblem',
+-  'art_series',
+-  'planar',
+-  'scheme',
+-  'vanguard',
+-  'reversible_card',
+-]);
+-
+-const RARITY_MAP: Record<string, Rarity> = {
+-  common: 'common',
+-  uncommon: 'uncommon',
+-  rare: 'rare',
+-  mythic: 'mythic',
+-  special: 'rare',
+-  bonus: 'rare',
+-};
+-
+-/* eslint-disable @typescript-eslint/no-explicit-any */
+-type RawCard = Record<string, any>;
+-
+-function lowerRarity(a: Rarity | null, b: Rarity): Rarity {
+-  if (a === null) return b;
+-  return RARITIES.indexOf(b) < RARITIES.indexOf(a) ? b : a;
+-}
+-
+-function colorsOf(list: unknown): Color[] {
+-  const set = new Set(Array.isArray(list) ? list : []);
+-  return COLORS.filter((c) => set.has(c));
+-}
+-
+-function faceOf(f: RawCard): CardFace {
+-  return {
+-    name: f.name,
+-    manaCost: f.mana_cost ?? '',
+-    typeLine: f.type_line ?? '',
+-    oracleText: f.oracle_text ?? '',
+-    ...(f.power !== undefined ? { power: f.power, toughness: f.toughness } : {}),
+-  };
+-}
+-
+-function fromPrinting(c: RawCard): CardRecord {
+-  const faces: CardFace[] = Array.isArray(c.card_faces) ? c.card_faces.map(faceOf) : [];
+-  const front = faces[0];
+-  const faceColors = faces.length ? colorsOf(c.card_faces.flatMap((f: RawCard) => f.colors ?? [])) : [];
+-  const pt =
+-    c.power !== undefined
+-      ? { power: c.power, toughness: c.toughness }
+-      : front?.power !== undefined
+-        ? { power: front.power, toughness: front.toughness }
+-        : {};
+-  return {
+-    oracleId: c.oracle_id,
+-    name: c.name,
+-    layout: c.layout,
+-    manaCost: c.mana_cost ?? front?.manaCost ?? '',
+-    cmc: typeof c.cmc === 'number' ? c.cmc : 0,
+-    typeLine: c.type_line ?? faces.map((f) => f.typeLine).join(' // '),
+-    oracleText: c.oracle_text ?? faces.map((f) => f.oracleText).join('\n//\n'),
+-    faces,
+-    colors: c.colors ? colorsOf(c.colors) : faceColors,
+-    colorIdentity: colorsOf(c.color_identity),
+-    producedMana: Array.isArray(c.produced_mana) ? [...c.produced_mana].sort() : [],
+-    keywords: Array.isArray(c.keywords) ? [...c.keywords].sort() : [],
+-    legalities: c.legalities ?? {},
+-    ...pt,
+-    rarity: RARITY_MAP[c.rarity] ?? 'rare',
+-    arenaRarity: null,
+-    onArena: false,
+-    arenaIds: [],
+-    releasedAt: c.released_at,
+-    latestReleasedAt: c.released_at,
+-    edhrecRank: null,
+-    gameChanger: Boolean(c.game_changer),
+-  };
+-}
+-
+-/**
+- * Folds every printing in a Scryfall bulk file (one JSON object per line) into one record
+- * per oracle ID. Arena availability, Arena IDs and the cheapest Arena rarity are
+- * aggregated across printings.
+- */
+-export async function aggregateCards(lines: AsyncIterable<string> | Iterable<string>): Promise<CardRecord[]> {
+-  const byOracle = new Map<string, CardRecord>();
+-  const latestAny = new Map<string, string>();
+-  for await (const raw of lines) {
+-    const line = raw.trim().replace(/,$/, '');
+-    if (!line || line === '[' || line === ']') continue;
+-    const c = JSON.parse(line) as RawCard;
+-    if (!c.oracle_id || SKIP_LAYOUTS.has(c.layout)) continue;
+-    if (c.set_type === 'memorabilia' || c.set_type === 'token') continue;
+-
+-    let rec = byOracle.get(c.oracle_id);
+-    if (!rec) {
+-      rec = fromPrinting(c);
+-      byOracle.set(c.oracle_id, rec);
+-    }
+-    const rarity = RARITY_MAP[c.rarity] ?? 'rare';
+-    rec.rarity = lowerRarity(rec.rarity, rarity);
+-    if (c.released_at < rec.releasedAt) rec.releasedAt = c.released_at;
+-    if (c.released_at > (latestAny.get(c.oracle_id) ?? '')) latestAny.set(c.oracle_id, c.released_at);
+-    if (typeof c.edhrec_rank === 'number') {
+-      rec.edhrecRank = rec.edhrecRank === null ? c.edhrec_rank : Math.min(rec.edhrecRank, c.edhrec_rank);
+-    }
+-    const games: string[] = c.games ?? [];
+-    if (games.includes('arena')) {
+-      if (!rec.onArena || c.released_at > rec.latestReleasedAt) rec.latestReleasedAt = c.released_at;
+-      rec.onArena = true;
+-      rec.arenaRarity = lowerRarity(rec.arenaRarity, rarity);
+-      if (typeof c.arena_id === 'number' && !rec.arenaIds.includes(c.arena_id)) rec.arenaIds.push(c.arena_id);
+-    }
+-  }
+-  const out = [...byOracle.values()];
+-  for (const rec of out) {
+-    rec.arenaIds.sort((a, b) => a - b);
+-    if (!rec.onArena) rec.latestReleasedAt = latestAny.get(rec.oracleId) ?? rec.releasedAt;
+-  }
+-  return out.sort(byNameThenId);
+-}
+-
+-function byNameThenId(a: CardRecord, b: CardRecord): number {
+-  if (a.name !== b.name) return a.name < b.name ? -1 : 1;
+-  return a.oracleId < b.oracleId ? -1 : a.oracleId > b.oracleId ? 1 : 0;
+-}
++export { aggregateCards };
+ 
+ export function writeIndex(dbPath: string, records: CardRecord[], meta: Omit<IndexMeta, 'cardCount'>) {
+   mkdirSync(path.dirname(dbPath), { recursive: true });
+diff --git a/src/data/roles.ts b/src/data/roles.ts
+index ce4151b..596dc97 100644
+--- a/src/data/roles.ts
++++ b/src/data/roles.ts
+@@ -1,138 +1,2 @@
+-import { frontTypeLine, isCreature, isLand, rulesText } from '../core/cards.js';
+-import type { CardRecord } from '../core/types.js';
+-
+-export type Role =
+-  | 'removal'
+-  | 'counterspell'
+-  | 'sweeper'
+-  | 'card_draw'
+-  | 'ramp'
+-  | 'tutor'
+-  | 'threat'
+-  | 'protection'
+-  | 'lifegain';
+-
+-export const ROLES: Role[] = [
+-  'removal',
+-  'counterspell',
+-  'sweeper',
+-  'card_draw',
+-  'ramp',
+-  'tutor',
+-  'threat',
+-  'protection',
+-  'lifegain',
+-];
+-
+-export const INTERACTION_ROLES: Role[] = ['removal', 'counterspell', 'sweeper'];
+-
+-interface Rule {
+-  role: Role;
+-  id: string;
+-  /** Matched against lowercased rules text with reminder text removed. */
+-  pattern?: RegExp;
+-  test?: (c: CardRecord) => boolean;
+-}
+-
+-// Removal means it can answer a creature (or any permanent); artifact/enchantment-only hate doesn't count.
+-const TARGET_THING =
+-  '(?:target|up to (?:one|two) target) (?:\\w+ )?(?:creature|permanent|nonland permanent|planeswalker|battle|artifact or creature|creature or planeswalker)';
+-
+-/**
+- * Oracle-text heuristics for card roles. Each match is reported with its rule ID so users
+- * can audit (and dispute) a tag. Order doesn't matter; a card can have several roles.
+- */
+-export const RULES: Rule[] = [
+-  { role: 'removal', id: 'destroy-target', pattern: new RegExp(`destroy ${TARGET_THING}`) },
+-  { role: 'removal', id: 'exile-target', pattern: new RegExp(`exile ${TARGET_THING}`) },
+-  {
+-    role: 'removal',
+-    id: 'damage-target',
+-    pattern: /deals? (?:\d+|x|that much) damage to (?:any target|target (?:\w+ )?(?:creature|planeswalker)|up to one target creature)/,
+-  },
+-  { role: 'removal', id: 'bite', pattern: /deals? damage equal to (?:its|their|that creature's) power to (?:any other target|target creature|another target)/ },
+-  { role: 'removal', id: 'fight', pattern: /fights? (?:target|up to one target|another target) creature/ },
+-  { role: 'removal', id: 'minus-toughness', pattern: /target creature (?:an opponent controls )?gets -\d+\/-\d+/ },
+-  { role: 'removal', id: 'edict', pattern: /(?:target|each) opponent sacrifices (?:a|an) (?:creature|nontoken creature|attacking creature|permanent)/ },
+-  { role: 'removal', id: 'bounce', pattern: /return target (?:creature|nonland permanent)[^.]* to its owner's hand/ },
+-  {
+-    role: 'removal',
+-    id: 'aura-lockdown',
+-    pattern: /enchanted creature can't attack or block|enchanted creature can't attack, block/,
+-  },
+-  { role: 'counterspell', id: 'counter-target', pattern: /counter target (?:\w+ )*?spell/ },
+-  {
+-    role: 'sweeper',
+-    id: 'destroy-all',
+-    pattern: /(?:destroy|exile) all (?:other )?(?:creatures|nonland permanents|permanents|artifacts|enchantments)/,
+-  },
+-  { role: 'sweeper', id: 'damage-each', pattern: /deals? \d+ damage to each (?:creature|other creature|opponent and each creature)/ },
+-  { role: 'sweeper', id: 'all-minus', pattern: /(?:all|each) (?:other )?creatures? (?:your opponents control )?gets? -\d+\/-\d+/ },
+-  { role: 'sweeper', id: 'each-sacrifices', pattern: /each player sacrifices (?:all|a) creatures?/ },
+-  {
+-    role: 'card_draw',
+-    id: 'draw-cards',
+-    // "draw", not "draws": "you draw" / "Draw a card", never "whenever an opponent draws a card".
+-    pattern: /\bdraw (?:a|an additional|two|three|four|x|that many) cards?/,
+-  },
+-  { role: 'card_draw', id: 'impulse', pattern: /exile the top (?:card|two cards|three cards)[^.]*\. (?:until|you may play|you may cast)/ },
+-  { role: 'card_draw', id: 'investigate', pattern: /\binvestigate\b|create (?:a|two) clue tokens?/ },
+-  { role: 'ramp', id: 'add-mana', test: (c) => !isLand(c) && /\{t\}(?:, [^:]*)?: add \{|add \{[wubrgc]\}|add one mana/.test(rulesText(c)) },
+-  {
+-    role: 'ramp',
+-    id: 'land-search',
+-    pattern: /search your library for (?:a|up to (?:one|two)) (?:basic )?(?:land|forest|plains|island|swamp|mountain)[^.]*onto the battlefield/,
+-  },
+-  { role: 'ramp', id: 'extra-land', pattern: /put a land card from your hand onto the battlefield|play an additional land/ },
+-  { role: 'ramp', id: 'treasure', test: (c) => !isLand(c) && /create (?:a|two|three|x) (?:tapped )?treasure tokens?/.test(rulesText(c)) },
+-  {
+-    role: 'tutor',
+-    id: 'search-card',
+-    pattern: /search your library for (?:a|an) (?!basic land|land|forest|plains|island|swamp|mountain)(?:[\w-]+ )*?card/,
+-  },
+-  {
+-    role: 'threat',
+-    id: 'creature-power',
+-    test: (c) => isCreature(c) && (Number(c.power) >= 2 || /\b(?:haste|flying|trample|double strike|prowess)\b/.test(rulesText(c))),
+-  },
+-  { role: 'threat', id: 'planeswalker', test: (c) => /\bPlaneswalker\b/.test(frontTypeLine(c)) },
+-  { role: 'threat', id: 'vehicle-or-manland', pattern: /becomes? an? \d+\/\d+[^.]*creature|crew \d/ },
+-  { role: 'threat', id: 'token-maker', test: (c) => !isCreature(c) && !isLand(c) && /create (?:a|two|three|x) \d+\/\d+[^.]*creature tokens?/.test(rulesText(c)) },
+-  {
+-    role: 'protection',
+-    id: 'grant-protection',
+-    pattern: /(?:target creature|creatures you control|target permanent|permanents you control)[^.]*gains? (?:hexproof|indestructible|protection|shroud|ward)/,
+-  },
+-  { role: 'protection', id: 'phase-out', pattern: /phases? out/ },
+-  { role: 'lifegain', id: 'gain-life', pattern: /you gain (?:\d+|x|that much) life|gain life equal/ },
+-  { role: 'lifegain', id: 'lifelink', test: (c) => c.keywords.includes('Lifelink') || /\blifelink\b/.test(rulesText(c)) },
+-];
+-
+-export interface RoleTag {
+-  role: Role;
+-  rule: string;
+-}
+-
+-const memo = new WeakMap<CardRecord, RoleTag[]>();
+-
+-export function tagRoles(c: CardRecord): RoleTag[] {
+-  const hit = memo.get(c);
+-  if (hit) return hit;
+-  const text = rulesText(c);
+-  const tags: RoleTag[] = [];
+-  for (const r of RULES) {
+-    if (tags.some((t) => t.role === r.role)) continue;
+-    const match = r.test ? r.test(c) : r.pattern!.test(text);
+-    if (match) tags.push({ role: r.role, rule: r.id });
+-  }
+-  memo.set(c, tags);
+-  return tags;
+-}
+-
+-export function hasRole(c: CardRecord, role: Role): boolean {
+-  return tagRoles(c).some((t) => t.role === role);
+-}
+-
+-export function isInteraction(c: CardRecord): boolean {
+-  return tagRoles(c).some((t) => INTERACTION_ROLES.includes(t.role));
+-}
++// Moved to core/roles.ts (browser-safe); kept as a re-export for existing imports.
++export * from '../core/roles.js';
+diff --git a/src/data/rubricFiles.ts b/src/data/rubricFiles.ts
+new file mode 100644
+index 0000000..cb7ceab
+--- /dev/null
++++ b/src/data/rubricFiles.ts
+@@ -0,0 +1,12 @@
++import { existsSync, readFileSync } from 'node:fs';
++import path from 'node:path';
++import { bundledRubrics, type RubricSource } from '../core/rubric.js';
++
++/** Prefers `<configDir>/rubric/<file>` when present, else the bundled package rubric (old behavior). */
++export function fileRubricSource(configDir: string): RubricSource {
++  const pick = (file: string, fallback: () => { key: string; json: unknown }) => () => {
++    const override = path.join(configDir, 'rubric', file);
++    return existsSync(override) ? { key: override, json: JSON.parse(readFileSync(override, 'utf8')) } : fallback();
++  };
++  return { constructed: pick('power-rubric.json', bundledRubrics.constructed), brawl: pick('brawl-rubric.json', bundledRubrics.brawl) };
++}
+diff --git a/src/data/rules.ts b/src/data/rules.ts
+index f5bf882..44ccdf6 100644
+--- a/src/data/rules.ts
++++ b/src/data/rules.ts
+@@ -2,6 +2,9 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+ import path from 'node:path';
+ import { USER_AGENT } from '../version.js';
+ import type { FetchLike } from './scryfall.js';
++import { findRulesTxtUrl, parseRules, type RulesDoc } from '../core/rules.js';
++
++export { findRulesTxtUrl, lookupNumber, parseRules, type Rule, type RulesDoc, searchRules } from '../core/rules.js';
+ 
+ /*
+  * The Comprehensive Rules are downloaded from Wizards at runtime and cached; the text is
+@@ -11,107 +14,6 @@ import type { FetchLike } from './scryfall.js';
+ export const RULES_PAGE = 'https://magic.wizards.com/en/rules';
+ const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+ 
+-export interface Rule {
+-  number: string;
+-  text: string;
+-  examples: string[];
+-}
+-
+-export interface RulesDoc {
+-  effective?: string;
+-  source: string;
+-  rules: Rule[];
+-  byNumber: Map<string, Rule>;
+-  glossary: Map<string, { term: string; definition: string }>;
+-}
+-
+-export function findRulesTxtUrl(html: string): string | null {
+-  const m = /https:\/\/media\.wizards\.com\/[^"'<>\s]*?MagicCompRules[^"'<>]*?\.txt/i.exec(html);
+-  return m ? m[0].replace(/ /g, '%20') : null;
+-}
+-
+-const RULE_LINE = /^(\d{1,3}(?:\.\d+[a-z]?)?)\.?\s+(\S.*)$/;
+-
+-export function parseRules(text: string, source: string): RulesDoc {
+-  const lines = text.replace(/\r\n?/g, '\n').split('\n').map((l) => l.trim());
+-  const effective = /effective as of ([A-Z][a-z]+ \d{1,2}, \d{4})/.exec(text)?.[1];
+-
+-  // The table of contents repeats the headings, so the body starts at the second "1. Game Concepts".
+-  const starts = lines.flatMap((l, i) => (/^1\.\s+Game Concepts$/.test(l) ? [i] : []));
+-  const glossaryAt = lines.flatMap((l, i) => (l === 'Glossary' ? [i] : []));
+-  const creditsAt = lines.flatMap((l, i) => (l === 'Credits' ? [i] : []));
+-  const bodyStart = starts[1] ?? starts[0] ?? 0;
+-  const glossaryStart = glossaryAt.find((i) => i > bodyStart) ?? lines.length;
+-  const glossaryEnd = creditsAt.find((i) => i > glossaryStart) ?? lines.length;
+-
+-  const rules: Rule[] = [];
+-  for (let i = bodyStart; i < glossaryStart; i++) {
+-    const line = lines[i]!;
+-    if (!line) continue;
+-    if (/^Example:/.test(line)) {
+-      rules[rules.length - 1]?.examples.push(line.replace(/^Example:\s*/, ''));
+-      continue;
+-    }
+-    const m = RULE_LINE.exec(line);
+-    if (m) rules.push({ number: m[1]!, text: m[2]!, examples: [] });
+-    else if (rules.length) rules[rules.length - 1]!.text += ` ${line}`;
+-  }
+-
+-  const glossary = new Map<string, { term: string; definition: string }>();
+-  let term: string | null = null;
+-  let def: string[] = [];
+-  const flush = () => {
+-    if (term && def.length) glossary.set(term.toLowerCase(), { term, definition: def.join(' ') });
+-    term = null;
+-    def = [];
+-  };
+-  for (let i = glossaryStart + 1; i < glossaryEnd; i++) {
+-    const line = lines[i]!;
+-    if (!line) flush();
+-    else if (term === null) term = line;
+-    else def.push(line);
+-  }
+-  flush();
+-
+-  return { ...(effective ? { effective } : {}), source, rules, byNumber: new Map(rules.map((r) => [r.number, r])), glossary };
+-}
+-
+-/** A rule plus its subrules (e.g. 702.19 → 702.19a, 702.19b…); a section (702) lists its rules. */
+-export function lookupNumber(doc: RulesDoc, number: string, limit = 40): Rule[] {
+-  const key = number.trim().replace(/\.$/, '');
+-  const exact = doc.byNumber.get(key);
+-  const children = doc.rules.filter(
+-    (r) => r.number !== key && (r.number.startsWith(`${key}.`) || (/\d$/.test(key) && new RegExp(`^${escape(key)}[a-z]$`).test(r.number))),
+-  );
+-  return [...(exact ? [exact] : []), ...children].slice(0, limit);
+-}
+-
+-function escape(s: string) {
+-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+-}
+-
+-export function searchRules(doc: RulesDoc, query: string, limit = 10) {
+-  const q = query.trim().toLowerCase();
+-  const terms = q.split(/\s+/).filter((t) => t.length > 1);
+-  const glossary = doc.glossary.get(q);
+-  const scored = doc.rules
+-    .map((r) => {
+-      const text = r.text.toLowerCase();
+-      let score = text.includes(q) ? 10 : 0;
+-      for (const t of terms) if (text.includes(t)) score += 1;
+-      return { r, score };
+-    })
+-    .filter((x) => x.score >= Math.max(1, terms.length))
+-    .sort((a, b) => b.score - a.score || a.r.number.length - b.r.number.length || cmpRule(a.r.number, b.r.number))
+-    .slice(0, limit)
+-    .map((x) => x.r);
+-  return { glossary: glossary ?? null, rules: scored };
+-}
+-
+-function cmpRule(a: string, b: string) {
+-  return a.localeCompare(b, 'en', { numeric: true });
+-}
+-
+ export interface RulesStoreOptions {
+   dir: string;
+   fetch: FetchLike;
+diff --git a/src/data/snapshots.ts b/src/data/snapshots.ts
+new file mode 100644
+index 0000000..9b65743
+--- /dev/null
++++ b/src/data/snapshots.ts
+@@ -0,0 +1,10 @@
++import { existsSync, readFileSync } from 'node:fs';
++import path from 'node:path';
++import { type MetaSnapshot, parseSnapshot } from '../core/meta.js';
++
++/** Reads `<config dir>/meta/<format>.json`, or returns null when there is none. */
++export function loadSnapshot(configDir: string, format: string): { snapshot: MetaSnapshot; path: string } | null {
++  const file = path.join(configDir, 'meta', `${format}.json`);
++  if (!existsSync(file)) return null;
++  return { snapshot: parseSnapshot(JSON.parse(readFileSync(file, 'utf8')), file), path: file };
++}
+diff --git a/src/tools/metaInput.ts b/src/tools/metaInput.ts
+index 7025ed9..4f647b8 100644
+--- a/src/tools/metaInput.ts
++++ b/src/tools/metaInput.ts
+@@ -1,7 +1,8 @@
+ import { z } from 'zod';
+ import type { Context } from '../context.js';
+ import type { CardIndex } from '../core/cards.js';
+-import { buildMeta, loadSnapshot, type MetaContext, type MetaListInput } from '../core/meta.js';
++import { buildMeta, type MetaContext, type MetaListInput } from '../core/meta.js';
++import { loadSnapshot } from '../data/snapshots.js';
+ 
+ export const metaListSchema = z.object({
+   name: z.string().optional(),
+@@ -38,11 +39,4 @@ export async function metaContext(
+   return { source: 'none' };
+ }
+ 
+-/** The data snapshot date (YYYY-MM-DD), used instead of "today" so results are reproducible. */
+-export function asOfDate(index: CardIndex): string {
+-  for (const candidate of [index.meta.snapshot, index.meta.builtAt]) {
+-    const t = Date.parse(candidate);
+-    if (!Number.isNaN(t)) return new Date(t).toISOString().slice(0, 10);
+-  }
+-  return '2026-01-01';
+-}
++export { asOfDate } from '../core/cards.js';
+diff --git a/src/tools/result.ts b/src/tools/result.ts
+index 37903db..b3054c1 100644
+--- a/src/tools/result.ts
++++ b/src/tools/result.ts
+@@ -1,14 +1,8 @@
+ import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+ 
+-/** Thrown inside tool code for problems the caller can fix (bad input, unknown format). */
+-export class ToolError extends Error {
+-  constructor(
+-    message: string,
+-    readonly details?: unknown,
+-  ) {
+-    super(message);
+-  }
+-}
++import { ToolError } from '../core/errors.js';
++
++export { ToolError };
+ 
+ export function ok(value: unknown): CallToolResult {
+   return {
+diff --git a/test/meta.test.ts b/test/meta.test.ts
+index 57c3755..291f38f 100644
+--- a/test/meta.test.ts
++++ b/test/meta.test.ts
+@@ -3,7 +3,8 @@ import os from 'node:os';
+ import path from 'node:path';
+ import { describe, expect, it } from 'vitest';
+ import { parseAndResolve } from '../src/core/deck.js';
+-import { buildMeta, compareToMeta, loadSnapshot, snapshotSchema } from '../src/core/meta.js';
++import { buildMeta, compareToMeta, snapshotSchema } from '../src/core/meta.js';
++import { loadSnapshot } from '../src/data/snapshots.js';
+ import { findRulesTxtUrl, loadRules, lookupNumber, parseRules, searchRules } from '../src/data/rules.js';
+ import { packageRoot } from '../src/data/paths.js';
+ import { createServer } from '../src/server.js';
+diff --git a/tsup.config.ts b/tsup.config.ts
+index d87623c..8a352a4 100644
+--- a/tsup.config.ts
++++ b/tsup.config.ts
+@@ -1,14 +1,29 @@
+ import { defineConfig } from 'tsup';
+ 
+-export default defineConfig({
+-  entry: ['src/index.ts'],
+-  format: ['esm'],
+-  target: 'node22',
+-  platform: 'node',
+-  clean: true,
+-  sourcemap: true,
+-  banner: { js: '#!/usr/bin/env node' },
+-  external: ['node:sqlite'],
+-  // node:sqlite has no unprefixed alias, so keep every node: prefix.
+-  removeNodeProtocol: false,
+-});
++export default defineConfig([
++  {
++    // The MCP server (bin). Unchanged.
++    entry: ['src/index.ts'],
++    format: ['esm'],
++    target: 'node22',
++    platform: 'node',
++    clean: true,
++    sourcemap: true,
++    banner: { js: '#!/usr/bin/env node' },
++    external: ['node:sqlite'],
++    // node:sqlite has no unprefixed alias, so keep every node: prefix.
++    removeNodeProtocol: false,
++  },
++  {
++    // Browser-safe library entry: `import { ... } from 'grindstone-mcp/core'`.
++    entry: { core: 'src/core/index.ts' },
++    format: ['esm'],
++    target: 'es2022',
++    platform: 'browser',
++    sourcemap: true,
++    // tsup's dts worker sets baseUrl, which TypeScript 6 deprecates.
++    dts: { compilerOptions: { ignoreDeprecations: '6.0' } },
++    // Let the consumer's bundler resolve zod (a normal dependency).
++    external: ['zod'],
++  },
++]);
