@@ -2,7 +2,7 @@
  * Read-only result sections of the deck analyzer. Every number shows its basis in text (no
  * colour-only cues, no hover-only details); card names open the card dialog.
  */
-import { useEffect, useState } from 'preact/hooks';
+import { useLayoutEffect, useState } from 'preact/hooks';
 import type { ComponentChildren } from 'preact';
 import { createStore } from '../../../../core/storage.ts';
 import { CardName } from '../CardPeek.tsx';
@@ -257,7 +257,7 @@ export function Curve({ result }: { result: AnalyzeResult }) {
   const max = Math.max(1, ...buckets.map(([, n]) => n));
   // Lands already have their own entry; other types read better plural ("Creatures 26").
   const types = Object.entries(a.types)
-    .filter(([t, n]) => n > 0 && t !== 'Land')
+    .filter(([t, n]) => n > 0 && t.toLowerCase() !== 'land')
     .sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0]));
   return (
     <Section id="deck-curve" title="Curve and card types" meta={`average mana value ${a.averageManaValue.toFixed(2)}`}>
@@ -305,10 +305,12 @@ export function Curve({ result }: { result: AnalyzeResult }) {
   );
 }
 
-const TYPE_PLURAL: Readonly<Record<string, string>> = { Sorcery: 'Sorceries', Battle: 'Battles' };
+const TYPE_PLURAL: Readonly<Record<string, string>> = { sorcery: 'Sorceries' };
 
+/** grindstone counts types under lower-case keys ("creature"); show "Creatures". */
 export function typePlural(t: string): string {
-  return TYPE_PLURAL[t] ?? `${t}s`;
+  const key = t.toLowerCase();
+  return TYPE_PLURAL[key] ?? `${key.charAt(0).toUpperCase()}${key.slice(1)}s`;
 }
 
 /** "Always tapped: 2 Elegant Parlor. Sometimes tapped: 4 Sacred Foundry." */
@@ -407,7 +409,7 @@ const validOwned = (v: unknown): WildcardCounts | undefined => {
 export function Wildcards({ result, onPeek }: { result: AnalyzeResult; onPeek: Peek }) {
   const w = result.wildcards;
   const [owned, setOwned] = useState<WildcardCounts>({ common: 0, uncommon: 0, rare: 0, mythic: 0 });
-  useEffect(() => setOwned(store.get(OWNED_KEY, { common: 0, uncommon: 0, rare: 0, mythic: 0 }, validOwned)), []);
+  useLayoutEffect(() => setOwned(store.get(OWNED_KEY, { common: 0, uncommon: 0, rare: 0, mythic: 0 }, validOwned)), []);
   const update = (r: Rarity, value: string) => {
     const next = { ...owned, [r]: Math.max(0, Math.min(9999, Math.floor(Number(value) || 0))) };
     setOwned(next);

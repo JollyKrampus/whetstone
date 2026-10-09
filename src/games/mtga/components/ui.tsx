@@ -46,7 +46,16 @@ export function RarityTag({ rarity, short = false }: { rarity: Rarity; short?: b
   return (
     <span class="rarity">
       <span class={`gem gem--${rarity}`} aria-hidden="true" />
-      {short ? <span class="visually-hidden">{RARITY_LABEL[rarity]}</span> : RARITY_LABEL[rarity]}
+      {short ? (
+        <>
+          <span class="rarity__abbr" aria-hidden="true">
+            {RARITY_LABEL[rarity][0]}
+          </span>
+          <span class="visually-hidden">{RARITY_LABEL[rarity]}</span>
+        </>
+      ) : (
+        RARITY_LABEL[rarity]
+      )}
     </span>
   );
 }

@@ -391,7 +391,8 @@ export class Engine {
       budget: result.budget,
       remaining: result.remaining,
       changes: result.changes,
-      notes: result.notes,
+      // grindstone phrases some notes for its MCP tool parameters; this page has no such field.
+      notes: result.notes.map((n) => n.replace(/ or maxChangePercent/g, '')),
       appliedText: toArenaText(applySwaps(deck, result.swaps, pool)),
       cards,
     };

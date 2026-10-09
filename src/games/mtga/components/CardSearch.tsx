@@ -3,7 +3,7 @@
  * the analyzer worker; no search request leaves the browser). The query, format and order live
  * in the URL hash, so a search can be bookmarked or shared.
  */
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useLayoutEffect, useRef, useState } from 'preact/hooks';
 import { int } from '../../../core/format.ts';
 import { createHashCodec, field } from '../../../core/urlstate.ts';
 import { IMAGE_CREDIT, IMAGE_SIZES, cardImageUrl } from '../lib/images.ts';
@@ -97,7 +97,7 @@ export default function CardSearch({ shards, snapshot, sizes }: Props) {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const s = searchCodec.decode(window.location.hash);
     setQuery(s.q);
     setFormat(s.format);

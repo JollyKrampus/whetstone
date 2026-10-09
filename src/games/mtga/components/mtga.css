@@ -18,6 +18,14 @@
   --gem-mythic: #ec7a3f;
 }
 
+/* Query syntax and deck lists must show what was typed: no "<=" → "≤" font ligatures. */
+[data-game='mtga'] code,
+[data-game='mtga'] pre,
+[data-game='mtga'] .input {
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
+}
+
 /* ---------- page frame ---------- */
 
 .mpage {
@@ -333,8 +341,12 @@ textarea.input {
 
 .seg__options {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(6.5rem, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
   gap: var(--sp-2);
+}
+
+.seg--compact .seg__options {
+  grid-template-columns: repeat(auto-fit, minmax(6rem, max-content));
 }
 
 .seg__opt {
@@ -632,6 +644,13 @@ textarea.input {
   align-items: center;
   gap: 0.35rem;
   font-size: var(--fs-sm);
+}
+
+.rarity__abbr {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
 }
 
 .gem {
@@ -2214,6 +2233,8 @@ textarea.input {
 /* ---------- card dialog ---------- */
 
 .peek {
+  /* The global reset zeroes margins; a modal dialog centres itself with margin: auto. */
+  margin: auto;
   width: min(52rem, calc(100vw - 2 * var(--gutter)));
   max-height: calc(100dvh - 2rem);
   padding: 0;
@@ -2917,30 +2938,65 @@ th[aria-sort] .sortbtn__icon {
   text-align: center;
 }
 
-.cpairs th .pips {
-  margin-right: var(--sp-2);
+.cpairs th {
+  min-width: 7.5rem;
+}
+
+.cpairs__id {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  white-space: nowrap;
+}
+
+.cpairs__name {
+  overflow-wrap: normal;
 }
 
 .cpairs__splash {
-  margin-left: var(--sp-1);
+  display: block;
+  margin-top: 0.1rem;
   color: var(--text-muted);
   font-size: var(--fs-xs);
   font-weight: 500;
 }
 
-.cpairs td.num {
-  position: relative;
-  min-width: 7rem;
+.cpairs td {
+  vertical-align: middle;
+}
+
+.cpairs__cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+}
+
+.cpairs__track {
+  display: block;
+  width: 4.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background: var(--surface-3);
+  overflow: hidden;
 }
 
 .cpairs__bar {
-  position: absolute;
-  left: var(--sp-2);
-  top: 30%;
-  bottom: 30%;
-  width: calc(var(--w) * 0.5);
-  border-radius: 2px;
-  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+@media (max-width: 30rem) {
+  .cpairs__share {
+    display: none;
+  }
+  .cpairs th {
+    min-width: 6.5rem;
+  }
+  .cpairs__track {
+    width: 1.75rem;
+  }
 }
 
 .glossary {
@@ -3246,8 +3302,12 @@ th[aria-sort] .sortbtn__icon {
   min-width: 3.5rem;
 }
 
+.rubric th[scope='row'] {
+  min-width: 6.5rem;
+  overflow-wrap: normal;
+}
+
 .rubric td:last-child {
-  min-width: 16rem;
   color: var(--text-muted);
 }
 

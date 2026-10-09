@@ -4,7 +4,7 @@
  * a shareable view in the URL hash. Card names open a dialog with the card image and every
  * number for that card.
  */
-import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { int } from '../../../core/format.ts';
 import { IMAGE_CREDIT, IMAGE_SIZES, cardImageUrl, scryfallCardUrl } from '../lib/images.ts';
 import {
@@ -77,14 +77,18 @@ export default function LimitedTable({ rows, label }: Props) {
   const avg = useMemo(() => averageGihWr(rows), [rows]);
   const shown = useMemo(() => viewRows(rows, view), [rows, view]);
 
-  useEffect(() => {
+  // Layout effect: applied before the browser handles any input, so an early click is never overwritten.
+  useLayoutEffect(() => {
     const s = limitedCodec.decode(window.location.hash);
     setView({ ...s, colors: normColors(s.colors), rarities: normRarities(s.rarities) });
-    hydrated.current = true;
   }, []);
 
+  // Mirror the view into the hash, but not on the first pass (the view read from the hash is not applied yet).
   useEffect(() => {
-    if (!hydrated.current) return;
+    if (!hydrated.current) {
+      hydrated.current = true;
+      return;
+    }
     const hash = limitedCodec.encode(view);
     const next = hash === '#v=1' ? '' : hash;
     if (next !== window.location.hash && !(next === '' && window.location.hash === '')) {

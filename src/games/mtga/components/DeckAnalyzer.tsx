@@ -7,7 +7,7 @@
  * same analysis; nothing is sent to a server. The server render is the empty paste form, so the
  * page is usable as soon as it hydrates.
  */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'preact/hooks';
 import CopyButton from '../../../components/CopyButton.tsx';
 import ShareButton from '../../../components/ShareButton.tsx';
 import { createStore } from '../../../core/storage.ts';
@@ -74,7 +74,7 @@ export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHr
   const fileRef = useRef<HTMLInputElement>(null);
 
   // Visitor's saved meta lists and meta choice (and later edits from the Meta page in another tab).
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Keep anything typed into the server-rendered box before the island hydrated.
     const early = textRef.current?.value ?? '';
     if (early.trim()) setText(early);

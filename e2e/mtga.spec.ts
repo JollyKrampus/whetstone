@@ -45,6 +45,14 @@ const MONO_RED = `Deck
 2 Sunspine Lynx
 24 Mountain`;
 
+/** 1×1 PNG served in place of Scryfall card images, so the tests never depend on an outside host. */
+const PIXEL = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
+
+test.beforeEach(async ({ context }) => {
+  await context.route('https://cards.scryfall.io/**', (route) => route.fulfill({ status: 200, contentType: 'image/png', body: PIXEL }));
+  await context.route('https://api.scryfall.com/**', (route) => route.fulfill({ status: 404, contentType: 'application/json', body: '{"object":"error"}' }));
+});
+
 function collectErrors(page: Page): string[] {
   const errors: string[] = [];
   page.on('console', (m) => {

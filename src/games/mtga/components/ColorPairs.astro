@@ -38,28 +38,34 @@ const span = Math.max(0.01, best - worst);
             <th scope="col">Colours</th>
             <th scope="col" class="num">Win rate</th>
             {!compact && <th scope="col" class="num">Games</th>}
-            {!compact && <th scope="col" class="num">Share</th>}
+            {!compact && <th scope="col" class="num cpairs__share">Share</th>}
           </tr>
         </thead>
         <tbody>
           {rows.map((p) => (
             <tr>
               <th scope="row">
-                <span class="pips" aria-hidden="true">
-                  {[...p.colors].map((c) => (
-                    <span class="pip" data-c={c}>{c}</span>
-                  ))}
+                <span class="cpairs__id">
+                  <span class="pips" aria-hidden="true">
+                    {[...p.colors].map((c) => (
+                      <span class="pip" data-c={c}>{c}</span>
+                    ))}
+                  </span>
+                  <span class="cpairs__name">{NAMES[p.colors] ?? p.colors}</span>
+                  <span class="visually-hidden"> ({[...p.colors].map((c) => COLOR[c]).join(' and ')})</span>
                 </span>
-                <span class="cpairs__name">{NAMES[p.colors] ?? p.colors}</span>
-                {p.splash && <span class="cpairs__splash">+ splash</span>}
-                <span class="visually-hidden"> ({[...p.colors].map((c) => COLOR[c]).join(' and ')})</span>
+                {p.splash && <span class="cpairs__splash">with a splash</span>}
               </th>
               <td class="num">
-                <span class="cpairs__bar" style={`--w: ${Math.round((15 + (85 * ((p.wr ?? 0) - worst)) / span))}%`} aria-hidden="true"></span>
-                {pct(p.wr ?? 0)}
+                <span class="cpairs__cell">
+                  <span class="cpairs__track" aria-hidden="true">
+                    <span class="cpairs__bar" style={`width: ${Math.round(15 + (85 * ((p.wr ?? 0) - worst)) / span)}%`}></span>
+                  </span>
+                  {pct(p.wr ?? 0)}
+                </span>
               </td>
               {!compact && <td class="num">{int(p.games)}</td>}
-              {!compact && <td class="num">{pct(total > 0 ? p.games / total : 0)}</td>}
+              {!compact && <td class="num cpairs__share">{pct(total > 0 ? p.games / total : 0)}</td>}
             </tr>
           ))}
         </tbody>

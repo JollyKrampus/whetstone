@@ -4,7 +4,7 @@
  * snapshot JSON. The deck analyzer compares decks with these lists and uses them to score card
  * quality. Nothing leaves the browser.
  */
-import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
+import { useLayoutEffect, useMemo, useRef, useState } from 'preact/hooks';
 import CopyButton from '../../../components/CopyButton.tsx';
 import { createStore } from '../../../core/storage.ts';
 import { MAX_LISTS, MY_LISTS_KEY, fromSnapshot, newListId, percentInput, sanitizeList, toSnapshot, validateMyLists, type CuratedDeck, type MyList } from '../lib/metaLists.ts';
@@ -68,7 +68,8 @@ export default function MetaManager({ shards, snapshot, deckHref, examples }: Pr
   const formRef = useRef<HTMLFormElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
+  // Before any input: a list saved before the stored ones loaded would overwrite them.
+  useLayoutEffect(() => {
     setLists(store.get(MY_LISTS_KEY, [], validateMyLists));
     setPersistent(store.persistent);
     setLoaded(true);
