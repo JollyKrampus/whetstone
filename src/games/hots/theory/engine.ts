@@ -300,7 +300,7 @@ export function applyCuratedTraits(heroes: readonly Hero[], curated: CuratedBund
         mechanics = mechanics.filter((m) => m.tag !== trait.tag);
         continue;
       }
-      mechanics = mergeMechanics(mechanics, [{ tag: trait.tag, evidence: [{ kind: 'curated', name: trait.source, snippet: trait.why }] }]);
+      mechanics = mergeMechanics(mechanics, [{ tag: trait.tag, evidence: [{ kind: 'curated', name: `curated/hots/${trait.source}`, snippet: trait.why }] }]);
     }
     return { ...hero, mechanics };
   });

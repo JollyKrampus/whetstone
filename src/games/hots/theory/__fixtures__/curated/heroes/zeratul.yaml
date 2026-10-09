@@ -1,0 +1,22 @@
+hero: zeratul
+reviewedFor: "2.56"
+traits:
+  - tag: dive
+    why: "Sample: Blink and Vorpal Blade let Zeratul jump onto the back line."
+  - tag: stealth
+    why: "Sample: duplicate of an extracted tag, kept to test merging."
+counters:
+  - a: zeratul
+    b: abathur
+    why: "Sample: Permanent Cloak gets Zeratul to Abathur unseen and Singularity Spike finishes the body."
+    evidence: ["Permanent Cloak", "Singularity Spike"]
+    confidence: high
+    reviewedFor: "2.57"
+  - a: zeratul
+    b: nova
+    why: "Sample: Vorpal Blade reveals the target Zeratul last hit, so Nova cannot re-stealth and escape."
+    evidence: ["Vorpal Blade"]
+    conditions: ["Nova was hit in the last 3 seconds", "Zeratul has Vorpal Blade ready"]
+    confidence: low
+    weight: 0.3
+synergies: []

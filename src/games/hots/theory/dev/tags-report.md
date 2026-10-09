@@ -15,11 +15,11 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Spike Burst, Volatile Mutation (talent)
 - **dot** *(talent only)*: Envenomed Nest (talent)
 - **summons**: Locust Strain, Locust Brood (talent), Locust Nest (talent)
-- **global**: curated (heroes/abathur.yaml)
+- **global**: curated (curated/hots/heroes/abathur.yaml)
 - **waveclear**: Locust Strain
 - **siege**: Locust Strain, Slapathur (talent), Bombard Strain (talent)
-- **split-push**: curated (heroes/abathur.yaml)
-- **vulnerable-body**: curated (heroes/abathur.yaml)
+- **split-push**: curated (curated/hots/heroes/abathur.yaml)
+- **vulnerable-body**: curated (curated/hots/heroes/abathur.yaml)
 
 ## Alarak (Melee Assassin)
 
@@ -32,10 +32,10 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-self**: Lightning Surge, Overwhelming Power (talent)
 - **dash**: Deadly Charge
 - **teleport** *(talent only)*: Last Laugh (talent)
-- **burst**: curated (heroes/alarak.yaml)
+- **burst**: curated (curated/hots/heroes/alarak.yaml)
 - **aoe**: Telekinesis, Deadly Charge
 - **channel**: Deadly Charge
-- **peel**: curated (heroes/alarak.yaml)
+- **peel**: curated (curated/hots/heroes/alarak.yaml)
 
 ## Alexstrasza (Healer)
 
@@ -48,8 +48,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Flame Buffet, Cleansing Flame, Wing Buffet, Life Unbound (talent)
 - **dot**: Flame Buffet, Flames of Fury (talent)
 - **waveclear**: Flame Buffet, Wing Buffet
-- **peel**: curated (heroes/alexstrasza.yaml)
-- **save**: curated (heroes/alexstrasza.yaml)
+- **peel**: curated (curated/hots/heroes/alexstrasza.yaml)
+- **save**: curated (curated/hots/heroes/alexstrasza.yaml)
 
 ## Ana (Healer)
 
@@ -63,8 +63,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **anti-heal**: Biotic Grenade
 - **aoe**: Biotic Grenade
 - **dot**: Shrike
-- **immobile**: curated (heroes/ana.yaml)
-- **peel**: curated (heroes/ana.yaml)
+- **immobile**: curated (curated/hots/heroes/ana.yaml)
+- **peel**: curated (curated/hots/heroes/ana.yaml)
 
 ## Anduin (Healer)
 
@@ -77,9 +77,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-ally**: Flash Heal, Divine Star, Holy Word: Salvation, Leap of Faith
 - **aoe**: Divine Star, Lightbomb
 - **dot** *(talent only)*: Varian's Legacy (talent)
-- **channel**: curated (heroes/anduin.yaml)
-- **immobile**: curated (heroes/anduin.yaml)
-- **save**: curated (heroes/anduin.yaml)
+- **channel**: curated (curated/hots/heroes/anduin.yaml)
+- **immobile**: curated (curated/hots/heroes/anduin.yaml)
+- **save**: curated (curated/hots/heroes/anduin.yaml)
 
 ## Anub'arak (Tank)
 
@@ -92,8 +92,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Burrow Charge, Locust Swarm, Urticating Spines (talent), Burning Beetles (talent)
 - **dot** *(talent only)*: Cryptweave (talent)
 - **summons**: Scarab Host, Legion of Beetles (talent), Beetle, Juiced (talent)
-- **peel**: curated (heroes/anubarak.yaml)
-- **engage**: curated (heroes/anubarak.yaml)
+- **peel**: curated (curated/hots/heroes/anubarak.yaml)
+- **engage**: curated (curated/hots/heroes/anubarak.yaml)
 
 ## Artanis (Bruiser)
 
@@ -109,8 +109,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **sustained-dps**: Twin Blades, Shield Overload, Chrono Surge (talent), Final Cut (talent)
 - **aoe**: Blade Dash, Plasma Burn (talent)
 - **waveclear** *(talent only)*: Amateur Opponent (talent)
-- **aa-reliant**: Twin Blades, Shield Overload, Chrono Surge (talent), Final Cut (talent), curated (heroes/artanis.yaml)
-- **dive**: curated (heroes/artanis.yaml)
+- **aa-reliant**: Twin Blades, Shield Overload, Chrono Surge (talent), Final Cut (talent), curated (curated/hots/heroes/artanis.yaml)
+- **dive**: curated (curated/hots/heroes/artanis.yaml)
 
 ## Arthas (Tank)
 
@@ -124,9 +124,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Frozen Tempest, Frost Presence (talent), Frost Strike (talent)
 - **summons**: Army of the Dead, Legion of Northrend (talent)
 - **siege**: Summon Sindragosa
-- **mana-hungry**: curated (heroes/arthas.yaml)
-- **frontline**: curated (heroes/arthas.yaml)
-- **peel**: curated (heroes/arthas.yaml)
+- **mana-hungry**: curated (curated/hots/heroes/arthas.yaml)
+- **frontline**: curated (curated/hots/heroes/arthas.yaml)
+- **peel**: curated (curated/hots/heroes/arthas.yaml)
 
 ## Auriel (Healer)
 
@@ -140,8 +140,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **armor-shred** *(talent only)*: Wrath of Heaven (talent)
 - **aoe**: Sacred Sweep, Crystal Aegis, Piercing Lash (talent)
 - **channel**: Resurrect
-- **peel**: curated (heroes/auriel.yaml)
-- **save**: curated (heroes/auriel.yaml)
+- **peel**: curated (curated/hots/heroes/auriel.yaml)
+- **save**: curated (curated/hots/heroes/auriel.yaml)
 
 ## Azmodan (Ranged Assassin)
 
@@ -152,9 +152,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **summons**: Summon Demon Warrior, Army of Hell (talent)
 - **global**: Demon Lieutenant
 - **waveclear**: Summon Demon Warrior, Greed (talent)
-- **siege**: Siegebreaker (talent), curated (heroes/azmodan.yaml)
-- **channel**: All Shall Burn, Master of Destruction (talent), Cydaea's Kiss (talent), Hell Rift (talent), curated (heroes/azmodan.yaml)
-- **immobile**: curated (heroes/azmodan.yaml)
+- **siege**: Siegebreaker (talent), curated (curated/hots/heroes/azmodan.yaml)
+- **channel**: All Shall Burn, Master of Destruction (talent), Cydaea's Kiss (talent), Hell Rift (talent), curated (curated/hots/heroes/azmodan.yaml)
+- **immobile**: curated (curated/hots/heroes/azmodan.yaml)
 
 ## Blaze (Tank)
 
@@ -169,9 +169,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **dot** *(talent only)*: Burn Notice (talent)
 - **waveclear**: Flame Stream, Pyromania, Flamethrower
 - **channel**: Combustion, Flash Fire (talent)
-- **frontline**: curated (heroes/blaze.yaml)
-- **peel**: curated (heroes/blaze.yaml)
-- **engage**: curated (heroes/blaze.yaml)
+- **frontline**: curated (curated/hots/heroes/blaze.yaml)
+- **peel**: curated (curated/hots/heroes/blaze.yaml)
+- **engage**: curated (curated/hots/heroes/blaze.yaml)
 
 ## Brightwing (Healer)
 
@@ -189,9 +189,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **teleport**: Blink Heal, Phase Shift
 - **armor-shred** *(talent only)*: Critterize (talent)
 - **aoe**: Arcane Flare
-- **global**: curated (heroes/brightwing.yaml)
-- **peel**: curated (heroes/brightwing.yaml)
-- **save**: curated (heroes/brightwing.yaml)
+- **global**: curated (curated/hots/heroes/brightwing.yaml)
+- **peel**: curated (curated/hots/heroes/brightwing.yaml)
+- **save**: curated (curated/hots/heroes/brightwing.yaml)
 
 ## Cassia (Ranged Assassin)
 
@@ -210,8 +210,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Lightning Fury, Blinding Light, Fend, Ball Lightning
 - **waveclear**: Lightning Fury, Blinding Light, Fend
 - **channel**: Fend
-- **aa-reliant**: curated (heroes/cassia.yaml)
-- **peel**: curated (heroes/cassia.yaml)
+- **aa-reliant**: curated (curated/hots/heroes/cassia.yaml)
+- **peel**: curated (curated/hots/heroes/cassia.yaml)
 
 ## Chen (Bruiser)
 
@@ -226,8 +226,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Wandering Keg, Ring of Fire (talent)
 - **dot**: Keg Smash
 - **channel** *(talent only)*: Energizing Brew (talent)
-- **frontline**: curated (heroes/chen.yaml)
-- **peel**: curated (heroes/chen.yaml)
+- **frontline**: curated (curated/hots/heroes/chen.yaml)
+- **peel**: curated (curated/hots/heroes/chen.yaml)
 
 ## Cho'gall (Tank / Ranged Assassin)
 
@@ -249,8 +249,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **dot**: Consuming Blaze, Runic Persistence (talent)
 - **waveclear**: Shadowflame, Dread Orb
 - **channel**: Surging Dash (talent), Twisting Nether, Shifting Nether (talent)
-- **frontline**: curated (heroes/chogall.yaml)
-- **engage**: curated (heroes/chogall.yaml)
+- **frontline**: curated (curated/hots/heroes/chogall.yaml)
+- **engage**: curated (curated/hots/heroes/chogall.yaml)
 
 ## Chromie (Ranged Assassin)
 
@@ -263,9 +263,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **teleport** *(talent only)*: Here and There (talent), Stuck in a Loop (talent)
 - **armor-shred** *(talent only)*: Unravelling (talent)
 - **burst**: Sand Blast, Dragon’s Breath
-- **poke**: Sand Blast, Dragon’s Breath, curated (heroes/chromie.yaml)
+- **poke**: Sand Blast, Dragon’s Breath, curated (curated/hots/heroes/chromie.yaml)
 - **aoe** *(talent only)*: Mobius Loop (talent)
-- **immobile**: curated (heroes/chromie.yaml)
+- **immobile**: curated (curated/hots/heroes/chromie.yaml)
 
 ## Deathwing (Bruiser)
 
@@ -281,9 +281,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Incinerate, Onslaught, Heat Wave (talent), Firestorm (talent)
 - **dot** *(talent only)*: Conflagration (talent)
 - **waveclear**: Incinerate, Onslaught
-- **siege**: Cataclysm, curated (heroes/deathwing.yaml)
-- **channel**: curated (heroes/deathwing.yaml)
-- **frontline**: curated (heroes/deathwing.yaml)
+- **siege**: Cataclysm, curated (curated/hots/heroes/deathwing.yaml)
+- **channel**: curated (curated/hots/heroes/deathwing.yaml)
+- **frontline**: curated (curated/hots/heroes/deathwing.yaml)
 
 ## Deckard (Healer)
 
@@ -301,9 +301,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **anti-heal** *(talent only)*: Emerald (talent)
 - **aoe**: Horadric Cube, Scroll Of Sealing, Ancient Blessings (talent)
 - **waveclear**: Horadric Cube, Scroll Of Sealing
-- **channel**: Stay Awhile and Listen, curated (heroes/deckard.yaml)
-- **immobile**: curated (heroes/deckard.yaml)
-- **peel**: curated (heroes/deckard.yaml)
+- **channel**: Stay Awhile and Listen, curated (curated/hots/heroes/deckard.yaml)
+- **immobile**: curated (curated/hots/heroes/deckard.yaml)
+- **peel**: curated (curated/hots/heroes/deckard.yaml)
 
 ## Dehaka (Bruiser)
 
@@ -321,8 +321,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **teleport**: Brushstalker, Tunneling Claws (talent)
 - **anti-heal** *(talent only)*: Paralyzing Enzymes (talent)
 - **armor-shred** *(talent only)*: Primal Swarm (talent)
-- **global**: Brushstalker, curated (heroes/dehaka.yaml)
-- **split-push**: curated (heroes/dehaka.yaml)
+- **global**: Brushstalker, curated (curated/hots/heroes/dehaka.yaml)
+- **split-push**: curated (curated/hots/heroes/dehaka.yaml)
 
 ## Diablo (Tank)
 
@@ -335,9 +335,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **armor-shred** *(talent only)*: Devastating Charge (talent)
 - **aoe** *(talent only)*: Hellfire (talent)
 - **global**: Apocalypse
-- **frontline**: curated (heroes/diablo.yaml)
-- **peel**: curated (heroes/diablo.yaml)
-- **engage**: curated (heroes/diablo.yaml)
+- **frontline**: curated (curated/hots/heroes/diablo.yaml)
+- **peel**: curated (curated/hots/heroes/diablo.yaml)
+- **engage**: curated (curated/hots/heroes/diablo.yaml)
 
 ## D.Va (Bruiser)
 
@@ -354,8 +354,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Self-Destruct, Bunny Hop, Micro Missiles, Mech Mode
 - **waveclear**: Self-Destruct, Mech Mode, Concussive Pulse, Rush-down (talent)
 - **channel**: Micro Missiles
-- **frontline**: curated (heroes/dva.yaml)
-- **peel**: curated (heroes/dva.yaml)
+- **frontline**: curated (curated/hots/heroes/dva.yaml)
+- **peel**: curated (curated/hots/heroes/dva.yaml)
 
 ## E.T.C. (Tank)
 
@@ -370,9 +370,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **teleport** *(talent only)*: Ride the Lightning (talent)
 - **aoe**: Powerslide, Face Melt, Stage Dive
 - **waveclear**: Powerslide, Face Melt, Echo Pedal (talent)
-- **channel**: Mosh Pit, Tour Bus (talent), curated (heroes/etc.yaml)
-- **peel**: curated (heroes/etc.yaml)
-- **engage**: curated (heroes/etc.yaml)
+- **channel**: Mosh Pit, Tour Bus (talent), curated (curated/hots/heroes/etc.yaml)
+- **peel**: curated (curated/hots/heroes/etc.yaml)
+- **engage**: curated (curated/hots/heroes/etc.yaml)
 
 ## Falstad (Ranged Assassin)
 
@@ -386,9 +386,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **poke**: Hammerang, Lightning Rod
 - **aoe**: Hammerang, Hinterland Blast
 - **dot**: Lightning Rod
-- **global**: Flight, curated (heroes/falstad.yaml)
+- **global**: Flight, curated (curated/hots/heroes/falstad.yaml)
 - **waveclear**: Lightning Rod
-- **aa-reliant**: curated (heroes/falstad.yaml)
+- **aa-reliant**: curated (curated/hots/heroes/falstad.yaml)
 
 ## Fenix (Ranged Assassin)
 
@@ -397,12 +397,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **shield**: Shield Capacitor, Dampening Field (talent), Rapid Recharge (talent), Auxiliary Shields (talent)
 - **teleport**: Warp
 - **percent-hp-damage** *(talent only)*: Offensive Cadence (talent)
-- **sustained-dps**: Weapon Mode: Repeater Cannon, Arsenal Synergy (talent), Mobile Offense (talent), Warp Warfare (talent), curated (heroes/fenix.yaml)
+- **sustained-dps**: Weapon Mode: Repeater Cannon, Arsenal Synergy (talent), Mobile Offense (talent), Warp Warfare (talent), curated (curated/hots/heroes/fenix.yaml)
 - **aoe**: Plasma Cutter, Weapon Mode: Repeater Cannon
 - **global**: Planet Cracker
 - **waveclear**: Plasma Cutter, Weapon Mode: Repeater Cannon
 - **channel**: Planet Cracker, Purification Salvo
-- **aa-reliant**: Weapon Mode: Repeater Cannon, Arsenal Synergy (talent), Mobile Offense (talent), Warp Warfare (talent), curated (heroes/fenix.yaml)
+- **aa-reliant**: Weapon Mode: Repeater Cannon, Arsenal Synergy (talent), Mobile Offense (talent), Warp Warfare (talent), curated (curated/hots/heroes/fenix.yaml)
 
 ## Garrosh (Tank)
 
@@ -419,9 +419,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Groundbreaker, Wrecking Ball, Decimate, Into the Fray
 - **dot** *(talent only)*: Warbreaker (talent)
 - **waveclear**: Groundbreaker, Wrecking Ball
-- **frontline**: curated (heroes/garrosh.yaml)
-- **peel**: curated (heroes/garrosh.yaml)
-- **engage**: curated (heroes/garrosh.yaml)
+- **frontline**: curated (curated/hots/heroes/garrosh.yaml)
+- **peel**: curated (curated/hots/heroes/garrosh.yaml)
+- **engage**: curated (curated/hots/heroes/garrosh.yaml)
 
 ## Gazlowe (Bruiser)
 
@@ -434,8 +434,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Hyperfocus Coils (talent), Overklock (talent)
 - **aoe**: Deth Lazor, Xplodium Charge, Grav-O-Bomb 3000
 - **dot**: Robo-Goblin
-- **waveclear**: Deth Lazor, Xplodium Charge, curated (heroes/gazlowe.yaml)
-- **immobile**: curated (heroes/gazlowe.yaml)
+- **waveclear**: Deth Lazor, Xplodium Charge, curated (curated/hots/heroes/gazlowe.yaml)
+- **immobile**: curated (curated/hots/heroes/gazlowe.yaml)
 
 ## Genji (Ranged Assassin)
 
@@ -447,9 +447,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-self** *(talent only)*: Pathfinder (talent)
 - **stealth** *(talent only)*: Pathfinder (talent)
 - **dash**: Swift Strike, Dragonblade, Cyber Agility, Pathfinder (talent)
-- **burst**: curated (heroes/genji.yaml)
+- **burst**: curated (curated/hots/heroes/genji.yaml)
 - **aoe**: Swift Strike, Strike At The Heart (talent), Dragon Claw (talent), Final Cut (talent)
-- **dive**: curated (heroes/genji.yaml)
+- **dive**: curated (curated/hots/heroes/genji.yaml)
 
 ## Greymane (Ranged Assassin)
 
@@ -459,8 +459,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **dash**: Darkflight, Go for the Throat, Unfettered Assault (talent)
 - **sustained-dps**: Inner Beast, Curse of the Worgen, Quicksilver Bullets (talent), Eager Wolf (talent)
 - **aoe**: Gilnean Cocktail, Cursed Bullet, Hunter's Blunderbuss (talent)
-- **aa-reliant**: Inner Beast, Curse of the Worgen, Quicksilver Bullets (talent), Eager Wolf (talent), curated (heroes/greymane.yaml)
-- **dive**: curated (heroes/greymane.yaml)
+- **aa-reliant**: Inner Beast, Curse of the Worgen, Quicksilver Bullets (talent), Eager Wolf (talent), curated (curated/hots/heroes/greymane.yaml)
+- **dive**: curated (curated/hots/heroes/greymane.yaml)
 
 ## Gul'dan (Ranged Assassin)
 
@@ -471,12 +471,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-self**: Drain Life, Chaotic Energy (talent), Echoed Corruption (talent), Harvest Life (talent)
 - **teleport** *(talent only)*: Demonic Circle (talent)
 - **armor-shred** *(talent only)*: Haunt (talent)
-- **sustained-dps**: curated (heroes/guldan.yaml)
+- **sustained-dps**: curated (curated/hots/heroes/guldan.yaml)
 - **aoe**: Fel Flame, Horrify, Rain of Destruction
 - **dot**: Corruption
 - **channel** *(talent only)*: Health Funnel (talent)
-- **mana-hungry**: curated (heroes/guldan.yaml)
-- **immobile**: curated (heroes/guldan.yaml)
+- **mana-hungry**: curated (curated/hots/heroes/guldan.yaml)
+- **immobile**: curated (curated/hots/heroes/guldan.yaml)
 
 ## Hanzo (Ranged Assassin)
 
@@ -488,12 +488,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Giant Slayer (talent)
 - **armor-shred** *(talent only)*: Sharpened Arrowheads (talent)
 - **burst**: Storm Bow, Sonic Arrow
-- **poke**: Storm Bow, Scatter Arrow, Sonic Arrow, curated (heroes/hanzo.yaml)
+- **poke**: Storm Bow, Scatter Arrow, Sonic Arrow, curated (curated/hots/heroes/hanzo.yaml)
 - **aoe**: Dragon's Arrow, Explosive Arrows (talent)
 - **global**: Dragon's Arrow
 - **waveclear** *(talent only)*: Serrated Arrows (talent), Ignore All Distractions (talent)
 - **channel**: Storm Bow
-- **aa-reliant**: curated (heroes/hanzo.yaml)
+- **aa-reliant**: curated (curated/hots/heroes/hanzo.yaml)
 
 ## Hogger (Bruiser)
 
@@ -506,9 +506,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **armor-shred** *(talent only)*: Power Spike (talent)
 - **aoe**: Staggering Blow, Shockwave, Loot Hoard
 - **waveclear**: Staggering Blow, Loot Hoard
-- **frontline**: curated (heroes/hogger.yaml)
-- **peel**: curated (heroes/hogger.yaml)
-- **engage**: curated (heroes/hogger.yaml)
+- **frontline**: curated (curated/hots/heroes/hogger.yaml)
+- **peel**: curated (curated/hots/heroes/hogger.yaml)
+- **engage**: curated (curated/hots/heroes/hogger.yaml)
 
 ## Illidan (Melee Assassin)
 
@@ -525,8 +525,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **sustained-dps**: Sweeping Strike, Betrayer's Thirst, Battered Assault (talent), Unending Hatred (talent)
 - **aoe**: Sweeping Strike
 - **dot** *(talent only)*: Immolation (talent)
-- **aa-reliant**: Sweeping Strike, Betrayer's Thirst, Battered Assault (talent), Unending Hatred (talent), curated (heroes/illidan.yaml)
-- **dive**: curated (heroes/illidan.yaml)
+- **aa-reliant**: Sweeping Strike, Betrayer's Thirst, Battered Assault (talent), Unending Hatred (talent), curated (curated/hots/heroes/illidan.yaml)
+- **dive**: curated (curated/hots/heroes/illidan.yaml)
 
 ## Imperius (Bruiser)
 
@@ -541,8 +541,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **armor-shred** *(talent only)*: Melting Touch (talent)
 - **aoe**: Solarion's Fire, Flash of Anger (talent)
 - **channel**: Celestial Charge
-- **frontline**: curated (heroes/imperius.yaml)
-- **engage**: curated (heroes/imperius.yaml)
+- **frontline**: curated (curated/hots/heroes/imperius.yaml)
+- **engage**: curated (curated/hots/heroes/imperius.yaml)
 
 ## Jaina (Ranged Assassin)
 
@@ -556,12 +556,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **shield** *(talent only)*: Ice Barrier (talent)
 - **teleport** *(talent only)*: Ice Blink (talent)
 - **armor-shred** *(talent only)*: Northern Exposure (talent)
-- **burst**: Cone of Cold, Frostbolt, curated (heroes/jaina.yaml)
+- **burst**: Cone of Cold, Frostbolt, curated (curated/hots/heroes/jaina.yaml)
 - **poke**: Frostbolt, Blizzard, Cone of Cold
 - **aoe**: Blizzard, Summon Water Elemental, Ring of Frost
 - **summons**: Summon Water Elemental
-- **mana-hungry**: curated (heroes/jaina.yaml)
-- **vulnerable-body**: curated (heroes/jaina.yaml)
+- **mana-hungry**: curated (curated/hots/heroes/jaina.yaml)
+- **vulnerable-body**: curated (curated/hots/heroes/jaina.yaml)
 
 ## Johanna (Tank)
 
@@ -577,8 +577,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **dash**: Falling Sword
 - **aoe**: Shield Glare, Falling Sword, Holy Fury (talent), Blessed Hammer (talent)
 - **waveclear**: Condemn
-- **frontline**: curated (heroes/johanna.yaml)
-- **peel**: curated (heroes/johanna.yaml)
+- **frontline**: curated (curated/hots/heroes/johanna.yaml)
+- **peel**: curated (curated/hots/heroes/johanna.yaml)
 
 ## Junkrat (Ranged Assassin)
 
@@ -588,9 +588,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **displace**: Concussion Mine, RIP-Tire, Ripper Air (talent), Extra Oomph (talent)
 - **armor-shred** *(talent only)*: Big As (talent)
 - **burst**: Concussion Mine, Steel Trap, RIP-Tire, Rocket Ride
-- **poke**: Frag Launcher, Concussion Mine, Steel Trap, curated (heroes/junkrat.yaml)
+- **poke**: Frag Launcher, Concussion Mine, Steel Trap, curated (curated/hots/heroes/junkrat.yaml)
 - **aoe**: Frag Launcher, Concussion Mine, RIP-Tire, Rocket Ride
-- **waveclear**: Frag Launcher, Concussion Mine, Total Mayhem, curated (heroes/junkrat.yaml)
+- **waveclear**: Frag Launcher, Concussion Mine, Total Mayhem, curated (curated/hots/heroes/junkrat.yaml)
 
 ## Kael'thas (Ranged Assassin)
 
@@ -599,12 +599,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **shield** *(talent only)*: Mana Addict (talent)
 - **heal-self** *(talent only)*: Fel Infusion (talent)
 - **percent-hp-damage** *(talent only)*: Burned Flesh (talent)
-- **burst**: Flamestrike, Pyroblast, curated (heroes/kaelthas.yaml)
+- **burst**: Flamestrike, Pyroblast, curated (curated/hots/heroes/kaelthas.yaml)
 - **aoe**: Flamestrike, Living Bomb, Phoenix
 - **dot**: Living Bomb
 - **waveclear**: Flamestrike, Living Bomb
-- **mana-hungry**: curated (heroes/kaelthas.yaml)
-- **immobile**: curated (heroes/kaelthas.yaml)
+- **mana-hungry**: curated (curated/hots/heroes/kaelthas.yaml)
+- **immobile**: curated (curated/hots/heroes/kaelthas.yaml)
 
 ## Kel'Thuzad (Ranged Assassin)
 
@@ -616,12 +616,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **shield** *(talent only)*: Strip Shields (talent)
 - **heal-self** *(talent only)*: Phylactery of Kel'Thuzad (talent)
 - **dash** *(talent only)*: Shifting Malice (talent)
-- **burst**: curated (heroes/kelthuzad.yaml)
+- **burst**: curated (curated/hots/heroes/kelthuzad.yaml)
 - **poke**: Death and Decay, Frost Nova, Chains of Kel'Thuzad
 - **aoe**: Death and Decay, Frost Nova, Frost Blast, Glacial Spike
 - **global**: Shadow Fissure
 - **waveclear**: Death and Decay, Frost Nova
-- **immobile**: curated (heroes/kelthuzad.yaml)
+- **immobile**: curated (curated/hots/heroes/kelthuzad.yaml)
 
 ## Kerrigan (Melee Assassin)
 
@@ -632,12 +632,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-self** *(talent only)*: Chrysalis (talent)
 - **dash**: Ravage
 - **teleport** *(talent only)*: Psionic Shift (talent)
-- **burst**: curated (heroes/kerrigan.yaml)
+- **burst**: curated (curated/hots/heroes/kerrigan.yaml)
 - **aoe**: Impaling Blades, Primal Grasp, Summon Ultralisk, Maelstrom
 - **summons**: Summon Ultralisk
 - **waveclear**: Impaling Blades, Primal Grasp
-- **mana-hungry**: curated (heroes/kerrigan.yaml)
-- **dive**: curated (heroes/kerrigan.yaml)
+- **mana-hungry**: curated (curated/hots/heroes/kerrigan.yaml)
+- **dive**: curated (curated/hots/heroes/kerrigan.yaml)
 
 ## Kharazim (Healer)
 
@@ -650,9 +650,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-ally**: Breath of Heaven, Divine Palm, Transcendence (talent), Spirit Ally (talent)
 - **reveal** *(talent only)*: Air Ally (talent)
 - **dash**: Radiant Dash, Heavenly Zeal (talent), Quicksilver (talent), Cleansing Touch (talent)
-- **aa-reliant**: curated (heroes/kharazim.yaml)
-- **dive**: curated (heroes/kharazim.yaml)
-- **save**: curated (heroes/kharazim.yaml)
+- **aa-reliant**: curated (curated/hots/heroes/kharazim.yaml)
+- **dive**: curated (curated/hots/heroes/kharazim.yaml)
+- **save**: curated (curated/hots/heroes/kharazim.yaml)
 
 ## Leoric (Bruiser)
 
@@ -665,8 +665,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: March of the Black King, Burning Despair (talent)
 - **dot** *(talent only)*: Buried Alive (talent)
 - **waveclear**: Skeletal Swing
-- **frontline**: curated (heroes/leoric.yaml)
-- **peel**: curated (heroes/leoric.yaml)
+- **frontline**: curated (curated/hots/heroes/leoric.yaml)
+- **peel**: curated (curated/hots/heroes/leoric.yaml)
 
 ## Li Li (Healer)
 
@@ -677,8 +677,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-ally**: Healing Brew, Cloud Serpent, Jug of 1,000 Cups, Let's Go! (talent)
 - **aoe**: Water Dragon
 - **summons**: Cloud Serpent
-- **channel**: Jug of 1,000 Cups, Water Dragon, curated (heroes/lili.yaml)
-- **peel**: curated (heroes/lili.yaml)
+- **channel**: Jug of 1,000 Cups, Water Dragon, curated (curated/hots/heroes/lili.yaml)
+- **peel**: curated (curated/hots/heroes/lili.yaml)
 
 ## Li-Ming (Ranged Assassin)
 
@@ -687,12 +687,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **spell-armor** *(talent only)*: Force Armor (talent)
 - **shield** *(talent only)*: Diamond Skin (talent)
 - **teleport**: Teleport, Aether Walker (talent), Calamity (talent), Illusionist (talent)
-- **burst**: curated (heroes/liming.yaml)
-- **poke**: Magic Missiles, Arcane Orb, curated (heroes/liming.yaml)
+- **burst**: curated (curated/hots/heroes/liming.yaml)
+- **poke**: Magic Missiles, Arcane Orb, curated (curated/hots/heroes/liming.yaml)
 - **aoe**: Wave of Force
 - **dot**: Disintegrate
 - **channel**: Disintegrate
-- **vulnerable-body**: curated (heroes/liming.yaml)
+- **vulnerable-body**: curated (curated/hots/heroes/liming.yaml)
 
 ## Lt. Morales (Healer)
 
@@ -706,8 +706,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Bedside Manner (talent)
 - **aoe**: Displacement Grenade
 - **dot** *(talent only)*: EMP Grenade (talent)
-- **channel**: Healing Beam, Caduceus Reactor, Extended Care (talent), curated (heroes/ltmorales.yaml)
-- **immobile**: curated (heroes/ltmorales.yaml)
+- **channel**: Healing Beam, Caduceus Reactor, Extended Care (talent), curated (curated/hots/heroes/ltmorales.yaml)
+- **immobile**: curated (curated/hots/heroes/ltmorales.yaml)
 
 ## Lúcio (Healer)
 
@@ -723,8 +723,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **anti-heal** *(talent only)*: Mixing Fire (talent)
 - **aoe**: Soundwave, Push Off
 - **waveclear**: Soundwave, Push Off
-- **peel**: curated (heroes/lucio.yaml)
-- **engage**: curated (heroes/lucio.yaml)
+- **peel**: curated (curated/hots/heroes/lucio.yaml)
+- **engage**: curated (curated/hots/heroes/lucio.yaml)
 
 ## Lunara (Ranged Assassin)
 
@@ -735,8 +735,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **reveal** *(talent only)*: Sentinel Wisp (talent), Natural Perspective (talent)
 - **dash**: Leaping Strike, Dryad's Swiftness
 - **percent-hp-damage** *(talent only)*: Invigorating Spores (talent)
-- **sustained-dps**: curated (heroes/lunara.yaml)
-- **poke**: curated (heroes/lunara.yaml)
+- **sustained-dps**: curated (curated/hots/heroes/lunara.yaml)
+- **poke**: curated (curated/hots/heroes/lunara.yaml)
 - **aoe**: Noxious Blossom, Thornwood Vine
 - **dot**: Nature's Toxin
 
@@ -751,8 +751,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **armor-shred** *(talent only)*: Bonds of Corruption (talent), Shadow Orb: Shadow Strike (talent)
 - **aoe**: Fan of Knives, Spirit of Vengeance, Blade Dance (talent)
 - **waveclear**: Fan of Knives, Spirit of Vengeance
-- **dive**: curated (heroes/maiev.yaml)
-- **engage**: curated (heroes/maiev.yaml)
+- **dive**: curated (curated/hots/heroes/maiev.yaml)
+- **engage**: curated (curated/hots/heroes/maiev.yaml)
 
 ## Malfurion (Healer)
 
@@ -764,12 +764,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-ally**: Regrowth, Moonfire, Tranquility, Lifebloom (talent)
 - **reveal**: Moonfire, Celestial Alignment (talent)
 - **teleport** *(talent only)*: Astral Communion (talent)
-- **poke**: curated (heroes/malfurion.yaml)
+- **poke**: curated (curated/hots/heroes/malfurion.yaml)
 - **aoe**: Moonfire, Twilight Dream
 - **dot**: Entangling Roots
 - **summons** *(talent only)*: Vengeful Roots (talent)
 - **channel** *(talent only)*: Astral Communion (talent)
-- **peel**: curated (heroes/malfurion.yaml)
+- **peel**: curated (curated/hots/heroes/malfurion.yaml)
 
 ## Mal'Ganis (Tank)
 
@@ -785,8 +785,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Fel Claws, Necrotic Embrace, Spreading Plague (talent)
 - **waveclear**: Fel Claws, Necrotic Embrace
 - **channel**: Dark Conversion
-- **frontline**: curated (heroes/malganis.yaml)
-- **peel**: curated (heroes/malganis.yaml)
+- **frontline**: curated (curated/hots/heroes/malganis.yaml)
+- **peel**: curated (curated/hots/heroes/malganis.yaml)
 
 ## Malthael (Bruiser)
 
@@ -799,8 +799,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **teleport**: Wraith Strike
 - **percent-hp-damage**: Reaper's Mark, Throwing Shade (talent)
 - **anti-heal** *(talent only)*: Touch of Death (talent)
-- **sustained-dps**: curated (heroes/malthael.yaml)
-- **aa-reliant**: curated (heroes/malthael.yaml)
+- **sustained-dps**: curated (curated/hots/heroes/malthael.yaml)
+- **aa-reliant**: curated (curated/hots/heroes/malthael.yaml)
 
 ## Medivh (Support)
 
@@ -814,8 +814,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **reveal** *(talent only)*: Dust of Appearance (talent)
 - **teleport**: Portal
 - **aoe**: Arcane Rift, Arcane Explosion (talent)
-- **engage**: curated (heroes/medivh.yaml)
-- **save**: curated (heroes/medivh.yaml)
+- **engage**: curated (curated/hots/heroes/medivh.yaml)
+- **save**: curated (curated/hots/heroes/medivh.yaml)
 
 ## Mei (Tank)
 
@@ -833,9 +833,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Snow Blind, Ice Storm (talent), Polar Vortex (talent)
 - **dot**: Blizzard
 - **siege** *(talent only)*: Slushball (talent)
-- **frontline**: curated (heroes/mei.yaml)
-- **peel**: curated (heroes/mei.yaml)
-- **engage**: curated (heroes/mei.yaml)
+- **frontline**: curated (curated/hots/heroes/mei.yaml)
+- **peel**: curated (curated/hots/heroes/mei.yaml)
+- **engage**: curated (curated/hots/heroes/mei.yaml)
 
 ## Mephisto (Ranged Assassin)
 
@@ -847,13 +847,13 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **reveal**: Consume Souls
 - **teleport**: Shade of Mephisto, Shade Lord (talent)
 - **percent-hp-damage** *(talent only)*: Static Field (talent)
-- **sustained-dps**: curated (heroes/mephisto.yaml)
+- **sustained-dps**: curated (curated/hots/heroes/mephisto.yaml)
 - **poke**: Skull Missile, Shade of Mephisto
 - **aoe**: Skull Missile, Shade of Mephisto, Shard of Hate (talent), Lightning Reaction (talent)
 - **dot**: Lightning Nova
 - **waveclear**: Skull Missile, Shade of Mephisto
 - **channel**: Consume Souls
-- **dive**: curated (heroes/mephisto.yaml)
+- **dive**: curated (curated/hots/heroes/mephisto.yaml)
 
 ## Muradin (Tank)
 
@@ -865,8 +865,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-self**: Second Wind, Bronzebeard Rage (talent), Healing Static (talent), Stoneform (talent)
 - **dash**: Dwarf Toss
 - **aoe**: Dwarf Toss, Bronzebeard Rage (talent)
-- **frontline**: curated (heroes/muradin.yaml)
-- **engage**: curated (heroes/muradin.yaml)
+- **frontline**: curated (curated/hots/heroes/muradin.yaml)
+- **engage**: curated (curated/hots/heroes/muradin.yaml)
 
 ## Murky (Melee Assassin)
 
@@ -884,8 +884,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Slime
 - **siege**: Pufferfish, Never-Ending Murlocs (talent)
 - **channel** *(talent only)*: Never-Ending Murlocs (talent)
-- **split-push**: curated (heroes/murky.yaml)
-- **vulnerable-body**: curated (heroes/murky.yaml)
+- **split-push**: curated (curated/hots/heroes/murky.yaml)
+- **vulnerable-body**: curated (curated/hots/heroes/murky.yaml)
 
 ## Nazeebo (Ranged Assassin)
 
@@ -896,24 +896,24 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **spell-armor** *(talent only)*: Superstition (talent)
 - **heal-self** *(talent only)*: Hexed Crawlers (talent), Blood Ritual (talent)
 - **anti-heal** *(talent only)*: Annihilating Spirit (talent)
-- **sustained-dps**: curated (heroes/nazeebo.yaml)
+- **sustained-dps**: curated (curated/hots/heroes/nazeebo.yaml)
 - **aoe**: Zombie Wall, Gargantuan
 - **dot**: Plague of Toads, Ring of Poison (talent)
 - **summons**: Corpse Spiders, Gargantuan, Superstition (talent)
-- **waveclear**: curated (heroes/nazeebo.yaml)
+- **waveclear**: curated (curated/hots/heroes/nazeebo.yaml)
 - **channel**: Ravenous Spirit
-- **immobile**: curated (heroes/nazeebo.yaml)
+- **immobile**: curated (curated/hots/heroes/nazeebo.yaml)
 
 ## Nova (Ranged Assassin)
 
 - **slow**: Pinning Shot, Covert Ops (talent), Crippling Shot (talent)
 - **stealth**: Permanent Cloak, Ghost Protocol, Covert Ops (talent), Advanced Cloaking (talent)
 - **armor-shred** *(talent only)*: Crippling Shot (talent)
-- **burst**: Snipe, Pinning Shot, curated (heroes/nova.yaml)
+- **burst**: Snipe, Pinning Shot, curated (curated/hots/heroes/nova.yaml)
 - **poke**: Snipe, Pinning Shot
 - **aoe**: Precision Strike, Explosive Round (talent)
 - **summons**: Holo Decoy
-- **vulnerable-body**: curated (heroes/nova.yaml)
+- **vulnerable-body**: curated (curated/hots/heroes/nova.yaml)
 
 ## Orphea (Ranged Assassin)
 
@@ -927,11 +927,11 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Bond of Anguish (talent)
 - **armor-shred** *(talent only)*: Dead Magic (talent)
 - **burst**: Chomp, Dread
-- **sustained-dps**: curated (heroes/orphea.yaml)
+- **sustained-dps**: curated (curated/hots/heroes/orphea.yaml)
 - **poke**: Shadow Waltz, Chomp, Dread
 - **aoe**: Shadow Waltz, Chomp, Dread, Crushing Jaws
 - **waveclear**: Shadow Waltz, Chomp, Dread
-- **aa-reliant**: curated (heroes/orphea.yaml)
+- **aa-reliant**: curated (curated/hots/heroes/orphea.yaml)
 
 ## Probius (Ranged Assassin)
 
@@ -946,9 +946,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Disruption Pulse, Warp Rift
 - **dot** *(talent only)*: Rift Shock (talent)
 - **summons**: Warp In Pylon
-- **waveclear**: Disruption Pulse, Warp Rift, curated (heroes/probius.yaml)
-- **siege**: curated (heroes/probius.yaml)
-- **vulnerable-body**: curated (heroes/probius.yaml)
+- **waveclear**: Disruption Pulse, Warp Rift, curated (curated/hots/heroes/probius.yaml)
+- **siege**: curated (curated/hots/heroes/probius.yaml)
+- **vulnerable-body**: curated (curated/hots/heroes/probius.yaml)
 
 ## Qhira (Melee Assassin)
 
@@ -964,8 +964,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Carnage, Revolving Sweep, Unrelenting Strikes, Final Strike
 - **dot**: Blood Rage
 - **waveclear**: Carnage, Revolving Sweep
-- **dive**: curated (heroes/qhira.yaml)
-- **engage**: curated (heroes/qhira.yaml)
+- **dive**: curated (curated/hots/heroes/qhira.yaml)
+- **engage**: curated (curated/hots/heroes/qhira.yaml)
 
 ## Ragnaros (Bruiser)
 
@@ -977,8 +977,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **sustained-dps**: Living Meteor, Explosive Rune
 - **aoe**: Empower Sulfuras, Blast Wave, Lava Wave
 - **dot** *(talent only)*: Giant Scorcher (talent)
-- **global**: Molten Core, Heroic Difficulty (talent), curated (heroes/ragnaros.yaml)
-- **waveclear**: Lava Wave, Empower Sulfuras, Blast Wave, curated (heroes/ragnaros.yaml)
+- **global**: Molten Core, Heroic Difficulty (talent), curated (curated/hots/heroes/ragnaros.yaml)
+- **waveclear**: Lava Wave, Empower Sulfuras, Blast Wave, curated (curated/hots/heroes/ragnaros.yaml)
 - **channel**: Molten Core
 
 ## Raynor (Ranged Assassin)
@@ -994,8 +994,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **summons**: Raynor's Raider
 - **waveclear** *(talent only)*: Exterminator (talent)
 - **siege**: Hyperion
-- **aa-reliant**: Inspire, Adrenaline Rush, Give 'Em Some Pepper, Exterminator (talent), curated (heroes/raynor.yaml)
-- **immobile**: curated (heroes/raynor.yaml)
+- **aa-reliant**: Inspire, Adrenaline Rush, Give 'Em Some Pepper, Exterminator (talent), curated (curated/hots/heroes/raynor.yaml)
+- **immobile**: curated (curated/hots/heroes/raynor.yaml)
 
 ## Rehgar (Healer)
 
@@ -1008,8 +1008,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Hunger of the Wolf (talent)
 - **anti-heal** *(talent only)*: Purification (talent)
 - **aoe**: Lightning Shield, Earthgrasp Totem (talent)
-- **peel**: curated (heroes/rehgar.yaml)
-- **save**: curated (heroes/rehgar.yaml)
+- **peel**: curated (curated/hots/heroes/rehgar.yaml)
+- **save**: curated (curated/hots/heroes/rehgar.yaml)
 
 ## Rexxar (Bruiser)
 
@@ -1022,9 +1022,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **block** *(talent only)*: Grizzled Fortitude (talent)
 - **reveal**: Unleash the Boars, Flare (talent)
 - **aoe**: Spirit Swoop, Misha, Charge!, Wildfire Bear (talent)
-- **summons**: curated (heroes/rexxar.yaml)
+- **summons**: curated (curated/hots/heroes/rexxar.yaml)
 - **waveclear**: Spirit Swoop, Misha, Charge!
-- **peel**: curated (heroes/rexxar.yaml)
+- **peel**: curated (curated/hots/heroes/rexxar.yaml)
 
 ## Samuro (Melee Assassin)
 
@@ -1036,8 +1036,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **armor-shred** *(talent only)*: Way of the Blade (talent)
 - **sustained-dps**: Mirror Image, Critical Strike, Image Transmission, Way of Illusion (talent)
 - **aoe**: Bladestorm, Burning Blade (talent)
-- **aa-reliant**: Mirror Image, Critical Strike, Image Transmission, Way of Illusion (talent), curated (heroes/samuro.yaml)
-- **split-push**: curated (heroes/samuro.yaml)
+- **aa-reliant**: Mirror Image, Critical Strike, Image Transmission, Way of Illusion (talent), curated (curated/hots/heroes/samuro.yaml)
+- **split-push**: curated (curated/hots/heroes/samuro.yaml)
 
 ## Sgt. Hammer (Ranged Assassin)
 
@@ -1051,9 +1051,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Spider Mines, Concussive Blast, Blunt Force Gun, Siege Mode
 - **global**: Blunt Force Gun
 - **waveclear**: Spider Mines, Concussive Blast, Siege Mode
-- **siege**: curated (heroes/sgthammer.yaml)
-- **aa-reliant**: Siege Mode, Ambush (talent), Advanced Artillery (talent), Maelstrom Rounds (talent), curated (heroes/sgthammer.yaml)
-- **immobile**: curated (heroes/sgthammer.yaml)
+- **siege**: curated (curated/hots/heroes/sgthammer.yaml)
+- **aa-reliant**: Siege Mode, Ambush (talent), Advanced Artillery (talent), Maelstrom Rounds (talent), curated (curated/hots/heroes/sgthammer.yaml)
+- **immobile**: curated (curated/hots/heroes/sgthammer.yaml)
 
 ## Sonya (Bruiser)
 
@@ -1068,8 +1068,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Giant Slammer (talent)
 - **aoe**: Whirlwind, Leap, Shattered Ground (talent)
 - **dot** *(talent only)*: Poisoned Spear (talent)
-- **dive**: curated (heroes/sonya.yaml)
-- **frontline**: curated (heroes/sonya.yaml)
+- **dive**: curated (curated/hots/heroes/sonya.yaml)
+- **frontline**: curated (curated/hots/heroes/sonya.yaml)
 
 ## Stitches (Tank)
 
@@ -1087,9 +1087,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Slam, Putrid Bile, Vile Cleaver (talent), Flare Up (talent)
 - **dot**: Shambling Horror, Digestive Juices (talent)
 - **waveclear**: Shambling Horror
-- **frontline**: curated (heroes/stitches.yaml)
-- **engage**: curated (heroes/stitches.yaml)
-- **save**: curated (heroes/stitches.yaml)
+- **frontline**: curated (curated/hots/heroes/stitches.yaml)
+- **engage**: curated (curated/hots/heroes/stitches.yaml)
+- **save**: curated (curated/hots/heroes/stitches.yaml)
 
 ## Stukov (Healer)
 
@@ -1103,8 +1103,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-ally**: Healing Pathogen, Bio-Kill Switch, Superstrain (talent)
 - **aoe**: Lurking Arm, Flailing Swipe, Poppin' Pustules (talent)
 - **channel**: Lurking Arm, Growing Infestation (talent)
-- **immobile**: curated (heroes/stukov.yaml)
-- **peel**: curated (heroes/stukov.yaml)
+- **immobile**: curated (curated/hots/heroes/stukov.yaml)
+- **peel**: curated (curated/hots/heroes/stukov.yaml)
 
 ## Sylvanas (Ranged Assassin)
 
@@ -1117,8 +1117,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Overwhelming Affliction (talent)
 - **aoe**: Shadow Dagger, Wailing Arrow
 - **dot**: Shadow Dagger
-- **waveclear**: curated (heroes/sylvanas.yaml)
-- **split-push**: curated (heroes/sylvanas.yaml)
+- **waveclear**: curated (curated/hots/heroes/sylvanas.yaml)
+- **split-push**: curated (curated/hots/heroes/sylvanas.yaml)
 
 ## Tassadar (Ranged Assassin)
 
@@ -1135,8 +1135,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **burst**: Shock Ray
 - **aoe**: Shock Ray, Archon, Electric Fence (talent)
 - **dot**: Psionic Storm
-- **channel**: Shock Ray, Resonance Beam, Oracle (talent), curated (heroes/tassadar.yaml)
-- **peel**: curated (heroes/tassadar.yaml)
+- **channel**: Shock Ray, Resonance Beam, Oracle (talent), curated (curated/hots/heroes/tassadar.yaml)
+- **peel**: curated (curated/hots/heroes/tassadar.yaml)
 
 ## The Butcher (Melee Assassin)
 
@@ -1153,8 +1153,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Savage Charge (talent)
 - **sustained-dps**: Hamstring, Butcher's Brand, Fresh Meat, Brutal Strike (talent)
 - **aoe**: Furnace Blast, Cleaver (talent)
-- **aa-reliant**: Hamstring, Butcher's Brand, Fresh Meat, Brutal Strike (talent), curated (heroes/thebutcher.yaml)
-- **dive**: curated (heroes/thebutcher.yaml)
+- **aa-reliant**: Hamstring, Butcher's Brand, Fresh Meat, Brutal Strike (talent), curated (curated/hots/heroes/thebutcher.yaml)
+- **dive**: curated (curated/hots/heroes/thebutcher.yaml)
 
 ## The Lost Vikings (Support)
 
@@ -1172,8 +1172,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Longboat Raid!, Spin To Win!, Explosive Attacks (talent), Pain Don't Hurt (talent)
 - **dot** *(talent only)*: It's a Sabotage! (talent)
 - **channel**: Play Again!
-- **split-push**: curated (heroes/thelostvikings.yaml)
-- **vulnerable-body**: curated (heroes/thelostvikings.yaml)
+- **split-push**: curated (curated/hots/heroes/thelostvikings.yaml)
+- **vulnerable-body**: curated (curated/hots/heroes/thelostvikings.yaml)
 
 ## Thrall (Bruiser)
 
@@ -1191,8 +1191,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **sustained-dps**: Windfury, Maelstrom Weapon (talent), Elemental Assault (talent), Alpha Wolf (talent)
 - **aoe**: Feral Spirit, Earthquake
 - **aa-reliant**: Windfury, Maelstrom Weapon (talent), Elemental Assault (talent), Alpha Wolf (talent)
-- **dive**: curated (heroes/thrall.yaml)
-- **engage**: curated (heroes/thrall.yaml)
+- **dive**: curated (curated/hots/heroes/thrall.yaml)
+- **engage**: curated (curated/hots/heroes/thrall.yaml)
 
 ## Tracer (Ranged Assassin)
 
@@ -1208,8 +1208,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **armor-shred** *(talent only)*: Heavy Handed (talent)
 - **burst**: Melee
 - **aoe**: Pulse Bomb, Telefrag (talent), Bullet Spray (talent)
-- **aa-reliant**: curated (heroes/tracer.yaml)
-- **dive**: curated (heroes/tracer.yaml)
+- **aa-reliant**: curated (curated/hots/heroes/tracer.yaml)
+- **dive**: curated (curated/hots/heroes/tracer.yaml)
 
 ## Tychus (Ranged Assassin)
 
@@ -1219,12 +1219,12 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-self** *(talent only)*: That's the Stuff! (talent)
 - **dash**: Run and Gun
 - **percent-hp-damage**: Minigun, Titan Grenade (talent), Sizzlin' Attacks (talent)
-- **sustained-dps**: Minigun, Press the Advantage (talent), Master Assassin (talent), Sizzlin' Attacks (talent), curated (heroes/tychus.yaml)
+- **sustained-dps**: Minigun, Press the Advantage (talent), Master Assassin (talent), Sizzlin' Attacks (talent), curated (curated/hots/heroes/tychus.yaml)
 - **aoe** *(talent only)*: Melting Point (talent)
 - **dot** *(talent only)*: Melting Point (talent)
 - **summons**: Drakken Laser Drill
 - **channel**: Overkill, Can Do This All Day (talent)
-- **aa-reliant**: Minigun, Press the Advantage (talent), Master Assassin (talent), Sizzlin' Attacks (talent), curated (heroes/tychus.yaml)
+- **aa-reliant**: Minigun, Press the Advantage (talent), Master Assassin (talent), Sizzlin' Attacks (talent), curated (curated/hots/heroes/tychus.yaml)
 
 ## Tyrael (Tank)
 
@@ -1237,9 +1237,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **teleport**: El'druin's Might, Stalwart Angel (talent), Burning Halo (talent), Sword of Justice (talent)
 - **aoe**: El'druin's Might, Smite, Judgment, Burning Halo (talent)
 - **waveclear**: El'druin's Might, Smite
-- **frontline**: curated (heroes/tyrael.yaml)
-- **engage**: curated (heroes/tyrael.yaml)
-- **save**: curated (heroes/tyrael.yaml)
+- **frontline**: curated (curated/hots/heroes/tyrael.yaml)
+- **engage**: curated (curated/hots/heroes/tyrael.yaml)
+- **save**: curated (curated/hots/heroes/tyrael.yaml)
 
 ## Tyrande (Healer)
 
@@ -1254,8 +1254,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Empower (talent)
 - **armor-shred**: Hunter's Mark
 - **aoe**: Lunar Flare, Starfall
-- **global**: curated (heroes/tyrande.yaml)
-- **aa-reliant**: curated (heroes/tyrande.yaml)
+- **global**: curated (curated/hots/heroes/tyrande.yaml)
+- **aa-reliant**: curated (curated/hots/heroes/tyrande.yaml)
 
 ## Uther (Healer)
 
@@ -1267,8 +1267,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-self**: Holy Light, Wave of Light (talent), Blessed Champion (talent)
 - **heal-ally**: Holy Light, Holy Radiance, Devotion, Blessed Champion (talent)
 - **aoe**: Holy Radiance, Divine Storm, Holy Fire (talent)
-- **peel**: curated (heroes/uther.yaml)
-- **save**: curated (heroes/uther.yaml)
+- **peel**: curated (curated/hots/heroes/uther.yaml)
+- **save**: curated (curated/hots/heroes/uther.yaml)
 
 ## Valeera (Melee Assassin)
 
@@ -1284,11 +1284,11 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **teleport**: Vanish, Subtlety (talent), Death From Above (talent)
 - **anti-heal** *(talent only)*: Wound Poison (talent)
 - **armor-shred**: Sinister Strike
-- **burst**: curated (heroes/valeera.yaml)
+- **burst**: curated (curated/hots/heroes/valeera.yaml)
 - **aoe**: Sinister Strike, Blade Flurry
 - **dot** *(talent only)*: Rupture (talent)
 - **waveclear**: Sinister Strike, Blade Flurry
-- **dive**: curated (heroes/valeera.yaml)
+- **dive**: curated (curated/hots/heroes/valeera.yaml)
 
 ## Valla (Ranged Assassin)
 
@@ -1298,10 +1298,10 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **heal-self** *(talent only)*: Siphoning Arrows (talent), Tempered by Discipline (talent), Gloom (talent)
 - **dash**: Vault, Death Dealer (talent), Acrobat (talent)
 - **percent-hp-damage** *(talent only)*: Manticore (talent)
-- **sustained-dps**: Vault, Hatred, Creed of the Hunter (talent), Death Dealer (talent), curated (heroes/valla.yaml)
+- **sustained-dps**: Vault, Hatred, Creed of the Hunter (talent), Death Dealer (talent), curated (curated/hots/heroes/valla.yaml)
 - **aoe**: Multishot, Rain of Vengeance, Death Siphon (talent)
 - **waveclear** *(talent only)*: Monster Hunter (talent)
-- **aa-reliant**: Vault, Hatred, Creed of the Hunter (talent), Death Dealer (talent), curated (heroes/valla.yaml)
+- **aa-reliant**: Vault, Hatred, Creed of the Hunter (talent), Death Dealer (talent), curated (curated/hots/heroes/valla.yaml)
 
 ## Varian (Bruiser)
 
@@ -1315,8 +1315,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **percent-hp-damage** *(talent only)*: Juggernaut (talent)
 - **anti-heal** *(talent only)*: Mortal Strike (talent)
 - **armor-shred**: Colossus Smash
-- **frontline**: curated (heroes/varian.yaml)
-- **peel**: curated (heroes/varian.yaml)
+- **frontline**: curated (curated/hots/heroes/varian.yaml)
+- **peel**: curated (curated/hots/heroes/varian.yaml)
 
 ## Whitemane (Healer)
 
@@ -1331,8 +1331,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **dot** *(talent only)*: Purge the Wicked (talent)
 - **global** *(talent only)*: Guiding Light (talent)
 - **channel**: Inquisition, Clemency
-- **mana-hungry**: curated (heroes/whitemane.yaml)
-- **immobile**: curated (heroes/whitemane.yaml)
+- **mana-hungry**: curated (curated/hots/heroes/whitemane.yaml)
+- **immobile**: curated (curated/hots/heroes/whitemane.yaml)
 
 ## Xal'atath (Ranged Assassin)
 
@@ -1345,9 +1345,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **teleport**: Void Step, Cloak of Shadows (talent)
 - **percent-hp-damage** *(talent only)*: Toxic Mark (talent)
 - **armor-shred** *(talent only)*: Toxic Mark (talent)
-- **burst**: curated (heroes/xalatath.yaml)
+- **burst**: curated (curated/hots/heroes/xalatath.yaml)
 - **sustained-dps**: Void Step, Void Volley, Void Summoner (talent), Relentless Whispers (talent)
-- **poke**: curated (heroes/xalatath.yaml)
+- **poke**: curated (curated/hots/heroes/xalatath.yaml)
 - **aoe**: Shadow Mark, Dark Heart Ritual, Anchored Core (talent), Silence of the Lamb (talent)
 - **dot** *(talent only)*: Unstable Core (talent)
 - **summons**: Void Convergence, Void Summoner (talent)
@@ -1368,9 +1368,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **sustained-dps**: Cursed Strikes, Shade (talent), Grim Scythe (talent), Jailors (talent)
 - **aoe**: Spectral Scythe, Cursed Strikes, Skeletal Mages, Poison Nova
 - **summons**: Spectral Scythe, Skeletal Mages, Jailors (talent)
-- **waveclear**: Spectral Scythe, Cursed Strikes, Raise Skeleton, curated (heroes/xul.yaml)
+- **waveclear**: Spectral Scythe, Cursed Strikes, Raise Skeleton, curated (curated/hots/heroes/xul.yaml)
 - **aa-reliant**: Cursed Strikes, Shade (talent), Grim Scythe (talent), Jailors (talent)
-- **split-push**: curated (heroes/xul.yaml)
+- **split-push**: curated (curated/hots/heroes/xul.yaml)
 
 ## Yrel (Bruiser)
 
@@ -1387,8 +1387,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **aoe**: Vindication, Righteous Hammer, Avenging Wrath
 - **waveclear**: Vindication, Righteous Hammer, Avenging Wrath
 - **channel** *(talent only)*: Righteous Momentum (talent)
-- **frontline**: curated (heroes/yrel.yaml)
-- **engage**: curated (heroes/yrel.yaml)
+- **frontline**: curated (curated/hots/heroes/yrel.yaml)
+- **engage**: curated (curated/hots/heroes/yrel.yaml)
 
 ## Zagara (Ranged Assassin)
 
@@ -1402,9 +1402,9 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **poke**: Baneling Barrage, Infested Drop
 - **aoe**: Baneling Barrage, Infested Drop
 - **dot** *(talent only)*: Envenomed Spines (talent)
-- **summons**: Hunter Killer, Infested Drop, Bile Drop (talent), curated (heroes/zagara.yaml)
+- **summons**: Hunter Killer, Infested Drop, Bile Drop (talent), curated (curated/hots/heroes/zagara.yaml)
 - **waveclear**: Baneling Barrage, Infested Drop
-- **siege**: curated (heroes/zagara.yaml)
+- **siege**: curated (curated/hots/heroes/zagara.yaml)
 
 ## Zarya (Support)
 
@@ -1419,8 +1419,8 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **block** *(talent only)*: Defensive Shielding (talent)
 - **shield**: Personal Barrier, Shield Ally, Pain is Temporary (talent), Gain Train (talent)
 - **aoe**: Particle Grenade, Pinpoint Accuracy (talent), Explosive Barrier (talent)
-- **peel**: curated (heroes/zarya.yaml)
-- **save**: curated (heroes/zarya.yaml)
+- **peel**: curated (curated/hots/heroes/zarya.yaml)
+- **save**: curated (curated/hots/heroes/zarya.yaml)
 
 ## Zeratul (Melee Assassin)
 
@@ -1432,10 +1432,10 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **stealth**: Permanent Cloak
 - **reveal**: Vorpal Blade
 - **teleport**: Blink, Vorpal Blade, Seeker in the Dark (talent), Warp Skirmisher (talent)
-- **burst**: Singularity Spike, Cleave, curated (heroes/zeratul.yaml)
+- **burst**: Singularity Spike, Cleave, curated (curated/hots/heroes/zeratul.yaml)
 - **aoe**: Cleave
 - **dot** *(talent only)*: Rending Cleave (talent)
-- **dive**: curated (heroes/zeratul.yaml)
+- **dive**: curated (curated/hots/heroes/zeratul.yaml)
 
 ## Zul'jin (Ranged Assassin)
 
@@ -1449,5 +1449,5 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **sustained-dps**: Grievous Throw, Berserker, Recklessness (talent), Headhunter (talent)
 - **aoe**: Grievous Throw, Buzzsaw (talent)
 - **channel**: Regeneration, Forest Medicine (talent)
-- **aa-reliant**: Grievous Throw, Berserker, Recklessness (talent), Headhunter (talent), curated (heroes/zuljin.yaml)
-- **immobile**: curated (heroes/zuljin.yaml)
+- **aa-reliant**: Grievous Throw, Berserker, Recklessness (talent), Headhunter (talent), curated (curated/hots/heroes/zuljin.yaml)
+- **immobile**: curated (curated/hots/heroes/zuljin.yaml)

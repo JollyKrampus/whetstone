@@ -1,0 +1,15 @@
+hero: nova
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Sample: Nova has no dash, only Permanent Cloak and Holo Decoy."
+  - tag: poke
+    op: remove
+    why: "Sample: removes an extracted tag to test op remove."
+counters:
+  - a: nova
+    b: zeratul
+    why: "Sample: a contradicting entry, so the loader keeps both directed edges and warns."
+    evidence: ["Snipe"]
+    confidence: low
+synergies: []
