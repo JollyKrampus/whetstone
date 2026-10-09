@@ -1,0 +1,138 @@
+---
+/**
+ * /mtga/meta/ (SPEC §8): hand-curated meta snapshots (each deck with its source link) and the
+ * visitor's own lists ("bring your own meta"), which the deck analyzer compares against.
+ */
+import MetaManager from '../../../games/mtga/components/MetaManager.tsx';
+import '../../../games/mtga/components/mtga.css';
+import CopyButton from '../../../components/CopyButton.tsx';
+import EmptyState from '../../../components/EmptyState.astro';
+import { pct } from '../../../core/format.ts';
+import { deckHash } from '../../../games/mtga/lib/share.ts';
+import { getMeta } from '../../../games/mtga/load.ts';
+import { curatedViews, shardUrls } from '../../../games/mtga/pagedata.ts';
+import { FORMAT_LABELS, isFormatId } from '../../../games/mtga/worker/protocol.ts';
+import { navHref } from '../../../games/registry.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+const meta = getMeta();
+
+/** Main-deck and sideboard card counts of an Arena export (lines after "Sideboard" are the sideboard). */
+function countCards(list: string): { main: number; side: number } {
+  let side = false;
+  const out = { main: 0, side: 0 };
+  for (const line of list.split(/\r?\n/)) {
+    const t = line.trim();
+    if (/^sideboard$/i.test(t)) side = true;
+    else if (/^(deck|commander|companion)$/i.test(t)) side = false;
+    const n = /^(\d+)x?\s/.exec(t);
+    if (n) out[side ? 'side' : 'main'] += Number(n[1]);
+  }
+  return out;
+}
+
+const deckHref = navHref('mtga', 'deck/');
+const snaps = await Promise.all(
+  curatedViews()
+    .filter((s) => isFormatId(s.format))
+    .map(async (s) => ({
+      ...s,
+      decks: await Promise.all(
+        s.decks.map(async (d) => ({
+          ...d,
+          ...countCards(d.list),
+          href: `${deckHref}${await deckHash({ text: d.list, format: s.format, seed: 0 })}`,
+        })),
+      ),
+    })),
+);
+const examples = snaps.map((s) => ({ format: s.format, decks: s.decks.filter((d) => d.example).map(({ href: _h, main: _m, side: _s, ...d }) => d) })).filter((e) => e.decks.length > 0);
+---
+
+<GameLayout
+  game="mtga"
+  title="MTG Arena meta lists"
+  description="Curated constructed meta lists with their sources, plus your own saved lists that the deck analyzer compares against."
+  uses={['curated-meta']}
+>
+  <div class="mpage">
+    <header class="mpage__head">
+      <p class="kicker">Meta</p>
+      <h1>Meta lists</h1>
+      <p class="mpage__lead">
+        The deck analyzer compares your deck with these lists and uses them to judge card quality. Whetstone does not scrape deck sites:
+        curated lists are added by hand with a link to where they were published, and you can keep your own.
+      </p>
+    </header>
+
+    <section class="mpage__section" aria-labelledby="curated-title">
+      <div class="mpage__shead">
+        <h2 id="curated-title">Curated lists</h2>
+        <p class="muted">Updated by pull request in <code>curated/mtga/meta/</code>.</p>
+      </div>
+      {
+        snaps.length === 0 ? (
+          <EmptyState title="No curated lists yet" icon="data" compact>
+            <p>Add your own lists below; the analyzer uses them the same way.</p>
+          </EmptyState>
+        ) : (
+          snaps.map((s) => (
+            <div class="cmeta">
+              <div class="cmeta__head">
+                <h3 class="sub">
+                  {FORMAT_LABELS[s.format]}
+                  {s.example && <span class="badge badge--warning">example only</span>}
+                </h3>
+                <p class="muted cmeta__src">
+                  {s.date && <>As of <time datetime={s.date}>{s.date}</time>. </>}
+                  {s.source}
+                </p>
+              </div>
+              {s.example && (
+                <p class="cmeta__note">
+                  These decks only show the file format. They are not real metagame data, so the analyzer never uses them as meta; you can copy
+                  them to your own lists below to try the comparison.
+                </p>
+              )}
+              <ul class="cmeta__decks">
+                {s.decks.map((d) => (
+                  <li class="card cdeck">
+                    <div class="cdeck__head">
+                      <h4 class="cdeck__name">{d.name ?? d.archetype ?? 'Deck'}</h4>
+                      <p class="cdeck__facts">
+                        {d.archetype && d.archetype !== d.name && <span>{d.archetype}</span>}
+                        <span>
+                          {d.main} cards{d.side ? ` + ${d.side} sideboard` : ''}
+                        </span>
+                        {d.metaShare !== undefined && <span>{pct(d.metaShare)} of the meta</span>}
+                        {d.winRate !== undefined && <span>{pct(d.winRate)} win rate</span>}
+                        {d.example && !s.example && <span class="badge badge--warning">example</span>}
+                      </p>
+                    </div>
+                    <div class="cluster cdeck__actions">
+                      <a class="btn btn--tiny" href={d.href}>Analyze</a>
+                      <CopyButton client:visible text={d.list} label="Copy list" class="btn--tiny" />
+                      {d.sourceUrl ? (
+                        <a class="btn btn--ghost btn--tiny" href={d.sourceUrl} rel="noopener nofollow">Source</a>
+                      ) : (
+                        <span class="muted cdeck__nosrc">no source: illustrative</span>
+                      )}
+                    </div>
+                    <details class="disclosure">
+                      <summary>Decklist</summary>
+                      <pre class="cdeck__list">{d.list}</pre>
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        )
+      }
+    </section>
+
+    <section class="mpage__section" aria-label="Your lists">
+      <MetaManager client:load shards={shardUrls()} snapshot={meta.extra.snapshot} deckHref={deckHref} examples={examples} />
+    </section>
+  </div>
+</GameLayout>

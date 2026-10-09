@@ -1,9 +1,189 @@
 ---
-// Placeholder until the mtga module ships its own index page.
-import GamePlaceholder from '../../components/GamePlaceholder.astro';
+/** /mtga/ (SPEC §8): what the MTG Arena tools do, how fresh the data is, and the newest sets. */
+import '../../games/mtga/components/mtga.css';
+import { formatDayUTC, int } from '../../core/format.ts';
+import { LIMITED_FORMAT_LABEL } from '../../games/mtga/lib/limited.ts';
+import { getMetaSnapshots } from '../../games/mtga/load.ts';
+import { cardFacts, limitedSets } from '../../games/mtga/pagedata.ts';
+import { FORMAT_LABELS } from '../../games/mtga/worker/protocol.ts';
+import { navHref } from '../../games/registry.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
+
+const facts = cardFacts();
+const limited = limitedSets();
+const snapshots = getMetaSnapshots();
+const realMeta = snapshots.filter((s) => !s.example && s.decks.some((d) => !d.example));
+
+const tools = [
+  {
+    href: navHref('mtga', 'deck/'),
+    title: 'Deck analyzer',
+    text: 'Paste an Arena export: legality in every format, curve and colour sources, a power tier with reasons, sample hands, wildcard cost and budget upgrades.',
+    cta: 'Analyze a deck',
+    icon: 'deck',
+  },
+  {
+    href: navHref('mtga', 'limited/'),
+    title: 'Limited ratings',
+    text: limited.length
+      ? `17Lands card ratings for ${limited.map((s) => s.name).join(' and ')}: games-in-hand win rate, pick order and colour pairs.`
+      : 'Card ratings from 17Lands public datasets, once a set has published data.',
+    cta: 'See ratings',
+    icon: 'chart',
+  },
+  {
+    href: navHref('mtga', 'search/'),
+    title: 'Card search',
+    text: 'Scryfall-style filters over every Arena card: type, colour, mana value, rules text, rarity and format legality.',
+    cta: 'Search cards',
+    icon: 'search',
+  },
+  {
+    href: navHref('mtga', 'meta/'),
+    title: 'Meta lists',
+    text: 'Curated lists with their sources, plus your own saved lists. The analyzer compares your deck with them.',
+    cta: 'Manage lists',
+    icon: 'meta',
+  },
+] as const;
 ---
 
-<GameLayout game="mtga">
-  <GamePlaceholder game="mtga" />
+<GameLayout game="mtga" title="MTG Arena tools" description="Free MTG Arena deck analyzer, 17Lands Limited ratings, card search and meta lists. Runs in your browser; no account, no tracker." uses={['scryfall', 'grindstone-mcp']}>
+  <div class="mpage">
+    <header class="mpage__head mpage__head--hero">
+      <p class="kicker">MTG Arena</p>
+      <h1>Tune the deck before you queue.</h1>
+      <p class="mpage__lead">
+        Paste a deck to see where it is legal, how its mana holds up, how strong it looks and what to craft next, or look up how cards are doing
+        in Limited. Everything runs in your browser on the
+        <a href="https://github.com/JollyKrampus/grindstone-mcp" rel="noopener">grindstone-mcp</a> engine.
+      </p>
+      <div class="cluster mpage__cta">
+        <a class="btn btn--primary" href={navHref('mtga', 'deck/')}>Analyze a deck</a>
+        <a class="btn" href={navHref('mtga', 'limited/')}>Limited ratings</a>
+      </div>
+    </header>
+
+    <ul class="tools" aria-label="Tools">
+      {
+        tools.map((t) => (
+          <li class="card tool">
+            <svg class="tool__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              {t.icon === 'deck' && (
+                <>
+                  <rect x="6" y="3.5" width="11" height="15" rx="1.5" />
+                  <path d="M9 21h9.5a1.5 1.5 0 0 0 1.5-1.5V7" />
+                  <path d="M9 8h5M9 11.5h5" />
+                </>
+              )}
+              {t.icon === 'chart' && <path d="M4 20V10M10 20V4M16 20v-7M21 20H3" />}
+              {t.icon === 'search' && (
+                <>
+                  <circle cx="11" cy="11" r="6.5" />
+                  <path d="m16 16 4.5 4.5" />
+                </>
+              )}
+              {t.icon === 'meta' && (
+                <>
+                  <path d="M4 6h16M4 12h10M4 18h13" />
+                  <circle cx="19" cy="12" r="1.5" />
+                </>
+              )}
+            </svg>
+            <h2 class="tool__title">
+              <a href={t.href}>{t.title}</a>
+            </h2>
+            <p class="tool__text">{t.text}</p>
+            <p class="tool__cta" aria-hidden="true">
+              {t.cta} →
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mpage__split">
+      <section class="card facts-card" aria-labelledby="data-title">
+        <h2 id="data-title" class="facts-card__title">The data behind it</h2>
+        <dl class="facts facts--rows">
+          <div>
+            <dt>Card data</dt>
+            <dd>
+              Scryfall snapshot of <time datetime={facts.snapshot}>{formatDayUTC(facts.snapshot)}</time>: {int(facts.cards)} Arena cards,
+              {int(facts.standardCards)} legal in Standard
+            </dd>
+          </div>
+          {
+            facts.latest && (
+              <div>
+                <dt>Newest set</dt>
+                <dd>
+                  {facts.latest.name} ({facts.latest.code}), released {formatDayUTC(facts.latest.releasedAt)}
+                </dd>
+              </div>
+            )
+          }
+          <div>
+            <dt>Limited</dt>
+            <dd>
+              {
+                limited.length ? (
+                  <ul class="plain">
+                    {limited.map((s) => (
+                      <li>
+                        <a href={navHref('mtga', `limited/${s.code.toLowerCase()}/`)}>{s.name}</a>
+                        <span class="muted"> · {s.formats.map((f) => LIMITED_FORMAT_LABEL[f.format] ?? f.format).join(', ')}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  'No 17Lands dataset yet'
+                )
+              }
+            </dd>
+          </div>
+          <div>
+            <dt>Meta</dt>
+            <dd>
+              {
+                realMeta.length
+                  ? `Curated lists for ${realMeta.map((s) => FORMAT_LABELS[s.format]).join(', ')}`
+                  : 'No curated lists yet: add your own on the Meta page'
+              }
+            </dd>
+          </div>
+          <div>
+            <dt>Engine</dt>
+            <dd>grindstone-mcp {facts.grindstone}</dd>
+          </div>
+        </dl>
+        <p class="muted facts-card__foot">Card data refreshes daily when Scryfall publishes a new snapshot; Limited data when 17Lands updates a dataset.</p>
+      </section>
+
+      <section class="card facts-card" aria-labelledby="std-title">
+        <h2 id="std-title" class="facts-card__title">In Standard now</h2>
+        <ul class="setchips">
+          {
+            facts.standardSets.map((s) => (
+              <li class="setchip">
+                <span class="setchip__code">{s.code}</span> {s.name}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="muted facts-card__foot">From each card's Standard legality in the card data.</p>
+      </section>
+    </div>
+
+    <section class="mpage__section limits" aria-labelledby="limits-title">
+      <h2 id="limits-title" class="mpage__h2">Good to know</h2>
+      <ul class="ticks ticks--muted">
+        <li>Whetstone can't see your collection, so wildcard costs assume you own none of the cards.</li>
+        <li>Alchemy (rebalanced "A-") cards are not supported; Scryfall no longer lists them separately.</li>
+        <li>The power tier is a rule of thumb from the deck's structure. With meta lists it is much better at judging card quality.</li>
+        <li>Your decks never leave your browser. Share links carry the list after the <code>#</code>, which browsers don't send to servers.</li>
+      </ul>
+      <p><a href={navHref('mtga', 'about/')}>How the numbers are worked out</a></p>
+    </section>
+  </div>
 </GameLayout>

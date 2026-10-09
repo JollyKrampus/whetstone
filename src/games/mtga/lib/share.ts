@@ -38,7 +38,7 @@ function toBase64Url(bytes: Uint8Array): string {
   return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-function fromBase64Url(text: string): Uint8Array | null {
+function fromBase64Url(text: string): Uint8Array<ArrayBuffer> | null {
   try {
     const b64 = text.replace(/-/g, '+').replace(/_/g, '/');
     const bin = atob(b64 + '='.repeat((4 - (b64.length % 4)) % 4));
@@ -50,7 +50,7 @@ function fromBase64Url(text: string): Uint8Array | null {
   }
 }
 
-async function pump(stream: ReadableStream<Uint8Array>, limit: number): Promise<Uint8Array | null> {
+async function pump(stream: ReadableStream<Uint8Array>, limit: number): Promise<Uint8Array<ArrayBuffer> | null> {
   const reader = stream.getReader();
   const parts: Uint8Array[] = [];
   let size = 0;
@@ -77,7 +77,7 @@ async function pump(stream: ReadableStream<Uint8Array>, limit: number): Promise<
   return out;
 }
 
-function streamOf(bytes: Uint8Array): ReadableStream<Uint8Array> {
+function streamOf(bytes: Uint8Array<ArrayBuffer>): ReadableStream<Uint8Array<ArrayBuffer>> {
   return new ReadableStream({
     start(controller) {
       controller.enqueue(bytes);
@@ -101,7 +101,7 @@ export async function decodeDeckText(token: string): Promise<string | null> {
   if (!token || token.length > MAX_TOKEN) return null;
   const bytes = fromBase64Url(token.slice(1));
   if (!bytes) return null;
-  let raw: Uint8Array | null;
+  let raw: Uint8Array<ArrayBuffer> | null;
   if (token[0] === 't') raw = bytes;
   else if (token[0] === 'z' && hasStreams()) raw = await pump(streamOf(bytes).pipeThrough(new DecompressionStream('deflate-raw')), MAX_DECK_CHARS * 4);
   else return null;

@@ -22,7 +22,7 @@ export function toWorkerError(err: unknown): WorkerError {
 }
 
 /** Request types the handler accepts; anything else is answered with an error. */
-const TYPES = new Set(['init', 'analyze', 'simulate', 'hand', 'suggest', 'search', 'checkLists']);
+const TYPES = new Set(['init', 'analyze', 'simulate', 'hand', 'suggest', 'apply', 'search', 'checkLists']);
 
 export function createHandler(deps: HandlerDeps): (msg: WorkerRequest) => Promise<void> {
   const { engine, post } = deps;
@@ -49,6 +49,9 @@ export function createHandler(deps: HandlerDeps): (msg: WorkerRequest) => Promis
           break;
         case 'suggest':
           result = await engine.suggest(msg);
+          break;
+        case 'apply':
+          result = await engine.apply(msg);
           break;
         case 'search':
           result = await engine.search(msg);

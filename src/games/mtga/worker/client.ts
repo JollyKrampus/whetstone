@@ -66,7 +66,7 @@ export class AnalyzerClient {
     return new Promise<ResultMap[T]>((resolve, reject) => {
       this.pending.set(id, { resolve: resolve as (v: unknown) => void, reject });
       try {
-        this.worker.postMessage({ ...body, type, id } as WorkerRequest);
+        this.worker.postMessage({ ...body, type, id } as unknown as WorkerRequest);
       } catch (err) {
         this.pending.delete(id);
         reject(err instanceof Error ? err : new AnalyzerError(String(err)));

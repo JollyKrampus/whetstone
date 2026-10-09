@@ -112,6 +112,8 @@ export interface PowerView {
   dimensions: Dimension[];
   /** True when any dimension is low confidence (card quality without meta lists). */
   lowConfidence: boolean;
+  /** The rubric's tier scale (tier, label, minimum score), lowest first. */
+  scale: { tier: number; label: string; min: number }[];
 }
 
 export interface MetaCompareView {
@@ -218,6 +220,18 @@ export interface SuggestView {
   cards: Record<string, CardView>;
 }
 
+export interface ApplyRequest {
+  type: 'apply';
+  text: string;
+  /** Swaps to apply to the main deck, in order (a subset of a SuggestView). */
+  swaps: { cut: string; add: string; qty: number }[];
+}
+
+export interface ApplyResult {
+  /** The deck with the swaps applied (Arena export). */
+  text: string;
+}
+
 export interface SearchRequest {
   type: 'search';
   query: string;
@@ -273,6 +287,7 @@ export type WorkerRequestBody =
   | SimulateRequest
   | HandRequest
   | SuggestRequest
+  | ApplyRequest
   | SearchRequest
   | CheckListsRequest;
 
@@ -284,6 +299,7 @@ export interface ResultMap {
   simulate: SimReport;
   hand: HandResult;
   suggest: SuggestView;
+  apply: ApplyResult;
   search: SearchResult;
   checkLists: ListCheck[];
 }

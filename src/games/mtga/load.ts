@@ -4,7 +4,9 @@
  * in the browser; pages read them here only for counts, search pages and validation.
  * Every read is zod-validated (errors name the file) and memoized.
  */
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
+import { gzipSync } from 'node:zlib';
 import { createCachedLoader } from '../../core/schemas.ts';
 import { gameDataDir, readGameJson } from '../../lib/datadir.ts';
 import {
@@ -97,4 +99,21 @@ export function getMetaSnapshots(): MetaSnapshot[] {
   return getMeta()
     .extra.metaFormats.map((f) => getMetaSnapshot(f))
     .filter((s): s is MetaSnapshot => s !== null);
+}
+
+// ---- additive (mtga UI) ------------------------------------------------------------------
+
+const shardSizes = new Map<string, { raw: number; gzip: number }>();
+
+/**
+ * Raw and gzip sizes of a card shard, for "this downloads about N MB once" notes. GitHub Pages
+ * serves JSON gzipped, so the gzip size is what a visitor actually downloads.
+ */
+export function getShardSizes(format: 'standard' | 'arena'): { raw: number; gzip: number } {
+  const hit = shardSizes.get(format);
+  if (hit) return hit;
+  const bytes = readFileSync(path.join(gameDataDir(GAME), `public/_cards.${format}.json`));
+  const sizes = { raw: bytes.byteLength, gzip: gzipSync(bytes, { level: 6 }).byteLength };
+  shardSizes.set(format, sizes);
+  return sizes;
 }

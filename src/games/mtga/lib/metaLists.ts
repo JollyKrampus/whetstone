@@ -55,6 +55,15 @@ export function toFraction(v: unknown): number | undefined {
   return n > 1 ? Math.round(n * 100) / 10_000 : n;
 }
 
+/** A form field typed as a percentage ("12.5", "12.5%", "0.5") as a fraction; undefined if empty or out of range. */
+export function percentInput(v: string): number | undefined {
+  const t = v.trim().replace(/%$/, '').trim();
+  if (t === '') return undefined;
+  const n = Number(t.replace(',', '.'));
+  if (!Number.isFinite(n) || n < 0 || n > 100) return undefined;
+  return Math.round(n * 100) / 10_000;
+}
+
 function cleanUrl(v: unknown): string | undefined {
   if (typeof v !== 'string') return undefined;
   try {

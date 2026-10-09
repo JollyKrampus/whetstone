@@ -8,7 +8,8 @@ import { createStore } from '../../../../core/storage.ts';
 import { CardName } from '../CardPeek.tsx';
 import ManaCost from '../ManaCost.tsx';
 import { COLOR_NAME, Meter, RARITIES, RARITY_LABEL, RarityTag, Section, ColorPip, pct01, plural, toneFor } from '../ui.tsx';
-import type { AnalyzeResult, CardView, Color, EntryView, Rarity, WildcardCounts } from '../../worker/protocol.ts';
+import type { MetaChoice } from '../../lib/view.ts';
+import type { AnalyzeResult, CardView, Color, EntryView, FormatId, Rarity, WildcardCounts } from '../../worker/protocol.ts';
 
 type Peek = (card: CardView) => void;
 
@@ -113,10 +114,11 @@ export function DeckList({ result, onPeek }: { result: AnalyzeResult; onPeek: Pe
 
 // ---- legality ---------------------------------------------------------------------------------
 
-export function Legality({ result }: { result: AnalyzeResult }) {
+export function Legality({ result, onFormat, busy = false }: { result: AnalyzeResult; onFormat?: (f: FormatId) => void; busy?: boolean }) {
   const [open, setOpen] = useState<string | null>(null);
   return (
     <Section id="deck-legality" title="Legality on Arena" meta={`Card data of ${result.asOf}`}>
+      <p class="dsec__lead">Select a format to see what breaks its rules. Every format is checked against the same card data.</p>
       <ul class="legal">
         {result.legality.map((l) => {
           const errors = l.issues.filter((i) => i.severity === 'error');
@@ -137,11 +139,13 @@ export function Legality({ result }: { result: AnalyzeResult }) {
                   {l.legal ? '✓' : '✕'}
                 </span>
                 <span class="legal__name">{l.label}</span>
-                <span class="legal__state">
-                  {l.legal ? 'Legal' : `Not legal${errors.length ? ` · ${plural(errors.length, 'issue')}` : ''}`}
-                  {l.legal && warnings.length ? ` · ${plural(warnings.length, 'note')}` : ''}
+                <span class="legal__info">
+                  <span class="legal__state">
+                    {l.legal ? 'Legal' : `Not legal${errors.length ? ` · ${plural(errors.length, 'issue')}` : ''}`}
+                    {l.legal && warnings.length ? ` · ${plural(warnings.length, 'note')}` : ''}
+                  </span>
+                  {result.format === l.format ? <span class="legal__current">analyzed</span> : null}
                 </span>
-                {result.format === l.format ? <span class="legal__current">analyzed</span> : null}
               </button>
               {l.issues.length > 0 && expanded ? (
                 <ul class="legal__issues" id={id}>
@@ -157,20 +161,39 @@ export function Legality({ result }: { result: AnalyzeResult }) {
           );
         })}
       </ul>
+      {onFormat ? (
+        <div class="asfmt" role="group" aria-labelledby="asfmt-label">
+          <span class="asfmt__label" id="asfmt-label">
+            Analyze as
+          </span>
+          {result.legality.map((l) => (
+            <button
+              key={l.format}
+              type="button"
+              class="chip chip--small"
+              aria-pressed={result.format === l.format}
+              disabled={busy}
+              onClick={() => {
+                if (result.format !== l.format) onFormat(l.format);
+              }}
+            >
+              {l.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
     </Section>
   );
 }
 
 // ---- power ------------------------------------------------------------------------------------
 
-const TIER_LABELS = ['Jank', 'Casual', 'Focused', 'Optimized', 'Competitive'];
-
 export function Power({ result, onAddMeta }: { result: AnalyzeResult; onAddMeta: () => void }) {
   const p = result.power;
   return (
     <Section id="deck-power" title="Power tier" meta={`${p.rubric} rubric · ${p.archetype} plan`}>
-      <div class="power">
-        <div class="power__tier" data-tier={p.tier}>
+      <div class="power" data-tier={p.tier}>
+        <div class="power__tier">
           <span class="power__label">Tier</span>
           <span class="power__num">{p.tier}</span>
           <span class="power__name">{p.label}</span>
@@ -180,10 +203,11 @@ export function Power({ result, onAddMeta }: { result: AnalyzeResult; onAddMeta:
           </span>
         </div>
         <ol class="power__scale" aria-label="Tier scale">
-          {TIER_LABELS.map((label, i) => (
-            <li key={label} class={i + 1 === p.tier ? 'is-current' : undefined}>
-              <span class="visually-hidden">{i + 1 === p.tier ? 'Current: ' : ''}</span>
-              {i + 1} {label}
+          {p.scale.map((t) => (
+            <li key={t.tier} class={t.tier === p.tier ? 'is-current' : undefined} aria-current={t.tier === p.tier ? 'true' : undefined}>
+              <span class="power__scale-tier">{t.tier}</span>
+              <span class="power__scale-label">{t.label}</span>
+              <span class="power__scale-min">{t.min}+</span>
             </li>
           ))}
         </ol>
@@ -205,9 +229,11 @@ export function Power({ result, onAddMeta }: { result: AnalyzeResult; onAddMeta:
         {p.dimensions.map((d) => (
           <li class="dim" key={d.name}>
             <div class="dim__head">
-              <span class="dim__name">{d.name}</span>
-              <span class="dim__weight">weight {Math.round(d.weight * 100)}%</span>
-              {d.confidence === 'low' ? <span class="badge badge--warning">low confidence</span> : null}
+              <span class="dim__title">
+                <span class="dim__name">{d.name}</span>
+                <span class="dim__weight">weight {Math.round(d.weight * 100)}%</span>
+                {d.confidence === 'low' ? <span class="badge badge--warning">low confidence</span> : null}
+              </span>
               <span class="dim__score">{Math.round(d.score)}</span>
             </div>
             <Meter value={d.score} label={`${d.name}: ${Math.round(d.score)} out of 100`} tone={toneFor(d.score)} />
@@ -229,7 +255,10 @@ export function Curve({ result }: { result: AnalyzeResult }) {
   const a = result.analysis;
   const buckets = Object.entries(a.curve) as [string, number][];
   const max = Math.max(1, ...buckets.map(([, n]) => n));
-  const types = Object.entries(a.types).filter(([, n]) => n > 0).sort((x, y) => y[1] - x[1]);
+  // Lands already have their own entry; other types read better plural ("Creatures 26").
+  const types = Object.entries(a.types)
+    .filter(([t, n]) => n > 0 && t !== 'Land')
+    .sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0]));
   return (
     <Section id="deck-curve" title="Curve and card types" meta={`average mana value ${a.averageManaValue.toFixed(2)}`}>
       <figure class="curve">
@@ -267,13 +296,29 @@ export function Curve({ result }: { result: AnalyzeResult }) {
         </div>
         {types.map(([t, n]) => (
           <div key={t}>
-            <dt>{t}</dt>
+            <dt>{typePlural(t)}</dt>
             <dd>{n}</dd>
           </div>
         ))}
       </dl>
     </Section>
   );
+}
+
+const TYPE_PLURAL: Readonly<Record<string, string>> = { Sorcery: 'Sorceries', Battle: 'Battles' };
+
+export function typePlural(t: string): string {
+  return TYPE_PLURAL[t] ?? `${t}s`;
+}
+
+/** "Always tapped: 2 Elegant Parlor. Sometimes tapped: 4 Sacred Foundry." */
+export function tappedText(t: AnalyzeResult['analysis']['tappedLands']): string {
+  if (t.unconditional + t.conditional === 0) return 'No lands enter tapped.';
+  const list = (kind: string) => t.cards.filter((x) => x.kind === kind).map((x) => `${x.qty} ${x.name}`).join(', ');
+  const parts: string[] = [];
+  if (t.unconditional) parts.push(`Always enter tapped (${t.unconditional}): ${list('unconditional')}.`);
+  if (t.conditional) parts.push(`Sometimes enter tapped (${t.conditional}): ${list('conditional')}.`);
+  return parts.join(' ');
 }
 
 // ---- mana -------------------------------------------------------------------------------------
@@ -338,9 +383,7 @@ export function Mana({ result }: { result: AnalyzeResult }) {
         <p class="muted">No coloured mana requirements.</p>
       )}
       <p class="dsec__foot">
-        {t.unconditional + t.conditional === 0
-          ? 'No lands enter tapped.'
-          : `${plural(t.unconditional, 'land')} always enter tapped${t.conditional ? `, ${t.conditional} sometimes` : ''}: ${t.cards.map((x) => `${x.qty} ${x.name}`).join(', ')}.`}
+        {tappedText(t)}
       </p>
     </Section>
   );
@@ -420,7 +463,6 @@ export function Wildcards({ result, onPeek }: { result: AnalyzeResult; onPeek: P
 
 // ---- meta comparison --------------------------------------------------------------------------
 
-export type MetaChoice = 'auto' | 'mine' | 'curated' | 'none';
 
 export function MetaCompare({
   result,
@@ -463,7 +505,7 @@ export function MetaCompare({
       </fieldset>
       {children}
       {!m ? (
-        <p class="muted">
+        <p class="muted dsec__lead">
           No meta lists for {result.legality.find((l) => l.format === result.format)?.label ?? result.format} yet. Paste a few
           current decklists on the <a href={metaHref}>Meta page</a> (they stay in your browser) to see the closest archetype, the
           core cards you are missing, and a confident card-quality score.

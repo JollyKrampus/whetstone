@@ -13,8 +13,10 @@ import {
   CardIndex,
   analyzeDeck,
   asOfDate,
+  brawlRubric,
   buildMeta,
   compareToMeta,
+  constructedRubric,
   dealSampleHand,
   getFormat,
   parseArenaText,
@@ -40,6 +42,8 @@ import {
   FORMAT_LABELS,
   type AnalyzeRequest,
   type AnalyzeResult,
+  type ApplyRequest,
+  type ApplyResult,
   type CardView,
   type CheckListsRequest,
   type EntryView,
@@ -314,7 +318,8 @@ export class Engine {
         if (c) cards[c.oracleId] = cardView(c);
       }
     }
-    const power: PowerView = { ...rating, lowConfidence: rating.dimensions.some((d) => d.confidence === 'low') };
+    const scale = (fmt.commander ? brawlRubric() : constructedRubric()).tiers.map((t) => ({ tier: t.tier, label: t.label, min: t.min }));
+    const power: PowerView = { ...rating, lowConfidence: rating.dimensions.some((d) => d.confidence === 'low'), scale };
     return {
       name: deck.name ?? null,
       arenaText: toArenaText(deck),
@@ -390,6 +395,14 @@ export class Engine {
       appliedText: toArenaText(applySwaps(deck, result.swaps, pool)),
       cards,
     };
+  }
+
+  /** Apply a chosen subset of suggested swaps (the "Apply selected" button). */
+  async apply(req: Omit<ApplyRequest, 'type'>): Promise<ApplyResult> {
+    const deck = await this.resolve(req.text);
+    this.requireCards(deck);
+    const swaps = req.swaps.filter((s) => s && typeof s.cut === 'string' && typeof s.add === 'string' && Number.isInteger(s.qty) && s.qty > 0 && s.qty <= 4);
+    return { text: toArenaText(applySwaps(deck, swaps, this.index!)) };
   }
 
   async search(req: Omit<SearchRequest, 'type'>): Promise<SearchResult> {

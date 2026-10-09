@@ -20,8 +20,18 @@ let urls: ShardUrls | null = null;
 let snapshot = '';
 let lastFromCache = false;
 
+/**
+ * The shards are cached in IndexedDB (cache.ts). The site's service worker would otherwise keep a
+ * second multi-megabyte copy and re-download it in the background on every use
+ * (stale-while-revalidate on /data/*.json), so the request carries a query string its data
+ * route does not match.
+ */
+export function networkUrl(url: string): string {
+  return `${url}${url.includes('?') ? '&' : '?'}via=worker`;
+}
+
 async function download(pool: Pool, url: string): Promise<string> {
-  const res = await fetch(url, { credentials: 'same-origin' });
+  const res = await fetch(networkUrl(url), { credentials: 'same-origin' });
   if (!res.ok) throw new EngineError('fetch_failed', `Could not load the ${pool === 'arena' ? 'full Arena' : 'Standard'} card data (HTTP ${res.status}).`);
   const total = Number(res.headers.get('content-length')) || undefined;
   if (!res.body) return res.text();

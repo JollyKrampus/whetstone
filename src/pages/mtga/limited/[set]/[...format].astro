@@ -1,0 +1,119 @@
+---
+/**
+ * /mtga/limited/<set>/ and /mtga/limited/<set>/<format>/ (SPEC §8): one set's 17Lands card
+ * ratings in a sortable, filterable table, plus colour-pair win rates. The set's main format
+ * (Premier Draft when published) lives at the set URL; other formats get their own page.
+ */
+import ColorPairs from '../../../../games/mtga/components/ColorPairs.astro';
+import LimitedGlossary from '../../../../games/mtga/components/LimitedGlossary.astro';
+import LimitedTable from '../../../../games/mtga/components/LimitedTable.tsx';
+import '../../../../games/mtga/components/mtga.css';
+import { formatDayUTC, int } from '../../../../core/format.ts';
+import { LIMITED_FORMAT_LABEL } from '../../../../games/mtga/lib/limited.ts';
+import { getLimitedRatings } from '../../../../games/mtga/load.ts';
+import { limitedRows, limitedSets, type LimitedSetSummary } from '../../../../games/mtga/pagedata.ts';
+import type { LimitedFormat } from '../../../../games/mtga/schema.ts';
+import { navHref } from '../../../../games/registry.ts';
+import GameLayout from '../../../../layouts/GameLayout.astro';
+
+export function getStaticPaths() {
+  return limitedSets().flatMap((set) =>
+    set.formats.map((f) => ({
+      params: { set: set.code.toLowerCase(), format: f.slug ?? undefined },
+      props: { set, format: f.format },
+    })),
+  );
+}
+
+interface Props {
+  set: LimitedSetSummary;
+  format: LimitedFormat;
+}
+
+const { set, format } = Astro.props;
+const ratings = getLimitedRatings(set.code, format);
+if (!ratings) throw new Error(`limited/${set.code}.${format}.json is listed in the index but missing`);
+const rows = limitedRows(ratings);
+const formatLabel = LIMITED_FORMAT_LABEL[format] ?? format;
+const label = `${set.code} ${formatLabel}`;
+const hrefOf = (slug: string | null) => navHref('mtga', `limited/${set.code.toLowerCase()}/${slug ? `${slug}/` : ''}`);
+const others = limitedSets().filter((s) => s.code !== set.code);
+---
+
+<GameLayout
+  game="mtga"
+  title={`${set.name} ${formatLabel} card ratings`}
+  description={`17Lands card ratings for ${set.name} (${set.code}) ${formatLabel} on MTG Arena: GIH WR, IWD, pick order and colour pairs from ${int(ratings.totals.games)} games.`}
+  uses={['17lands', 'scryfall']}
+  navPath="limited/"
+>
+  <div class="mpage">
+    <header class="mpage__head">
+      <p class="kicker">
+        <a href={navHref('mtga', 'limited/')}>Limited</a> · {set.code}
+      </p>
+      <h1>{set.name}: {formatLabel}</h1>
+      <p class="mpage__lead">
+        {int(ratings.totals.games)} games{ratings.totals.drafts ? ` from ${int(ratings.totals.drafts)} drafts` : ''} in 17Lands' public dataset
+        of <time datetime={ratings.dataset.lastModified}>{formatDayUTC(ratings.dataset.lastModified)}</time>.
+        {ratings.synthetic && <strong>Sample numbers for development, not real 17Lands data.</strong>}
+      </p>
+    </header>
+
+    {
+      set.formats.length > 1 && (
+        <nav class="ftabs" aria-label={`${set.name} formats`}>
+          <ul>
+            {set.formats.map((f) => (
+              <li>
+                <a class="ftabs__tab" href={hrefOf(f.slug)} aria-current={f.format === format ? 'page' : undefined}>
+                  {LIMITED_FORMAT_LABEL[f.format] ?? f.format}
+                  <span class="ftabs__n">{int(f.games)} games</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <section class="mpage__section" aria-labelledby="ratings-title">
+      <h2 id="ratings-title" class="visually-hidden">Card ratings</h2>
+      <LimitedTable client:load rows={rows} label={label} />
+    </section>
+
+    <div class="mpage__split">
+      <section class="mpage__section" aria-labelledby="pairs-title">
+        <h2 id="pairs-title" class="mpage__h2">Colour pairs</h2>
+        <p class="muted">Two-colour decks with at least 300 games, best win rate first. Decks with a splash are counted separately.</p>
+        <ColorPairs ratings={ratings} />
+      </section>
+      <LimitedGlossary />
+    </div>
+
+    <p class="mpage__foot muted">
+      Source files: <a href={ratings.dataset.gameData} rel="noopener">game data</a>
+      {
+        ratings.dataset.draftData && (
+          <>
+            and <a href={ratings.dataset.draftData} rel="noopener">draft data</a>
+          </>
+        )
+      } (compressed CSV) from <a href="https://www.17lands.com/public_datasets" rel="noopener">17Lands public datasets</a>.
+      {
+        others.length > 0 && (
+          <>
+            Other sets:{' '}
+            {others.map((s, i) => (
+              <>
+                {i > 0 && ', '}
+                <a href={navHref('mtga', `limited/${s.code.toLowerCase()}/`)}>{s.name}</a>
+              </>
+            ))}
+            .
+          </>
+        )
+      }
+    </p>
+  </div>
+</GameLayout>
