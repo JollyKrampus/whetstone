@@ -11,10 +11,11 @@
  *  - talent builds: ranked by a posterior 10th percentile so small samples do not win.
  * Cho and Gall rows collapse into the composite `chogall` (they always share a game and team).
  */
-import { GATES, edgesFromPairs, fitPairK, pairStat, shrinkAll, type PairRow } from '../../../../core/stats.ts';
+import { edgesFromPairs, fitPairK, pairStat, shrinkAll, type PairRow } from '../../../../core/stats.ts';
 import { assignTiers } from '../../../../core/tiers.ts';
 import type { ValidationIssue } from '../../../../core/game.ts';
 import type { DraftShard, DraftStatsBlock, GameMap, GameMode, Stats, StatsWindow } from '../../schema.ts';
+import { statsBlockFromWindow } from '../../draft/statsblock.ts';
 import { compareStrings, round, searchKey, warn } from '../util.ts';
 
 export interface HpHeroRow {
@@ -302,60 +303,9 @@ export function buildStats(input: { fetchedAt: string; major: string; builds: st
 
 /**
  * The class-B overlay for public/draft.json: dense matrices aligned with the shard's entity and
- * map order (DraftStatsBlockSchema). Pairs below the hide gate are null.
+ * map order (DraftStatsBlockSchema). Pairs below the hide gate are null. One builder serves the
+ * pipeline, the fixture overlay and the draft tests (draft/statsblock.ts).
  */
 export function buildDraftStatsBlock(shard: Pick<DraftShard, 'heroes' | 'maps'>, window: StatsWindow, mode: GameMode = 'sl'): DraftStatsBlock {
-  const H = shard.heroes.id.length;
-  const M = shard.maps.id.length;
-  const hIdx = new Map(shard.heroes.id.map((id, i) => [id, i]));
-  const mIdx = new Map(shard.maps.id.map((id, i) => [id, i]));
-  const dense = (edges: StatsWindow['counters'], symmetric: boolean): DraftStatsBlock['counters'] => {
-    const score: (number | null)[] = new Array(H * H).fill(null);
-    const delta: (number | null)[] = new Array(H * H).fill(null);
-    const n: number[] = new Array(H * H).fill(0);
-    for (const e of edges) {
-      const a = hIdx.get(e.a);
-      const b = hIdx.get(e.b);
-      if (a === undefined || b === undefined || e.n === undefined) continue;
-      const cells = symmetric ? [a * H + b, b * H + a] : [a * H + b];
-      for (const c of cells) {
-        n[c] = e.n;
-        if (e.n >= GATES.hideBelow) {
-          score[c] = e.score;
-          delta[c] = e.delta ?? null;
-        }
-      }
-    }
-    return { score, delta, n };
-  };
-  const heroIds = shard.heroes.id;
-  const mapDelta: (number | null)[] = new Array(H * M).fill(null);
-  const mapN: number[] = new Array(H * M).fill(0);
-  for (const [h, per] of Object.entries(window.maps)) {
-    const i = hIdx.get(h);
-    if (i === undefined) continue;
-    for (const [m, s] of Object.entries(per)) {
-      const j = mIdx.get(m);
-      if (j === undefined) continue;
-      mapN[i * M + j] = s.games;
-      if (s.games >= GATES.hideBelow) mapDelta[i * M + j] = s.delta;
-    }
-  }
-  return {
-    source: 'heroesprofile',
-    mode,
-    timeframe: 'current',
-    label: window.label,
-    games: window.games,
-    hero: {
-      games: heroIds.map((id) => window.heroes[id]?.games ?? 0),
-      shrunk: heroIds.map((id) => window.heroes[id]?.shrunk ?? 0.5),
-      pick: heroIds.map((id) => window.heroes[id]?.pick ?? 0),
-      ban: heroIds.map((id) => window.heroes[id]?.ban ?? 0),
-      tier: heroIds.map((id) => window.heroes[id]?.tier ?? null),
-    },
-    counters: dense(window.counters, false),
-    synergies: dense(window.synergies, true),
-    maps: { delta: mapDelta, n: mapN },
-  };
+  return statsBlockFromWindow(window, shard, { mode, timeframe: 'current' });
 }

@@ -97,6 +97,36 @@ describe('stage', () => {
     expect(stage({ root, env: { WHETSTONE_DATA_DIR: 'ci-data' }, ...quiet }).manifest.games.pokemon?.dataHash).toBe('ci');
   });
 
+  it('skips data/ with WHETSTONE_FIXTURES=1 and never pairs fixtures with data/private', () => {
+    put('data/current/pokemon/meta.json', JSON.stringify(meta('pokemon', 'local')));
+    put('data/private/pokemon/x.json', '{}');
+    put('data/private/hots/public/draft.json', '{"stats":{}}');
+    put('fixtures/pokemon/meta.json', JSON.stringify(meta('pokemon', 'fx')));
+    put('fixtures/hots/meta.json', JSON.stringify(meta('hots', 'fx')));
+    expect(resolveDataDirs(root, 'pokemon', { WHETSTONE_FIXTURES: '1' })).toEqual({ dir: path.join(root, 'fixtures', 'pokemon'), privateDir: null, fixtures: true });
+    // data/current/hots is absent, so hots comes from fixtures and must not pick up data/private/hots.
+    expect(resolveDataDirs(root, 'hots', {})).toEqual({ dir: path.join(root, 'fixtures', 'hots'), privateDir: null, fixtures: true });
+    // An explicit WHETSTONE_DATA_DIR still wins over the pin.
+    put('ci-data/current/pokemon/meta.json', JSON.stringify(meta('pokemon', 'ci')));
+    expect(resolveDataDirs(root, 'pokemon', { WHETSTONE_FIXTURES: '1', WHETSTONE_DATA_DIR: 'ci-data' }).dir).toBe(path.join(root, 'ci-data', 'current', 'pokemon'));
+  });
+
+  it('overlays fixtures/<game>/_private/public/** only with WHETSTONE_FIXTURE_PRIVATE=1', () => {
+    const pub = '{"heroes":["Abat"]}\n';
+    put('fixtures/hots/meta.json', JSON.stringify(meta('hots', 'fx')));
+    put('fixtures/hots/public/draft.json', pub);
+    put('fixtures/hots/_private/public/draft.json', '{"stats":{"synthetic":true}}\n');
+    put('fixtures/hots/_private/stats.json', '{}\n');
+    expect(stage({ root, env: {}, ...quiet }).map['hots/draft']).toBe(`data/hots/draft.${shortHash(pub)}.json`);
+    const r = stage({ root, env: { WHETSTONE_FIXTURE_PRIVATE: '1' }, ...quiet });
+    const merged = '{"heroes":["Abat"],"stats":{"synthetic":true}}\n';
+    expect(r.map['hots/draft']).toBe(`data/hots/draft.${shortHash(merged)}.json`);
+    expect(r.manifest.games.hots?.files.draft?.url).toBe(`data/hots/draft.${shortHash(pub)}.json`);
+    expect(r.manifest.games.hots?.fixtures).toBe(true);
+    // Only public/** of the private directory is staged.
+    expect(r.files.some((f) => f.includes('stats'))).toBe(false);
+  });
+
   it('merges a private overlay into the shard the site uses, while the manifest keeps the class-A file', () => {
     const pub = '{"heroes":["Abat"],"schema":1}\n';
     put('data/current/hots/meta.json', JSON.stringify(meta('hots', 'h')));

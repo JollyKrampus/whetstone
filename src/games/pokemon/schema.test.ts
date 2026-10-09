@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 import type { z } from 'zod';
 import { parseData } from '../../core/schemas.ts';
-import { repoRoot, usingFixtures } from '../../lib/datadir.ts';
+import { repoRoot } from '../../lib/datadir.ts';
 import * as load from './load.ts';
 import {
   AbilitiesFileSchema,
@@ -171,7 +171,6 @@ describe('pokemon load.ts against fixtures', () => {
     expect(load.getMeta().game).toBe('pokemon');
     expect(load.getSpecies().length).toBeGreaterThan(0);
     expect(load.getRegulations().length).toBeGreaterThan(0);
-    if (!usingFixtures('pokemon')) return;
     expect(load.getCurrentRegulation().id).toBe('M-C');
     expect(load.getCurrentSeason()?.id).toBe('M-7');
     expect(load.getCurrentRegulation(new Date('2026-08-01T00:00:00Z')).id).toBe('M-B');

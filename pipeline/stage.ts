@@ -4,7 +4,8 @@
  *   node pipeline/stage.ts
  *
  * Per game, from the same data directory src/lib/datadir.ts resolves
- * ($WHETSTONE_DATA_DIR/current/<game>, then data/current/<game>, then fixtures/<game>):
+ * ($WHETSTONE_DATA_DIR/current/<game>, then data/current/<game> unless WHETSTONE_FIXTURES=1, then
+ * fixtures/<game>; private files pair with it, see resolveDataDirs):
  *  - <dir>/public/** and <privateDir>/public/** → public/data/<game>/<name>.<hash8>.<ext>
  *  - <dir>/img/**                              → public/data/<game>/img/** (unchanged names)
  *  - src/generated/stage-map.json  { "<game>/<name>": "data/<game>/<name>.<hash8>.<ext>" }
@@ -41,19 +42,26 @@ export interface DataDirs {
   fixtures: boolean;
 }
 
-/** Mirrors src/lib/datadir.ts (gameDataDir / gamePrivateDir) with an explicit root and env. */
+/**
+ * Mirrors src/lib/datadir.ts (gameDataDir / gamePrivateDir) with an explicit root and env:
+ * WHETSTONE_DATA_DIR, then data/ (skipped when WHETSTONE_FIXTURES=1), then fixtures/. The private
+ * directory pairs with the chosen one: <dataRoot>/private/<game>, or for fixtures
+ * fixtures/<game>/_private when WHETSTONE_FIXTURE_PRIVATE=1, so a fixture build can exercise the
+ * class-B overlays (the HotS draft shard's synthetic `stats` block) exactly as a real build does.
+ */
 export function resolveDataDirs(root: string, game: GameId, env: Readonly<Record<string, string | undefined>>): DataDirs {
   const custom = env.WHETSTONE_DATA_DIR;
   const fixturesDir = path.join(root, 'fixtures', game);
-  const candidates = [
-    ...(custom ? [path.resolve(root, custom, 'current', game)] : []),
-    path.join(root, 'data', 'current', game),
-    fixturesDir,
-  ];
-  const dir = candidates.find((d) => existsSync(path.join(d, META_FILE))) ?? null;
-  const privateCandidates = [...(custom ? [path.resolve(root, custom, 'private', game)] : []), path.join(root, 'data', 'private', game)];
-  const privateDir = privateCandidates.find((d) => existsSync(d)) ?? null;
-  return { dir, privateDir, fixtures: dir === fixturesDir };
+  const dataRoots = [...(custom ? [path.resolve(root, custom)] : []), ...(env.WHETSTONE_FIXTURES === '1' ? [] : [path.join(root, 'data')])];
+  const dataRoot = dataRoots.find((r) => existsSync(path.join(r, 'current', game, META_FILE)));
+  if (dataRoot) {
+    const privateDir = path.join(dataRoot, 'private', game);
+    return { dir: path.join(dataRoot, 'current', game), privateDir: existsSync(privateDir) ? privateDir : null, fixtures: false };
+  }
+  if (!existsSync(path.join(fixturesDir, META_FILE))) return { dir: null, privateDir: null, fixtures: false };
+  const fixturePrivate = path.join(fixturesDir, '_private');
+  const privateDir = env.WHETSTONE_FIXTURE_PRIVATE === '1' && existsSync(fixturePrivate) ? fixturePrivate : null;
+  return { dir: fixturesDir, privateDir, fixtures: true };
 }
 
 export interface StageOptions {

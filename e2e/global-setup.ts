@@ -26,7 +26,7 @@ export default async function globalSetup(config: FullConfig): Promise<void> {
     const res = await fetch(baseURL);
     served = await res.text();
   } catch (err) {
-    throw new Error(`[e2e] Nothing answers at ${baseURL}: ${(err as Error).message}`);
+    throw new Error(`[e2e] Nothing answers at ${baseURL}: ${(err as Error).message}`, { cause: err });
   }
   if (served !== readFileSync(indexFile, 'utf8')) {
     throw new Error(

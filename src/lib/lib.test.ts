@@ -4,7 +4,7 @@ import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import type { GameModule } from '../core/game.ts';
 import { games } from '../games/registry.ts';
-import { gameDataDir, repoRoot } from './datadir.ts';
+import { fixturesPinned, gameDataDir, gamePrivateDir, repoRoot, usingFixtures } from './datadir.ts';
 import { hasPage, pendingSections } from './routes.ts';
 import { lookupStaged, readStageMap, stagedUrl, stagedUrlOrNull } from './stagemap.ts';
 
@@ -31,6 +31,16 @@ describe('datadir', () => {
 
   it('resolves every game to a directory with a meta.json', () => {
     for (const g of games) expect(gameDataDir(g.id)).toMatch(new RegExp(`[\\\\/]${g.id}$`));
+  });
+
+  it('is pinned to the committed fixtures under Vitest, whatever data/ holds', () => {
+    expect(fixturesPinned()).toBe(true);
+    for (const g of games) {
+      expect(usingFixtures(g.id)).toBe(true);
+      expect(gameDataDir(g.id)).toBe(path.join(repoRoot(), 'fixtures', g.id));
+      // Private samples only with WHETSTONE_FIXTURE_PRIVATE=1, and never from data/private.
+      expect(gamePrivateDir(g.id)).toBeNull();
+    }
   });
 });
 

@@ -37,11 +37,14 @@ export function statsBlockFromWindow(window: StatsWindow, shard: Pick<DraftShard
   });
   const counters = dense();
   const synergies = dense();
+  // Pairs without a sample size are skipped; pairs below the hide gate keep only their n.
   const put = (m: ReturnType<typeof dense>, a: number, b: number, e: { score: number; delta?: number; n?: number }) => {
+    if (e.n === undefined) return;
     const k = a * H + b;
+    m.n[k] = e.n;
+    if (e.n < GATES.hideBelow) return;
     m.score[k] = e.score;
-    m.delta[k] = e.delta ?? 0;
-    m.n[k] = e.n ?? 0;
+    m.delta[k] = e.delta ?? null;
   };
   for (const e of window.counters) {
     const a = heroIndex.get(e.a);

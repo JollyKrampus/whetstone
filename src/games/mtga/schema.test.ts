@@ -3,7 +3,7 @@ import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import type { z } from 'zod';
 import { DataValidationError, parseData } from '../../core/schemas.ts';
-import { repoRoot, usingFixtures } from '../../lib/datadir.ts';
+import { repoRoot } from '../../lib/datadir.ts';
 import * as load from './load.ts';
 import {
   CardRecordSchema,
@@ -158,7 +158,6 @@ describe('mtga load.ts against fixtures', () => {
     expect(load.getMeta().game).toBe('mtga');
     expect(load.getSets().length).toBeGreaterThan(0);
     expect(load.getCardShard('standard').cards.length).toBeGreaterThan(0);
-    if (!usingFixtures('mtga')) return;
     expect(load.getSet('blb')?.name).toBe('Bloomburrow');
     expect(load.getStandardSets().length).toBe(load.getMeta().extra.standardSets.length);
     expect(load.getCardShard('arena').cards.find((c) => c.name === 'Fire Elemental')?.oracleText).toBe('');

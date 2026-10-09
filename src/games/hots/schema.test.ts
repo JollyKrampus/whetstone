@@ -4,7 +4,8 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 import type { z } from 'zod';
 import { DataValidationError, EdgeSchema, parseData } from '../../core/schemas.ts';
-import { repoRoot, usingFixtures } from '../../lib/datadir.ts';
+import { repoRoot } from '../../lib/datadir.ts';
+import { statsBlockFromWindow } from './draft/statsblock.ts';
 import * as load from './load.ts';
 import {
   AliasesFileSchema,
@@ -49,6 +50,17 @@ describe('hots fixtures match the schemas', () => {
       expect(() => parseData(schema, readJson(path.join(FIXTURES, rel)), `fixtures/hots/${rel}`)).not.toThrow();
     });
   }
+
+  it('ships the draft stats overlay that stage.ts merges with WHETSTONE_FIXTURE_PRIVATE=1, in sync with stats.json', () => {
+    const shard = fixture(DraftShardSchema, 'public/draft.json');
+    const stats = fixture(StatsSchema, '_private/stats.json');
+    const overlay = fixture(DraftStatsOverlaySchema, '_private/public/draft.json');
+    const sl = stats.modes.sl?.current;
+    expect(sl).toBeDefined();
+    if (!sl) return;
+    // Regenerate with the hots fixture generator when the shard or stats.json change.
+    expect(overlay).toEqual({ stats: statsBlockFromWindow(sl, shard, { mode: 'sl', timeframe: 'current', synthetic: true }) });
+  });
 
   it('marks every private sample as synthetic', () => {
     for (const file of PRIVATE) expect((readJson(path.join(FIXTURES, '_private', file)) as { synthetic?: boolean }).synthetic).toBe(true);
@@ -268,7 +280,6 @@ describe('hots load.ts against fixtures', () => {
     expect(load.getHeroes().length).toBeGreaterThan(0);
     expect(load.getDraftableEntities().every((h) => !h.memberOf)).toBe(true);
     expect(load.getMaps().length).toBeGreaterThan(0);
-    if (!usingFixtures('hots')) return;
     expect(load.getHeroes()).toHaveLength(15);
     expect(load.getDraftableEntities().map((h) => h.id)).toContain('chogall');
     expect(load.getDraftableEntities().map((h) => h.id)).not.toContain('CCho');
@@ -283,7 +294,6 @@ describe('hots load.ts against fixtures', () => {
   });
 
   it('resolves names, nicknames and localized aliases to draftable entities', () => {
-    if (!usingFixtures('hots')) return;
     expect(load.resolveHero('Li Ming')?.slug).toBe('liming');
     expect(load.resolveHero('li-ming')?.slug).toBe('liming');
     expect(load.resolveHero('cho gall')?.slug).toBe('chogall');
@@ -294,7 +304,6 @@ describe('hots load.ts against fixtures', () => {
   });
 
   it('falls back to labelled theory edges without stats', () => {
-    if (!usingFixtures('hots')) return;
     expect(load.getStats()).toBeNull();
     expect(load.getVideos()).toBeNull();
     const m = load.heroEdges('johanna');
@@ -309,7 +318,6 @@ describe('hots load.ts against fixtures', () => {
   });
 
   it('reads synthetic private samples only when WHETSTONE_FIXTURE_PRIVATE=1', () => {
-    if (!usingFixtures('hots')) return;
     process.env.WHETSTONE_FIXTURE_PRIVATE = '1';
     load.clearHotsCache();
     expect(load.getStats()?.synthetic).toBe(true);

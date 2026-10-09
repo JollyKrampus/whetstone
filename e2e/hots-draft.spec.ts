@@ -1,13 +1,19 @@
 /**
  * HotS draft helper and ARAM helper flows (SPEC §7) against the committed fixtures:
  * a full 16-step Storm League draft by clicking, Cho'gall step rules, share-link restore,
- * free mode, keyboard use, the ARAM ranking, a phone viewport and statistics mode (the class-B
- * overlay is injected from the synthetic private fixture, as stage.ts would merge it).
+ * free mode, keyboard use, the ARAM ranking, a phone viewport and statistics mode.
+ *
+ * Statistics mode needs the class-B `stats` block in the draft shard. The statistics build
+ * (WHETSTONE_FIXTURE_PRIVATE=1 npm run build, see e2e/hots-pages.spec.ts) gets it from
+ * fixtures/hots/_private/public/draft.json, merged by pipeline/stage.ts as on the live site. Against
+ * the default theory build, the statistics tests serve that same committed overlay merged into
+ * the shard, so both builds cover the flow.
  */
 import { readFileSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
-import { statsBlockFromWindow } from '../src/games/hots/draft/statsblock.ts';
-import type { DraftShard, Stats } from '../src/games/hots/schema.ts';
+
+/** Mirrors e2e/hots-pages.spec.ts: which build is being served. */
+const STATS = process.env.WHETSTONE_FIXTURE_PRIVATE === '1';
 
 const DRAFT = 'hots/draft/';
 const ARAM = 'hots/aram/';
@@ -44,7 +50,7 @@ test.describe('Storm League draft', () => {
     await ready(page);
     await expect(stepTitle(page)).toHaveText('Your ban');
     await expect(page.locator('.dt-step__count')).toHaveText('Step 1 of 16');
-    await expect(page.locator('.sg-basis')).toContainText('Theory');
+    await expect(page.locator('.sg-basis')).toContainText(STATS ? 'Stats' : 'Theory');
 
     // A-ban B-ban A-ban B-ban A-pick B-pick(Cho'gall ×2) A-pick A-pick B-ban A-ban B-pick B-pick A-pick A-pick B-pick
     const plan: (string | null)[] = ['Abat', null, null, 'Diab', 'Mura', 'chogall', 'Malf', 'Wiza', null, 'Zera', 'Demo', 'Tra0', 'Vari', 'HXAL', 'Anub'];
@@ -106,9 +112,13 @@ test.describe('Storm League draft', () => {
     await ready(page);
     await page.locator('#dt-map').selectOption('cursed-hollow');
     await expect(page.locator('.sg-modes__chip', { hasText: 'Map' })).not.toHaveAttribute('aria-disabled', 'true');
-    // Stats-only modes are visibly disabled, with the reason in text.
-    await expect(page.locator('.sg-modes__chip', { hasText: 'Win rate' })).toHaveAttribute('aria-disabled', 'true');
-    await expect(page.locator('.sg-modes__why')).toContainText('need match statistics');
+    if (STATS) {
+      await expect(page.locator('.sg-modes__chip', { hasText: 'Win rate' })).not.toHaveAttribute('aria-disabled', 'true');
+    } else {
+      // Stats-only modes are visibly disabled, with the reason in text.
+      await expect(page.locator('.sg-modes__chip', { hasText: 'Win rate' })).toHaveAttribute('aria-disabled', 'true');
+      await expect(page.locator('.sg-modes__why')).toContainText('need match statistics');
+    }
 
     const first = page.locator('.dt-now .sg-item').first();
     const name = (await first.locator('.sg-item__name').innerText()).replace(/^Rank \d+:\s*/, '').trim();
@@ -302,13 +312,18 @@ test.describe('phone viewport', () => {
   });
 });
 
+/** In the theory build, serve the shard with the committed synthetic overlay, as stage.ts merges it. */
+async function withStats(page: Page) {
+  if (STATS) return;
+  const read = (rel: string) => JSON.parse(readFileSync(rel, 'utf8')) as Record<string, unknown>;
+  const merged = { ...read('fixtures/hots/public/draft.json'), ...read('fixtures/hots/_private/public/draft.json') };
+  await page.route('**/data/hots/draft.*.json', (route) => route.fulfill({ json: merged }));
+}
+
 test.describe('statistics mode', () => {
   test('uses Heroes Profile numbers with an inline credit when the overlay is present', async ({ page }) => {
     const errors = watch(page);
-    const shard = JSON.parse(readFileSync('fixtures/hots/public/draft.json', 'utf8')) as DraftShard;
-    const stats = JSON.parse(readFileSync('fixtures/hots/_private/stats.json', 'utf8')) as Stats;
-    const block = statsBlockFromWindow(stats.modes.sl!.current, shard, { mode: 'sl', timeframe: 'current', synthetic: true });
-    await page.route('**/data/hots/draft.*.json', (route) => route.fulfill({ json: { ...shard, stats: block } }));
+    await withStats(page);
     await page.goto(`${DRAFT}#v=1&m=cursed-hollow&s=--------`);
     await ready(page);
     await expect(page.locator('.sg-basis')).toContainText('Stats');
@@ -326,10 +341,7 @@ test.describe('statistics mode', () => {
   });
 
   test('the ARAM helper ignores Storm League statistics', async ({ page }) => {
-    const shard = JSON.parse(readFileSync('fixtures/hots/public/draft.json', 'utf8')) as DraftShard;
-    const stats = JSON.parse(readFileSync('fixtures/hots/_private/stats.json', 'utf8')) as Stats;
-    const block = statsBlockFromWindow(stats.modes.sl!.current, shard, { mode: 'sl', timeframe: 'current', synthetic: true });
-    await page.route('**/data/hots/draft.*.json', (route) => route.fulfill({ json: { ...shard, stats: block } }));
+    await withStats(page);
     await page.goto(`${ARAM}`);
     await ready(page);
     await page.locator('#ar-pick-search').fill('valla');
