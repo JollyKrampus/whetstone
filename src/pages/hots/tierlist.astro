@@ -17,7 +17,15 @@ import LensBlocks from '../../games/hots/components/LensBlocks.astro';
 import StatsCredit from '../../games/hots/components/StatsCredit.astro';
 import StatsLens from '../../games/hots/components/StatsLens.astro';
 import { describeCounts, VERDICT } from '../../games/hots/components/labels.ts';
-import { patchMomentum, statsModes, TIER_TITLE, tierResults, type ModeOption, type PeriodOption } from '../../games/hots/components/pagedata.ts';
+import {
+  banPriority,
+  patchMomentum,
+  statsModes,
+  TIER_TITLE,
+  tierResults,
+  type ModeOption,
+  type PeriodOption,
+} from '../../games/hots/components/pagedata.ts';
 import { getEntity, getMeta, getPro, getStatsWindow, hasAsset } from '../../games/hots/load.ts';
 import { heroHref, heroPortrait } from '../../games/hots/view.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
@@ -130,6 +138,7 @@ const momentumScope =
           <LensBlocks modes={modes}>
             {(m: ModeOption, p: PeriodOption) => {
               const results = tierResults(m.id, p.id) ?? [];
+              const bans = banPriority(m.id, p.id);
               return (
                 <div class="tl__block">
                   <p class="wlabel">{windowLabel(m, p)}</p>
@@ -137,6 +146,37 @@ const momentumScope =
                     <TierList tiers={rows(results)} label={`${m.label} tiers, ${p.label.toLowerCase()}`} emptyTierText="No hero in this band." />
                   ) : (
                     <p class="tl__none">No hero statistics in this window.</p>
+                  )}
+                  {bans.length > 0 && (
+                    <section class="tl__sec tl__bans" aria-label={`Ban priority, ${m.label}, ${p.label.toLowerCase()}`} data-ban-priority>
+                      <div class="tl__sechead">
+                        <h2>Ban priority</h2>
+                        <p class="tl__sub">
+                          The most banned heroes in this window, with how often they get picked. Bans show what players fear,
+                          which is not always what wins.
+                        </p>
+                      </div>
+                      <ol class="presence">
+                        {bans.map((r) => (
+                          <li class="presence__row" style={`--p: ${r.ban}`}>
+                            <a class="presence__hero" href={heroHref(r.hero)}>
+                              {hasAsset(r.hero.portrait) && <img src={heroPortrait(r.hero)} alt="" width="32" height="32" loading="lazy" />}
+                              <span>{r.hero.name}</span>
+                            </a>
+                            <span class="presence__bar" aria-hidden="true">
+                              <span class="presence__fill" />
+                            </span>
+                            <span class="presence__pct">
+                              {pct(r.ban, 0)}
+                              <span class="visually-hidden"> banned</span>
+                            </span>
+                            <span class="presence__meta">
+                              picked in {pct(r.pick, 1)} of games · n = {int(r.games)} games
+                            </span>
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
                   )}
                 </div>
               );
@@ -256,6 +296,10 @@ const momentumScope =
     color: var(--text-muted);
     font-family: var(--font-mono);
     font-size: var(--fs-xs);
+  }
+
+  .tl__bans {
+    margin-top: var(--sp-5);
   }
 
   .tl__none,

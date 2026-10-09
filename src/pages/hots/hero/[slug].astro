@@ -136,6 +136,10 @@ const tabs = [
 <GameLayout game="hots" title={title} description={description} uses={statsOn ? ['heroesprofile'] : []} inlineCredits={false} navPath="">
   <article class="hpage" data-hero={hero.id} data-basis={statsOn ? 'stats' : 'theory'}>
     <Crumbs trail={[{ label: 'Heroes', href: navHref('hots') }]} current={hero.name} />
+    <!-- heroescounters-style links (#videos) open the Guides tab; runs before the Tabs script reads the hash. -->
+    <script is:inline>
+      if (location.hash === '#videos') history.replaceState(history.state, '', '#guides');
+    </script>
 
     <HeroHeader hero={hero} members={members} free={isFreeToPlay(hero)} tier={tier} lastChanged={history[0]?.patch.date ?? null} />
 

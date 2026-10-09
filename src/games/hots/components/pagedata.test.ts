@@ -4,6 +4,7 @@ import { clearHotsCache, getDraftableEntities, getHeroBySlug, getMapBySlug, getM
 import { catchUp } from './catchup.ts';
 import {
   allPeriods,
+  banPriority,
   catchUpData,
   featuredChannels,
   heroVideos,
@@ -62,6 +63,16 @@ describe('tiers', () => {
     expect(results.some((r) => r.deltaPrevious !== undefined)).toBe(true);
     expect((tierResults('sl', 'previous') ?? []).every((r) => r.deltaPrevious === undefined)).toBe(true);
     expect(tierResults('qm', 'current')).toBeNull();
+  });
+
+  it('ranks ban priority by ban rate within the tier sample gate', () => {
+    expect(banPriority('sl', 'current')).toEqual([]);
+    statsOn();
+    const rows = banPriority('sl', 'current', 5);
+    expect(rows).toHaveLength(5);
+    expect(rows.map((r) => r.ban)).toEqual([...rows.map((r) => r.ban)].sort((a, b) => b - a));
+    expect(rows.every((r) => r.games >= HOTS_TIERS.minN)).toBe(true);
+    expect(rows.some((r) => r.hero.id === 'Abat')).toBe(false); // 195 games: early data
   });
 
   it('is deterministic', () => {

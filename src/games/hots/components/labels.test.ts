@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { HERO_TAGS, MAP_TAGS } from '../schema.ts';
-import { countDirs, describeCounts, emptyCounts, groupTags, mapTagLabel, netVerdict, sortAbilities, tagLabel } from './labels.ts';
+import { countDirs, describeCounts, emptyCounts, groupTags, mapTagLabel, netVerdict, slugTitle, sortAbilities, tagLabel } from './labels.ts';
 
 describe('hots display labels', () => {
   it('labels every hero and map tag in the schema vocabulary', () => {
@@ -40,5 +40,11 @@ describe('hots display labels', () => {
       { kind: 'active', hotkey: '1', name: 'Active' },
     ]);
     expect(sorted.map((a) => a.name)).toEqual(['Trait', 'Q', 'E', 'Ult A', 'Ult B', 'Active', 'Mount']);
+  });
+
+  it('turns unknown slugs into readable titles', () => {
+    expect(slugTitle('garden-of-terror')).toBe('Garden of Terror');
+    expect(slugTitle('the-lost-cavern')).toBe('The Lost Cavern');
+    expect(slugTitle('volskaya-foundry')).toBe('Volskaya Foundry');
   });
 });

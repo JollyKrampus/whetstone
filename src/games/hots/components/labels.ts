@@ -218,3 +218,17 @@ export const RATING_LABEL = {
 function cmp(a: string, b: string): number {
   return a < b ? -1 : a > b ? 1 : 0;
 }
+
+const MINOR_WORDS = new Set(['of', 'the', 'and', 'a', 'an', 'in', 'on', 'at', 'to']);
+
+/**
+ * Readable title for a kebab-case slug the data has no name for (e.g. a map that patch notes
+ * mention but maps.json no longer lists): 'garden-of-terror' -> 'Garden of Terror'.
+ */
+export function slugTitle(slug: string): string {
+  return slug
+    .split('-')
+    .filter(Boolean)
+    .map((w, i) => (i > 0 && MINOR_WORDS.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' ');
+}

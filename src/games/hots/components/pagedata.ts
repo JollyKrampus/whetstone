@@ -120,6 +120,29 @@ export function tierResults(mode: GameMode, timeframe: Timeframe): TierResult[] 
   return assignTiers(tierInputs(w, previous), HOTS_TIERS);
 }
 
+export interface BanRow {
+  hero: Hero;
+  ban: number;
+  pick: number;
+  games: number;
+}
+
+/**
+ * Ban priority (roadmap T2) for one stats window: the most banned heroes, ties broken by pick
+ * rate, then name. Heroes below the tier sample gate are left out, like their tiers.
+ */
+export function banPriority(mode: GameMode, timeframe: Timeframe, limit = 10): BanRow[] {
+  const w = getStatsWindow(mode, timeframe);
+  if (!w) return [];
+  return Object.entries(w.heroes)
+    .flatMap(([id, s]): BanRow[] => {
+      const hero = getEntity(id);
+      return hero && s.games >= HOTS_TIERS.minN ? [{ hero, ban: s.ban, pick: s.pick, games: s.games }] : [];
+    })
+    .sort((a, b) => b.ban - a.ban || b.pick - a.pick || (a.hero.name < b.hero.name ? -1 : 1))
+    .slice(0, limit);
+}
+
 /** Storm League (current patch) tier per entity id, for grid and header badges. */
 export function tierById(): Map<string, TierResult> {
   return new Map((tierResults('sl', 'current') ?? []).map((t) => [t.id, t]));

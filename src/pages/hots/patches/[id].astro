@@ -10,7 +10,7 @@ import { formatDayUTC } from '../../../core/format.ts';
 import { navHref, versionText } from '../../../games/registry.ts';
 import ChangeList from '../../../games/hots/components/ChangeList.tsx';
 import Crumbs from '../../../games/hots/components/Crumbs.astro';
-import { countDirs, describeCounts, emptyCounts, PATCH_KIND, VERDICT } from '../../../games/hots/components/labels.ts';
+import { countDirs, describeCounts, emptyCounts, PATCH_KIND, slugTitle, VERDICT } from '../../../games/hots/components/labels.ts';
 import { getDiffs, getEntity, getHeroById, getMapBySlug, getPatch, getPatches, hasAsset } from '../../../games/hots/load.ts';
 import { heroHref, heroPortrait, mapHref, patchHref } from '../../../games/hots/view.ts';
 import GameLayout from '../../../layouts/GameLayout.astro';
@@ -125,7 +125,7 @@ const description = `${kind.label} for Heroes of the Storm ${patch.version} on $
           <ul class="pdetail__maps">
             {mapNotes.map((m) => (
               <li>
-                <p class="pdetail__mapname">{m.map ? <a href={mapHref(m.map)}>{m.map.name}</a> : m.id}</p>
+                <p class="pdetail__mapname">{m.map ? <a href={mapHref(m.map)}>{m.map.name}</a> : slugTitle(m.id)}</p>
                 <ul>
                   {m.lines.map((l) => (
                     <li>{l}</li>

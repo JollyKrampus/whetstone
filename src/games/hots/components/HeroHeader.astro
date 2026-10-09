@@ -123,6 +123,16 @@ const tierTitle = tier
   </dl>
 
   {
+    hero.isNew && (
+      <p class="hhead__new" data-new-hero>
+        <strong>New hero.</strong> {hero.name} arrived
+        {hero.releaseDate ? ` on ${formatDayUTC(hero.releaseDate)}` : ' recently'}. Early patches tend to move a new kit
+        quickly and players are still learning it, so treat every number and matchup here as provisional for a few weeks.
+      </p>
+    )
+  }
+
+  {
     members.length > 0 && (
       <p class="hhead__members">
         {hero.name} is two players sharing one hero:{' '}
@@ -191,8 +201,18 @@ const tierTitle = tier
 
   .hhead__facts,
   .hhead__ratings,
+  .hhead__new,
   .hhead__members {
     grid-column: 1 / -1;
+  }
+
+  .hhead__new {
+    max-width: 72ch;
+    padding: var(--sp-2) var(--sp-3);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+    font-size: var(--fs-sm);
   }
 
   .hhead__facts {

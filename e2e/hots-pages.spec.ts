@@ -284,6 +284,21 @@ test.describe(`HotS pages (${MODE} build)`, () => {
     });
   });
 
+  test.describe('hero page links', () => {
+    test('heroescounters-style #videos opens the Guides tab', async ({ page }) => {
+      await page.goto('hots/hero/abathur/#videos');
+      await expect(page).toHaveURL(/#guides$/);
+      await expect(page.locator('#guides .glink').first()).toBeVisible();
+    });
+
+    test('new heroes carry a provisional-data notice', async ({ page }) => {
+      await page.goto('hots/hero/xalatath/');
+      await expect(page.locator('[data-new-hero]')).toContainText('New hero.');
+      await page.goto('hots/hero/abathur/');
+      await expect(page.locator('[data-new-hero]')).toHaveCount(0);
+    });
+  });
+
   test.describe('maps', () => {
     test('map index groups the ranked pool and ARAM; map pages rank heroes', async ({ page }) => {
       const errors = watch(page);
@@ -321,6 +336,9 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(hpCredit(page)).toBeVisible();
       await expect(page.locator('.wlabel:visible')).toHaveText(/Storm League · 2\.57/);
       await expect(page.getByText(/Early data/).first()).toBeVisible();
+      const bans = page.locator('[data-ban-priority]:visible');
+      await expect(bans.getByRole('heading', { name: 'Ban priority' })).toBeVisible();
+      await expect(bans.locator('.presence__meta').first()).toContainText('n =');
       await page.locator('label.mswitch__option', { hasText: 'ARAM' }).click();
       await expect(page.locator('.wlabel:visible')).toHaveText(/ARAM · 2\.57/);
     });
