@@ -1,0 +1,120 @@
+---
+/**
+ * One page per Pokémon (base species); Mega formes are tabs on their base species' page, so
+ * links to a Mega land on /mon/<base>/#<mega id>.
+ */
+import '../../../games/pokemon/components/pokemon.css';
+import type { GetStaticPaths } from 'astro';
+import Badge from '../../../components/Badge.tsx';
+import Tabs from '../../../components/Tabs.astro';
+import { pct } from '../../../core/format.ts';
+import { navHref } from '../../../games/registry.ts';
+import { getBaseSpecies, getCurrentRegulation, getMegaFormes, getRegulations } from '../../../games/pokemon/load.ts';
+import type { Species } from '../../../games/pokemon/schema.ts';
+import FormePanel from '../../../games/pokemon/components/FormePanel.astro';
+import { TypeList } from '../../../games/pokemon/components/TypeChip.tsx';
+import { buildNow, currentUsage, serverDex } from '../../../games/pokemon/components/server.ts';
+import { displayName, outboundLinks } from '../../../games/pokemon/view.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+export const getStaticPaths = (() => getBaseSpecies().map((s) => ({ params: { id: s.id }, props: { species: s } }))) satisfies GetStaticPaths;
+
+interface Props {
+  species: Species;
+}
+
+const { species } = Astro.props;
+const now = buildNow();
+const regulation = getCurrentRegulation(new Date(now));
+const regs = getRegulations();
+const regIndex = regs.findIndex((r) => r.id === regulation.id);
+const previousReg = regIndex > 0 ? regs[regIndex - 1] : undefined;
+const megas = getMegaFormes(species.id);
+const dex = serverDex();
+const usage = currentUsage();
+// The most used forme opens first (Mega Salamence over Salamence); unranked formes keep dex order.
+const rankOf = (id: string) => usage?.pokemon.find((p) => p.id === id)?.rank ?? Number.POSITIVE_INFINITY;
+const formes = [species, ...megas]
+  .map((f, i) => ({ f, i, r: rankOf(f.id) }))
+  .sort((a, b) => a.r - b.r || a.i - b.i)
+  .map((x) => x.f);
+const legalNow = species.legal.includes(regulation.id);
+const isNew = legalNow && previousReg !== undefined && !species.legal.includes(previousReg.id);
+const usageOf = (id: string) => usage?.pokemon.find((p) => p.id === id) ?? null;
+const headline = formes
+  .map((f) => ({ f, u: usageOf(f.id) }))
+  .filter((x) => x.u !== null)
+  .sort((a, b) => a.u!.rank - b.u!.rank)[0];
+const links = outboundLinks(species, regulation.formats.doubles);
+const legalRegs = regs.filter((r) => species.legal.includes(r.id)).map((r) => r.id);
+const title = `${species.name}: usage, sets and counters`;
+---
+
+<GameLayout
+  game="pokemon"
+  title={title}
+  navPath=""
+  description={`${species.name} in Pokémon Champions ${regulation.label}: stats with Stat Points, usage, moves, items, checks and counters, partners and speed tier.`}
+  uses={['showdown', 'smogon', 'limitless', 'showdown-replays']}
+>
+  <article class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">
+        <a href={navHref('pokemon')}>Pokémon</a> · #{species.num}
+      </p>
+      <h1>{species.name}</h1>
+      <div class="cluster">
+        <TypeList types={species.types} />
+        {legalNow ? <Badge tone="positive">Legal in {regulation.id}</Badge> : <Badge tone="warning">Not in {regulation.id}</Badge>}
+        {isNew && <Badge tone="accent">New in {regulation.id}</Badge>}
+        {megas.length > 0 && <Badge tone="info">{megas.length === 1 ? 'Mega Evolution' : `${megas.length} Mega formes`}</Badge>}
+      </div>
+      <p class="pk-lead">
+        {
+          headline
+            ? `${displayName(headline.f)} is #${headline.u!.rank} on the ladder, on ${pct(headline.u!.usage, 1)} of teams.`
+            : legalNow
+              ? `${species.name} is legal in ${regulation.label} but has no ladder usage data yet.`
+              : `${species.name} is not part of the ${regulation.label} roster${legalRegs.length ? ` (legal in ${legalRegs.join(', ')})` : ''}.`
+        }
+      </p>
+    </header>
+
+    {
+      formes.length > 1 ? (
+        <Tabs
+          label={`${species.name} formes`}
+          tabs={formes.map((f) => {
+            const u = usageOf(f.id);
+            return u ? { id: f.id, label: displayName(f), meta: `#${u.rank}` } : { id: f.id, label: displayName(f) };
+          })}
+        >
+          {formes.map((f) => (
+            <Fragment slot={f.id}>
+              <FormePanel forme={f} regulation={regulation} dex={dex} />
+            </Fragment>
+          ))}
+        </Tabs>
+      ) : (
+        <FormePanel forme={species} regulation={regulation} dex={dex} />
+      )
+    }
+
+    <section class="pk-section" aria-labelledby="links-h">
+      <h2 id="links-h">More about {species.name}</h2>
+      <ul class="pk-links">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} rel="noopener external">
+                <span>{l.label}</span>
+                <small>{l.note}</small>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="pk-subtle">Links open other sites; Whetstone doesn't copy their analyses.</p>
+    </section>
+  </article>
+</GameLayout>

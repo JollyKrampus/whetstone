@@ -1,0 +1,29 @@
+---
+/**
+ * One-line provenance under a data block: the credit the file carries (FileAttribution), what the
+ * numbers are (month, cutoff, sample size) and a "sample data" marker for synthetic fixtures.
+ */
+interface Props {
+  attribution?: { text: string; url: string; license?: string } | null | undefined;
+  /** Extra facts, e.g. ['Sep 2026', 'rating ≥ 1760', '100,000 battles']. */
+  facts?: (string | null | undefined | false)[];
+  synthetic?: boolean | undefined;
+  class?: string;
+}
+
+const { attribution, facts = [], synthetic = false, class: extra } = Astro.props;
+const shown = facts.filter((f): f is string => typeof f === 'string' && f !== '');
+---
+
+<p class:list={['pk-note', extra]}>
+  {attribution && <a href={attribution.url} rel="noopener">{attribution.text}</a>}
+  {attribution?.license && <span>({attribution.license})</span>}
+  {shown.map((f) => <span>· {f}</span>)}
+  {
+    synthetic && (
+      <span class="pk-sample" title="Synthetic sample used for development; not real results">
+        sample data
+      </span>
+    )
+  }
+</p>

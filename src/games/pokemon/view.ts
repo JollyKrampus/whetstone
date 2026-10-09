@@ -12,7 +12,7 @@
  *   its popularity predicts; 1.25× ≈ 61, 2× ≈ 80.
  */
 import type { Edge, Reason } from '../../core/game.ts';
-import { compact, int, pct, pp } from '../../core/format.ts';
+import { compact, formatDayUTC, int, pct, pp } from '../../core/format.ts';
 import { classifySample, isListableEdge, wilsonInterval } from '../../core/stats.ts';
 import { pokemonTierValue, type TierInput } from '../../core/tiers.ts';
 import type { MatchupRow } from '../../components/types.ts';
@@ -79,6 +79,16 @@ export function outboundLinks(s: Pick<Species, 'name' | 'baseSpecies'>, format: 
 }
 
 // ---- usage helpers -----------------------------------------------------------------------------
+
+/** '2026-09' → 'Sep 2026'. */
+export function monthLabel(month: string): string {
+  return formatDayUTC(`${month}-01T00:00:00Z`).replace(/^1 /, '');
+}
+
+/** Smogon rating cutoff: 0 → 'all ratings', 1760 → '≥ 1760'. */
+export function cutoffLabel(cutoff: number): string {
+  return cutoff === 0 ? 'all ratings' : `≥ ${cutoff}`;
+}
 
 /** Usage share in percent text: 0.4659 → "46.6%". */
 export const usageText = (share: number): string => pct(share, 1);

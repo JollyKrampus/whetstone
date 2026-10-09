@@ -1,0 +1,86 @@
+---
+/**
+ * Speed tiers at level 50: each top Pokémon's most common spread plus its max, neutral and
+ * minimum Speed, with Scarf, Tailwind, paralysis, stat stages and Trick Room ordering.
+ */
+import '../../games/pokemon/components/pokemon.css';
+import EmptyState from '../../components/EmptyState.astro';
+import { int } from '../../core/format.ts';
+import { getCurrentRegulation, getLegalSpecies, getSpeciesById, getSpeedTiers } from '../../games/pokemon/load.ts';
+import DataNote from '../../games/pokemon/components/DataNote.astro';
+import SpeedTable, { type SpeedRowData } from '../../games/pokemon/components/SpeedTable.tsx';
+import { buildNow, currentUsage, topMetaSets } from '../../games/pokemon/components/server.ts';
+import { statValue } from '../../games/pokemon/components/lib/stats.ts';
+import { cutoffLabel, displayName, monHref, monthLabel } from '../../games/pokemon/view.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+
+const regulation = getCurrentRegulation(new Date(buildNow()));
+const tiers = getSpeedTiers();
+const usage = currentUsage();
+
+let rows: SpeedRowData[] = [];
+if (tiers) {
+  rows = tiers.entries.flatMap((e) => {
+    const s = getSpeciesById(e.id);
+    if (!s) return [];
+    return [{ id: e.id, name: displayName(s), href: monHref(s), base: e.base, speed: e.speed, nature: e.nature, sp: e.sp, share: e.share, max: e.max, neutral: e.neutral, min: e.min }];
+  });
+} else {
+  // No speed.json yet: derive the same columns from the usage spreads.
+  rows = topMetaSets(80).flatMap((m) => {
+    const s = getSpeciesById(m.id);
+    if (!s) return [];
+    const base = s.base.spe;
+    return [
+      {
+        id: m.id,
+        name: displayName(s),
+        href: monHref(s),
+        base,
+        speed: m.speed,
+        nature: m.nature,
+        sp: m.sp[5],
+        share: m.spreadShare,
+        max: statValue('spe', base, 32, 'Timid'),
+        neutral: statValue('spe', base, 0),
+        min: statValue('spe', base, 0, 'Brave'),
+      },
+    ];
+  });
+}
+
+const species = getLegalSpecies(regulation.id)
+  .map((s) => ({ id: s.id, name: displayName(s), base: s.base.spe }))
+  .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+---
+
+<GameLayout game="pokemon" title="Speed tiers" description={`Pokémon Champions ${regulation.label} speed tiers at level 50 with Stat Points, Scarf, Tailwind and Trick Room.`} uses={['smogon', 'showdown']}>
+  <div class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">{regulation.label} · level 50</p>
+      <h1>Speed tiers</h1>
+      <p class="pk-lead">
+        Speed = floor((base + Speed SP + 20) × nature) at level 50. Scarf multiplies by 1.5, Tailwind by 2 and paralysis halves
+        it; under Trick Room the slowest Pokémon moves first. Equal speeds move in random order.
+      </p>
+    </header>
+    {
+      rows.length === 0 ? (
+        <EmptyState title="Speed tiers are warming up" level={2}>
+          <p>Speed tiers come from the most common spreads, which need the first month of ladder data for {regulation.label}.</p>
+        </EmptyState>
+      ) : (
+        <SpeedTable client:load rows={rows} species={species} />
+      )
+    }
+    {
+      usage && (
+        <DataNote
+          attribution={usage.attribution}
+          facts={[`common spreads from ${monthLabel(tiers?.month ?? usage.month)}`, cutoffLabel(tiers?.cutoff ?? usage.cutoff), `${int(rows.length)} Pokémon`]}
+          synthetic={Boolean(tiers?.synthetic ?? usage.synthetic)}
+        />
+      )
+    }
+  </div>
+</GameLayout>

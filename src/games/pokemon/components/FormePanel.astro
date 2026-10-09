@@ -1,0 +1,395 @@
+---
+/**
+ * Everything the Pokémon page shows for one forme (the base species or one of its Megas): stats
+ * with the Stat Point planner, type matchups, abilities, usage by cutoff, tournament results,
+ * checks and counters, partners and speed tier. Reads data through load.ts at build time.
+ */
+import CopyButton from '../../../components/CopyButton.tsx';
+import EmptyState from '../../../components/EmptyState.astro';
+import MatchupList from '../../../components/MatchupList.astro';
+import PeriodToggle from '../../../components/PeriodToggle.astro';
+import { int, pct } from '../../../core/format.ts';
+import { wilsonInterval } from '../../../core/stats.ts';
+import { navHref } from '../../registry.ts';
+import {
+  getAbility,
+  getH2H,
+  getItem,
+  getMove,
+  getSpeciesById,
+  getSpeedTiers,
+  getTournaments,
+  getTypeChart,
+  getUsage,
+  getUsageIndex,
+} from '../load.ts';
+import type { Regulation, Species, Usage } from '../schema.ts';
+import { checkRows, cutoffLabel, displayName, edgeLists, monHref, monthLabel, speedPosition, teammateRows } from '../view.ts';
+import DataNote from './DataNote.astro';
+import ShareBars from './ShareBars.astro';
+import StatPlanner from './StatPlanner.tsx';
+import TypeChip, { TypeList } from './TypeChip.tsx';
+import type { DexIndex } from './lib/dex.ts';
+import { exportSet } from './lib/paste.ts';
+import { STAT_IDS, STAT_LABEL, STAT_NAME, finalStats, natureLabel } from './lib/stats.ts';
+import { DEFENSIVE_ABILITIES, defenseProfile, groupDefense } from './lib/types.ts';
+import { metaSetFromUsage } from './lib/metasets.ts';
+
+interface Props {
+  forme: Species;
+  regulation: Regulation;
+  /** Full dex index (server.ts serverDex) for the "copy common set" paste. */
+  dex: DexIndex;
+}
+
+const { forme, regulation, dex } = Astro.props;
+const name = displayName(forme);
+const lookup = (id: string) => getSpeciesById(id);
+const chart = getTypeChart();
+
+// ---- stats
+const bst = STAT_IDS.reduce((s, k) => s + forme.base[k], 0);
+const MAX_BASE = 200;
+
+// ---- type matchups (with ability notes)
+const plain = groupDefense(defenseProfile(chart, forme.types));
+const abilityNotes = forme.abilities
+  .filter((a) => DEFENSIVE_ABILITIES[a])
+  .map((a) => {
+    const cells = defenseProfile(chart, forme.types, a).filter((c) => c.byAbility);
+    return { ability: getAbility(a)?.name ?? a, cells };
+  })
+  .filter((n) => n.cells.length > 0);
+
+// ---- usage by cutoff (current regulation, doubles)
+const cutoffs = getUsageIndex()
+  .filter((e) => e.regulation === regulation.id && e.format === regulation.formats.doubles)
+  .sort((a, b) => b.cutoff - a.cutoff)
+  .map((e) => getUsage(e.format, e.cutoff))
+  .filter((u): u is Usage => u !== null);
+const rows = cutoffs.map((u) => ({ usage: u, entry: u.pokemon.find((p) => p.id === forme.id) ?? null }));
+const withEntry = rows.filter((r) => r.entry !== null);
+const top = withEntry[0] ?? null;
+const ctxLabel = (u: Usage) => `Smogon ${cutoffLabel(u.cutoff)}, ${monthLabel(u.month)}`;
+
+const nameOf = {
+  move: (id: string) => getMove(id)?.name ?? id,
+  item: (id: string) => getItem(id)?.name ?? id,
+  ability: (id: string) => getAbility(id)?.name ?? id,
+};
+
+const common = top?.entry ? metaSetFromUsage(top.entry, { species: lookup, move: getMove }) : null;
+const commonPaste = common
+  ? exportSet(
+      {
+        species: common.base,
+        ...(common.item ? { item: common.item } : {}),
+        ...(common.ability ? { ability: common.ability } : {}),
+        nature: common.nature,
+        sp: common.sp,
+        moves: common.moves,
+      },
+      dex,
+    )
+  : null;
+
+// ---- tournaments
+const tournaments = getTournaments();
+const tour = tournaments?.species.find((s) => s.id === forme.id) ?? null;
+const tourGames = tour ? tour.wins + tour.losses + tour.ties : 0;
+const tourCi = tour && tourGames > 0 ? wilsonInterval(tour.wins + tour.ties / 2, tourGames) : null;
+
+// ---- matchups
+const h2h = getH2H();
+const edges = edgeLists([forme.id], h2h, lookup);
+const checks = top?.entry ? checkRows(top.entry, { lookup, label: ctxLabel(top.usage) }) : [];
+const mates = top?.entry ? teammateRows(top.entry, top.usage, { lookup, label: ctxLabel(top.usage) }) : [];
+const sourceNames = { smogon: 'Smogon', 'showdown-replays': 'Showdown replays', limitless: 'Limitless' };
+
+// ---- speed
+const speedTiers = getSpeedTiers();
+const speedEntry = speedTiers?.entries.find((e) => e.id === forme.id) ?? null;
+const commonSpeed = speedEntry?.speed ?? (common ? common.speed : null);
+const neutral = finalStats(forme.base, [0, 0, 0, 0, 0, 0], 'Serious').spe;
+const fastest = finalStats(forme.base, [0, 0, 0, 0, 0, 32], 'Timid').spe;
+const slowest = finalStats(forme.base, [0, 0, 0, 0, 0, 0], 'Brave').spe;
+const metaSpeeds = (speedTiers?.entries ?? []).slice(0, 50).map((e) => ({ id: e.id, speed: e.speed }));
+const position = commonSpeed !== null && metaSpeeds.length ? speedPosition(commonSpeed, metaSpeeds, forme.id) : null;
+const ordered = [...metaSpeeds.filter((e) => e.id !== forme.id), ...(commonSpeed !== null ? [{ id: forme.id, speed: commonSpeed }] : [])].sort(
+  (a, b) => b.speed - a.speed || (a.id < b.id ? -1 : 1),
+);
+const at = ordered.findIndex((e) => e.id === forme.id);
+const neighbours = at >= 0 ? ordered.slice(Math.max(0, at - 3), at + 4) : [];
+const pid = forme.id;
+---
+
+<div class="pk-page" data-forme={forme.id}>
+  <div class="pk-cols pk-cols--wide-left">
+    <section class="card pk-panel" aria-labelledby={`${pid}-stats`}>
+      <h3 id={`${pid}-stats`}>Stats at level 50</h3>
+      <div class="pk-stats" role="list" aria-label={`${name} base stats`}>
+        {
+          STAT_IDS.map((k) => (
+            <div class="pk-stat" role="listitem">
+              <span class="pk-stat__name" title={STAT_NAME[k]}>
+                {STAT_LABEL[k]}
+              </span>
+              <span class="pk-stat__base">{forme.base[k]}</span>
+              <span class="pk-stat__track" aria-hidden="true">
+                <span class="pk-stat__fill" style={`--w: ${Math.min(100, (forme.base[k] / MAX_BASE) * 100).toFixed(1)}%`} />
+              </span>
+            </div>
+          ))
+        }
+        <p class="pk-subtle">Base stat total <span class="pk-num">{bst}</span></p>
+      </div>
+      <h4 class="pk-list-title" style="margin-top: var(--sp-2)">Stat Point planner</h4>
+      <StatPlanner
+        client:visible
+        name={name}
+        idPrefix={pid}
+        base={forme.base}
+        spreads={(top?.entry?.spreads ?? []).slice(0, 3).map((s) => ({ nature: s.nature, sp: [...s.sp] as [number, number, number, number, number, number], share: s.share }))}
+      />
+    </section>
+
+    <div class="pk-page" style="gap: var(--sp-4)">
+      <section class="card pk-panel" aria-labelledby={`${pid}-types`}>
+        <h3 id={`${pid}-types`}>Types and weaknesses</h3>
+        <TypeList types={forme.types} />
+        <dl class="pk-kv">
+          {
+            plain.map((g) => (
+              <>
+                <dt>{g.multiplier === 0 ? 'Immune' : g.multiplier > 1 ? `Weak ${g.label}` : `Resists ${g.label}`}</dt>
+                <dd class="pk-types">
+                  {g.cells.map((c) => (
+                    <TypeChip type={c.type} small />
+                  ))}
+                </dd>
+              </>
+            ))
+          }
+        </dl>
+        {
+          abilityNotes.map((n) => (
+            <p class="pk-subtle">
+              With {n.ability}: {n.cells.map((c) => `${c.type} ×${c.multiplier === 0 ? 0 : c.multiplier}`).join(', ')}
+            </p>
+          ))
+        }
+      </section>
+
+      <section class="card pk-panel" aria-labelledby={`${pid}-abilities`}>
+        <h3 id={`${pid}-abilities`}>Abilities</h3>
+        <dl class="pk-kv">
+          {
+            forme.abilities.map((a) => {
+              const ab = getAbility(a);
+              const share = top?.entry?.abilities.find((x) => x.id === a)?.share;
+              return (
+                <>
+                  <dt>{ab?.name ?? a}</dt>
+                  <dd>
+                    {ab?.desc ?? 'No description in the dex yet.'}
+                    {share !== undefined && <span class="pk-subtle"> · used by {pct(share, 0)}</span>}
+                  </dd>
+                </>
+              );
+            })
+          }
+        </dl>
+        {
+          forme.megaOf && forme.requiredItem && (
+            <p class="pk-subtle">
+              Mega Evolves from {getSpeciesById(forme.megaOf)?.name ?? forme.megaOf} holding {getItem(forme.requiredItem)?.name ?? forme.requiredItem}
+              {forme.legal.includes(regulation.id) ? '' : ` (not allowed in ${regulation.label})`}.
+            </p>
+          )
+        }
+      </section>
+
+      <section class="card pk-panel" aria-labelledby={`${pid}-speed`}>
+        <h3 id={`${pid}-speed`}>Speed tier</h3>
+        <dl class="pk-kv">
+          {
+            commonSpeed !== null && (
+              <>
+                <dt>Most common</dt>
+                <dd class="pk-num">
+                  {commonSpeed}
+                  {speedEntry && (
+                    <span class="pk-subtle">
+                      {' '}
+                      ({speedEntry.nature}, {speedEntry.sp} Spe SP, {pct(speedEntry.share, 0)} of spreads)
+                    </span>
+                  )}
+                </dd>
+              </>
+            )
+          }
+          <dt>Fastest</dt>
+          <dd class="pk-num">{fastest} <span class="pk-subtle">(+Spe nature, 32 SP)</span></dd>
+          <dt>Neutral</dt>
+          <dd class="pk-num">{neutral} <span class="pk-subtle">(0 SP)</span></dd>
+          <dt>Slowest</dt>
+          <dd class="pk-num">{slowest} <span class="pk-subtle">(−Spe nature, 0 SP, for Trick Room)</span></dd>
+        </dl>
+        {
+          position && (
+            <p class="pk-subtle">
+              Outspeeds {position.faster} of the {position.total} most used Pokémon{position.ties ? `, ties ${position.ties}` : ''} at their common spreads.
+            </p>
+          )
+        }
+        {
+          neighbours.length > 1 && (
+            <ol class="pk-bars" aria-label="Nearby speed tiers">
+              {neighbours.map((n) => {
+                const s = lookup(n.id);
+                const self = n.id === forme.id;
+                return (
+                  <li class="pk-bar" style={`--w: ${Math.min(100, (n.speed / 250) * 100).toFixed(1)}%`}>
+                    <span class="pk-bar__label">{self ? <strong>{name} (this)</strong> : s ? <a href={monHref(s)}>{displayName(s)}</a> : n.id}</span>
+                    <span class="pk-bar__value">{n.speed}</span>
+                  </li>
+                );
+              })}
+            </ol>
+          )
+        }
+        <a href={navHref('pokemon', 'speed/')}>Full speed tiers →</a>
+      </section>
+    </div>
+  </div>
+
+  <section class="pk-section" aria-labelledby={`${pid}-usage`}>
+    <div class="section-head">
+      <h3 id={`${pid}-usage`} class="pk-h3">Usage in {regulation.label}</h3>
+      {commonPaste && <CopyButton client:visible text={commonPaste} label="Copy common set" class="btn--sm" />}
+    </div>
+    {
+      withEntry.length === 0 ? (
+        <EmptyState title={`No ladder usage for ${name} yet`} icon="data" level={4} compact>
+          <p>
+            {cutoffs.length === 0
+              ? 'Smogon has not published usage for this regulation yet (it is monthly).'
+              : `${name} is not among the Pokémon Smogon reports for this regulation's ladder.`}
+          </p>
+        </EmptyState>
+      ) : (
+        <PeriodToggle name={`pk-cutoff-${pid}`} label="Rating cutoff" periods={withEntry.map((r) => ({ id: String(r.usage.cutoff), label: cutoffLabel(r.usage.cutoff), note: r.entry ? `#${r.entry.rank} · ${pct(r.entry.usage, 1)}` : '' }))}>
+          {withEntry.map(({ usage: u, entry }) => (
+            <div data-period={String(u.cutoff)} class="pk-section">
+              <p class="pk-subtle">
+                Rank <strong>#{entry!.rank}</strong> · on <strong>{pct(entry!.usage, 1)}</strong> of teams · {int(entry!.raw)} appearances in{' '}
+                {int(u.battles)} battles
+              </p>
+              <div class="pk-lists pk-lists--3">
+                <ShareBars title="Moves" rows={entry!.moves.map((m) => ({ label: nameOf.move(m.id), share: m.share }))} />
+                <ShareBars title="Items" rows={entry!.items.map((m) => ({ label: nameOf.item(m.id), share: m.share }))} />
+                <ShareBars title="Abilities" rows={entry!.abilities.map((m) => ({ label: nameOf.ability(m.id), share: m.share }))} />
+                <ShareBars
+                  title="Spreads"
+                  rows={entry!.spreads.map((s) => ({
+                    label: `${s.nature} ${s.sp.join('/')}`,
+                    share: s.share,
+                    note: `Spe ${finalStats(forme.base, s.sp, s.nature).spe}`,
+                  }))}
+                />
+                <ShareBars
+                  title="Teammates"
+                  rows={entry!.teammates.map((t) => {
+                    const s = lookup(t.id);
+                    return { label: displayName(s, t.id), share: t.share, href: s ? monHref(s) : undefined };
+                  })}
+                />
+              </div>
+              <DataNote attribution={u.attribution} facts={[monthLabel(u.month), cutoffLabel(u.cutoff), `${int(u.battles)} battles`]} synthetic={u.synthetic} />
+            </div>
+          ))}
+        </PeriodToggle>
+      )
+    }
+    {
+      tour && tournaments && (
+        <div class="card pk-panel">
+          <h4 class="pk-list-title">Tournaments ({tournaments.window.label})</h4>
+          <p>
+            On <strong>{int(tour.teams)}</strong> of {int(tournaments.totals.teams)} teams ({pct(tour.share, 1)})
+            {tour.wr !== null && tourCi && (
+              <>
+                {' '}
+                · win rate <strong>{pct(tour.wr, 1)}</strong> (95% interval {pct(tourCi.lower, 1)}–{pct(tourCi.upper, 1)}, n = {int(tourGames)} games)
+              </>
+            )}
+            {tour.topCut !== undefined && <> · {int(tour.topCut)} top-cut teams</>}
+          </p>
+          <DataNote attribution={tournaments.attribution} facts={[`${int(tournaments.totals.tournaments)} tournaments`, 'player names removed']} synthetic={tournaments.synthetic} />
+        </div>
+      )
+    }
+  </section>
+
+  <section class="pk-section" aria-labelledby={`${pid}-checks`}>
+    <h3 id={`${pid}-checks`} class="pk-h3">Checks and counters</h3>
+    <div class="pk-cols">
+      <MatchupList
+        title="Beats it in replays"
+        subtitle="Teams with these win more often against teams bringing it than their overall strength predicts. Score 1–100, 50 = neutral."
+        rows={edges.counteredBy}
+        sourceNames={sourceNames}
+        level={4}
+        emptyText={h2h ? 'No matchup in the replay sample passes the n ≥ 50 and ±1.5 pp gates yet.' : 'No replay data yet.'}
+      />
+      <MatchupList
+        title="Ladder checks"
+        subtitle="How often each one KOs or forces it out when they meet. Score = 100 × (p − 2 sd)."
+        rows={checks}
+        sourceNames={sourceNames}
+        level={4}
+        emptyText="Smogon lists no checks with at least 20 encounters."
+      />
+    </div>
+    {
+      edges.strongAgainst.length > 0 && (
+        <MatchupList
+          title="Strong against (replays)"
+          subtitle="Teams with it beat teams bringing these more often than expected."
+          rows={edges.strongAgainst}
+          sourceNames={sourceNames}
+          level={4}
+        />
+      )
+    }
+    {h2h && <DataNote attribution={h2h.attribution} facts={[h2h.window.label, `${int(h2h.replays)} replays`, h2h.format]} synthetic={h2h.synthetic} />}
+  </section>
+
+  <section class="pk-section" aria-labelledby={`${pid}-good`}>
+    <h3 id={`${pid}-good`} class="pk-h3">Good with</h3>
+    <div class="pk-cols">
+      <MatchupList
+        title="Wins together in replays"
+        subtitle="Brought together, these pairs win more often than expected. Score 1–100, 50 = neutral."
+        rows={edges.goodWith}
+        sourceNames={sourceNames}
+        level={4}
+        emptyText={h2h ? 'No partner passes the n ≥ 50 and ±1.5 pp gates yet.' : 'No replay data yet.'}
+      />
+      <MatchupList
+        title="Common teammates"
+        subtitle="Score 50 = paired as often as the teammate's own popularity predicts; higher = paired more often."
+        rows={mates}
+        sourceNames={sourceNames}
+        level={4}
+        emptyText="No teammate data for this Pokémon."
+      />
+    </div>
+  </section>
+</div>
+
+<style>
+  .pk-h3 {
+    font-size: var(--fs-xl);
+  }
+</style>
