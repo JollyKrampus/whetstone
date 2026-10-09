@@ -2,7 +2,10 @@
  * HeroesToolChest heroes-images (network only): release tags and per-folder git blob ids from
  * the GitHub API (a handful of unauthenticated calls, only when the image set may change), and
  * individual files from jsDelivr pinned to the tag (immutable, CDN-cached) with
- * raw.githubusercontent.com as the fallback.
+ * raw.githubusercontent.com as the fallback. The repository is larger than jsDelivr's 50 MB
+ * package limit, so files jsDelivr has not cached yet answer 403 there (about 1 % on the first
+ * 2.57 run) and come from raw instead. Images are only downloaded when the pinned tag or the
+ * referenced set changes.
  */
 import type { Http } from '../../../../core/game.ts';
 import { IMAGES_REPO, type ImageFolder, type ImageRef } from '../transform/images.ts';

@@ -88,14 +88,10 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
   }
   const major = majorOf(builds.live);
 
-  // Maps without HP shares first (patch notes only need names).
-  const mapsFrom = (shares: Map<string, number> | null): GameMap[] => {
-    if (!hd.mapdata) return hd.previousMaps ?? [];
-    const built = buildMaps(hd.mapdata, curated.maps, curated.rankedPool, shares);
-    return built.maps;
-  };
-  let maps = mapsFrom(null);
-  if (hd.mapdata) env.issues.push(...buildMaps(hd.mapdata, curated.maps, curated.rankedPool, null).issues);
+  // Maps without HP shares first (patch notes only need names); last-good maps in fallback.
+  const baseMaps = hd.mapdata ? buildMaps(hd.mapdata, curated.maps, curated.rankedPool, null) : null;
+  if (baseMaps) env.issues.push(...baseMaps.issues);
+  let maps: GameMap[] = baseMaps?.maps ?? hd.previousMaps ?? [];
 
   // Patch notes (+ diffs dated by them).
   const news = await runNews(env, { heroes: hd.heroes, maps, diffs: hd.diffs, buildDates: hd.buildDates, major, curated });
@@ -110,7 +106,7 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
 
   // Heroes Profile (gated): stats and the ranked map pool.
   const hp = await runHeroesProfile(env, { heroes: hd.heroes, maps, major, majorSince: since, versions: builds.versions, liveBuilds }, deps.heroesprofile);
-  if (hp.shares && hp.shares.size > 0) maps = mapsFrom(hp.shares);
+  if (hd.mapdata && hp.shares && hp.shares.size > 0) maps = buildMaps(hd.mapdata, curated.maps, curated.rankedPool, hp.shares).maps;
 
   // Theory: mechanics for every hero record, theory.json for draftable entities.
   const prevHeroes = await previousFile(env, 'heroes.json', HeroesFileSchema);
@@ -127,8 +123,7 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
   const heroes: Hero[] = theory.heroes;
 
   // Images (only re-emitted when the pinned tag or the referenced set changed).
-  const mapImages = hd.mapdata ? buildMaps(hd.mapdata, curated.maps, curated.rankedPool, null).images : [];
-  const images = await runImages(env, hd.fallback ? [] : [...hd.images, ...mapImages], hd.dataBuild);
+  const images = await runImages(env, hd.fallback ? [] : [...hd.images, ...(baseMaps?.images ?? [])], hd.dataBuild);
 
   const rotation = await runRotation(env, hd.heroes);
   const lp = await runLiquipedia(env, hd.heroes);
