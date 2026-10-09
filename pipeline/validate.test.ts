@@ -75,7 +75,7 @@ describe('validateFiles (per-game registries)', () => {
       { overlays: HOTS_PRIVATE_OVERLAYS },
     );
     expect(issues).toEqual([]);
-    expect(validateFiles([{ path: 'limited/BLB.PremierDraft.json', data: fixture('mtga/limited/BLB.PremierDraft.json'), custody: 'A' }], MTGA_FILES)).toEqual([]);
+    expect(validateFiles([{ path: 'limited/HOB.PremierDraft.json', data: fixture('mtga/limited/HOB.PremierDraft.json'), custody: 'A' }], MTGA_FILES)).toEqual([]);
   });
 
   it('checks a class-B overlay against the overlay schema, not the public shard schema', () => {
