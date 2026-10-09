@@ -1,0 +1,59 @@
+hero: qhira
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Grappling Hook and Revolving Sweep let Qhira reach and stick to backliners, and she is Immune to all effects while swinging around a target."
+  - tag: engage
+    why: "Unrelenting Strikes' 1.5-second area stun and Revolving Sweep's re-activation stun start fights on clumped teams."
+counters:
+  - a: qhira
+    b: ltmorales
+    why: "Grappling Hook kicks Qhira onto a Lt. Morales who cannot move, and Revolving Sweep's Immunity ignores Displacement Grenade while she stays attached."
+    evidence: ["Grappling Hook", "Revolving Sweep", "Displacement Grenade", "Healing Beam"]
+    confidence: medium
+  - a: qhira
+    b: probius
+    why: "Probius's 1260 Health and lack of escapes make him a perfect Grappling Hook target, and Revolving Sweep's Immunity ignores his Warp Rift slows."
+    evidence: ["Grappling Hook", "Revolving Sweep", "Warp Rift"]
+    confidence: medium
+  - a: qhira
+    b: kaelthas
+    why: "Revolving Sweep makes Qhira Immune while she swings, so Gravity Lapse cannot stop her, and Grappling Hook reaches an immobile Kael'thas."
+    evidence: ["Revolving Sweep", "Gravity Lapse", "Grappling Hook"]
+    confidence: low
+  - a: qhira
+    b: sgthammer
+    why: "Revolving Sweep's Immunity ignores Concussive Blast's knockback, and Grappling Hook reaches a sieged Sgt. Hammer behind her team."
+    evidence: ["Revolving Sweep", "Concussive Blast", "Grappling Hook", "Siege Mode"]
+    confidence: medium
+  - a: johanna
+    b: qhira
+    why: "Shield Glare Blinds the Basic Attacks that stack Blood Rage's bleed, and Iron Skin's Unstoppable shield soaks Final Strike's burst."
+    evidence: ["Shield Glare", "Blood Rage", "Iron Skin", "Final Strike"]
+    confidence: low
+  - a: ana
+    b: qhira
+    why: "Biotic Grenade stops Blood Rage's healing for 1.75 seconds, and Sleep Dart catches Qhira as soon as Revolving Sweep's Immunity ends."
+    evidence: ["Biotic Grenade", "Blood Rage", "Sleep Dart", "Revolving Sweep"]
+    confidence: medium
+  - a: arthas
+    b: qhira
+    why: "Frozen Tempest slows Qhira's Attack Speed and Movement Speed while she fights in melee, and Howling Blast's root locks her after Grappling Hook commits."
+    evidence: ["Frozen Tempest", "Howling Blast", "Grappling Hook"]
+    confidence: low
+synergies:
+  - a: qhira
+    b: zarya
+    why: "Graviton Surge pulls enemies together so Unrelenting Strikes' expanding sword stuns all of them for 1.5 seconds."
+    evidence: ["Graviton Surge", "Unrelenting Strikes"]
+    confidence: medium
+  - a: qhira
+    b: rehgar
+    why: "Bloodlust's Attack Speed and lifesteal stack with Blood Rage's healing, letting Qhira win extended fights in the enemy backline."
+    evidence: ["Bloodlust", "Blood Rage"]
+    confidence: medium
+  - a: kharazim
+    b: qhira
+    why: "Radiant Dash lets Kharazim follow a Grappling Hook dive, and Divine Palm or Cleansing Touch covers Qhira once Revolving Sweep's Immunity ends."
+    evidence: ["Radiant Dash", "Divine Palm", "Cleansing Touch", "Grappling Hook", "Revolving Sweep"]
+    confidence: medium

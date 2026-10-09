@@ -1,0 +1,66 @@
+hero: liming
+reviewedFor: "2.57"
+traits:
+  - tag: vulnerable-body
+    why: "With 1270 Health, one stun on Li-Ming usually means death unless Teleport is ready."
+  - tag: burst
+    why: "Critical Mass refreshes every cooldown on a Takedown, so Magic Missiles and Arcane Orb can chain through a team once the first kill lands."
+  - tag: poke
+    why: "Arcane Orb gains damage the farther it travels, rewarding long-range hits on backliners before a fight starts."
+counters:
+  - a: liming
+    b: nazeebo
+    why: "Teleport crosses Zombie Wall instantly, and Nazeebo stands still while channeling Ravenous Spirit, an easy target for full-distance Arcane Orb and Disintegrate."
+    evidence: ["Teleport", "Zombie Wall", "Ravenous Spirit", "Arcane Orb", "Disintegrate"]
+    confidence: medium
+  - a: liming
+    b: kaelthas
+    why: "Teleport dodges Gravity Lapse and steps out of Flamestrike's delayed area, while Kael'thas has no mobility to avoid Arcane Orb."
+    evidence: ["Teleport", "Gravity Lapse", "Flamestrike", "Arcane Orb"]
+    confidence: low
+  - a: liming
+    b: murky
+    why: "Murky's 730 Health dies to one Magic Missiles volley, and every Murky death is a Takedown that refreshes all of Li-Ming's cooldowns through Critical Mass."
+    evidence: ["Magic Missiles", "Critical Mass"]
+    confidence: medium
+  - a: anubarak
+    b: liming
+    why: "Harden Carapace's Spell Armor absorbs Li-Ming's all-Ability damage, and Impale or Cocoon catches her once Teleport is spent, at which point 1270 Health evaporates."
+    evidence: ["Harden Carapace", "Impale", "Cocoon", "Teleport"]
+    confidence: high
+  - a: genji
+    b: liming
+    why: "Deflect blocks Magic Missiles and Disintegrate, and Swift Strike plus Shuriken can kill a 1270-Health target before she Teleports clear."
+    evidence: ["Deflect", "Swift Strike", "Shuriken", "Disintegrate"]
+    confidence: medium
+  - a: zeratul
+    b: liming
+    why: "From Permanent Cloak Zeratul lands Singularity Spike and Cleave before Li-Ming sees him, and Blink matches her Teleport if she tries to run."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Cleave", "Blink", "Teleport"]
+    confidence: medium
+  - a: valeera
+    b: liming
+    why: "A Garrote Silence from stealth stops Teleport, leaving a 1270-Health mage stuck under Valeera's follow-up."
+    evidence: ["Vanish", "Eviscerate", "Teleport"]
+    confidence: medium
+synergies:
+  - a: liming
+    b: zarya
+    why: "Graviton Surge holds the enemy team in one spot, letting Disintegrate sweep several Heroes for its full 2.6 seconds."
+    evidence: ["Graviton Surge", "Disintegrate"]
+    confidence: medium
+  - a: etc
+    b: liming
+    why: "Mosh Pit stuns for up to 4 seconds, which covers a full Disintegrate channel, and the resulting Takedowns refresh Li-Ming through Critical Mass."
+    evidence: ["Mosh Pit", "Disintegrate", "Critical Mass"]
+    confidence: medium
+  - a: ana
+    b: liming
+    why: "Nano Boost's faster Basic Ability recharge turns Magic Missiles' 3-second cooldown into near-constant volleys during the burst window."
+    evidence: ["Nano Boost", "Magic Missiles"]
+    confidence: medium
+  - a: liming
+    b: malfurion
+    why: "Innervate refills Li-Ming's Mana and speeds her cooldowns for Magic Missiles spam, and Entangling Roots holds targets for a full-range Arcane Orb."
+    evidence: ["Innervate", "Entangling Roots", "Magic Missiles", "Arcane Orb"]
+    confidence: medium

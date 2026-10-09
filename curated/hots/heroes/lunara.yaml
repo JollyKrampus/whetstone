@@ -1,0 +1,61 @@
+hero: lunara
+reviewedFor: "2.57"
+traits:
+  - tag: poke
+    why: "Noxious Blossom and Nature's Toxin chip enemies from range, and Crippling Spores extends the poison without Lunara needing to stay in combat."
+  - tag: sustained-dps
+    why: "Every Basic Attack and damaging Ability refreshes and extends Nature's Toxin, so her damage keeps ticking while she kites."
+counters:
+  - a: lunara
+    b: zeratul
+    why: "With Natural Perspective, Nature's Toxin reveals poisoned enemies for its whole duration, so one Noxious Blossom on Zeratul's approach strips the value of Permanent Cloak."
+    evidence: ["Natural Perspective", "Nature's Toxin", "Noxious Blossom", "Permanent Cloak"]
+    conditions: "Requires the level 1 Natural Perspective talent."
+    confidence: medium
+  - a: lunara
+    b: nova
+    why: "Natural Perspective makes Nature's Toxin reveal its target, so a poisoned Nova cannot re-cloak for up to 9 seconds and loses her stealth openers."
+    evidence: ["Natural Perspective", "Nature's Toxin", "Permanent Cloak"]
+    conditions: "Requires the level 1 Natural Perspective talent."
+    confidence: medium
+  - a: lunara
+    b: thebutcher
+    why: "The Butcher must walk into melee range with only Ruthless Onslaught to close; Dryad's Swiftness, Leaping Strike and Crippling Spores keep him poisoned and slowed out of reach."
+    evidence: ["Dryad's Swiftness", "Leaping Strike", "Crippling Spores", "Ruthless Onslaught"]
+    confidence: low
+  - a: lunara
+    b: murky
+    why: "Wisp scouts out Murky's Egg from a distance, and Nature's Toxin keeps ticking on a 730-Health Murky after he retreats or his Safety Bubble ends."
+    evidence: ["Wisp", "Nature's Toxin", "Spawn Egg", "Safety Bubble"]
+    confidence: low
+  - a: valeera
+    b: lunara
+    why: "Cloak of Shadows removes every damage over time effect on Valeera, wiping Nature's Toxin stacks, and her stealth opener catches a 1430-Health Lunara."
+    evidence: ["Cloak of Shadows", "Nature's Toxin", "Vanish"]
+    confidence: medium
+  - a: genji
+    b: lunara
+    why: "Deflect blocks Lunara's poke and Basic Attacks while Genji dives in, and Cyber Agility keeps pace with her Dryad's Swiftness and Leaping Strike escapes."
+    evidence: ["Deflect", "Cyber Agility", "Dryad's Swiftness", "Leaping Strike"]
+    confidence: low
+  - a: tracer
+    b: lunara
+    why: "Recall removes negative effects, clearing Nature's Toxin and Crippling Spores' slow, and Blink keeps Tracer on Lunara despite Dryad's Swiftness."
+    evidence: ["Recall", "Blink", "Nature's Toxin", "Crippling Spores"]
+    confidence: low
+synergies:
+  - a: lunara
+    b: mei
+    why: "Unfair Advantage makes Nature's Toxin deal 60% more to Slowed, Rooted or Stunned Heroes, and Snow Blind, Blizzard and Icing keep targets in that state."
+    evidence: ["Unfair Advantage", "Snow Blind", "Blizzard", "Icing"]
+    confidence: medium
+  - a: jaina
+    b: lunara
+    why: "Frostbite's Chill keeps enemies Slowed for 4 seconds at a time, so Unfair Advantage's bonus poison damage is almost always active on Jaina's targets."
+    evidence: ["Frostbite", "Unfair Advantage"]
+    confidence: medium
+  - a: lunara
+    b: tyrande
+    why: "Starfall Slows everything in its area for 6 seconds and Lunar Flare stuns, both of which switch on Unfair Advantage's bonus poison damage."
+    evidence: ["Starfall", "Lunar Flare", "Unfair Advantage"]
+    confidence: low

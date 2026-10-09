@@ -1,0 +1,54 @@
+hero: nova
+reviewedFor: "2.57"
+traits:
+  - tag: burst
+    why: "Snipe stacks into big hits, and Triple Tap or Precision Strike turn a caught target into a kill from long range."
+  - tag: vulnerable-body
+    why: "1300 Health and no defensive tools beyond Holo Decoy and Ghost Protocol, so being revealed and caught is usually fatal."
+counters:
+  - a: nova
+    b: probius
+    why: "Probius has 1260 Health and stands near his Pylons, so a stealth Snipe and Pinning Shot plus Triple Tap kill him before Worker Rush gets him out."
+    evidence: ["Snipe", "Pinning Shot", "Triple Tap", "Worker Rush"]
+    confidence: medium
+  - a: nova
+    b: sgthammer
+    why: "Siege Mode keeps Sgt. Hammer still, making Snipe trivial to land, and Triple Tap's three shots kill her before she can unsiege and move."
+    evidence: ["Siege Mode", "Snipe", "Triple Tap"]
+    confidence: medium
+  - a: nova
+    b: kaelthas
+    why: "Kael'thas has no movement ability, so a stealth Snipe and Pinning Shot set up Triple Tap on an immobile 1595-Health mage."
+    evidence: ["Snipe", "Pinning Shot", "Triple Tap", "Permanent Cloak"]
+    confidence: medium
+  - a: tyrande
+    b: nova
+    why: "Sentinel and Hunter's Mark reveal Nova, and Lunar Flare's stun lands on a revealed 1300-Health target before she can re-cloak."
+    evidence: ["Sentinel", "Hunter's Mark", "Lunar Flare", "Permanent Cloak"]
+    confidence: medium
+  - a: zarya
+    b: nova
+    why: "Shield Ally and Personal Barrier absorb Snipe and Triple Tap bursts, and every shot Nova lands on a shield builds Zarya's Energy."
+    evidence: ["Shield Ally", "Personal Barrier", "Energy", "Snipe", "Triple Tap"]
+    confidence: medium
+  - a: hanzo
+    b: nova
+    why: "Sonic Arrow reveals an area for 5 seconds, exposing a stealthed Nova, and a fully charged Storm Bow outranges her Snipe."
+    evidence: ["Sonic Arrow", "Storm Bow", "Permanent Cloak", "Snipe"]
+    confidence: low
+synergies:
+  - a: mei
+    b: nova
+    why: "Ice Wall traps Heroes for 2.5 seconds, longer than Precision Strike's 1.5-second delay, and leaves a target that cannot sidestep Snipe."
+    evidence: ["Ice Wall", "Precision Strike", "Snipe"]
+    confidence: medium
+  - a: kelthuzad
+    b: nova
+    why: "Frost Blast roots for 2 seconds, enough for Precision Strike to land, and Chains of Kel'Thuzad holds targets in place for Snipe."
+    evidence: ["Frost Blast", "Precision Strike", "Chains of Kel'Thuzad", "Snipe"]
+    confidence: medium
+  - a: nova
+    b: stitches
+    why: "Gorge releases its victim at Stitches's feet at a known moment, giving Nova a predictable spot for Snipe and Triple Tap."
+    evidence: ["Gorge", "Snipe", "Triple Tap"]
+    confidence: low

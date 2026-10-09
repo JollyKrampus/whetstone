@@ -1,0 +1,61 @@
+hero: tassadar
+reviewedFor: "2.57"
+traits:
+  - tag: peel
+    why: "Force Wall blocks pathing for 2 seconds, cutting divers off from Tassadar and his backline."
+  - tag: channel
+    why: "His basic attack is a channelled Resonance Beam that ramps up damage and Mana regen while held, so being interrupted costs him output."
+counters:
+  # --- strong against ---
+  - a: tassadar
+    b: sgthammer
+    why: "A sieging Sgt. Hammer can't step out of Psionic Storm, whose damage ramps up with each consecutive tick, without Thrusters cancelling Siege Mode."
+    evidence: ["Psionic Storm", "Siege Mode", "Thrusters"]
+    confidence: medium
+  - a: tassadar
+    b: thebutcher
+    why: "Force Wall cuts The Butcher off after Ruthless Onslaught and Resonance Beam's slow kites him, while Psionic Storm punishes him for standing in melee."
+    evidence: ["Force Wall", "Resonance Beam", "Psionic Storm", "Ruthless Onslaught"]
+    confidence: low
+  - a: tassadar
+    b: illidan
+    why: "Evasion does nothing against Psionic Storm or Shock Ray, and Force Wall blocks Illidan's path back toward his healers."
+    evidence: ["Psionic Storm", "Shock Ray", "Force Wall", "Evasion"]
+    confidence: low
+  # --- weak against ---
+  - a: valeera
+    b: tassadar
+    why: "Vanish lets Valeera reach Tassadar unseen, and Cheap Shot (Blade Flurry from Stealth) stuns him before Force Wall or Shadow Walk can save him."
+    evidence: ["Vanish", "Blade Flurry", "Force Wall", "Shadow Walk"]
+    confidence: medium
+  - a: zeratul
+    b: tassadar
+    why: "Zeratul's cloaked approach and Vorpal Blade get around Force Wall, and Tassadar's 1650 Health melts to Cleave plus Singularity Spike."
+    evidence: ["Permanent Cloak", "Vorpal Blade", "Cleave", "Singularity Spike", "Force Wall"]
+    confidence: medium
+  - a: tracer
+    b: tassadar
+    why: "Tracer Blinks around Force Wall and out of Psionic Storm, and Resonance Beam has to stay locked on a target that keeps teleporting away."
+    evidence: ["Blink", "Recall", "Force Wall", "Psionic Storm", "Resonance Beam"]
+    confidence: medium
+  - a: johanna
+    b: tassadar
+    why: "Resonance Beam is Tassadar's basic attack, so Shield Glare's Blind makes it miss and stalls the damage and Mana ramp he builds by channelling it."
+    evidence: ["Shield Glare", "Resonance Beam"]
+    confidence: low
+synergies:
+  - a: kaelthas
+    b: tassadar
+    why: "Black Hole pulls enemy Heroes together and stuns those at its center, a perfect setup for Flamestrike and a spreading Living Bomb."
+    evidence: ["Black Hole", "Flamestrike", "Living Bomb"]
+    confidence: medium
+  - a: jaina
+    b: tassadar
+    why: "Black Hole groups enemies for Blizzard's three waves, and Frostbite's Chill keeps them inside Psionic Storm long enough for it to ramp up."
+    evidence: ["Black Hole", "Blizzard", "Frostbite", "Psionic Storm"]
+    confidence: medium
+  - a: kelthuzad
+    b: tassadar
+    why: "Frost Nova's root and Chains of Kel'Thuzad's pull hold enemies in place, letting Psionic Storm ramp to full damage on them."
+    evidence: ["Frost Nova", "Chains of Kel'Thuzad", "Psionic Storm"]
+    confidence: medium

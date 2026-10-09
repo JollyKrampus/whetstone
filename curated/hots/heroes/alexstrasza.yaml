@@ -1,0 +1,69 @@
+hero: alexstrasza
+reviewedFor: "2.57"
+traits:
+  - tag: save
+    why: "Life-Binder heals an ally and then lifts them to her own health percentage, rescuing a dived teammate as long as she is healthy."
+  - tag: peel
+    why: "Flame Buffet's slow on burning targets and Dragonqueen's Wing Buffet knockback push divers off her and her backline."
+counters:
+  # --- strong against ---
+  - a: alexstrasza
+    b: hanzo
+    why: "Hanzo wins by landing long-range single-target chunks between fights; Gift of Life every 7 seconds and Abundance's 20% max-health area heal erase Storm Bow poke before it adds up."
+    evidence: ["Gift of Life", "Abundance", "Storm Bow"]
+    confidence: low
+  - a: alexstrasza
+    b: chromie
+    why: "Chromie's pressure is Sand Blast poke on one target at a time; Gift of Life and Abundance refill those chunks quickly, so her damage rarely converts into kills."
+    evidence: ["Gift of Life", "Abundance", "Sand Blast"]
+    confidence: low
+  - a: alexstrasza
+    b: greymane
+    why: "Go for the Throat and Cursed Bullet spike a single hero; a healthy Alexstrasza answers with Life-Binder, healing the target and lifting it to her own health percentage."
+    evidence: ["Life-Binder", "Go for the Throat", "Cursed Bullet"]
+    conditions: "Alexstrasza must be high on health when the spike lands."
+    confidence: low
+  - a: alexstrasza
+    b: jaina
+    why: "Jaina's kill pattern relies on Chill slows and roots; Dragonqueen halves slow and root durations on Alexstrasza, and Lifeblossom lets Breath of Life strip slows and roots from an ally."
+    evidence: ["Dragonqueen", "Lifeblossom", "Breath of Life", "Frostbite", "Ring of Frost"]
+    conditions: "Lifeblossom at level 7, during Dragonqueen."
+    confidence: low
+  # --- weak against ---
+  - a: ana
+    b: alexstrasza
+    why: "Biotic Grenade stops all healing for 1.75 seconds; a Gift of Life cast into it still costs Alexstrasza 15% of her health while the heal does nothing."
+    evidence: ["Biotic Grenade", "Anti-Healer", "Gift of Life"]
+    confidence: medium
+  - a: malthael
+    b: alexstrasza
+    why: "Reaper's Mark ticks 2% of max health per second regardless of her heals, Touch of Death halves healing on marked heroes, and Dragonqueen's extra health only makes the ticks bigger."
+    evidence: ["Reaper's Mark", "Touch of Death", "Dragonqueen"]
+    confidence: medium
+  - a: tracer
+    b: alexstrasza
+    why: "Outside Dragonqueen Alexstrasza has no escape and Gift of Life keeps her own health low, so Blink plus Melee finishes her before she can transform."
+    evidence: ["Blink", "Melee", "Gift of Life", "Dragonqueen"]
+    confidence: medium
+  - a: garrosh
+    b: alexstrasza
+    why: "Body Check cuts healing received by 30% (75% with Inner Rage) on the ally she is trying to save, and Wrecking Ball drags that ally out of her range."
+    evidence: ["Body Check", "Inner Rage", "Wrecking Ball"]
+    conditions: "Body Check at level 1; Inner Rage at 20 for the full reduction."
+    confidence: low
+synergies:
+  - a: alexstrasza
+    b: etc
+    why: "Mosh Pit stuns enemies in place for up to 4 seconds, so all five Cleansing Flame fireballs land on the stunned group."
+    evidence: ["Mosh Pit", "Cleansing Flame"]
+    confidence: medium
+  - a: alexstrasza
+    b: zarya
+    why: "Graviton Surge pins heroes together for 2.5 seconds under Cleansing Flame, and Zarya's shields absorb damage while Gift of Life and Abundance catch up."
+    evidence: ["Graviton Surge", "Shield Ally", "Cleansing Flame", "Abundance"]
+    confidence: medium
+  - a: alexstrasza
+    b: mei
+    why: "Ice Wall traps enemies for 2.5 seconds, a window in which Cleansing Flame fireballs hit the trapped heroes repeatedly."
+    evidence: ["Ice Wall", "Cleansing Flame"]
+    confidence: medium

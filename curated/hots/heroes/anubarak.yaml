@@ -1,0 +1,66 @@
+hero: anubarak
+reviewedFor: "2.57"
+traits:
+  - tag: engage
+    why: "Burrow Charge travels underground to a target area and stuns on arrival, letting him open a fight from outside the enemy's sight line."
+  - tag: peel
+    why: "Impale's line stun and Cocoon, which removes an enemy for up to 7 seconds, keep divers off his backline."
+counters:
+  # --- strong against ---
+  - a: anubarak
+    b: alarak
+    why: "Harden Carapace adds 40 Spell Armor on top of its shield, blunting Alarak's ability-based burst, and Impale or Burrow Charge stuns him before his combo finishes."
+    evidence: ["Harden Carapace", "Impale", "Burrow Charge", "Sadism"]
+    confidence: medium
+  - a: anubarak
+    b: kaelthas
+    why: "Burrow Charge surfaces under an immobile Kael'thas from range, and Harden Carapace's Spell Armor shrugs off Flamestrike and Living Bomb while Anub'arak sticks to him."
+    evidence: ["Burrow Charge", "Harden Carapace", "Flamestrike", "Living Bomb"]
+    confidence: medium
+  - a: anubarak
+    b: jaina
+    why: "Jaina's damage is all spells, so Harden Carapace's Spell Armor and shield blunt Blizzard and Cone of Cold, and Burrow Charge or Impale stuns her before Ice Block is unlocked."
+    evidence: ["Harden Carapace", "Burrow Charge", "Impale", "Blizzard", "Cone of Cold", "Improved Ice Block"]
+    confidence: medium
+  - a: anubarak
+    b: chromie
+    why: "Chromie has no escape in her base kit; Burrow Charge lands on her, Impale follows, and Harden Carapace soaks Sand Blast on the way in."
+    evidence: ["Burrow Charge", "Impale", "Harden Carapace", "Sand Blast"]
+    confidence: medium
+  # --- weak against ---
+  - a: deathwing
+    b: anubarak
+    why: "Deathwing is permanently Unstoppable, so Impale, Burrow Charge's stun and Cocoon do nothing to him and Anub'arak loses most of his value."
+    evidence: ["Aspect of Death", "Impale", "Burrow Charge", "Cocoon"]
+    confidence: medium
+  - a: malthael
+    b: anubarak
+    why: "Malthael's damage and healing scale with max health: Reaper's Mark ticks 2% per second and Soul Rip heals him 4% of each marked hero's max health, so a tank feeds him."
+    evidence: ["Reaper's Mark", "Soul Rip"]
+    confidence: medium
+  - a: tychus
+    b: anubarak
+    why: "Minigun adds 2.5% of max health to every basic attack, and Harden Carapace's Spell Armor does nothing against physical attacks."
+    evidence: ["Minigun", "Harden Carapace"]
+    confidence: medium
+  - a: zuljin
+    b: anubarak
+    why: "Zul'jin's damage is basic attacks that speed up as he loses health, which Harden Carapace's Spell Armor ignores, and Taz'dingo! makes diving him with Burrow Charge pointless."
+    evidence: ["Berserker", "Taz'dingo!", "Harden Carapace", "Burrow Charge"]
+    confidence: low
+synergies:
+  - a: anubarak
+    b: kaelthas
+    why: "Burrow Charge's stun holds enemies for Flamestrike's 1-second delay, and Gravity Lapse extends the lockdown afterwards."
+    evidence: ["Burrow Charge", "Flamestrike", "Gravity Lapse"]
+    confidence: medium
+  - a: anubarak
+    b: illidan
+    why: "Burrow Charge or Impale stuns the dive target, so Illidan lands Dive and Sweeping Strike before the enemy can peel him."
+    evidence: ["Burrow Charge", "Impale", "Dive", "Sweeping Strike"]
+    confidence: medium
+  - a: anubarak
+    b: chromie
+    why: "Impale's 1-second stun covers Sand Blast's 0.5-second delay and the staggered blasts of Dragon's Breath."
+    evidence: ["Impale", "Sand Blast", "Dragon's Breath"]
+    confidence: medium

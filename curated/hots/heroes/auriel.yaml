@@ -1,0 +1,61 @@
+hero: auriel
+reviewedFor: "2.57"
+traits:
+  - tag: save
+    why: "Crystal Aegis puts an ally in Stasis for 2 seconds to dodge burst, and Resurrect brings a dead ally back at full health."
+  - tag: peel
+    why: "Detainment Strike knocks a diver back and stuns them if they hit a wall."
+counters:
+  # --- strong against ---
+  - a: auriel
+    b: nova
+    why: "Snipe and Triple Tap commit to one target; Crystal Aegis puts that target in Stasis so the shots are wasted, and Resurrect undoes the pick if it lands anyway."
+    evidence: ["Crystal Aegis", "Resurrect", "Snipe", "Triple Tap"]
+    confidence: low
+  - a: auriel
+    b: kaelthas
+    why: "Pyroblast's slow fireball gives Auriel time to Crystal Aegis its target, and the energy her team stores through Bestow Hope refills everyone after the burst."
+    evidence: ["Crystal Aegis", "Bestow Hope", "Ray of Heaven", "Pyroblast"]
+    confidence: low
+  - a: auriel
+    b: greymane
+    why: "Go for the Throat and Cursed Bullet spike one hero; Crystal Aegis on that hero denies the kill that would reset Go for the Throat for a second leap."
+    evidence: ["Crystal Aegis", "Go for the Throat", "Cursed Bullet"]
+    confidence: low
+  # --- weak against ---
+  - a: ana
+    b: auriel
+    why: "Ray of Heaven releases Auriel's stored energy in one burst; a well-timed Biotic Grenade on her team turns that whole store into nothing."
+    evidence: ["Biotic Grenade", "Ray of Heaven", "Bestow Hope"]
+    confidence: medium
+  - a: zeratul
+    b: auriel
+    why: "Auriel has no escape until Angelic Flight at 20, so Zeratul's Blink-and-Cleave combo from stealth kills her before Ray of Heaven matters."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Angelic Flight"]
+    confidence: medium
+  - a: tracer
+    b: auriel
+    why: "Detainment Strike is a narrow skillshot Tracer Blinks around, and Auriel cannot outrun her constant basic attacks."
+    evidence: ["Blink", "Reload", "Detainment Strike"]
+    confidence: medium
+  - a: valeera
+    b: auriel
+    why: "Valeera's stealth opener locks down an immobile Auriel, and Smoke Bomb protects Valeera while she finishes the kill."
+    evidence: ["Vanish", "Smoke Bomb", "Eviscerate"]
+    confidence: low
+synergies:
+  - a: auriel
+    b: tychus
+    why: "Bestow Hope converts 30% of an ally's hero damage into healing energy, and Tychus' Minigun deals huge sustained damage to heroes."
+    evidence: ["Bestow Hope", "Minigun"]
+    confidence: medium
+  - a: auriel
+    b: valla
+    why: "Bestow Hope on Valla turns her constant Hatred-boosted attacks into Ray of Heaven energy, and Will of Heaven adds 20% attack speed on top."
+    evidence: ["Bestow Hope", "Will of Heaven", "Hatred"]
+    confidence: medium
+  - a: auriel
+    b: muradin
+    why: "Crystal Aegis on Muradin after a Dwarf Toss lets him survive the collapse, and its 255-damage burst hits the heroes crowding him."
+    evidence: ["Crystal Aegis", "Dwarf Toss"]
+    confidence: low

@@ -1,0 +1,63 @@
+hero: guldan
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Gul'dan has no dash or blink until Demonic Circle at 20, so divers catch him easily."
+  - tag: mana-hungry
+    why: "He never regenerates mana, so every Fel Flame spam has to be paid back with Life Tap."
+  - tag: sustained-dps
+    why: "Fel Flame's short cooldown and stacking Corruption reward long fights more than one quick burst."
+counters:
+  # --- strong against ---
+  - a: guldan
+    b: thelostvikings
+    why: "Fel Flame's wave hits every Viking standing together on a 1.5-second cooldown, and Corruption stacks on whichever one gets caught alone."
+    evidence: ["Fel Flame", "Corruption"]
+    confidence: low
+  - a: guldan
+    b: zagara
+    why: "Fel Flame sweeps away Banelings, Roachlings and Hunter Killers in one wave, blunting Zagara's summon pressure."
+    evidence: ["Fel Flame", "Baneling Barrage", "Infested Drop", "Hunter Killer"]
+    confidence: low
+  - a: guldan
+    b: thebutcher
+    why: "Horrify fears and silences Butcher for 2 seconds after he charges in, and Drain Life with Curse of Exhaustion slows him and out-heals his melee pressure."
+    evidence: ["Horrify", "Drain Life", "Curse of Exhaustion", "Ruthless Onslaught"]
+    confidence: low
+  # --- weak against ---
+  - a: zeratul
+    b: guldan
+    why: "Gul'dan has no escape before Demonic Circle, so a Blink-and-Cleave combo from stealth kills him before Drain Life can sustain him."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Drain Life"]
+    confidence: medium
+  - a: tracer
+    b: guldan
+    why: "Tracer Blinks out of Drain Life's reach and dodges Fel Flame, while Gul'dan has no way to escape her constant attacks."
+    evidence: ["Blink", "Reload", "Drain Life", "Fel Flame"]
+    confidence: medium
+  - a: genji
+    b: guldan
+    why: "Gul'dan has no escape in his base kit; Swift Strike and Shuriken burst him, and Deflect blocks Drain Life and Fel Flame."
+    evidence: ["Swift Strike", "Shuriken", "Deflect", "Drain Life", "Fel Flame"]
+    confidence: medium
+  - a: illidan
+    b: guldan
+    why: "Dive and Sweeping Strike keep Illidan on top of an immobile Gul'dan, and Betrayer's Thirst heals him through Corruption ticks."
+    evidence: ["Dive", "Sweeping Strike", "Betrayer's Thirst", "Corruption"]
+    confidence: low
+synergies:
+  - a: ana
+    b: guldan
+    why: "Nano Boost restores 200 mana to Gul'dan, who does not regenerate mana, and makes Fel Flame recharge 150% faster with 30% Spell Power."
+    evidence: ["Nano Boost", "Life Tap", "Fel Flame"]
+    confidence: medium
+  - a: etc
+    b: guldan
+    why: "Mosh Pit holds a group inside Rain of Destruction's falling meteors."
+    evidence: ["Mosh Pit", "Rain of Destruction"]
+    confidence: medium
+  - a: guldan
+    b: zarya
+    why: "Graviton Surge holds heroes together so Horrify fears the whole group, or Rain of Destruction's meteors keep landing on them."
+    evidence: ["Graviton Surge", "Horrify", "Rain of Destruction"]
+    confidence: medium

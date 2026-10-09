@@ -1,0 +1,66 @@
+hero: artanis
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Phase Prism swaps places with a backline target, dropping Artanis into their team and dragging the target into his."
+  - tag: aa-reliant
+    why: "Twin Blades and Shield Overload's cooldown both run off basic attacks, so blinds and attack-speed slows cut his damage and survivability together."
+counters:
+  # --- strong against ---
+  - a: artanis
+    b: sgthammer
+    why: "A Phase Prism hit swaps Artanis with a sieged Hammer, leaving her immobile in front of his team while he gains 1.5 seconds of Unstoppable."
+    evidence: ["Phase Prism", "Siege Mode"]
+    confidence: medium
+  - a: artanis
+    b: valla
+    why: "Suppression Pulse blinds every enemy in a large area for 4 seconds from any range, wiping out Valla's basic-attack damage for a whole fight window."
+    evidence: ["Suppression Pulse", "Hatred"]
+    confidence: medium
+  - a: artanis
+    b: zuljin
+    why: "Suppression Pulse's 4-second blind reaches Zul'jin anywhere on the map, and nearly all of his damage is basic attacks boosted by Berserker."
+    evidence: ["Suppression Pulse", "Berserker"]
+    confidence: medium
+  - a: artanis
+    b: chromie
+    why: "Phase Prism pulls an immobile Chromie into Artanis' team, and Twin Blades closes the gap again if she survives the swap."
+    evidence: ["Phase Prism", "Twin Blades"]
+    confidence: medium
+  # --- weak against ---
+  - a: johanna
+    b: artanis
+    why: "Shield Glare blinds Artanis for 1.5 seconds, wasting Twin Blades and stalling the basic attacks that recharge Shield Overload."
+    evidence: ["Shield Glare", "Twin Blades", "Shield Overload"]
+    confidence: medium
+  - a: cassia
+    b: artanis
+    why: "Blinding Light blinds Artanis for 2 seconds, so Twin Blades misses and Shield Overload loses its attack-based cooldown reduction."
+    evidence: ["Blinding Light", "Twin Blades", "Shield Overload"]
+    confidence: medium
+  - a: arthas
+    b: artanis
+    why: "Frozen Tempest cuts Artanis' attack speed by up to 40% and Rime blocks a basic attack every 5 seconds, starving Shield Overload's refresh."
+    evidence: ["Frozen Tempest", "Rime", "Shield Overload"]
+    confidence: medium
+  - a: lili
+    b: artanis
+    why: "Blinding Wind auto-targets the nearest enemies, so a diving Artanis is blinded for 1.5 seconds right when Twin Blades should land."
+    evidence: ["Blinding Wind", "Twin Blades"]
+    confidence: low
+synergies:
+  - a: artanis
+    b: garrosh
+    why: "Phase Prism and Wrecking Ball both relocate enemy heroes, so together they can drag a backliner into the team twice in a row."
+    evidence: ["Phase Prism", "Wrecking Ball"]
+    confidence: medium
+  - a: artanis
+    b: rehgar
+    why: "Bloodlust's 40% attack speed means more basic attacks, and every Artanis attack lowers Shield Overload's cooldown by 4 seconds."
+    evidence: ["Bloodlust", "Shield Overload"]
+    confidence: medium
+  - a: artanis
+    b: zarya
+    why: "Graviton Surge keeps enemies grouped so Blade Dash's return hits several heroes, each one cutting Shield Overload's cooldown by 2 seconds."
+    evidence: ["Graviton Surge", "Blade Dash", "Shield Overload"]
+    confidence: medium

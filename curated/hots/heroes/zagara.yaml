@@ -1,0 +1,57 @@
+hero: zagara
+reviewedFor: "2.57"
+traits:
+  - tag: summons
+    why: "Roachlings and Hunter Killers add extra bodies that push lanes, soak damage and block first-target skillshots."
+  - tag: siege
+    why: "Her summons and Baneling Barrage chew through structures, so Zagara keeps constant pressure on towers and Forts."
+counters:
+  # --- strong against ---
+  - a: zagara
+    b: stitches
+    why: "Hook stops on the first enemy it touches, and Zagara's Roachlings and Hunter Killers constantly body-block it, so Stitches rarely lands a pick on her."
+    evidence: ["Hook", "Infested Drop", "Hunter Killer"]
+    confidence: low
+  - a: zagara
+    b: deathwing
+    why: "Devouring Maw works on Unstoppable enemies, making it one of the few disables that affects Deathwing, who is permanently Unstoppable."
+    evidence: ["Devouring Maw", "Aspect of Death"]
+    confidence: medium
+  - a: zagara
+    b: muradin
+    why: "Storm Bolt stops on the first enemy it hits, so Zagara's Roachlings and Hunter Killers screen her from Muradin's main lockdown tool."
+    evidence: ["Storm Bolt", "Infested Drop", "Hunter Killer"]
+    confidence: low
+  # --- weak against ---
+  - a: ragnaros
+    b: zagara
+    why: "Molten Core turns a threatened Fort or Keep into a long-range Ragnaros whose Meteor Shower and Molten Swing wipe Roachlings and Hunter Killers, stalling the summon-led siege Zagara relies on."
+    evidence: ["Molten Core", "Meteor Shower", "Molten Swing", "Infested Drop", "Hunter Killer"]
+    conditions: "Defending structures rather than an open-field teamfight."
+    confidence: low
+  - a: zeratul
+    b: zagara
+    why: "Zagara has 1550 Health and no escape away from her Nydus Worms; Zeratul cloaks past her summons and bursts her before she can reach one."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Nydus Network"]
+    confidence: low
+  - a: genji
+    b: zagara
+    why: "Cyber Agility jumps Genji past Zagara's summons onto her, and Swift Strike's line damage clears Roachlings on the way."
+    evidence: ["Cyber Agility", "Swift Strike", "Infested Drop"]
+    confidence: low
+  - a: xul
+    b: zagara
+    why: "Cursed Strikes slows the attack speed of Summons by 40% and cleaves through Roachlings and Hunter Killers, blunting Zagara's push."
+    evidence: ["Cursed Strikes", "Hunter Killer", "Infested Drop"]
+    confidence: low
+synergies:
+  - a: abathur
+    b: zagara
+    why: "Locusts and Zagara's summons push lanes together, and Symbiote on Zagara adds shields and damage while she sieges."
+    evidence: ["Locust Strain", "Symbiote", "Infested Drop"]
+    confidence: low
+  - a: azmodan
+    b: zagara
+    why: "Demon Warriors and Zagara's Roachlings and Hunter Killers flood a lane together, overwhelming minion waves and structures."
+    evidence: ["Summon Demon Warrior", "Infested Drop", "Hunter Killer"]
+    confidence: low
