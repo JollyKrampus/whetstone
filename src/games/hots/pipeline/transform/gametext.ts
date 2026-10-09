@@ -23,6 +23,8 @@ export function renderGameText(raw: string | undefined | null): string {
   s = s.replace(/<img\b[^>]*\/?>/gi, '');
   s = s.replace(/<\/?(?:c|s|w|d|a|font|span)\b[^>]*>/gi, '');
   s = s.replace(/<[^>]+>/g, '');
+  // A tag opener that never closes on its line is a typo in the game strings ("<Mythic Reward:").
+  s = s.replace(/<(?=[A-Za-z][^>\n]*(?:\n|$))/g, '');
   s = decodeEntities(s);
   s = s.replace(SCALING_RE, (_m, v: string) => ` (+${scalingPercent(v)}% per level)`);
   s = s.replace(/[\u200B-\u200D\uFEFF]/g, '');

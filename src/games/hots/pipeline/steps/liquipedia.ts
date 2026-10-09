@@ -3,12 +3,15 @@
  * and which heroes have a Liquipedia page (for links.json). MediaWiki API only, 2 s apart,
  * custom User-Agent (see sources/liquipedia.ts).
  *
- * Incremental: with last-good data younger than RC_MAX_DAYS, one `recentchanges` call decides
- * whether anything changed. No main-namespace edits since the last fetch ⇒ last-good pro.json
- * and page checks are reused (2 calls in total). Otherwise tournaments are searched and their
- * wikitext fetched in batches of 50, and only heroes that are new or whose page title changed
- * are re-checked. Liquipedia data is never merged into class-A files: links.json carries only
- * the existence of a page (a URL), not its content.
+ * Incremental: with last-good data fetched less than RC_MAX_DAYS ago, one `recentchanges` call
+ * decides whether anything changed. No main-namespace edits since the last fetch ⇒ last-good
+ * pro.json and page checks are reused (1 call). Otherwise tournaments are searched and their
+ * wikitext fetched in batches of 50 (about 4 calls), and only heroes that are new or whose page
+ * title changed are re-checked. Every FULL_REFRESH_DAY (UTC) everything is refetched, which
+ * bounds what a truncated change list or a parser update can leave stale.
+ *
+ * Liquipedia data is never merged into class-A files: links.json carries only the existence of
+ * a page (a URL), not its content.
  */
 import type { Link } from '../../schema.ts';
 import { LinksSchema, ProSchema, type Pro } from '../../schema.ts';
@@ -21,8 +24,10 @@ import { compareStrings, warn } from '../util.ts';
 import { hoursSince } from './builds.ts';
 import { lastFetchedAt, previousFile, selected, setFallback, setNotSelected, setOk, type RunEnv } from './common.ts';
 
-/** Incremental checks only within a week of the last full fetch (MediaWiki keeps 30 days of recent changes); a weekly full refresh also picks up parser changes. */
+/** MediaWiki keeps 30 days of recent changes by default; stay well inside that. */
 const RC_MAX_DAYS = 7;
+/** Weekly full refresh on this UTC weekday (1 = Monday). */
+export const FULL_REFRESH_DAY = 1;
 /** With fewer drafted maps than this in the current year, the window also covers last year. */
 const MIN_MAPS_FOR_YEAR = 50;
 
@@ -74,7 +79,8 @@ export async function runLiquipedia(env: RunEnv, heroes: readonly HeroInput[]): 
   try {
     const since = lastFetchedAt(env, 'liquipedia');
     let changed: Set<string> | null = null;
-    if (since && prevPro && prevLinks && hoursSince(since, env.nowIso) < RC_MAX_DAYS * 24) {
+    const weekly = env.now.getUTCDay() === FULL_REFRESH_DAY;
+    if (since && prevPro && prevLinks && !weekly && hoursSince(since, env.nowIso) < RC_MAX_DAYS * 24) {
       changed = new Set((await recentChanges(lp, since)).map((t) => t.replace(/ /g, '_')));
     }
 

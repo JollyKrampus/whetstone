@@ -221,6 +221,8 @@ const SECTION_RE = /^(base|base stats|stats|abilities|ability|basic abilities|ta
 const LEVEL_RE = /^level\s*(\d{1,2})$/i;
 const HERO_SUFFIX_RE = /\s+(balance updates?|bug fixes?|changes|updates?)$/i;
 const TARGET_HOTKEY_RE = /\s*[[(]\s*(?:[QWERDZ]|trait|heroic|passive|active|\d)\s*[\])]\s*$/i;
+/** Shop and cosmetic announcements are not game changes. */
+const COSMETIC_RE = /^(new|added)\s+(skins?|mounts?|bundles?|portraits?|sprays?|banners?|emojis?|announcers?|voice ?lines?|loot chests?)\b/i;
 
 function areaFromAnchor(name: string): Area | null {
   const n = name.toLowerCase();
@@ -349,7 +351,7 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
     if (!text || /^return to top$/i.test(text)) return;
     rec.text.push(text);
     if (area === 'general' || (area === 'hotfix' && !hero)) {
-      if (!skipHero) rec.addGeneral(text);
+      if (!skipHero && !COSMETIC_RE.test(text)) rec.addGeneral(text);
       return;
     }
     if (area === 'map') {

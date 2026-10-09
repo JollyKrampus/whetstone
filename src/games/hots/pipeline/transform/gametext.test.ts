@@ -16,6 +16,11 @@ describe('renderGameText', () => {
     expect(renderGameText('<img path="@UI/StormTalentInTextQuestIcon"/>Quest: Gain&nbsp;5 &amp; more<n/><n/><n/>Reward')).toBe('Quest: Gain 5 & more\n\nReward');
   });
 
+  it('drops a stray unclosed tag opener from the game strings', () => {
+    expect(renderGameText('Reward: more.<n/><n/><Mythic Reward: even more.')).toBe('Reward: more.\n\nMythic Reward: even more.');
+    expect(renderGameText('Deal 5 < 10 damage')).toBe('Deal 5 < 10 damage');
+  });
+
   it('returns an empty string for missing text', () => {
     expect(renderGameText(undefined)).toBe('');
     expect(renderGameText(null)).toBe('');

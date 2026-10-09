@@ -99,6 +99,15 @@ describe('parseArticle on the recorded 2026-09-28 live notes', () => {
     expect(unmatched).toEqual(new Set(['Garrosh']));
   });
 
+  it('leaves shop announcements out of the general lines', () => {
+    const recs2 = parseArticle(
+      '<section class="blog"><a name="General"></a><h2>General</h2><ul><li>New Skin: Ruby Lucio</li><li>Haunted Mines has been added to Ranked.</li></ul></section>',
+      { url: URL, title: 'Heroes of the Storm Live Patch Notes - July 20, 2026', published: '2026-07-20T17:00:00Z' },
+      { heroes: heroIndex, maps: mapIndex, heroInfo },
+    );
+    expect(recs2[0]?.general).toEqual(['Haunted Mines has been added to Ranked.']);
+  });
+
   it('is deterministic', () => {
     expect(parseLive()).toEqual(recs);
   });
