@@ -119,10 +119,7 @@ const species = [...(tournaments?.species ?? [])].sort((a, b) => b.teams - a.tea
                           </td>
                           <td class="pk-num">{int(a.teams)}</td>
                           <td class="pk-num">{pct(a.share, 1)}</td>
-                          <td class="pk-num">
-                            {a.wins}–{a.losses}
-                            {a.ties ? `–${a.ties}` : ''}
-                          </td>
+                          <td class="pk-num">{`${a.wins}–${a.losses}${a.ties ? `–${a.ties}` : ''}`}</td>
                           <td class="pk-num">
                             {a.wr !== null ? pct(a.wr, 1) : '—'}
                             {interval && <span class="pk-subtle"> ({pct(interval.lower, 0)}–{pct(interval.upper, 0)})</span>}
@@ -187,10 +184,7 @@ const species = [...(tournaments?.species ?? [])].sort((a, b) => b.teams - a.tea
                         #{t.placing} at {tournament ? <a href={tournament.url} rel="noopener external">{tournament.name}</a> : t.tournamentId}
                       </span>
                       <span class="pk-card__meta">
-                        <span>
-                          {t.record.wins}–{t.record.losses}
-                          {t.record.ties ? `–${t.record.ties}` : ''}
-                        </span>
+                        <span>{`${t.record.wins}–${t.record.losses}${t.record.ties ? `–${t.record.ties}` : ''}`}</span>
                         {tournament && <span>{formatDayUTC(tournament.date)}</span>}
                         {tournament && <span>{int(tournament.players)} players</span>}
                       </span>

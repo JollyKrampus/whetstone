@@ -216,8 +216,8 @@ const pid = forme.id;
             commonSpeed !== null && (
               <>
                 <dt>Most common</dt>
-                <dd class="pk-num">
-                  {commonSpeed}
+                <dd>
+                  <strong class="pk-num">{commonSpeed}</strong>
                   {speedEntry && (
                     <span class="pk-subtle">
                       {' '}
@@ -229,11 +229,11 @@ const pid = forme.id;
             )
           }
           <dt>Fastest</dt>
-          <dd class="pk-num">{fastest} <span class="pk-subtle">(+Spe nature, 32 SP)</span></dd>
+          <dd><strong class="pk-num">{fastest}</strong> <span class="pk-subtle">(+Spe nature, 32 SP)</span></dd>
           <dt>Neutral</dt>
-          <dd class="pk-num">{neutral} <span class="pk-subtle">(0 SP)</span></dd>
+          <dd><strong class="pk-num">{neutral}</strong> <span class="pk-subtle">(0 SP)</span></dd>
           <dt>Slowest</dt>
-          <dd class="pk-num">{slowest} <span class="pk-subtle">(−Spe nature, 0 SP, for Trick Room)</span></dd>
+          <dd><strong class="pk-num">{slowest}</strong> <span class="pk-subtle">(−Spe nature, 0 SP, for Trick Room)</span></dd>
         </dl>
         {
           position && (

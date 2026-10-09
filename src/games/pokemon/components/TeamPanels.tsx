@@ -96,21 +96,23 @@ export function Coverage({ chart, attacks, names, dex }: { chart: TypeChart; att
   const gaps = cells.filter((c) => c.best <= 1);
   return (
     <div class="pk-section" style="gap: var(--sp-3)">
-      <p class={gaps.length ? 'pk-status' : 'pk-status'}>
+      <p class="pk-status">
         {gaps.length === 0
           ? 'Every type takes super-effective damage from at least one of your moves.'
           : `No super-effective move against ${nameList(gaps.map((g) => g.type))}.`}
       </p>
       <ul class="pk-cover" aria-label="Best multiplier against each type">
         {cells.map((c) => {
-          const via = c.via.slice(0, 2).map((a) => `${names[a.member] ?? a.member} ${dex.moveName(a.move.id)}`);
+          const via = c.via.slice(0, 2).map((a) => `${dex.moveName(a.move.id)} (${names[a.member] ?? a.member})`);
+          const text =
+            c.best === 0 ? 'Nothing hits it' : c.best < 1 ? 'Every move is resisted' : c.best === 1 ? 'Neutral hits only' : via.join(', ') + (c.via.length > 2 ? ` +${c.via.length - 2}` : '');
           return (
             <li key={c.type} data-best={c.best <= 1 ? 'weak' : undefined}>
               <span class="pk-cover__top">
                 <TypeChip type={c.type} small />
                 <strong class="pk-num">{multiplierLabel(c.best)}</strong>
               </span>
-              <span class="pk-subtle">{c.best === 0 ? 'Nothing hits it' : via.join(', ') + (c.via.length > 2 ? ` +${c.via.length - 2}` : '')}</span>
+              <span class="pk-subtle">{text}</span>
             </li>
           );
         })}
@@ -142,24 +144,35 @@ export function SpeedPanel({ members, sets, usageLabel }: { members: readonly Pa
           Trick Room (slowest first)
         </label>
       </div>
-      <ul class="pk-cards pk-speedsum">
-        {members.map((m) => {
-          const pos = ladderPosition(ladder, m.id, trickRoom);
-          const row = ladder.find((r) => r.key === m.id);
-          return (
-            <li class="pk-card" key={m.id}>
-              <div class="pk-card__head">
-                <span class="pk-card__name">{m.name}</span>
-                <span class="pk-num">Speed {row?.speed ?? m.speed}</span>
-              </div>
-              <span class="pk-subtle">
-                Moves before {pos.before} of the top {pos.total}
-                {pos.ties ? `, ties ${pos.ties}` : ''}
-              </span>
-            </li>
-          );
-        })}
-      </ul>
+      <div class="pk-scroll">
+        <table class="pk-table pk-speedsum">
+          <caption class="visually-hidden">Your Pokémon's Speed and how many of the top {sets.length} they move before</caption>
+          <thead>
+            <tr>
+              <th scope="col">Pokémon</th>
+              <th scope="col" class="pk-num">Speed</th>
+              <th scope="col" class="pk-num">Moves before</th>
+              <th scope="col" class="pk-num">Ties</th>
+            </tr>
+          </thead>
+          <tbody>
+            {members.map((m) => {
+              const pos = ladderPosition(ladder, m.id, trickRoom);
+              const row = ladder.find((r) => r.key === m.id);
+              return (
+                <tr key={m.id}>
+                  <th scope="row">{m.name}</th>
+                  <td class="pk-num">{row?.speed ?? m.speed}</td>
+                  <td class="pk-num">
+                    {pos.before} <span class="pk-subtle">of {pos.total}</span>
+                  </td>
+                  <td class="pk-num">{pos.ties || '–'}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <details class="pk-details">
         <summary>Full speed ladder ({ladder.length} rows)</summary>
         <ol class="pk-ladder">

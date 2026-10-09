@@ -110,7 +110,7 @@ export default function SetEditor({ idBase, title, marker, set, dex, speciesOpti
             onChange(next);
           }}
         />
-        <div class="pk-field">
+        <div class="pk-field pk-field--wide-sm">
           <label for={`${idBase}-ability`}>Ability</label>
           <select
             id={`${idBase}-ability`}
@@ -134,7 +134,7 @@ export default function SetEditor({ idBase, title, marker, set, dex, speciesOpti
           </select>
           {mega && <small class="pk-subtle">As {formeLabel(mega)}: {dex.abilityName(mega.abilities[0] ?? '')}</small>}
         </div>
-        <div class="pk-field">
+        <div class="pk-field pk-field--wide-sm">
           <label for={`${idBase}-nature`}>Nature</label>
           <select id={`${idBase}-nature`} class="pk-select" value={set.nature} onChange={(e) => update({ nature: (e.currentTarget as HTMLSelectElement).value as Nature })}>
             {NATURES.map((n) => (
