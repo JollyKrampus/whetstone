@@ -1,5 +1,6 @@
 {
-  // Type-checks the code that runs as `node pipeline/run.ts` / `node scripts/*.ts` with Node's own
+  // Type-checks the code that runs as `node pipeline/run.ts` / `node scripts/*.ts` (and the game
+  // pipelines, the HotS theory layer and its CLIs, which run.ts loads at runtime) with Node's own
   // resolution rules (package.json "imports", mandatory .ts extensions, JSON import attributes),
   // so anything that passes here also resolves at runtime under Node 24 type stripping.
   "extends": "./tsconfig.json",
@@ -10,6 +11,6 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["pipeline", "scripts"],
+  "include": ["pipeline", "scripts", "src/games/*/pipeline", "src/games/hots/theory", "src/games/mtga/fixtures/*.ts"],
   "exclude": ["node_modules", "dist", "data", "**/*.test.ts"]
 }
