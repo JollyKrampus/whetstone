@@ -134,3 +134,28 @@ describe('runLimitlessSource', () => {
     expect(noDex.status.status).toBe('failed');
   });
 });
+
+describe('runLimitlessSource partial failures', () => {
+  const plan = regulationPlan(WITH_NEXT, NOW);
+  const page1 = `${LIMITLESS_API}/tournaments?game=VGC&format=M-C&limit=50&page=1`;
+  const list = [listing('t1', '2026-10-05T10:00:00Z', 32), listing('t2', '2026-10-06T10:00:00Z', 30), listing('t3', '2026-10-04T10:00:00Z', 20)];
+
+  it('leaves out an event whose standings fail and keeps the rest', async () => {
+    const http = fakeHttp({
+      [page1]: list,
+      [`${LIMITLESS_API}/tournaments/t1/standings`]: [row(1, 5, 0)],
+      [`${LIMITLESS_API}/tournaments/t2/standings`]: new Error('GET -> 500 after 4 attempt(s)'),
+      [`${LIMITLESS_API}/tournaments/t3/standings`]: [row(1, 3, 1)],
+    });
+    const r = await runLimitlessSource(fakeContext({ http, now: NOW }), plan, known, true);
+    expect(r.status.status).toBe('ok');
+    expect(r.counts).toEqual({ tournaments: 2, teams: 2 });
+    expect(r.issues).toEqual([expect.objectContaining({ level: 'warn', message: expect.stringMatching(/left out 1 of 3 events.*t2/) })]);
+  });
+
+  it('fails the source when most events fail', async () => {
+    const http = fakeHttp({ [page1]: list, [`${LIMITLESS_API}/tournaments/t1/standings`]: [row(1, 5, 0)], [`${LIMITLESS_API}/tournaments/`]: new Error('GET -> 429') });
+    const r = await runLimitlessSource(fakeContext({ http, now: NOW }), plan, known, true);
+    expect(r.status).toMatchObject({ status: 'failed', detail: expect.stringMatching(/2 of 3 standings failed/) });
+  });
+});

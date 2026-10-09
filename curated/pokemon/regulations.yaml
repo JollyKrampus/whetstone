@@ -11,6 +11,13 @@
 #   limitlessFormat  Limitless play API format code
 #   seasons          ranked seasons inside the window; `estimated: true` = not yet confirmed
 #   estimatedEnd     the end date itself is a prediction
+#
+# Adding the next regulation (e.g. M-D) once it is announced: append an entry with its official
+# window and Showdown format ids (the year in the id can change, e.g. ...vgc2027...), keep the
+# list sorted, and confirm the previous one's `end`. The pipeline switches at `start`; until
+# Showdown, Smogon, Limitless and replays have data for it, each keeps showing the previous
+# regulation's data and meta.extra.warmingUp says so. Do not add unannounced regulations: the
+# site would switch to rules nobody has published.
 regulations:
   - id: M-B
     label: Regulation Set M-B

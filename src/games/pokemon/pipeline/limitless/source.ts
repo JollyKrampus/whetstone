@@ -78,13 +78,22 @@ export async function runLimitlessSource(ctx: PipelineContext, plan: RegulationP
       const picked = selectTournaments(await listTournaments(ctx, reg.limitlessFormat), ctx.now);
       const events: TournamentTeams[] = [];
       const unknown = new Set<string>();
+      const failures: string[] = [];
       for (const t of picked) {
-        const rows = await ctx.http.json(`${LIMITLESS_API}/tournaments/${encodeURIComponent(t.id)}/standings`, {
-          spacingMs: LIMITLESS_SPACING_MS,
-          ttlHours: 24,
-          fixture: `limitless/standings-${t.id}`,
-        });
-        const { teams, unknownSpecies } = anonymise(rows, known);
+        let anon: ReturnType<typeof anonymise>;
+        try {
+          const rows = await ctx.http.json(`${LIMITLESS_API}/tournaments/${encodeURIComponent(t.id)}/standings`, {
+            spacingMs: LIMITLESS_SPACING_MS,
+            ttlHours: 24,
+            fixture: `limitless/standings-${t.id}`,
+          });
+          anon = anonymise(rows, known);
+        } catch (err) {
+          // One broken event should not cost the other thirty-nine.
+          failures.push(`${t.id}: ${errorMessage(err)}`);
+          continue;
+        }
+        const { teams, unknownSpecies } = anon;
         for (const s of unknownSpecies) unknown.add(s);
         if (teams.length === 0) continue;
         events.push({
@@ -92,6 +101,8 @@ export async function runLimitlessSource(ctx: PipelineContext, plan: RegulationP
           teams,
         });
       }
+      if (failures.length > 0 && failures.length * 2 > picked.length) throw new Error(`${failures.length} of ${picked.length} standings failed: ${failures.slice(0, 2).join('; ')}`);
+      if (failures.length > 0) issues.push(warn('limitless', `left out ${failures.length} of ${picked.length} events whose standings failed: ${failures.slice(0, 3).join('; ')}`));
       if (unknown.size > 0) issues.push(warn('limitless', `species not in the dex, left out of team lists: ${[...unknown].sort(compareStrings).slice(0, 10).join(', ')}`));
       if (events.length === 0) {
         ctx.log(`limitless: no ${reg.limitlessFormat} events with team lists in the last ${WINDOW_DAYS} days`);
