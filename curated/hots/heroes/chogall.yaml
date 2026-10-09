@@ -1,0 +1,62 @@
+hero: chogall
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Cho's 2950 health and Ogre Hide armor let the pair stand at the front while Gall supplies the damage."
+  - tag: engage
+    why: "A fully charged Surging Fist covers a long distance, letting Cho start a fight on a target for Gall to follow up."
+counters:
+  # --- strong against ---
+  - a: chogall
+    b: illidan
+    why: "Ogre Hide and Twilight Veil stack armor against Illidan's basic attacks, while Gall's Shadowflame and Hammer of Twilight punish him for staying close."
+    evidence: ["Ogre Hide", "Twilight Veil", "Shadowflame", "Hammer of Twilight", "Betrayer's Thirst"]
+    confidence: low
+  - a: chogall
+    b: thebutcher
+    why: "Butcher has to stand in melee to heal; Ogre Hide's armor shrinks his hits while Gall's Shadowflame and Dread Orb chip him nonstop."
+    evidence: ["Ogre Hide", "Shadowflame", "Dread Orb", "Butcher's Brand"]
+    confidence: low
+  - a: chogall
+    b: varian
+    why: "Varian's damage is physical basic attacks that Ogre Hide and Twilight Veil reduce, and Gall is immune to the silence from Taunt."
+    evidence: ["Ogre Hide", "Twilight Veil", "Ogre Rage", "Taunt"]
+    confidence: low
+  # --- weak against ---
+  - a: malthael
+    b: chogall
+    why: "Reaper's Mark deals 2% of Cho's large max health every second, and Touch of Death halves Consuming Blaze's healing."
+    evidence: ["Reaper's Mark", "Touch of Death", "Consuming Blaze"]
+    confidence: medium
+  - a: tychus
+    b: chogall
+    why: "Minigun adds 2.5% of max health to every attack, and Cho's huge health pool makes that bonus enormous."
+    evidence: ["Minigun"]
+    confidence: medium
+  - a: azmodan
+    b: chogall
+    why: "Cho'gall is a large, slow target that Globe of Annihilation hits reliably, and Total Annihilation adds 4% of max health to every globe."
+    evidence: ["Globe of Annihilation", "Total Annihilation"]
+    conditions: "Total Annihilation at level 16 for the percent damage."
+    confidence: low
+  - a: leoric
+    b: chogall
+    why: "Drain Hope takes up to 20% of the target's max health and heals Leoric, which is massive against Cho's health pool."
+    evidence: ["Drain Hope"]
+    confidence: low
+synergies:
+  - a: ana
+    b: chogall
+    why: "Nano Boost on Gall makes Shadowflame and Dread Orb recharge 150% faster with 30% Spell Power, a huge damage window."
+    evidence: ["Nano Boost", "Shadowflame", "Dread Orb"]
+    confidence: medium
+  - a: chogall
+    b: kaelthas
+    why: "Upheaval pulls enemies together after 1 second, then Flamestrike and Living Bomb hit the whole group."
+    evidence: ["Upheaval", "Flamestrike", "Living Bomb"]
+    confidence: medium
+  - a: chogall
+    b: zarya
+    why: "Graviton Surge and Upheaval chain into several seconds of grouped enemies for Gall's Shadowflame and Runic Blast."
+    evidence: ["Graviton Surge", "Upheaval", "Shadowflame", "Runic Blast"]
+    confidence: medium

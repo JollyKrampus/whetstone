@@ -1,0 +1,67 @@
+hero: chen
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Fortifying Brew's shields and Stagger's delayed damage let Chen stay in fights far longer than his health pool suggests."
+  - tag: peel
+    why: "Wandering Keg is an Unstoppable barrel that knocks back everything it rolls through, clearing divers off allies."
+counters:
+  # --- strong against ---
+  - a: chen
+    b: illidan
+    why: "Elusive Brawler makes Chen evade basic attacks for 2 seconds and Stagger delays the rest, so Illidan's attack-based damage and lifesteal have nothing to bite on."
+    evidence: ["Elusive Brawler", "Stagger", "Betrayer's Thirst"]
+    conditions: "Elusive Brawler at level 7."
+    confidence: low
+  - a: chen
+    b: thebutcher
+    why: "Butcher heals only by hitting branded targets with basic attacks; Elusive Brawler's evasion and Keg Smash's slow deny him those free hits."
+    evidence: ["Elusive Brawler", "Keg Smash", "Butcher's Brand"]
+    conditions: "Elusive Brawler at level 7."
+    confidence: low
+  - a: chen
+    b: kaelthas
+    why: "Stagger defers a Flamestrike and Pyroblast combo, and Withering Flames cuts Kael'thas' Spell Power by 60% once Chen ignites him."
+    evidence: ["Stagger", "Withering Flames", "Flamestrike", "Pyroblast"]
+    conditions: "Withering Flames at level 4."
+    confidence: low
+  # --- weak against ---
+  - a: varian
+    b: chen
+    why: "Shattering Throw deals up to 1400 bonus damage to shields and Varian's attacks deal extra to shields, stripping Fortifying Brew, Chen's main defence."
+    evidence: ["Shattering Throw", "Fortifying Brew"]
+    conditions: "Shattering Throw at level 13."
+    confidence: medium
+  - a: kelthuzad
+    b: chen
+    why: "Strip Shields adds up to 270 damage against shields to Chains of Kel'Thuzad, and the pull and stun interrupt Fortifying Brew mid-drink."
+    evidence: ["Strip Shields", "Chains of Kel'Thuzad", "Fortifying Brew"]
+    confidence: low
+  - a: ltmorales
+    b: chen
+    why: "EMP Grenade deals up to 400 extra damage to shields, cracking most of a Fortifying Brew shield in one hit."
+    evidence: ["EMP Grenade", "Fortifying Brew"]
+    conditions: "EMP Grenade at level 13."
+    confidence: low
+  - a: alarak
+    b: chen
+    why: "A Discord Strike silence stops Chen from drinking Fortifying Brew or casting Stagger for 1.5 seconds, exactly the tools he needs to survive."
+    evidence: ["Discord Strike", "Fortifying Brew", "Stagger"]
+    confidence: low
+synergies:
+  - a: chen
+    b: kaelthas
+    why: "Keg Smash's slow ramps to 40% after 1.25 seconds, holding enemies inside Flamestrike's area for its 1-second delay."
+    evidence: ["Keg Smash", "Flamestrike"]
+    confidence: low
+  - a: chen
+    b: muradin
+    why: "Thunder Clap's slow and Storm Bolt's stun enable Celerity, so Chen's attacks lower Stagger's cooldown and grant him 30 Armor."
+    evidence: ["Thunder Clap", "Storm Bolt", "Celerity", "Stagger"]
+    conditions: "Celerity at level 16."
+    confidence: low
+  - a: chen
+    b: zarya
+    why: "Shield Ally stacks on top of Fortifying Brew, and Graviton Surge keeps enemies inside Keg Smash's brew."
+    evidence: ["Shield Ally", "Fortifying Brew", "Graviton Surge", "Keg Smash"]
+    confidence: medium

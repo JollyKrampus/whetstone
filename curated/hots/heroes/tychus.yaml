@@ -1,0 +1,72 @@
+hero: tychus
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Tychus' damage is rapid basic attacks amplified by Minigun's max-Health bonus, so anything that stops his attacks stops him."
+  - tag: sustained-dps
+    why: "Overkill channels while he moves and Minigun comes back every few seconds, so Tychus wins long fights against large targets."
+counters:
+  # --- strong against ---
+  - a: tychus
+    b: stitches
+    why: "Minigun deals bonus damage based on max Health, and Stitches' 3020 Health is the biggest pool in the game; Devour's percent heal can't keep pace."
+    evidence: ["Minigun", "Devour"]
+    confidence: high
+  - a: tychus
+    b: chogall
+    why: "Cho'gall's combined Health pool is enormous, so Minigun's max-Health bonus, raised to 4% by The Bigger They Are, melts Cho quickly."
+    evidence: ["Minigun", "The Bigger They Are", "Ogre Hide"]
+    confidence: high
+  - a: tychus
+    b: blaze
+    why: "Blaze's 2900 Health makes him a prime Minigun target, and Pyromania's Armor only trims a bonus that grows with his own Health pool."
+    evidence: ["Minigun", "Pyromania"]
+    confidence: medium
+  - a: tychus
+    b: deathwing
+    why: "Deathwing is permanently Unstoppable so CC can't stop him, but Minigun's max-Health bonus chews through his 2750 Health and knocks off Armor Plates as it goes."
+    evidence: ["Minigun", "Aspect of Death"]
+    confidence: low
+  - a: tychus
+    b: sonya
+    why: "Minigun's bonus damage scales with max Health, so Sonya's 2450 Health makes her a prime target, and Frag Grenade's knockback plus Run and Gun keep her from sticking to him."
+    evidence: ["Minigun", "Frag Grenade", "Run and Gun", "Ancient Spear"]
+    confidence: medium
+  # --- weak against ---
+  - a: johanna
+    b: tychus
+    why: "Shield Glare blinds Tychus, so his basic attacks, and the Minigun bonus riding on them, miss for 1.5 seconds."
+    evidence: ["Shield Glare", "Minigun"]
+    confidence: medium
+  - a: cassia
+    b: tychus
+    why: "Blinding Light blinds Tychus for 2 seconds and Avoidance gives Cassia Armor while she moves, blunting the basic attacks his damage depends on."
+    evidence: ["Blinding Light", "Avoidance", "Minigun"]
+    confidence: medium
+  - a: lili
+    b: tychus
+    why: "Blinding Wind auto-targets the nearest enemies and blinds them, cancelling Tychus' basic-attack damage without Li Li needing to aim."
+    evidence: ["Blinding Wind", "Minigun"]
+    confidence: medium
+  - a: varian
+    b: tychus
+    why: "Parry blocks every basic attack for 1.25 seconds and stores two charges, so Varian can waste most of a 3-second Minigun window."
+    evidence: ["Parry", "Minigun"]
+    conditions: "Varian's Taunt passive raises his max Health, which feeds Minigun, so this holds best for Colossus Smash or Twin Blades builds."
+    confidence: low
+synergies:
+  - a: rehgar
+    b: tychus
+    why: "Bloodlust's Attack Speed puts more Minigun hits into each window, and its lifesteal keeps Tychus alive at his short range."
+    evidence: ["Bloodlust", "Minigun"]
+    confidence: medium
+  - a: ltmorales
+    b: tychus
+    why: "Stim Drone's 75% Attack Speed adds more Minigun hits per window, and Healing Beam sustains Tychus while he fights up close."
+    evidence: ["Stim Drone", "Healing Beam", "Minigun"]
+    confidence: medium
+  - a: abathur
+    b: tychus
+    why: "Symbiote on Tychus adds Carapace shields and Spike Burst while he fights at short range, and Ultimate Evolution can clone him for a second Minigun."
+    evidence: ["Symbiote", "Carapace", "Ultimate Evolution", "Minigun"]
+    confidence: medium

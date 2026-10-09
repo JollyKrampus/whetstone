@@ -1,0 +1,56 @@
+hero: malfurion
+reviewedFor: "2.57"
+traits:
+  - tag: peel
+    why: "Entangling Roots covers an area that grows for 3 seconds, so placing it in a diver's path stops them from reaching the backline."
+  - tag: poke
+    why: "Moonfire is a cheap 3-second area nuke that also reveals, letting Malfurion chip enemies and heal his Regrowth targets at the same time."
+counters:
+  - a: malfurion
+    b: genji
+    why: "Twilight Dream Silences everyone near Malfurion for 3 seconds, so a diving Genji cannot Deflect, Cyber Agility or Swift Strike his way out."
+    evidence: ["Twilight Dream", "Deflect", "Cyber Agility", "Swift Strike"]
+    conditions: "Requires Twilight Dream at level 10."
+    confidence: medium
+  - a: malfurion
+    b: tracer
+    why: "A Silenced Tracer cannot Blink or Recall, and Twilight Dream's large area covers the spot she dives into, leaving her stranded for 3 seconds."
+    evidence: ["Twilight Dream", "Blink", "Recall"]
+    conditions: "Requires Twilight Dream at level 10."
+    confidence: medium
+  - a: malfurion
+    b: zeratul
+    why: "Moonfire reveals Heroes it hits for 2 seconds (5 with Celestial Alignment), exposing Zeratul's approach, and Twilight Dream's Silence stops his Blink exit."
+    evidence: ["Moonfire", "Celestial Alignment", "Twilight Dream", "Permanent Cloak", "Blink"]
+    confidence: medium
+  - a: ana
+    b: malfurion
+    why: "Biotic Grenade blocks the Regrowth heal-over-time ticks Malfurion relies on, and Sleep Dart catches a healer with no mobility."
+    evidence: ["Biotic Grenade", "Regrowth", "Sleep Dart"]
+    confidence: medium
+  - a: chromie
+    b: malfurion
+    why: "Regrowth heals slowly over 20 seconds, so Chromie's spiky Sand Blast and Dragon's Breath hits kill targets faster than it can tick, and her range keeps her outside Moonfire."
+    evidence: ["Regrowth", "Sand Blast", "Dragon's Breath", "Moonfire"]
+    confidence: low
+  - a: nova
+    b: malfurion
+    why: "Malfurion's healing is slow Regrowth ticks with no burst heal, so Snipe plus Triple Tap kills a target, or Malfurion himself, before the healing can catch up."
+    evidence: ["Snipe", "Triple Tap", "Regrowth"]
+    confidence: low
+synergies:
+  - a: liming
+    b: malfurion
+    why: "Innervate gives Li-Ming Mana and faster cooldowns during her Magic Missiles spam, and Entangling Roots holds targets still for long Arcane Orbs."
+    evidence: ["Innervate", "Magic Missiles", "Entangling Roots", "Arcane Orb"]
+    confidence: medium
+  - a: guldan
+    b: malfurion
+    why: "Gul'dan never regenerates Mana and pays Health for Life Tap, so Innervate gives him free Mana and faster Fel Flame and Corruption cooldowns."
+    evidence: ["Innervate", "Life Tap", "Fel Flame", "Corruption"]
+    confidence: medium
+  - a: jaina
+    b: malfurion
+    why: "Jaina's Blizzard and Cone of Cold drain Mana quickly; Innervate refills it, and Entangling Roots keeps targets in place for all three Blizzard waves."
+    evidence: ["Innervate", "Entangling Roots", "Blizzard", "Cone of Cold"]
+    confidence: medium

@@ -1,0 +1,71 @@
+hero: ana
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Ana has no dash, blink or self-cleanse, so a diver who reaches her has to be peeled off by her teammates."
+  - tag: peel
+    why: "Sleep Dart takes a diver out of the fight for up to 3 seconds, and Biotic Grenade turns off their lifesteal."
+counters:
+  # --- strong against ---
+  - a: ana
+    b: malganis
+    why: "Mal'Ganis lives on Vampiric Touch healing; a Biotic Grenade on him cancels all of it for 1.75 seconds, and Sleep Dart can stop Night Rush before it reaches the backline."
+    evidence: ["Biotic Grenade", "Sleep Dart", "Vampiric Touch", "Night Rush"]
+    confidence: medium
+  - a: ana
+    b: leoric
+    why: "Drain Hope's self-heal is Leoric's main sustain; a Biotic Grenade during the drain turns that healing off, and Anti-Healer stretches the window."
+    evidence: ["Biotic Grenade", "Anti-Healer", "Drain Hope"]
+    confidence: medium
+  - a: ana
+    b: thebutcher
+    why: "Butcher's Brand heals Butcher for most of his attack damage on branded heroes; Biotic Grenade blocks that healing, and Sleep Dart catches him once Ruthless Onslaught's Unstoppable ends."
+    evidence: ["Biotic Grenade", "Sleep Dart", "Butcher's Brand", "Ruthless Onslaught"]
+    confidence: medium
+  - a: ana
+    b: alexstrasza
+    why: "Biotic Grenade stops all healing for 1.75 seconds; a Gift of Life cast into it still costs Alexstrasza 15% of her health while the heal does nothing."
+    evidence: ["Biotic Grenade", "Anti-Healer", "Gift of Life"]
+    confidence: medium
+  - a: ana
+    b: sonya
+    why: "Whirlwind heals Sonya for 75% of the damage it deals to heroes; a grenade on her mid-Whirlwind turns off the sustain she uses to stay in melee."
+    evidence: ["Biotic Grenade", "Whirlwind"]
+    confidence: medium
+  # --- weak against ---
+  - a: zeratul
+    b: ana
+    why: "Ana cannot escape once Zeratul Blinks onto her from stealth, and Vorpal Blade lets him follow her even if his first attempt is peeled."
+    evidence: ["Permanent Cloak", "Blink", "Vorpal Blade", "Cleave"]
+    confidence: medium
+  - a: tracer
+    b: ana
+    why: "Three Blink charges make Sleep Dart hard to land on Tracer, and Ana has no way to escape her constant basic attacks once she is on top of her."
+    evidence: ["Blink", "Reload", "Sleep Dart"]
+    confidence: medium
+  - a: valeera
+    b: ana
+    why: "From Vanish Valeera picks the moment Ana is alone, and her stealth opener disables the immobile Ana before Sleep Dart can be aimed."
+    evidence: ["Vanish", "Sinister Strike", "Eviscerate", "Sleep Dart"]
+    confidence: medium
+  - a: genji
+    b: ana
+    why: "Cyber Agility and Swift Strike close the gap instantly, and Ana's only defensive tool, Sleep Dart, is a narrow skillshot against a hero who keeps dashing."
+    evidence: ["Cyber Agility", "Swift Strike", "Sleep Dart"]
+    confidence: medium
+synergies:
+  - a: ana
+    b: guldan
+    why: "Nano Boost restores 200 mana to Gul'dan, who does not regenerate mana, and makes Fel Flame recharge 150% faster with 30% Spell Power."
+    evidence: ["Nano Boost", "Life Tap", "Fel Flame"]
+    confidence: medium
+  - a: ana
+    b: kaelthas
+    why: "Nano Boost speeds Flamestrike, Living Bomb and Gravity Lapse cooldowns by 150% for 8 seconds with 30% Spell Power, turning one engage into a stream of burst."
+    evidence: ["Nano Boost", "Flamestrike", "Living Bomb", "Gravity Lapse"]
+    confidence: medium
+  - a: ana
+    b: liming
+    why: "Nano Boost on Li-Ming brings Magic Missiles and Arcane Orb back almost instantly and adds 30% Spell Power to every cast."
+    evidence: ["Nano Boost", "Magic Missiles", "Arcane Orb"]
+    confidence: medium

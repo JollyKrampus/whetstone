@@ -1,0 +1,76 @@
+hero: genji
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Cyber Agility and Swift Strike's refund on kills let him jump straight onto a backliner and chain into the next one."
+  - tag: burst
+    why: "X-Strike and Dragonblade deliver large bursts over a short window, best against grouped or low-health targets."
+counters:
+  # --- strong against ---
+  - a: genji
+    b: abathur
+    why: "Cyber Agility hops walls straight to where Abathur hides, and a Shuriken volley plus Swift Strike is more than enough burst for his small health pool."
+    evidence: ["Cyber Agility", "Shuriken", "Swift Strike"]
+    confidence: medium
+  - a: genji
+    b: ana
+    why: "Cyber Agility and Swift Strike close the gap instantly, and Ana's only defensive tool, Sleep Dart, is a narrow skillshot against a hero who keeps dashing."
+    evidence: ["Cyber Agility", "Swift Strike", "Sleep Dart"]
+    confidence: medium
+  - a: genji
+    b: alarak
+    why: "Deflect blocks Discord Strike and Lightning Surge damage for 1.25 seconds and throws kunai back, and Alarak's damage is almost entirely abilities on cooldown."
+    evidence: ["Deflect", "Discord Strike", "Lightning Surge"]
+    confidence: medium
+  - a: genji
+    b: chromie
+    why: "Cyber Agility and Swift Strike close the distance instantly, and Deflect blocks the Sand Blast she fires in panic."
+    evidence: ["Cyber Agility", "Swift Strike", "Deflect", "Sand Blast"]
+    confidence: medium
+  - a: genji
+    b: hanzo
+    why: "Hanzo has only 1375 health and Natural Agility needs terrain to jump; Cyber Agility and Swift Strike reach him before he can get away."
+    evidence: ["Cyber Agility", "Swift Strike", "Natural Agility"]
+    confidence: medium
+  - a: genji
+    b: guldan
+    why: "Gul'dan has no escape in his base kit; Swift Strike and Shuriken burst him, and Deflect blocks Drain Life and Fel Flame."
+    evidence: ["Swift Strike", "Shuriken", "Deflect", "Drain Life", "Fel Flame"]
+    confidence: medium
+  # --- weak against ---
+  - a: brightwing
+    b: genji
+    why: "Polymorph is point-and-click, so Genji can't dodge it, and while polymorphed he can't Deflect, Swift Strike or Cyber Agility away."
+    evidence: ["Polymorph", "Deflect", "Swift Strike", "Cyber Agility"]
+    confidence: medium
+  - a: uther
+    b: genji
+    why: "Hammer of Justice is a targeted 1-second stun Genji can't dodge, and Divine Shield saves the ally he dived."
+    evidence: ["Hammer of Justice", "Divine Shield", "Swift Strike"]
+    confidence: medium
+  - a: diablo
+    b: genji
+    why: "Overpower grabs Genji wherever he lands and Shadow Charge into terrain stuns him; both are targeted, so his mobility doesn't help."
+    evidence: ["Overpower", "Shadow Charge", "Cyber Agility"]
+    confidence: low
+  - a: garrosh
+    b: genji
+    why: "Wrecking Ball throws Genji into Garrosh's team right after he dives in, away from his target."
+    evidence: ["Wrecking Ball", "Swift Strike"]
+    confidence: low
+synergies:
+  - a: anduin
+    b: genji
+    why: "Genji can commit with Swift Strike and Dragonblade knowing Leap of Faith will pull him back, Unstoppable, if the dive goes wrong."
+    evidence: ["Leap of Faith", "Swift Strike", "Dragonblade"]
+    confidence: medium
+  - a: genji
+    b: mei
+    why: "Ice Wall traps heroes for 2.5 seconds, perfect for Dragonblade's wide slashes."
+    evidence: ["Ice Wall", "Dragonblade"]
+    confidence: medium
+  - a: genji
+    b: zarya
+    why: "Graviton Surge holds heroes together for Dragonblade's arcs or X-Strike's delayed detonation."
+    evidence: ["Graviton Surge", "Dragonblade", "X-Strike"]
+    confidence: medium

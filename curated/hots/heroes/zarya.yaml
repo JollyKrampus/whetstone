@@ -1,0 +1,82 @@
+hero: zarya
+reviewedFor: "2.57"
+traits:
+  - tag: save
+    why: "Shield Ally absorbs 420 damage on an ally, and Cleansing Shield can also strip disables off them."
+  - tag: peel
+    why: "Expulsion Zone knocks divers back and slows them whenever they re-enter, while Particle Grenade punishes them."
+counters:
+  # --- strong against ---
+  - a: zarya
+    b: illidan
+    why: "Expulsion Zone knocks Illidan back and slows him whenever he re-enters, and Shield Ally soaks his burst on a target while feeding Zarya Energy."
+    evidence: ["Expulsion Zone", "Shield Ally", "Energy", "Dive"]
+    confidence: low
+  - a: zarya
+    b: valeera
+    why: "Shield Ally absorbs Valeera's opener, and Cleansing Shield removes Cheap Shot's stun or Garrote's silence from the target."
+    evidence: ["Shield Ally", "Cleansing Shield", "Blade Flurry", "Eviscerate"]
+    conditions: "Cleansing Shield at level 16."
+    confidence: low
+  - a: zarya
+    b: kerrigan
+    why: "Shield Ally soaks Kerrigan's combo damage, and Cleansing Shield breaks Impaling Blades' stun before her Ravage follow-up lands."
+    evidence: ["Shield Ally", "Cleansing Shield", "Impaling Blades", "Ravage"]
+    conditions: "Cleansing Shield at level 16."
+    confidence: low
+  # --- weak against ---
+  - a: varian
+    b: zarya
+    why: "Shattering Throw deals up to 1400 bonus damage to Shields, popping Personal Barrier or Shield Ally on demand and denying Zarya the Energy she would have gained."
+    evidence: ["Shattering Throw", "Personal Barrier", "Shield Ally", "Energy"]
+    conditions: "Shattering Throw at level 13."
+    confidence: medium
+  - a: ltmorales
+    b: zarya
+    why: "EMP Grenade deals up to 400 bonus damage to Shields, stripping Personal Barrier or Shield Ally before they can build Zarya Energy."
+    evidence: ["EMP Grenade", "Personal Barrier", "Shield Ally", "Energy"]
+    conditions: "EMP Grenade at level 13."
+    confidence: low
+  - a: kelthuzad
+    b: zarya
+    why: "Strip Shields lets Chains of Kel'Thuzad deal up to 270 bonus damage to Shields, cutting through Zarya's barriers."
+    evidence: ["Strip Shields", "Chains of Kel'Thuzad", "Personal Barrier"]
+    conditions: "Strip Shields at level 4."
+    confidence: low
+  - a: rehgar
+    b: zarya
+    why: "Purification makes Purge deal up to 330 damage to Shields and cut healing, popping Shield Ally or Personal Barrier on demand."
+    evidence: ["Purification", "Purge", "Shield Ally", "Personal Barrier"]
+    conditions: "Purification at level 7."
+    confidence: low
+synergies:
+  - a: ragnaros
+    b: zarya
+    why: "Graviton Surge drags enemies to one point for 2.5 seconds, so Sulfuras Smash's center and Living Meteor's roll hit several Heroes at once."
+    evidence: ["Graviton Surge", "Sulfuras Smash", "Living Meteor"]
+    confidence: medium
+  - a: stukov
+    b: zarya
+    why: "Graviton Surge holds enemies inside Lurking Arm's silence, and Virulent Reaction roots anyone carrying a Weighted Pustule there."
+    evidence: ["Graviton Surge", "Lurking Arm", "Virulent Reaction", "Weighted Pustule"]
+    confidence: medium
+  - a: tracer
+    b: zarya
+    why: "Graviton Surge holds enemies in place so Pulse Bomb sticks reliably, and Shield Ally gives Tracer a buffer to dive deeper."
+    evidence: ["Graviton Surge", "Shield Ally", "Pulse Bomb"]
+    confidence: medium
+  - a: xul
+    b: zarya
+    why: "Graviton Surge groups enemies so Poison Nova's missiles hit all of them, and Shield Ally keeps Xul alive while he fights in melee."
+    evidence: ["Graviton Surge", "Shield Ally", "Poison Nova"]
+    confidence: medium
+  - a: xalatath
+    b: zarya
+    why: "Graviton Surge holds enemies in place for a fully charged Void Eruption and makes Shadow Mark's center easy to land on several targets."
+    evidence: ["Graviton Surge", "Void Eruption", "Shadow Mark"]
+    confidence: medium
+  - a: thrall
+    b: zarya
+    why: "Graviton Surge groups enemies so Sundering's line stun and Earthquake's slowing pulses hit all of them."
+    evidence: ["Graviton Surge", "Sundering", "Earthquake"]
+    confidence: medium

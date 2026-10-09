@@ -1,0 +1,59 @@
+hero: muradin
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "2765 Health, Second Wind regeneration and Dwarf Toss's Armor let Muradin absorb damage at the front of every fight."
+  - tag: engage
+    why: "Dwarf Toss leaps onto a target and Storm Bolt stuns on a short cooldown, giving him a reliable catch tool."
+counters:
+  - a: muradin
+    b: thebutcher
+    why: "Thunder Clap slows The Butcher's Attack Speed by 30% (50% with Reverberation), and Storm Bolt stuns him off a target after Ruthless Onslaught lands."
+    evidence: ["Thunder Clap", "Reverberation", "Storm Bolt", "Ruthless Onslaught"]
+    confidence: medium
+  - a: muradin
+    b: samuro
+    why: "Thunder Clap is an area blast, so one cast slows the attacks and movement of Samuro and both Mirror Images, cutting the damage of his whole illusion team."
+    evidence: ["Thunder Clap", "Mirror Image"]
+    confidence: low
+  - a: muradin
+    b: greymane
+    why: "Worgen form turns Greymane into a melee Basic Attacker; Thunder Clap cuts his Attack Speed and Dwarf Block negates his heaviest hits."
+    evidence: ["Thunder Clap", "Dwarf Block", "Curse of the Worgen"]
+    confidence: low
+  - a: muradin
+    b: illidan
+    why: "Storm Bolt stuns Illidan out of Dive and Thunder Clap's Attack Speed slow cuts his Betrayer's Thirst healing, so Muradin can hold him off the backline."
+    evidence: ["Storm Bolt", "Thunder Clap", "Dive", "Betrayer's Thirst"]
+    confidence: medium
+  - a: malthael
+    b: muradin
+    why: "Reaper's Mark ticks every second, so a marked Muradin never goes 4 seconds without damage, shutting off Second Wind while percent damage eats his 2765 Health."
+    evidence: ["Reaper's Mark", "Second Wind"]
+    confidence: medium
+  - a: leoric
+    b: muradin
+    why: "Drain Hope's 20% maximum Health drain is large against Muradin's pool, and Wraith Walk's Unstoppable shrugs off Storm Bolt and Haymaker."
+    evidence: ["Drain Hope", "Wraith Walk", "Storm Bolt", "Haymaker"]
+    confidence: low
+  - a: lunara
+    b: muradin
+    why: "Nature's Toxin keeps ticking on Muradin, so Second Wind's out-of-combat regeneration rarely starts, and Crippling Spores slows his walk back in."
+    evidence: ["Nature's Toxin", "Second Wind", "Crippling Spores"]
+    confidence: low
+synergies:
+  - a: jaina
+    b: muradin
+    why: "Jaina's Chill keeps targets Slowed, which triggers Give 'em the Axe's bonus damage and counts toward Storm Bolt's quest on every Basic Attack."
+    evidence: ["Frostbite", "Give 'em the Axe!", "Storm Bolt"]
+    confidence: medium
+  - a: malfurion
+    b: muradin
+    why: "Entangling Roots holds targets still for Storm Bolt's projectile and counts as a Root for Give 'em the Axe's 40% Basic Attack bonus."
+    evidence: ["Entangling Roots", "Storm Bolt", "Give 'em the Axe!"]
+    confidence: medium
+  - a: muradin
+    b: tyrande
+    why: "Lunar Flare's area stun triggers Give 'em the Axe and counts double for Storm Bolt's quest, and Hunter's Mark lowers the target's Armor for Muradin's follow-up."
+    evidence: ["Lunar Flare", "Hunter's Mark", "Give 'em the Axe!", "Storm Bolt"]
+    confidence: low

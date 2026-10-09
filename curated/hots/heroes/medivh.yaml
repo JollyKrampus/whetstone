@@ -1,0 +1,64 @@
+hero: medivh
+reviewedFor: "2.57"
+traits:
+  - tag: save
+    why: "Force of Will makes an ally immune to all damage for 1.5 seconds, enough to cancel most burst combos and damage heroics."
+  - tag: engage
+    why: "Portal lets his whole team teleport across walls to start a fight or flank from an unexpected angle."
+counters:
+  - a: medivh
+    b: nova
+    why: "Snipe into Triple Tap is one short burst window, and Force of Will makes the target immune to all damage for 1.5 seconds, wasting Nova's 100-second heroic."
+    evidence: ["Force of Will", "Triple Tap", "Snipe"]
+    confidence: high
+  - a: medivh
+    b: chromie
+    why: "Chromie's kills come from timed Sand Blast and Dragon's Breath bursts that Force of Will negates, and Raven Form is immune to effects like Time Trap."
+    evidence: ["Force of Will", "Sand Blast", "Dragon's Breath", "Raven Form", "Time Trap"]
+    confidence: medium
+  - a: medivh
+    b: greymane
+    why: "Cursed Bullet and Go for the Throat are single big hits, and a well-timed Force of Will cancels the damage outright and wastes the cooldown."
+    evidence: ["Force of Will", "Cursed Bullet", "Go for the Throat"]
+    confidence: medium
+  - a: medivh
+    b: kaelthas
+    why: "Pyroblast and Flamestrike are slow, telegraphed bursts, so Medivh has time to put Force of Will on the target and block all of the damage."
+    evidence: ["Force of Will", "Pyroblast", "Flamestrike"]
+    confidence: medium
+  - a: medivh
+    b: liming
+    why: "Li-Ming's Critical Mass snowball depends on securing the first kill; Force of Will denies it by absorbing Arcane Orb and Disintegrate on her target."
+    evidence: ["Force of Will", "Critical Mass", "Arcane Orb", "Disintegrate"]
+    confidence: medium
+  - a: valeera
+    b: medivh
+    why: "Valeera's stealth Garrote Silences Medivh so he cannot Force of Will himself or an ally, and his 1470 Health falls to her follow-up before he can escape."
+    evidence: ["Vanish", "Eviscerate", "Force of Will"]
+    confidence: low
+  - a: tracer
+    b: medivh
+    why: "Force of Will lasts only 1.5 seconds, and Tracer's sustained Basic Attack damage simply waits it out before Blinking back onto a fragile Medivh."
+    evidence: ["Force of Will", "Blink", "Reload"]
+    confidence: low
+  - a: zeratul
+    b: medivh
+    why: "Zeratul can open on Medivh himself from Permanent Cloak, and once Force of Will is spent, Singularity Spike and Cleave finish a 1470-Health support."
+    evidence: ["Permanent Cloak", "Force of Will", "Singularity Spike", "Cleave"]
+    confidence: low
+synergies:
+  - a: etc
+    b: medivh
+    why: "Portal lets E.T.C. appear at an unexpected angle for Powerslide into Mosh Pit, turning a flank into a team-wide stun."
+    evidence: ["Portal", "Powerslide", "Mosh Pit"]
+    confidence: medium
+  - a: garrosh
+    b: medivh
+    why: "Portal puts Garrosh behind the enemy team, where Wrecking Ball throws a backliner into Medivh's side of the fight."
+    evidence: ["Portal", "Wrecking Ball"]
+    confidence: medium
+  - a: diablo
+    b: medivh
+    why: "Portal drops Diablo on the far side of an enemy so Shadow Charge knocks them toward his team, or into terrain for the stun."
+    evidence: ["Portal", "Shadow Charge"]
+    confidence: low
