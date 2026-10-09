@@ -221,7 +221,9 @@ function roles(env: Env): Provider {
     // On ban steps ctx is the opponent's view: their needs make a hero more (or less) of a threat.
     const team = heroes(env.data, ctx.allies);
     const verdicts = roleVerdicts(c, team, availableHeroes(env.data, ctx), ctx.picksLeft, env.roles, alliesOf(ctx, env));
-    return verdicts.map((v) => ({ key: 'role' as const, value: v.value, reasons: v.reasons }));
+    // A ban removes one of many heroes that could fill a role, so only the penalties carry over:
+    // a hero they would not pick (second tank, impossible comp) is less of a threat.
+    return (ctx.action === 'ban' ? verdicts.filter((v) => v.value < 0) : verdicts).map((v) => ({ key: 'role' as const, value: v.value, reasons: v.reasons }));
   };
 }
 

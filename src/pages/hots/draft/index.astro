@@ -1,0 +1,133 @@
+---
+/**
+ * /hots/draft/: Storm League draft helper (SPEC §7). The island gets the roster, map list and
+ * free rotation as props (class A, build time) and fetches the staged draft shard for the
+ * scoring tables; Heroes Profile numbers arrive only inside that shard's class-B overlay, and
+ * the island credits them inline when they are used.
+ */
+import { formatDayUTC } from '../../../core/format.ts';
+import { navHref, sourcesFor } from '../../../games/registry.ts';
+import DraftTool from '../../../games/hots/components/draft/DraftTool.tsx';
+import { draftMaps, draftRoster, freeRotation, hpCredit } from '../../../games/hots/components/draft/build.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+import { stagedUrl } from '../../../lib/stagemap.ts';
+
+const shardUrl = stagedUrl('hots', 'draft');
+const roster = draftRoster();
+const maps = draftMaps();
+const rotation = freeRotation(roster);
+const credit = hpCredit(sourcesFor('hots', ['heroesprofile'])[0]);
+const rotationLabel = rotation.window ? `Free this week: ${formatDayUTC(rotation.window.start)} to ${formatDayUTC(rotation.window.end)}` : null;
+---
+
+<GameLayout
+  game="hots"
+  title="Draft helper"
+  description="Storm League draft helper for Heroes of the Storm: the real pick and ban order, Cho'gall rules, role checks and explained pick and ban suggestions. Share any draft as a link."
+  inlineCredits={false}
+>
+  <div class="dpage">
+    <header class="dpage__head">
+      <p class="kicker">Storm League · {roster.length} heroes</p>
+      <h1>Draft helper</h1>
+      <p class="dpage__lead">
+        Follow the real Storm League order step by step: three bans each, picks in 1-2-2-2-2-1, Cho'gall only where a team picks twice in a row. Every
+        suggestion says why it ranks where it does and what to watch out for, and the link in your address bar always holds the whole draft.
+      </p>
+    </header>
+
+    <noscript>
+      <p class="dpage__nojs">The draft helper needs JavaScript. The hero and map pages work without it.</p>
+    </noscript>
+
+    <DraftTool
+      client:load
+      shardUrl={shardUrl}
+      roster={roster}
+      maps={maps}
+      free={rotation.ids}
+      freeLabel={rotationLabel}
+      credit={credit}
+      poolHref={navHref('hots')}
+    />
+
+    <section class="dpage__how" aria-labelledby="draft-how">
+      <h2 id="draft-how">How the suggestions work</h2>
+      <ul>
+        <li>
+          <strong>Picks</strong> add up evidence for the team on the clock: counters against heroes already locked by the other side, synergy with
+          teammates, fit for the chosen map, and whether the team can still end up with a Healer and a frontline hero.
+        </li>
+        <li>
+          <strong>Bans</strong> are ranked as threats: how strong the hero would be for the other side, which of your locked heroes it beats, and how
+          many heroes you could still pick it counters.
+        </li>
+        <li>
+          <strong>Early picks</strong> favour heroes with few hard counters still available to the other side.
+        </li>
+        <li>
+          Without match statistics every signal is <em>theory</em>: rules applied to ability and talent text plus hand-written notes. When statistics
+          are available they take over and the source is credited next to them.
+        </li>
+        <li>
+          Sort modes re-weigh the same signals. Tap <em>Why this score?</em> on any suggestion to see each signal, its weight and what it adds.
+        </li>
+      </ul>
+      <p>
+        Free mode works like a team picker: put heroes on either team in any order. Your pool (owned heroes and favourites) is kept in this browser
+        only.
+      </p>
+    </section>
+  </div>
+</GameLayout>
+
+<style>
+  .dpage {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .dpage__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .dpage__lead {
+    max-width: 68ch;
+    color: var(--text-muted);
+  }
+
+  .dpage__nojs {
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+  }
+
+  .dpage__how {
+    display: grid;
+    gap: var(--sp-3);
+    max-width: 72ch;
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--border);
+  }
+
+  .dpage__how h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .dpage__how ul {
+    display: grid;
+    gap: var(--sp-2);
+    padding-left: 1.25rem;
+  }
+
+  .dpage__how p,
+  .dpage__how li {
+    color: var(--text-muted);
+  }
+
+  .dpage__how strong,
+  .dpage__how em {
+    color: var(--text);
+  }
+</style>

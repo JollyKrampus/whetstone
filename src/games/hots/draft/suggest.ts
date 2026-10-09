@@ -24,8 +24,8 @@ export interface PresetInfo {
   label: string;
   /** False when the data this mode sorts by is missing. */
   enabled: boolean;
-  /** Why it is disabled (shown as text, never only on hover). */
-  why?: string;
+  /** Why it is disabled: missing statistics or no map chosen (shown as text, never only on hover). */
+  why?: 'stats' | 'map';
   /** Visible at all ("Community" only exists with votes data). */
   visible: boolean;
 }
@@ -47,11 +47,21 @@ export function presetInfo(opts: { stats: boolean; map: string; votes?: boolean 
     const base = { id, label: PRESET_LABEL[id], enabled: true, visible: true };
     if (id === 'community') return { ...base, enabled: !!opts.votes, visible: !!opts.votes };
     if ((id === 'winrate' || id === 'tier') && !opts.stats) {
-      return { ...base, enabled: false, why: `${PRESET_LABEL[id]} needs match statistics, which are not available, so suggestions use theory.` };
+      return { ...base, enabled: false, why: 'stats' as const };
     }
-    if (id === 'map' && !opts.map) return { ...base, enabled: false, why: 'Choose a map to sort by map fit.' };
+    if (id === 'map' && !opts.map) return { ...base, enabled: false, why: 'map' as const };
     return base;
   });
+}
+
+/** One sentence explaining every disabled mode, e.g. "Win rate and Tier need match statistics …". */
+export function disabledNote(list: readonly PresetInfo[]): string {
+  const visible = list.filter((p) => p.visible && !p.enabled);
+  const stats = visible.filter((p) => p.why === 'stats').map((p) => p.label);
+  const parts: string[] = [];
+  if (stats.length) parts.push(`${stats.join(' and ')} need${stats.length === 1 ? 's' : ''} match statistics, which are not available right now.`);
+  if (visible.some((p) => p.why === 'map')) parts.push('Choose a map to sort by map fit.');
+  return parts.join(' ');
 }
 
 /** Weights of a sort mode for pick steps. */

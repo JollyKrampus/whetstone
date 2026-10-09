@@ -11,7 +11,7 @@ import {
 import { decodeShard } from './data.ts';
 import { availableHeroes, banProviders, hardCounter, pickProviders } from './providers.ts';
 import { entityRules, slConfig } from './rules.ts';
-import { banWeights, breakdown, presetInfo, reasonLabel, suggest, usesStats } from './suggest.ts';
+import { banWeights, breakdown, disabledNote, presetInfo, reasonLabel, suggest, usesStats } from './suggest.ts';
 import { fixtureShard, idOf, statsData, theoryData } from './testkit.ts';
 
 const theory = theoryData();
@@ -128,7 +128,7 @@ describe('stats providers', () => {
 describe('suggest', () => {
   const rules = entityRules(theory.heroes);
 
-  function at(choices: (string | null)[], data = theory) {
+  function at(choices: (string | null)[]) {
     const state = replaySequential(slConfig('a', rules), choices).state;
     const c = sequentialContext(state, { map: 'cursed-hollow' })!;
     return { state, ctx: c, candidates: legalCandidates(state, ALL) };
@@ -187,7 +187,7 @@ describe('suggest', () => {
   });
 
   it('phrases enemy-perspective stat reasons as threats to your picks', () => {
-    const s = at([null, null, null, null, id('Muradin')], stats);
+    const s = at([null, null, null, null, id('Muradin')]);
     expect(s.ctx).toMatchObject({ team: 'B', action: 'pick' });
     const list = suggest({ data: stats, ctx: s.ctx, candidates: s.candidates, preset: 'composite' });
     const texts = list.flatMap((x) => x.signals.flatMap((sig) => sig.reasons.map((r) => r.text)));
@@ -196,7 +196,7 @@ describe('suggest', () => {
   });
 
   it('breaks a score down per signal with the mode weights', () => {
-    const { ctx: c, candidates } = at([null, null, null, null, id('Muradin')], stats);
+    const { ctx: c, candidates } = at([null, null, null, null, id('Muradin')]);
     const [top] = suggest({ data: stats, ctx: c, candidates, preset: 'composite' });
     const rows = breakdown(top!, WEIGHT_PRESETS.composite);
     const sum = rows.reduce((s, r) => s + r.contribution, 0);
@@ -209,8 +209,10 @@ describe('presets', () => {
   it('disables stats-only modes without stats and hides Community without votes', () => {
     const list = presetInfo({ stats: false, map: '' });
     expect(list.find((p) => p.id === 'winrate')).toMatchObject({ enabled: false });
-    expect(list.find((p) => p.id === 'tier')?.why).toContain('match statistics');
-    expect(list.find((p) => p.id === 'map')).toMatchObject({ enabled: false, why: 'Choose a map to sort by map fit.' });
+    expect(list.find((p) => p.id === 'tier')?.why).toBe('stats');
+    expect(list.find((p) => p.id === 'map')).toMatchObject({ enabled: false, why: 'map' });
+    expect(disabledNote(list)).toBe('Win rate and Tier need match statistics, which are not available right now. Choose a map to sort by map fit.');
+    expect(disabledNote(presetInfo({ stats: true, map: 'x' }))).toBe('');
     expect(list.find((p) => p.id === 'community')?.visible).toBe(false);
     const full = presetInfo({ stats: true, map: 'cursed-hollow' });
     expect(full.filter((p) => p.visible && p.enabled).map((p) => p.id)).toEqual(['composite', 'winrate', 'counters', 'synergy', 'map', 'tier']);
