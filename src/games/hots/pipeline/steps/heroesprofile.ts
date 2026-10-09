@@ -55,7 +55,8 @@ export async function runHeroesProfile(
   input: { heroes: readonly HeroInput[]; maps: readonly GameMap[]; major: string; majorSince: string; versions: readonly string[]; liveBuilds: string[] },
   deps: HeroesProfileDeps = {},
 ): Promise<HeroesProfileResult> {
-  const gate = hpGate(env.ctx.secrets, env.ctx.offline);
+  // An injected transport (tests) never touches the network, so offline does not disable it.
+  const gate = hpGate(env.ctx.secrets, env.ctx.offline && !deps.transport);
   if (gate) {
     setStatus(env, 'heroesprofile', 'disabled', gate);
     return { stats: null, shares: null };

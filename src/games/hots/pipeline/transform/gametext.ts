@@ -25,8 +25,8 @@ export function renderGameText(raw: string | undefined | null): string {
   s = s.replace(/<[^>]+>/g, '');
   s = decodeEntities(s);
   s = s.replace(SCALING_RE, (_m, v: string) => ` (+${scalingPercent(v)}% per level)`);
-  s = s.replace(/[​-‍﻿]/g, '');
-  const lines = s.split('\n').map((line) => line.replace(/[ \t ]+/g, ' ').trim());
+  s = s.replace(/[\u200B-\u200D\uFEFF]/g, '');
+  const lines = s.split('\n').map((line) => line.replace(/[ \t\u00A0]+/g, ' ').trim());
   const out: string[] = [];
   for (const line of lines) {
     if (line === '' && (out.length === 0 || out[out.length - 1] === '')) continue;

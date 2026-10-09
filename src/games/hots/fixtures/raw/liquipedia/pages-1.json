@@ -1,0 +1,39 @@
+{
+ "batchcomplete": true,
+ "query": {
+  "normalized": [],
+  "redirects": [],
+  "pages": [
+   {
+    "ns": 0,
+    "title": "Xal'atath",
+    "missing": true
+   },
+   {
+    "ns": 0,
+    "title": "Alexstrasza",
+    "missing": true
+   },
+   {
+    "pageid": 512,
+    "ns": 0,
+    "title": "Abathur"
+   },
+   {
+    "pageid": 572,
+    "ns": 0,
+    "title": "Cho'gall"
+   },
+   {
+    "pageid": 13806,
+    "ns": 0,
+    "title": "Gall"
+   },
+   {
+    "pageid": 13807,
+    "ns": 0,
+    "title": "Cho"
+   }
+  ]
+ }
+}

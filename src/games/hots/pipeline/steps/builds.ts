@@ -71,8 +71,8 @@ export async function detectBuilds(env: RunEnv): Promise<BuildState> {
   }
 
   // TACT live and PTR builds.
-  let live: string | null = null;
-  let ptr: string | null = null;
+  let live: string | null;
+  let ptr: string | null;
   if (!selected(env, 'tact')) {
     setNotSelected(env, 'tact');
     live = prevExtra?.build ?? null;

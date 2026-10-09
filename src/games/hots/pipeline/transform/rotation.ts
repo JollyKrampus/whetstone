@@ -28,15 +28,19 @@ export function buildRotation(raw: unknown, heroIndex: ReadonlyMap<string, reado
   if (!DATE_RE.test(start) || !DATE_RE.test(end)) throw new Error(`Nexus Compendium rotation has invalid dates "${start}".."${end}"`);
   const issues: ValidationIssue[] = [];
   const ids = new Set<string>();
+  const unknown: string[] = [];
   for (const h of Array.isArray(r.Heroes) ? r.Heroes : []) {
     if (!isRecord(h)) continue;
     const candidates = [asString(h.Name), asString(h.ID)].filter((x): x is string => Boolean(x));
     const hit = candidates.map((c) => heroIndex.get(searchKey(c))).find((x) => x && x.length > 0);
     if (!hit) {
-      issues.push(warn(`rotation hero "${candidates.join(' / ')}" is not in heroes.json; skipped`, 'nexus-compendium'));
+      unknown.push(candidates[0] ?? '?');
       continue;
     }
     for (const id of hit) ids.add(id);
+  }
+  if (unknown.length > 0) {
+    issues.push(warn(`rotation heroes not in heroes.json (skipped): ${unknown.sort(compareStrings).join(', ')}`, 'nexus-compendium'));
   }
   let ranked: Rotation['ranked'] = null;
   if (isRecord(raw.Ranked)) {

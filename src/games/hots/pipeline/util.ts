@@ -179,5 +179,5 @@ function safeCodePoint(cp: number, fallback: string): string {
 
 /** Collapse whitespace, drop zero-width characters and trim. */
 export function cleanText(text: string): string {
-  return text.replace(/[​-‍﻿]/g, '').replace(/\s+/g, ' ').trim();
+  return text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\s+/g, ' ').trim();
 }
