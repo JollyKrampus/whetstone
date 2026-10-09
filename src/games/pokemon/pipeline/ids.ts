@@ -1,7 +1,9 @@
 /**
  * Showdown ids and the dex lookups every source needs to normalise what it ingests: cosmetic
- * formes fold into their species, a registered Pokémon holding its Mega Stone is counted as
- * the Mega (Smogon's convention, so usage, tournaments and replays share one id space).
+ * formes fold into their species, a base species that is not legal itself resolves to its only
+ * legal forme (Limitless lists Eternal Flower Floette as plain "Floette"), and a registered
+ * Pokémon holding its Mega Stone is counted as the Mega (Smogon's convention, so usage,
+ * tournaments and replays share one id space).
  */
 import type { Item, Species } from '../schema.ts';
 
@@ -30,6 +32,14 @@ export function dexIndex(species: readonly Species[], items: readonly Item[]): D
   const byId = new Map(species.map((s) => [s.id, s]));
   const alias = new Map<string, string>();
   for (const s of species) for (const c of s.cosmeticFormes ?? []) if (!byId.has(c)) alias.set(c, s.id);
+  // Base species missing from the dex whose formes include exactly one non-Mega entry.
+  const formesOf = new Map<string, string[]>();
+  for (const s of species) {
+    if (s.megaOf || !s.baseSpecies) continue;
+    const base = toId(s.baseSpecies);
+    if (base !== s.id) formesOf.set(base, [...(formesOf.get(base) ?? []), s.id]);
+  }
+  for (const [base, formes] of formesOf) if (!byId.has(base) && !alias.has(base) && formes.length === 1) alias.set(base, formes[0] as string);
   const stones = new Map<string, { base: string; forme: string }>();
   for (const i of items) if (i.mega) stones.set(i.id, i.mega);
   const resolve = (nameOrId: string): string | null => {

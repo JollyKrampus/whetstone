@@ -35,7 +35,7 @@ import type { ExportRequest } from './export.ts';
 export const SHOWDOWN_REPO = 'smogon/pokemon-showdown';
 export const SHOWDOWN_BRANCH = 'master';
 /** Bump when the extraction/transpile step changes, so cached trees are rebuilt. */
-export const TREE_VERSION = 1;
+export const TREE_VERSION = 2;
 
 const SHA_RE = /^[0-9a-f]{40}$/;
 const EXPORT_SCRIPT = fileURLToPath(new URL('./export.ts', import.meta.url));
@@ -102,6 +102,10 @@ export async function transpileTree(files: ReadonlyMap<string, Uint8Array>, outD
     sourceMap: false,
   };
   const decoder = new TextDecoder();
+  // The tree lives under the repo, whose package.json says "type": "module"; the transpiled
+  // files are CommonJS, so the tree needs its own package scope.
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(path.join(outDir, 'package.json'), '{ "type": "commonjs" }\n');
   let count = 0;
   for (const [rel, bytes] of files) {
     const isTs = rel.endsWith('.ts');

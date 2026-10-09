@@ -8,7 +8,9 @@
  *    expectation, antisymmetrised, scored 1–100, with n and z;
  *  - synergies: pairs brought together by one side, relation 'synergy', stored once with a < b.
  *
- * Pairs below the display floor (n < 15) are left out. Edges carry source 'replays'.
+ * Pairs below the display floor (n < 15) are left out. To keep a file that changes daily small,
+ * each species keeps its MAX_PER_SPECIES strongest and weakest edges (a kept counter keeps both
+ * directions, so the file stays antisymmetric). Edges carry source 'replays'.
  */
 import type { Edge } from '../../../../core/game.ts';
 import { edgesFromPairs, GATES, shrinkAll, type PairRow } from '../../../../core/stats.ts';
@@ -16,12 +18,37 @@ import { compareStrings } from '../../../../../pipeline/hash.ts';
 import type { H2H } from '../../schema.ts';
 import type { LedgerGame } from './ledger.ts';
 
+/** Strongest and weakest edges kept per species and relation (pages list far fewer). */
+export const MAX_PER_SPECIES = 12;
+
+/**
+ * Keep, per species, its `max` highest- and `max` lowest-delta edges (ties by n, then ids).
+ * An edge survives when either endpoint keeps it; a counter also keeps its mirror.
+ */
+export function capPerSpecies(edges: readonly Edge[], max: number, directed: boolean): Edge[] {
+  const bySpecies = new Map<string, Edge[]>();
+  for (const e of edges) {
+    for (const id of directed ? [e.a] : [e.a, e.b]) bySpecies.set(id, [...(bySpecies.get(id) ?? []), e]);
+  }
+  const key = (e: Edge): string => `${e.a}|${e.b}`;
+  const keep = new Set<string>();
+  const order = (x: Edge, y: Edge): number => (y.delta ?? 0) - (x.delta ?? 0) || (y.n ?? 0) - (x.n ?? 0) || compareStrings(key(x), key(y));
+  for (const list of bySpecies.values()) {
+    const sorted = [...list].sort(order);
+    for (const e of [...sorted.slice(0, max), ...sorted.slice(-max)]) keep.add(key(e));
+  }
+  if (directed) for (const k of [...keep]) keep.add(k.split('|').reverse().join('|'));
+  return edges.filter((e) => keep.has(key(e)));
+}
+
 export interface H2HOptions {
   regulation: string;
   format: string;
   window: { label: string; from: string; to: string };
   names: Readonly<Record<string, string>>;
   minN?: number;
+  /** Per-species cap (default MAX_PER_SPECIES). */
+  maxPerSpecies?: number;
 }
 
 function tallyRows(map: Map<string, PairRow>, a: string, b: string, won: boolean): void {
@@ -65,7 +92,7 @@ export function h2hFromGames(games: readonly LedgerGame[], o: H2HOptions): H2H {
     format: o.format,
     window: o.window,
     replays: games.length,
-    counters: edgesFromPairs(sorted(counters), { relation: 'counter', ...common }).map(asReplayEdge),
-    synergies: edgesFromPairs(sorted(synergies), { relation: 'synergy', ...common }).map(asReplayEdge),
+    counters: capPerSpecies(edgesFromPairs(sorted(counters), { relation: 'counter', ...common }), o.maxPerSpecies ?? MAX_PER_SPECIES, true).map(asReplayEdge),
+    synergies: capPerSpecies(edgesFromPairs(sorted(synergies), { relation: 'synergy', ...common }), o.maxPerSpecies ?? MAX_PER_SPECIES, false).map(asReplayEdge),
   };
 }

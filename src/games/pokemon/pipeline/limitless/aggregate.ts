@@ -19,6 +19,8 @@ import { toId, type DexIndex } from '../ids.ts';
 export const TOP_CUT = 8;
 export const MAX_TOP_TEAMS = 64;
 export const MAX_ARCHETYPES = 12;
+/** Top K per set field, as in usage files. */
+export const SET_TOP = { items: 6, abilities: 3, moves: 10, natures: 5 } as const;
 
 const Rec = z.looseObject({ wins: z.number().int().nonnegative(), losses: z.number().int().nonnegative(), ties: z.number().int().nonnegative() });
 const DeckMon = z.looseObject({
@@ -101,6 +103,27 @@ interface Tally {
   topCut: number;
 }
 const tally = (): Tally => ({ teams: 0, wins: 0, losses: 0, ties: 0, topCut: 0 });
+
+/** Counts of items, abilities, moves and natures over the team-list entries of one species. */
+interface SetTally {
+  items: Map<string, number>;
+  abilities: Map<string, number>;
+  moves: Map<string, number>;
+  natures: Map<Nature, number>;
+}
+const setTally = (): SetTally => ({ items: new Map(), abilities: new Map(), moves: new Map(), natures: new Map() });
+const bump = <K>(m: Map<K, number>, k: K): void => {
+  m.set(k, (m.get(k) ?? 0) + 1);
+};
+
+/** Top-k shares of `counts` over `total` entries, largest first (ties by key). */
+function topShares<K extends string>(counts: Map<K, number>, total: number, k: number): { key: K; share: number }[] {
+  return [...counts]
+    .sort((a, b) => b[1] - a[1] || compareStrings(a[0], b[0]))
+    .slice(0, k)
+    .map(([key, c]) => ({ key, share: total > 0 ? round4(c / total) : 0 }))
+    .filter((r) => r.share > 0);
+}
 const round4 = (x: number): number => Math.round(x * 10_000) / 10_000;
 
 function wrOf(t: Tally): { wr: number | null; wrLower: number | null } {
@@ -117,6 +140,7 @@ export interface AggregateOptions {
 
 export function aggregate(events: readonly TournamentTeams[], o: AggregateOptions): Tournaments {
   const species = new Map<string, Tally>();
+  const sets = new Map<string, SetTally>();
   const pairs = new Map<string, Tally>();
   let teamCount = 0;
   for (const e of events) {
@@ -135,6 +159,15 @@ export function aggregate(events: readonly TournamentTeams[], o: AggregateOption
         if (!species.has(id)) species.set(id, tally());
         add(species.get(id) as Tally);
       }
+      for (const m of team.members) {
+        const id = o.dex.usageId(m.species, m.item);
+        const t = sets.get(id) ?? setTally();
+        sets.set(id, t);
+        if (m.item) bump(t.items, m.item);
+        if (m.ability) bump(t.abilities, m.ability);
+        for (const move of m.moves) bump(t.moves, move);
+        if (m.nature) bump(t.natures, m.nature);
+      }
       for (let i = 0; i < ids.length; i++) {
         for (let j = i + 1; j < ids.length; j++) {
           const key = `${ids[i]}|${ids[j]}`;
@@ -146,7 +179,21 @@ export function aggregate(events: readonly TournamentTeams[], o: AggregateOption
   }
   const share = (n: number): number => (teamCount > 0 ? round4(n / teamCount) : 0);
   const speciesOut = [...species]
-    .map(([id, t]) => ({ id, teams: t.teams, share: share(t.teams), wins: t.wins, losses: t.losses, ties: t.ties, ...wrOf(t), topCut: t.topCut }))
+    .map(([id, t]) => {
+      const row: Tournaments['species'][number] = { id, teams: t.teams, share: share(t.teams), wins: t.wins, losses: t.losses, ties: t.ties, ...wrOf(t), topCut: t.topCut };
+      const s = sets.get(id);
+      if (s) {
+        const items = topShares(s.items, t.teams, SET_TOP.items).map((r) => ({ id: r.key, share: r.share }));
+        const abilities = topShares(s.abilities, t.teams, SET_TOP.abilities).map((r) => ({ id: r.key, share: r.share }));
+        const moves = topShares(s.moves, t.teams, SET_TOP.moves).map((r) => ({ id: r.key, share: r.share }));
+        const natures = topShares(s.natures, t.teams, SET_TOP.natures).map((r) => ({ nature: r.key, share: r.share }));
+        if (items.length > 0) row.items = items;
+        if (abilities.length > 0) row.abilities = abilities;
+        if (moves.length > 0) row.moves = moves;
+        if (natures.length > 0) row.natures = natures;
+      }
+      return row;
+    })
     .sort((a, b) => b.teams - a.teams || compareStrings(a.id, b.id));
   const minPairTeams = Math.max(5, Math.ceil(teamCount * 0.04));
   const archetypes = [...pairs]

@@ -1,0 +1,10 @@
+<html>
+<head><title>Index of /stats/2026-09/chaos/</title></head>
+<body>
+<h1>Index of /stats/2026-09/chaos/</h1><hr><pre><a href="../">../</a>
+<a href="gen9championsbssregmc-1760.json">gen9championsbssregmc-1760.json</a>                    01-Oct-2026 14:40              935727
+<a href="gen9championsou-1500.json">gen9championsou-1500.json</a>                          01-Oct-2026 14:40             2005524
+<a href="gen9championsvgc2026regmc-1760.json">gen9championsvgc2026regmc-1760.json</a>                01-Oct-2026 14:40             5850354
+<a href="gen9championsvgc2026regmcbo3-1760.json">gen9championsvgc2026regmcbo3-1760.json</a>             01-Oct-2026 14:40             1983159
+</pre><hr></body>
+</html>

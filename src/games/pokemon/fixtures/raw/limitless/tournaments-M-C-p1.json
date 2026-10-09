@@ -1,0 +1,20 @@
+[
+  {
+    "game": "VGC",
+    "name": "Vgc Córdoba | -1%",
+    "date": "2026-10-07T23:30:00.000Z",
+    "format": "M-C",
+    "id": "6ac3f2d2245696afb3516f3d",
+    "players": 22,
+    "organizerId": 895
+  },
+  {
+    "game": "VGC",
+    "name": "Intimidators Champions Challenge #48 REG M-C",
+    "date": "2026-10-05T23:05:00.000Z",
+    "format": "M-C",
+    "id": "6ac30ee985920e4d253642d5",
+    "players": 64,
+    "organizerId": 2823
+  }
+]

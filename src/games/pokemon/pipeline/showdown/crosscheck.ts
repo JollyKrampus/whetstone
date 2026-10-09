@@ -20,11 +20,17 @@ export interface CrossCheck {
 
 const STATS = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'] as const;
 
+/**
+ * Showdown ids the calc spells differently. Showdown's `aegislash` is the Shield Forme the
+ * Pokémon enters battle in; the calc lists the formes separately.
+ */
+export const CALC_ALIASES: Readonly<Record<string, string>> = { aegislash: 'aegislashshield' };
+
 export function crossCheckWithCalc(species: readonly Species[]): CrossCheck {
   const gen = Generations.get(CALC_GENERATION);
   const out: CrossCheck = { matched: 0, missing: [], mismatches: [] };
   for (const s of species) {
-    const calc = gen.species.get(s.id);
+    const calc = gen.species.get((CALC_ALIASES[s.id] ?? s.id) as Parameters<typeof gen.species.get>[0]);
     if (!calc) {
       out.missing.push(s.id);
       continue;

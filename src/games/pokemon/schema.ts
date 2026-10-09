@@ -136,6 +136,11 @@ export const PokemonMetaExtraSchema = z.strictObject({
    * The pipeline skips the Showdown build and re-emits the last-good dex while it is unchanged.
    */
   dexKey: z.string().regex(/^[0-9a-f]{16}$/).exactOptional(),
+  /**
+   * Self-hosted sprites (img/sprites/<id>.webp, referenced by Species.sprite): where they come
+   * from and the credit to show wherever they appear.
+   */
+  sprites: z.strictObject({ count: Count, source: Url, credit: z.string().min(1) }).exactOptional(),
 });
 export const PokemonMetaSchema = gameMetaSchema('pokemon', PokemonMetaExtraSchema);
 export type PokemonMeta = z.infer<typeof PokemonMetaSchema>;
@@ -376,6 +381,11 @@ export const SpeciesResultSchema = z.strictObject({
   wrLower: Rate.nullable(),
   /** Teams that reached a top cut. */
   topCut: Count.exactOptional(),
+  /** Held items on the open team lists that registered it, as shares of those teams (Champions has no Tera). */
+  items: z.array(ShareSchema).max(6).exactOptional(),
+  abilities: z.array(ShareSchema).max(3).exactOptional(),
+  moves: z.array(ShareSchema).max(10).exactOptional(),
+  natures: z.array(z.strictObject({ nature: NatureSchema, share: Rate })).max(5).exactOptional(),
 });
 
 export const ArchetypeSchema = z.strictObject({

@@ -23,6 +23,11 @@ export const REPLAY_API = 'https://replay.pokemonshowdown.com';
 export const MAX_LOGS = 500;
 export const REPLAY_SPACING_MS = 1_000;
 const MAX_SEARCH_PAGES = 20;
+/**
+ * A few unusable logs a day are normal (forfeits at team preview, custom-rule challenges filed
+ * under the format with species Champions does not have); more than this share is reported.
+ */
+export const SKIP_WARN_SHARE = 0.1;
 const PAGE = 50;
 
 const SearchRowSchema = z.looseObject({
@@ -33,6 +38,14 @@ const SearchRowSchema = z.looseObject({
 });
 const SearchSchema = z.array(SearchRowSchema);
 type SearchRow = z.infer<typeof SearchRowSchema>;
+
+/**
+ * Status detail of the head-to-head data in effect. It describes the window, not the run, so a
+ * run that adds nothing leaves meta.json (and dataHash) alone.
+ */
+export function describeH2H(h2h: H2H): string {
+  return `${h2h.replays} ${h2h.format} games from ${h2h.window.from} to ${h2h.window.to}; ${h2h.counters.length} counter and ${h2h.synergies.length} synergy edges (n ≥ 15)`;
+}
 
 export interface H2HOutcome extends SourceOutcome {
   h2h: H2H | null;
@@ -126,18 +139,21 @@ export async function runReplaySource(ctx: PipelineContext, plan: RegulationPlan
       const files = [json('h2h.json', h2h), json(LEDGER_FILE, ledger)];
       const problems = invalid(files, 'showdown-replays');
       if (problems.length > 0) throw new Error(problems.slice(0, 3).map((p) => p.message).join('; '));
+      ctx.log(`showdown-replays: parsed ${fresh.length} of ${rows.length} new ${format} replays; ${games.length} games in the ${LEDGER_WINDOW_DAYS}-day window`);
       const skippedTotal = Object.values(skipped).reduce((a, b) => a + b, 0);
       if (skippedTotal > 0) {
         const parts = Object.entries(skipped).filter(([, n]) => n > 0).map(([k, n]) => `${n} ${k}`);
-        issues.push(warn('showdown-replays', `skipped ${skippedTotal} of ${rows.length} new replays (${parts.join(', ')})`));
+        const line = `skipped ${skippedTotal} of ${rows.length} new replays (${parts.join(', ')})`;
+        if (skippedTotal > rows.length * SKIP_WARN_SHARE) issues.push(warn('showdown-replays', line));
+        else ctx.log(`showdown-replays: ${line}`);
       }
       return {
-        status: ok(ctx, 'showdown-replays', `${fresh.length} new ${format} games; ${games.length} in the ${LEDGER_WINDOW_DAYS}-day window; ${h2h.counters.length} counter and ${h2h.synergies.length} synergy edges (n ≥ 15)`),
+        status: ok(ctx, 'showdown-replays', describeH2H(h2h)),
         files,
         issues,
         h2h,
         regulation: reg.id,
-        counts: { replays: games.length, replaysParsed: fresh.length, h2hEdges: h2h.counters.length + h2h.synergies.length },
+        counts: { replays: games.length, h2hEdges: h2h.counters.length + h2h.synergies.length },
       };
     }
     const msg = `no replays for ${candidateRegulations(plan).map((r) => r.formats.doublesBo3).join(' or ')}`;

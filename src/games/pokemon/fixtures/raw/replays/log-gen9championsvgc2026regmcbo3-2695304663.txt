@@ -1,0 +1,242 @@
+|t:|1791507457
+|gametype|doubles
+|player|p1|Player A|1|
+|player|p2|Player B|1|
+|gen|9
+|tier|[Gen 9 Champions] VGC 2026 Reg M-C (Bo3)
+|rated|
+|rule|Species Clause: Limit one of each Pokémon
+|rule|Item Clause: Limit 1 of each item
+|clearpoke
+|poke|p1|Golisopod, L50, F|
+|poke|p1|Pelipper, L50, M|
+|poke|p1|Archaludon, L50, F|
+|poke|p1|Basculegion-F, L50, F, shiny|
+|poke|p1|Raichu, L50, F|
+|poke|p1|Sneasler, L50, M, shiny|
+|poke|p2|Kommo-o, L50, M, shiny|
+|poke|p2|Incineroar, L50, F|
+|poke|p2|Sneasler, L50, F|
+|poke|p2|Kingambit, L50, F|
+|poke|p2|Rillaboom, L50, M|
+|poke|p2|Gengar, L50, M|
+|teampreview|4
+|showteam|p1|Golisopod||Golisopite|EmergencyExit|LeechLife,IronHead,SuckerPunch,Protect|Adamant||F|||50|]Pelipper||DampRock|Drizzle|WeatherBall,Hurricane,HelpingHand,WideGuard|Bold||M|||50|]Archaludon||Leftovers|Stamina|ElectroShot,DragonPulse,AuraSphere,Protect|Bold||F|||50|]Basculegion-F||FocusSash|SwiftSwim|MuddyWater,ShadowBall,IceBeam,Protect|Modest||F|||50|]Raichu||RaichuniteX|LightningRod|VoltTackle,VoltSwitch,FakeOut,Protect|Jolly||F|||50|]Sneasler||ElectricSeed|Unburden|DireClaw,CloseCombat,SwordsDance,Protect|Adamant||M|||50|
+|showteam|p2|Kommo-o||Leftovers|Bulletproof|ClangingScales,AuraSphere,ClangorousSoul,Protect|Modest||M|||50|]Incineroar||ChopleBerry|Intimidate|FakeOut,PartingShot,FlareBlitz,Protect|Sassy||F|||50|]Sneasler||GrassySeed|Unburden|CloseCombat,DireClaw,RockSlide,Protect|Adamant||F|||50|]Kingambit||LifeOrb|Defiant|KowtowCleave,SuckerPunch,SwordsDance,Protect|Adamant||F|||50|]Rillaboom||EjectButton|GrassySurge|FakeOut,GrassyGlide,Uturn,Protect|Sassy||M|||50|]Gengar||Gengarite|CursedBody|ShadowBall,SludgeBomb,PerishSong,Protect|Modest||M|||50|
+|
+|t:|1791507504
+|teamsize|p1|4
+|teamsize|p2|4
+|start
+|switch|p1a: Raichu|Raichu, L50, F|100/100
+|switch|p1b: Basculegion-F|Basculegion-F, L50, F, shiny|100/100
+|switch|p2a: Kingambit|Kingambit, L50, F|100/100
+|switch|p2b: Incineroar|Incineroar, L50, F|100/100
+|-ability|p2b: Incineroar|Intimidate|boost
+|-unboost|p1a: Raichu|atk|1
+|-unboost|p1b: Basculegion-F|atk|1
+|turn|1
+|
+|t:|1791507525
+|switch|p1b: Pelipper|Pelipper, L50, M|100/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p1b: Pelipper
+|detailschange|p1a: Raichu|Raichu-Mega-X, L50, F
+|-mega|p1a: Raichu|Raichu|Raichunite X
+|-fieldstart|move: Electric Terrain|[from] ability: Electric Surge|[of] p1a: Raichu
+|move|p2a: Kingambit|Protect|p2a: Kingambit
+|-singleturn|p2a: Kingambit|Protect
+|move|p2b: Incineroar|Protect|p2b: Incineroar
+|-singleturn|p2b: Incineroar|Protect
+|move|p1a: Raichu|Volt Switch|p2a: Kingambit
+|-activate|p2a: Kingambit|move: Protect
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|2
+|
+|t:|1791507552
+|switch|p2b: Rillaboom|Rillaboom, L50, M|100/100
+|-fieldstart|move: Grassy Terrain|[from] ability: Grassy Surge|[of] p2b: Rillaboom
+|move|p1a: Raichu|Volt Switch|p2a: Kingambit
+|-damage|p2a: Kingambit|80/100
+|
+|t:|1791507562
+|switch|p1a: Basculegion-F|Basculegion-F, L50, F, shiny|100/100|[from] Volt Switch
+|move|p1b: Pelipper|Weather Ball|p2b: Rillaboom
+|-resisted|p2b: Rillaboom|1
+|-damage|p2b: Rillaboom|78/100
+|-enditem|p2b: Rillaboom|Eject Button
+|
+|t:|1791507572
+|switch|p2b: Incineroar|Incineroar, L50, F|100/100
+|-ability|p2b: Incineroar|Intimidate|boost
+|-unboost|p1a: Basculegion-F|atk|1
+|-unboost|p1b: Pelipper|atk|1
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Basculegion-F
+|-supereffective|p1a: Basculegion-F|1
+|-enditem|p1a: Basculegion-F|Focus Sash
+|-damage|p1a: Basculegion-F|1/100
+|-damage|p2a: Kingambit|70/100|[from] item: Life Orb
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Basculegion-F|6/100|[from] Grassy Terrain
+|-heal|p2a: Kingambit|76/100|[from] Grassy Terrain
+|upkeep
+|turn|3
+|
+|t:|1791507594
+|move|p2b: Incineroar|Fake Out|p1b: Pelipper
+|-damage|p1b: Pelipper|90/100
+|move|p2a: Kingambit|Sucker Punch|p1a: Basculegion-F
+|-supereffective|p1a: Basculegion-F|1
+|-damage|p1a: Basculegion-F|0 fnt
+|faint|p1a: Basculegion-F
+|-damage|p2a: Kingambit|66/100|[from] item: Life Orb
+|cant|p1b: Pelipper|flinch
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Kingambit|72/100|[from] Grassy Terrain
+|upkeep
+|
+|t:|1791507597
+|switch|p1a: Sneasler|Sneasler, L50, M, shiny|100/100
+|turn|4
+|
+|t:|1791507630
+|switch|p1b: Raichu|Raichu-Mega-X, L50, F|100/100
+|-fieldstart|move: Electric Terrain|[from] ability: Electric Surge|[of] p1b: Raichu
+|-enditem|p1a: Sneasler|Electric Seed
+|-boost|p1a: Sneasler|def|1|[from] item: Electric Seed
+|switch|p2a: Kommo-o|Kommo-o, L50, M, shiny|100/100
+|switch|p2b: Rillaboom|Rillaboom, L50, M|78/100
+|-fieldstart|move: Grassy Terrain|[from] ability: Grassy Surge|[of] p2b: Rillaboom
+|move|p1a: Sneasler|Swords Dance|p1a: Sneasler
+|-boost|p1a: Sneasler|atk|2
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2b: Rillaboom|84/100|[from] Grassy Terrain
+|upkeep
+|turn|5
+|
+|t:|1791507650
+|switch|p2b: Incineroar|Incineroar, L50, F|100/100
+|-ability|p2b: Incineroar|Intimidate|boost
+|-unboost|p1a: Sneasler|atk|1
+|-unboost|p1b: Raichu|atk|1
+|move|p1b: Raichu|Fake Out|p2a: Kommo-o
+|-crit|p2a: Kommo-o
+|-damage|p2a: Kommo-o|82/100
+|move|p1a: Sneasler|Swords Dance|p1a: Sneasler
+|-boost|p1a: Sneasler|atk|2
+|cant|p2a: Kommo-o|flinch
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Kommo-o|89/100|[from] Grassy Terrain
+|-heal|p2a: Kommo-o|95/100|[from] item: Leftovers
+|upkeep
+|turn|6
+|
+|t:|1791507675
+|switch|p1b: Pelipper|Pelipper, L50, M|90/100
+|move|p1a: Sneasler|Protect|p1a: Sneasler
+|-singleturn|p1a: Sneasler|Protect
+|move|p2b: Incineroar|Fake Out|p1a: Sneasler
+|-activate|p1a: Sneasler|move: Protect
+|move|p2a: Kommo-o|Clangorous Soul|p2a: Kommo-o
+|-boost|p2a: Kommo-o|atk|1
+|-boost|p2a: Kommo-o|def|1
+|-boost|p2a: Kommo-o|spa|1
+|-boost|p2a: Kommo-o|spd|1
+|-boost|p2a: Kommo-o|spe|1
+|-damage|p2a: Kommo-o|62/100
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Kommo-o|68/100|[from] Grassy Terrain
+|-heal|p2a: Kommo-o|74/100|[from] item: Leftovers
+|upkeep
+|turn|7
+|
+|t:|1791507716
+|switch|p2b: Rillaboom|Rillaboom, L50, M|84/100
+|move|p2a: Kommo-o|Protect|p2a: Kommo-o
+|-singleturn|p2a: Kommo-o|Protect
+|move|p1b: Pelipper|Wide Guard|p1b: Pelipper
+|-singleturn|p1b: Pelipper|Wide Guard
+|move|p1a: Sneasler|Close Combat|p2b: Rillaboom
+|-damage|p2b: Rillaboom|0 fnt
+|-unboost|p1a: Sneasler|def|1
+|-unboost|p1a: Sneasler|spd|1
+|faint|p2b: Rillaboom
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Kommo-o|80/100|[from] Grassy Terrain
+|-heal|p2a: Kommo-o|86/100|[from] item: Leftovers
+|upkeep
+|
+|t:|1791507718
+|switch|p2b: Incineroar|Incineroar, L50, F|100/100
+|-ability|p2b: Incineroar|Intimidate|boost
+|-unboost|p1a: Sneasler|atk|1
+|-unboost|p1b: Pelipper|atk|1
+|turn|8
+|
+|t:|1791507735
+|switch|p1b: Raichu|Raichu-Mega-X, L50, F|100/100
+|-fieldstart|move: Electric Terrain|[from] ability: Electric Surge|[of] p1b: Raichu
+|move|p1a: Sneasler|Protect|p1a: Sneasler
+|-singleturn|p1a: Sneasler|Protect
+|move|p2b: Incineroar|Fake Out|p1b: Raichu
+|-damage|p1b: Raichu|88/100
+|move|p2a: Kommo-o|Clangorous Soul|p2a: Kommo-o
+|-boost|p2a: Kommo-o|atk|1
+|-boost|p2a: Kommo-o|def|1
+|-boost|p2a: Kommo-o|spa|1
+|-boost|p2a: Kommo-o|spd|1
+|-boost|p2a: Kommo-o|spe|1
+|-damage|p2a: Kommo-o|53/100
+|
+|-weather|none
+|-heal|p2a: Kommo-o|59/100|[from] item: Leftovers
+|upkeep
+|turn|9
+|
+|t:|1791507753
+|move|p2a: Kommo-o|Protect|p2a: Kommo-o
+|-singleturn|p2a: Kommo-o|Protect
+|move|p2b: Incineroar|Protect|p2b: Incineroar
+|-singleturn|p2b: Incineroar|Protect
+|move|p1b: Raichu|Fake Out|p2a: Kommo-o
+|-activate|p2a: Kommo-o|move: Protect
+|move|p1a: Sneasler|Close Combat|p2b: Incineroar
+|-activate|p2b: Incineroar|move: Protect
+|
+|-heal|p2a: Kommo-o|65/100|[from] item: Leftovers
+|upkeep
+|turn|10
+|
+|t:|1791507763
+|move|p1a: Sneasler|Close Combat|p2a: Kommo-o
+|-damage|p2a: Kommo-o|1/100
+|-unboost|p1a: Sneasler|def|1
+|-unboost|p1a: Sneasler|spd|1
+|move|p2a: Kommo-o|Clanging Scales|p1a: Sneasler|[spread] p1a,p1b
+|-damage|p1a: Sneasler|0 fnt
+|-damage|p1b: Raichu|8/100
+|faint|p1a: Sneasler
+|-unboost|p2a: Kommo-o|def|1
+|move|p1b: Raichu|Volt Tackle|p2a: Kommo-o
+|-resisted|p2a: Kommo-o|1
+|-damage|p2a: Kommo-o|0 fnt
+|faint|p2a: Kommo-o
+|-damage|p1b: Raichu|8/100|[from] Recoil
+|move|p2b: Incineroar|Flare Blitz|p1b: Raichu
+|-damage|p1b: Raichu|0 fnt
+|faint|p1b: Raichu
+|-damage|p2b: Incineroar|98/100|[from] Recoil
+|
+|upkeep
+|
+|win|Player B
+||Player A is ready for game 3.
+||Player B is ready for game 3.
+|player|p1|
