@@ -77,6 +77,22 @@ const active = explicit ?? byUrl;
         }
       </ul>
     </nav>
+    {/*
+      On narrow screens the sub-nav scrolls sideways; bring the current section into view before
+      first paint (a plain scrollLeft jump: no animation, no vertical scroll, no layout shift).
+    */}
+    <script is:inline>
+      (function () {
+        var nav = document.currentScript && document.currentScript.previousElementSibling;
+        var link = nav && nav.querySelector('[aria-current="page"]');
+        if (!link || nav.scrollWidth <= nav.clientWidth) return;
+        var fade = 32; // the right-edge fade mask (2rem)
+        var n = nav.getBoundingClientRect();
+        var l = link.getBoundingClientRect();
+        if (l.right > n.right - fade) nav.scrollLeft += l.right - n.right + fade;
+        else if (l.left < n.left) nav.scrollLeft -= n.left - l.left;
+      })();
+    </script>
   </div>
 
   <div class="container game-page">
