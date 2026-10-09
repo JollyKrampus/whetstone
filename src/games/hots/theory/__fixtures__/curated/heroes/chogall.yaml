@@ -1,0 +1,12 @@
+hero: chogall
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Sample: Cho's large Health pool stands in front while Gall deals damage."
+counters:
+  - a: malthael
+    b: chogall
+    why: "Sample: Reaper's Mark deals percent-Health damage to Cho's large Health pool."
+    evidence: ["Reaper's Mark"]
+    confidence: medium
+synergies: []

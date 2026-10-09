@@ -1,23 +1,33 @@
 # Map profiles and map-fit rules (SPEC §5.1.5). Validated by CuratedMapsFileSchema in
 # src/games/hots/schema.ts. The pipeline merges these profiles with heroes-data2 map data
 # (images) and the ranked pool to produce maps.json; the theory engine applies `fit` rules
-# to produce theory.json `mapFit`.
+# to produce theory.json `mapFit`. How map fit is scored: docs/THEORY.md.
 #
 # maps: keyed by our own kebab-case slug.
 #   name       English name as the game shows it.
 #   kind       standard | aram | brawl (brawl maps are not listed: hidden per critique D11).
 #   size       small | medium | large (relative footprint / rotation distance).
 #   lanes      1 | 2 | 3
-#   objective  one plain sentence describing what the objective does.
-#   tags       MAP_TAGS vocabulary: large small three-lane two-lane single-lane
-#              channel-objective pve-objective teamfight structure-objective
-#              long-rotations escort-objective push-objective
+#   objective  one plain sentence, in our own words, describing what the objective does.
+#   tags       MAP_TAGS vocabulary:
+#                large / small           rotation distances well above / below the average map
+#                three-lane / two-lane / single-lane
+#                channel-objective       the objective is won by channelling (tributes, altars, nukes, turn-ins)
+#                pve-objective           the objective is a race to kill neutral units
+#                teamfight               the objective forces five-versus-five fights in one spot
+#                structure-objective     the objective damages structures directly
+#                long-rotations          objectives spawn far apart, so teams cross the map often
+#                escort-objective        a moving payload has to be escorted
+#                push-objective          the objective reward is a unit or wave that pushes lanes
 #   hp         Heroes Profile map_id and name (join key for map stats).
 #
 # fit: map tags x hero tags rules. A rule applies when the map has ANY of `map` and the hero
 #   satisfies ANY expression in `hero` (same syntax as rules.yaml). Placeholders in `why`:
-#   {hero} {map} {heroTag} {mapTag} {evidence}. Negative weights mark poor fits.
-version: 1
+#   {hero} {map} {heroTag} {mapTag} {evidence}. Negative weights mark poor fits. Heroes with no
+#   matching rule on a map get no map-fit entry (neutral). Weights use the same scale as
+#   rules.yaml (0.2 -> 60, 0.3 -> 65); talent-only tags count at 0.6x; the sum per hero and map
+#   stops at 0.6 (77).
+version: 2
 
 maps:
   alterac-pass:
@@ -25,15 +35,15 @@ maps:
     kind: standard
     size: medium
     lanes: 3
-    objective: Free the prisoners held in the middle camp to launch a cavalry charge down every lane.
-    tags: [three-lane, teamfight, push-objective]
+    objective: Kill the guards holding your captured soldiers and free them; the freed cavalry charges down every lane with your minions.
+    tags: [three-lane, teamfight, pve-objective, push-objective]
     hp: { id: 15, name: Alterac Pass }
   battlefield-of-eternity:
     name: Battlefield of Eternity
     kind: standard
     size: small
     lanes: 2
-    objective: Kill the enemy Immortal before they kill yours; the surviving Immortal pushes a lane.
+    objective: Both teams race to kill the other side's Immortal; the surviving Immortal then pushes a lane.
     tags: [two-lane, small, pve-objective, teamfight, push-objective]
     hp: { id: 1, name: Battlefield of Eternity }
   blackhearts-bay:
@@ -41,7 +51,7 @@ maps:
     kind: standard
     size: large
     lanes: 3
-    objective: Collect doubloons from chests and camps and turn them in at the ship, which then bombards enemy forts.
+    objective: Gather doubloons from chests, camps and fallen heroes and hand them in at the ghost ship, which then fires on enemy forts.
     tags: [three-lane, large, channel-objective, structure-objective, long-rotations]
     hp: { id: 2, name: Blackheart's Bay }
   braxis-holdout:
@@ -49,7 +59,7 @@ maps:
     kind: standard
     size: small
     lanes: 2
-    objective: Hold both beacons to fill your Zerg wave, which then attacks the enemy base.
+    objective: Hold both beacons to fill your Zerg wave faster than the enemy; the wave then marches on the enemy base.
     tags: [two-lane, small, teamfight, push-objective]
     hp: { id: 3, name: Braxis Holdout }
   cursed-hollow:
@@ -57,7 +67,7 @@ maps:
     kind: standard
     size: large
     lanes: 3
-    objective: Channel tributes as they spawn; a third tribute curses the enemy team, weakening their minions and disabling their towers.
+    objective: Channel tributes as they appear around the map; the team that collects three curses the other, weakening its minions and shutting down its towers.
     tags: [three-lane, large, channel-objective, long-rotations]
     hp: { id: 4, name: Cursed Hollow }
   dragon-shire:
@@ -65,7 +75,7 @@ maps:
     kind: standard
     size: medium
     lanes: 3
-    objective: Hold the top and bottom shrines, then channel the statue in the middle to become the Dragon Knight.
+    objective: Hold the top and bottom shrines, then channel the statue in the middle to turn a hero into the lane-pushing Dragon Knight.
     tags: [three-lane, channel-objective, push-objective, long-rotations]
     hp: { id: 5, name: Dragon Shire }
   garden-of-terror:
@@ -73,7 +83,7 @@ maps:
     kind: standard
     size: large
     lanes: 3
-    objective: Kill Shamblers at night to gather seeds; enough seeds plant a Garden Terror that pushes and disables structures.
+    objective: At night, kill the Shamblers and their guardian for seeds; enough seeds plant a Garden Terror that pushes and disables structures.
     tags: [three-lane, large, pve-objective, push-objective]
     hp: { id: 6, name: Garden of Terror }
   hanamura-temple:
@@ -81,7 +91,7 @@ maps:
     kind: standard
     size: medium
     lanes: 2
-    objective: Escort your payload to the end of its track, where it fires at the enemy core.
+    objective: Escort your payload along its track by standing next to it; a delivered payload fires on the enemy base.
     tags: [two-lane, escort-objective, structure-objective, teamfight]
     hp: { id: 7, name: Hanamura Temple }
   haunted-mines:
@@ -89,7 +99,7 @@ maps:
     kind: standard
     size: medium
     lanes: 2
-    objective: Kill the undead in the mines for skulls; more skulls make a stronger Grave Golem for your team.
+    objective: Clear the undead in the mines for skulls; the team with more skulls raises the stronger Grave Golem to push for it.
     tags: [two-lane, pve-objective, push-objective]
     hp: { id: 8, name: Haunted Mines }
   infernal-shrines:
@@ -97,7 +107,7 @@ maps:
     kind: standard
     size: medium
     lanes: 3
-    objective: Kill a shrine's guardians before the other team to summon a Punisher that pushes for you.
+    objective: Kill an active shrine's guardians before the other team to summon a Punisher that pushes for you.
     tags: [three-lane, pve-objective, push-objective, teamfight]
     hp: { id: 9, name: Infernal Shrines }
   sky-temple:
@@ -105,7 +115,7 @@ maps:
     kind: standard
     size: large
     lanes: 3
-    objective: Hold active temples; a held temple fires at the other team's structures.
+    objective: Capture and hold the active temples; a held temple fires on the other team's structures.
     tags: [three-lane, large, structure-objective, teamfight, long-rotations]
     hp: { id: 10, name: Sky Temple }
   tomb-of-the-spider-queen:
@@ -113,7 +123,7 @@ maps:
     kind: standard
     size: medium
     lanes: 3
-    objective: Collect gems dropped by minions and heroes and turn them in to summon Webweavers in every lane.
+    objective: Collect the gems dropped by minions and heroes and hand them in to summon Webweavers in every lane.
     tags: [three-lane, push-objective]
     hp: { id: 11, name: Tomb of the Spider Queen }
   towers-of-doom:
@@ -121,7 +131,7 @@ maps:
     kind: standard
     size: medium
     lanes: 3
-    objective: Channel altars when they activate to fire at the enemy core, which heroes cannot attack directly.
+    objective: Capture altars when they activate to fire on the enemy core, which heroes cannot attack directly.
     tags: [three-lane, channel-objective, structure-objective]
     hp: { id: 12, name: Towers of Doom }
   volskaya-foundry:
@@ -129,7 +139,7 @@ maps:
     kind: standard
     size: medium
     lanes: 3
-    objective: Hold the control point to earn the Triglav Protector, a robot piloted by two heroes.
+    objective: Hold the control point to earn the Triglav Protector, a robot two heroes pilot together.
     tags: [three-lane, teamfight, push-objective]
     hp: { id: 14, name: Volskaya Foundry }
   warhead-junction:
@@ -137,7 +147,7 @@ maps:
     kind: standard
     size: large
     lanes: 3
-    objective: Pick up nukes that spawn across the map and channel them onto enemy heroes or structures.
+    objective: Pick up the nukes that spawn across the map and channel them onto enemy heroes or structures.
     tags: [three-lane, large, channel-objective, long-rotations]
     hp: { id: 13, name: Warhead Junction }
   braxis-outpost:
@@ -145,7 +155,7 @@ maps:
     kind: aram
     size: small
     lanes: 1
-    objective: ARAM single lane; destroy the enemy core.
+    objective: ARAM on a single lane; destroy the enemy core.
     tags: [single-lane, small, teamfight]
     hp: { id: 21, name: Braxis Outpost }
   industrial-district:
@@ -153,7 +163,7 @@ maps:
     kind: aram
     size: small
     lanes: 1
-    objective: ARAM single lane; destroy the enemy core.
+    objective: ARAM on a single lane; destroy the enemy core.
     tags: [single-lane, small, teamfight]
     hp: { id: 17, name: Industrial District }
   lost-cavern:
@@ -161,7 +171,7 @@ maps:
     kind: aram
     size: small
     lanes: 1
-    objective: ARAM single lane; destroy the enemy core.
+    objective: ARAM on a single lane; destroy the enemy core.
     tags: [single-lane, small, teamfight]
     hp: { id: 18, name: Lost Cavern }
   silver-city:
@@ -169,67 +179,120 @@ maps:
     kind: aram
     size: small
     lanes: 1
-    objective: ARAM single lane; destroy the enemy core.
+    objective: ARAM on a single lane; destroy the enemy core.
     tags: [single-lane, small, teamfight]
     hp: { id: 20, name: Silver City }
 
 fit:
+  # --- map size and rotations -------------------------------------------------------------
   - id: global-on-large-maps
     map: [large, long-rotations]
     hero: [global]
-    weight: 0.5
+    weight: 0.3
     why: "{hero}'s map-wide reach ({evidence}) offsets {map}'s long rotations."
+
+  - id: fast-rotation-on-large-maps
+    map: [large]
+    hero: [teleport]
+    weight: 0.1
+    why: "{hero} can cover ground quickly ({evidence}) on {map}'s large layout."
 
   - id: immobile-on-large-maps
     map: [large]
     hero: [immobile]
-    weight: -0.3
+    weight: -0.15
     why: "{hero} has little mobility to rotate across {map}'s large layout."
 
+  # --- lanes and pushing --------------------------------------------------------------------
   - id: split-push-on-three-lanes
     map: [three-lane]
     hero: [split-push]
-    weight: 0.3
+    weight: 0.2
     why: "{map} has three lanes for {hero} to pressure while the team holds the objective."
+
+  - id: split-push-on-two-lanes
+    map: [two-lane]
+    hero: [split-push]
+    weight: -0.1
+    why: "{map} has only two lanes, so {hero}'s side-lane pressure is easier to answer."
 
   - id: waveclear-vs-pushing-objectives
     map: [push-objective, structure-objective]
     hero: [waveclear]
-    weight: 0.3
+    weight: 0.1
     why: "{hero}'s waveclear ({evidence}) helps hold lanes against {map}'s pushing objective."
 
   - id: siege-on-structure-maps
     map: [structure-objective]
     hero: [siege]
-    weight: 0.4
-    why: "{hero} can siege structures ({evidence}), which {map}'s objective rewards."
+    weight: 0.2
+    why: "{hero} can siege structures ({evidence}), which adds to {map}'s objective pressure."
 
-  - id: area-damage-in-teamfights
-    map: [teamfight]
-    hero: [aoe]
-    weight: 0.3
-    why: "{map}'s objective forces teamfights where {hero}'s area damage ({evidence}) is strong."
-
+  # --- objective type -----------------------------------------------------------------------
   - id: damage-for-pve-objectives
     map: [pve-objective]
     hero: [sustained-dps, percent-hp-damage]
-    weight: 0.4
-    why: "{hero}'s {heroTag} ({evidence}) speeds up {map}'s PvE objective."
+    weight: 0.2
+    why: "{hero}'s {heroTag} ({evidence}) speeds up {map}'s race against neutral units."
+
+  - id: summons-for-pve-objectives
+    map: [pve-objective]
+    hero: [summons]
+    weight: 0.1
+    why: "{hero}'s summons ({evidence}) add damage to {map}'s neutral objective."
 
   - id: mobility-contests-channels
     map: [channel-objective]
-    hero: [stealth, dash, teleport]
-    weight: 0.2
+    hero: [stealth, global, teleport]
+    weight: 0.15
     why: "{hero} can reach channelling enemies quickly ({evidence}) to contest {map}'s objective."
 
-  - id: poke-in-single-lane
-    map: [single-lane]
-    hero: [poke]
-    weight: 0.3
-    why: "{map}'s single lane suits {hero}'s poke ({evidence})."
+  - id: interrupts-on-channel-maps
+    map: [channel-objective]
+    hero: [silence, polymorph, sleep, time-stop]
+    weight: 0.1
+    why: "{hero}'s {heroTag} ({evidence}) stops enemies channelling {map}'s objective."
 
   - id: frontline-on-escort
     map: [escort-objective]
     hero: [frontline]
     weight: 0.2
     why: "{hero} can stand on {map}'s payload and absorb pressure."
+
+  # --- teamfights ---------------------------------------------------------------------------
+  - id: area-burst-in-teamfights
+    map: [teamfight]
+    hero: ["aoe&burst"]
+    weight: 0.2
+    why: "{map}'s objective forces teamfights where {hero}'s area burst ({evidence}) hits several targets."
+
+  - id: grouping-in-teamfights
+    map: [teamfight]
+    hero: [pull, time-stop]
+    weight: 0.15
+    why: "{hero} can group or freeze enemies ({evidence}) in {map}'s objective fights."
+
+  - id: engage-in-teamfights
+    map: [teamfight]
+    hero: [engage]
+    weight: 0.1
+    why: "{hero} can start the fights {map}'s objective forces."
+
+  # --- ARAM -----------------------------------------------------------------------------------
+  - id: poke-in-single-lane
+    map: [single-lane]
+    hero: [poke]
+    weight: 0.25
+    why: "{map}'s single lane suits {hero}'s poke ({evidence})."
+
+  - id: waveclear-in-single-lane
+    map: [single-lane]
+    hero: [waveclear]
+    weight: 0.1
+    why: "{hero}'s waveclear ({evidence}) holds {map}'s single lane."
+
+  - id: divers-in-single-lane
+    map: [single-lane]
+    hero: [dive]
+    weight: -0.1
+    why: "{map}'s single lane leaves {hero} little room to flank around the front line."

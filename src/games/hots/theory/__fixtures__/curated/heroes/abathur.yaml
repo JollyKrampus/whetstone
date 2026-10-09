@@ -1,0 +1,20 @@
+hero: abathur
+reviewedFor: "2.57"
+traits:
+  - tag: vulnerable-body
+    why: "Sample: Abathur's body sits alone while he rides a Symbiote elsewhere."
+  - tag: split-push
+    why: "Sample: Locust waves keep a side lane pushed."
+counters:
+  - a: zeratul
+    b: abathur
+    why: "Sample: Zeratul walks up to Abathur's body in stealth and kills it before Deep Tunnel is ready."
+    evidence: ["Permanent Cloak", "Cleave"]
+    confidence: medium
+synergies:
+  - a: abathur
+    b: illidan
+    why: "Sample: a Symbiote on a diving Illidan adds shields and damage to every jump."
+    evidence: ["Symbiote", "Carapace"]
+    conditions: "Illidan dives first."
+    confidence: medium

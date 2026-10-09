@@ -1,0 +1,8 @@
+hero: valla
+reviewedFor: "2.57"
+counters:
+  - a: valla
+    b: abathur
+    why: "Sample: a pair without evidence names is rejected."
+    evidence: []
+    confidence: low

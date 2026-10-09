@@ -1,104 +1,158 @@
 # Theory rules (SPEC §5.1.3). Validated by RulesFileSchema in src/games/hots/schema.ts.
+# How the engine uses them: docs/THEORY.md.
 #
 # The theory engine scores every ordered pair of draftable heroes (A, B):
-#   x = sum of the weights of matching rules (each rule counts once per pair, capped)
-#       + curated pair weights from counters.yaml / synergies.yaml
-#   score = round(50 + 50 * tanh(x))           (50 = neutral, 1..100)
+#   x = sum of the weights of matching rules (each rule counts once per pair)
+#       + the weight of a curated pair from curated/hots/heroes/*.yaml
+#   x is clamped to [-2, 2];  score = round(50 + 50 * tanh(x))   (50 = neutral, 1..100)
+# A rule counts at 0.6x its weight when a side only matches through a talent (or through one of
+# several Heroic choices). Calibration: 0.15 -> 57, 0.2 -> 60, 0.25 -> 62, 0.3 -> 65, 0.35 -> 67,
+# 0.4 -> 69; three strong rules stacked reach about 85-90 and nothing passes 98.
 #
 # Fields
-#   id       kebab-case, unique across both lists; shown in debug output and tests.
+#   id       kebab-case, unique across both lists; shown in debug output and tests. Never reuse
+#            an id for a different idea.
 #   a, b     lists of tag expressions. A side matches when ANY expression matches.
 #            An expression is one tag, or several joined with "&" that must ALL match
 #            ("burst&type:ranged"). Tags: the HERO_TAGS vocabulary (mechanics extracted
 #            from kit text + curated traits) plus role:<role> and type:melee|ranged.
-#   weight   contribution to x; typical 0.2 (mild) .. 0.8 (strong). Negative is allowed.
+#   weight   contribution to x; 0.15 (mild) .. 0.4 (strong). Negative is allowed.
 #   why      one-line template rendered as the reason. Placeholders: {a} {b} hero names,
 #            {aTag} {bTag} the tags that matched, {evidence} the ability/talent names
-#            that justified A's tag. When a tag has no evidence (curated traits, role or
+#            that justified A's tag. When A's tag has no evidence (curated traits, role or
 #            type selectors) the engine drops the " ({evidence})" group from the line.
 #
-# counters: A counters B (directed). synergies: A works well with B (checked both ways).
-# Keep rules generic and mechanical; specific matchups belong in counters.yaml.
-version: 1
+# counters: A counters B (directed). synergies: A works well with B (checked both ways, counted once).
+# Keep rules generic and mechanical, true for every hero they can match, and explainable in one
+# line. Specific matchups belong in the per-hero files under curated/hots/heroes/.
+version: 2
 
 counters:
+  # --- answers to damage profiles ---------------------------------------------------------
   - id: blind-vs-auto-attackers
     a: [blind]
     b: [aa-reliant]
-    weight: 0.6
-    why: "{a} can blind basic attacks ({evidence}), and {b} relies on basic attacks for damage."
+    weight: 0.4
+    why: "{a} can Blind ({evidence}), and {b} deals most of its damage with Basic Attacks."
 
   - id: block-vs-auto-attackers
     a: [block, physical-armor]
     b: [aa-reliant]
-    weight: 0.4
-    why: "{a} can block or armor against basic attacks ({evidence}), which {b} relies on for damage."
-
-  - id: anti-heal-vs-sustain
-    a: [anti-heal]
-    b: [heal-self, heal-ally]
-    weight: 0.5
-    why: "{a} reduces healing ({evidence}), which cuts into {b}'s {bTag}."
-
-  - id: percent-damage-vs-frontline
-    a: [percent-hp-damage]
-    b: [role:tank, role:bruiser]
-    weight: 0.5
-    why: "{a} deals damage based on maximum Health ({evidence}), which hits high-Health heroes like {b} hardest."
-
-  - id: reveal-vs-stealth
-    a: [reveal]
-    b: [stealth]
-    weight: 0.6
-    why: "{a} can reveal enemies ({evidence}), taking away the stealth {b} relies on."
-
-  - id: interrupt-vs-channel
-    a: [stun, silence, displace, polymorph, sleep, time-stop]
-    b: [channel]
-    weight: 0.4
-    why: "{a} can interrupt channels with {aTag} ({evidence}); {b} has channelled abilities."
-
-  - id: lockdown-vs-divers
-    a: [stun, root, silence, polymorph]
-    b: [dive]
-    weight: 0.4
-    why: "{a}'s {aTag} ({evidence}) can stop {b} in the middle of a dive."
-
-  - id: cleanse-vs-heavy-cc
-    a: [cleanse, unstoppable]
-    b: [stun, root, polymorph, sleep, taunt, fear]
     weight: 0.3
-    why: "{a} can ignore or remove crowd control ({evidence}), weakening {b}'s {bTag}."
+    why: "{a} can block or armor against Basic Attacks ({evidence}), which {b} relies on for damage."
 
   - id: spell-armor-vs-burst-mages
     a: [spell-armor]
     b: ["burst&type:ranged"]
-    weight: 0.4
-    why: "{a} has Spell Armor ({evidence}), which reduces ability burst from {b}."
-
-  - id: dive-vs-immobile
-    a: [dive]
-    b: [immobile, vulnerable-body]
-    weight: 0.5
-    why: "{a} can dive onto {b}, who has little mobility to escape."
-
-  - id: area-damage-vs-summons
-    a: [aoe, waveclear]
-    b: [summons]
-    weight: 0.3
-    why: "{a}'s area damage ({evidence}) clears {b}'s summoned units quickly."
+    weight: 0.25
+    why: "{a} brings Spell Armor ({evidence}), which blunts {b}'s ability burst."
 
   - id: untouchable-vs-burst
-    a: [invulnerable, stasis, untargetable, unkillable]
+    a: [invulnerable, stasis, untargetable, unkillable, save]
     b: [burst]
-    weight: 0.3
-    why: "{a} can avoid or survive a burst window ({evidence}), wasting {b}'s cooldowns."
+    weight: 0.2
+    why: "{a} can deny a burst window ({evidence}), wasting {b}'s cooldowns."
+
+  - id: healer-outlasts-poke
+    a: [role:healer]
+    b: [poke]
+    weight: 0.1
+    why: "{a}'s healing undoes the chip damage {b} lands from range."
+
+  # --- answers to sustain and high Health -------------------------------------------------
+  - id: anti-heal-vs-sustain
+    a: [anti-heal]
+    b: [role:healer, heal-ally]
+    weight: 0.35
+    why: "{a} reduces healing received ({evidence}), which cuts into {b}'s healing."
+
+  - id: anti-heal-vs-self-sustain
+    a: [anti-heal]
+    b: ["heal-self&role:bruiser", "heal-self&role:melee-assassin", "heal-self&role:tank"]
+    weight: 0.2
+    why: "{a} reduces healing received ({evidence}), which blunts {b}'s self-healing in melee range."
+
+  - id: percent-damage-vs-frontline
+    a: [percent-hp-damage]
+    b: [role:tank]
+    weight: 0.35
+    why: "{a} deals damage based on maximum Health ({evidence}), which hits high-Health heroes like {b} hardest."
+
+  - id: percent-damage-vs-bruisers
+    a: [percent-hp-damage]
+    b: [role:bruiser]
+    weight: 0.25
+    why: "{a} deals damage based on maximum Health ({evidence}), and {b} has a large Health pool."
 
   - id: armor-shred-vs-armor
     a: [armor-shred]
     b: [physical-armor, spell-armor]
+    weight: 0.15
+    why: "{a} reduces enemy Armor ({evidence}), offsetting {b}'s {bTag}."
+
+  # --- answers to stealth and mobility ----------------------------------------------------
+  - id: reveal-vs-stealth
+    a: [reveal]
+    b: [stealth]
+    weight: 0.4
+    why: "{a} can reveal enemies ({evidence}), taking away {b}'s stealth."
+
+  - id: lockdown-vs-divers
+    a: [stun, root, silence, polymorph, sleep, time-stop]
+    b: [dive]
+    weight: 0.1
+    why: "{a}'s {aTag} ({evidence}) can stop {b} in the middle of a dive."
+
+  - id: peel-vs-dive
+    a: [peel]
+    b: [dive]
+    weight: 0.2
+    why: "{a} has the crowd control and body-blocking to peel {b} off its targets."
+
+  # --- answers to channels and crowd control ----------------------------------------------
+  - id: interrupt-vs-channel
+    a: [stun, silence, polymorph, sleep, time-stop]
+    b: [channel]
+    weight: 0.15
+    why: "{a} can interrupt channels with {aTag} ({evidence}), and {b} relies on channelled abilities."
+
+  - id: cleanse-vs-heavy-cc
+    a: [cleanse, unstoppable]
+    b: ["stun&root", "stun&silence", polymorph, sleep, taunt, fear, time-stop]
+    weight: 0.1
+    why: "{a} can ignore or remove crowd control ({evidence}), weakening {b}'s {bTag}."
+
+  # --- answers to fragile or immobile heroes ----------------------------------------------
+  - id: dive-vs-immobile
+    a: [dive]
+    b: [immobile, vulnerable-body]
+    weight: 0.35
+    why: "{a} can dive onto {b}, who has little mobility to escape."
+
+  - id: stealth-hunts-vulnerable
+    a: [stealth]
+    b: [vulnerable-body]
     weight: 0.3
-    why: "{a} reduces armor ({evidence}), offsetting {b}'s {bTag}."
+    why: "{a} can approach unseen ({evidence}) and catch {b}, who is easy to kill when found alone."
+
+  - id: burst-vs-vulnerable
+    a: [burst]
+    b: [vulnerable-body]
+    weight: 0.2
+    why: "{a}'s burst ({evidence}) can delete {b}'s small Health pool before help arrives."
+
+  - id: poke-vs-immobile-backline
+    a: [poke]
+    b: ["immobile&role:ranged-assassin", "immobile&role:support"]
+    weight: 0.15
+    why: "{a} can poke {b} from range ({evidence}), and {b} has few ways to dodge or disengage."
+
+  # --- macro --------------------------------------------------------------------------------
+  - id: area-damage-vs-summons
+    a: [waveclear]
+    b: [summons]
+    weight: 0.15
+    why: "{a}'s area damage ({evidence}) clears {b}'s summoned units quickly."
 
   - id: global-vs-split-push
     a: [global]
@@ -106,42 +160,72 @@ counters:
     weight: 0.3
     why: "{a}'s map-wide reach ({evidence}) helps answer {b}'s side-lane pressure."
 
+  - id: waveclear-vs-split-push
+    a: [waveclear]
+    b: [split-push]
+    weight: 0.1
+    why: "{a} clears waves quickly ({evidence}), so {b}'s lane pressure buys less."
+
 synergies:
   - id: cc-sets-up-burst
     a: [stun, root, polymorph, sleep, time-stop, taunt]
     b: [burst]
-    weight: 0.5
+    weight: 0.25
     why: "{a}'s {aTag} ({evidence}) holds targets still for {b}'s burst."
 
   - id: grouping-feeds-area-damage
     a: [pull, time-stop]
-    b: [aoe]
-    weight: 0.4
+    b: ["aoe&burst", "aoe&sustained-dps"]
+    weight: 0.3
     why: "{a} groups or freezes enemies ({evidence}) for {b}'s area damage."
 
+  - id: engage-for-area-burst
+    a: [engage]
+    b: ["aoe&burst"]
+    weight: 0.2
+    why: "{a} starts fights on its terms, giving {b} grouped targets for its area burst."
+
   - id: healer-backs-dive-bruiser
-    a: [heal-ally]
-    b: ["dive&role:bruiser", "dive&role:tank"]
-    weight: 0.3
-    why: "{a} can heal {b} through a dive ({evidence})."
+    a: [role:healer]
+    b: ["dive&role:bruiser", "dive&role:melee-assassin", "dive&role:tank"]
+    weight: 0.25
+    why: "{a} can keep {b} alive through a dive."
 
   - id: save-backs-diver
-    a: [save, shield]
+    a: [save]
     b: [dive]
     weight: 0.3
-    why: "{a} can shield or save {b} after {b} commits to a dive ({evidence})."
+    why: "{a} can save {b} after it commits to a dive."
+
+  - id: lockdown-for-divers
+    a: [stun, root, polymorph, sleep, time-stop]
+    b: [dive]
+    weight: 0.15
+    why: "{a}'s {aTag} ({evidence}) lets {b} dive onto a target that cannot walk away."
 
   - id: global-pairs-with-split-push
     a: [global]
     b: [split-push]
-    weight: 0.3
+    weight: 0.2
     why: "{a} has map-wide reach ({evidence}) while {b} pressures a side lane."
 
   - id: peel-protects-immobile-carry
     a: [peel]
-    b: ["immobile&aa-reliant", "immobile&burst"]
+    b: ["immobile&aa-reliant", "immobile&burst", "immobile&role:ranged-assassin"]
     weight: 0.3
     why: "{a} peels divers off {b}, who cannot escape on its own."
+
+  - id: protect-vulnerable-body
+    a: [save, peel]
+    b: [vulnerable-body]
+    weight: 0.2
+    why: "{a} can protect {b}'s fragile body when the enemy hunts it."
+
+  - id: frontline-shields-backline
+    a: [frontline]
+    b: [immobile]
+    weight: 0.15
+    why: "{a} holds the front line, giving {b} room to deal damage from behind it."
 
   - id: cleanse-frees-carry
     a: [cleanse]

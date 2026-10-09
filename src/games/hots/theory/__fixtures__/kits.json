@@ -1,0 +1,2690 @@
+{
+ "source": "Ability and talent tooltip text from Heroes of the Storm 2.57.0.98348 game data, extracted by HeroesToolChest heroes-data2 (MIT). Game content © Blizzard Entertainment, Inc. Trimmed to the fields the extractor reads.",
+ "heroes": [
+  {
+   "id": "Abat",
+   "slug": "abathur",
+   "name": "Abathur",
+   "role": "Support",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Symbiote",
+     "kind": "basic",
+     "text": "Spawn and attach a Symbiote to a target ally or Structure. While active, Abathur controls the Symbiote, gaining access to new Abilities. The Symbiote is able to gain XP from nearby enemy deaths."
+    },
+    {
+     "name": "Toxic Nest",
+     "kind": "basic",
+     "text": "Spawn a mine that becomes active after a short time. Deals 153 (+4% per level) damage and reveals the enemy for 4 seconds. Lasts 90 seconds.\n\nStores up to 3 charges."
+    },
+    {
+     "name": "Evolve Monstrosity",
+     "kind": "heroic",
+     "text": "Turn an allied Minion or Locust into a Monstrosity. When enemy Minions near the Monstrosity die, it gains 2% Health and 2% Basic Attack damage, stacking up to 40 times. The Monstrosity can be healed by Carapace and has the ability to Burrow to a visible location every 80 seconds.\n\nUsing Symbiote on the Monstrosity allows Abathur to control it, in addition to Symbiote's normal benefits. This Ability can be reactivated to automatically cast Symbiote on his Monstrosity."
+    },
+    {
+     "name": "Ultimate Evolution",
+     "kind": "heroic",
+     "text": "Clone target allied Hero and control it for 20 seconds. Abathur has perfected the clone, granting it 20% Spell Power, 20% bonus Attack Damage, and 10% bonus Movement Speed. Cannot use their Heroic Ability."
+    },
+    {
+     "name": "Locust Strain",
+     "kind": "trait",
+     "text": "Spawns a Locust to attack down the nearest lane every 15 seconds. Locusts heal for 20% of the damage they deal, and regain 20% of their Maximum health when a nearby minion dies.\n\nLocusts lose health over 17 seconds, have 225 (+4% per level) health and deal 36 (+4% per level) damage with each Basic Attack, dealing 100% bonus damage to enemy non-Heroes."
+    },
+    {
+     "name": "Deep Tunnel",
+     "kind": "mount",
+     "text": "Quickly tunnel to a visible location."
+    },
+    {
+     "name": "Stab",
+     "kind": "basic",
+     "text": "Shoots a spike towards target area that deals 119 (+4% per level) damage to the first enemy it contacts."
+    },
+    {
+     "name": "Spike Burst",
+     "kind": "basic",
+     "text": "Deals 120 (+4% per level) damage to nearby enemies."
+    },
+    {
+     "name": "Carapace",
+     "kind": "basic",
+     "text": "Shields the assisted ally for 150 (+4% per level). Allied Heroes are healed for 22 (+4% per level) Health per second while the Shield is active. Lasts for 6 seconds."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Pressurized Glands",
+      "text": "Increases the range of Symbiote's Spike Burst by 25% and decreases the cooldown by 1 second."
+     },
+     {
+      "name": "Envenomed Nest",
+      "text": "Toxic Nests deal 75% more damage over 3 seconds and reduce the Armor of enemy Heroes hit by 15 for 4 seconds."
+     },
+     {
+      "name": "Reinforced Carapace",
+      "text": "Increase the Shield amount of Carapace by 40%."
+     },
+     {
+      "name": "Locust Brood",
+      "text": "Activate to spawn 3 Locusts at a nearby location."
+     }
+    ],
+    "4": [
+     {
+      "name": "Adrenal Overload",
+      "text": "Heroic Symbiote hosts gain 25% increased Attack Speed."
+     },
+     {
+      "name": "Needlespine",
+      "text": "Increases the damage and range of Symbiote's Stab by 20%."
+     },
+     {
+      "name": "Prolific Dispersal",
+      "text": "Increase the duration of Toxic Nests by 45 seconds, reduce its cooldown by 2 seconds, and add 2 additional charges."
+     },
+     {
+      "name": "Slapathur",
+      "text": "Abathur’s Basic Attacks deal 350% additional damage and Stun non-Elite enemies and disable Structures for 1.5 seconds.\n\nThe same Hero or Structure can only be Stunned or disabled once every 6 seconds."
+     }
+    ],
+    "7": [
+     {
+      "name": "Vile Nest",
+      "text": "Toxic Nests Slow enemy Movement Speed by 40% for 2.5 seconds."
+     },
+     {
+      "name": "Networked Carapace",
+      "text": "Using Symbiote's Carapace also applies an untalented Carapace Shield to all nearby allied Heroes, Minions, and Mercenaries."
+     },
+     {
+      "name": "Calldown: MULE",
+      "text": "Activate to calldown a Mule that repairs Structures, one at a time, near target point for 40 seconds, healing for 90 Health every 1 second."
+     }
+    ],
+    "10": [
+     {
+      "name": "Ultimate Evolution",
+      "text": "Clone target allied Hero and control it for 20 seconds. Abathur has perfected the clone, granting it 20% Spell Power, 20% bonus Attack Damage, and 10% bonus Movement Speed. Cannot use their Heroic Ability."
+     },
+     {
+      "name": "Evolve Monstrosity",
+      "text": "Turn an allied Minion or Locust into a Monstrosity. When enemy Minions near the Monstrosity die, it gains 2% Health and 2% Basic Attack damage, stacking up to 40 times. The Monstrosity can be healed by Carapace and has the ability to Burrow to a visible location every 80 seconds.\n\nUsing Symbiote on the Monstrosity allows Abathur to control it, in addition to Symbiote's normal benefits. This Ability can be reactivated to automatically cast Symbiote on his Monstrosity.",
+      "quest": true
+     }
+    ],
+    "13": [
+     {
+      "name": "Spatial Efficiency",
+      "text": "Symbiote's Stab gains 1 additional charge and its cooldown is reduced by .5 seconds."
+     },
+     {
+      "name": "Soma Transference",
+      "text": "Symbiote's Spike Burst heals the host for 64 (+4% per level) Health per enemy Hero hit."
+     },
+     {
+      "name": "Bombard Strain",
+      "text": "Locust's Basic Attacks become a long-range siege attack and they now lose health 40% more slowly."
+     }
+    ],
+    "16": [
+     {
+      "name": "Envenomed Spikes",
+      "text": "Abathur's Symbiote's Spike Burst also Slows enemy Movement Speed by 40% for 2 seconds."
+     },
+     {
+      "name": "Adrenaline Boost",
+      "text": "Symbiote's Carapace increases the Movement Speed of the target by 40% for 3.5 seconds."
+     },
+     {
+      "name": "Volatile Mutation",
+      "text": "Ultimate Evolution clones and Monstrosities deal 137 (+4% per level) damage to nearby enemies every 3 seconds and when they die. Enemy Heroes hit heal the clone or Monstrosity for 100% of the damage dealt."
+     },
+     {
+      "name": "Survival Instincts",
+      "text": "Reduce damage taken by Locusts from non-Heroes by 50% and increase their damage by 60%."
+     }
+    ],
+    "20": [
+     {
+      "name": "Evolutionary Link",
+      "text": "Increase the duration of Ultimate Evolution by 50%. As long as the Ultimate Evolution is alive, the original target of the clone gains a Shield equal to 35% of their maximum Health. Refreshes every 5 seconds."
+     },
+     {
+      "name": "Evolution Complete",
+      "text": "Increase Monstrosity's Basic Attack damage by 100%."
+     },
+     {
+      "name": "Hivemind",
+      "text": "Symbiote creates an additional Symbiote on a nearby allied Hero. This Symbiote mimics the commands of the first, but does half damage and Shielding."
+     },
+     {
+      "name": "Locust Nest",
+      "text": "Activate to create a nest that periodically spawns Locusts. Only one Locust Nest can be active at a time."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Alar",
+   "slug": "alarak",
+   "name": "Alarak",
+   "role": "Melee Assassin",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Discord Strike",
+     "kind": "basic",
+     "text": "After a 0.5 second delay, enemies in front of Alarak take 165 (+4% per level) damage and are silenced for 1.5 seconds."
+    },
+    {
+     "name": "Telekinesis",
+     "kind": "basic",
+     "text": "Vector Targeting\nCreate a force, pushing Alarak and all enemies hit from the targeted point towards the targeted direction. Deals 48 (+4% per level) damage to enemies."
+    },
+    {
+     "name": "Lightning Surge",
+     "kind": "basic",
+     "text": "Deal 62 (+4% per level) damage to an enemy and an additional 100% damage to enemies between Alarak and the target. Restore 75 (+4% per level) health for each Hero hit."
+    },
+    {
+     "name": "Deadly Charge",
+     "kind": "heroic",
+     "text": "After channeling, Alarak charges forward dealing 200 (+4% per level) damage to all enemies in his path. Distance is increased based on the amount of time channeled, up to 1.5 seconds.\n\nIssuing a Move order while this is channeling will cancel it at no cost. Taking damage will interrupt the channeling."
+    },
+    {
+     "name": "Counter-Strike",
+     "kind": "heroic",
+     "text": "Alarak targets an area and channels for 1 second, becoming Protected and Unstoppable. After, if he took damage from an enemy Hero, he sends a shockwave that deals 275 (+4% per level) damage."
+    },
+    {
+     "name": "Sadism",
+     "kind": "trait",
+     "text": "Alarak's Ability damage and self-healing are increased by 100% against enemy Heroes.\n\nRepeatable Quest: Takedowns increase Sadism by 3%, up to 30%. Sadism gained from Takedowns is lost on death."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Overwhelming Power",
+      "text": "Hitting an enemy Hero with Discord Strike grants 40% Attack Speed and causes Basic Attacks to heal for 15% of the damage dealt, increased by 50% of Sadism's bonus when hitting Heroes. These effects last for 4 seconds."
+     },
+     {
+      "name": "Ruthless Momentum",
+      "text": "Reduce the Mana cost of Telekinesis from 30 to 20. Telekinesis's cooldown recharges 100% faster while above 80% Health."
+     },
+     {
+      "name": "Extended Lightning",
+      "text": "Reduce Sadism by 10%.\n\nQuest: Hit Heroes with the center of Lightning Surge.\n\nReward: After hitting 5 Heroes, increase Lightning Surge's range by 20%.\n\nReward: After hitting 15 Heroes, Lightning Surge's center also Slows enemies by 40% for 2 seconds.\n\nReward: After hitting 3 Heroes with the center of a single cast, increase Sadism by 10% and instantly gain all other Rewards.",
+      "quest": true
+     }
+    ],
+    "4": [
+     {
+      "name": "Chaos Reigns",
+      "text": "Quest: Hit Heroes with Discord Strike.\n\nReward: After hitting 15 Heroes, increase Discord Strike's damage by 60.\n\nReward: After hitting 2 Heroes with a single Discord Strike, increase its damage by 60.\n\nReward: After hitting 3 Heroes with a single Discord Strike, increase its damage by 100 and instantly gain all other Rewards.",
+      "quest": true
+     },
+     {
+      "name": "Negatively Charged",
+      "text": "Increase the Lightning Surge damage bonus to enemies between Alarak and his victim to 175%.\n\nRepeatable Quest: Each Hero hit by the center of Lightning Surge permanently increases the damage bonus by 5%.",
+      "quest": true
+     },
+     {
+      "name": "Show of Force",
+      "text": "Heroes hit with 3 of Alarak's Abilities within 2 seconds take an additional 61 (+4% per level) damage and increase Sadism by 2%, stacking up to 20%.\n\nSadism gained from Show of Force is lost on death."
+     }
+    ],
+    "7": [
+     {
+      "name": "Dissonance",
+      "text": "Increase Discord Strike's Silence duration by 0.75 seconds."
+     },
+     {
+      "name": "Hindered Motion",
+      "text": "Telekinesis Slows enemies by 30% for 3 seconds."
+     },
+     {
+      "name": "Applied Force",
+      "text": "Reduce Sadism by 10%, but Telekinesis pushes 15% further and has 15% increased range."
+     }
+    ],
+    "10": [
+     {
+      "name": "Deadly Charge",
+      "text": "After channeling, Alarak charges forward dealing 200 (+4% per level) damage to all enemies in his path. Distance is increased based on the amount of time channeled, up to 1.5 seconds.\n\nIssuing a Move order while this is channeling will cancel it at no cost. Taking damage will interrupt the channeling."
+     },
+     {
+      "name": "Counter-Strike",
+      "text": "Alarak targets an area and channels for 1 second, becoming Protected and Unstoppable. After, if he took damage from an enemy Hero, he sends a shockwave that deals 275 (+4% per level) damage."
+     }
+    ],
+    "13": [
+     {
+      "name": "Blade of the Highlord",
+      "text": "Basic Attacks against Heroes increase Sadism by 2% stacking up to 40%.\n\nSadism gained from Blade of the Highlord is lost on death."
+     },
+     {
+      "name": "Pure Malice",
+      "text": "Increase Sadism by 10% any time an allied Hero dies, up to 40%.\n\nSadism gained from Pure Malice is lost on death."
+     },
+     {
+      "name": "Rite of Rak'Shir",
+      "text": "Activate to mark an enemy Hero for 300 seconds.\n\nHitting the marked Hero with Discord Strike increases Sadism by 3%. Killing the marked Hero increases Sadism by 5% and lowers the cooldown of Rite of Rak'Shir to 10 seconds.\n\nSadism gained from Rite of Rak'Shir is lost on death."
+     }
+    ],
+    "16": [
+     {
+      "name": "Lethal Onslaught",
+      "text": "Hitting an enemy Hero with Discord Strike grants 50% of Sadism's damage bonus to Alarak's Basic Attacks for 4 seconds. Basic Attacks against Heroes refresh this duration."
+     },
+     {
+      "name": "Lightning Barrage",
+      "text": "Hitting an enemy Hero with the center of Lightning Surge allows it to be cast again for free on a different primary target within the next 3 seconds. This free cast cannot benefit from Lightning Barrage."
+     },
+     {
+      "name": "Mocking Strikes",
+      "text": "Basic Attacks against enemy Heroes reduce the cooldown of Alarak's Basic Abilities by 1.5 seconds. This bonus is doubled against enemy Heroes who are Stunned, Silenced, Slowed, or Rooted."
+     }
+    ],
+    "20": [
+     {
+      "name": "Wrath of the Highlord",
+      "text": "If Deadly Charge was the selected Heroic, Heroes hit by Deadly Charge take bonus damage from Alarak's Abilities equal to 75% of Sadism's bonus damage for 4 seconds.\n\nIf Counter-Strike was the selected Heroic, its cooldown is reduced by 2.5 seconds for each enemy Hero hit by Alarak's Basic Abilities."
+     },
+     {
+      "name": "Might of the Highlord",
+      "text": "Alarak gains access to both of his Heroic Abilities. This can be activated to change which Ability occupies the Heroic slot, with the other Ability using the Trait slot."
+     },
+     {
+      "name": "Last Laugh",
+      "text": "Activate to teleport to the chosen location and remove all Roots, Slows, and damage over time effects. If Alarak fails to hit enemy Heroes 3 times with Basic Abilities within 4 seconds of using Last Laugh, his Health is reduced to 1."
+     },
+     {
+      "name": "Hasty Bargain",
+      "text": "Activate to permanently reduce Alarak's Sadism by 4% and reset the cooldowns of his Basic Abilities."
+     }
+    ]
+   }
+  },
+  {
+   "id": "HANA",
+   "slug": "ana",
+   "name": "Ana",
+   "role": "Healer",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Healing Dart",
+     "kind": "basic",
+     "text": "Fire a dart which heals the first allied Hero hit for 195 (+4% per level) Health. Does not affect full Health Heroes."
+    },
+    {
+     "name": "Biotic Grenade",
+     "kind": "basic",
+     "text": "Toss a grenade at the target area. Allied Heroes hit are healed for 152 (+4% per level) Health and receive 25% increased healing from Ana for 4 seconds. Enemies hit take 60 (+4% per level) damage and receive 100% less healing for 1.75 seconds.\n\nIf Biotic Grenade does not hit any enemies, reduce its cooldown by 3 seconds, and if Ana is the only target hit, reduce its cooldown by an additional 2 seconds."
+    },
+    {
+     "name": "Sleep Dart",
+     "kind": "basic",
+     "text": "Fire a dart that puts the first enemy Hero hit to Sleep, Stunning them for 3 seconds. Sleep's effects end instantly if the target takes damage after the first 0.5 seconds.\n\nCannot be used on Vehicles."
+    },
+    {
+     "name": "Nano Boost",
+     "kind": "heroic",
+     "text": "Instantly boost an allied Hero, restoring 200 Mana. For the next 8 seconds, they gain 30% Spell Power and their Basic Ability cooldowns recharge 150% faster.\n\nCannot be used on Ana."
+    },
+    {
+     "name": "Eye of Horus",
+     "kind": "heroic",
+     "text": "Assume a sniping position, gaining the ability to fire up to 6 specialized rounds with unlimited range. Rounds pierce allied and enemy Heroes but collide with enemy Structures in their path. Allies are healed for 225 (+4% per level) and enemies are damaged for 135 (+4% per level). Deals 50% less damage to Structures.\n\nAna is unable to move while Eye of Horus is active."
+    },
+    {
+     "name": "Shrike",
+     "kind": "trait",
+     "text": "Basic Attacks apply a Dose to enemies, dealing 40 (+4% per level) damage over 5 seconds, plus additional damage equal to the current number of stacks on the target, stacking up to 5 times. Every 0.5 seconds, Ana is healed for 60% of the damage dealt by Shrike.\n\nAim Down Sights\n\nActivating Shrike reduces your Movement Speed by 25%, but increases the Range of Healing Dart and Sleep Dart by 25% while also allowing them to pierce one Hero. Lasts until canceled."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Contact Healing",
+      "text": "Hitting Heroes with Biotic Grenade increases its damage and healing by 30% per Hero hit."
+     },
+     {
+      "name": "Slumber Shells",
+      "text": "Reduce the cooldown of Sleep Dart by 2 seconds. Upon waking, enemy Heroes are Slowed by 25% for 3 seconds."
+     },
+     {
+      "name": "Vampiric Rounds",
+      "text": "Increase Shrike's healing by 15%.\n\nRepeatable Quest: Stack 5 Doses to increase Shrike's healing by 1%.\n\nRepeatable Quest: Basic Attack a Hero with 5 Doses to increase Shrike's healing by 0.25%.",
+      "quest": true
+     }
+    ],
+    "4": [
+     {
+      "name": "Biotic Enhancements",
+      "text": "Increase the bonus healing duration of Biotic Grenade by 50% and reduce its cooldown by 3 seconds."
+     },
+     {
+      "name": "Overdose",
+      "text": "Sleep Dart applies 4 Doses. While Aim Down Sights is active, Sleep Dart pierces all enemy Heroes."
+     },
+     {
+      "name": "Debilitating Dart",
+      "text": "Fire a dart which Slows the Movement Speed and reduces the damage dealt by the first enemy Hero it hits by 50% for 4 seconds. If no Heroes are hit, reduce this cooldown by 8 seconds."
+     }
+    ],
+    "7": [
+     {
+      "name": "Anti-Healer",
+      "text": "Increase the area of Biotic Grenade by 25% and the duration of the healing reduction by 0.75 seconds."
+     },
+     {
+      "name": "Night Terrors",
+      "text": "Gain 25% Movement Speed for 2 seconds for every Hero hit by Sleep Dart. Upon waking, enemy Heroes take 8% of their Maximum Health in damage."
+     },
+     {
+      "name": "Mind-Numbing Agent",
+      "text": "Every Dose a Hero has reduces their Spell Power by 10%."
+     }
+    ],
+    "10": [
+     {
+      "name": "Nano Boost",
+      "text": "Instantly boost an allied Hero, restoring 200 Mana. For the next 8 seconds, they gain 30% Spell Power and their Basic Ability cooldowns recharge 150% faster.\n\nCannot be used on Ana."
+     },
+     {
+      "name": "Eye of Horus",
+      "text": "Assume a sniping position, gaining the ability to fire up to 6 specialized rounds with unlimited range. Rounds pierce allied and enemy Heroes but collide with enemy Structures in their path. Allies are healed for 225 (+4% per level) and enemies are damaged for 135 (+4% per level). Deals 50% less damage to Structures.\n\nAna is unable to move while Eye of Horus is active."
+     }
+    ],
+    "13": [
+     {
+      "name": "Speed Serum",
+      "text": "Healing Dart grants 25% Movement Speed to affected Heroes for 2 seconds."
+     },
+     {
+      "name": "Purifying Darts",
+      "text": "Healing Dart removes Roots and Slows from the target, and heals for 20% more when doing so."
+     },
+     {
+      "name": "Smelling Salts",
+      "text": "Healing Dart removes Stuns from the target, and grants them 50 Armor for 2 seconds when doing so."
+     }
+    ],
+    "16": [
+     {
+      "name": "Sharpshooter",
+      "text": "Healing Dart's healing is increased by 5% if it heals a Hero, up to 50%. At maximum bonus, further increase its healing by 35%. This bonus is reset if Healing Dart fails to hit a Hero."
+     },
+     {
+      "name": "Concentrated Doses",
+      "text": "Increase Healing Dart's healing by 12% for each Dose active on enemy Heroes."
+     },
+     {
+      "name": "Active Reload",
+      "text": "Activate to instantly gain 3 charges of Healing Dart."
+     }
+    ],
+    "20": [
+     {
+      "name": "Nano Infusion",
+      "text": "Allies affected by Nano Boost heal for 50% of Spell Damage dealt."
+     },
+     {
+      "name": "Deadeye",
+      "text": "Eye of Horus cooldown reduced to 6 seconds, but it only regains new rounds every 10 seconds. Remaining cooldown is converted to rounds.\n\nFor every Hero Eye of Horus hits, increases its damage and healing by 5%. This bonus resets after leaving Eye of Horus or after 4 seconds."
+     },
+     {
+      "name": "Armored Stance",
+      "text": "Increase Shrike's damage by 50%. While Aim Down Sights is active, gain 25 Armor."
+     },
+     {
+      "name": "Dynamic Optics",
+      "text": "Basic Attacks increase Attack Speed by 10% for 3 seconds, up to 100%. While Aim Down Sights is active, increase your Basic Attack Range by 4."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Andu",
+   "slug": "anduin",
+   "name": "Anduin",
+   "role": "Healer",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Flash Heal",
+     "kind": "basic",
+     "text": "Cast for 0.75 seconds to heal an allied Hero for 280 (+4% per level)."
+    },
+    {
+     "name": "Divine Star",
+     "kind": "basic",
+     "text": "Send light that deals 140 (+4% per level) damage to enemies and then returns to Anduin, healing allied Heroes for 130 (+4% per level) in a wider path. Healing increases by 25% per enemy Hero hit."
+    },
+    {
+     "name": "Chastise",
+     "kind": "basic",
+     "text": "Shove a swell of light forward, dealing 175 (+4% per level) damage to the first enemy Hero hit and Rooting them for 1.25 seconds."
+    },
+    {
+     "name": "Holy Word: Salvation",
+     "kind": "heroic",
+     "text": "After 0.5 seconds, Channel to invoke the Light for 3 seconds. While nearby, allied Heroes heal for up to 30% of their max Health and are Protected."
+    },
+    {
+     "name": "Lightbomb",
+     "kind": "heroic",
+     "text": "Imbue an allied Hero with the Light. After 1.5 seconds, it explodes, dealing 150 (+4% per level) damage to enemies and Stunning them for 1.25 seconds.\n\nThe target gains a Shield that absorbs 165 (+4% per level) damage per enemy Hero hit. Lasts for 5 seconds."
+    },
+    {
+     "name": "Leap of Faith",
+     "kind": "trait",
+     "text": "Faith instantly pulls an allied Hero to Anduin's location, granting them Unstoppable while they travel.\n\nPursued By Grace\n\nBasic Attacks against enemy Heroes heal the lowest Health allied Hero near Anduin for 32 (+4% per level)."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Evenhanded Blessings",
+      "text": "If Flash Heal is cast on a different target from its last, increase its healing by 15% and refund 40% of its cooldown."
+     },
+     {
+      "name": "Power Word: Shield",
+      "text": "While Divine Star is traveling out, allies in its path gain a Shield that absorbs 128 (+4% per level) damage for 4 seconds.\n\nIf Divine Star hits an enemy Hero, Anduin gains a Shield that absorbs 185 (+4% per level) damage for 4 seconds."
+     },
+     {
+      "name": "Lightwell",
+      "text": "Summon a Lightwell that periodically heals a nearby allied Hero for 50 (+4% per level). The well only fades after healing 15 times or when recast.\n\nThis cooldown is reduced by 1 second each time Anduin heals an allied Hero."
+     }
+    ],
+    "4": [
+     {
+      "name": "Moral Compass",
+      "text": "Divine Star fires Basic Attacks at Heroes close to its apex.\n\nPassive: Increase Attack Range by 1.1."
+     },
+     {
+      "name": "Surge of Light",
+      "text": "Basic Attacks reduce the cooldown of Chastise by 0.75 seconds. Basic Attacks against Heroes Rooted by Chastise launch an additional Basic Attack and restore 25 Mana."
+     },
+     {
+      "name": "Piercing Light",
+      "text": "Chastise pierces to hit an additional Hero.\n\nQuest: Hitting two Heroes with a single Chastise permanently increases Spell Power by 1, to a maximum of 10.",
+      "quest": true
+     }
+    ],
+    "7": [
+     {
+      "name": "Binding Heal",
+      "text": "Casting Flash Heal on an ally heals Anduin for 135 (+4% per level)."
+     },
+     {
+      "name": "Blessed Recovery",
+      "text": "If Anduin loses more than 8% of his maximum Health at once, recover 15% Health over 3 seconds.\n\nThis effect has a 10 second cooldown.\n\nCurrent Health required: 133 (+4% per level)"
+     },
+     {
+      "name": "Desperate Prayer",
+      "text": "Activate to instantly heal an allied Hero for 375 (+4% per level), but kneel for 2 seconds, unable to act."
+     }
+    ],
+    "10": [
+     {
+      "name": "Holy Word: Salvation",
+      "text": "After 0.5 seconds, Channel to invoke the Light for 3 seconds. While nearby, allied Heroes heal for up to 30% of their max Health and are Protected."
+     },
+     {
+      "name": "Lightbomb",
+      "text": "Imbue an allied Hero with the Light. After 1.5 seconds, it explodes, dealing 150 (+4% per level) damage to enemies and Stunning them for 1.25 seconds.\n\nThe target gains a Shield that absorbs 165 (+4% per level) damage per enemy Hero hit. Lasts for 5 seconds."
+     }
+    ],
+    "13": [
+     {
+      "name": "Speed of the Pious",
+      "text": "While Divine Star is traveling, gain 30% Movement Speed. Each allied Hero healed by Divine Star on its return to Anduin reduces its cooldown by 1 second."
+     },
+     {
+      "name": "Push Forward!",
+      "text": "Damaging an enemy Hero increases Movement Speed by 2.5% and the amount healed by Pursued By Grace by 5% for 6 seconds. These effects stack up to 8 times."
+     },
+     {
+      "name": "Enchant Boots - Lion's Speed",
+      "text": "Gain 5% Movement Speed. This bonus is quadrupled while Leap of Faith's cooldown is available. Allies pulled by Leap of Faith are healed for 280 (+4% per level) over 4 seconds."
+     }
+    ],
+    "16": [
+     {
+      "name": "Renew",
+      "text": "Flash Heal heals an additional 180 (+4% per level) over 6 seconds. The duration of this heal is refreshed each time Anduin hits an enemy Hero with a Basic Attack."
+     },
+     {
+      "name": "Holy Nova",
+      "text": "After Anduin catches Divine Star, it explodes, healing nearby allied Heroes for 105 (+4% per level) and damaging enemies for 150 (+4% per level)."
+     },
+     {
+      "name": "Glyph of Faith",
+      "text": "Leap of Faith gains a 2nd charge."
+     },
+     {
+      "name": "Inner Focus",
+      "text": "Activate to reset the cooldown of Flash Heal and its next cast heals for 25% more.\n\nDamaging enemy Heroes reduces this cooldown by 1 second."
+     }
+    ],
+    "20": [
+     {
+      "name": "Light of Stormwind",
+      "text": "Holy Word: Salvation grants allied Heroes Invulnerability instead of Protected. This does not affect Anduin.\n\nChanneling Holy Word: Salvation for its full duration reduces its cooldown by 60 seconds."
+     },
+     {
+      "name": "Inner Fire",
+      "text": "The target of Light Bomb gains 40% Move Speed and 50 Armor for 3 seconds."
+     },
+     {
+      "name": "Censure",
+      "text": "Chastise Stuns for 0.75 seconds and its Root duration is increased by 0.5 seconds."
+     },
+     {
+      "name": "Varian's Legacy",
+      "text": "Basic Attacks burn enemies for 87 (+4% per level) damage over 3 seconds and Anduin heals for 50% of the damage dealt."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Azmo",
+   "slug": "azmodan",
+   "name": "Azmodan",
+   "role": "Ranged Assassin",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Globe of Annihilation",
+     "kind": "basic",
+     "text": "Shoot a globe of destruction, dealing 176 (+4% per level) damage on impact. Deals 50% damage to non-Heroes.\n\nQuest: Hitting a Hero or killing a Minion within 3 seconds of being hit by Globe Of Annihilation grants 2 stacks of Annihilation. Each stack increases its damage by 1.\n\nMythic Reward: After gaining 450 Annihilation, the area of Globe of Annihilation is increased by 15% and it deals 150 additional damage."
+    },
+    {
+     "name": "Summon Demon Warrior",
+     "kind": "basic",
+     "text": "Spawn a Demon Warrior that marches forward. Warriors deal 53 (+4% per level) damage per Attack. Loses Health over 17 seconds. Deals 100% bonus damage to Minions and Mercenaries.\n\nUsable while Channeling All Shall Burn."
+    },
+    {
+     "name": "All Shall Burn",
+     "kind": "basic",
+     "text": "Channel a beam of death on an enemy, dealing 128 (+4% per level) damage per second for 2.5 seconds. If the Channel lasts its full duration, deal an extra 340 (+4% per level) damage to the target.\n\nAzmodan's Movement Speed is reduced by 30% while Channeling."
+    },
+    {
+     "name": "Demonic Invasion",
+     "kind": "heroic",
+     "text": "Rain a small army of Demonic Grunts down on enemies, dealing 85 (+4% per level) damage per impact. Grunts deal 30 (+4% per level) damage, have 750 (+4% per level) Health and last up to 20 seconds. When Grunts die they explode, dealing 40 (+4% per level) damage to nearby enemies, doubled against enemy Heroes.\n\nUsable while Channeling All Shall Burn."
+    },
+    {
+     "name": "Tide of Sin",
+     "kind": "heroic",
+     "text": "Activate to make the next Globe of Annihilation cost no Mana and deal 50% more damage.\n\nUsable while Channeling All Shall Burn."
+    },
+    {
+     "name": "Demon Lieutenant",
+     "kind": "trait",
+     "text": "Summon a Demon Lieutenant at any allied Mercenary, Minion, or Azmodan Demon. The Lieutenant will cast Demonic Smite every 7 seconds, instantly killing an enemy Minion. Loses Health over 21 seconds.\n\nUsable while Channeling All Shall Burn."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Greed",
+      "text": "Globe of Annihilation deals 15% more damage to non-Heroic targets.\n\nQuest: After gaining 225 Annihilation, increase the range of All Shall Burn by 25% and Demon Warriors gain 20% Attack Speed and Movement Speed. Globe of Annihilation's damage penalty against Minions and Mercenaries is removed.",
+      "quest": true
+     },
+     {
+      "name": "Gluttony",
+      "text": "Increase the number of stacks of Annihilation gained by hitting Heroes with Globe of Annihilation from 2 to 4.\n\nQuest: After gaining 225 Annihilation, each enemy hit by Globe of Annihilation reduces its cooldown by 0.25 seconds, doubled against Heroes. Globe of Annihilation's damage penalty against Minions and Mercenaries is removed.",
+      "quest": true
+     },
+     {
+      "name": "Wrath",
+      "text": "Every other Basic Attack against Heroes or Structures grant Annihilation.\n\nQuest: After gaining 225 Annihilation, hitting a Hero with Globe of Annihilation increases the damage of Azmodan's next Basic Attack against them within 3 seconds by 85% the amount of Annihilation he has. Globe of Annihilation's damage penalty against Minions and Mercenaries is removed.",
+      "quest": true
+     }
+    ],
+    "4": [
+     {
+      "name": "Army of Hell",
+      "text": "Summon Demon Warrior spawns an additional Demon, but its cooldown is increased by 10 seconds."
+     },
+     {
+      "name": "Hellforged Armor",
+      "text": "Demon Warriors and Lieutenants gain 20 Armor and lose 25% less health per second."
+     },
+     {
+      "name": "Battleborn",
+      "text": "Reduce the Mana cost of Summon Demon Warrior from 25 to 20. Azmodan's Basic Attacks reduce the cooldown of Summon Demon Warrior by 0.75 seconds and Demon Lieutenant by 1.5 seconds."
+     }
+    ],
+    "7": [
+     {
+      "name": "Art of Chaos",
+      "text": "If Globe of Annihilation hits 2 or more Heroes, restore 40 Mana and gain an extra 2 Annihilation."
+     },
+     {
+      "name": "Bombardment",
+      "text": "After casting Globe of Annihilation, Azmodan's Basic Attacks within the next 3 seconds have an additional 1.5 range and can hit 3 additional targets. Hitting Heroes with Basic Attacks empowered by Bombardment grant 1 Annihilation."
+     },
+     {
+      "name": "Master of Destruction",
+      "text": "If All Shall Burn's Channel kills or lasts its full duration, All Shall Burn's final damage applies to all enemies in an area around the target and grants 1 Annihilation per Hero hit."
+     }
+    ],
+    "10": [
+     {
+      "name": "Demonic Invasion",
+      "text": "Rain a small army of Demonic Grunts down on enemies, dealing 85 (+4% per level) damage per impact. Grunts deal 30 (+4% per level) damage, have 750 (+4% per level) Health and last up to 20 seconds. When Grunts die they explode, dealing 40 (+4% per level) damage to nearby enemies, doubled against enemy Heroes.\n\nUsable while Channeling All Shall Burn."
+     },
+     {
+      "name": "Tide of Sin",
+      "text": "Activate to make the next Globe of Annihilation cost no Mana and deal 50% more damage.\n\nUsable while Channeling All Shall Burn."
+     }
+    ],
+    "13": [
+     {
+      "name": "Brutish Vanguard",
+      "text": "Demon Warriors and Lieutenants gain 25% increased Health. Demon Warriors Slow attacked targets by 30%."
+     },
+     {
+      "name": "Cydaea's Kiss",
+      "text": "Reduces the Channel time of All Shall Burn by 0.5 seconds. If All Shall Burn's Channel kills or lasts its full duration against a Hero, Azmodan is healed for 8% of his maximum Health."
+     },
+     {
+      "name": "Chain of Command",
+      "text": "The cooldown of Demon Lieutenants' Demonic Smite is reduced by 2 seconds and they grant 25% increased damage to nearby friendly Minions, Mercenaries, and Azmodan's summoned Demons."
+     }
+    ],
+    "16": [
+     {
+      "name": "Total Annihilation",
+      "text": "Globe of Annihilation damages Heroes for an additional 4% of their maximum Health."
+     },
+     {
+      "name": "Hell Rift",
+      "text": "If All Shall Burn Channels for its full duration or kills the target, a Demon Warrior is summoned at the target's location and all Demon Warriors deal 35% increased damage for 5 seconds."
+     },
+     {
+      "name": "Trample",
+      "text": "Activate to charge a short distance, dealing 275 (+4% per level) damage and Slowing enemies caught in the path by 60% for 1.25 second.\n\nAfter hitting an enemy Hero with Trample, reduce the cooldown of Azmodan's Heroic Ability by 25%."
+     }
+    ],
+    "20": [
+     {
+      "name": "Siegebreaker",
+      "text": "Azmodan's Demons deal 40% increased damage to Structures."
+     },
+     {
+      "name": "Black Pool",
+      "text": "Globes of Annihilation empowered by Tide of Sin also leave a Black Pool at their impact location for 5 seconds. Enemies within the pool lose 8 Armor per second, up to 15, and take 56 (+4% per level) damage per second."
+     },
+     {
+      "name": "Inescapable Annihilation",
+      "text": "Globe of Annihilation can now be cast globally."
+     },
+     {
+      "name": "Sin's Grasp",
+      "text": "All Shall Burn Slows enemy Heroes. While active, the target is Slowed by 15%, and if it lasts its full duration, they are Slowed by 50% for 2.5 seconds.\n\nIf All Shall Burn's Channel kills or lasts its full duration against a Hero, reduce its cooldown by 50%."
+     }
+    ]
+   }
+  },
+  {
+   "id": "CCho",
+   "slug": "cho",
+   "name": "Cho",
+   "role": "Tank",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Surging Fist",
+     "kind": "basic",
+     "text": "Activate to begin charging Surging Fist. Activate again to dash forward, knocking aside enemies and dealing 46 (+4% per level) damage. The dash range increases by up to 250%, depending on how long it is charged."
+    },
+    {
+     "name": "Consuming Blaze",
+     "kind": "basic",
+     "text": "Ignite nearby enemies, dealing 150 (+4% per level) damage over 5 seconds. Basic Attacking burning enemies re-Ignites them. Cho is healed for 40 (+4% per level) when an enemy is Ignited."
+    },
+    {
+     "name": "Rune Bomb",
+     "kind": "basic",
+     "text": "Roll a bomb dealing 91 (+4% per level) damage to enemies in its path. Gall can use Runic Blast to detonate it to deal 210 (+4% per level) damage in an area."
+    },
+    {
+     "name": "Upheaval",
+     "kind": "heroic",
+     "text": "After 1 second, pull enemies towards Cho'gall, Slowing them by 25% for 3 seconds and dealing 175 (+4% per level) damage."
+    },
+    {
+     "name": "Hammer of Twilight",
+     "kind": "heroic",
+     "text": "Activate to swing the Hammer of Twilight, dealing 150 (+4.5% per level) damage, pushing enemies away, and Stunning them for 0.75 seconds.\n\nPassive: Cho's Basic Attacks deal 25% increased damage."
+    },
+    {
+     "name": "Ogre Hide",
+     "kind": "trait",
+     "text": "Activate to gain 25 Armor, but reduce Gall's damage by 25%."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Consuming Fire",
+      "text": "Consuming Blaze restores 75 (+4% per level) more Health when a Hero is Ignited."
+     },
+     {
+      "name": "Calloused Hide",
+      "text": "While under 50% maximum Health, Cho gains 15% increased Movement Speed and healing received."
+     },
+     {
+      "name": "The Will of Cho",
+      "text": "Quest: Killing enemy Minions grants 1 stack of The Will of Cho, and Hero takedowns grant 10 stacks. Gain 1 Armor for every 30 stacks of The Will of Cho, up to a maximum of 10 Armor.\n\nThis Armor bonus stacks with Ogre Hide.",
+      "quest": true
+     }
+    ],
+    "4": [
+     {
+      "name": "Uppercut",
+      "text": "Hitting an enemy Hero with Surging Fist deals additional damage to Heroes equal to 5% of their max Health and reduces the cooldown of Surging Fist by 5 seconds."
+     },
+     {
+      "name": "Rollback",
+      "text": "Rune Bomb rolls back to Cho, damaging enemies in its path."
+     },
+     {
+      "name": "Seared Flesh",
+      "text": "Each consecutive Basic Attack to enemy Heroes deals 20% more damage, to a maximum of 60% damage. This bonus lasts 5 seconds or until a non-Heroic enemy is attacked."
+     }
+    ],
+    "7": [
+     {
+      "name": "Power Surge",
+      "text": "Enemy Heroes who are hit by Surging Fist are Slowed by 30% for 2.5 seconds. Gain 15% Movement Speed while charging Surging Fist and for 2.5 seconds after casting the Ability."
+     },
+     {
+      "name": "Firestarter",
+      "text": "Basic Attacks against ignited Heroes decreases the cooldown of Consuming Blaze by 1.5 second.\n\nPassive: Reduce the cooldown of Consuming Blaze by 3 seconds."
+     },
+     {
+      "name": "Enraged Regeneration",
+      "text": "Each time Cho hits an enemy Hero with an Ability or Basic Attack, he heals for 60 (+4% per level) over 3 seconds. Enemy Heroes hit by Gall's Dread Orb receive 35% less healing for 2 seconds."
+     }
+    ],
+    "10": [
+     {
+      "name": "Hammer of Twilight",
+      "text": "Activate to swing the Hammer of Twilight, dealing 150 (+4.5% per level) damage, pushing enemies away, and Stunning them for 0.75 seconds.\n\nPassive: Cho's Basic Attacks deal 25% increased damage."
+     },
+     {
+      "name": "Upheaval",
+      "text": "After 1 second, pull enemies towards Cho'gall, Slowing them by 25% for 3 seconds and dealing 175 (+4% per level) damage."
+     }
+    ],
+    "13": [
+     {
+      "name": "Surging Dash",
+      "text": "While Channeling Surging Fist, Cho heals for 150 (+4% per level) Health per second."
+     },
+     {
+      "name": "Twilight Veil",
+      "text": "Activate to increase the Armor bonus of Ogre Hide to 75 for 4 seconds. If cast while Ogre Rage is active, it instantly swaps to Ogre Hide."
+     },
+     {
+      "name": "Molten Block",
+      "text": "Activate to enter Stasis and gain Invulnerability for 3 seconds, damaging nearby enemies for 92 (+4% per level) damage per second."
+     }
+    ],
+    "16": [
+     {
+      "name": "Frenzied Fists",
+      "text": "Gain 75% Attack Speed for 5 seconds after using Surging Fist."
+     },
+     {
+      "name": "Runic Feedback",
+      "text": "Gall's Runic Blast reduces Cho's Rune Bomb cooldown by 1 second per enemy hit, and 2 seconds for each Hero hit."
+     },
+     {
+      "name": "Runed Gauntlet",
+      "text": "Basic Attacks reduce the cooldown of Cho and Gall's Heroic Abilities by 6%."
+     }
+    ],
+    "20": [
+     {
+      "name": "C'Thun's Gift",
+      "text": "Cho's Basic Attack becomes ranged and Slows targets by 20% for 2 seconds."
+     },
+     {
+      "name": "Favor of the Old Gods",
+      "text": "Upheaval Roots enemy Heroes for 2 seconds."
+     },
+     {
+      "name": "Fuel for the Flame",
+      "text": "Basic Attacks against enemies cause them to explode, dealing 21 (+4% per level) damage to them and 45 (+4% per level) damage to nearby enemies. This damage is doubled against enemy Heroes."
+     },
+     {
+      "name": "Hour of Twilight",
+      "text": "Decreases Cho'gall's death timer by 50%."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Diab",
+   "slug": "diablo",
+   "name": "Diablo",
+   "role": "Tank",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Shadow Charge",
+     "kind": "basic",
+     "text": "Charge an enemy, knocking them back, dealing 45 (+4% per level) damage and gaining 15% Movement Speed for 2 seconds. If the enemy hits terrain, they are Stunned for 1 second and take an additional 140 (+4% per level) damage."
+    },
+    {
+     "name": "Fire Stomp",
+     "kind": "basic",
+     "text": "Unleashes fire waves toward the targeted area that deal 11 (+4% per level) damage each. Once they reach maximum range they return, dealing an additional 34 (+4% per level) damage. Diablo heals for 130% of the damage dealt to Heroes."
+    },
+    {
+     "name": "Overpower",
+     "kind": "basic",
+     "text": "Grabs the target and slams it behind Diablo, dealing 80 (+4% per level) damage and Stunning for 0.25 seconds."
+    },
+    {
+     "name": "Apocalypse",
+     "kind": "heroic",
+     "text": "Create a demonic rune under each enemy Hero on the battleground. After 1.75 seconds the rune explodes dealing 137 (+4% per level) damage and Stunning them for 1.75 seconds."
+    },
+    {
+     "name": "Lightning Breath",
+     "kind": "heroic",
+     "text": "After 0.5 seconds, become Unstoppable and Channel for up to 4 seconds, dealing 50 (+4% per level) damage every 0.25 seconds to enemies in front of Diablo. Enemies affected are Slowed by 4% for 2 seconds, up to 40%.\n\nLightning Breath's direction changes with your mouse cursor position."
+    },
+    {
+     "name": "Black Soulstone",
+     "kind": "trait",
+     "text": "Repeatable Quest: Gain 10 Souls per Hero killed and 1 Soul per Minion, up to 100. For each Soul, gain 0.3% maximum Health. If Diablo has 100 Souls upon dying, he will resurrect in 5 seconds but lose 100 Souls.\n\nAfter reaching level 10, Diablo only consumes 75 Souls when resurrecting."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Feast on Fear",
+      "text": "Stunning an enemy Hero with Shadow Charge or Overpower heals Diablo for 10% of his maximum Health over 3 seconds."
+     },
+     {
+      "name": "Devil's Due",
+      "text": "Black Soulstone increases the effects of Regen Globes and Healing Fountains by 2.25% per Soul."
+     },
+     {
+      "name": "Soul Shield",
+      "text": "Activate to gain 25 plus 50% of Diablo's current Souls as Spell Armor for 4 seconds. Every time Diablo damages an enemy Hero, reduce this cooldown by 1 second."
+     }
+    ],
+    "4": [
+     {
+      "name": "Sacrificial Soul",
+      "text": "Stunning a Hero with Shadow Charge grants 10 Souls and 20 Armor for 3 seconds. While at 100 Souls, increase this Armor to 40."
+     },
+     {
+      "name": "Souls to the Flame",
+      "text": "Fire Stomp grants 1 Soul every 3 times it damages an enemy Hero, and heals for an additional 1.3% of its damage dealt per Soul."
+     },
+     {
+      "name": "Life Leech",
+      "text": "Diablo gains 1 Soul and heals for 1.75% of his maximum Health when Basic Attacking an enemy Hero. While at 100 Souls, increase this healing to 3.5% of his maximum Health."
+     }
+    ],
+    "7": [
+     {
+      "name": "Eternal Flames",
+      "text": "Reduce the cooldown of Fire Stomp by 1 second. When Diablo Stuns an enemy Hero with Shadow Charge or Overpower, reset the cooldown of Fire Stomp and restore 45 Mana."
+     },
+     {
+      "name": "Malevolence",
+      "text": "Basic Abilities cause Diablo's next Basic Attack within 6 seconds to deal an additional 100 (+4% per level) Spell Damage. Stores up to 2 charges."
+     },
+     {
+      "name": "Diabolical Momentum",
+      "text": "When Diablo's Basic Attacks damage enemies, reduce the cooldown of Shadow Charge and Overpower by 2 seconds."
+     }
+    ],
+    "10": [
+     {
+      "name": "Apocalypse",
+      "text": "Create a demonic rune under each enemy Hero on the battleground. After 1.75 seconds the rune explodes dealing 137 (+4% per level) damage and Stunning them for 1.75 seconds."
+     },
+     {
+      "name": "Lightning Breath",
+      "text": "After 0.5 seconds, become Unstoppable and Channel for up to 4 seconds, dealing 50 (+4% per level) damage every 0.25 seconds to enemies in front of Diablo. Enemies affected are Slowed by 4% for 2 seconds, up to 40%.\n\nLightning Breath's direction changes with your mouse cursor position."
+     }
+    ],
+    "13": [
+     {
+      "name": "Devastating Charge",
+      "text": "Increase Shadow Charge's terrain collision damage by 50%.\n\nQuest: Hit an enemy Hero against terrain 5 times.\n\nReward: Hitting enemy Heroes against terrain reduces their Armor by 20 for 4 seconds.",
+      "quest": true
+     },
+     {
+      "name": "Hellfire",
+      "text": "Each enemy Hero hit by Fire Stomp grants 3% Spell Power for 10 seconds, up to 30%. While at maximum stacks, Diablo deals 33 (+4% per level) damage per second to nearby enemies."
+     },
+     {
+      "name": "Cruelty",
+      "text": "Stunning an enemy Hero with Shadow Charge or Overpower increases Diablo's Attack Speed by 50% for 7 seconds, up to 100%."
+     }
+    ],
+    "16": [
+     {
+      "name": "Domination",
+      "text": "Casting Overpower resets the cooldown of Shadow Charge."
+     },
+     {
+      "name": "Debilitating Flames",
+      "text": "Enemy Heroes hit by Fire Stomp are Slowed by 6% for 4 seconds, up to 60%. Heroes Slowed by 24% or more by Debilitating Flames deal 50% less damage."
+     },
+     {
+      "name": "Overpowering Nightmare",
+      "text": "Gain 2 additional charges of Overpower, with a 2 second cooldown between uses."
+     }
+    ],
+    "20": [
+     {
+      "name": "Dying Breath",
+      "text": "Apocalypse's cooldown is reduced by 30 seconds for every enemy Hero hit (to a minimum of 5 seconds) and is cast for free when Diablo dies."
+     },
+     {
+      "name": "Hellstorm",
+      "text": "Lightning Breath lasts 200% longer."
+     },
+     {
+      "name": "Lord of Terror",
+      "text": "Activate to steal 12% of the maximum Health of nearby enemy Heroes and gain 5 Souls per Hero hit."
+     },
+     {
+      "name": "Hellgate",
+      "text": "Teleport and place a demonic rune at target location. After 1.75 seconds the rune explodes dealing 137 (+4% per level) damage and stunning enemies for 1.75 seconds."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Gall",
+   "slug": "gall",
+   "name": "Gall",
+   "role": "Ranged Assassin",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Shadowflame",
+     "kind": "basic",
+     "text": "Deal 135 (+5% per level) damage to enemies in the area."
+    },
+    {
+     "name": "Dread Orb",
+     "kind": "basic",
+     "text": "Throw a bomb that will bounce three times, dealing 126 (+5% per level) damage to enemies."
+    },
+    {
+     "name": "Runic Blast",
+     "kind": "basic",
+     "text": "Detonate Cho's Rune Bomb, dealing 210 (+4% per level) damage around it."
+    },
+    {
+     "name": "Twisting Nether",
+     "kind": "heroic",
+     "text": "After 1 second, nearby enemies are Slowed by 50% while Gall channels, up to 5 seconds. Activate to deal 353 (+5% per level) damage."
+    },
+    {
+     "name": "Shadow Bolt Volley",
+     "kind": "heroic",
+     "text": "After 1 second, unleash 20 Shadow Bolts over 4 seconds, each dealing 87 (+4% per level) damage to the first target hit. The bolts fire towards your mouse."
+    },
+    {
+     "name": "Ogre Rage",
+     "kind": "trait",
+     "text": "Activate to increase Gall's damage by 25%, but reduce Cho's Armor by 25.\n\nPassive: Gall is permanently immune to Stun and Silence effects."
+    },
+    {
+     "name": "Shove",
+     "kind": "mount",
+     "text": "Nudge Cho a small distance and grant him 25% Movement Speed for 2 seconds."
+    },
+    {
+     "name": "Eye of Kilrogg",
+     "kind": "active",
+     "text": "Place an eye, granting vision of a large area around it for 45 seconds. The eye can be killed by enemies with 2 Basic Attacks. Stores up to 2 charges."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Keep Moving!",
+      "text": "Increases the Movement Speed bonus of Shove by 10% and its duration by 2 seconds."
+     },
+     {
+      "name": "Taskmaster",
+      "text": "Every time Cho is hit by a Hero Basic Attack, reduce the cooldown of Shove by 1 second."
+     },
+     {
+      "name": "We See You!",
+      "text": "Eye of Kilrogg's cooldown is decreased by 25 seconds, its range is increased by 33%, and the number of Basic Attacks required to kill it is increased by 1."
+     }
+    ],
+    "4": [
+     {
+      "name": "Rising Dread",
+      "text": "Each bounce of Dread Orb increases its radius by 20% and damage by 15%. Activate Dread Orb before the second bounce ends to reverse the direction of the third bounce."
+     },
+     {
+      "name": "Runic Persistence",
+      "text": "Runic Blast deals an additional 180 (+4% per level) damage over 3 seconds in an area around the detonation point."
+     },
+     {
+      "name": "Bomb's Away",
+      "text": "Quest: Damaging a Hero with Runic Blast increases its damage by 4.\n\nReward: After damaging 20 Heroes, the range and speed of Cho's Rune Bomb is increased by 20%.",
+      "quest": true
+     }
+    ],
+    "7": [
+     {
+      "name": "Edge of Madness",
+      "text": "Every subsequent hit of Shadowflame against the same enemy Hero deals an additional 12% damage, to a maximum of 60%. These bonuses are lost if the Hero has not been hit for 7 seconds."
+     },
+     {
+      "name": "Double Trouble",
+      "text": "Quest: If Shadowflame hits an enemy Hero that is afflicted by Cho's Consuming Blaze, its cooldown is reduced by 0.5 seconds.\n\nReward: After hitting 20 Heroes, Shadowflame's cooldown is instead permanently reduced by 1 second.",
+      "quest": true
+     },
+     {
+      "name": "Ogre Rampage",
+      "text": "Increase the damage bonus of Ogre Rage by 5%. Each time Gall damages an enemy Hero while Ogre Rage is active, this bonus increases by 1% for 4 seconds, up to an additional 10% bonus damage."
+     }
+    ],
+    "10": [
+     {
+      "name": "Shadow Bolt Volley",
+      "text": "After 1 second, unleash 20 Shadow Bolts over 4 seconds, each dealing 87 (+4% per level) damage to the first target hit. The bolts fire towards your mouse."
+     },
+     {
+      "name": "Twisting Nether",
+      "text": "After 1 second, nearby enemies are Slowed by 50% while Gall channels, up to 5 seconds. Activate to deal 353 (+5% per level) damage."
+     }
+    ],
+    "13": [
+     {
+      "name": "Searing Shadows",
+      "text": "Enemy Heroes hit by Shadowflame take an additional 2% of their maximum Health as damage."
+     },
+     {
+      "name": "Psychotic Break",
+      "text": "Increase Gall's damage to enemy Heroes by 10%. Upon dying, Gall gains Ogre Rage and can use Abilities for 10 seconds."
+     },
+     {
+      "name": "Twilight Nova",
+      "text": "After the first bounce of Dread Orb, 2 extra bombs bounce to the sides once."
+     }
+    ],
+    "16": [
+     {
+      "name": "Leaden Orb",
+      "text": "Dread Orb Stuns enemy Heroes for 0.6 seconds."
+     },
+     {
+      "name": "Deafening Blast",
+      "text": "Runic Blast Silences enemy Heroes for 1.25 seconds."
+     },
+     {
+      "name": "Shadowsnare",
+      "text": "Enemy Heroes hit by your Basic Abilities are Slowed by 15% for 4 seconds. This effect can stack up to 2 times."
+     }
+    ],
+    "20": [
+     {
+      "name": "Shadowfury",
+      "text": "Shadow Bolt Volley hits all enemies in its path."
+     },
+     {
+      "name": "Shifting Nether",
+      "text": "Twisting Nether now teleports Cho to a targeted location before it begins Channeling."
+     },
+     {
+      "name": "The Will of Gall",
+      "text": "Takedowns permanently increase the bonus of Ogre Rage by 2%.",
+      "quest": true
+     },
+     {
+      "name": "Twilight Frenzy",
+      "text": "Activate to reduce the cooldowns of Shadowflame and Dread Orb to 2 seconds for the next 6 seconds."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Genj",
+   "slug": "genji",
+   "name": "Genji",
+   "role": "Ranged Assassin",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Shuriken",
+     "kind": "basic",
+     "text": "Throw 3 Shuriken in a spread pattern, each dealing 65 (+4% per level) damage to the first enemy hit.\n\nStores up to 3 charges. Shuriken's cooldown replenishes all charges at the same time."
+    },
+    {
+     "name": "Deflect",
+     "kind": "basic",
+     "text": "Channel for 1.25 seconds, becoming Protected and blocking damage. Any damage blocked while channeling causes Genji to throw a Kunai toward the nearest enemy, prioritizing Heroes and dealing 55 (+4% per level) damage.\n\nTotal Damage Deflected: 0"
+    },
+    {
+     "name": "Swift Strike",
+     "kind": "basic",
+     "text": "Dash forward, dealing 190 (+4% per level) damage to all enemies in a line. Enemy Heroes that die within 1.5 seconds of being hit with Swift Strike cause the cooldown and mana cost to be refunded."
+    },
+    {
+     "name": "Dragonblade",
+     "kind": "heroic",
+     "text": "Unleash the Dragonblade for 8 seconds. While active, Dragonblade can be reactivated to lunge forward and slash in a huge arc, dealing 240 (+4% per level) damage."
+    },
+    {
+     "name": "X-Strike",
+     "kind": "heroic",
+     "text": "Perform two slashes dealing 145 (+4% per level) damage. The slashes detonate after 1.25 seconds causing an additional 290 (+4% per level) damage to enemies in their area."
+    },
+    {
+     "name": "Cyber Agility",
+     "kind": "trait",
+     "text": "Activate to jump to the target area."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Swift as the Wind",
+      "text": "Hitting an enemy Hero with Swift Strike increases Genji's Movement Speed by 40% for 3 seconds."
+     },
+     {
+      "name": "Agile Dismount",
+      "text": "While mounted the range of Cyber Agility is increased by 70%, its cooldown is reduced by 14 seconds, and it Slows enemy Heroes in its landing area by 25% for 2 seconds."
+     },
+     {
+      "name": "Pathfinder",
+      "text": "Jumping over terrain with Cyber Agility increases Movement Speed by 30%, and grants Stealth, for 6 seconds.\n\nPassive: Genji's Heroic Ability heals him for 10% of the damage dealt to enemy Heroes, increasing up to 30% the lower Genji's Health is."
+     }
+    ],
+    "4": [
+     {
+      "name": "Shuriken Mastery",
+      "text": "Quest: Hit enemy Heroes with Shuriken.\n\nReward: After hitting 30 Heroes, Shuriken damage is increased by 25.\n\nReward: After hitting 60 Heroes, Cyber Agility now refunds 3 charges of Shuriken.",
+      "quest": true
+     },
+     {
+      "name": "Strike At The Heart",
+      "text": "Enemies hit by the end of Swift Strike take an additional 142 (+4% per level) damage after 1 second."
+     },
+     {
+      "name": "Dragon Claw",
+      "text": "After Genji blocks 330 (+4% per level) damage with Deflect, activate to release a Dragon Claw, dealing 190 (+4% per level) damage to all nearby enemies."
+     }
+    ],
+    "7": [
+     {
+      "name": "Augmented Guard",
+      "text": "When Deflect ends, Genji gains a Shield equal to 100% of the damage blocked for 4 seconds."
+     },
+     {
+      "name": "Perfect Defense",
+      "text": "Deflected damage reduces the cooldown of Deflect by 2.5 seconds, up to a maximum of 12.5 seconds."
+     },
+     {
+      "name": "Cyber Shield",
+      "text": "Using Cyber Agility grants 40 Spell Armor for 4 seconds.\n\nPassive: Genji dodges 1 Heroic Basic Attack every 5 seconds."
+     }
+    ],
+    "10": [
+     {
+      "name": "Dragonblade",
+      "text": "Unleash the Dragonblade for 8 seconds. While active, Dragonblade can be reactivated to lunge forward and slash in a huge arc, dealing 240 (+4% per level) damage."
+     },
+     {
+      "name": "X-Strike",
+      "text": "Perform two slashes dealing 145 (+4% per level) damage. The slashes detonate after 1.25 seconds causing an additional 290 (+4% per level) damage to enemies in their area."
+     }
+    ],
+    "13": [
+     {
+      "name": "Shingan",
+      "text": "Hitting an enemy with all 3 Shuriken deals 100 (+4% per level) bonus damage. Deals 40% less damage to Structures."
+     },
+     {
+      "name": "Flow Like Water",
+      "text": "Each enemy Hero hit with Swift Strike reduces its cooldown by 4 seconds."
+     },
+     {
+      "name": "Way Of The Shimada",
+      "text": "Increase Genji's Basic Attack range by 1. Each time Genji hits an enemy Hero with a Basic Attack, increase his Basic Attack damage by 1% for 3 seconds, stacking up to 15%."
+     }
+    ],
+    "16": [
+     {
+      "name": "Reflect",
+      "text": "Deflect also deals an additional 33% of the damage blocked."
+     },
+     {
+      "name": "Final Cut",
+      "text": "After 1 second, Swift Strike deals an additional 115 (+4% per level) damage to all enemies in the area."
+     },
+     {
+      "name": "Steady Blade",
+      "text": "Each enemy Hero hit by Swift Strike increases the damage of the next Swift Strike by 30%. This bonus stacks up to 3 times."
+     }
+    ],
+    "20": [
+     {
+      "name": "The Dragon Becomes Me",
+      "text": "Each time Dragonblade hits an enemy Hero, the duration of Dragonblade is increased by 0.5 seconds. If a Hero is killed within 1.5 seconds of being hit by Dragonblade, Swift Strike's cooldown is reset."
+     },
+     {
+      "name": "Living Weapon",
+      "text": "Each enemy Hero hit by X-Strike reduces its cooldown by 12.5 seconds."
+     },
+     {
+      "name": "Sharpened Stars",
+      "text": "Shuriken now pierce all enemies hit. Swift Strike's refund grants 1 charge of Shuriken."
+     },
+     {
+      "name": "Zanshin",
+      "text": "Quest: Block 6500 damage with Deflect, including damage blocked so far.\n\nReward: Deflect hits all nearby enemy Heroes.",
+      "quest": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "Crus",
+   "slug": "johanna",
+   "name": "Johanna",
+   "role": "Tank",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Punish",
+     "kind": "basic",
+     "text": "Step forward dealing 113 (+4% per level) damage and Slowing enemies by 50%, decaying over 2 seconds."
+    },
+    {
+     "name": "Condemn",
+     "kind": "basic",
+     "text": "After 1 second, Johanna pulls nearby enemies toward her, Stunning them for 0.25 seconds and dealing 55 (+4% per level) damage. Deals 200% increased damage to Minions and Mercenaries."
+    },
+    {
+     "name": "Shield Glare",
+     "kind": "basic",
+     "text": "Deal 59 (+4% per level) damage to enemies and Blind them for 1.5 seconds."
+    },
+    {
+     "name": "Falling Sword",
+     "kind": "heroic",
+     "text": "Johanna leaps into the air for 2 seconds and she can steer the landing location by moving. While in the air, allies below Johanna are Unstoppable. Upon landing enemies hit take 225 (+4% per level) damage and are Stunned for 0.25 seconds."
+    },
+    {
+     "name": "Blessed Shield",
+     "kind": "heroic",
+     "text": "Deal 114 (+4% per level) damage and Stun the first enemy hit for 1.5 seconds. Blessed Shield then bounces to 2 nearby enemies, dealing 57 (+4% per level) damage and Stunning them for 0.75 seconds."
+    },
+    {
+     "name": "Iron Skin",
+     "kind": "trait",
+     "text": "Activate to grant Johanna a Shield that absorbs 810 (+4% per level) damage for 4 seconds. While this Shield is active, Johanna is Unstoppable."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Zealous Glare",
+      "text": "Shield Glare gains 1 additional charge, and deals 70% more damage."
+     },
+     {
+      "name": "Divine Fortress",
+      "text": "Basic Attacks grant 10 Physical Armor for 4 seconds, stacking up to 40.\n\nGambit: Gain 25% bonus maximum Health. Every death reduces this bonus by 5%.",
+      "quest": true
+     },
+     {
+      "name": "Laws of Hope",
+      "text": "Activate to heal 20% of Johanna's max Health over 5 seconds.\n\nQuest: Every 10 Regeneration Globes gathered increases this heal amount by 5% of Johanna's max Health.",
+      "quest": true
+     }
+    ],
+    "4": [
+     {
+      "name": "Subdue",
+      "text": "Hitting 2 or more Heroes at the same time with Punish increases the Slow to 70% and the Slow amount does not decay.\n\nQuest: Hit 4 or more Heroes at the same time with Punish.\n\nReward: Punish always Slows by 70%.",
+      "quest": true
+     },
+     {
+      "name": "Eternal Retaliation",
+      "text": "Mark enemies hit by Condemn for 10 seconds. Johanna's next Basic Attack against them removes the mark, lowering the cooldown of Condemn by 1 second, refunding 10 Mana, and killing Minions."
+     },
+     {
+      "name": "Hold Your Ground",
+      "text": "Increases Iron Skin's Shield by 40% and its cooldown is reduced by 2 seconds."
+     }
+    ],
+    "7": [
+     {
+      "name": "Sins Exposed",
+      "text": "Punish reduces healing received by 35% for 3 seconds. Basic Attacks against them refresh this duration."
+     },
+     {
+      "name": "Conviction",
+      "text": "Gain 10% Movement Speed, increased to 20% while Condemn is charging up."
+     },
+     {
+      "name": "Steed Charge",
+      "text": "Activate to instantly Mount for 4 seconds, unhindered by damage.\n\nPassive: Increase the duration of Iron Skin by 2 second."
+     }
+    ],
+    "10": [
+     {
+      "name": "Falling Sword",
+      "text": "Johanna leaps into the air for 2 seconds and she can steer the landing location by moving. While in the air, allies below Johanna are Unstoppable. Upon landing enemies hit take 225 (+4% per level) damage and are Stunned for 0.25 seconds."
+     },
+     {
+      "name": "Blessed Shield",
+      "text": "Deal 114 (+4% per level) damage and Stun the first enemy hit for 1.5 seconds. Blessed Shield then bounces to 2 nearby enemies, dealing 57 (+4% per level) damage and Stunning them for 0.75 seconds."
+     }
+    ],
+    "13": [
+     {
+      "name": "Roar",
+      "text": "Increase Punish's damage by 50%. This bonus is increased to 150% whenever Punish hits 2 or more Heroes."
+     },
+     {
+      "name": "Holy Fury",
+      "text": "Deal 15 (+4% per level) damage per second to nearby enemies. Each Hero hit by Condemn increases this damage by 40% for 5 seconds."
+     },
+     {
+      "name": "Blessed Hammer",
+      "text": "Activate to create 2 hammers that spiral outward from Johanna, dealing 65 (+4% per level) damage to enemies hit. Damaging enemies with Basic Abilities reduce the cooldown of this Ability by 2.5 seconds.\n\nPassive: Every 3rd Basic Attack against enemy Heroes releases a hammer."
+     }
+    ],
+    "16": [
+     {
+      "name": "Shrinking Vacuum",
+      "text": "Condemn reduces enemy Heroes damage by 30% and Slows by 30% for 3 seconds."
+     },
+     {
+      "name": "Holy Renewal",
+      "text": "Hitting enemy Heroes with Shield Glare reduce its cooldown by 1 second and heals for 5% of Johanna's maximum Health."
+     },
+     {
+      "name": "Blessed Momentum",
+      "text": "Basic Attacks grant 10% increased Attack Speed for 4 seconds, stacking up to 40%. They also reduce Johanna's Basic Ability cooldowns by 0.5 seconds."
+     }
+    ],
+    "20": [
+     {
+      "name": "Heaven's Fury",
+      "text": "Falling Sword rains down holy bolts, dealing 50 (+4% per level) damage to enemies, healing allied Heroes for 68 (+4% per level), and reducing its cooldown by 1 second for each Hero hit."
+     },
+     {
+      "name": "Radiating Faith",
+      "text": "Increase the number of enemies hit by Blessed Shield by 2. Its Stun duration is increased to 1.75 seconds and all targets hit are Stunned for the maximum duration."
+     },
+     {
+      "name": "Indestructible",
+      "text": "Upon taking fatal damage, Johanna gains a Shield equal to her maximum Health for 4 seconds. This effect has a 120 second cooldown."
+     },
+     {
+      "name": "Blinded By The Light",
+      "text": "Activate to grant nearby allied Heroes a Shield equal to 25% of their maximum Health for 3 seconds.\n\nHitting Heroes with Shield Glare reduces the cooldown of this Ability by 8 seconds."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Luci",
+   "slug": "lucio",
+   "name": "Lúcio",
+   "role": "Healer",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Soundwave",
+     "kind": "basic",
+     "text": "Deal 105 (+4% per level) damage to enemies in an area and knock them back."
+    },
+    {
+     "name": "Crossfade",
+     "kind": "basic",
+     "text": "Currently playing Speed Boost, increasing the Movement Speed of Lúcio and nearby allied Heroes by 10%.\n\nToggle to play Healing Boost instead."
+    },
+    {
+     "name": "Amp It Up",
+     "kind": "basic",
+     "text": "Raise Lúcio's Crossfade track volume for 3 seconds, amping Healing Boost to 112 (+4% per level) Health per second and Speed Boost to 30% increased Movement Speed."
+    },
+    {
+     "name": "Sound Barrier",
+     "kind": "heroic",
+     "text": "After 1 second, Lúcio and nearby allied Heroes gain a 1296 (+4% per level) point Shield that rapidly decays over 6 seconds."
+    },
+    {
+     "name": "High Five",
+     "kind": "heroic",
+     "text": "Quickly skate to an allied Hero. Upon arrival the ally is healed for 230 (+4% per level), Lúcio is healed for 80 (+4% per level), and both gain Unstoppable for 1 second."
+    },
+    {
+     "name": "Push Off",
+     "kind": "trait",
+     "text": "While moving alongside terrain, activate to slide towards a targeted location. Enemies hit take 100 (+4% per level) damage and are Slowed by 75% for 1 second."
+    },
+    {
+     "name": "Wall Ride",
+     "kind": "mount",
+     "text": "When moving alongside terrain, Lúcio begins to Wall Ride for 2 seconds. While Wall Ride is active, Lúcio can walk through units and gains 20% Movement Speed that stacks with other bonuses."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Party Mix",
+      "text": "Quest: Play Lúcio's Crossfade tracks to nearby allies. Multiple allies provide additional time.\n\nReward: For every 1 Minute played, permanently increase Lúcio's maximum Mana by 10.\nReward: Once you have played for 8 minutes or more, permanently increase Crossfade's radius by 20%.",
+      "quest": true
+     },
+     {
+      "name": "Accelerando",
+      "text": "Wall Ride's Movement Speed bonus gradually increases to 40% over 6 seconds while Lúcio maintains its effect."
+     },
+     {
+      "name": "Smooth Moves",
+      "text": "While Wall Ride is active, Basic Attacks heal for 30% of the damage dealt and restore 0.5 Mana.\n\nPassive: Increase Wall Ride duration by 1 second."
+     }
+    ],
+    "4": [
+     {
+      "name": "Subwoofer",
+      "text": "Enemies within the first half of Soundwave's range are knocked back 75% further.\n\nQuest: Hit 3 enemy Heroes with a single Soundwave.\n\nReward: Increase Soundwave's arc by 50% and its range by 20%.",
+      "quest": true
+     },
+     {
+      "name": "Off the Wall",
+      "text": "Hitting an enemy with Soundwave while Wall Ride is active sets its cooldown to 5 seconds and refunds 15 Mana."
+     },
+     {
+      "name": "Supersonic",
+      "text": "While Wall Ride is active, Push Off's cooldown recharges 100% faster."
+     }
+    ],
+    "7": [
+     {
+      "name": "Good Vibrations",
+      "text": "Hitting an enemy with Soundwave grants Lúcio a 38 (+4% per level) Shield for 8 seconds. Hitting enemy Heroes grants 3 times this amount."
+     },
+     {
+      "name": "Reverse Amp",
+      "text": "Blast Lúcio's active Crossfade track at enemy Heroes. While Amp It Up is active, Healing Boost deals 50 (+4% per level) damage per second and Speed Boost Slows by 20%.\n\nThis ability is unaffected by Crossfade talents."
+     },
+     {
+      "name": "Boombox",
+      "text": "Place a boombox that plays Lúcio's active Crossfade track. Its volume adjusts with Amp It Up. Allied Heroes near the boombox gain 5 Armor.\n\nCrossfade tracks from Lúcio and the Boombox do not stack."
+     }
+    ],
+    "10": [
+     {
+      "name": "Sound Barrier",
+      "text": "After 1 second, Lúcio and nearby allied Heroes gain a 1296 (+4% per level) point Shield that rapidly decays over 6 seconds."
+     },
+     {
+      "name": "High Five",
+      "text": "Quickly skate to an allied Hero. Upon arrival the ally is healed for 230 (+4% per level), Lúcio is healed for 80 (+4% per level), and both gain Unstoppable for 1 second."
+     }
+    ],
+    "13": [
+     {
+      "name": "All Together",
+      "text": "For each ally affected by Crossfade, Lúcio gains 5% Movement Speed that stacks with other bonuses."
+     },
+     {
+      "name": "Heavy Casters",
+      "text": "Push Off no longer Slows the first Hero hit, and instead Stuns them for 0.5 seconds."
+     },
+     {
+      "name": "Slip",
+      "text": "While Wall Ride is active, passing near an enemy Hero increases its Movement Speed bonus to 40%, and grants 15 Armor, for 1 second."
+     }
+    ],
+    "16": [
+     {
+      "name": "Rejuvenescência",
+      "text": "While Amp It Up is active, Crossfade's Healing Boost heals for an additional 2.5% of the target's maximum Health each second."
+     },
+     {
+      "name": "Up the Frequency",
+      "text": "Hitting enemy Heroes with Basic Attacks reduces the cooldown of Amp It Up by 0.3 seconds.\n\nPassive: Wall Ride increases Basic Attack range by 2.2."
+     },
+     {
+      "name": "Up To Eleven",
+      "text": "Hitting an enemy Hero with Soundwave or Push Off increases the duration of Amp It Up.\n\nSoundwave grants 0.5 seconds and Push Off grants 1 second. If Amp It Up is not active, these bonuses are granted to its next activation, up to 3 seconds.\n\nPassive: Increase the duration of Amp It Up by 1 second."
+     }
+    ],
+    "20": [
+     {
+      "name": "Bossa Nova",
+      "text": "Reduce the cooldown of Sound Barrier to 30 seconds, but the Shield now decays over 4 seconds."
+     },
+     {
+      "name": "Mixing Fire",
+      "text": "High Five can now be cast on enemy Heroes, dealing 160 (+4% per level) damage and reducing all healing received by 50% for 3 seconds.\n\nPassive: Reduce the cost and cooldown of High Five by 30%."
+     },
+     {
+      "name": "House Party",
+      "text": "For each ally affected by Crossfade, Lúcio gains 8% increased healing."
+     },
+     {
+      "name": "Summer Anthem",
+      "text": "Activate for allies affected by Crossfade to become Unkillable for 1.5 seconds."
+     }
+    ]
+   }
+  },
+  {
+   "id": "MALT",
+   "slug": "malthael",
+   "name": "Malthael",
+   "role": "Bruiser",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Soul Rip",
+     "kind": "basic",
+     "text": "Extract the souls of nearby enemies afflicted by Reaper's Mark, dealing 100 (+4% per level) damage and healing Malthael for 25 (+4% per level) per target hit. Heroic targets heal Malthael for an additional 4% of the Hero's maximum Health."
+    },
+    {
+     "name": "Wraith Strike",
+     "kind": "basic",
+     "text": "Instantly teleport through an enemy afflicted by Reaper's Mark, dealing 59 (+4% per level) damage and refreshing Reaper's Mark."
+    },
+    {
+     "name": "Death Shroud",
+     "kind": "basic",
+     "text": "After 0.25 seconds, unleash a wave of dark mist that applies Reaper's Mark to enemies it hits."
+    },
+    {
+     "name": "Tormented Souls",
+     "kind": "heroic",
+     "text": "Unleash a torrent of souls, continually applying Reaper's Mark to nearby enemies for 4 seconds.\n\nTormented Souls resets the cooldown of Wraith Strike when activated, and while active, Wraith Strike costs no Mana its cooldown is reduced to 2 seconds."
+    },
+    {
+     "name": "Last Rites",
+     "kind": "heroic",
+     "text": "Apply a death sentence to an enemy Hero that, after 2 seconds, deals damage equal to 50% of their missing Health.\n\nQuest: Enemies killed between the application of Last Rites and within 1.5 seconds of it dealing damage permanently reduce its cooldown by 5 seconds, to a minimum of 20 seconds."
+    },
+    {
+     "name": "Reaper's Mark",
+     "kind": "trait",
+     "text": "Basic Attacks cleave in an area in front of Malthael and afflict non-Structure targets with Reaper's Mark for 4 seconds. Marked enemies are revealed and take damage equal to 2% of their maximum Health every 1 second."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Death's Reach",
+      "text": "Increase Wraith Strike's range by 35%."
+     },
+     {
+      "name": "On a Pale Horse",
+      "text": "Gain an additional 20% Movement Speed while mounted."
+     },
+     {
+      "name": "Fear the Reaper",
+      "text": "Activate to increase Movement Speed by 25% and pass through other units for 4 seconds."
+     }
+    ],
+    "4": [
+     {
+      "name": "Die Alone",
+      "text": "Soul Rip deals 50% more damage to Heroes if it hits only one Hero."
+     },
+     {
+      "name": "Throwing Shade",
+      "text": "Increase Death Shroud's range by 33%, reduce its cooldown by 3 seconds, and reduce its Mana cost from 50 to 30.\n\nDeath Shroud's initial impact deals 2% maximum Health as damage to non-Structure enemies."
+     },
+     {
+      "name": "Black Harvest",
+      "text": "Quest: Apply Reaper's Mark to Heroes for a total of 150 seconds.\n\nReward: Permanently increase Reaper's Mark's duration by 2 seconds.",
+      "quest": true
+     }
+    ],
+    "7": [
+     {
+      "name": "Cold Hand",
+      "text": "Soul Rip Slows enemies by 20% for 2.5 seconds."
+     },
+     {
+      "name": "Massacre",
+      "text": "Wraith Strike now damages and applies Reaper's Mark to enemies around its target."
+     },
+     {
+      "name": "Touch of Death",
+      "text": "Activate to reduce healing received by Heroes afflicted by Reaper's Mark by 50% for 4 seconds."
+     }
+    ],
+    "10": [
+     {
+      "name": "Tormented Souls",
+      "text": "Unleash a torrent of souls, continually applying Reaper's Mark to nearby enemies for 4 seconds.\n\nTormented Souls resets the cooldown of Wraith Strike when activated, and while active, Wraith Strike costs no Mana its cooldown is reduced to 2 seconds."
+     },
+     {
+      "name": "Last Rites",
+      "text": "Apply a death sentence to an enemy Hero that, after 2 seconds, deals damage equal to 50% of their missing Health.\n\nQuest: Enemies killed between the application of Last Rites and within 1.5 seconds of it dealing damage permanently reduce its cooldown by 5 seconds, to a minimum of 20 seconds.",
+      "quest": true
+     }
+    ],
+    "13": [
+     {
+      "name": "Soul Siphon",
+      "text": "Increase Soul Rip's bonus healing from Heroes to 4.75% of the Hero's maximum Health."
+     },
+     {
+      "name": "Ethereal Existence",
+      "text": "Gain 10 Physical Armor per enemy Hero afflicted by Reaper's Mark, up to a maximum of 30."
+     },
+     {
+      "name": "Inevitable End",
+      "text": "Activate to become Unstoppable for 2 seconds, but remove all active Reaper's Marks."
+     },
+     {
+      "name": "Shroud of Wisdom",
+      "text": "After 2 seconds, gain 50 Spell Armor for 4 seconds."
+     }
+    ],
+    "16": [
+     {
+      "name": "Soul Collector",
+      "text": "Reduce Soul Rip's cooldown by 0.5 seconds and increase its range by 25%."
+     },
+     {
+      "name": "Mortality",
+      "text": "When damaging a Hero, Wraith Strike deals bonus damage equal to 8% of the Hero's maximum Health."
+     },
+     {
+      "name": "Memento Mori",
+      "text": "Reaper's Mark deals 60% increased damage after afflicting an enemy for more than 4 seconds."
+     }
+    ],
+    "20": [
+     {
+      "name": "Reaper of Souls",
+      "text": "Increase the duration of Tormented Souls to 6 seconds, and while Tormented Souls is active, Hero Takedowns refresh its duration.\n\nIf 2 or more enemy Heroes are in Tormented Souls' radius, it does not decay."
+     },
+     {
+      "name": "Angel of Death",
+      "text": "Last Rites heals for 100% of the damage dealt, and its current and future cooldown reduction bonuses are doubled."
+     },
+     {
+      "name": "Final Curtain",
+      "text": "Death Shroud leaves a trail in its wake for 4 seconds, applying Reaper's Mark to enemies in its area."
+     },
+     {
+      "name": "No One Can Stop Death",
+      "text": "Activate while dead to immediately respawn at the Hall of Storms but increase Malthael's next respawn time by 25%."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Nova",
+   "slug": "nova",
+   "name": "Nova",
+   "role": "Ranged Assassin",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Snipe",
+     "kind": "basic",
+     "text": "Deal 230 (+4% per level) damage to the first enemy hit.\n\nPassive: Hitting an enemy Hero with Snipe permanently increases the damage of Snipe by 6%, stacking up to 30%. Gain an additional 25% damage bonus at maximum stacks. All stacks are lost if Snipe fails to hit an enemy."
+    },
+    {
+     "name": "Pinning Shot",
+     "kind": "basic",
+     "text": "Deal 100 (+4% per level) damage to an enemy and Slow them by 40% for 2.25 seconds."
+    },
+    {
+     "name": "Holo Decoy",
+     "kind": "basic",
+     "text": "Create a Decoy for 5 seconds with 100% of Nova's current Health that attacks enemies, dealing 10% of Nova's base damage. Whenever a Decoy takes damage, it deals that amount of damage to itself, effectively doubling the damage it takes.\n\nUsing this Ability does not break Stealth."
+    },
+    {
+     "name": "Triple Tap",
+     "kind": "heroic",
+     "text": "Locks in on the target Hero, then fires 3 shots that hit the first Hero or Structure they come in contact with for 372 (+4% per level) damage each."
+    },
+    {
+     "name": "Precision Strike",
+     "kind": "heroic",
+     "text": "After a 1.5 second delay, deals 435 (+4% per level) damage to enemies within an area. Unlimited range."
+    },
+    {
+     "name": "Permanent Cloak",
+     "kind": "trait",
+     "text": "Gain Stealth when out of combat for 3 seconds. Taking damage, attacking, using Abilities, or Channeling ends Stealth. Remaining stationary for at least 1.5 seconds while Stealthed grants Invisible.\n\nPassive: Gain 15% Movement Speed while Stealthed."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    },
+    {
+     "name": "Ghost Protocol",
+     "kind": "active",
+     "text": "Activate to instantly grant Stealth to Nova and spawn a Holo Decoy at her location. Nova is Unrevealable for the first 0.5 seconds when Stealthed by Ghost Protocol."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Longshot",
+      "text": "Increases the cast range of Pinning Shot by 30%. Pinning Shot also increases the range of Nova's next Basic Attack by 2.3."
+     },
+     {
+      "name": "Covert Ops",
+      "text": "After being Stealthed for 2 seconds, Pinning Shot's Slow is increased to 60% and costs no Mana. Bonus is lost after losing Stealth for 1 second."
+     },
+     {
+      "name": "Advanced Cloaking",
+      "text": "After being Stealthed for 1 second, gain an additional 10% Movement Speed. While Stealthed, regenerate 6 Mana per second."
+     }
+    ],
+    "4": [
+     {
+      "name": "Rapid Projection",
+      "text": "Reduces Holo Decoy's cooldown and Mana cost by 60%."
+     },
+     {
+      "name": "Holo Stability",
+      "text": "Increase the cast range of Holo Decoy by 100% and its duration by 120%.\n\nPassive: Reduce the cooldown of Ghost Protocol by 15 seconds."
+     },
+     {
+      "name": "Covert Mission",
+      "text": "Enemy Minions killed near Nova grant a stack of Bribe. Hero Takedowns grant 10 stacks of Bribe. Use 25 stacks to bribe a Mercenary, instantly defeating them. Does not work on Elite Mercenaries. Maximum of 100 stacks. If a camp is defeated entirely with Bribe, the camp respawns 50% faster."
+     }
+    ],
+    "7": [
+     {
+      "name": "Perfect Shot",
+      "text": "Hitting an enemy with Snipe reduces its cooldown by 2 seconds and refunds half its Mana cost, doubled against enemy Heroes."
+     },
+     {
+      "name": "One in the Chamber",
+      "text": "After using an Ability, Nova's next Basic Attack within 3 seconds deals 65% additional damage."
+     },
+     {
+      "name": "Anti-Armor Shells",
+      "text": "Nova's Basic Attacks deal 250% damage and decrease the Physical Armor of Heroic targets by 15 for 4 seconds, but her Attack Speed is proportionally slower."
+     }
+    ],
+    "10": [
+     {
+      "name": "Triple Tap",
+      "text": "Locks in on the target Hero, then fires 3 shots that hit the first Hero or Structure they come in contact with for 372 (+4% per level) damage each."
+     },
+     {
+      "name": "Precision Strike",
+      "text": "After a 1.5 second delay, deals 435 (+4% per level) damage to enemies within an area. Unlimited range."
+     }
+    ],
+    "13": [
+     {
+      "name": "Psionic Efficiency",
+      "text": "Snipe's range is increased by 15% and hitting a Hero grants an additional stack of Precision Sniper."
+     },
+     {
+      "name": "Double Tap",
+      "text": "Pinning Shot now has 2 charges, but its cooldown is increased by 2 seconds."
+     },
+     {
+      "name": "Ionic Force Field",
+      "text": "Gain 25 Armor for 3 seconds after losing Stealth."
+     }
+    ],
+    "16": [
+     {
+      "name": "Explosive Round",
+      "text": "Snipe also deals 90% damage to enemies near the impact."
+     },
+     {
+      "name": "Crippling Shot",
+      "text": "Pinning Shot lowers a Hero's Armor by 20 for the duration of the Slow, causing them to take 20% increased damage."
+     },
+     {
+      "name": "Lethal Decoy",
+      "text": "Increases the damage Holo Decoy deals to 30% of Nova's damage."
+     }
+    ],
+    "20": [
+     {
+      "name": "Fast Reload",
+      "text": "Triple Tap's cooldown is reset if it kills an enemy Hero."
+     },
+     {
+      "name": "Precision Barrage",
+      "text": "Precision Strike gains a 2nd charge and its cooldown is reduced by 25 seconds."
+     },
+     {
+      "name": "Apollo Suit",
+      "text": "Reduce the cooldown of Permanent Cloak by 2 seconds."
+     },
+     {
+      "name": "Rewind",
+      "text": "Activate to reset the cooldowns of your Basic Abilities."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Stit",
+   "slug": "stitches",
+   "name": "Stitches",
+   "role": "Tank",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Hook",
+     "kind": "basic",
+     "text": "Pull the first enemy hit towards Stitches and deal 91 (+4% per level) damage.\n\nAfter reaching level 13, Hook's range is increased by 40%."
+    },
+    {
+     "name": "Slam",
+     "kind": "basic",
+     "text": "Deal 104 (+4% per level) damage to enemies within the target area. Enemies in the inner impact take 50% more damage and are Slowed by 45% for 2 seconds."
+    },
+    {
+     "name": "Devour",
+     "kind": "basic",
+     "text": "Deal 319 (+4% per level) damage to non-Heroic units, or 114 (+4% per level) damage to Heroes. Restores 20% of Stitches's maximum Health."
+    },
+    {
+     "name": "Putrid Bile",
+     "kind": "heroic",
+     "text": "Emit bile that deals 37 (+4% per level) damage per second to enemies within, Slowing them by 35% for 1.5 seconds. Gain 20% Movement Speed while emitting bile. Lasts 8 seconds."
+    },
+    {
+     "name": "Gorge",
+     "kind": "heroic",
+     "text": "Consume an enemy Hero, trapping them for 4 seconds. When Gorge ends, the enemy Hero takes 274 (+4% per level) damage. The trapped Hero cannot move or act and doesn't take damage from other sources."
+    },
+    {
+     "name": "Shambling Horror",
+     "kind": "trait",
+     "text": "Activate to spread Vile Gas in a large area every second and prevent your Movement Speed from being reduced below 110% for 4 seconds.\n\nVile Gas\nHitting enemies with Basic Attacks or the inner area of Slam afflicts them with Vile Gas, dealing an additional 36 (+4% per level) damage over 4 seconds. Deals 150% more damage to Minions, Mercenaries, and Monsters."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    },
+    {
+     "name": "Helping Hand",
+     "kind": "active",
+     "text": "Activate to use Hook that can hit allied Heroes. Hitting an allied Hero this way reduces the cooldown of Hook by 8 seconds.\n\nAfter reaching level 13, Helping Hand's range is increased by 40%."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Patchwork Creation",
+      "text": "Gain 3 Armor for every unit afflicted with Vile Gas, stacking up to 8 times. While Shambling Horror is active, this Armor amount is doubled.\n\nPassive: Increase regeneration effects and all healing received by 15%."
+     },
+     {
+      "name": "Savor The Flavor",
+      "text": "Quest: Hitting an enemy Hero with Devour increases Stitches' Health Regeneration by 1.5 and the damage of Vile Gas by 2%, stacking up to 100 times.",
+      "quest": true
+     },
+     {
+      "name": "Hungry for More",
+      "text": "Gain 5% Movement Speed.\n\nQuest: Gathering a Regeneration Globe increases Stitches's maximum Health by 25.\n\nReward: Every 20 Globes gathered permanently increases Stitches' Movement Speed by an additional 5%.",
+      "quest": true
+     }
+    ],
+    "4": [
+     {
+      "name": "Playtime!",
+      "text": "Basic Attacks restore 5 Mana and reduce Slam's cooldown by 0.75 seconds.\n\nFor each enemy Hero hit by Slam's inner area, restore 5 Mana and reduce its cooldown by 1.5 seconds."
+     },
+     {
+      "name": "Vile Cleaver",
+      "text": "Basic Attacks against enemies with Vile Gas deal 35% more damage and spreads Vile Gas to nearby enemies.\n\nPassive: Slam applies Vile Gas to all targets hit."
+     },
+     {
+      "name": "Tenderizer",
+      "text": "Basic Attacks against enemy Heroes Slow by 20% for 1.5 seconds and restore 1.75% of Stitches' maximum Health."
+     }
+    ],
+    "7": [
+     {
+      "name": "Serrated Edge",
+      "text": "Hitting an enemy Hero with Hook deals bonus damage equal to 5% of their maximum Health, reduces Hook's cooldown by 4 seconds, and restores 35 Mana."
+     },
+     {
+      "name": "Second Helping",
+      "text": "Devour gains 1 additional charge with a 6 second cooldown between uses.\n\nGambit: If Stitches is at max Health after using Devour, he gains a Shield equal to 15% of his maximum Health for 10 seconds. Every death, reduce this Shield by 3%.",
+      "quest": true
+     },
+     {
+      "name": "Putrefaction",
+      "text": "While Shambling Horror is active, Vile Gas reduces healing received by 40%.\n\nPassive: Vile Gas heals Stitches for 75% of the damage dealt."
+     }
+    ],
+    "10": [
+     {
+      "name": "Putrid Bile",
+      "text": "Emit bile that deals 37 (+4% per level) damage per second to enemies within, Slowing them by 35% for 1.5 seconds. Gain 20% Movement Speed while emitting bile. Lasts 8 seconds."
+     },
+     {
+      "name": "Gorge",
+      "text": "Consume an enemy Hero, trapping them for 4 seconds. When Gorge ends, the enemy Hero takes 274 (+4% per level) damage. The trapped Hero cannot move or act and doesn't take damage from other sources."
+     }
+    ],
+    "13": [
+     {
+      "name": "Meat Hook",
+      "text": "Hitting an enemy Hero with Hook heals Stitches for 20% of his maximum Health over 5 seconds. While active, Basic Attacks against the Hero hit refresh the duration of this effect."
+     },
+     {
+      "name": "Under Pressure",
+      "text": "Increase Slam's damage by 25.\n\nQuest: After damaging Heroes with Vile Gas 6 times, permanently increase the damage of Slam by 1, to a maximum of 75 additional damage.",
+      "quest": true
+     },
+     {
+      "name": "Chop Chop",
+      "text": "Hitting an enemy Hero with Hook or activating Shambling Horror grants 40% increased Attack Speed for 4 seconds. Basic Attacks refresh the duration of this effect."
+     }
+    ],
+    "16": [
+     {
+      "name": "Pulverize",
+      "text": "All enemies hit by Slam are Slowed by 70% for 0.75 seconds and Heroes have their Armor reduced by 10 for 3 seconds."
+     },
+     {
+      "name": "Digestive Juices",
+      "text": "Devour deals an additional 140 (+4% per level) damage over 5 seconds. When used on a Hero, its cooldown is reduced by 4 seconds and causes the Hero hit to deal 50% reduced damage for 4 seconds."
+     },
+     {
+      "name": "Flare Up",
+      "text": "Deals 15 (+4% per level) damage per second to nearby enemies. Hitting an enemy Hero with Hook or activating Shambling Horror increases this damage by 150% for 4 seconds."
+     }
+    ],
+    "20": [
+     {
+      "name": "Gift From The Embalmer",
+      "text": "Putrid Bile deals 100% more damage to Heroes.\n\nQuest: Each time Putrid Bile damages an enemy Hero, the duration of Stitches' next death timer is reduced by 2%, to a maximum of 80% total reduction. All stacks of this effect are lost upon death.",
+      "quest": true
+     },
+     {
+      "name": "Hungry Hungry Stitches",
+      "text": "For 4 seconds after using Gorge, Stitches can teleport a short distance to additional targets and Gorge them. Enemies are Slowed by 75% for 1 second after Gorge ends."
+     },
+     {
+      "name": "Master Hooker",
+      "text": "Reduce the cooldown of Hook by 4 seconds. Enemy Heroes hit by Hook have 75% reduced healing for 2 seconds. Allies hit by Helping Hand are Unkillable for 2 seconds."
+     },
+     {
+      "name": "Gas Bag",
+      "text": "Activating Shambling Horror grants Unstoppable for 3 seconds.\n\nPassive: Shambling Horror's cooldown is reduced by 20 seconds."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Tra0",
+   "slug": "tracer",
+   "name": "Tracer",
+   "role": "Ranged Assassin",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Blink",
+     "kind": "basic",
+     "text": "Dash towards an area.\n\nStores up to 3 charges."
+    },
+    {
+     "name": "Melee",
+     "kind": "basic",
+     "text": "Deal 220 (+4% per level) damage to a nearby enemy, prioritizing Heroes. Gain 5% Pulse Bomb charge when using Melee against an enemy, and 10% against Heroes."
+    },
+    {
+     "name": "Recall",
+     "kind": "basic",
+     "text": "After 1.25 seconds, Tracer returns to the position she was at 2 seconds prior to casting, refilling her ammo, and removing all negative status effects from herself."
+    },
+    {
+     "name": "Pulse Bomb",
+     "kind": "heroic",
+     "text": "Fire a short range bomb that can attach to an enemy if it hits them. The bomb explodes after 2 seconds dealing 298 (+6% per level) damage to them and 149 (+6% per level) damage to other nearby enemies.\n\nThis ability is slowly charged over time by dealing damage to enemies with Basic Attacks and Melee."
+    },
+    {
+     "name": "Reload",
+     "kind": "trait",
+     "text": "Tracer can Basic Attack while moving, and after attacking 10 times she needs to reload over 0.75 seconds. Tracer can manually reload early by activating Reload.\n\nBasic Attacks heal Tracer for 10% of the damage dealt."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "One-Two Punch",
+      "text": "Reduce the cooldown of Melee by 1 second and it gains an additional charge."
+     },
+     {
+      "name": "Parting Gift",
+      "text": "Recall leaves behind 6 bombs that deal 240 (+4% per level) damage each to different targets. Heroes hit with these bombs are Slowed by 50% for 0.75 seconds and grant 7% Pulse Bomb charge."
+     },
+     {
+      "name": "Tracer Rounds",
+      "text": "Increase Basic Attack range by 10%. Basic Attacks against Heroes reveal a small area around them for 3 seconds."
+     }
+    ],
+    "4": [
+     {
+      "name": "Leeching Rounds",
+      "text": "Increase the healing from Basic Attacks by up to 200%, based on the amount of health Tracer is missing."
+     },
+     {
+      "name": "Pulse Generator",
+      "text": "Successfully sticking a Pulse Bomb to an enemy Hero heals Tracer for 12% of her maximum Health over 1.5 seconds and refunds a charge of Blink."
+     },
+     {
+      "name": "Is That a Health Pack?!",
+      "text": "Collecting a Regeneration Globe instantly heals Tracer for 15% of her maximum Health and reduces the cooldown of Healing Fountain by 15 seconds.\n\nDrinking from a Healing Fountain instantly heals for 20% of Tracer's maximum Health."
+     }
+    ],
+    "7": [
+     {
+      "name": "Sleight of Hand",
+      "text": "Reduces Reload time by 50%. This equals 20% more damage per second."
+     },
+     {
+      "name": "Focus Fire",
+      "text": "If an entire ammo magazine is unloaded on an enemy within 2 seconds, the last bullet will deal 80 (+4% per level) bonus damage. This is equal to 35% of the total magazine."
+     },
+     {
+      "name": "Locked and Loaded",
+      "text": "Reactivate Reload within the last 50% of its cast time to increase Tracer's Basic Attack damage by 40% for that magazine."
+     }
+    ],
+    "10": [
+     {
+      "name": "Sticky Bomb",
+      "text": "Increases Pulse Bomb's radius by 50% and enemies hit are Slowed by 70% for 3 seconds."
+     },
+     {
+      "name": "Quantum Spike",
+      "text": "Pulse Bomb deals an additional 6% of maximum Health as damage to Heroes."
+     },
+     {
+      "name": "Pulse Rounds",
+      "text": "Increases Pulse Bomb's range and charge rate from Basic Attacks against Heroes by 100%."
+     }
+    ],
+    "13": [
+     {
+      "name": "Untouchable",
+      "text": "Passive: After Blinking, gain 20% Movement Speed for 1.25 seconds.\n\nQuest: Takedowns increase Tracer's Basic Attack damage by 5%, up to 25%. These bonuses are lost on death.",
+      "quest": true
+     },
+     {
+      "name": "Jumper",
+      "text": "Passive: When Blink has no charges remaining, its cooldown refreshes 100% faster.\n\nCasting Blink grants Tracer a Shield equal to 6% of her maximum Health for 3 seconds. This Shield stacks up to 3 times."
+     },
+     {
+      "name": "Telefrag",
+      "text": "Passive: Basic Attacks against enemy Heroes reduce the cooldown of Recall by 0.1875 seconds.\n\nWhen Tracer arrives at her Recall location she becomes Unkillable for 1 second and nearby enemies take 175 (+4% per level) damage and are knocked back."
+     }
+    ],
+    "16": [
+     {
+      "name": "Bullet Spray",
+      "text": "Increases the radius of Melee by 30%, and causes it to damage all enemies in range."
+     },
+     {
+      "name": "Heavy Handed",
+      "text": "Heroes hit by Melee have their Armor reduced by 15 for 4 seconds."
+     },
+     {
+      "name": "Ricochet",
+      "text": "Tracer's Basic Attacks have a 60% chance to hit another nearby enemy, prioritizing Heroes."
+     }
+    ],
+    "20": [
+     {
+      "name": "Chrono Triggers",
+      "text": "Casting Blink causes Basic Attacks to not consume ammo for 1 second."
+     },
+     {
+      "name": "Get Stuffed!",
+      "text": "Increases Melee's Pulse Bomb charge against Heroes from 10% to 20%. Hitting an enemy with Melee who is stuck with a Pulse Bomb causes the bomb to instantly explode and knock the target away."
+     },
+     {
+      "name": "Total Recall",
+      "text": "Recall heals Tracer equal to the amount of Health she lost during that time."
+     },
+     {
+      "name": "Composition B",
+      "text": "Successfully sticking a Pulse Bomb to an enemy Hero also drops another one at their feet that deals 50% damage and explodes slightly earlier."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Demo",
+   "slug": "valla",
+   "name": "Valla",
+   "role": "Ranged Assassin",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Hungering Arrow",
+     "kind": "basic",
+     "text": "Fire an arrow that deals 140 (+4% per level) damage to the first target hit, then seeks up to 2 additional enemies, prioritizing Heroes, dealing 80 (+4% per level) damage. Can hit an enemy multiple times."
+    },
+    {
+     "name": "Multishot",
+     "kind": "basic",
+     "text": "Deal 159 (+4% per level) damage to enemies within the target area."
+    },
+    {
+     "name": "Vault",
+     "kind": "basic",
+     "text": "Dash to the target area. Valla's next Basic Attack within 2 seconds deals 6% increased damage per stack of Hatred."
+    },
+    {
+     "name": "Strafe",
+     "kind": "heroic",
+     "text": "Rapidly attack enemies within 10 range for 70 (+4% per level) damage per hit, prioritizing Heroes over Minions. Valla is able to move and use Vault while strafing. Lasts for 4 seconds."
+    },
+    {
+     "name": "Rain of Vengeance",
+     "kind": "heroic",
+     "text": "Launch a wave of Shadow Beasts that deals 250 (+4% per level) damage and Stuns enemies in the target area for 0.5 seconds.\n\nStores up to 2 charges."
+    },
+    {
+     "name": "Hatred",
+     "kind": "trait",
+     "text": "Basic Attacks grant a stack of Hatred, up to 10. Each Hatred stack increases Basic Attack damage by 8% and Movement Speed by 1%. Lasts 5 seconds."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Puncturing Arrow",
+      "text": "Increase the number of Hungering Arrow bounces by 1.\n\nQuest: Hitting an enemy Hero with the initial impact of Hungering Arrow refunds 40 Mana and permanently increases the damage of its initial impact by 6.",
+      "quest": true
+     },
+     {
+      "name": "Fire At Will",
+      "text": "Quest: Hitting a Hero with Multishot grants 2 Hatred and permanently increases its damage by 2.\n\nReward: After hitting 20 Heroes with Multishot, increase its damage by 40.",
+      "quest": true
+     },
+     {
+      "name": "Creed of the Hunter",
+      "text": "Quest: Every 50 Basic Attacks against Heroes increases Hatred's damage bonus per stack by 1%, up to 6%.\n\nGambit: Gain 25% bonus Attack Speed. Every death reduces this bonus by 5%.",
+      "quest": true
+     }
+    ],
+    "4": [
+     {
+      "name": "Arsenal",
+      "text": "Increase the range of Multishot by 20%. Multishot also fires 3 grenades that deal 100 (+4% per level) damage and refund 25 Mana after hitting enemy Heroes."
+     },
+     {
+      "name": "Death Dealer",
+      "text": "Increase Vaults Basic Attack damage bonus from 6% to 15% per stack of Hatred. If this attack kills its victim within 1.5 seconds, the Mana cost and cooldown of Vault are refunded.\n\nPassive: Reduce the cooldown of Vault by 5 seconds."
+     },
+     {
+      "name": "Repeating Arrow",
+      "text": "Vault no longer has a Mana cost. Casting Vault resets the cooldown of Hungering Arrow."
+     }
+    ],
+    "7": [
+     {
+      "name": "Monster Hunter",
+      "text": "Hungering Arrow deals 150% additional damage to Minions, Mercenaries, and Monsters."
+     },
+     {
+      "name": "Frost Shot",
+      "text": "Multishot Slows enemies by 20% for 2.5 seconds. Hungering Arrows deals 25% more damage to Slowed enemies."
+     },
+     {
+      "name": "Hot Pursuit",
+      "text": "Increase the Movement Speed bonus of each stack of Hatred from 1% to 2%."
+     }
+    ],
+    "10": [
+     {
+      "name": "Strafe",
+      "text": "Rapidly attack enemies within 10 range for 70 (+4% per level) damage per hit, prioritizing Heroes over Minions. Valla is able to move and use Vault while strafing. Lasts for 4 seconds."
+     },
+     {
+      "name": "Rain of Vengeance",
+      "text": "Launch a wave of Shadow Beasts that deals 250 (+4% per level) damage and Stuns enemies in the target area for 0.5 seconds.\n\nStores up to 2 charges."
+     }
+    ],
+    "13": [
+     {
+      "name": "Siphoning Arrows",
+      "text": "Hitting a Hero with Hungering Arrow heals Valla for 4% of her maximum Health, and Multishot heals for 2%."
+     },
+     {
+      "name": "Tempered by Discipline",
+      "text": "Basic Attacks heal for 10% of the damage dealt, increased by 2% per Hatred stack."
+     },
+     {
+      "name": "Gloom",
+      "text": "Activate to consume all Hatred, granting 3 Spell Armor per Hatred consumed for 5 seconds.\n\nPassive: Gain 15 Spell Armor, and each stack of Hatred heals for 1.2 (+4% per level) Health per second."
+     }
+    ],
+    "16": [
+     {
+      "name": "Punishment",
+      "text": "While at max Hatred, Multishot's cooldown recharges 50% faster.\n\nPassive: Reduce Multishot's Mana cost from 75 to 55."
+     },
+     {
+      "name": "Seething Hatred",
+      "text": "While at max Hatred, increase all damage dealt by 10%."
+     },
+     {
+      "name": "Manticore",
+      "text": "Every 3rd Basic Attack against the same Hero deals an additional 4% of their maximum Health as damage."
+     }
+    ],
+    "20": [
+     {
+      "name": "Death Siphon",
+      "text": "Hitting an enemy Hero with Strafe increases its duration by 0.125 seconds. Strafe also fires penetrating bolts in a line for 34 (+4% per level) damage every 0.25 seconds."
+     },
+     {
+      "name": "Storm of Vengeance",
+      "text": "Basic Attacks against Heroes reduce the cooldown of Rain of Vengeance by 5 seconds.\n\nPassive: Each stack of Hatred increases your Attack Speed by 2%. While at max Hatred, gain an additional 30% Attack Speed."
+     },
+     {
+      "name": "Acrobat",
+      "text": "Gain 2 additional charges of Vault. Drop 3 Caltrops while Vaulting that deal 60 (+4% per level) damage and Slow enemies by 40% for 1 second."
+     },
+     {
+      "name": "Farflight Quiver",
+      "text": "Gain 20% Basic Attack range. While at max Hatred, gain an additional 30% Basic Attack range."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Vari",
+   "slug": "varian",
+   "name": "Varian",
+   "role": "Bruiser",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Lion's Fang",
+     "kind": "basic",
+     "text": "Create a shockwave that travels in a straight line, dealing 150 (+4% per level) damage and Slowing enemies by 35% for 1.5 seconds. Each enemy hit heals Varian for 35 (+4% per level), increased to 140 (+4% per level) against Heroes."
+    },
+    {
+     "name": "Parry",
+     "kind": "basic",
+     "text": "Parry all incoming Basic Attacks for 1.25 seconds, reducing their damage by 100%.\n\nStores up to 2 charges."
+    },
+    {
+     "name": "Charge",
+     "kind": "basic",
+     "text": "Charge to the target enemy, dealing 50 (+4% per level) damage and Slowing them by 75% for 1 second."
+    },
+    {
+     "name": "Taunt",
+     "kind": "heroic",
+     "text": "Silence a target Hero and force them to attack Varian for 1.25 seconds.\n\nPassive: Maximum Health and Health Regeneration increased by 40%."
+    },
+    {
+     "name": "Colossus Smash",
+     "kind": "heroic",
+     "text": "Smash a target enemy, dealing 185 (+4% per level) damage and lowering their Armor by 25 for 3 seconds, causing them to take 25% increased damage.\n\nPassive: Base Attack Damage increased by 100%.\nPassive: Maximum Health and Health Regeneration reduced by 10%."
+    },
+    {
+     "name": "Twin Blades of Fury",
+     "kind": "heroic",
+     "text": "Basic Attacks reduce Heroic Strike's cooldown by an additional 7 seconds, and increase Varian's Movement Speed by 30% for 2 seconds.\n\nPassive: Attack Speed increased by 100%.\nPassive: Base Attack Damage reduced by 25%."
+    },
+    {
+     "name": "Heroic Strike",
+     "kind": "trait",
+     "text": "Every 18 seconds, Varian's next Basic Attack deals 125 (+4% per level) bonus Spell Damage. Basic Attacks reduce this cooldown by 3 seconds."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Lion's Maw",
+      "text": "Quest: Every time Lion's Fang hits a Hero, increase its damage by 7, up to 175.\n\nReward: After hitting 25 Heroes, the Slow is increased to 50% and its duration is increased to 2 seconds.",
+      "quest": true
+     },
+     {
+      "name": "Overpower",
+      "text": "When Parry blocks a Hero's Basic Attack, Heroic Strike's cooldown is refreshed and the next one does 40% more damage."
+     },
+     {
+      "name": "High King's Quest",
+      "text": "Quest: Hit 50 Heroes with Basic Attacks.\nQuest: Participate in 5 Hero Takedowns.\nQuest: Gather 15 Regeneration Globes.\n\nReward: Completing a Quest grants 10 Base Attack Damage. Completing all 3 Quests grants an additional 30 Base Attack Damage.",
+      "quest": true
+     }
+    ],
+    "4": [
+     {
+      "name": "Taunt",
+      "text": "Silence a target Hero and force them to attack Varian for 1.25 seconds.\n\nPassive: Maximum Health and Health Regeneration increased by 40%."
+     },
+     {
+      "name": "Colossus Smash",
+      "text": "Smash a target enemy, dealing 185 (+4% per level) damage and lowering their Armor by 25 for 3 seconds, causing them to take 25% increased damage.\n\nPassive: Base Attack Damage increased by 100%.\nPassive: Maximum Health and Health Regeneration reduced by 10%."
+     },
+     {
+      "name": "Twin Blades of Fury",
+      "text": "Basic Attacks reduce Heroic Strike's cooldown by an additional 7 seconds, and increase Varian's Movement Speed by 30% for 2 seconds.\n\nPassive: Attack Speed increased by 100%.\nPassive: Base Attack Damage reduced by 25%."
+     }
+    ],
+    "7": [
+     {
+      "name": "Lionheart",
+      "text": "Increase Lion's Fang's healing from Heroes by 75%."
+     },
+     {
+      "name": "Second Wind",
+      "text": "Basic Attacks heal Varian for 1% of his maximum Health. While below 50% Health, they also heal him for 50% of the damage dealt."
+     },
+     {
+      "name": "Victory Rush",
+      "text": "Every 30 seconds, Varian's next Basic Attack will heal him for 350 (+4% per level) Health. When a nearby enemy Minion or Monster dies, the cooldown is reduced by 10 seconds."
+     }
+    ],
+    "10": [
+     {
+      "name": "Shield Wall",
+      "text": "Parry grants Protected, preventing all incoming damage while active. Additionally, Parry's cooldown is reduced by 5 seconds, but it loses 1 charge."
+     },
+     {
+      "name": "Warbringer",
+      "text": "Reduce Charge's cooldown by 8 seconds and Mana cost from 45 to 25. Additionally, Charge can be cast on allied Heroes."
+     }
+    ],
+    "13": [
+     {
+      "name": "Juggernaut",
+      "text": "Charge deals bonus damage to Heroes equal to 4% of their maximum Health."
+     },
+     {
+      "name": "Mortal Strike",
+      "text": "Heroes hit by Heroic Strike receive 40% reduced healing for 4 seconds."
+     },
+     {
+      "name": "Shattering Throw",
+      "text": "Activate to throw a sword at a target Hero that deals 50 (+4% per level) damage, and up to 1400 (+4% per level) bonus damage to their Shields.\n\nPassive: Basic Attacks against Heroes deal up to 200% bonus Physical Damage to Shields."
+     }
+    ],
+    "16": [
+     {
+      "name": "Banner of Stormwind",
+      "text": "Activate to place a Banner that grants 25% increased Movement Speed to nearby allied Heroes. Lasts 12 seconds."
+     },
+     {
+      "name": "Banner of Ironforge",
+      "text": "Activate to place a Banner that grants 20 Armor to nearby allied Heroes, reducing damage taken by 20%. Lasts 12 seconds."
+     },
+     {
+      "name": "Banner of Dalaran",
+      "text": "Activate to place a Banner that grants 20% increased Spell Power to nearby allied Heroes. Lasts 12 seconds."
+     }
+    ],
+    "20": [
+     {
+      "name": "Vigilance",
+      "text": "Being hit by a Hero Basic Attack reduces the cooldown of Taunt by 1 second."
+     },
+     {
+      "name": "Master at Arms",
+      "text": "Colossus Smash affects all enemies near the target, and its cooldown is reduced by 10 seconds."
+     },
+     {
+      "name": "Frenzy",
+      "text": "Twin Blades of Fury increases Heroic Strike damage by an additional 25%, and Basic Attacks increase his Movement Speed by an additional 10%."
+     },
+     {
+      "name": "Glory to the Alliance",
+      "text": "Banner now also increases health regeneration and all healing received for nearby allied Heroes by 50%, and the cooldown is reduced by 50%."
+     },
+     {
+      "name": "Demoralizing Shout",
+      "text": "Activate to demoralize nearby enemy Heroes, reducing damage they deal by 40% for 5 seconds.\n\nEach time an enemy Hero affected by Demoralizing Shout deals damage to a Hero, reduce its cooldown and Parry's cooldown by 5%."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Zera",
+   "slug": "zeratul",
+   "name": "Zeratul",
+   "role": "Melee Assassin",
+   "type": "Melee",
+   "abilities": [
+    {
+     "name": "Cleave",
+     "kind": "basic",
+     "text": "Deal 200 (+4% per level) damage to nearby enemies."
+    },
+    {
+     "name": "Singularity Spike",
+     "kind": "basic",
+     "text": "Flings a Singularity Spike that sticks to the first enemy hit. Deals 240 (+4% per level) damage after 1 second and Slows the enemy by 40% for 3 seconds."
+    },
+    {
+     "name": "Blink",
+     "kind": "basic",
+     "text": "Teleport to the target location.\n\nUsing this Ability does not break Stealth."
+    },
+    {
+     "name": "Might Of The Nerazim",
+     "kind": "heroic",
+     "text": "Activate to cast an untalented version of Zeratul's most recently used Basic Ability, dealing 50% less damage.\n\nPassive: After using an Ability, Zeratul's next Basic Attack within 6 seconds deals 30% more damage."
+    },
+    {
+     "name": "Void Prison",
+     "kind": "heroic",
+     "text": "Slows time in an area to a near standstill, placing allies and enemies in Time Stop for 5 seconds. Zeratul is not affected."
+    },
+    {
+     "name": "Permanent Cloak",
+     "kind": "trait",
+     "text": "Gain Stealth when out of combat for 3 seconds. Taking damage, attacking, using Abilities, or Channeling ends Stealth. Remaining stationary for at least 1.5 seconds while Stealthed grants Invisible."
+    },
+    {
+     "name": "Summon Mount",
+     "kind": "mount",
+     "text": "After Channeling for 1 second, gain 30% Movement Speed."
+    },
+    {
+     "name": "Vorpal Blade",
+     "kind": "active",
+     "text": "Activate to teleport to Zeratul's last non-structure Basic Attack target within 3 seconds. The target is revealed during these 3 seconds."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Greater Cleave",
+      "text": "Increases the radius of Cleave by 33%."
+     },
+     {
+      "name": "Shadow Hunter",
+      "text": "Quest: Gather Regeneration Globes to lower the Mana cost of Blink by 3, up to 45.\n\nReward: Upon gathering 15 Regeneration Globes, Basic Attacks reduce the cooldown of Blink by 1.5 seconds.",
+      "quest": true
+     },
+     {
+      "name": "Move Unseen",
+      "text": "Reduce the cooldown of Permanent Cloak by 1 second. Gain 30% Movement Speed while Stealthed."
+     }
+    ],
+    "4": [
+     {
+      "name": "Rending Cleave",
+      "text": "Cleave deals an additional 40% damage over 3 seconds."
+     },
+     {
+      "name": "Psionic Strength",
+      "text": "Dealing damage to enemy Heroes increases all damage dealt by 6% for 3 seconds, stacking up to 30%."
+     },
+     {
+      "name": "Darkness Descends",
+      "text": "Activate to gain 40% Attack Speed for 5 seconds.\n\nPassive: Gain 20% Attack Speed."
+     }
+    ],
+    "7": [
+     {
+      "name": "Wormhole",
+      "text": "After 1.25 seconds, reactivate Blink to return to the point where it was cast from within 4 seconds."
+     },
+     {
+      "name": "Seeker in the Dark",
+      "text": "Singularity Spike takes 50% longer to explode. It can be reactivated to teleport to the target, granting 30% increased Move Speed for 3 seconds."
+     },
+     {
+      "name": "Warp Skirmisher",
+      "text": "Vorpal Blade gains a 2nd charge. Teleporting to an enemy with Vorpal Blade or entering Permanent Cloak causes Zeratul's next Basic Attack to deal 50% more damage."
+     }
+    ],
+    "10": [
+     {
+      "name": "Might Of The Nerazim",
+      "text": "Activate to cast an untalented version of Zeratul's most recently used Basic Ability, dealing 50% less damage.\n\nPassive: After using an Ability, Zeratul's next Basic Attack within 6 seconds deals 30% more damage."
+     },
+     {
+      "name": "Void Prison",
+      "text": "Slows time in an area to a near standstill, placing allies and enemies in Time Stop for 5 seconds. Zeratul is not affected."
+     }
+    ],
+    "13": [
+     {
+      "name": "Shroud of Adun",
+      "text": "Zeratul gains a Shield equal to 20% of his Maximum Health over 3 seconds while under Permanent Cloak."
+     },
+     {
+      "name": "Mending Strikes",
+      "text": "Basic Attacks heal for 35% of the damage dealt."
+     },
+     {
+      "name": "Spell Shield",
+      "text": "Every 30 seconds, gain 50 Spell Armor against the next enemy Ability and subsequent Abilities for 3 seconds, reducing the damage taken by 50%.\n\nCan be toggled to allow or prevent this talent from triggering automatically."
+     }
+    ],
+    "16": [
+     {
+      "name": "Master Warp-Blade",
+      "text": "Every third consecutive Basic Attack against the same target deals 125% more damage."
+     },
+     {
+      "name": "Void Slash",
+      "text": "If Cleave hits more than one enemy Hero, it deals 40% increased damage and its cooldown is reduced by 3 seconds."
+     },
+     {
+      "name": "Sentenced to Death",
+      "text": "Deal 25% increased damage to enemies while they are marked or Slowed by Singularity Spike."
+     }
+    ],
+    "20": [
+     {
+      "name": "Twilight Falls",
+      "text": "Might of the Nerazim resets the cooldown of all Basic Abilities."
+     },
+     {
+      "name": "Unwavering Pressure",
+      "text": "Singularity Spike no longer costs Mana. Basic Attacks against enemies reduce its cooldown by 1.25 seconds, double versus Heroes."
+     },
+     {
+      "name": "Shadow Stride",
+      "text": "Reduce the cooldown of Vorpal Blade by 10 seconds. Casting Vorpal Blade grants Zeratul a Shield that absorbs up to 260 (+4% per level) damage for 3 seconds."
+     },
+     {
+      "name": "Shadow Mending",
+      "text": "Heal for 60% of Spell Damage dealt to Heroes."
+     }
+    ]
+   }
+  }
+ ]
+}

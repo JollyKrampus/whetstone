@@ -1,0 +1,8 @@
+hero: valla
+reviewedFor: "2.57"
+counters:
+  - a: valla
+    b: notahero
+    why: "Sample: notahero is not a hero slug anyone knows."
+    evidence: ["Hatred"]
+    confidence: low

@@ -1,12 +1,17 @@
-# Curated synergy pairs (SPEC §5.1.4). Same format as counters.yaml, validated by
-# CuratedPairsFileSchema in src/games/hots/schema.ts. Pairs are undirected: `a` and `b`
-# can be listed in either order.
+# Global curated synergy pairs (SPEC §5.1.4). Same format as counters.yaml, validated by
+# CuratedPairsFileSchema in src/games/hots/schema.ts and merged by
+# src/games/hots/theory/curated.ts.
 #
-# The entry below is an example of the format; real content comes from curators by PR.
-pairs:
-  - a: muradin
-    b: liming
-    why: Muradin's Storm Bolt stuns its target, which gives Li-Ming time to land Arcane Orb from long range.
-    evidence: [Storm Bolt, Arcane Orb]
-    confidence: medium
-    reviewedFor: "2.57"
+# Synergies are curated per hero: add yours to curated/hots/heroes/<slug>.yaml, where they are
+# stored with a < b (alphabetical). Pairs here are undirected and may be listed in either
+# order; this file is normally empty.
+#
+# Example (not active):
+#   pairs:
+#     - a: liming
+#       b: muradin
+#       why: Storm Bolt holds a target still long enough for Arcane Orb to land from long range.
+#       evidence: [Storm Bolt, Arcane Orb]
+#       confidence: medium
+#       reviewedFor: "2.57"
+pairs: []

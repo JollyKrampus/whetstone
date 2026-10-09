@@ -1,0 +1,14 @@
+hero: valla
+reviewedFor: "2.57"
+counters:
+  - a: zeratul
+    b: abathur
+    why: "Sample: this pair does not involve Valla, the file's hero."
+    evidence: ["Cleave"]
+    confidence: low
+synergies:
+  - a: valla
+    b: abathur
+    why: "Sample: synergies must be written with a < b alphabetically."
+    evidence: ["Hatred"]
+    confidence: low
