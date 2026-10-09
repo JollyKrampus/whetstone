@@ -115,6 +115,32 @@ export const PokemonMetaExtraSchema = z.strictObject({
   smogonMonth: z.string().regex(/^\d{4}-\d{2}$/).exactOptional(),
   /** smogon/pokemon-showdown commit the dex was exported from. */
   showdownSha: z.string().regex(/^[0-9a-f]{7,40}$/).exactOptional(),
+  /**
+   * Present right after a regulation change while some sources have no data for the new
+   * regulation yet ("data warming up"). Those sources keep showing `showing`'s data, which
+   * every file labels with its own `regulation`.
+   */
+  warmingUp: z
+    .strictObject({
+      /** The new (current) regulation. */
+      regulation: RegulationIdSchema,
+      since: IsoDateTime,
+      /** SourceRef ids without data for `regulation` yet. */
+      sources: z.array(z.string().min(1)).min(1),
+      /** Regulation whose data is shown meanwhile, when there is any. */
+      showing: RegulationIdSchema.exactOptional(),
+    })
+    .exactOptional(),
+  /**
+   * Cache key of the dex export: Showdown commit, exporter version and the regulation formats.
+   * The pipeline skips the Showdown build and re-emits the last-good dex while it is unchanged.
+   */
+  dexKey: z.string().regex(/^[0-9a-f]{16}$/).exactOptional(),
+  /**
+   * Self-hosted sprites (img/sprites/<id>.webp, referenced by Species.sprite): where they come
+   * from and the credit to show wherever they appear.
+   */
+  sprites: z.strictObject({ count: Count, source: Url, credit: z.string().min(1) }).exactOptional(),
 });
 export const PokemonMetaSchema = gameMetaSchema('pokemon', PokemonMetaExtraSchema);
 export type PokemonMeta = z.infer<typeof PokemonMetaSchema>;
@@ -147,6 +173,12 @@ export const SpeciesSchema = z
     /** Showdown Champions tier (OU, UU, ...), informational. */
     tier: z.string().min(1).exactOptional(),
     sprite: DataPath.exactOptional(),
+    /**
+     * Base species: ids of cosmetic formes (Vivillon patterns, Alcremie flavours...) that battle
+     * exactly like it. They have no entry of their own; data keyed by one of them (replays,
+     * tournament lists) is counted under this species.
+     */
+    cosmeticFormes: z.array(ShowdownIdSchema).exactOptional(),
   })
   .superRefine((s, ctx) => {
     if ((s.megaOf === undefined) !== (s.requiredItem === undefined)) {
@@ -349,6 +381,11 @@ export const SpeciesResultSchema = z.strictObject({
   wrLower: Rate.nullable(),
   /** Teams that reached a top cut. */
   topCut: Count.exactOptional(),
+  /** Held items on the open team lists that registered it, as shares of those teams (Champions has no Tera). */
+  items: z.array(ShareSchema).max(6).exactOptional(),
+  abilities: z.array(ShareSchema).max(3).exactOptional(),
+  moves: z.array(ShareSchema).max(10).exactOptional(),
+  natures: z.array(z.strictObject({ nature: NatureSchema, share: Rate })).max(5).exactOptional(),
 });
 
 export const ArchetypeSchema = z.strictObject({
@@ -436,6 +473,12 @@ export const SpeedEntrySchema = z.strictObject({
   neutral: z.number().int().positive(),
   /** 0 SP, −Spe nature (Trick Room). */
   min: z.number().int().positive(),
+  /** Choice Scarf: share of sets holding it and the scarfed Speed of the common spread (× 1.5). */
+  scarf: z.strictObject({ share: Rate, speed: z.number().int().positive() }).exactOptional(),
+  /** Share of sets with Tailwind (doubles the side's Speed for four turns). */
+  tailwind: Rate.exactOptional(),
+  /** Share of sets with Trick Room (slower Pokémon move first for five turns). */
+  trickRoom: Rate.exactOptional(),
 });
 
 export const SpeedTiersSchema = z
@@ -474,6 +517,46 @@ export const DexShardSchema = z.strictObject({
 });
 export type DexShard = z.infer<typeof DexShardSchema>;
 
+// ---- ledger/<source>.json (pipeline state, anonymised) -----------------------------------
+
+/**
+ * One replayed game: `<date> <winner> <team1> <brought1> <team2> <brought2>`, where a team is
+ * the six registered species and `brought` the ones that battled in order of first appearance
+ * (the first two led). Both are comma-separated indexes into `species`; winner is 1 or 2.
+ */
+export const LedgerGameSchema = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2} [12] \d+(?:,\d+){0,5} \d+(?:,\d+){0,5} \d+(?:,\d+){0,5} \d+(?:,\d+){0,5}$/, 'expected "<date> <winner> <team1> <brought1> <team2> <brought2>"');
+
+/**
+ * Rolling store of parsed Showdown replays, so a daily crawl capped at a few hundred logs adds
+ * up to a meaningful window. No player names, replay ids or ratings: species, outcome and date.
+ */
+export const ReplayLedgerSchema = z
+  .strictObject({
+    schema: z.literal(1),
+    source: z.literal('showdown-replays'),
+    regulation: RegulationIdSchema,
+    format: FormatIdSchema,
+    /** Upload time (Unix seconds) of the newest replay ingested; the next run reads only newer ones. */
+    cursor: z.number().int().nonnegative(),
+    /** Species dictionary, sorted; games refer to it by index. */
+    species: z.array(ShowdownIdSchema),
+    /** Oldest first. */
+    games: z.array(LedgerGameSchema),
+  })
+  .superRefine((l, ctx) => {
+    checkUnique(ctx, l.species, 'species', ['species']);
+    for (const [i, g] of l.games.entries()) {
+      const parts = g.split(' ').slice(2);
+      if (parts.some((p) => p.split(',').some((x) => Number(x) >= l.species.length))) {
+        ctx.addIssue({ code: 'custom', message: 'species index out of range', path: ['games', i] });
+        return;
+      }
+    }
+  });
+export type ReplayLedger = z.infer<typeof ReplayLedgerSchema>;
+
 // ---- file registry ---------------------------------------------------------------------
 
 export const POKEMON_FILES = {
@@ -491,6 +574,8 @@ export const POKEMON_FILES = {
   'h2h.json': { schema: H2HSchema, custody: 'A' },
   'speed.json': { schema: SpeedTiersSchema, custody: 'A' },
   'public/dex.json': { schema: DexShardSchema, custody: 'A' },
+  /** Pipeline state (not read by pages): anonymised per-source ledgers, e.g. ledger/showdown-replays.json. */
+  'ledger/<source>.json': { schema: ReplayLedgerSchema, custody: 'A' },
 } as const;
 
 export const POKEMON_CURATED = {

@@ -1,0 +1,136 @@
+|t:|1791507852
+|gametype|doubles
+|player|p1|Player A|1|
+|player|p2|Player B|1|
+|gen|9
+|tier|[Gen 9 Champions] VGC 2026 Reg M-C (Bo3)
+|rated|
+|rule|Species Clause: Limit one of each Pokémon
+|rule|Item Clause: Limit 1 of each item
+|clearpoke
+|poke|p1|Gholdengo, L50|
+|poke|p1|Raichu, L50, M|
+|poke|p1|Volcarona, L50, M|
+|poke|p1|Milotic, L50, M|
+|poke|p1|Rillaboom, L50, F|
+|poke|p1|Garchomp, L50, F|
+|poke|p2|Whimsicott, L50, F|
+|poke|p2|Kleavor, L50, F|
+|poke|p2|Armarouge, L50, F|
+|poke|p2|Indeedee-F, L50, F|
+|poke|p2|Gardevoir, L50, M|
+|poke|p2|Pyroar, L50, F|
+|teampreview|4
+|showteam|p1|Gholdengo||LifeOrb|GoodasGold|MakeItRain,ShadowBall,NastyPlot,Protect|Timid|||||50|]Raichu||RaichuniteY|LightningRod|FakeOut,ZapCannon,FocusBlast,Protect|Timid||M|||50|]Volcarona||ChartiBerry|FlameBody|FieryDance,BugBuzz,RagePowder,Protect|Modest||M|||50|]Milotic||GrassySeed|Competitive|Scald,IceBeam,LifeDew,Protect|Modest||M|||50|]Rillaboom||ExpertBelt|GrassySurge|FakeOut,GrassyGlide,HighHorsepower,Uturn|Adamant||F|||50|]Garchomp||GarchompiteZ|RoughSkin|DragonPulse,EarthPower,Flamethrower,Protect|Modest||F|||50|
+|showteam|p2|Whimsicott||FocusSash|Prankster|Tailwind,SunnyDay,Protect,Moonblast|Timid||F|||50|]Kleavor||WhiteHerb|Sharpness|StoneAxe,BrickBreak,Protect,XScissor|Adamant||F|||50|]Armarouge|||FlashFire|TrickRoom,WideGuard,ArmorCannon,ExpandingForce|Modest||F|||50|]Indeedee-F||PsychicSeed|PsychicSurge|FollowMe,TrickRoom,Psychic,HelpingHand|Bold||F|||50|]Gardevoir||Gardevoirite|Telepathy|Protect,HyperVoice,ExpandingForce,ShadowBall|Modest||M|||50|]Pyroar||Pyroarite|Unnerve|Protect,SolarBeam,Flamethrower,HeatWave|Timid||F|||50|
+|
+|t:|1791507879
+|teamsize|p1|4
+|teamsize|p2|4
+|start
+|switch|p1a: Volcarona|Volcarona, L50, M|100/100
+|switch|p1b: Rillaboom|Rillaboom, L50, F|100/100
+|switch|p2a: Whimsicott|Whimsicott, L50, F|100/100
+|switch|p2b: Pyroar|Pyroar, L50, F|100/100
+|-ability|p2b: Pyroar|Unnerve
+|-fieldstart|move: Grassy Terrain|[from] ability: Grassy Surge|[of] p1b: Rillaboom
+|turn|1
+|
+|t:|1791507918
+|switch|p2a: Indeedee-F|Indeedee-F, L50, F|100/100
+|-fieldstart|move: Psychic Terrain|[from] ability: Psychic Surge|[of] p2a: Indeedee-F
+|-enditem|p2a: Indeedee-F|Psychic Seed
+|-boost|p2a: Indeedee-F|spd|1|[from] item: Psychic Seed
+|switch|p1a: Milotic|Milotic, L50, M|100/100
+|detailschange|p2b: Pyroar|Pyroar-Mega, L50, F
+|-mega|p2b: Pyroar|Pyroar|Pyroarite
+|move|p1b: Rillaboom|Fake Out|p2b: Pyroar
+|-activate|p2b: Pyroar|move: Psychic Terrain
+|move|p2b: Pyroar|Heat Wave|p1b: Rillaboom|[spread] p1b
+|-miss|p2b: Pyroar|p1a: Milotic
+|-supereffective|p1b: Rillaboom|1
+|-damage|p1b: Rillaboom|0 fnt
+|faint|p1b: Rillaboom
+|
+|upkeep
+|
+|t:|1791507937
+|switch|p1b: Raichu|Raichu, L50, M|100/100
+|turn|2
+|
+|t:|1791507961
+|switch|p2a: Whimsicott|Whimsicott, L50, F|100/100
+|detailschange|p1b: Raichu|Raichu-Mega-Y, L50, M
+|-mega|p1b: Raichu|Raichu|Raichunite Y
+|move|p2b: Pyroar|Protect|p2b: Pyroar
+|-singleturn|p2b: Pyroar|Protect
+|move|p1b: Raichu|Focus Blast|p2b: Pyroar
+|-activate|p2b: Pyroar|move: Protect
+|move|p1a: Milotic|Scald|p2a: Whimsicott
+|-resisted|p2a: Whimsicott|1
+|-damage|p2a: Whimsicott|74/100
+|
+|upkeep
+|turn|3
+|
+|t:|1791507992
+|switch|p2b: Armarouge|Armarouge, L50, F|100/100
+|move|p2a: Whimsicott|Sunny Day|p2a: Whimsicott
+|-weather|SunnyDay
+|move|p1b: Raichu|Focus Blast|p2b: Armarouge
+|-resisted|p2b: Armarouge|1
+|-damage|p2b: Armarouge|77/100
+|move|p1a: Milotic|Scald|p2b: Armarouge
+|-supereffective|p2b: Armarouge|1
+|-damage|p2b: Armarouge|39/100
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|4
+|
+|t:|1791508031
+|switch|p1b: Volcarona|Volcarona, L50, M|100/100
+|move|p1a: Milotic|Protect|p1a: Milotic
+|-singleturn|p1a: Milotic|Protect
+|move|p2a: Whimsicott|Tailwind|p2a: Whimsicott
+|-sidestart|p2: Player B|move: Tailwind
+|move|p2b: Armarouge|Expanding Force|p1a: Milotic|[spread] p1b
+|-activate|p1a: Milotic|move: Protect
+|-damage|p1b: Volcarona|38/100
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|5
+|
+|t:|1791508053
+|switch|p2a: Pyroar|Pyroar-Mega, L50, F|100/100
+|move|p2b: Armarouge|Expanding Force|p1b: Volcarona|[spread] p1a,p1b
+|-damage|p1a: Milotic|56/100
+|-damage|p1b: Volcarona|0 fnt
+|faint|p1b: Volcarona
+|move|p1a: Milotic|Scald|p2b: Armarouge
+|-supereffective|p2b: Armarouge|1
+|-damage|p2b: Armarouge|2/100
+|
+|-weather|SunnyDay|[upkeep]
+|-fieldend|move: Psychic Terrain
+|upkeep
+|
+|t:|1791508065
+|switch|p1b: Raichu|Raichu-Mega-Y, L50, M|100/100
+|turn|6
+|
+|t:|1791508107
+|move|p2a: Pyroar|Heat Wave|p1a: Milotic|[spread] p1a,p1b
+|-resisted|p1a: Milotic|1
+|-damage|p1a: Milotic|22/100
+|-damage|p1b: Raichu|0 fnt
+|faint|p1b: Raichu
+|move|p2b: Armarouge|Armor Cannon|p1a: Milotic
+|-resisted|p1a: Milotic|1
+|-damage|p1a: Milotic|0 fnt
+|-unboost|p2b: Armarouge|def|1
+|-unboost|p2b: Armarouge|spd|1
+|faint|p1a: Milotic
+|
+|win|Player B

@@ -215,3 +215,35 @@ export function getH2H(): H2H | null {
 export function getSpeedTiers(): SpeedTiers | null {
   return data.optional('speed.json', SpeedTiersSchema);
 }
+
+// ---- regulation warm-up (added with the data pipeline) ---------------------------------
+
+/**
+ * The "data warming up" state right after a regulation change: which sources still show the
+ * previous regulation's data (each data file also names its own `regulation`). Null otherwise.
+ */
+export function getWarmingUp(): NonNullable<PokemonMeta['extra']['warmingUp']> | null {
+  return getMeta().extra.warmingUp ?? null;
+}
+
+/**
+ * Regulation the dex's legality flags describe: the current one, or, while Pokémon Showdown has
+ * not added a new regulation yet, the latest one any species is legal in. Use it as the default
+ * roster (e.g. `getLegalSpecies(getRosterRegulation().id)`) so a warm-up never shows an empty one.
+ */
+export function getRosterRegulation(now?: Date): Regulation {
+  const current = getCurrentRegulation(now);
+  const species = getSpecies();
+  if (species.some((s) => s.legal.includes(current.id))) return current;
+  const regs = getRegulations();
+  for (let i = regs.length - 1; i >= 0; i--) {
+    const reg = regs[i] as Regulation;
+    if (species.some((s) => s.legal.includes(reg.id))) return reg;
+  }
+  return current;
+}
+
+/** Credit for the self-hosted sprites (Species.sprite), when the data has any. */
+export function getSpriteCredit(): NonNullable<PokemonMeta['extra']['sprites']> | null {
+  return getMeta().extra.sprites ?? null;
+}

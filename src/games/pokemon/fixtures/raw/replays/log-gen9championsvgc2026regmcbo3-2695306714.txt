@@ -1,0 +1,202 @@
+|t:|1791507775
+|gametype|doubles
+|player|p1|Player A|1|
+|player|p2|Player B|1|
+|gen|9
+|tier|[Gen 9 Champions] VGC 2026 Reg M-C (Bo3)
+|rated|
+|rule|Species Clause: Limit one of each Pokémon
+|rule|Item Clause: Limit 1 of each item
+|clearpoke
+|poke|p1|Golisopod, L50, F|
+|poke|p1|Pelipper, L50, M|
+|poke|p1|Archaludon, L50, F|
+|poke|p1|Basculegion-F, L50, F, shiny|
+|poke|p1|Raichu, L50, M|
+|poke|p1|Sneasler, L50, F, shiny|
+|poke|p2|Kommo-o, L50, M, shiny|
+|poke|p2|Incineroar, L50, M|
+|poke|p2|Sneasler, L50, M|
+|poke|p2|Kingambit, L50, F|
+|poke|p2|Rillaboom, L50, F|
+|poke|p2|Gengar, L50, F|
+|teampreview|4
+|showteam|p1|Golisopod||Golisopite|EmergencyExit|LeechLife,IronHead,SuckerPunch,Protect|Adamant||F|||50|]Pelipper||DampRock|Drizzle|WeatherBall,Hurricane,HelpingHand,WideGuard|Bold||M|||50|]Archaludon||Leftovers|Stamina|ElectroShot,DragonPulse,AuraSphere,Protect|Bold||F|||50|]Basculegion-F||FocusSash|SwiftSwim|MuddyWater,ShadowBall,IceBeam,Protect|Modest||F|||50|]Raichu||RaichuniteX|LightningRod|VoltTackle,VoltSwitch,FakeOut,Protect|Jolly||M|||50|]Sneasler||ElectricSeed|Unburden|DireClaw,CloseCombat,SwordsDance,Protect|Adamant||F|||50|
+|showteam|p2|Kommo-o||Leftovers|Bulletproof|ClangingScales,AuraSphere,ClangorousSoul,Protect|Modest||M|||50|]Incineroar||ChopleBerry|Intimidate|FakeOut,PartingShot,FlareBlitz,Protect|Sassy||M|||50|]Sneasler||GrassySeed|Unburden|CloseCombat,DireClaw,RockSlide,Protect|Adamant||M|||50|]Kingambit||LifeOrb|Defiant|KowtowCleave,SuckerPunch,SwordsDance,Protect|Adamant||F|||50|]Rillaboom||EjectButton|GrassySurge|FakeOut,GrassyGlide,Uturn,Protect|Sassy||F|||50|]Gengar||Gengarite|CursedBody|ShadowBall,SludgeBomb,PerishSong,Protect|Modest||F|||50|
+|
+|t:|1791507795
+|teamsize|p1|4
+|teamsize|p2|4
+|start
+|switch|p1a: Golisopod|Golisopod, L50, F|100/100
+|switch|p1b: Basculegion-F|Basculegion-F, L50, F, shiny|100/100
+|switch|p2a: Gengar|Gengar, L50, F|100/100
+|switch|p2b: Incineroar|Incineroar, L50, M|100/100
+|-ability|p2b: Incineroar|Intimidate|boost
+|-unboost|p1a: Golisopod|atk|1
+|-unboost|p1b: Basculegion-F|atk|1
+|turn|1
+|
+|t:|1791507809
+|switch|p1a: Pelipper|Pelipper, L50, M|100/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Pelipper
+|detailschange|p2a: Gengar|Gengar-Mega, L50, F
+|-mega|p2a: Gengar|Gengar|Gengarite
+|move|p2a: Gengar|Protect|p2a: Gengar
+|-singleturn|p2a: Gengar|Protect
+|move|p2b: Incineroar|Fake Out|p1a: Pelipper
+|-damage|p1a: Pelipper|89/100
+|move|p1b: Basculegion-F|Muddy Water|p2b: Incineroar|[spread] p2b
+|-activate|p2a: Gengar|move: Protect
+|-supereffective|p2b: Incineroar|1
+|-damage|p2b: Incineroar|24/100
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|2
+|
+|t:|1791507828
+|switch|p2a: Kommo-o|Kommo-o, L50, M, shiny|100/100
+|move|p1a: Pelipper|Helping Hand|p1b: Basculegion-F
+|-singleturn|p1b: Basculegion-F|Helping Hand|[of] p1a: Pelipper
+|move|p1b: Basculegion-F|Shadow Ball|p2a: Kommo-o
+|-immune|p2a: Kommo-o|[from] ability: Bulletproof
+|move|p2b: Incineroar|Parting Shot|p1b: Basculegion-F
+|-unboost|p1b: Basculegion-F|atk|1
+|-unboost|p1b: Basculegion-F|spa|1
+|
+|t:|1791507839
+|switch|p2b: Gengar|Gengar-Mega, L50, F|100/100|[from] Parting Shot
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|3
+|
+|t:|1791507854
+|move|p1b: Basculegion-F|Shadow Ball|p2b: Gengar
+|-supereffective|p2b: Gengar|1
+|-damage|p2b: Gengar|46/100
+|move|p2b: Gengar|Shadow Ball|p1b: Basculegion-F
+|-supereffective|p1b: Basculegion-F|1
+|-enditem|p1b: Basculegion-F|Focus Sash
+|-damage|p1b: Basculegion-F|1/100
+|move|p2a: Kommo-o|Clangorous Soul|p2a: Kommo-o
+|-boost|p2a: Kommo-o|atk|1
+|-boost|p2a: Kommo-o|def|1
+|-boost|p2a: Kommo-o|spa|1
+|-boost|p2a: Kommo-o|spd|1
+|-boost|p2a: Kommo-o|spe|1
+|-damage|p2a: Kommo-o|67/100
+|move|p1a: Pelipper|Hurricane|p2a: Kommo-o
+|-supereffective|p2a: Kommo-o|1
+|-damage|p2a: Kommo-o|7/100
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Kommo-o|13/100|[from] item: Leftovers
+|upkeep
+|turn|4
+|
+|t:|1791507880
+|switch|p2b: Incineroar|Incineroar, L50, M|24/100
+|-ability|p2b: Incineroar|Intimidate|boost
+|-unboost|p1a: Pelipper|atk|1
+|-unboost|p1b: Basculegion-F|atk|1
+|move|p1a: Pelipper|Helping Hand|p1b: Basculegion-F
+|-singleturn|p1b: Basculegion-F|Helping Hand|[of] p1a: Pelipper
+|move|p2a: Kommo-o|Protect|p2a: Kommo-o
+|-singleturn|p2a: Kommo-o|Protect
+|move|p1b: Basculegion-F|Muddy Water|p2b: Incineroar|[spread] p2b
+|-activate|p2a: Kommo-o|move: Protect
+|-supereffective|p2b: Incineroar|1
+|-damage|p2b: Incineroar|0 fnt
+|faint|p2b: Incineroar
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Kommo-o|19/100|[from] item: Leftovers
+|upkeep
+|
+|t:|1791507891
+|switch|p2b: Rillaboom|Rillaboom, L50, F|100/100
+|-fieldstart|move: Grassy Terrain|[from] ability: Grassy Surge|[of] p2b: Rillaboom
+|turn|5
+|
+|t:|1791507910
+|move|p1b: Basculegion-F|Protect|p1b: Basculegion-F
+|-singleturn|p1b: Basculegion-F|Protect
+|move|p2b: Rillaboom|Grassy Glide|p1a: Pelipper
+|-damage|p1a: Pelipper|61/100
+|move|p2a: Kommo-o|Clanging Scales|p1a: Pelipper|[spread] p1a
+|-activate|p1b: Basculegion-F|move: Protect
+|-damage|p1a: Pelipper|0 fnt
+|faint|p1a: Pelipper
+|-unboost|p2a: Kommo-o|def|1
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1b: Basculegion-F|6/100|[from] Grassy Terrain
+|-heal|p2a: Kommo-o|25/100|[from] Grassy Terrain
+|-heal|p2a: Kommo-o|31/100|[from] item: Leftovers
+|upkeep
+|
+|t:|1791507916
+|switch|p1a: Golisopod|Golisopod, L50, F|100/100
+|turn|6
+|
+|t:|1791507949
+|detailschange|p1a: Golisopod|Golisopod-Mega, L50, F
+|-mega|p1a: Golisopod|Golisopod|Golisopite
+|move|p2a: Kommo-o|Protect|p2a: Kommo-o
+|-singleturn|p2a: Kommo-o|Protect
+|move|p2b: Rillaboom|Protect|p2b: Rillaboom
+|-singleturn|p2b: Rillaboom|Protect
+|move|p1b: Basculegion-F|Ice Beam|p2a: Kommo-o
+|-activate|p2a: Kommo-o|move: Protect
+|move|p1a: Golisopod|Leech Life|p2b: Rillaboom
+|-activate|p2b: Rillaboom|move: Protect
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1b: Basculegion-F|12/100|[from] Grassy Terrain
+|-heal|p2a: Kommo-o|37/100|[from] Grassy Terrain
+|-heal|p2a: Kommo-o|43/100|[from] item: Leftovers
+|upkeep
+|turn|7
+|
+|t:|1791507984
+|move|p1b: Basculegion-F|Protect|p1b: Basculegion-F
+|-singleturn|p1b: Basculegion-F|Protect
+|move|p2b: Rillaboom|Grassy Glide|p1b: Basculegion-F
+|-activate|p1b: Basculegion-F|move: Protect
+|move|p2a: Kommo-o|Aura Sphere|p1a: Golisopod
+|-crit|p1a: Golisopod
+|-damage|p1a: Golisopod|27/100
+|move|p1a: Golisopod|Iron Head|p2a: Kommo-o
+|-damage|p2a: Kommo-o|0 fnt
+|faint|p2a: Kommo-o
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1b: Basculegion-F|18/100|[from] Grassy Terrain
+|-heal|p1a: Golisopod|33/100|[from] Grassy Terrain
+|upkeep
+|
+|t:|1791507986
+|switch|p2a: Gengar|Gengar-Mega, L50, F|46/100
+|turn|8
+|
+|t:|1791508030
+|move|p2b: Rillaboom|Grassy Glide|p1b: Basculegion-F
+|-supereffective|p1b: Basculegion-F|1
+|-damage|p1b: Basculegion-F|0 fnt
+|faint|p1b: Basculegion-F
+|move|p2a: Gengar|Shadow Ball|p1a: Golisopod
+|-damage|p1a: Golisopod|0 fnt
+|faint|p1a: Golisopod
+|
+|-weather|none
+|-heal|p2a: Gengar|52/100|[from] Grassy Terrain
+|upkeep
+|
+|t:|1791508037
+|switch|p1b: Sneasler|Sneasler, L50, F, shiny|100/100
+|turn|9
+|
+|win|Player B
+|player|p1|

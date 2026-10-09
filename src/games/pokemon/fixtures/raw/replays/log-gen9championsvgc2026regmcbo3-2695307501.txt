@@ -1,0 +1,102 @@
+|t:|1791507903
+|gametype|doubles
+|player|p1|Player A|1|
+|player|p2|Player B|1|
+|gen|9
+|tier|[Gen 9 Champions] VGC 2026 Reg M-C (Bo3)
+|rated|
+|rule|Species Clause: Limit one of each Pokémon
+|rule|Item Clause: Limit 1 of each item
+|clearpoke
+|poke|p1|Raichu, L50, M|
+|poke|p1|Rillaboom, L50, M|
+|poke|p1|Incineroar, L50, M|
+|poke|p1|Volcarona, L50, M|
+|poke|p1|Garchomp, L50, F|
+|poke|p1|Gholdengo, L50|
+|poke|p2|Lopunny, L50, M, shiny|
+|poke|p2|Glaceon, L50, M|
+|poke|p2|Froslass, L50, F|
+|poke|p2|Incineroar, L50, F|
+|poke|p2|Garchomp, L50, F|
+|poke|p2|Staraptor, L50, M|
+|teampreview|4
+|showteam|p1|Raichu||RaichuniteY|Static|ZapCannon,FakeOut,Protect,FocusBlast|Timid||M|||50|]Rillaboom||MiracleSeed|GrassySurge|GrassyGlide,FakeOut,WoodHammer,Protect|Adamant||M|||50|]Incineroar||SitrusBerry|Intimidate|FakeOut,PartingShot,FlareBlitz,DarkestLariat|Impish||M|||50|]Volcarona||RockyHelmet|FlameBody|Overheat,StruggleBug,Tailwind,RagePowder|Timid||M|||50|]Garchomp||GarchompiteZ|RoughSkin|DragonPulse,EarthPower,PowerGem,Protect|Modest||F|||50|]Gholdengo||LifeOrb|GoodasGold|Protect,ShadowBall,NastyPlot,MakeItRain|Modest|||||50|
+|showteam|p2|Lopunny||ChopleBerry|Limber|FakeOut,ThunderWave,TripleAxel,Protect|Jolly||M|||50|]Glaceon||BrightPowder|SnowCloak|Blizzard,FreezeDry,Protect,Yawn|Modest||M|||50|]Froslass||Froslassite|SnowCloak|AuroraVeil,Blizzard,ShadowBall,Protect|Timid||F|||50|]Incineroar||SitrusBerry|Intimidate|FakeOut,DarkestLariat,FlareBlitz,PartingShot|Impish||F|||50|]Garchomp||LifeOrb|RoughSkin|StompingTantrum,DragonClaw,RockSlide,Protect|Jolly||F|||50|]Staraptor||Staraptite|Intimidate|Roost,BraveBird,CloseCombat,Protect|Jolly||M|||50|
+|
+|t:|1791507937
+|teamsize|p1|4
+|teamsize|p2|4
+|start
+|switch|p1a: Garchomp|Garchomp, L50, F|100/100
+|switch|p1b: Volcarona|Volcarona, L50, M|100/100
+|switch|p2a: Staraptor|Staraptor, L50, M|100/100
+|switch|p2b: Garchomp|Garchomp, L50, F|100/100
+|-ability|p2a: Staraptor|Intimidate|boost
+|-unboost|p1a: Garchomp|atk|1
+|-unboost|p1b: Volcarona|atk|1
+|turn|1
+|
+|t:|1791507980
+|detailschange|p2a: Staraptor|Staraptor-Mega, L50, M
+|-mega|p2a: Staraptor|Staraptor|Staraptite
+|detailschange|p1a: Garchomp|Garchomp-Mega-Z, L50, F
+|-mega|p1a: Garchomp|Garchomp|Garchompite Z
+|move|p1a: Garchomp|Protect|p1a: Garchomp
+|-singleturn|p1a: Garchomp|Protect
+|move|p2a: Staraptor|Close Combat|p1a: Garchomp
+|-activate|p1a: Garchomp|move: Protect
+|move|p2b: Garchomp|Rock Slide|p1b: Volcarona|[spread] p1b
+|-activate|p1a: Garchomp|move: Protect
+|-supereffective|p1b: Volcarona|2
+|-damage|p1b: Volcarona|0 fnt
+|faint|p1b: Volcarona
+|-damage|p2b: Garchomp|90/100|[from] item: Life Orb
+|
+|upkeep
+|
+|t:|1791507997
+|switch|p1b: Gholdengo|Gholdengo, L50|100/100
+|turn|2
+|
+|t:|1791508010
+|switch|p2b: Incineroar|Incineroar, L50, F|100/100
+|-ability|p2b: Incineroar|Intimidate|boost
+|-unboost|p1a: Garchomp|atk|1
+|-unboost|p1b: Gholdengo|atk|1
+|move|p1a: Garchomp|Dragon Pulse|p2b: Incineroar
+|-damage|p2b: Incineroar|59/100
+|move|p2a: Staraptor|Close Combat|p1a: Garchomp
+|-damage|p1a: Garchomp|32/100
+|-boost|p2a: Staraptor|def|1
+|-boost|p2a: Staraptor|spd|1
+|move|p1b: Gholdengo|Nasty Plot|p1b: Gholdengo
+|-boost|p1b: Gholdengo|spa|2
+|
+|upkeep
+|turn|3
+|
+|t:|1791508042
+|move|p1a: Garchomp|Power Gem|p2b: Incineroar
+|-supereffective|p2b: Incineroar|1
+|-damage|p2b: Incineroar|2/100
+|-enditem|p2b: Incineroar|Sitrus Berry|[eat]
+|-heal|p2b: Incineroar|27/100|[from] item: Sitrus Berry
+|move|p2a: Staraptor|Close Combat|p1a: Garchomp
+|-damage|p1a: Garchomp|0 fnt
+|-boost|p2a: Staraptor|def|1
+|-boost|p2a: Staraptor|spd|1
+|faint|p1a: Garchomp
+|move|p1b: Gholdengo|Shadow Ball|p2a: Staraptor
+|-damage|p2a: Staraptor|37/100
+|-damage|p1b: Gholdengo|90/100|[from] item: Life Orb
+|move|p2b: Incineroar|Flare Blitz|p1b: Gholdengo
+|-supereffective|p1b: Gholdengo|1
+|-damage|p1b: Gholdengo|0 fnt
+|faint|p1b: Gholdengo
+|-damage|p2b: Incineroar|1/100|[from] Recoil
+|
+|upkeep
+|player|p1|
+|
+|win|Player B

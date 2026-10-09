@@ -1,0 +1,10 @@
+<html>
+<head><title>Index of /stats/</title></head>
+<body>
+<h1>Index of /stats/</h1><hr><pre><a href="../">../</a>
+<a href="2026-06/">2026-06/</a>                                           23-Aug-2026 21:44                   -
+<a href="2026-07/">2026-07/</a>                                           23-Aug-2026 21:55                   -
+<a href="2026-08/">2026-08/</a>                                           01-Sep-2026 23:16                   -
+<a href="2026-09/">2026-09/</a>                                           01-Oct-2026 14:40                   -
+</pre><hr></body>
+</html>

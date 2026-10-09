@@ -1,0 +1,147 @@
+|t:|1791507998
+|gametype|doubles
+|player|p1|Player A|1|
+|player|p2|Player B|1|
+|gen|9
+|tier|[Gen 9 Champions] VGC 2026 Reg M-C (Bo3)
+|rated|
+|rule|Species Clause: Limit one of each Pokémon
+|rule|Item Clause: Limit 1 of each item
+|clearpoke
+|poke|p1|Inteleon, L50, M|
+|poke|p1|Pelipper, L50, M|
+|poke|p1|Raichu, L50, M|
+|poke|p1|Indeedee-F, L50, F|
+|poke|p1|Overqwil, L50, M|
+|poke|p1|Rillaboom, L50, F|
+|poke|p2|Pelipper, L50, F|
+|poke|p2|Swampert, L50, M|
+|poke|p2|Archaludon, L50, M|
+|poke|p2|Grimmsnarl, L50, M|
+|poke|p2|Golisopod, L50, M|
+|poke|p2|Sinistcha, L50|
+|teampreview|4
+|showteam|p1|Inteleon||ScopeLens|Sniper|Protect,IceBeam,SnipeShot,AirCutter|Timid||M|||50|]Pelipper||FocusSash|Drizzle|Hurricane,HydroPump,Protect,Tailwind|Bold||M|||50|]Raichu||RaichuniteY|LightningRod|ZapCannon,FakeOut,FocusBlast,Protect|Hasty||M|||50|]Indeedee-F||PsychicSeed|PsychicSurge|Psychic,HelpingHand,Protect,TrickRoom|Bold||F|||50|]Overqwil||WhiteHerb|SwiftSwim|GunkShot,Crunch,SwordsDance,Liquidation|Adamant||M|||50|]Rillaboom||MiracleSeed|GrassySurge|FakeOut,WoodHammer,GrassyGlide,HighHorsepower|Jolly||F|||50|
+|showteam|p2|Pelipper||SitrusBerry|Drizzle|Hurricane,WeatherBall,Tailwind,WideGuard|Modest||F|||50|]Swampert||Swampertite|Torrent|WaveCrash,Earthquake,StompingTantrum,Protect|Adamant||M|||50|]Archaludon||Leftovers|Stamina|ElectroShot,DragonPulse,FlashCannon,Protect|Modest||M|||50|]Grimmsnarl||LightClay|Prankster|SpiritBreak,Reflect,LightScreen,PartingShot|Careful||M|||50|]Golisopod||Golisopite|EmergencyExit|LeechLife,IronHead,SwordsDance,Protect|Adamant||M|||50|]Sinistcha||ColburBerry|Hospitality|MatchaGotcha,RagePowder,TrickRoom,ShadowBall|Bold|||||50|
+|
+|t:|1791508011
+|teamsize|p1|4
+|teamsize|p2|4
+|start
+|switch|p1a: Pelipper|Pelipper, L50, M|100/100
+|switch|p1b: Inteleon|Inteleon, L50, M|100/100
+|switch|p2a: Pelipper|Pelipper, L50, F|100/100
+|switch|p2b: Swampert|Swampert, L50, M|100/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p2a: Pelipper
+|turn|1
+|
+|t:|1791508045
+|detailschange|p2b: Swampert|Swampert-Mega, L50, M
+|-mega|p2b: Swampert|Swampert|Swampertite
+|move|p2b: Swampert|Earthquake|p1a: Pelipper|[spread] p1b
+|-immune|p2a: Pelipper
+|-immune|p1a: Pelipper
+|-damage|p1b: Inteleon|11/100
+|move|p1b: Inteleon|Snipe Shot|p2b: Swampert
+|-crit|p2b: Swampert
+|-damage|p2b: Swampert|0 fnt
+|faint|p2b: Swampert
+|move|p2a: Pelipper|Tailwind|p2a: Pelipper
+|-sidestart|p2: Player B|move: Tailwind
+|move|p1a: Pelipper|Hurricane|p2a: Pelipper
+|-damage|p2a: Pelipper|59/100
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|
+|t:|1791508061
+|switch|p2b: Sinistcha|Sinistcha, L50|100/100
+|-heal|p2a: Pelipper|84/100|[from] ability: Hospitality|[of] p2b: Sinistcha
+|turn|2
+|
+|t:|1791508075
+|move|p2a: Pelipper|Hurricane|p1a: Pelipper
+|-damage|p1a: Pelipper|40/100
+|move|p1b: Inteleon|Air Cutter|p2b: Sinistcha|[spread] p2b
+|-miss|p1b: Inteleon|p2a: Pelipper
+|-supereffective|p2b: Sinistcha|1
+|-crit|p2b: Sinistcha
+|-damage|p2b: Sinistcha|41/100
+|move|p2b: Sinistcha|Matcha Gotcha|p1b: Inteleon|[spread] p1b
+|-miss|p2b: Sinistcha|p1a: Pelipper
+|-supereffective|p1b: Inteleon|1
+|-crit|p1b: Inteleon
+|-damage|p1b: Inteleon|0 fnt
+|-heal|p2b: Sinistcha|46/100|[from] drain|[of] p1b: Inteleon
+|faint|p1b: Inteleon
+|move|p1a: Pelipper|Hurricane|p2b: Sinistcha
+|-supereffective|p2b: Sinistcha|1
+|-damage|p2b: Sinistcha|0 fnt
+|faint|p2b: Sinistcha
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|
+|t:|1791508092
+|switch|p1b: Raichu|Raichu, L50, M|100/100
+|switch|p2b: Archaludon|Archaludon, L50, M|100/100
+|turn|3
+|
+|t:|1791508120
+|detailschange|p1b: Raichu|Raichu-Mega-Y, L50, M
+|-mega|p1b: Raichu|Raichu|Raichunite Y
+|move|p2b: Archaludon|Electro Shot||[still]
+|-prepare|p2b: Archaludon|Electro Shot
+|-boost|p2b: Archaludon|spa|1
+|-anim|p2b: Archaludon|Electro Shot|p1a: Pelipper
+|-supereffective|p1a: Pelipper|2
+|-damage|p1a: Pelipper|0 fnt
+|faint|p1a: Pelipper
+|move|p1b: Raichu|Focus Blast|p2b: Archaludon
+|-supereffective|p2b: Archaludon|1
+|-damage|p2b: Archaludon|11/100
+|-ability|p2b: Archaludon|Stamina|boost
+|-boost|p2b: Archaludon|def|1
+|move|p2a: Pelipper|Weather Ball|p1b: Raichu
+|-damage|p1b: Raichu|8/100
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2b: Archaludon|17/100|[from] item: Leftovers
+|upkeep
+|
+|t:|1791508121
+|switch|p1a: Rillaboom|Rillaboom, L50, F|100/100
+|-fieldstart|move: Grassy Terrain|[from] ability: Grassy Surge|[of] p1a: Rillaboom
+|turn|4
+|
+|t:|1791508147
+|move|p2b: Archaludon|Protect|p2b: Archaludon
+|-singleturn|p2b: Archaludon|Protect
+|move|p1b: Raichu|Protect|p1b: Raichu
+|-singleturn|p1b: Raichu|Protect
+|move|p1a: Rillaboom|Fake Out|p2a: Pelipper
+|-damage|p2a: Pelipper|69/100
+|cant|p2a: Pelipper|flinch
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2b: Archaludon|23/100|[from] Grassy Terrain
+|-heal|p2b: Archaludon|29/100|[from] item: Leftovers
+|-heal|p1b: Raichu|14/100|[from] Grassy Terrain
+|-sideend|p2: Player B|move: Tailwind
+|upkeep
+|turn|5
+|
+|t:|1791508159
+|move|p2b: Archaludon|Protect||[still]
+|-fail|p2b: Archaludon
+|move|p1b: Raichu|Focus Blast|p2b: Archaludon
+|-supereffective|p2b: Archaludon|1
+|-damage|p2b: Archaludon|0 fnt
+|faint|p2b: Archaludon
+|move|p1a: Rillaboom|Wood Hammer|p2a: Pelipper
+|-damage|p2a: Pelipper|0 fnt
+|faint|p2a: Pelipper
+|-damage|p1a: Rillaboom|78/100|[from] Recoil
+|
+|win|Player A
+||Player A is ready for game 3.
