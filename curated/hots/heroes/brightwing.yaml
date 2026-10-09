@@ -1,0 +1,68 @@
+hero: brightwing
+reviewedFor: "2.57"
+traits:
+  - tag: global
+    why: "Phase Shift teleports her to any allied hero on the map after 2 seconds and heals them for 25% of their max health."
+  - tag: save
+    why: "Activating Soothing Mist strips stuns, roots, slows and silences from every nearby ally at once."
+  - tag: peel
+    why: "Polymorph is a point-and-click silence that also stops basic attacks for 1.5 seconds."
+counters:
+  # --- strong against ---
+  - a: brightwing
+    b: illidan
+    why: "Polymorph silences Illidan and stops his attacks for 1.5 seconds, cutting both his damage and the Betrayer's Thirst healing it fuels."
+    evidence: ["Polymorph", "Betrayer's Thirst"]
+    confidence: medium
+  - a: brightwing
+    b: genji
+    why: "Polymorph is point-and-click, so Genji can't dodge it, and while polymorphed he can't Deflect, Swift Strike or Cyber Agility away."
+    evidence: ["Polymorph", "Deflect", "Swift Strike", "Cyber Agility"]
+    confidence: medium
+  - a: brightwing
+    b: kelthuzad
+    why: "Soothing Mist's activation frees allies from Frost Nova and Frost Blast roots and from Chains' stun, so they walk out before Shadow Fissure lands."
+    evidence: ["Soothing Mist", "Frost Nova", "Frost Blast", "Chains of Kel'Thuzad", "Shadow Fissure"]
+    confidence: low
+  - a: brightwing
+    b: jaina
+    why: "Jaina kills with Chill slows and Ring of Frost's root, and Soothing Mist removes both from everyone nearby."
+    evidence: ["Soothing Mist", "Frostbite", "Ring of Frost"]
+    confidence: low
+  # --- weak against ---
+  - a: nova
+    b: brightwing
+    why: "Brightwing has only 1425 health and no instant escape; Snipe and Triple Tap from stealth kill her before Phase Shift's 2-second delay finishes."
+    evidence: ["Snipe", "Triple Tap", "Permanent Cloak", "Phase Shift"]
+    confidence: medium
+  - a: zeratul
+    b: brightwing
+    why: "Zeratul's Blink and Cleave burst a 1425-health Brightwing, and stealth lets him pick the moment Phase Shift is on cooldown."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Phase Shift"]
+    confidence: medium
+  - a: valeera
+    b: brightwing
+    why: "Valeera's stealth opener disables Brightwing before she can start Phase Shift, and her small health pool doesn't survive the follow-up."
+    evidence: ["Vanish", "Eviscerate", "Phase Shift"]
+    confidence: low
+  - a: chromie
+    b: brightwing
+    why: "Each Sand Blast takes about a fifth of Brightwing's health from long range, and she has no way to close the distance."
+    evidence: ["Sand Blast"]
+    confidence: low
+synergies:
+  - a: brightwing
+    b: falstad
+    why: "Phase Shift and Flight are both global, so the pair can rotate together to collapse on a lane or rescue a split-pusher."
+    evidence: ["Phase Shift", "Flight"]
+    confidence: medium
+  - a: brightwing
+    b: dehaka
+    why: "Brushstalker and Phase Shift let Dehaka and Brightwing appear in any lane, turning side-lane ganks into two-hero collapses."
+    evidence: ["Brushstalker", "Phase Shift"]
+    confidence: medium
+  - a: brightwing
+    b: illidan
+    why: "Pixie Dust's movement speed and 30 Spell Armor help Illidan stick to his target, and Phase Shift lets Brightwing follow him deep."
+    evidence: ["Pixie Dust", "Phase Shift", "Dive"]
+    confidence: medium

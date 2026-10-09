@@ -1,0 +1,66 @@
+hero: greymane
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Inner Beast and Worgen form turn nearly all of his damage into basic attacks, so blinds and attack-speed slows hit him hard."
+  - tag: dive
+    why: "Darkflight and Go for the Throat leap him onto a target, switching to melee Worgen form on arrival."
+counters:
+  # --- strong against ---
+  - a: greymane
+    b: chromie
+    why: "Darkflight leaps onto an immobile Chromie and Go for the Throat finishes her small health pool before Time Trap can help."
+    evidence: ["Darkflight", "Go for the Throat", "Time Trap"]
+    confidence: medium
+  - a: greymane
+    b: chogall
+    why: "Cursed Bullet takes 35% of current health, a huge chunk of Cho's pool, and Alpha Killer adds 3% max health to every Worgen attack."
+    evidence: ["Cursed Bullet", "Alpha Killer"]
+    confidence: low
+  - a: greymane
+    b: kaelthas
+    why: "Darkflight and Go for the Throat reach an immobile Kael'thas, who has no way to escape the Worgen follow-up."
+    evidence: ["Darkflight", "Go for the Throat"]
+    confidence: medium
+  - a: greymane
+    b: sgthammer
+    why: "Darkflight leaps onto a sieged Hammer who can't move away, and Worgen basic attacks shred her up close."
+    evidence: ["Darkflight", "Curse of the Worgen", "Siege Mode"]
+    confidence: medium
+  # --- weak against ---
+  - a: johanna
+    b: greymane
+    why: "Shield Glare blinds Greymane for 1.5 seconds right after he leaps in as a Worgen, wasting his melee damage."
+    evidence: ["Shield Glare", "Darkflight"]
+    confidence: medium
+  - a: lili
+    b: greymane
+    why: "Blinding Wind auto-targets the nearest heroes, so a Worgen Greymane who dives in eats a 1.5-second blind."
+    evidence: ["Blinding Wind", "Curse of the Worgen"]
+    confidence: low
+  - a: arthas
+    b: greymane
+    why: "Frozen Tempest cuts Greymane's attack speed by up to 40% while he's in Worgen melee range, and Howling Blast roots him there."
+    evidence: ["Frozen Tempest", "Howling Blast", "Inner Beast"]
+    confidence: low
+  - a: mei
+    b: greymane
+    why: "Snow Blind blinds and slows Greymane for 1.75 seconds, and Ice Wall cuts him off from his team after he Darkflights in."
+    evidence: ["Snow Blind", "Ice Wall", "Darkflight"]
+    confidence: low
+synergies:
+  - a: greymane
+    b: jaina
+    why: "Chill slows enable Lord of His Pack, giving Worgen Greymane 50% bonus basic-attack damage against slowed targets."
+    evidence: ["Frostbite", "Lord of His Pack"]
+    confidence: medium
+  - a: greymane
+    b: rehgar
+    why: "Bloodlust's attack speed stacks with Inner Beast, and its lifesteal keeps a Worgen Greymane alive in melee."
+    evidence: ["Bloodlust", "Inner Beast"]
+    confidence: medium
+  - a: greymane
+    b: tyrande
+    why: "Hunter's Mark reveals and strips 15 armor from a target right before Greymane leaps on it with Go for the Throat."
+    evidence: ["Hunter's Mark", "Go for the Throat"]
+    confidence: medium

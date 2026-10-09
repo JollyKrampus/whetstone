@@ -1,0 +1,64 @@
+hero: maiev
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Spirit of Vengeance blinks Maiev to its shadow and Umbral Bind tethers whoever she hits, letting her stick to mobile backliners."
+  - tag: engage
+    why: "Warden's Cage and Containment Disc start fights by trapping a group or removing a key Hero for 4 seconds."
+counters:
+  - a: maiev
+    b: liming
+    why: "Umbral Bind tethers Li-Ming for 2.5 seconds and yanks her back if Teleport takes her too far, and Containment Disc can remove her before Critical Mass gets going."
+    evidence: ["Umbral Bind", "Teleport", "Containment Disc", "Critical Mass"]
+    confidence: medium
+  - a: maiev
+    b: tracer
+    why: "Blinking away from Maiev while tethered by Umbral Bind just triggers the pull and its damage, so Tracer's main escape works against her for the tether's duration."
+    evidence: ["Umbral Bind", "Blink", "Recall"]
+    confidence: medium
+  - a: maiev
+    b: thelostvikings
+    why: "Fan of Knives drops to a 0.5-second cooldown whenever it hits two Heroes, so a grouped Viking trio lets Maiev spam it, and Umbral Bind's cleave tethers all three."
+    evidence: ["Fan of Knives", "Umbral Bind"]
+    confidence: medium
+  - a: maiev
+    b: genji
+    why: "Cyber Agility and Swift Strike carry Genji away from an Umbral Bind tether, which pulls him straight back, and Vault of the Wardens dodges his Dragonblade lunge."
+    evidence: ["Umbral Bind", "Cyber Agility", "Swift Strike", "Vault of the Wardens", "Dragonblade"]
+    confidence: low
+  - a: johanna
+    b: maiev
+    why: "Shield Glare Blinds the empowered attack that applies Umbral Bind, so no tether lands, and Iron Skin's Unstoppable shield ignores the pull altogether."
+    evidence: ["Shield Glare", "Umbral Bind", "Iron Skin"]
+    confidence: low
+  - a: mei
+    b: maiev
+    why: "Snow Blind's area Blind cancels Maiev's Umbral Bind attack and Basic Attack damage, and Blizzard's delayed stun can be timed after Vault of the Wardens ends."
+    evidence: ["Snow Blind", "Umbral Bind", "Blizzard", "Vault of the Wardens"]
+    confidence: low
+  - a: arthas
+    b: maiev
+    why: "Frozen Tempest cuts Maiev's Attack Speed and Movement Speed by up to 40% while she fights in melee, and Howling Blast's root catches her between Vault of the Wardens uses."
+    evidence: ["Frozen Tempest", "Howling Blast", "Vault of the Wardens"]
+    confidence: low
+  - a: lili
+    b: maiev
+    why: "Blinding Wind auto-targets the nearest Heroes, so it reliably hits a diving Maiev and makes her empowered Umbral Bind attack miss, leaving no tether to pull with."
+    evidence: ["Blinding Wind", "Umbral Bind"]
+    confidence: low
+synergies:
+  - a: maiev
+    b: mephisto
+    why: "Warden's Cage keeps knocking escaping enemies back to its center, holding them inside Lightning Nova's ring for its whole duration."
+    evidence: ["Warden's Cage", "Lightning Nova"]
+    confidence: medium
+  - a: jaina
+    b: maiev
+    why: "Warden's Cage pins a group in place for all three Blizzard waves, and the clustered Heroes let Fan of Knives reset over and over."
+    evidence: ["Warden's Cage", "Blizzard", "Fan of Knives"]
+    confidence: medium
+  - a: kaelthas
+    b: maiev
+    why: "Warden's Cage keeps Heroes bunched near its center, so Flamestrike and Living Bomb spreads hit everyone trapped inside."
+    evidence: ["Warden's Cage", "Flamestrike", "Living Bomb"]
+    confidence: medium

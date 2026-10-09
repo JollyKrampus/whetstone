@@ -1,0 +1,87 @@
+hero: varian
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Taunt's passive adds 40% max Health and regeneration, turning Varian into an off-tank who soaks damage at the front."
+  - tag: peel
+    why: "Taunt silences a diver and forces them to attack Varian, and Parry blocks the basic attacks that follow."
+counters:
+  # --- strong against ---
+  - a: varian
+    b: thebutcher
+    why: "Parry blocks all basic attacks for 1.25 seconds with two charges, and Taunt silences The Butcher and forces him to swing at Varian instead of his target."
+    evidence: ["Parry", "Taunt", "Fresh Meat"]
+    confidence: medium
+  - a: varian
+    b: valla
+    why: "Parry blocks all of Valla's basic attacks for 1.25 seconds with two charges, and Charge plus Taunt pin her in place."
+    evidence: ["Parry", "Charge", "Taunt", "Hatred"]
+    confidence: medium
+  - a: varian
+    b: tychus
+    why: "Parry blocks every basic attack for 1.25 seconds and stores two charges, so Varian can waste most of a 3-second Minigun window."
+    evidence: ["Parry", "Minigun"]
+    conditions: "Varian's Taunt passive raises his max Health, which feeds Minigun, so this holds best for Colossus Smash or Twin Blades builds."
+    confidence: low
+  - a: varian
+    b: thrall
+    why: "Parry negates Windfury's quick basic attacks for 1.25 seconds, and Taunt silences Thrall so he can't Feral Spirit or Chain Lightning for healing stacks."
+    evidence: ["Parry", "Taunt", "Windfury", "Frostwolf Resilience"]
+    confidence: low
+  - a: varian
+    b: zuljin
+    why: "Parry blocks the basic attacks that make up most of Zul'jin's damage, and Taunt silences him so he can't Taz'dingo! at the critical moment."
+    evidence: ["Parry", "Taunt", "Taz'dingo!", "Berserker"]
+    confidence: medium
+  - a: varian
+    b: zarya
+    why: "Shattering Throw deals up to 1400 bonus damage to Shields, popping Personal Barrier or Shield Ally on demand and denying Zarya the Energy she would have gained."
+    evidence: ["Shattering Throw", "Personal Barrier", "Shield Ally", "Energy"]
+    conditions: "Shattering Throw at level 13."
+    confidence: medium
+  - a: varian
+    b: illidan
+    why: "Parry blocks Illidan's basic attacks, cutting off Betrayer's Thirst healing and cooldown reduction, and Taunt silences him so he can't Dive away."
+    evidence: ["Parry", "Taunt", "Betrayer's Thirst", "Dive"]
+    confidence: medium
+  # --- weak against ---
+  - a: malthael
+    b: varian
+    why: "Taunt's +40% max Health only gives Reaper's Mark and Soul Rip more to take, since both scale off Varian's maximum Health."
+    evidence: ["Reaper's Mark", "Soul Rip", "Taunt"]
+    conditions: "Varian on the Taunt build."
+    confidence: medium
+  - a: arthas
+    b: varian
+    why: "Frozen Tempest stacks up to a 40% Attack Speed reduction on Heroes, gutting a Twin Blades of Fury Varian whose damage is all fast basic attacks."
+    evidence: ["Frozen Tempest", "Twin Blades of Fury"]
+    conditions: "Varian on Twin Blades of Fury."
+    confidence: medium
+  - a: xul
+    b: varian
+    why: "Cursed Strikes cuts attack speed by 40%, which hits a Twin Blades of Fury Varian hardest, and Bone Prison roots him in place."
+    evidence: ["Cursed Strikes", "Bone Prison", "Twin Blades of Fury"]
+    conditions: "Varian on Twin Blades of Fury."
+    confidence: medium
+  - a: johanna
+    b: varian
+    why: "Shield Glare blinds Varian, nullifying his Twin Blades of Fury or Colossus Smash basic-attack damage for 1.5 seconds."
+    evidence: ["Shield Glare", "Twin Blades of Fury", "Colossus Smash"]
+    conditions: "Varian on a damage build rather than Taunt."
+    confidence: low
+synergies:
+  - a: abathur
+    b: varian
+    why: "Symbiote on a Twin Blades Varian adds shields and Spike Burst while he attacks, and Ultimate Evolution can copy his high basic-attack damage."
+    evidence: ["Symbiote", "Carapace", "Ultimate Evolution", "Twin Blades of Fury"]
+    confidence: medium
+  - a: rehgar
+    b: varian
+    why: "Bloodlust's Attack Speed and lifesteal stack with Twin Blades of Fury's attack speed and Heroic Strike resets."
+    evidence: ["Bloodlust", "Twin Blades of Fury", "Heroic Strike"]
+    confidence: medium
+  - a: uther
+    b: varian
+    why: "Devotion's Armor and Holy Light keep Varian alive as he Charges in, and Hammer of Justice chains with Taunt to lock a target down."
+    evidence: ["Devotion", "Holy Light", "Hammer of Justice", "Charge", "Taunt"]
+    confidence: low

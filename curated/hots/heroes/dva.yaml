@@ -1,0 +1,61 @@
+hero: dva
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "The mech soaks damage that turns into Self-Destruct charge, and losing it only ejects D.Va rather than killing her."
+  - tag: peel
+    why: "Defense Matrix cuts damage from enemy heroes inside it by 60%, and Boosters knock divers away from allies."
+counters:
+  # --- strong against ---
+  - a: dva
+    b: sgthammer
+    why: "Boosters carry the mech onto a sieged Hammer and knock her out of position, and Defense Matrix aimed at her cuts her damage by 60% while she sits in it."
+    evidence: ["Boosters", "Defense Matrix", "Siege Mode"]
+    confidence: medium
+  - a: dva
+    b: tychus
+    why: "Tychus has to stand in range to use Minigun; Defense Matrix pointed at him cuts that burst window by 60% for 3 seconds."
+    evidence: ["Defense Matrix", "Minigun"]
+    confidence: medium
+  - a: dva
+    b: liming
+    why: "Disintegrate is a long beam Li-Ming has to channel in place; Defense Matrix on her reduces it by 60% for most of its duration."
+    evidence: ["Defense Matrix", "Disintegrate"]
+    confidence: low
+  - a: dva
+    b: zagara
+    why: "Mech Mode's cannons hit everything in a wide area every 0.25 seconds, chewing through Zagara's summons while the mech tanks them."
+    evidence: ["Mech Mode", "Infested Drop", "Hunter Killer"]
+    confidence: low
+  # --- weak against ---
+  - a: malthael
+    b: dva
+    why: "Reaper's Mark ticks percent max-health damage on the mech, and Soul Rip heals Malthael off its large health pool."
+    evidence: ["Reaper's Mark", "Soul Rip", "Mech Mode"]
+    confidence: medium
+  - a: azmodan
+    b: dva
+    why: "The mech is a big target that has to brawl up close; Globe of Annihilation with Total Annihilation takes 4% of its max health per hit while Demon Warriors pressure the lane."
+    evidence: ["Globe of Annihilation", "Total Annihilation", "Summon Demon Warrior", "Mech Mode"]
+    confidence: low
+  - a: leoric
+    b: dva
+    why: "Drain Hope steals up to 20% of the mech's max health, and Wraith Walk's Unstoppable lets Leoric ignore Boosters' knockback."
+    evidence: ["Drain Hope", "Wraith Walk", "Boosters"]
+    confidence: low
+synergies:
+  - a: anduin
+    b: dva
+    why: "Lightbomb on D.Va followed by Boosters into the backline stuns the heroes she knocks around, and the shield grows with each hero hit."
+    evidence: ["Lightbomb", "Boosters"]
+    confidence: medium
+  - a: dva
+    b: mei
+    why: "Ice Wall traps heroes for 2.5 seconds, holding them inside Self-Destruct's blast radius."
+    evidence: ["Ice Wall", "Self-Destruct"]
+    confidence: medium
+  - a: dva
+    b: zarya
+    why: "Graviton Surge holds enemies in one spot so the center of Self-Destruct lands on several of them."
+    evidence: ["Graviton Surge", "Self-Destruct"]
+    confidence: medium

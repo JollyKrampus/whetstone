@@ -1,0 +1,71 @@
+hero: thebutcher
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "The Butcher's damage is basic attacks scaled by Fresh Meat, and Butcher's Brand only heals him through those attacks."
+  - tag: dive
+    why: "Ruthless Onslaught charges onto a target while Unstoppable and stuns on arrival, so he reaches backliners through peel."
+counters:
+  # --- strong against ---
+  - a: thebutcher
+    b: sgthammer
+    why: "Ruthless Onslaught's Unstoppable charge ignores Concussive Blast's knockback and Spider Mines' slow, and a sieging Hammer can't escape without dropping Siege Mode."
+    evidence: ["Ruthless Onslaught", "Concussive Blast", "Spider Mines", "Siege Mode"]
+    confidence: medium
+  - a: thebutcher
+    b: chromie
+    why: "Chromie's 1390 Health and lack of a dash make her easy prey once Ruthless Onslaught connects, and Lamb to the Slaughter can chain and silence her for 3 seconds."
+    evidence: ["Ruthless Onslaught", "Lamb to the Slaughter"]
+    confidence: medium
+  - a: thebutcher
+    b: probius
+    why: "Probius has 1260 Health and Worker Rush ends when he takes damage; Hamstring's 50% Slow and Onslaught's stun keep him in reach until he dies."
+    evidence: ["Hamstring", "Ruthless Onslaught", "Worker Rush"]
+    confidence: low
+  - a: thebutcher
+    b: liming
+    why: "Lamb to the Slaughter chains and silences Li-Ming for 3 seconds so she can't Teleport out, and Butcher's Brand keeps him healthy while he hits her 1270 Health."
+    evidence: ["Lamb to the Slaughter", "Teleport", "Butcher's Brand"]
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: thebutcher
+    why: "Shield Glare blinds The Butcher, so his Fresh Meat-boosted attacks miss and Butcher's Brand can't heal him, while Iron Skin absorbs his opening burst."
+    evidence: ["Shield Glare", "Iron Skin", "Fresh Meat", "Butcher's Brand"]
+    confidence: high
+  - a: cassia
+    b: thebutcher
+    why: "Blinding Light blinds The Butcher for 2 seconds and Avoidance gives Cassia Armor while she kites, so his basic attacks and Brand healing fall flat."
+    evidence: ["Blinding Light", "Avoidance", "Butcher's Brand"]
+    confidence: medium
+  - a: varian
+    b: thebutcher
+    why: "Parry blocks all basic attacks for 1.25 seconds with two charges, and Taunt silences The Butcher and forces him to swing at Varian instead of his target."
+    evidence: ["Parry", "Taunt", "Fresh Meat"]
+    confidence: medium
+  - a: xul
+    b: thebutcher
+    why: "Cursed Strikes cuts The Butcher's attack speed by 40%, slashing both his damage and the healing he gets from Butcher's Brand."
+    evidence: ["Cursed Strikes", "Butcher's Brand"]
+    confidence: medium
+  - a: arthas
+    b: thebutcher
+    why: "Frozen Tempest stacks up to a 40% Attack Speed reduction on Heroes near Arthas, and Howling Blast's root stops The Butcher's chase once Ruthless Onslaught is spent."
+    evidence: ["Frozen Tempest", "Howling Blast", "Ruthless Onslaught"]
+    confidence: medium
+synergies:
+  - a: abathur
+    b: thebutcher
+    why: "Symbiote on The Butcher adds Carapace shields and Spike Burst damage as he charges in, and his large Health pool keeps the Symbiote riding along."
+    evidence: ["Symbiote", "Carapace", "Spike Burst", "Ruthless Onslaught"]
+    confidence: medium
+  - a: rehgar
+    b: thebutcher
+    why: "Bloodlust's 40% Attack Speed and lifesteal stack with Butcher's Brand healing, making a Bloodlusted Butcher extremely hard to kill in melee."
+    evidence: ["Bloodlust", "Butcher's Brand"]
+    confidence: medium
+  - a: ltmorales
+    b: thebutcher
+    why: "Stim Drone's 75% Attack Speed on The Butcher multiplies both his Fresh Meat-scaled damage and his Butcher's Brand healing."
+    evidence: ["Stim Drone", "Fresh Meat", "Butcher's Brand"]
+    confidence: medium

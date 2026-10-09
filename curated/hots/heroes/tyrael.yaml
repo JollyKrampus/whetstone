@@ -1,0 +1,64 @@
+hero: tyrael
+reviewedFor: "2.57"
+traits:
+  - tag: engage
+    why: "Judgment charges and stuns a Hero after a short wind-up, and El'druin's Might lets Tyrael teleport in behind its slow."
+  - tag: save
+    why: "Sanctification makes every allied Hero inside Invulnerable for 3 seconds, cancelling an enemy burst combo."
+  - tag: frontline
+    why: "Righteousness shields him and his allies, and Archangel's Wrath keeps him dangerous even after he dies, so he anchors the front."
+counters:
+  # --- strong against ---
+  - a: tyrael
+    b: sgthammer
+    why: "Judgment's charge and 1.5-second stun reach a sieging Sgt. Hammer, who can't dodge without dropping Siege Mode, and El'druin's Might follows a Thrusters escape."
+    evidence: ["Judgment", "El'druin's Might", "Siege Mode", "Thrusters"]
+    confidence: low
+  - a: tyrael
+    b: kaelthas
+    why: "Sanctification makes allies Invulnerable for 3 seconds, wasting Pyroblast or a Gravity Lapse into Flamestrike combo aimed at them."
+    evidence: ["Sanctification", "Pyroblast", "Flamestrike", "Gravity Lapse"]
+    conditions: "Tyrael takes Sanctification."
+    confidence: low
+  - a: tyrael
+    b: chromie
+    why: "El'druin's Might teleport and Judgment reach Chromie's backline spot, and her 1390 Health rarely survives the follow-up."
+    evidence: ["El'druin's Might", "Judgment"]
+    confidence: low
+  # --- weak against ---
+  - a: tychus
+    b: tyrael
+    why: "Minigun's bonus is a share of max Health, and Tyrael's 2517 Health with only Righteousness for sustain lets Tychus grind him down."
+    evidence: ["Minigun", "Righteousness"]
+    confidence: low
+  - a: malthael
+    b: tyrael
+    why: "Reaper's Mark burns 2% of max Health per second while Righteousness' small shield barely slows it, and Soul Rip heals Malthael off Tyrael's large Health pool."
+    evidence: ["Reaper's Mark", "Soul Rip", "Righteousness"]
+    confidence: low
+  - a: leoric
+    b: tyrael
+    why: "Drain Hope steals up to 20% of Tyrael's max Health over 4 seconds, and Tyrael has little self-healing to offset it."
+    evidence: ["Drain Hope", "Righteousness"]
+    confidence: low
+synergies:
+  - a: jaina
+    b: tyrael
+    why: "Judgment stuns for 1.5 seconds, long enough to land Ring of Frost's delayed root and damage on the target."
+    evidence: ["Judgment", "Ring of Frost"]
+    confidence: medium
+  - a: tyrael
+    b: zarya
+    why: "Graviton Surge holds enemies in place while Judgment and El'druin's Might's slow keep them there for the team's follow-up."
+    evidence: ["Graviton Surge", "Judgment", "El'druin's Might"]
+    confidence: low
+  - a: malfurion
+    b: tyrael
+    why: "Judgment pins a target in place so Entangling Roots' growing area catches them, and Twilight Dream's silence lands on the clump that follows."
+    evidence: ["Judgment", "Entangling Roots", "Twilight Dream"]
+    confidence: low
+  - a: tyrael
+    b: whitemane
+    why: "Righteousness shields Whitemane and Sanctification protects her while she channels; Zeal then heals Tyrael off the damage she deals."
+    evidence: ["Righteousness", "Sanctification", "Zeal"]
+    confidence: low

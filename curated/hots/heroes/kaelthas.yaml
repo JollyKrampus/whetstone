@@ -1,0 +1,71 @@
+hero: kaelthas
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Kael'thas has no dash, blink or self-protection in his base kit, so he relies on Gravity Lapse and his frontline to survive divers."
+  - tag: burst
+    why: "Verdant Spheres empowers Flamestrike or Living Bomb, and with Burned Flesh or Pyroblast one good cast becomes a kill on clustered or isolated targets."
+  - tag: mana-hungry
+    why: "Flamestrike costs 70 and Gravity Lapse 90 Mana, so without Mana Tap or Energy Roil he can run out mid-fight."
+counters:
+  - a: kaelthas
+    b: thelostvikings
+    why: "Living Bomb's explosion spreads a new bomb to every nearby Hero, so three Vikings walking together each catch one, and an empowered Flamestrike's bigger radius hits all of them."
+    evidence: ["Living Bomb", "Flamestrike", "Verdant Spheres"]
+    confidence: medium
+  - a: kaelthas
+    b: sgthammer
+    why: "A sieging Sgt. Hammer stands still, so Flamestrike's 1-second delay always lands, and Pyroblast's slow fireball reaches her before she can leave Siege Mode and move."
+    evidence: ["Flamestrike", "Pyroblast", "Siege Mode"]
+    confidence: medium
+  - a: kaelthas
+    b: nazeebo
+    why: "Nazeebo cannot move while channeling Ravenous Spirit, so Gravity Lapse cancels it and Flamestrike lands on a target that cannot step out."
+    evidence: ["Ravenous Spirit", "Gravity Lapse", "Flamestrike"]
+    confidence: medium
+  - a: kaelthas
+    b: azmodan
+    why: "All Shall Burn slows Azmodan and keeps him channeling in one spot, so Flamestrike connects reliably and Gravity Lapse stops the channel before its final burst."
+    evidence: ["All Shall Burn", "Flamestrike", "Gravity Lapse"]
+    confidence: low
+  - a: kaelthas
+    b: murky
+    why: "Living Bomb's damage over time and explosion, or a single Flamestrike, exceed Murky's 730 Health, and the same area damage destroys the Pufferfish he spits nearby."
+    evidence: ["Living Bomb", "Flamestrike", "Pufferfish"]
+    confidence: medium
+  - a: genji
+    b: kaelthas
+    why: "Deflect blocks Flamestrike and Living Bomb while Genji dives a target with no escape; Kael's only answer is Gravity Lapse, a skillshot Genji can dash around."
+    evidence: ["Deflect", "Swift Strike", "Cyber Agility", "Gravity Lapse"]
+    confidence: medium
+  - a: anubarak
+    b: kaelthas
+    why: "Harden Carapace's Spell Armor soaks Kael'thas's all-Ability damage, and Burrow Charge or Cocoon reaches and removes an immobile mage."
+    evidence: ["Harden Carapace", "Burrow Charge", "Cocoon"]
+    confidence: high
+  - a: zeratul
+    b: kaelthas
+    why: "Zeratul opens from Permanent Cloak with Singularity Spike and Cleave on a target that has no mobility, before Kael'thas can aim Gravity Lapse at him."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Cleave", "Gravity Lapse"]
+    confidence: medium
+  - a: tracer
+    b: kaelthas
+    why: "Blink dodges Gravity Lapse and Flamestrike's delayed hit, and Recall pulls Tracer back out after she bursts an immobile 1595-Health mage."
+    evidence: ["Blink", "Recall", "Gravity Lapse", "Flamestrike"]
+    confidence: medium
+synergies:
+  - a: etc
+    b: kaelthas
+    why: "Mosh Pit locks enemies in place for up to 4 seconds, guaranteeing Flamestrike and letting Living Bomb spread across the stunned group."
+    evidence: ["Mosh Pit", "Flamestrike", "Living Bomb"]
+    confidence: medium
+  - a: kaelthas
+    b: zarya
+    why: "Graviton Surge pulls the enemy team into a ball for 2.5 seconds, the ideal setup for a Burned Flesh Flamestrike and chained Living Bombs."
+    evidence: ["Graviton Surge", "Flamestrike", "Burned Flesh", "Living Bomb"]
+    confidence: medium
+  - a: kaelthas
+    b: malfurion
+    why: "Innervate covers Kael'thas's heavy Mana costs and speeds his cooldowns, and Entangling Roots holds targets through Flamestrike's 1-second delay."
+    evidence: ["Innervate", "Entangling Roots", "Flamestrike"]
+    confidence: medium

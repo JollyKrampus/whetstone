@@ -1,0 +1,69 @@
+hero: sgthammer
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "In Siege Mode she can't move unless she took Hover Siege Mode, and Thrusters cancels the siege, so divers punish her hard."
+  - tag: aa-reliant
+    why: "Long-range Siege Mode basic attacks, with their splash, are the core of Sgt. Hammer's damage."
+  - tag: siege
+    why: "Siege Mode doubles her attack range, letting her shell structures from a distance few defenders can contest."
+counters:
+  # --- strong against ---
+  - a: sgthammer
+    b: probius
+    why: "Siege Mode's doubled range and splash let Sgt. Hammer shell Probius' Pylons and Photon Cannons from beyond their reach, splashing Probius when he stands near them."
+    evidence: ["Siege Mode", "Advanced Artillery", "Warp In Pylon", "Photon Cannon"]
+    confidence: low
+  - a: sgthammer
+    b: xul
+    why: "Xul has no gap closer, so a sieging Hammer with doubled range and Concussive Blast's knockback keeps his melee Cursed Strikes away, while Advanced Artillery's splash clears his Skeletal Warriors."
+    evidence: ["Siege Mode", "Concussive Blast", "Advanced Artillery", "Cursed Strikes", "Raise Skeleton"]
+    confidence: low
+  - a: sgthammer
+    b: chogall
+    why: "Cho'gall is a huge, slow target; Giant Killer adds 1.5% of max Health per Siege Mode shot, and Concussive Blast shoves Cho back out after a Surging Fist."
+    evidence: ["Siege Mode", "Giant Killer", "Concussive Blast", "Surging Fist"]
+    conditions: "Giant Killer at level 16."
+    confidence: low
+  # --- weak against ---
+  - a: zeratul
+    b: sgthammer
+    why: "Zeratul cloaks up to a sieging Sgt. Hammer and Blink plus Vorpal Blade keep him on her; her only escape is Thrusters, which drops Siege Mode and her damage."
+    evidence: ["Permanent Cloak", "Blink", "Vorpal Blade", "Siege Mode", "Thrusters"]
+    confidence: high
+  - a: illidan
+    b: sgthammer
+    why: "Evasion makes Illidan immune to her basic attacks for 2.5 seconds, and Dive keeps him glued to a stationary Siege Mode Hammer while Betrayer's Thirst heals him."
+    evidence: ["Evasion", "Dive", "Betrayer's Thirst", "Siege Mode"]
+    confidence: medium
+  - a: genji
+    b: sgthammer
+    why: "Cyber Agility and Swift Strike close the gap to an immobile Siege Mode Hammer, and Deflect blocks her shots while she has no quick way to reposition."
+    evidence: ["Cyber Agility", "Swift Strike", "Deflect", "Siege Mode"]
+    confidence: medium
+  - a: tracer
+    b: sgthammer
+    why: "Three Blink charges let Tracer flank a stationary Siege Mode Hammer and step around Concussive Blast, and Recall resets her if Spider Mines catch her."
+    evidence: ["Blink", "Recall", "Siege Mode", "Concussive Blast", "Spider Mines"]
+    confidence: medium
+  - a: valeera
+    b: sgthammer
+    why: "Vanish lets Valeera walk up unseen and open with Cheap Shot (Blade Flurry from Stealth), stunning and blinding a sieging Hammer who can't move away."
+    evidence: ["Vanish", "Blade Flurry", "Siege Mode"]
+    confidence: medium
+synergies:
+  - a: johanna
+    b: sgthammer
+    why: "Shield Glare and Condemn peel divers off a sieging Sgt. Hammer, who can't reposition herself without dropping Siege Mode."
+    evidence: ["Shield Glare", "Condemn", "Siege Mode"]
+    confidence: medium
+  - a: ltmorales
+    b: sgthammer
+    why: "Stim Drone's 75% Attack Speed on a Siege Mode Hammer multiplies her long-range splash, and Healing Beam reaches her from a safe distance."
+    evidence: ["Stim Drone", "Healing Beam", "Siege Mode"]
+    confidence: medium
+  - a: sgthammer
+    b: zarya
+    why: "Shield Ally gives an immobile Siege Mode Hammer a 420-damage buffer against divers, and Expulsion Zone knocks them back off her."
+    evidence: ["Shield Ally", "Expulsion Zone", "Siege Mode"]
+    confidence: low
