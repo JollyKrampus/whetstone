@@ -270,13 +270,13 @@ export default function DamageCalc({ dexUrl, regulation, metaSets, usageLabel }:
   // Weather and terrain follow a newly picked setter ability on either side.
   const abilityA = dex && a ? battleAbility(dex, a.set) : undefined;
   const abilityB = dex && b ? battleAbility(dex, b.set) : undefined;
-  useEffect(() => {
-    for (const ability of [abilityA, abilityB]) {
-      const fx = ability ? FIELD_ABILITIES[ability] : undefined;
-      if (fx?.weather) setWeather(fx.weather);
-      if (fx?.terrain) setTerrain(fx.terrain);
-    }
-  }, [abilityA, abilityB]);
+  const applyField = (ability: string | undefined) => {
+    const fx = ability ? FIELD_ABILITIES[ability] : undefined;
+    if (fx?.weather) setWeather(fx.weather);
+    if (fx?.terrain) setTerrain(fx.terrain);
+  };
+  useEffect(() => applyField(abilityA), [abilityA]);
+  useEffect(() => applyField(abilityB), [abilityB]);
 
   const options = useMemo(() => {
     if (!dex) return { species: [] as ComboOption[], items: [] as ComboOption[] };
