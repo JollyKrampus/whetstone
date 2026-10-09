@@ -39,6 +39,10 @@ jobs:
       - name: Unit tests
         run: npm test
 
+      # Curated counters, synergies and traits: schema, merge conflicts and evidence names.
+      - name: Validate the HotS theory files
+        run: node src/games/hots/theory/validate.ts
+
       # No data/ and no WHETSTONE_DATA_DIR here, so every game builds from fixtures/.
       - name: Build against fixtures
         run: npm run build
@@ -54,6 +58,23 @@ jobs:
 
       - name: E2E smoke
         run: npm run e2e
+
+      # Statistics mode: the synthetic Heroes Profile, YouTube and Twitch samples in
+      # fixtures/hots/_private (WHETSTONE_FIXTURE_PRIVATE=1; stage.ts also merges the draft shard's
+      # stats overlay). A separate output directory and port, so it cannot be confused with the
+      # theory build above (e2e/global-setup.ts checks which build the server serves).
+      - name: Build in statistics mode
+        run: npm run build
+        env:
+          WHETSTONE_FIXTURE_PRIVATE: '1'
+          WHETSTONE_OUT_DIR: .cache/dist-stats
+
+      - name: E2E in statistics mode (HotS pages, draft and ARAM)
+        run: npx playwright test e2e/hots-pages.spec.ts e2e/hots-draft.spec.ts
+        env:
+          WHETSTONE_FIXTURE_PRIVATE: '1'
+          WHETSTONE_OUT_DIR: .cache/dist-stats
+          SMOKE_PORT: '4322'
 
       - name: Upload Playwright report
         if: failure()
