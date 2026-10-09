@@ -1,0 +1,79 @@
+hero: valla
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Hatred stacks only build through basic attacks, which make up most of Valla's damage."
+  - tag: sustained-dps
+    why: "Hatred builds to 80% bonus attack damage over ten attacks and fades if she stops, so Valla wins drawn-out fights rather than short burst windows."
+counters:
+  # --- strong against ---
+  - a: valla
+    b: chogall
+    why: "Manticore adds 4% of max Health every third hit on the same Hero, which is punishing against Cho'gall's huge Health pool and lack of escapes."
+    evidence: ["Manticore", "Ogre Hide"]
+    conditions: "Manticore at level 16."
+    confidence: medium
+  - a: valla
+    b: blaze
+    why: "Blaze's 2900 Health and short range make him a Manticore target, and Vault keeps Valla out of Flame Stream's reach."
+    evidence: ["Manticore", "Vault", "Flame Stream"]
+    conditions: "Manticore at level 16."
+    confidence: low
+  - a: valla
+    b: stitches
+    why: "Manticore's 4% max-Health hits scale off Stitches' 3020 Health, and Vault gets Valla out if Hook lands."
+    evidence: ["Manticore", "Vault", "Hook"]
+    conditions: "Manticore at level 16."
+    confidence: low
+  - a: valla
+    b: ragnaros
+    why: "Vault and Hatred's Movement Speed let Valla kite a dash-less Ragnaros, whose only speed boost is Blast Wave."
+    evidence: ["Vault", "Hatred", "Blast Wave"]
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: valla
+    why: "Shield Glare blinds Valla for 1.5 seconds, so her Hatred-stacked attacks miss and the stacks start to fall off."
+    evidence: ["Shield Glare", "Hatred"]
+    confidence: medium
+  - a: cassia
+    b: valla
+    why: "Blinding Light blinds Valla for 2 seconds in an area, and Avoidance's Armor while Cassia moves cuts the basic attacks Valla depends on."
+    evidence: ["Blinding Light", "Avoidance", "Hatred"]
+    confidence: medium
+  - a: varian
+    b: valla
+    why: "Parry blocks all of Valla's basic attacks for 1.25 seconds with two charges, and Charge plus Taunt pin her in place."
+    evidence: ["Parry", "Charge", "Taunt", "Hatred"]
+    confidence: medium
+  - a: xul
+    b: valla
+    why: "Cursed Strikes slows Valla's attack speed by 40% once Xul reaches her, and Bone Prison roots her so that he can."
+    evidence: ["Cursed Strikes", "Bone Prison", "Hatred"]
+    confidence: low
+  - a: zeratul
+    b: valla
+    why: "Valla has 1340 Health and only Vault to escape; Zeratul cloaks in, lands Singularity Spike, and Vorpal Blade follows her Vault."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Vorpal Blade", "Vault"]
+    confidence: medium
+synergies:
+  - a: rehgar
+    b: valla
+    why: "Bloodlust's 40% Attack Speed stacks with Hatred, and its lifesteal makes Valla far harder to burst while she keeps attacking."
+    evidence: ["Bloodlust", "Hatred"]
+    confidence: medium
+  - a: tyrande
+    b: valla
+    why: "Trueshot Aura's 40% Attack Damage and Hunter's Mark's Armor shred amplify Valla's Hatred-stacked basic attacks."
+    evidence: ["Trueshot Aura", "Hunter's Mark", "Hatred"]
+    confidence: medium
+  - a: uther
+    b: valla
+    why: "Hammer of Justice and Devotion's Armor protect an immobile basic-attack carry like Valla, and Divine Shield saves her from a committed dive."
+    evidence: ["Hammer of Justice", "Devotion", "Divine Shield", "Hatred"]
+    confidence: medium
+  - a: ltmorales
+    b: valla
+    why: "Stim Drone's 75% Attack Speed fills Hatred almost instantly and sharply raises Valla's damage for 10 seconds while Healing Beam keeps her up."
+    evidence: ["Stim Drone", "Healing Beam", "Hatred"]
+    confidence: medium

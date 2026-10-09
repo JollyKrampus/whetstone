@@ -1,0 +1,59 @@
+hero: leoric
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "2550 Health, Drain Hope's self-healing and the Undying trait let Leoric hold the front and keep coming back after he dies."
+  - tag: peel
+    why: "Skeletal Swing's 40% slow and Entomb's impassable tomb can cut a diver off from the backline or block a chasing enemy."
+counters:
+  - a: leoric
+    b: chogall
+    why: "Drain Hope deals up to 20% of the target's maximum Health, so Cho'gall's enormous pool loses the most to it, while Leoric heals the same share of his own."
+    evidence: ["Drain Hope"]
+    confidence: medium
+  - a: leoric
+    b: stitches
+    why: "Drain Hope's 20% maximum Health drain hits hardest against Stitches's 3020 Health, and Undying means trading a death with a tank costs Leoric very little."
+    evidence: ["Drain Hope", "Undying"]
+    confidence: low
+  - a: leoric
+    b: diablo
+    why: "Black Soulstone stacks raise Diablo's maximum Health, which makes Drain Hope's percent drain larger, and Wraith Walk's Unstoppable ignores Shadow Charge and Overpower."
+    evidence: ["Drain Hope", "Wraith Walk", "Black Soulstone", "Shadow Charge", "Overpower"]
+    confidence: low
+  - a: ana
+    b: leoric
+    why: "Biotic Grenade blocks all healing for 1.75 seconds, cutting off Drain Hope's heal at its peak, and most of Leoric's sustain is self-healing the grenade negates."
+    evidence: ["Biotic Grenade", "Drain Hope"]
+    confidence: medium
+  - a: malthael
+    b: leoric
+    why: "Reaper's Mark ticks percent-maximum-Health damage on Leoric's large pool, and Touch of Death halves Drain Hope's healing while Soul Rip keeps Malthael healthy."
+    evidence: ["Reaper's Mark", "Touch of Death", "Soul Rip", "Drain Hope"]
+    confidence: medium
+  - a: tychus
+    b: leoric
+    why: "Minigun's percent-maximum-Health Basic Attacks shred a 2550-Health bruiser, and Run and Gun lets Tychus step out of Drain Hope's range to cut the drain short."
+    evidence: ["Minigun", "Run and Gun", "Drain Hope"]
+    confidence: medium
+  - a: lucio
+    b: leoric
+    why: "Soundwave's knockback pushes Leoric out of Drain Hope's range, ending the drain early, and Push Off slows him as he tries to re-engage."
+    evidence: ["Soundwave", "Push Off", "Drain Hope"]
+    confidence: low
+synergies:
+  - a: chromie
+    b: leoric
+    why: "Entomb pins a Hero in a pocket for up to 4 seconds, so Chromie's delayed Sand Blast and all three Dragon's Breath blasts land on a target that cannot sidestep."
+    evidence: ["Entomb", "Sand Blast", "Dragon's Breath"]
+    confidence: low
+  - a: jaina
+    b: leoric
+    why: "Entomb pins enemies in a pocket for up to 4 seconds, so all three Blizzard waves and Ring of Frost land on targets that cannot walk out."
+    evidence: ["Entomb", "Blizzard", "Ring of Frost"]
+    confidence: medium
+  - a: kaelthas
+    b: leoric
+    why: "Entomb blocks a retreat path long enough for Flamestrike's 1-second delay and Living Bomb's spread to finish the trapped Heroes."
+    evidence: ["Entomb", "Flamestrike", "Living Bomb"]
+    confidence: medium

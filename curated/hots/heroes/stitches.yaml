@@ -1,0 +1,68 @@
+hero: stitches
+reviewedFor: "2.57"
+traits:
+  - tag: engage
+    why: "Hook drags the first enemy hit straight into Stitches' team, starting picks from long range."
+  - tag: frontline
+    why: "3020 Health and Devour's 20% max-Health heal make Stitches one of the sturdiest frontliners in the game."
+  - tag: save
+    why: "Helping Hand can Hook an ally out of danger, and Master Hooker makes that ally briefly Unkillable."
+counters:
+  # --- strong against ---
+  - a: stitches
+    b: sgthammer
+    why: "Hook pulls a sieging Sgt. Hammer out of position; she can't sidestep without Thrusters cancelling Siege Mode, and Slam's slow keeps her in place for the team."
+    evidence: ["Hook", "Slam", "Siege Mode", "Thrusters"]
+    confidence: medium
+  - a: stitches
+    b: chromie
+    why: "Chromie has 1390 Health and no dash, so a Hook into Slam and Gorge is usually lethal unless she saved Time Out."
+    evidence: ["Hook", "Slam", "Gorge", "Time Out"]
+    confidence: medium
+  - a: stitches
+    b: probius
+    why: "Probius has 1260 Health and only regenerates Mana inside a Pylon's Power Field, so a Hook that drags him away from his Pylons leaves him helpless."
+    evidence: ["Hook", "Warp In Pylon"]
+    confidence: low
+  - a: stitches
+    b: kelthuzad
+    why: "Kel'Thuzad has no mobility unless he took Shifting Malice; a Hook pulls him away from his team and Slam plus Gorge finish the pick."
+    evidence: ["Hook", "Slam", "Gorge", "Shifting Malice"]
+    confidence: low
+  # --- weak against ---
+  - a: tychus
+    b: stitches
+    why: "Minigun deals bonus damage based on max Health, and Stitches' 3020 Health is the biggest pool in the game; Devour's percent heal can't keep pace."
+    evidence: ["Minigun", "Devour"]
+    confidence: high
+  - a: malthael
+    b: stitches
+    why: "Reaper's Mark burns 2% max Health per second and Soul Rip heals Malthael for a share of Stitches' max Health per hit, turning his huge pool into Malthael's sustain."
+    evidence: ["Reaper's Mark", "Soul Rip", "Devour"]
+    confidence: medium
+  - a: leoric
+    b: stitches
+    why: "Drain Hope steals up to 20% of Stitches' max Health over 4 seconds and heals Leoric, and Stitches has no dash to break the tether quickly."
+    evidence: ["Drain Hope"]
+    confidence: low
+  - a: zagara
+    b: stitches
+    why: "Hook stops on the first enemy it touches, and Zagara's Roachlings and Hunter Killers constantly body-block it, so Stitches rarely lands a pick on her."
+    evidence: ["Hook", "Infested Drop", "Hunter Killer"]
+    confidence: low
+synergies:
+  - a: jaina
+    b: stitches
+    why: "A Hook drags its target into Jaina's range for Cone of Cold and Ring of Frost, and Frostbite's Chill makes the follow-up hit 50% harder."
+    evidence: ["Hook", "Cone of Cold", "Ring of Frost", "Frostbite"]
+    confidence: medium
+  - a: kaelthas
+    b: stitches
+    why: "Hook drags a target onto Stitches, Gravity Lapse stuns them, and Flamestrike lands on the stationary victim."
+    evidence: ["Hook", "Gravity Lapse", "Flamestrike"]
+    confidence: medium
+  - a: stitches
+    b: xul
+    why: "Bone Prison's 2-second delay is easy to land on a target that has just been Hooked and Slammed, and its Root then holds them for Xul's skeletons."
+    evidence: ["Hook", "Slam", "Bone Prison"]
+    confidence: low

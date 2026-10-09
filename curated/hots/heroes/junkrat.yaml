@@ -1,0 +1,59 @@
+hero: junkrat
+reviewedFor: "2.57"
+traits:
+  - tag: poke
+    why: "Frag Launcher's four bouncing grenades chip enemies from behind walls, and almost all of Junkrat's damage comes from Abilities rather than Basic Attack range."
+  - tag: waveclear
+    why: "Frag Launcher splashes across whole minion waves, letting Junkrat clear and push a lane quickly before rotating."
+counters:
+  - a: junkrat
+    b: thelostvikings
+    why: "Frag Launcher grenades explode in an area, so a volley into a grouped Viking trio damages all three, and Total Mayhem punishes the Vikings for collapsing on Junkrat."
+    evidence: ["Frag Launcher", "Total Mayhem"]
+    confidence: medium
+  - a: junkrat
+    b: murky
+    why: "Murky's 730 Health falls to a couple of Frag Launcher splashes, and Steel Trap's root keeps him from walking away once Safety Bubble has ended."
+    evidence: ["Frag Launcher", "Steel Trap", "Safety Bubble"]
+    confidence: low
+  - a: junkrat
+    b: illidan
+    why: "Junkrat's damage is all Abilities, so Evasion is useless; Concussion Mine knocks a diving Illidan away, Steel Trap roots him, and Total Mayhem punishes him for securing the kill."
+    evidence: ["Evasion", "Concussion Mine", "Steel Trap", "Total Mayhem"]
+    confidence: low
+  - a: genji
+    b: junkrat
+    why: "Deflect blocks Frag Launcher grenades and throws Kunai back, and Cyber Agility closes on a hero whose only escape is a self-knockback from Concussion Mine."
+    evidence: ["Deflect", "Cyber Agility", "Concussion Mine", "Frag Launcher"]
+    confidence: medium
+  - a: zeratul
+    b: junkrat
+    why: "Zeratul approaches unseen under Permanent Cloak and Blinks past the Steel Trap and Concussion Mine Junkrat places in front of him, then bursts a 1425-Health target."
+    evidence: ["Permanent Cloak", "Blink", "Steel Trap", "Concussion Mine"]
+    confidence: medium
+  - a: tracer
+    b: junkrat
+    why: "Blink charges let Tracer step around Frag Launcher arcs, and Recall strips Steel Trap's root and resets her position if she gets caught by a trap."
+    evidence: ["Blink", "Recall", "Steel Trap", "Frag Launcher"]
+    confidence: medium
+  - a: anubarak
+    b: junkrat
+    why: "Harden Carapace's Spell Armor and shield soak Junkrat's all-Ability damage, and Burrow Charge or Impale reaches a 1425-Health target whose only escape is a Concussion Mine self-knockback."
+    evidence: ["Harden Carapace", "Burrow Charge", "Impale", "Concussion Mine"]
+    confidence: medium
+synergies:
+  - a: junkrat
+    b: zarya
+    why: "Graviton Surge holds enemies in place for 2.5 seconds, so RIP-Tire can drive into the middle or Frag Launcher grenades land without bouncing past their targets."
+    evidence: ["Graviton Surge", "RIP-Tire", "Frag Launcher"]
+    confidence: medium
+  - a: etc
+    b: junkrat
+    why: "Mosh Pit stuns enemies around E.T.C. for up to 4 seconds, enough to land a pre-aimed Rocket Ride or drive RIP-Tire into the center of the group."
+    evidence: ["Mosh Pit", "Rocket Ride", "RIP-Tire"]
+    confidence: medium
+  - a: junkrat
+    b: malfurion
+    why: "Entangling Roots holds targets in place long enough for Frag Launcher's arcing grenades and Steel Trap to land on Heroes who would otherwise sidestep them."
+    evidence: ["Entangling Roots", "Frag Launcher", "Steel Trap"]
+    confidence: low

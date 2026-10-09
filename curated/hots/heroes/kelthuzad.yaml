@@ -1,0 +1,59 @@
+hero: kelthuzad
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Kel'Thuzad has no movement ability until the level 20 Shifting Malice, so he must play behind his frontline and respect divers."
+  - tag: burst
+    why: "Chains of Kel'Thuzad into Frost Nova and Death and Decay, then Frost Blast or Shadow Fissure, can kill a Hero in one combo once Master of the Cold Dark is complete."
+counters:
+  - a: kelthuzad
+    b: sgthammer
+    why: "A sieging Sgt. Hammer cannot dodge Frost Nova's center root or Death and Decay's lingering pool, and Chains can drag her toward Kel'Thuzad's team once she unsieges."
+    evidence: ["Frost Nova", "Death and Decay", "Chains of Kel'Thuzad", "Siege Mode"]
+    confidence: medium
+  - a: kelthuzad
+    b: thelostvikings
+    why: "Chains of Kel'Thuzad pulls two Vikings together and stuns them, and Death and Decay's pool plus Frost Nova then hit the whole cluster at once."
+    evidence: ["Chains of Kel'Thuzad", "Death and Decay", "Frost Nova"]
+    confidence: low
+  - a: kelthuzad
+    b: lili
+    why: "Kel'Thuzad's damage is entirely Abilities, so Blinding Wind does nothing to him, and Chains pulls Li Li out of position for Frost Nova and Death and Decay."
+    evidence: ["Blinding Wind", "Chains of Kel'Thuzad", "Frost Nova", "Death and Decay"]
+    confidence: low
+  - a: anubarak
+    b: kelthuzad
+    why: "Harden Carapace's Spell Armor blunts the whole combo, Burrow Charge or Impale reaches an immobile Kel'Thuzad before he lands Chains, and Debilitation halves his Spell Power."
+    evidence: ["Harden Carapace", "Burrow Charge", "Impale", "Debilitation"]
+    confidence: high
+  - a: genji
+    b: kelthuzad
+    why: "Deflect absorbs Death and Decay and Frost Nova, and Cyber Agility plus Swift Strike reach a Kel'Thuzad who has no way to reposition."
+    evidence: ["Deflect", "Cyber Agility", "Swift Strike"]
+    confidence: medium
+  - a: zeratul
+    b: kelthuzad
+    why: "Zeratul starts on Kel'Thuzad from Permanent Cloak, and Blink dodges Chains or Frost Nova's delayed root, leaving the Archlich nothing to escape with."
+    evidence: ["Permanent Cloak", "Blink", "Chains of Kel'Thuzad", "Frost Nova"]
+    confidence: medium
+  - a: valeera
+    b: kelthuzad
+    why: "From Vanish, Valeera opens with a Garrote Silence that stops Kel'Thuzad from casting his combo, and Cloak of Shadows' Spell Armor blunts whatever he lands afterwards."
+    evidence: ["Vanish", "Eviscerate", "Cloak of Shadows"]
+    confidence: medium
+synergies:
+  - a: kelthuzad
+    b: mei
+    why: "Ice Wall traps enemies for 2.5 seconds, so Frost Nova's 1-second center root and Death and Decay land without any chance to dodge."
+    evidence: ["Ice Wall", "Frost Nova", "Death and Decay"]
+    confidence: medium
+  - a: kelthuzad
+    b: malfurion
+    why: "Hungering Cold adds damage on every hit against Rooted enemies, including targets held by Entangling Roots, and Innervate feeds Kel'Thuzad's Mana."
+    evidence: ["Hungering Cold", "Entangling Roots", "Innervate"]
+    confidence: medium
+  - a: ana
+    b: kelthuzad
+    why: "Nano Boost's Spell Power and faster Basic Ability recharge let Kel'Thuzad cycle Death and Decay and Frost Nova twice inside one engage."
+    evidence: ["Nano Boost", "Death and Decay", "Frost Nova"]
+    confidence: medium

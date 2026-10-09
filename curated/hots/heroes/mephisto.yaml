@@ -1,0 +1,54 @@
+hero: mephisto
+reviewedFor: "2.57"
+traits:
+  - tag: sustained-dps
+    why: "Lord of Hatred lowers his Basic Ability cooldowns every time they hit Heroes, so Skull Missile and Lightning Nova keep cycling in long fights."
+  - tag: dive
+    why: "Shade of Mephisto teleports him into the enemy team and snaps him back 2.5 seconds later, letting him fight up close and then return to safety."
+counters:
+  - a: mephisto
+    b: thelostvikings
+    why: "Lightning Nova hits every enemy inside its ring and gains damage for each Hero hit, so three Vikings standing together feed it and all take the ticks."
+    evidence: ["Lightning Nova", "Lord Of Hatred"]
+    confidence: medium
+  - a: mephisto
+    b: samuro
+    why: "Lightning Nova and Skull Missile are area damage that hit Samuro and his Mirror Images together, and the images take double damage from every tick."
+    evidence: ["Lightning Nova", "Skull Missile", "Mirror Image"]
+    confidence: low
+  - a: mephisto
+    b: murky
+    why: "Lightning Nova's ring ticks every 0.25 seconds around Mephisto, so a 730-Health Murky cannot stay near him to Slime, and Skull Missile catches him walking away."
+    evidence: ["Lightning Nova", "Skull Missile", "Slime"]
+    confidence: medium
+  - a: anubarak
+    b: mephisto
+    why: "Mephisto's damage is entirely Abilities, so Harden Carapace's 40 Spell Armor blunts it, and Debilitation halves his Spell Power after Impale or Burrow Charge."
+    evidence: ["Harden Carapace", "Debilitation", "Impale", "Burrow Charge"]
+    confidence: medium
+  - a: genji
+    b: mephisto
+    why: "Deflect absorbs Lightning Nova ticks and Skull Missiles, and Shade of Mephisto always returns him to a known spot, where Genji can wait to finish him."
+    evidence: ["Deflect", "Lightning Nova", "Skull Missile", "Shade of Mephisto"]
+    confidence: low
+  - a: chen
+    b: mephisto
+    why: "Withering Flames cuts Mephisto's Spell Power by 60% after Chen Ignites him, and Stagger delays the damage Mephisto's ramping Lightning Nova deals to Chen."
+    evidence: ["Withering Flames", "Keg Smash", "Stagger", "Lightning Nova"]
+    confidence: low
+synergies:
+  - a: mephisto
+    b: zarya
+    why: "Graviton Surge holds Heroes together for 2.5 seconds, so a Shade of Mephisto onto the group keeps all of them inside Lightning Nova as it ramps."
+    evidence: ["Graviton Surge", "Shade of Mephisto", "Lightning Nova"]
+    confidence: medium
+  - a: etc
+    b: mephisto
+    why: "Mosh Pit stuns enemies around E.T.C. for up to 4 seconds, long enough for a full Lightning Nova and Durance of Hate to spread across the stunned team."
+    evidence: ["Mosh Pit", "Lightning Nova", "Durance of Hate"]
+    confidence: medium
+  - a: johanna
+    b: mephisto
+    why: "Condemn pulls nearby enemies to Johanna after a short delay, dragging them into a Lightning Nova ring Mephisto has Shaded onto her position."
+    evidence: ["Condemn", "Lightning Nova", "Shade of Mephisto"]
+    confidence: medium

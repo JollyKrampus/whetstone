@@ -1,0 +1,62 @@
+hero: fenix
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Repeater Cannon's attack speed and most of his talents make basic attacks his main damage source."
+  - tag: sustained-dps
+    why: "Shield Capacitor and constant attacks favour long fights over one big burst."
+counters:
+  # --- strong against ---
+  - a: fenix
+    b: chromie
+    why: "Shield Capacitor's 760 shield soaks Sand Blast and refills when Fenix isn't hit, so Chromie's poke rarely sticks to his health."
+    evidence: ["Shield Capacitor", "Sand Blast"]
+    confidence: low
+  - a: fenix
+    b: hanzo
+    why: "Shield Capacitor absorbs Storm Bow poke and regenerates between hits, so Hanzo's long-range chip damage rarely reaches Fenix's health."
+    evidence: ["Shield Capacitor", "Storm Bow"]
+    confidence: low
+  - a: fenix
+    b: zagara
+    why: "Fenix's fast basic attacks and Plasma Cutter's circling laser clear Zagara's summons quickly while Shield Capacitor absorbs their chip damage."
+    evidence: ["Plasma Cutter", "Shield Capacitor", "Infested Drop", "Hunter Killer"]
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: fenix
+    why: "Shield Glare blinds Fenix for 1.5 seconds, wiping out his basic-attack damage for the window."
+    evidence: ["Shield Glare"]
+    confidence: medium
+  - a: lili
+    b: fenix
+    why: "Blinding Wind blinds the nearest enemies, catching Fenix's basic attacks for 1.5 seconds on a short cooldown."
+    evidence: ["Blinding Wind"]
+    confidence: low
+  - a: varian
+    b: fenix
+    why: "Shattering Throw deals up to 1400 bonus damage to shields, wiping out Shield Capacitor in a single hit."
+    evidence: ["Shattering Throw", "Shield Capacitor"]
+    conditions: "Shattering Throw at level 13."
+    confidence: low
+  - a: kelthuzad
+    b: fenix
+    why: "Strip Shields adds up to 270 damage against shields to Chains of Kel'Thuzad, and the pull and stun hold Fenix in place for Frost Nova."
+    evidence: ["Strip Shields", "Chains of Kel'Thuzad", "Frost Nova", "Shield Capacitor"]
+    confidence: low
+synergies:
+  - a: arthas
+    b: fenix
+    why: "Summon Sindragosa and Frozen Tempest keep enemies slowed, and Purification Salvo deals 50% more damage to slowed targets."
+    evidence: ["Summon Sindragosa", "Frozen Tempest", "Purification Salvo"]
+    confidence: medium
+  - a: fenix
+    b: jaina
+    why: "Chill slows let Purification Salvo hit slowed targets for 50% more, and Combat Advantage boosts Plasma Cutter against them."
+    evidence: ["Frostbite", "Purification Salvo", "Combat Advantage", "Plasma Cutter"]
+    confidence: medium
+  - a: fenix
+    b: rehgar
+    why: "Bloodlust's 40% attack speed and lifesteal supercharge Fenix's rapid basic attacks."
+    evidence: ["Bloodlust", "Shield Capacitor"]
+    confidence: medium

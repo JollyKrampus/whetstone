@@ -1,0 +1,66 @@
+hero: kharazim
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Radiant Dash jumps to enemies or allies twice, letting Kharazim follow his divers into the backline."
+  - tag: save
+    why: "Divine Palm heals an ally for 1200 if they take fatal damage, turning a lost fight around when timed on the focus target."
+  - tag: aa-reliant
+    why: "Transcendence, Iron Fists and Insight all trigger on every 3rd Basic Attack, so his healing or damage collapses when he cannot attack."
+counters:
+  - a: kharazim
+    b: chogall
+    why: "Seven-Sided Strike hits the highest-Health Hero nearby for 7% of maximum Health per strike, and Cho'gall's huge pool makes him both the target and the biggest loser."
+    evidence: ["Seven-Sided Strike"]
+    confidence: medium
+  - a: kharazim
+    b: stitches
+    why: "Stitches has 3020 base Health, so Seven-Sided Strike's percent-maximum-Health strikes lock onto him for heavy damage while Kharazim is Invulnerable."
+    evidence: ["Seven-Sided Strike"]
+    confidence: medium
+  - a: kharazim
+    b: diablo
+    why: "Black Soulstone adds up to 30% maximum Health, which only increases what Seven-Sided Strike takes, since each strike is a share of maximum Health."
+    evidence: ["Seven-Sided Strike", "Black Soulstone"]
+    confidence: medium
+  - a: kharazim
+    b: muradin
+    why: "Seven-Sided Strike lands on the highest-Health Hero nearby, and Muradin's Avatar adds 1000 Health, making him an even bigger target for its percent strikes."
+    evidence: ["Seven-Sided Strike", "Avatar"]
+    confidence: low
+  - a: ana
+    b: kharazim
+    why: "Biotic Grenade stops all healing for 1.75 seconds, cancelling Breath of Heaven and Transcendence, and Sleep Dart catches Kharazim as he Radiant Dashes forward."
+    evidence: ["Biotic Grenade", "Sleep Dart", "Breath of Heaven", "Transcendence", "Radiant Dash"]
+    confidence: medium
+  - a: lili
+    b: kharazim
+    why: "Blinding Wind auto-targets the nearest enemies, which a melee healer usually is, and a Blinded Kharazim's 3rd-hit trait procs miss."
+    evidence: ["Blinding Wind", "Transcendence", "Iron Fists"]
+    confidence: low
+  - a: mei
+    b: kharazim
+    why: "Snow Blind Blinds Kharazim's attack-based healing, and Ice Wall can trap him away from the ally he dashed in with."
+    evidence: ["Snow Blind", "Ice Wall", "Transcendence"]
+    confidence: low
+  - a: cassia
+    b: kharazim
+    why: "Blinding Light Blinds Kharazim's Basic Attacks, and Avoidance gives Cassia Armor against his physical hits, so he neither heals well nor threatens her."
+    evidence: ["Blinding Light", "Avoidance", "Transcendence"]
+    confidence: low
+synergies:
+  - a: kharazim
+    b: thebutcher
+    why: "Breath of Heaven's speed and heal help The Butcher reach and stay on targets, and Divine Palm covers him when he overextends to collect Fresh Meat."
+    evidence: ["Breath of Heaven", "Divine Palm", "Fresh Meat"]
+    confidence: medium
+  - a: kharazim
+    b: qhira
+    why: "Qhira commits deep with Grappling Hook and Revolving Sweep; Radiant Dash lets Kharazim follow her, and Divine Palm keeps her alive while Blood Rage ramps."
+    evidence: ["Radiant Dash", "Divine Palm", "Grappling Hook", "Revolving Sweep"]
+    confidence: medium
+  - a: kharazim
+    b: malthael
+    why: "Kharazim can follow Wraith Strike with Radiant Dash, and Cleansing Touch or Divine Palm saves Malthael at the moment his dive gets punished."
+    evidence: ["Radiant Dash", "Cleansing Touch", "Divine Palm", "Wraith Strike"]
+    confidence: medium

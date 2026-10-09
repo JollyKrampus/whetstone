@@ -1,0 +1,59 @@
+hero: malthael
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Reaper's Mark is applied and refreshed by his cleaving Basic Attacks, and Soul Rip and Wraith Strike only work on marked enemies."
+  - tag: sustained-dps
+    why: "Reaper's Mark deals 2% of maximum Health every second to each marked target, so his damage grows with fight length and enemy Health pools."
+counters:
+  - a: malthael
+    b: chogall
+    why: "Reaper's Mark ticks 2% of maximum Health per second and Soul Rip heals Malthael for 4% of a marked Hero's maximum Health, so Cho'gall's enormous pool is ideal fuel."
+    evidence: ["Reaper's Mark", "Soul Rip"]
+    confidence: high
+  - a: malthael
+    b: stitches
+    why: "Stitches's 3020 Health makes every Reaper's Mark tick and Soul Rip heal larger, and Last Rites punishes the missing Health he carries between Devour heals."
+    evidence: ["Reaper's Mark", "Soul Rip", "Last Rites", "Devour"]
+    confidence: medium
+  - a: malthael
+    b: diablo
+    why: "Black Soulstone's bonus maximum Health directly increases Reaper's Mark and Soul Rip value, and Touch of Death halves Diablo's Fire Stomp healing."
+    evidence: ["Reaper's Mark", "Soul Rip", "Black Soulstone", "Touch of Death", "Fire Stomp"]
+    confidence: medium
+  - a: malthael
+    b: muradin
+    why: "Reaper's Mark ticks every second, so a marked Muradin never goes 4 seconds without damage and Second Wind's regeneration never starts."
+    evidence: ["Reaper's Mark", "Second Wind"]
+    confidence: medium
+  - a: lili
+    b: malthael
+    why: "Blinding Wind stops Malthael's Basic Attacks, his only way to apply Reaper's Mark, so Soul Rip and Wraith Strike have nothing to work with."
+    evidence: ["Blinding Wind", "Reaper's Mark", "Soul Rip", "Wraith Strike"]
+    confidence: medium
+  - a: cassia
+    b: malthael
+    why: "Blinding Light Blinds Malthael's marking attacks for 2 seconds, and Avoidance's Armor reduces his physical damage while Cassia kites."
+    evidence: ["Blinding Light", "Avoidance", "Reaper's Mark"]
+    confidence: medium
+  - a: mei
+    b: malthael
+    why: "Snow Blind Blinds every enemy in its area for 1.75 seconds, so Malthael cannot apply or refresh Reaper's Mark, and Blizzard's stun holds him once Wraith Strike commits him."
+    evidence: ["Snow Blind", "Blizzard", "Reaper's Mark", "Wraith Strike"]
+    confidence: low
+synergies:
+  - a: abathur
+    b: malthael
+    why: "Adrenal Overload's Attack Speed spreads and refreshes Reaper's Mark faster, and Carapace keeps Malthael alive while he dives for Soul Rip value."
+    evidence: ["Adrenal Overload", "Carapace", "Reaper's Mark", "Soul Rip"]
+    confidence: medium
+  - a: malthael
+    b: rehgar
+    why: "Bloodlust adds 40% Attack Speed and lifesteal on top of Soul Rip healing, letting Malthael mark the whole enemy team quickly."
+    evidence: ["Bloodlust", "Soul Rip", "Reaper's Mark"]
+    confidence: medium
+  - a: malthael
+    b: tyrande
+    why: "Hunter's Mark lowers a target's Armor by 15, so Malthael's Basic Attacks and Reaper's Mark ticks hit harder on the Hero Tyrande has already focused."
+    evidence: ["Hunter's Mark", "Reaper's Mark"]
+    confidence: low

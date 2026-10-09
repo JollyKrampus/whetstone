@@ -1,0 +1,63 @@
+hero: deckard
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Deckard has no dash or blink, so his safety depends on landing Scroll of Sealing and Horadric Cube."
+  - tag: channel
+    why: "Stay Awhile and Listen is a 3-second channel, so a stun or silence on Deckard ends the sleep early."
+  - tag: peel
+    why: "Horadric Cube's slow and Scroll of Sealing's root stop divers who commit onto his backline."
+counters:
+  # --- strong against ---
+  - a: deckard
+    b: illidan
+    why: "Illidan has to stay on top of his target; Horadric Cube's slow sets up Scroll of Sealing's root, and Stay Awhile and Listen sleeps him when he dives into a group."
+    evidence: ["Horadric Cube", "Scroll Of Sealing", "Stay Awhile and Listen", "Dive"]
+    confidence: low
+  - a: deckard
+    b: kerrigan
+    why: "Kerrigan commits in melee after Ravage; Scroll of Sealing roots her inside the triangle and Kanai's Cube cuts her damage by 30%."
+    evidence: ["Scroll Of Sealing", "Kanai's Cube", "Ravage"]
+    confidence: low
+  - a: deckard
+    b: thebutcher
+    why: "Ruthless Onslaught brings Butcher straight into the group, where Stay Awhile and Listen sleeps him and Scroll of Sealing roots him once the Unstoppable charge ends."
+    evidence: ["Stay Awhile and Listen", "Scroll Of Sealing", "Ruthless Onslaught"]
+    confidence: low
+  # --- weak against ---
+  - a: tracer
+    b: deckard
+    why: "Scroll of Sealing takes 2.25 seconds to close, easy for Tracer to Blink out of, and Deckard has no escape from her basic attacks."
+    evidence: ["Blink", "Reload", "Scroll Of Sealing"]
+    confidence: medium
+  - a: zeratul
+    b: deckard
+    why: "From stealth Zeratul Blinks onto an immobile Deckard, and his burst lands long before a scroll can form around him."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Scroll Of Sealing"]
+    confidence: medium
+  - a: genji
+    b: deckard
+    why: "Cyber Agility and Swift Strike dodge the slow-forming Scroll of Sealing and reach Deckard before Horadric Cube can slow him."
+    evidence: ["Cyber Agility", "Swift Strike", "Scroll Of Sealing", "Horadric Cube"]
+    confidence: low
+  - a: nova
+    b: deckard
+    why: "An immobile Deckard is an easy Snipe target from stealth, and he has nothing to punish Nova at long range."
+    evidence: ["Snipe", "Permanent Cloak"]
+    confidence: low
+synergies:
+  - a: deckard
+    b: kaelthas
+    why: "Scroll of Sealing roots for 1.5 seconds, enough for Flamestrike's 1-second delay to hit the rooted heroes."
+    evidence: ["Scroll Of Sealing", "Flamestrike"]
+    confidence: medium
+  - a: deckard
+    b: mei
+    why: "Ice Wall traps heroes in place while Scroll of Sealing's triangle forms, so it roots several at once."
+    evidence: ["Ice Wall", "Scroll Of Sealing"]
+    confidence: medium
+  - a: deckard
+    b: zarya
+    why: "Graviton Surge holds heroes inside the forming Scroll of Sealing, which deals 200% more damage with Scroll of Stone Curse when it catches two or more."
+    evidence: ["Graviton Surge", "Scroll Of Sealing", "Scroll of Stone Curse"]
+    confidence: medium

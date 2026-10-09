@@ -1,0 +1,77 @@
+hero: xul
+reviewedFor: "2.57"
+traits:
+  - tag: waveclear
+    why: "Cursed Strikes cleaves in a wide area and Raise Skeleton turns dying minions into attackers, so Xul clears waves very fast."
+  - tag: split-push
+    why: "Skeletal Warriors and quick waveclear let Xul hold or push a side lane alone while his team plays elsewhere."
+counters:
+  # --- strong against ---
+  - a: xul
+    b: thebutcher
+    why: "Cursed Strikes cuts The Butcher's attack speed by 40%, slashing both his damage and the healing he gets from Butcher's Brand."
+    evidence: ["Cursed Strikes", "Butcher's Brand"]
+    confidence: medium
+  - a: xul
+    b: rexxar
+    why: "Cursed Strikes slows the attack speed of Heroes and Summons by 40%, so both Rexxar and Misha, who deal most of their damage with basic attacks, lose a big share of their output."
+    evidence: ["Cursed Strikes", "Bestial Wrath"]
+    confidence: medium
+  - a: xul
+    b: varian
+    why: "Cursed Strikes cuts attack speed by 40%, which hits a Twin Blades of Fury Varian hardest, and Bone Prison roots him in place."
+    evidence: ["Cursed Strikes", "Bone Prison", "Twin Blades of Fury"]
+    conditions: "Varian on Twin Blades of Fury."
+    confidence: medium
+  - a: xul
+    b: thrall
+    why: "Cursed Strikes cuts Thrall's attack speed by 40%, blunting Windfury's burst and slowing how fast he builds Frostwolf Resilience healing."
+    evidence: ["Cursed Strikes", "Windfury", "Frostwolf Resilience"]
+    confidence: low
+  - a: xul
+    b: valla
+    why: "Cursed Strikes slows Valla's attack speed by 40% once Xul reaches her, and Bone Prison roots her so that he can."
+    evidence: ["Cursed Strikes", "Bone Prison", "Hatred"]
+    confidence: low
+  - a: xul
+    b: raynor
+    why: "Cursed Strikes cuts the attack speed of Heroes it hits by 40%, gutting Raynor's Inspire-fuelled damage once Xul reaches him, and Bone Prison's root helps him get there."
+    evidence: ["Cursed Strikes", "Bone Prison", "Inspire"]
+    confidence: low
+  # --- weak against ---
+  - a: tracer
+    b: xul
+    why: "Tracer fights from range while Blinking, so Xul's melee Cursed Strikes rarely touch her, and Recall cleanses Bone Prison's Root once it lands."
+    evidence: ["Blink", "Recall", "Cursed Strikes", "Bone Prison"]
+    confidence: low
+  - a: genji
+    b: xul
+    why: "Genji fights at range with Shuriken and hops away with Cyber Agility, so Xul's melee Cursed Strikes rarely connect and he has no gap closer to follow."
+    evidence: ["Shuriken", "Cyber Agility", "Cursed Strikes"]
+    confidence: low
+  - a: liming
+    b: xul
+    why: "Arcane Orb and Magic Missiles let Li-Ming poke Xul from long range, and Teleport keeps her out of Cursed Strikes' melee cleave since he has no gap closer."
+    evidence: ["Arcane Orb", "Magic Missiles", "Teleport", "Cursed Strikes"]
+    confidence: low
+  - a: sgthammer
+    b: xul
+    why: "Xul has no gap closer, so a sieging Hammer with doubled range and Concussive Blast's knockback keeps his melee Cursed Strikes away, while Advanced Artillery's splash clears his Skeletal Warriors."
+    evidence: ["Siege Mode", "Concussive Blast", "Advanced Artillery", "Cursed Strikes", "Raise Skeleton"]
+    confidence: low
+synergies:
+  - a: xul
+    b: zarya
+    why: "Graviton Surge groups enemies so Poison Nova's missiles hit all of them, and Shield Ally keeps Xul alive while he fights in melee."
+    evidence: ["Graviton Surge", "Shield Ally", "Poison Nova"]
+    confidence: medium
+  - a: mei
+    b: xul
+    why: "Ice Wall traps enemies for 2.5 seconds, long enough for Bone Prison's delayed Root and Poison Nova to land."
+    evidence: ["Ice Wall", "Bone Prison", "Poison Nova"]
+    confidence: medium
+  - a: stitches
+    b: xul
+    why: "Bone Prison's 2-second delay is easy to land on a target that has just been Hooked and Slammed, and its Root then holds them for Xul's skeletons."
+    evidence: ["Hook", "Slam", "Bone Prison"]
+    confidence: low

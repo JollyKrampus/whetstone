@@ -1,0 +1,76 @@
+hero: chromie
+reviewedFor: "2.57"
+traits:
+  - tag: poke
+    why: "Sand Blast hits hard from long range every 3 seconds, chipping enemies down before a fight starts."
+  - tag: immobile
+    why: "Chromie has no dash or blink in her base kit; the Time Out talent is her only self-protection, so divers who reach her usually win."
+counters:
+  # --- strong against ---
+  - a: chromie
+    b: sgthammer
+    why: "A sieged Hammer stands still, so Sand Blast's 0.5-second delay and Dragon's Breath's staggered blasts land every time."
+    evidence: ["Sand Blast", "Dragon's Breath", "Siege Mode"]
+    confidence: medium
+  - a: chromie
+    b: nazeebo
+    why: "Ravenous Spirit roots Nazeebo in place for up to 8 seconds, letting all three Dragon's Breath blasts and repeated Sand Blasts hit him."
+    evidence: ["Dragon's Breath", "Sand Blast", "Ravenous Spirit"]
+    confidence: medium
+  - a: chromie
+    b: azmodan
+    why: "All Shall Burn slows Azmodan by 30% while he channels, giving Chromie free Sand Blasts and Dragon's Breath hits on a target that can't dodge."
+    evidence: ["Sand Blast", "Dragon's Breath", "All Shall Burn"]
+    confidence: low
+  # --- weak against ---
+  - a: zeratul
+    b: chromie
+    why: "Chromie cannot escape a Blink from stealth, and Cleave plus Singularity Spike kill her before Time Trap can be set up."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Time Trap"]
+    confidence: high
+  - a: tracer
+    b: chromie
+    why: "Blink charges sidestep Sand Blast's delay and Time Trap, and Chromie can't run from Tracer's constant basic attacks."
+    evidence: ["Blink", "Reload", "Sand Blast", "Time Trap"]
+    confidence: medium
+  - a: genji
+    b: chromie
+    why: "Cyber Agility and Swift Strike close the distance instantly, and Deflect blocks the Sand Blast she fires in panic."
+    evidence: ["Cyber Agility", "Swift Strike", "Deflect", "Sand Blast"]
+    confidence: medium
+  - a: anubarak
+    b: chromie
+    why: "Chromie has no escape in her base kit; Burrow Charge lands on her, Impale follows, and Harden Carapace soaks Sand Blast on the way in."
+    evidence: ["Burrow Charge", "Impale", "Harden Carapace", "Sand Blast"]
+    confidence: medium
+  - a: artanis
+    b: chromie
+    why: "Phase Prism pulls an immobile Chromie into Artanis' team, and Twin Blades closes the gap again if she survives the swap."
+    evidence: ["Phase Prism", "Twin Blades"]
+    confidence: medium
+  - a: garrosh
+    b: chromie
+    why: "Wrecking Ball throws the immobile Chromie into Garrosh's team, where she has no tool to get back out."
+    evidence: ["Wrecking Ball"]
+    confidence: medium
+synergies:
+  - a: anubarak
+    b: chromie
+    why: "Impale's 1-second stun covers Sand Blast's 0.5-second delay and the staggered blasts of Dragon's Breath."
+    evidence: ["Impale", "Sand Blast", "Dragon's Breath"]
+    confidence: medium
+  - a: chromie
+    b: muradin
+    why: "Storm Bolt's 1.25-second stun covers Sand Blast's delay and the first blasts of Dragon's Breath."
+    evidence: ["Storm Bolt", "Sand Blast", "Dragon's Breath"]
+    confidence: medium
+  - a: chromie
+    b: mei
+    why: "Ice Wall traps heroes for 2.5 seconds, enough for all three Dragon's Breath blasts to land."
+    evidence: ["Ice Wall", "Dragon's Breath"]
+    confidence: medium
+  - a: chromie
+    b: zarya
+    why: "Graviton Surge holds heroes in one spot so Dragon's Breath and Sand Blast hit the whole clump."
+    evidence: ["Graviton Surge", "Dragon's Breath", "Sand Blast"]
+    confidence: medium

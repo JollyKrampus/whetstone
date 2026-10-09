@@ -1,0 +1,66 @@
+hero: uther
+reviewedFor: "2.57"
+traits:
+  - tag: save
+    why: "Divine Shield makes an ally Invulnerable for 3 seconds, and Devotion's Eternal Vanguard lets Uther keep healing after he dies."
+  - tag: peel
+    why: "Hammer of Justice is a targeted 1-second stun that stops a diver on his carries without needing to aim."
+counters:
+  # --- strong against ---
+  - a: uther
+    b: tracer
+    why: "Hammer of Justice is a targeted stun that Blink can't dodge once cast, and Divine Shield blanks Pulse Bomb's burst on an ally."
+    evidence: ["Hammer of Justice", "Divine Shield", "Pulse Bomb", "Blink"]
+    confidence: medium
+  - a: uther
+    b: valeera
+    why: "Hammer of Justice stuns Valeera as soon as she reveals herself to attack, and Divine Shield wastes the burst she poured into her target."
+    evidence: ["Hammer of Justice", "Divine Shield", "Vanish"]
+    confidence: medium
+  - a: uther
+    b: zeratul
+    why: "Divine Shield blanks Zeratul's burst on an ally, and Hammer of Justice's targeted stun stops him once he decloaks."
+    evidence: ["Divine Shield", "Hammer of Justice", "Permanent Cloak"]
+    confidence: medium
+  - a: uther
+    b: greymane
+    why: "Divine Shield wastes Go for the Throat or Cursed Bullet on an ally, and Hammer of Justice stops Greymane as he Darkflights in."
+    evidence: ["Divine Shield", "Hammer of Justice", "Go for the Throat", "Cursed Bullet", "Darkflight"]
+    confidence: medium
+  # --- weak against ---
+  - a: ana
+    b: uther
+    why: "Biotic Grenade blocks healing on everyone it hits, so Holy Light and Holy Radiance cast into it are wasted for its duration."
+    evidence: ["Biotic Grenade", "Holy Light", "Holy Radiance"]
+    confidence: medium
+  - a: alarak
+    b: uther
+    why: "Discord Strike silences a melee-range Uther for 1.5 seconds, stopping Holy Light and Divine Shield while Alarak bursts his target."
+    evidence: ["Discord Strike", "Holy Light", "Divine Shield"]
+    confidence: low
+  - a: stukov
+    b: uther
+    why: "Lurking Arm silences everything in its zone, and Uther must stand close to land Holy Radiance and Hammer of Justice, so he loses his tools inside it."
+    evidence: ["Lurking Arm", "Holy Radiance", "Hammer of Justice"]
+    confidence: low
+synergies:
+  - a: illidan
+    b: uther
+    why: "Divine Shield makes a diving Illidan Invulnerable for 3 seconds, and Hammer of Justice stuns the peeler who would otherwise lock him down."
+    evidence: ["Divine Shield", "Hammer of Justice", "Dive"]
+    confidence: medium
+  - a: uther
+    b: valla
+    why: "Hammer of Justice and Devotion's Armor protect an immobile basic-attack carry like Valla, and Divine Shield saves her from a committed dive."
+    evidence: ["Hammer of Justice", "Devotion", "Divine Shield", "Hatred"]
+    confidence: medium
+  - a: uther
+    b: zuljin
+    why: "Zul'jin attacks faster the lower his Health; Divine Shield and Taz'dingo! let him sit near death at full Berserker speed without dying."
+    evidence: ["Divine Shield", "Taz'dingo!", "Berserker"]
+    confidence: medium
+  - a: uther
+    b: varian
+    why: "Devotion's Armor and Holy Light keep Varian alive as he Charges in, and Hammer of Justice chains with Taunt to lock a target down."
+    evidence: ["Devotion", "Holy Light", "Hammer of Justice", "Charge", "Taunt"]
+    confidence: low
