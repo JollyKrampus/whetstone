@@ -8,16 +8,26 @@
  * referenced set changes.
  */
 import type { Http } from '../../../../core/game.ts';
+import { parseJsdelivrVersions, parseTagsApi } from '../transform/github.ts';
 import { IMAGES_REPO, type ImageFolder, type ImageRef } from '../transform/images.ts';
 import { isRecord } from '../util.ts';
 
 const API = `https://api.github.com/repos/${IMAGES_REPO}`;
 const GH_HEADERS = { accept: 'application/vnd.github+json', 'x-github-api-version': '2022-11-28' };
 
+export const JSDELIVR_LISTING = `https://data.jsdelivr.com/v1/packages/gh/${IMAGES_REPO}`;
+
+/** Tag names: the GitHub tags API, else jsDelivr's package listing (no GitHub API quota). */
 export async function fetchImageTags(http: Http): Promise<string[]> {
-  const raw = await http.json<unknown>(`${API}/tags?per_page=100`, { fixture: 'heroes-images/tags', ttlHours: 6, headers: GH_HEADERS });
-  if (!Array.isArray(raw)) throw new Error('GitHub tags API did not return a list');
-  return raw.filter(isRecord).map((t) => t.name).filter((n): n is string => typeof n === 'string');
+  try {
+    return parseTagsApi(await http.json<unknown>(`${API}/tags?per_page=100`, { fixture: 'heroes-images/tags', ttlHours: 6, headers: GH_HEADERS }));
+  } catch (err) {
+    try {
+      return parseJsdelivrVersions(await http.json<unknown>(JSDELIVR_LISTING, { fixture: 'heroes-images/jsdelivr-versions', ttlHours: 6 }));
+    } catch {
+      throw err;
+    }
+  }
 }
 
 /** `heroesimages/<folder>/<file>` → git blob sha for the folders the site uses. */

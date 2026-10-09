@@ -100,7 +100,8 @@ export async function runLiquipedia(env: RunEnv, heroes: readonly HeroInput[]): 
     }
 
     if (changed !== null && changed.size === 0 && prevPro) {
-      setOk(env, 'liquipedia', 'no wiki changes since the last fetch');
+      // Same detail as a full refresh with the same result, so meta.json (and dataHash) stay stable.
+      setOk(env, 'liquipedia', `${prevPro.totals.tournaments} tournaments, ${prevPro.totals.maps} drafted maps`);
       return { pro: prevPro, heroPages };
     }
 

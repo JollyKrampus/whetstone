@@ -87,7 +87,7 @@ export async function runImages(env: RunEnv, rawRefs: readonly ImageRef[], dataB
   }
 
   if (indexUnchanged(prevIndex, tag, refs)) {
-    setOk(env, 'heroes-images', `unchanged at ${tag}`);
+    setOk(env, 'heroes-images', `${tag}: ${refs.length} images`);
     return { files: [], tag };
   }
 

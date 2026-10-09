@@ -1,17 +1,20 @@
 /**
  * HeroesToolChest heroes-data2 (network only). The release zip is downloaded over HTTPS from
  * github.com releases; `.version.json` gates which build exists; the GitHub releases API (one
- * unauthenticated call) supplies build publish dates for patch/diff dating.
+ * unauthenticated call, or the releases Atom feed when the API quota is used up) supplies build
+ * publish dates for patch/diff dating.
  */
 import { unzipSync } from 'fflate';
 import type { Http } from '../../../../core/game.ts';
 import { readRelease, wantedEntry, type RawRelease } from '../transform/release.ts';
+import { parseReleasesApi, parseReleasesAtom } from '../transform/github.ts';
 import type { BuildDate } from '../transform/patchset.ts';
-import { BUILD_RE, isRecord } from '../util.ts';
+import { isRecord } from '../util.ts';
 
 export const HD2_REPO = 'HeroesToolChest/heroes-data2';
 export const VERSION_URL = `https://raw.githubusercontent.com/${HD2_REPO}/main/heroesdata/.version.json`;
 export const RELEASES_API = `https://api.github.com/repos/${HD2_REPO}/releases?per_page=100`;
+export const RELEASES_ATOM = `https://github.com/${HD2_REPO}/releases.atom`;
 
 export interface VersionInfo {
   latest: string;
@@ -25,22 +28,25 @@ export async function fetchVersionInfo(http: Http): Promise<VersionInfo> {
   return { latest: raw.latest, versions };
 }
 
-/** Release tag → publish date for every heroes-data2 release (empty on failure: dates are optional). */
+/**
+ * Release tag → publish date for heroes-data2 releases: the GitHub API (all releases), else the
+ * releases Atom feed (latest 10, no API quota). Callers treat a failure as "dates unknown".
+ */
 export async function fetchReleaseDates(http: Http): Promise<BuildDate[]> {
-  const raw = await http.json<unknown>(RELEASES_API, {
-    fixture: 'heroes-data2/releases',
-    ttlHours: 6,
-    headers: { accept: 'application/vnd.github+json', 'x-github-api-version': '2022-11-28' },
-  });
-  if (!Array.isArray(raw)) throw new Error('GitHub releases API did not return a list');
-  const out: BuildDate[] = [];
-  for (const r of raw) {
-    if (!isRecord(r) || typeof r.tag_name !== 'string' || typeof r.published_at !== 'string') continue;
-    const build = r.tag_name.replace(/^v/, '').replace(/_\d+$/, '');
-    if (!BUILD_RE.test(build.replace(/_ptr$/, ''))) continue;
-    out.push({ build, date: r.published_at.slice(0, 10) });
+  try {
+    const raw = await http.json<unknown>(RELEASES_API, {
+      fixture: 'heroes-data2/releases',
+      ttlHours: 6,
+      headers: { accept: 'application/vnd.github+json', 'x-github-api-version': '2022-11-28' },
+    });
+    return parseReleasesApi(raw);
+  } catch (err) {
+    try {
+      return parseReleasesAtom(await http.text(RELEASES_ATOM, { fixture: 'heroes-data2/releases-atom', ttlHours: 6, headers: { accept: 'application/atom+xml' } }));
+    } catch {
+      throw err;
+    }
   }
-  return out;
 }
 
 export function releaseZipUrl(tag: string, build: string): string {

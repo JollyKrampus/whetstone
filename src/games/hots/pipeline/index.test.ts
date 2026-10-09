@@ -150,6 +150,13 @@ describe('offline run on recorded fixtures', () => {
     expect(meta(again).dataHash).toBe(meta(out).dataHash);
   });
 
+  it('reports no change on a second run with the same upstream data (incremental paths)', async () => {
+    const before = meta(out).dataHash;
+    const s = await run({ out, now: new Date(FIXTURE_NOW.getTime() + 3600 * 1000) });
+    expect(s.reports[0]?.status.changed).toBe(false);
+    expect(meta(out).dataHash).toBe(before);
+  });
+
   it('keeps last-good files with stale statuses when sources go down', async () => {
     const before = meta(out);
     const patches = readFileSync(path.join(out, 'current/hots/patches.json'), 'utf8');
