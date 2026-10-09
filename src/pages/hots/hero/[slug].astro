@@ -1,7 +1,8 @@
 ---
 /**
- * /hots/hero/[slug]/ (SPEC §8): one page per draftable entity, plus redirect pages for
- * composite members (cho, gall -> chogall). Sections live in tabs with hash deep links:
+ * /hots/hero/[slug]/ (SPEC §8): one page per draftable entity, plus noindex redirect pages for
+ * composite members (cho, gall -> chogall) and URL-style aliases (li-ming -> liming), see
+ * src/games/hots/redirects.ts. Sections live in tabs with hash deep links:
  * #counters #maps #talents #abilities #history #guides. Statistics views carry a mode and
  * patch-window switch and the Heroes Profile credit; theory views say they are theory.
  */
@@ -36,7 +37,6 @@ import {
   getDiffs,
   getDraftableEntities,
   getHeroById,
-  getHeroes,
   getHeroLinks,
   getHeroPatchHistory,
   getMaps,
@@ -50,36 +50,28 @@ import {
   type MapFitRow,
 } from '../../../games/hots/load.ts';
 import type { Hero } from '../../../games/hots/schema.ts';
+import { heroSlugRedirects, redirectHtml } from '../../../games/hots/redirects.ts';
 import { heroHref, mapFitRow } from '../../../games/hots/view.ts';
 import Crumbs from '../../../games/hots/components/Crumbs.astro';
 import GameLayout from '../../../layouts/GameLayout.astro';
 
 export const getStaticPaths = (() => {
   const pages = getDraftableEntities().map((h) => ({ params: { slug: h.slug }, props: { id: h.id } }));
-  // Members of a composite (Cho, Gall) have no page of their own: their slugs redirect.
-  const members = getHeroes()
-    .filter((h) => h.memberOf)
-    .map((h) => ({ params: { slug: h.slug }, props: { id: h.id } }));
-  return [...pages, ...members];
+  // Member slugs (cho, gall) and URL-style aliases (li-ming) have no page of their own: they redirect.
+  const redirects = heroSlugRedirects().map((r) => ({ params: { slug: r.from }, props: { redirectTo: r.to } }));
+  return [...pages, ...redirects];
 }) satisfies GetStaticPaths;
 
-interface Props {
-  id: string;
-}
+type Props = { id: string } | { redirectTo: string };
 
-/** Instant redirect for member slugs (cho, gall): meta refresh plus a link, kept out of search. */
-function redirectPage(to: string): string {
-  const abs = new URL(to, Astro.site).href;
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark light"><title>Redirecting…</title><meta name="robots" content="noindex"><link rel="canonical" href="${abs}"><meta http-equiv="refresh" content="0;url=${to}"></head><body><p><a href="${to}">Continue to the hero page</a></p></body></html>`;
+if ('redirectTo' in Astro.props) {
+  const target = getDraftableEntities().find((h) => h.slug === (Astro.props as { redirectTo: string }).redirectTo);
+  if (!target) throw new Error(`Redirect target ${Astro.props.redirectTo} is missing`);
+  const to = heroHref(target);
+  return new Response(redirectHtml(to, new URL(to, Astro.site).href, 'Continue to the hero page'), { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 }
-
 const record = getHeroById(Astro.props.id);
-if (!record) throw new Error(`Unknown hero id ${Astro.props.id}`);
-if (record.memberOf) {
-  const composite = getHeroById(record.memberOf);
-  if (!composite) throw new Error(`Composite ${record.memberOf} of ${record.id} is missing`);
-  return new Response(redirectPage(heroHref(composite)), { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
-}
+if (!record || record.memberOf) throw new Error(`Unknown hero id ${Astro.props.id}`);
 const hero: Hero = record;
 const meta = getMeta();
 const members = getMembers(hero);

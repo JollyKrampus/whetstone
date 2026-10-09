@@ -149,6 +149,22 @@ test('pages stay within a 360 px viewport', async ({ page }) => {
   }
 });
 
+test('the current section is scrolled into view in a narrow game sub-nav', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 780 });
+  for (const g of games) {
+    const last = g.nav.at(-1);
+    if (!last) continue;
+    await page.goto(`${g.id}/${last.path}`);
+    const nav = page.locator('.gamebar__nav');
+    const link = nav.locator('[aria-current="page"]');
+    await expect(link).toHaveText(last.label);
+    const n = await nav.boundingBox();
+    const l = await link.boundingBox();
+    expect.soft(l && n && l.x >= n.x && l.x + l.width <= n.x + n.width, `${last.label} visible in the ${g.id} sub-nav`).toBe(true);
+    expect.soft(await page.evaluate(() => window.scrollY), 'no vertical scroll').toBe(0);
+  }
+});
+
 test('internal links two levels deep resolve (sampled per page template)', async ({ page }) => {
   test.setTimeout(180_000);
   const w = watch(page);

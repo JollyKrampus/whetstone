@@ -3,13 +3,15 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
+import { redirectPaths } from './src/games/hots/redirects.ts';
 import { pendingSections } from './src/lib/routes.ts';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const BASE = '/whetstone';
 
-// Placeholder pages for unbuilt game sections are noindex, so keep them out of the sitemap too.
-const placeholderPaths = new Set(pendingSections(ROOT).map((s) => `${BASE}/${s.game}/${s.section}/`));
+// Noindex pages stay out of the sitemap too: placeholders for unbuilt game sections, and the
+// HotS slugs that only redirect (cho/gall → chogall, li-ming → liming, cursedhollow → cursed-hollow).
+const noindexPaths = new Set([...pendingSections(ROOT).map((s) => `${BASE}/${s.game}/${s.section}/`), ...redirectPaths(BASE)]);
 
 /** Lower-cased on Windows so drive-letter casing differences in module ids don't defeat the check. */
 function normalizeId(id) {
@@ -57,7 +59,7 @@ export default defineConfig({
   // Astro 7 defaults to JSX whitespace rules, which silently glue inline elements together
   // ("2.57·updated"). HTML-aware compression keeps authored spacing predictable.
   compressHTML: true,
-  integrations: [preact(), sitemap({ filter: (page) => !placeholderPaths.has(new URL(page).pathname) })],
+  integrations: [preact(), sitemap({ filter: (page) => !noindexPaths.has(new URL(page).pathname) })],
   vite: {
     plugins: [serverOnlyGuard()],
   },

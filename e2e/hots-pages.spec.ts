@@ -282,6 +282,16 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await page.locator('a[data-tab="talents"]').click();
       await expect(page.locator('#talents .ttiers__name')).toHaveText(['Cho', 'Gall']);
     });
+
+    test('heroescounters-style slugs redirect and stay out of the sitemap', async ({ page, request }) => {
+      await page.goto('hots/hero/li-ming/');
+      await expect(page).toHaveURL(new RegExp(`${BASE}hots/hero/liming/$`));
+      await page.goto('hots/map/cursedhollow/');
+      await expect(page).toHaveURL(new RegExp(`${BASE}hots/map/cursed-hollow/$`));
+      const sitemap = await (await request.get('sitemap-0.xml')).text();
+      expect(sitemap).toContain('/hots/hero/liming/');
+      for (const slug of ['hero/cho/', 'hero/gall/', 'hero/li-ming/', 'map/cursedhollow/']) expect(sitemap, slug).not.toContain(`/hots/${slug}`);
+    });
   });
 
   test.describe('hero page links', () => {

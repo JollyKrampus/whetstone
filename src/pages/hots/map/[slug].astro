@@ -16,18 +16,29 @@ import TheoryNotice from '../../../games/hots/components/TheoryNotice.astro';
 import { MAP_KIND_LABEL, mapTagLabel } from '../../../games/hots/components/labels.ts';
 import { sourceNames, statsModes, theoryHeroesForMap, type ModeOption, type PeriodOption } from '../../../games/hots/components/pagedata.ts';
 import { getMapBySlug, getMaps, getPatches, getStatsWindow, hasAsset, heroesForMap } from '../../../games/hots/load.ts';
+import { mapSlugRedirects, redirectHtml } from '../../../games/hots/redirects.ts';
 import { heroFitRow, mapHref, mapImage, patchHref } from '../../../games/hots/view.ts';
 import Crumbs from '../../../games/hots/components/Crumbs.astro';
 import GameLayout from '../../../layouts/GameLayout.astro';
 
-export const getStaticPaths = (() => getMaps().map((m) => ({ params: { slug: m.id }, props: { id: m.id } }))) satisfies GetStaticPaths;
+// Compact slugs (cursedhollow, as heroescounters.com wrote them) redirect: src/games/hots/redirects.ts.
+export const getStaticPaths = (() => [
+  ...getMaps().map((m) => ({ params: { slug: m.id }, props: { id: m.id } })),
+  ...mapSlugRedirects().map((r) => ({ params: { slug: r.from }, props: { id: r.to, redirect: true } })),
+]) satisfies GetStaticPaths;
 
 interface Props {
   id: string;
+  /** This slug only redirects to the map `id`. */
+  redirect?: boolean;
 }
 
 const map = getMapBySlug(Astro.props.id);
 if (!map) throw new Error(`Unknown map ${Astro.props.id}`);
+if (Astro.props.redirect) {
+  const to = mapHref(map);
+  return new Response(redirectHtml(to, new URL(to, Astro.site).href, 'Continue to the map page'), { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
 const modes = statsModes();
 const statsOn = modes.length > 0;
 const names = sourceNames();

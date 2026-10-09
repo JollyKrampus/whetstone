@@ -221,6 +221,10 @@ test.describe('MTGA Limited ratings', () => {
 
     await table.locator('tbody .cardref').first().click();
     await expect(page.locator('dialog.peek[open]')).toContainText('GIH WR');
+    // Modal dialogs are centred (global.css restores the UA's margin: auto after the reset).
+    const box = await page.locator('dialog.peek[open]').boundingBox();
+    const width = page.viewportSize()?.width ?? 0;
+    expect(Math.abs((box?.x ?? 0) + (box?.width ?? 0) / 2 - width / 2)).toBeLessThan(2);
     await page.keyboard.press('Escape');
     expect(errors).toEqual([]);
   });

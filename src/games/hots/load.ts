@@ -470,7 +470,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { parse as parseYaml } from 'yaml';
 import { parseData } from '../../core/schemas.ts';
 import { repoRoot } from '../../lib/datadir.ts';
-import { CreatorsFileSchema, type CreatorsFile } from './schema.ts';
+import { AliasesFileSchema, CreatorsFileSchema, type CreatorsFile } from './schema.ts';
 
 /**
  * curated/hots/creators.yaml, validated: the hand-checked video and stream channels
@@ -481,6 +481,16 @@ export function getCreators(): CreatorsFile | null {
     const file = path.join(repoRoot(), 'curated', 'hots', 'creators.yaml');
     if (!existsSync(file)) return null;
     return parseData(CreatorsFileSchema, parseYaml(readFileSync(file, 'utf8')), file, { roundTrip: false });
+  });
+}
+
+/** Map slug → extra lowercase aliases from curated/hots/aliases.yaml (maps carry none in maps.json). */
+export function getMapAliases(): ReadonlyMap<string, readonly string[]> {
+  return memo('map-aliases', () => {
+    const file = path.join(repoRoot(), 'curated', 'hots', 'aliases.yaml');
+    if (!existsSync(file)) return new Map<string, readonly string[]>();
+    const parsed = parseData(AliasesFileSchema, parseYaml(readFileSync(file, 'utf8')), file, { roundTrip: false });
+    return new Map(Object.entries(parsed.maps));
   });
 }
 
