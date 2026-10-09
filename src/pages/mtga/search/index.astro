@@ -1,0 +1,31 @@
+---
+/** /mtga/search/ (SPEC §8): Scryfall-style search over the local Arena card index, in the browser. */
+import CardSearch from '../../../games/mtga/components/CardSearch.tsx';
+import '../../../games/mtga/components/mtga.css';
+import { getMeta, getShardSizes } from '../../../games/mtga/load.ts';
+import { shardUrls } from '../../../games/mtga/pagedata.ts';
+import { int } from '../../../core/format.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+const meta = getMeta();
+const sizes = { standard: getShardSizes('standard').gzip, arena: getShardSizes('arena').gzip };
+---
+
+<GameLayout
+  game="mtga"
+  title="MTG Arena card search"
+  description="Search every MTG Arena card with Scryfall-style filters (type, colour, mana value, rules text, rarity, format) without leaving the page."
+  uses={['scryfall']}
+>
+  <div class="mpage">
+    <header class="mpage__head">
+      <p class="kicker">Card search</p>
+      <h1>Search Arena cards</h1>
+      <p class="mpage__lead">
+        {int(meta.counts.cards ?? 0)} cards that exist on MTG Arena, {int(meta.counts.standardCards ?? 0)} of them legal in Standard. Searches run
+        on this page against a copy of Scryfall's card data; the wildcard rarity shown is the cheapest Arena printing.
+      </p>
+    </header>
+    <CardSearch client:load shards={shardUrls()} snapshot={meta.extra.snapshot} sizes={sizes} />
+  </div>
+</GameLayout>

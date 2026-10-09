@@ -1,0 +1,38 @@
+---
+/** /mtga/deck/ (SPEC §8): paste an Arena export for a full analysis in the browser (Web Worker). */
+import DeckAnalyzer from '../../../games/mtga/components/DeckAnalyzer.tsx';
+import '../../../games/mtga/components/mtga.css';
+import { bytesText } from '../../../games/mtga/lib/view.ts';
+import { getMeta, getShardSizes } from '../../../games/mtga/load.ts';
+import { curatedViews, sampleDeck, shardUrls } from '../../../games/mtga/pagedata.ts';
+import { navHref } from '../../../games/registry.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+const meta = getMeta();
+const shards = shardUrls();
+const sizes = { standard: getShardSizes('standard').gzip, arena: getShardSizes('arena').gzip };
+---
+
+<GameLayout
+  game="mtga"
+  title="MTG Arena deck analyzer"
+  description="Paste an MTG Arena deck export: legality in every Arena format, mana curve and colour sources, power tier with reasons, sample hands, wildcard cost and budget upgrades."
+  uses={['scryfall', 'grindstone-mcp']}
+>
+  <div class="mpage">
+    <header class="mpage__head">
+      <p class="kicker">Deck analyzer</p>
+      <h1>Analyze an Arena deck</h1>
+      <p class="mpage__lead">
+        Paste your list from MTG Arena. Everything is worked out in your browser from Scryfall card data of
+        <time datetime={meta.extra.snapshot}>{meta.extra.snapshot.slice(0, 10)}</time>; the first analysis downloads
+        {bytesText(sizes.standard)} of card data once (more only for decks outside Standard).
+      </p>
+    </header>
+    <DeckAnalyzer client:load shards={shards} snapshot={meta.extra.snapshot} curated={curatedViews()} sample={sampleDeck()} metaHref={navHref('mtga', 'meta/')} />
+    <p class="mpage__foot muted">
+      How the tier, roles and upgrades are worked out: <a href={navHref('mtga', 'about/')}>methodology</a>. Card images come from
+      Scryfall (cards.scryfall.io). Full Arena card data is {bytesText(sizes.arena)}.
+    </p>
+  </div>
+</GameLayout>

@@ -1,0 +1,25 @@
+---
+/** Definitions of the 17Lands-style metrics, in our own words (shown on every Limited page). */
+interface Props {
+  /** Heading level of the glossary title. */
+  level?: 2 | 3;
+}
+const { level = 2 } = Astro.props;
+const H = `h${level}` as 'h2' | 'h3';
+---
+
+<section class="glossary" aria-labelledby="glossary-title">
+  <H id="glossary-title" class="glossary__title">What the columns mean</H>
+  <dl class="glossary__list">
+    <div><dt>GIH WR</dt><dd>Games in hand win rate: how often decks won the games in which this card was in the opening hand or drawn. The most useful single number for judging a card.</dd></div>
+    <div><dt>OH WR / GD WR</dt><dd>The same, split into games where the card was in the opening hand and games where it was drawn later. Cheap cards usually do better in the opening hand.</dd></div>
+    <div><dt>GNS WR</dt><dd>Win rate of games where the card was in the deck but never seen. A low value means the decks that play it tend to be weaker overall.</dd></div>
+    <div><dt>IWD</dt><dd>Improvement when drawn: GIH WR minus GNS WR, in percentage points. How much drawing the card helped compared with not seeing it.</dd></div>
+    <div><dt>ALSA / ATA</dt><dd>Average pick number when the card was last seen in a pack, and when it was taken. Lower numbers mean drafters take it earlier.</dd></div>
+    <div><dt># GIH / GP WR</dt><dd>Games with the card in hand (the sample size), and the win rate of every deck that played it.</dd></div>
+  </dl>
+  <p class="glossary__note muted">
+    Win rates are whole-population averages from 17Lands users, who are on average stronger than the typical Arena player, so every
+    number runs a little high. Rows with fewer than 500 games in hand are marked as low sample; treat small differences there as noise.
+  </p>
+</section>

@@ -1,119 +1,182 @@
 [
   {
+    "arena": true,
+    "cardCount": 285,
+    "code": "FRA",
+    "kind": "expansion",
+    "name": "Reality Fracture",
+    "releasedAt": "2026-10-02",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 193,
+    "code": "HOB",
+    "kind": "expansion",
+    "name": "The Hobbit",
+    "releasedAt": "2026-08-14",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 281,
     "code": "MSH",
+    "kind": "expansion",
     "name": "Marvel Super Heroes",
     "releasedAt": "2026-06-26",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/msh.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 271,
     "code": "SOS",
+    "kind": "expansion",
     "name": "Secrets of Strixhaven",
     "releasedAt": "2026-04-24",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/sos.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 195,
+    "code": "TMT",
+    "kind": "expansion",
+    "name": "Teenage Mutant Ninja Turtles",
+    "releasedAt": "2026-03-06",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 273,
     "code": "ECL",
+    "kind": "expansion",
     "name": "Lorwyn Eclipsed",
     "releasedAt": "2026-01-23",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/ecl.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 286,
     "code": "TLA",
+    "kind": "expansion",
     "name": "Avatar: The Last Airbender",
     "releasedAt": "2025-11-21",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/tla.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 193,
+    "code": "SPM",
+    "kind": "expansion",
+    "name": "Marvel's Spider-Man",
+    "releasedAt": "2025-09-26",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 266,
+    "code": "EOE",
+    "kind": "expansion",
+    "name": "Edge of Eternities",
+    "releasedAt": "2025-08-01",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 312,
+    "code": "FIN",
+    "kind": "expansion",
+    "name": "Final Fantasy",
+    "releasedAt": "2025-06-13",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 276,
     "code": "TDM",
+    "kind": "expansion",
     "name": "Tarkir: Dragonstorm",
     "releasedAt": "2025-04-11",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/tdm.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 276,
     "code": "DFT",
+    "kind": "expansion",
     "name": "Aetherdrift",
     "releasedAt": "2025-02-14",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/dft.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 517,
     "code": "FDN",
+    "kind": "core",
     "name": "Foundations",
     "releasedAt": "2024-11-15",
-    "kind": "core",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/fdn.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 276,
     "code": "DSK",
+    "kind": "expansion",
     "name": "Duskmourn: House of Horror",
     "releasedAt": "2024-09-27",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/dsk.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 279,
     "code": "BLB",
+    "kind": "expansion",
     "name": "Bloomburrow",
     "releasedAt": "2024-08-02",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/blb.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 30,
+    "code": "BIG",
+    "kind": "expansion",
+    "name": "The Big Score",
+    "releasedAt": "2024-04-19",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 276,
     "code": "OTJ",
+    "kind": "expansion",
     "name": "Outlaws of Thunder Junction",
     "releasedAt": "2024-04-19",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/otj.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 279,
     "code": "MKM",
+    "kind": "expansion",
     "name": "Murders at Karlov Manor",
     "releasedAt": "2024-02-09",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/mkm.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 291,
     "code": "LCI",
+    "kind": "expansion",
     "name": "The Lost Caverns of Ixalan",
     "releasedAt": "2023-11-17",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/lci.svg"
+    "standard": true
   },
   {
+    "arena": true,
+    "cardCount": 281,
     "code": "WOE",
+    "kind": "expansion",
     "name": "Wilds of Eldraine",
     "releasedAt": "2023-09-08",
-    "kind": "expansion",
-    "arena": true,
-    "standard": true,
-    "icon": "https://svgs.scryfall.io/sets/woe.svg"
+    "standard": true
   }
 ]

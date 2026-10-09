@@ -1,0 +1,273 @@
+---
+/**
+ * /mtga/about/ (SPEC §8): methodology of the MTGA tools (grindstone's rubric, read from the
+ * vendored rubric files so the page never drifts from the engine), sources, privacy notes and the
+ * Wizards Fan Content Policy notice.
+ */
+import { brawlRubric, constructedRubric } from '#vendor/grindstone/core.js';
+import SourceAttribution from '../../../components/SourceAttribution.astro';
+import '../../../games/mtga/components/mtga.css';
+import { formatDayUTC, int } from '../../../core/format.ts';
+import { cardFacts } from '../../../games/mtga/pagedata.ts';
+import { navHref, withBase } from '../../../games/registry.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+const facts = cardFacts();
+const c = constructedRubric();
+const b = brawlRubric();
+const w = (x: number) => `${Math.round(x * 100)}%`;
+const constructedDims = [
+  { name: 'Mana base', weight: c.weights.manaBase, what: 'Coloured sources against the Karsten targets, land count against the archetype, and lands that enter tapped.' },
+  { name: 'Speed / curve', weight: c.weights.speed, what: 'Average mana value, the share of cheap spells and the number of expensive ones, compared with what the archetype wants.' },
+  { name: 'Interaction', weight: c.weights.interaction, what: 'How many removal spells, counterspells and sweepers the deck runs, and how many of them are cheap.' },
+  { name: 'Card quality', weight: c.weights.cardQuality, what: 'With meta lists: how many of your nonland cards the meta decks also play, and how widely. Without: an estimate from popularity, rarity and age (low confidence).' },
+  { name: 'Consistency', weight: c.weights.consistency, what: 'Keepable openers, land drops and castable colours from the hand simulation, plus how many cards are 4-ofs.' },
+];
+const brawlDims = [
+  { name: 'Mana base', weight: b.weights.manaBase },
+  { name: 'Commander synergy', weight: b.weights.commanderSynergy },
+  { name: 'Ramp', weight: b.weights.ramp },
+  { name: 'Card draw', weight: b.weights.cardDraw },
+  { name: 'Interaction', weight: b.weights.interaction },
+  { name: 'Card quality', weight: b.weights.cardQuality },
+];
+const karsten = Object.entries(c.karsten.table).map(([pips, byMv]) => ({ pips, cells: [1, 2, 3, 4, 5, 6].map((mv) => byMv[String(mv)] ?? null) }));
+const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes)['aggro']][];
+---
+
+<GameLayout game="mtga" title="About the MTG Arena tools" description="How Whetstone's MTG Arena tools work: the grindstone power rubric, Karsten mana targets, hand simulation, upgrade planner, 17Lands Limited metrics, sources and privacy." uses={['scryfall', '17lands', 'grindstone-mcp', 'curated-meta']}>
+  <article class="mpage">
+    <header class="mpage__head">
+      <p class="kicker">About</p>
+      <h1>How the MTG Arena tools work</h1>
+      <p class="mpage__lead">
+        The deck tools run <a href="https://github.com/JollyKrampus/grindstone-mcp" rel="noopener">grindstone-mcp</a>'s engine (version
+        {facts.grindstone}) in your browser against a trimmed copy of Scryfall's card data. Every number below comes from the same rule files
+        the engine uses.
+      </p>
+    </header>
+
+    <nav class="toc card" aria-label="On this page">
+      <ol>
+        <li><a href="#legality">Legality</a></li>
+        <li><a href="#mana">Curve and mana</a></li>
+        <li><a href="#roles">Card roles</a></li>
+        <li><a href="#power">Power tier</a></li>
+        <li><a href="#hands">Hands and mulligans</a></li>
+        <li><a href="#wildcards">Wildcards and upgrades</a></li>
+        <li><a href="#meta">Meta lists</a></li>
+        <li><a href="#limited">Limited ratings</a></li>
+        <li><a href="#sources">Sources and privacy</a></li>
+      </ol>
+    </nav>
+
+    <div class="prose about">
+      <h2 id="legality">Legality</h2>
+      <p>
+        A pasted deck is checked against Standard, Pioneer, Historic, Timeless, Brawl and Standard Brawl in one go: deck size, copy limits (with
+        cards like "any number" exceptions), sideboard size, banned and restricted cards, commander and companion rules, and whether every card
+        exists on Arena. Legality comes from Scryfall's per-format flags in the card data of
+        <time datetime={facts.snapshot}>{formatDayUTC(facts.snapshot)}</time>. Alchemy is not supported, and a card the index cannot find is
+        reported with "did you mean" suggestions instead of being guessed.
+      </p>
+
+      <h2 id="mana">Curve and mana</h2>
+      <p>
+        The curve counts nonland cards by mana value (the front face for double-faced and adventure cards). Colour checks compare the coloured
+        sources in the deck with Frank Karsten's targets: the number of sources needed to cast a spell on curve about 90% of the time. For a
+        {c.karsten.deckSize}-card deck:
+      </p>
+      <div class="tablewrap">
+        <table class="mtable mtable--compact karsten">
+          <caption>Coloured sources needed, by coloured pips (rows) and mana value (columns)</caption>
+          <thead>
+            <tr>
+              <th scope="col">Pips</th>
+              {[1, 2, 3, 4, 5, 6].map((mv) => <th scope="col" class="num">MV {mv}{mv === 6 ? '+' : ''}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {
+              karsten.map((r) => (
+                <tr>
+                  <th scope="row">{r.pips}</th>
+                  {r.cells.map((n) => (
+                    <td class="num">{n ?? '—'}</td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Dual lands count for each colour they make and fetch lands for the basic types the deck runs. Modal double-faced cards with a land back
+        count as colour sources, and as half a land when the power tier judges the land count. Lands that always enter tapped are listed
+        separately because they cost tempo.
+      </p>
+
+      <h2 id="roles">Card roles</h2>
+      <p>
+        Roles (removal, counterspell, sweeper, card draw, ramp, tutor, threat, protection, lifegain) come from patterns in each card's rules text,
+        with reminder text removed. Every tag names the rule that matched, so you can see why a card was tagged and disagree with it. The patterns
+        are deliberately simple; an unusual card can be missed or mis-tagged.
+      </p>
+
+      <h2 id="power">Power tier</h2>
+      <p>
+        Each part of the deck gets a score from 0 to 100 with the reasons behind it, and the weighted total sets the tier. The deck's plan
+        (aggro, midrange, control or ramp) is inferred from its curve, creature count, interaction and ramp, and the targets follow that plan.
+      </p>
+      <div class="tablewrap">
+        <table class="mtable rubric">
+          <caption>{c.name}: what is scored</caption>
+          <thead>
+            <tr>
+              <th scope="col">Part</th>
+              <th scope="col" class="num">Weight</th>
+              <th scope="col">What it looks at</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              constructedDims.map((d) => (
+                <tr>
+                  <th scope="row">{d.name}</th>
+                  <td class="num">{w(d.weight)}</td>
+                  <td>{d.what}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="cols about__cols">
+        <div class="tablewrap">
+          <table class="mtable mtable--compact">
+            <caption>Tiers</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tier</th>
+                <th scope="col">Label</th>
+                <th scope="col" class="num">From score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                c.tiers.map((t) => (
+                  <tr>
+                    <th scope="row">{t.tier}</th>
+                    <td>{t.label}</td>
+                    <td class="num">{t.min}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="mtable mtable--compact">
+            <caption>Targets by plan (60 cards)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Plan</th>
+                <th scope="col" class="num">Avg MV</th>
+                <th scope="col" class="num">Lands</th>
+                <th scope="col" class="num">Interaction</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                archetypes.map(([name, a]) => (
+                  <tr>
+                    <th scope="row">{name[0]?.toUpperCase()}{name.slice(1)}</th>
+                    <td class="num">{a.avgMv.toFixed(1)}</td>
+                    <td class="num">{a.lands}</td>
+                    <td class="num">{a.interaction}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p>
+        Brawl and Standard Brawl use a separate rubric: {brawlDims.map((d, i) => `${i > 0 ? (i === brawlDims.length - 1 ? ' and ' : ', ') : ''}${d.name.toLowerCase()} (${w(d.weight)})`).join('')}.
+        Commander synergy checks how much of the deck supports the themes and creature types named in the commander's text.
+      </p>
+      <p>
+        <strong>Confidence.</strong> Without meta lists, card quality can only be estimated from how popular a card is on Scryfall (its EDHREC
+        rank), its rarity and its age. That estimate is marked low confidence and the analyzer says so in a banner. Add a few current lists on the
+        <a href={navHref('mtga', 'meta/')}>Meta page</a> and the tier becomes much more meaningful.
+      </p>
+
+      <h2 id="hands">Hands and mulligans</h2>
+      <p>
+        Sample hands and the simulation shuffle with a seeded generator, so the same seed always deals the same cards and a shared link replays
+        the same hand. The simulation plays out thousands of openers with the London mulligan (down to five cards, bottoming lands when flooded,
+        else the most expensive spell). A seven is "keepable" when it has two to five lands and a spell of mana value 3 or less that those lands
+        can cast. The optional best-of-one smoothing is an approximation of Arena's hand smoother: of two shuffled openers it keeps the one whose
+        land count is closer to what the deck's land ratio predicts. It also reports land drops on curve, the chance to cast each card on curve, and any "card or role by turn N" checks
+        you add, next to the exact hypergeometric odds for comparison.
+      </p>
+
+      <h2 id="wildcards">Wildcards and upgrades</h2>
+      <p>
+        Wildcard cost counts every copy in the main deck, sideboard, commander and companion (at most four per card), each at its cheapest Arena
+        rarity; basic lands are free. Whetstone cannot see your collection, so you can enter the wildcards you have to see what is still missing.
+      </p>
+      <p>
+        The upgrade planner looks for swaps that keep the deck recognizable: it only cuts from the weakest nonland cards and changes at most
+        about 7%, 15% or 30% of the deck (light, normal, heavy). An added card has to share a role with the card it replaces (when that card has one) and fit
+        the deck's colours (in Brawl, the commander's colour identity and themes). "Budget-minded" leans toward cheaper rarities; "Strongest" leans on meta
+        play rates. Locked cards are never cut, and every applied swap can be undone.
+      </p>
+
+      <h2 id="meta">Meta lists</h2>
+      <p>
+        Whetstone does not collect decklists from sites whose terms forbid it. Curated lists are added by hand to the repository, each linked to
+        the page it was read from, and checked against the card data every day. You can also keep your own lists in your browser and import or
+        export them as grindstone snapshot JSON. The comparison reports the closest list by shared nonland cards, the core cards your deck is
+        missing, and your unusual choices.
+      </p>
+
+      <h2 id="limited">Limited ratings</h2>
+      <p>
+        Limited pages are built from 17Lands' public game and draft datasets (licensed CC BY 4.0), downloaded and summarised once a day when a
+        file changes. For each card: games-in-hand, opening-hand, drawn and never-seen win rates, improvement when drawn, average pick when last
+        seen and when taken, and colour-pair win rates. 17Lands users are stronger than the average Arena player, so win rates run high; the
+        differences between cards are what matters. Rows with fewer than 500 games in hand are marked as low sample.
+      </p>
+
+      <h2 id="sources">Sources and privacy</h2>
+      <ul>
+        <li>
+          Card data and images: <a href="https://scryfall.com" rel="noopener">Scryfall</a>, from its daily bulk data. The trimmed card index is an
+          internal part of the tools, not a dataset. Card images load straight from Scryfall's image server (cards.scryfall.io), shown whole with
+          the artist credit.
+        </li>
+        <li>Limited data: <a href="https://www.17lands.com/public_datasets" rel="noopener">17Lands public datasets</a>, CC BY 4.0, credited at the top of every Limited page.</li>
+        <li>Analysis engine: <a href="https://github.com/JollyKrampus/grindstone-mcp" rel="noopener">grindstone-mcp</a>, MIT licence.</li>
+        <li>
+          Your browser keeps a copy of the card data in IndexedDB (database <code>whetstone-mtga</code>), replaced when the data changes, so the
+          tools don't download it on every visit. Saved meta lists and tool settings stay in local storage under <code>whetstone:mtga:</code>.
+          Clearing this site's data removes both.
+        </li>
+        <li>
+          The analyzer only contacts api.scryfall.com when you tick "Ask Scryfall about names this site doesn't know", and then only with the names
+          it could not match. See the site's <a href={withBase('privacy/')}>privacy page</a>.
+        </li>
+      </ul>
+      <SourceAttribution game="mtga" ids={['scryfall', '17lands', 'grindstone-mcp', 'curated-meta']} placement="footer" />
+
+      <h2 id="fan-content">Fan Content Policy</h2>
+      <p class="fcp">
+        Whetstone is unofficial Fan Content permitted under the
+        <a href="https://company.wizards.com/en/legal/fancontentpolicy" rel="noopener">Fan Content Policy</a>. Not approved/endorsed by Wizards.
+        Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC. Magic: The Gathering and MTG Arena are
+        trademarks of Wizards of the Coast LLC. Whetstone is free and has no ads.
+      </p>
+      <p class="muted">Card counts on this build: {int(facts.cards)} Arena cards, {int(facts.standardCards)} legal in Standard.</p>
+    </div>
+  </article>
+</GameLayout>

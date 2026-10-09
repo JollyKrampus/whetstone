@@ -1,0 +1,131 @@
+---
+/** /mtga/limited/ (SPEC §8): every set with 17Lands ratings, its formats and a quick look at the best commons and colour pairs. */
+import EmptyState from '../../../components/EmptyState.astro';
+import ColorPairs from '../../../games/mtga/components/ColorPairs.astro';
+import LimitedGlossary from '../../../games/mtga/components/LimitedGlossary.astro';
+import '../../../games/mtga/components/mtga.css';
+import { formatDayUTC, int, pct } from '../../../core/format.ts';
+import { LIMITED_FORMAT_LABEL, LOW_SAMPLE } from '../../../games/mtga/lib/limited.ts';
+import { getLimitedRatings } from '../../../games/mtga/load.ts';
+import { limitedSets } from '../../../games/mtga/pagedata.ts';
+import { navHref } from '../../../games/registry.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+const sets = limitedSets().map((s) => {
+  const main = s.formats[0];
+  const ratings = main ? getLimitedRatings(s.code, main.format) : null;
+  const top = (rarity: 'common' | 'uncommon') =>
+    (ratings?.cards ?? [])
+      .filter((c) => c.rarity === rarity && c.gih >= LOW_SAMPLE && c.gihWr !== null)
+      .sort((a, b) => (b.gihWr ?? 0) - (a.gihWr ?? 0) || a.name.localeCompare(b.name))
+      .slice(0, 5);
+  return {
+    ...s,
+    href: (slug: string | null) => navHref('mtga', `limited/${s.code.toLowerCase()}/${slug ? `${slug}/` : ''}`),
+    ratings,
+    mainFormat: main?.format ?? null,
+    commons: top('common'),
+    uncommons: top('uncommon'),
+  };
+});
+const synthetic = sets.some((s) => s.formats.some((f) => f.synthetic));
+---
+
+<GameLayout
+  game="mtga"
+  title="MTG Arena Limited ratings"
+  description="Card ratings for the latest MTG Arena draft and sealed sets from 17Lands public data: games-in-hand win rate, improvement when drawn, pick order and colour pairs."
+  uses={['17lands']}
+>
+  <div class="mpage">
+    <header class="mpage__head">
+      <p class="kicker">Limited</p>
+      <h1>Limited ratings</h1>
+      <p class="mpage__lead">
+        How each card performed in Arena drafts and sealed events, worked out from 17Lands' public game and draft logs. 17Lands publishes
+        these files a few weeks into a set, so a brand-new set shows up here after that.
+      </p>
+    </header>
+
+    {synthetic && <p class="note-line">These are sample numbers for development, not real 17Lands data.</p>}
+
+    {
+      sets.length === 0 ? (
+        <EmptyState title="No Limited data yet" icon="data">
+          <p>Ratings appear after the next data refresh finds a published 17Lands dataset.</p>
+        </EmptyState>
+      ) : (
+        <ul class="lsets">
+          {sets.map((s) => (
+            <li class="card lset">
+              <div class="lset__head">
+                <p class="kicker">
+                  {s.code}
+                  {s.releasedAt && <> · released {formatDayUTC(s.releasedAt)}</>}
+                </p>
+                <h2 class="lset__name">
+                  <a href={s.href(null)}>{s.name}</a>
+                </h2>
+              </div>
+              <ul class="lset__formats" aria-label={`${s.name} formats`}>
+                {s.formats.map((f) => (
+                  <li>
+                    <a class="lset__format" href={s.href(f.slug)}>
+                      <span class="lset__fname">{LIMITED_FORMAT_LABEL[f.format] ?? f.format}</span>
+                      <span class="lset__fmeta">
+                        {int(f.games)} games · data of {formatDayUTC(f.lastModified)}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {s.ratings && (
+                <div class="lset__peek">
+                  <div>
+                    <h3 class="sub sub--sm">
+                      Top commons <span class="muted">({LIMITED_FORMAT_LABEL[s.mainFormat ?? ''] ?? ''}, GIH WR)</span>
+                    </h3>
+                    {s.commons.length ? (
+                      <ol class="toplist">
+                        {s.commons.map((c) => (
+                          <li>
+                            <span class="toplist__name">{c.name}</span> <span class="toplist__v">{pct(c.gihWr ?? 0)}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    ) : (
+                      <p class="muted">Not enough games yet.</p>
+                    )}
+                  </div>
+                  <div>
+                    <h3 class="sub sub--sm">Top uncommons</h3>
+                    {s.uncommons.length ? (
+                      <ol class="toplist">
+                        {s.uncommons.map((c) => (
+                          <li>
+                            <span class="toplist__name">{c.name}</span> <span class="toplist__v">{pct(c.gihWr ?? 0)}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    ) : (
+                      <p class="muted">Not enough games yet.</p>
+                    )}
+                  </div>
+                  <div>
+                    <h3 class="sub sub--sm">Best colour pairs</h3>
+                    <ColorPairs ratings={s.ratings} limit={5} compact minGames={1000} />
+                  </div>
+                </div>
+              )}
+              <p class="lset__more">
+                <a href={s.href(null)}>All {s.name} card ratings</a>
+              </p>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <LimitedGlossary />
+  </div>
+</GameLayout>

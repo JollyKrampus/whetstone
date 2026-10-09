@@ -1,0 +1,1274 @@
+{
+  "attribution": {
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "17lands",
+    "text": "Limited ratings derived from 17Lands public datasets",
+    "url": "https://www.17lands.com/public_datasets"
+  },
+  "cards": [
+    {
+      "alsa": 5.95,
+      "arenaIds": [
+        103495
+      ],
+      "ata": 7.64,
+      "colors": "G",
+      "gd": 15130,
+      "gdWr": 0.5599,
+      "gih": 30096,
+      "gihWr": 0.561,
+      "gns": 26850,
+      "gnsWr": 0.5454,
+      "gp": 57157,
+      "gpWr": 0.5536,
+      "iwd": 1.56,
+      "name": "Attercop",
+      "oh": 14966,
+      "ohWr": 0.5621,
+      "oracleId": "45d652c4-188e-4f00-acdd-1be014922cbc",
+      "picks": 21588,
+      "rarity": "common"
+    },
+    {
+      "alsa": 5.7,
+      "arenaIds": [
+        103405
+      ],
+      "ata": 6.49,
+      "colors": "U",
+      "gd": 28448,
+      "gdWr": 0.585,
+      "gih": 51284,
+      "gihWr": 0.5746,
+      "gns": 30768,
+      "gnsWr": 0.5159,
+      "gp": 82625,
+      "gpWr": 0.5521,
+      "iwd": 5.86,
+      "name": "Bilbo Baggins, Burglar",
+      "oh": 22836,
+      "ohWr": 0.5616,
+      "oracleId": "fa85f9e6-69ff-4669-b70a-440aa7b16c97",
+      "picks": 32476,
+      "rarity": "common"
+    },
+    {
+      "alsa": 3,
+      "arenaIds": [
+        103436
+      ],
+      "ata": 3.4,
+      "colors": "B",
+      "gd": 25224,
+      "gdWr": 0.5938,
+      "gih": 47704,
+      "gihWr": 0.5772,
+      "gns": 49396,
+      "gnsWr": 0.5632,
+      "gp": 97101,
+      "gpWr": 0.5701,
+      "iwd": 1.39,
+      "name": "Bilbo's Deadly Slice",
+      "oh": 22480,
+      "ohWr": 0.5585,
+      "oracleId": "4c054431-3667-4e28-9d68-03b43447c35b",
+      "picks": 26276,
+      "rarity": "common"
+    },
+    {
+      "alsa": 2.91,
+      "arenaIds": [
+        103465
+      ],
+      "ata": 3.12,
+      "colors": "R",
+      "gd": 14821,
+      "gdWr": 0.5867,
+      "gih": 27882,
+      "gihWr": 0.6102,
+      "gns": 30191,
+      "gnsWr": 0.5629,
+      "gp": 58080,
+      "gpWr": 0.5856,
+      "iwd": 4.73,
+      "name": "Bothersome Noisemaker",
+      "oh": 13061,
+      "ohWr": 0.6369,
+      "oracleId": "978e07fd-8b8c-4eab-850e-e4c0e712251e",
+      "picks": 14395,
+      "rarity": "uncommon"
+    },
+    {
+      "alsa": 2.72,
+      "arenaIds": [
+        103375
+      ],
+      "ata": 2.93,
+      "colors": "W",
+      "gd": 18355,
+      "gdWr": 0.6342,
+      "gih": 30687,
+      "gihWr": 0.6216,
+      "gns": 28817,
+      "gnsWr": 0.5366,
+      "gp": 59540,
+      "gpWr": 0.5804,
+      "iwd": 8.5,
+      "name": "Celebrate the Mountain-king",
+      "oh": 12332,
+      "ohWr": 0.6028,
+      "oracleId": "d51136fa-3c13-48a5-83fd-51fe00010a4b",
+      "picks": 14540,
+      "rarity": "uncommon"
+    },
+    {
+      "alsa": 3.38,
+      "arenaIds": [
+        103437
+      ],
+      "ata": 3.55,
+      "colors": "B",
+      "gd": 31066,
+      "gdWr": 0.6017,
+      "gih": 60413,
+      "gihWr": 0.6041,
+      "gns": 53642,
+      "gnsWr": 0.5463,
+      "gp": 114246,
+      "gpWr": 0.577,
+      "iwd": 5.77,
+      "name": "Crude Bent Blade",
+      "oh": 29347,
+      "ohWr": 0.6065,
+      "oracleId": "eec81460-899d-4b4c-b33c-ce2ca704df17",
+      "picks": 34241,
+      "rarity": "common"
+    },
+    {
+      "alsa": 2.68,
+      "arenaIds": [
+        103438
+      ],
+      "ata": 2.82,
+      "colors": "B",
+      "gd": 15733,
+      "gdWr": 0.5856,
+      "gih": 30018,
+      "gihWr": 0.612,
+      "gns": 33980,
+      "gnsWr": 0.5615,
+      "gp": 64042,
+      "gpWr": 0.5852,
+      "iwd": 5.05,
+      "name": "Desolation Prowler",
+      "oh": 14285,
+      "ohWr": 0.6411,
+      "oracleId": "ed9d4bb1-7335-45fd-b2ea-97b1f6491d7a",
+      "picks": 15047,
+      "rarity": "uncommon"
+    },
+    {
+      "alsa": 5.37,
+      "arenaIds": [
+        103470
+      ],
+      "ata": 6.65,
+      "colors": "R",
+      "gd": 23807,
+      "gdWr": 0.5758,
+      "gih": 44509,
+      "gihWr": 0.5781,
+      "gns": 44634,
+      "gnsWr": 0.5659,
+      "gp": 89517,
+      "gpWr": 0.5723,
+      "iwd": 1.21,
+      "name": "Dori, Bearer of Friends",
+      "oh": 20702,
+      "ohWr": 0.5807,
+      "oracleId": "58acd6b2-730c-4472-a34a-f2784977aca8",
+      "picks": 26996,
+      "rarity": "common"
+    },
+    {
+      "alsa": 3.2,
+      "arenaIds": [
+        103439
+      ],
+      "ata": 3.5,
+      "colors": "B",
+      "gd": 14951,
+      "gdWr": 0.5845,
+      "gih": 27443,
+      "gihWr": 0.5933,
+      "gns": 32873,
+      "gnsWr": 0.5711,
+      "gp": 60375,
+      "gpWr": 0.5811,
+      "iwd": 2.22,
+      "name": "Down, Down to Goblin-town",
+      "oh": 12492,
+      "ohWr": 0.6038,
+      "oracleId": "e01860cd-0aa1-435a-9ef9-ee412bc458cd",
+      "picks": 14327,
+      "rarity": "uncommon"
+    },
+    {
+      "alsa": 5.67,
+      "arenaIds": [
+        103533
+      ],
+      "ata": 7.34,
+      "colors": "BG",
+      "gd": 16962,
+      "gdWr": 0.5564,
+      "gih": 33195,
+      "gihWr": 0.5569,
+      "gns": 34716,
+      "gnsWr": 0.572,
+      "gp": 68003,
+      "gpWr": 0.5647,
+      "iwd": -1.52,
+      "name": "Duskwatch Hunter",
+      "oh": 16233,
+      "ohWr": 0.5574,
+      "oracleId": "6283e5ca-9924-478b-89a5-36924accb9aa",
+      "picks": 24379,
+      "rarity": "common"
+    },
+    {
+      "alsa": 7.04,
+      "arenaIds": [
+        103377
+      ],
+      "ata": 8.79,
+      "colors": "W",
+      "gd": 19543,
+      "gdWr": 0.569,
+      "gih": 34547,
+      "gihWr": 0.5561,
+      "gns": 29722,
+      "gnsWr": 0.5593,
+      "gp": 64487,
+      "gpWr": 0.5578,
+      "iwd": -0.32,
+      "name": "Dwarven Provisioner",
+      "oh": 15004,
+      "ohWr": 0.5393,
+      "oracleId": "8fcab221-8737-4357-b8ee-bad9421739a3",
+      "picks": 26897,
+      "rarity": "common"
+    },
+    {
+      "alsa": 5.56,
+      "arenaIds": [
+        103411
+      ],
+      "ata": 6.74,
+      "colors": "U",
+      "gd": 24238,
+      "gdWr": 0.5811,
+      "gih": 41489,
+      "gihWr": 0.5561,
+      "gns": 26726,
+      "gnsWr": 0.5195,
+      "gp": 68410,
+      "gpWr": 0.5418,
+      "iwd": 3.66,
+      "name": "Enchanted River's Grasp",
+      "oh": 17251,
+      "ohWr": 0.5208,
+      "oracleId": "fcc9f3bc-0bc3-4189-a4d0-9698594b99a8",
+      "picks": 25931,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.51,
+      "arenaIds": [
+        103441
+      ],
+      "ata": 8.36,
+      "colors": "B",
+      "gd": 15102,
+      "gdWr": 0.5532,
+      "gih": 29032,
+      "gihWr": 0.5572,
+      "gns": 31158,
+      "gnsWr": 0.5726,
+      "gp": 60218,
+      "gpWr": 0.5652,
+      "iwd": -1.54,
+      "name": "Front Porch Sentries",
+      "oh": 13930,
+      "ohWr": 0.5617,
+      "oracleId": "b39f03cf-3d1a-42ad-903f-e3b3542878b0",
+      "picks": 26126,
+      "rarity": "common"
+    },
+    {
+      "alsa": 4.11,
+      "arenaIds": [
+        103537
+      ],
+      "ata": 4.86,
+      "colors": "BR",
+      "gd": 30379,
+      "gdWr": 0.5719,
+      "gih": 59344,
+      "gihWr": 0.5729,
+      "gns": 56310,
+      "gnsWr": 0.5701,
+      "gp": 115865,
+      "gpWr": 0.5718,
+      "iwd": 0.28,
+      "name": "Goblin Plate Mail",
+      "oh": 28965,
+      "ohWr": 0.574,
+      "oracleId": "eda99a16-6a7c-4f39-8a6b-a284e6afd3fc",
+      "picks": 32670,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.2,
+      "arenaIds": [
+        103567
+      ],
+      "ata": 8.72,
+      "colors": "BR",
+      "gd": 15166,
+      "gdWr": 0.5346,
+      "gih": 29259,
+      "gihWr": 0.5572,
+      "gns": 32827,
+      "gnsWr": 0.5797,
+      "gp": 62092,
+      "gpWr": 0.5691,
+      "iwd": -2.26,
+      "name": "Goblin-town",
+      "oh": 14093,
+      "ohWr": 0.5815,
+      "oracleId": "98d20908-6d68-4d31-b719-207f93c9b402",
+      "picks": 19265,
+      "rarity": "common"
+    },
+    {
+      "alsa": 5.05,
+      "arenaIds": [
+        103445
+      ],
+      "ata": 5.81,
+      "colors": "B",
+      "gd": 28003,
+      "gdWr": 0.596,
+      "gih": 52853,
+      "gihWr": 0.5922,
+      "gns": 51645,
+      "gnsWr": 0.562,
+      "gp": 105512,
+      "gpWr": 0.5768,
+      "iwd": 3.02,
+      "name": "Gollum, Silent Slinker",
+      "oh": 24850,
+      "ohWr": 0.5878,
+      "oracleId": "0296d57e-e5b9-456f-bb21-eb584adefb4c",
+      "picks": 32504,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.55,
+      "arenaIds": [
+        103479
+      ],
+      "ata": 8.26,
+      "colors": "R",
+      "gd": 19915,
+      "gdWr": 0.5693,
+      "gih": 37178,
+      "gihWr": 0.5633,
+      "gns": 38595,
+      "gnsWr": 0.5755,
+      "gp": 75776,
+      "gpWr": 0.5695,
+      "iwd": -1.22,
+      "name": "Gundabad Opportunist",
+      "oh": 17263,
+      "ohWr": 0.5565,
+      "oracleId": "61773534-8da8-48fa-b51a-73c0a9a751c4",
+      "picks": 28703,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.09,
+      "arenaIds": [
+        103568
+      ],
+      "ata": 7.75,
+      "colors": "",
+      "gd": 32693,
+      "gdWr": 0.5577,
+      "gih": 60133,
+      "gihWr": 0.565,
+      "gns": 62379,
+      "gnsWr": 0.5687,
+      "gp": 122637,
+      "gpWr": 0.567,
+      "iwd": -0.38,
+      "name": "Hobbit Hole",
+      "oh": 27440,
+      "ohWr": 0.5737,
+      "oracleId": "17492186-9814-4c41-8111-1f000a96c212",
+      "picks": 31330,
+      "rarity": "common"
+    },
+    {
+      "alsa": 5.93,
+      "arenaIds": [
+        103415
+      ],
+      "ata": 6.55,
+      "colors": "U",
+      "gd": 28024,
+      "gdWr": 0.5614,
+      "gih": 52839,
+      "gihWr": 0.5704,
+      "gns": 21772,
+      "gnsWr": 0.5109,
+      "gp": 74646,
+      "gpWr": 0.553,
+      "iwd": 5.95,
+      "name": "Lakeshore Apothecary",
+      "oh": 24815,
+      "ohWr": 0.5806,
+      "oracleId": "80bcb154-b4be-4bbd-bbc1-b116a59045b7",
+      "picks": 34866,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.75,
+      "arenaIds": [
+        103418
+      ],
+      "ata": 7.64,
+      "colors": "U",
+      "gd": 27856,
+      "gdWr": 0.5945,
+      "gih": 49140,
+      "gihWr": 0.5771,
+      "gns": 25101,
+      "gnsWr": 0.5128,
+      "gp": 74296,
+      "gpWr": 0.5553,
+      "iwd": 6.43,
+      "name": "Long Lake Nuisance",
+      "oh": 21284,
+      "ohWr": 0.5543,
+      "oracleId": "a833fdf1-db0c-4846-8452-d3b2059c2355",
+      "picks": 34462,
+      "rarity": "common"
+    },
+    {
+      "alsa": 5.02,
+      "arenaIds": [
+        103388
+      ],
+      "ata": 6.11,
+      "colors": "W",
+      "gd": 26485,
+      "gdWr": 0.582,
+      "gih": 46144,
+      "gihWr": 0.5675,
+      "gns": 35611,
+      "gnsWr": 0.5475,
+      "gp": 81757,
+      "gpWr": 0.5588,
+      "iwd": 2,
+      "name": "Magnificent End",
+      "oh": 19659,
+      "ohWr": 0.5479,
+      "oracleId": "82bdf9cb-61fe-4eaf-8762-c32002403d96",
+      "picks": 26751,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.29,
+      "arenaIds": [
+        103540
+      ],
+      "ata": 7.89,
+      "colors": "UG",
+      "gd": 19213,
+      "gdWr": 0.5776,
+      "gih": 34167,
+      "gihWr": 0.5577,
+      "gns": 30707,
+      "gnsWr": 0.5382,
+      "gp": 65103,
+      "gpWr": 0.5487,
+      "iwd": 1.95,
+      "name": "Mirkwood Nurturer",
+      "oh": 14954,
+      "ohWr": 0.5321,
+      "oracleId": "66630640-9605-44da-afdf-eb9d458d056f",
+      "picks": 27151,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.32,
+      "arenaIds": [
+        103541
+      ],
+      "ata": 8.29,
+      "colors": "WR",
+      "gd": 16049,
+      "gdWr": 0.5437,
+      "gih": 29199,
+      "gihWr": 0.5445,
+      "gns": 32767,
+      "gnsWr": 0.5612,
+      "gp": 62196,
+      "gpWr": 0.5536,
+      "iwd": -1.67,
+      "name": "Nori, Teller of Tales",
+      "oh": 13150,
+      "ohWr": 0.5454,
+      "oracleId": "03253076-9add-4efb-9227-b0a062c86534",
+      "picks": 23464,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.2,
+      "arenaIds": [
+        103542
+      ],
+      "ata": 7.05,
+      "colors": "WU",
+      "gd": 30012,
+      "gdWr": 0.5954,
+      "gih": 55365,
+      "gihWr": 0.5834,
+      "gns": 32047,
+      "gnsWr": 0.5287,
+      "gp": 87452,
+      "gpWr": 0.5634,
+      "iwd": 5.47,
+      "name": "Patient Instructor",
+      "oh": 25353,
+      "ohWr": 0.5692,
+      "oracleId": "bddd7e99-ec74-4ca6-9137-155b85695a95",
+      "picks": 36061,
+      "rarity": "common"
+    },
+    {
+      "alsa": 3.36,
+      "arenaIds": [
+        103485
+      ],
+      "ata": 3.75,
+      "colors": "R",
+      "gd": 28549,
+      "gdWr": 0.5955,
+      "gih": 55706,
+      "gihWr": 0.5937,
+      "gns": 48714,
+      "gnsWr": 0.556,
+      "gp": 104421,
+      "gpWr": 0.5761,
+      "iwd": 3.77,
+      "name": "Pinecone Strike",
+      "oh": 27157,
+      "ohWr": 0.5918,
+      "oracleId": "961e3023-39ea-4141-99b6-738280a2815d",
+      "picks": 31663,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.24,
+      "arenaIds": [
+        103425
+      ],
+      "ata": 7.09,
+      "colors": "U",
+      "gd": 28267,
+      "gdWr": 0.5972,
+      "gih": 50977,
+      "gihWr": 0.5853,
+      "gns": 29256,
+      "gnsWr": 0.5101,
+      "gp": 80250,
+      "gpWr": 0.5578,
+      "iwd": 7.52,
+      "name": "Plunder the Trollshaws",
+      "oh": 22710,
+      "ohWr": 0.5706,
+      "oracleId": "526f520e-b4bb-4215-9c6b-afc298744f06",
+      "picks": 33417,
+      "rarity": "common"
+    },
+    {
+      "alsa": 4.91,
+      "arenaIds": [
+        103515
+      ],
+      "ata": 6.02,
+      "colors": "G",
+      "gd": 17962,
+      "gdWr": 0.5846,
+      "gih": 34443,
+      "gihWr": 0.5697,
+      "gns": 30461,
+      "gnsWr": 0.541,
+      "gp": 64911,
+      "gpWr": 0.5562,
+      "iwd": 2.87,
+      "name": "Quarrel",
+      "oh": 16481,
+      "ohWr": 0.5535,
+      "oracleId": "db05b114-2eb5-46bc-81e7-7e036d8eaab3",
+      "picks": 22505,
+      "rarity": "common"
+    },
+    {
+      "alsa": 5.4,
+      "arenaIds": [
+        103455,
+        107390
+      ],
+      "ata": 6.67,
+      "colors": "B",
+      "gd": 22168,
+      "gdWr": 0.5615,
+      "gih": 43147,
+      "gihWr": 0.5606,
+      "gns": 44191,
+      "gnsWr": 0.5781,
+      "gp": 87338,
+      "gpWr": 0.5694,
+      "iwd": -1.75,
+      "name": "Rage into the Valley",
+      "oh": 20979,
+      "ohWr": 0.5596,
+      "oracleId": "8c7641b6-3a6c-4441-a98c-3b5d61d91f76",
+      "picks": 29344,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.71,
+      "arenaIds": [
+        103486
+      ],
+      "ata": 8.82,
+      "colors": "R",
+      "gd": 14063,
+      "gdWr": 0.5605,
+      "gih": 26261,
+      "gihWr": 0.5597,
+      "gns": 32337,
+      "gnsWr": 0.5616,
+      "gp": 58785,
+      "gpWr": 0.561,
+      "iwd": -0.19,
+      "name": "Ragged Short Spear",
+      "oh": 12198,
+      "ohWr": 0.5588,
+      "oracleId": "bb67d0a4-864e-4f46-8538-fdd920bf0197",
+      "picks": 23724,
+      "rarity": "common"
+    },
+    {
+      "alsa": 4.81,
+      "arenaIds": [
+        103456
+      ],
+      "ata": 5.86,
+      "colors": "B",
+      "gd": 23151,
+      "gdWr": 0.5699,
+      "gih": 46145,
+      "gihWr": 0.5767,
+      "gns": 45173,
+      "gnsWr": 0.5703,
+      "gp": 91412,
+      "gpWr": 0.5735,
+      "iwd": 0.65,
+      "name": "Ravening Warg",
+      "oh": 22994,
+      "ohWr": 0.5836,
+      "oracleId": "8060d231-7477-441d-b249-8e75aa1d7791",
+      "picks": 27662,
+      "rarity": "common"
+    },
+    {
+      "alsa": 5.48,
+      "arenaIds": [
+        103487
+      ],
+      "ata": 7.06,
+      "colors": "R",
+      "gd": 18932,
+      "gdWr": 0.5839,
+      "gih": 33601,
+      "gihWr": 0.5667,
+      "gns": 40854,
+      "gnsWr": 0.5598,
+      "gp": 74556,
+      "gpWr": 0.5629,
+      "iwd": 0.69,
+      "name": "Smaug, the Great Calamity",
+      "oh": 14669,
+      "ohWr": 0.5445,
+      "oracleId": "fc75cfec-e1f6-4cb5-8a3c-2f7b2c39c03f",
+      "picks": 23239,
+      "rarity": "common"
+    },
+    {
+      "alsa": 4.39,
+      "arenaIds": [
+        103460
+      ],
+      "ata": 5.29,
+      "colors": "B",
+      "gd": 25535,
+      "gdWr": 0.5913,
+      "gih": 48095,
+      "gihWr": 0.5698,
+      "gns": 50787,
+      "gnsWr": 0.5643,
+      "gp": 98884,
+      "gpWr": 0.567,
+      "iwd": 0.55,
+      "name": "Stir Up Trouble",
+      "oh": 22560,
+      "ohWr": 0.5455,
+      "oracleId": "dda607bd-f419-4b7f-b052-a5ce6ce22bfe",
+      "picks": 28126,
+      "rarity": "common"
+    },
+    {
+      "alsa": 5.65,
+      "arenaIds": [
+        103461
+      ],
+      "ata": 7.11,
+      "colors": "B",
+      "gd": 20419,
+      "gdWr": 0.5559,
+      "gih": 40456,
+      "gihWr": 0.5575,
+      "gns": 38958,
+      "gnsWr": 0.5752,
+      "gp": 79463,
+      "gpWr": 0.5662,
+      "iwd": -1.77,
+      "name": "Stony-Voiced Goblins",
+      "oh": 20037,
+      "ohWr": 0.5592,
+      "oracleId": "d1dceaa7-d33e-4067-9e1b-8a8978a12933",
+      "picks": 28187,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.3,
+      "arenaIds": [
+        103494
+      ],
+      "ata": 8.16,
+      "colors": "R",
+      "gd": 16048,
+      "gdWr": 0.5536,
+      "gih": 31344,
+      "gihWr": 0.5633,
+      "gns": 30206,
+      "gnsWr": 0.571,
+      "gp": 61552,
+      "gpWr": 0.5671,
+      "iwd": -0.77,
+      "name": "Tidings of War",
+      "oh": 15296,
+      "ohWr": 0.5735,
+      "oracleId": "5753f4d6-08d0-4e12-85c5-875ee6441626",
+      "picks": 25119,
+      "rarity": "common"
+    },
+    {
+      "alsa": 7.45,
+      "arenaIds": [
+        103432
+      ],
+      "ata": 8.93,
+      "colors": "U",
+      "gd": 23179,
+      "gdWr": 0.5896,
+      "gih": 38308,
+      "gihWr": 0.5625,
+      "gns": 27411,
+      "gnsWr": 0.53,
+      "gp": 65730,
+      "gpWr": 0.5489,
+      "iwd": 3.25,
+      "name": "Uneasy Partings",
+      "oh": 15129,
+      "ohWr": 0.5209,
+      "oracleId": "15211eaa-d906-4b95-8942-2f49d3cb4b81",
+      "picks": 31006,
+      "rarity": "common"
+    },
+    {
+      "alsa": 6.62,
+      "arenaIds": [
+        103484
+      ],
+      "ata": 8.43,
+      "colors": "R",
+      "gd": 16887,
+      "gdWr": 0.5565,
+      "gih": 31738,
+      "gihWr": 0.5567,
+      "gns": 37062,
+      "gnsWr": 0.568,
+      "gp": 69082,
+      "gpWr": 0.5635,
+      "iwd": -1.12,
+      "name": "Óin the Brave",
+      "oh": 14851,
+      "ohWr": 0.5571,
+      "oracleId": "a25ba5cc-6ff8-4215-b70d-7e86e15e3c1a",
+      "picks": 25226,
+      "rarity": "common"
+    }
+  ],
+  "colorPairs": [
+    {
+      "colors": "B",
+      "games": 706,
+      "splash": false,
+      "wins": 460,
+      "wr": 0.6516
+    },
+    {
+      "colors": "B",
+      "games": 1909,
+      "splash": true,
+      "wins": 1159,
+      "wr": 0.6071
+    },
+    {
+      "colors": "G",
+      "games": 440,
+      "splash": false,
+      "wins": 249,
+      "wr": 0.5659
+    },
+    {
+      "colors": "G",
+      "games": 1340,
+      "splash": true,
+      "wins": 729,
+      "wr": 0.544
+    },
+    {
+      "colors": "R",
+      "games": 206,
+      "splash": false,
+      "wins": 98,
+      "wr": 0.4757
+    },
+    {
+      "colors": "R",
+      "games": 581,
+      "splash": true,
+      "wins": 340,
+      "wr": 0.5852
+    },
+    {
+      "colors": "U",
+      "games": 375,
+      "splash": false,
+      "wins": 193,
+      "wr": 0.5147
+    },
+    {
+      "colors": "U",
+      "games": 3079,
+      "splash": true,
+      "wins": 1682,
+      "wr": 0.5463
+    },
+    {
+      "colors": "W",
+      "games": 77,
+      "splash": false,
+      "wins": 39,
+      "wr": 0.5065
+    },
+    {
+      "colors": "W",
+      "games": 225,
+      "splash": true,
+      "wins": 129,
+      "wr": 0.5733
+    },
+    {
+      "colors": "BG",
+      "games": 47065,
+      "splash": false,
+      "wins": 27031,
+      "wr": 0.5743
+    },
+    {
+      "colors": "BG",
+      "games": 10212,
+      "splash": true,
+      "wins": 5539,
+      "wr": 0.5424
+    },
+    {
+      "colors": "BR",
+      "games": 71364,
+      "splash": false,
+      "wins": 41369,
+      "wr": 0.5797
+    },
+    {
+      "colors": "BR",
+      "games": 14095,
+      "splash": true,
+      "wins": 7837,
+      "wr": 0.556
+    },
+    {
+      "colors": "RG",
+      "games": 1523,
+      "splash": false,
+      "wins": 839,
+      "wr": 0.5509
+    },
+    {
+      "colors": "RG",
+      "games": 1299,
+      "splash": true,
+      "wins": 702,
+      "wr": 0.5404
+    },
+    {
+      "colors": "UB",
+      "games": 7633,
+      "splash": false,
+      "wins": 4089,
+      "wr": 0.5357
+    },
+    {
+      "colors": "UB",
+      "games": 5112,
+      "splash": true,
+      "wins": 2690,
+      "wr": 0.5262
+    },
+    {
+      "colors": "UG",
+      "games": 13962,
+      "splash": false,
+      "wins": 7358,
+      "wr": 0.527
+    },
+    {
+      "colors": "UG",
+      "games": 8289,
+      "splash": true,
+      "wins": 4321,
+      "wr": 0.5213
+    },
+    {
+      "colors": "UR",
+      "games": 2364,
+      "splash": false,
+      "wins": 1327,
+      "wr": 0.5613
+    },
+    {
+      "colors": "UR",
+      "games": 2522,
+      "splash": true,
+      "wins": 1368,
+      "wr": 0.5424
+    },
+    {
+      "colors": "WB",
+      "games": 3405,
+      "splash": false,
+      "wins": 1936,
+      "wr": 0.5686
+    },
+    {
+      "colors": "WB",
+      "games": 1400,
+      "splash": true,
+      "wins": 791,
+      "wr": 0.565
+    },
+    {
+      "colors": "WG",
+      "games": 775,
+      "splash": false,
+      "wins": 393,
+      "wr": 0.5071
+    },
+    {
+      "colors": "WG",
+      "games": 548,
+      "splash": true,
+      "wins": 265,
+      "wr": 0.4836
+    },
+    {
+      "colors": "WR",
+      "games": 44930,
+      "splash": false,
+      "wins": 25571,
+      "wr": 0.5691
+    },
+    {
+      "colors": "WR",
+      "games": 7867,
+      "splash": true,
+      "wins": 4251,
+      "wr": 0.5404
+    },
+    {
+      "colors": "WU",
+      "games": 50951,
+      "splash": false,
+      "wins": 28870,
+      "wr": 0.5666
+    },
+    {
+      "colors": "WU",
+      "games": 7643,
+      "splash": true,
+      "wins": 4205,
+      "wr": 0.5502
+    },
+    {
+      "colors": "BRG",
+      "games": 1955,
+      "splash": false,
+      "wins": 990,
+      "wr": 0.5064
+    },
+    {
+      "colors": "BRG",
+      "games": 111,
+      "splash": true,
+      "wins": 50,
+      "wr": 0.4505
+    },
+    {
+      "colors": "UBG",
+      "games": 1552,
+      "splash": false,
+      "wins": 703,
+      "wr": 0.453
+    },
+    {
+      "colors": "UBG",
+      "games": 175,
+      "splash": true,
+      "wins": 86,
+      "wr": 0.4914
+    },
+    {
+      "colors": "UBR",
+      "games": 364,
+      "splash": false,
+      "wins": 184,
+      "wr": 0.5055
+    },
+    {
+      "colors": "UBR",
+      "games": 99,
+      "splash": true,
+      "wins": 46,
+      "wr": 0.4646
+    },
+    {
+      "colors": "URG",
+      "games": 117,
+      "splash": false,
+      "wins": 60,
+      "wr": 0.5128
+    },
+    {
+      "colors": "URG",
+      "games": 66,
+      "splash": true,
+      "wins": 29,
+      "wr": 0.4394
+    },
+    {
+      "colors": "WBG",
+      "games": 189,
+      "splash": false,
+      "wins": 104,
+      "wr": 0.5503
+    },
+    {
+      "colors": "WBG",
+      "games": 44,
+      "splash": true,
+      "wins": 19,
+      "wr": 0.4318
+    },
+    {
+      "colors": "WBR",
+      "games": 2055,
+      "splash": false,
+      "wins": 1020,
+      "wr": 0.4964
+    },
+    {
+      "colors": "WBR",
+      "games": 140,
+      "splash": true,
+      "wins": 69,
+      "wr": 0.4929
+    },
+    {
+      "colors": "WRG",
+      "games": 103,
+      "splash": false,
+      "wins": 46,
+      "wr": 0.4466
+    },
+    {
+      "colors": "WRG",
+      "games": 20,
+      "splash": true,
+      "wins": 9,
+      "wr": 0.45
+    },
+    {
+      "colors": "WUB",
+      "games": 845,
+      "splash": false,
+      "wins": 451,
+      "wr": 0.5337
+    },
+    {
+      "colors": "WUB",
+      "games": 124,
+      "splash": true,
+      "wins": 59,
+      "wr": 0.4758
+    },
+    {
+      "colors": "WUG",
+      "games": 1166,
+      "splash": false,
+      "wins": 621,
+      "wr": 0.5326
+    },
+    {
+      "colors": "WUG",
+      "games": 95,
+      "splash": true,
+      "wins": 43,
+      "wr": 0.4526
+    },
+    {
+      "colors": "WUR",
+      "games": 1795,
+      "splash": false,
+      "wins": 947,
+      "wr": 0.5276
+    },
+    {
+      "colors": "WUR",
+      "games": 126,
+      "splash": true,
+      "wins": 68,
+      "wr": 0.5397
+    },
+    {
+      "colors": "UBRG",
+      "games": 10,
+      "splash": true,
+      "wins": 3,
+      "wr": 0.3
+    },
+    {
+      "colors": "WBRG",
+      "games": 1,
+      "splash": false,
+      "wins": 0,
+      "wr": 0
+    },
+    {
+      "colors": "WBRG",
+      "games": 3,
+      "splash": true,
+      "wins": 0,
+      "wr": 0
+    },
+    {
+      "colors": "WUBG",
+      "games": 21,
+      "splash": false,
+      "wins": 12,
+      "wr": 0.5714
+    },
+    {
+      "colors": "WUBG",
+      "games": 4,
+      "splash": true,
+      "wins": 1,
+      "wr": 0.25
+    },
+    {
+      "colors": "WUBR",
+      "games": 21,
+      "splash": false,
+      "wins": 11,
+      "wr": 0.5238
+    },
+    {
+      "colors": "WUBR",
+      "games": 5,
+      "splash": true,
+      "wins": 2,
+      "wr": 0.4
+    },
+    {
+      "colors": "WURG",
+      "games": 5,
+      "splash": false,
+      "wins": 2,
+      "wr": 0.4
+    },
+    {
+      "colors": "WURG",
+      "games": 5,
+      "splash": true,
+      "wins": 2,
+      "wr": 0.4
+    },
+    {
+      "colors": "WUBRG",
+      "games": 1,
+      "splash": false,
+      "wins": 0,
+      "wr": 0
+    }
+  ],
+  "dataset": {
+    "draftData": "https://17lands-public.s3.amazonaws.com/analysis_data/draft_data/draft_data_public.HOB.PremierDraft.csv.gz",
+    "gameData": "https://17lands-public.s3.amazonaws.com/analysis_data/game_data/game_data_public.HOB.PremierDraft.csv.gz",
+    "lastModified": "2026-10-01T13:17:00.000Z"
+  },
+  "format": "PremierDraft",
+  "set": "HOB",
+  "synthetic": true,
+  "totals": {
+    "drafts": 58017,
+    "games": 323114
+  }
+}
