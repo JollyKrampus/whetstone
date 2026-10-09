@@ -221,7 +221,7 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **block** *(talent only)*: Elusive Brawler (talent)
 - **shield**: Storm, Earth, Fire, Fortifying Brew, Enough to Share (talent)
 - **heal-self** *(talent only)*: Stormstout Secret Recipe (talent), Eye of the Tiger (talent)
-- **dash**: Storm, Earth, Fire
+- **dash**: Flying Kick, Storm, Earth, Fire
 - **armor-shred** *(talent only)*: Accumulating Flame (talent)
 - **aoe**: Wandering Keg, Ring of Fire (talent)
 - **dot**: Keg Smash
@@ -1272,9 +1272,10 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 
 ## Valeera (Melee Assassin)
 
+- **stun**: Blade Flurry
 - **slow** *(talent only)*: Crippling Poison (talent)
 - **silence**: Eviscerate
-- **blind** *(talent only)*: Blind (talent)
+- **blind**: Blade Flurry, Blind (talent)
 - **unstoppable**: Cloak of Shadows
 - **spell-armor**: Cloak of Shadows
 - **physical-armor** *(talent only)*: Combat Readiness (talent)

@@ -102,8 +102,9 @@ function stripNonApplying(masked: string, ctx: Ctx): string {
   // The words in between may not contain a verb or conjunction ("Alarak take 165 damage and are
   // Silenced" is about the enemies hit, not Alarak).
   s = blank(s, new RegExp(`\\b(?:${ctx.selfWords}|allies|ally|allied Heroes?|teammates?|the boat|Mech)\\b(?:\\s+${SUBJECT_TOKEN}){0,4}?\\s+(?:is|are|becomes?|gets?)\\s+(?:also\\s+|then\\s+|instantly\\s+)?${STATE_LIST}`, 'gi'));
-  // Effect lists not used as verbs: "Stuns, Roots, and Slows", "Stun and Silence effects".
-  s = blank(s, new RegExp(`\\b${EFFECT_LIST}(?:\\s+effects?)?(?!\\s+(?:them|enemies|enemy|the|nearby|all|target|him|her|it|an?)\\b)`, 'gi'));
+  // Effect lists not used as verbs: "Stuns, Roots, and Slows", "Stun and Silence effects"; but
+  // "Stun, Blind, and damage an enemy" (Cheap Shot) is a list of verbs and stays.
+  s = blank(s, new RegExp(`\\b${EFFECT_LIST}(?:\\s+effects?)?(?!\\s+(?:them|enemies|enemy|the|nearby|all|target|him|her|it|an?)\\b|\\s*,?\\s+and\\s+(?:damage|deal)\\b)`, 'gi'));
   // "Stunning, Rooting, or Slowing a Hero grants…" (a condition, not an effect).
   s = blank(s, new RegExp(`\\b${GERUNDS}(?:\\s*,\\s*(?:or\\s+|and\\s+)?${GERUNDS}|\\s+(?:or|and)\\s+${GERUNDS})+\\s+(?:a|an|enemy)\\b`, 'gi'));
   // Removal and immunity: "remove all Roots and Slows", "cannot be Slowed", "duration of Stuns".
@@ -527,6 +528,8 @@ const RULES: TagRule[] = [
         /(?<!\b(?:all|its|of|the|their|additional|extra|\d+)\s)\bcharg(?:e|es|ing)\s+(?:forward\s+)?(?:at|toward|towards|forward|into|through|in a|to (?:the |an? )?(?:target|enemy|ally|location|area))\b/i,
         /\b(?:jump|jumps|jumping|hop|hops|roll|rolls|rolling|surge|surges)\s+(?:forward|over|toward|towards|onto|across|to (?:the |a |an |target))\b/i,
         /\bquickly (?:move|travel)s?\b/i,
+        // "Kick through target enemy" (Flying Kick) moves the hero through its target.
+        /\bkicks?\s+through\b/i,
       ),
       new RegExp(`\\b(?:${NON_HERO_UNITS}|Misha|Murlocs?|Ghouls?|Boars|Wolves|meteors?|enemies|enemy Heroes)\\b[^.]{0,40}?\\b(?:dash|dashes|charge|charges|leap|leaps|leaping|rolls)\\b`, 'i'),
     ),
