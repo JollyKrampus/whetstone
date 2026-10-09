@@ -75,17 +75,12 @@ counters:
     weight: 0.2
     why: "{a} reduces healing received ({evidence}), which blunts {b}'s self-healing in melee range."
 
+  # One rule for tanks and bruisers, so a flex hero (Varian is both) is not counted twice.
   - id: percent-damage-vs-frontline
     a: [percent-hp-damage]
-    b: [role:tank]
-    weight: 0.35
+    b: [role:tank, role:bruiser]
+    weight: 0.3
     why: "{a} deals damage based on maximum Health ({evidence}), which hits high-Health heroes like {b} hardest."
-
-  - id: percent-damage-vs-bruisers
-    a: [percent-hp-damage]
-    b: [role:bruiser]
-    weight: 0.25
-    why: "{a} deals damage based on maximum Health ({evidence}), and {b} has a large Health pool."
 
   - id: armor-shred-vs-armor
     a: [armor-shred]

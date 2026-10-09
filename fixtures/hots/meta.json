@@ -8,7 +8,7 @@
     "theoryCounters": 94,
     "theorySynergies": 50
   },
-  "dataHash": "2a1d9fd5cbcf04e7",
+  "dataHash": "21f56f6f14ab7367",
   "extra": {
     "assetsTag": "v2.57.0.98285",
     "build": "2.57.0.98348",
@@ -24,41 +24,41 @@
     "majorSince": "2026-09-28"
   },
   "game": "hots",
-  "generatedAt": "2026-10-09T05:10:16.278Z",
+  "generatedAt": "2026-10-09T05:31:20.090Z",
   "schema": 1,
   "sources": [
     {
-      "fetchedAt": "2026-10-09T05:10:16.278Z",
+      "fetchedAt": "2026-10-09T05:31:20.090Z",
       "id": "tact",
       "status": "ok"
     },
     {
-      "fetchedAt": "2026-10-09T05:10:16.278Z",
+      "fetchedAt": "2026-10-09T05:31:20.090Z",
       "id": "heroes-data2",
       "status": "ok",
       "detail": "fixture: 15 hero records from the 2026-10-09 live run"
     },
     {
       "detail": "fixture: portraits, draft portraits and map images from the live run (no ability icons)",
-      "fetchedAt": "2026-10-09T05:10:16.278Z",
+      "fetchedAt": "2026-10-09T05:31:20.090Z",
       "id": "heroes-images",
       "status": "ok"
     },
     {
       "detail": "24 patch-note articles since 2025-01-01",
-      "fetchedAt": "2026-10-09T05:10:16.278Z",
+      "fetchedAt": "2026-10-09T05:31:20.090Z",
       "id": "blizzard-news",
       "status": "ok"
     },
     {
       "detail": "rotation not yet updated upstream (window ended 2026-10-08)",
-      "fetchedAt": "2026-10-09T05:10:16.278Z",
+      "fetchedAt": "2026-10-09T05:31:20.090Z",
       "id": "nexus-compendium",
       "status": "ok"
     },
     {
       "detail": "fixture: synthetic pick/ban numbers",
-      "fetchedAt": "2026-10-09T05:10:16.278Z",
+      "fetchedAt": "2026-10-09T05:31:20.090Z",
       "id": "liquipedia",
       "status": "ok"
     },

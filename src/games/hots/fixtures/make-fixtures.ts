@@ -100,7 +100,10 @@ function main(): void {
   const fixtureLinks: Links = { ...links, heroes: Object.fromEntries(Object.entries(links.heroes).filter(([id]) => heroIds.has(id))) };
 
   const rotation = read<Rotation>(src, 'rotation.json');
-  const fixtureRotation: Rotation = { ...rotation, heroes: rotation.heroes.filter((id) => heroIds.has(id)) };
+  // Keep the fixture rotation current even when the live one was fetched after its window ended
+  // (rotationIsStale): the stale path has its own unit test, and fixtures should show free heroes.
+  const fetchedAt = rotation.fetchedAt.slice(0, 10) > rotation.end ? `${rotation.end}T12:00:00.000Z` : rotation.fetchedAt;
+  const fixtureRotation: Rotation = { ...rotation, fetchedAt, heroes: rotation.heroes.filter((id) => heroIds.has(id)) };
 
   // Synthetic pick/ban numbers stay; keep them keyed by the fixture entities.
   const pro = read<Pro>(OUT, 'pro.json');

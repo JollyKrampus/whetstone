@@ -1,5 +1,5 @@
 {
-  "rulesVersion": "1.5+fde7877d97a9",
+  "rulesVersion": "1.5+eef0ce288e1a",
   "counters": [
     {
       "a": "Abat",
@@ -355,7 +355,7 @@
           "text": "Valla's area damage (Monster Hunter) clears Anub'arak's summoned units quickly. Only when Valla takes Monster Hunter."
         }
       ],
-      "score": 65,
+      "score": 63,
       "source": "theory"
     },
     {
@@ -367,7 +367,7 @@
           "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Johanna hardest. Only when Valla takes Manticore."
         }
       ],
-      "score": 60,
+      "score": 59,
       "source": "theory"
     },
     {
@@ -379,7 +379,7 @@
           "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Diablo hardest. Only when Valla takes Manticore."
         }
       ],
-      "score": 60,
+      "score": 59,
       "source": "theory"
     },
     {
@@ -427,7 +427,7 @@
           "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Muradin hardest. Only when Valla takes Manticore."
         }
       ],
-      "score": 60,
+      "score": 59,
       "source": "theory"
     },
     {
@@ -453,13 +453,9 @@
         {
           "kind": "theory",
           "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Varian hardest. Only when Valla takes Manticore."
-        },
-        {
-          "kind": "theory",
-          "text": "Valla deals damage based on maximum Health (Manticore), and Varian has a large Health pool. Only when Valla takes Manticore."
         }
       ],
-      "score": 67,
+      "score": 59,
       "source": "theory"
     },
     {
@@ -499,7 +495,7 @@
           "text": "Valla can interrupt channels with stun (Rain of Vengeance), and Cho'gall relies on channelled abilities. Only when Valla takes Rain of Vengeance."
         }
       ],
-      "score": 80,
+      "score": 79,
       "source": "curated"
     },
     {
@@ -664,7 +660,7 @@
           "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Anub'arak's Spell Armor. Only when Xal'atath takes Toxic Mark."
         }
       ],
-      "score": 71,
+      "score": 70,
       "source": "theory"
     },
     {
@@ -680,7 +676,7 @@
           "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Johanna's Physical Armor. Only when Xal'atath takes Toxic Mark. Johanna must also take Divine Fortress."
         }
       ],
-      "score": 65,
+      "score": 63,
       "source": "theory"
     },
     {
@@ -708,7 +704,7 @@
           "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Diablo hardest. Only when Xal'atath takes Toxic Mark."
         }
       ],
-      "score": 60,
+      "score": 59,
       "source": "theory"
     },
     {
@@ -724,7 +720,7 @@
           "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Muradin's Physical Armor. Only when Xal'atath takes Toxic Mark. Muradin must also take Dwarf Block."
         }
       ],
-      "score": 65,
+      "score": 63,
       "source": "theory"
     },
     {
@@ -754,13 +750,9 @@
         {
           "kind": "theory",
           "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Varian hardest. Only when Xal'atath takes Toxic Mark."
-        },
-        {
-          "kind": "theory",
-          "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), and Varian has a large Health pool. Only when Xal'atath takes Toxic Mark."
         }
       ],
-      "score": 67,
+      "score": 59,
       "source": "theory"
     },
     {
@@ -812,7 +804,7 @@
           "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Cho'gall hardest. Only when Xal'atath takes Toxic Mark."
         }
       ],
-      "score": 60,
+      "score": 59,
       "source": "theory"
     },
     {
@@ -1025,7 +1017,7 @@
           "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Anub'arak's Spell Armor. Only when Tracer takes Heavy Handed."
         }
       ],
-      "score": 65,
+      "score": 63,
       "source": "theory"
     },
     {
@@ -1041,7 +1033,7 @@
           "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Johanna's Physical Armor. Only when Tracer takes Heavy Handed. Johanna must also take Divine Fortress."
         }
       ],
-      "score": 65,
+      "score": 63,
       "source": "theory"
     },
     {
@@ -1053,7 +1045,7 @@
           "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Diablo hardest. Only when Tracer takes Quantum Spike."
         }
       ],
-      "score": 60,
+      "score": 59,
       "source": "theory"
     },
     {
@@ -1095,7 +1087,7 @@
           "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Muradin's Physical Armor. Only when Tracer takes Heavy Handed. Muradin must also take Dwarf Block."
         }
       ],
-      "score": 65,
+      "score": 63,
       "source": "theory"
     },
     {
@@ -1108,14 +1100,10 @@
         },
         {
           "kind": "theory",
-          "text": "Tracer deals damage based on maximum Health (Quantum Spike), and Varian has a large Health pool. Only when Tracer takes Quantum Spike."
-        },
-        {
-          "kind": "theory",
           "text": "Tracer can ignore or remove crowd control (Recall), weakening Varian's taunt. Only when Varian takes Taunt."
         }
       ],
-      "score": 70,
+      "score": 62,
       "source": "theory"
     },
     {
@@ -1179,7 +1167,7 @@
           "text": "Tracer can ignore or remove crowd control (Recall), weakening Cho'gall's stun. Only when Cho'gall takes Favor of the Old Gods."
         }
       ],
-      "score": 63,
+      "score": 62,
       "source": "theory"
     },
     {
@@ -1199,7 +1187,7 @@
           "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Anub'arak's Spell Armor. Only when Varian takes Colossus Smash."
         }
       ],
-      "score": 70,
+      "score": 69,
       "source": "theory"
     },
     {
@@ -1219,7 +1207,7 @@
           "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Johanna's Physical Armor. Only when Varian takes Colossus Smash. Johanna must also take Divine Fortress."
         }
       ],
-      "score": 70,
+      "score": 69,
       "source": "theory"
     },
     {
@@ -1261,7 +1249,7 @@
           "text": "Varian reduces healing received (Mortal Strike), which blunts Diablo's self-healing in melee range. Only when Varian takes Mortal Strike."
         }
       ],
-      "score": 66,
+      "score": 65,
       "source": "theory"
     },
     {
@@ -1321,7 +1309,7 @@
           "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Muradin's Physical Armor. Only when Varian takes Colossus Smash. Muradin must also take Dwarf Block."
         }
       ],
-      "score": 70,
+      "score": 69,
       "source": "theory"
     },
     {
@@ -1564,7 +1552,7 @@
           "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Anub'arak's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Anub'arak must also take Locust Swarm."
         }
       ],
-      "score": 72,
+      "score": 71,
       "source": "theory"
     },
     {
@@ -1580,7 +1568,7 @@
           "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Johanna's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Johanna must also take Laws of Hope."
         }
       ],
-      "score": 66,
+      "score": 65,
       "source": "theory"
     },
     {
@@ -1596,7 +1584,7 @@
           "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Diablo's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration."
         }
       ],
-      "score": 66,
+      "score": 65,
       "source": "theory"
     },
     {
@@ -1648,7 +1636,7 @@
           "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Muradin's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration."
         }
       ],
-      "score": 66,
+      "score": 65,
       "source": "theory"
     },
     {
@@ -1680,13 +1668,9 @@
           ],
           "kind": "curated",
           "text": "Twin Blades Varian deals almost all his damage through physical basic attacks, which Ogre Hide's armor (75 with Twilight Veil) cuts sharply while Gall keeps hitting him with Shadowflame in melee range."
-        },
-        {
-          "kind": "theory",
-          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), and Varian has a large Health pool. Only when Cho'gall takes Uppercut."
         }
       ],
-      "score": 67,
+      "score": 60,
       "source": "curated"
     },
     {
