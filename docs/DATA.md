@@ -44,7 +44,10 @@ The same as the branch plus `private/<game>/` (B and C files and their own `_fil
 
 ### Build-time resolution
 
-Per game, the site reads the first directory that has a `meta.json`: `$WHETSTONE_DATA_DIR/current/<game>`, `data/current/<game>`, `fixtures/<game>` (`src/lib/datadir.ts`; `pipeline/stage.ts` uses the same order). Private files come from `$WHETSTONE_DATA_DIR/private/<game>` or `data/private/<game>` when present.
+Per game, the site reads the first directory that has a `meta.json`: `$WHETSTONE_DATA_DIR/current/<game>`, `data/current/<game>`, `fixtures/<game>` (`src/lib/datadir.ts`; `pipeline/stage.ts` uses the same order).
+
+- `WHETSTONE_FIXTURES=1` skips `data/current/<game>` (an explicit `WHETSTONE_DATA_DIR` still wins). Vitest sets it, so a local pipeline run never changes test results, and `WHETSTONE_FIXTURES=1 npm run build` gives a CI-parity build next to a live `data/` directory.
+- Private (B/C) files pair with the chosen directory: `<root>/private/<game>` next to `<root>/current/<game>`. A fixture build never reads `data/private`; with `WHETSTONE_FIXTURE_PRIVATE=1` it uses the synthetic samples in `fixtures/<game>/_private/` instead, including the overlays under `_private/public/` (section 5).
 
 ## 3. Files the runner maintains
 
@@ -97,17 +100,18 @@ The tables mirror the file registries `HOTS_FILES`, `MTGA_FILES` and `POKEMON_FI
 
 | File | Class | Schema | Content |
 |---|---|---|---|
-| `meta.json` | A | `HotsMetaSchema` | `extra`: live build, data build, PTR build, major patch and its start date, builds of the major, image tag, HP mode |
-| `heroes.json` | A | `HeroesFileSchema` | Roster with roles, abilities, talents, mechanics tags with evidence, `isNew` |
+| `meta.json` | A | `HotsMetaSchema` | `extra`: `build` (live), `dataBuild` (the heroes-data2 build the hero data comes from), `ptrBuild`, `major` and `majorSince`, `builds` of the major, `assetsTag` (heroes-images tag), `hpMode`, `buildSeenAt` (when the pipeline first saw the live build) and `dataPending` (set only while heroes-data2 lags the live build by more than 48 hours, so the hero data is from `dataBuild`) |
+| `heroes.json` | A | `HeroesFileSchema` | Roster with roles, abilities, talents, mechanics tags with evidence, `isNew`, `portrait` (hero-select button) and `draftPortrait` (180×212 draft-screen portrait under `img/heroes/`) |
 | `maps.json` | A | `MapsFileSchema` | Maps, kind, ranked flag and its source, profile tags |
 | `patches.json` | A | `PatchesFileSchema` | Patch notes as short factual summaries, per-hero changes, link to the original |
 | `diffs.json` | A | `DiffsFileSchema` | Build-to-build game-data diffs per hero |
-| `theory.json` | A | `TheorySchema` | Theory counters, synergies and map fit with reasons |
+| `theory.json` | A | `TheorySchema` | Theory counters, synergies and map fit with reasons ([THEORY.md](THEORY.md)); generic edges within ±4 of 50 are left out |
 | `links.json` | A | `LinksSchema` | Outbound guide links per hero |
 | `rotation.json` | A | `RotationSchema` | Free hero rotation and ranked season (Nexus Compendium, "as of") |
 | `pro.json` | **A-SA** | `ProSchema` | Liquipedia pro picks, bans and presence, CC-BY-SA 3.0 |
-| `public/draft.json` | A | `DraftShardSchema` | Columnar draft shard; a class-B overlay adds `stats` at stage time (section 5) |
-| `img/**` | A | n/a | WebP portraits, icons and map images from heroes-images at a pinned tag |
+| `public/draft.json` | A | `DraftShardSchema` | Columnar draft shard. Schema 2: reason lines are templates in which `{a}` and `{b}` (map fit: `{a}` and `{m}`) stand for the edge's names, which the reader fills in, and a reference `[i, j]` or `[i, j, k]` joins a rule line with its "Only when … takes …" conditions. A class-B overlay adds `stats` at stage time (section 5) |
+| `img/**` | A | n/a | WebP portraits, draft portraits, ability and talent icons (64 px) and map images converted from heroes-images at a pinned tag. Files come from jsDelivr, with raw.githubusercontent.com as the fallback for files jsDelivr does not serve (the repository is over its 50 MB package limit) |
+| `img/_index.json` | A | n/a | Image conversion index written with the images: `{ schema: 1, repo, tag, converter, files: { "<img/… path>": { src, blob } } }` (`src` = path in heroes-images, `blob` = sha256 of the source file). Only files whose source or converter changed are converted again |
 | `stats.json` (private) | **B** | `StatsSchema` | Heroes Profile aggregates; only with `HP_MODE=on` |
 | `public/draft.json` (private overlay) | **B** | `DraftStatsBlockSchema` under `stats` | Statistics block merged into the draft shard |
 | `videos.json` (private) | **C** | `VideosSchema` | YouTube video metadata (30-day retention) |
@@ -120,22 +124,24 @@ The tables mirror the file registries `HOTS_FILES`, `MTGA_FILES` and `POKEMON_FI
 | `meta.json` | A | `MtgaMetaSchema` | `extra`: Scryfall snapshot, grindstone version, latest set, Standard sets, curated meta formats |
 | `sets.json` | A | `SetsFileSchema` | Arena sets and formats |
 | `public/_cards.standard.json`, `public/_cards.arena.json` | A | `CardShardSchema` | Trimmed card index for the in-browser analyzer. The `_` prefix keeps it out of the public manifest: it is an internal asset, not a dataset (section 5) |
-| `limited/index.json` | A | `LimitedIndexSchema` | Available 17Lands sets and formats |
-| `limited/<SET>.<Format>.json` | A | `LimitedRatingsSchema` | Card ratings derived from 17Lands public datasets (CC BY 4.0) |
+| `limited/index.json` | A | `LimitedIndexSchema` | Available 17Lands datasets: `[{ set, format, file, games, lastModified }]`, newest set first |
+| `limited/<SET>.<Format>.json` | A | `LimitedRatingsSchema` | Card ratings derived from 17Lands public datasets (CC BY 4.0), one file per set and format (`PremierDraft`, `TradDraft`, `Sealed`), e.g. `limited/HOB.PremierDraft.json`. Pages: `/mtga/limited/<set>/` for Premier Draft and `/mtga/limited/<set>/<format-slug>/` (`trad-draft`, `sealed`) for the others, with lower-case set codes |
 | `meta/<format>.json` | A | `MetaSnapshotSchema` | Hand-curated meta lists from `curated/mtga/meta/`, each with its source URL |
 
 ### Pokémon Champions (`src/games/pokemon/schema.ts`)
 
 | File | Class | Schema | Content |
 |---|---|---|---|
-| `meta.json` | A | `PokemonMetaSchema` | `extra`: regulation and its window, season, formats, Smogon month, Showdown commit |
+| `meta.json` | A | `PokemonMetaSchema` | `extra`: regulation and its window, season, formats, `smogonMonth` (the primary doubles month), `showdownSha` (Showdown commit of the dex), `dexKey` (cache key of the dex export), `warmingUp` (right after a regulation change: `{ regulation, since, sources[], showing? }`, the sources without data for the new regulation yet and the regulation shown meanwhile) and `sprites` (`{ count, source, credit }` for the self-hosted sprites) |
 | `regulations.json` | A | `RegulationsFileSchema` | Regulation windows and format ids (from `curated/pokemon/regulations.yaml`) |
-| `dex/species.json`, `dex/moves.json`, `dex/items.json`, `dex/abilities.json`, `dex/typechart.json`, `dex/learnsets.json` | A | `SpeciesFileSchema` and siblings | Champions dex from Pokémon Showdown (MIT) |
+| `dex/species.json`, `dex/moves.json`, `dex/items.json`, `dex/abilities.json`, `dex/typechart.json`, `dex/learnsets.json` | A | `SpeciesFileSchema` and siblings | Champions dex from Pokémon Showdown (MIT). Species carry `sprite` (`img/sprites/<id>.webp`) when one exists and `cosmeticFormes` (Showdown ids of purely cosmetic formes, folded into the species) |
 | `usage/index.json`, `usage/<format>-<cutoff>.json` | A | `UsageIndexSchema`, `UsageSchema` | Smogon monthly usage, reduced to top-K per field |
 | `tournaments.json` | A | `TournamentsSchema` | Limitless aggregates and top-cut teams, player names removed |
 | `h2h.json` | A | `H2HSchema` | Head-to-head aggregates from Showdown Bo3 replays |
 | `speed.json` | A | `SpeedTiersSchema` | Speed tiers |
 | `public/dex.json` | A | `DexShardSchema` | Browser shard for the builder |
+| `ledger/<source>.json` | A | `ReplayLedgerSchema` | Pipeline state, never read by pages: `ledger/showdown-replays.json` keeps the parsed Bo3 replays of the current regulation (species, the ones brought in order, winner and date; no names, replay ids or ratings) and the crawl cursor, so a capped daily crawl adds up to the 30-day window behind `h2h.json` |
+| `img/sprites/**` | A | n/a | Pokémon sprites converted to WebP from Showdown's gen5 sprites, credited as `meta.extra.sprites.credit` |
 
 ## 5. Browser shards and the public manifest
 
@@ -158,7 +164,7 @@ Manifest rules:
 - Only class A and A-SA shards from the public data directory are listed.
 - B and C shards are staged and mapped for the site but never listed.
 - Shards whose file name starts with `_` are internal assets: staged and mapped, not listed. Use this for anything that must not be presented as a dataset, such as the MTGA card index (Scryfall terms).
-- **Overlay:** when `private/<game>/public/<name>.json` exists next to `current/<game>/public/<name>.json`, the site's copy is their shallow merge (the private keys must not overlap the public ones), and the manifest keeps pointing at the pure class-A file, which is staged too. This is how the HotS draft shard gains its Heroes Profile `stats` block without ever exposing it under a documented name.
+- **Overlay:** when `private/<game>/public/<name>.json` exists next to `current/<game>/public/<name>.json`, the site's copy is their shallow merge (the private keys must not overlap the public ones), and the manifest keeps pointing at the pure class-A file, which is staged too. This is how the HotS draft shard gains its Heroes Profile `stats` block without ever exposing it under a documented name. Fixture builds with `WHETSTONE_FIXTURE_PRIVATE=1` merge `fixtures/<game>/_private/public/**` the same way (the synthetic stats block in `fixtures/hots/_private/public/draft.json`), so the statistics-mode e2e runs the draft and ARAM tools exactly as the live site does.
 
 GitHub Pages serves everything with `Access-Control-Allow-Origin: *` and a 10-minute cache, so external tools can read the documented class-A shards. Please credit the sources listed in the manifest.
 

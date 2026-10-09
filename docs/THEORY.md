@@ -21,9 +21,10 @@ Code lives in `src/games/hots/theory/`; curated inputs live in `curated/hots/`.
 5. [Map fit](#map-fit)
 6. [Contributing a counter](#contributing-a-counter)
 7. [Extractor precision](#extractor-precision)
-8. [Calibration on the 2.57 roster](#calibration-on-the-257-roster)
-9. [Known limitations](#known-limitations)
-10. [Developer tools](#developer-tools)
+8. [What pages list](#what-pages-list)
+9. [Calibration on the 2.57 roster](#calibration-on-the-257-roster)
+10. [Known limitations](#known-limitations)
+11. [Developer tools](#developer-tools)
 
 ## Pipeline contract
 
@@ -167,9 +168,11 @@ file fails CI.
 For every ordered pair of draftable heroes (A, B):
 
 ```
-rules(A, B) = Σ over matching rules of  weight × min(factor(A side), factor(B side))
-x(A, B)     = clamp(rules, ±0.6) + curated pair weight            (then clamped to ±2)
-score       = round(50 + 50 · tanh(x))                            (50 = neutral, 1..100)
+net(r, A, B) = weight × min(factor(A side), factor(B side))
+               − the same for r applied B → A, when r also matches that way   (never below 0)
+rules(A, B)  = Σ over matching counter rules of net(r, A, B)
+x(A, B)      = clamp(rules, ±0.6) + curated pair weight            (then clamped to ±2)
+score        = round(50 + 50 · tanh(x))                            (50 = neutral, 1..100)
 ```
 
 - Each rule counts once per pair. `factor` is 1 for a tag the hero always has (a basic ability,
@@ -178,9 +181,14 @@ score       = round(50 + 50 · tanh(x))                            (50 = neutral
   not hard-countered by everyone, and a curated pair (low .2, medium .4, high .6) still moves the
   score: a curated pair on top of capped rules reaches 83-92. SPEC §5.1.6 calls this "each rule
   counted once per pair, capped".
-- Counters are directed (A counters B) and emitted for every ordered pair with x ≠ 0. Synergy
-  rules are tried both ways and count once (the stronger direction); synergies are stored with
-  a < b.
+- **Mirror matchups are a wash.** A counter rule that matches both ways round (both heroes Blind
+  and rely on Basic Attacks; both are global split-pushers) only counts by how much more it
+  favours A: Cassia and Xal'atath no longer "counter" each other at 77 through the same blind
+  rule. Negative (penalty) rules apply as written.
+- Counters are directed (A counters B). An edge is stored when its score is more than 4 points
+  from 50 (`PRUNE_MARGIN` in `weights.ts`) or a curated pair exists: the 46-54 band is one mild rule
+  reached through a talent, or rules that cancel out, and carries no usable signal. Synergy rules
+  are tried both ways and count once (the stronger direction); synergies are stored with a < b.
 - Edge `source` is `curated` when a curated pair exists, else `theory`.
 
 | Weight | Score | Used for |
@@ -194,6 +202,17 @@ score       = round(50 + 50 · tanh(x))                            (50 = neutral
 reason renders its template with the hero names, tag labels and up to two evidence names of A's
 tag; when A's tag has no evidence (a curated trait, a role selector), the " ({evidence})" group is
 dropped. Evidence names come from the current game data, so reasons stay true when a kit changes.
+The reason's `evidence` list is only attached when the template does not already quote it.
+
+**Talent conditions.** When a side matches only through a talent or one of several Heroics, the
+reason says so, naming the pick: "Abathur can reveal enemies (Toxic Nest), taking away Genji's
+stealth. Only when Genji takes Pathfinder." When both sides need one: "Only when Chromie takes
+Timewalker's Pursuit. Tassadar must also take Shadow Walk."
+
+**Draft shard.** `public/draft.json` (schema 2) stores each reason once as a template, with the
+edge's hero names replaced by `{a}`/`{b}` (map fit: `{a}`/`{m}`) and the talent conditions as separate
+parts, so one line serves every pair a rule matches; `src/games/hots/draft/data.ts` fills the names
+back in. On the 2.57 roster that takes the shard from 2.14 MB (243 KB gzipped) to 518 KB (100 KB).
 
 ## Map fit
 
@@ -286,23 +305,40 @@ Remaining known imprecisions (accepted, or left to curators):
 - Healers whose healing is a toggle or aura (Lúcio's Crossfade) may lack `heal-ally` from basic
   abilities; rules that care use `role:healer` as well.
 
+## What pages list
+
+Hero pages list a theory edge in "strong against", "weak against" or "good with" when a curator
+wrote it, or when its generic rules reach **65** (`THEORY_GATES.listMinScore` in
+`src/games/hots/load.ts`): one strong interaction the hero always has, or two clear ones. A match
+that only works through a talent tops out at 62 on its own, so it never heads a list alone.
+Curated matchups come first, then generic ones, each by score. Edges scoring 55-64 stay one tap
+away under "weaker mechanical edges"; the draft tool weighs every stored edge by its score.
+`docs/METHODOLOGY.md` §11 says the same for players.
+
 ## Calibration on the 2.57 roster
 
-Generated with `dev/build.ts` on build 98348 with the curated files of this commit (90 draftable
-heroes, 572 curated counter pairs, 238 curated synergy pairs):
+From the live pipeline run of 9 October 2026 (build 2.57.0.98348, rules `1.5`, 90 draftable heroes,
+572 curated counter pairs, 238 curated synergy pairs):
 
-| | Edges | 50-59 | 60-69 | 70-79 | 80-89 | 90-99 |
+| | Edges | 55-59 | 60-69 | 70-79 | 80-89 | 90-99 |
 |---|---|---|---|---|---|---|
-| Counters | 6,508 of 8,010 ordered pairs | 2,620 | 2,519 | 1,080 | 280 | 9 |
-| Synergies | 2,653 of 4,005 pairs | 777 | 870 | 888 | 118 | 0 |
+| Counters | 5,039 of 8,010 ordered pairs | 1,660 | 2,234 | 875 | 262 | 8 |
+| Synergies | 2,590 of 4,005 pairs | 708 | 866 | 898 | 118 | 0 |
 
-1,370 map-fit entries. Edges with a curated pair: 572 counters, 238 synergies. The strongest
-counters (92) are Johanna over The Butcher and Illidan, Genji over Jaina, Medivh over Nova and
-Zeratul over Abathur and Sgt. Hammer: each a curated pair on top of capped rules. The most
-countered heroes by edges scoring 65+ are Murky, Xal'atath, Nova, Zeratul, Genji, Xul, Thrall,
-Probius, Valeera and Li-Ming (49-59 edges each, mean incoming 66-69): fragile or Basic-Attack
-heroes with known hard answers, which matches common experience. The full theory.json for the
-real roster is about 3.7 MB as compact JSON.
+1,370 map-fit entries. 2,314 counter edges clear the list bar (curated or 65+). 181 generic
+counters sit at the 77 cap. The strongest counters (92) are Johanna over The Butcher and Illidan,
+Genji over Jaina, Medivh over Nova and Zeratul over Abathur and Sgt. Hammer: each a curated pair on
+top of capped rules. The most countered heroes by edges scoring 65+ are Murky, Genji, Nova,
+Zeratul, Valeera, Thrall, Xal'atath, Probius, Li-Ming and Xul (46-55 edges each, mean incoming
+71-74): fragile or Basic-Attack heroes with known hard answers, which matches common experience.
+theory.json is 3.1 MB as compact JSON (284 KB gzipped).
+
+Before this tuning (rules `1.1`) the same roster gave 6,489 counters and 2,653 synergies (3.7 MB),
+every edge above 50 was listed (Abathur "weak against" 71 heroes, Zeratul "good with" 85), and
+generic rules produced lines such as "D.Va reduces healing received (Aggression Matrix), which
+cuts into Johanna's healing" at 77 and Abathur and Dehaka "countering" each other at 77 through the
+same global-vs-split-push rule. Now Abathur lists 13 / 28 / 14 heroes (strong / weak / good with),
+curated first, and those lines are gone or carry their talent condition.
 
 ## Known limitations
 
@@ -314,6 +350,7 @@ real roster is about 3.7 MB as compact JSON.
   damage; curated pairs supply the specifics.
 - **Counters are not antisymmetric.** A > B and B > A are scored from different rules, so both can
   be above 50. They are separate statements ("A has tools against B", "B has tools against A").
+  Only the same rule matching both ways is netted out.
 - **No team context.** Scores are pairwise. Comps, double support, map timing and talent
   build-paths are left to the draft engine's other signals and to statistics.
 - **Patch drift.** Curated entries carry `reviewedFor`; evidence names are checked against current

@@ -321,7 +321,7 @@ export function statGate(n: number, delta: number, z?: number): MatchupGate {
 }
 
 /**
- * Theory list gate (docs/METHODOLOGY.md §13, docs/THEORY.md). A theory edge makes the headline
+ * Theory list gate (docs/METHODOLOGY.md §11, docs/THEORY.md). A theory edge makes the headline
  * strong/weak/good-with lists when a curator wrote the matchup, or when the generic rules alone
  * reach listMinScore (x ≥ 0.3: one strong, always-available interaction, or two clear ones; a match
  * that only works through a talent tops out at 62 on its own). Weaker generic edges

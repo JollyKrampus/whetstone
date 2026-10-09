@@ -259,7 +259,43 @@ The draft tool scores every hero you could pick or ban right now.
 - Cho'gall takes two consecutive picks of the same team and is only offered at those steps.
 - Free mode places heroes on either team in any order.
 
-## 11. Freshness
+**Role needs** (`src/games/hots/draft/roles.ts`). A team should end with a Healer (or a Support
+that shields, saves or heals allies) and a frontline hero (Tank or Bruiser, main or flex role).
+
+- A pick that leaves fewer pick slots than unmet needs gets a large penalty and a warning.
+- A pick that fills an open need gets a bonus: **0.2 + 0.3 to 0.4 × urgency**, where urgency is
+  open needs ÷ picks left. In Storm League urgency starts at 0, because your team's later picks are
+  planned. A need nobody available can fill any more is dropped and mentioned once.
+- Smaller penalties, each with its reason: a second main-role Tank, a second (or third) Healer, a
+  second Support, a third Melee Assassin, a fourth melee hero, a finished team without ranged
+  damage.
+
+**ARAM helper.** You choose one of the three heroes you are offered, so there is no draft order.
+The same role needs apply with gentler penalties, with one difference: **a gap you can fill counts
+fully** (urgency never below 1), because your teammates still to lock get random options of their
+own and may not be able to fill it. ARAM rankings use theory and ARAM statistics only, never
+Storm League numbers.
+
+## 11. Theory scores and what a hero page lists
+
+Without match statistics, matchups come from the theory layer (`docs/THEORY.md`): rules
+about what kits do to each other, plus matchups that curators wrote and checked against the
+current kit text. Theory scores use the same 1–100 ring, but they measure how hard one kit
+punishes another, not how often a matchup is won.
+
+| Rule | Threshold | Effect |
+|---|---|---|
+| Not stored | generic score within 4 points of 50 | Too close to neutral to mean anything; left out of the data. Curated matchups are always kept. |
+| Listed as "strong against", "weak against" or "good with" | curated, or generic score ≥ **65** | One strong interaction the hero always has, or two clear ones. A match that only works through a talent tops out at 62 on its own. |
+| Below the bar | generic score 55–64 | Shown behind "weaker mechanical edges" under the list. |
+
+Within a list, curated matchups come first, then generic ones, each by score. A reason that only
+holds when a hero takes a certain talent or Heroic says so ("Only when Genji takes Pathfinder").
+A rule that applies both ways round (both heroes blind, both rely on Basic Attacks) is a wash
+and only counts by how much more it favours one side. The draft tool uses every stored theory
+edge, weighted by its score.
+
+## 12. Freshness
 
 Every page shows how old its data is. The data job runs once a day.
 
@@ -274,7 +310,7 @@ A source whose latest fetch failed keeps showing its last good data. It is label
 never called "fresh". Disabled sources (for example Heroes Profile before permission) are listed
 as disabled, not broken.
 
-## 12. Known biases
+## 13. Known biases
 
 - **Who uploads replays.** Uploaders skew toward engaged, higher-rated players, and some regions
   (notably China) are barely present.
