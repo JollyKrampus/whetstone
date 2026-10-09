@@ -80,6 +80,11 @@ export function fakeHttp(routes: Readonly<Record<string, Route>>): FakeHttp {
       await answer('head', url, init);
       return {};
     },
+    async request(url: string, init?: HttpInit) {
+      const r = await answer('request', url, init);
+      const body = r instanceof Uint8Array ? r : new TextEncoder().encode(typeof r === 'string' ? r : JSON.stringify(r));
+      return { status: 200, headers: {}, body };
+    },
   };
 }
 

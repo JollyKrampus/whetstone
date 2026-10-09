@@ -8,7 +8,7 @@
  * pooled in at weight 0.5 (SPEC §5).
  */
 import { HP_PATHS, fetchWindow, type FetchWindowResult } from '../sources/heroesprofileAdapter.ts';
-import { createHpClient, type HpClient, type HpTransport } from '../sources/heroesprofile.ts';
+import { createHpClient, httpTransport, type HpClient, type HpTransport } from '../sources/heroesprofile.ts';
 import type { GameMap, Stats, StatsWindow } from '../../schema.ts';
 import type { HeroInput } from '../transform/heroes.ts';
 import { buildStats, buildStatsWindow, mapShares, poolWindows } from '../transform/stats.ts';
@@ -64,7 +64,7 @@ export async function runHeroesProfile(
   const client: HpClient = createHpClient({
     key: env.ctx.secrets.HP_API_KEY as string,
     budget: HP_CALL_BUDGET,
-    ...(deps.transport ? { transport: deps.transport } : {}),
+    transport: deps.transport ?? httpTransport(env.ctx.http),
     ...(deps.sleep ? { sleep: deps.sleep } : {}),
     log: (m) => env.ctx.log(m),
   });

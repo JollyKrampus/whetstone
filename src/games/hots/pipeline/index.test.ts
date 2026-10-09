@@ -58,6 +58,7 @@ function failingHosts(http: Http, down: readonly string[]): Http {
     text: async (url, init) => (guard(url), http.text(url, init)),
     bytes: async (url, init) => (guard(url), http.bytes(url, init)),
     head: async (url, init) => (guard(url), http.head(url, init)),
+    request: async (url, init) => (guard(url), http.request(url, init)),
   };
 }
 

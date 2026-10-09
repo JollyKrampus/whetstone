@@ -140,6 +140,10 @@ jobs:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
           LIQUIPEDIA_UA_CONTACT: ${{ vars.LIQUIPEDIA_UA_CONTACT }}
+          # The job's own read-only token: api.github.com calls (heroes-data2 releases, heroes-images
+          # tags and trees, the Showdown commit) get 1,000 requests/hour instead of 60 per runner IP.
+          # pipeline/http.ts sends it to api.github.com only, never to logs or caches.
+          GITHUB_TOKEN: ${{ github.token }}
 
       # Uploaded even when the run failed: status.json tells publish to keep last-good data.
       - name: Upload open data (A, A-SA, history, status)

@@ -97,6 +97,13 @@ export interface OutputFile {
   bytes?: Uint8Array;
 }
 
+export interface HttpResponse {
+  status: number;
+  /** Lower-cased header names. */
+  headers: Record<string, string>;
+  body: Uint8Array;
+}
+
 export interface Http {
   /** GET JSON with UA, retries/backoff, per-host spacing, dev disk cache, offline fixtures. */
   json<T = unknown>(url: string, init?: HttpInit): Promise<T>;
@@ -104,6 +111,14 @@ export interface Http {
   bytes(url: string, init?: HttpInit): Promise<Uint8Array>;
   /** HEAD request; returns headers (lower-cased keys). */
   head(url: string, init?: HttpInit): Promise<Record<string, string>>;
+  /**
+   * The final response with its status and headers, for APIs that answer in statuses (202 jobs,
+   * 429 quotas, rate-limit headers). Same User-Agent, per-host spacing, timeout, retries on
+   * network errors and offline fixtures as the others, but it never throws on an HTTP status
+   * and never retries one (the caller decides), skips the dev disk cache and is never recorded
+   * as a fixture (licensed responses must not land in the repo).
+   */
+  request(url: string, init?: HttpInit): Promise<HttpResponse>;
 }
 
 export interface HttpInit {

@@ -30,6 +30,7 @@ const down: Http = {
   text: () => Promise.reject(new Error('GET -> 503 (network down in this test)')),
   bytes: () => Promise.reject(new Error('GET -> 503 (network down in this test)')),
   head: () => Promise.reject(new Error('GET -> 503 (network down in this test)')),
+  request: () => Promise.reject(new Error('GET -> 503 (network down in this test)')),
 };
 
 function run(extra: Partial<RunOptions> = {}) {

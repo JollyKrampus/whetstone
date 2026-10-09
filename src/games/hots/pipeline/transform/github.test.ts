@@ -53,6 +53,7 @@ describe('fallbacks when the GitHub API is rate-limited', () => {
       text: async (url: string) => String(pick(url)),
       bytes: async () => new Uint8Array(),
       head: async () => ({}),
+      request: async (url: string) => ({ status: 200, headers: {}, body: new TextEncoder().encode(String(pick(url))) }),
     };
   };
 

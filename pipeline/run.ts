@@ -34,7 +34,7 @@ import type {
   SourceStatus,
   ValidationIssue,
 } from '../src/core/game.ts';
-import { createContext, gameDirs, hpEnabled, secretsFromEnv } from './context.ts';
+import { bearerTokens, createContext, gameDirs, hpEnabled, secretsFromEnv } from './context.ts';
 import { compareStrings, hashTree, jsonBytes, sha256 } from './hash.ts';
 import { createHttp } from './http.ts';
 import {
@@ -357,6 +357,7 @@ async function processGame(game: GameId, o: Resolved, print: (line: string) => v
         record: o.env.WHETSTONE_RECORD === '1',
         cache: o.env.CI !== 'true' && o.env.WHETSTONE_HTTP_CACHE !== '0',
         contact: o.env.WHETSTONE_CONTACT ?? o.env.LIQUIPEDIA_UA_CONTACT ?? '',
+        bearer: bearerTokens(secretsFromEnv(o.env)),
         log: (m) => log(m),
       });
   const ctx = createContext({ game, root: o.root, out: o.out, http, env: o.env, now: o.now, offline: o.offline, only: o.only, log });

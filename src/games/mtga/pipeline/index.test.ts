@@ -34,6 +34,7 @@ function failingHttp(fail: RegExp): Http {
     text: (url, init) => guard(url, () => base.text(url, init)),
     bytes: (url, init) => guard(url, () => base.bytes(url, init)),
     head: (url, init) => guard(url, () => base.head(url, init)),
+    request: (url, init) => guard(url, () => base.request(url, init)),
   };
 }
 

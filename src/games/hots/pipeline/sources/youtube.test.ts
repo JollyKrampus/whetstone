@@ -36,6 +36,7 @@ describe('fetchUploads', () => {
       text: async () => '',
       bytes: async () => new Uint8Array(),
       head: async () => ({}),
+      request: async () => ({ status: 404, headers: {}, body: new Uint8Array() }),
     };
     const out = await fetchUploads(http, 'KEY', ['UCaaaaaaaaaaaaaaaaaaaaaa']);
     expect(out).toEqual([{ id: 'abcdefghijk', channelId: 'UCaaaaaaaaaaaaaaaaaaaaaa', channel: 'C', title: 'T', description: 'd', published: '2026-10-07T10:00:00Z', durationSec: 600, views: 42, lang: 'en' }]);

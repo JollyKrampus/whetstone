@@ -4,7 +4,7 @@ import path from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { DataPipeline, GameId, GameMeta, Http, OutputFile, PipelineContext, PipelineResult, ValidationIssue } from '../src/core/game.ts';
-import { isSelected } from './context.ts';
+import { bearerTokens, isSelected, secretsFromEnv } from './context.ts';
 import type { FileIndex, StatusFile } from './manifest.ts';
 import { checkResult, failedSources, formatSummary, githubOutputs, loadGamePipeline, runPipelines, type RunOptions } from './run.ts';
 import { listFiles } from './store.ts';
@@ -25,6 +25,7 @@ const noHttp: Http = {
   text: () => Promise.reject(new Error('no network in tests')),
   bytes: () => Promise.reject(new Error('no network in tests')),
   head: () => Promise.reject(new Error('no network in tests')),
+  request: () => Promise.reject(new Error('no network in tests')),
 };
 
 function meta(game: GameId, extra: Partial<PipelineResult['meta']> = {}): PipelineResult['meta'] {
@@ -317,5 +318,15 @@ describe('helpers', () => {
 
   it('loadGamePipeline returns null when the module does not exist', async () => {
     await expect(loadGamePipeline('hots', root)).resolves.toBeNull();
+  });
+});
+
+describe('secrets', () => {
+  it('exposes GITHUB_TOKEN to games and as a bearer token for api.github.com only', () => {
+    const secrets = secretsFromEnv({ GITHUB_TOKEN: ' ghs_x ', HOME: '/root' });
+    expect(secrets.GITHUB_TOKEN).toBe('ghs_x');
+    expect(secrets).not.toHaveProperty('HOME');
+    expect(bearerTokens(secrets)).toEqual({ 'api.github.com': 'ghs_x' });
+    expect(bearerTokens(secretsFromEnv({ GITHUB_TOKEN: '' }))).toEqual({});
   });
 });

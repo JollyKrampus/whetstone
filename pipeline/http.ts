@@ -7,10 +7,14 @@
  * Fixture lookup: src/games/<game>/fixtures/raw/<key>.<ext> where <key> is `init.fixture` or
  * `fixtureKey(url)` (first 16 hex of sha256 of the redacted URL) and <ext> is tried in the order
  * json/txt/bin depending on the call (`head()` uses <key>.head.json, an object of headers).
+ *
+ * Credentials: `bearer` maps a host to a token sent as `Authorization: Bearer` to that host only
+ * (pipeline/run.ts passes GITHUB_TOKEN for api.github.com). fetch drops the header on a
+ * cross-origin redirect, and neither the token nor the header reaches logs, cache keys or fixtures.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import type { Http, HttpInit } from '../src/core/game.ts';
+import type { Http, HttpInit, HttpResponse } from '../src/core/game.ts';
 import { sha256, stableStringify } from './hash.ts';
 
 export const USER_AGENT_BASE = 'Whetstone/0.1 (+https://github.com/JollyKrampus/whetstone)';
@@ -88,6 +92,8 @@ export interface HttpOptions {
   fixturesDir?: string;
   /** Contact appended to the User-Agent (email or URL). */
   contact?: string;
+  /** Host → bearer token, e.g. { 'api.github.com': GITHUB_TOKEN }. Empty values are ignored. */
+  bearer?: Readonly<Record<string, string | undefined>>;
   retries?: number;
   baseDelayMs?: number;
   maxDelayMs?: number;
@@ -104,13 +110,10 @@ export interface HttpOptions {
   log?: (msg: string) => void;
 }
 
-type Kind = 'json' | 'text' | 'bytes' | 'head';
+/** 'raw' is Http.request(): any status comes back to the caller. */
+type Kind = 'json' | 'text' | 'bytes' | 'head' | 'raw';
 
-interface RawResponse {
-  status: number;
-  headers: Record<string, string>;
-  body: Uint8Array;
-}
+type RawResponse = HttpResponse;
 
 interface CacheMeta {
   url: string;
@@ -125,6 +128,7 @@ const FIXTURE_EXTS: Record<Kind, readonly string[]> = {
   text: ['txt', 'json', 'bin'],
   bytes: ['bin', 'json', 'txt'],
   head: ['head.json'],
+  raw: ['json', 'txt', 'bin'],
 };
 
 const FIXTURE_KEY = /^[A-Za-z0-9_-][A-Za-z0-9._-]*(\/[A-Za-z0-9_-][A-Za-z0-9._-]*)*$/;
@@ -288,23 +292,27 @@ export function createHttp(options: HttpOptions): Http {
 
     if (options.offline) return readFixture(method, url, key, kind);
 
-    const cacheable = options.cache === true && (method === 'GET' || method === 'HEAD');
+    const raw = kind === 'raw';
+    const record = options.record === true && !raw;
+    const cacheable = options.cache === true && !raw && (method === 'GET' || method === 'HEAD');
     const cp = cacheable ? cachePaths(method, url, init.body) : null;
     const cached = cp ? readCache(cp) : null;
     const ttlMs = (init.ttlHours ?? options.ttlHours ?? 12) * 3_600_000;
     if (cached && now() - cached.meta.savedAt < ttlMs) {
       const res = { status: cached.meta.status, headers: cached.meta.headers, body: cached.body };
-      if (options.record) writeFixture(key, kind, res);
+      if (record) writeFixture(key, kind, res);
       return res;
     }
 
+    const host = new URL(url).host;
     const headers: Record<string, string> = { 'user-agent': ua };
+    const token = options.bearer?.[host]?.trim();
+    if (token) headers.authorization = `Bearer ${token}`;
     for (const [k, v] of Object.entries(init.headers ?? {})) headers[k.toLowerCase()] = v;
     // Revalidate an expired cache entry instead of downloading it again.
     if (cached?.meta.headers.etag) headers['if-none-match'] = cached.meta.headers.etag;
     else if (cached?.meta.headers['last-modified']) headers['if-modified-since'] = cached.meta.headers['last-modified'];
 
-    const host = new URL(url).host;
     const spacing = init.spacingMs ?? options.spacingMs ?? 250;
     const timeoutMs = init.timeoutMs ?? options.timeoutMs ?? 30_000;
 
@@ -331,9 +339,10 @@ export function createHttp(options: HttpOptions): Http {
         const meta = { ...cached.meta, savedAt: now() };
         writeCache(cp, meta, cached.body);
         const out = { status: cached.meta.status, headers: cached.meta.headers, body: cached.body };
-        if (options.record) writeFixture(key, kind, out);
+        if (record) writeFixture(key, kind, out);
         return out;
       }
+      if (raw) return res;
       if (isRetryableStatus(res.status)) {
         lastError = `HTTP ${res.status}`;
         const retryAfter = parseRetryAfter(res.headers['retry-after'], now());
@@ -352,7 +361,7 @@ export function createHttp(options: HttpOptions): Http {
       if (cp && res.status === 200) {
         writeCache(cp, { url: safeUrl, method, status: res.status, headers: res.headers, savedAt: now() }, res.body);
       }
-      if (options.record && res.status === 200) writeFixture(key, kind, res);
+      if (record && res.status === 200) writeFixture(key, kind, res);
       return res;
     }
     throw new HttpError(`${method} ${safeUrl} failed: ${lastError}`, 0, safeUrl);
@@ -376,6 +385,9 @@ export function createHttp(options: HttpOptions): Http {
     },
     async head(url: string, init?: HttpInit): Promise<Record<string, string>> {
       return (await request('head', url, init)).headers;
+    },
+    async request(url: string, init?: HttpInit): Promise<HttpResponse> {
+      return request('raw', url, init);
     },
   };
 }

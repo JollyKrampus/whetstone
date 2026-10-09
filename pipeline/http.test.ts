@@ -248,3 +248,64 @@ describe('offline fixtures and record mode', () => {
     await expect(offline.json('https://nexuscompendium.com/api/currently/herorotation', { fixture: 'nc/rotation' })).resolves.toEqual({ rotation: ['Abathur'] });
   });
 });
+
+describe('request() for status-driven APIs', () => {
+  it('returns any status with headers and never retries one', async () => {
+    const { fetch, calls } = stubFetch([
+      new Response('{"job":1}', { status: 202, headers: { location: '/jobs/1', 'retry-after': '3' } }),
+      new Response('{"error":{"code":"quota"}}', { status: 429, headers: { 'x-ratelimit-remaining': '0' } }),
+      new Response('nope', { status: 404 }),
+      new Response('down', { status: 503 }),
+    ]);
+    const http = make({ fetch });
+    const accepted = await http.request('https://hp.example/api/x');
+    expect(accepted.status).toBe(202);
+    expect(accepted.headers).toMatchObject({ location: '/jobs/1', 'retry-after': '3' });
+    expect(new TextDecoder().decode(accepted.body)).toBe('{"job":1}');
+    expect((await http.request('https://hp.example/api/x')).status).toBe(429);
+    expect((await http.request('https://hp.example/api/x')).status).toBe(404);
+    expect((await http.request('https://hp.example/api/x')).status).toBe(503);
+    expect(calls).toHaveLength(4);
+    expect(calls[0]?.init.headers).toMatchObject({ 'user-agent': expect.stringMatching(/^Whetstone\//) as unknown });
+  });
+
+  it('retries network errors, skips the dev cache and never records', async () => {
+    const { fetch, calls } = stubFetch([new TypeError('fetch failed'), json({ ok: 1 }), json({ ok: 2 })]);
+    const http = make({ fetch, cache: true, record: true });
+    expect((await http.request('https://hp.example/api/y')).status).toBe(200);
+    expect(new TextDecoder().decode((await http.request('https://hp.example/api/y')).body)).toBe('{"ok":2}');
+    expect(calls).toHaveLength(3);
+    expect(existsSync(path.join(root, '.cache', 'http'))).toBe(false);
+    expect(existsSync(path.join(root, 'src'))).toBe(false);
+  });
+
+  it('serves offline fixtures as 200', async () => {
+    const dir = path.join(root, 'src', 'games', 'hots', 'fixtures', 'raw');
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(path.join(dir, 'hp-x.json'), '{"a":1}');
+    const http = createHttp({ game: 'hots', root, offline: true });
+    const res = await http.request('https://hp.example/api/x', { fixture: 'hp-x' });
+    expect(res.status).toBe(200);
+    expect(new TextDecoder().decode(res.body)).toBe('{"a":1}');
+  });
+});
+
+describe('bearer tokens', () => {
+  it('sends a host token to that host only and keeps it out of logs', async () => {
+    const lines: string[] = [];
+    const { fetch, calls } = stubFetch([json([]), json({})]);
+    const http = make({ fetch, bearer: { 'api.github.com': 'ghs_secret', 'empty.example': '' }, log: (m) => lines.push(m) });
+    await http.json('https://api.github.com/repos/a/b/releases');
+    await http.json('https://raw.githubusercontent.com/a/b/main/x.json');
+    expect((calls[0]?.init.headers as Record<string, string>).authorization).toBe('Bearer ghs_secret');
+    expect((calls[1]?.init.headers as Record<string, string>).authorization).toBeUndefined();
+    expect(lines.join('\n')).not.toContain('ghs_secret');
+  });
+
+  it('lets an explicit Authorization header win', async () => {
+    const { fetch, calls } = stubFetch([json({})]);
+    const http = make({ fetch, bearer: { 'api.github.com': 'ghs_secret' } });
+    await http.json('https://api.github.com/x', { headers: { Authorization: 'Bearer other' } });
+    expect((calls[0]?.init.headers as Record<string, string>).authorization).toBe('Bearer other');
+  });
+});

@@ -7,8 +7,17 @@ import type { GameId, GameMeta, Http, PipelineContext } from '../src/core/game.t
 import { META_FILE } from './manifest.ts';
 import { readJson, resolveRel } from './store.ts';
 
-/** Environment variables exposed to games as `ctx.secrets`. Anything else stays invisible to them. */
-export const SECRET_NAMES = ['HP_API_KEY', 'HP_MODE', 'YT_API_KEY', 'TWITCH_CLIENT_ID', 'TWITCH_CLIENT_SECRET', 'LIQUIPEDIA_UA_CONTACT'] as const;
+/**
+ * Environment variables exposed to games as `ctx.secrets`. Anything else stays invisible to them.
+ * GITHUB_TOKEN (the workflow's own token in CI) is also handed to the Http client, which sends it
+ * to api.github.com only, so GitHub API calls get 1,000 requests/hour instead of 60 per runner IP.
+ */
+export const SECRET_NAMES = ['HP_API_KEY', 'HP_MODE', 'YT_API_KEY', 'TWITCH_CLIENT_ID', 'TWITCH_CLIENT_SECRET', 'LIQUIPEDIA_UA_CONTACT', 'GITHUB_TOKEN'] as const;
+
+/** Hosts that receive a bearer token from the secrets (pipeline/http.ts `bearer`). */
+export function bearerTokens(secrets: Readonly<Record<string, string | undefined>>): Record<string, string> {
+  return secrets.GITHUB_TOKEN ? { 'api.github.com': secrets.GITHUB_TOKEN } : {};
+}
 
 /**
  * GitHub passes unset secrets as empty strings; normalise those to undefined. HP_MODE is the

@@ -14,10 +14,12 @@
  *    queries really answer 202 with a pollable Location, and the reset header's unit. Endpoint
  *    paths and response shapes live in ./heroesprofileAdapter.ts.
  *
- * pipeline/http.ts's Http interface returns bodies only (no status codes or headers), which 202
- * polling and rate-limit handling need, so this client has its own small transport. The default
- * transport is global fetch with the pipeline's User-Agent; tests inject a fake one.
+ * Transport: `httpTransport(ctx.http)` sends every call through the pipeline's Http.request()
+ * (User-Agent, per-host spacing, timeouts, network-error retries; statuses come back untouched
+ * and responses are never cached on disk or recorded as fixtures). Status handling (202 jobs,
+ * 429, 5xx, the call budget) stays here. Tests inject a fake transport.
  */
+import type { Http } from '../../../../core/game.ts';
 import { userAgent } from '../../../../../pipeline/http.ts';
 
 export const HP_BASE_URL = 'https://www.heroesprofile.com/api/external/v1';
@@ -34,7 +36,7 @@ export type HpTransport = (url: string, headers: Record<string, string>) => Prom
 export interface HpClientOptions {
   key: string;
   baseUrl?: string;
-  transport?: HpTransport;
+  transport: HpTransport;
   /** Billable calls allowed in one run (job polls are not counted). */
   budget?: number;
   /** Longest wait for one asynchronous job. */
@@ -108,26 +110,17 @@ function envelope(body: string): { code: string | null; message: string | null }
   }
 }
 
-export const fetchTransport =
-  (timeoutMs = 120_000): HpTransport =>
+/** The pipeline's Http client as an HpTransport (long timeout: some queries are slow). */
+export const httpTransport =
+  (http: Http, timeoutMs = 120_000): HpTransport =>
   async (url, headers) => {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(new Error(`timed out after ${timeoutMs} ms`)), timeoutMs);
-    try {
-      const res = await fetch(url, { headers, signal: controller.signal, redirect: 'follow' });
-      const out: Record<string, string> = {};
-      res.headers.forEach((v, k) => {
-        out[k.toLowerCase()] = v;
-      });
-      return { status: res.status, headers: out, body: await res.text() };
-    } finally {
-      clearTimeout(timer);
-    }
+    const res = await http.request(url, { headers, timeoutMs });
+    return { status: res.status, headers: res.headers, body: new TextDecoder('utf-8').decode(res.body) };
   };
 
 export function createHpClient(opts: HpClientOptions): HpClient {
   const base = (opts.baseUrl ?? HP_BASE_URL).replace(/\/+$/, '');
-  const transport = opts.transport ?? fetchTransport();
+  const transport = opts.transport;
   const budget = opts.budget ?? 120;
   const maxJobMs = opts.maxJobMs ?? 20 * 60_000;
   const maxRetryAfter = opts.maxRetryAfterMs ?? 120_000;
