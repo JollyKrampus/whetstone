@@ -50,6 +50,11 @@ export interface Store {
   /** False when values only live in memory for this page view. */
   readonly persistent: boolean;
   get<T>(key: string, fallback: T, validate?: Validator<T>): T;
+  /**
+   * The stored string as written (null when absent), without unwrapping the version envelope:
+   * for readers that must also accept a value some other writer stored bare.
+   */
+  raw(key: string): string | null;
   /** Returns true when the value reached persistent storage. */
   set<T>(key: string, value: T): boolean;
   remove(key: string): void;
@@ -179,6 +184,9 @@ export function createStore(scope: StoreScope, opts: StoreOptions = {}): Store {
       } catch {
         return fallback;
       }
+    },
+    raw(key: string): string | null {
+      return readRaw(prefix + key);
     },
     set<T>(key: string, value: T): boolean {
       const full = prefix + key;

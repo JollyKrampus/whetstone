@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createStore, storageKey, type StorageLike } from '../../../core/storage.ts';
+import { createStore, storageKey, type StorageLike } from '../../core/storage.ts';
 import {
   EMPTY_POOL,
   hasOwnedList,
@@ -9,7 +9,8 @@ import {
   setFavorite,
   setOwned,
   subscribePool,
-  validatePool,
+  parsePool,
+  mentions,
   withOwned,
   writePool,
   type HeroPool,
@@ -49,9 +50,9 @@ describe('hero pool contract', () => {
   });
 
   it('drops ids that are not entity-shaped but keeps unknown heroes', () => {
-    expect(validatePool({ v: 1, owned: ['Abat', '<script>', 42, 'Gone'], favorites: [] })).toEqual({ v: 1, owned: ['Abat', 'Gone'], favorites: [] });
-    expect(validatePool({ v: 1 })).toEqual({ v: 1, owned: [], favorites: [] });
-    expect(validatePool(null)).toBeUndefined();
+    expect(parsePool({ v: 1, owned: ['Abat', '<script>', 42, 'Gone'], favorites: [] })).toEqual({ v: 1, owned: ['Abat', 'Gone'], favorites: [] });
+    expect(parsePool({ v: 1 })).toEqual({ v: 1, owned: [], favorites: [] });
+    expect(parsePool(null)).toBeUndefined();
   });
 
   it('treats an empty owned list as "not set up": every hero counts as available', () => {
@@ -80,5 +81,41 @@ describe('hero pool contract', () => {
     stop();
     writePool({ v: 1, owned: [], favorites: [] }, s);
     expect(seen).toEqual([{ v: 1, owned: ['Tra0'], favorites: [] }]);
+  });
+});
+
+describe('tolerant reading (the draft and ARAM tools rely on it)', () => {
+  const KEY = 'whetstone:hots:pool';
+  const from = (raw: Record<string, string>) => createStore('hots', { storage: memoryStorageWith(raw), events: null });
+  function memoryStorageWith(raw: Record<string, string>) {
+    const s = memoryStorage();
+    for (const [k, v] of Object.entries(raw)) s.data.set(k, v);
+    return s;
+  }
+
+  it('reads the store envelope, a bare value and a value without a version', () => {
+    const pool = { v: 1, owned: ['Wiza'], favorites: ['Mura'] };
+    expect(readPool(from({ [KEY]: JSON.stringify({ v: 1, d: pool }) }))).toEqual(pool);
+    expect(readPool(from({ [KEY]: JSON.stringify(pool) }))).toEqual(pool);
+    expect(readPool(from({ [KEY]: JSON.stringify({ v: 1, d: { owned: ['Wiza'] } }) }))).toEqual({ v: 1, owned: ['Wiza'], favorites: [] });
+    expect(readPool(from({ [KEY]: JSON.stringify({ owned: ['Wiza'], favorites: [] }) }))).toEqual({ v: 1, owned: ['Wiza'], favorites: [] });
+  });
+
+  it('falls back to an empty pool on anything else', () => {
+    const empty = { v: 1, owned: [], favorites: [] };
+    expect(readPool(from({ [KEY]: '{oops' }))).toEqual(empty);
+    expect(readPool(from({ [KEY]: JSON.stringify({ v: 2, owned: ['Wiza'], favorites: [] }) }))).toEqual(empty);
+    expect(readPool(createStore('hots', { storage: null, events: null }))).toEqual(empty);
+    expect(parsePool({ owned: 'Wiza' })).toBeUndefined();
+    expect(parsePool({ owned: ['Wiza', 'Wiza', 3, ''], favorites: [] })).toEqual({ v: 1, owned: ['Wiza'], favorites: [] });
+  });
+
+  it('matches entities by id, slug or member id', () => {
+    const liming = { id: 'Wiza', slug: 'liming', members: null };
+    const chogall = { id: 'chogall', slug: 'chogall', members: ['CCho', 'Gall'] };
+    expect(mentions(new Set(['liming']), liming)).toBe(true);
+    expect(mentions(new Set(['Wiza']), liming)).toBe(true);
+    expect(mentions(new Set(['Gall']), chogall)).toBe(true);
+    expect(mentions(new Set(['Zera']), liming)).toBe(false);
   });
 });

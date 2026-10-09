@@ -26,7 +26,8 @@ import {
 import { createStore } from '../../../../core/storage.ts';
 import { onHashChange, readHash, writeHash } from '../../../../core/urlstate.ts';
 import type { DraftHero } from '../../draft/data.ts';
-import { EMPTY_POOL, SUGGEST_FROM_LABEL, allowedFor, mentions, readPool, watchPool, type HeroPool, type SuggestFrom } from '../../draft/pool.ts';
+import { SUGGEST_FROM_LABEL, allowedFor, type SuggestFrom } from '../../draft/allowed.ts';
+import { EMPTY_POOL, mentions, readPool, subscribePool, type HeroPool } from '../../pool.ts';
 import { teamSummary, type RoleHero, type TeamSummary } from '../../draft/roles.ts';
 import {
   FREE_MAX_BANS,
@@ -184,7 +185,7 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
     const offHash = onHashChange((h) => {
       if (h !== lastHash.current) restore(h);
     });
-    const offPool = watchPool(setPool);
+    const offPool = subscribePool(setPool);
     return () => {
       offHash();
       offPool();

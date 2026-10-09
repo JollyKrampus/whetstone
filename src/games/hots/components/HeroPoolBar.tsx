@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { normalize } from '../../../core/search.ts';
 import { createStore } from '../../../core/storage.ts';
 import './hots.css';
-import { EMPTY_POOL, hasOwnedList, readPool, setFavorite, setOwned, subscribePool, withOwned, writePool, type HeroPool } from './pool.ts';
+import { EMPTY_POOL, hasOwnedList, readPool, setFavorite, setOwned, subscribePool, withOwned, writePool, type HeroPool } from '../pool.ts';
 
 export interface PoolHero {
   id: string;

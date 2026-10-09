@@ -48,6 +48,16 @@ describe('createStore', () => {
     expect(store.persistent).toBe(true);
   });
 
+  it('exposes the raw stored string, including values only held in memory', () => {
+    const storage = memoryStorage({ 'whetstone:hots:bare': '{"owned":["Abat"]}' });
+    const store = createStore('hots', { storage, events: null });
+    expect(store.raw('bare')).toBe('{"owned":["Abat"]}');
+    expect(store.raw('missing')).toBeNull();
+    const memoryOnly = createStore('hots', { storage: throwing('write'), events: null });
+    memoryOnly.set('k', 1);
+    expect(memoryOnly.raw('k')).toBe('{"v":1,"d":1}');
+  });
+
   it('returns the fallback for missing, corrupt, foreign or old-version values', () => {
     const storage = memoryStorage({
       'whetstone:hots:corrupt': '{nope',

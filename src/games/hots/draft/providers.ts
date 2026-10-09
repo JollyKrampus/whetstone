@@ -26,7 +26,7 @@ import {
   type DraftData,
   type DraftHero,
 } from './data.ts';
-import { mentions } from './pool.ts';
+import { mentions } from '../pool.ts';
 import { SL_ROLES, roleVerdicts, type RoleConfig } from './roles.ts';
 
 export const HP_SOURCE = 'heroesprofile';

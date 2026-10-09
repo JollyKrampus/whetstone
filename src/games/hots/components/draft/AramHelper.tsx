@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import ShareButton from '../../../../components/ShareButton.tsx';
 import { onHashChange, readHash, writeHash } from '../../../../core/urlstate.ts';
 import { ARAM_TEAM_SIZE, ARAM_WEIGHTS, rankAram } from '../../draft/aram.ts';
-import { EMPTY_POOL, mentions, readPool, watchPool, type HeroPool } from '../../draft/pool.ts';
+import { EMPTY_POOL, mentions, readPool, subscribePool, type HeroPool } from '../../pool.ts';
 import { ARAM_ALLIES, ARAM_ENEMIES, ARAM_OPTIONS, createAramCodec } from '../../draft/state.ts';
 import HeroPicker, { type TileStatus } from './HeroPicker.tsx';
 import SuggestionList from './SuggestionList.tsx';
@@ -69,7 +69,7 @@ export default function AramHelper({ shardUrl, roster, maps, credit }: Props) {
     const offHash = onHashChange((h) => {
       if (h !== lastHash.current) restore(h);
     });
-    const offPool = watchPool(setPool);
+    const offPool = subscribePool(setPool);
     return () => {
       offHash();
       offPool();
