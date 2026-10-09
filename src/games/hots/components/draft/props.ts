@@ -83,6 +83,23 @@ export function useShard(url: string): { shard: ShardState; retry: () => void } 
   return { shard, retry: () => setAttempt((n) => n + 1) };
 }
 
+/** Live result of a CSS media query; false on the server and before hydration. */
+export function useMediaQuery(query: string): boolean {
+  const [match, setMatch] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;
+    const mql = window.matchMedia(query);
+    const update = () => setMatch(mql.matches);
+    update();
+    mql.addEventListener('change', update);
+    return () => mql.removeEventListener('change', update);
+  }, [query]);
+  return match;
+}
+
+/** Phones: the step and suggestions come first, so keep the list short above the board. */
+export const NARROW_QUERY = '(max-width: 47.99rem)';
+
 /** Names joined for prose: "A", "A and B", "A, B and C". */
 export function joinNames(names: readonly string[]): string {
   if (names.length <= 1) return names.join('');

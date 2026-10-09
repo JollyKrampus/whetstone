@@ -37,9 +37,8 @@ function slotCaption(s: BoardSlot): string {
 function SlotBody({ s }: { s: BoardSlot }) {
   const free = s.step === undefined;
   const name = s.hero ? s.hero.name : s.skipped ? 'No ban' : s.current ? (free ? 'Adding here' : 'Now') : 'Open';
-  const sub = [s.step === undefined ? '' : `Step ${s.step + 1}`, s.part ? `${s.part} of 2` : '', s.current && !free ? 'on the clock' : '']
-    .filter(Boolean)
-    .join(' · ');
+  // "Now" plus the highlight (and aria-current) mark the step on the clock; the sub-line keeps the step number.
+  const sub = [s.step === undefined ? '' : `Step ${s.step + 1}`, s.part ? `${s.part} of 2` : ''].filter(Boolean).join(' · ');
   return (
     <>
       <span class="tp-slot__pic" aria-hidden="true">

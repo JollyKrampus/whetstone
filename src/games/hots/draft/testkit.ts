@@ -3,6 +3,7 @@
  * merge a stats block built from the synthetic private fixture). Node-only; used by *.test.ts.
  */
 import { readFileSync } from 'node:fs';
+import type { DraftContext, Provider, Signal } from '../../../core/draft.ts';
 import { decodeShard, type DraftData } from './data.ts';
 import { statsBlockFromWindow } from './statsblock.ts';
 import type { DraftShard, Stats } from '../schema.ts';
@@ -36,4 +37,17 @@ export function idOf(data: DraftData, name: string): string {
   const h = data.heroes.find((x) => x.name === name);
   if (!h) throw new Error(`no hero named ${name}`);
   return h.id;
+}
+
+/** A scoring context with neutral defaults (team A picking, five picks left each). */
+export function ctxOf(partial: Partial<DraftContext>): DraftContext {
+  return { team: 'A', action: 'pick', allies: [], enemies: [], bans: [], picksLeft: 5, enemyPicksLeft: 5, ...partial };
+}
+
+/** Every signal the providers return for one candidate, flattened. */
+export function signalsOf(list: readonly Provider[], candidate: string, c: DraftContext): Signal[] {
+  return list.flatMap((p) => {
+    const out = p(candidate, c);
+    return out ? (Array.isArray(out) ? out : [out]) : [];
+  }) as Signal[];
 }

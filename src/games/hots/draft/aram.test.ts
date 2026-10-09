@@ -21,6 +21,21 @@ describe('ARAM helper', () => {
     expect(r.usesStats).toBe(false);
   });
 
+  it('counts a gap you can fill as urgent even when an unknown teammate is still to lock', () => {
+    // Three known teammates, no Healer: the fifth player's options are random, so they cannot plan for it.
+    const r = rankAram(theory, {
+      options: [id('Valla'), id('Tracer'), id('Malfurion')],
+      allies: [id('Muradin'), id('Li-Ming'), id('Zeratul')],
+      enemies: [],
+      map: '',
+    });
+    expect(r.ranked[0]!.hero.name).toBe('Malfurion');
+    const fill = r.ranked[0]!.signals.find((s) => s.key === 'role' && s.value > 0)!;
+    expect(fill.reasons[0]!.text).toBe('Gives your team the Healer it still needs');
+    // Same as the last-pick bonus: base + full urgency.
+    expect(fill.value).toBeCloseTo(0.5, 10);
+  });
+
   it('uses counters against known enemies', () => {
     const r = rankAram(theory, { options: [id("Anub'arak"), id('Johanna'), id('Diablo')], allies: [], enemies: [id('Valla'), id('Li-Ming')], map: '' });
     const anub = r.ranked.find((s) => s.hero.name === "Anub'arak")!;

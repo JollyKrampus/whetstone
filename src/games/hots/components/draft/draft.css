@@ -199,12 +199,14 @@
 @media (min-width: 64rem) {
   .dt-layout {
     grid-template-columns: minmax(0, 1fr) minmax(21rem, 27rem);
+    /* The suggestions column spans both rows; its extra height goes to the second row, so the
+       picker sits directly under the board instead of below an empty gap. */
+    grid-template-rows: auto 1fr;
     grid-template-areas:
       'board now'
       'picker now';
     column-gap: var(--sp-6);
   }
-
 }
 
 /* ---------- current step ---------- */
@@ -335,6 +337,7 @@
 .tp {
   --team: var(--team-a);
   --team-soft: var(--team-a-soft);
+  container: team / inline-size;
   display: grid;
   gap: var(--sp-2);
   align-content: start;
@@ -428,8 +431,34 @@ button.tp-slot:hover {
 }
 
 .tp-slot--ban .tp-slot__name {
+  max-width: 100%;
   font-size: 0.6875rem;
   font-weight: 600;
+}
+
+/* Narrow team panels (phones): three ban tiles side by side cannot fit a name, so the bans
+   become a compact list with the portrait beside the full name. */
+@container team (max-width: 14rem) {
+  .tp__bans {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tp-slot--ban {
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+    justify-items: start;
+    gap: var(--sp-2);
+    padding: 2px var(--sp-1);
+    text-align: left;
+  }
+
+  .tp-slot--ban .tp-slot__pic {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .tp-slot--ban .tp-slot__name {
+    font-size: var(--fs-xs);
+  }
 }
 
 .tp-slot--ban.tp-slot--filled img {

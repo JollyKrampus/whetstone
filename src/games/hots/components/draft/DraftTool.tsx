@@ -45,7 +45,7 @@ import { banWeights, pickWeights, presetInfo, suggest, type Suggestion } from '.
 import HeroPicker, { type TileStatus } from './HeroPicker.tsx';
 import SuggestionList from './SuggestionList.tsx';
 import TeamPanel, { type BoardSlot } from './TeamPanel.tsx';
-import { useShard, type CreditProp, type MapOption, type RosterHero } from './props.ts';
+import { NARROW_QUERY, useMediaQuery, useShard, type CreditProp, type MapOption, type RosterHero } from './props.ts';
 import './draft.css';
 
 interface Props {
@@ -123,6 +123,7 @@ function stepHint(t: Target): string {
 export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, credit, poolHref }: Props) {
   const { shard, retry } = useShard(shardUrl);
   const data = shard.status === 'ready' ? shard.data : null;
+  const narrow = useMediaQuery(NARROW_QUERY);
 
   const rules = useMemo(() => entityRules(roster), [roster]);
   const codec = useMemo(() => createDraftCodec(roster.map((h) => h.id)), [roster]);
@@ -599,6 +600,7 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
                   idPrefix="dt-sg"
                   suggestions={list}
                   weights={weights}
+                  limit={narrow ? 3 : 6}
                   presets={presets}
                   preset={activePreset}
                   onPreset={changePreset}

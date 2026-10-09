@@ -130,6 +130,12 @@ export interface RoleConfig {
   /** Bonus for filling an open need; grows with urgency (needs ÷ picks left). */
   fillBase: number;
   fillUrgency: number;
+  /**
+   * Lowest urgency a fillable need gets. 0 in Storm League (your team drafts its later picks on
+   * purpose); 1 in ARAM, where teammates still to lock get random options and may not be able
+   * to fill the gap, so a gap you can fill yourself counts as if you were the last chance.
+   */
+  fillUrgencyFloor: number;
   secondTank: number;
   secondHealer: number;
   thirdHealer: number;
@@ -144,6 +150,7 @@ export const SL_ROLES: Readonly<RoleConfig> = Object.freeze({
   infeasible: 1.5,
   fillBase: 0.2,
   fillUrgency: 0.4,
+  fillUrgencyFloor: 0,
   secondTank: 0.4,
   secondHealer: 0.3,
   thirdHealer: 0.8,
@@ -153,11 +160,15 @@ export const SL_ROLES: Readonly<RoleConfig> = Object.freeze({
   noRangedDamage: 0.35,
 });
 
-/** ARAM: random options and no draft, so the same rules apply more gently. */
+/**
+ * ARAM: random options and no draft. Penalties are gentler (you can only choose among three),
+ * but filling a gap counts fully, because the teammates still to lock cannot plan for it.
+ */
 export const ARAM_ROLES: Readonly<RoleConfig> = Object.freeze({
   infeasible: 0.6,
   fillBase: 0.2,
   fillUrgency: 0.3,
+  fillUrgencyFloor: 1,
   secondTank: 0.25,
   secondHealer: 0.2,
   thirdHealer: 0.5,
@@ -213,7 +224,7 @@ export function roleVerdicts(
   } else {
     const filled = before.filter((n) => !afterNeeds.includes(n) && meetsNeed(candidate, n));
     if (filled.length > 0 && picksLeft > 0) {
-      const urgency = Math.min(1, before.length / picksLeft);
+      const urgency = Math.min(1, Math.max(cfg.fillUrgencyFloor, before.length / picksLeft));
       const what = filled.map((n) => (n === 'healer' ? (isHealer(candidate) ? 'Healer' : 'sustain (shields/saves)') : 'frontline')).join(' and ');
       out.push({ value: cfg.fillBase + cfg.fillUrgency * urgency, reasons: [role(`Gives ${whose} team the ${what} it still needs`)] });
     }
