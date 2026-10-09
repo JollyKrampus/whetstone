@@ -13,7 +13,29 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { GameId, GameMeta } from '../core/game.ts';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const PACKAGE_NAME = 'whetstone';
+
+/** Nearest ancestor of `start` (inclusive) holding this repo's package.json, or null. */
+function findRepoRoot(start: string): string | null {
+  for (let dir = path.resolve(start); ; dir = path.dirname(dir)) {
+    const pkg = path.join(dir, 'package.json');
+    if (existsSync(pkg)) {
+      try {
+        if ((JSON.parse(readFileSync(pkg, 'utf8')) as { name?: unknown }).name === PACKAGE_NAME) return dir;
+      } catch {
+        // Unreadable or foreign package.json: keep walking up.
+      }
+    }
+    if (path.dirname(dir) === dir) return null;
+  }
+}
+
+// Astro bundles this module for prerendering, so import.meta.url may point at a chunk under
+// .astro/ or the build output rather than src/lib/. Walking up to the package.json works from
+// both; cwd covers an output directory outside the repo (WHETSTONE_OUT_DIR), where astro runs
+// from the repo root anyway.
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = findRepoRoot(HERE) ?? findRepoRoot(process.cwd()) ?? path.resolve(HERE, '../..');
 
 export function repoRoot(): string {
   return ROOT;

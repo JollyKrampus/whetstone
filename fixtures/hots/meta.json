@@ -1,0 +1,86 @@
+{
+  "game": "hots",
+  "schema": 1,
+  "version": {
+    "label": "2.57",
+    "build": "2.57.0.98348",
+    "since": "2026-09-28"
+  },
+  "generatedAt": "2026-10-08T10:31:00Z",
+  "dataHash": "aa21cc5e2e1314c9",
+  "sources": [
+    {
+      "id": "tact",
+      "fetchedAt": "2026-10-08T10:17:05Z",
+      "status": "ok"
+    },
+    {
+      "id": "heroes-data2",
+      "fetchedAt": "2026-10-08T10:17:40Z",
+      "status": "ok",
+      "detail": "fixture: 14 heroes hand-written from release v2.57.0.98348 (text paraphrased)"
+    },
+    {
+      "id": "heroes-images",
+      "fetchedAt": "2026-10-08T10:18:10Z",
+      "status": "ok",
+      "detail": "fixture: generated placeholder portraits and map thumbnails"
+    },
+    {
+      "id": "blizzard-news",
+      "fetchedAt": "2026-10-08T10:18:30Z",
+      "status": "ok"
+    },
+    {
+      "id": "nexus-compendium",
+      "fetchedAt": "2026-10-08T10:20:00Z",
+      "status": "ok"
+    },
+    {
+      "id": "liquipedia",
+      "fetchedAt": "2026-10-08T10:22:00Z",
+      "status": "ok",
+      "detail": "fixture: synthetic pick/ban numbers"
+    },
+    {
+      "id": "heroesprofile",
+      "fetchedAt": null,
+      "status": "disabled",
+      "detail": "HP_MODE=off"
+    },
+    {
+      "id": "youtube",
+      "fetchedAt": null,
+      "status": "disabled",
+      "detail": "YT_API_KEY not set"
+    },
+    {
+      "id": "twitch",
+      "fetchedAt": null,
+      "status": "disabled",
+      "detail": "Twitch credentials not set"
+    }
+  ],
+  "counts": {
+    "heroes": 14,
+    "entities": 13,
+    "maps": 6,
+    "patches": 2,
+    "theoryCounters": 96,
+    "theorySynergies": 49
+  },
+  "extra": {
+    "build": "2.57.0.98348",
+    "dataBuild": "2.57.0.98348",
+    "major": "2.57",
+    "majorSince": "2026-09-28",
+    "builds": [
+      "2.57.0.98348",
+      "2.57.0.98304",
+      "2.57.0.98297",
+      "2.57.0.98285"
+    ],
+    "assetsTag": "v2.57.0.98285",
+    "hpMode": "off"
+  }
+}

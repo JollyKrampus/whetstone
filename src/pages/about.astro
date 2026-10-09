@@ -1,0 +1,285 @@
+---
+import Badge from '../components/Badge.tsx';
+import { GATES } from '../core/stats.ts';
+import { SITE, games, navHref, withBase } from '../games/registry.ts';
+import Base from '../layouts/Base.astro';
+
+const flow = [
+  {
+    title: 'Sources',
+    body: 'Game files and builds, official patch notes, open datasets (MIT, CC BY, CC-BY-SA) and, only with permission, licensed stats.',
+  },
+  {
+    title: 'Daily pipeline',
+    body: 'A scheduled GitHub Actions job runs each game separately, validates every file against a schema, and keeps the last good copy of any source that fails.',
+  },
+  {
+    title: 'Custody',
+    body: 'Open data is published to a public data branch with history. Share-alike data stays in separate, labelled files. Licensed data is never committed anywhere.',
+  },
+  {
+    title: 'Static build',
+    body: 'Astro pre-renders one page per hero, map, card and Pokémon. Interactive tools are small islands that load only where they are used.',
+  },
+  {
+    title: 'Your browser',
+    body: 'Everything runs here: no server, no account, no cookies. Your pools and pastes stay on your device.',
+  },
+];
+---
+
+<Base title="About" description="What Whetstone is, where its data comes from, and how it decides what to show.">
+  <article class="container page">
+    <header class="page__head">
+      <p class="kicker">About</p>
+      <h1>A sharper second opinion for every pick.</h1>
+      <p class="page__lead">
+        {SITE.name} is a free, open-source meta companion for {games.map((g) => g.name).join(', ').replace(/, ([^,]*)$/, ' and $1')}.
+        It turns public game data and openly licensed statistics into counters, drafts, deck analysis and team building, and it
+        always shows its working.
+      </p>
+    </header>
+
+    <section class="page__section" aria-labelledby="games-h">
+      <h2 id="games-h">The games</h2>
+      <ul class="about-games">
+        {
+          games.map((g) => (
+            <li class="about-games__item" style={`--accent: var(${g.accent})`}>
+              <div class="about-games__top">
+                <a href={navHref(g)}>{g.name}</a>
+                <Badge tone={g.status === 'live' ? 'positive' : 'accent'}>{g.status}</Badge>
+              </div>
+              <p>{g.tagline}</p>
+              <a class="about-games__method" href={navHref(g, 'about/')}>
+                Methodology for {g.short}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="page__section" aria-labelledby="principles-h">
+      <h2 id="principles-h">Principles</h2>
+      <ul class="prose principles">
+        <li>
+          <strong>Every number explains itself.</strong> Counters and recommendations show why (the matching mechanics,
+          stats or curated notes), how sure (sample size and effect in percentage points) and where the number came from.
+        </li>
+        <li>
+          <strong>Honest sample sizes.</strong> Pairs with fewer than {GATES.hideBelow} games are hidden, fewer than {GATES.greyBelow}
+          are greyed out, and a hero is only called strong or weak against another with at least {GATES.listMinN} games and an
+          effect of {GATES.listMinDeltaPp} pp or more.
+        </li>
+        <li>
+          <strong>Theory is labelled as theory.</strong> When measured statistics aren't available, rule-based reasoning from
+          the current game text fills in, and every such line is marked "Theory".
+        </li>
+        <li>
+          <strong>Nothing hard-coded.</strong> Rosters, cards and Pokémon come from data, so a new release appears on its own
+          with an "early data" badge.
+        </li>
+        <li>
+          <strong>Non-commercial.</strong> No ads, no trackers, no paywall, no accounts. Sources are credited the way their
+          licenses ask.
+        </li>
+      </ul>
+    </section>
+
+    <section class="page__section" aria-labelledby="flow-h">
+      <h2 id="flow-h">How data flows</h2>
+      <ol class="flow">
+        {
+          flow.map((step, i) => (
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="muted page__note">
+        If a source can't be reached, its game keeps working from the last good data and shows a staleness notice with the
+        date it was last refreshed.
+      </p>
+    </section>
+
+    <section class="page__section" aria-labelledby="more-h">
+      <h2 id="more-h">Credits, privacy and feedback</h2>
+      <div class="prose">
+        <p>
+          Every data source, its license and how it is credited is listed on the
+          <a href={withBase('credits/')}>credits page</a>. The <a href={withBase('privacy/')}>privacy page</a> lists exactly
+          what is stored in your browser (only preferences you set). Found a wrong counter or a broken page?
+          <a href={SITE.feedback} rel="noopener">Open an issue</a>, or read the <a href={SITE.repo} rel="noopener">source code</a>.
+        </p>
+        <p>
+          Whetstone is an unofficial fan project with no connection to the game publishers or to other community sites; see
+          the footer for the full notices.
+        </p>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    gap: var(--sp-7);
+    padding-block: var(--sp-7) var(--sp-8);
+  }
+
+  .page__head {
+    display: grid;
+    gap: var(--sp-3);
+    max-width: 48rem;
+  }
+
+  .page__head h1 {
+    font-size: var(--fs-3xl);
+    max-width: 18ch;
+  }
+
+  .page__lead {
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .page__section {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .page__section h2 {
+    font-size: var(--fs-2xl);
+    margin-top: 0;
+  }
+
+  .principles {
+    display: grid;
+    gap: var(--sp-3);
+    padding-left: 1.25rem;
+  }
+
+  .principles > li + li {
+    margin-top: 0;
+  }
+
+  .page__note {
+    font-size: var(--fs-sm);
+  }
+
+  .about-games {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .about-games__item {
+    display: grid;
+    align-content: start;
+    gap: var(--sp-2);
+    padding: var(--sp-4);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .about-games__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+  }
+
+  .about-games__top a {
+    color: var(--text);
+    font-weight: 750;
+    font-size: var(--fs-lg);
+  }
+
+  .about-games__item p {
+    color: var(--text-muted);
+  }
+
+  .about-games__method {
+    font-size: var(--fs-sm);
+    font-weight: 650;
+  }
+
+  .flow {
+    display: grid;
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .flow__step {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: var(--sp-1);
+    padding: var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  /* Connector notch between steps: a small rotated square pointing to the next stage. */
+  .flow__step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    bottom: -0.45rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-right: 1px solid var(--border-strong);
+    border-bottom: 1px solid var(--border-strong);
+    background: var(--surface);
+    transform: rotate(45deg);
+    z-index: 1;
+  }
+
+  .flow__n {
+    color: var(--edge);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+  }
+
+  .flow__step h3 {
+    font-size: var(--fs-lg);
+  }
+
+  .flow__step p {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .about-games {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .flow {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .flow__step:not(:last-child)::after {
+      left: auto;
+      right: -0.45rem;
+      top: 1.6rem;
+      bottom: auto;
+      border-bottom: 0;
+      border-top: 1px solid var(--border-strong);
+    }
+  }
+</style>

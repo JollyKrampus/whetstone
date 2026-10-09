@@ -1,0 +1,248 @@
+---
+/**
+ * Layout for every page under /<game>/: game bar (name, data version, freshness, sub-nav from the
+ * game's module.ts), staleness banners, required source credits, then the page content.
+ *
+ * Attribution (SPEC §1.5): list the source ids the page displays in `uses`. 'top'-rule sources
+ * are credited above the content; 'inline'-rule sources (Heroes Profile, Liquipedia) are credited
+ * right under it unless the page renders its own <SourceAttribution> beside the data and passes
+ * inlineCredits={false}. Footer-rule credits are always in the site footer. The `attribution`
+ * slot is for any extra page-level credit.
+ */
+import type { GameId } from '../core/game.ts';
+import FreshnessBadge from '../components/FreshnessBadge.astro';
+import SourceAttribution from '../components/SourceAttribution.astro';
+import StaleBanner from '../components/StaleBanner.astro';
+import { gameById, navHref } from '../games/registry.ts';
+import Base from './Base.astro';
+import { loadGameMeta } from './gameMeta.ts';
+
+interface Props {
+  game: GameId;
+  /** Page title (without site name); defaults to the game name. */
+  title?: string;
+  description?: string;
+  /** SourceRef ids whose data this page shows. */
+  uses?: string[];
+  /** Render credits for 'inline'-rule sources under the content (default true). */
+  inlineCredits?: boolean;
+  /** Sub-nav path to mark current when the URL alone doesn't say (e.g. 'maps/' on a map page). */
+  navPath?: string;
+  /** Base-relative share image path. */
+  image?: string;
+  /** Keep the page out of search results (placeholders for unbuilt sections). */
+  noindex?: boolean;
+}
+
+const { game, title, description, uses = [], inlineCredits = true, navPath, image, noindex = false } = Astro.props;
+const module = gameById(game);
+const { meta, fixtures } = loadGameMeta(game);
+const pathname = Astro.url.pathname;
+
+const fetchedAt = (id: string) => meta?.sources.find((s) => s.id === id)?.fetchedAt ?? null;
+const topIds = module.sources.filter((s) => s.rule === 'top' && uses.includes(s.id)).map((s) => s.id);
+const inlineIds = module.sources.filter((s) => s.rule === 'inline' && uses.includes(s.id)).map((s) => s.id);
+
+const items = module.nav.map((item) => ({ ...item, href: navHref(game, item.path) }));
+const explicit = navPath !== undefined ? items.find((i) => i.path === navPath) : undefined;
+// Longest matching prefix wins; the game home ('') only matches exactly.
+const byUrl = items
+  .filter((i) => (i.path === '' ? pathname === i.href : pathname.startsWith(i.href)))
+  .sort((a, b) => b.href.length - a.href.length)[0];
+const active = explicit ?? byUrl;
+---
+
+<Base title={title ?? module.name} description={description ?? `${module.name}: ${module.tagline}`} game={game} noindex={noindex} {...(image ? { image } : {})}>
+  <Fragment slot="head"><slot name="head" /></Fragment>
+
+  <div slot="subheader" class="gamebar" style={`--accent: var(${module.accent})`}>
+    <div class="container gamebar__top">
+      <a class="gamebar__name" href={navHref(game)}>
+        <span class="gamebar__pip" aria-hidden="true"></span>
+        <span>{module.name}</span>
+        {module.status !== 'live' && <span class="gamebar__status">{module.status}</span>}
+      </a>
+      <FreshnessBadge game={game} meta={meta} fixtures={fixtures} />
+    </div>
+    <nav class="gamebar__nav" aria-label={`${module.short} sections`}>
+      <ul class="container gamebar__list">
+        {
+          items.map((item) => (
+            <li>
+              <a class="gamebar__link" href={item.href} aria-current={item === active ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container game-page">
+    <div class="game-page__notices">
+      <StaleBanner game={game} meta={meta} />
+      {
+        topIds.length > 0 && (
+          <SourceAttribution game={game} ids={topIds} placement="top" asOf={fetchedAt(topIds[0] ?? '')} />
+        )
+      }
+    </div>
+
+    <div class="game-page__content">
+      <slot />
+    </div>
+
+    {
+      (Astro.slots.has('attribution') || (inlineCredits && inlineIds.length > 0)) && (
+        <div class="game-page__credits">
+          {inlineCredits && inlineIds.length > 0 && <SourceAttribution game={game} ids={inlineIds} placement="inline" />}
+          <slot name="attribution" />
+        </div>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .gamebar {
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 7%, var(--bg)), var(--bg));
+  }
+
+  .gamebar__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2) var(--sp-4);
+    padding-block: var(--sp-4) var(--sp-2);
+  }
+
+  .gamebar__name {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: var(--text);
+    font-size: var(--fs-lg);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .gamebar__pip {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 1px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+
+  .gamebar__status {
+    padding: 0 0.4rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 60%, var(--border));
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gamebar__nav {
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Fade the right edge so a clipped tab reads as "scroll for more". */
+    mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
+  }
+
+  .gamebar__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gamebar__list {
+    display: flex;
+    gap: var(--sp-1);
+    margin: 0 auto;
+    list-style: none;
+  }
+
+  .gamebar__list > li:last-child {
+    padding-right: 2rem;
+  }
+
+  .gamebar__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    padding: 0 var(--sp-3);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: 650;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .gamebar__list > li:first-child .gamebar__link {
+    padding-left: 0;
+  }
+
+  .gamebar__link:hover {
+    color: var(--text);
+  }
+
+  .gamebar__link[aria-current='page'] {
+    color: var(--text);
+  }
+
+  .gamebar__link[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    left: var(--sp-3);
+    right: var(--sp-3);
+    bottom: 0;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background: var(--accent);
+  }
+
+  .gamebar__list > li:first-child .gamebar__link[aria-current='page']::after {
+    left: 0;
+  }
+
+  .game-page {
+    display: grid;
+    gap: var(--sp-5);
+    padding-block: var(--sp-5) var(--sp-7);
+  }
+
+  .game-page__notices {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  /* Banners render conditionally (and their scripts live here too), so collapse when nothing shows. */
+  .game-page__notices:not(:has(> :not(script, [hidden]))) {
+    display: none;
+  }
+
+  .game-page__content {
+    min-width: 0;
+  }
+
+  .game-page__credits {
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (min-width: 48rem) {
+    .gamebar__nav {
+      mask-image: none;
+    }
+    .gamebar__list > li:last-child {
+      padding-right: 0;
+    }
+  }
+</style>

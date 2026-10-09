@@ -1,0 +1,12 @@
+# Curated synergy pairs (SPEC §5.1.4). Same format as counters.yaml, validated by
+# CuratedPairsFileSchema in src/games/hots/schema.ts. Pairs are undirected: `a` and `b`
+# can be listed in either order.
+#
+# The entry below is an example of the format; real content comes from curators by PR.
+pairs:
+  - a: muradin
+    b: liming
+    why: Muradin's Storm Bolt stuns its target, which gives Li-Ming time to land Arcane Orb from long range.
+    evidence: [Storm Bolt, Arcane Orb]
+    confidence: medium
+    reviewedFor: "2.57"

@@ -1,0 +1,209 @@
+{
+  "synthetic": true,
+  "source": "limitless",
+  "attribution": {
+    "source": "limitless",
+    "text": "Tournament data: Limitless",
+    "url": "https://play.limitlesstcg.com/"
+  },
+  "regulation": "M-C",
+  "format": "M-C",
+  "window": {
+    "label": "Last 30 days (sample)",
+    "from": "2026-09-09",
+    "to": "2026-10-08"
+  },
+  "totals": {
+    "tournaments": 2,
+    "players": 160,
+    "teams": 160
+  },
+  "tournaments": [
+    {
+      "id": "sample-a",
+      "name": "Sample tournament A (synthetic)",
+      "date": "2026-10-04",
+      "players": 96,
+      "url": "https://play.limitlesstcg.com/"
+    },
+    {
+      "id": "sample-b",
+      "name": "Sample tournament B (synthetic)",
+      "date": "2026-09-27",
+      "players": 64,
+      "url": "https://play.limitlesstcg.com/"
+    }
+  ],
+  "species": [
+    {
+      "id": "rillaboom",
+      "teams": 70,
+      "share": 0.4375,
+      "wins": 200,
+      "losses": 180,
+      "ties": 2,
+      "wr": 0.5263,
+      "wrLower": 0.4761,
+      "topCut": 10
+    },
+    {
+      "id": "incineroar",
+      "teams": 60,
+      "share": 0.375,
+      "wins": 170,
+      "losses": 160,
+      "ties": 2,
+      "wr": 0.5152,
+      "wrLower": 0.4614,
+      "topCut": 9
+    },
+    {
+      "id": "sneasler",
+      "teams": 50,
+      "share": 0.3125,
+      "wins": 140,
+      "losses": 140,
+      "ties": 2,
+      "wr": 0.5,
+      "wrLower": 0.4418,
+      "topCut": 8
+    },
+    {
+      "id": "salamencemega",
+      "teams": 40,
+      "share": 0.25,
+      "wins": 110,
+      "losses": 120,
+      "ties": 2,
+      "wr": 0.4783,
+      "wrLower": 0.4146,
+      "topCut": 7
+    },
+    {
+      "id": "kingambit",
+      "teams": 30,
+      "share": 0.1875,
+      "wins": 80,
+      "losses": 100,
+      "ties": 2,
+      "wr": 0.4444,
+      "wrLower": 0.3738,
+      "topCut": 6
+    }
+  ],
+  "archetypes": [
+    {
+      "id": "rillaboom-incineroar",
+      "label": "Rillaboom + Incineroar balance",
+      "core": [
+        "incineroar",
+        "rillaboom"
+      ],
+      "teams": 40,
+      "share": 0.25,
+      "wins": 120,
+      "losses": 110,
+      "ties": 1,
+      "wr": 0.5217
+    },
+    {
+      "id": "trick-room",
+      "label": "Indeedee-F Trick Room",
+      "core": [
+        "farigiraf",
+        "indeedeef"
+      ],
+      "teams": 18,
+      "share": 0.1125,
+      "wins": 50,
+      "losses": 56,
+      "ties": 0,
+      "wr": 0.4717
+    }
+  ],
+  "teams": [
+    {
+      "tournamentId": "sample-a",
+      "placing": 1,
+      "record": {
+        "wins": 9,
+        "losses": 1,
+        "ties": 0
+      },
+      "members": [
+        {
+          "species": "rillaboom",
+          "item": "miracleseed",
+          "ability": "grassysurge",
+          "moves": [
+            "fakeout",
+            "grassyglide",
+            "protect",
+            "woodhammer"
+          ],
+          "nature": "Adamant"
+        },
+        {
+          "species": "incineroar",
+          "item": "sitrusberry",
+          "ability": "intimidate",
+          "moves": [
+            "fakeout",
+            "flareblitz",
+            "knockoff",
+            "partingshot"
+          ],
+          "nature": "Careful"
+        },
+        {
+          "species": "sneasler",
+          "item": "focussash",
+          "ability": "unburden",
+          "moves": [
+            "closecombat",
+            "direclaw",
+            "fakeout",
+            "protect"
+          ],
+          "nature": "Jolly"
+        },
+        {
+          "species": "salamence",
+          "item": "salamencite",
+          "ability": "intimidate",
+          "moves": [
+            "dracometeor",
+            "hurricane",
+            "protect",
+            "tailwind"
+          ],
+          "nature": "Timid"
+        },
+        {
+          "species": "kingambit",
+          "item": "lifeorb",
+          "ability": "defiant",
+          "moves": [
+            "ironhead",
+            "kowtowcleave",
+            "protect",
+            "suckerpunch"
+          ],
+          "nature": "Adamant"
+        },
+        {
+          "species": "gholdengo",
+          "item": "choicescarf",
+          "ability": "goodasgold",
+          "moves": [
+            "makeitrain",
+            "nastyplot",
+            "protect",
+            "shadowball"
+          ],
+          "nature": "Timid"
+        }
+      ]
+    }
+  ]
+}

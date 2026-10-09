@@ -1,0 +1,1519 @@
+{
+  "schema": 1,
+  "format": "standard",
+  "meta": {
+    "snapshot": "2026-10-08T09:05:45Z",
+    "builtAt": "2026-10-08T09:05:45Z",
+    "source": "https://scryfall.com/docs/api/bulk-data",
+    "cardCount": 40
+  },
+  "grindstone": "0.2.0",
+  "cards": [
+    {
+      "oracleId": "f9db72dc-9a5b-48a4-a86e-7464d9a2166a",
+      "name": "Abrade",
+      "layout": "normal",
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "typeLine": "Instant",
+      "oracleText": "Choose one — Abrade deals 3 damage to target creature; or destroy target artifact.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        78940,
+        93901,
+        102789
+      ],
+      "releasedAt": "2017-07-14",
+      "latestReleasedAt": "2026-04-24",
+      "edhrecRank": 145,
+      "set": "soa",
+      "cn": "37"
+    },
+    {
+      "oracleId": "bb8cccc8-e56f-42fa-a0d7-fc889b5e1c7b",
+      "name": "Boltwave",
+      "layout": "normal",
+      "manaCost": "{R}",
+      "cmc": 1,
+      "typeLine": "Sorcery",
+      "oracleText": "Boltwave deals 3 damage to each opponent.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "uncommon",
+      "arenaRarity": "uncommon",
+      "arenaIds": [
+        93792
+      ],
+      "releasedAt": "2024-11-15",
+      "latestReleasedAt": "2024-11-15",
+      "edhrecRank": 1406,
+      "set": "fdn",
+      "cn": "79"
+    },
+    {
+      "oracleId": "ac2086fe-98ee-4280-9c7c-c5c2d6548a8b",
+      "name": "Burst Lightning",
+      "layout": "normal",
+      "manaCost": "{R}",
+      "cmc": 1,
+      "typeLine": "Instant",
+      "oracleText": "Kicker {4}. Burst Lightning deals 2 damage to any target, or 4 damage instead if it was kicked.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "keywords": [
+        "Kicker"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        93905,
+        102793
+      ],
+      "releasedAt": "2009-10-02",
+      "latestReleasedAt": "2026-04-24",
+      "edhrecRank": 5264,
+      "set": "soa",
+      "cn": "41"
+    },
+    {
+      "oracleId": "0e7405e3-e9e6-4213-a73f-e0c01a7d6721",
+      "name": "Callous Sell-Sword // Burn Together",
+      "layout": "adventure",
+      "manaCost": "{1}{B} // {R}",
+      "cmc": 2,
+      "typeLine": "Creature — Human Soldier // Sorcery — Adventure",
+      "oracleText": "This creature enters with a +1/+1 counter for each creature that died this turn.\n//\nTarget creature you control deals damage equal to its power to any other target. Then sacrifice it.",
+      "faces": [
+        {
+          "name": "Callous Sell-Sword",
+          "manaCost": "{1}{B}",
+          "typeLine": "Creature — Human Soldier",
+          "oracleText": "This creature enters with a +1/+1 counter for each creature that died this turn.",
+          "power": "2",
+          "toughness": "2"
+        },
+        {
+          "name": "Burn Together",
+          "manaCost": "{R}",
+          "typeLine": "Sorcery — Adventure",
+          "oracleText": "Target creature you control deals damage equal to its power to any other target. Then sacrifice it."
+        }
+      ],
+      "colors": [
+        "B"
+      ],
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal"
+      },
+      "power": "2",
+      "toughness": "2",
+      "rarity": "uncommon",
+      "arenaRarity": "uncommon",
+      "arenaIds": [
+        86932
+      ],
+      "releasedAt": "2023-09-08",
+      "latestReleasedAt": "2023-09-08",
+      "edhrecRank": 13392,
+      "set": "woe",
+      "cn": "221"
+    },
+    {
+      "oracleId": "774dce79-67e0-4820-8013-c7a7347993ce",
+      "name": "Cathar Commando",
+      "layout": "normal",
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "typeLine": "Creature — Human Soldier",
+      "oracleText": "Flash. {1}, Sacrifice this creature: Destroy target artifact or enchantment.",
+      "colors": [
+        "W"
+      ],
+      "colorIdentity": [
+        "W"
+      ],
+      "keywords": [
+        "Flash"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "3",
+      "toughness": "1",
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        78335,
+        93852
+      ],
+      "releasedAt": "2021-09-24",
+      "latestReleasedAt": "2024-11-15",
+      "edhrecRank": 1432,
+      "set": "fdn",
+      "cn": "139"
+    },
+    {
+      "oracleId": "33d405ea-7a9a-4970-b70f-9c05d90dd6f0",
+      "name": "Duress",
+      "layout": "normal",
+      "manaCost": "{B}",
+      "cmc": 1,
+      "typeLine": "Sorcery",
+      "oracleText": "Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.",
+      "colors": [
+        "B"
+      ],
+      "colorIdentity": [
+        "B"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        66175,
+        83792,
+        94034
+      ],
+      "releasedAt": "1998-10-12",
+      "latestReleasedAt": "2024-11-15",
+      "edhrecRank": 3255,
+      "set": "fdn",
+      "cn": "606"
+    },
+    {
+      "oracleId": "9ea747cf-5d04-4aa7-bdc3-8145860cd1ba",
+      "name": "Elegant Parlor",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Land — Mountain Plains",
+      "oracleText": "({T}: Add {R} or {W}.) This land enters tapped. When it enters, surveil 1.",
+      "colorIdentity": [
+        "W",
+        "R"
+      ],
+      "producedMana": [
+        "R",
+        "W"
+      ],
+      "keywords": [
+        "Surveil"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal"
+      },
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        89182
+      ],
+      "releasedAt": "2024-02-09",
+      "latestReleasedAt": "2024-02-09",
+      "edhrecRank": 769,
+      "set": "mkm",
+      "cn": "260"
+    },
+    {
+      "oracleId": "5b4b21ed-c24e-4038-83fb-bd7f3c3426cd",
+      "name": "Emberheart Challenger",
+      "layout": "normal",
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "typeLine": "Creature — Mouse Warrior",
+      "oracleText": "Haste, prowess. Valiant — The first time each turn this creature becomes the target of a spell or ability you control, exile the top card of your library; you may play it this turn.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "keywords": [
+        "Haste",
+        "Prowess",
+        "Valiant"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "2",
+      "toughness": "2",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        91668
+      ],
+      "releasedAt": "2024-08-02",
+      "latestReleasedAt": "2024-08-02",
+      "edhrecRank": 9129,
+      "set": "blb",
+      "cn": "133"
+    },
+    {
+      "oracleId": "5963eef1-1022-42b1-8a0c-fc9850bfc2a3",
+      "name": "Emeritus of Conflict // Lightning Bolt",
+      "layout": "prepare",
+      "manaCost": "{1}{R} // {R}",
+      "cmc": 2,
+      "typeLine": "Creature — Human Wizard // Instant",
+      "oracleText": "When this creature enters, it becomes prepared.\n//\nLightning Bolt deals 3 damage to any target.",
+      "faces": [
+        {
+          "name": "Emeritus of Conflict",
+          "manaCost": "{1}{R}",
+          "typeLine": "Creature — Human Wizard",
+          "oracleText": "When this creature enters, it becomes prepared.",
+          "power": "2",
+          "toughness": "2"
+        },
+        {
+          "name": "Lightning Bolt",
+          "manaCost": "{R}",
+          "typeLine": "Instant",
+          "oracleText": "Lightning Bolt deals 3 damage to any target."
+        }
+      ],
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "keywords": [
+        "First strike",
+        "Prepared"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "2",
+      "toughness": "2",
+      "rarity": "mythic",
+      "arenaRarity": "mythic",
+      "arenaIds": [
+        102572
+      ],
+      "releasedAt": "2026-04-24",
+      "latestReleasedAt": "2026-04-24",
+      "edhrecRank": 7140,
+      "set": "sos",
+      "cn": "113"
+    },
+    {
+      "oracleId": "98a389f4-2905-47f3-b60e-3d4afb3e5cb0",
+      "name": "Enduring Innocence",
+      "layout": "normal",
+      "manaCost": "{1}{W}{W}",
+      "cmc": 3,
+      "typeLine": "Enchantment Creature — Sheep Glimmer",
+      "oracleText": "Lifelink. Whenever one or more other creatures with power 2 or less you control enter, draw a card. This ability triggers only once each turn. When this dies, if it was a creature, return it to the battlefield as an enchantment.",
+      "colors": [
+        "W"
+      ],
+      "colorIdentity": [
+        "W"
+      ],
+      "keywords": [
+        "Lifelink"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "2",
+      "toughness": "1",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        92064
+      ],
+      "releasedAt": "2024-09-27",
+      "latestReleasedAt": "2024-09-27",
+      "edhrecRank": 728,
+      "set": "dsk",
+      "cn": "6"
+    },
+    {
+      "oracleId": "a75445d3-1303-4bb5-89ad-26ea93fecd48",
+      "name": "Evolving Wilds",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Land",
+      "oracleText": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.",
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        67003,
+        95783,
+        98586
+      ],
+      "releasedAt": "2010-04-23",
+      "latestReleasedAt": "2026-01-23",
+      "edhrecRank": 19,
+      "set": "ecl",
+      "cn": "264"
+    },
+    {
+      "oracleId": "236ce592-1321-4a7c-b695-fd84496f8924",
+      "name": "Fear of Missing Out",
+      "layout": "normal",
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "typeLine": "Enchantment Creature — Nightmare",
+      "oracleText": "When this enters, discard a card, then draw a card. Delirium — Whenever it attacks for the first time each turn, if four or more card types are among cards in your graveyard, untap target creature and take an additional combat phase after this one.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "keywords": [
+        "Delirium"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "2",
+      "toughness": "3",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        92218
+      ],
+      "releasedAt": "2024-09-27",
+      "latestReleasedAt": "2024-09-27",
+      "edhrecRank": 2494,
+      "set": "dsk",
+      "cn": "136"
+    },
+    {
+      "oracleId": "3912d21e-1ebc-4a81-9dc9-f404248d564a",
+      "name": "Fire Elemental",
+      "layout": "normal",
+      "manaCost": "{3}{R}{R}",
+      "cmc": 5,
+      "typeLine": "Creature — Elemental",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "5",
+      "toughness": "4",
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        67344,
+        69923,
+        93687
+      ],
+      "releasedAt": "1993-08-05",
+      "latestReleasedAt": "2024-11-15",
+      "edhrecRank": 23998,
+      "set": "fdn",
+      "cn": "538"
+    },
+    {
+      "oracleId": "b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+      "name": "Forest",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Basic Land — Forest",
+      "oracleText": "({T}: Add {G}.)",
+      "colorIdentity": [
+        "G"
+      ],
+      "producedMana": [
+        "G"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "releasedAt": "1993-08-05",
+      "latestReleasedAt": "2026-11-13",
+      "set": "ktk",
+      "cn": "266"
+    },
+    {
+      "oracleId": "522dd417-364b-44ab-8ca9-fb55db5f26a6",
+      "name": "Get Lost",
+      "layout": "normal",
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "typeLine": "Instant",
+      "oracleText": "Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens.",
+      "colors": [
+        "W"
+      ],
+      "colorIdentity": [
+        "W"
+      ],
+      "keywords": [
+        "Explore"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal"
+      },
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        87145
+      ],
+      "releasedAt": "2023-11-17",
+      "latestReleasedAt": "2023-11-17",
+      "edhrecRank": 1815,
+      "set": "lci",
+      "cn": "14"
+    },
+    {
+      "oracleId": "48e6d3d8-2f27-4017-acdd-40bce8cdbc02",
+      "name": "Giada, Font of Hope",
+      "layout": "normal",
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "typeLine": "Legendary Creature — Angel",
+      "oracleText": "Flying, vigilance. Each other Angel you control enters with an additional +1/+1 counter for each Angel you already control. {T}: Add {W}. Spend this mana only to cast an Angel spell.",
+      "colors": [
+        "W"
+      ],
+      "colorIdentity": [
+        "W"
+      ],
+      "producedMana": [
+        "W"
+      ],
+      "keywords": [
+        "Flying",
+        "Vigilance"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "2",
+      "toughness": "2",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        93573,
+        93854
+      ],
+      "releasedAt": "2022-04-29",
+      "latestReleasedAt": "2024-11-15",
+      "edhrecRank": 1646,
+      "set": "fdn",
+      "cn": "141"
+    },
+    {
+      "oracleId": "c6bdaf76-6a03-4695-9c4b-f040e73435af",
+      "name": "Guttersnipe",
+      "layout": "normal",
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "typeLine": "Creature — Goblin Shaman",
+      "oracleText": "Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "2",
+      "toughness": "2",
+      "rarity": "uncommon",
+      "arenaRarity": "uncommon",
+      "arenaIds": [
+        67970,
+        94144,
+        108012
+      ],
+      "releasedAt": "2012-10-05",
+      "latestReleasedAt": "2026-08-14",
+      "edhrecRank": 405,
+      "set": "hoc",
+      "cn": "196"
+    },
+    {
+      "oracleId": "49e1e202-37bf-46ed-93d1-1adb13726039",
+      "name": "Heartfire Hero",
+      "layout": "normal",
+      "manaCost": "{R}",
+      "cmc": 1,
+      "typeLine": "Creature — Mouse Soldier",
+      "oracleText": "Valiant — The first time each turn this creature becomes the target of a spell or ability you control, put a +1/+1 counter on it. When it dies, it deals damage equal to its power to each opponent.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "keywords": [
+        "Valiant"
+      ],
+      "legalities": {
+        "standard": "banned",
+        "pioneer": "banned",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "1",
+      "toughness": "1",
+      "rarity": "uncommon",
+      "arenaRarity": "uncommon",
+      "arenaIds": [
+        91674
+      ],
+      "releasedAt": "2024-08-02",
+      "latestReleasedAt": "2024-08-02",
+      "edhrecRank": 8012,
+      "set": "blb",
+      "cn": "138"
+    },
+    {
+      "oracleId": "031cfc7d-8bda-454b-b88a-15d3f5fe47e2",
+      "name": "Hired Claw",
+      "layout": "normal",
+      "manaCost": "{R}",
+      "cmc": 1,
+      "typeLine": "Creature — Lizard Mercenary",
+      "oracleText": "Whenever you attack with one or more Lizards, this creature deals 1 damage to target opponent. {1}{R}: Put a +1/+1 counter on this creature. Activate only if an opponent lost life this turn and only once each turn.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "1",
+      "toughness": "2",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        91676
+      ],
+      "releasedAt": "2024-08-02",
+      "latestReleasedAt": "2024-08-02",
+      "edhrecRank": 11731,
+      "set": "blb",
+      "cn": "140"
+    },
+    {
+      "oracleId": "3f17c60e-923a-4392-9da8-87d9ded009b7",
+      "name": "Inspiring Vantage",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Land",
+      "oracleText": "This land enters tapped unless you control two or fewer other lands. {T}: Add {R} or {W}.",
+      "colorIdentity": [
+        "W",
+        "R"
+      ],
+      "producedMana": [
+        "R",
+        "W"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal"
+      },
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        75864,
+        90616
+      ],
+      "releasedAt": "2016-09-30",
+      "latestReleasedAt": "2024-04-19",
+      "edhrecRank": 1454,
+      "set": "otj",
+      "cn": "269"
+    },
+    {
+      "oracleId": "176f5ba8-6e7b-4234-a298-b6164f51656f",
+      "name": "Inti, Seneschal of the Sun",
+      "layout": "normal",
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "typeLine": "Legendary Creature — Human Knight",
+      "oracleText": "Whenever you attack, you may discard a card. When you do, put a +1/+1 counter on target attacking creature and it gains trample until end of turn. Whenever you discard one or more cards, exile the top card of your library; you may play it until your next end step.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal"
+      },
+      "power": "2",
+      "toughness": "2",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        87308
+      ],
+      "releasedAt": "2023-11-17",
+      "latestReleasedAt": "2023-11-17",
+      "edhrecRank": 1940,
+      "set": "lci",
+      "cn": "156"
+    },
+    {
+      "oracleId": "b2c6aa39-2d2a-459c-a555-fb48ba993373",
+      "name": "Island",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Basic Land — Island",
+      "oracleText": "({T}: Add {U}.)",
+      "colorIdentity": [
+        "U"
+      ],
+      "producedMana": [
+        "U"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        58449
+      ],
+      "releasedAt": "1993-08-05",
+      "latestReleasedAt": "2026-11-13",
+      "set": "ktk",
+      "cn": "256"
+    },
+    {
+      "oracleId": "68418069-f615-40ef-ae0d-764192acae00",
+      "name": "Krenko, Mob Boss",
+      "layout": "normal",
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "typeLine": "Legendary Creature — Goblin Warrior",
+      "oracleText": "{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "3",
+      "toughness": "3",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        72401,
+        93917
+      ],
+      "releasedAt": "2012-07-13",
+      "latestReleasedAt": "2024-11-15",
+      "edhrecRank": 1089,
+      "set": "fdn",
+      "cn": "204"
+    },
+    {
+      "oracleId": "f34b9bc4-7bfe-47fd-ba23-4eeeb46026eb",
+      "name": "Lightning Strike",
+      "layout": "normal",
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "typeLine": "Instant",
+      "oracleText": "Lightning Strike deals 3 damage to any target.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        82189,
+        97423,
+        105037
+      ],
+      "releasedAt": "2013-09-27",
+      "latestReleasedAt": "2026-06-26",
+      "edhrecRank": 2279,
+      "set": "msh",
+      "cn": "142"
+    },
+    {
+      "oracleId": "68954295-54e3-4303-a6bc-fc4547a4e3a3",
+      "name": "Llanowar Elves",
+      "layout": "normal",
+      "manaCost": "{G}",
+      "cmc": 1,
+      "typeLine": "Creature — Elf Druid",
+      "oracleText": "{T}: Add {G}.",
+      "colors": [
+        "G"
+      ],
+      "colorIdentity": [
+        "G"
+      ],
+      "producedMana": [
+        "G"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "1",
+      "toughness": "1",
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        69781,
+        92939,
+        93940
+      ],
+      "releasedAt": "1993-08-05",
+      "latestReleasedAt": "2024-11-15",
+      "edhrecRank": 58,
+      "set": "j25",
+      "cn": "149"
+    },
+    {
+      "oracleId": "646a2371-54c0-4492-ac2f-20f109d6108c",
+      "name": "Monstrous Rage",
+      "layout": "normal",
+      "manaCost": "{R}",
+      "cmc": 1,
+      "typeLine": "Instant",
+      "oracleText": "Target creature gets +2/+0 until end of turn. Create a Monster Role token attached to it.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "keywords": [
+        "Role token"
+      ],
+      "legalities": {
+        "standard": "banned",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal"
+      },
+      "rarity": "uncommon",
+      "arenaRarity": "uncommon",
+      "arenaIds": [
+        86843,
+        102797,
+        105236
+      ],
+      "releasedAt": "2023-09-08",
+      "latestReleasedAt": "2026-06-26",
+      "edhrecRank": 3405,
+      "set": "mar",
+      "cn": "72"
+    },
+    {
+      "oracleId": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+      "name": "Mountain",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Basic Land — Mountain",
+      "oracleText": "({T}: Add {R}.)",
+      "colorIdentity": [
+        "R"
+      ],
+      "producedMana": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "releasedAt": "1993-08-05",
+      "latestReleasedAt": "2026-11-13",
+      "set": "ktk",
+      "cn": "264"
+    },
+    {
+      "oracleId": "713332c1-5bd8-400f-bfff-c1ca0697a043",
+      "name": "Opt",
+      "layout": "normal",
+      "manaCost": "{U}",
+      "cmc": 1,
+      "typeLine": "Instant",
+      "oracleText": "Scry 1. Draw a card.",
+      "colors": [
+        "U"
+      ],
+      "colorIdentity": [
+        "U"
+      ],
+      "keywords": [
+        "Scry"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        66091,
+        93122,
+        93661
+      ],
+      "releasedAt": "2000-10-02",
+      "latestReleasedAt": "2024-11-15",
+      "edhrecRank": 216,
+      "set": "j25",
+      "cn": "339"
+    },
+    {
+      "oracleId": "bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+      "name": "Plains",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Basic Land — Plains",
+      "oracleText": "({T}: Add {W}.)",
+      "colorIdentity": [
+        "W"
+      ],
+      "producedMana": [
+        "W"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        58437
+      ],
+      "releasedAt": "1993-08-05",
+      "latestReleasedAt": "2026-11-13",
+      "set": "ktk",
+      "cn": "250"
+    },
+    {
+      "oracleId": "a78f981a-bf8a-42a4-b171-d655cc2cc1a2",
+      "name": "Razorkin Needlehead",
+      "layout": "normal",
+      "manaCost": "{R}{R}",
+      "cmc": 2,
+      "typeLine": "Creature — Human Assassin",
+      "oracleText": "This creature has first strike during your turn. Whenever an opponent draws a card, this creature deals 1 damage to them.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "2",
+      "toughness": "2",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        92239
+      ],
+      "releasedAt": "2024-09-27",
+      "latestReleasedAt": "2024-09-27",
+      "edhrecRank": 993,
+      "set": "dsk",
+      "cn": "153"
+    },
+    {
+      "oracleId": "45181cb8-2090-4471-ba90-e5a8f04d525f",
+      "name": "Sacred Foundry",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Land — Mountain Plains",
+      "oracleText": "({T}: Add {R} or {W}.) As this land enters, you may pay 2 life. If you don't, it enters tapped.",
+      "colorIdentity": [
+        "W",
+        "R"
+      ],
+      "producedMana": [
+        "R",
+        "W"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        68735
+      ],
+      "releasedAt": "2005-10-07",
+      "latestReleasedAt": "2026-11-13",
+      "edhrecRank": 73,
+      "set": "grn",
+      "cn": "254"
+    },
+    {
+      "oracleId": "fcb7c93c-46ab-49b5-a6e0-35d73f3be8f0",
+      "name": "Screaming Nemesis",
+      "layout": "normal",
+      "manaCost": "{2}{R}",
+      "cmc": 3,
+      "typeLine": "Creature — Spirit",
+      "oracleText": "Haste. Whenever this creature is dealt damage, it deals that much damage to any other target. A player dealt damage this way can't gain life for the rest of the game.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "keywords": [
+        "Haste"
+      ],
+      "legalities": {
+        "standard": "banned",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "3",
+      "toughness": "3",
+      "rarity": "mythic",
+      "arenaRarity": "mythic",
+      "arenaIds": [
+        92243
+      ],
+      "releasedAt": "2024-09-27",
+      "latestReleasedAt": "2024-09-27",
+      "edhrecRank": 3714,
+      "set": "dsk",
+      "cn": "157"
+    },
+    {
+      "oracleId": "a9d288b8-cdc1-4e55-a0c9-d6edfc95e65d",
+      "name": "Shock",
+      "layout": "normal",
+      "manaCost": "{R}",
+      "cmc": 1,
+      "typeLine": "Instant",
+      "oracleText": "Shock deals 2 damage to any target.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        67992,
+        104878,
+        105819
+      ],
+      "releasedAt": "1998-03-02",
+      "latestReleasedAt": "2026-06-26",
+      "edhrecRank": 2214,
+      "set": "msc",
+      "cn": "809"
+    },
+    {
+      "oracleId": "74c7a029-59aa-4511-8e4c-f8f167cda4e2",
+      "name": "Slickshot Show-Off",
+      "layout": "normal",
+      "manaCost": "{1}{R}",
+      "cmc": 2,
+      "typeLine": "Creature — Bird Wizard",
+      "oracleText": "Flying, haste. Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn. Plot {1}{R}.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "keywords": [
+        "Flying",
+        "Haste",
+        "Plot"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal"
+      },
+      "power": "1",
+      "toughness": "2",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        90492
+      ],
+      "releasedAt": "2024-04-19",
+      "latestReleasedAt": "2024-04-19",
+      "edhrecRank": 9391,
+      "set": "otj",
+      "cn": "146"
+    },
+    {
+      "oracleId": "9a107e48-3d50-4941-95b1-10f2b29a4245",
+      "name": "Stroke of Midnight",
+      "layout": "normal",
+      "manaCost": "{2}{W}",
+      "cmc": 3,
+      "typeLine": "Instant",
+      "oracleText": "Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token.",
+      "colors": [
+        "W"
+      ],
+      "colorIdentity": [
+        "W"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "uncommon",
+      "arenaRarity": "uncommon",
+      "arenaIds": [
+        86717,
+        93861,
+        96255
+      ],
+      "releasedAt": "2023-09-08",
+      "latestReleasedAt": "2025-06-13",
+      "edhrecRank": 203,
+      "set": "fca",
+      "cn": "26"
+    },
+    {
+      "oracleId": "58b0c737-0a84-4f9a-b3b7-300c5de43874",
+      "name": "Studious First-Year // Rampant Growth",
+      "layout": "prepare",
+      "manaCost": "{G} // {1}{G}",
+      "cmc": 1,
+      "typeLine": "Creature — Bear Wizard // Sorcery",
+      "oracleText": "When this creature enters, it becomes prepared.\n//\nSearch your library for a basic land card, put that card onto the battlefield tapped, then shuffle.",
+      "faces": [
+        {
+          "name": "Studious First-Year",
+          "manaCost": "{G}",
+          "typeLine": "Creature — Bear Wizard",
+          "oracleText": "When this creature enters, it becomes prepared.",
+          "power": "1",
+          "toughness": "1"
+        },
+        {
+          "name": "Rampant Growth",
+          "manaCost": "{1}{G}",
+          "typeLine": "Sorcery",
+          "oracleText": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+        }
+      ],
+      "colors": [
+        "G"
+      ],
+      "colorIdentity": [
+        "G"
+      ],
+      "keywords": [
+        "Prepared"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "1",
+      "toughness": "1",
+      "rarity": "common",
+      "arenaRarity": "common",
+      "arenaIds": [
+        102621
+      ],
+      "releasedAt": "2026-04-24",
+      "latestReleasedAt": "2026-04-24",
+      "edhrecRank": 2864,
+      "set": "sos",
+      "cn": "162"
+    },
+    {
+      "oracleId": "a202276b-1f1b-4277-95ee-26877a204f5e",
+      "name": "Sunbillow Verge",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Land",
+      "oracleText": "{T}: Add {W}. {T}: Add {R}. Activate only if you control a Mountain or a Plains.",
+      "colorIdentity": [
+        "W",
+        "R"
+      ],
+      "producedMana": [
+        "R",
+        "W"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        95066
+      ],
+      "releasedAt": "2025-02-14",
+      "latestReleasedAt": "2025-02-14",
+      "edhrecRank": 809,
+      "set": "dft",
+      "cn": "264"
+    },
+    {
+      "oracleId": "479adf64-f42c-4cb6-bf25-648c044bca8b",
+      "name": "Sunspine Lynx",
+      "layout": "normal",
+      "manaCost": "{2}{R}{R}",
+      "cmc": 4,
+      "typeLine": "Creature — Elemental Cat",
+      "oracleText": "Players can't gain life. Damage can't be prevented. When this creature enters, it deals damage to each player equal to the number of nonbasic lands that player controls.",
+      "colors": [
+        "R"
+      ],
+      "colorIdentity": [
+        "R"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "5",
+      "toughness": "4",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        91691
+      ],
+      "releasedAt": "2024-08-02",
+      "latestReleasedAt": "2024-08-02",
+      "edhrecRank": 2902,
+      "set": "blb",
+      "cn": "155"
+    },
+    {
+      "oracleId": "56719f6a-1a6c-4c0a-8d21-18f7d7350b68",
+      "name": "Swamp",
+      "layout": "normal",
+      "cmc": 0,
+      "typeLine": "Basic Land — Swamp",
+      "oracleText": "({T}: Add {B}.)",
+      "colorIdentity": [
+        "B"
+      ],
+      "producedMana": [
+        "B"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "rarity": "common",
+      "arenaRarity": "common",
+      "releasedAt": "1993-08-05",
+      "latestReleasedAt": "2026-11-13",
+      "set": "ktk",
+      "cn": "260"
+    },
+    {
+      "oracleId": "b12cbda1-ac09-49eb-96b3-a4df27bc37ea",
+      "name": "Voice of Victory",
+      "layout": "normal",
+      "manaCost": "{1}{W}",
+      "cmc": 2,
+      "typeLine": "Creature — Human Bard",
+      "oracleText": "Mobilize 2. Your opponents can't cast spells during your turn.",
+      "colors": [
+        "W"
+      ],
+      "colorIdentity": [
+        "W"
+      ],
+      "keywords": [
+        "Mobilize"
+      ],
+      "legalities": {
+        "standard": "legal",
+        "pioneer": "legal",
+        "historic": "legal",
+        "timeless": "legal",
+        "brawl": "legal",
+        "standardbrawl": "legal",
+        "alchemy": "legal"
+      },
+      "power": "1",
+      "toughness": "3",
+      "rarity": "rare",
+      "arenaRarity": "rare",
+      "arenaIds": [
+        95549
+      ],
+      "releasedAt": "2025-04-11",
+      "latestReleasedAt": "2025-04-11",
+      "edhrecRank": 505,
+      "set": "tdm",
+      "cn": "33"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+---
+/**
+ * "Patch 2.57 · Updated 3 h ago" pill for a game's data. Server HTML carries the absolute UTC time;
+ * the client script swaps in a relative time and re-checks staleness against the visitor's clock.
+ */
+import type { GameId, GameMeta } from '../core/game.ts';
+import { formatDateTimeUTC } from '../core/format.ts';
+import { freshness } from '../core/freshness.ts';
+import { gameById, versionText } from '../games/registry.ts';
+import { STATE_WORD, type BadgeState } from './freshness.ts';
+
+interface Props {
+  game: GameId;
+  meta: GameMeta | null;
+  /** Data comes from committed fixtures (dev / PR builds). */
+  fixtures?: boolean;
+  class?: string;
+}
+
+const { game, meta, fixtures = false, class: extra } = Astro.props;
+const generatedAt = meta?.generatedAt || null;
+const names = Object.fromEntries(gameById(game).sources.map((s) => [s.id, s.name]));
+const report = meta && generatedAt ? freshness(meta, Date.now(), { names }) : null;
+const state: BadgeState = report?.level ?? 'unknown';
+const version = meta?.version.label ? versionText(game, meta.version.label) : null;
+const word = STATE_WORD[state];
+---
+
+<p class:list={['fresh-line', extra]}>
+  <span class="fresh" data-fresh data-state={state} data-generated-at={generatedAt ?? undefined}>
+    <span class="fresh__pip" aria-hidden="true"></span>
+    {version && <span class="fresh__version">{version}</span>}
+    {
+      generatedAt ? (
+        <span class="fresh__time">
+          Updated <time datetime={generatedAt} data-rel-time>{formatDateTimeUTC(generatedAt)}</time>
+        </span>
+      ) : null
+    }
+    <span class="fresh__state" data-fresh-label hidden={word === ''}>{word}</span>
+  </span>
+  {
+    fixtures && (
+      <span class="fresh__sample">
+        sample data<span class="visually-hidden"> (committed snapshot, not a live refresh)</span>
+      </span>
+    )
+  }
+</p>
+
+<script>
+  import './freshnessClient.ts';
+</script>
+
+<style>
+  .fresh-line {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-2);
+  }
+
+  .fresh {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-2);
+    min-height: 1.75rem;
+    padding: 0.15rem var(--sp-3) 0.15rem var(--sp-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    line-height: 1.3;
+  }
+
+  .fresh__pip {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--positive);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 22%, transparent);
+  }
+
+  .fresh[data-state='aging'] .fresh__pip {
+    background: var(--warning);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--warning) 22%, transparent);
+  }
+
+  .fresh[data-state='stale'] .fresh__pip,
+  .fresh[data-state='broken'] .fresh__pip {
+    background: var(--negative);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--negative) 22%, transparent);
+  }
+
+  .fresh[data-state='unknown'] .fresh__pip {
+    background: var(--steel-1);
+    box-shadow: none;
+  }
+
+  .fresh__version {
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-weight: 650;
+  }
+
+  .fresh__version + .fresh__time::before {
+    content: '·';
+    margin-right: var(--sp-2);
+    color: var(--text-faint);
+  }
+
+  .fresh__state {
+    font-family: var(--font-mono);
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .fresh[data-state='aging'] .fresh__state {
+    color: var(--warning);
+  }
+
+  .fresh[data-state='stale'] .fresh__state,
+  .fresh[data-state='broken'] .fresh__state {
+    color: var(--negative);
+  }
+
+  .fresh__sample {
+    padding: 0.1rem var(--sp-2);
+    border: 1px dashed var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+</style>

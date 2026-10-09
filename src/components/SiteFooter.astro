@@ -1,0 +1,195 @@
+---
+import type { GameId } from '../core/game.ts';
+import { SITE, gameById, withBase } from '../games/registry.ts';
+import SourceAttribution from './SourceAttribution.astro';
+
+interface Props {
+  /** On game pages the footer also carries that game's footer-rule credits. */
+  game?: GameId | undefined;
+}
+
+const { game } = Astro.props;
+const current = game ? gameById(game) : null;
+const hasFooterCredits = current?.sources.some((s) => s.rule === 'footer') ?? false;
+
+/*
+ * Non-affiliation and rights notices. Wording follows each rights holder's published fan
+ * guidance (Blizzard copyright notices page, Wizards Fan Content Policy). Order puts the
+ * current game first.
+ */
+const notices: { game: GameId; heading: string }[] = [
+  { game: 'hots', heading: 'Heroes of the Storm' },
+  { game: 'mtga', heading: 'Magic: The Gathering Arena' },
+  { game: 'pokemon', heading: 'Pokémon Champions' },
+];
+const ordered = game ? [...notices.filter((n) => n.game === game), ...notices.filter((n) => n.game !== game)] : notices;
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    {
+      current && hasFooterCredits && (
+        <section class="site-footer__credits" aria-labelledby="footer-credits-title">
+          <h2 id="footer-credits-title" class="kicker">
+            {current.short} data sources
+          </h2>
+          <SourceAttribution game={current.id} rule="footer" placement="footer" />
+        </section>
+      )
+    }
+
+    <div class="site-footer__grid">
+      <section class="site-footer__about" aria-label="About Whetstone">
+        <p class="site-footer__brand">{SITE.name}</p>
+        <p class="muted">
+          A free, ad-free, open-source meta companion. No accounts, no trackers, no paywall. Data is refreshed daily and
+          every number shows its source and sample size.
+        </p>
+        <ul class="site-footer__links">
+          <li><a href={withBase('about/')}>About</a></li>
+          <li><a href={withBase('credits/')}>Credits</a></li>
+          <li><a href={withBase('privacy/')}>Privacy</a></li>
+          <li><a href={SITE.repo} rel="noopener">Source code</a></li>
+          <li><a href={SITE.feedback} rel="noopener">Feedback</a></li>
+        </ul>
+      </section>
+
+      <section class="site-footer__legal" aria-label="Legal notices">
+        <p>
+          <strong>Whetstone is an unofficial fan project.</strong> It is not affiliated with, endorsed, sponsored or approved
+          by Blizzard Entertainment, Wizards of the Coast, The Pokémon Company, Nintendo, Creatures Inc. or GAME FREAK inc.,
+          and is not affiliated with heroescounters.com or Heroes Profile.
+        </p>
+        <dl class="site-footer__notices">
+          {
+            ordered.map((n) => (
+              <div class="site-footer__notice" data-current={n.game === game ? 'true' : undefined}>
+                <dt>{n.heading}</dt>
+                {n.game === 'hots' && (
+                  <dd>
+                    ©2014 Blizzard Entertainment, Inc. All rights reserved. Heroes of the Storm is a trademark of Blizzard
+                    Entertainment, Inc. Game content and materials are used under Blizzard's fan-site terms for
+                    non-commercial use.
+                  </dd>
+                )}
+                {n.game === 'mtga' && (
+                  <dd>
+                    Whetstone is unofficial Fan Content permitted under the{' '}
+                    <a href="https://company.wizards.com/en/legal/fancontentpolicy" rel="noopener">Fan Content Policy</a>.
+                    Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast.
+                    ©Wizards of the Coast LLC.
+                  </dd>
+                )}
+                {n.game === 'pokemon' && (
+                  <dd>
+                    Pokémon and all related names are trademarks of Nintendo, Creatures Inc., GAME FREAK inc. and The
+                    Pokémon Company. ©Nintendo, Creatures Inc., GAME FREAK inc., The Pokémon Company. Used here for
+                    identification only.
+                  </dd>
+                )}
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    background:
+      repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 9px),
+      var(--surface);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .site-footer__inner {
+    display: grid;
+    gap: var(--sp-6);
+    padding-block: var(--sp-6) var(--sp-7);
+  }
+
+  .site-footer__credits {
+    display: grid;
+    gap: var(--sp-2);
+    padding-bottom: var(--sp-5);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .site-footer__brand {
+    color: var(--text);
+    font-weight: 800;
+    font-size: var(--fs-lg);
+    letter-spacing: -0.02em;
+  }
+
+  .site-footer__about {
+    display: grid;
+    gap: var(--sp-3);
+    align-content: start;
+  }
+
+  .site-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1) var(--sp-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .site-footer__legal {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .site-footer__legal strong {
+    color: var(--text);
+  }
+
+  .site-footer__notices {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .site-footer__notice {
+    padding-left: var(--sp-3);
+    border-left: 2px solid var(--border-strong);
+  }
+
+  .site-footer__notice[data-current] {
+    border-left-color: var(--accent);
+  }
+
+  .site-footer__notice dt {
+    color: var(--text);
+    font-weight: 650;
+  }
+
+  .site-footer a {
+    color: var(--text);
+  }
+
+  @media (min-width: 60rem) {
+    .site-footer__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+      gap: var(--sp-7);
+    }
+  }
+</style>

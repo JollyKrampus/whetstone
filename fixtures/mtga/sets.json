@@ -1,0 +1,119 @@
+[
+  {
+    "code": "MSH",
+    "name": "Marvel Super Heroes",
+    "releasedAt": "2026-06-26",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/msh.svg"
+  },
+  {
+    "code": "SOS",
+    "name": "Secrets of Strixhaven",
+    "releasedAt": "2026-04-24",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/sos.svg"
+  },
+  {
+    "code": "ECL",
+    "name": "Lorwyn Eclipsed",
+    "releasedAt": "2026-01-23",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/ecl.svg"
+  },
+  {
+    "code": "TLA",
+    "name": "Avatar: The Last Airbender",
+    "releasedAt": "2025-11-21",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/tla.svg"
+  },
+  {
+    "code": "TDM",
+    "name": "Tarkir: Dragonstorm",
+    "releasedAt": "2025-04-11",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/tdm.svg"
+  },
+  {
+    "code": "DFT",
+    "name": "Aetherdrift",
+    "releasedAt": "2025-02-14",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/dft.svg"
+  },
+  {
+    "code": "FDN",
+    "name": "Foundations",
+    "releasedAt": "2024-11-15",
+    "kind": "core",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/fdn.svg"
+  },
+  {
+    "code": "DSK",
+    "name": "Duskmourn: House of Horror",
+    "releasedAt": "2024-09-27",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/dsk.svg"
+  },
+  {
+    "code": "BLB",
+    "name": "Bloomburrow",
+    "releasedAt": "2024-08-02",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/blb.svg"
+  },
+  {
+    "code": "OTJ",
+    "name": "Outlaws of Thunder Junction",
+    "releasedAt": "2024-04-19",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/otj.svg"
+  },
+  {
+    "code": "MKM",
+    "name": "Murders at Karlov Manor",
+    "releasedAt": "2024-02-09",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/mkm.svg"
+  },
+  {
+    "code": "LCI",
+    "name": "The Lost Caverns of Ixalan",
+    "releasedAt": "2023-11-17",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/lci.svg"
+  },
+  {
+    "code": "WOE",
+    "name": "Wilds of Eldraine",
+    "releasedAt": "2023-09-08",
+    "kind": "expansion",
+    "arena": true,
+    "standard": true,
+    "icon": "https://svgs.scryfall.io/sets/woe.svg"
+  }
+]

@@ -1,0 +1,198 @@
+---
+import type { GameId } from '../core/game.ts';
+import { SITE, games, gameById, navHref, searchHref, withBase } from '../games/registry.ts';
+import BrandMark from './BrandMark.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  /** Game section the page belongs to; highlights it in the switcher and scopes the search link. */
+  game?: GameId | undefined;
+}
+
+const { game } = Astro.props;
+const current = game ? gameById(game) : null;
+---
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="brand" href={withBase()}>
+      <BrandMark size={28} />
+      <span class="brand__word">{SITE.name}</span>
+    </a>
+
+    <nav class="switcher" aria-label="Games">
+      <ul class="switcher__list">
+        {
+          games.map((g) => (
+            <li>
+              <a
+                class="switcher__link"
+                href={navHref(g)}
+                style={`--accent: var(${g.accent})`}
+                aria-current={g.id === game ? 'true' : undefined}
+              >
+                <span class="switcher__pip" aria-hidden="true" />
+                <span>{g.short}</span>
+                {g.status !== 'live' && <span class="switcher__status">{g.status}</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__tools">
+      {
+        current && (
+          <a class="btn btn--ghost btn--icon" href={searchHref(current.id)}>
+            <span class="visually-hidden">Search {current.name}</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="6.5" />
+              <path d="M16 16l4.5 4.5" />
+            </svg>
+          </a>
+        )
+      }
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* The honed edge: a hairline that is bright where the brand sits and fades into steel. */
+  .site-header::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent) 0, color-mix(in srgb, var(--accent) 40%, transparent) 30%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .site-header__bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'brand tools'
+      'switcher switcher';
+    align-items: center;
+    column-gap: var(--sp-3);
+    padding-block: var(--sp-2);
+  }
+
+  .brand {
+    grid-area: brand;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    justify-self: start;
+    min-height: var(--tap);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .brand__word {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .switcher {
+    grid-area: switcher;
+    margin-inline: calc(var(--gutter) * -1);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .switcher::-webkit-scrollbar {
+    display: none;
+  }
+
+  .switcher__list {
+    display: flex;
+    gap: var(--sp-1);
+    padding: var(--sp-1) var(--gutter) var(--sp-1);
+    margin: 0;
+    list-style: none;
+  }
+
+  .switcher__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-height: 2.5rem;
+    padding: 0 var(--sp-3);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: 650;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color var(--dur-fast) var(--ease),
+      background-color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease);
+  }
+
+  .switcher__link:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+
+  .switcher__link[aria-current='true'] {
+    color: var(--text);
+    background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  }
+
+  .switcher__pip {
+    width: 0.55rem;
+    height: 0.55rem;
+    background: var(--accent);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+
+  .switcher__status {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .site-header__tools {
+    grid-area: tools;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+  }
+
+  @media (min-width: 48rem) {
+    .site-header__bar {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: 'brand switcher tools';
+      min-height: var(--header-h);
+      padding-block: 0;
+    }
+    .switcher {
+      margin-inline: 0;
+      justify-self: center;
+    }
+    .switcher__list {
+      padding: 0;
+    }
+  }
+</style>

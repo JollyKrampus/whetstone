@@ -1,0 +1,136 @@
+---
+/**
+ * Explains degraded data for a game (SPEC §1.8): no data in this build, sources that failed or
+ * went stale (last-good data shown), or data older than the stale threshold. The age banner is
+ * also re-evaluated in the browser because the page may be read long after it was built.
+ */
+import type { GameId, GameMeta } from '../core/game.ts';
+import { formatDateTimeUTC, formatDayUTC } from '../core/format.ts';
+import { freshness } from '../core/freshness.ts';
+import { gameById } from '../games/registry.ts';
+
+interface Props {
+  game: GameId;
+  meta: GameMeta | null;
+  class?: string;
+}
+
+const { game, meta, class: extra } = Astro.props;
+const module = gameById(game);
+const names = Object.fromEntries(module.sources.map((s) => [s.id, s.name]));
+const generatedAt = meta?.generatedAt || null;
+const report = meta && generatedAt ? freshness(meta, Date.now(), { names }) : null;
+// Failed sources: either never produced data (broken) or serving last-good data (degraded).
+const problems = report ? report.sources.filter((s) => report.broken.includes(s.id) || report.degraded.includes(s.id)) : [];
+const staleNow = report?.level === 'stale';
+---
+
+{
+  !report && (
+    <div class:list={['banner', 'banner--info', extra]} role="note">
+      <svg class="banner__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 8v5M12 16.5v.5" />
+      </svg>
+      <p>
+        <strong>No {module.short} data in this build yet.</strong> Pages show what they can without it; numbers appear after
+        the next data refresh.
+      </p>
+    </div>
+  )
+}
+
+{
+  problems.length > 0 && (
+    <div class:list={['banner', 'banner--warning', extra]} role="note">
+      <svg class="banner__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3.5 2.5 20h19z" />
+        <path d="M12 10v4.5M12 17.5v.5" />
+      </svg>
+      <div>
+        <p>
+          <strong>Some sources couldn't be refreshed.</strong> Pages keep the last good data where there is any:
+        </p>
+        <ul class="banner__list">
+          {problems.map((s) => (
+            <li>
+              <span class="banner__source">{s.name}</span>:{' '}
+              {s.fetchedAt && s.ageHours !== null ? `last good data from ${formatDayUTC(s.fetchedAt)}` : 'no data yet'}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+{
+  generatedAt && (
+    <div class:list={['banner', 'banner--warning', extra]} role="note" data-stale-age data-generated-at={generatedAt} hidden={!staleNow}>
+      <svg class="banner__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </svg>
+      <p>
+        <strong>This data is getting old.</strong> Last refreshed{' '}
+        <time datetime={generatedAt} data-rel-time>{formatDateTimeUTC(generatedAt)}</time>; the daily update may have
+        failed, so numbers can lag the live game.
+      </p>
+    </div>
+  )
+}
+
+<script>
+  import './freshnessClient.ts';
+</script>
+
+<style>
+  .banner {
+    display: flex;
+    gap: var(--sp-3);
+    align-items: flex-start;
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border);
+    border-left-width: 3px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .banner--info {
+    border-left-color: var(--info);
+    background: color-mix(in srgb, var(--info) 7%, var(--surface));
+  }
+
+  .banner--warning {
+    border-left-color: var(--warning);
+    background: color-mix(in srgb, var(--warning) 7%, var(--surface));
+  }
+
+  .banner__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: none;
+    margin-top: 0.1rem;
+  }
+
+  .banner--info .banner__icon {
+    color: var(--info);
+  }
+
+  .banner--warning .banner__icon {
+    color: var(--warning);
+  }
+
+  .banner__source {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .banner__list {
+    margin-top: var(--sp-1);
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+  }
+</style>

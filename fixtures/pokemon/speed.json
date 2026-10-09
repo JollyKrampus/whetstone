@@ -1,0 +1,141 @@
+{
+  "synthetic": true,
+  "regulation": "M-C",
+  "format": "gen9championsvgc2026regmc",
+  "cutoff": 1760,
+  "month": "2026-09",
+  "entries": [
+    {
+      "id": "raichumegay",
+      "base": 130,
+      "speed": 190,
+      "nature": "Timid",
+      "sp": 23,
+      "share": 0.3,
+      "max": 200,
+      "neutral": 150,
+      "min": 135
+    },
+    {
+      "id": "salamencemega",
+      "base": 120,
+      "speed": 189,
+      "nature": "Timid",
+      "sp": 32,
+      "share": 0.5,
+      "max": 189,
+      "neutral": 140,
+      "min": 126
+    },
+    {
+      "id": "sneasler",
+      "base": 120,
+      "speed": 189,
+      "nature": "Jolly",
+      "sp": 32,
+      "share": 0.6,
+      "max": 189,
+      "neutral": 140,
+      "min": 126
+    },
+    {
+      "id": "charizardmegay",
+      "base": 100,
+      "speed": 167,
+      "nature": "Timid",
+      "sp": 32,
+      "share": 0.5,
+      "max": 167,
+      "neutral": 120,
+      "min": 108
+    },
+    {
+      "id": "gholdengo",
+      "base": 84,
+      "speed": 149,
+      "nature": "Timid",
+      "sp": 32,
+      "share": 0.5,
+      "max": 149,
+      "neutral": 104,
+      "min": 93
+    },
+    {
+      "id": "pelipper",
+      "base": 65,
+      "speed": 128,
+      "nature": "Timid",
+      "sp": 32,
+      "share": 0.45,
+      "max": 128,
+      "neutral": 85,
+      "min": 76
+    },
+    {
+      "id": "rillaboom",
+      "base": 85,
+      "speed": 105,
+      "nature": "Adamant",
+      "sp": 0,
+      "share": 0.45,
+      "max": 150,
+      "neutral": 105,
+      "min": 94
+    },
+    {
+      "id": "indeedeef",
+      "base": 85,
+      "speed": 94,
+      "nature": "Relaxed",
+      "sp": 0,
+      "share": 0.4,
+      "max": 150,
+      "neutral": 105,
+      "min": 94
+    },
+    {
+      "id": "farigiraf",
+      "base": 60,
+      "speed": 80,
+      "nature": "Bold",
+      "sp": 0,
+      "share": 0.3,
+      "max": 123,
+      "neutral": 80,
+      "min": 72
+    },
+    {
+      "id": "incineroar",
+      "base": 60,
+      "speed": 80,
+      "nature": "Careful",
+      "sp": 0,
+      "share": 0.35,
+      "max": 123,
+      "neutral": 80,
+      "min": 72
+    },
+    {
+      "id": "kingambit",
+      "base": 50,
+      "speed": 70,
+      "nature": "Adamant",
+      "sp": 0,
+      "share": 0.55,
+      "max": 112,
+      "neutral": 70,
+      "min": 63
+    },
+    {
+      "id": "golisopodmega",
+      "base": 40,
+      "speed": 60,
+      "nature": "Adamant",
+      "sp": 0,
+      "share": 0.5,
+      "max": 101,
+      "neutral": 60,
+      "min": 54
+    }
+  ]
+}

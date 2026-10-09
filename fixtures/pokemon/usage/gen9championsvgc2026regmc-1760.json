@@ -1,0 +1,884 @@
+{
+  "synthetic": true,
+  "source": "smogon",
+  "attribution": {
+    "source": "smogon",
+    "text": "Usage: Smogon usage statistics (Pokémon Showdown ladder)",
+    "url": "https://www.smogon.com/stats/"
+  },
+  "regulation": "M-C",
+  "format": "gen9championsvgc2026regmc",
+  "cutoff": 1760,
+  "month": "2026-09",
+  "battles": 100000,
+  "pokemon": [
+    {
+      "id": "rillaboom",
+      "rank": 1,
+      "usage": 0.47,
+      "raw": 94000,
+      "abilities": [
+        {
+          "id": "grassysurge",
+          "share": 0.99
+        }
+      ],
+      "items": [
+        {
+          "id": "miracleseed",
+          "share": 0.62
+        },
+        {
+          "id": "sitrusberry",
+          "share": 0.2
+        }
+      ],
+      "moves": [
+        {
+          "id": "grassyglide",
+          "share": 0.95
+        },
+        {
+          "id": "fakeout",
+          "share": 0.83
+        },
+        {
+          "id": "woodhammer",
+          "share": 0.71
+        },
+        {
+          "id": "highhorsepower",
+          "share": 0.59
+        },
+        {
+          "id": "uturn",
+          "share": 0.47
+        },
+        {
+          "id": "protect",
+          "share": 0.35
+        }
+      ],
+      "teammates": [
+        {
+          "id": "incineroar",
+          "share": 0.4
+        },
+        {
+          "id": "sneasler",
+          "share": 0.32
+        },
+        {
+          "id": "salamencemega",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Adamant",
+          "sp": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "share": 0.45
+        },
+        {
+          "nature": "Jolly",
+          "sp": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "share": 0.2
+        }
+      ],
+      "checks": [
+        {
+          "id": "sneasler",
+          "n": 34.1,
+          "p": 0.45,
+          "d": 0.08
+        }
+      ]
+    },
+    {
+      "id": "sneasler",
+      "rank": 2,
+      "usage": 0.37,
+      "raw": 74000,
+      "abilities": [
+        {
+          "id": "unburden",
+          "share": 0.7
+        },
+        {
+          "id": "poisontouch",
+          "share": 0.3
+        }
+      ],
+      "items": [
+        {
+          "id": "focussash",
+          "share": 0.5
+        },
+        {
+          "id": "choicescarf",
+          "share": 0.2
+        }
+      ],
+      "moves": [
+        {
+          "id": "closecombat",
+          "share": 0.95
+        },
+        {
+          "id": "direclaw",
+          "share": 0.83
+        },
+        {
+          "id": "fakeout",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        },
+        {
+          "id": "uturn",
+          "share": 0.47
+        }
+      ],
+      "teammates": [
+        {
+          "id": "rillaboom",
+          "share": 0.4
+        },
+        {
+          "id": "incineroar",
+          "share": 0.32
+        },
+        {
+          "id": "kingambit",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Jolly",
+          "sp": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "share": 0.6
+        }
+      ],
+      "checks": [
+        {
+          "id": "incineroar",
+          "n": 28,
+          "p": 0.52,
+          "d": 0.07
+        }
+      ]
+    },
+    {
+      "id": "incineroar",
+      "rank": 3,
+      "usage": 0.32,
+      "raw": 64000,
+      "abilities": [
+        {
+          "id": "intimidate",
+          "share": 0.99
+        }
+      ],
+      "items": [
+        {
+          "id": "sitrusberry",
+          "share": 0.45
+        },
+        {
+          "id": "rockyhelmet",
+          "share": 0.2
+        }
+      ],
+      "moves": [
+        {
+          "id": "fakeout",
+          "share": 0.95
+        },
+        {
+          "id": "partingshot",
+          "share": 0.83
+        },
+        {
+          "id": "flareblitz",
+          "share": 0.71
+        },
+        {
+          "id": "knockoff",
+          "share": 0.59
+        },
+        {
+          "id": "protect",
+          "share": 0.47
+        }
+      ],
+      "teammates": [
+        {
+          "id": "rillaboom",
+          "share": 0.4
+        },
+        {
+          "id": "sneasler",
+          "share": 0.32
+        },
+        {
+          "id": "whimsicott",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Careful",
+          "sp": [
+            32,
+            0,
+            14,
+            0,
+            20,
+            0
+          ],
+          "share": 0.35
+        }
+      ],
+      "checks": [
+        {
+          "id": "salamencemega",
+          "n": 22.4,
+          "p": 0.48,
+          "d": 0.09
+        }
+      ]
+    },
+    {
+      "id": "salamencemega",
+      "rank": 4,
+      "usage": 0.28,
+      "raw": 56000,
+      "abilities": [
+        {
+          "id": "aerilate",
+          "share": 1
+        }
+      ],
+      "items": [
+        {
+          "id": "salamencite",
+          "share": 1
+        }
+      ],
+      "moves": [
+        {
+          "id": "dracometeor",
+          "share": 0.95
+        },
+        {
+          "id": "hurricane",
+          "share": 0.83
+        },
+        {
+          "id": "tailwind",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        }
+      ],
+      "teammates": [
+        {
+          "id": "rillaboom",
+          "share": 0.4
+        },
+        {
+          "id": "kingambit",
+          "share": 0.32
+        },
+        {
+          "id": "incineroar",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Timid",
+          "sp": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "share": 0.5
+        }
+      ],
+      "checks": [
+        {
+          "id": "gholdengo",
+          "n": 25.3,
+          "p": 0.4,
+          "d": 0.1
+        }
+      ]
+    },
+    {
+      "id": "kingambit",
+      "rank": 5,
+      "usage": 0.25,
+      "raw": 50000,
+      "abilities": [
+        {
+          "id": "defiant",
+          "share": 0.8
+        },
+        {
+          "id": "supremeoverlord",
+          "share": 0.2
+        }
+      ],
+      "items": [
+        {
+          "id": "lifeorb",
+          "share": 0.3
+        },
+        {
+          "id": "sitrusberry",
+          "share": 0.25
+        }
+      ],
+      "moves": [
+        {
+          "id": "kowtowcleave",
+          "share": 0.95
+        },
+        {
+          "id": "suckerpunch",
+          "share": 0.83
+        },
+        {
+          "id": "ironhead",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        }
+      ],
+      "teammates": [
+        {
+          "id": "sneasler",
+          "share": 0.4
+        },
+        {
+          "id": "salamencemega",
+          "share": 0.32
+        },
+        {
+          "id": "indeedeef",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Adamant",
+          "sp": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "share": 0.55
+        }
+      ],
+      "checks": []
+    },
+    {
+      "id": "indeedeef",
+      "rank": 6,
+      "usage": 0.2,
+      "raw": 40000,
+      "abilities": [
+        {
+          "id": "psychicsurge",
+          "share": 0.98
+        }
+      ],
+      "items": [
+        {
+          "id": "sitrusberry",
+          "share": 0.4
+        },
+        {
+          "id": "rockyhelmet",
+          "share": 0.2
+        }
+      ],
+      "moves": [
+        {
+          "id": "followme",
+          "share": 0.95
+        },
+        {
+          "id": "expandingforce",
+          "share": 0.83
+        },
+        {
+          "id": "trickroom",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        }
+      ],
+      "teammates": [
+        {
+          "id": "farigiraf",
+          "share": 0.4
+        },
+        {
+          "id": "kingambit",
+          "share": 0.32
+        },
+        {
+          "id": "gholdengo",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Relaxed",
+          "sp": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "share": 0.4
+        }
+      ],
+      "checks": []
+    },
+    {
+      "id": "gholdengo",
+      "rank": 7,
+      "usage": 0.19,
+      "raw": 38000,
+      "abilities": [
+        {
+          "id": "goodasgold",
+          "share": 1
+        }
+      ],
+      "items": [
+        {
+          "id": "choicescarf",
+          "share": 0.3
+        },
+        {
+          "id": "lifeorb",
+          "share": 0.25
+        }
+      ],
+      "moves": [
+        {
+          "id": "makeitrain",
+          "share": 0.95
+        },
+        {
+          "id": "shadowball",
+          "share": 0.83
+        },
+        {
+          "id": "nastyplot",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        }
+      ],
+      "teammates": [
+        {
+          "id": "incineroar",
+          "share": 0.4
+        },
+        {
+          "id": "indeedeef",
+          "share": 0.32
+        },
+        {
+          "id": "farigiraf",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Timid",
+          "sp": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "share": 0.5
+        }
+      ],
+      "checks": []
+    },
+    {
+      "id": "farigiraf",
+      "rank": 8,
+      "usage": 0.16,
+      "raw": 32000,
+      "abilities": [
+        {
+          "id": "armortail",
+          "share": 0.97
+        }
+      ],
+      "items": [
+        {
+          "id": "sitrusberry",
+          "share": 0.5
+        }
+      ],
+      "moves": [
+        {
+          "id": "trickroom",
+          "share": 0.95
+        },
+        {
+          "id": "expandingforce",
+          "share": 0.83
+        },
+        {
+          "id": "protect",
+          "share": 0.71
+        }
+      ],
+      "teammates": [
+        {
+          "id": "indeedeef",
+          "share": 0.4
+        },
+        {
+          "id": "kingambit",
+          "share": 0.32
+        },
+        {
+          "id": "gholdengo",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Bold",
+          "sp": [
+            27,
+            0,
+            20,
+            0,
+            19,
+            0
+          ],
+          "share": 0.3
+        }
+      ],
+      "checks": []
+    },
+    {
+      "id": "golisopodmega",
+      "rank": 9,
+      "usage": 0.16,
+      "raw": 32000,
+      "abilities": [
+        {
+          "id": "toughclaws",
+          "share": 1
+        }
+      ],
+      "items": [
+        {
+          "id": "golisopite",
+          "share": 1
+        }
+      ],
+      "moves": [
+        {
+          "id": "firstimpression",
+          "share": 0.95
+        },
+        {
+          "id": "liquidation",
+          "share": 0.83
+        },
+        {
+          "id": "knockoff",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        }
+      ],
+      "teammates": [
+        {
+          "id": "pelipper",
+          "share": 0.4
+        },
+        {
+          "id": "incineroar",
+          "share": 0.32
+        },
+        {
+          "id": "farigiraf",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Adamant",
+          "sp": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "share": 0.5
+        }
+      ],
+      "checks": []
+    },
+    {
+      "id": "pelipper",
+      "rank": 10,
+      "usage": 0.15,
+      "raw": 30000,
+      "abilities": [
+        {
+          "id": "drizzle",
+          "share": 1
+        }
+      ],
+      "items": [
+        {
+          "id": "focussash",
+          "share": 0.3
+        },
+        {
+          "id": "mysticwater",
+          "share": 0.2
+        }
+      ],
+      "moves": [
+        {
+          "id": "hurricane",
+          "share": 0.95
+        },
+        {
+          "id": "weatherball",
+          "share": 0.83
+        },
+        {
+          "id": "tailwind",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        }
+      ],
+      "teammates": [
+        {
+          "id": "golisopodmega",
+          "share": 0.4
+        },
+        {
+          "id": "archaludon",
+          "share": 0.32
+        },
+        {
+          "id": "rillaboom",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Timid",
+          "sp": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "share": 0.45
+        }
+      ],
+      "checks": []
+    },
+    {
+      "id": "raichumegay",
+      "rank": 11,
+      "usage": 0.13,
+      "raw": 26000,
+      "abilities": [
+        {
+          "id": "noguard",
+          "share": 1
+        }
+      ],
+      "items": [
+        {
+          "id": "raichunitey",
+          "share": 1
+        }
+      ],
+      "moves": [
+        {
+          "id": "thunderbolt",
+          "share": 0.95
+        },
+        {
+          "id": "voltswitch",
+          "share": 0.83
+        },
+        {
+          "id": "fakeout",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        }
+      ],
+      "teammates": [
+        {
+          "id": "pelipper",
+          "share": 0.4
+        },
+        {
+          "id": "incineroar",
+          "share": 0.32
+        },
+        {
+          "id": "whimsicott",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Timid",
+          "sp": [
+            32,
+            0,
+            11,
+            0,
+            0,
+            23
+          ],
+          "share": 0.3
+        }
+      ],
+      "checks": []
+    },
+    {
+      "id": "charizardmegay",
+      "rank": 12,
+      "usage": 0.12,
+      "raw": 24000,
+      "abilities": [
+        {
+          "id": "drought",
+          "share": 1
+        }
+      ],
+      "items": [
+        {
+          "id": "charizarditey",
+          "share": 1
+        }
+      ],
+      "moves": [
+        {
+          "id": "heatwave",
+          "share": 0.95
+        },
+        {
+          "id": "weatherball",
+          "share": 0.83
+        },
+        {
+          "id": "tailwind",
+          "share": 0.71
+        },
+        {
+          "id": "protect",
+          "share": 0.59
+        }
+      ],
+      "teammates": [
+        {
+          "id": "whimsicott",
+          "share": 0.4
+        },
+        {
+          "id": "incineroar",
+          "share": 0.32
+        },
+        {
+          "id": "rillaboom",
+          "share": 0.24
+        }
+      ],
+      "spreads": [
+        {
+          "nature": "Timid",
+          "sp": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "share": 0.5
+        }
+      ],
+      "checks": []
+    }
+  ]
+}

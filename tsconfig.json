@@ -1,0 +1,14 @@
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    // Pipeline and scripts run under plain `node` (type stripping): enums, namespaces and
+    // parameter properties would crash at runtime, so forbid them everywhere.
+    "erasableSyntaxOnly": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    // TypeScript 6 no longer loads every @types package by default.
+    "types": ["node"]
+  },
+  "include": [".astro/types.d.ts", "src", "e2e", "scripts", "pipeline", "test", "*.ts"],
+  "exclude": ["dist", "data", "node_modules", "public", "vendor", ".cache"]
+}

@@ -1,0 +1,40 @@
+# One GET per external host from a GitHub-hosted runner (critique U3): confirms that no source
+# serves the runner a bot challenge before the daily pipeline depends on it. Run it by hand
+# after creating the repo and whenever a source starts failing in CI only.
+name: Egress probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: Probe only URLs containing this text (optional)
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # The probe uses only Node built-ins, so no npm ci.
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Probe external hosts
+        env:
+          ONLY: ${{ inputs.only }}
+          LIQUIPEDIA_UA_CONTACT: ${{ vars.LIQUIPEDIA_UA_CONTACT }}
+        run: |
+          if [ -n "$ONLY" ]; then
+            node pipeline/egress-probe.ts --only "$ONLY"
+          else
+            node pipeline/egress-probe.ts
+          fi

@@ -1,0 +1,63 @@
+{
+  "game": "pokemon",
+  "schema": 1,
+  "version": {
+    "label": "Reg M-C",
+    "since": "2026-09-09"
+  },
+  "generatedAt": "2026-10-08T10:45:00Z",
+  "dataHash": "5c2d676e39764105",
+  "sources": [
+    {
+      "id": "showdown",
+      "fetchedAt": "2026-10-08T10:41:00Z",
+      "status": "ok",
+      "detail": "fixture: dex subset from @smogon/calc 0.12.0 gen 0; accuracy, PP and learnsets hand-written"
+    },
+    {
+      "id": "smogon",
+      "fetchedAt": "2026-10-08T10:42:00Z",
+      "status": "ok",
+      "detail": "fixture: synthetic usage sample"
+    },
+    {
+      "id": "limitless",
+      "fetchedAt": "2026-10-08T10:43:00Z",
+      "status": "ok",
+      "detail": "fixture: synthetic aggregates"
+    },
+    {
+      "id": "showdown-replays",
+      "fetchedAt": "2026-10-08T10:44:00Z",
+      "status": "ok",
+      "detail": "fixture: synthetic head-to-head sample"
+    }
+  ],
+  "counts": {
+    "species": 21,
+    "moves": 38,
+    "items": 14,
+    "usageFiles": 1,
+    "tournaments": 2
+  },
+  "extra": {
+    "regulation": "M-C",
+    "regulationLabel": "Regulation Set M-C",
+    "window": {
+      "start": "2026-09-09T02:00:00Z",
+      "end": "2026-12-02T01:59:00Z"
+    },
+    "season": {
+      "id": "M-7",
+      "start": "2026-10-07T02:00:00Z",
+      "end": "2026-11-04T01:59:00Z",
+      "estimated": true
+    },
+    "formats": {
+      "doubles": "gen9championsvgc2026regmc",
+      "doublesBo3": "gen9championsvgc2026regmcbo3",
+      "singles": "gen9championsbssregmc"
+    },
+    "smogonMonth": "2026-09"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "game": "mtga",
+  "schema": 1,
+  "version": {
+    "label": "MSH",
+    "since": "2026-06-26"
+  },
+  "generatedAt": "2026-10-08T10:40:00Z",
+  "dataHash": "2afc2df5eedb2f32",
+  "sources": [
+    {
+      "id": "scryfall",
+      "fetchedAt": "2026-10-08T10:35:00Z",
+      "status": "ok",
+      "detail": "fixture: 48 Arena records folded by grindstone aggregateCards from its test printings; oracle text paraphrased"
+    },
+    {
+      "id": "17lands",
+      "fetchedAt": "2026-10-08T10:36:00Z",
+      "status": "ok",
+      "detail": "fixture: synthetic BLB PremierDraft sample"
+    },
+    {
+      "id": "curated-meta",
+      "fetchedAt": "2026-10-08T10:36:30Z",
+      "status": "ok",
+      "detail": "example snapshot only"
+    }
+  ],
+  "counts": {
+    "cards": 48,
+    "standardCards": 40,
+    "sets": 13,
+    "limitedSets": 1,
+    "metaDecks": 2
+  },
+  "extra": {
+    "snapshot": "2026-10-08T09:05:45Z",
+    "grindstone": "0.2.0",
+    "latestSet": "MSH",
+    "standardSets": [
+      "MSH",
+      "SOS",
+      "ECL",
+      "TLA",
+      "TDM",
+      "DFT",
+      "FDN",
+      "DSK",
+      "BLB",
+      "OTJ",
+      "MKM",
+      "LCI",
+      "WOE"
+    ],
+    "metaFormats": [
+      "standard"
+    ]
+  }
+}

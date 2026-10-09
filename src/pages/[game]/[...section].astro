@@ -1,0 +1,30 @@
+---
+/**
+ * Placeholder for every game nav section that has no page yet, so the nav never links to a 404.
+ * A game claims a section by adding src/pages/<game>/<section>.astro (or <section>/index.astro);
+ * pendingSections() then drops it from here, so the static page wins without a route collision.
+ */
+import type { GetStaticPaths } from 'astro';
+import GamePlaceholder from '../../components/GamePlaceholder.astro';
+import type { GameId } from '../../core/game.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+import { pendingSections } from '../../lib/routes.ts';
+
+export const getStaticPaths = (() =>
+  pendingSections().map((s) => ({
+    params: { game: s.game, section: s.section },
+    props: { game: s.game, path: `${s.section}/`, label: s.label },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  game: GameId;
+  path: string;
+  label: string;
+}
+
+const { game, path, label } = Astro.props;
+---
+
+<GameLayout game={game} title={label} navPath={path} noindex>
+  <GamePlaceholder game={game} section={{ label, path }} />
+</GameLayout>

@@ -1,0 +1,123 @@
+{
+  "synthetic": true,
+  "source": "showdown-replays",
+  "attribution": {
+    "source": "showdown-replays",
+    "text": "Matchups: public Pokémon Showdown replays",
+    "url": "https://replay.pokemonshowdown.com/"
+  },
+  "regulation": "M-C",
+  "format": "gen9championsvgc2026regmcbo3",
+  "window": {
+    "label": "Last 30 days (sample)",
+    "from": "2026-09-09",
+    "to": "2026-10-08"
+  },
+  "replays": 1200,
+  "counters": [
+    {
+      "a": "incineroar",
+      "b": "sneasler",
+      "score": 58,
+      "delta": 3.2,
+      "n": 140,
+      "source": "replays",
+      "reasons": [
+        {
+          "kind": "usage",
+          "text": "Sample head-to-head (synthetic): +3.2 pp over 140 games",
+          "n": 140,
+          "delta": 3.2,
+          "source": "showdown-replays"
+        }
+      ]
+    },
+    {
+      "a": "rillaboom",
+      "b": "sneasler",
+      "score": 39,
+      "delta": -4.4,
+      "n": 210,
+      "source": "replays",
+      "reasons": [
+        {
+          "kind": "usage",
+          "text": "Sample head-to-head (synthetic): -4.4 pp over 210 games",
+          "n": 210,
+          "delta": -4.4,
+          "source": "showdown-replays"
+        }
+      ]
+    },
+    {
+      "a": "sneasler",
+      "b": "incineroar",
+      "score": 42,
+      "delta": -3.2,
+      "n": 140,
+      "source": "replays",
+      "reasons": [
+        {
+          "kind": "usage",
+          "text": "Sample head-to-head (synthetic): -3.2 pp over 140 games",
+          "n": 140,
+          "delta": -3.2,
+          "source": "showdown-replays"
+        }
+      ]
+    },
+    {
+      "a": "sneasler",
+      "b": "rillaboom",
+      "score": 61,
+      "delta": 4.4,
+      "n": 210,
+      "source": "replays",
+      "reasons": [
+        {
+          "kind": "usage",
+          "text": "Sample head-to-head (synthetic): +4.4 pp over 210 games",
+          "n": 210,
+          "delta": 4.4,
+          "source": "showdown-replays"
+        }
+      ]
+    }
+  ],
+  "synergies": [
+    {
+      "a": "incineroar",
+      "b": "rillaboom",
+      "score": 63,
+      "delta": 4.1,
+      "n": 260,
+      "source": "replays",
+      "reasons": [
+        {
+          "kind": "usage",
+          "text": "Sample head-to-head (synthetic): +4.1 pp over 260 games",
+          "n": 260,
+          "delta": 4.1,
+          "source": "showdown-replays"
+        }
+      ]
+    },
+    {
+      "a": "kingambit",
+      "b": "salamencemega",
+      "score": 57,
+      "delta": 2.3,
+      "n": 120,
+      "source": "replays",
+      "reasons": [
+        {
+          "kind": "usage",
+          "text": "Sample head-to-head (synthetic): +2.3 pp over 120 games",
+          "n": 120,
+          "delta": 2.3,
+          "source": "showdown-replays"
+        }
+      ]
+    }
+  ]
+}

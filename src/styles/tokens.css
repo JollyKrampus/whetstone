@@ -1,0 +1,201 @@
+/*
+ * Whetstone design tokens.
+ * Dark is the default theme. The inline theme script in Base.astro sets data-theme on <html>
+ * before first paint (stored choice, else prefers-color-scheme). Without JS the media query
+ * below still honours the OS preference.
+ * Every text/background pair used by components is >= 4.5:1 in both themes.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Neutrals: blue-slate steel. */
+  --bg: #0b0f14;
+  --surface: #121820;
+  --surface-2: #19212b;
+  --surface-3: #212a36;
+  --border: #2a3441;
+  --border-strong: #3b4858;
+  --text: #e6ebf1;
+  --text-muted: #9fabba;
+  --text-faint: #8592a3;
+  --steel-1: #5d6b7c;
+  --steel-2: #8f9cad;
+  --steel-3: #c8d1dc;
+
+  /* Brand edge: the honed highlight. */
+  --edge: #4fd8c4;
+  --edge-soft: rgb(79 216 196 / 0.14);
+  --on-edge: #0b0f14;
+
+  /* Game accents (GameModule.accent names one of these). */
+  --accent-hots: #b69cff;
+  --accent-mtga: #f2b84b;
+  --accent-pokemon: #ff7d73;
+  --on-accent: #0b0f14;
+
+  /* Semantic tones; always paired with text or an icon, never colour alone. */
+  --positive: #5cd68d;
+  --negative: #ff8080;
+  --warning: #f0c24f;
+  --info: #7db8ff;
+  --positive-soft: rgb(92 214 141 / 0.14);
+  --negative-soft: rgb(255 128 128 / 0.14);
+  --warning-soft: rgb(240 194 79 / 0.14);
+  --info-soft: rgb(125 184 255 / 0.14);
+
+  --shadow-1: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 8px 24px rgb(0 0 0 / 0.45);
+  --hatch: rgb(255 255 255 / 0.025);
+
+  /* The current page's accent; GameLayout points it at the game's colour. */
+  --accent: var(--edge);
+
+  /* Typography: system stacks only, no web fonts. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 1.875rem);
+  --fs-3xl: clamp(2rem, 1.35rem + 3vw, 3.25rem);
+  --lh-tight: 1.15;
+  --lh: 1.55;
+
+  /* 4/8 px spacing scale. */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --gutter: 1rem;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  /* Size of the clipped "honed" corner on cards. */
+  --bevel: 12px;
+
+  --content-max: 72rem;
+  --header-h: 3.5rem;
+  --tap: 2.75rem;
+
+  --focus-color: var(--edge);
+  --focus-ring: 2px solid var(--focus-color);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur: 180ms;
+}
+
+/* Light theme: explicit choice. */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --surface-2: #eaeef3;
+  --surface-3: #dfe5ec;
+  --border: #d3dae3;
+  --border-strong: #b3bfcc;
+  --text: #111720;
+  --text-muted: #4a5667;
+  --text-faint: #535f6e;
+  --steel-1: #9aa6b4;
+  --steel-2: #6a7787;
+  --steel-3: #3c4856;
+
+  --edge: #086b60;
+  --edge-soft: rgb(8 107 96 / 0.1);
+  --on-edge: #ffffff;
+
+  --accent-hots: #6b3fd4;
+  --accent-mtga: #8f5600;
+  --accent-pokemon: #c0282b;
+  --on-accent: #ffffff;
+
+  --positive: #166c36;
+  --negative: #b3261e;
+  --warning: #835400;
+  --info: #1d5dbf;
+  --positive-soft: rgb(22 108 54 / 0.1);
+  --negative-soft: rgb(179 38 30 / 0.09);
+  --warning-soft: rgb(131 84 0 / 0.1);
+  --info-soft: rgb(29 93 191 / 0.09);
+
+  --shadow-1: 0 1px 2px rgb(16 24 40 / 0.08);
+  --shadow-2: 0 10px 28px rgb(16 24 40 / 0.12);
+  --hatch: rgb(17 23 32 / 0.035);
+}
+
+/* No stored choice and no JS yet: follow the OS. Mirrors the light block above. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+
+    --bg: #f3f5f8;
+    --surface: #ffffff;
+    --surface-2: #eaeef3;
+    --surface-3: #dfe5ec;
+    --border: #d3dae3;
+    --border-strong: #b3bfcc;
+    --text: #111720;
+    --text-muted: #4a5667;
+    --text-faint: #535f6e;
+    --steel-1: #9aa6b4;
+    --steel-2: #6a7787;
+    --steel-3: #3c4856;
+
+    --edge: #086b60;
+    --edge-soft: rgb(8 107 96 / 0.1);
+    --on-edge: #ffffff;
+
+    --accent-hots: #6b3fd4;
+    --accent-mtga: #8f5600;
+    --accent-pokemon: #c0282b;
+    --on-accent: #ffffff;
+
+    --positive: #166c36;
+    --negative: #b3261e;
+    --warning: #835400;
+    --info: #1d5dbf;
+    --positive-soft: rgb(22 108 54 / 0.1);
+    --negative-soft: rgb(179 38 30 / 0.09);
+    --warning-soft: rgb(131 84 0 / 0.1);
+    --info-soft: rgb(29 93 191 / 0.09);
+
+    --shadow-1: 0 1px 2px rgb(16 24 40 / 0.08);
+    --shadow-2: 0 10px 28px rgb(16 24 40 / 0.12);
+    --hatch: rgb(17 23 32 / 0.035);
+  }
+}
+
+/* Per-game accent scoping (Base.astro sets data-game on <body>). */
+[data-game='hots'] {
+  --accent: var(--accent-hots);
+}
+[data-game='mtga'] {
+  --accent: var(--accent-mtga);
+}
+[data-game='pokemon'] {
+  --accent: var(--accent-pokemon);
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur: 0ms;
+  }
+}

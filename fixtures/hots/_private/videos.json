@@ -1,0 +1,55 @@
+{
+  "synthetic": true,
+  "source": "youtube",
+  "fetchedAt": "2026-10-08T10:20:00Z",
+  "videos": [
+    {
+      "id": "SYNTHvid001",
+      "channelId": "UCmrYR_1TM7W5kLProbKqPSA",
+      "channel": "HotS_Fox",
+      "title": "Sample video (synthetic): Xal'atath guide",
+      "published": "2026-10-07T15:00:00Z",
+      "durationSec": 812,
+      "views": 1000,
+      "heroes": [
+        "HXAL"
+      ],
+      "maps": [],
+      "kind": "guide",
+      "lang": "en"
+    },
+    {
+      "id": "SYNTHvid002",
+      "channelId": "UChC7zO4y0QPXax65t1W41lQ",
+      "channel": "Khaldor",
+      "title": "Sample video (synthetic): community cup final",
+      "published": "2026-10-05T19:00:00Z",
+      "durationSec": 3600,
+      "views": 2000,
+      "heroes": [
+        "Diab",
+        "Wiza"
+      ],
+      "maps": [
+        "cursed-hollow"
+      ],
+      "kind": "tournament",
+      "lang": "en"
+    },
+    {
+      "id": "SYNTHvid003",
+      "channelId": "UCNXJWL-geC9tMB2s3PpAuLA",
+      "channel": "TheFreind",
+      "title": "Sample video (synthetic): Johanna talents explained",
+      "published": "2026-09-15T12:00:00Z",
+      "durationSec": 1500,
+      "views": 3000,
+      "heroes": [
+        "Crus"
+      ],
+      "maps": [],
+      "kind": "guide",
+      "lang": "en"
+    }
+  ]
+}

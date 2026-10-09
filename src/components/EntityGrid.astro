@@ -1,0 +1,237 @@
+---
+/**
+ * Server-rendered grid of entity tiles (heroes, maps, cards, Pokémon). Every tile is a plain link,
+ * so the grid works with JS off; with `filter`, the EntityFilter island hides tiles in place
+ * using the data-name/data-aliases/data-extra and data-f-<facet> attributes emitted here.
+ */
+import Badge from './Badge.tsx';
+import EntityFilter from './EntityFilter.tsx';
+import type { EntityTile, FacetSpec, ResolvedFacet } from './types.ts';
+
+interface Props {
+  /** id of the <ul>; must be unique on the page. */
+  id: string;
+  items: EntityTile[];
+  /** Accessible name of the list, e.g. "Heroes". */
+  label: string;
+  facets?: FacetSpec[];
+  /** Render the search/facet island (default: true when there are more than 8 tiles). */
+  filter?: boolean;
+  /** id for the search input; '#search' is what the header search link targets. */
+  searchId?: string;
+  placeholder?: string;
+  noun?: [string, string];
+  /** Tile size: sm for dense rosters, md default, lg for maps/cards with art. */
+  size?: 'sm' | 'md' | 'lg';
+  emptyText?: string;
+}
+
+const {
+  id,
+  items,
+  label,
+  facets = [],
+  filter = items.length > 8,
+  searchId = 'search',
+  placeholder,
+  noun = ['result', 'results'],
+  size = 'md',
+  emptyText = 'Nothing to show yet.',
+} = Astro.props;
+
+const facetValues = (tile: EntityTile, facetId: string): string[] => {
+  const raw = tile.facets?.[facetId];
+  if (raw === undefined) return [];
+  return Array.isArray(raw) ? raw : [raw];
+};
+
+const resolved: ResolvedFacet[] = facets.map((facet) => {
+  const counts = new Map<string, number>();
+  for (const tile of items) for (const v of facetValues(tile, facet.id)) counts.set(v, (counts.get(v) ?? 0) + 1);
+  const options = facet.options
+    ? facet.options.map((o) => ({ value: o.value, label: o.label ?? o.value, count: counts.get(o.value) ?? 0 }))
+    : [...counts.keys()].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0)).map((v) => ({ value: v, label: v, count: counts.get(v) ?? 0 }));
+  return { id: facet.id, label: facet.label, options: options.filter((o) => o.count > 0) };
+});
+
+const tileAttrs = (tile: EntityTile): Record<string, string> => {
+  const attrs: Record<string, string> = {
+    'data-entity': tile.id,
+    'data-name': tile.name,
+  };
+  if (tile.aliases?.length) attrs['data-aliases'] = tile.aliases.join('|');
+  if (tile.subtitle) attrs['data-extra'] = tile.subtitle;
+  for (const facet of facets) attrs[`data-f-${facet.id}`] = facetValues(tile, facet.id).join('|');
+  return attrs;
+};
+---
+
+<div class:list={['egrid-wrap', `egrid-wrap--${size}`]}>
+  {
+    filter && items.length > 0 && (
+      <EntityFilter
+        client:load
+        gridId={id}
+        inputId={searchId}
+        label={`Search ${label.toLowerCase()}`}
+        {...(placeholder ? { placeholder } : {})}
+        facets={resolved}
+        total={items.length}
+        noun={noun}
+      />
+    )
+  }
+  {
+    items.length > 0 ? (
+      <ul id={id} class:list={['egrid', `egrid--${size}`]} aria-label={label}>
+        {items.map((tile) => (
+          <li class="etile" data-dimmed={tile.dimmed ? 'true' : undefined} {...tileAttrs(tile)}>
+            <a class="etile__link" href={tile.href}>
+              {tile.image ? (
+                <img class="etile__img" src={tile.image} alt="" loading="lazy" decoding="async" />
+              ) : (
+                <span class="etile__img etile__img--blank" aria-hidden="true">
+                  {tile.name.slice(0, 1)}
+                </span>
+              )}
+              <span class="etile__text">
+                <span class="etile__name">{tile.name}</span>
+                {tile.subtitle && <span class="etile__sub">{tile.subtitle}</span>}
+              </span>
+            </a>
+            {tile.badges && tile.badges.length > 0 && (
+              <span class="etile__badges">
+                {tile.badges.map((b) => (
+                  <Badge tone={b.tone ?? 'neutral'} {...(b.title ? { title: b.title } : {})}>
+                    {b.label}
+                  </Badge>
+                ))}
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="egrid__none muted">{emptyText}</p>
+    )
+  }
+</div>
+
+<style>
+  .egrid-wrap {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .egrid {
+    --tile-min: 7.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--tile-min), 1fr));
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .egrid--sm {
+    --tile-min: 6rem;
+  }
+
+  .egrid--lg {
+    --tile-min: 10.5rem;
+  }
+
+  .etile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition:
+      border-color var(--dur-fast) var(--ease),
+      transform var(--dur-fast) var(--ease);
+  }
+
+  .etile:hover,
+  .etile:focus-within {
+    border-color: var(--accent);
+  }
+
+  .etile:hover {
+    transform: translateY(-1px);
+  }
+
+  .etile[data-dimmed] {
+    opacity: 0.55;
+  }
+
+  .etile__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-2) var(--sp-3);
+    color: var(--text);
+    text-decoration: none;
+    text-align: center;
+    border-radius: inherit;
+    flex: 1;
+  }
+
+  .etile__img {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--radius);
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .egrid--sm .etile__img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .egrid--lg .etile__img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .etile__img--blank {
+    display: grid;
+    place-items: center;
+    color: var(--text-faint);
+    font-weight: 800;
+    font-size: var(--fs-xl);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    border-radius: 0;
+  }
+
+  .etile__text {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .etile__name {
+    font-size: var(--fs-sm);
+    font-weight: 650;
+    line-height: 1.25;
+  }
+
+  .etile__sub {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .etile__badges {
+    position: absolute;
+    top: var(--sp-1);
+    right: var(--sp-1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    pointer-events: none;
+  }
+</style>

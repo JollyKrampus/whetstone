@@ -1,0 +1,213 @@
+---
+/**
+ * Tier rows (T1 best … T5 worst, or any custom bands). The tier block shows its label as text
+ * plus a stepped edge marker, so tiers never rely on colour alone. Empty tiers say so.
+ */
+import Badge from './Badge.tsx';
+import type { TierRow } from './types.ts';
+
+interface Props {
+  tiers: TierRow[];
+  /** Shown in a tier with no entries. */
+  emptyTierText?: string;
+  /** Accessible name for the whole list. */
+  label?: string;
+  class?: string;
+}
+
+const { tiers, emptyTierText = 'Nobody here right now.', label = 'Tier list', class: extra } = Astro.props;
+const total = tiers.length;
+---
+
+<ol class:list={['tiers', extra]} aria-label={label}>
+  {
+    tiers.map((tier, i) => (
+      <li class="tier" data-tier={tier.id} style={`--rank: ${total > 1 ? i / (total - 1) : 0}`}>
+        <div class="tier__label">
+          <span class="tier__code">{tier.label}</span>
+          {tier.title && <span class="tier__title">{tier.title}</span>}
+          <span class="tier__count">{tier.items.length}</span>
+        </div>
+        <div class="tier__body">
+          {tier.note && <p class="tier__note">{tier.note}</p>}
+          {tier.items.length === 0 ? (
+            <p class="tier__empty">{emptyTierText}</p>
+          ) : (
+            <ul class="tier__items">
+              {tier.items.map((item) => {
+                const inner = (
+                  <>
+                    {item.image ? (
+                      <img class="tier__img" src={item.image} alt="" width="40" height="40" loading="lazy" decoding="async" />
+                    ) : (
+                      <span class="tier__img tier__img--blank" aria-hidden="true" />
+                    )}
+                    <span class="tier__name">{item.name}</span>
+                    {item.value && <span class="tier__value">{item.value}</span>}
+                  </>
+                );
+                return (
+                  <li class="tier__item" data-id={item.id}>
+                    {item.href ? (
+                      <a class="tier__link" href={item.href}>
+                        {inner}
+                      </a>
+                    ) : (
+                      <span class="tier__link">{inner}</span>
+                    )}
+                    {item.badges && item.badges.length > 0 && (
+                      <span class="tier__badges">
+                        {item.badges.map((b) => (
+                          <Badge tone={b.tone ?? 'neutral'} {...(b.title ? { title: b.title } : {})}>
+                            {b.label}
+                          </Badge>
+                        ))}
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .tiers {
+    display: grid;
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .tier {
+    /* Best tier gets the full accent, the worst fades towards steel. */
+    --tier-color: color-mix(in srgb, var(--accent) calc((1 - var(--rank)) * 100%), var(--steel-1));
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .tier__label {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--tier-color) 18%, transparent), transparent 70%);
+    box-shadow: inset 3px 0 0 var(--tier-color);
+  }
+
+  .tier__code {
+    font-family: var(--font-mono);
+    font-size: var(--fs-lg);
+    font-weight: 800;
+  }
+
+  .tier__title {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+  }
+
+  .tier__count {
+    margin-left: auto;
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .tier__body {
+    padding: var(--sp-3);
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .tier__note,
+  .tier__empty {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .tier__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .tier__item {
+    position: relative;
+  }
+
+  .tier__link {
+    display: grid;
+    justify-items: center;
+    gap: 0.2rem;
+    padding: var(--sp-2) var(--sp-1);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  a.tier__link:hover {
+    border-color: var(--accent);
+    background: var(--surface-2);
+  }
+
+  .tier__img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .tier__name {
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    line-height: 1.2;
+  }
+
+  .tier__value {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .tier__badges {
+    position: absolute;
+    top: 0;
+    right: 0;
+    pointer-events: none;
+  }
+
+  @media (min-width: 40rem) {
+    .tier {
+      grid-template-columns: 8.5rem minmax(0, 1fr);
+    }
+    .tier__label {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.1rem;
+      border-bottom: 0;
+      border-right: 1px solid var(--border);
+      padding: var(--sp-3);
+    }
+    .tier__count {
+      margin-left: 0;
+      margin-top: auto;
+    }
+  }
+</style>

@@ -1,0 +1,132 @@
+{
+  "archaludon": [
+    "bodypress",
+    "dracometeor",
+    "ironhead",
+    "protect",
+    "thunderbolt"
+  ],
+  "charizard": [
+    "earthquake",
+    "heatwave",
+    "hurricane",
+    "protect",
+    "tailwind",
+    "weatherball"
+  ],
+  "farigiraf": [
+    "bodypress",
+    "expandingforce",
+    "protect",
+    "shadowball",
+    "trickroom"
+  ],
+  "garchomp": [
+    "dracometeor",
+    "dragonclaw",
+    "earthquake",
+    "protect",
+    "rockslide"
+  ],
+  "gholdengo": [
+    "makeitrain",
+    "nastyplot",
+    "protect",
+    "shadowball",
+    "thunderbolt",
+    "trickroom"
+  ],
+  "golisopod": [
+    "firstimpression",
+    "knockoff",
+    "liquidation",
+    "protect",
+    "uturn"
+  ],
+  "incineroar": [
+    "closecombat",
+    "fakeout",
+    "flareblitz",
+    "heatwave",
+    "knockoff",
+    "partingshot",
+    "protect",
+    "uturn"
+  ],
+  "indeedeef": [
+    "dazzlinggleam",
+    "encore",
+    "expandingforce",
+    "followme",
+    "protect",
+    "shadowball",
+    "trickroom"
+  ],
+  "kingambit": [
+    "ironhead",
+    "knockoff",
+    "kowtowcleave",
+    "protect",
+    "suckerpunch"
+  ],
+  "pelipper": [
+    "hurricane",
+    "protect",
+    "tailwind",
+    "uturn",
+    "weatherball"
+  ],
+  "raichu": [
+    "encore",
+    "fakeout",
+    "nastyplot",
+    "protect",
+    "thunderbolt",
+    "voltswitch"
+  ],
+  "rillaboom": [
+    "earthquake",
+    "fakeout",
+    "grassyglide",
+    "highhorsepower",
+    "knockoff",
+    "protect",
+    "rockslide",
+    "uturn",
+    "woodhammer"
+  ],
+  "salamence": [
+    "dracometeor",
+    "dragonclaw",
+    "earthquake",
+    "heatwave",
+    "hurricane",
+    "protect",
+    "rockslide",
+    "tailwind"
+  ],
+  "sinistcha": [
+    "matchagotcha",
+    "protect",
+    "ragepowder",
+    "shadowball",
+    "trickroom"
+  ],
+  "sneasler": [
+    "closecombat",
+    "direclaw",
+    "fakeout",
+    "knockoff",
+    "protect",
+    "rockslide",
+    "uturn"
+  ],
+  "whimsicott": [
+    "dazzlinggleam",
+    "encore",
+    "moonblast",
+    "protect",
+    "tailwind",
+    "uturn"
+  ]
+}

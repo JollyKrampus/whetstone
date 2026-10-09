@@ -1,0 +1,228 @@
+---
+import Badge from '../components/Badge.tsx';
+import type { AttributionRule, CustodyClass } from '../core/game.ts';
+import { SITE, games, navHref } from '../games/registry.ts';
+import Base from '../layouts/Base.astro';
+
+const CUSTODY: Record<CustodyClass, { label: string; text: string }> = {
+  A: { label: 'Open', text: 'Open or our own derivation; published in the public data branch.' },
+  'A-SA': { label: 'Share-alike', text: 'Share-alike; published in separate files under the same license.' },
+  B: { label: 'Licensed', text: 'Licensed; shown on the site only, never published or committed as data.' },
+  C: { label: 'Ephemeral', text: 'Short-lived metadata; never stored, hidden once out of date.' },
+};
+
+const RULE: Record<AttributionRule, string> = {
+  inline: 'Credited next to the data it supports',
+  top: 'Credited at the top of every page that uses it',
+  footer: 'Credited in the footer of its game pages',
+};
+
+const software = [
+  { name: 'Astro', url: 'https://astro.build', license: 'MIT', use: 'Static site generator' },
+  { name: 'Preact', url: 'https://preactjs.com', license: 'MIT', use: 'Interactive islands' },
+  { name: 'Zod', url: 'https://zod.dev', license: 'MIT', use: 'Data validation' },
+  { name: 'Workbox', url: 'https://developer.chrome.com/docs/workbox', license: 'MIT', use: 'Offline support' },
+];
+---
+
+<Base title="Credits" description="Every data source Whetstone uses, its license, and how it is credited.">
+  <article class="container credits">
+    <header class="credits__head">
+      <p class="kicker">Credits</p>
+      <h1>Built on other people's good work.</h1>
+      <p class="credits__lead">
+        Every data source, its license and how it's credited. Licensed and share-alike data is handled exactly as its terms
+        ask; nothing here is endorsed by the projects listed.
+      </p>
+    </header>
+
+    {
+      games.map((g) => (
+        <section class="credits__game" style={`--accent: var(${g.accent})`} aria-labelledby={`credits-${g.id}`}>
+          <h2 id={`credits-${g.id}`}>
+            <a href={navHref(g)}>{g.name}</a>
+          </h2>
+          <ul class="credits__list">
+            {g.sources.map((s) => (
+              <li class="source" id={`source-${g.id}-${s.id}`}>
+                <div class="source__top">
+                  <a class="source__name" href={s.url} rel="noopener">
+                    {s.name}
+                  </a>
+                  <span class="source__badges">
+                    {s.license && <Badge tone="neutral">{s.license}</Badge>}
+                    <Badge tone={s.custody === 'B' ? 'warning' : s.custody === 'A-SA' ? 'info' : 'neutral'} title={CUSTODY[s.custody].text}>
+                      {CUSTODY[s.custody].label}
+                    </Badge>
+                  </span>
+                </div>
+                <p class="source__credit">{s.attribution}</p>
+                <dl class="source__facts">
+                  <div>
+                    <dt>Credit</dt>
+                    <dd>{RULE[s.rule]}</dd>
+                  </div>
+                  {s.tosNote && (
+                    <div>
+                      <dt>Terms</dt>
+                      <dd>{s.tosNote}</dd>
+                    </div>
+                  )}
+                </dl>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <section class="credits__game" aria-labelledby="credits-software">
+      <h2 id="credits-software">Software and artwork</h2>
+      <ul class="credits__list">
+        {
+          software.map((s) => (
+            <li class="source">
+              <div class="source__top">
+                <a class="source__name" href={s.url} rel="noopener">
+                  {s.name}
+                </a>
+                <span class="source__badges">
+                  <Badge tone="neutral">{s.license}</Badge>
+                </span>
+              </div>
+              <p class="source__credit">{s.use}</p>
+            </li>
+          ))
+        }
+        <li class="source">
+          <div class="source__top">
+            <span class="source__name">Whetstone icons and artwork</span>
+          </div>
+          <p class="source__credit">
+            Original. Game names, logos and artwork belong to their owners and are used for identification only; see the
+            notices in the footer. Source code: <a href={SITE.repo} rel="noopener">{SITE.repo.replace('https://', '')}</a>.
+          </p>
+        </li>
+      </ul>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .credits {
+    display: grid;
+    gap: var(--sp-7);
+    padding-block: var(--sp-7) var(--sp-8);
+  }
+
+  .credits__head {
+    display: grid;
+    gap: var(--sp-3);
+    max-width: 48rem;
+  }
+
+  .credits__lead {
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .credits__game {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .credits__game h2 {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-size: var(--fs-2xl);
+  }
+
+  .credits__game h2::before {
+    content: '';
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 1px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    flex: none;
+  }
+
+  .credits__game h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .credits__list {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .source {
+    display: grid;
+    gap: var(--sp-2);
+    padding: var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .source__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+  }
+
+  .source__name {
+    color: var(--text);
+    font-weight: 750;
+    font-size: var(--fs-lg);
+  }
+
+  .source__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+  }
+
+  .source__credit {
+    color: var(--text);
+  }
+
+  .source__facts {
+    display: grid;
+    gap: var(--sp-1);
+    font-size: var(--fs-sm);
+  }
+
+  .source__facts > div {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: var(--sp-2);
+  }
+
+  .source__facts dt {
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    line-height: 1.9;
+    text-transform: uppercase;
+  }
+
+  .source__facts dd {
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 48rem) {
+    .credits__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

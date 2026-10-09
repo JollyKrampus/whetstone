@@ -1,0 +1,138 @@
+---
+/**
+ * Document shell for every page: metadata, pre-paint theme, skip link, header, main, footer.
+ * Slots: default (main content), `subheader` (between header and main, e.g. a game bar),
+ * `head` (extra <head> tags).
+ */
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/components.css';
+import type { GameId } from '../core/game.ts';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { THEME_COLORS, THEME_KEY } from '../components/theme.ts';
+import { BASE, SITE, gameById, withBase } from '../games/registry.ts';
+
+interface Props {
+  /** Page title without the site name; omit on the home page. */
+  title?: string;
+  description?: string;
+  /** Game section the page belongs to (accent colour, header switcher, footer credits). */
+  game?: GameId | undefined;
+  /** Base-relative path of the share image (default: the site card). */
+  image?: string;
+  /** Keep the page out of search results (e.g. the 404 page). */
+  noindex?: boolean;
+}
+
+const { title, description = SITE.description, game, image = 'og.png', noindex = false } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.origin).href;
+const ogImage = new URL(withBase(image), Astro.site ?? SITE.origin).href;
+const gameName = game ? gameById(game).name : undefined;
+const isProd = import.meta.env.PROD;
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content={THEME_COLORS.dark} />
+    <script is:inline define:vars={{ key: THEME_KEY, colors: THEME_COLORS }}>
+      // Runs before first paint so the stored theme never flashes the wrong colours.
+      const root = document.documentElement;
+      let theme;
+      try {
+        theme = localStorage.getItem(key);
+      } catch {
+        theme = null;
+      }
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      root.setAttribute('data-theme', theme);
+      root.classList.remove('no-js');
+      root.classList.add('js');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', colors[theme]);
+    </script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="color-scheme" content="dark light" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title ?? SITE.name} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE.name}${gameName ? ` · ${gameName}` : ''}`} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={withBase('icons/icon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={withBase('icons/apple-touch-icon.png')} />
+    <link rel="manifest" href={withBase('manifest.webmanifest')} />
+    <link rel="sitemap" href={withBase('sitemap-index.xml')} />
+    <meta name="generator" content={Astro.generator} />
+    <slot name="head" />
+  </head>
+  <body data-game={game}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader game={game} />
+    <slot name="subheader" />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter game={game} />
+    {
+      isProd && (
+        <script is:inline define:vars={{ swUrl: withBase('sw.js'), scope: BASE }}>
+          // Offline shell (scripts/sw.ts). Registration failures are harmless: the site works without it.
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+              navigator.serviceWorker.register(swUrl, { scope: scope }).catch(function () {});
+            });
+          }
+        </script>
+      )
+    }
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: var(--sp-2);
+    left: var(--sp-2);
+    z-index: 100;
+    padding: var(--sp-2) var(--sp-4);
+    border-radius: var(--radius);
+    background: var(--edge);
+    color: var(--on-edge);
+    font-weight: 700;
+    text-decoration: none;
+    transform: translateY(-200%);
+    transition: transform var(--dur-fast) var(--ease);
+  }
+
+  .skip-link:focus {
+    transform: none;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main:focus {
+    outline: none;
+  }
+</style>

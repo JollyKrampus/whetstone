@@ -1,0 +1,142 @@
+[
+  {
+    "id": "airballoon",
+    "name": "Air Balloon",
+    "legal": [
+      "M-C"
+    ],
+    "desc": "Immune to Ground moves until hit."
+  },
+  {
+    "id": "charizarditey",
+    "name": "Charizardite Y",
+    "mega": {
+      "base": "charizard",
+      "forme": "charizardmegay"
+    },
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "desc": "Lets Charizard Mega Evolve in battle."
+  },
+  {
+    "id": "choicescarf",
+    "name": "Choice Scarf",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "desc": "Speed ×1.5, but the holder is locked into its first move."
+  },
+  {
+    "id": "focussash",
+    "name": "Focus Sash",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "desc": "Survives one hit that would KO from full HP."
+  },
+  {
+    "id": "garchompitez",
+    "name": "Garchompite Z",
+    "mega": {
+      "base": "garchomp",
+      "forme": "garchompmegaz"
+    },
+    "legal": [
+      "M-C"
+    ],
+    "desc": "Lets Garchomp Mega Evolve in battle."
+  },
+  {
+    "id": "golisopite",
+    "name": "Golisopite",
+    "mega": {
+      "base": "golisopod",
+      "forme": "golisopodmega"
+    },
+    "legal": [
+      "M-C"
+    ],
+    "desc": "Lets Golisopod Mega Evolve in battle."
+  },
+  {
+    "id": "leftovers",
+    "name": "Leftovers",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "desc": "Restores 1/16 of max HP each turn."
+  },
+  {
+    "id": "lifeorb",
+    "name": "Life Orb",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "desc": "Attacks deal 30% more damage; the holder loses 1/10 HP per attack."
+  },
+  {
+    "id": "miracleseed",
+    "name": "Miracle Seed",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "desc": "Grass moves deal 20% more damage."
+  },
+  {
+    "id": "mysticwater",
+    "name": "Mystic Water",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "desc": "Water moves deal 20% more damage."
+  },
+  {
+    "id": "raichunitey",
+    "name": "Raichunite Y",
+    "mega": {
+      "base": "raichu",
+      "forme": "raichumegay"
+    },
+    "legal": [
+      "M-C"
+    ],
+    "desc": "Lets Raichu Mega Evolve in battle."
+  },
+  {
+    "id": "rockyhelmet",
+    "name": "Rocky Helmet",
+    "legal": [
+      "M-C"
+    ],
+    "desc": "Attackers making contact lose 1/6 of their max HP."
+  },
+  {
+    "id": "salamencite",
+    "name": "Salamencite",
+    "mega": {
+      "base": "salamence",
+      "forme": "salamencemega"
+    },
+    "legal": [
+      "M-C"
+    ],
+    "desc": "Lets Salamence Mega Evolve in battle."
+  },
+  {
+    "id": "sitrusberry",
+    "name": "Sitrus Berry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "desc": "Restores 1/4 of max HP when HP falls to half or below."
+  }
+]

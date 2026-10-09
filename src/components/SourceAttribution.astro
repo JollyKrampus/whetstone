@@ -1,0 +1,192 @@
+---
+/**
+ * Renders the credit each source requires, per its AttributionRule (SPEC §1.5):
+ *   inline — same screen as the data, body-size text with a visible link (Heroes Profile, Liquipedia)
+ *   top    — a banner at the top of the page (17Lands CC BY)
+ *   footer — compact list in the site footer
+ * Pass the source ids a page actually displays; credits for sources the page doesn't use are noise.
+ */
+import { allCredits, groupCredits } from '../core/attribution.ts';
+import type { AttributionRule, GameId, SourceRef } from '../core/game.ts';
+import { formatDayUTC } from '../core/format.ts';
+import { sourcesFor } from '../games/registry.ts';
+
+interface Props {
+  game?: GameId;
+  /** Source ids to credit (default: all of the game's sources, narrowed by `rule`). */
+  ids?: string[];
+  /** Explicit SourceRefs (e.g. per-list curated sources) instead of looking them up by game. */
+  sources?: SourceRef[];
+  /** Only credit sources whose rule is this. */
+  rule?: AttributionRule;
+  /** Visual treatment; defaults to `rule`, else 'inline'. */
+  placement?: AttributionRule;
+  /** "Retrieved" date shown with the credit (ISO), e.g. the source's fetchedAt. */
+  asOf?: string | null | undefined;
+  class?: string;
+}
+
+const { game, ids, sources: given, rule, placement, asOf, class: extra } = Astro.props;
+// Core grouping dedupes by id and orders deterministically (strictest rule wins on conflicts).
+const groups = groupCredits(given ?? (game ? sourcesFor(game, ids) : []));
+const list: SourceRef[] = rule ? groups[rule] : allCredits(groups);
+const mode: AttributionRule = placement ?? rule ?? 'inline';
+
+const LICENSE_URLS: Record<string, string> = {
+  'CC BY 4.0': 'https://creativecommons.org/licenses/by/4.0/',
+  'CC-BY-SA 3.0': 'https://creativecommons.org/licenses/by-sa/3.0/',
+  MIT: 'https://opensource.org/license/mit',
+};
+
+/** Split the credit text around the source name so the name itself becomes the visible link. */
+function parts(s: SourceRef): { before: string; linkText: string; after: string } {
+  const at = s.attribution.indexOf(s.name);
+  if (at < 0) return { before: `${s.attribution} `, linkText: s.name, after: '' };
+  return {
+    before: s.attribution.slice(0, at),
+    linkText: s.name,
+    after: s.attribution.slice(at + s.name.length),
+  };
+}
+
+const asOfText = asOf ? formatDayUTC(asOf) : null;
+---
+
+{
+  list.length > 0 && mode === 'inline' && (
+    <p class:list={['attr', 'attr--inline', extra]} data-attribution="inline">
+      {list.map((s, i) => {
+        const p = parts(s);
+        // Share-alike credits must point at the license itself.
+        const licenseUrl = s.custody === 'A-SA' && s.license ? LICENSE_URLS[s.license] : undefined;
+        const licenseText = s.license && s.attribution.includes(s.license) ? 'license terms' : s.license;
+        const stop = /[.!?)]$/.test(s.attribution) ? '' : '.';
+        // One line on purpose: HTML whitespace between these pieces would render as " ." or " ,".
+        return (
+          <span class="attr__item" data-source={s.id}>{i > 0 ? ' ' : ''}{p.before}<a href={s.url} rel="noopener">{p.linkText}</a>{p.after}{licenseUrl ? <> (<a href={licenseUrl} rel="license noopener">{licenseText}</a>)</> : null}{stop}</span>
+        );
+      })}
+      {asOfText && <span class="attr__asof"> Retrieved {asOfText}.</span>}
+    </p>
+  )
+}
+
+{
+  list.length > 0 && mode === 'top' && (
+    <aside class:list={['attr', 'attr--top', extra]} aria-label="Data source" data-attribution="top">
+      <svg class="attr__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="6" rx="7.5" ry="3" />
+        <path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6" />
+        <path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6" />
+      </svg>
+      <div class="attr__lines">
+        {list.map((s) => {
+          const p = parts(s);
+          const licenseUrl = s.license ? LICENSE_URLS[s.license] : undefined;
+          return (
+            <p class="attr__item" data-source={s.id}>
+              {p.before}<a href={s.url} rel="noopener">{p.linkText}</a>{p.after}
+              {licenseUrl && !s.attribution.includes(s.license ?? '') ? (
+                <>
+                  {' '}
+                  (<a href={licenseUrl} rel="license noopener">{s.license}</a>)
+                </>
+              ) : null}
+              {licenseUrl && s.attribution.includes(s.license ?? '') ? (
+                <>
+                  {' '}
+                  <a class="attr__license" href={licenseUrl} rel="license noopener">License terms</a>
+                </>
+              ) : null}
+              {asOfText ? ` · retrieved ${asOfText}` : ''}
+            </p>
+          );
+        })}
+      </div>
+    </aside>
+  )
+}
+
+{
+  list.length > 0 && mode === 'footer' && (
+    <ul class:list={['attr', 'attr--footer', extra]} data-attribution="footer">
+      {list.map((s) => {
+        const p = parts(s);
+        return (
+          <li class="attr__item" data-source={s.id}>
+            {p.before}<a href={s.url} rel="noopener">{p.linkText}</a>{p.after}
+          </li>
+        );
+      })}
+    </ul>
+  )
+}
+
+<style>
+  .attr a {
+    color: inherit;
+    font-weight: 650;
+  }
+
+  .attr--inline {
+    color: var(--text);
+    font-size: var(--fs-md);
+  }
+
+  .attr__asof {
+    color: var(--text-muted);
+  }
+
+  .attr--top {
+    display: flex;
+    gap: var(--sp-3);
+    align-items: flex-start;
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .attr__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: none;
+    margin-top: 0.15rem;
+    color: var(--accent);
+  }
+
+  .attr__lines {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .attr__license {
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  .attr--footer {
+    display: grid;
+    gap: var(--sp-1);
+    padding: 0;
+    list-style: none;
+  }
+
+  .attr--footer .attr__item {
+    padding-left: var(--sp-3);
+    position: relative;
+  }
+
+  .attr--footer .attr__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.35rem;
+    height: 0.35rem;
+    background: var(--steel-2);
+    transform: rotate(45deg);
+  }
+</style>

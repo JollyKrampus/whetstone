@@ -1,0 +1,541 @@
+[
+  {
+    "id": "bodypress",
+    "name": "Body Press",
+    "type": "Fighting",
+    "category": "Physical",
+    "basePower": 80,
+    "accuracy": 100,
+    "pp": 12,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "Uses the user's Defense instead of Attack."
+  },
+  {
+    "id": "closecombat",
+    "name": "Close Combat",
+    "type": "Fighting",
+    "category": "Physical",
+    "basePower": 120,
+    "accuracy": 100,
+    "pp": 8,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "Lowers the user's Defense and Sp. Def by 1."
+  },
+  {
+    "id": "dazzlinggleam",
+    "name": "Dazzling Gleam",
+    "type": "Fairy",
+    "category": "Special",
+    "basePower": 80,
+    "accuracy": 100,
+    "pp": 12,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "flags": [],
+    "desc": "Hits both foes."
+  },
+  {
+    "id": "direclaw",
+    "name": "Dire Claw",
+    "type": "Poison",
+    "category": "Physical",
+    "basePower": 80,
+    "accuracy": 100,
+    "pp": 16,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact",
+      "slicing"
+    ],
+    "desc": "50% chance to poison, paralyze or put the target to sleep."
+  },
+  {
+    "id": "dracometeor",
+    "name": "Draco Meteor",
+    "type": "Dragon",
+    "category": "Special",
+    "basePower": 130,
+    "accuracy": 90,
+    "pp": 8,
+    "priority": 0,
+    "target": "normal",
+    "flags": [],
+    "desc": "Lowers the user's Sp. Atk by 2."
+  },
+  {
+    "id": "dragonclaw",
+    "name": "Dragon Claw",
+    "type": "Dragon",
+    "category": "Physical",
+    "basePower": 80,
+    "accuracy": 100,
+    "pp": 16,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact",
+      "slicing"
+    ]
+  },
+  {
+    "id": "earthquake",
+    "name": "Earthquake",
+    "type": "Ground",
+    "category": "Physical",
+    "basePower": 100,
+    "accuracy": 100,
+    "pp": 12,
+    "priority": 0,
+    "target": "allAdjacent",
+    "flags": [],
+    "desc": "Hits every adjacent Pokémon, including the ally."
+  },
+  {
+    "id": "encore",
+    "name": "Encore",
+    "type": "Normal",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": 100,
+    "pp": 8,
+    "priority": 0,
+    "target": "normal",
+    "flags": [],
+    "desc": "The target must repeat its last move for 3 turns."
+  },
+  {
+    "id": "expandingforce",
+    "name": "Expanding Force",
+    "type": "Psychic",
+    "category": "Special",
+    "basePower": 80,
+    "accuracy": 100,
+    "pp": 12,
+    "priority": 0,
+    "target": "normal",
+    "flags": [],
+    "desc": "Hits both foes with more power in Psychic Terrain."
+  },
+  {
+    "id": "fakeout",
+    "name": "Fake Out",
+    "type": "Normal",
+    "category": "Physical",
+    "basePower": 40,
+    "accuracy": 100,
+    "pp": 12,
+    "priority": 3,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "Hits first and makes the target flinch; works only on the user's first turn after switching in."
+  },
+  {
+    "id": "firstimpression",
+    "name": "First Impression",
+    "type": "Bug",
+    "category": "Physical",
+    "basePower": 100,
+    "accuracy": 100,
+    "pp": 12,
+    "priority": 2,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "Works only on the user's first turn after switching in."
+  },
+  {
+    "id": "flareblitz",
+    "name": "Flare Blitz",
+    "type": "Fire",
+    "category": "Physical",
+    "basePower": 120,
+    "accuracy": 100,
+    "pp": 16,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "1/3 recoil; 10% chance to burn."
+  },
+  {
+    "id": "followme",
+    "name": "Follow Me",
+    "type": "Normal",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "pp": 20,
+    "priority": 2,
+    "target": "self",
+    "flags": [],
+    "desc": "Draws foes' single-target moves to the user this turn."
+  },
+  {
+    "id": "grassyglide",
+    "name": "Grassy Glide",
+    "type": "Grass",
+    "category": "Physical",
+    "basePower": 55,
+    "accuracy": 100,
+    "pp": 20,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "Gains +1 priority in Grassy Terrain."
+  },
+  {
+    "id": "heatwave",
+    "name": "Heat Wave",
+    "type": "Fire",
+    "category": "Special",
+    "basePower": 95,
+    "accuracy": 90,
+    "pp": 12,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "flags": [
+      "wind"
+    ],
+    "desc": "Hits both foes; 10% chance to burn."
+  },
+  {
+    "id": "highhorsepower",
+    "name": "High Horsepower",
+    "type": "Ground",
+    "category": "Physical",
+    "basePower": 95,
+    "accuracy": 95,
+    "pp": 12,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ]
+  },
+  {
+    "id": "hurricane",
+    "name": "Hurricane",
+    "type": "Flying",
+    "category": "Special",
+    "basePower": 110,
+    "accuracy": 70,
+    "pp": 12,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "wind"
+    ],
+    "desc": "30% chance to confuse; never misses in rain."
+  },
+  {
+    "id": "ironhead",
+    "name": "Iron Head",
+    "type": "Steel",
+    "category": "Physical",
+    "basePower": 80,
+    "accuracy": 100,
+    "pp": 16,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "20% chance to flinch."
+  },
+  {
+    "id": "knockoff",
+    "name": "Knock Off",
+    "type": "Dark",
+    "category": "Physical",
+    "basePower": 65,
+    "accuracy": 100,
+    "pp": 20,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "Removes the target's held item; more damage if it had one."
+  },
+  {
+    "id": "kowtowcleave",
+    "name": "Kowtow Cleave",
+    "type": "Dark",
+    "category": "Physical",
+    "basePower": 85,
+    "accuracy": true,
+    "pp": 12,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact",
+      "slicing"
+    ],
+    "desc": "Never misses."
+  },
+  {
+    "id": "liquidation",
+    "name": "Liquidation",
+    "type": "Water",
+    "category": "Physical",
+    "basePower": 85,
+    "accuracy": 100,
+    "pp": 12,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "20% chance to lower the target's Defense."
+  },
+  {
+    "id": "makeitrain",
+    "name": "Make It Rain",
+    "type": "Steel",
+    "category": "Special",
+    "basePower": 120,
+    "accuracy": 95,
+    "pp": 8,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "flags": [],
+    "desc": "Hits both foes; lowers the user's Sp. Atk by 2."
+  },
+  {
+    "id": "matchagotcha",
+    "name": "Matcha Gotcha",
+    "type": "Grass",
+    "category": "Special",
+    "basePower": 80,
+    "accuracy": 90,
+    "pp": 16,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "flags": [],
+    "desc": "Hits both foes; heals the user by half the damage dealt; 20% chance to burn."
+  },
+  {
+    "id": "moonblast",
+    "name": "Moonblast",
+    "type": "Fairy",
+    "category": "Special",
+    "basePower": 95,
+    "accuracy": 100,
+    "pp": 16,
+    "priority": 0,
+    "target": "normal",
+    "flags": [],
+    "desc": "10% chance to lower the target's Sp. Atk."
+  },
+  {
+    "id": "nastyplot",
+    "name": "Nasty Plot",
+    "type": "Dark",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "pp": 20,
+    "priority": 0,
+    "target": "self",
+    "flags": [],
+    "desc": "Raises the user's Sp. Atk by 2."
+  },
+  {
+    "id": "partingshot",
+    "name": "Parting Shot",
+    "type": "Dark",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": 100,
+    "pp": 20,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "sound"
+    ],
+    "desc": "Lowers the target's Attack and Sp. Atk by 1, then the user switches out."
+  },
+  {
+    "id": "protect",
+    "name": "Protect",
+    "type": "Normal",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "pp": 8,
+    "priority": 4,
+    "target": "self",
+    "flags": [],
+    "desc": "Blocks most moves this turn; more likely to fail if used in a row."
+  },
+  {
+    "id": "ragepowder",
+    "name": "Rage Powder",
+    "type": "Bug",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "pp": 20,
+    "priority": 2,
+    "target": "self",
+    "flags": [],
+    "desc": "Draws foes' single-target moves to the user this turn."
+  },
+  {
+    "id": "rockslide",
+    "name": "Rock Slide",
+    "type": "Rock",
+    "category": "Physical",
+    "basePower": 75,
+    "accuracy": 90,
+    "pp": 12,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "flags": [],
+    "desc": "Hits both foes; 30% chance to flinch."
+  },
+  {
+    "id": "shadowball",
+    "name": "Shadow Ball",
+    "type": "Ghost",
+    "category": "Special",
+    "basePower": 80,
+    "accuracy": 100,
+    "pp": 16,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "bullet"
+    ],
+    "desc": "20% chance to lower the target's Sp. Def."
+  },
+  {
+    "id": "suckerpunch",
+    "name": "Sucker Punch",
+    "type": "Dark",
+    "category": "Physical",
+    "basePower": 70,
+    "accuracy": 100,
+    "pp": 8,
+    "priority": 1,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "Moves first; fails unless the target is using an attacking move."
+  },
+  {
+    "id": "tailwind",
+    "name": "Tailwind",
+    "type": "Flying",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "pp": 16,
+    "priority": 0,
+    "target": "allySide",
+    "flags": [
+      "wind"
+    ],
+    "desc": "Doubles the Speed of the user's side for 4 turns."
+  },
+  {
+    "id": "thunderbolt",
+    "name": "Thunderbolt",
+    "type": "Electric",
+    "category": "Special",
+    "basePower": 90,
+    "accuracy": 100,
+    "pp": 16,
+    "priority": 0,
+    "target": "normal",
+    "flags": [],
+    "desc": "10% chance to paralyze."
+  },
+  {
+    "id": "trickroom",
+    "name": "Trick Room",
+    "type": "Psychic",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "pp": 8,
+    "priority": 0,
+    "target": "all",
+    "flags": [],
+    "desc": "For 5 turns, slower Pokémon move first."
+  },
+  {
+    "id": "uturn",
+    "name": "U-turn",
+    "type": "Bug",
+    "category": "Physical",
+    "basePower": 70,
+    "accuracy": 100,
+    "pp": 20,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "The user switches out after hitting."
+  },
+  {
+    "id": "voltswitch",
+    "name": "Volt Switch",
+    "type": "Electric",
+    "category": "Special",
+    "basePower": 70,
+    "accuracy": 100,
+    "pp": 20,
+    "priority": 0,
+    "target": "normal",
+    "flags": [],
+    "desc": "The user switches out after hitting."
+  },
+  {
+    "id": "weatherball",
+    "name": "Weather Ball",
+    "type": "Normal",
+    "category": "Special",
+    "basePower": 50,
+    "accuracy": 100,
+    "pp": 12,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "bullet"
+    ],
+    "desc": "Type and power change with the weather."
+  },
+  {
+    "id": "woodhammer",
+    "name": "Wood Hammer",
+    "type": "Grass",
+    "category": "Physical",
+    "basePower": 120,
+    "accuracy": 100,
+    "pp": 16,
+    "priority": 0,
+    "target": "normal",
+    "flags": [
+      "contact"
+    ],
+    "desc": "The user takes 1/3 of the damage dealt as recoil."
+  }
+]

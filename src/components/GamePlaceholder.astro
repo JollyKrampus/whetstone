@@ -1,0 +1,126 @@
+---
+/**
+ * Body of a game page until that game ships it: the game index (intro plus links to every
+ * section in the game's nav) or, with `section`, one nav section (src/pages/[game]/[...section].astro).
+ * Lives in shared components so every placeholder stays identical.
+ */
+import type { GameId, NavItem } from '../core/game.ts';
+import { gameById, navHref } from '../games/registry.ts';
+import EmptyState from './EmptyState.astro';
+
+interface Props {
+  game: GameId;
+  /** The nav section this placeholder stands in for; omit on the game index. */
+  section?: NavItem;
+}
+
+const { game, section } = Astro.props;
+const module = gameById(game);
+const others = module.nav.filter((n) => n.path !== '' && n.path !== section?.path);
+const home = module.nav.find((n) => n.path === '');
+---
+
+<div class="gph">
+  <header class="gph__head">
+    {section && <p class="kicker gph__kicker">{module.name}</p>}
+    <h1>{section ? section.label : module.name}</h1>
+    {!section && <p class="gph__lead">{module.tagline}</p>}
+  </header>
+
+  <EmptyState title="Being sharpened" icon="build" level={2}>
+    {
+      section ? (
+        <p>
+          The {module.short} {section.label} page is being built and will appear here as soon as it's ready. Data refreshes
+          daily.
+        </p>
+      ) : (
+        <p>
+          The {module.short} pages are being built. Sections appear here as soon as they're ready; data refreshes daily.
+        </p>
+      )
+    }
+  </EmptyState>
+
+  {
+    others.length > 0 && (
+      <nav aria-label={section ? `More ${module.short} sections` : `${module.short} sections`}>
+        {section && <h2 class="gph__more">More in {module.short}</h2>}
+        <ul class="gph__sections">
+          {section && home && (
+            <li>
+              <a class="gph__section" href={navHref(module.id)}>
+                {home.label}
+              </a>
+            </li>
+          )}
+          {others.map((s) => (
+            <li>
+              <a class="gph__section" href={navHref(module.id, s.path)}>
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+</div>
+
+<style>
+  .gph {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .gph__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .gph__head h1 {
+    font-size: var(--fs-2xl);
+  }
+
+  .gph__kicker {
+    color: var(--accent);
+  }
+
+  .gph__lead {
+    max-width: 60ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .gph__more {
+    margin-bottom: var(--sp-3);
+    font-size: var(--fs-lg);
+  }
+
+  .gph__sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .gph__section {
+    display: flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0 var(--sp-4);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .gph__section:hover {
+    border-color: var(--accent);
+  }
+</style>

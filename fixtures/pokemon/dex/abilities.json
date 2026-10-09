@@ -1,0 +1,197 @@
+[
+  {
+    "id": "aerilate",
+    "name": "Aerilate",
+    "desc": "Normal moves become Flying type and gain power."
+  },
+  {
+    "id": "armortail",
+    "name": "Armor Tail",
+    "desc": "Opponents cannot use priority moves against this side."
+  },
+  {
+    "id": "blaze",
+    "name": "Blaze",
+    "desc": "Fire moves are stronger when the user has 1/3 or less HP."
+  },
+  {
+    "id": "chlorophyll",
+    "name": "Chlorophyll",
+    "desc": "Speed doubles in harsh sunlight."
+  },
+  {
+    "id": "cudchew",
+    "name": "Cud Chew",
+    "desc": "Eats a used Berry again at the end of the next turn."
+  },
+  {
+    "id": "defiant",
+    "name": "Defiant",
+    "desc": "Attack rises by 2 when another Pokémon lowers this one's stats."
+  },
+  {
+    "id": "drizzle",
+    "name": "Drizzle",
+    "desc": "Summons rain on entry."
+  },
+  {
+    "id": "drought",
+    "name": "Drought",
+    "desc": "Summons harsh sunlight on entry."
+  },
+  {
+    "id": "emergencyexit",
+    "name": "Emergency Exit",
+    "desc": "Switches out when HP falls below half."
+  },
+  {
+    "id": "goodasgold",
+    "name": "Good as Gold",
+    "desc": "Immune to status moves used by other Pokémon."
+  },
+  {
+    "id": "grassysurge",
+    "name": "Grassy Surge",
+    "desc": "Sets Grassy Terrain on entry."
+  },
+  {
+    "id": "heatproof",
+    "name": "Heatproof",
+    "desc": "Halves damage from Fire moves and burns."
+  },
+  {
+    "id": "hospitality",
+    "name": "Hospitality",
+    "desc": "Heals the ally a little on entry."
+  },
+  {
+    "id": "infiltrator",
+    "name": "Infiltrator",
+    "desc": "Moves ignore screens and substitutes."
+  },
+  {
+    "id": "intimidate",
+    "name": "Intimidate",
+    "desc": "Lowers adjacent foes' Attack by 1 on entry."
+  },
+  {
+    "id": "keeneye",
+    "name": "Keen Eye",
+    "desc": "Accuracy cannot be lowered."
+  },
+  {
+    "id": "levitate",
+    "name": "Levitate",
+    "desc": "Immune to Ground moves."
+  },
+  {
+    "id": "lightningrod",
+    "name": "Lightning Rod",
+    "desc": "Draws in Electric moves and raises Sp. Atk."
+  },
+  {
+    "id": "moxie",
+    "name": "Moxie",
+    "desc": "Attack rises by 1 after knocking out a Pokémon."
+  },
+  {
+    "id": "noguard",
+    "name": "No Guard",
+    "desc": "Moves used by or against this Pokémon always hit."
+  },
+  {
+    "id": "overgrow",
+    "name": "Overgrow",
+    "desc": "Grass moves are stronger when the user has 1/3 or less HP."
+  },
+  {
+    "id": "owntempo",
+    "name": "Own Tempo",
+    "desc": "Cannot be confused; immune to Intimidate."
+  },
+  {
+    "id": "poisontouch",
+    "name": "Poison Touch",
+    "desc": "Contact moves may poison the target."
+  },
+  {
+    "id": "prankster",
+    "name": "Prankster",
+    "desc": "Status moves gain +1 priority."
+  },
+  {
+    "id": "pressure",
+    "name": "Pressure",
+    "desc": "Opposing moves aimed at this Pokémon use extra PP."
+  },
+  {
+    "id": "psychicsurge",
+    "name": "Psychic Surge",
+    "desc": "Sets Psychic Terrain on entry."
+  },
+  {
+    "id": "raindish",
+    "name": "Rain Dish",
+    "desc": "Restores a little HP each turn in rain."
+  },
+  {
+    "id": "roughskin",
+    "name": "Rough Skin",
+    "desc": "Attackers making contact lose 1/8 of their max HP."
+  },
+  {
+    "id": "sandveil",
+    "name": "Sand Veil",
+    "desc": "Evasion rises in a sandstorm."
+  },
+  {
+    "id": "sapsipper",
+    "name": "Sap Sipper",
+    "desc": "Absorbs Grass moves and raises Attack."
+  },
+  {
+    "id": "solarpower",
+    "name": "Solar Power",
+    "desc": "Sp. Atk rises in harsh sunlight, but HP is lost each turn."
+  },
+  {
+    "id": "stalwart",
+    "name": "Stalwart",
+    "desc": "Ignores moves and abilities that redirect attacks."
+  },
+  {
+    "id": "stamina",
+    "name": "Stamina",
+    "desc": "Defense rises by 1 when hit by an attack."
+  },
+  {
+    "id": "static",
+    "name": "Static",
+    "desc": "Contact may paralyze the attacker."
+  },
+  {
+    "id": "sturdy",
+    "name": "Sturdy",
+    "desc": "Survives a one-hit KO from full HP with 1 HP."
+  },
+  {
+    "id": "supremeoverlord",
+    "name": "Supreme Overlord",
+    "desc": "Attack and Sp. Atk rise for each fainted ally."
+  },
+  {
+    "id": "synchronize",
+    "name": "Synchronize",
+    "desc": "Passes burn, poison or paralysis back to the Pokémon that caused it."
+  },
+  {
+    "id": "toughclaws",
+    "name": "Tough Claws",
+    "desc": "Contact moves are stronger."
+  },
+  {
+    "id": "unburden",
+    "name": "Unburden",
+    "desc": "Speed doubles after the held item is used or lost."
+  }
+]

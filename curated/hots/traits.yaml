@@ -1,0 +1,18 @@
+# Curated hero traits (SPEC §5.1.2). Validated by TraitsFileSchema in src/games/hots/schema.ts.
+#
+# Tags the mechanics extractor cannot read from kit text, or corrections to what it read.
+# Keyed by hero slug (lowercase alphanumerics of the English name: liming, thebutcher,
+# chogall for the composite). Each entry:
+#   tag   one of HERO_TAGS (e.g. aa-reliant, immobile, dive, split-push, vulnerable-body,
+#         frontline, peel, engage, save, or any extractor tag)
+#   why   one line a player would accept as true for the current kit
+#   op    add (default) | remove — `remove` suppresses a wrongly extracted tag
+#
+# Example (not active):
+#   abathur:
+#     - tag: vulnerable-body
+#       why: Abathur's body is left defenceless while he controls a Symbiote elsewhere.
+#
+# Curators fill this file by PR; the theory engine merges it into heroes.json `mechanics`
+# with evidence kind "curated".
+{}

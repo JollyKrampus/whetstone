@@ -15,6 +15,7 @@
     "#vendor/*": "./vendor/*"
   },
   "scripts": {
+    "predev": "node pipeline/stage.ts",
     "dev": "astro dev",
     "build": "node pipeline/stage.ts && astro build && node scripts/sw.ts",
     "preview": "astro preview",

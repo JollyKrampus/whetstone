@@ -1,0 +1,55 @@
+# Storm League map pool fallback (SPEC §5, critique C10 / row 6). Validated by
+# RankedPoolFileSchema in src/games/hots/schema.ts.
+#
+# The pipeline prefers Heroes Profile map-level game counts (a map is in the pool when its
+# share of SL games on the current major is >= 1.5 %). This file is used only when those
+# stats are unavailable (HP_MODE=off), and maps.json then says rankedSource: curated.
+#
+# UNCERTAINTY: the sources disagree and nobody has checked in game.
+#   - Heroes Profile's ranked_rotation flag lists 14 maps (every standard map except
+#     Blackheart's Bay).
+#   - Nexus Compendium lists 11 maps but is stale (last changed 2025-12-01; it omits Haunted
+#     Mines, which Blizzard added to Ranked on 2026-07-20).
+#   - Blizzard said on 2025-09-30 that Blackheart's Bay, Hanamura Temple and Warhead
+#     Junction would join Ranked "in the coming weeks".
+#   - A sample of 278 Storm League replays on 2.57 builds had zero games on those three maps
+#     while every other standard map appeared 17-32 times (about 23 expected).
+# The list below follows the observed games. Re-check when stats are available or after an
+# in-game look, and update asOf.
+asOf: "2026-10-08"
+mode: sl
+confidence: medium
+note: Observed Storm League pool on 2.57 (12 maps). Blackheart's Bay, Hanamura Temple and Warhead Junction appear in Quick Match only.
+maps:
+  - alterac-pass
+  - battlefield-of-eternity
+  - braxis-holdout
+  - cursed-hollow
+  - dragon-shire
+  - garden-of-terror
+  - haunted-mines
+  - infernal-shrines
+  - sky-temple
+  - tomb-of-the-spider-queen
+  - towers-of-doom
+  - volskaya-foundry
+excluded:
+  - map: blackhearts-bay
+    why: No Storm League games in a 278-game sample on 2.57; Heroes Profile also flags it unranked.
+  - map: hanamura-temple
+    why: No Storm League games in a 278-game sample on 2.57, although Heroes Profile flags it ranked.
+  - map: warhead-junction
+    why: No Storm League games in a 278-game sample on 2.57, although Heroes Profile flags it ranked.
+sources:
+  - what: Heroes Profile replay sample, 278 Storm League games on 2.57 builds (map counts)
+    date: "2026-10-08"
+  - what: Heroes Profile maps list, ranked_rotation flag (14 maps)
+    date: "2026-10-08"
+  - what: Blizzard live patch notes, "Haunted Mines has been added to Ranked"
+    url: https://news.blizzard.com/en-us/article/24291432/
+    date: "2026-07-20"
+  - what: Blizzard patch notes announcing Blackheart's Bay, Hanamura Temple and Warhead Junction for Ranked
+    date: "2025-09-30"
+  - what: Nexus Compendium ranked battleground rotation (stale, last changed 2025-12-01)
+    url: https://nexuscompendium.com/
+    date: "2026-10-08"

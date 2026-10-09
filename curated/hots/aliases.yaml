@@ -1,0 +1,52 @@
+# Search aliases (SPEC §8 hero grid search, critique D4). Validated by AliasesFileSchema in
+# src/games/hots/schema.ts.
+#
+# Keyed by the target slug (heroes: lowercase alphanumerics like `kelthuzad`; maps: our
+# kebab-case slugs). Values are extra lowercase aliases. The pipeline merges these with each
+# hero's localized names and search text from heroes-data2 into heroes.json `aliases`.
+# An alias may point at only one target.
+heroes:
+  abathur: [abby, slapathur]
+  alexstrasza: [alex, alexstraza]
+  ana: [ana amari]
+  anubarak: [anub, "anub'arak", anub arak]
+  chen: [chen stormstout]
+  chogall: [cho gall, "cho'gall", cho-gall, cho, gall]
+  deckard: [deckard cain, cain]
+  dva: [d.va, d va, hana song]
+  etc: [e.t.c., e-t-c, elite tauren chieftain]
+  greymane: [genn, genn greymane]
+  guldan: ["gul'dan", gul dan]
+  jaina: [jaina proudmoore]
+  kaelthas: [kael, "kael'thas"]
+  kelthuzad: [kt, kel thuzad, kel-thuzad, "kel'thuzad"]
+  lili: [li li, li-li]
+  liming: [li ming, li-ming, ming]
+  ltmorales: [lt morales, lt. morales, lt-morales, lieutenant morales, morales]
+  lucio: [lúcio]
+  malfurion: [malf, malfurion stormrage]
+  sgthammer: [sgt hammer, sgt. hammer, sgt-hammer, sergeant hammer, hammer]
+  sylvanas: [sylv, sylvanas windrunner]
+  tassadar: [tass, tassa]
+  thebutcher: [butcher, the-butcher]
+  thelostvikings: [tlv, lost vikings, the-lost-vikings, vikings]
+  tracer: [lena oxton]
+  xalatath: [xal, "xal'atath", zalatath]
+  xul: [necromancer]
+  zuljin: [zul, zj, "zul'jin", zul jin]
+maps:
+  alterac-pass: [alterac]
+  battlefield-of-eternity: [boe, battlefield]
+  blackhearts-bay: [bhb, "blackheart's bay"]
+  braxis-holdout: [braxis]
+  cursed-hollow: [ch, cursed]
+  dragon-shire: [ds, dragon]
+  garden-of-terror: [garden, got]
+  hanamura-temple: [hanamura]
+  haunted-mines: [mines]
+  infernal-shrines: [shrines]
+  sky-temple: [sky]
+  tomb-of-the-spider-queen: [tomb, tsq, spider queen]
+  towers-of-doom: [tod, towers]
+  volskaya-foundry: [volskaya]
+  warhead-junction: [warhead, whj]

@@ -1,0 +1,62 @@
+name: Data problem
+description: Something in the data looks wrong, outdated or missing.
+title: '[Data] '
+labels: [data-problem]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Data refreshes daily. If the page shows a staleness banner, a source may be down; that is tracked automatically, but extra detail still helps.
+
+        Rights holders: to request a correction, a change to attribution, or removal of data, use this form or contact the maintainer through the GitHub profile; requests are handled promptly.
+
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Heroes of the Storm
+        - MTG Arena
+        - Pokémon Champions
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Problem
+      options:
+        - A value is wrong
+        - A hero, card or Pokémon is missing
+        - Out of date (patch, set or regulation)
+        - Attribution or licence issue
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      placeholder: https://jollykrampus.github.io/whetstone/hots/hero/abathur/
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong, and what should it be?
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Where can this be verified?
+      description: Patch notes, the in-game client, an official announcement, a card database link, ...
+
+  - type: input
+    id: freshness
+    attributes:
+      label: '"Data as of" shown on the page'
+      description: The freshness badge near the data (date and patch).

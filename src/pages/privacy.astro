@@ -1,0 +1,122 @@
+---
+import { SITE, withBase } from '../games/registry.ts';
+import Base from '../layouts/Base.astro';
+
+const UPDATED = '2026-10-08';
+---
+
+<Base title="Privacy" description="What Whetstone stores (only preferences in your own browser) and which requests leave this site.">
+  <article class="container privacy">
+    <header class="privacy__head">
+      <p class="kicker">Privacy</p>
+      <h1>Nothing to track.</h1>
+      <p class="privacy__lead">
+        No accounts, no cookies, no analytics, no ads, no fingerprinting. The site is a set of static files; it has no server
+        of its own that could receive your data.
+      </p>
+      <p class="muted">Last updated <time datetime={UPDATED}>{UPDATED}</time>.</p>
+    </header>
+
+    <div class="prose">
+      <h2>Stored in your browser</h2>
+      <p>
+        A few preferences are saved in your browser's local storage so they survive a reload. They never leave your device,
+        and clearing this site's data in your browser removes them. Keys start with <code>whetstone:</code>:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Key</th>
+            <th scope="col">What it holds</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>whetstone:site:theme</code></td>
+            <td>Your light or dark theme choice.</td>
+          </tr>
+          <tr>
+            <td><code>whetstone:site:period:*</code></td>
+            <td>The time period you last picked on stats pages.</td>
+          </tr>
+          <tr>
+            <td><code>whetstone:&lt;game&gt;:*</code></td>
+            <td>Tool preferences you set: for example your hero pool or owned heroes, saved decks or teams, and sort choices.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Offline copy</h2>
+      <p>
+        A service worker keeps a copy of the site's scripts, styles, images and the pages and data files you have opened, so
+        tools keep working on a flaky connection. It lives in your browser's cache storage and is removed with the rest of the
+        site data.
+      </p>
+
+      <h2>Share links</h2>
+      <p>
+        Drafts, decks and teams you share are encoded after the <code>#</code> in the link. Browsers don't send that part to
+        any server; it only means something to the person who opens the link.
+      </p>
+
+      <h2>Requests to other sites</h2>
+      <ul>
+        <li>
+          <strong>Hosting.</strong> Pages are served by GitHub Pages. GitHub may log technical data such as IP addresses for
+          security and operations, as described in the
+          <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub General Privacy Statement</a>.
+        </li>
+        <li>
+          <strong>MTG Arena card images and lookups.</strong> MTG Arena pages load card images from Scryfall's image servers
+          (<code>cards.scryfall.io</code>) and may ask Scryfall's API (<code>api.scryfall.com</code>) to recognize a card name
+          you typed that isn't in the built-in index. Those requests go straight from your browser to Scryfall, under
+          <a href="https://scryfall.com/docs/privacy" rel="noopener">Scryfall's privacy policy</a>.
+        </li>
+        <li>
+          <strong>Everything else</strong> (data files, hero and Pokémon images, scripts and styles) is served from this site.
+          Outbound links to guides and sources take you to those sites, under their own policies.
+        </li>
+      </ul>
+
+      <h2>Questions</h2>
+      <p>
+        Ask in a <a href={SITE.feedback} rel="noopener">GitHub issue</a> or read the <a href={SITE.repo} rel="noopener">source
+        code</a> to check any of the above. See also <a href={withBase('about/')}>About</a> and
+        <a href={withBase('credits/')}>Credits</a>.
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .privacy {
+    display: grid;
+    gap: var(--sp-6);
+    padding-block: var(--sp-7) var(--sp-8);
+  }
+
+  .privacy__head {
+    display: grid;
+    gap: var(--sp-3);
+    max-width: 48rem;
+  }
+
+  .privacy__lead {
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .prose table {
+    font-size: var(--fs-sm);
+  }
+
+  .prose td:first-child {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 30rem) {
+    .prose td:first-child {
+      white-space: normal;
+    }
+  }
+</style>

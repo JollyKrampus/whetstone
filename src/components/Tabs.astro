@@ -1,0 +1,211 @@
+---
+/**
+ * Accessible tabs that work without JS. Each tab's content goes in a named slot whose name is the
+ * tab id; the id doubles as the panel's element id and URL hash, so /hero/x/#maps deep-links.
+ *
+ *   <Tabs label="Hero sections" tabs={[{ id: 'counters', label: 'Counters' }, { id: 'maps', label: 'Maps' }]}>
+ *     <Fragment slot="counters">…</Fragment>
+ *     <Fragment slot="maps">…</Fragment>
+ *   </Tabs>
+ *
+ * Without JS: the tab strip is a list of in-page links and CSS :target shows the linked panel
+ * (the first panel when none is targeted). With JS: upgraded to the WAI-ARIA tabs pattern with
+ * arrow/Home/End keys, and the hash kept in sync without scrolling.
+ */
+import type { TabSpec } from './types.ts';
+
+interface Props {
+  tabs: TabSpec[];
+  /** Accessible name of the tab list. */
+  label: string;
+  class?: string;
+}
+
+const { tabs, label, class: extra } = Astro.props;
+const panels = await Promise.all(
+  tabs.map(async (tab) => ({ tab, html: Astro.slots.has(tab.id) ? await Astro.slots.render(tab.id) : '' })),
+);
+---
+
+<div class:list={['tabs', extra]} data-tabs>
+  <nav class="tabs__nav" aria-label={label}>
+    <ul class="tabs__list" data-tablist>
+      {
+        tabs.map((tab, i) => (
+          <li class="tabs__item">
+            <a class="tabs__tab" id={`tab-${tab.id}`} href={`#${tab.id}`} data-tab={tab.id} data-default={i === 0 ? 'true' : undefined}>
+              {tab.label}
+              {tab.meta && <span class="tabs__meta">{tab.meta}</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  {
+    panels.map(({ tab, html }) => (
+      <section class="tabs__panel" id={tab.id} aria-labelledby={`tab-${tab.id}`} data-panel={tab.id} tabindex="-1">
+        <Fragment set:html={html} />
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .tabs {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .tabs__nav {
+    margin-inline: calc(var(--gutter) * -1);
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tabs__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabs__list {
+    display: flex;
+    gap: var(--sp-1);
+    padding: 0 var(--gutter);
+    margin: 0;
+    list-style: none;
+  }
+
+  .tabs__tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-height: var(--tap);
+    padding: 0 var(--sp-3);
+    color: var(--text-muted);
+    font-weight: 650;
+    font-size: var(--fs-sm);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .tabs__tab:hover {
+    color: var(--text);
+  }
+
+  .tabs__tab::after {
+    content: '';
+    position: absolute;
+    inset: auto var(--sp-2) -1px;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background: transparent;
+  }
+
+  .tabs__meta {
+    padding: 0 0.35rem;
+    border-radius: 999px;
+    background: var(--surface-3);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .tabs__panel:focus {
+    outline: none;
+  }
+
+  /* Selected tab: ARIA state when enhanced; :target-driven fallback otherwise. */
+  .tabs__tab[aria-selected='true'] {
+    color: var(--text);
+  }
+  .tabs__tab[aria-selected='true']::after {
+    background: var(--accent);
+  }
+
+  .tabs:not([data-enhanced]):not(:has(> .tabs__panel:target)) .tabs__tab[data-default]::after {
+    background: var(--accent);
+  }
+
+  /* ---- No-JS: CSS :target switching ---- */
+  .tabs:not([data-enhanced]):has(> .tabs__panel:is(:target, :has(:target))) > .tabs__panel:not(:target):not(:has(:target)),
+  .tabs:not([data-enhanced]):not(:has(> .tabs__panel:is(:target, :has(:target)))) > .tabs__panel:not(:first-of-type) {
+    display: none;
+  }
+
+  @media (min-width: 48rem) {
+    .tabs__nav {
+      margin-inline: 0;
+    }
+    .tabs__list {
+      padding: 0;
+    }
+  }
+</style>
+
+<script>
+  function enhance(root: HTMLElement) {
+    const list = root.querySelector<HTMLElement>('[data-tablist]');
+    const tabs = [...root.querySelectorAll<HTMLAnchorElement>('[data-tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>(':scope > [data-panel]')];
+    if (!list || tabs.length === 0) return;
+
+    list.setAttribute('role', 'tablist');
+    for (const li of list.children) li.setAttribute('role', 'presentation');
+    for (const tab of tabs) {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', tab.dataset.tab ?? '');
+    }
+    for (const panel of panels) panel.setAttribute('role', 'tabpanel');
+
+    function select(id: string, focus: boolean, updateHash: boolean) {
+      for (const tab of tabs) {
+        const on = tab.dataset.tab === id;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        if (on && focus) tab.focus();
+      }
+      for (const panel of panels) panel.hidden = panel.dataset.panel !== id;
+      if (updateHash && location.hash !== `#${id}`) history.replaceState(history.state, '', `#${id}`);
+    }
+
+    function fromHash(): string | null {
+      const hash = decodeURIComponent(location.hash.slice(1));
+      if (!hash) return null;
+      if (panels.some((p) => p.dataset.panel === hash)) return hash;
+      // A hash pointing inside a panel selects the panel that contains it.
+      const target = document.getElementById(hash);
+      const owner = target ? panels.find((p) => p.contains(target)) : undefined;
+      return owner?.dataset.panel ?? null;
+    }
+
+    root.dataset.enhanced = 'true';
+    select(fromHash() ?? tabs[0]?.dataset.tab ?? '', false, false);
+
+    for (const tab of tabs) {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        select(tab.dataset.tab ?? '', false, true);
+      });
+      tab.addEventListener('keydown', (e) => {
+        const i = tabs.indexOf(tab);
+        let next = -1;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        if (next < 0) return;
+        e.preventDefault();
+        select(tabs[next]?.dataset.tab ?? '', true, true);
+      });
+    }
+
+    window.addEventListener('hashchange', () => {
+      const id = fromHash();
+      if (id) select(id, false, false);
+    });
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-tabs]')) enhance(root);
+</script>

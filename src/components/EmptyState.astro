@@ -1,0 +1,102 @@
+---
+/**
+ * Friendly placeholder for "no data yet", "no results" or "coming soon". Body text goes in the
+ * default slot; buttons/links in the `actions` slot.
+ */
+interface Props {
+  title: string;
+  icon?: 'data' | 'search' | 'build' | 'offline';
+  /** Heading level (default 2). */
+  level?: 2 | 3 | 4;
+  compact?: boolean;
+  class?: string;
+}
+
+const { title, icon = 'data', level = 2, compact = false, class: extra } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3' | 'h4';
+---
+
+<div class:list={['empty', { 'empty--compact': compact }, extra]}>
+  <svg class="empty__icon" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 4 44 24 24 44 4 24z" class="empty__stone"></path>
+    {
+      icon === 'data' && (
+        <>
+          <path d="M17 28v-5M24 28v-9M31 28v-3" />
+        </>
+      )
+    }
+    {
+      icon === 'search' && (
+        <>
+          <circle cx="22.5" cy="22.5" r="5.5" />
+          <path d="m26.5 26.5 4 4" />
+        </>
+      )
+    }
+    {
+      icon === 'build' && (
+        <>
+          <path d="M18 30 30 18M26 17l5 5" />
+        </>
+      )
+    }
+    {
+      icon === 'offline' && (
+        <>
+          <path d="M17 22a10 10 0 0 1 14 0M20 26a5 5 0 0 1 8 0M24 30v.5M16 16l16 16" />
+        </>
+      )
+    }
+  </svg>
+  <Heading class="empty__title">{title}</Heading>
+  {Astro.slots.has('default') && <div class="empty__body"><slot /></div>}
+  {Astro.slots.has('actions') && <div class="empty__actions"><slot name="actions" /></div>}
+</div>
+
+<style>
+  .empty {
+    display: grid;
+    justify-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-7) var(--sp-5);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-lg);
+    background: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 10px), var(--surface);
+    text-align: center;
+  }
+
+  .empty--compact {
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  .empty__icon {
+    width: 3rem;
+    height: 3rem;
+    color: var(--text-muted);
+  }
+
+  .empty__stone {
+    stroke: var(--accent);
+  }
+
+  .empty__title {
+    font-size: var(--fs-lg);
+  }
+
+  .empty__body {
+    max-width: 52ch;
+    color: var(--text-muted);
+  }
+
+  .empty__body :global(p + p) {
+    margin-top: var(--sp-2);
+  }
+
+  .empty__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-2);
+  }
+</style>

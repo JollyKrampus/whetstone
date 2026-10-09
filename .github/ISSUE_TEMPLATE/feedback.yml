@@ -1,0 +1,55 @@
+name: Feedback or idea
+description: Tell us what works, what doesn't, or what you would like to see.
+title: '[Feedback] '
+labels: [feedback]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Whetstone. Issues are public: please leave out personal details such as BattleTags, emails or Arena usernames.
+
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Heroes of the Storm
+        - MTG Arena
+        - Pokémon Champions
+        - Whole site
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of feedback
+      options:
+        - Bug
+        - Idea or feature request
+        - Something is confusing
+        - Accessibility
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: A link to the page. Share links are welcome; they carry the draft, deck or team you were looking at.
+      placeholder: https://jollykrampus.github.io/whetstone/hots/draft/#v=1&...
+
+  - type: textarea
+    id: details
+    attributes:
+      label: What happened, or what would you like?
+      description: For bugs, include what you expected and what you saw instead.
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser (for bugs)
+      placeholder: e.g. Android 15 / Chrome 141, Windows 11 / Firefox 145

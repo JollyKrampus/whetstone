@@ -1,0 +1,4115 @@
+[
+  {
+    "id": "Abat",
+    "slug": "abathur",
+    "name": "Abathur",
+    "title": "Evolution Master",
+    "role": "Support",
+    "type": "Melee",
+    "franchise": "StarCraft",
+    "difficulty": "Very Hard",
+    "ratings": {
+      "damage": 3,
+      "utility": 7,
+      "survivability": 1,
+      "complexity": 9
+    },
+    "releaseDate": "2014-03-13",
+    "aliases": [
+      "abatur",
+      "abby",
+      "slapathur"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_infestor.webp",
+    "abilities": [
+      {
+        "id": "AbathurSymbiote|AbathurSymbiote|Q",
+        "name": "Symbiote",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 4,
+        "text": "Attach to an allied hero, minion or structure anywhere on the map. While attached, Abathur uses the Symbiote's abilities and can give the host a shield with Carapace.",
+        "icon": "img/icons/storm_ui_icon_abathur_symbiote.webp"
+      },
+      {
+        "id": "AbathurToxicNest|AbathurToxicNest|W",
+        "name": "Toxic Nest",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 10,
+        "text": "Plant a hidden mine. It arms after a short delay and explodes when an enemy comes close, dealing damage in a small area. Holds up to 3 charges.",
+        "icon": "img/icons/storm_ui_icon_abathur_toxic_nest.webp"
+      },
+      {
+        "id": "AbathurLocustStrain|AbathurLocustStrain|Trait",
+        "name": "Locust Strain",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Periodically spawns a Locust that walks down the nearest lane and attacks enemies.",
+        "icon": "img/icons/storm_ui_icon_abathur_locust_strain.webp"
+      },
+      {
+        "id": "AbathurUltimateEvolution|AbathurUltimateEvolution|Heroic",
+        "name": "Ultimate Evolution",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 70,
+        "text": "Clone an allied hero and control the copy for a limited time. The clone deals more damage and moves faster.",
+        "icon": "img/icons/storm_ui_icon_abathur_ultimate_evolution.webp"
+      },
+      {
+        "id": "AbathurEvolveMonstrosity|AbathurEvolveMonstrosity|Heroic",
+        "name": "Evolve Monstrosity",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 50,
+        "text": "Turn an allied minion or Locust into a Monstrosity that grows stronger as nearby enemy minions die.",
+        "icon": "img/icons/storm_ui_icon_abathur_evolve_monstrosity.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "AbathurTalentPressurizedGlands",
+          "name": "Pressurized Glands",
+          "text": "Spike Burst covers a larger area and comes back sooner.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_pressurized_glands.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "AbathurTalentSurvivalInstincts",
+          "name": "Survival Instincts",
+          "text": "Locusts take 50% less damage from non-Heroic sources.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_survival_instincts.webp",
+          "ability": "D",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "AbathurTalentEnvenomedNest",
+          "name": "Envenomed Nest",
+          "text": "Toxic Nests also deal damage over a few seconds after exploding.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_envenomed_nest.webp",
+          "ability": "W",
+          "sort": 1,
+          "quest": true
+        },
+        {
+          "id": "AbathurTalentRegenerativeMicrobes",
+          "name": "Regenerative Microbes",
+          "text": "Carapace also heals the host over a few seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_regenerative_microbes.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "AbathurTalentAdrenalOverload",
+          "name": "Adrenal Overload",
+          "text": "The Symbiote host gains bonus Attack Speed.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_adrenal_overload.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "AbathurTalentNeedlespine",
+          "name": "Needlespine",
+          "text": "Stab deals more damage.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_needlespine.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "AbathurHeroicUltimateEvolution",
+          "name": "Ultimate Evolution",
+          "text": "Clone an allied hero and control the copy.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_ultimate_evolution.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "AbathurHeroicEvolveMonstrosity",
+          "name": "Evolve Monstrosity",
+          "text": "Turn an allied minion or Locust into a growing Monstrosity.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_evolve_monstrosity.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "AbathurTalentBombardStrain",
+          "name": "Bombard Strain",
+          "text": "Locusts attack from range and deal more damage, especially to structures.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_bombard_strain.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "AbathurTalentVileNest",
+          "name": "Vile Nest",
+          "text": "Toxic Nest explosions also slow enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_vile_nest.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "AbathurTalentEnvenomedSpikes",
+          "name": "Envenomed Spikes",
+          "text": "Spike Burst also slows and deals damage over time.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_envenomed_spikes.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "AbathurTalentSpatialEfficiency",
+          "name": "Spatial Efficiency",
+          "text": "Stab gains an extra charge.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_spatial_efficiency.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "AbathurTalentEvolutionaryLink",
+          "name": "Evolutionary Link",
+          "text": "While Ultimate Evolution is active, the original hero is shielded.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_evolutionary_link.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "AbathurTalentLocustBrood",
+          "name": "Locust Brood",
+          "text": "Activate to spawn several Locusts at once.",
+          "icon": "img/icons/storm_ui_icon_talent_abathur_locust_brood.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "global",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Symbiote",
+            "snippet": "attach to an allied hero, minion or structure anywhere on the map"
+          }
+        ]
+      },
+      {
+        "tag": "shield",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Symbiote",
+            "snippet": "can give the host a shield with Carapace"
+          }
+        ]
+      },
+      {
+        "tag": "summons",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Locust Strain",
+            "snippet": "spawns a Locust that walks down the nearest lane"
+          }
+        ]
+      },
+      {
+        "tag": "siege",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Bombard Strain",
+            "snippet": "more damage, especially to structures"
+          }
+        ]
+      },
+      {
+        "tag": "waveclear",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Toxic Nest",
+            "snippet": "dealing damage in a small area"
+          }
+        ]
+      },
+      {
+        "tag": "dot",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Envenomed Nest",
+            "snippet": "damage over a few seconds"
+          }
+        ]
+      },
+      {
+        "tag": "slow",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Vile Nest",
+            "snippet": "also slow enemies"
+          }
+        ]
+      },
+      {
+        "tag": "split-push",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Locusts and nests pressure lanes while Abathur stays hidden."
+          }
+        ]
+      },
+      {
+        "tag": "vulnerable-body",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "His body is defenceless while he controls a Symbiote elsewhere."
+          }
+        ]
+      }
+    ],
+    "lastChangedBuild": "2.57.0.98285",
+    "isNew": false,
+    "hpId": 1,
+    "hdpId": "Abathur"
+  },
+  {
+    "id": "Anub",
+    "slug": "anubarak",
+    "name": "Anub'arak",
+    "title": "Traitor King",
+    "role": "Tank",
+    "type": "Melee",
+    "franchise": "Warcraft",
+    "difficulty": "Medium",
+    "ratings": {
+      "damage": 4,
+      "utility": 6,
+      "survivability": 8,
+      "complexity": 4
+    },
+    "releaseDate": "2014-10-07",
+    "aliases": [
+      "anub",
+      "anub arak",
+      "anub'arak",
+      "anub’arak"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_anubarak.webp",
+    "abilities": [
+      {
+        "id": "AnubarakImpale|AnubarakImpale|Q",
+        "name": "Impale",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "60 Mana",
+        "text": "Spikes erupt in a line, damaging and stunning enemies they hit.",
+        "icon": "img/icons/storm_ui_icon_anubarak_impale.webp"
+      },
+      {
+        "id": "AnubarakHardenCarapace|AnubarakHardenCarapace|W",
+        "name": "Harden Carapace",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "40 Mana",
+        "text": "Gain a shield that absorbs damage for a few seconds.",
+        "icon": "img/icons/storm_ui_icon_anubarak_harden_carapace.webp"
+      },
+      {
+        "id": "AnubarakBurrowCharge|AnubarakBurrowCharge|E",
+        "name": "Burrow Charge",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 14,
+        "cost": "50 Mana",
+        "text": "Burrow underground and travel to a target area, then emerge to damage and stun nearby enemies.",
+        "icon": "img/icons/storm_ui_icon_anubarak_burrow_charge.webp"
+      },
+      {
+        "id": "AnubarakScarabHost|AnubarakScarabHost|Trait",
+        "name": "Scarab Host",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Using a basic ability spawns a Beetle that attacks nearby enemies.",
+        "icon": "img/icons/storm_ui_icon_anubarak_scarab_host.webp"
+      },
+      {
+        "id": "AnubarakLocustSwarm|AnubarakLocustSwarm|Heroic",
+        "name": "Locust Swarm",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 70,
+        "cost": "100 Mana",
+        "text": "A swarm of locusts damages nearby enemies over several seconds and heals Anub'arak for part of the damage.",
+        "icon": "img/icons/storm_ui_icon_anubarak_locust_swarm.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "AnubarakTalentLegionOfBeetles",
+          "name": "Legion of Beetles",
+          "text": "A Beetle spawns automatically every few seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_legion_of_beetles.webp",
+          "ability": "D",
+          "sort": 1,
+          "quest": true
+        },
+        {
+          "id": "AnubarakTalentUnderking",
+          "name": "Underking",
+          "text": "Burrow Charge has more range and a longer stun.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_underking.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "AnubarakTalentNerubianArmor",
+          "name": "Nerubian Armor",
+          "text": "After using Harden Carapace, the next enemy abilities deal reduced damage (Spell Armor).",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_nerubian_armor.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "AnubarakTalentShedExoskeleton",
+          "name": "Shed Exoskeleton",
+          "text": "Harden Carapace also grants a burst of movement speed.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_shed_exoskeleton.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "AnubarakTalentEpicenter",
+          "name": "Epicenter",
+          "text": "Burrow Charge hits a larger area.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_epicenter.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "AnubarakTalentPersistentCarapace",
+          "name": "Persistent Carapace",
+          "text": "The Harden Carapace shield lasts longer.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_persistent_carapace.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "AnubarakHeroicLocustSwarm",
+          "name": "Locust Swarm",
+          "text": "Damage nearby enemies over time and heal from it.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_locust_swarm.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "AnubarakHeroicCocoon",
+          "name": "Cocoon",
+          "text": "Wrap an enemy hero in a cocoon, taking them out of the fight for a few seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_cocoon.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "AnubarakTalentLeechingScarabs",
+          "name": "Leeching Scarabs",
+          "text": "Beetles heal Anub'arak when they deal damage.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_leeching_scarabs.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "AnubarakTalentBedOfBarbs",
+          "name": "Bed of Barbs",
+          "text": "Impale leaves a field of spikes that slows enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_bed_of_barbs.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "AnubarakTalentHiveMaster",
+          "name": "Hive Master",
+          "text": "Gain a permanent Vampire Locust that attacks enemies and heals you.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_hive_master.webp",
+          "ability": "Active",
+          "sort": 1
+        },
+        {
+          "id": "AnubarakTalentSubterraneanShield",
+          "name": "Subterranean Shield",
+          "text": "Emerging from Burrow Charge grants a shield.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_subterranean_shield.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "AnubarakTalentCryptweave",
+          "name": "Cryptweave",
+          "text": "Cocoon lasts longer and can be broken only by allies.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_cryptweave.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "AnubarakTalentHardenedFocus",
+          "name": "Hardened Focus",
+          "text": "While above most of his Health, basic ability cooldowns recharge faster.",
+          "icon": "img/icons/storm_ui_icon_talent_anubarak_hardened_focus.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "stun",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Impale",
+            "snippet": "damaging and stunning enemies"
+          }
+        ]
+      },
+      {
+        "tag": "shield",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Harden Carapace",
+            "snippet": "gain a shield that absorbs damage"
+          }
+        ]
+      },
+      {
+        "tag": "spell-armor",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Nerubian Armor",
+            "snippet": "next enemy abilities deal reduced damage (Spell Armor)"
+          }
+        ]
+      },
+      {
+        "tag": "dash",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Burrow Charge",
+            "snippet": "travel to a target area"
+          }
+        ]
+      },
+      {
+        "tag": "summons",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Scarab Host",
+            "snippet": "spawns a Beetle"
+          }
+        ]
+      },
+      {
+        "tag": "heal-self",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Locust Swarm",
+            "snippet": "heals Anub'arak"
+          }
+        ]
+      },
+      {
+        "tag": "slow",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Bed of Barbs",
+            "snippet": "slows enemies"
+          }
+        ]
+      },
+      {
+        "tag": "dive",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Burrow Charge lets him engage onto the backline from fog."
+          }
+        ]
+      },
+      {
+        "tag": "frontline",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "A main tank built to soak damage at the front."
+          }
+        ]
+      }
+    ],
+    "isNew": false,
+    "hpId": 3,
+    "hdpId": "Anubarak"
+  },
+  {
+    "id": "CCho",
+    "slug": "cho",
+    "name": "Cho",
+    "title": "Twilight's Hammer Chieftain",
+    "role": "Tank",
+    "type": "Melee",
+    "franchise": "Warcraft",
+    "difficulty": "Hard",
+    "ratings": {
+      "damage": 5,
+      "utility": 6,
+      "survivability": 9,
+      "complexity": 6
+    },
+    "releaseDate": "2015-11-17",
+    "aliases": [
+      "czo"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_cho.webp",
+    "abilities": [
+      {
+        "id": "ChoSurgingFist|ChoSurgingFist|Q",
+        "name": "Surging Fist",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 10,
+        "text": "Charge up, then dash forward and knock back enemies in the path.",
+        "icon": "img/icons/storm_ui_icon_cho_surging_fist.webp"
+      },
+      {
+        "id": "ChoConsumingBlaze|ChoConsumingBlaze|W",
+        "name": "Consuming Blaze",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 12,
+        "text": "Set nearby enemies on fire for damage over time. Cho heals for each enemy hero hit.",
+        "icon": "img/icons/storm_ui_icon_cho_consuming_blaze.webp"
+      },
+      {
+        "id": "ChoRuneBomb|ChoRuneBomb|E",
+        "name": "Rune Bomb",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 12,
+        "text": "Roll a bomb forward that damages enemies it passes. Gall can detonate it early.",
+        "icon": "img/icons/storm_ui_icon_cho_rune_bomb.webp"
+      },
+      {
+        "id": "ChoUpheaval|ChoUpheaval|Heroic",
+        "name": "Upheaval",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 80,
+        "text": "After a short delay, pull all nearby enemies toward Cho.",
+        "icon": "img/icons/storm_ui_icon_cho_upheaval.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "ChoTalentOgreHide",
+          "name": "Ogre Hide",
+          "text": "Cho takes less damage from all sources.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_ogre_hide.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "ChoTalentFuelForTheFlame",
+          "name": "Fuel for the Flame",
+          "text": "Consuming Blaze lasts longer each time it hits heroes.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_fuel_for_the_flame.webp",
+          "ability": "W",
+          "sort": 2,
+          "quest": true
+        }
+      ],
+      "4": [
+        {
+          "id": "ChoTalentRunicFeedback",
+          "name": "Runic Feedback",
+          "text": "Rune Bomb hits lower Cho's basic ability cooldowns.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_runic_feedback.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "ChoTalentSurgingDash",
+          "name": "Surging Dash",
+          "text": "Surging Fist can travel farther when fully charged.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_surging_dash.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "ChoTalentMoltenBlock",
+          "name": "Molten Block",
+          "text": "Activate to become Invulnerable for a short time.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_molten_block.webp",
+          "ability": "Active",
+          "sort": 1
+        },
+        {
+          "id": "ChoTalentFrenziedFists",
+          "name": "Frenzied Fists",
+          "text": "Basic attacks are faster for a few seconds after Surging Fist.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_frenzied_fists.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "ChoHeroicUpheaval",
+          "name": "Upheaval",
+          "text": "Pull nearby enemies toward Cho.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_upheaval.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "ChoHeroicHammerOfTwilight",
+          "name": "Hammer of Twilight",
+          "text": "Basic attacks hit harder; activate to knock nearby enemies away.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_hammer_of_twilight.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "ChoTalentFirestorm",
+          "name": "Firestorm",
+          "text": "Consuming Blaze also slows enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_firestorm.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "ChoTalentPowerSurge",
+          "name": "Power Surge",
+          "text": "Rune Bomb deals more damage to heroes.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_power_surge.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "ChoTalentBlazeOfGlory",
+          "name": "Blaze of Glory",
+          "text": "Consuming Blaze heals more when it hits several heroes.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_blaze_of_glory.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "ChoTalentUppercut",
+          "name": "Uppercut",
+          "text": "Surging Fist briefly stuns the first hero hit.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_uppercut.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "ChoTalentTwilightCrusher",
+          "name": "Twilight Crusher",
+          "text": "Upheaval pulls from farther away.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_twilight_crusher.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "ChoTalentFavorOfTheOldGods",
+          "name": "Favor of the Old Gods",
+          "text": "Activate to heal Cho and Gall for a large amount.",
+          "icon": "img/icons/storm_ui_icon_talent_cho_favor_of_the_old_gods.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ]
+    },
+    "memberOf": "chogall",
+    "mechanics": [
+      {
+        "tag": "dash",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Surging Fist",
+            "snippet": "dash forward"
+          }
+        ]
+      },
+      {
+        "tag": "displace",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Surging Fist",
+            "snippet": "knock back enemies in the path"
+          }
+        ]
+      },
+      {
+        "tag": "dot",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Consuming Blaze",
+            "snippet": "damage over time"
+          }
+        ]
+      },
+      {
+        "tag": "heal-self",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Consuming Blaze",
+            "snippet": "Cho heals for each enemy hero hit"
+          }
+        ]
+      },
+      {
+        "tag": "pull",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Upheaval",
+            "snippet": "pull all nearby enemies toward Cho"
+          }
+        ]
+      },
+      {
+        "tag": "invulnerable",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Molten Block",
+            "snippet": "become Invulnerable for a short time"
+          }
+        ]
+      },
+      {
+        "tag": "frontline",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Cho is the tank half and leads every fight."
+          }
+        ]
+      }
+    ],
+    "lastChangedBuild": "2.55.17.97605",
+    "isNew": false,
+    "hpId": 11,
+    "hdpId": "Cho"
+  },
+  {
+    "id": "chogall",
+    "slug": "chogall",
+    "name": "Cho'gall",
+    "title": "Twilight's Hammer Chieftain",
+    "role": "Tank",
+    "roleAlt": "Ranged Assassin",
+    "type": "Melee",
+    "franchise": "Warcraft",
+    "difficulty": "Hard",
+    "ratings": {
+      "damage": 7,
+      "utility": 5,
+      "survivability": 8,
+      "complexity": 7
+    },
+    "releaseDate": "2015-11-17",
+    "aliases": [
+      "cho",
+      "cho gall",
+      "cho'gall",
+      "cho-gall",
+      "gall"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_chogall.webp",
+    "abilities": [],
+    "talents": {
+      "1": [],
+      "4": [],
+      "7": [],
+      "10": [],
+      "13": [],
+      "16": [],
+      "20": []
+    },
+    "members": [
+      "CCho",
+      "Gall"
+    ],
+    "mechanics": [
+      {
+        "tag": "dash",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Surging Fist",
+            "snippet": "dash forward"
+          }
+        ]
+      },
+      {
+        "tag": "displace",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Surging Fist",
+            "snippet": "knock back enemies in the path"
+          }
+        ]
+      },
+      {
+        "tag": "dot",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Consuming Blaze",
+            "snippet": "damage over time"
+          }
+        ]
+      },
+      {
+        "tag": "heal-self",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Consuming Blaze",
+            "snippet": "Cho heals for each enemy hero hit"
+          }
+        ]
+      },
+      {
+        "tag": "pull",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Upheaval",
+            "snippet": "pull all nearby enemies toward Cho"
+          }
+        ]
+      },
+      {
+        "tag": "invulnerable",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Molten Block",
+            "snippet": "become Invulnerable for a short time"
+          }
+        ]
+      },
+      {
+        "tag": "frontline",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Cho is the tank half and leads every fight."
+          }
+        ]
+      },
+      {
+        "tag": "poke",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadowflame",
+            "snippet": "damages the first enemy hit and enemies near it"
+          }
+        ]
+      },
+      {
+        "tag": "aoe",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Dread Orb",
+            "snippet": "damaging enemies at each bounce"
+          }
+        ]
+      },
+      {
+        "tag": "burst",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Runic Blast",
+            "snippet": "detonate Cho's Rune Bomb"
+          }
+        ]
+      },
+      {
+        "tag": "sustained-dps",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadow Bolt Volley",
+            "snippet": "stream of shadow bolts"
+          }
+        ]
+      },
+      {
+        "tag": "channel",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadow Bolt Volley",
+            "snippet": "for several seconds"
+          }
+        ]
+      },
+      {
+        "tag": "slow",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Twisting Nether",
+            "snippet": "heavily slow nearby enemies"
+          }
+        ]
+      }
+    ],
+    "lastChangedBuild": "2.55.17.97605",
+    "isNew": false
+  },
+  {
+    "id": "Diab",
+    "slug": "diablo",
+    "name": "Diablo",
+    "title": "Lord of Terror",
+    "role": "Tank",
+    "type": "Melee",
+    "franchise": "Diablo",
+    "difficulty": "Medium",
+    "ratings": {
+      "damage": 5,
+      "utility": 6,
+      "survivability": 8,
+      "complexity": 4
+    },
+    "releaseDate": "2014-03-13",
+    "aliases": [
+      "диабло"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_diablo.webp",
+    "abilities": [
+      {
+        "id": "DiabloShadowCharge|DiabloShadowCharge|Q",
+        "name": "Shadow Charge",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "50 Mana",
+        "text": "Charge into an enemy and knock them back; if they hit terrain they are stunned.",
+        "icon": "img/icons/storm_ui_icon_diablo_shadow_charge.webp"
+      },
+      {
+        "id": "DiabloFireStomp|DiabloFireStomp|W",
+        "name": "Fire Stomp",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 10,
+        "cost": "55 Mana",
+        "text": "Send out waves of fire that damage enemies, then return to Diablo.",
+        "icon": "img/icons/storm_ui_icon_diablo_fire_stomp.webp"
+      },
+      {
+        "id": "DiabloOverpower|DiabloOverpower|E",
+        "name": "Overpower",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 10,
+        "cost": "40 Mana",
+        "text": "Grab an enemy, slam them behind Diablo and stun them briefly.",
+        "icon": "img/icons/storm_ui_icon_diablo_overpower.webp"
+      },
+      {
+        "id": "DiabloBlackSoulstone|DiabloBlackSoulstone|Trait",
+        "name": "Black Soulstone",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Gain Souls when minions and heroes die nearby. Souls add Health, and a full Soulstone shortens his next death.",
+        "icon": "img/icons/storm_ui_icon_diablo_black_soulstone.webp"
+      },
+      {
+        "id": "DiabloApocalypse|DiabloApocalypse|Heroic",
+        "name": "Apocalypse",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 100,
+        "cost": "100 Mana",
+        "text": "Mark every enemy hero on the map; after a short delay each one is stunned.",
+        "icon": "img/icons/storm_ui_icon_diablo_apocalypse.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "DiabloTalentSoulShield",
+          "name": "Soul Shield",
+          "text": "With a full Black Soulstone, gain Spell Armor.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_soul_shield.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "DiabloTalentLifeLeech",
+          "name": "Life Leech",
+          "text": "Basic attacks against heroes heal Diablo.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_life_leech.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "DiabloTalentDevastatingCharge",
+          "name": "Devastating Charge",
+          "text": "Shadow Charge deals more damage.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_devastating_charge.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "DiabloTalentFireDevil",
+          "name": "Fire Devil",
+          "text": "Basic attacks also burn enemies around the target.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_fire_devil.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "DiabloTalentDomination",
+          "name": "Domination",
+          "text": "Overpower lowers Shadow Charge's cooldown.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_domination.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "DiabloTalentHellfire",
+          "name": "Hellfire",
+          "text": "Fire Stomp deals more damage.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_hellfire.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "DiabloHeroicApocalypse",
+          "name": "Apocalypse",
+          "text": "Stun every enemy hero on the map after a delay.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_apocalypse.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "DiabloHeroicLightningBreath",
+          "name": "Lightning Breath",
+          "text": "Channel a beam of lightning that damages enemies in front of Diablo.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_lightning_breath.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "DiabloTalentDebilitatingFlames",
+          "name": "Debilitating Flames",
+          "text": "Fire Stomp also slows enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_debilitating_flames.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "DiabloTalentHellgate",
+          "name": "Hellgate",
+          "text": "When reviving, appear at a chosen location and frighten nearby enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_hellgate.webp",
+          "ability": "D",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "DiabloTalentDiabolicalMomentum",
+          "name": "Diabolical Momentum",
+          "text": "Basic attacks lower Shadow Charge and Overpower cooldowns.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_diabolical_momentum.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "DiabloTalentEternalFlames",
+          "name": "Eternal Flames",
+          "text": "Fire Stomp waves last longer.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_eternal_flames.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "DiabloTalentDyingBreath",
+          "name": "Dying Breath",
+          "text": "Lightning Breath fires automatically when Diablo dies.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_dying_breath.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "DiabloTalentLordOfTerror",
+          "name": "Lord of Terror",
+          "text": "Activate to steal Health from nearby enemy heroes.",
+          "icon": "img/icons/storm_ui_icon_talent_diablo_lord_of_terror.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "stun",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Overpower",
+            "snippet": "stun them briefly"
+          }
+        ]
+      },
+      {
+        "tag": "displace",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadow Charge",
+            "snippet": "knock them back"
+          }
+        ]
+      },
+      {
+        "tag": "dash",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadow Charge",
+            "snippet": "charge into an enemy"
+          }
+        ]
+      },
+      {
+        "tag": "aoe",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Fire Stomp",
+            "snippet": "waves of fire that damage enemies"
+          }
+        ]
+      },
+      {
+        "tag": "waveclear",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Fire Stomp",
+            "snippet": "waves of fire that damage enemies"
+          }
+        ]
+      },
+      {
+        "tag": "global",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Apocalypse",
+            "snippet": "every enemy hero on the map"
+          }
+        ]
+      },
+      {
+        "tag": "channel",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Lightning Breath",
+            "snippet": "channel a beam of lightning"
+          }
+        ]
+      },
+      {
+        "tag": "spell-armor",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Soul Shield",
+            "snippet": "gain Spell Armor"
+          }
+        ]
+      },
+      {
+        "tag": "frontline",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "A main tank who starts fights with Shadow Charge."
+          }
+        ]
+      },
+      {
+        "tag": "engage",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Shadow Charge into terrain is a reliable fight starter."
+          }
+        ]
+      }
+    ],
+    "lastChangedBuild": "2.55.17.97605",
+    "isNew": false,
+    "hpId": 15,
+    "hdpId": "Diablo"
+  },
+  {
+    "id": "Gall",
+    "slug": "gall",
+    "name": "Gall",
+    "title": "Twilight's Hammer Chieftain",
+    "role": "Ranged Assassin",
+    "type": "Ranged",
+    "franchise": "Warcraft",
+    "difficulty": "Hard",
+    "ratings": {
+      "damage": 8,
+      "utility": 4,
+      "survivability": 7,
+      "complexity": 8
+    },
+    "releaseDate": "2015-11-17",
+    "aliases": [
+      "gal"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_gall.webp",
+    "abilities": [
+      {
+        "id": "GallShadowflame|GallShadowflame|Q",
+        "name": "Shadowflame",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 3,
+        "text": "Hurl a bolt of shadow fire that damages the first enemy hit and enemies near it.",
+        "icon": "img/icons/storm_ui_icon_gall_shadowflame.webp"
+      },
+      {
+        "id": "GallDreadOrb|GallDreadOrb|W",
+        "name": "Dread Orb",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 12,
+        "text": "Throw an orb that bounces several times, damaging enemies at each bounce.",
+        "icon": "img/icons/storm_ui_icon_gall_dread_orb.webp"
+      },
+      {
+        "id": "GallRunicBlast|GallRunicBlast|E",
+        "name": "Runic Blast",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 2,
+        "text": "Detonate Cho's Rune Bomb, damaging enemies around it.",
+        "icon": "img/icons/storm_ui_icon_gall_runic_blast.webp"
+      },
+      {
+        "id": "GallShadowBoltVolley|GallShadowBoltVolley|Heroic",
+        "name": "Shadow Bolt Volley",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 60,
+        "text": "For several seconds, fire a stream of shadow bolts in the direction Gall faces.",
+        "icon": "img/icons/storm_ui_icon_gall_shadow_bolt_volley.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "GallTalentSearingShadows",
+          "name": "Searing Shadows",
+          "text": "Shadowflame also burns heroes for damage over time.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_searing_shadows.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "GallTalentPsychoticBreak",
+          "name": "Psychotic Break",
+          "text": "When Cho dies, Gall keeps fighting for a few seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_psychotic_break.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "GallTalentRisingDread",
+          "name": "Rising Dread",
+          "text": "Dread Orb deals more damage with each bounce.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_rising_dread.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "GallTalentDoubleBack",
+          "name": "Double Back",
+          "text": "Dread Orb bounces one extra time.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_double_back.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "GallTalentAncientRune",
+          "name": "Ancient Rune",
+          "text": "Runic Blast deals bonus damage to the first hero it hits.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_ancient_rune.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "GallTalentDarkDescent",
+          "name": "Dark Descent",
+          "text": "Activate to give Cho a burst of movement speed.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_dark_descent.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "GallHeroicShadowBoltVolley",
+          "name": "Shadow Bolt Volley",
+          "text": "Fire a stream of shadow bolts for several seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_shadow_bolt_volley.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "GallHeroicTwistingNether",
+          "name": "Twisting Nether",
+          "text": "Heavily slow nearby enemies for a few seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_twisting_nether.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "GallTalentShove",
+          "name": "Shove",
+          "text": "Activate to push Cho a short distance.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_shove.webp",
+          "ability": "Active",
+          "sort": 1
+        },
+        {
+          "id": "GallTalentDarknessCalls",
+          "name": "Darkness Calls",
+          "text": "Shadowflame comes back faster.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_darkness_calls.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "GallTalentSeethingHatred",
+          "name": "Seething Hatred",
+          "text": "Dread Orb slows enemies it hits.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_seething_hatred.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "GallTalentTwilightNova",
+          "name": "Twilight Nova",
+          "text": "Runic Blast leaves a patch of fire behind.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_twilight_nova.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "GallTalentEyeOfKilrogg",
+          "name": "Eye of Kilrogg",
+          "text": "Place an eye that grants vision of the area around it.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_eye_of_kilrogg.webp",
+          "ability": "Active",
+          "sort": 1
+        },
+        {
+          "id": "GallTalentTwilightFury",
+          "name": "Twilight Fury",
+          "text": "Shadow Bolt Volley lasts longer.",
+          "icon": "img/icons/storm_ui_icon_talent_gall_twilight_fury.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ]
+    },
+    "memberOf": "chogall",
+    "mechanics": [
+      {
+        "tag": "poke",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadowflame",
+            "snippet": "damages the first enemy hit and enemies near it"
+          }
+        ]
+      },
+      {
+        "tag": "aoe",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Dread Orb",
+            "snippet": "damaging enemies at each bounce"
+          }
+        ]
+      },
+      {
+        "tag": "burst",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Runic Blast",
+            "snippet": "detonate Cho's Rune Bomb"
+          }
+        ]
+      },
+      {
+        "tag": "sustained-dps",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadow Bolt Volley",
+            "snippet": "stream of shadow bolts"
+          }
+        ]
+      },
+      {
+        "tag": "channel",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadow Bolt Volley",
+            "snippet": "for several seconds"
+          }
+        ]
+      },
+      {
+        "tag": "slow",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Twisting Nether",
+            "snippet": "heavily slow nearby enemies"
+          }
+        ]
+      }
+    ],
+    "lastChangedBuild": "2.55.17.97605",
+    "isNew": false,
+    "hpId": 18,
+    "hdpId": "Gall"
+  },
+  {
+    "id": "Crus",
+    "slug": "johanna",
+    "name": "Johanna",
+    "title": "Crusader of Zakarum",
+    "role": "Tank",
+    "type": "Melee",
+    "franchise": "Diablo",
+    "difficulty": "Easy",
+    "ratings": {
+      "damage": 3,
+      "utility": 6,
+      "survivability": 10,
+      "complexity": 3
+    },
+    "releaseDate": "2015-06-02",
+    "aliases": [
+      "джоанна"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_crusader.webp",
+    "abilities": [
+      {
+        "id": "CrusaderPunish|CrusaderPunish|Q",
+        "name": "Punish",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 6,
+        "cost": "40 Mana",
+        "text": "Strike the ground in front of Johanna, damaging and slowing enemies.",
+        "icon": "img/icons/storm_ui_icon_crusader_punish.webp"
+      },
+      {
+        "id": "CrusaderCondemn|CrusaderCondemn|W",
+        "name": "Condemn",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "50 Mana",
+        "text": "After a short delay, pull nearby enemies toward Johanna and stun them briefly.",
+        "icon": "img/icons/storm_ui_icon_crusader_condemn.webp"
+      },
+      {
+        "id": "CrusaderShieldGlare|CrusaderShieldGlare|E",
+        "name": "Shield Glare",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "40 Mana",
+        "text": "Damage enemies in front of Johanna and blind them for a few seconds.",
+        "icon": "img/icons/storm_ui_icon_crusader_shield_glare.webp"
+      },
+      {
+        "id": "CrusaderIronSkin|CrusaderIronSkin|Trait",
+        "name": "Iron Skin",
+        "hotkey": "D",
+        "kind": "trait",
+        "cooldown": 30,
+        "text": "Become Unstoppable and gain a shield for a few seconds.",
+        "icon": "img/icons/storm_ui_icon_crusader_iron_skin.webp"
+      },
+      {
+        "id": "CrusaderBlessedShield|CrusaderBlessedShield|Heroic",
+        "name": "Blessed Shield",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 60,
+        "cost": "75 Mana",
+        "text": "Throw a shield that stuns the first enemy hero hit, then bounces to nearby heroes.",
+        "icon": "img/icons/storm_ui_icon_crusader_blessed_shield.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "CrusaderTalentSinsExposed",
+          "name": "Sins Exposed",
+          "text": "Shield Glare makes heroes take bonus damage from Johanna's team.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_sins_exposed.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "CrusaderTalentReinforce",
+          "name": "Reinforce",
+          "text": "Iron Skin's shield is larger.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_reinforce.webp",
+          "ability": "D",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "CrusaderTalentKnightTakesPawn",
+          "name": "Knight Takes Pawn",
+          "text": "Condemn deals more damage to minions and mercenaries.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_knight_takes_pawn.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "CrusaderTalentHolyFervor",
+          "name": "Holy Fervor",
+          "text": "Activate to grant nearby allies Attack Speed and movement speed.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_holy_fervor.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "CrusaderTalentImposingWill",
+          "name": "Imposing Will",
+          "text": "Punish also lowers the Attack Speed of enemy heroes hit.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_imposing_will.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "CrusaderTalentBlessedMomentum",
+          "name": "Blessed Momentum",
+          "text": "Basic attacks lower basic ability cooldowns.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_blessed_momentum.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "CrusaderHeroicFallingSword",
+          "name": "Falling Sword",
+          "text": "Leap to a target area, damaging and knocking up enemies on landing.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_falling_sword.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "CrusaderHeroicBlessedShield",
+          "name": "Blessed Shield",
+          "text": "Throw a shield that stuns and bounces between heroes.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_blessed_shield.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "CrusaderTalentHolyRenewal",
+          "name": "Holy Renewal",
+          "text": "Iron Skin also heals Johanna when it expires.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_holy_renewal.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "CrusaderTalentLawsOfHope",
+          "name": "Laws of Hope",
+          "text": "Activate to regenerate Health quickly for a few seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_laws_of_hope.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "CrusaderTalentIndestructible",
+          "name": "Indestructible",
+          "text": "Iron Skin lasts longer.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_indestructible.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "CrusaderTalentRadiatingFaith",
+          "name": "Radiating Faith",
+          "text": "Shield Glare covers a wider cone.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_radiating_faith.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "CrusaderTalentHeavensFury",
+          "name": "Heaven's Fury",
+          "text": "Falling Sword calls down bolts on nearby enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_heaven_s_fury.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "CrusaderTalentShieldOfHope",
+          "name": "Shield of Hope",
+          "text": "Blessed Shield also shields allies near the heroes it hits.",
+          "icon": "img/icons/storm_ui_icon_talent_crusader_shield_of_hope.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "slow",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Punish",
+            "snippet": "damaging and slowing enemies"
+          }
+        ]
+      },
+      {
+        "tag": "pull",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Condemn",
+            "snippet": "pull nearby enemies toward Johanna"
+          }
+        ]
+      },
+      {
+        "tag": "stun",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Condemn",
+            "snippet": "stun them briefly"
+          }
+        ]
+      },
+      {
+        "tag": "blind",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shield Glare",
+            "snippet": "blind them for a few seconds"
+          }
+        ]
+      },
+      {
+        "tag": "unstoppable",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Iron Skin",
+            "snippet": "become Unstoppable"
+          }
+        ]
+      },
+      {
+        "tag": "shield",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Iron Skin",
+            "snippet": "gain a shield"
+          }
+        ]
+      },
+      {
+        "tag": "heal-self",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Laws of Hope",
+            "snippet": "regenerate Health quickly"
+          }
+        ]
+      },
+      {
+        "tag": "frontline",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Very durable tank who holds the front line."
+          }
+        ]
+      },
+      {
+        "tag": "peel",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Condemn and Shield Glare punish divers on her backline."
+          }
+        ]
+      }
+    ],
+    "lastChangedBuild": "2.55.17.97605",
+    "isNew": false,
+    "hpId": 26,
+    "hdpId": "Crusader"
+  },
+  {
+    "id": "Wiza",
+    "slug": "liming",
+    "name": "Li-Ming",
+    "title": "Rebellious Wizard",
+    "role": "Ranged Assassin",
+    "type": "Ranged",
+    "franchise": "Diablo",
+    "difficulty": "Medium",
+    "ratings": {
+      "damage": 8,
+      "utility": 3,
+      "survivability": 3,
+      "complexity": 5
+    },
+    "releaseDate": "2016-02-02",
+    "aliases": [
+      "li ming",
+      "li-ming",
+      "ming",
+      "리밍"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_wizard.webp",
+    "abilities": [
+      {
+        "id": "WizardMagicMissiles|WizardMagicMissiles|Q",
+        "name": "Magic Missiles",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 4,
+        "cost": "25 Mana",
+        "text": "Fire three missiles in a line; each damages the first enemy it hits.",
+        "icon": "img/icons/storm_ui_icon_wizard_magic_missiles.webp"
+      },
+      {
+        "id": "WizardArcaneOrb|WizardArcaneOrb|W",
+        "name": "Arcane Orb",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 9,
+        "cost": "50 Mana",
+        "text": "Launch an orb whose damage grows the farther it travels before hitting.",
+        "icon": "img/icons/storm_ui_icon_wizard_arcane_orb.webp"
+      },
+      {
+        "id": "WizardTeleport|WizardTeleport|E",
+        "name": "Teleport",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 15,
+        "cost": "40 Mana",
+        "text": "Teleport a short distance instantly.",
+        "icon": "img/icons/storm_ui_icon_wizard_teleport.webp"
+      },
+      {
+        "id": "WizardCriticalMass|WizardCriticalMass|Trait",
+        "name": "Critical Mass",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Taking part in a hero takedown resets her basic ability cooldowns.",
+        "icon": "img/icons/storm_ui_icon_wizard_critical_mass.webp"
+      },
+      {
+        "id": "WizardDisintegrate|WizardDisintegrate|Heroic",
+        "name": "Disintegrate",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 50,
+        "cost": "70 Mana",
+        "text": "Channel a beam that damages enemies in a line for a few seconds.",
+        "icon": "img/icons/storm_ui_icon_wizard_disintegrate.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "WizardTalentSeekerInTheDark",
+          "name": "Seeker in the Dark",
+          "text": "Magic Missiles deal more damage and fly farther.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_seeker_in_the_dark.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "WizardTalentPowerHungry",
+          "name": "Power Hungry",
+          "text": "Arcane Orb hits on heroes permanently increase its damage.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_power_hungry.webp",
+          "ability": "W",
+          "sort": 2,
+          "quest": true
+        }
+      ],
+      "4": [
+        {
+          "id": "WizardTalentArcaneIntellect",
+          "name": "Arcane Intellect",
+          "text": "Dealing ability damage restores Mana.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_arcane_intellect.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "WizardTalentAetherWalker",
+          "name": "Aether Walker",
+          "text": "Teleport travels farther.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_aether_walker.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "WizardTalentGlassCannon",
+          "name": "Glass Cannon",
+          "text": "Abilities deal more damage, but Li-Ming has less Health.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_glass_cannon.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "WizardTalentTriumvirate",
+          "name": "Triumvirate",
+          "text": "Arcane Orb hits lower Magic Missiles' cooldown.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_triumvirate.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "WizardHeroicDisintegrate",
+          "name": "Disintegrate",
+          "text": "Channel a damaging beam in a line.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_disintegrate.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "WizardHeroicWaveOfForce",
+          "name": "Wave of Force",
+          "text": "Knock back every enemy in a target area.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_wave_of_force.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "WizardTalentIllusionist",
+          "name": "Illusionist",
+          "text": "Teleport removes slows and roots and grants a burst of speed.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_illusionist.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "WizardTalentForceArmor",
+          "name": "Force Armor",
+          "text": "Gain Physical Armor against hero basic attacks for a short time after Teleport.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_force_armor.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "WizardTalentCalamity",
+          "name": "Calamity",
+          "text": "Magic Missiles explode, damaging enemies around the target.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_calamity.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "WizardTalentArcaneFlux",
+          "name": "Arcane Flux",
+          "text": "Arcane Orb's cooldown is lower.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_arcane_flux.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "WizardTalentTemporalFlux",
+          "name": "Temporal Flux",
+          "text": "Disintegrate slows enemies it hits.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_temporal_flux.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "WizardTalentRepulsion",
+          "name": "Repulsion",
+          "text": "Wave of Force also slows enemies it knocks back.",
+          "icon": "img/icons/storm_ui_icon_talent_wizard_repulsion.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "burst",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Arcane Orb",
+            "snippet": "damage grows the farther it travels"
+          }
+        ]
+      },
+      {
+        "tag": "poke",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Magic Missiles",
+            "snippet": "three missiles in a line"
+          }
+        ]
+      },
+      {
+        "tag": "teleport",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Teleport",
+            "snippet": "teleport a short distance"
+          }
+        ]
+      },
+      {
+        "tag": "channel",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Disintegrate",
+            "snippet": "channel a beam"
+          }
+        ]
+      },
+      {
+        "tag": "displace",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Wave of Force",
+            "snippet": "knock back every enemy"
+          }
+        ]
+      },
+      {
+        "tag": "cleanse",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Illusionist",
+            "snippet": "removes slows and roots"
+          }
+        ]
+      },
+      {
+        "tag": "mana-hungry",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Arcane Intellect",
+            "snippet": "restores Mana"
+          }
+        ]
+      }
+    ],
+    "isNew": false,
+    "hpId": 32,
+    "hdpId": "Wizard"
+  },
+  {
+    "id": "Malf",
+    "slug": "malfurion",
+    "name": "Malfurion",
+    "title": "Archdruid",
+    "role": "Healer",
+    "type": "Ranged",
+    "franchise": "Warcraft",
+    "difficulty": "Medium",
+    "ratings": {
+      "damage": 4,
+      "utility": 8,
+      "survivability": 4,
+      "complexity": 4
+    },
+    "releaseDate": "2014-03-13",
+    "aliases": [
+      "malf",
+      "malfurion stormrage",
+      "малфурион"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_malfurion.webp",
+    "abilities": [
+      {
+        "id": "MalfurionRegrowth|MalfurionRegrowth|Q",
+        "name": "Regrowth",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 7,
+        "cost": "60 Mana",
+        "text": "Heal an allied hero instantly, then again over several seconds.",
+        "icon": "img/icons/storm_ui_icon_malfurion_regrowth.webp"
+      },
+      {
+        "id": "MalfurionMoonfire|MalfurionMoonfire|W",
+        "name": "Moonfire",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 3,
+        "cost": "30 Mana",
+        "text": "Damage enemies in a small area and reveal them for a short time.",
+        "icon": "img/icons/storm_ui_icon_malfurion_moonfire.webp"
+      },
+      {
+        "id": "MalfurionEntanglingRoots|MalfurionEntanglingRoots|E",
+        "name": "Entangling Roots",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 10,
+        "cost": "70 Mana",
+        "text": "Vines grow in an area after a short delay, rooting and damaging enemies there.",
+        "icon": "img/icons/storm_ui_icon_malfurion_entangling_roots.webp"
+      },
+      {
+        "id": "MalfurionInnervate|MalfurionInnervate|Trait",
+        "name": "Innervate",
+        "hotkey": "D",
+        "kind": "trait",
+        "cooldown": 50,
+        "text": "Restore a large amount of Mana to an allied hero over a few seconds.",
+        "icon": "img/icons/storm_ui_icon_malfurion_innervate.webp"
+      },
+      {
+        "id": "MalfurionTwilightDream|MalfurionTwilightDream|Heroic",
+        "name": "Twilight Dream",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 70,
+        "cost": "100 Mana",
+        "text": "After a short delay, damage and silence enemies around Malfurion.",
+        "icon": "img/icons/storm_ui_icon_malfurion_twilight_dream.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "MalfurionTalentCelestialAlignment",
+          "name": "Celestial Alignment",
+          "text": "Moonfire hits on heroes increase its radius.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_celestial_alignment.webp",
+          "ability": "W",
+          "sort": 1,
+          "quest": true
+        },
+        {
+          "id": "MalfurionTalentNaturalPerspective",
+          "name": "Natural Perspective",
+          "text": "Allies with Regrowth grant vision around them.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_natural_perspective.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "MalfurionTalentShandosClarity",
+          "name": "Shan'do's Clarity",
+          "text": "Innervate comes back sooner.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_shan_do_s_clarity.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "MalfurionTalentNourishingVines",
+          "name": "Nourishing Vines",
+          "text": "Regrowth heals more over time.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_nourishing_vines.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "MalfurionTalentTenaciousRoots",
+          "name": "Tenacious Roots",
+          "text": "Entangling Roots last longer.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_tenacious_roots.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "MalfurionTalentMoonburn",
+          "name": "Moonburn",
+          "text": "Moonfire deals bonus damage to minions.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_moonburn.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "MalfurionHeroicTranquility",
+          "name": "Tranquility",
+          "text": "Heal all nearby allies over several seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_tranquility.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "MalfurionHeroicTwilightDream",
+          "name": "Twilight Dream",
+          "text": "After a delay, damage and silence nearby enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_twilight_dream.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "MalfurionTalentHinderingMoonfire",
+          "name": "Hindering Moonfire",
+          "text": "Moonfire slows enemy heroes hit.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_hindering_moonfire.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "MalfurionTalentRevitalize",
+          "name": "Revitalize",
+          "text": "Innervate also heals its target.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_revitalize.webp",
+          "ability": "D",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "MalfurionTalentElunesGrace",
+          "name": "Elune's Grace",
+          "text": "Regrowth has more range.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_elune_s_grace.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "MalfurionTalentVengefulRoots",
+          "name": "Vengeful Roots",
+          "text": "Entangling Roots spawn a Treant that attacks nearby enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_vengeful_roots.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "MalfurionTalentSerenity",
+          "name": "Serenity",
+          "text": "Tranquility also restores Mana.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_serenity.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "MalfurionTalentAstralCommunion",
+          "name": "Astral Communion",
+          "text": "Activate to teleport to an allied hero after a short channel.",
+          "icon": "img/icons/storm_ui_icon_talent_malfurion_astral_communion.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "heal-ally",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Regrowth",
+            "snippet": "heal an allied hero"
+          }
+        ]
+      },
+      {
+        "tag": "reveal",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Moonfire",
+            "snippet": "reveal them for a short time"
+          }
+        ]
+      },
+      {
+        "tag": "poke",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Moonfire",
+            "snippet": "damage enemies in a small area"
+          }
+        ]
+      },
+      {
+        "tag": "root",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Entangling Roots",
+            "snippet": "rooting and damaging enemies"
+          }
+        ]
+      },
+      {
+        "tag": "silence",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Twilight Dream",
+            "snippet": "damage and silence enemies"
+          }
+        ]
+      },
+      {
+        "tag": "immobile",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Malfurion has no dash, blink or stealth to escape."
+          }
+        ]
+      }
+    ],
+    "isNew": false,
+    "hpId": 36,
+    "hdpId": "Malfurion"
+  },
+  {
+    "id": "Mura",
+    "slug": "muradin",
+    "name": "Muradin",
+    "title": "Mountain King",
+    "role": "Tank",
+    "type": "Melee",
+    "franchise": "Warcraft",
+    "difficulty": "Easy",
+    "ratings": {
+      "damage": 4,
+      "utility": 6,
+      "survivability": 9,
+      "complexity": 3
+    },
+    "releaseDate": "2014-03-13",
+    "aliases": [
+      "мурадин"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_muradin.webp",
+    "abilities": [
+      {
+        "id": "MuradinStormBolt|MuradinStormBolt|Q",
+        "name": "Storm Bolt",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 10,
+        "cost": "55 Mana",
+        "text": "Throw a hammer that damages and stuns the first enemy hit.",
+        "icon": "img/icons/storm_ui_icon_muradin_storm_bolt.webp"
+      },
+      {
+        "id": "MuradinThunderClap|MuradinThunderClap|W",
+        "name": "Thunder Clap",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 8,
+        "cost": "40 Mana",
+        "text": "Damage and slow nearby enemies.",
+        "icon": "img/icons/storm_ui_icon_muradin_thunder_clap.webp"
+      },
+      {
+        "id": "MuradinDwarfToss|MuradinDwarfToss|E",
+        "name": "Dwarf Toss",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "45 Mana",
+        "text": "Leap to a target area, damaging and slowing enemies where Muradin lands.",
+        "icon": "img/icons/storm_ui_icon_muradin_dwarf_toss.webp"
+      },
+      {
+        "id": "MuradinSecondWind|MuradinSecondWind|Trait",
+        "name": "Second Wind",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Regenerate Health quickly after a few seconds without taking damage.",
+        "icon": "img/icons/storm_ui_icon_muradin_second_wind.webp"
+      },
+      {
+        "id": "MuradinHaymaker|MuradinHaymaker|Heroic",
+        "name": "Haymaker",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 40,
+        "cost": "50 Mana",
+        "text": "Punch an enemy hero and knock them far back, damaging enemies they hit.",
+        "icon": "img/icons/storm_ui_icon_muradin_haymaker.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "MuradinTalentPerfectStorm",
+          "name": "Perfect Storm",
+          "text": "Storm Bolt hits on heroes permanently increase its damage.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_perfect_storm.webp",
+          "ability": "Q",
+          "sort": 1,
+          "quest": true
+        },
+        {
+          "id": "MuradinTalentReverberation",
+          "name": "Reverberation",
+          "text": "Thunder Clap also lowers enemy Attack Speed.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_reverberation.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "MuradinTalentHeavyImpact",
+          "name": "Heavy Impact",
+          "text": "Dwarf Toss briefly stuns enemies where Muradin lands.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_heavy_impact.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "MuradinTalentSledgehammer",
+          "name": "Sledgehammer",
+          "text": "Basic attacks deal bonus damage to structures.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_sledgehammer.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "MuradinTalentHealingStatic",
+          "name": "Healing Static",
+          "text": "Storm Bolt hits heal Muradin.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_healing_static.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "MuradinTalentCrowdPleaser",
+          "name": "Crowd Pleaser",
+          "text": "Dwarf Toss comes back sooner when it hits heroes.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_crowd_pleaser.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "MuradinHeroicAvatar",
+          "name": "Avatar",
+          "text": "Transform for several seconds and gain bonus Health.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_avatar.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "MuradinHeroicHaymaker",
+          "name": "Haymaker",
+          "text": "Knock an enemy hero far back.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_haymaker.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "MuradinTalentStoneform",
+          "name": "Stoneform",
+          "text": "Activate to heal a large part of Muradin's Health over a few seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_stoneform.webp",
+          "ability": "Active",
+          "sort": 1
+        },
+        {
+          "id": "MuradinTalentRuggedBulwark",
+          "name": "Rugged Bulwark",
+          "text": "Gain Armor while below half Health.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_rugged_bulwark.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "MuradinTalentBurningRage",
+          "name": "Burning Rage",
+          "text": "Deal damage to nearby enemies every second.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_burning_rage.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "MuradinTalentThunderStrike",
+          "name": "Thunder Strike",
+          "text": "Thunder Clap deals more damage to a single hero.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_thunder_strike.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "MuradinTalentGrandSlam",
+          "name": "Grand Slam",
+          "text": "Haymaker gains a second charge and hits harder.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_grand_slam.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "MuradinTalentUnstoppableForce",
+          "name": "Unstoppable Force",
+          "text": "Avatar also makes Muradin Unstoppable for a few seconds.",
+          "icon": "img/icons/storm_ui_icon_talent_muradin_unstoppable_force.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "stun",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Storm Bolt",
+            "snippet": "damages and stuns the first enemy hit"
+          }
+        ]
+      },
+      {
+        "tag": "slow",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Thunder Clap",
+            "snippet": "damage and slow nearby enemies"
+          }
+        ]
+      },
+      {
+        "tag": "aoe",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Thunder Clap",
+            "snippet": "damage and slow nearby enemies"
+          }
+        ]
+      },
+      {
+        "tag": "dash",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Dwarf Toss",
+            "snippet": "leap to a target area"
+          }
+        ]
+      },
+      {
+        "tag": "heal-self",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Second Wind",
+            "snippet": "regenerate Health quickly"
+          }
+        ]
+      },
+      {
+        "tag": "displace",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Haymaker",
+            "snippet": "knock them far back"
+          }
+        ]
+      },
+      {
+        "tag": "frontline",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Classic durable main tank."
+          }
+        ]
+      },
+      {
+        "tag": "engage",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Dwarf Toss into Storm Bolt starts fights reliably."
+          }
+        ]
+      }
+    ],
+    "lastChangedBuild": "2.55.16.96846",
+    "isNew": false,
+    "hpId": 39,
+    "hdpId": "Muradin"
+  },
+  {
+    "id": "Tra0",
+    "slug": "tracer",
+    "name": "Tracer",
+    "title": "Agent of Overwatch",
+    "role": "Ranged Assassin",
+    "type": "Ranged",
+    "franchise": "Overwatch",
+    "difficulty": "Very Hard",
+    "ratings": {
+      "damage": 7,
+      "utility": 3,
+      "survivability": 3,
+      "complexity": 9
+    },
+    "releaseDate": "2016-04-19",
+    "aliases": [
+      "lena oxton",
+      "smuga"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_tracer.webp",
+    "abilities": [
+      {
+        "id": "TracerBlink|TracerBlink|Q",
+        "name": "Blink",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 2,
+        "text": "Dash a short distance. Holds up to 3 charges.",
+        "icon": "img/icons/storm_ui_icon_tracer_blink.webp"
+      },
+      {
+        "id": "TracerMelee|TracerMelee|W",
+        "name": "Melee",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 4,
+        "text": "Hit a nearby enemy for heavy damage; this also charges Pulse Bomb.",
+        "icon": "img/icons/storm_ui_icon_tracer_melee.webp"
+      },
+      {
+        "id": "TracerRecall|TracerRecall|E",
+        "name": "Recall",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 12,
+        "text": "Return to where Tracer was a few seconds ago.",
+        "icon": "img/icons/storm_ui_icon_tracer_recall.webp"
+      },
+      {
+        "id": "TracerReload|TracerReload|Trait",
+        "name": "Reload",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Basic attacks fire while she moves; reload to refill her pistols.",
+        "icon": "img/icons/storm_ui_icon_tracer_reload.webp"
+      },
+      {
+        "id": "TracerPulseBomb|TracerPulseBomb|Heroic",
+        "name": "Pulse Bomb",
+        "hotkey": "R",
+        "kind": "heroic",
+        "text": "Throw a sticky bomb that explodes after a short delay, dealing heavy damage in an area. Charged by dealing damage.",
+        "icon": "img/icons/storm_ui_icon_tracer_pulse_bomb.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "TracerTalentTracerRounds",
+          "name": "Tracer Rounds",
+          "text": "Basic attacks against heroes grant vision of them.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_tracer_rounds.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "TracerTalentPulseStrike",
+          "name": "Pulse Strike",
+          "text": "Melee charges Pulse Bomb faster.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_pulse_strike.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "TracerTalentJumper",
+          "name": "Jumper",
+          "text": "Blink gains an extra charge.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_jumper.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "TracerTalentSpatialEcho",
+          "name": "Spatial Echo",
+          "text": "Hero takedowns restore Blink charges.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_spatial_echo.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "TracerTalentUntouchable",
+          "name": "Untouchable",
+          "text": "Hero takedowns permanently increase basic attack damage.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_untouchable.webp",
+          "ability": "Passive",
+          "sort": 1,
+          "quest": true
+        },
+        {
+          "id": "TracerTalentIsThatAHealthPack",
+          "name": "Is That a Health Pack?!",
+          "text": "Regeneration Globes heal more and grant a burst of speed.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_is_that_a_health_pack.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "TracerHeroicQuantumSpike",
+          "name": "Quantum Spike",
+          "text": "Pulse Bomb deals bonus damage equal to a share of the target's maximum Health.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_quantum_spike.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "TracerHeroicStickyBomb",
+          "name": "Sticky Bomb",
+          "text": "Pulse Bomb slows the target after it explodes.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_sticky_bomb.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "TracerTalentBulletSpray",
+          "name": "Bullet Spray",
+          "text": "Basic attacks also hit enemies near the target.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_bullet_spray.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "TracerTalentLeechingRounds",
+          "name": "Leeching Rounds",
+          "text": "Basic attacks against heroes heal Tracer.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_leeching_rounds.webp",
+          "ability": "D",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "TracerTalentFocusFire",
+          "name": "Focus Fire",
+          "text": "Basic attacks against the same target deal bonus damage.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_focus_fire.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "TracerTalentTotalRecall",
+          "name": "Total Recall",
+          "text": "Recall restores Health lost during the rewind.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_total_recall.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "TracerTalentBulletTime",
+          "name": "Bullet Time",
+          "text": "Reload is faster after hitting a hero.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_bullet_time.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "TracerTalentCompositionB",
+          "name": "Composition B",
+          "text": "Pulse Bomb's area is larger.",
+          "icon": "img/icons/storm_ui_icon_talent_tracer_composition_b.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "dash",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Blink",
+            "snippet": "dash a short distance"
+          }
+        ]
+      },
+      {
+        "tag": "burst",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Pulse Bomb",
+            "snippet": "heavy damage in an area"
+          }
+        ]
+      },
+      {
+        "tag": "aa-reliant",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Reload",
+            "snippet": "basic attacks fire while she moves"
+          }
+        ]
+      },
+      {
+        "tag": "sustained-dps",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Reload",
+            "snippet": "basic attacks fire while she moves"
+          }
+        ]
+      },
+      {
+        "tag": "percent-hp-damage",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Quantum Spike",
+            "snippet": "a share of the target's maximum Health"
+          }
+        ]
+      },
+      {
+        "tag": "heal-self",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Total Recall",
+            "snippet": "restores Health lost during the rewind"
+          }
+        ]
+      }
+    ],
+    "isNew": false,
+    "hpId": 58,
+    "hdpId": "Tracer"
+  },
+  {
+    "id": "Demo",
+    "slug": "valla",
+    "name": "Valla",
+    "title": "Demon Hunter",
+    "role": "Ranged Assassin",
+    "type": "Ranged",
+    "franchise": "Diablo",
+    "difficulty": "Easy",
+    "ratings": {
+      "damage": 7,
+      "utility": 3,
+      "survivability": 3,
+      "complexity": 4
+    },
+    "releaseDate": "2014-03-13",
+    "aliases": [
+      "cazadora de demonios"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_demonhunter.webp",
+    "abilities": [
+      {
+        "id": "DemonHunterHungeringArrow|DemonHunterHungeringArrow|Q",
+        "name": "Hungering Arrow",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 8,
+        "cost": "40 Mana",
+        "text": "Fire an arrow that seeks nearby enemies and bounces between targets.",
+        "icon": "img/icons/storm_ui_icon_demonhunter_hungering_arrow.webp"
+      },
+      {
+        "id": "DemonHunterMultishot|DemonHunterMultishot|W",
+        "name": "Multishot",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 10,
+        "cost": "50 Mana",
+        "text": "Fire a volley of arrows in a wide cone.",
+        "icon": "img/icons/storm_ui_icon_demonhunter_multishot.webp"
+      },
+      {
+        "id": "DemonHunterVault|DemonHunterVault|E",
+        "name": "Vault",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 10,
+        "cost": "30 Mana",
+        "text": "Roll a short distance.",
+        "icon": "img/icons/storm_ui_icon_demonhunter_vault.webp"
+      },
+      {
+        "id": "DemonHunterHatred|DemonHunterHatred|Trait",
+        "name": "Hatred",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Basic attacks build Hatred stacks that increase attack damage and movement speed.",
+        "icon": "img/icons/storm_ui_icon_demonhunter_hatred.webp"
+      },
+      {
+        "id": "DemonHunterStrafe|DemonHunterStrafe|Heroic",
+        "name": "Strafe",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 60,
+        "cost": "80 Mana",
+        "text": "For several seconds, rapidly fire at enemies in range while moving.",
+        "icon": "img/icons/storm_ui_icon_demonhunter_strafe.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "DemonHunterTalentPuncturingArrow",
+          "name": "Puncturing Arrow",
+          "text": "Hungering Arrow bounces more times.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_puncturing_arrow.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "DemonHunterTalentHotPursuit",
+          "name": "Hot Pursuit",
+          "text": "At full Hatred, gain extra movement speed.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_hot_pursuit.webp",
+          "ability": "D",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "DemonHunterTalentCreedOfTheHunter",
+          "name": "Creed of the Hunter",
+          "text": "Basic attacks build more Hatred; finishing the quest grants Attack Speed.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_creed_of_the_hunter.webp",
+          "ability": "Passive",
+          "sort": 1,
+          "quest": true
+        },
+        {
+          "id": "DemonHunterTalentSiphoningArrow",
+          "name": "Siphoning Arrow",
+          "text": "Hungering Arrow heals Valla for part of its damage.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_siphoning_arrow.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "DemonHunterTalentDeathDealer",
+          "name": "Death Dealer",
+          "text": "Multishot deals more damage to heroes at long range.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_death_dealer.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "DemonHunterTalentRepeatingArrow",
+          "name": "Repeating Arrow",
+          "text": "Vault resets Hungering Arrow's cooldown.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_repeating_arrow.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "DemonHunterHeroicStrafe",
+          "name": "Strafe",
+          "text": "Rapidly fire at enemies in range while moving.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_strafe.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "DemonHunterHeroicRainOfVengeance",
+          "name": "Rain of Vengeance",
+          "text": "Call down demons that damage and stun enemies in an area.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_rain_of_vengeance.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "DemonHunterTalentMysticalVault",
+          "name": "Mystical Vault",
+          "text": "Vault comes back sooner.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_mystical_vault.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "DemonHunterTalentGloom",
+          "name": "Gloom",
+          "text": "Activate to spend Hatred for Spell Armor and a shield.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_gloom.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "DemonHunterTalentArsenal",
+          "name": "Arsenal",
+          "text": "Multishot also fires grenades that deal bonus damage.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_arsenal.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "DemonHunterTalentSearingAttacks",
+          "name": "Searing Attacks",
+          "text": "Activate to make basic attacks deal bonus damage at a Mana cost.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_searing_attacks.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "DemonHunterTalentDeathSiphon",
+          "name": "Death Siphon",
+          "text": "Activate to damage enemies in a line and heal for the damage dealt.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_death_siphon.webp",
+          "ability": "Active",
+          "sort": 1
+        },
+        {
+          "id": "DemonHunterTalentFarflightQuiver",
+          "name": "Farflight Quiver",
+          "text": "Basic attacks have more range.",
+          "icon": "img/icons/storm_ui_icon_talent_demonhunter_farflight_quiver.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "aa-reliant",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Hatred",
+            "snippet": "basic attacks build Hatred stacks"
+          }
+        ]
+      },
+      {
+        "tag": "sustained-dps",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Hatred",
+            "snippet": "increase attack damage"
+          }
+        ]
+      },
+      {
+        "tag": "dash",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Vault",
+            "snippet": "roll a short distance"
+          }
+        ]
+      },
+      {
+        "tag": "aoe",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Multishot",
+            "snippet": "volley of arrows in a wide cone"
+          }
+        ]
+      },
+      {
+        "tag": "poke",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Hungering Arrow",
+            "snippet": "seeks nearby enemies"
+          }
+        ]
+      },
+      {
+        "tag": "channel",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Strafe",
+            "snippet": "for several seconds, rapidly fire"
+          }
+        ]
+      },
+      {
+        "tag": "stun",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Rain of Vengeance",
+            "snippet": "damage and stun enemies in an area"
+          }
+        ]
+      },
+      {
+        "tag": "spell-armor",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Gloom",
+            "snippet": "Spell Armor and a shield"
+          }
+        ]
+      }
+    ],
+    "isNew": false,
+    "hpId": 64,
+    "hdpId": "DemonHunter"
+  },
+  {
+    "id": "Vari",
+    "slug": "varian",
+    "name": "Varian",
+    "title": "High King of the Alliance",
+    "role": "Bruiser",
+    "roleAlt": "Tank",
+    "type": "Melee",
+    "franchise": "Warcraft",
+    "difficulty": "Medium",
+    "ratings": {
+      "damage": 6,
+      "utility": 6,
+      "survivability": 7,
+      "complexity": 6
+    },
+    "releaseDate": "2016-11-15",
+    "aliases": [
+      "вариан"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_varian.webp",
+    "abilities": [
+      {
+        "id": "VarianLionsFang|VarianLionsFang|Q",
+        "name": "Lion's Fang",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 6,
+        "cost": "40 Mana",
+        "text": "Send a shockwave that damages and slows enemies.",
+        "icon": "img/icons/storm_ui_icon_varian_lion_s_fang.webp"
+      },
+      {
+        "id": "VarianParry|VarianParry|W",
+        "name": "Parry",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 16,
+        "cost": "30 Mana",
+        "text": "Block all incoming basic attacks for a short time.",
+        "icon": "img/icons/storm_ui_icon_varian_parry.webp"
+      },
+      {
+        "id": "VarianCharge|VarianCharge|E",
+        "name": "Charge",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "50 Mana",
+        "text": "Charge to an enemy, damaging and slowing them.",
+        "icon": "img/icons/storm_ui_icon_varian_charge.webp"
+      },
+      {
+        "id": "VarianHeroicStrike|VarianHeroicStrike|Trait",
+        "name": "Heroic Strike",
+        "hotkey": "D",
+        "kind": "trait",
+        "cooldown": 12,
+        "text": "Every few seconds, the next basic attack deals bonus damage.",
+        "icon": "img/icons/storm_ui_icon_varian_heroic_strike.webp"
+      },
+      {
+        "id": "VarianColossusSmash|VarianColossusSmash|Heroic",
+        "name": "Colossus Smash",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 20,
+        "cost": "50 Mana",
+        "text": "Smash an enemy for heavy damage and reduce their Armor for a few seconds.",
+        "icon": "img/icons/storm_ui_icon_varian_colossus_smash.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "VarianTalentLionsMaw",
+          "name": "Lion's Maw",
+          "text": "Lion's Fang hits on heroes heal Varian.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_lion_s_maw.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "VarianTalentWarbringer",
+          "name": "Warbringer",
+          "text": "Charge can also target the ground and comes back sooner.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_warbringer.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "VarianTalentTaunt",
+          "name": "Taunt",
+          "text": "Force an enemy hero to attack Varian for a short time.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_taunt.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "VarianTalentTwinBladesOfFury",
+          "name": "Twin Blades of Fury",
+          "text": "Wield two swords: faster basic attacks that lower Heroic Strike's cooldown.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_twin_blades_of_fury.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "VarianTalentJuggernaut",
+          "name": "Juggernaut",
+          "text": "Charge deals more damage to heroes.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_juggernaut.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "VarianTalentVictoryRush",
+          "name": "Victory Rush",
+          "text": "Activate to heal a large amount; refreshed by nearby takedowns.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_victory_rush.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "VarianHeroicBannerOfStormwind",
+          "name": "Banner of Stormwind",
+          "text": "Place a banner that grants nearby allies movement speed.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_banner_of_stormwind.webp",
+          "ability": "Active",
+          "sort": 1
+        },
+        {
+          "id": "VarianHeroicDemoralizingShout",
+          "name": "Demoralizing Shout",
+          "text": "Activate to lower the damage of nearby enemy heroes.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_demoralizing_shout.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "VarianTalentShieldWall",
+          "name": "Shield Wall",
+          "text": "Parry also grants Spell Armor.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_shield_wall.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "VarianTalentShatteringThrow",
+          "name": "Shattering Throw",
+          "text": "Throw a sword that deals bonus damage to shields.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_shattering_throw.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "VarianTalentMortalStrike",
+          "name": "Mortal Strike",
+          "text": "Heroic Strike reduces the healing the target receives.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_mortal_strike.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "VarianTalentHighKingsQuest",
+          "name": "High King's Quest",
+          "text": "Hero takedowns grant bonus damage after the quest completes.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_high_king_s_quest.webp",
+          "ability": "Passive",
+          "sort": 2,
+          "quest": true
+        }
+      ],
+      "20": [
+        {
+          "id": "VarianTalentGloryToTheAlliance",
+          "name": "Glory to the Alliance",
+          "text": "Parry lasts longer and heals Varian.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_glory_to_the_alliance.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "VarianTalentExecute",
+          "name": "Execute",
+          "text": "Heroic Strike deals bonus damage to low-Health targets.",
+          "icon": "img/icons/storm_ui_icon_talent_varian_execute.webp",
+          "ability": "D",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "slow",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Lion's Fang",
+            "snippet": "damages and slows enemies"
+          }
+        ]
+      },
+      {
+        "tag": "block",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Parry",
+            "snippet": "block all incoming basic attacks"
+          }
+        ]
+      },
+      {
+        "tag": "dash",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Charge",
+            "snippet": "charge to an enemy"
+          }
+        ]
+      },
+      {
+        "tag": "armor-shred",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Colossus Smash",
+            "snippet": "reduce their Armor"
+          }
+        ]
+      },
+      {
+        "tag": "taunt",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Taunt",
+            "snippet": "force an enemy hero to attack Varian"
+          }
+        ]
+      },
+      {
+        "tag": "anti-heal",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Mortal Strike",
+            "snippet": "reduces the healing the target receives"
+          }
+        ]
+      },
+      {
+        "tag": "heal-self",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Victory Rush",
+            "snippet": "heal a large amount"
+          }
+        ]
+      },
+      {
+        "tag": "frontline",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Can play as a durable off-tank or main tank with Taunt."
+          }
+        ]
+      }
+    ],
+    "isNew": false,
+    "hpId": 65,
+    "hdpId": "Varian"
+  },
+  {
+    "id": "HXAL",
+    "slug": "xalatath",
+    "name": "Xal'atath",
+    "title": "The Harbinger of the Void",
+    "role": "Ranged Assassin",
+    "type": "Ranged",
+    "franchise": "Warcraft",
+    "difficulty": "Medium",
+    "ratings": {
+      "damage": 8,
+      "utility": 6,
+      "survivability": 6,
+      "complexity": 8
+    },
+    "releaseDate": "2026-09-28",
+    "aliases": [
+      "xal",
+      "xal'atath",
+      "xal’atath",
+      "zalatath"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_xalatath.webp",
+    "abilities": [
+      {
+        "id": "XalatathShadowMark|XalatathShadowMark|Q",
+        "name": "Shadow Mark",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 8,
+        "cost": "50 Mana",
+        "text": "Throw a void orb; enemies hit take damage, more at the center, and are marked and revealed.",
+        "icon": "img/icons/storm_ui_icon_xalatath_shadow_mark.webp"
+      },
+      {
+        "id": "XalatathVoidStep|XalatathVoidStep|W",
+        "name": "Void Step",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "45 Mana",
+        "text": "Teleport up to three times in a triangle; each step increases basic attack damage for a short time.",
+        "icon": "img/icons/storm_ui_icon_xalatath_void_step.webp"
+      },
+      {
+        "id": "XalatathDarkHeartRitual|XalatathDarkHeartRitual|E",
+        "name": "Dark Heart Ritual",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 14,
+        "cost": "60 Mana",
+        "text": "Summon a pulsing heart that chases marked enemies and detonates on them.",
+        "icon": "img/icons/storm_ui_icon_xalatath_dark_heart_ritual.webp"
+      },
+      {
+        "id": "XalatathVoidVolley|XalatathVoidVolley|Trait",
+        "name": "Void Volley",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Basic attacks charge a barrage of void missiles that she can release at enemies.",
+        "icon": "img/icons/storm_ui_icon_xalatath_void_volley.webp"
+      },
+      {
+        "id": "XalatathVoidEruption|XalatathVoidEruption|Heroic",
+        "name": "Void Eruption",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 60,
+        "cost": "90 Mana",
+        "text": "Charge up a void orb, then release it; a charged orb deals more damage in a larger area.",
+        "icon": "img/icons/storm_ui_icon_xalatath_void_eruption.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "XalatathTalentDarkBarrier",
+          "name": "Dark Barrier",
+          "text": "Hitting a hero with Shadow Mark grants a small shield.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_dark_barrier.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "XalatathTalentDeepeningVoid",
+          "name": "Deepening Void",
+          "text": "Void Volley charges faster from basic attacks.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_deepening_void.webp",
+          "ability": "D",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "XalatathTalentSilenceOfTheLamb",
+          "name": "Silence of the Lamb",
+          "text": "The center of Shadow Mark silences heroes hit.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_silence_of_the_lamb.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "XalatathTalentDarkHeartsProtection",
+          "name": "Dark Heart's Protection",
+          "text": "Dark Heart Ritual silences marked heroes when it detonates on them.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_dark_heart_s_protection.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "XalatathTalentVoidStride",
+          "name": "Void Stride",
+          "text": "Each Void Step grants more basic attack damage.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_void_stride.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "XalatathTalentHungeringDark",
+          "name": "Hungering Dark",
+          "text": "Dark Heart Ritual moves faster toward marked enemies.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_hungering_dark.webp",
+          "ability": "E",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "XalatathHeroicVoidEruption",
+          "name": "Void Eruption",
+          "text": "Charge and release a void orb.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_void_eruption.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "XalatathHeroicVoidConvergence",
+          "name": "Void Convergence",
+          "text": "Open portals that release Void Minions to fight for her.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_void_convergence.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "XalatathTalentVolleyMastery",
+          "name": "Volley Mastery",
+          "text": "Void Volley fires more missiles.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_volley_mastery.webp",
+          "ability": "D",
+          "sort": 1
+        },
+        {
+          "id": "XalatathTalentUmbralReach",
+          "name": "Umbral Reach",
+          "text": "Shadow Mark has more range.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_umbral_reach.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "XalatathTalentMarkedForTheVoid",
+          "name": "Marked for the Void",
+          "text": "Marked heroes take more damage from Void Volley.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_marked_for_the_void.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "XalatathTalentAbyssalWard",
+          "name": "Abyssal Ward",
+          "text": "Void Step grants Spell Armor for a moment.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_abyssal_ward.webp",
+          "ability": "W",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "XalatathTalentAnchoredCore",
+          "name": "Anchored Core",
+          "text": "Void Eruption's explosion radius is 25% larger.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_anchored_core.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "XalatathTalentRiftInvasion",
+          "name": "Rift Invasion",
+          "text": "Void Convergence portals last longer and decay instead of dying instantly.",
+          "icon": "img/icons/storm_ui_icon_talent_xalatath_rift_invasion.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "reveal",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadow Mark",
+            "snippet": "marked and revealed"
+          }
+        ]
+      },
+      {
+        "tag": "poke",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Shadow Mark",
+            "snippet": "throw a void orb"
+          }
+        ]
+      },
+      {
+        "tag": "teleport",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Void Step",
+            "snippet": "teleport up to three times"
+          }
+        ]
+      },
+      {
+        "tag": "summons",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Dark Heart Ritual",
+            "snippet": "summon a pulsing heart"
+          }
+        ]
+      },
+      {
+        "tag": "burst",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Void Eruption",
+            "snippet": "a charged orb deals more damage in a larger area"
+          }
+        ]
+      },
+      {
+        "tag": "aoe",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Void Eruption",
+            "snippet": "a larger area"
+          }
+        ]
+      },
+      {
+        "tag": "silence",
+        "evidence": [
+          {
+            "kind": "talent",
+            "name": "Silence of the Lamb",
+            "snippet": "silences heroes hit"
+          }
+        ]
+      },
+      {
+        "tag": "sustained-dps",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Void Volley",
+            "snippet": "barrage of void missiles"
+          }
+        ]
+      }
+    ],
+    "lastChangedBuild": "2.57.0.98348",
+    "isNew": true,
+    "hpId": 92,
+    "hdpId": "Xalatath"
+  },
+  {
+    "id": "Zera",
+    "slug": "zeratul",
+    "name": "Zeratul",
+    "title": "Dark Prelate",
+    "role": "Melee Assassin",
+    "type": "Melee",
+    "franchise": "StarCraft",
+    "difficulty": "Very Hard",
+    "ratings": {
+      "damage": 7,
+      "utility": 4,
+      "survivability": 4,
+      "complexity": 9
+    },
+    "releaseDate": "2014-03-13",
+    "aliases": [
+      "зератул"
+    ],
+    "portrait": "img/heroes/storm_ui_ingame_heroselect_btn_zeratul.webp",
+    "abilities": [
+      {
+        "id": "ZeratulCleave|ZeratulCleave|Q",
+        "name": "Cleave",
+        "hotkey": "Q",
+        "kind": "basic",
+        "cooldown": 6,
+        "cost": "30 Mana",
+        "text": "After a short delay, damage all enemies around Zeratul.",
+        "icon": "img/icons/storm_ui_icon_zeratul_cleave.webp"
+      },
+      {
+        "id": "ZeratulSingularitySpike|ZeratulSingularitySpike|W",
+        "name": "Singularity Spike",
+        "hotkey": "W",
+        "kind": "basic",
+        "cooldown": 10,
+        "cost": "30 Mana",
+        "text": "Fire a spike that sticks to the first enemy hit, then slows and damages enemies near it.",
+        "icon": "img/icons/storm_ui_icon_zeratul_singularity_spike.webp"
+      },
+      {
+        "id": "ZeratulBlink|ZeratulBlink|E",
+        "name": "Blink",
+        "hotkey": "E",
+        "kind": "basic",
+        "cooldown": 12,
+        "cost": "30 Mana",
+        "text": "Teleport a short distance.",
+        "icon": "img/icons/storm_ui_icon_zeratul_blink.webp"
+      },
+      {
+        "id": "ZeratulPermanentCloak|ZeratulPermanentCloak|Trait",
+        "name": "Permanent Cloak",
+        "hotkey": "D",
+        "kind": "trait",
+        "text": "Become Stealthed after a moment without taking or dealing damage.",
+        "icon": "img/icons/storm_ui_icon_zeratul_permanent_cloak.webp"
+      },
+      {
+        "id": "ZeratulVoidPrison|ZeratulVoidPrison|Heroic",
+        "name": "Void Prison",
+        "hotkey": "R",
+        "kind": "heroic",
+        "cooldown": 100,
+        "cost": "100 Mana",
+        "text": "Put every unit in an area into time stasis: they become Invulnerable but cannot act.",
+        "icon": "img/icons/storm_ui_icon_zeratul_void_prison.webp"
+      }
+    ],
+    "talents": {
+      "1": [
+        {
+          "id": "ZeratulTalentGreaterCleave",
+          "name": "Greater Cleave",
+          "text": "Cleave hits a larger area.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_greater_cleave.webp",
+          "ability": "Q",
+          "sort": 1
+        },
+        {
+          "id": "ZeratulTalentSentencedToDeath",
+          "name": "Sentenced to Death",
+          "text": "Bonus damage against heroes marked by Singularity Spike.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_sentenced_to_death.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "4": [
+        {
+          "id": "ZeratulTalentWormhole",
+          "name": "Wormhole",
+          "text": "Blink can be reactivated to return to the starting point.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_wormhole.webp",
+          "ability": "E",
+          "sort": 1
+        },
+        {
+          "id": "ZeratulTalentRendingCleave",
+          "name": "Rending Cleave",
+          "text": "Cleave also deals damage over time.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_rending_cleave.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "7": [
+        {
+          "id": "ZeratulTalentSeekerInTheDark",
+          "name": "Seeker in the Dark",
+          "text": "Singularity Spike grants vision of heroes it sticks to.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_seeker_in_the_dark.webp",
+          "ability": "W",
+          "sort": 1
+        },
+        {
+          "id": "ZeratulTalentShroudOfAdun",
+          "name": "Shroud of Adun",
+          "text": "Activate to gain a shield.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_shroud_of_adun.webp",
+          "ability": "Active",
+          "sort": 2
+        }
+      ],
+      "10": [
+        {
+          "id": "ZeratulHeroicVoidPrison",
+          "name": "Void Prison",
+          "text": "Put every unit in an area into time stasis.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_void_prison.webp",
+          "ability": "R",
+          "sort": 1
+        },
+        {
+          "id": "ZeratulHeroicMaelstrom",
+          "name": "Maelstrom",
+          "text": "Gain a damaging aura that grows with Cleave hits.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_maelstrom.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ],
+      "13": [
+        {
+          "id": "ZeratulTalentMendingStrikes",
+          "name": "Mending Strikes",
+          "text": "Basic attacks against heroes heal Zeratul.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_mending_strikes.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "ZeratulTalentPsionicStrength",
+          "name": "Psionic Strength",
+          "text": "Stealth lasts longer before Zeratul is revealed.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_psionic_strength.webp",
+          "ability": "Passive",
+          "sort": 2
+        }
+      ],
+      "16": [
+        {
+          "id": "ZeratulTalentAssassinsBlade",
+          "name": "Assassin's Blade",
+          "text": "The first basic attack after leaving Stealth deals bonus damage.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_assassin_s_blade.webp",
+          "ability": "Passive",
+          "sort": 1
+        },
+        {
+          "id": "ZeratulTalentVoidSlash",
+          "name": "Void Slash",
+          "text": "Cleave deals bonus damage to the hero hit by Singularity Spike.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_void_slash.webp",
+          "ability": "Q",
+          "sort": 2
+        }
+      ],
+      "20": [
+        {
+          "id": "ZeratulTalentRewind",
+          "name": "Rewind",
+          "text": "Activate to reset basic ability cooldowns.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_rewind.webp",
+          "ability": "Active",
+          "sort": 1
+        },
+        {
+          "id": "ZeratulTalentNerazimFury",
+          "name": "Nerazim Fury",
+          "text": "Void Prison and Maelstrom gain bonus effects.",
+          "icon": "img/icons/storm_ui_icon_talent_zeratul_nerazim_fury.webp",
+          "ability": "R",
+          "sort": 2
+        }
+      ]
+    },
+    "mechanics": [
+      {
+        "tag": "stealth",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Permanent Cloak",
+            "snippet": "become Stealthed"
+          }
+        ]
+      },
+      {
+        "tag": "teleport",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Blink",
+            "snippet": "teleport a short distance"
+          }
+        ]
+      },
+      {
+        "tag": "slow",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Singularity Spike",
+            "snippet": "slows and damages enemies near it"
+          }
+        ]
+      },
+      {
+        "tag": "time-stop",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Void Prison",
+            "snippet": "into time stasis"
+          }
+        ]
+      },
+      {
+        "tag": "aoe",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Cleave",
+            "snippet": "damage all enemies around Zeratul"
+          }
+        ]
+      },
+      {
+        "tag": "burst",
+        "evidence": [
+          {
+            "kind": "ability",
+            "name": "Cleave",
+            "snippet": "damage all enemies around Zeratul"
+          }
+        ]
+      },
+      {
+        "tag": "dive",
+        "evidence": [
+          {
+            "kind": "curated",
+            "name": "traits.yaml",
+            "snippet": "Approaches from stealth and blinks onto backline heroes."
+          }
+        ]
+      }
+    ],
+    "isNew": false,
+    "hpId": 69,
+    "hdpId": "Zeratul"
+  }
+]

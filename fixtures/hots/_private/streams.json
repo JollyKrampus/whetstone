@@ -1,0 +1,31 @@
+{
+  "synthetic": true,
+  "source": "twitch",
+  "twitchGameId": "32959",
+  "fetchedAt": "2026-10-08T10:20:00Z",
+  "streams": [
+    {
+      "login": "khaldor",
+      "name": "Khaldor",
+      "title": "Sample stream (synthetic)",
+      "viewers": 512,
+      "startedAt": "2026-10-08T09:30:00Z",
+      "lang": "en",
+      "thumb": "https://static-cdn.jtvnw.net/previews-ttv/live_user_khaldor-{width}x{height}.jpg",
+      "url": "https://www.twitch.tv/khaldor",
+      "heroes": [
+        "HXAL"
+      ]
+    },
+    {
+      "login": "blizzheroes",
+      "name": "BlizzHeroes",
+      "title": "Sample stream (synthetic)",
+      "viewers": 128,
+      "startedAt": "2026-10-08T08:00:00Z",
+      "lang": "en",
+      "thumb": "https://static-cdn.jtvnw.net/previews-ttv/live_user_blizzheroes-{width}x{height}.jpg",
+      "url": "https://www.twitch.tv/blizzheroes"
+    }
+  ]
+}

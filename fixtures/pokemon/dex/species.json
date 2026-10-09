@@ -1,0 +1,595 @@
+[
+  {
+    "id": "archaludon",
+    "name": "Archaludon",
+    "num": 1018,
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "base": {
+      "hp": 90,
+      "atk": 105,
+      "def": 130,
+      "spa": 125,
+      "spd": 65,
+      "spe": 85
+    },
+    "abilities": [
+      "stamina",
+      "sturdy",
+      "stalwart"
+    ],
+    "weightkg": 60,
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "charizard",
+    "name": "Charizard",
+    "num": 6,
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "base": {
+      "hp": 78,
+      "atk": 84,
+      "def": 78,
+      "spa": 109,
+      "spd": 85,
+      "spe": 100
+    },
+    "abilities": [
+      "blaze",
+      "solarpower"
+    ],
+    "weightkg": 90.5,
+    "megas": [
+      "charizardmegay"
+    ],
+    "otherFormes": [
+      "charizardmegax",
+      "charizardmegay"
+    ],
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "charizardmegay",
+    "name": "Charizard-Mega-Y",
+    "num": 6,
+    "baseSpecies": "Charizard",
+    "forme": "Mega-Y",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "base": {
+      "hp": 78,
+      "atk": 104,
+      "def": 78,
+      "spa": 159,
+      "spd": 115,
+      "spe": 100
+    },
+    "abilities": [
+      "drought"
+    ],
+    "weightkg": 100.5,
+    "megaOf": "charizard",
+    "requiredItem": "charizarditey",
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "farigiraf",
+    "name": "Farigiraf",
+    "num": 981,
+    "types": [
+      "Normal",
+      "Psychic"
+    ],
+    "base": {
+      "hp": 120,
+      "atk": 90,
+      "def": 70,
+      "spa": 110,
+      "spd": 70,
+      "spe": 60
+    },
+    "abilities": [
+      "cudchew",
+      "armortail",
+      "sapsipper"
+    ],
+    "weightkg": 160,
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "garchomp",
+    "name": "Garchomp",
+    "num": 445,
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "base": {
+      "hp": 108,
+      "atk": 130,
+      "def": 95,
+      "spa": 80,
+      "spd": 85,
+      "spe": 102
+    },
+    "abilities": [
+      "sandveil",
+      "roughskin"
+    ],
+    "weightkg": 95,
+    "megas": [
+      "garchompmegaz"
+    ],
+    "otherFormes": [
+      "garchompmega",
+      "garchompmegaz"
+    ],
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "garchompmegaz",
+    "name": "Garchomp-Mega-Z",
+    "num": 445,
+    "baseSpecies": "Garchomp",
+    "forme": "Mega-Z",
+    "types": [
+      "Dragon"
+    ],
+    "base": {
+      "hp": 108,
+      "atk": 130,
+      "def": 85,
+      "spa": 141,
+      "spd": 85,
+      "spe": 151
+    },
+    "abilities": [
+      "levitate"
+    ],
+    "weightkg": 99,
+    "megaOf": "garchomp",
+    "requiredItem": "garchompitez",
+    "legal": [
+      "M-C"
+    ]
+  },
+  {
+    "id": "gholdengo",
+    "name": "Gholdengo",
+    "num": 1000,
+    "types": [
+      "Steel",
+      "Ghost"
+    ],
+    "base": {
+      "hp": 87,
+      "atk": 60,
+      "def": 95,
+      "spa": 133,
+      "spd": 91,
+      "spe": 84
+    },
+    "abilities": [
+      "goodasgold"
+    ],
+    "weightkg": 30,
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "golisopod",
+    "name": "Golisopod",
+    "num": 768,
+    "types": [
+      "Bug",
+      "Water"
+    ],
+    "base": {
+      "hp": 75,
+      "atk": 125,
+      "def": 140,
+      "spa": 60,
+      "spd": 90,
+      "spe": 40
+    },
+    "abilities": [
+      "emergencyexit"
+    ],
+    "weightkg": 108,
+    "megas": [
+      "golisopodmega"
+    ],
+    "otherFormes": [
+      "golisopodmega"
+    ],
+    "legal": [
+      "M-C"
+    ]
+  },
+  {
+    "id": "golisopodmega",
+    "name": "Golisopod-Mega",
+    "num": 768,
+    "baseSpecies": "Golisopod",
+    "forme": "Mega",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "base": {
+      "hp": 75,
+      "atk": 150,
+      "def": 175,
+      "spa": 70,
+      "spd": 120,
+      "spe": 40
+    },
+    "abilities": [
+      "toughclaws"
+    ],
+    "weightkg": 148,
+    "megaOf": "golisopod",
+    "requiredItem": "golisopite",
+    "legal": [
+      "M-C"
+    ]
+  },
+  {
+    "id": "incineroar",
+    "name": "Incineroar",
+    "num": 727,
+    "types": [
+      "Fire",
+      "Dark"
+    ],
+    "base": {
+      "hp": 95,
+      "atk": 115,
+      "def": 90,
+      "spa": 80,
+      "spd": 90,
+      "spe": 60
+    },
+    "abilities": [
+      "blaze",
+      "intimidate"
+    ],
+    "weightkg": 83,
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "indeedeef",
+    "name": "Indeedee-F",
+    "num": 876,
+    "baseSpecies": "Indeedee",
+    "forme": "F",
+    "types": [
+      "Psychic",
+      "Normal"
+    ],
+    "base": {
+      "hp": 70,
+      "atk": 55,
+      "def": 65,
+      "spa": 95,
+      "spd": 105,
+      "spe": 85
+    },
+    "abilities": [
+      "owntempo",
+      "synchronize",
+      "psychicsurge"
+    ],
+    "weightkg": 28,
+    "legal": [
+      "M-C"
+    ]
+  },
+  {
+    "id": "kingambit",
+    "name": "Kingambit",
+    "num": 983,
+    "types": [
+      "Dark",
+      "Steel"
+    ],
+    "base": {
+      "hp": 100,
+      "atk": 135,
+      "def": 120,
+      "spa": 60,
+      "spd": 85,
+      "spe": 50
+    },
+    "abilities": [
+      "defiant",
+      "supremeoverlord",
+      "pressure"
+    ],
+    "weightkg": 120,
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "pelipper",
+    "name": "Pelipper",
+    "num": 279,
+    "types": [
+      "Water",
+      "Flying"
+    ],
+    "base": {
+      "hp": 60,
+      "atk": 50,
+      "def": 100,
+      "spa": 95,
+      "spd": 70,
+      "spe": 65
+    },
+    "abilities": [
+      "keeneye",
+      "drizzle",
+      "raindish"
+    ],
+    "weightkg": 28,
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "raichu",
+    "name": "Raichu",
+    "num": 26,
+    "types": [
+      "Electric"
+    ],
+    "base": {
+      "hp": 60,
+      "atk": 90,
+      "def": 55,
+      "spa": 90,
+      "spd": 80,
+      "spe": 110
+    },
+    "abilities": [
+      "static",
+      "lightningrod"
+    ],
+    "weightkg": 30,
+    "megas": [
+      "raichumegay"
+    ],
+    "otherFormes": [
+      "raichualola",
+      "raichumegax",
+      "raichumegay"
+    ],
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "raichumegay",
+    "name": "Raichu-Mega-Y",
+    "num": 26,
+    "baseSpecies": "Raichu",
+    "forme": "Mega-Y",
+    "types": [
+      "Electric"
+    ],
+    "base": {
+      "hp": 60,
+      "atk": 100,
+      "def": 55,
+      "spa": 160,
+      "spd": 80,
+      "spe": 130
+    },
+    "abilities": [
+      "noguard"
+    ],
+    "weightkg": 26,
+    "megaOf": "raichu",
+    "requiredItem": "raichunitey",
+    "legal": [
+      "M-C"
+    ]
+  },
+  {
+    "id": "rillaboom",
+    "name": "Rillaboom",
+    "num": 812,
+    "types": [
+      "Grass"
+    ],
+    "base": {
+      "hp": 100,
+      "atk": 125,
+      "def": 90,
+      "spa": 60,
+      "spd": 70,
+      "spe": 85
+    },
+    "abilities": [
+      "overgrow",
+      "grassysurge"
+    ],
+    "weightkg": 90,
+    "legal": [
+      "M-C"
+    ]
+  },
+  {
+    "id": "salamence",
+    "name": "Salamence",
+    "num": 373,
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "base": {
+      "hp": 95,
+      "atk": 135,
+      "def": 80,
+      "spa": 110,
+      "spd": 80,
+      "spe": 100
+    },
+    "abilities": [
+      "intimidate",
+      "moxie"
+    ],
+    "weightkg": 102.6,
+    "megas": [
+      "salamencemega"
+    ],
+    "otherFormes": [
+      "salamencemega"
+    ],
+    "legal": [
+      "M-C"
+    ]
+  },
+  {
+    "id": "salamencemega",
+    "name": "Salamence-Mega",
+    "num": 373,
+    "baseSpecies": "Salamence",
+    "forme": "Mega",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "base": {
+      "hp": 95,
+      "atk": 145,
+      "def": 130,
+      "spa": 120,
+      "spd": 90,
+      "spe": 120
+    },
+    "abilities": [
+      "aerilate"
+    ],
+    "weightkg": 112.6,
+    "megaOf": "salamence",
+    "requiredItem": "salamencite",
+    "legal": [
+      "M-C"
+    ]
+  },
+  {
+    "id": "sinistcha",
+    "name": "Sinistcha",
+    "num": 1013,
+    "types": [
+      "Grass",
+      "Ghost"
+    ],
+    "base": {
+      "hp": 71,
+      "atk": 60,
+      "def": 106,
+      "spa": 121,
+      "spd": 80,
+      "spe": 70
+    },
+    "abilities": [
+      "hospitality",
+      "heatproof"
+    ],
+    "weightkg": 2.2,
+    "otherFormes": [
+      "sinistchamasterpiece"
+    ],
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "sneasler",
+    "name": "Sneasler",
+    "num": 903,
+    "types": [
+      "Fighting",
+      "Poison"
+    ],
+    "base": {
+      "hp": 80,
+      "atk": 130,
+      "def": 60,
+      "spa": 40,
+      "spd": 80,
+      "spe": 120
+    },
+    "abilities": [
+      "pressure",
+      "unburden",
+      "poisontouch"
+    ],
+    "weightkg": 43,
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  },
+  {
+    "id": "whimsicott",
+    "name": "Whimsicott",
+    "num": 547,
+    "types": [
+      "Grass",
+      "Fairy"
+    ],
+    "base": {
+      "hp": 60,
+      "atk": 67,
+      "def": 85,
+      "spa": 77,
+      "spd": 75,
+      "spe": 116
+    },
+    "abilities": [
+      "prankster",
+      "infiltrator",
+      "chlorophyll"
+    ],
+    "weightkg": 6.6,
+    "legal": [
+      "M-B",
+      "M-C"
+    ]
+  }
+]

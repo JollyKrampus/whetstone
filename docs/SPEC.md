@@ -266,3 +266,26 @@ Phase-in of secrets: `HP_API_KEY` + repo variable `HP_MODE=on` (owner, after HP'
 **Later** — opt-in community votes/tags via one Cloudflare Worker (D1 + Turnstile), shared by all games (owner gate); browser-only replay import; async tournament drafts/OBS view; matchup heatmap.
 
 **Never** — opponent scouting by player name; ads/trackers; scraping forbidden sources.
+
+---
+
+## 12. Decisions log
+
+Where the sections above were ambiguous or the parallel builds disagreed, the integrator picked the simplest consistent option. Each entry is binding until a later entry replaces it.
+
+1. **Every nav entry resolves.** A `GameModule.nav` path without a page file is served by `src/pages/[game]/[...section].astro`, a placeholder that is `noindex` and left out of the sitemap. `src/lib/routes.ts` (`pendingSections`) drops a section as soon as `src/pages/<game>/<section>.astro` or `<section>/index.astro` exists, so a real page never collides with its placeholder. The e2e smoke test runs strictly: no `SMOKE_ALLOW_MISSING` in CI.
+2. **Repo root.** `src/lib/datadir.ts` finds the repo by walking up to the `package.json` named `whetstone`, falling back to `cwd`. It no longer trusts `import.meta.url` alone, because Astro bundles it into chunks elsewhere. The Vite plugin that rewrote `import.meta.url` was removed.
+3. **Browser shards.** Pages resolve staged shards at build time with `stagedUrl(game, name)` or `stagedUrlOrNull` from `src/lib/stagemap.ts`, and pass the URL to islands as a prop. Islands never import `src/generated/stage-map.json`. `npm run build` and `npm run dev` (via `predev`) run `pipeline/stage.ts` first.
+4. **Output validation.** Game pipelines validate their outputs with `validateFiles(files, <GAME>_FILES, { overlays })` from `pipeline/validate.ts`. The rules:
+   - A `<name>` segment in a registry key matches one path segment.
+   - The emitted custody class must equal the registry's, or the run gets an error.
+   - Class-B/C files on an overlay path (`HOTS_PRIVATE_OVERLAYS`) are checked against the overlay schema.
+   - Unregistered JSON is a warning.
+   - `meta.json` and `_files.json` are written by the runner, never by games.
+5. **Internal shards.** A public shard whose file name starts with `_` is staged and mapped but never listed in `public/data/manifest.json`. The MTGA card index is `public/_cards.standard.json` and `public/_cards.arena.json`, so it is not advertised as a dataset.
+6. **Units.** Every `delta` (Edge, Reason, gates, tiers) is in percentage points. §6's `tanh(Δ / 0.04)` with Δ as a fraction is implemented as `scoreFromDelta(Δpp) = round(50 + 50·tanh(Δpp / 4))`; the two are the same.
+7. **Gates.** `GATES` keep the §6 values. `stats.ts` also offers an optional `|z|` gate (`listMinAbsZ`, with `HIGH_VOLUME_MIN_ABS_Z = 2.5` suggested). The simulation shows it is needed at about 3k games/day with strong effects. It stays **off** (0) until the owner decides from real Heroes Profile volume, and `docs/METHODOLOGY.md` and `/about/` must change with it.
+8. **Draftable entities.** Every score-bearing file (theory, stats, pro, the draft shard) is keyed by draftable entity id, with Cho'gall as the composite `chogall`. Patches, links and rotation stay keyed by member hero ids (`CCho`, `Gall`). The HotS pipeline emits the composite record.
+9. **Licensed stats in the draft shard.** Heroes Profile numbers reach the draft tool only as the class-B overlay `private/hots/public/draft.json = { stats }`, merged by `stage.ts`. The public manifest keeps pointing at the pure class-A shard.
+10. **Meta details.** `SourceStatus.fetchedAt` is `string | null` (null = never fetched). Each game's `meta.json` schema requires its own `extra` block, although `GameMeta.extra` is optional in `game.ts`. Optional keys are omitted, never written as `undefined`.
+11. **Loader rows and component props.** The HotS loader's matchup row type is `HeroMatchupRow`, renamed so it no longer collides with the shared component's `MatchupRow` props. `src/games/hots/view.ts` converts one to the other with `toMatchupRow`, and also provides `heroHref` (`/hots/hero/<slug>/`) and `heroPortrait`. Images that `stage.ts` copies unchanged (`img/**`) are addressed with `assetHref(game, rel)` from `src/games/registry.ts`. Hashed JSON shards go through `stagedUrl` (entry 3).

@@ -1,0 +1,15 @@
+{
+  // Type-checks the code that runs as `node pipeline/run.ts` / `node scripts/*.ts` with Node's own
+  // resolution rules (package.json "imports", mandatory .ts extensions, JSON import attributes),
+  // so anything that passes here also resolves at runtime under Node 24 type stripping.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": ["pipeline", "scripts"],
+  "exclude": ["node_modules", "dist", "data", "**/*.test.ts"]
+}

@@ -1,0 +1,29 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    ignore:
+      # docs/SPEC.md §2: preact stays on 10.x; TypeScript stays below 6.1 until the lint and
+      # type-check tooling allows it; @types/node follows the Node major used in CI (24).
+      - dependency-name: preact
+        update-types: ['version-update:semver-major']
+      - dependency-name: typescript
+        versions: ['>=6.1.0']
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns: ['*']

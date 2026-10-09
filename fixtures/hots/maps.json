@@ -1,0 +1,139 @@
+[
+  {
+    "id": "battlefield-of-eternity",
+    "name": "Battlefield of Eternity",
+    "kind": "standard",
+    "ranked": true,
+    "rankedSource": "curated",
+    "image": "img/maps/replayspreviewimage_battlefieldofeternity.webp",
+    "profile": {
+      "size": "small",
+      "lanes": 2,
+      "objective": "Kill the enemy Immortal before they kill yours; the surviving Immortal pushes a lane.",
+      "tags": [
+        "two-lane",
+        "small",
+        "pve-objective",
+        "teamfight",
+        "push-objective"
+      ]
+    },
+    "hp": {
+      "id": 1,
+      "name": "Battlefield of Eternity"
+    }
+  },
+  {
+    "id": "braxis-outpost",
+    "name": "Braxis Outpost",
+    "kind": "aram",
+    "ranked": false,
+    "rankedSource": "curated",
+    "image": "img/maps/replayspreviewimage_braxisoutpost.webp",
+    "profile": {
+      "size": "small",
+      "lanes": 1,
+      "objective": "ARAM single lane; destroy the enemy core.",
+      "tags": [
+        "single-lane",
+        "small",
+        "teamfight"
+      ]
+    },
+    "hp": {
+      "id": 21,
+      "name": "Braxis Outpost"
+    }
+  },
+  {
+    "id": "cursed-hollow",
+    "name": "Cursed Hollow",
+    "kind": "standard",
+    "ranked": true,
+    "rankedSource": "curated",
+    "image": "img/maps/replayspreviewimage_cursedhollow.webp",
+    "profile": {
+      "size": "large",
+      "lanes": 3,
+      "objective": "Channel tributes as they spawn; a third tribute curses the enemy team, weakening their minions and disabling their towers.",
+      "tags": [
+        "three-lane",
+        "large",
+        "channel-objective",
+        "long-rotations"
+      ]
+    },
+    "hp": {
+      "id": 4,
+      "name": "Cursed Hollow"
+    }
+  },
+  {
+    "id": "dragon-shire",
+    "name": "Dragon Shire",
+    "kind": "standard",
+    "ranked": true,
+    "rankedSource": "curated",
+    "image": "img/maps/replayspreviewimage_dragonshire.webp",
+    "profile": {
+      "size": "medium",
+      "lanes": 3,
+      "objective": "Hold the top and bottom shrines, then channel the statue in the middle to become the Dragon Knight.",
+      "tags": [
+        "three-lane",
+        "channel-objective",
+        "push-objective",
+        "long-rotations"
+      ]
+    },
+    "hp": {
+      "id": 5,
+      "name": "Dragon Shire"
+    }
+  },
+  {
+    "id": "hanamura-temple",
+    "name": "Hanamura Temple",
+    "kind": "standard",
+    "ranked": false,
+    "rankedSource": "curated",
+    "image": "img/maps/replayspreviewimage_hanamuratemple.webp",
+    "profile": {
+      "size": "medium",
+      "lanes": 2,
+      "objective": "Escort your payload to the end of its track, where it fires at the enemy core.",
+      "tags": [
+        "two-lane",
+        "escort-objective",
+        "structure-objective",
+        "teamfight"
+      ]
+    },
+    "hp": {
+      "id": 7,
+      "name": "Hanamura Temple"
+    }
+  },
+  {
+    "id": "towers-of-doom",
+    "name": "Towers of Doom",
+    "kind": "standard",
+    "ranked": true,
+    "rankedSource": "curated",
+    "image": "img/maps/replayspreviewimage_towersofdoom.webp",
+    "profile": {
+      "size": "medium",
+      "lanes": 3,
+      "objective": "Channel altars when they activate to fire at the enemy core, which heroes cannot attack directly.",
+      "tags": [
+        "three-lane",
+        "channel-objective",
+        "structure-objective"
+      ]
+    },
+    "hp": {
+      "id": 12,
+      "name": "Towers of Doom"
+    }
+  }
+]

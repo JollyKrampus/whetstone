@@ -1,0 +1,1922 @@
+{
+  "schema": 1,
+  "build": "2.57.0.98348",
+  "major": "2.57",
+  "rulesVersion": "02303557bb30",
+  "heroes": {
+    "id": [
+      "Abat",
+      "Anub",
+      "chogall",
+      "Diab",
+      "Crus",
+      "Wiza",
+      "Malf",
+      "Mura",
+      "Tra0",
+      "Demo",
+      "Vari",
+      "HXAL",
+      "Zera"
+    ],
+    "slug": [
+      "abathur",
+      "anubarak",
+      "chogall",
+      "diablo",
+      "johanna",
+      "liming",
+      "malfurion",
+      "muradin",
+      "tracer",
+      "valla",
+      "varian",
+      "xalatath",
+      "zeratul"
+    ],
+    "name": [
+      "Abathur",
+      "Anub'arak",
+      "Cho'gall",
+      "Diablo",
+      "Johanna",
+      "Li-Ming",
+      "Malfurion",
+      "Muradin",
+      "Tracer",
+      "Valla",
+      "Varian",
+      "Xal'atath",
+      "Zeratul"
+    ],
+    "role": [
+      "Support",
+      "Tank",
+      "Tank",
+      "Tank",
+      "Tank",
+      "Ranged Assassin",
+      "Healer",
+      "Tank",
+      "Ranged Assassin",
+      "Ranged Assassin",
+      "Bruiser",
+      "Ranged Assassin",
+      "Melee Assassin"
+    ],
+    "roleAlt": [
+      null,
+      null,
+      "Ranged Assassin",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Tank",
+      null,
+      null
+    ],
+    "type": [
+      "Melee",
+      "Melee",
+      "Melee",
+      "Melee",
+      "Melee",
+      "Ranged",
+      "Ranged",
+      "Melee",
+      "Ranged",
+      "Ranged",
+      "Melee",
+      "Ranged",
+      "Melee"
+    ],
+    "portrait": [
+      "img/heroes/storm_ui_ingame_heroselect_btn_infestor.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_anubarak.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_chogall.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_diablo.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_crusader.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_wizard.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_malfurion.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_muradin.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_tracer.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_demonhunter.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_varian.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_xalatath.webp",
+      "img/heroes/storm_ui_ingame_heroselect_btn_zeratul.webp"
+    ],
+    "slots": [
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "members": [
+      null,
+      null,
+      [
+        "CCho",
+        "Gall"
+      ],
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "isNew": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+    ],
+    "tags": [
+      [
+        "dot",
+        "global",
+        "shield",
+        "siege",
+        "slow",
+        "split-push",
+        "summons",
+        "vulnerable-body",
+        "waveclear"
+      ],
+      [
+        "dash",
+        "dive",
+        "frontline",
+        "heal-self",
+        "shield",
+        "slow",
+        "spell-armor",
+        "stun",
+        "summons"
+      ],
+      [
+        "aoe",
+        "burst",
+        "channel",
+        "dash",
+        "displace",
+        "dot",
+        "frontline",
+        "heal-self",
+        "invulnerable",
+        "poke",
+        "pull",
+        "slow",
+        "sustained-dps"
+      ],
+      [
+        "aoe",
+        "channel",
+        "dash",
+        "displace",
+        "engage",
+        "frontline",
+        "global",
+        "spell-armor",
+        "stun",
+        "waveclear"
+      ],
+      [
+        "blind",
+        "frontline",
+        "heal-self",
+        "peel",
+        "pull",
+        "shield",
+        "slow",
+        "stun",
+        "unstoppable"
+      ],
+      [
+        "burst",
+        "channel",
+        "cleanse",
+        "displace",
+        "mana-hungry",
+        "poke",
+        "teleport"
+      ],
+      [
+        "heal-ally",
+        "immobile",
+        "poke",
+        "reveal",
+        "root",
+        "silence"
+      ],
+      [
+        "aoe",
+        "dash",
+        "displace",
+        "engage",
+        "frontline",
+        "heal-self",
+        "slow",
+        "stun"
+      ],
+      [
+        "aa-reliant",
+        "burst",
+        "dash",
+        "heal-self",
+        "percent-hp-damage",
+        "sustained-dps"
+      ],
+      [
+        "aa-reliant",
+        "aoe",
+        "channel",
+        "dash",
+        "poke",
+        "spell-armor",
+        "stun",
+        "sustained-dps"
+      ],
+      [
+        "anti-heal",
+        "armor-shred",
+        "block",
+        "dash",
+        "frontline",
+        "heal-self",
+        "slow",
+        "taunt"
+      ],
+      [
+        "aoe",
+        "burst",
+        "poke",
+        "reveal",
+        "silence",
+        "summons",
+        "sustained-dps",
+        "teleport"
+      ],
+      [
+        "aoe",
+        "burst",
+        "dive",
+        "slow",
+        "stealth",
+        "teleport",
+        "time-stop"
+      ]
+    ]
+  },
+  "maps": {
+    "id": [
+      "battlefield-of-eternity",
+      "braxis-outpost",
+      "cursed-hollow",
+      "dragon-shire",
+      "hanamura-temple",
+      "towers-of-doom"
+    ],
+    "name": [
+      "Battlefield of Eternity",
+      "Braxis Outpost",
+      "Cursed Hollow",
+      "Dragon Shire",
+      "Hanamura Temple",
+      "Towers of Doom"
+    ],
+    "kind": [
+      "standard",
+      "aram",
+      "standard",
+      "standard",
+      "standard",
+      "standard"
+    ],
+    "ranked": [
+      true,
+      false,
+      true,
+      true,
+      false,
+      true
+    ]
+  },
+  "reasons": [
+    "Abathur's area damage (Toxic Nest) clears Anub'arak's summoned units quickly.",
+    "Abathur's area damage (Toxic Nest) clears Xal'atath's summoned units quickly.",
+    "Anub'arak can dive onto Abathur, who has little mobility to escape.",
+    "Anub'arak can interrupt channels with stun (Impale); Valla has channelled abilities.",
+    "Anub'arak can interrupt channels with stun (Impale); Diablo has channelled abilities.",
+    "Anub'arak has Spell Armor (Nerubian Armor), which reduces ability burst from Xal'atath.",
+    "Anub'arak can dive onto Malfurion, who has little mobility to escape.",
+    "Anub'arak has Spell Armor (Nerubian Armor), which reduces ability burst from Tracer.",
+    "Anub'arak can interrupt channels with stun (Impale); Li-Ming has channelled abilities.",
+    "Anub'arak has Spell Armor (Nerubian Armor), which reduces ability burst from Li-Ming.",
+    "Anub'arak's stun (Impale) can stop Zeratul in the middle of a dive.",
+    "Anub'arak can interrupt channels with stun (Impale); Cho'gall has channelled abilities.",
+    "Johanna's stun (Condemn) can stop Anub'arak in the middle of a dive.",
+    "Johanna can ignore or remove crowd control (Iron Skin), weakening Anub'arak's stun.",
+    "Johanna can blind basic attacks (Shield Glare), and Valla relies on basic attacks for damage.",
+    "Johanna can interrupt channels with stun (Condemn); Valla has channelled abilities.",
+    "Johanna can ignore or remove crowd control (Iron Skin), weakening Valla's stun.",
+    "Johanna's Shield Glare blinds enemies in front of her, so Valla's basic attacks miss while the blind lasts, and most of Valla's damage comes from basic attacks.",
+    "Johanna can interrupt channels with stun (Condemn); Diablo has channelled abilities.",
+    "Johanna can ignore or remove crowd control (Iron Skin), weakening Diablo's stun.",
+    "Johanna can ignore or remove crowd control (Iron Skin), weakening Malfurion's root.",
+    "Johanna can ignore or remove crowd control (Iron Skin), weakening Muradin's stun.",
+    "Johanna can blind basic attacks (Shield Glare), and Tracer relies on basic attacks for damage.",
+    "Johanna can ignore or remove crowd control (Iron Skin), weakening Varian's taunt.",
+    "Johanna can interrupt channels with stun (Condemn); Li-Ming has channelled abilities.",
+    "Johanna's stun (Condemn) can stop Zeratul in the middle of a dive.",
+    "Johanna can interrupt channels with stun (Condemn); Cho'gall has channelled abilities.",
+    "Valla's area damage (Multishot) clears Abathur's summoned units quickly.",
+    "Valla's stun (Rain of Vengeance) can stop Anub'arak in the middle of a dive.",
+    "Valla's area damage (Multishot) clears Anub'arak's summoned units quickly.",
+    "Valla can interrupt channels with stun (Rain of Vengeance); Diablo has channelled abilities.",
+    "Valla has Spell Armor (Gloom), which reduces ability burst from Xal'atath.",
+    "Valla's area damage (Multishot) clears Xal'atath's summoned units quickly.",
+    "Valla has Spell Armor (Gloom), which reduces ability burst from Tracer.",
+    "Valla can interrupt channels with stun (Rain of Vengeance); Li-Ming has channelled abilities.",
+    "Valla has Spell Armor (Gloom), which reduces ability burst from Li-Ming.",
+    "Valla's stun (Rain of Vengeance) can stop Zeratul in the middle of a dive.",
+    "Valla can interrupt channels with stun (Rain of Vengeance); Cho'gall has channelled abilities.",
+    "Diablo's area damage (Fire Stomp) clears Abathur's summoned units quickly.",
+    "Diablo's map-wide reach (Apocalypse) helps answer Abathur's side-lane pressure.",
+    "Diablo's stun (Overpower) can stop Anub'arak in the middle of a dive.",
+    "Diablo's area damage (Fire Stomp) clears Anub'arak's summoned units quickly.",
+    "Diablo can interrupt channels with stun (Overpower); Valla has channelled abilities.",
+    "Diablo has Spell Armor (Soul Shield), which reduces ability burst from Xal'atath.",
+    "Diablo's area damage (Fire Stomp) clears Xal'atath's summoned units quickly.",
+    "Diablo has Spell Armor (Soul Shield), which reduces ability burst from Tracer.",
+    "Diablo can interrupt channels with stun (Overpower); Li-Ming has channelled abilities.",
+    "Diablo has Spell Armor (Soul Shield), which reduces ability burst from Li-Ming.",
+    "Diablo's stun (Overpower) can stop Zeratul in the middle of a dive.",
+    "Diablo can interrupt channels with stun (Overpower); Cho'gall has channelled abilities.",
+    "Xal'atath's area damage (Void Eruption) clears Abathur's summoned units quickly.",
+    "Xal'atath's silence (Silence of the Lamb) can stop Anub'arak in the middle of a dive.",
+    "Xal'atath's area damage (Void Eruption) clears Anub'arak's summoned units quickly.",
+    "Xal'atath can interrupt channels with silence (Silence of the Lamb); Valla has channelled abilities.",
+    "Xal'atath can interrupt channels with silence (Silence of the Lamb); Diablo has channelled abilities.",
+    "Xal'atath can interrupt channels with silence (Silence of the Lamb); Li-Ming has channelled abilities.",
+    "Xal'atath can reveal enemies (Shadow Mark), taking away the stealth Zeratul relies on.",
+    "Xal'atath's silence (Silence of the Lamb) can stop Zeratul in the middle of a dive.",
+    "Xal'atath can interrupt channels with silence (Silence of the Lamb); Cho'gall has channelled abilities.",
+    "Malfurion's root (Entangling Roots) can stop Anub'arak in the middle of a dive.",
+    "Malfurion can interrupt channels with silence (Twilight Dream); Valla has channelled abilities.",
+    "Malfurion can interrupt channels with silence (Twilight Dream); Diablo has channelled abilities.",
+    "Malfurion can interrupt channels with silence (Twilight Dream); Li-Ming has channelled abilities.",
+    "Malfurion can reveal enemies (Moonfire), taking away the stealth Zeratul relies on.",
+    "Malfurion's root (Entangling Roots) can stop Zeratul in the middle of a dive.",
+    "Malfurion can interrupt channels with silence (Twilight Dream); Cho'gall has channelled abilities.",
+    "Muradin's area damage (Thunder Clap) clears Abathur's summoned units quickly.",
+    "Muradin's stun (Storm Bolt) can stop Anub'arak in the middle of a dive.",
+    "Muradin's area damage (Thunder Clap) clears Anub'arak's summoned units quickly.",
+    "Muradin can interrupt channels with stun (Storm Bolt); Valla has channelled abilities.",
+    "Muradin can interrupt channels with stun (Storm Bolt); Diablo has channelled abilities.",
+    "Muradin's area damage (Thunder Clap) clears Xal'atath's summoned units quickly.",
+    "Muradin can interrupt channels with stun (Storm Bolt); Li-Ming has channelled abilities.",
+    "Muradin's stun (Storm Bolt) can stop Zeratul in the middle of a dive.",
+    "Muradin can interrupt channels with stun (Storm Bolt); Cho'gall has channelled abilities.",
+    "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Anub'arak hardest.",
+    "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Johanna hardest.",
+    "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Diablo hardest.",
+    "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Muradin hardest.",
+    "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Varian hardest.",
+    "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Cho'gall hardest.",
+    "Varian reduces healing (Mortal Strike), which cuts into Anub'arak's heal-self.",
+    "Varian reduces armor (Colossus Smash), offsetting Anub'arak's spell-armor.",
+    "Varian reduces healing (Mortal Strike), which cuts into Johanna's heal-self.",
+    "Varian can block or armor against basic attacks (Parry), which Valla relies on for damage.",
+    "Varian reduces armor (Colossus Smash), offsetting Valla's spell-armor.",
+    "Varian reduces armor (Colossus Smash), offsetting Diablo's spell-armor.",
+    "Varian reduces healing (Mortal Strike), which cuts into Malfurion's heal-ally.",
+    "Varian reduces healing (Mortal Strike), which cuts into Muradin's heal-self.",
+    "Varian can block or armor against basic attacks (Parry), which Tracer relies on for damage.",
+    "Varian reduces healing (Mortal Strike), which cuts into Tracer's heal-self.",
+    "Varian reduces healing (Mortal Strike), which cuts into Cho'gall's heal-self.",
+    "Li-Ming can ignore or remove crowd control (Illusionist), weakening Anub'arak's stun.",
+    "Li-Ming can ignore or remove crowd control (Illusionist), weakening Johanna's stun.",
+    "Li-Ming can interrupt channels with displace (Wave of Force); Valla has channelled abilities.",
+    "Li-Ming can ignore or remove crowd control (Illusionist), weakening Valla's stun.",
+    "Li-Ming can interrupt channels with displace (Wave of Force); Diablo has channelled abilities.",
+    "Li-Ming can ignore or remove crowd control (Illusionist), weakening Diablo's stun.",
+    "Li-Ming can ignore or remove crowd control (Illusionist), weakening Malfurion's root.",
+    "Li-Ming can ignore or remove crowd control (Illusionist), weakening Muradin's stun.",
+    "Li-Ming can ignore or remove crowd control (Illusionist), weakening Varian's taunt.",
+    "Li-Ming can interrupt channels with displace (Wave of Force); Cho'gall has channelled abilities.",
+    "Zeratul can dive onto Abathur, who has little mobility to escape.",
+    "Zeratul's area damage (Cleave) clears Abathur's summoned units quickly.",
+    "Zeratul's area damage (Cleave) clears Anub'arak's summoned units quickly.",
+    "Zeratul can interrupt channels with time-stop (Void Prison); Valla has channelled abilities.",
+    "Zeratul can interrupt channels with time-stop (Void Prison); Diablo has channelled abilities.",
+    "Zeratul's area damage (Cleave) clears Xal'atath's summoned units quickly.",
+    "Zeratul can dive onto Malfurion, who has little mobility to escape.",
+    "Zeratul can interrupt channels with time-stop (Void Prison); Li-Ming has channelled abilities.",
+    "Zeratul can interrupt channels with time-stop (Void Prison); Cho'gall has channelled abilities.",
+    "Cho'gall's area damage (Dread Orb) clears Abathur's summoned units quickly.",
+    "Cho'gall's area damage (Dread Orb) clears Anub'arak's summoned units quickly.",
+    "Cho'gall can interrupt channels with displace (Surging Fist); Valla has channelled abilities.",
+    "Cho'gall can interrupt channels with displace (Surging Fist); Diablo has channelled abilities.",
+    "Cho'gall's area damage (Dread Orb) clears Xal'atath's summoned units quickly.",
+    "Cho'gall can avoid or survive a burst window (Molten Block), wasting Xal'atath's cooldowns.",
+    "Cho'gall can avoid or survive a burst window (Molten Block), wasting Tracer's cooldowns.",
+    "Cho'gall can interrupt channels with displace (Surging Fist); Li-Ming has channelled abilities.",
+    "Cho'gall can avoid or survive a burst window (Molten Block), wasting Li-Ming's cooldowns.",
+    "Cho'gall can avoid or survive a burst window (Molten Block), wasting Zeratul's cooldowns.",
+    "Abathur can shield or save Anub'arak after Anub'arak commits to a dive (Symbiote).",
+    "Diablo has map-wide reach (Apocalypse) while Abathur pressures a side lane.",
+    "Abathur can shield or save Zeratul after Zeratul commits to a dive (Symbiote).",
+    "Johanna can shield or save Anub'arak after Anub'arak commits to a dive (Iron Skin).",
+    "Anub'arak's stun (Impale) holds targets still for Xal'atath's burst.",
+    "Malfurion can heal Anub'arak through a dive (Regrowth).",
+    "Anub'arak's stun (Impale) holds targets still for Tracer's burst.",
+    "Anub'arak's stun (Impale) holds targets still for Li-Ming's burst.",
+    "Anub'arak's stun (Impale) holds targets still for Zeratul's burst.",
+    "Anub'arak can shield or save Zeratul after Zeratul commits to a dive (Harden Carapace).",
+    "Anub'arak's stun (Impale) holds targets still for Cho'gall's burst.",
+    "Johanna groups or freezes enemies (Condemn) for Valla's area damage.",
+    "Johanna groups or freezes enemies (Condemn) for Diablo's area damage.",
+    "Johanna's stun (Condemn) holds targets still for Xal'atath's burst.",
+    "Johanna groups or freezes enemies (Condemn) for Xal'atath's area damage.",
+    "Johanna groups or freezes enemies (Condemn) for Muradin's area damage.",
+    "Johanna's stun (Condemn) holds targets still for Tracer's burst.",
+    "Johanna's stun (Condemn) holds targets still for Li-Ming's burst.",
+    "Johanna's stun (Condemn) holds targets still for Zeratul's burst.",
+    "Johanna groups or freezes enemies (Condemn) for Zeratul's area damage.",
+    "Johanna can shield or save Zeratul after Zeratul commits to a dive (Iron Skin).",
+    "Johanna's stun (Condemn) holds targets still for Cho'gall's burst.",
+    "Johanna groups or freezes enemies (Condemn) for Cho'gall's area damage.",
+    "Valla's stun (Rain of Vengeance) holds targets still for Xal'atath's burst.",
+    "Valla's stun (Rain of Vengeance) holds targets still for Tracer's burst.",
+    "Valla's stun (Rain of Vengeance) holds targets still for Li-Ming's burst.",
+    "Li-Ming can cleanse crowd control off Valla (Illusionist) so it keeps attacking.",
+    "Valla's stun (Rain of Vengeance) holds targets still for Zeratul's burst.",
+    "Zeratul groups or freezes enemies (Void Prison) for Valla's area damage.",
+    "Valla's stun (Rain of Vengeance) holds targets still for Cho'gall's burst.",
+    "Cho'gall groups or freezes enemies (Upheaval) for Valla's area damage.",
+    "Diablo's stun (Overpower) holds targets still for Xal'atath's burst.",
+    "Diablo's stun (Overpower) holds targets still for Tracer's burst.",
+    "Diablo's stun (Overpower) holds targets still for Li-Ming's burst.",
+    "Diablo's stun (Overpower) holds targets still for Zeratul's burst.",
+    "Zeratul groups or freezes enemies (Void Prison) for Diablo's area damage.",
+    "Diablo's stun (Overpower) holds targets still for Cho'gall's burst.",
+    "Cho'gall groups or freezes enemies (Upheaval) for Diablo's area damage.",
+    "Malfurion's root (Entangling Roots) holds targets still for Xal'atath's burst.",
+    "Muradin's stun (Storm Bolt) holds targets still for Xal'atath's burst.",
+    "Varian's taunt (Taunt) holds targets still for Xal'atath's burst.",
+    "Zeratul's time-stop (Void Prison) holds targets still for Xal'atath's burst.",
+    "Zeratul groups or freezes enemies (Void Prison) for Xal'atath's area damage.",
+    "Cho'gall groups or freezes enemies (Upheaval) for Xal'atath's area damage.",
+    "Malfurion's root (Entangling Roots) holds targets still for Tracer's burst.",
+    "Malfurion's root (Entangling Roots) holds targets still for Li-Ming's burst.",
+    "Malfurion's root (Entangling Roots) holds targets still for Zeratul's burst.",
+    "Malfurion's root (Entangling Roots) holds targets still for Cho'gall's burst.",
+    "Muradin's stun (Storm Bolt) holds targets still for Tracer's burst.",
+    "Muradin's stun (Storm Bolt) holds targets still for Li-Ming's burst.",
+    "Muradin's Storm Bolt stuns its target, which gives Li-Ming time to land Arcane Orb from long range.",
+    "Muradin's stun (Storm Bolt) holds targets still for Zeratul's burst.",
+    "Zeratul groups or freezes enemies (Void Prison) for Muradin's area damage.",
+    "Muradin's stun (Storm Bolt) holds targets still for Cho'gall's burst.",
+    "Cho'gall groups or freezes enemies (Upheaval) for Muradin's area damage.",
+    "Varian's taunt (Taunt) holds targets still for Tracer's burst.",
+    "Li-Ming can cleanse crowd control off Tracer (Illusionist) so it keeps attacking.",
+    "Zeratul's time-stop (Void Prison) holds targets still for Tracer's burst.",
+    "Varian's taunt (Taunt) holds targets still for Li-Ming's burst.",
+    "Varian's taunt (Taunt) holds targets still for Zeratul's burst.",
+    "Varian's taunt (Taunt) holds targets still for Cho'gall's burst.",
+    "Zeratul's time-stop (Void Prison) holds targets still for Li-Ming's burst.",
+    "Zeratul's time-stop (Void Prison) holds targets still for Cho'gall's burst.",
+    "Zeratul groups or freezes enemies (Void Prison) for Cho'gall's area damage.",
+    "Abathur's waveclear (Toxic Nest) helps hold lanes against Battlefield of Eternity's pushing objective.",
+    "Abathur's map-wide reach (Symbiote) offsets Cursed Hollow's long rotations.",
+    "Cursed Hollow has three lanes for Abathur to pressure while the team holds the objective.",
+    "Abathur's map-wide reach (Symbiote) offsets Dragon Shire's long rotations.",
+    "Dragon Shire has three lanes for Abathur to pressure while the team holds the objective.",
+    "Abathur's waveclear (Toxic Nest) helps hold lanes against Dragon Shire's pushing objective.",
+    "Abathur's waveclear (Toxic Nest) helps hold lanes against Hanamura Temple's pushing objective.",
+    "Abathur can siege structures (Bombard Strain), which Hanamura Temple's objective rewards.",
+    "Towers of Doom has three lanes for Abathur to pressure while the team holds the objective.",
+    "Abathur's waveclear (Toxic Nest) helps hold lanes against Towers of Doom's pushing objective.",
+    "Abathur can siege structures (Bombard Strain), which Towers of Doom's objective rewards.",
+    "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Cursed Hollow's objective.",
+    "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Dragon Shire's objective.",
+    "Anub'arak can stand on Hanamura Temple's payload and absorb pressure.",
+    "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Towers of Doom's objective.",
+    "Johanna can stand on Hanamura Temple's payload and absorb pressure.",
+    "Battlefield of Eternity's objective forces teamfights where Valla's area damage (Multishot) is strong.",
+    "Valla's sustained-dps (Hatred) speeds up Battlefield of Eternity's PvE objective.",
+    "Braxis Outpost's objective forces teamfights where Valla's area damage (Multishot) is strong.",
+    "Braxis Outpost's single lane suits Valla's poke (Hungering Arrow).",
+    "Valla can reach channelling enemies quickly (Vault) to contest Cursed Hollow's objective.",
+    "Valla can reach channelling enemies quickly (Vault) to contest Dragon Shire's objective.",
+    "Hanamura Temple's objective forces teamfights where Valla's area damage (Multishot) is strong.",
+    "Valla can reach channelling enemies quickly (Vault) to contest Towers of Doom's objective.",
+    "Diablo's waveclear (Fire Stomp) helps hold lanes against Battlefield of Eternity's pushing objective.",
+    "Battlefield of Eternity's objective forces teamfights where Diablo's area damage (Fire Stomp) is strong.",
+    "Braxis Outpost's objective forces teamfights where Diablo's area damage (Fire Stomp) is strong.",
+    "Diablo's map-wide reach (Apocalypse) offsets Cursed Hollow's long rotations.",
+    "Diablo can reach channelling enemies quickly (Shadow Charge) to contest Cursed Hollow's objective.",
+    "Diablo's map-wide reach (Apocalypse) offsets Dragon Shire's long rotations.",
+    "Diablo's waveclear (Fire Stomp) helps hold lanes against Dragon Shire's pushing objective.",
+    "Diablo can reach channelling enemies quickly (Shadow Charge) to contest Dragon Shire's objective.",
+    "Diablo's waveclear (Fire Stomp) helps hold lanes against Hanamura Temple's pushing objective.",
+    "Hanamura Temple's objective forces teamfights where Diablo's area damage (Fire Stomp) is strong.",
+    "Diablo can stand on Hanamura Temple's payload and absorb pressure.",
+    "Diablo's waveclear (Fire Stomp) helps hold lanes against Towers of Doom's pushing objective.",
+    "Diablo can reach channelling enemies quickly (Shadow Charge) to contest Towers of Doom's objective.",
+    "Battlefield of Eternity's objective forces teamfights where Xal'atath's area damage (Void Eruption) is strong.",
+    "Xal'atath's sustained-dps (Void Volley) speeds up Battlefield of Eternity's PvE objective.",
+    "Braxis Outpost's objective forces teamfights where Xal'atath's area damage (Void Eruption) is strong.",
+    "Braxis Outpost's single lane suits Xal'atath's poke (Shadow Mark).",
+    "Xal'atath can reach channelling enemies quickly (Void Step) to contest Cursed Hollow's objective.",
+    "Xal'atath can reach channelling enemies quickly (Void Step) to contest Dragon Shire's objective.",
+    "Hanamura Temple's objective forces teamfights where Xal'atath's area damage (Void Eruption) is strong.",
+    "Xal'atath can reach channelling enemies quickly (Void Step) to contest Towers of Doom's objective.",
+    "Braxis Outpost's single lane suits Malfurion's poke (Moonfire).",
+    "Malfurion has little mobility to rotate across Cursed Hollow's large layout.",
+    "Battlefield of Eternity's objective forces teamfights where Muradin's area damage (Thunder Clap) is strong.",
+    "Braxis Outpost's objective forces teamfights where Muradin's area damage (Thunder Clap) is strong.",
+    "Muradin can reach channelling enemies quickly (Dwarf Toss) to contest Cursed Hollow's objective.",
+    "Muradin can reach channelling enemies quickly (Dwarf Toss) to contest Dragon Shire's objective.",
+    "Hanamura Temple's objective forces teamfights where Muradin's area damage (Thunder Clap) is strong.",
+    "Muradin can stand on Hanamura Temple's payload and absorb pressure.",
+    "Muradin can reach channelling enemies quickly (Dwarf Toss) to contest Towers of Doom's objective.",
+    "Tracer's sustained-dps (Reload) speeds up Battlefield of Eternity's PvE objective.",
+    "Tracer can reach channelling enemies quickly (Blink) to contest Cursed Hollow's objective.",
+    "Tracer can reach channelling enemies quickly (Blink) to contest Dragon Shire's objective.",
+    "Tracer can reach channelling enemies quickly (Blink) to contest Towers of Doom's objective.",
+    "Varian can reach channelling enemies quickly (Charge) to contest Cursed Hollow's objective.",
+    "Varian can reach channelling enemies quickly (Charge) to contest Dragon Shire's objective.",
+    "Varian can stand on Hanamura Temple's payload and absorb pressure.",
+    "Varian can reach channelling enemies quickly (Charge) to contest Towers of Doom's objective.",
+    "Braxis Outpost's single lane suits Li-Ming's poke (Magic Missiles).",
+    "Li-Ming can reach channelling enemies quickly (Teleport) to contest Cursed Hollow's objective.",
+    "Li-Ming can reach channelling enemies quickly (Teleport) to contest Dragon Shire's objective.",
+    "Li-Ming can reach channelling enemies quickly (Teleport) to contest Towers of Doom's objective.",
+    "Battlefield of Eternity's objective forces teamfights where Zeratul's area damage (Cleave) is strong.",
+    "Braxis Outpost's objective forces teamfights where Zeratul's area damage (Cleave) is strong.",
+    "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Cursed Hollow's objective.",
+    "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Dragon Shire's objective.",
+    "Hanamura Temple's objective forces teamfights where Zeratul's area damage (Cleave) is strong.",
+    "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Towers of Doom's objective.",
+    "Battlefield of Eternity's objective forces teamfights where Cho'gall's area damage (Dread Orb) is strong.",
+    "Cho'gall's sustained-dps (Shadow Bolt Volley) speeds up Battlefield of Eternity's PvE objective.",
+    "Braxis Outpost's objective forces teamfights where Cho'gall's area damage (Dread Orb) is strong.",
+    "Braxis Outpost's single lane suits Cho'gall's poke (Shadowflame).",
+    "Cho'gall can reach channelling enemies quickly (Surging Fist) to contest Cursed Hollow's objective.",
+    "Cho'gall can reach channelling enemies quickly (Surging Fist) to contest Dragon Shire's objective.",
+    "Hanamura Temple's objective forces teamfights where Cho'gall's area damage (Dread Orb) is strong.",
+    "Cho'gall can stand on Hanamura Temple's payload and absorb pressure.",
+    "Cho'gall can reach channelling enemies quickly (Surging Fist) to contest Towers of Doom's objective."
+  ],
+  "theory": {
+    "counters": {
+      "a": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "b": [
+        1,
+        11,
+        0,
+        9,
+        3,
+        11,
+        6,
+        8,
+        5,
+        12,
+        2,
+        1,
+        9,
+        3,
+        6,
+        7,
+        8,
+        10,
+        5,
+        12,
+        2,
+        0,
+        1,
+        3,
+        11,
+        8,
+        5,
+        12,
+        2,
+        0,
+        1,
+        9,
+        11,
+        8,
+        5,
+        12,
+        2,
+        0,
+        1,
+        9,
+        3,
+        5,
+        12,
+        2,
+        1,
+        9,
+        3,
+        5,
+        12,
+        2,
+        0,
+        1,
+        9,
+        3,
+        11,
+        5,
+        12,
+        2,
+        1,
+        4,
+        3,
+        7,
+        10,
+        2,
+        1,
+        4,
+        9,
+        3,
+        6,
+        7,
+        8,
+        2,
+        1,
+        4,
+        9,
+        3,
+        6,
+        7,
+        10,
+        2,
+        0,
+        1,
+        9,
+        3,
+        11,
+        6,
+        5,
+        2,
+        0,
+        1,
+        9,
+        3,
+        11,
+        8,
+        5,
+        12
+      ],
+      "score": [
+        65,
+        65,
+        73,
+        69,
+        69,
+        69,
+        73,
+        69,
+        83,
+        69,
+        69,
+        80,
+        97,
+        80,
+        65,
+        65,
+        77,
+        65,
+        69,
+        69,
+        69,
+        65,
+        80,
+        69,
+        80,
+        69,
+        83,
+        69,
+        69,
+        77,
+        80,
+        69,
+        80,
+        69,
+        83,
+        69,
+        69,
+        65,
+        80,
+        69,
+        69,
+        69,
+        88,
+        69,
+        69,
+        69,
+        69,
+        69,
+        88,
+        69,
+        65,
+        80,
+        69,
+        69,
+        65,
+        69,
+        69,
+        69,
+        73,
+        73,
+        73,
+        73,
+        73,
+        73,
+        83,
+        73,
+        80,
+        65,
+        73,
+        73,
+        86,
+        73,
+        65,
+        65,
+        80,
+        80,
+        65,
+        65,
+        65,
+        69,
+        83,
+        65,
+        69,
+        69,
+        65,
+        73,
+        69,
+        69,
+        65,
+        65,
+        69,
+        69,
+        77,
+        65,
+        80,
+        65
+      ],
+      "r": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          10
+        ],
+        [
+          11
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          20
+        ],
+        [
+          21
+        ],
+        [
+          22
+        ],
+        [
+          23
+        ],
+        [
+          24
+        ],
+        [
+          25
+        ],
+        [
+          26
+        ],
+        [
+          27
+        ],
+        [
+          28,
+          29
+        ],
+        [
+          30
+        ],
+        [
+          31,
+          32
+        ],
+        [
+          33
+        ],
+        [
+          34,
+          35
+        ],
+        [
+          36
+        ],
+        [
+          37
+        ],
+        [
+          38,
+          39
+        ],
+        [
+          40,
+          41
+        ],
+        [
+          42
+        ],
+        [
+          43,
+          44
+        ],
+        [
+          45
+        ],
+        [
+          46,
+          47
+        ],
+        [
+          48
+        ],
+        [
+          49
+        ],
+        [
+          50
+        ],
+        [
+          51,
+          52
+        ],
+        [
+          53
+        ],
+        [
+          54
+        ],
+        [
+          55
+        ],
+        [
+          56,
+          57
+        ],
+        [
+          58
+        ],
+        [
+          59
+        ],
+        [
+          60
+        ],
+        [
+          61
+        ],
+        [
+          62
+        ],
+        [
+          63,
+          64
+        ],
+        [
+          65
+        ],
+        [
+          66
+        ],
+        [
+          67,
+          68
+        ],
+        [
+          69
+        ],
+        [
+          70
+        ],
+        [
+          71
+        ],
+        [
+          72
+        ],
+        [
+          73
+        ],
+        [
+          74
+        ],
+        [
+          75
+        ],
+        [
+          76
+        ],
+        [
+          77
+        ],
+        [
+          78
+        ],
+        [
+          79
+        ],
+        [
+          80
+        ],
+        [
+          81,
+          82
+        ],
+        [
+          83
+        ],
+        [
+          84,
+          85
+        ],
+        [
+          86
+        ],
+        [
+          87
+        ],
+        [
+          88
+        ],
+        [
+          89,
+          90
+        ],
+        [
+          91
+        ],
+        [
+          92
+        ],
+        [
+          93
+        ],
+        [
+          94,
+          95
+        ],
+        [
+          96,
+          97
+        ],
+        [
+          98
+        ],
+        [
+          99
+        ],
+        [
+          100
+        ],
+        [
+          101
+        ],
+        [
+          102,
+          103
+        ],
+        [
+          104
+        ],
+        [
+          105
+        ],
+        [
+          106
+        ],
+        [
+          107
+        ],
+        [
+          108
+        ],
+        [
+          109
+        ],
+        [
+          110
+        ],
+        [
+          111
+        ],
+        [
+          112
+        ],
+        [
+          113
+        ],
+        [
+          114
+        ],
+        [
+          115,
+          116
+        ],
+        [
+          117
+        ],
+        [
+          118,
+          119
+        ],
+        [
+          120
+        ]
+      ]
+    },
+    "synergies": {
+      "a": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        9,
+        9,
+        9,
+        9,
+        9,
+        3,
+        3,
+        3,
+        3,
+        3,
+        11,
+        11,
+        11,
+        11,
+        11,
+        6,
+        6,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        10,
+        10,
+        10,
+        5,
+        12
+      ],
+      "b": [
+        1,
+        3,
+        12,
+        4,
+        11,
+        6,
+        8,
+        5,
+        12,
+        2,
+        9,
+        3,
+        11,
+        7,
+        8,
+        5,
+        12,
+        2,
+        11,
+        8,
+        5,
+        12,
+        2,
+        11,
+        8,
+        5,
+        12,
+        2,
+        6,
+        7,
+        10,
+        12,
+        2,
+        8,
+        5,
+        12,
+        2,
+        8,
+        5,
+        12,
+        2,
+        10,
+        5,
+        12,
+        5,
+        12,
+        2,
+        12,
+        2
+      ],
+      "score": [
+        65,
+        65,
+        65,
+        65,
+        73,
+        65,
+        73,
+        73,
+        83,
+        73,
+        69,
+        69,
+        86,
+        69,
+        73,
+        73,
+        92,
+        86,
+        73,
+        73,
+        80,
+        86,
+        86,
+        73,
+        73,
+        73,
+        86,
+        86,
+        73,
+        73,
+        73,
+        86,
+        69,
+        73,
+        73,
+        73,
+        73,
+        73,
+        86,
+        86,
+        86,
+        73,
+        60,
+        73,
+        73,
+        73,
+        73,
+        73,
+        86
+      ],
+      "r": [
+        [
+          121
+        ],
+        [
+          122
+        ],
+        [
+          123
+        ],
+        [
+          124
+        ],
+        [
+          125
+        ],
+        [
+          126
+        ],
+        [
+          127
+        ],
+        [
+          128
+        ],
+        [
+          129,
+          130
+        ],
+        [
+          131
+        ],
+        [
+          132
+        ],
+        [
+          133
+        ],
+        [
+          134,
+          135
+        ],
+        [
+          136
+        ],
+        [
+          137
+        ],
+        [
+          138
+        ],
+        [
+          139,
+          140,
+          141
+        ],
+        [
+          142,
+          143
+        ],
+        [
+          144
+        ],
+        [
+          145
+        ],
+        [
+          146,
+          147
+        ],
+        [
+          148,
+          149
+        ],
+        [
+          150,
+          151
+        ],
+        [
+          152
+        ],
+        [
+          153
+        ],
+        [
+          154
+        ],
+        [
+          155,
+          156
+        ],
+        [
+          157,
+          158
+        ],
+        [
+          159
+        ],
+        [
+          160
+        ],
+        [
+          161
+        ],
+        [
+          162,
+          163
+        ],
+        [
+          164
+        ],
+        [
+          165
+        ],
+        [
+          166
+        ],
+        [
+          167
+        ],
+        [
+          168
+        ],
+        [
+          169
+        ],
+        [
+          170,
+          171
+        ],
+        [
+          172,
+          173
+        ],
+        [
+          174,
+          175
+        ],
+        [
+          176
+        ],
+        [
+          177
+        ],
+        [
+          178
+        ],
+        [
+          179
+        ],
+        [
+          180
+        ],
+        [
+          181
+        ],
+        [
+          182
+        ],
+        [
+          183,
+          184
+        ]
+      ]
+    },
+    "mapFit": {
+      "hero": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        4,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        10,
+        10,
+        10,
+        10,
+        5,
+        5,
+        5,
+        5,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "map": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        2,
+        3,
+        4,
+        5,
+        4,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        1,
+        2,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0,
+        2,
+        3,
+        5,
+        2,
+        3,
+        4,
+        5,
+        1,
+        2,
+        3,
+        5,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "score": [
+        65,
+        83,
+        90,
+        80,
+        88,
+        60,
+        60,
+        60,
+        60,
+        60,
+        80,
+        77,
+        60,
+        60,
+        65,
+        60,
+        77,
+        65,
+        80,
+        88,
+        83,
+        73,
+        80,
+        77,
+        60,
+        60,
+        65,
+        60,
+        65,
+        35,
+        65,
+        65,
+        60,
+        60,
+        73,
+        60,
+        69,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        65,
+        60,
+        60,
+        60,
+        65,
+        65,
+        60,
+        60,
+        65,
+        60,
+        80,
+        77,
+        60,
+        60,
+        73,
+        60
+      ],
+      "r": [
+        [
+          185
+        ],
+        [
+          186,
+          187
+        ],
+        [
+          188,
+          189,
+          190
+        ],
+        [
+          191,
+          192
+        ],
+        [
+          193,
+          194,
+          195
+        ],
+        [
+          196
+        ],
+        [
+          197
+        ],
+        [
+          198
+        ],
+        [
+          199
+        ],
+        [
+          200
+        ],
+        [
+          201,
+          202
+        ],
+        [
+          203,
+          204
+        ],
+        [
+          205
+        ],
+        [
+          206
+        ],
+        [
+          207
+        ],
+        [
+          208
+        ],
+        [
+          209,
+          210
+        ],
+        [
+          211
+        ],
+        [
+          212,
+          213
+        ],
+        [
+          214,
+          215,
+          216
+        ],
+        [
+          217,
+          218,
+          219
+        ],
+        [
+          220,
+          221
+        ],
+        [
+          222,
+          223
+        ],
+        [
+          224,
+          225
+        ],
+        [
+          226
+        ],
+        [
+          227
+        ],
+        [
+          228
+        ],
+        [
+          229
+        ],
+        [
+          230
+        ],
+        [
+          231
+        ],
+        [
+          232
+        ],
+        [
+          233
+        ],
+        [
+          234
+        ],
+        [
+          235
+        ],
+        [
+          236,
+          237
+        ],
+        [
+          238
+        ],
+        [
+          239
+        ],
+        [
+          240
+        ],
+        [
+          241
+        ],
+        [
+          242
+        ],
+        [
+          243
+        ],
+        [
+          244
+        ],
+        [
+          245
+        ],
+        [
+          246
+        ],
+        [
+          247
+        ],
+        [
+          248
+        ],
+        [
+          249
+        ],
+        [
+          250
+        ],
+        [
+          251
+        ],
+        [
+          252
+        ],
+        [
+          253
+        ],
+        [
+          254
+        ],
+        [
+          255
+        ],
+        [
+          256
+        ],
+        [
+          257,
+          258
+        ],
+        [
+          259,
+          260
+        ],
+        [
+          261
+        ],
+        [
+          262
+        ],
+        [
+          263,
+          264
+        ],
+        [
+          265
+        ]
+      ]
+    }
+  }
+}

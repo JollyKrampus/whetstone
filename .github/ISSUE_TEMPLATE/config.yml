@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: How scores and sources work
+    url: https://jollykrampus.github.io/whetstone/hots/about/
+    about: Formulas, sample-size gates, tiers and data sources (methodology page).
+  - name: Report a security problem privately
+    url: https://github.com/JollyKrampus/whetstone/security/advisories/new
+    about: Please do not open public issues for security problems.

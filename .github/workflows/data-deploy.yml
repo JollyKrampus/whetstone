@@ -1,0 +1,382 @@
+# Daily data refresh and site deploy (docs/SPEC.md §10, critique D3).
+#
+#   plan → data (one job per game) → publish (data branch) → build → deploy → report
+#
+# Push to main skips data/publish and rebuilds from the data branch. Class B/C data (Heroes
+# Profile, Twitch/YouTube) never touches git: it moves from a data job to the build job as a
+# short-lived, encrypted-when-licensed artifact (pipeline/private.ts). See docs/DATA.md.
+name: Data + Deploy
+
+on:
+  schedule:
+    # 10:17 UTC: after Scryfall's ~09:05 bulk build, off the congested top of the hour.
+    - cron: '17 10 * * *'
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/dependabot.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/egress-probe.yml'
+  workflow_dispatch:
+    inputs:
+      games:
+        description: 'Games to refresh: "all", "none" (rebuild only) or a comma list (hots,mtga,pokemon)'
+        type: string
+        default: all
+      force_deploy:
+        description: Deploy even if no data changed
+        type: boolean
+        default: false
+
+# Every job states its own permissions.
+permissions: {}
+
+# Runs never overlap, so two runs cannot race on the data branch. The deploy job additionally
+# uses the "pages" group.
+concurrency:
+  group: data-deploy
+  cancel-in-progress: false
+
+env:
+  SITE_URL: https://jollykrampus.github.io/whetstone/
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      games: ${{ steps.plan.outputs.games }}
+      run_data: ${{ steps.plan.outputs.run_data }}
+    steps:
+      - name: Choose games and per-game timeouts
+        id: plan
+        env:
+          EVENT: ${{ github.event_name }}
+          GAMES: ${{ inputs.games }}
+        run: |
+          set -euf
+          all="hots mtga pokemon"
+          sel=""
+          if [ "$EVENT" = "push" ] || [ "${GAMES:-}" = "none" ]; then
+            sel=""
+          elif [ -z "${GAMES:-}" ] || [ "$GAMES" = "all" ]; then
+            sel="$all"
+          else
+            for g in $(printf '%s' "$GAMES" | tr ',' ' '); do
+              case " $all " in
+                *" $g "*) sel="$sel $g" ;;
+                *) echo "::error::Unknown game '$g' (expected hots, mtga, pokemon, all or none)"; exit 1 ;;
+              esac
+            done
+          fi
+          matrix=$(jq -cn --arg sel "$sel" '{"hots":90,"mtga":30,"pokemon":45} as $t
+            | {include: [$sel | split(" ") | .[] | select(length > 0) | {game: ., timeout: $t[.]}]}')
+          games=$(printf '%s' "$sel" | xargs | tr ' ' ',')
+          {
+            echo "matrix=$matrix"
+            echo "games=$games"
+            if [ -n "$games" ]; then echo "run_data=true"; else echo "run_data=false"; fi
+          } >> "$GITHUB_OUTPUT"
+          echo "games: ${games:-none}"
+
+  data:
+    name: data (${{ matrix.game }})
+    needs: plan
+    if: needs.plan.outputs.run_data == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: ${{ matrix.timeout }}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    env:
+      GAME: ${{ matrix.game }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Find the data branch
+        id: branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/branches/data" --silent 2>/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out last-good data
+        if: steps.branch.outputs.exists == 'true'
+        uses: actions/checkout@v7
+        with:
+          ref: data
+          path: data
+          sparse-checkout: current
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run the ${{ matrix.game }} pipeline
+        id: run
+        run: node pipeline/run.ts --game "$GAME" --out data
+        env:
+          # Unset secrets arrive as empty strings; the pipeline marks those sources "disabled".
+          HP_MODE: ${{ vars.HP_MODE }}
+          HP_API_KEY: ${{ secrets.HP_API_KEY }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+          LIQUIPEDIA_UA_CONTACT: ${{ vars.LIQUIPEDIA_UA_CONTACT }}
+
+      # Uploaded even when the run failed: status.json tells publish to keep last-good data.
+      - name: Upload open data (A, A-SA, history, status)
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: data-${{ matrix.game }}
+          path: |
+            data/current/${{ matrix.game }}/
+            data/history/
+            data/status.json
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: Pack private data (B, C)
+        if: steps.run.outcome == 'success'
+        run: node pipeline/private.ts pack --dir "data/private/$GAME" --out "private-$GAME.wsb"
+        env:
+          DATA_ARTIFACT_KEY: ${{ secrets.DATA_ARTIFACT_KEY }}
+
+      # One day of retention keeps Twitch data inside its 24 h cache limit.
+      - name: Upload private data
+        if: steps.run.outcome == 'success'
+        uses: actions/upload-artifact@v7
+        with:
+          name: private-${{ matrix.game }}
+          path: private-${{ matrix.game }}.wsb
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+
+  publish:
+    needs: [plan, data]
+    if: ${{ !cancelled() && needs.plan.outputs.run_data == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.publish.outputs.changed }}
+      deploy: ${{ steps.publish.outputs.deploy }}
+      failed: ${{ steps.publish.outputs.failed }}
+      sha: ${{ steps.push.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Find the data branch
+        id: branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/branches/data" --silent 2>/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out the data branch
+        if: steps.branch.outputs.exists == 'true'
+        uses: actions/checkout@v7
+        with:
+          ref: data
+          path: .data-store
+
+      # First run: a second checkout gets push credentials, then becomes an empty orphan branch.
+      - name: Check out a workspace for a new data branch
+        if: steps.branch.outputs.exists != 'true'
+        uses: actions/checkout@v7
+        with:
+          path: .data-store
+
+      - name: Start the orphan data branch
+        if: steps.branch.outputs.exists != 'true'
+        working-directory: .data-store
+        run: git switch --orphan data
+
+      # A job that died before uploading leaves no artifact; publish.ts then keeps last-good data.
+      - name: Download open data
+        uses: actions/download-artifact@v8
+        continue-on-error: true
+        with:
+          pattern: data-*
+          path: artifacts
+
+      - name: Merge results into the data branch
+        id: publish
+        env:
+          GAMES: ${{ needs.plan.outputs.games }}
+        run: node pipeline/publish.ts --store .data-store --artifacts artifacts --games "$GAMES" --live-manifest "${SITE_URL}data/manifest.json"
+
+      - name: Commit and push
+        id: push
+        working-directory: .data-store
+        env:
+          SUMMARY: ${{ steps.publish.outputs.summary }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -q -m "data: $(date -u +%Y-%m-%dT%H:%MZ) $SUMMARY"
+            git push -q origin HEAD:refs/heads/data
+          fi
+          echo "sha=$(git rev-parse --verify -q HEAD || true)" >> "$GITHUB_OUTPUT"
+
+  # Builds when no data was fetched (push, or dispatch with games=none), when publish says the
+  # live site is behind, or when forced.
+  build:
+    needs: [plan, publish]
+    if: >-
+      ${{ !cancelled() && needs.plan.result == 'success'
+          && (needs.publish.result == 'success' || needs.publish.result == 'skipped')
+          && (needs.plan.outputs.run_data != 'true' || needs.publish.outputs.deploy == 'true' || inputs.force_deploy) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read # private-<game> artifacts of earlier runs
+    env:
+      WHETSTONE_DATA_DIR: data
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Find the data branch
+        id: branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/branches/data" --silent 2>/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Without a data branch yet, the build falls back to fixtures/ (src/lib/datadir.ts).
+      - name: Check out published data
+        if: steps.branch.outputs.exists == 'true'
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.publish.outputs.sha || 'data' }}
+          path: data
+          sparse-checkout: current
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - run: npm ci
+
+      # Newest unexpired private-<game> artifact of a scheduled/dispatched run of this workflow
+      # (this run's, or the last good one for games that failed or on push builds).
+      - name: Restore private data (B, C)
+        run: node pipeline/private.ts restore --repo "$GITHUB_REPOSITORY" --dir data/private
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DATA_ARTIFACT_KEY: ${{ secrets.DATA_ARTIFACT_KEY }}
+
+      - name: Heroes Profile kill switch (HP_MODE is not "on")
+        if: vars.HP_MODE != 'on'
+        run: node pipeline/private.ts purge --dir data/private --custody B
+
+      - uses: actions/cache@v6
+        with:
+          path: node_modules/.astro
+          key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+
+      - name: Build (stage data, astro build, service worker)
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: ${{ !cancelled() && needs.build.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  report:
+    needs: [plan, data, publish, build, deploy]
+    if: ${{ always() && github.event_name != 'push' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      issues: write
+      actions: write # gh workflow enable
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Open, update or close the pipeline-failure issue
+        env:
+          FAILED: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+          FAILED_GAMES: ${{ needs.publish.outputs.failed }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh label create pipeline-failure --color B60205 --description "The daily data pipeline failed" >/dev/null 2>&1 || true
+          n=$(gh issue list --label pipeline-failure --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ "$FAILED" = "true" ]; then
+            body=$(printf 'Run: %s\nFailed games: %s\n\nLast-good data stays live. Recovery steps: docs/DATA.md.' "$RUN_URL" "${FAILED_GAMES:-see the run}")
+            if [ -n "$n" ]; then
+              gh issue comment "$n" --body "$body"
+            else
+              gh issue create --title "Daily data pipeline failed" --label pipeline-failure --body "$body"
+            fi
+          elif [ -n "$n" ]; then
+            gh issue close "$n" --comment "Recovered in $RUN_URL"
+          fi
+
+      # Public repos lose scheduled workflows after 60 days without activity; re-enabling via the
+      # API is the documented remedy (no dummy commits).
+      - name: Keep the schedule alive
+        run: gh workflow enable data-deploy.yml

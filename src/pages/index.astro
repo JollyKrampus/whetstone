@@ -1,0 +1,473 @@
+---
+import Badge from '../components/Badge.tsx';
+import EmptyState from '../components/EmptyState.astro';
+import FreshnessBadge from '../components/FreshnessBadge.astro';
+import { formatDayUTC, int } from '../core/format.ts';
+import { games, navHref, versionText, withBase } from '../games/registry.ts';
+import Base from '../layouts/Base.astro';
+import { loadGameMeta } from '../layouts/gameMeta.ts';
+
+const cards = games.map((game) => {
+  const { meta, fixtures } = loadGameMeta(game.id);
+  // Highlight the tools, not the overview/about entries every game has.
+  const links = game.nav.filter((n) => n.path !== '' && n.path !== 'about/').slice(0, 4);
+  return { game, meta, fixtures, links };
+});
+
+const news = cards
+  .flatMap(({ game, meta }) => (meta && meta.generatedAt ? [{ game, meta }] : []))
+  .map(({ game, meta }) => {
+    const counts = Object.entries(meta.counts)
+      .filter(([, v]) => v > 0)
+      .slice(0, 3)
+      // counts keys are camelCase ids (standardCards); show them as words.
+      .map(([k, v]) => `${int(v)} ${k.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()}`);
+    return {
+      game,
+      version: meta.version.label ? versionText(game.id, meta.version.label) : null,
+      since: meta.version.since ?? null,
+      generatedAt: meta.generatedAt,
+      counts,
+    };
+  })
+  .sort((a, b) => b.generatedAt.localeCompare(a.generatedAt));
+---
+
+<Base>
+  <section class="hero">
+    <svg class="hero__art" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+      <g fill="none" stroke-width="1.5">
+        <path class="hero__art-line" d="M200 20 380 200 200 380 20 200z"></path>
+        <path class="hero__art-line" d="M200 20v360M20 200h360"></path>
+        <path class="hero__art-line hero__art-faint" d="M110 110l180 180M290 110 110 290"></path>
+        <path class="hero__art-edge" d="M20 200 200 20"></path>
+      </g>
+      <path class="hero__art-facet" d="M200 20 20 200h180z"></path>
+    </svg>
+    <div class="container hero__inner">
+      <p class="kicker hero__kicker">Meta companion · refreshed daily</p>
+      <h1 class="hero__title">Sharpen every <span class="hero__edge">pick</span>.</h1>
+      <p class="hero__lead">
+        Counters, drafts, decks and teams for three games, with the reasons, sources and sample sizes behind every
+        number. Free, static, no accounts, no trackers.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#games">Choose a game</a>
+        <a class="btn" href={withBase('about/')}>How it works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section" id="games" aria-labelledby="games-title">
+    <div class="section-head">
+      <h2 id="games-title">Games</h2>
+      <p class="muted">Each game keeps its own data and refreshes independently.</p>
+    </div>
+    <ul class="games">
+      {
+        cards.map(({ game, meta, fixtures, links }) => (
+          <li class="card game-card" style={`--accent: var(${game.accent})`}>
+            <div class="game-card__top">
+              <span class="kicker game-card__short">{game.short}</span>
+              <Badge tone={game.status === 'live' ? 'positive' : 'accent'}>{game.status}</Badge>
+            </div>
+            <h3 class="game-card__name">
+              <a class="game-card__link" href={navHref(game)}>
+                {game.name}
+              </a>
+            </h3>
+            <p class="game-card__tagline">{game.tagline}</p>
+            <FreshnessBadge game={game.id} meta={meta} fixtures={fixtures} />
+            {links.length > 0 && (
+              <ul class="game-card__tools" aria-label={`${game.short} tools`}>
+                {links.map((l) => (
+                  <li>
+                    <a href={navHref(game, l.path)}>{l.label}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <span class="game-card__go" aria-hidden="true">
+              Open
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="container section" aria-labelledby="news-title">
+    <div class="section-head">
+      <h2 id="news-title">What's new</h2>
+      <p class="muted">Latest data refresh per game.</p>
+    </div>
+    {
+      news.length > 0 ? (
+        <ol class="news">
+          {news.map((item) => (
+            <li class="news__item" style={`--accent: var(${item.game.accent})`}>
+              <time class="news__date" datetime={item.generatedAt}>
+                {formatDayUTC(item.generatedAt)}
+              </time>
+              <div class="news__body">
+                <a class="news__title" href={navHref(item.game)}>
+                  {item.game.name}
+                  {item.version ? ` · ${item.version}` : ''}
+                </a>
+                <p class="news__meta">
+                  {item.since ? `Live since ${formatDayUTC(item.since)}. ` : ''}
+                  {item.counts.length > 0 ? item.counts.join(' · ') : 'Data refreshed.'}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <EmptyState title="Fresh data is on its way" icon="data" level={3} compact>
+          <p>The first daily refresh hasn't landed in this build yet. Game pages still work and will fill in as data arrives.</p>
+        </EmptyState>
+      )
+    }
+  </section>
+
+  <section class="container section" aria-labelledby="how-title">
+    <div class="section-head">
+      <h2 id="how-title">How it works</h2>
+      <a href={withBase('about/')}>Read the full story</a>
+    </div>
+    <ol class="steps">
+      <li class="steps__item">
+        <span class="steps__n" aria-hidden="true">01</span>
+        <h3>Open, credited sources</h3>
+        <p>Game files, patch notes, public datasets and licensed stats. Each one is credited, with its license.</p>
+      </li>
+      <li class="steps__item">
+        <span class="steps__n" aria-hidden="true">02</span>
+        <h3>Refreshed every day</h3>
+        <p>A scheduled job fetches, validates and publishes. If a source fails, the last good copy stays up, clearly marked.</p>
+      </li>
+      <li class="steps__item">
+        <span class="steps__n" aria-hidden="true">03</span>
+        <h3>Picks with reasons</h3>
+        <p>Every counter says why, how sure (sample size), and whether it's measured or theory. Small samples are greyed out.</p>
+      </li>
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(60rem 24rem at 85% -10%, color-mix(in srgb, var(--edge) 10%, transparent), transparent 70%),
+      repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 12px);
+  }
+
+  .hero__inner {
+    position: relative;
+    display: grid;
+    gap: var(--sp-4);
+    padding-block: var(--sp-7) var(--sp-7);
+  }
+
+  .hero__kicker {
+    color: var(--edge);
+  }
+
+  .hero__title {
+    max-width: 14ch;
+  }
+
+  .hero__edge {
+    position: relative;
+    white-space: nowrap;
+  }
+
+  /* The honed underline: a sharp wedge rather than a soft highlight. */
+  .hero__edge::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: -0.05em;
+    bottom: 0.02em;
+    height: 0.14em;
+    background: var(--edge);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+
+  .hero__lead {
+    max-width: 56ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+  }
+
+  .hero__cta .btn--primary {
+    --btn-bg: var(--edge);
+    --btn-fg: var(--on-edge);
+    --btn-border: var(--edge);
+  }
+
+  .hero__art {
+    position: absolute;
+    right: -7rem;
+    top: 50%;
+    width: 22rem;
+    height: 22rem;
+    translate: 0 -50%;
+    opacity: 0.55;
+  }
+
+  .hero__art-line {
+    stroke: var(--border-strong);
+  }
+
+  .hero__art-faint {
+    stroke-dasharray: 2 6;
+  }
+
+  .hero__art-edge {
+    stroke: var(--edge);
+    stroke-width: 3;
+  }
+
+  .hero__art-facet {
+    fill: color-mix(in srgb, var(--edge) 9%, transparent);
+  }
+
+  .games {
+    display: grid;
+    gap: var(--sp-4);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    padding: var(--sp-5) var(--sp-5) var(--sp-4);
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+
+  .game-card:hover,
+  .game-card:has(:focus-visible) {
+    border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
+  }
+
+  .game-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+  }
+
+  .game-card__short {
+    color: var(--accent);
+  }
+
+  .game-card__name {
+    font-size: var(--fs-xl);
+  }
+
+  .game-card__link {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* Whole card is the link target; inner tool links sit above the overlay. */
+  .game-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .game-card__link:focus-visible {
+    outline: none;
+  }
+
+  .game-card:has(.game-card__link:focus-visible) {
+    border-color: var(--focus-color);
+    box-shadow: inset 0 0 0 1px var(--focus-color);
+  }
+
+  .game-card__tagline {
+    color: var(--text-muted);
+  }
+
+  .game-card :global(.fresh-line) {
+    align-self: flex-start;
+    position: relative;
+  }
+
+  .game-card__tools {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1) var(--sp-2);
+    padding: var(--sp-3) 0 0;
+    margin: auto 0 0;
+    border-top: 1px dashed var(--border);
+    list-style: none;
+    font-size: var(--fs-sm);
+  }
+
+  .game-card__tools a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0 var(--sp-2);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .game-card__tools a:hover {
+    background: var(--surface-3);
+  }
+
+  .game-card__go {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    align-self: flex-end;
+    color: var(--accent);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+  }
+
+  .game-card__go svg {
+    width: 1rem;
+    height: 1rem;
+    transition: translate var(--dur) var(--ease);
+  }
+
+  .game-card:hover .game-card__go svg {
+    translate: 3px 0;
+  }
+
+  .news {
+    display: grid;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .news__item {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: var(--sp-3);
+    padding-block: var(--sp-3);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .news__date {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+  }
+
+  .news__title {
+    color: var(--text);
+    font-weight: 650;
+    text-decoration-color: var(--accent);
+  }
+
+  .news__meta {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--sp-4);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    counter-reset: none;
+  }
+
+  .steps__item {
+    display: grid;
+    gap: var(--sp-2);
+    padding-left: var(--sp-4);
+    border-left: 2px solid var(--border-strong);
+  }
+
+  .steps__item:first-child {
+    border-left-color: var(--edge);
+  }
+
+  .steps__n {
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+  }
+
+  .steps__item h3 {
+    font-size: var(--fs-lg);
+  }
+
+  .steps__item p {
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 48rem) {
+    .hero__inner {
+      padding-block: var(--sp-8);
+    }
+    .hero__art {
+      right: 2%;
+      width: 26rem;
+      height: 26rem;
+      opacity: 0.9;
+    }
+    .games {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    /* Subgrid shares row heights across the cards, so a tool list that wraps in one game no
+       longer leaves the dividers, badges and "Open" links at different heights. */
+    .game-card {
+      display: grid;
+      grid-row: span 6;
+      grid-template-rows: subgrid;
+      row-gap: var(--sp-3);
+    }
+    .game-card :global(.fresh-line) {
+      justify-self: start;
+    }
+    .game-card__tools {
+      align-self: start;
+      margin-top: 0;
+    }
+    .game-card__go {
+      justify-self: end;
+    }
+    .steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--sp-5);
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .hero__art {
+      opacity: 0.25;
+    }
+  }
+</style>

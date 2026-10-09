@@ -1,0 +1,245 @@
+/*
+ * Styles for the Preact components in src/components/*.tsx. They render both as static HTML from
+ * .astro pages and inside islands, where Astro's scoped <style> can't reach, so they live here.
+ */
+
+/* ---------- Badge ---------- */
+.badge {
+  --badge-fg: var(--text-muted);
+  --badge-bg: var(--surface-2);
+  --badge-border: var(--border-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid var(--badge-border);
+  border-radius: var(--radius-sm);
+  background: var(--badge-bg);
+  color: var(--badge-fg);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge--accent {
+  --badge-fg: var(--text);
+  --badge-bg: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  --badge-border: color-mix(in srgb, var(--accent) 60%, var(--border));
+}
+.badge--positive {
+  --badge-fg: var(--positive);
+  --badge-bg: var(--positive-soft);
+  --badge-border: color-mix(in srgb, var(--positive) 45%, transparent);
+}
+.badge--negative {
+  --badge-fg: var(--negative);
+  --badge-bg: var(--negative-soft);
+  --badge-border: color-mix(in srgb, var(--negative) 45%, transparent);
+}
+.badge--warning {
+  --badge-fg: var(--warning);
+  --badge-bg: var(--warning-soft);
+  --badge-border: color-mix(in srgb, var(--warning) 45%, transparent);
+}
+.badge--info,
+.badge--stats {
+  --badge-fg: var(--info);
+  --badge-bg: var(--info-soft);
+  --badge-border: color-mix(in srgb, var(--info) 45%, transparent);
+}
+/* Theory is always labelled as such (SPEC §1.6); the dashed border marks it apart from measured stats. */
+.badge--theory {
+  --badge-fg: var(--text);
+  --badge-bg: transparent;
+  --badge-border: var(--steel-2);
+  border-style: dashed;
+}
+
+/* ---------- ScoreRing ---------- */
+.score-ring {
+  flex: none;
+  overflow: visible;
+}
+.score-ring__track {
+  stroke: var(--surface-3);
+}
+.score-ring__fill {
+  stroke: var(--accent);
+}
+.score-ring--positive .score-ring__fill {
+  stroke: var(--positive);
+}
+.score-ring--negative .score-ring__fill {
+  stroke: var(--negative);
+}
+.score-ring--neutral .score-ring__fill {
+  stroke: var(--steel-2);
+}
+.score-ring--muted .score-ring__fill {
+  stroke: var(--steel-1);
+}
+.score-ring__value {
+  fill: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 750;
+}
+.score-ring--muted .score-ring__value {
+  fill: var(--text-muted);
+}
+
+/* ---------- ReasonList ---------- */
+.reasons {
+  display: grid;
+  gap: var(--sp-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: var(--fs-sm);
+}
+.reason {
+  display: grid;
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+  gap: var(--sp-2);
+  align-items: baseline;
+}
+.reason__kind {
+  justify-self: start;
+  padding: 0 0.35rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.reason--stat .reason__kind,
+.reason--usage .reason__kind,
+.reason--pro .reason__kind {
+  border-color: color-mix(in srgb, var(--info) 50%, transparent);
+  color: var(--info);
+}
+.reason--theory .reason__kind,
+.reason--curated .reason__kind {
+  border-style: dashed;
+  color: var(--text);
+}
+.reason__body {
+  display: grid;
+  gap: 0.1rem;
+}
+.reason__text {
+  color: var(--text);
+}
+.reason__meta,
+.reason__evidence {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+.reason__meta {
+  font-family: var(--font-mono);
+}
+
+/* ---------- EntityFilter ---------- */
+.efilter {
+  display: grid;
+  gap: var(--sp-3);
+}
+.efilter__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.efilter__icon {
+  position: absolute;
+  left: var(--sp-3);
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.efilter__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0 3rem 0 2.6rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-md);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.efilter__input::placeholder {
+  color: var(--text-faint);
+}
+.efilter__input:hover {
+  border-color: var(--steel-2);
+}
+.efilter__input:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.efilter__kbd {
+  position: absolute;
+  right: var(--sp-3);
+  pointer-events: none;
+}
+.efilter__input:focus ~ .efilter__kbd,
+.efilter__input:not(:placeholder-shown) ~ .efilter__kbd {
+  display: none;
+}
+.efilter__facet {
+  display: grid;
+  gap: var(--sp-2);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+.efilter__facet legend {
+  padding: 0;
+  margin-bottom: var(--sp-2);
+}
+.efilter__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  min-height: var(--tap);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+.efilter__clear {
+  min-height: 2.25rem;
+}
+.efilter__empty {
+  padding: var(--sp-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ---------- Copy / Share ---------- */
+.copy-btn-wrap,
+.share-btn-wrap {
+  display: inline-flex;
+}
+.copy-btn[data-state='copied'],
+.share-btn[data-state='copied'] {
+  --btn-border: var(--positive);
+  color: var(--positive);
+}
+.copy-btn[data-state='error'],
+.share-btn[data-state='error'] {
+  --btn-border: var(--negative);
+  color: var(--negative);
+}

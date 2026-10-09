@@ -1,0 +1,23 @@
+{
+  "format": "standard",
+  "date": "2026-10-08",
+  "source": "EXAMPLE ONLY: shows the file format; these are not real metagame lists or numbers. Curators replace them with lists read from a cited source.",
+  "example": true,
+  "curator": "whetstone",
+  "decks": [
+    {
+      "name": "Boros Aggro (example)",
+      "archetype": "Boros Aggro",
+      "example": true,
+      "list": "Deck\n4 Emberheart Challenger\n4 Slickshot Show-Off\n4 Voice of Victory\n4 Inti, Seneschal of the Sun\n4 Razorkin Needlehead\n4 Hired Claw\n2 Sunspine Lynx\n4 Burst Lightning\n4 Lightning Strike\n4 Shock\n2 Stroke of Midnight\n4 Sacred Foundry\n4 Inspiring Vantage\n2 Sunbillow Verge\n2 Elegant Parlor\n6 Mountain\n2 Plains\n\nSideboard\n3 Abrade\n2 Boltwave\n2 Cathar Commando\n2 Get Lost",
+      "notes": "Illustrative list built from the fixture card pool."
+    },
+    {
+      "name": "Mono-Red Aggro (example)",
+      "archetype": "Mono-Red Aggro",
+      "example": true,
+      "list": "Deck\n4 Hired Claw\n4 Razorkin Needlehead\n4 Emberheart Challenger\n4 Slickshot Show-Off\n4 Burst Lightning\n4 Shock\n4 Lightning Strike\n4 Boltwave\n2 Fear of Missing Out\n2 Sunspine Lynx\n24 Mountain\n\nSideboard\n3 Abrade\n2 Fire Elemental",
+      "notes": "Illustrative list built from the fixture card pool."
+    }
+  ]
+}

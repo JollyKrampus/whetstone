@@ -1,0 +1,106 @@
+# HotS video creators and featured channels (critique C15, hots-meta-extra §2.1).
+# Validated by CreatorsFileSchema in src/games/hots/schema.ts.
+#
+# Only channels someone checked by hand: active, mostly HotS, and the channel id resolved
+# from the handle. Re-check quarterly and bump `verified`. The videos job (YouTube Data API,
+# class C, artifact only) reads the youtube channel ids; /hots/live/ shows `featured`
+# channels as keyless Twitch embeds.
+#   id             our kebab-case id
+#   youtube        channelId (UC...) and optional @handle
+#   twitch         login, when a Twitch channel was verified
+#   lang           BCP 47 language of most titles ("und" = not checked)
+#   kinds          guide gameplay tournament patch news coaching official
+#   excludeTitles  case-insensitive regexes for non-HotS uploads to skip
+reviewed: "2026-10-08"
+creators:
+  - id: mfpallytime
+    name: MFPallytime
+    youtube: { channelId: UCaIG92A013x_Cuv-yQOO7Hw }
+    lang: en
+    kinds: [gameplay, guide]
+    verified: "2026-10-08"
+    excludeTitles: [star wars, zero company]
+  - id: fanhots
+    name: FanHOTS
+    youtube: { channelId: UClntdP-abV6GX9MkfIiYnMA }
+    lang: en
+    kinds: [coaching, guide]
+    verified: "2026-10-08"
+    notes: Titles usually start with the hero and a talent name. The @Fan handle is a different, unrelated channel.
+  - id: khaldor
+    name: Khaldor
+    youtube: { channelId: UChC7zO4y0QPXax65t1W41lQ }
+    twitch: { login: khaldor }
+    lang: en
+    kinds: [tournament, news]
+    featured: true
+    verified: "2026-10-08"
+    notes: Casts and organizes community tournaments (Nations Cup, Murky Cup, Underdog Cup).
+  - id: hots-fox
+    name: HotS_Fox
+    youtube: { channelId: UCmrYR_1TM7W5kLProbKqPSA }
+    lang: en
+    kinds: [guide]
+    verified: "2026-10-08"
+  - id: grubbyplays
+    name: GrubbyPlays
+    youtube: { channelId: UCAKzSdcPqeDGU4ZRCTv9eLQ }
+    lang: en
+    kinds: [gameplay]
+    verified: "2026-10-08"
+    notes: "@GrubbyTV is unrelated; GrubbyTalks (UCD5ZtKIFmGNutSOpfvtL_zg) is mostly Warcraft and news."
+  - id: liquidhasuobs
+    name: LiquidHasuObs
+    youtube: { channelId: UC3aJviM3bBzjG744bTIKYig }
+    lang: en
+    kinds: [gameplay, patch, tournament]
+    verified: "2026-10-08"
+  - id: crisheroes-moba
+    name: CrisHeroes Moba
+    youtube: { channelId: UCzV5KBPI7QSoF3eG17Gbc-A }
+    lang: und
+    kinds: [gameplay, guide]
+    verified: "2026-10-08"
+    excludeTitles: [march of giants]
+  - id: thefreind
+    name: TheFreind
+    youtube: { channelId: UCNXJWL-geC9tMB2s3PpAuLA }
+    lang: en
+    kinds: [guide]
+    verified: "2026-10-08"
+    notes: In-depth per-hero talent guides, about two a month.
+  - id: goerson
+    name: Goerson
+    youtube: { channelId: UCMZDsWGmueH5dGccVjTLdRA }
+    lang: und
+    kinds: [gameplay]
+    verified: "2026-10-08"
+  - id: the-hero-of-the-storm
+    name: The Hero of The Storm
+    youtube: { channelId: UCFahai8IMJq-XVJUHj7boag }
+    lang: en
+    kinds: [guide]
+    verified: "2026-10-08"
+  - id: eowea
+    name: Eowea
+    youtube: { channelId: UCPsyRq7cuI-F2ZdVhul8OZQ }
+    lang: fr
+    kinds: [news, guide]
+    verified: "2026-10-08"
+  - id: heroes-of-the-storm
+    name: Heroes of the Storm
+    youtube: { channelId: UCpVdq9gLew6E76BmfB2GJ0w }
+    twitch: { login: blizzheroes }
+    lang: en
+    kinds: [official]
+    featured: true
+    verified: "2026-10-08"
+    notes: Official channel; uploads are sporadic (trailers, hero spotlights).
+  - id: bahamut
+    name: Bahamut
+    twitch: { login: bahamutgaming }
+    lang: en
+    kinds: [tournament]
+    featured: true
+    verified: "2026-10-08"
+    notes: Twitch login taken from a Liquipedia tournament infobox.

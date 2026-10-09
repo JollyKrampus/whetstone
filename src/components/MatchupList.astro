@@ -1,0 +1,135 @@
+---
+/**
+ * "Strong against" / "Weak against" / "Good with" list (SPEC §8–9). Each row: avatar, linked
+ * name, score gauge, Δ in pp, n, source badge, and an expandable "Why" with the reasons.
+ * Low-sample rows are greyed (SPEC §6 gates). Rows past `visible`, or scoring below
+ * `collapseBelow`, fold into a "View more" disclosure. No JS required.
+ */
+import MatchupRowItem from './MatchupRowItem.astro';
+import type { MatchupRow } from './types.ts';
+
+interface Props {
+  title: string;
+  /** Visible helper line under the title, e.g. "Score 1–100 · higher = stronger counter". */
+  subtitle?: string;
+  rows: MatchupRow[];
+  /** Rows shown before "View more" (default 8). */
+  visible?: number;
+  /** Rows scoring below this always fold into "View more" (heroescounters used 30). */
+  collapseBelow?: number;
+  /** SourceRef.id -> display name for reason lines. */
+  sourceNames?: Record<string, string>;
+  emptyText?: string;
+  /** Heading level for the title (default 3). */
+  level?: 2 | 3 | 4;
+  id?: string;
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  rows,
+  visible = 8,
+  collapseBelow,
+  sourceNames,
+  emptyText = 'Not enough data yet.',
+  level = 3,
+  id,
+  class: extra,
+} = Astro.props;
+
+const Heading = `h${level}` as 'h2' | 'h3' | 'h4';
+
+const head: MatchupRow[] = [];
+const more: MatchupRow[] = [];
+for (const row of rows) {
+  if (head.length < visible && (collapseBelow === undefined || row.score >= collapseBelow)) head.push(row);
+  else more.push(row);
+}
+---
+
+<section class:list={['mlist', extra]} id={id}>
+  <header class="mlist__head">
+    <Heading class="mlist__title">{title}</Heading>
+    {subtitle && <p class="mlist__sub">{subtitle}</p>}
+  </header>
+
+  {
+    rows.length === 0 ? (
+      <p class="mlist__empty">{emptyText}</p>
+    ) : (
+      <>
+        <ol class="mlist__rows">
+          {head.map((row) => (
+            <MatchupRowItem row={row} sourceNames={sourceNames} />
+          ))}
+        </ol>
+        {more.length > 0 && (
+          <details class="mlist__more">
+            <summary class="btn btn--ghost">
+              View {more.length} more{collapseBelow !== undefined ? `, including scores below ${collapseBelow}` : ''}
+            </summary>
+            <ol class="mlist__rows" start={head.length + 1}>
+              {more.map((row) => (
+                <MatchupRowItem row={row} sourceNames={sourceNames} />
+              ))}
+            </ol>
+          </details>
+        )}
+      </>
+    )
+  }
+</section>
+
+<style>
+  .mlist {
+    display: grid;
+    gap: var(--sp-3);
+    align-content: start;
+  }
+
+  .mlist__head {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .mlist__title {
+    font-size: var(--fs-lg);
+  }
+
+  .mlist__sub {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .mlist__empty {
+    padding: var(--sp-4);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .mlist__rows {
+    display: grid;
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .mlist__more {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .mlist__more > summary {
+    justify-self: start;
+    border-color: var(--border);
+  }
+
+  .mlist__more[open] > summary {
+    margin-bottom: var(--sp-2);
+  }
+</style>

@@ -1,0 +1,11 @@
+[
+  {
+    "regulation": "M-C",
+    "format": "gen9championsvgc2026regmc",
+    "cutoff": 1760,
+    "month": "2026-09",
+    "battles": 100000,
+    "file": "usage/gen9championsvgc2026regmc-1760.json",
+    "synthetic": true
+  }
+]

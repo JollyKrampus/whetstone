@@ -1,0 +1,143 @@
+---
+/**
+ * Segmented period switch (Current patch / Previous patch / …) that wraps the content it controls.
+ * Pre-render every period inside the default slot and mark each block with data-period="<id>":
+ *
+ *   <PeriodToggle name="hero-period" periods={[{ id: 'current', label: 'Current patch' }, …]}>
+ *     <div data-period="current">…</div>
+ *     <div data-period="previous">…</div>
+ *   </PeriodToggle>
+ *
+ * Works without JS: native radio buttons plus a per-instance :has() rule hide the other periods.
+ * With JS the choice is remembered per `name` in localStorage.
+ */
+import type { PeriodSpec } from './types.ts';
+
+interface Props {
+  /** Unique per page; also the localStorage key suffix. Letters, digits and dashes. */
+  name: string;
+  periods: PeriodSpec[];
+  /** Initially selected period id (default: the first). */
+  selected?: string;
+  label?: string;
+  class?: string;
+}
+
+const { name, periods, selected, label = 'Period', class: extra } = Astro.props;
+const safe = (s: string) => s.replace(/[^A-Za-z0-9_-]/g, '');
+const scope = safe(name);
+const initial = periods.some((p) => p.id === selected) ? selected : periods[0]?.id;
+
+// Static per-instance CSS: when period X is checked, hide every other period's blocks.
+const css = periods
+  .map((p) => {
+    const id = safe(p.id);
+    return `[data-period-scope="${scope}"]:has(input[name="${scope}"][value="${id}"]:checked) [data-period]:not([data-period="${id}"]){display:none!important}`;
+  })
+  .join('\n');
+---
+
+<div class:list={['period', extra]} data-period-scope={scope}>
+  <fieldset class="period__switch">
+    <legend class="visually-hidden">{label}</legend>
+    {
+      periods.map((p) => (
+        <label class="period__option">
+          <input class="visually-hidden" type="radio" name={scope} value={safe(p.id)} checked={p.id === initial} />
+          <span class="period__label">{p.label}</span>
+          {p.note && <span class="period__note">{p.note}</span>}
+        </label>
+      ))
+    }
+  </fieldset>
+  <div class="period__content">
+    <slot />
+  </div>
+</div>
+
+<Fragment set:html={`<style>${css}</style>`} />
+
+<style>
+  .period {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .period__switch {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-self: start;
+    gap: 2px;
+    padding: 3px;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 3px);
+    background: var(--surface-2);
+    min-inline-size: 0;
+  }
+
+  .period__option {
+    position: relative;
+    display: inline-grid;
+    align-content: center;
+    min-height: 2.5rem;
+    padding: 0.2rem var(--sp-3);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1.2;
+  }
+
+  .period__option:hover {
+    color: var(--text);
+  }
+
+  .period__label {
+    font-size: var(--fs-sm);
+    font-weight: 650;
+  }
+
+  .period__note {
+    font-size: var(--fs-xs);
+    color: var(--text-faint);
+  }
+
+  .period__option:has(input:checked) {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow:
+      var(--shadow-1),
+      inset 0 -2px 0 var(--accent);
+  }
+
+  .period__option:has(input:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: 1px;
+  }
+</style>
+
+<script>
+  // storageKey('site', 'period:<name>') shape from src/core/storage.ts.
+  const PREFIX = 'whetstone:site:period:';
+  for (const scope of document.querySelectorAll<HTMLElement>('[data-period-scope]')) {
+    const name = scope.dataset.periodScope ?? '';
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem(PREFIX + name);
+    } catch {
+      saved = null;
+    }
+    const inputs = [...scope.querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${name}"]`)];
+    const match = inputs.find((i) => i.value === saved);
+    if (match) match.checked = true;
+    for (const input of inputs) {
+      input.addEventListener('change', () => {
+        try {
+          localStorage.setItem(PREFIX + name, input.value);
+        } catch {
+          // Storage unavailable: the selection simply isn't remembered.
+        }
+      });
+    }
+  }
+</script>

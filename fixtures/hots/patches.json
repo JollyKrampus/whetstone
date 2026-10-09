@@ -1,0 +1,131 @@
+[
+  {
+    "id": "2026-10-05-hotfix",
+    "version": "2.57",
+    "build": "2.57.0.98348",
+    "date": "2026-10-05",
+    "title": "Hotfix - 10/5/2026",
+    "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
+    "kind": "hotfix",
+    "contentHash": "da15be395e495736",
+    "general": [
+      "Fixed several interactions between Xal'atath and Time Stop effects."
+    ],
+    "heroes": {
+      "HXAL": {
+        "verdict": "mixed",
+        "changes": [
+          {
+            "section": "Abilities",
+            "target": "Shadow Mark",
+            "text": "Orb travels faster.",
+            "dir": "buff"
+          },
+          {
+            "section": "Abilities",
+            "target": "Void Step",
+            "text": "Targeting range 5 → 2; hop distance 7 → 6.5; now stopped by Immobilize effects.",
+            "dir": "nerf"
+          },
+          {
+            "section": "Trait",
+            "target": "Void Volley",
+            "text": "Missile damage 90 → 72; gains 1 charge per hero attack and 1 per 2 non-hero attacks.",
+            "dir": "nerf"
+          },
+          {
+            "section": "Heroic",
+            "target": "Void Eruption",
+            "text": "Damage reduced: uncharged by 20%, fully charged by 5%.",
+            "dir": "nerf"
+          },
+          {
+            "section": "Level 20",
+            "target": "Anchored Core",
+            "level": "20",
+            "text": "Radius bonus 50% → 25%.",
+            "dir": "nerf"
+          },
+          {
+            "section": "Level 1",
+            "target": "Dark Barrier",
+            "level": "1",
+            "text": "Now triggers only on Heroes.",
+            "dir": "nerf"
+          },
+          {
+            "section": "Level 4",
+            "target": "Silence of the Lamb",
+            "level": "4",
+            "text": "Silence duration increased (game data: 2 seconds).",
+            "dir": "buff"
+          },
+          {
+            "section": "Level 4",
+            "target": "Dark Heart's Protection",
+            "level": "4",
+            "text": "Now silences marked targets when Dark Heart Ritual detonates on them.",
+            "dir": "buff"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2026-09-28-patch",
+    "version": "2.57",
+    "build": "2.57.0.98285",
+    "date": "2026-09-28",
+    "title": "Heroes of the Storm Live Patch Notes – September 28, 2026",
+    "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
+    "kind": "patch",
+    "contentHash": "9910f1a60639ebb0",
+    "general": [
+      "New hero: Xal'atath, the Harbinger of the Void (Ranged Assassin).",
+      "New homescreen and startup music.",
+      "The Healing Fountain cooldown can now be pinged."
+    ],
+    "maps": {
+      "garden-of-terror": [
+        "Shamblers start 25% weaker and scale back to their previous strength over the match."
+      ],
+      "volskaya-foundry": [
+        "Fixed fort walls having different Health on each side."
+      ]
+    },
+    "heroes": {
+      "Abat": {
+        "verdict": "mixed",
+        "changes": [
+          {
+            "section": "Level 13",
+            "target": "Bombard Strain",
+            "level": "13",
+            "text": "Locust decay reduction lowered.",
+            "dir": "nerf"
+          },
+          {
+            "section": "Level 1",
+            "target": "Survival Instincts",
+            "level": "1",
+            "text": "Reworked: Locusts take 50% less damage from non-Heroes instead of gaining 100% Health.",
+            "dir": "rework"
+          }
+        ]
+      },
+      "HXAL": {
+        "verdict": "new",
+        "changes": [
+          {
+            "section": "New Hero",
+            "text": "Xal'atath joins the Nexus as a Ranged Assassin.",
+            "dir": "change"
+          }
+        ]
+      }
+    },
+    "newHeroes": [
+      "HXAL"
+    ]
+  }
+]

@@ -1,0 +1,180 @@
+{
+  "synthetic": true,
+  "attribution": {
+    "source": "liquipedia",
+    "text": "Data: Liquipedia (CC BY-SA 3.0)",
+    "url": "https://liquipedia.net/heroes/",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "window": {
+    "label": "2026 community tournaments (sample)",
+    "from": "2026-01-01",
+    "to": "2026-10-08"
+  },
+  "totals": {
+    "tournaments": 4,
+    "maps": 178
+  },
+  "tournaments": [
+    {
+      "id": "Copium_Cup",
+      "name": "Copium Cup",
+      "url": "https://liquipedia.net/heroes/Copium_Cup",
+      "tier": 2,
+      "region": "Europe",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-04",
+      "maps": 35
+    },
+    {
+      "id": "Calamity_Invitational",
+      "name": "Calamity Invitational",
+      "url": "https://liquipedia.net/heroes/Calamity_Invitational",
+      "tier": 3,
+      "region": "Americas",
+      "startDate": "2026-09-02",
+      "endDate": "2026-09-26",
+      "maps": 26
+    },
+    {
+      "id": "Khaldors_Underdog_Cup/5/Div_1",
+      "name": "Khaldor's Underdog Cup 5 – Division 1",
+      "url": "https://liquipedia.net/heroes/Khaldors_Underdog_Cup/5/Div_1",
+      "tier": 3,
+      "region": "Europe",
+      "startDate": "2026-08-29",
+      "endDate": "2026-09-06",
+      "maps": 37
+    },
+    {
+      "id": "Murky_Cup/3",
+      "name": "Murky Cup 3",
+      "url": "https://liquipedia.net/heroes/Murky_Cup/3",
+      "tier": 2,
+      "region": "Europe",
+      "startDate": "2026-05-30",
+      "endDate": "2026-06-28",
+      "maps": 80
+    }
+  ],
+  "heroes": [
+    {
+      "hero": "HXAL",
+      "picks": 54,
+      "bans": 29,
+      "wins": 28,
+      "pickRate": 0.3034,
+      "banRate": 0.1629,
+      "presence": 0.4663
+    },
+    {
+      "hero": "Wiza",
+      "picks": 33,
+      "bans": 34,
+      "wins": 18,
+      "pickRate": 0.1854,
+      "banRate": 0.191,
+      "presence": 0.3764
+    },
+    {
+      "hero": "Diab",
+      "picks": 22,
+      "bans": 40,
+      "wins": 11,
+      "pickRate": 0.1236,
+      "banRate": 0.2247,
+      "presence": 0.3483
+    },
+    {
+      "hero": "Crus",
+      "picks": 41,
+      "bans": 16,
+      "wins": 19,
+      "pickRate": 0.2303,
+      "banRate": 0.0899,
+      "presence": 0.3202
+    },
+    {
+      "hero": "Abat",
+      "picks": 43,
+      "bans": 11,
+      "wins": 25,
+      "pickRate": 0.2416,
+      "banRate": 0.0618,
+      "presence": 0.3034
+    },
+    {
+      "hero": "Demo",
+      "picks": 15,
+      "bans": 38,
+      "wins": 6,
+      "pickRate": 0.0843,
+      "banRate": 0.2135,
+      "presence": 0.2978
+    },
+    {
+      "hero": "Vari",
+      "picks": 44,
+      "bans": 3,
+      "wins": 24,
+      "pickRate": 0.2472,
+      "banRate": 0.0169,
+      "presence": 0.264
+    },
+    {
+      "hero": "Zera",
+      "picks": 12,
+      "bans": 34,
+      "wins": 7,
+      "pickRate": 0.0674,
+      "banRate": 0.191,
+      "presence": 0.2584
+    },
+    {
+      "hero": "chogall",
+      "picks": 19,
+      "bans": 12,
+      "wins": 10,
+      "pickRate": 0.1067,
+      "banRate": 0.0674,
+      "presence": 0.1742
+    },
+    {
+      "hero": "Anub",
+      "picks": 6,
+      "bans": 15,
+      "wins": 3,
+      "pickRate": 0.0337,
+      "banRate": 0.0843,
+      "presence": 0.118
+    },
+    {
+      "hero": "Mura",
+      "picks": 19,
+      "bans": 2,
+      "wins": 9,
+      "pickRate": 0.1067,
+      "banRate": 0.0112,
+      "presence": 0.118
+    },
+    {
+      "hero": "Malf",
+      "picks": 11,
+      "bans": 9,
+      "wins": 5,
+      "pickRate": 0.0618,
+      "banRate": 0.0506,
+      "presence": 0.1124
+    },
+    {
+      "hero": "Tra0",
+      "picks": 3,
+      "bans": 15,
+      "wins": 2,
+      "pickRate": 0.0169,
+      "banRate": 0.0843,
+      "presence": 0.1011
+    }
+  ]
+}

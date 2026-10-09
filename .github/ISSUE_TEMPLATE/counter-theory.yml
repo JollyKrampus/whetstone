@@ -1,0 +1,100 @@
+name: Counter or synergy theory
+description: Propose or correct a counter or synergy, with the mechanical reason behind it.
+title: '[Theory] <Hero A> vs/with <Hero B>'
+labels: [counter-theory]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Whetstone's **theory** layer explains matchups from game mechanics (ability and talent text), separately from win-rate statistics. Accepted proposals land in `curated/hots/counters.yaml` or `curated/hots/synergies.yaml` and show up on hero pages and in the draft tool, labelled as theory.
+
+        A good proposal names the abilities or talents that interact and says why it matters. "A beats B" without a reason cannot be accepted. Please write it in your own words: votes, tags or text from other counter sites cannot be used.
+
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Heroes of the Storm
+        - Pokémon Champions
+    validations:
+      required: true
+
+  - type: dropdown
+    id: relation
+    attributes:
+      label: Proposal
+      options:
+        - A counters B
+        - A is countered by B
+        - A and B have synergy
+        - An existing entry is wrong or outdated
+    validations:
+      required: true
+
+  - type: input
+    id: a
+    attributes:
+      label: A (hero or Pokémon)
+      placeholder: Li Li
+    validations:
+      required: true
+
+  - type: input
+    id: b
+    attributes:
+      label: B (hero or Pokémon)
+      placeholder: Valla
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Mechanical reason
+      description: Which abilities, talents, moves or items interact, and why that decides the matchup.
+      placeholder: Blinding Wind (Li Li) blinds nearby enemies, and Valla's damage comes mostly from basic attacks, so a well-timed blind removes much of her burst window.
+    validations:
+      required: true
+
+  - type: textarea
+    id: conditions
+    attributes:
+      label: Conditions (optional)
+      description: Talents, maps, team compositions or situations where this holds or stops holding.
+      placeholder: Weaker if Valla takes Strafe at 10; strongest on small maps with frequent team fights.
+
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: How strong is the effect?
+      options:
+        - Hard counter (mechanics decide it)
+        - Favourable (clear edge, playable either way)
+        - Situational (only with the conditions above)
+    validations:
+      required: true
+
+  - type: input
+    id: patch
+    attributes:
+      label: Patch or regulation you checked this on
+      placeholder: '2.57'
+    validations:
+      required: true
+
+  - type: input
+    id: evidence
+    attributes:
+      label: Evidence (optional)
+      description: A replay, VOD timestamp, guide or patch note that shows the interaction.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I checked the current ability and talent text on the hero or Pokémon page.
+          required: true
+        - label: This is my own reasoning, not copied from another site's votes, tags or write-ups.
+          required: true

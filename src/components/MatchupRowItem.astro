@@ -1,0 +1,185 @@
+---
+/** One MatchupList row. Kept separate so the visible and "View more" lists render identically. */
+import { int, pp } from '../core/format.ts';
+import { classifySample } from '../core/stats.ts';
+import Badge from './Badge.tsx';
+import ReasonList from './ReasonList.tsx';
+import ScoreRing from './ScoreRing.tsx';
+import { edgeSourceLabel, edgeSourceTone, type MatchupRow } from './types.ts';
+
+interface Props {
+  row: MatchupRow;
+  sourceNames?: Record<string, string> | undefined;
+}
+
+const { row, sourceNames } = Astro.props;
+const low = row.lowSample ?? (row.source === 'stats' && row.n !== undefined && classifySample(row.n) !== 'ok');
+const deltaClass =
+  row.delta === undefined ? '' : row.delta > 0.05 ? 'delta--up' : row.delta < -0.05 ? 'delta--down' : 'delta--flat';
+const score = Math.round(row.score);
+---
+
+<li class="mrow" data-low={low ? 'true' : undefined} data-id={row.id}>
+  <div class="mrow__main">
+    {
+      row.image ? (
+        <img class="mrow__img" src={row.image} alt="" width="40" height="40" loading="lazy" decoding="async" />
+      ) : (
+        <span class="mrow__img mrow__img--blank" aria-hidden="true" />
+      )
+    }
+    <div class="mrow__info">
+      {
+        row.href ? (
+          <a class="mrow__name" href={row.href}>
+            {row.name}
+          </a>
+        ) : (
+          <span class="mrow__name">{row.name}</span>
+        )
+      }
+      <span class="mrow__meta">
+        {row.delta !== undefined && <span class:list={['mrow__delta', deltaClass]}>{pp(row.delta)}</span>}
+        {row.n !== undefined && <span class="mrow__n">n = {int(row.n)}</span>}
+        <Badge tone={edgeSourceTone(row.source)}>{row.sourceLabel ?? edgeSourceLabel(row.source)}</Badge>
+        {low && <span class="mrow__lowtag">low sample</span>}
+      </span>
+    </div>
+    <ScoreRing score={row.score} muted={low} label={`${row.name}: score ${score} out of 100`} />
+  </div>
+  {
+    row.reasons && row.reasons.length > 0 && (
+      <details class="mrow__why">
+        <summary>
+          Why? <span class="mrow__count">{row.reasons.length}</span>
+        </summary>
+        <ReasonList reasons={row.reasons} {...(sourceNames ? { sourceNames } : {})} />
+      </details>
+    )
+  }
+</li>
+
+<style>
+  .mrow {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .mrow__main {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-2) var(--sp-3);
+  }
+
+  .mrow__img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .mrow__info {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .mrow__name {
+    color: var(--text);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  a.mrow__name:hover {
+    text-decoration: underline;
+  }
+
+  .mrow__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-2);
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .mrow__delta,
+  .mrow__n {
+    font-family: var(--font-mono);
+  }
+
+  .mrow__delta {
+    font-weight: 650;
+  }
+
+  .mrow__lowtag {
+    font-style: italic;
+  }
+
+  .mrow[data-low] {
+    background: var(--surface-2);
+    border-style: dashed;
+  }
+
+  .mrow[data-low] .mrow__name,
+  .mrow[data-low] .mrow__img {
+    opacity: 0.72;
+  }
+
+  .mrow__why {
+    border-top: 1px solid var(--border);
+  }
+
+  .mrow__why > summary {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-height: 2.25rem;
+    padding: 0 var(--sp-3);
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .mrow__why > summary::after {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    margin-left: auto;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--dur-fast) var(--ease);
+  }
+
+  .mrow__why[open] > summary::after {
+    transform: rotate(-135deg);
+  }
+
+  .mrow__why > summary:hover {
+    color: var(--text);
+  }
+
+  .mrow__why :global(.reasons) {
+    padding: 0 var(--sp-3) var(--sp-3);
+  }
+
+  .mrow__count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.2rem;
+    height: 1.2rem;
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    background: var(--surface-3);
+    color: var(--text);
+    font-family: var(--font-mono);
+    letter-spacing: 0;
+  }
+</style>

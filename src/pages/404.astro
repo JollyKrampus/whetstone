@@ -1,0 +1,66 @@
+---
+import { games, navHref, withBase } from '../games/registry.ts';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="This page doesn't exist on Whetstone." noindex>
+  <section class="container nf">
+    <p class="kicker nf__code">404</p>
+    <h1>Lost the edge.</h1>
+    <p class="nf__lead">
+      This page doesn't exist, or it moved when a game was reorganized. Hero, card and Pokémon pages are rebuilt daily
+      from fresh data, so an old link may point at something that was renamed.
+    </p>
+    <ul class="nf__links">
+      <li><a class="btn btn--primary" href={withBase()}>Home</a></li>
+      {
+        games.map((g) => (
+          <li>
+            <a class="btn" href={navHref(g)} style={`--accent: var(${g.accent})`}>
+              {g.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+    padding-block: var(--sp-8);
+  }
+
+  .nf__code {
+    color: var(--edge);
+    font-size: var(--fs-md);
+  }
+
+  .nf__lead {
+    max-width: 58ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .nf__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    padding: 0;
+    margin: var(--sp-2) 0 0;
+    list-style: none;
+  }
+
+  .nf__links .btn--primary {
+    --btn-bg: var(--edge);
+    --btn-fg: var(--on-edge);
+    --btn-border: var(--edge);
+  }
+
+  .nf__links .btn:not(.btn--primary) {
+    border-left: 3px solid var(--accent);
+  }
+</style>

@@ -1,0 +1,63 @@
+[
+  {
+    "id": "2.57.0.98304..2.57.0.98348",
+    "from": "2.57.0.98304",
+    "to": "2.57.0.98348",
+    "date": "2026-10-05",
+    "heroes": {
+      "HXAL": [
+        {
+          "kind": "ability",
+          "target": "Void Volley",
+          "field": "damage",
+          "old": 90,
+          "new": 72
+        },
+        {
+          "kind": "ability",
+          "target": "Void Step",
+          "field": "range",
+          "old": 5,
+          "new": 2
+        },
+        {
+          "kind": "talent",
+          "target": "Anchored Core",
+          "field": "text",
+          "level": "20",
+          "old": "Radius +50%",
+          "new": "Radius +25%"
+        }
+      ]
+    }
+  },
+  {
+    "id": "2.55.17.98025..2.57.0.98285",
+    "from": "2.55.17.98025",
+    "to": "2.57.0.98285",
+    "date": "2026-09-28",
+    "heroes": {
+      "Abat": [
+        {
+          "kind": "talent",
+          "target": "Survival Instincts",
+          "field": "text",
+          "level": "1",
+          "old": "Locusts gain 100% Health",
+          "new": "Locusts take 50% less damage from non-Heroic sources"
+        }
+      ],
+      "HXAL": [
+        {
+          "kind": "talent-added",
+          "target": "Void Eruption",
+          "level": "10"
+        },
+        {
+          "kind": "ability-added",
+          "target": "Shadow Mark"
+        }
+      ]
+    }
+  }
+]

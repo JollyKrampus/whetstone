@@ -11,3 +11,8 @@ playwright-report/
 .DS_Store
 .env
 .env.*
+
+# CI-only working paths (data-deploy.yml). *.wsb bundles hold encrypted class-B data: never commit them.
+.data-store/
+/artifacts/
+*.wsb

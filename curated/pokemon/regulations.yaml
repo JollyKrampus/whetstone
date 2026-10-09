@@ -1,0 +1,45 @@
+# Pokémon Champions regulation windows (pokemon-champions research §1.2 / §5.1).
+# Validated by RegulationsFileSchema in src/games/pokemon/schema.ts; the pipeline copies it
+# to data/current/pokemon/regulations.json and picks the regulation whose window contains
+# "now" as the current one.
+#
+# All times are UTC. Seasons and regulations start at 02:00 and end at 01:59.
+#   id               regulation set id (M-A, M-B, M-C, ...)
+#   start, end       window; the official M-C post gives Sep 8 7 p.m. PDT .. Dec 1 5:59 p.m. PST
+#   showdownMod      Showdown mod that holds this regulation's data
+#   formats          Showdown format ids (Smogon stats use the same ids)
+#   limitlessFormat  Limitless play API format code
+#   seasons          ranked seasons inside the window; `estimated: true` = not yet confirmed
+#   estimatedEnd     the end date itself is a prediction
+regulations:
+  - id: M-B
+    label: Regulation Set M-B
+    start: "2026-06-17T02:00:00Z"
+    end: "2026-09-09T01:59:00Z"
+    showdownMod: championsregmb
+    formats:
+      doubles: gen9championsvgc2026regmb
+      doublesBo3: gen9championsvgc2026regmbbo3
+      singles: gen9championsbssregmb
+    limitlessFormat: M-B
+    seasons:
+      - { id: M-3, start: "2026-06-17T02:00:00Z", end: "2026-07-08T01:59:00Z" }
+      - { id: M-4, start: "2026-07-08T02:00:00Z", end: "2026-08-05T01:59:00Z" }
+      - { id: M-5, start: "2026-08-05T02:00:00Z", end: "2026-09-09T01:59:00Z" }
+    notes: Used at the 2026 World Championships.
+  - id: M-C
+    label: Regulation Set M-C
+    start: "2026-09-09T02:00:00Z"
+    end: "2026-12-02T01:59:00Z"
+    showdownMod: champions
+    formats:
+      doubles: gen9championsvgc2026regmc
+      doublesBo3: gen9championsvgc2026regmcbo3
+      singles: gen9championsbssregmc
+    limitlessFormat: M-C
+    seasons:
+      - { id: M-6, start: "2026-09-09T02:00:00Z", end: "2026-10-07T01:59:00Z" }
+      - { id: M-7, start: "2026-10-07T02:00:00Z", end: "2026-11-04T01:59:00Z", estimated: true }
+      - { id: M-8, start: "2026-11-04T02:00:00Z", end: "2026-12-02T01:59:00Z", estimated: true }
+    sourceUrl: https://www.pokemon.com/us/news/get-ready-for-regulation-set-m-c-in-pokemon-champions
+    notes: Adds Rillaboom and other new species, new Megas (including Garchomp Z, Lucario Z and Absol Z) and twelve new items.

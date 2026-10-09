@@ -1,0 +1,22 @@
+# Curated counter pairs (SPEC §5.1.4). Validated by CuratedPairsFileSchema in
+# src/games/hots/schema.ts.
+#
+# Each pair says: hero `a` is good against hero `b`, for a concrete mechanical reason that
+# holds for the current kits. Curated pairs add weight on top of the generic rules in
+# rules.yaml and their `why` is shown verbatim as a reason, so write it for players.
+#   a, b         hero slugs (chogall for the composite)
+#   why          handwritten mechanical reason, consistent with current ability/talent text
+#   evidence     ability/talent names the reason relies on (checked against game data)
+#   conditions   optional talents or situations the matchup depends on
+#   confidence   low | medium | high (sets the default weight)
+#   weight       optional override of the confidence weight
+#   reviewedFor  major patch the entry was last checked against, e.g. "2.57"
+#
+# The entry below is an example of the format; real content comes from curators by PR.
+pairs:
+  - a: johanna
+    b: valla
+    why: Johanna's Shield Glare blinds enemies in front of her, so Valla's basic attacks miss while the blind lasts, and most of Valla's damage comes from basic attacks.
+    evidence: [Shield Glare]
+    confidence: medium
+    reviewedFor: "2.57"
