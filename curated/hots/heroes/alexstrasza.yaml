@@ -25,7 +25,7 @@ counters:
     confidence: low
   - a: alexstrasza
     b: jaina
-    why: "Jaina's kill pattern relies on Chill slows and roots; Dragonqueen halves slow and root durations on Alexstrasza, and Lifeblossom lets Breath of Life strip slows and roots from an ally."
+    why: "Jaina sets up kills with Chill slows and Ring of Frost's root; Dragonqueen gives Alexstrasza resistance to disabling effects, and with Lifeblossom her Breath of Life strips slows and roots off an ally."
     evidence: ["Dragonqueen", "Lifeblossom", "Breath of Life", "Frostbite", "Ring of Frost"]
     conditions: "Lifeblossom at level 7, during Dragonqueen."
     confidence: low
@@ -34,11 +34,13 @@ counters:
     b: alexstrasza
     why: "Biotic Grenade stops all healing for 1.75 seconds; a Gift of Life cast into it still costs Alexstrasza 15% of her health while the heal does nothing."
     evidence: ["Biotic Grenade", "Anti-Healer", "Gift of Life"]
+    conditions: "Anti-Healer at level 7 lengthens the block; the base grenade does most of the work."
     confidence: medium
   - a: malthael
     b: alexstrasza
     why: "Reaper's Mark ticks 2% of max health per second regardless of her heals, Touch of Death halves healing on marked heroes, and Dragonqueen's extra health only makes the ticks bigger."
     evidence: ["Reaper's Mark", "Touch of Death", "Dragonqueen"]
+    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tracer
     b: alexstrasza

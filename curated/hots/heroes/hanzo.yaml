@@ -11,11 +11,13 @@ counters:
     b: chogall
     why: "Cho'gall is a big, slow target for charged Storm Bows, and Giant Slayer adds 1.6% max health to every Scatter Arrow and basic attack."
     evidence: ["Storm Bow", "Giant Slayer", "Scatter Arrow"]
+    conditions: "Giant Slayer at level 16 for the percent damage."
     confidence: low
   - a: hanzo
     b: stitches
     why: "Stitches is a slow 3020-health target, so Giant Slayer's percent damage chunks him, and Natural Agility hops terrain to stay out of Hook's line."
     evidence: ["Giant Slayer", "Natural Agility", "Hook"]
+    conditions: "Giant Slayer at level 16 for the percent damage."
     confidence: low
   - a: hanzo
     b: nova

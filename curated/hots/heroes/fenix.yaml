@@ -43,6 +43,7 @@ counters:
     b: fenix
     why: "Strip Shields adds up to 270 damage against shields to Chains of Kel'Thuzad, and the pull and stun hold Fenix in place for Frost Nova."
     evidence: ["Strip Shields", "Chains of Kel'Thuzad", "Frost Nova", "Shield Capacitor"]
+    conditions: "Strip Shields at level 4."
     confidence: low
 synergies:
   - a: arthas

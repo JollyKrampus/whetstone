@@ -37,6 +37,7 @@ counters:
     b: blaze
     why: "Reaper's Mark takes 2% of Blaze's large max health every second, and Touch of Death halves the healing he gets from standing in Ignited Oil Spills."
     evidence: ["Reaper's Mark", "Touch of Death", "Oil Spill"]
+    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tychus
     b: blaze

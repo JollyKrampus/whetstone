@@ -23,6 +23,7 @@ counters:
     b: illidan
     why: "Wrecking Ball throws a diving Illidan into Garrosh's team, and Groundbreaker with Intimidation cuts his attack speed by 30%."
     evidence: ["Wrecking Ball", "Groundbreaker", "Intimidation"]
+    conditions: "Intimidation at level 7 for the attack-speed cut."
     confidence: low
   - a: garrosh
     b: chromie
@@ -44,6 +45,7 @@ counters:
     b: garrosh
     why: "Reaper's Mark deals percent max-health damage every second, and Touch of Death halves the healing Garrosh gets from Bloodthirst."
     evidence: ["Reaper's Mark", "Touch of Death", "Bloodthirst"]
+    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
 synergies:
   - a: alarak

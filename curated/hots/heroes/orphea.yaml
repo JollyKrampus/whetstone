@@ -18,7 +18,7 @@ counters:
     confidence: low
   - a: orphea
     b: sonya
-    why: "Ancient Spear is Sonya's only way in, and Backbiter's dash after Chomp plus Dread's slow let Orphea kite her while Chaos attacks heal back the damage."
+    why: "Ancient Spear is Sonya's only basic gap closer, and Backbiter's dash after Chomp plus Dread's slow let Orphea kite her while Chaos attacks heal back the damage."
     evidence: ["Ancient Spear", "Backbiter", "Chomp", "Dread", "Overflowing Chaos"]
     conditions: "Assumes Backbiter at level 4."
     confidence: low

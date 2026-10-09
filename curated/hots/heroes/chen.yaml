@@ -36,6 +36,7 @@ counters:
     b: chen
     why: "Strip Shields adds up to 270 damage against shields to Chains of Kel'Thuzad, and the pull and stun interrupt Fortifying Brew mid-drink."
     evidence: ["Strip Shields", "Chains of Kel'Thuzad", "Fortifying Brew"]
+    conditions: "Strip Shields at level 4."
     confidence: low
   - a: ltmorales
     b: chen

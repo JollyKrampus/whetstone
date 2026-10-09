@@ -16,6 +16,7 @@ counters:
     b: chromie
     why: "Chromie's 1390 Health and lack of a dash make her easy prey once Ruthless Onslaught connects, and Lamb to the Slaughter can chain and silence her for 3 seconds."
     evidence: ["Ruthless Onslaught", "Lamb to the Slaughter"]
+    conditions: "Less reliable once Chromie has Time Out or Here and There at level 13."
     confidence: medium
   - a: thebutcher
     b: probius

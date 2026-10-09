@@ -14,7 +14,7 @@ counters:
     confidence: medium
   - a: chromie
     b: nazeebo
-    why: "Ravenous Spirit roots Nazeebo in place for up to 8 seconds, letting all three Dragon's Breath blasts and repeated Sand Blasts hit him."
+    why: "Nazeebo cannot move while channeling Ravenous Spirit for up to 8 seconds, letting all three Dragon's Breath blasts and repeated Sand Blasts hit him."
     evidence: ["Dragon's Breath", "Sand Blast", "Ravenous Spirit"]
     confidence: medium
   - a: chromie

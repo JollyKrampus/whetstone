@@ -23,7 +23,7 @@ counters:
     confidence: low
   - a: genji
     b: junkrat
-    why: "Deflect blocks Frag Launcher grenades and throws Kunai back, and Cyber Agility closes on a hero whose only escape is a self-knockback from Concussion Mine."
+    why: "Deflect blocks Frag Launcher grenades and throws Kunai back, and Cyber Agility closes on a hero whose only basic escape is a self-knockback from Concussion Mine."
     evidence: ["Deflect", "Cyber Agility", "Concussion Mine", "Frag Launcher"]
     confidence: medium
   - a: zeratul
@@ -38,7 +38,7 @@ counters:
     confidence: medium
   - a: anubarak
     b: junkrat
-    why: "Harden Carapace's Spell Armor and shield soak Junkrat's all-Ability damage, and Burrow Charge or Impale reaches a 1425-Health target whose only escape is a Concussion Mine self-knockback."
+    why: "Harden Carapace's Spell Armor and shield soak Junkrat's all-Ability damage, and Burrow Charge or Impale reaches a 1425-Health target whose only basic escape is a Concussion Mine self-knockback."
     evidence: ["Harden Carapace", "Burrow Charge", "Impale", "Concussion Mine"]
     confidence: medium
 synergies:

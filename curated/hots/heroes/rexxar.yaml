@@ -36,7 +36,7 @@ counters:
     confidence: low
   - a: malthael
     b: rexxar
-    why: "Reaper's Mark burns 2% max Health per second on any marked non-Structure target, so Malthael's cleaving attacks drain Rexxar and Misha at once and Soul Rip heals him off both."
+    why: "Reaper's Mark burns 2% max Health per second on any marked non-Structure target, so Malthael's cleaving attacks drain Rexxar and Misha at once faster than Mend Pet can refill her, and Soul Rip heals him off both."
     evidence: ["Reaper's Mark", "Soul Rip", "Mend Pet"]
     confidence: low
 synergies:

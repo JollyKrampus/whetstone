@@ -16,3 +16,5 @@ playwright-report/
 .data-store/
 /artifacts/
 *.wsb
+.claude/
+*.stackdump

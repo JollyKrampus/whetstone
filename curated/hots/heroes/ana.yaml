@@ -16,6 +16,7 @@ counters:
     b: leoric
     why: "Drain Hope's self-heal is Leoric's main sustain; a Biotic Grenade during the drain turns that healing off, and Anti-Healer stretches the window."
     evidence: ["Biotic Grenade", "Anti-Healer", "Drain Hope"]
+    conditions: "Anti-Healer at level 7 lengthens the block; the base grenade does most of the work."
     confidence: medium
   - a: ana
     b: thebutcher
@@ -26,6 +27,7 @@ counters:
     b: alexstrasza
     why: "Biotic Grenade stops all healing for 1.75 seconds; a Gift of Life cast into it still costs Alexstrasza 15% of her health while the heal does nothing."
     evidence: ["Biotic Grenade", "Anti-Healer", "Gift of Life"]
+    conditions: "Anti-Healer at level 7 lengthens the block; the base grenade does most of the work."
     confidence: medium
   - a: ana
     b: sonya

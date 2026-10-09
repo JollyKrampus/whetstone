@@ -20,7 +20,7 @@ counters:
     confidence: medium
   - a: jaina
     b: imperius
-    why: "Imperius must walk into melee range with Celestial Charge as his lone gap closer; steady Chill from Frostbolt and Cone of Cold kites him while Frostbite amplifies her damage."
+    why: "Imperius must walk into melee range with Celestial Charge as his lone basic gap closer; steady Chill from Frostbolt and Cone of Cold kites him while Frostbite amplifies her damage."
     evidence: ["Celestial Charge", "Frostbolt", "Cone of Cold", "Frostbite"]
     confidence: low
   - a: jaina

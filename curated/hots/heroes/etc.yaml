@@ -29,6 +29,7 @@ counters:
     b: thebutcher
     why: "Face Melt pushes Butcher away right after Ruthless Onslaught, and Imposing Presence slows the basic attacks Butcher needs to heal."
     evidence: ["Face Melt", "Imposing Presence", "Ruthless Onslaught", "Butcher's Brand"]
+    conditions: "Imposing Presence at level 16 for the attack-speed slow."
     confidence: low
   # --- weak against ---
   - a: deathwing
@@ -40,6 +41,7 @@ counters:
     b: etc
     why: "Reaper's Mark ticks 2% of E.T.C.'s max health per second, and Touch of Death halves Guitar Solo's healing."
     evidence: ["Reaper's Mark", "Touch of Death", "Guitar Solo"]
+    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tyrael
     b: etc

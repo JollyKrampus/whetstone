@@ -9,8 +9,9 @@ counters:
   # --- strong against ---
   - a: chogall
     b: illidan
-    why: "Ogre Hide and Twilight Veil stack armor against Illidan's basic attacks, while Gall's Shadowflame and Hammer of Twilight punish him for staying close."
+    why: "Ogre Hide's armor, raised to 75 by Twilight Veil, blunts Illidan's basic attacks and the Betrayer's Thirst healing they feed, while Cho's Hammer of Twilight and Gall's Shadowflame punish him for staying close."
     evidence: ["Ogre Hide", "Twilight Veil", "Shadowflame", "Hammer of Twilight", "Betrayer's Thirst"]
+    conditions: "Twilight Veil at level 13 for the 75-armor window; base Ogre Hide still helps."
     confidence: low
   - a: chogall
     b: thebutcher
@@ -19,14 +20,16 @@ counters:
     confidence: low
   - a: chogall
     b: varian
-    why: "Varian's damage is physical basic attacks that Ogre Hide and Twilight Veil reduce, and Gall is immune to the silence from Taunt."
-    evidence: ["Ogre Hide", "Twilight Veil", "Ogre Rage", "Taunt"]
+    why: "Twin Blades Varian deals almost all his damage through physical basic attacks, which Ogre Hide's armor (75 with Twilight Veil) cuts sharply while Gall keeps hitting him with Shadowflame in melee range."
+    evidence: ["Ogre Hide", "Twilight Veil", "Shadowflame", "Twin Blades of Fury"]
+    conditions: "Varian on Twin Blades of Fury; Twilight Veil at level 13 for the full armor."
     confidence: low
   # --- weak against ---
   - a: malthael
     b: chogall
     why: "Reaper's Mark deals 2% of Cho's large max health every second, and Touch of Death halves Consuming Blaze's healing."
     evidence: ["Reaper's Mark", "Touch of Death", "Consuming Blaze"]
+    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tychus
     b: chogall

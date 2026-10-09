@@ -20,7 +20,7 @@ counters:
     confidence: low
   - a: zarya
     b: kerrigan
-    why: "Shield Ally soaks Kerrigan's combo damage, and Cleansing Shield breaks Impaling Blades' stun before her Ravage follow-up lands."
+    why: "Shield Ally soaks the burst from Kerrigan's Ravage and Primal Grasp, and Cleansing Shield frees the target from Impaling Blades' stun so they can walk out before the combo finishes."
     evidence: ["Shield Ally", "Cleansing Shield", "Impaling Blades", "Ravage"]
     conditions: "Cleansing Shield at level 16."
     confidence: low

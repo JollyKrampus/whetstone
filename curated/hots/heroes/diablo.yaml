@@ -39,6 +39,7 @@ counters:
     b: diablo
     why: "Reaper's Mark ticks 2% of max health per second and grows with Black Soulstone's bonus health, while Touch of Death halves Fire Stomp's heal."
     evidence: ["Reaper's Mark", "Touch of Death", "Black Soulstone", "Fire Stomp"]
+    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tychus
     b: diablo

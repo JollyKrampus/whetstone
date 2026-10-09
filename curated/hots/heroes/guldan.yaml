@@ -23,6 +23,7 @@ counters:
     b: thebutcher
     why: "Horrify fears and silences Butcher for 2 seconds after he charges in, and Drain Life with Curse of Exhaustion slows him and out-heals his melee pressure."
     evidence: ["Horrify", "Drain Life", "Curse of Exhaustion", "Ruthless Onslaught"]
+    conditions: "Curse of Exhaustion at level 7 for the slow."
     confidence: low
   # --- weak against ---
   - a: zeratul

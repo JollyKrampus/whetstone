@@ -32,7 +32,7 @@ counters:
   - a: illidan
     b: raynor
     why: "Evasion makes every Raynor basic attack miss for 2.5 seconds while Illidan heals off him with Betrayer's Thirst, and Raynor has no dash to leave the dive."
-    evidence: ["Evasion", "Betrayer's Thirst", "Inspire"]
+    evidence: ["Evasion", "Betrayer's Thirst"]
     confidence: medium
   - a: cassia
     b: raynor

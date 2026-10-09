@@ -42,6 +42,7 @@ counters:
     b: artanis
     why: "Frozen Tempest cuts Artanis' attack speed by up to 40% and Rime blocks a basic attack every 5 seconds, starving Shield Overload's refresh."
     evidence: ["Frozen Tempest", "Rime", "Shield Overload"]
+    conditions: "Rime at level 1 adds the attack-blocking armor; Frozen Tempest works without it."
     confidence: medium
   - a: lili
     b: artanis

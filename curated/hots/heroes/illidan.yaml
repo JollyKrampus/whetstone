@@ -8,7 +8,7 @@ traits:
 counters:
   - a: illidan
     b: sgthammer
-    why: "Siege Mode keeps Sgt. Hammer in place, and Dive plus Sweeping Strike reach her past the frontline; her only peel is a single Concussive Blast knockback that Illidan can Dive back through."
+    why: "Siege Mode keeps Sgt. Hammer in place, and Dive plus Sweeping Strike reach her past the frontline; her only knockback is Concussive Blast, which Illidan can Dive straight back through."
     evidence: ["Siege Mode", "Concussive Blast", "Dive", "Sweeping Strike"]
     confidence: medium
   - a: illidan

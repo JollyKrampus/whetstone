@@ -14,8 +14,8 @@ counters:
     confidence: low
   - a: sonya
     b: chromie
-    why: "Ancient Spear yanks Sonya onto Chromie and briefly stuns her; with 1390 Health and no dash, Chromie can't get away unless she took Time Out."
-    evidence: ["Ancient Spear", "Leap", "Time Out"]
+    why: "Ancient Spear yanks Sonya onto Chromie and briefly stuns her; with 1390 Health and no dash, Chromie can't get away unless she took Time Out or Here and There at level 13."
+    evidence: ["Ancient Spear", "Leap", "Time Out", "Here and There"]
     confidence: medium
   - a: sonya
     b: probius

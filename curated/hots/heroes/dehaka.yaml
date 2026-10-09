@@ -28,6 +28,7 @@ counters:
     b: dehaka
     why: "Reaper's Mark ticks percent max-health damage that Essence Collection can't keep up with, and Touch of Death halves that healing."
     evidence: ["Reaper's Mark", "Touch of Death", "Essence Collection"]
+    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: ana
     b: dehaka

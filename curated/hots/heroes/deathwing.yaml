@@ -5,8 +5,6 @@ traits:
     why: "Big health, up to 40 Armor from his plates and permanent Unstoppable let him walk into the enemy team without being moved."
   - tag: siege
     why: "Cataclysm's scorched ground and Burn Beneath My Shadow let him take structures down quickly."
-  - tag: channel
-    why: "Dragonflight takes 3 seconds and can't be started for 6 seconds after he takes damage, so steady chip damage stops him resetting."
 counters:
   # --- strong against ---
   - a: deathwing
@@ -16,13 +14,13 @@ counters:
     confidence: medium
   - a: deathwing
     b: stitches
-    why: "Hook can't drag and Gorge can't trap an Unstoppable target, so Stitches loses his playmaking tools against Deathwing."
-    evidence: ["Aspect of Death", "Hook", "Gorge"]
+    why: "Hook's pull does nothing to a permanently Unstoppable Deathwing, which takes away the pick tool Stitches is drafted for and leaves him only his damage."
+    evidence: ["Aspect of Death", "Hook"]
     confidence: medium
   - a: deathwing
     b: anubarak
-    why: "Deathwing is permanently Unstoppable, so Impale, Burrow Charge's stun and Cocoon do nothing to him and Anub'arak loses most of his value."
-    evidence: ["Aspect of Death", "Impale", "Burrow Charge", "Cocoon"]
+    why: "Deathwing is permanently Unstoppable, so the stuns from Impale and Burrow Charge never land on him and Anub'arak loses most of the lockdown he was picked for."
+    evidence: ["Aspect of Death", "Impale", "Burrow Charge"]
     confidence: medium
   - a: deathwing
     b: arthas

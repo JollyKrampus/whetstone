@@ -24,6 +24,7 @@ counters:
     b: dva
     why: "The mech is a big target that has to brawl up close; Globe of Annihilation with Total Annihilation takes 4% of its max health per hit while Demon Warriors pressure the lane."
     evidence: ["Globe of Annihilation", "Total Annihilation", "Summon Demon Warrior", "Mech Mode"]
+    conditions: "Total Annihilation at level 16 for the percent damage."
     confidence: low
   # --- weak against ---
   - a: zeratul

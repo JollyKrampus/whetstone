@@ -29,8 +29,9 @@ counters:
     confidence: medium
   - a: tracer
     b: nazeebo
-    why: "Ravenous Spirit roots Nazeebo in place while he channels, and Tracer's constant movement makes Zombie Wall hard to land on her."
+    why: "Nazeebo has no dash, so Tracer Blinks onto his 1502 Health and Melee bursts him; she can Blink out of Zombie Wall during its 1-second delay, and he can't step away while channelling Ravenous Spirit."
     evidence: ["Blink", "Melee", "Ravenous Spirit", "Zombie Wall"]
+    conditions: "Ice Block at level 13 gives him one escape."
     confidence: low
   - a: tracer
     b: xul

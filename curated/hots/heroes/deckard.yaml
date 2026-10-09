@@ -18,6 +18,7 @@ counters:
     b: kerrigan
     why: "Kerrigan commits in melee after Ravage; Scroll of Sealing roots her inside the triangle and Kanai's Cube cuts her damage by 30%."
     evidence: ["Scroll Of Sealing", "Kanai's Cube", "Ravage"]
+    conditions: "Kanai's Cube at level 7 for the damage reduction."
     confidence: low
   - a: deckard
     b: thebutcher

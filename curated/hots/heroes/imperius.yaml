@@ -28,7 +28,7 @@ counters:
     confidence: medium
   - a: lunara
     b: imperius
-    why: "Imperius's only gap closer is Celestial Charge on a 10-second cooldown, so Crippling Spores and Dryad's Swiftness let Lunara stack Nature's Toxin while staying out of his reach."
+    why: "Imperius's only basic gap closer is Celestial Charge on a 10-second cooldown, so Crippling Spores and Dryad's Swiftness let Lunara stack Nature's Toxin while staying out of his reach."
     evidence: ["Celestial Charge", "Crippling Spores", "Dryad's Swiftness", "Nature's Toxin"]
     confidence: medium
   - a: malthael

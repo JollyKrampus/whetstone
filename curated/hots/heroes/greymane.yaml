@@ -16,6 +16,7 @@ counters:
     b: chogall
     why: "Cursed Bullet takes 35% of current health, a huge chunk of Cho's pool, and Alpha Killer adds 3% max health to every Worgen attack."
     evidence: ["Cursed Bullet", "Alpha Killer"]
+    conditions: "Alpha Killer at level 16 for the percent damage; Cursed Bullet works without it."
     confidence: low
   - a: greymane
     b: kaelthas

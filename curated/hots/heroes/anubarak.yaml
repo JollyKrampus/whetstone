@@ -30,8 +30,8 @@ counters:
   # --- weak against ---
   - a: deathwing
     b: anubarak
-    why: "Deathwing is permanently Unstoppable, so Impale, Burrow Charge's stun and Cocoon do nothing to him and Anub'arak loses most of his value."
-    evidence: ["Aspect of Death", "Impale", "Burrow Charge", "Cocoon"]
+    why: "Deathwing is permanently Unstoppable, so the stuns from Impale and Burrow Charge never land on him and Anub'arak loses most of the lockdown he was picked for."
+    evidence: ["Aspect of Death", "Impale", "Burrow Charge"]
     confidence: medium
   - a: malthael
     b: anubarak

@@ -18,11 +18,13 @@ counters:
     b: thebutcher
     why: "Frozen Tempest slows Butcher's attacks by up to 40% and Rime absorbs his hits, starving the Butcher's Brand healing that only comes from basic attacks."
     evidence: ["Frozen Tempest", "Rime", "Butcher's Brand"]
+    conditions: "Rime at level 1 adds the attack-blocking armor; Frozen Tempest works without it."
     confidence: medium
   - a: arthas
     b: artanis
     why: "Frozen Tempest cuts Artanis' attack speed by up to 40% and Rime blocks a basic attack every 5 seconds, starving Shield Overload's refresh."
     evidence: ["Frozen Tempest", "Rime", "Shield Overload"]
+    conditions: "Rime at level 1 adds the attack-blocking armor; Frozen Tempest works without it."
     confidence: medium
   - a: arthas
     b: varian
@@ -40,6 +42,7 @@ counters:
     b: arthas
     why: "Arthas' large health pool feeds Reaper's Mark's 2% max-health ticks and Soul Rip's healing, and Touch of Death halves his Death Coil self-heal."
     evidence: ["Reaper's Mark", "Soul Rip", "Touch of Death", "Death Coil"]
+    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: lunara
     b: arthas
