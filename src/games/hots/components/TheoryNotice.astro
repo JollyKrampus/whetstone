@@ -1,0 +1,76 @@
+---
+/**
+ * Plain-language notice that a view comes from the theory layer (kit text + curated notes), not
+ * from match statistics. Shown wherever theory stands in for numbers (SPEC §1.6).
+ */
+import { navHref } from '../../registry.ts';
+
+interface Props {
+  /** Heading text; the body explains what theory scores mean. */
+  title?: string;
+  /** Extra sentence for the specific view. */
+  detail?: string;
+  /** True when a stats build simply lacks this view (else: stats are not enabled at all). */
+  statsOn?: boolean;
+  class?: string;
+}
+
+const { title = 'Theory mode', detail, statsOn = false, class: extra } = Astro.props;
+---
+
+<aside class:list={['tnote', extra]} aria-label={title} data-theory-notice>
+  <svg class="tnote__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3 21 12 12 21 3 12z" stroke-dasharray="3 2.2"></path>
+    <path d="M9.5 10a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.2M12 16.8v.2"></path>
+  </svg>
+  <div class="tnote__body">
+    <p class="tnote__title">{title}</p>
+    <p>
+      {
+        statsOn
+          ? 'This view has no match statistics in this build, so its scores come from mechanics and curated matchups.'
+          : 'Scores come from mechanics and curated matchups until match statistics are enabled.'
+      }{' '}
+      They describe how the kits interact (a stun against a channel, anti-heal against a healer), not how often a matchup is
+      won.
+      {detail ? ` ${detail}` : ''}
+    </p>
+    <p>
+      <a href={navHref('hots', 'about/#theory')}>How theory scores work</a>
+    </p>
+  </div>
+</aside>
+
+<style>
+  .tnote {
+    display: flex;
+    gap: var(--sp-3);
+    align-items: flex-start;
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px dashed var(--steel-2);
+    border-radius: var(--radius);
+    background: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 9px), var(--surface);
+    font-size: var(--fs-sm);
+  }
+
+  .tnote__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: none;
+    color: var(--accent);
+  }
+
+  .tnote__body {
+    display: grid;
+    gap: var(--sp-1);
+    max-width: 72ch;
+  }
+
+  .tnote__title {
+    font-weight: 750;
+  }
+
+  .tnote a {
+    font-weight: 650;
+  }
+</style>

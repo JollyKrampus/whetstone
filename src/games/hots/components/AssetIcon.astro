@@ -1,0 +1,55 @@
+---
+/**
+ * An ability/talent/map image from the data, or a lettered placeholder when the file is not in
+ * this build (fixtures ship portraits and map art but not every icon). Decorative: the name is
+ * always printed next to it.
+ */
+import { assetHref } from '../../registry.ts';
+import { hasAsset } from '../load.ts';
+
+interface Props {
+  /** Game-relative path, e.g. 'img/icons/x.webp'. */
+  src: string;
+  /** Short text for the placeholder (hotkey or first letter). */
+  fallback: string;
+  size?: number;
+  class?: string;
+}
+
+const { src, fallback, size = 40, class: extra } = Astro.props;
+const exists = hasAsset(src);
+---
+
+{
+  exists ? (
+    <img class:list={['aicon', extra]} src={assetHref('hots', src)} alt="" width={size} height={size} loading="lazy" decoding="async" />
+  ) : (
+    <span class:list={['aicon', 'aicon--blank', extra]} style={`--size: ${size}px`} aria-hidden="true">
+      {fallback.slice(0, 2)}
+    </span>
+  )
+}
+
+<style>
+  .aicon {
+    flex: none;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .aicon--blank {
+    display: inline-grid;
+    place-items: center;
+    width: var(--size);
+    height: var(--size);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: calc(var(--size) * 0.36);
+    font-weight: 750;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+      var(--surface-2);
+  }
+</style>

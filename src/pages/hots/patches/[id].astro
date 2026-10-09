@@ -1,0 +1,377 @@
+---
+/**
+ * /hots/patches/[id]/ (SPEC §8): one patch, balance update or hotfix: general changes, map
+ * changes, new heroes, every hero's change lines with their direction, game-data changes for the
+ * build, and a link to Blizzard's original notes.
+ */
+import type { GetStaticPaths } from 'astro';
+import Badge from '../../../components/Badge.tsx';
+import { formatDayUTC } from '../../../core/format.ts';
+import { navHref, versionText } from '../../../games/registry.ts';
+import ChangeList from '../../../games/hots/components/ChangeList.tsx';
+import Crumbs from '../../../games/hots/components/Crumbs.astro';
+import { countDirs, describeCounts, emptyCounts, PATCH_KIND, VERDICT } from '../../../games/hots/components/labels.ts';
+import { getDiffs, getEntity, getHeroById, getMapBySlug, getPatch, getPatches, hasAsset } from '../../../games/hots/load.ts';
+import { heroHref, heroPortrait, mapHref, patchHref } from '../../../games/hots/view.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+export const getStaticPaths = (() => getPatches().map((p) => ({ params: { id: p.id }, props: { id: p.id } }))) satisfies GetStaticPaths;
+
+interface Props {
+  id: string;
+}
+
+const patch = getPatch(Astro.props.id);
+if (!patch) throw new Error(`Unknown patch ${Astro.props.id}`);
+const all = getPatches();
+const index = all.findIndex((p) => p.id === patch.id);
+const newer = index > 0 ? all[index - 1] : undefined;
+const older = index >= 0 ? all[index + 1] : undefined;
+const kind = PATCH_KIND[patch.kind];
+
+const heroes = Object.entries(patch.heroes).map(([id, entry]) => {
+  const hero = getHeroById(id);
+  const entity = hero ? (getEntity(hero) ?? hero) : undefined;
+  return {
+    id,
+    name: hero?.name ?? id,
+    href: entity ? heroHref(entity) : null,
+    portrait: hero && hasAsset(hero.portrait) ? heroPortrait(hero) : null,
+    entry,
+    counts: countDirs(entry.changes),
+  };
+});
+const totals = emptyCounts();
+for (const h of heroes) countDirs(h.entry.changes, totals);
+const newHeroes = (patch.newHeroes ?? []).map((id) => heroes.find((h) => h.id === id) ?? { id, name: getHeroById(id)?.name ?? id });
+const mapNotes = Object.entries(patch.maps ?? {}).map(([id, lines]) => ({ id, map: getMapBySlug(id), lines }));
+const diffs = patch.build ? getDiffs().filter((d) => d.to === patch.build) : [];
+const diffHeroes = diffs.flatMap((d) => Object.entries(d.heroes).map(([id, entries]) => ({ diff: d, name: getHeroById(id)?.name ?? id, entries })));
+
+const title = `${patch.title}`;
+const description = `${kind.label} for Heroes of the Storm ${patch.version} on ${formatDayUTC(patch.date)}: ${heroes.length} hero${heroes.length === 1 ? '' : 'es'} changed${describeCounts(totals) ? ` (${describeCounts(totals)})` : ''}, summarized line by line.`;
+---
+
+<GameLayout game="hots" title={title} description={description} navPath="patches/">
+  <article class="pdetail" data-patch={patch.id} data-kind={patch.kind}>
+    <Crumbs trail={[{ label: 'Patches', href: navHref('hots', 'patches/') }]} current={formatDayUTC(patch.date)} />
+
+    <header class="pdetail__head">
+      <p class="pdetail__badges">
+        <Badge tone={kind.tone}>{kind.label}</Badge>
+        <span class="pdetail__ver">{versionText('hots', patch.version)}{patch.build ? ` · build ${patch.build}` : ''}</span>
+      </p>
+      <h1>{patch.title}</h1>
+      <p class="pdetail__meta">
+        <time datetime={patch.date}>{formatDayUTC(patch.date)}</time>
+        {heroes.length > 0 && <> · {heroes.length} hero{heroes.length === 1 ? '' : 'es'} changed</>}
+        {describeCounts(totals) && <> · {describeCounts(totals)}</>}
+      </p>
+      <p class="pdetail__source">
+        <a class="btn" href={patch.url} rel="noopener" target="_blank">
+          Read Blizzard's full notes<span class="visually-hidden"> (opens in a new tab)</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 5h5v5M19 5l-8 8M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"></path>
+          </svg>
+        </a>
+        <span class="pdetail__note">Whetstone shows short summaries; the original notes are the reference.</span>
+      </p>
+      {
+        patch.kind === 'hotfix' && (
+          <p class="pdetail__hotfix" data-hotfix>
+            <strong>Hotfix.</strong> Balance or bug fixes applied to the live game between full patches.
+          </p>
+        )
+      }
+      {
+        patch.kind === 'ptr' && (
+          <p class="pdetail__hotfix">
+            <strong>PTR.</strong> These changes are on the Public Test Realm and may change before they go live.
+          </p>
+        )
+      }
+    </header>
+
+    {
+      newHeroes.length > 0 && (
+        <section class="pdetail__sec" aria-labelledby="new-h">
+          <h2 id="new-h">New {newHeroes.length === 1 ? 'hero' : 'heroes'}</h2>
+          <ul class="pdetail__new">
+            {newHeroes.map((h) => (
+              <li>{'href' in h && h.href ? <a href={h.href}>{h.name}</a> : h.name}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      patch.general.length > 0 && (
+        <section class="pdetail__sec" aria-labelledby="general-h">
+          <h2 id="general-h">General</h2>
+          <ul class="pdetail__general">
+            {patch.general.map((g) => (
+              <li>{g}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      mapNotes.length > 0 && (
+        <section class="pdetail__sec" aria-labelledby="maps-h">
+          <h2 id="maps-h">Maps</h2>
+          <ul class="pdetail__maps">
+            {mapNotes.map((m) => (
+              <li>
+                <p class="pdetail__mapname">{m.map ? <a href={mapHref(m.map)}>{m.map.name}</a> : m.id}</p>
+                <ul>
+                  {m.lines.map((l) => (
+                    <li>{l}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      heroes.length > 0 && (
+        <section class="pdetail__sec" aria-labelledby="heroes-h">
+          <h2 id="heroes-h">Heroes</h2>
+          <ul class="pdetail__heroes">
+            {heroes.map((h) => (
+              <li class="phero" data-hero={h.id} id={`hero-${h.id}`}>
+                <div class="phero__head">
+                  {h.href ? (
+                    <a class="hx-hero" href={h.href}>
+                      {h.portrait ? (
+                        <img class="hx-hero__img" src={h.portrait} alt="" width="40" height="40" loading="lazy" />
+                      ) : (
+                        <span class="hx-hero__img hx-hero__img--blank" aria-hidden="true">
+                          {h.name.slice(0, 1)}
+                        </span>
+                      )}
+                      <span class="hx-hero__name">{h.name}</span>
+                    </a>
+                  ) : (
+                    <span class="hx-hero">{h.name}</span>
+                  )}
+                  {h.entry.verdict && <Badge tone={VERDICT[h.entry.verdict].tone}>{VERDICT[h.entry.verdict].label}</Badge>}
+                  <span class="phero__counts">{describeCounts(h.counts)}</span>
+                </div>
+                <ChangeList changes={h.entry.changes} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      diffHeroes.length > 0 && (
+        <section class="pdetail__sec" aria-labelledby="diffs-h">
+          <h2 id="diffs-h">Game-data changes in build {patch.build}</h2>
+          <p class="pdetail__note">Found by comparing the game files with the previous build; silent changes show up here too.</p>
+          <ul class="pdetail__general">
+            {diffHeroes.map((d) => (
+              <li>
+                <strong>{d.name}:</strong>{' '}
+                {d.entries
+                  .map((e) =>
+                    e.old !== undefined && e.new !== undefined
+                      ? `${e.target}${e.field ? ` ${e.field}` : ''} ${e.old} → ${e.new}`
+                      : `${e.target} (${e.kind.replace('-', ' ')})`,
+                  )
+                  .join('; ')}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <nav class="pdetail__nav" aria-label="Other patches">
+      {
+        older ? (
+          <a class="pdetail__step" href={patchHref(older)}>
+            <span class="pdetail__dir">Older</span>
+            <span>{older.title}</span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        newer && (
+          <a class="pdetail__step pdetail__step--next" href={patchHref(newer)}>
+            <span class="pdetail__dir">Newer</span>
+            <span>{newer.title}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</GameLayout>
+
+<style>
+  .pdetail {
+    display: grid;
+    gap: var(--sp-6);
+    min-width: 0;
+  }
+
+  .pdetail__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .pdetail__head h1 {
+    font-size: var(--fs-2xl);
+  }
+
+  .pdetail__badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .pdetail__ver,
+  .pdetail__meta {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .pdetail__ver {
+    font-family: var(--font-mono);
+  }
+
+  .pdetail__source {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2) var(--sp-3);
+    margin-top: var(--sp-2);
+  }
+
+  .pdetail__note {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .pdetail__hotfix {
+    max-width: 70ch;
+    padding: var(--sp-2) var(--sp-3);
+    border-left: 3px solid var(--warning);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--warning) 8%, var(--surface));
+    font-size: var(--fs-sm);
+  }
+
+  .pdetail__sec {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .pdetail__sec h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .pdetail__general,
+  .pdetail__new {
+    display: grid;
+    gap: var(--sp-1);
+    max-width: 75ch;
+    padding-left: 1.1rem;
+  }
+
+  .pdetail__maps {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .pdetail__maps ul {
+    padding-left: 1.1rem;
+    font-size: var(--fs-sm);
+  }
+
+  .pdetail__mapname {
+    font-weight: 700;
+  }
+
+  .pdetail__heroes {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .phero {
+    display: grid;
+    gap: var(--sp-3);
+    padding: var(--sp-3) var(--sp-4) var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .phero__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2) var(--sp-3);
+  }
+
+  .phero__counts {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .pdetail__nav {
+    display: grid;
+    gap: var(--sp-2);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .pdetail__step {
+    display: grid;
+    gap: 0.1rem;
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .pdetail__step:hover {
+    border-color: var(--accent);
+  }
+
+  .pdetail__dir {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (min-width: 48rem) {
+    .pdetail__nav {
+      grid-template-columns: 1fr 1fr;
+    }
+    .pdetail__step--next {
+      grid-column: 2;
+      text-align: right;
+    }
+  }
+</style>

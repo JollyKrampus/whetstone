@@ -1,0 +1,151 @@
+---
+/**
+ * Talents by level (1, 4, 7, 10, 13, 16, 20) with icon, the ability each one modifies and the
+ * game-file tooltip text. Composites list each member separately.
+ */
+import Badge from '../../../components/Badge.tsx';
+import type { Hero } from '../schema.ts';
+import AssetIcon from './AssetIcon.astro';
+import { TIERS } from './talents.ts';
+
+interface Props {
+  owners: Hero[];
+  /** Show each owner's name as a heading (composites). */
+  named?: boolean;
+}
+
+const { owners, named = false } = Astro.props;
+const abilityLabel: Record<string, string> = { Active: 'Active', Passive: 'Passive', D: 'Trait', R: 'Heroic' };
+---
+
+<div class="ttiers">
+  {
+    owners.map((owner) => (
+      <section class="ttiers__owner" aria-label={named ? `${owner.name} talents` : 'Talents'}>
+        {named && <h3 class="ttiers__name">{owner.name}</h3>}
+        <ol class="ttiers__levels">
+          {TIERS.map((tier) => (
+            <li class="ttier" data-level={tier}>
+              <p class="ttier__level">
+                <span class="visually-hidden">Level </span>
+                <span aria-hidden="true">Lv</span> {tier}
+              </p>
+              {owner.talents[tier].length === 0 ? (
+                <p class="ttier__none">No talents at this level.</p>
+              ) : (
+                <ul class="ttier__list">
+                  {owner.talents[tier].map((t) => (
+                    <li class="talent" data-talent={t.id}>
+                      <AssetIcon src={t.icon} fallback={t.ability ?? t.name} size={40} />
+                      <div class="talent__body">
+                        <p class="talent__head">
+                          <span class="talent__name">{t.name}</span>
+                          {t.ability && <Badge tone="neutral">{abilityLabel[t.ability] ?? t.ability}</Badge>}
+                          {t.quest && <Badge tone="warning">Quest</Badge>}
+                        </p>
+                        <p class="talent__text">{t.text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .ttiers {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .ttiers__owner {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .ttiers__name {
+    font-size: var(--fs-lg);
+  }
+
+  .ttiers__levels {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .ttier {
+    display: grid;
+    gap: var(--sp-2);
+    padding: var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .ttier__level {
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: 750;
+    color: var(--accent);
+  }
+
+  .ttier__none {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .ttier__list {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .talent {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--sp-3);
+    align-items: start;
+  }
+
+  .talent__body {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .talent__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-2);
+  }
+
+  .talent__name {
+    font-weight: 700;
+  }
+
+  .talent__text {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    white-space: pre-line;
+  }
+
+  @media (min-width: 64rem) {
+    .ttier {
+      grid-template-columns: 4rem minmax(0, 1fr);
+      align-items: start;
+    }
+    .ttier__list {
+      grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,293 @@
+---
+/**
+ * Hero page header: portrait, name, in-game title, role and franchise, badges (new, free this
+ * week, Storm League tier when stats exist), key facts and the four kit ratings.
+ */
+import Badge from '../../../components/Badge.tsx';
+import { formatDayUTC, pp } from '../../../core/format.ts';
+import type { TierResult } from '../../../core/tiers.ts';
+import type { Hero } from '../schema.ts';
+import { heroPortrait } from '../view.ts';
+import { RATING_LABEL, RATING_MAX } from './labels.ts';
+import { TIER_TITLE } from './pagedata.ts';
+
+interface Props {
+  hero: Hero;
+  members: Hero[];
+  free: boolean;
+  /** Storm League, current patch; null in theory mode or without a row for this hero. */
+  tier: TierResult | null;
+  /** Date of the newest patch note that touched the hero. */
+  lastChanged: string | null;
+}
+
+const { hero, members, free, tier, lastChanged } = Astro.props;
+const roles = [hero.role, ...(hero.roleAlt ? [hero.roleAlt] : [])];
+const ratings = (Object.keys(RATING_LABEL) as (keyof typeof RATING_LABEL)[]).map((key) => ({
+  key,
+  label: RATING_LABEL[key],
+  value: hero.ratings[key],
+}));
+const tierText = tier ? (tier.early ? 'Early data' : `Tier ${tier.tier.slice(1)}`) : null;
+const tierTitle = tier
+  ? tier.early
+    ? `Fewer than 200 Storm League games this patch (n = ${tier.n}), so no tier yet`
+    : `${TIER_TITLE[tier.tier] ?? ''}: shrunk win rate ${pp(tier.metric)} from 50% in Storm League, current patch`
+  : null;
+---
+
+<header class="hhead">
+  <img class="hhead__portrait" src={heroPortrait(hero)} alt="" width="96" height="96" />
+  <div class="hhead__main">
+    <p class="kicker hhead__kicker">{roles.join(' / ')} · {hero.franchise}</p>
+    <h1 class="hhead__name">{hero.name}</h1>
+    <p class="hhead__title">{hero.title}</p>
+    <ul class="hhead__badges" aria-label="Status">
+      {
+        hero.isNew && (
+          <li>
+            <Badge tone="accent" title="Released recently: expect thin data and fast balance changes">
+              New
+            </Badge>
+          </li>
+        )
+      }
+      {
+        free && (
+          <li>
+            <Badge tone="positive" title="In this week's free hero rotation">
+              Free this week
+            </Badge>
+          </li>
+        )
+      }
+      {
+        tierText && tierTitle && (
+          <li data-tier-badge>
+            <Badge tone={tier?.early ? 'neutral' : 'stats'} title={tierTitle}>
+              {tierText}
+            </Badge>
+          </li>
+        )
+      }
+    </ul>
+  </div>
+
+  <dl class="hhead__facts">
+    <div>
+      <dt>Role</dt>
+      <dd>{roles.join(' or ')}</dd>
+    </div>
+    <div>
+      <dt>Attack</dt>
+      <dd>{hero.type}</dd>
+    </div>
+    <div>
+      <dt>Difficulty</dt>
+      <dd>{hero.difficulty}</dd>
+    </div>
+    {
+      hero.releaseDate && (
+        <div>
+          <dt>Released</dt>
+          <dd>{formatDayUTC(hero.releaseDate)}</dd>
+        </div>
+      )
+    }
+    {
+      lastChanged && (
+        <div>
+          <dt>Last patched</dt>
+          <dd>
+            <a href="#history">{formatDayUTC(lastChanged)}</a>
+          </dd>
+        </div>
+      )
+    }
+  </dl>
+
+  <dl class="hhead__ratings" aria-label="Kit ratings from the game files, 0 to 10">
+    {
+      ratings.map((r) => (
+        <div class="rating">
+          <dt>{r.label}</dt>
+          <dd>
+            <span class="rating__bar" aria-hidden="true">
+              <span class="rating__fill" style={`--v: ${r.value / RATING_MAX}`} />
+            </span>
+            <span class="rating__value">{r.value}<span class="rating__max">/{RATING_MAX}</span></span>
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  {
+    members.length > 0 && (
+      <p class="hhead__members">
+        {hero.name} is two players sharing one hero:{' '}
+        {members.map((m, i) => (
+          <>
+            {i > 0 ? ' and ' : ''}
+            <strong>{m.name}</strong> ({m.role})
+          </>
+        ))}
+        . In Storm League the pair needs two consecutive picks of the same team. Talents and abilities are listed per
+        player; counters and statistics treat the pair as one pick.
+      </p>
+    )
+  }
+</header>
+
+<style>
+  .hhead {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--sp-3) var(--sp-4);
+    align-items: center;
+  }
+
+  .hhead__portrait {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-strong);
+    object-fit: cover;
+    background: var(--surface-2);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+
+  .hhead__main {
+    display: grid;
+    gap: var(--sp-1);
+    min-width: 0;
+  }
+
+  .hhead__kicker {
+    color: var(--accent);
+  }
+
+  .hhead__name {
+    font-size: var(--fs-3xl);
+  }
+
+  .hhead__title {
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .hhead__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    padding: 0;
+    margin: var(--sp-1) 0 0;
+    list-style: none;
+  }
+
+  .hhead__badges:empty {
+    display: none;
+  }
+
+  .hhead__facts,
+  .hhead__ratings,
+  .hhead__members {
+    grid-column: 1 / -1;
+  }
+
+  .hhead__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-5);
+    padding: var(--sp-3) 0;
+    margin: 0;
+    border-block: 1px solid var(--border);
+  }
+
+  .hhead__facts dt {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hhead__facts dd {
+    margin: 0;
+    font-weight: 650;
+  }
+
+  .hhead__ratings {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-2) var(--sp-5);
+    margin: 0;
+  }
+
+  .rating {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .rating dt {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .rating dd {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin: 0;
+  }
+
+  .rating__bar {
+    position: relative;
+    flex: 1;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--surface-3);
+    overflow: hidden;
+  }
+
+  .rating__fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: calc(var(--v) * 100%);
+    border-radius: inherit;
+    background: var(--accent);
+  }
+
+  .rating__value {
+    min-width: 2.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .rating__max {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .hhead__members {
+    max-width: 70ch;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .hhead__members strong {
+    color: var(--text);
+  }
+
+  @media (min-width: 48rem) {
+    .hhead__portrait {
+      width: 6rem;
+      height: 6rem;
+    }
+    .hhead__ratings {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

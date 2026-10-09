@@ -1,0 +1,125 @@
+---
+/**
+ * The three matchup lists of a hero page: strong against, weak against, works well with.
+ * Statistics rows only make the headline list when they pass the SPEC §6 bar (n and |Δ|);
+ * the rest stay available, greyed when thin, behind a disclosure. Theory rows are always listed
+ * and labelled as theory by their source badge.
+ */
+import MatchupList from '../../../components/MatchupList.astro';
+import { GATES, type HeroMatchupRow } from '../load.ts';
+import { toMatchupRow } from '../view.ts';
+import { splitByGate, type MatchupLists } from './pagedata.ts';
+
+interface Props {
+  heroName: string;
+  lists: MatchupLists;
+  basis: 'stats' | 'theory';
+  sourceNames: Record<string, string>;
+  /** Prefix for element ids, unique per rendered block. */
+  idPrefix: string;
+}
+
+const { heroName, lists, basis, sourceNames, idPrefix } = Astro.props;
+const bar = `at least ${GATES.listMinN} games and an edge of ${GATES.listMinDeltaPp} pp`;
+
+const columns = [
+  {
+    key: 'strong',
+    title: `${heroName} is strong against`,
+    subtitle:
+      basis === 'stats'
+        ? `Score 1–100 · Δ = ${heroName}'s edge over the expected result, in pp · n = games`
+        : 'Score 1–100 from how the kits interact (50 = neutral)',
+    rows: lists.strong,
+    empty: basis === 'stats' ? `No counter clears the bar yet (${bar}).` : `No mechanical edge for ${heroName} found yet.`,
+  },
+  {
+    key: 'weak',
+    title: `${heroName} is weak against`,
+    subtitle:
+      basis === 'stats'
+        ? `Score 1–100 · Δ = their edge over ${heroName}, in pp · n = games`
+        : `Score 1–100 for how hard they punish ${heroName}'s kit`,
+    rows: lists.weak,
+    empty: basis === 'stats' ? `No threat clears the bar yet (${bar}).` : `No hero has a mechanical edge on ${heroName} in our rules yet.`,
+  },
+  {
+    key: 'synergy',
+    title: `${heroName} works well with`,
+    subtitle:
+      basis === 'stats'
+        ? 'Score 1–100 · Δ = gain when on the same team, in pp · n = games'
+        : 'Score 1–100 for how well the kits combine',
+    rows: lists.synergy,
+    empty: basis === 'stats' ? `No partner clears the bar yet (${bar}).` : 'No synergy rule matches yet.',
+  },
+].map((c) => {
+  const { listed, other } = basis === 'stats' ? splitByGate<HeroMatchupRow>(c.rows) : { listed: c.rows, other: [] };
+  return { ...c, listed: listed.map((r) => toMatchupRow(r)), other: other.map((r) => toMatchupRow(r)) };
+});
+---
+
+<div class="ccols" data-basis={basis}>
+  {
+    columns.map((c) => (
+      <div class="ccols__col" data-list={c.key}>
+        <MatchupList
+          id={`${idPrefix}-${c.key}`}
+          title={c.title}
+          subtitle={c.subtitle}
+          rows={c.listed}
+          visible={8}
+          sourceNames={sourceNames}
+          emptyText={c.empty}
+          level={3}
+        />
+        {c.other.length > 0 && (
+          <details class="ccols__below">
+            <summary class="btn btn--ghost">
+              {c.other.length} more below the bar
+            </summary>
+            <MatchupList
+              title="Below the reliability bar"
+              subtitle={`Fewer than ${GATES.listMinN} games or an edge under ${GATES.listMinDeltaPp} pp. Dashed rows have fewer than ${GATES.greyBelow} games.`}
+              rows={c.other}
+              visible={c.other.length}
+              sourceNames={sourceNames}
+              level={4}
+            />
+          </details>
+        )}
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .ccols {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .ccols__col {
+    display: grid;
+    gap: var(--sp-3);
+    align-content: start;
+    min-width: 0;
+  }
+
+  .ccols__below {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .ccols__below > summary {
+    justify-self: start;
+    border-color: var(--border);
+  }
+
+  @media (min-width: 64rem) {
+    .ccols {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--sp-5);
+    }
+  }
+</style>

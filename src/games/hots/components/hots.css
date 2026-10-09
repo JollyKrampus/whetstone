@@ -1,0 +1,376 @@
+/*
+ * Styles for the HotS Preact components (DirChip, ChangeList, CatchUp, HeroPoolBar). They render
+ * as static HTML from .astro pages and inside islands, where Astro's scoped styles can't reach,
+ * so they are global and prefixed `hx-`. Imported by each .tsx that uses them (Vite dedupes).
+ */
+
+/* ---------- Direction chip (buff / nerf / change / rework) ---------- */
+.hx-dir {
+  gap: 0.3rem;
+}
+.hx-dir__icon {
+  font-size: 0.6rem;
+  line-height: 1;
+}
+
+/* ---------- Change lines ---------- */
+.hx-changes {
+  display: grid;
+  gap: var(--sp-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.hx-change {
+  display: grid;
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  gap: var(--sp-2);
+  align-items: baseline;
+  font-size: var(--fs-sm);
+}
+.hx-change .hx-dir {
+  justify-self: start;
+}
+.hx-change__body {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+.hx-change__target {
+  color: var(--text);
+  font-weight: 650;
+}
+.hx-change__section {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+.hx-change__text {
+  color: var(--text);
+}
+.hx-change__meta {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+.hx-change__meta a {
+  color: inherit;
+}
+
+/* ---------- Hero chip (portrait + name) ---------- */
+.hx-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  color: var(--text);
+  font-weight: 650;
+  text-decoration: none;
+}
+a.hx-hero:hover .hx-hero__name {
+  text-decoration: underline;
+}
+.hx-hero__img {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--surface-2);
+}
+.hx-hero__img--blank {
+  display: grid;
+  place-items: center;
+  color: var(--text-faint);
+  font-weight: 800;
+}
+
+/* ---------- Catch-up island ---------- */
+.hx-catchup {
+  display: grid;
+  gap: var(--sp-5);
+}
+.hx-catchup__form {
+  display: grid;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.hx-catchup__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--sp-3);
+}
+.hx-catchup__field {
+  display: grid;
+  gap: var(--sp-1);
+}
+.hx-catchup__field label {
+  font-weight: 650;
+}
+.hx-catchup__date {
+  min-height: var(--tap);
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+}
+.hx-catchup__date:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.hx-catchup__hint {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+.hx-catchup__summary {
+  font-size: var(--fs-lg);
+  font-weight: 650;
+}
+.hx-catchup__summary[aria-busy='true'] {
+  opacity: 0.6;
+}
+.hx-catchup__section {
+  display: grid;
+  gap: var(--sp-3);
+}
+.hx-catchup__section > h2 {
+  font-size: var(--fs-xl);
+}
+.hx-catchup__patches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.hx-catchup__patch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 2.25rem;
+  padding: var(--sp-1) var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+a.hx-catchup__patch:hover {
+  border-color: var(--accent);
+}
+.hx-catchup__patch time {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+.hx-groups {
+  display: grid;
+  gap: var(--sp-3);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.hx-group {
+  display: grid;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.hx-group[data-rework] {
+  border-color: color-mix(in srgb, var(--warning) 55%, var(--border));
+  box-shadow: inset 3px 0 0 var(--warning);
+}
+.hx-group[data-new] {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.hx-group__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
+}
+.hx-group__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+}
+.hx-group__count {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+.hx-newheroes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.hx-general {
+  display: grid;
+  gap: var(--sp-3);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.hx-general > li {
+  display: grid;
+  gap: var(--sp-1);
+}
+.hx-general ul {
+  padding-left: 1.1rem;
+  color: var(--text);
+  font-size: var(--fs-sm);
+}
+.hx-catchup__empty {
+  padding: var(--sp-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+
+/* ---------- Hero pool bar (grid island) ---------- */
+.hx-pool {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: var(--fs-sm);
+}
+.hx-pool__label {
+  font-weight: 650;
+}
+.hx-pool__status {
+  color: var(--text-muted);
+}
+.hx-pool__spacer {
+  flex: 1;
+}
+.hx-pool-dialog {
+  width: min(44rem, calc(100vw - 2 * var(--gutter)));
+  max-height: min(42rem, calc(100dvh - 2rem));
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-2);
+}
+.hx-pool-dialog::backdrop {
+  background: rgb(0 0 0 / 0.55);
+}
+.hx-pool-dialog__inner {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: var(--sp-3);
+  max-height: inherit;
+  padding: var(--sp-4);
+}
+.hx-pool-dialog__head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+.hx-pool-dialog__head h2 {
+  font-size: var(--fs-xl);
+}
+.hx-pool-dialog__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.hx-pool-dialog__search {
+  flex: 1 1 12rem;
+  min-height: var(--tap);
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text);
+}
+.hx-pool-dialog__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: var(--sp-2);
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.hx-pool-pick {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--sp-1) var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+.hx-pool-pick img,
+.hx-pool-pick .hx-hero__img {
+  width: 2rem;
+  height: 2rem;
+}
+.hx-pool-pick[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--text);
+}
+.hx-pool-pick__mark {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+.hx-pool-dialog__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+/* Tiles of heroes the visitor doesn't own, while "dim heroes I don't own" is on: the portrait
+   greys out and the name gains a text cue, so the state never rests on colour or opacity alone. */
+.egrid [data-unowned] .etile__img {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+.egrid [data-unowned] .etile__name::after {
+  content: 'Not owned';
+  display: block;
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+}
+.egrid [data-favorite] .etile__name::before {
+  content: '★ ';
+  color: var(--warning);
+}

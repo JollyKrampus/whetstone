@@ -1,0 +1,332 @@
+---
+/**
+ * /hots/hero/[slug]/ (SPEC §8): one page per draftable entity, plus redirect pages for
+ * composite members (cho, gall -> chogall). Sections live in tabs with hash deep links:
+ * #counters #maps #talents #abilities #history #guides. Statistics views carry a mode and
+ * patch-window switch and the Heroes Profile credit; theory views say they are theory.
+ */
+import type { GetStaticPaths } from 'astro';
+import MatchupList from '../../../components/MatchupList.astro';
+import Tabs from '../../../components/Tabs.astro';
+import { int } from '../../../core/format.ts';
+import { SITE, navHref } from '../../../games/registry.ts';
+import AbilityList from '../../../games/hots/components/AbilityList.astro';
+import CounterColumns from '../../../games/hots/components/CounterColumns.astro';
+import GuideLinks from '../../../games/hots/components/GuideLinks.astro';
+import HeroHeader from '../../../games/hots/components/HeroHeader.astro';
+import LensBlocks from '../../../games/hots/components/LensBlocks.astro';
+import MechanicsList from '../../../games/hots/components/MechanicsList.astro';
+import PatchHistory from '../../../games/hots/components/PatchHistory.astro';
+import StatsCredit from '../../../games/hots/components/StatsCredit.astro';
+import StatsLens from '../../../games/hots/components/StatsLens.astro';
+import TalentBuilds from '../../../games/hots/components/TalentBuilds.astro';
+import TalentTiers from '../../../games/hots/components/TalentTiers.astro';
+import TheoryNotice from '../../../games/hots/components/TheoryNotice.astro';
+import {
+  heroVideos,
+  sourceNames,
+  statsModes,
+  theoryMapFit,
+  theoryMatchups,
+  tierById,
+  type ModeOption,
+  type PeriodOption,
+} from '../../../games/hots/components/pagedata.ts';
+import {
+  getDiffs,
+  getDraftableEntities,
+  getHeroById,
+  getHeroes,
+  getHeroLinks,
+  getHeroPatchHistory,
+  getMaps,
+  getMembers,
+  getMeta,
+  getStatsWindow,
+  hasAsset,
+  heroEdges,
+  heroMapFit,
+  isFreeToPlay,
+} from '../../../games/hots/load.ts';
+import type { Hero } from '../../../games/hots/schema.ts';
+import { heroHref, mapFitRow } from '../../../games/hots/view.ts';
+import Crumbs from '../../../games/hots/components/Crumbs.astro';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+export const getStaticPaths = (() => {
+  const pages = getDraftableEntities().map((h) => ({ params: { slug: h.slug }, props: { id: h.id } }));
+  // Members of a composite (Cho, Gall) have no page of their own: their slugs redirect.
+  const members = getHeroes()
+    .filter((h) => h.memberOf)
+    .map((h) => ({ params: { slug: h.slug }, props: { id: h.id } }));
+  return [...pages, ...members];
+}) satisfies GetStaticPaths;
+
+interface Props {
+  id: string;
+}
+
+/** Instant redirect for member slugs (cho, gall): meta refresh plus a link, kept out of search. */
+function redirectPage(to: string): string {
+  const abs = new URL(to, Astro.site).href;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Redirecting…</title><meta name="robots" content="noindex"><link rel="canonical" href="${abs}"><meta http-equiv="refresh" content="0;url=${to}"></head><body><p><a href="${to}">Continue to the hero page</a></p></body></html>`;
+}
+
+const record = getHeroById(Astro.props.id);
+if (!record) throw new Error(`Unknown hero id ${Astro.props.id}`);
+if (record.memberOf) {
+  const composite = getHeroById(record.memberOf);
+  if (!composite) throw new Error(`Composite ${record.memberOf} of ${record.id} is missing`);
+  return new Response(redirectPage(heroHref(composite)), { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
+const hero: Hero = record;
+const meta = getMeta();
+const members = getMembers(hero);
+const owners = members.length > 0 ? members : [hero];
+const modes = statsModes();
+const statsOn = modes.length > 0;
+const names = sourceNames();
+const tier = statsOn ? (tierById().get(hero.id) ?? null) : null;
+const history = getHeroPatchHistory(hero);
+const memberNames = Object.fromEntries(members.map((m) => [m.id, m.name]));
+const diffIds = new Set([hero.id, ...members.map((m) => m.id)]);
+const diffs = getDiffs().flatMap((diff) =>
+  Object.entries(diff.heroes)
+    .filter(([id]) => diffIds.has(id))
+    .map(([heroId, entries]) => ({ diff, heroId, entries })),
+);
+const links = getHeroLinks(hero);
+const videos = heroVideos(hero);
+const theory = theoryMatchups(hero.id) ?? { strong: [], weak: [], synergy: [] };
+const maps = getMaps();
+const theoryMaps = theoryMapFit(hero, maps);
+const mapImage = (m: { image: string }) => (hasAsset(m.image) ? undefined : null);
+
+const windowLabel = (m: ModeOption, p: PeriodOption) => {
+  const w = getStatsWindow(m.id, p.id);
+  return w ? `${w.label} · ${int(w.games)} games` : m.label;
+};
+
+const issue = new URL(`${SITE.repo}/issues/new`);
+issue.searchParams.set('template', 'counter-theory.yml');
+issue.searchParams.set('title', `[Theory] ${hero.name} vs/with <Hero B>`);
+issue.searchParams.set('a', hero.name);
+issue.searchParams.set('patch', meta.extra.major);
+
+const roles = [hero.role, ...(hero.roleAlt ? [hero.roleAlt] : [])].join(' / ');
+const title = `${hero.name} counters, synergies and best maps`;
+const description =
+  `${hero.name}, ${hero.title} (${roles}): who ${hero.name} beats, who beats ${hero.name}, best teammates and maps, ` +
+  `talents, abilities and patch history for Heroes of the Storm ${meta.version.label}` +
+  (statsOn ? ', with win rates and sample sizes.' : ', explained from the hero kits.');
+
+const tabs = [
+  { id: 'counters', label: 'Counters' },
+  { id: 'maps', label: 'Maps' },
+  { id: 'talents', label: 'Talents' },
+  { id: 'abilities', label: 'Abilities' },
+  { id: 'history', label: 'Patches', ...(history.length > 0 ? { meta: String(history.length) } : {}) },
+  { id: 'guides', label: 'Guides', ...(links.length > 0 ? { meta: String(links.length) } : {}) },
+];
+---
+
+<GameLayout game="hots" title={title} description={description} uses={statsOn ? ['heroesprofile'] : []} inlineCredits={false} navPath="">
+  <article class="hpage" data-hero={hero.id} data-basis={statsOn ? 'stats' : 'theory'}>
+    <Crumbs trail={[{ label: 'Heroes', href: navHref('hots') }]} current={hero.name} />
+
+    <HeroHeader hero={hero} members={members} free={isFreeToPlay(hero)} tier={tier} lastChanged={history[0]?.patch.date ?? null} />
+
+    <StatsLens name="hots-hero" modes={modes} class="hpage__lens">
+      {statsOn && <StatsCredit lead="Counters, map scores, the tier badge and builds on this page use match statistics." />}
+      <Tabs label={`${hero.name} sections`} tabs={tabs} class="hpage__tabs">
+        <Fragment slot="counters">
+          <div class="panel">
+            <h2 class="visually-hidden">Counters and synergies</h2>
+            {
+              statsOn ? (
+                <>
+                  <LensBlocks modes={modes}>
+                    {(m: ModeOption, p: PeriodOption) => (
+                      <div class="panel__block">
+                        <p class="wlabel">{windowLabel(m, p)}</p>
+                        <CounterColumns
+                          heroName={hero.name}
+                          lists={heroEdges(hero.id, { mode: m.id, timeframe: p.id }) ?? { strong: [], weak: [], synergy: [] }}
+                          basis="stats"
+                          sourceNames={names}
+                          idPrefix={`c-${m.id}-${p.id}`}
+                        />
+                      </div>
+                    )}
+                  </LensBlocks>
+                  <details class="compare">
+                    <summary class="btn">Compare with theory (from the kits)</summary>
+                    <div class="compare__body">
+                      <TheoryNotice title="Theory view" statsOn detail="Use it to see why a matchup might go one way, then check the numbers above." />
+                      <CounterColumns heroName={hero.name} lists={theory} basis="theory" sourceNames={names} idPrefix="c-theory" />
+                    </div>
+                  </details>
+                </>
+              ) : (
+                <>
+                  <TheoryNotice />
+                  <CounterColumns heroName={hero.name} lists={theory} basis="theory" sourceNames={names} idPrefix="c-theory" />
+                </>
+              )
+            }
+            <p class="panel__foot">
+              Spot a wrong or missing matchup?
+              <a href={issue.href} rel="noopener">Suggest a correction</a> with the mechanical reason; accepted notes land in the
+              theory layer for everyone.
+            </p>
+          </div>
+        </Fragment>
+
+        <Fragment slot="maps">
+          <div class="panel">
+            <h2 class="visually-hidden">Maps</h2>
+            {
+              statsOn ? (
+                <LensBlocks modes={modes}>
+                  {(m: ModeOption, p: PeriodOption) => (
+                    <div class="panel__block">
+                      <p class="wlabel">{windowLabel(m, p)}</p>
+                      <MatchupList
+                        title={`Best maps for ${hero.name}`}
+                        subtitle="Score 1–100 · Δ = win rate on the map compared with the hero's overall, in pp · n = games on the map"
+                        rows={heroMapFit(hero.id, { mode: m.id, timeframe: p.id }).map((f) => mapFitRow(f, { image: mapImage(f.map) }))}
+                        visible={8}
+                        sourceNames={names}
+                        emptyText="No map has enough games for this hero in this window yet."
+                        level={3}
+                      />
+                    </div>
+                  )}
+                </LensBlocks>
+              ) : (
+                <>
+                  <TheoryNotice detail="Map scores match the hero's kit tags against each map's layout and objective." />
+                  <MatchupList
+                    title={`Best maps for ${hero.name}`}
+                    subtitle="Score 1–100 from how the kit fits each map's layout and objective (50 = neutral)"
+                    rows={theoryMaps.map((f) => mapFitRow(f, { image: mapImage(f.map) }))}
+                    visible={8}
+                    sourceNames={names}
+                    emptyText="No map rule matches this hero yet."
+                    level={3}
+                  />
+                </>
+              )
+            }
+            <p class="panel__foot"><a href={navHref('hots', 'maps/')}>All maps</a></p>
+          </div>
+        </Fragment>
+
+        <Fragment slot="talents">
+          <div class="panel">
+            <h2 class="visually-hidden">Talents</h2>
+            {
+              statsOn && (
+                <LensBlocks modes={modes}>
+                  {(m: ModeOption, p: PeriodOption) => {
+                    const w = getStatsWindow(m.id, p.id);
+                    return w ? (
+                      <TalentBuilds hero={hero} owners={[hero, ...members]} window={w} idPrefix={`b-${m.id}-${p.id}`} />
+                    ) : null;
+                  }}
+                </LensBlocks>
+              )
+            }
+            <section class="panel__block" aria-labelledby="talent-tiers-h">
+              <h3 id="talent-tiers-h" class="panel__h">Talents by level</h3>
+              <TalentTiers owners={owners} named={members.length > 0} />
+            </section>
+          </div>
+        </Fragment>
+
+        <Fragment slot="abilities">
+          <div class="panel">
+            <h2 class="visually-hidden">Abilities and mechanics</h2>
+            <AbilityList owners={owners} named={members.length > 0} />
+            <MechanicsList hero={hero} />
+          </div>
+        </Fragment>
+
+        <Fragment slot="history">
+          <div class="panel">
+            <h2 class="visually-hidden">Patch history</h2>
+            <PatchHistory heroName={hero.name} entries={history} memberNames={memberNames} diffs={diffs} />
+            <p class="panel__foot">
+              <a href={navHref('hots', 'catch-up/')}>Catch up on everything since you last played</a>
+            </p>
+          </div>
+        </Fragment>
+
+        <Fragment slot="guides">
+          <div class="panel">
+            <h2 class="visually-hidden">Guides and links</h2>
+            <GuideLinks heroName={hero.name} links={links} videos={videos} />
+          </div>
+        </Fragment>
+      </Tabs>
+    </StatsLens>
+  </article>
+</GameLayout>
+
+<style>
+  .hpage {
+    display: grid;
+    gap: var(--sp-5);
+    min-width: 0;
+  }
+
+
+  .hpage__lens :global(.mswitch),
+  .hpage__lens :global(.period) {
+    gap: var(--sp-3);
+  }
+
+  .panel {
+    display: grid;
+    gap: var(--sp-5);
+    min-width: 0;
+  }
+
+  .panel__block {
+    display: grid;
+    gap: var(--sp-3);
+    min-width: 0;
+  }
+
+  .panel__h {
+    font-size: var(--fs-xl);
+  }
+
+  .panel__foot {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .wlabel {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .compare {
+    display: grid;
+    gap: var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .compare > summary {
+    justify-self: start;
+  }
+
+  .compare__body {
+    display: grid;
+    gap: var(--sp-4);
+    margin-top: var(--sp-4);
+  }
+</style>

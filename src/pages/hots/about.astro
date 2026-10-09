@@ -1,0 +1,430 @@
+---
+/**
+ * /hots/about/ (SPEC §8): how the HotS numbers are made. The methodology is rendered from
+ * docs/METHODOLOGY.md (HotS parts only), so the page and the repository never disagree; plus the
+ * theory layer explained, every source with its licence and credit rule, and how statistics get
+ * switched on.
+ */
+import Badge from '../../components/Badge.tsx';
+import { formatDayUTC, int } from '../../core/format.ts';
+import { GATES } from '../../core/stats.ts';
+import { HOTS_TIERS } from '../../core/tiers.ts';
+import { SITE, gameById, withBase } from '../../games/registry.ts';
+import { groupTags, tagLabel } from '../../games/hots/components/labels.ts';
+import { hotsMethodology } from '../../games/hots/components/methodology.ts';
+import { statsModes } from '../../games/hots/components/pagedata.ts';
+import { getMeta, getStats, getTheory } from '../../games/hots/load.ts';
+import { HERO_TAGS, type HeroTag } from '../../games/hots/schema.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+import * as methodologyDoc from '../../../docs/METHODOLOGY.md';
+
+const module = gameById('hots');
+const meta = getMeta();
+const theory = getTheory();
+const stats = getStats();
+const modes = statsModes();
+const doc = hotsMethodology(await methodologyDoc.compiledContent());
+const sourceStatus = new Map(meta.sources.map((s) => [s.id, s]));
+const custodyLabel = { A: 'Open', 'A-SA': 'Share-alike', B: 'Licensed', C: 'Ephemeral' } as const;
+const ruleLabel = { inline: 'Next to the data', top: 'Top of the page', footer: 'Page footer' } as const;
+const vocab = groupTags(HERO_TAGS.map((tag: HeroTag) => ({ tag })));
+const ownerActions = `${SITE.repo}/blob/main/docs/OWNER-ACTIONS.md#2-heroes-profile-statistics-for-hots`;
+const methodologyUrl = `${SITE.repo}/blob/main/docs/METHODOLOGY.md`;
+---
+
+<GameLayout
+  game="hots"
+  title="How Whetstone's HotS numbers work"
+  description="How Whetstone computes Heroes of the Storm counters, synergies, map scores and tiers: the formulas, sample-size gates, the theory layer behind matchups when statistics are off, and every data source with its licence."
+>
+  <div class="about">
+    <header class="about__head">
+      <p class="kicker">Methodology</p>
+      <h1>How the HotS numbers work</h1>
+      <p class="about__lead">
+        Every counter, map score and tier on these pages comes from one of two places: match statistics, when they are
+        enabled, or the theory layer, which reads the hero kits. This page explains both, lists the sources, and shows the
+        exact thresholds the site uses.
+      </p>
+      <nav class="about__toc" aria-label="On this page">
+        <ul>
+          <li><a href="#status">This build</a></li>
+          <li><a href="#theory">The theory layer</a></li>
+          <li><a href="#stats">Statistics and how to enable them</a></li>
+          <li><a href="#methodology">Formulas and gates</a></li>
+          <li><a href="#sources">Sources and licences</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="about__sec" id="status" aria-labelledby="status-h">
+      <h2 id="status-h">This build</h2>
+      <dl class="facts">
+        <div>
+          <dt>Data mode</dt>
+          <dd>
+            {
+              stats ? (
+                <Badge tone="stats">Statistics on</Badge>
+              ) : (
+                <Badge tone="theory">Theory only</Badge>
+              )
+            }
+          </dd>
+        </div>
+        <div>
+          <dt>Patch</dt>
+          <dd>{meta.extra.major} · build {meta.extra.build}</dd>
+        </div>
+        <div>
+          <dt>Data refreshed</dt>
+          <dd>{formatDayUTC(meta.generatedAt)}</dd>
+        </div>
+        <div>
+          <dt>Theory rules</dt>
+          <dd>
+            {int(theory.counters.length)} counters · {int(theory.synergies.length)} synergies · {int(theory.mapFit.length)} map fits
+          </dd>
+        </div>
+        {
+          modes.length > 0 && (
+            <div>
+              <dt>Statistics modes</dt>
+              <dd>{modes.map((m) => m.label).join(', ')}</dd>
+            </div>
+          )
+        }
+      </dl>
+    </section>
+
+    <section class="about__sec prose" id="theory" aria-labelledby="theory-h">
+      <h2 id="theory-h">The theory layer</h2>
+      <p>
+        Without match statistics, Whetstone still knows a lot: what every ability and talent does. The theory layer turns that
+        into matchups, and it keeps working whatever happens to other sources.
+      </p>
+      <ol class="steps">
+        <li>
+          <strong>Read the kits.</strong> Fixed text rules scan each ability and talent tooltip from the game files and tag
+          what they find: stuns, blinds, unstoppable effects, anti-heal, global presence and so on. Every tag keeps the text
+          that produced it, which you can see on each hero's Abilities tab.
+        </li>
+        <li>
+          <strong>Add what text can't show.</strong> A short, reviewed list adds traits such as "dives the backline" or
+          "relies on basic attacks", each with a one-line reason.
+        </li>
+        <li>
+          <strong>Match tags against tags.</strong> Rules pair one hero's tags with another's, for example a blind against a
+          hero who relies on basic attacks, or anti-heal against a healer. Each matching rule adds a fixed weight.
+        </li>
+        <li>
+          <strong>Add curated matchups.</strong> Hand-written notes cover interactions rules can't capture, with the
+          conditions they depend on (a talent, a map) and the patch they were checked on.
+        </li>
+        <li>
+          <strong>Score.</strong> The weights add up to a number x, and the ring shows <code>round(50 + 50 · tanh(x))</code>:
+          50 is neutral and the score saturates near 1 and 100. Every row lists the rules that fired and the abilities they
+          point at.
+        </li>
+      </ol>
+      <p>
+        Theory says how the kits interact, not who wins more often: player skill, drafts and maps still decide games. It is
+        always labelled <Badge tone="theory">Theory</Badge> and never mixed into a statistic. Rules version
+        <code>{theory.rulesVersion}</code>.
+      </p>
+      <details class="vocab">
+        <summary>Mechanics tags the rules use ({HERO_TAGS.length})</summary>
+        <div class="vocab__groups">
+          {
+            vocab.map((g) => (
+              <div>
+                <h3 class="kicker">{g.label}</h3>
+                <ul class="vocab__list">
+                  {g.items.map((i) => (
+                    <li>{tagLabel(i.tag)}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </details>
+      <p>
+        Think a matchup is wrong or missing? Use the "Suggest a correction" link on the hero's Counters tab; accepted notes
+        reach everyone with the next data refresh.
+      </p>
+    </section>
+
+    <section class="about__sec prose" id="stats" aria-labelledby="stats-h">
+      <h2 id="stats-h">Statistics and how to enable them</h2>
+      <p>
+        Win rates, counters measured from games, map deltas, talent builds and tiers need match data. For Heroes of the Storm
+        that data comes from Heroes Profile, and only with its owner's written permission and a paid API key. Licensed numbers
+        are never committed to the repository or published as open data; they ship only inside the built site, and every
+        screen that shows them credits Heroes Profile next to the numbers.
+      </p>
+      <p>
+        {stats
+          ? 'Statistics are on in this build. Counters only make the headline lists when they pass the sample-size bar below.'
+          : 'Statistics are off in this build, so every score you see comes from the theory layer.'}
+      </p>
+      <p>
+        To switch them on, the site owner sets the <code>HP_MODE</code> variable to <code>on</code> and adds the
+        <code>HP_API_KEY</code> secret; the next daily run fetches the aggregates and the pages light up. Setting
+        <code>HP_MODE</code> back to <code>off</code> and redeploying removes every licensed number. The
+        <a href={ownerActions} rel="noopener">owner checklist</a> has the steps.
+      </p>
+      <ul class="gates">
+        <li><strong>Hidden</strong> below {GATES.hideBelow} games.</li>
+        <li><strong>Greyed</strong> from {GATES.hideBelow} to {GATES.greyBelow - 1} games.</li>
+        <li>
+          <strong>Listed</strong> as strong or weak against, or good with, only from {GATES.listMinN} games and an edge of
+          {GATES.listMinDeltaPp} pp.
+        </li>
+        <li><strong>Tiers</strong> need {HOTS_TIERS.minN} games; fewer means "early data".</li>
+      </ul>
+    </section>
+
+    <section class="about__sec" id="methodology" aria-labelledby="method-h">
+      <div class="prose">
+        <h2 id="method-h">Formulas and gates</h2>
+        <p>
+          The rest of this page is the project's methodology document, trimmed to Heroes of the Storm. The same text lives in
+          the repository as <a href={methodologyUrl} rel="noopener">docs/METHODOLOGY.md</a>.
+        </p>
+      </div>
+      <nav class="about__toc" aria-label="Methodology sections">
+        <ul>
+          {
+            doc.sections.map((s) => (
+              <li>
+                <a href={`#${s.id}`}>{s.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="method prose">
+        {doc.sections.map((s) => <Fragment set:html={s.html} />)}
+      </div>
+    </section>
+
+    <section class="about__sec" id="sources" aria-labelledby="sources-h">
+      <h2 id="sources-h">Sources and licences</h2>
+      <ul class="srcs">
+        {
+          module.sources.map((s) => {
+            const st = sourceStatus.get(s.id);
+            return (
+              <li class="src" data-source={s.id}>
+                <p class="src__head">
+                  <a href={s.url} rel="noopener">
+                    {s.name}
+                  </a>
+                  <Badge tone={s.custody === 'B' ? 'stats' : s.custody === 'A-SA' ? 'info' : 'neutral'}>{custodyLabel[s.custody]}</Badge>
+                  {st && <Badge tone={st.status === 'ok' ? 'positive' : st.status === 'disabled' ? 'neutral' : 'warning'}>{st.status}</Badge>}
+                </p>
+                <p class="src__credit">{s.attribution}</p>
+                <p class="src__meta">
+                  {s.license ? `${s.license} · ` : ''}credited: {ruleLabel[s.rule].toLowerCase()}
+                </p>
+                {s.tosNote && <p class="src__meta">{s.tosNote}</p>}
+              </li>
+            );
+          })
+        }
+      </ul>
+      <p class="about__note">
+        The full list for every game is on the <a href={withBase('credits/')}>credits page</a>. Whetstone never
+        imports heroescounters.com votes or tags, and never copies guide text from other sites.
+      </p>
+    </section>
+  </div>
+</GameLayout>
+
+<style>
+  .about {
+    display: grid;
+    gap: var(--sp-7);
+    min-width: 0;
+  }
+
+  .about__head {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .about__lead {
+    max-width: 70ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .about__toc ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1) var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .about__toc a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0 var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .about__toc a:hover {
+    border-color: var(--accent);
+  }
+
+  .about__sec {
+    display: grid;
+    gap: var(--sp-4);
+    min-width: 0;
+  }
+
+  .about__sec > h2,
+  .about__sec .prose > h2 {
+    margin-top: 0;
+    font-size: var(--fs-2xl);
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: var(--sp-3);
+    margin: 0;
+  }
+
+  .facts > div {
+    padding: var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .facts dt {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .facts dd {
+    margin: var(--sp-1) 0 0;
+    font-weight: 650;
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .vocab {
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .vocab > summary {
+    font-weight: 650;
+  }
+
+  .vocab__groups {
+    display: grid;
+    gap: var(--sp-3);
+    margin-top: var(--sp-3);
+  }
+
+  .vocab__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1) var(--sp-2);
+    padding: 0 !important;
+    list-style: none;
+  }
+
+  .vocab__list li {
+    margin: 0 !important;
+    padding: 0 var(--sp-2);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    font-size: var(--fs-xs);
+  }
+
+  .gates li {
+    margin: 0;
+  }
+
+  /* Methodology HTML comes from Markdown: tables can be wider than a phone, so they scroll inside. */
+  .method :global(table) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    font-size: var(--fs-sm);
+  }
+
+  .method :global(h2) {
+    scroll-margin-top: calc(var(--header-h) + var(--sp-4));
+  }
+
+  .method :global(code) {
+    overflow-wrap: anywhere;
+  }
+
+  .srcs {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .src {
+    display: grid;
+    gap: var(--sp-1);
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .src__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2);
+    font-weight: 700;
+  }
+
+  .src__credit {
+    font-size: var(--fs-sm);
+  }
+
+  .src__meta,
+  .about__note {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .srcs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .vocab__groups {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

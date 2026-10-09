@@ -1,0 +1,59 @@
+---
+/**
+ * Page-level data lens for statistics: a game-mode switch (only when two or more modes have
+ * stats) and the shared PeriodToggle (only when some mode has a previous-patch window), wrapped
+ * around the default slot. Put <LensBlocks> anywhere inside to pre-render one block per
+ * mode/period; the switches show the matching block with no JS. Renders just the slot when
+ * there are no modes (theory-only builds).
+ */
+import PeriodToggle from '../../../components/PeriodToggle.astro';
+import ModeSwitch from './ModeSwitch.astro';
+import { allPeriods, type ModeOption } from './pagedata.ts';
+
+interface Props {
+  /** Unique per page; the switches remember the choice under this name. */
+  name: string;
+  modes: ModeOption[];
+  /** Mode selected before the visitor chooses (default: the first). */
+  selectedMode?: string;
+  class?: string;
+}
+
+const { name, modes, selectedMode, class: extra } = Astro.props;
+const periods = allPeriods(modes);
+const first = modes[0];
+const periodSpecs = periods.map((p) => {
+  const note = first?.periods.find((x) => x.id === p.id)?.note;
+  return { id: p.id, label: p.label, ...(note ? { note } : {}) };
+});
+const withModes = modes.length > 1;
+const withPeriods = periods.length > 1;
+---
+
+<div class:list={['lens', extra]}>
+  {
+    withModes ? (
+      <ModeSwitch name={`${name}-mode`} options={modes.map((m) => ({ id: m.id, label: m.label }))} {...(selectedMode ? { selected: selectedMode } : {})}>
+        {withPeriods ? (
+          <PeriodToggle name={`${name}-period`} periods={periodSpecs} label="Patch window">
+            <slot />
+          </PeriodToggle>
+        ) : (
+          <slot />
+        )}
+      </ModeSwitch>
+    ) : withPeriods ? (
+      <PeriodToggle name={`${name}-period`} periods={periodSpecs} label="Patch window">
+        <slot />
+      </PeriodToggle>
+    ) : (
+      <slot />
+    )
+  }
+</div>
+
+<style>
+  .lens {
+    min-width: 0;
+  }
+</style>

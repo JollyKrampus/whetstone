@@ -1,0 +1,387 @@
+---
+/**
+ * /hots/map/[slug]/ (SPEC §8): map art and profile, ranked status, the heroes that fit it best
+ * (statistics per mode and patch window when they exist, theory otherwise), ARAM notes for
+ * ARAM maps and the map's recent patch notes.
+ */
+import type { GetStaticPaths } from 'astro';
+import Badge from '../../../components/Badge.tsx';
+import MatchupList from '../../../components/MatchupList.astro';
+import { formatDayUTC, int } from '../../../core/format.ts';
+import { navHref } from '../../../games/registry.ts';
+import LensBlocks from '../../../games/hots/components/LensBlocks.astro';
+import StatsCredit from '../../../games/hots/components/StatsCredit.astro';
+import StatsLens from '../../../games/hots/components/StatsLens.astro';
+import TheoryNotice from '../../../games/hots/components/TheoryNotice.astro';
+import { MAP_KIND_LABEL, mapTagLabel } from '../../../games/hots/components/labels.ts';
+import { sourceNames, statsModes, theoryHeroesForMap, type ModeOption, type PeriodOption } from '../../../games/hots/components/pagedata.ts';
+import { getMapBySlug, getMaps, getPatches, getStatsWindow, hasAsset, heroesForMap } from '../../../games/hots/load.ts';
+import { heroFitRow, mapHref, mapImage, patchHref } from '../../../games/hots/view.ts';
+import Crumbs from '../../../games/hots/components/Crumbs.astro';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+export const getStaticPaths = (() => getMaps().map((m) => ({ params: { slug: m.id }, props: { id: m.id } }))) satisfies GetStaticPaths;
+
+interface Props {
+  id: string;
+}
+
+const map = getMapBySlug(Astro.props.id);
+if (!map) throw new Error(`Unknown map ${Astro.props.id}`);
+const modes = statsModes();
+const statsOn = modes.length > 0;
+const names = sourceNames();
+const isAram = map.kind === 'aram';
+const selectedMode = isAram && modes.some((m) => m.id === 'aram') ? 'aram' : undefined;
+const theoryRows = theoryHeroesForMap(map).map(({ hero, fit }) => heroFitRow(hero, fit));
+const notes = getPatches()
+  .filter((p) => p.kind !== 'ptr' && p.maps?.[map.id])
+  .map((p) => ({ patch: p, lines: p.maps?.[map.id] ?? [] }));
+const others = getMaps().filter((m) => m.id !== map.id && m.kind === map.kind);
+const sizeWord = { small: 'Small', medium: 'Medium', large: 'Large' } as const;
+const windowLabel = (m: ModeOption, p: PeriodOption) => {
+  const w = getStatsWindow(m.id, p.id);
+  return w ? `${w.label} · ${int(w.games)} games` : m.label;
+};
+const title = `${map.name}: best heroes and map guide`;
+const description = `${map.name} in Heroes of the Storm (${MAP_KIND_LABEL[map.kind]}${map.ranked ? ', Storm League pool' : ''}): ${map.profile.objective} Which heroes fit the map best, and why.`;
+---
+
+<GameLayout game="hots" title={title} description={description} uses={statsOn ? ['heroesprofile'] : []} inlineCredits={false} navPath="maps/">
+  <article class="mpage" data-map={map.id}>
+    <Crumbs trail={[{ label: 'Maps', href: navHref('hots', 'maps/') }]} current={map.name} />
+
+    <header class="mhead">
+      {
+        hasAsset(map.image) ? (
+          <img class="mhead__art" src={mapImage(map)} alt={`${map.name} loading screen`} width="640" height="360" />
+        ) : (
+          <div class="mhead__art mhead__art--blank" aria-hidden="true">
+            {map.name.slice(0, 1)}
+          </div>
+        )
+      }
+      <div class="mhead__main">
+        <p class="kicker mhead__kicker">{MAP_KIND_LABEL[map.kind]} map</p>
+        <h1>{map.name}</h1>
+        <ul class="mhead__badges" aria-label="Status">
+          <li>
+            {map.ranked ? (
+              <Badge tone="positive" title="In the current Storm League map pool">
+                Ranked pool
+              </Badge>
+            ) : (
+              <Badge tone="neutral">{map.kind === 'standard' ? 'Not in ranked pool' : MAP_KIND_LABEL[map.kind]}</Badge>
+            )}
+          </li>
+        </ul>
+        <p class="mhead__objective">{map.profile.objective}</p>
+        <dl class="mhead__facts">
+          <div>
+            <dt>Size</dt>
+            <dd>{sizeWord[map.profile.size]}</dd>
+          </div>
+          <div>
+            <dt>Lanes</dt>
+            <dd>{map.profile.lanes}</dd>
+          </div>
+          <div>
+            <dt>Ranked list</dt>
+            <dd>{map.rankedSource === 'stats' ? 'From match counts' : 'Hand-checked'}</dd>
+          </div>
+        </dl>
+        <ul class="mhead__tags" aria-label="Map traits">
+          {map.profile.tags.map((t) => <li class="mtag">{mapTagLabel(t)}</li>)}
+        </ul>
+      </div>
+    </header>
+
+    {
+      isAram && (
+        <section class="aram" aria-labelledby="aram-h">
+          <h2 id="aram-h">Playing ARAM here</h2>
+          <p>
+            ARAM has no draft: each player chooses from a few offered heroes on this single lane, so filling the team (some
+            healing, a frontline, steady damage) usually matters more than any single counter.
+          </p>
+          <p>
+            <a class="btn" href={navHref('hots', 'aram/')}>Open the ARAM pick helper</a>
+          </p>
+        </section>
+      )
+    }
+
+    <section class="best" aria-labelledby="best-h">
+      <h2 id="best-h">Best heroes on {map.name}</h2>
+      {
+        statsOn ? (
+          <StatsLens name={isAram ? 'hots-aram-map' : 'hots-map'} modes={modes} {...(selectedMode ? { selectedMode } : {})}>
+            <StatsCredit lead="Hero scores on this map use match statistics." />
+            <LensBlocks modes={modes}>
+              {(m: ModeOption, p: PeriodOption) => (
+                <div class="best__block">
+                  <p class="wlabel">{windowLabel(m, p)}</p>
+                  <MatchupList
+                    title={`Heroes on ${map.name}`}
+                    subtitle="Score 1–100 · Δ = the hero's win rate here compared with their overall, in pp · n = games on this map"
+                    rows={heroesForMap(map.id, { mode: m.id, timeframe: p.id })
+                      .filter((r) => r.fit.source === 'stats')
+                      .map(({ hero, fit }) => heroFitRow(hero, fit))}
+                    visible={12}
+                    sourceNames={names}
+                    emptyText="No hero has enough games on this map in this window yet."
+                    level={3}
+                  />
+                </div>
+              )}
+            </LensBlocks>
+            <details class="compare">
+              <summary class="btn">Compare with theory (from the kits)</summary>
+              <div class="compare__body">
+                <MatchupList title="Theory fit" subtitle="Score 1–100 from kit tags against this map's layout and objective" rows={theoryRows} visible={12} sourceNames={names} emptyText="No map rule matches a hero here yet." level={3} />
+              </div>
+            </details>
+          </StatsLens>
+        ) : (
+          <div class="best__block">
+            <TheoryNotice detail="Map scores match each hero's kit tags (global presence, waveclear, channel stopping…) against this map's layout and objective." />
+            <MatchupList
+              title={`Heroes on ${map.name}`}
+              subtitle="Score 1–100 from how the kit fits this map (50 = neutral)"
+              rows={theoryRows}
+              visible={12}
+              sourceNames={names}
+              emptyText="No map rule matches a hero here yet."
+              level={3}
+            />
+          </div>
+        )
+      }
+    </section>
+
+    {
+      notes.length > 0 && (
+        <section class="mnotes" aria-labelledby="notes-h">
+          <h2 id="notes-h">Recent changes to {map.name}</h2>
+          <ol class="mnotes__list">
+            {notes.map((n) => (
+              <li>
+                <p class="mnotes__head">
+                  <time datetime={n.patch.date}>{formatDayUTC(n.patch.date)}</time> <a href={patchHref(n.patch)}>{n.patch.title}</a>
+                </p>
+                <ul>
+                  {n.lines.map((l) => (
+                    <li>{l}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+
+    {
+      others.length > 0 && (
+        <nav class="mothers" aria-labelledby="others-h">
+          <h2 id="others-h">Other {MAP_KIND_LABEL[map.kind]} maps</h2>
+          <ul>
+            {others.map((m) => (
+              <li>
+                <a href={mapHref(m)}>{m.name}</a>
+                {m.ranked && <Badge tone="positive">Ranked</Badge>}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+  </article>
+</GameLayout>
+
+<style>
+  .mpage {
+    display: grid;
+    gap: var(--sp-6);
+    min-width: 0;
+  }
+
+
+  .mhead {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .mhead__art {
+    width: 100%;
+    max-width: 40rem;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .mhead__art--blank {
+    display: grid;
+    place-items: center;
+    color: var(--text-faint);
+    font-size: var(--fs-3xl);
+    font-weight: 800;
+  }
+
+  .mhead__main {
+    display: grid;
+    gap: var(--sp-2);
+    align-content: start;
+  }
+
+  .mhead__kicker {
+    color: var(--accent);
+  }
+
+  .mhead__badges,
+  .mhead__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1) var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .mhead__objective {
+    max-width: 60ch;
+    font-size: var(--fs-lg);
+  }
+
+  .mhead__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-5);
+    margin: 0;
+  }
+
+  .mhead__facts dt {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mhead__facts dd {
+    margin: 0;
+    font-weight: 650;
+  }
+
+  .mtag {
+    padding: 0.1rem var(--sp-2);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+  }
+
+  .aram {
+    display: grid;
+    gap: var(--sp-2);
+    padding: var(--sp-4);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .aram h2,
+  .best h2,
+  .mnotes h2,
+  .mothers h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .aram p {
+    max-width: 70ch;
+    color: var(--text-muted);
+  }
+
+  .best,
+  .best__block {
+    display: grid;
+    gap: var(--sp-3);
+    min-width: 0;
+  }
+
+  .wlabel {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .compare {
+    display: grid;
+    gap: var(--sp-3);
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .compare > summary {
+    justify-self: start;
+  }
+
+  .compare__body {
+    margin-top: var(--sp-3);
+  }
+
+  .mnotes {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .mnotes__list {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .mnotes__head time {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+  }
+
+  .mnotes ul {
+    padding-left: 1.1rem;
+    font-size: var(--fs-sm);
+  }
+
+  .mothers {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .mothers ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .mothers li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  @media (min-width: 48rem) {
+    .mhead {
+      grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+</style>

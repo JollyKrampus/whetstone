@@ -1,0 +1,158 @@
+---
+/** /hots/maps/ (SPEC §8): every map, Storm League pool first, then other standard maps, ARAM and brawls. */
+import EntityGrid from '../../components/EntityGrid.astro';
+import SourceAttribution from '../../components/SourceAttribution.astro';
+import type { EntityTile } from '../../components/types.ts';
+import { navHref } from '../../games/registry.ts';
+import { MAP_KIND_LABEL, mapTagLabel } from '../../games/hots/components/labels.ts';
+import { hpSource } from '../../games/hots/components/pagedata.ts';
+import { getMaps, hasAsset } from '../../games/hots/load.ts';
+import type { GameMap } from '../../games/hots/schema.ts';
+import { mapHref, mapImage } from '../../games/hots/view.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+
+const maps = [...getMaps()].sort((a, b) => (a.name < b.name ? -1 : 1));
+const sizeWord = { small: 'Small', medium: 'Medium', large: 'Large' } as const;
+
+function tile(map: GameMap): EntityTile {
+  const badges: NonNullable<EntityTile['badges']> = [];
+  if (map.ranked) badges.push({ label: 'Ranked', tone: 'positive', title: 'In the current Storm League map pool' });
+  if (map.kind !== 'standard') badges.push({ label: MAP_KIND_LABEL[map.kind], tone: 'accent' });
+  return {
+    id: map.id,
+    name: map.name,
+    href: mapHref(map),
+    ...(hasAsset(map.image) ? { image: mapImage(map) } : {}),
+    subtitle: `${map.profile.lanes} lane${map.profile.lanes === 1 ? '' : 's'} · ${sizeWord[map.profile.size]}`,
+    aliases: map.profile.tags.map(mapTagLabel),
+    badges,
+  };
+}
+
+const groups = [
+  {
+    id: 'ranked',
+    title: 'Storm League pool',
+    note: 'The maps currently drawn in ranked play.',
+    maps: maps.filter((m) => m.kind === 'standard' && m.ranked),
+  },
+  {
+    id: 'standard',
+    title: 'Other standard maps',
+    note: 'Standard maps outside the current ranked pool.',
+    maps: maps.filter((m) => m.kind === 'standard' && !m.ranked),
+  },
+  {
+    id: 'aram',
+    title: 'ARAM',
+    note: 'Single-lane maps for All Random, All Mid: every player picks from a few offered heroes, so team make-up matters more than counters.',
+    maps: maps.filter((m) => m.kind === 'aram'),
+  },
+  {
+    id: 'brawl',
+    title: 'Brawl',
+    note: 'Rotating special modes.',
+    maps: maps.filter((m) => m.kind === 'brawl'),
+  },
+].filter((g) => g.maps.length > 0);
+
+const poolFromStats = maps.some((m) => m.ranked && m.rankedSource === 'stats');
+---
+
+<GameLayout
+  game="hots"
+  title="Heroes of the Storm maps"
+  description="Every Heroes of the Storm map: the Storm League pool, ARAM maps, layouts and objectives, and the heroes that suit each one."
+  uses={poolFromStats ? ['heroesprofile'] : []}
+  inlineCredits={false}
+>
+  <div class="mapsx">
+    <header class="mapsx__head">
+      <h1>Maps</h1>
+      <p class="mapsx__lead">Open a map for its layout, objective and the heroes that fit it best.</p>
+    </header>
+
+    {
+      groups.map((g) => (
+        <section class="mapsx__group" aria-labelledby={`maps-${g.id}`}>
+          <div class="mapsx__ghead">
+            <h2 id={`maps-${g.id}`}>
+              {g.title} <span class="mapsx__count">{g.maps.length}</span>
+            </h2>
+            <p class="mapsx__note">{g.note}</p>
+          </div>
+          <EntityGrid id={`map-grid-${g.id}`} items={g.maps.map(tile)} label={g.title} size="lg" filter={false} noun={['map', 'maps']} />
+          {g.id === 'aram' && (
+            <p class="mapsx__note">
+              Offered three heroes in ARAM? The <a href={navHref('hots', 'aram/')}>ARAM pick helper</a> weighs them against your
+              team.
+            </p>
+          )}
+        </section>
+      ))
+    }
+
+    <div class="mapsx__source">
+      {
+        poolFromStats ? (
+          <>
+            The ranked pool is measured from current match counts.{' '}
+            <SourceAttribution sources={hpSource()} placement="inline" class="mapsx__credit" />
+          </>
+        ) : (
+          <>The ranked pool comes from Whetstone's hand-checked list until match statistics can confirm it.</>
+        )
+      }
+    </div>
+  </div>
+</GameLayout>
+
+<style>
+  .mapsx {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .mapsx__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .mapsx__lead {
+    max-width: 62ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .mapsx__group {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .mapsx__ghead {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .mapsx__ghead h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .mapsx__count {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+
+  .mapsx__note,
+  .mapsx__source {
+    max-width: 70ch;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .mapsx__source :global(.mapsx__credit) {
+    display: inline;
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+/** A hero's abilities in game order (trait, Q W E, heroics, actives, mount) with tooltip text. */
+import Badge from '../../../components/Badge.tsx';
+import type { Hero } from '../schema.ts';
+import AssetIcon from './AssetIcon.astro';
+import { ABILITY_KIND_LABEL, sortAbilities } from './labels.ts';
+
+interface Props {
+  owners: Hero[];
+  named?: boolean;
+}
+
+const { owners, named = false } = Astro.props;
+const seconds = (s: number) => (Number.isInteger(s) ? `${s}` : s.toFixed(1));
+---
+
+<div class="abils">
+  {
+    owners.map((owner) => (
+      <section class="abils__owner" aria-label={named ? `${owner.name} abilities` : 'Abilities'}>
+        {named && <h3 class="abils__name">{owner.name}</h3>}
+        <ul class="abils__list">
+          {sortAbilities(owner.abilities).map((a) => (
+            <li class="abil" data-kind={a.kind}>
+              <AssetIcon src={a.icon} fallback={a.hotkey || a.name} size={48} />
+              <div class="abil__body">
+                <p class="abil__head">
+                  <span class="abil__title">{a.name}</span>
+                  {a.hotkey && (
+                    <kbd class="abil__key" title={`Hotkey ${a.hotkey}`}>
+                      {a.hotkey}
+                    </kbd>
+                  )}
+                  <Badge tone={a.kind === 'heroic' ? 'accent' : 'neutral'}>{ABILITY_KIND_LABEL[a.kind]}</Badge>
+                </p>
+                {(a.cooldown !== undefined || a.cost) && (
+                  <p class="abil__meta">
+                    {a.cooldown !== undefined && <span>{seconds(a.cooldown)} s cooldown</span>}
+                    {a.cooldown !== undefined && a.cost && <span aria-hidden="true"> · </span>}
+                    {a.cost && <span>{a.cost}</span>}
+                  </p>
+                )}
+                <p class="abil__text">{a.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .abils {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .abils__owner {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .abils__name {
+    font-size: var(--fs-lg);
+  }
+
+  .abils__list {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .abil {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: var(--sp-3);
+    align-items: start;
+    padding: var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .abil[data-kind='heroic'] {
+    border-left: 3px solid var(--accent);
+  }
+
+  .abil__body {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .abil__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-2);
+  }
+
+  .abil__title {
+    font-weight: 700;
+  }
+
+  .abil__meta {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .abil__text {
+    font-size: var(--fs-sm);
+    white-space: pre-line;
+  }
+
+  @media (min-width: 64rem) {
+    .abils__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,199 @@
+---
+/**
+ * A hero's patch history, newest first: one card per patch with the kind (hotfixes marked),
+ * the overall verdict and every change line with its direction. Composite pages say which
+ * member each note is about. Below it, game-data changes detected between builds.
+ */
+import Badge from '../../../components/Badge.tsx';
+import { formatDayUTC } from '../../../core/format.ts';
+import type { HeroPatchEntry } from '../load.ts';
+import type { Diff, DiffEntry } from '../schema.ts';
+import { patchHref } from '../view.ts';
+import ChangeList from './ChangeList.tsx';
+import { countDirs, describeCounts, PATCH_KIND, VERDICT } from './labels.ts';
+
+interface Props {
+  heroName: string;
+  entries: HeroPatchEntry[];
+  /** Member id -> name, for composites. */
+  memberNames?: Record<string, string>;
+  diffs: { diff: Diff; heroId: string; entries: DiffEntry[] }[];
+}
+
+const { heroName, entries, memberNames = {}, diffs } = Astro.props;
+
+function describeDiff(e: DiffEntry): string {
+  const what = e.field ? `${e.target} ${e.field}` : e.target;
+  const level = e.level ? ` (level ${e.level})` : '';
+  switch (e.kind) {
+    case 'ability-added':
+      return `New ability: ${e.target}`;
+    case 'ability-removed':
+      return `Ability removed: ${e.target}`;
+    case 'talent-added':
+      return `New talent: ${e.target}${level}`;
+    case 'talent-removed':
+      return `Talent removed: ${e.target}${level}`;
+    case 'talent-moved':
+      return `Talent moved: ${e.target}${e.old !== undefined && e.new !== undefined ? ` from level ${e.old} to ${e.new}` : level}`;
+    default:
+      return e.old !== undefined && e.new !== undefined ? `${what}${level}: ${e.old} → ${e.new}` : `${what}${level} changed`;
+  }
+}
+---
+
+<div class="phist">
+  {
+    entries.length === 0 ? (
+      <p class="phist__none">No patch notes for {heroName} in this data yet.</p>
+    ) : (
+      <ol class="phist__list">
+        {entries.map((e) => {
+          const counts = countDirs(e.changes);
+          const kind = PATCH_KIND[e.patch.kind];
+          return (
+            <li class="pentry" data-patch={e.patch.id} data-kind={e.patch.kind}>
+              <div class="pentry__head">
+                <time class="pentry__date" datetime={e.patch.date}>
+                  {formatDayUTC(e.patch.date)}
+                </time>
+                <a class="pentry__title" href={patchHref(e.patch)}>
+                  {e.patch.title}
+                </a>
+                <span class="pentry__badges">
+                  <Badge tone={kind.tone}>{kind.label}</Badge>
+                  {e.verdict && <Badge tone={VERDICT[e.verdict].tone}>{VERDICT[e.verdict].label}</Badge>}
+                  {memberNames[e.heroId] && <Badge tone="neutral">{memberNames[e.heroId]}</Badge>}
+                </span>
+              </div>
+              <p class="pentry__summary">{describeCounts(counts)}</p>
+              <ChangeList changes={e.changes} />
+            </li>
+          );
+        })}
+      </ol>
+    )
+  }
+
+  {
+    diffs.length > 0 && (
+      <section class="phist__diffs" aria-labelledby="hero-diffs-h">
+        <h3 id="hero-diffs-h">Game-data changes between builds</h3>
+        <p class="phist__sub">Detected by comparing the game files of consecutive builds, including silent changes.</p>
+        <ol class="phist__dlist">
+          {diffs.map((d) => (
+            <li class="dentry">
+              <p class="dentry__head">
+                {d.diff.date && <time datetime={d.diff.date}>{formatDayUTC(d.diff.date)}</time>}
+                <span class="dentry__builds">
+                  {d.diff.from} → {d.diff.to}
+                </span>
+                {memberNames[d.heroId] && <Badge tone="neutral">{memberNames[d.heroId]}</Badge>}
+              </p>
+              <ul class="dentry__lines">
+                {d.entries.map((x) => (
+                  <li>{describeDiff(x)}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )
+  }
+</div>
+
+<style>
+  .phist {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .phist__none,
+  .phist__sub {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .phist__list,
+  .phist__dlist {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .pentry {
+    display: grid;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4) var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .pentry[data-kind='hotfix'] {
+    border-left: 3px solid var(--warning);
+  }
+
+  .pentry__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-3);
+  }
+
+  .pentry__date {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+  }
+
+  .pentry__title {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .pentry__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+  }
+
+  .pentry__summary {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .phist__diffs {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .phist__diffs h3 {
+    font-size: var(--fs-lg);
+  }
+
+  .dentry {
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+  }
+
+  .dentry__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-3);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .dentry__lines {
+    margin-top: var(--sp-2);
+    padding-left: 1.1rem;
+    font-size: var(--fs-sm);
+  }
+</style>

@@ -1,9 +1,244 @@
 ---
-// Placeholder until the hots module ships its own index page.
-import GamePlaceholder from '../../components/GamePlaceholder.astro';
+/**
+ * /hots/ (SPEC §8): the hero grid. Search by name, nickname or localized alias; filter by role,
+ * franchise, free rotation and new heroes; mark owned heroes (shared pool contract); tier
+ * badges when statistics exist; a banner for the live patch.
+ */
+import Badge from '../../components/Badge.tsx';
+import EntityGrid from '../../components/EntityGrid.astro';
+import type { EntityTile } from '../../components/types.ts';
+import { formatDayUTC } from '../../core/format.ts';
+import { navHref, versionText } from '../../games/registry.ts';
+import HeroPoolBar from '../../games/hots/components/HeroPoolBar.tsx';
+import StatsCredit from '../../games/hots/components/StatsCredit.astro';
+import { latestLivePatch, statsModes, tierById } from '../../games/hots/components/pagedata.ts';
+import { PATCH_KIND } from '../../games/hots/components/labels.ts';
+import { getDraftableEntities, getMembers, getMeta, getRotation, hasAsset, isFreeToPlay } from '../../games/hots/load.ts';
+import { HOTS_ROLES } from '../../games/hots/schema.ts';
+import { heroHref, heroPortrait, patchHref } from '../../games/hots/view.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
+
+const meta = getMeta();
+const statsOn = statsModes().length > 0;
+const tiers = statsOn ? tierById() : new Map();
+const rotation = getRotation();
+const latest = latestLivePatch();
+const heroes = [...getDraftableEntities()].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+
+const tiles: EntityTile[] = heroes.map((hero) => {
+  const members = getMembers(hero);
+  const free = isFreeToPlay(hero);
+  const tier = tiers.get(hero.id);
+  const badges: NonNullable<EntityTile['badges']> = [];
+  if (hero.isNew) badges.push({ label: 'New', tone: 'accent', title: 'Released recently' });
+  if (free) badges.push({ label: 'Free', tone: 'positive', title: 'In this week’s free rotation' });
+  if (tier && !tier.early) badges.push({ label: tier.tier, tone: 'stats', title: `Tier ${tier.tier.slice(1)} in Storm League this patch` });
+  const avail = [...(free ? ['free'] : []), ...(hero.isNew ? ['new'] : [])];
+  return {
+    id: hero.id,
+    name: hero.name,
+    href: heroHref(hero),
+    ...(hasAsset(hero.portrait) ? { image: heroPortrait(hero) } : {}),
+    subtitle: [hero.role, ...(hero.roleAlt ? [hero.roleAlt] : [])].join(' / '),
+    aliases: [hero.slug, ...hero.aliases, ...members.flatMap((m) => [m.name, ...m.aliases])],
+    facets: {
+      role: [hero.role, ...(hero.roleAlt ? [hero.roleAlt] : [])],
+      franchise: hero.franchise,
+      avail,
+    },
+    badges,
+  };
+});
+
+const poolHeroes = heroes.map((h) => ({
+  id: h.id,
+  name: h.name,
+  portrait: hasAsset(h.portrait) ? heroPortrait(h) : null,
+  role: h.role,
+}));
+const freeCount = heroes.filter((h) => isFreeToPlay(h)).length;
+const version = versionText('hots', meta.version.label);
+const ptr = meta.extra.ptrBuild;
 ---
 
-<GameLayout game="hots">
-  <GamePlaceholder game="hots" />
+<GameLayout
+  game="hots"
+  title="Heroes of the Storm heroes: counters, maps and talents"
+  description={`Every Heroes of the Storm hero in ${version}: counters, synergies, best maps, talents and patch changes, with the reasons and sample sizes behind each one.`}
+  uses={statsOn ? ['heroesprofile'] : []}
+  inlineCredits={false}
+>
+  <div class="hgrid">
+    <header class="hgrid__head">
+      <h1>Heroes</h1>
+      <p class="hgrid__lead">
+        Pick a hero for counters, synergies, best maps, talents and patch history. Search by name or nickname, or press
+        <kbd>/</kbd> to jump to the search box.
+      </p>
+    </header>
+
+    <section class="pbanner" aria-label="Current patch">
+      <div class="pbanner__main">
+        <p class="kicker pbanner__kicker">Live patch</p>
+        <p class="pbanner__title">
+          {version}
+          <span class="pbanner__since">since {formatDayUTC(meta.extra.majorSince)}</span>
+        </p>
+        {
+          latest ? (
+            <p class="pbanner__latest">
+              Latest notes: <a href={patchHref(latest)}>{latest.title}</a>{' '}
+              <Badge tone={PATCH_KIND[latest.kind].tone}>{PATCH_KIND[latest.kind].label}</Badge>
+              <span class="pbanner__date"> · {formatDayUTC(latest.date)}</span>
+            </p>
+          ) : (
+            <p class="pbanner__latest">Patch notes haven't been fetched yet.</p>
+          )
+        }
+        {ptr && <p class="pbanner__ptr">A PTR build ({ptr}) is being tested.</p>}
+      </div>
+      <div class="pbanner__links">
+        {latest && <a class="btn" href={patchHref(latest)}>Read the patch notes</a>}
+        <a class="btn btn--ghost" href={navHref('hots', 'catch-up/')}>Catch up since you last played</a>
+      </div>
+      {
+        rotation && (
+          <p class="pbanner__rot">
+            {rotation.allFree ? (
+              <>Every hero is free to play this week.</>
+            ) : (
+              <>
+                <strong>{freeCount} free heroes</strong> this week ({formatDayUTC(rotation.start)} – {formatDayUTC(rotation.end)}),
+                marked <Badge tone="positive">Free</Badge>.
+              </>
+            )}{' '}
+            {rotation.ranked && (
+              <>
+                Storm League: {rotation.ranked.name}, until {formatDayUTC(rotation.ranked.end)}.
+              </>
+            )}{' '}
+            <span class="pbanner__asof">Rotation as of {formatDayUTC(rotation.fetchedAt)}, via Nexus Compendium.</span>
+          </p>
+        )
+      }
+    </section>
+
+    {
+      statsOn && (
+        <StatsCredit lead="Tier badges (T1 best to T5) come from Storm League win rates for the current patch; see the tier list for the numbers." />
+      )
+    }
+
+    <HeroPoolBar client:idle gridId="hero-grid" heroes={poolHeroes} />
+
+    <EntityGrid
+      id="hero-grid"
+      items={tiles}
+      label="Heroes"
+      size="sm"
+      filter={true}
+      placeholder="Search heroes by name or nickname"
+      noun={['hero', 'heroes']}
+      facets={[
+        { id: 'role', label: 'Role', options: HOTS_ROLES.map((r) => ({ value: r })) },
+        { id: 'franchise', label: 'Franchise' },
+        {
+          id: 'avail',
+          label: 'Show only',
+          options: [
+            { value: 'free', label: 'Free this week' },
+            { value: 'new', label: 'New heroes' },
+          ],
+        },
+      ]}
+      emptyText="No hero data in this build yet."
+    />
+  </div>
 </GameLayout>
+
+<style>
+  .hgrid {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .hgrid__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .hgrid__head h1 {
+    font-size: var(--fs-3xl);
+  }
+
+  .hgrid__lead {
+    max-width: 62ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .pbanner {
+    display: grid;
+    gap: var(--sp-3);
+    padding: var(--sp-4);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background:
+      radial-gradient(40rem 12rem at 100% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
+      var(--surface);
+  }
+
+  .pbanner__main {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .pbanner__kicker {
+    color: var(--accent);
+  }
+
+  .pbanner__title {
+    font-size: var(--fs-xl);
+    font-weight: 750;
+  }
+
+  .pbanner__since,
+  .pbanner__date,
+  .pbanner__asof {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+
+  .pbanner__latest,
+  .pbanner__ptr,
+  .pbanner__rot {
+    font-size: var(--fs-sm);
+  }
+
+  .pbanner__ptr {
+    color: var(--text-muted);
+  }
+
+  .pbanner__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  .pbanner__rot {
+    padding-top: var(--sp-3);
+    border-top: 1px dashed var(--border);
+  }
+
+  @media (min-width: 48rem) {
+    .pbanner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+    }
+    .pbanner__rot {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

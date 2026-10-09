@@ -5,7 +5,7 @@
  */
 import type { MatchupRow } from '../../components/types.ts';
 import { assetHref, navHref } from '../registry.ts';
-import type { HeroMatchupRow } from './load.ts';
+import type { HeroMatchupRow, MapFitRow } from './load.ts';
 
 /** Hero page URL (SPEC §8 /hots/hero/[slug]/). Composite entities use their own slug (chogall). */
 export function heroHref(hero: { slug: string }): string {
@@ -35,5 +35,53 @@ export function toMatchupRow(row: HeroMatchupRow, opts: { sourceLabel?: string }
     ...(row.edge.delta === undefined ? {} : { delta: row.edge.delta }),
     ...(row.edge.n === undefined ? {} : { n: row.edge.n }),
     ...(opts.sourceLabel === undefined ? {} : { sourceLabel: opts.sourceLabel }),
+  };
+}
+
+/** Map page URL (SPEC §8 /hots/map/[slug]/). */
+export function mapHref(map: { id: string }): string {
+  return navHref('hots', `map/${map.id}/`);
+}
+
+/** Map art URL from GameMap.image (staged unchanged, like portraits). */
+export function mapImage(map: { image: string }): string {
+  return assetHref('hots', map.image);
+}
+
+/** Patch notes page URL (SPEC §8 /hots/patches/[id]/). */
+export function patchHref(patch: { id: string }): string {
+  return navHref('hots', `patches/${patch.id}/`);
+}
+
+/** MatchupList row for a hero's fit on one map (hero page "Best maps"). */
+export function mapFitRow(fit: MapFitRow, opts: { image?: string | null } = {}): MatchupRow {
+  const image = opts.image === undefined ? mapImage(fit.map) : opts.image;
+  return {
+    id: fit.map.id,
+    name: fit.map.name,
+    href: mapHref(fit.map),
+    ...(image ? { image } : {}),
+    score: fit.score,
+    source: fit.source,
+    reasons: fit.reasons,
+    lowSample: fit.gate === 'grey',
+    ...(fit.delta === undefined ? {} : { delta: fit.delta }),
+    ...(fit.n === undefined ? {} : { n: fit.n }),
+  };
+}
+
+/** MatchupList row for one hero on a map (map page "Best heroes"). */
+export function heroFitRow(hero: { id: string; name: string; slug: string; portrait: string }, fit: MapFitRow): MatchupRow {
+  return {
+    id: hero.id,
+    name: hero.name,
+    href: heroHref(hero),
+    image: heroPortrait(hero),
+    score: fit.score,
+    source: fit.source,
+    reasons: fit.reasons,
+    lowSample: fit.gate === 'grey',
+    ...(fit.delta === undefined ? {} : { delta: fit.delta }),
+    ...(fit.n === undefined ? {} : { n: fit.n }),
   };
 }

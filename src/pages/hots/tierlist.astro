@@ -1,0 +1,411 @@
+---
+/**
+ * /hots/tierlist/ (SPEC §6 tiers, §8). With statistics: fixed-band tiers on shrunk win rate per
+ * mode and patch window, n gate, change against the previous patch. Without: a clearly labelled
+ * alternative (pro presence from Liquipedia and patch momentum), never a theory "tier list".
+ */
+import Badge from '../../components/Badge.tsx';
+import EmptyState from '../../components/EmptyState.astro';
+import SourceAttribution from '../../components/SourceAttribution.astro';
+import TierList from '../../components/TierList.astro';
+import type { TierRow } from '../../components/types.ts';
+import { formatDayUTC, int, pct, pp } from '../../core/format.ts';
+import type { TierResult } from '../../core/tiers.ts';
+import { HOTS_TIERS } from '../../core/tiers.ts';
+import { navHref, sourcesFor, versionText } from '../../games/registry.ts';
+import LensBlocks from '../../games/hots/components/LensBlocks.astro';
+import StatsCredit from '../../games/hots/components/StatsCredit.astro';
+import StatsLens from '../../games/hots/components/StatsLens.astro';
+import { describeCounts, VERDICT } from '../../games/hots/components/labels.ts';
+import { patchMomentum, statsModes, TIER_TITLE, tierResults, type ModeOption, type PeriodOption } from '../../games/hots/components/pagedata.ts';
+import { getEntity, getMeta, getPro, getStatsWindow, hasAsset } from '../../games/hots/load.ts';
+import { heroHref, heroPortrait } from '../../games/hots/view.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+
+const meta = getMeta();
+const modes = statsModes();
+const statsOn = modes.length > 0;
+
+const bandText = (i: number): string => {
+  const band = HOTS_TIERS.bands[i]!;
+  const upper = HOTS_TIERS.bands[i - 1];
+  if (!upper) return `${pp(band.min)} or more`;
+  if (!Number.isFinite(band.min)) return `${pp(upper.min)} or less`;
+  return `${pp(band.min)} to ${pp(upper.min)}`;
+};
+
+function rows(results: TierResult[]): TierRow[] {
+  const item = (t: TierResult) => {
+    const hero = getEntity(t.id);
+    const badges: NonNullable<TierRow['items'][number]['badges']> = [];
+    if (t.change === 'up' && t.previousTier) badges.push({ label: `▲ ${t.previousTier}`, tone: 'positive', title: `Up from ${t.previousTier} last patch` });
+    if (t.change === 'down' && t.previousTier) badges.push({ label: `▼ ${t.previousTier}`, tone: 'negative', title: `Down from ${t.previousTier} last patch` });
+    if (t.change === 'new' && !t.early) badges.push({ label: 'New', tone: 'accent', title: 'No tier last patch' });
+    return {
+      id: t.id,
+      name: hero?.name ?? t.id,
+      ...(hero ? { href: heroHref(hero) } : {}),
+      ...(hero && hasAsset(hero.portrait) ? { image: heroPortrait(hero) } : {}),
+      value: t.early ? `n = ${int(t.n)}` : `${pp(t.metric)}${t.deltaPrevious !== undefined ? ` (${t.deltaPrevious >= 0 ? '+' : ''}${t.deltaPrevious.toFixed(1)})` : ''}`,
+      badges,
+    };
+  };
+  const tiers: TierRow[] = HOTS_TIERS.bands.map((band, i) => ({
+    id: band.id,
+    label: band.id,
+    title: TIER_TITLE[band.id] ?? band.label ?? band.id,
+    note: `Shrunk win rate ${bandText(i)} from 50%`,
+    items: results.filter((r) => r.tier === band.id).map(item),
+  }));
+  const early = results.filter((r) => r.early);
+  if (early.length > 0) {
+    tiers.push({
+      id: 'early',
+      label: 'Early',
+      title: 'Early data',
+      note: `Fewer than ${HOTS_TIERS.minN} games: too few to place yet`,
+      items: early.map(item),
+    });
+  }
+  return tiers;
+}
+
+const windowLabel = (m: ModeOption, p: PeriodOption) => {
+  const w = getStatsWindow(m.id, p.id);
+  return w ? `${w.label} · ${int(w.games)} games` : m.label;
+};
+
+// Theory-mode alternative views.
+const pro = statsOn ? null : getPro();
+const proRows = (pro?.heroes ?? []).slice(0, 12).map((h) => ({ ...h, hero: getEntity(h.hero) }));
+const momentum = statsOn ? null : patchMomentum(meta.extra.major);
+const momentumScope =
+  momentum && momentum.patches.length > 0
+    ? `${versionText('hots', meta.extra.major)} (${momentum.patches.length} set${momentum.patches.length === 1 ? '' : 's'} of notes)`
+    : versionText('hots', meta.extra.major);
+---
+
+<GameLayout
+  game="hots"
+  title={statsOn ? 'Heroes of the Storm tier list' : 'Heroes of the Storm meta: pro picks and patch momentum'}
+  description={statsOn
+    ? `Heroes of the Storm tier list for ${versionText('hots', meta.version.label)}: fixed win-rate bands with sample sizes and changes since last patch.`
+    : 'What the Heroes of the Storm meta looks like without match statistics: pro tournament presence and recent buffs and nerfs per hero.'}
+  uses={statsOn ? ['heroesprofile'] : pro ? ['liquipedia'] : []}
+  inlineCredits={false}
+>
+  <div class="tl">
+    <header class="tl__head">
+      <h1>Tier list</h1>
+      {
+        statsOn ? (
+          <p class="tl__lead">
+            Heroes in fixed bands of shrunk win rate: a hero keeps its tier when others move. Each shows its distance from 50%
+            and, in brackets, the change since last patch in pp. Heroes with fewer than {HOTS_TIERS.minN} games wait in
+            Early data.
+          </p>
+        ) : (
+          <p class="tl__lead">
+            A tier list needs win rates, and match statistics are not enabled in this build. Rather than rank heroes by
+            opinion, this page shows two things that are measured: how often pros pick and ban each hero, and who the latest
+            patches pushed up or down. <a href={navHref('hots', 'about/#stats')}>How statistics get enabled</a>.
+          </p>
+        )
+      }
+    </header>
+
+    {
+      statsOn ? (
+        <StatsLens name="hots-tier" modes={modes}>
+          <StatsCredit lead="Tiers use match statistics: shrunk win rates per hero." />
+          <LensBlocks modes={modes}>
+            {(m: ModeOption, p: PeriodOption) => {
+              const results = tierResults(m.id, p.id) ?? [];
+              return (
+                <div class="tl__block">
+                  <p class="wlabel">{windowLabel(m, p)}</p>
+                  {results.length > 0 ? (
+                    <TierList tiers={rows(results)} label={`${m.label} tiers, ${p.label.toLowerCase()}`} emptyTierText="No hero in this band." />
+                  ) : (
+                    <p class="tl__none">No hero statistics in this window.</p>
+                  )}
+                </div>
+              );
+            }}
+          </LensBlocks>
+        </StatsLens>
+      ) : (
+        <div class="tl__alt" data-alt-view>
+          <section class="tl__sec" aria-labelledby="pro-h">
+            <div class="tl__sechead">
+              <p class="kicker">Not a tier list</p>
+              <h2 id="pro-h">Pro presence</h2>
+              <p class="tl__sub">
+                Share of drafted pro maps where the hero was picked or banned{pro ? `: ${pro.window.label}, ${int(pro.totals.maps)} maps` : ''}.
+                Pro drafts reward coordination and differ from solo queue.
+              </p>
+            </div>
+            {pro && proRows.length > 0 ? (
+              <>
+                <ol class="presence">
+                  {proRows.map((r) => (
+                    <li class="presence__row" style={`--p: ${r.presence}`}>
+                      {r.hero ? (
+                        <a class="presence__hero" href={heroHref(r.hero)}>
+                          {hasAsset(r.hero.portrait) && <img src={heroPortrait(r.hero)} alt="" width="32" height="32" loading="lazy" />}
+                          <span>{r.hero.name}</span>
+                        </a>
+                      ) : (
+                        <span class="presence__hero">{r.hero}</span>
+                      )}
+                      <span class="presence__bar" aria-hidden="true">
+                        <span class="presence__fill" />
+                      </span>
+                      <span class="presence__pct">{pct(r.presence, 0)}</span>
+                      <span class="presence__meta">
+                        {int(r.picks)} picks · {int(r.bans)} bans
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+                {pro.synthetic && <p class="tl__sub">Sample numbers in this build (synthetic fixtures).</p>}
+                <SourceAttribution sources={sourcesFor('hots', ['liquipedia'])} placement="inline" />
+                <p class="tl__sub">
+                  <a href={navHref('hots', 'pro/')}>All heroes and tournaments</a>
+                </p>
+              </>
+            ) : (
+              <EmptyState title="No pro data yet" level={3} compact>
+                <p>Pro drafts appear here once tournament data has been fetched.</p>
+              </EmptyState>
+            )}
+          </section>
+
+          <section class="tl__sec" aria-labelledby="momentum-h">
+            <div class="tl__sechead">
+              <p class="kicker">Not a tier list</p>
+              <h2 id="momentum-h">Patch momentum</h2>
+              <p class="tl__sub">
+                Heroes changed in {momentumScope}, newest first. A buff does not make a hero strong; it shows where the balance team is pushing.
+              </p>
+            </div>
+            {momentum && momentum.rows.length > 0 ? (
+              <ol class="momentum">
+                {momentum.rows.map((r) => (
+                  <li class="momentum__row" data-verdict={r.verdict}>
+                    <a class="momentum__hero" href={heroHref(r.hero)}>
+                      {hasAsset(r.hero.portrait) && <img src={heroPortrait(r.hero)} alt="" width="40" height="40" loading="lazy" />}
+                      <span>{r.hero.name}</span>
+                    </a>
+                    <Badge tone={VERDICT[r.verdict].tone}>{VERDICT[r.verdict].label}</Badge>
+                    <span class="momentum__meta">
+                      {describeCounts(r.counts) || 'changed'} · last {formatDayUTC(r.latest)}
+                    </span>
+                    <span class="momentum__links">
+                      {r.patches.map((p) => (
+                        <a href={p.href}>{p.title}</a>
+                      ))}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <EmptyState title="No hero changes this patch" level={3} compact>
+                <p>No patch notes in this build changed a hero during the current major.</p>
+              </EmptyState>
+            )}
+          </section>
+        </div>
+      )
+    }
+  </div>
+</GameLayout>
+
+<style>
+  .tl {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .tl__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .tl__lead {
+    max-width: 70ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .tl__block {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .wlabel {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .tl__none,
+  .tl__sub {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .tl__alt {
+    display: grid;
+    gap: var(--sp-7);
+  }
+
+  .tl__sec {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .tl__sechead {
+    display: grid;
+    gap: var(--sp-1);
+    max-width: 70ch;
+  }
+
+  .tl__sechead h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .presence,
+  .momentum {
+    display: grid;
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .presence__row {
+    display: grid;
+    grid-template-columns: minmax(0, 9rem) minmax(0, 1fr) 3rem;
+    grid-template-areas:
+      'hero bar pct'
+      'hero meta meta';
+    align-items: center;
+    gap: 0.1rem var(--sp-3);
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .presence__hero {
+    grid-area: hero;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-width: 0;
+    color: var(--text);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .presence__hero img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-sm);
+  }
+
+  a.presence__hero:hover span {
+    text-decoration: underline;
+  }
+
+  .presence__bar {
+    grid-area: bar;
+    position: relative;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--surface-3);
+    overflow: hidden;
+  }
+
+  .presence__fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: calc(var(--p) * 100%);
+    border-radius: inherit;
+    background: var(--info);
+  }
+
+  .presence__pct {
+    grid-area: pct;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .presence__meta {
+    grid-area: meta;
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .momentum__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2) var(--sp-3);
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .momentum__row[data-verdict='buff'] {
+    box-shadow: inset 3px 0 0 var(--positive);
+  }
+
+  .momentum__row[data-verdict='nerf'] {
+    box-shadow: inset 3px 0 0 var(--negative);
+  }
+
+  .momentum__row[data-verdict='rework'] {
+    box-shadow: inset 3px 0 0 var(--warning);
+  }
+
+  .momentum__hero {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: var(--text);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .momentum__hero img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  a.momentum__hero:hover span {
+    text-decoration: underline;
+  }
+
+  .momentum__meta {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .momentum__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1) var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .momentum__links {
+      margin-left: auto;
+    }
+  }
+</style>

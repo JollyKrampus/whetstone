@@ -1,0 +1,139 @@
+---
+/**
+ * Click-to-load facade for third-party players (YouTube via youtube-nocookie.com, Twitch via
+ * player.twitch.tv): nothing is requested from the provider until the visitor presses Play, so
+ * page views stay tracker-free. Without JS it is a plain card with a link to watch on the site.
+ * `minWidth` keeps embeds that have a minimum size (Twitch: 400 × 300) from loading on screens
+ * too narrow for them; the link still works there.
+ */
+interface Props {
+  provider: 'YouTube' | 'Twitch';
+  title: string;
+  /** Second line, e.g. channel and date. */
+  meta?: string;
+  /** Short note under the meta line (e.g. a curator's description). */
+  note?: string;
+  embedUrl: string;
+  watchUrl: string;
+  minWidth?: number;
+  class?: string;
+}
+
+const { provider, title, meta, note, embedUrl, watchUrl, minWidth = 0, class: extra } = Astro.props;
+const host = new URL(embedUrl).hostname;
+---
+
+<div class:list={['facade', extra]} data-facade data-embed={embedUrl} data-title={title} data-min-width={minWidth}>
+  <div class="facade__poster" data-facade-poster>
+    <span class="facade__provider">{provider}</span>
+    <p class="facade__title">{title}</p>
+    {meta && <p class="facade__meta">{meta}</p>}
+    {note && <p class="facade__note">{note}</p>}
+    <div class="facade__actions">
+      <button type="button" class="btn btn--primary facade__play" data-facade-load hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"></path></svg>
+        <span>Play here<span class="visually-hidden">: {title}</span></span>
+      </button>
+      <a class="btn facade__out" href={watchUrl} rel="noopener" target="_blank">
+        Open on {provider}<span class="visually-hidden"> (new tab): {title}</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 5h5v5M19 5l-8 8M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"></path>
+        </svg>
+      </a>
+    </div>
+    <p class="facade__privacy" data-facade-privacy hidden>Pressing Play loads the player from {host}.</p>
+    <p class="facade__privacy" data-facade-narrow hidden>The embedded player needs a wider screen; use the link instead.</p>
+  </div>
+</div>
+
+<script>
+  function setup(box: HTMLElement) {
+    const play = box.querySelector<HTMLButtonElement>('[data-facade-load]');
+    const privacy = box.querySelector<HTMLElement>('[data-facade-privacy]');
+    const narrow = box.querySelector<HTMLElement>('[data-facade-narrow]');
+    if (!play) return;
+    const min = Number(box.dataset.minWidth ?? 0);
+    const fit = () => {
+      const wide = !(min > 0) || box.clientWidth >= min;
+      play.hidden = !wide;
+      if (privacy) privacy.hidden = !wide;
+      if (narrow) narrow.hidden = wide;
+    };
+    fit();
+    if (min > 0 && 'ResizeObserver' in window) new ResizeObserver(fit).observe(box);
+    play.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = box.dataset.embed ?? '';
+      frame.title = box.dataset.title ?? 'Video player';
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen = true;
+      frame.referrerPolicy = 'strict-origin-when-cross-origin';
+      frame.className = 'facade__frame';
+      box.replaceChildren(frame);
+      box.dataset.loaded = 'true';
+      frame.focus();
+    });
+  }
+  for (const box of document.querySelectorAll<HTMLElement>('[data-facade]')) setup(box);
+</script>
+
+<style>
+  .facade {
+    display: grid;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+      radial-gradient(28rem 12rem at 100% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
+      var(--surface);
+    overflow: hidden;
+  }
+
+  .facade__poster {
+    display: grid;
+    align-content: start;
+    gap: var(--sp-2);
+    padding: var(--sp-4);
+  }
+
+  .facade__provider {
+    justify-self: start;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .facade__title {
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .facade__meta,
+  .facade__note,
+  .facade__privacy {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .facade__privacy {
+    font-size: var(--fs-xs);
+  }
+
+  .facade__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-1);
+  }
+
+  .facade :global(.facade__frame) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 300px;
+    border: 0;
+    background: #000;
+  }
+</style>
