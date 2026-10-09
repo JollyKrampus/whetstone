@@ -1,0 +1,370 @@
+<!doctype html><html lang="en-us"><head><meta charset="utf-8"><title>fixture</title></head><body>
+<section class="blog"><p>Our next Heroes of the Storm patch is live! Read on for more information.</p>
+
+<p><span style="color: rgb(255, 140, 0);"><b>NOTE: Orange text indicates a change between PTR and Live notes.</b></span></p>
+
+<p></p>
+
+<h3 style="color: rgb(153, 0, 255); margin: 4px 0px; padding: 0px;"><i>Hotfix - 10/5/2026</i></h3>
+
+<p></p>
+
+<ul>
+	<li>
+	<div style="margin: 0; padding: 0; color: #1d1c1d; margin: 4px 0; padding: 0"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Xal'atath Balance Updates</span><br />
+	<br />
+	<span style="font-weight: 700; font-weight: 700">Abilities</span></span></div>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Shadow Mark (Q)</span></span>
+	<ul style="margin: 4px 0 4px 24px; padding: 0; list-style-position: outside">
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Void Orb speed slightly increased.</span></li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Void Step (E)</span></span>
+	<ul style="margin: 4px 0 4px 24px; padding: 0; list-style-position: outside">
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Targeting range reduced from 5 to 2.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Distance between teleport points reduced from 7 to 6.5.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Now prevented and interrupted by Immobilize.</span></li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Void Volley (D)</span></span>
+	<ul style="margin: 4px 0 4px 24px; padding: 0; list-style-position: outside">
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Base damage per missile reduced from 90 to 72.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Now generates 1 charge for every Basic Attack against enemy Heroes and every 2 Basic Attacks against non-Heroes.</span></li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Void Eruption (R)</span></span>
+	<ul style="margin: 4px 0 4px 24px; padding: 0; list-style-position: outside">
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Uncharged damage reduced by 20%.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Fully charged damage reduced by 5%.</span></li>
+	</ul>
+	</li>
+</ul>
+
+<p style="margin: 2px 0px; padding: 0px;"></p>
+
+<ul>
+	<li>
+	<div style="margin: 0; padding: 0; color: #1d1c1d; margin: 4px 0; padding: 0"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Talents</span></span></div>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Level 1</span></span>
+	<ul>
+		<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Anchored Core </span></span>
+		<ul>
+			<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;">Radius bonus reduced from 50% to 25%.</span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Level 4</span></span>
+	<ul>
+		<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Dark Barrier</span></span>
+		<ul>
+			<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;">Now only triggers when enemy Heroes are hit</span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Level 7</span></span>
+	<ul>
+		<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Silence of the Lamb</span></span>
+		<ul>
+			<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;">Silence duration increased from 1 to 1.5 seconds.</span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Level 13</span></span>
+	<ul>
+		<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Dark Heart's Protection</span></span>
+		<ul>
+			<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;">Detonating the Dark Heart on a target affected by Shadow Mark now Silences all enemies hit. Previously silenced on cast.</span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Level 20</span></span>
+	<ul>
+		<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Rift Invasion</span></span>
+		<ul>
+			<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;">Portals now have non-lethal Health decay, stopping at 4 Health.</span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p style="margin: 2px 0; padding: 0; color: #1d1c1d"></p>
+
+<ul>
+	<li>
+	<div style="margin: 0; padding: 0; color: #1d1c1d; margin: 4px 0; padding: 0"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Xal'atath Bug Fixes</span></span></div>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">General</span></span>
+	<ul style="margin: 4px 0 4px 24px; padding: 0; list-style-position: outside">
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Orbiting orbs now pause during Time Stop and resume afterward.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Fixed issues that prevented orbiting orbs from correctly following the missile or continuing to orbit after a release queued during Time Stop.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Fixed an issue where Xal'atath was appearing brighter than intended in the game.</span></li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Void Volley (D)</span></span>
+	<ul style="margin: 4px 0 4px 24px; padding: 0; list-style-position: outside">
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Fixed an issue that caused impact visual effects to appear at the cursor location instead of where missiles hit.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Fixed an issue that prevented the charge indicator from immediately displaying 1 charge upon reaching the second milestone.</span></li>
+	</ul>
+	</li>
+	<li style="margin: 2px 0; padding: 0; color: #1d1c1d"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">Void Eruption (R)</span></span>
+	<ul style="margin: 4px 0 4px 24px; padding: 0; list-style-position: outside">
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Can now be queued to cast or release during Time Stop.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Casting during Time Stop immediately enters targeting, with charging beginning when Time Stop ends.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Releasing during Time Stop queues the release for when Time Stop ends. The Ability button becomes greyed out while a release is queued.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Issuing another Ability, movement, or attack order during Time Stop cancels the pending cast or queued release.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Casting Void Eruption again during Time Stop clears earlier queued orders.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Fixed issues that could allow an additional charge to begin while already charging or during Void Step.</span></li>
+		<li style="margin: 2px 0px; padding: 0px;"><span style="color:#FFD700;">Orb growth and the flight damage timer now pause while Xal’atath is affected by Time Stop.</span></li>
+	</ul>
+	</li>
+	<li>
+	<div style="margin: 0; padding: 0; color: #1d1c1d; margin: 4px 0; padding: 0"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">General Bug Fixes</span></span></div>
+
+	<ul>
+		<li>
+		<div style="margin: 0; padding: 0; color: #1d1c1d; margin: 4px 0; padding: 0"><span style="color:#FFD700;"><span style="font-weight: 700; font-weight: 700">​</span>Fixed an issue where certain Maskless skins were not appearing in the game.</span></div>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<hr />
+<h3 style="color: rgb(153, 0, 255); margin: 4px 0px; padding: 0px;"></h3>
+
+<h3 style="color: rgb(153, 0, 255); margin: 4px 0px; padding: 0px;"><i>Hotfix - 9/29/2026</i></h3>
+
+<p></p>
+
+<ul>
+	<li>Fixed an issue where some players who bought the pre-purchase bundle didn't receive Xal'atath.</li>
+	<li>Fixed an exploit with Xal'atath's ultimate.</li>
+	<li>Fixed an issue where Level 20 Void Convergence portal would lose life.</li>
+	<li>Adjusted colors on Dark Heart to make visibility clearer for enemies.</li>
+</ul>
+
+<p></p>
+
+<hr />
+<p><a name="return"></a></p>
+
+<h2>Quick Navigation:</h2>
+
+<ul>
+	<li><strong><a href="#New">New Hero</a></strong></li>
+	<li><strong><a href="#Collection">Collection</a></strong></li>
+	<li><strong><a href="#General">General</a></strong></li>
+	<li><strong><a href="#Map">Map Updates</a></strong></li>
+	<li><strong><a href="#Balance">Balance Update</a></strong></li>
+	<li><strong><a href="#Bugs">Bug Fixes</a></strong></li>
+</ul>
+
+<hr /><a name="New"></a>
+
+<h2><strong>New Hero: Xal'atath</strong></h2>
+
+<p>Xal'atath has arrived in the Nexus!</p>
+
+<a name="General"></a>
+
+<h2><strong>General</strong></h2>
+
+<ul>
+	<li>Updated Homescreen and Startup Music.</li>
+	<li><span style="color: rgb(255, 140, 0);">Added the ability to ping your Healing Fountain cooldown.</span></li>
+</ul>
+
+<p><a href="#return">Return to Top</a></p>
+
+<hr /><a name="Map"></a>
+
+<h2><strong>Map Updates</strong></h2>
+
+<ul>
+	<li><strong style="color: rgb(153, 0, 255); ">Garden of Terror</strong>
+
+	<ul>
+		<li>Shambler Health and damage now begin 25% below their previous values and gradually return to their previous values over the course of the match.</li>
+	</ul>
+	</li>
+</ul>
+
+<p><a href="#return">Return to Top</a></p>
+
+<hr /><a name="Balance"></a>
+
+<h2><strong>Balance Update</strong></h2>
+
+<h3><strong>Heroes</strong></h3>
+
+<h4>Abathur</h4>
+
+<p><strong style="color: rgb(153, 0, 255); ">Talents</strong></p>
+
+<ul>
+	<li><strong>Level 13</strong>
+
+	<ul>
+		<li><strong style="color:#0099ff;">Bombard Strain</strong>
+
+		<ul>
+			<li>Health decay reduction lowered from 50% to 40%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 16</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">Survival Instincts</strong>
+		<ul>
+			<li>Now provides 50% damage reduction against non-Heroes, instead of +100% Health.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h4>Alexstrasza</h4>
+
+<p><strong style="color: rgb(153, 0, 255); ">Base</strong></p>
+
+<ul>
+	<li>Health increased from 1698 to 1780.</li>
+</ul>
+
+<p><strong style="color: rgb(153, 0, 255); ">Talents</strong></p>
+
+<ul>
+	<li><strong>Level 1</strong>
+
+	<ul>
+		<li><strong style="color:#0099ff;">Flames of Fury</strong>
+
+		<ul>
+			<li>Mythic Reward requirement reduced from 40 extra hits without dying to 30.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 16</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">Overprotective</strong>
+		<ul>
+			<li>Shield reduced from 70% of healing to 50%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p></p>
+
+<h4>Garrosh</h4>
+
+<p></p>
+
+<p><strong style="color: rgb(153, 0, 255); ">Talents</strong></p>
+
+<ul>
+	<li><strong>Level 1</strong>
+
+	<ul>
+		<li><strong style="color:#0099ff;">Unrivaled Strength</strong>
+
+		<ul>
+			<li>Damage bonus reduced from 125% to 75%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 4</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">In For The Kill</strong>
+		<ul>
+			<li>Damage bonus increased from 70% to 100%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 7</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">Oppressor</strong>
+		<ul>
+			<li>Spell Power reduction decreased from 30% to 25%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 13</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">Bloodcraze</strong>
+		<ul>
+			<li>Heal duration increased from 3 seconds to 4 seconds. Total healing remains the same.</li>
+		</ul>
+		</li>
+		<li><strong style="color:#0099ff;">Double Up</strong>
+		<ul>
+			<li>Armor duration increased from 3 seconds to 5 seconds.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<a name="Bugs"></a>
+
+<h2><strong>Bug Fixes</strong></h2>
+
+<h3><strong>Maps</strong></h3>
+
+<ul>
+	<li><strong style="color: rgb(153, 0, 255); ">Volskaya Foundry</strong>
+
+	<ul>
+		<li><span style="color: rgb(255, 140, 0);">Fixed an issue where the fort walls on one side had more Health than the other. The game is now balanced...</span></li>
+	</ul>
+	</li>
+</ul>
+
+<h3><strong>Heroes</strong></h3>
+
+<ul>
+	<li><strong style="color: rgb(153, 0, 255); ">Anduin</strong>
+
+	<ul>
+		<li><span style="color: rgb(255, 140, 0);">Fixed an issue that caused Leap of Faith to be delayed when cast on Rooted Heroes.</span></li>
+	</ul>
+	</li>
+	<li><strong style="color: rgb(153, 0, 255); ">Malfurion</strong>
+	<ul>
+		<li>Fixed an issue where Entangling Roots would not continuously root enemies within its area.</li>
+		<li><span style="color: rgb(255, 140, 0);">Fixed an issue that prevented Entangling Roots from applying on first contact.</span></li>
+	</ul>
+	</li>
+	<li><strong style="color: rgb(153, 0, 255); ">Ragnaros</strong>
+	<ul>
+		<li><span style="color: rgb(255, 140, 0);">Fixed an issue that caused Heroic Difficulty granted 25% more damage and duration.</span></li>
+		<li><span style="color: rgb(255, 140, 0);">Cooldown on Molten Core when Heroic Difficulty is selected decreased from 90 seconds to 70 seconds.</span></li>
+	</ul>
+	</li>
+	<li><strong style="color: rgb(153, 0, 255); ">Xul</strong>
+	<ul>
+		<li>Fixed an issue where Xul's skeletons were sometimes not dealing damage.</li>
+	</ul>
+	</li>
+</ul>
+
+<p><a href="#return">Return to Top</a></p>
+
+<hr />
+<p style="text-align: center;"><span style="font-size:14px;"><strong><a href="https://us.forums.blizzard.com/en/heroes/" target="_blank">Click here to discuss this post with other players in the official Heroes of the Storm forums</a>.</strong></span></p>
+
+<p style="text-align: center;"><strong><img alt="" class="no-border; no-shadow" src="https://bnetcmsus-a.akamaihd.net/cms/content_folder_media/g6/G6G0N80EOC941426801305139.png" /></strong></p>
+</section>
+</body></html>

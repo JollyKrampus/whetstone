@@ -16,13 +16,13 @@ import { createLiquipediaClient, existingPages, fetchPages, recentChanges, searc
 import type { HeroInput } from '../transform/heroes.ts';
 import { COMPOSITES } from '../transform/heroes.ts';
 import { liquipediaTitles } from '../transform/links.ts';
-import { aggregatePro, buildEntityIndex, parseTournament, type ParsedTournament } from '../transform/pro.ts';
+import { aggregatePro, buildEntityIndex, inheritFromParents, parseTournament, type ParsedTournament } from '../transform/pro.ts';
 import { compareStrings, warn } from '../util.ts';
 import { hoursSince } from './builds.ts';
 import { lastFetchedAt, previousFile, selected, setFallback, setNotSelected, setOk, type RunEnv } from './common.ts';
 
-/** MediaWiki keeps recent changes for 30 days by default; stay inside that. */
-const RC_MAX_DAYS = 25;
+/** Incremental checks only within a week of the last full fetch (MediaWiki keeps 30 days of recent changes); a weekly full refresh also picks up parser changes. */
+const RC_MAX_DAYS = 7;
 /** With fewer drafted maps than this in the current year, the window also covers last year. */
 const MIN_MAPS_FOR_YEAR = 50;
 
@@ -103,7 +103,7 @@ export async function runLiquipedia(env: RunEnv, heroes: readonly HeroInput[]): 
       const titles = new Set<string>();
       for (const y of years) for (const t of await searchTournaments(lp, y)) titles.add(t);
       const pages = await fetchPages(lp, [...titles].sort(compareStrings), `revisions-${years.join('-')}`);
-      return pages.map(parseTournament).filter((t): t is ParsedTournament => t !== null);
+      return inheritFromParents(pages.map(parseTournament).filter((t) => t !== null));
     };
     const year = Number(env.today.slice(0, 4));
     let tournaments = await parseAll([year]);

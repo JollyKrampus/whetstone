@@ -86,9 +86,15 @@ export function portraitPath(file: string): string {
 export function mapImagePath(file: string): string {
   return `img/maps/${webpName(file)}`;
 }
+/** Output file name: lowercase, only [a-z0-9._-] (Kel'Thuzad's icons carry an apostrophe). */
 export function webpName(file: string): string {
   const base = file.split('/').pop() ?? file;
-  return base.toLowerCase().replace(/\.(png|jpe?g|dds|tga|webp)$/i, '') + '.webp';
+  return (
+    base
+      .toLowerCase()
+      .replace(/\.(png|jpe?g|dds|tga|webp)$/i, '')
+      .replace(/[^a-z0-9._-]+/g, '') + '.webp'
+  );
 }
 
 function hotkeyFor(group: string, abilityType: string): string {

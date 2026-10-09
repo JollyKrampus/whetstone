@@ -2,10 +2,12 @@
  * Build-to-build game-data diff per hero (diffs.json, SPEC §5): base stats, abilities and
  * talents old → new, with numbers paired up when only numbers changed. Pure.
  *
- * Text diffs: both tooltips are reduced to a "shape" (numbers replaced by #, the per-level
- * scaling annotations removed). Same shape → one entry per changed number, labelled with the
- * nearest stat word ("damage", "cooldown", "radius" …). Different shape → one `text` entry with
- * both full texts.
+ * Text diffs: both tooltips (per-level scaling annotations removed) are split into word, number
+ * and punctuation tokens and aligned on their "shape" (numbers as #) with a longest common
+ * subsequence. Aligned numbers that differ become one entry each, labelled with the nearest stat
+ * word ("damage", "cooldown", "radius" …). Reworded parts become one `text` entry holding only
+ * the old and new sentences that changed, so "each dealing 90 damage" → "72" is still a number
+ * change when the sentence before it was rewritten.
  */
 import { TALENT_TIERS, type Ability, type Diff, type DiffEntry, type TalentTier } from '../../schema.ts';
 import { compareBuilds, compareStrings, round } from '../util.ts';
@@ -80,22 +82,102 @@ export function fieldNear(text: string, index: number): string {
   return find(before, true) ?? find(after, false) ?? 'value';
 }
 
+interface Token {
+  text: string;
+  /** Lowercased word, punctuation, or '#' for a number. */
+  shape: string;
+  sentence: number;
+  /** Index among the text's numbers (same order as NUMBER_RE / fieldNear). */
+  num?: number;
+}
+
+const TOKEN_RE = /[+-]?\d+(?:\.\d+)?%?|[\p{L}'’]+|[^\s\p{L}\d]/gu;
+
+function tokenize(plain: string): { tokens: Token[]; sentences: string[] } {
+  const sentences = plain
+    .split(/\n+|(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const tokens: Token[] = [];
+  let num = 0;
+  sentences.forEach((s, sentence) => {
+    for (const m of s.matchAll(TOKEN_RE)) {
+      const text = m[0];
+      if (/^[+-]?\d/.test(text)) tokens.push({ text, shape: '#', sentence, num: num++ });
+      else tokens.push({ text, shape: text.toLowerCase(), sentence });
+    }
+  });
+  return { tokens, sentences };
+}
+
+/** Index pairs of a longest common subsequence of two shape lists. */
+function lcsPairs(a: readonly string[], b: readonly string[]): [number, number][] {
+  const n = a.length;
+  const m = b.length;
+  const dp: Uint16Array[] = Array.from({ length: n + 1 }, () => new Uint16Array(m + 1));
+  for (let i = n - 1; i >= 0; i--) {
+    const row = dp[i] as Uint16Array;
+    const below = dp[i + 1] as Uint16Array;
+    for (let j = m - 1; j >= 0; j--) row[j] = a[i] === b[j] ? (below[j + 1] as number) + 1 : Math.max(below[j] as number, row[j + 1] as number);
+  }
+  const pairs: [number, number][] = [];
+  let i = 0;
+  let j = 0;
+  while (i < n && j < m) {
+    if (a[i] === b[j]) {
+      pairs.push([i, j]);
+      i++;
+      j++;
+    } else if ((dp[i + 1]?.[j] ?? 0) >= (dp[i]?.[j + 1] ?? 0)) i++;
+    else j++;
+  }
+  return pairs;
+}
+
+/** Longest tooltip (in tokens) that is aligned token by token; longer ones compare by shape only. */
+const MAX_ALIGN_TOKENS = 1500;
+
 /** Entries for a changed tooltip. */
 export function textEntries(kind: 'ability' | 'talent', target: string, oldText: string, newText: string, level?: TalentTier): DiffEntry[] {
   if (oldText === newText) return [];
-  const a = shapeOf(oldText);
-  const b = shapeOf(newText);
   const base = (): DiffEntry => (level ? { kind, target, level } : { kind, target });
-  if (a.shape === b.shape && a.numbers.length === b.numbers.length) {
-    const out: DiffEntry[] = [];
-    a.numbers.forEach((oldNum, i) => {
-      const newNum = b.numbers[i] as string;
-      if (oldNum === newNum) return;
-      out.push({ ...base(), field: fieldNear(newText, i), old: numeric(oldNum), new: numeric(newNum) });
-    });
-    if (out.length > 0) return out;
+  const whole = (): DiffEntry[] => [{ ...base(), field: 'text', old: oldText.slice(0, MAX_TEXT), new: newText.slice(0, MAX_TEXT) }];
+  const a = tokenize(stripScaling(oldText));
+  const b = tokenize(stripScaling(newText));
+  if (a.tokens.length > MAX_ALIGN_TOKENS || b.tokens.length > MAX_ALIGN_TOKENS) {
+    const sa = shapeOf(oldText);
+    const sb = shapeOf(newText);
+    if (sa.shape !== sb.shape) return whole();
   }
-  return [{ ...base(), field: 'text', old: oldText.slice(0, MAX_TEXT), new: newText.slice(0, MAX_TEXT) }];
+  const pairs = lcsPairs(
+    a.tokens.map((t) => t.shape),
+    b.tokens.map((t) => t.shape),
+  );
+  const out: DiffEntry[] = [];
+  const matchedA = new Set<number>();
+  const matchedB = new Set<number>();
+  for (const [i, j] of pairs) {
+    matchedA.add(i);
+    matchedB.add(j);
+    const ta = a.tokens[i] as Token;
+    const tb = b.tokens[j] as Token;
+    if (ta.shape === '#' && ta.text !== tb.text) {
+      out.push({ ...base(), field: fieldNear(newText, tb.num ?? 0), old: numeric(ta.text), new: numeric(tb.text) });
+    }
+  }
+  const changedA = [...new Set(a.tokens.filter((_, i) => !matchedA.has(i)).map((t) => t.sentence))].sort((x, y) => x - y);
+  const changedB = [...new Set(b.tokens.filter((_, j) => !matchedB.has(j)).map((t) => t.sentence))].sort((x, y) => x - y);
+  if (changedA.length > 0 || changedB.length > 0) {
+    const pick = (sentences: readonly string[], idx: readonly number[]): string => idx.map((i) => sentences[i]).join(' ').slice(0, MAX_TEXT);
+    const entry: DiffEntry = { ...base(), field: 'text' };
+    const o = pick(a.sentences, changedA);
+    const n = pick(b.sentences, changedB);
+    if (o) entry.old = o;
+    if (n) entry.new = n;
+    out.unshift(entry);
+  }
+  // Same words and numbers, different text (a scaling annotation added or removed, spacing).
+  return out.length > 0 ? out : whole();
 }
 
 function abilityKey(a: Ability): string {

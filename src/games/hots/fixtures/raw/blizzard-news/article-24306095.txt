@@ -1,0 +1,181 @@
+<!doctype html><html lang="en-us"><head><meta charset="utf-8"><title>fixture</title></head><body>
+<section class="blog"><p>Our next Heroes of the Storm patch has just hit the Public Test Realm and will be available for playtesting. As always, if you encounter any bugs during your PTR play sessions, please stop by the <a href="https://us.forums.blizzard.com/en/heroes/c/ptr-bug-report" target="_blank">PTR Bug Report forum</a> to let us know about your experiences.</p>
+
+<hr /><a name="return"></a>
+
+<h2>Quick Navigation:</h2>
+
+<ul>
+	<li><strong><a href="#New">New Hero</a></strong></li>
+	<li><strong><a href="#General">General</a></strong></li>
+	<li><strong><a href="#Map">Map Updates</a></strong></li>
+	<li><strong><a href="#Balance">Balance Update</a></strong></li>
+	<li><strong><a href="#Bugs">Bug Fixes</a></strong></li>
+</ul>
+
+<hr /><a name="New"></a>
+
+<h2><strong>New Hero: Xal'atath</strong></h2>
+
+<p>Xal'atath has arrived in the Nexus!</p>
+
+<a name="General"></a>
+
+<h2><strong>General</strong></h2>
+
+<ul>
+	<li>Updated Homescreen and Startup Music.</li>
+</ul>
+
+<p><a href="#return">Return to Top</a></p>
+
+<hr /><a name="Map"></a>
+
+<h2><strong>Map Updates</strong></h2>
+
+<ul>
+	<li><strong style="color:#9900ff;">Garden of Terror</strong>
+
+	<ul>
+		<li>Shambler Health and damage now begin 25% below their previous values and gradually return to their previous values over the course of the match.</li>
+	</ul>
+	</li>
+</ul>
+
+<p><a href="#return">Return to Top</a></p>
+
+<hr /><a name="Balance"></a>
+
+<h2><strong>Balance Update</strong></h2>
+
+<h3><strong>Heroes</strong></h3>
+
+<h4>Abathur</h4>
+
+<p><strong style="color: rgb(153, 0, 255); ">Talents</strong></p>
+
+<ul>
+	<li><strong>Level 13</strong>
+
+	<ul>
+		<li><strong style="color:#0099ff;">Bombard Strain</strong>
+
+		<ul>
+			<li>Health decay reduction lowered from 50% to 40%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 16</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">Survival Instincts</strong>
+		<ul>
+			<li>Now provides 50% damage reduction against non-Heroes, instead of +100% Health.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h4>Alexstrasza</h4>
+
+<p><strong style="color: rgb(153, 0, 255); ">Base</strong></p>
+
+<ul>
+	<li>Health increased from 1698 to 1780.</li>
+</ul>
+
+<p><strong style="color: rgb(153, 0, 255); ">Talents</strong></p>
+
+<ul>
+	<li><strong>Level 16</strong>
+
+	<ul>
+		<li><strong style="color:#0099ff;">Overprotective</strong>
+
+		<ul>
+			<li>Shield reduced from 70% of healing to 50%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p></p>
+
+<h4>Garrosh</h4>
+
+<p></p>
+
+<p><strong style="color: rgb(153, 0, 255); ">Talents</strong></p>
+
+<ul>
+	<li><strong>Level 1</strong>
+
+	<ul>
+		<li><strong style="color:#0099ff;">Unrivaled Strength</strong>
+
+		<ul>
+			<li>Damage bonus reduced from 125% to 75%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 4</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">In For The Kill</strong>
+		<ul>
+			<li>Damage bonus increased from 70% to 100%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 7</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">Oppressor</strong>
+		<ul>
+			<li>Spell Power reduction decreased from 30% to 25%.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Level 13</strong>
+	<ul>
+		<li><strong style="color:#0099ff;">Bloodcraze</strong>
+		<ul>
+			<li>Heal duration increased from 3 seconds to 4 seconds. Total healing remains the same.</li>
+		</ul>
+		</li>
+		<li><strong style="color:#0099ff;">Double Up</strong>
+		<ul>
+			<li>Armor duration increased from 3 seconds to 5 seconds.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<a name="Bugs"></a>
+
+<h2><strong>Bug Fixes</strong></h2>
+
+<h4>Malfurion</h4>
+
+<ul>
+	<li>Fixed an issue where Entangling Roots would not continuously root enemies within its area.</li>
+</ul>
+
+<h4>Xul</h4>
+
+<ul>
+	<li>Fixed an issue where Xul's skeletons were sometimes not dealing damage.</li>
+</ul>
+
+<p><a href="#return">Return to Top</a></p>
+
+<hr />
+<p style="text-align: center;"><span style="font-size:14px;"><strong><a href="https://us.forums.blizzard.com/en/heroes/" target="_blank">Click here to discuss this post with other players in the official Heroes of the Storm forums</a>.</strong></span></p>
+
+<p style="text-align: center;"><strong><img alt="" class="no-border; no-shadow" src="https://bnetcmsus-a.akamaihd.net/cms/content_folder_media/g6/G6G0N80EOC941426801305139.png" /></strong></p>
+</section>
+</body></html>

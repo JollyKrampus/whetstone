@@ -106,13 +106,16 @@ export interface DraftedMap {
   bans: [string[], string[]];
 }
 
+/** Template values that mean "no hero recorded" (Liquipedia uses `default` for an unknown or skipped pick/ban). */
+const NO_HERO = new Set(['default', 'none', 'tbd', 'tba', 'unknown', 'skip', 'skipped', 'nopick', 'noban', '-']);
+
 export function parseMaps(wikitext: string): DraftedMap[] {
   const text = stripComments(wikitext);
   const out: DraftedMap[] = [];
   for (const t of findTemplates(text, 'Map')) {
     const p = t.params;
     const team = (side: 1 | 2, kind: 'h' | 'b', n: number): string[] =>
-      Array.from({ length: n }, (_, i) => (p[`t${side}${kind}${i + 1}`] ?? '').trim().toLowerCase()).filter(Boolean);
+      Array.from({ length: n }, (_, i) => (p[`t${side}${kind}${i + 1}`] ?? '').trim().toLowerCase()).filter((h) => h && !NO_HERO.has(h));
     const picks: [string[], string[]] = [team(1, 'h', 5), team(2, 'h', 5)];
     if (picks[0].length + picks[1].length === 0) continue;
     const w = (p.winner ?? '').trim();
@@ -160,23 +163,97 @@ function plain(v: string | undefined): string {
     .trim();
 }
 
-export function parseTournament(page: TournamentPage): ParsedTournament | null {
+const REGIONS: Readonly<Record<string, string>> = {
+  eu: 'Europe',
+  euw: 'Europe',
+  eue: 'Europe',
+  europe: 'Europe',
+  na: 'North America',
+  'north america': 'North America',
+  us: 'North America',
+  usa: 'North America',
+  usca: 'North America',
+  ca: 'North America',
+  americas: 'Americas',
+  america: 'Americas',
+  sa: 'South America',
+  'south america': 'South America',
+  latam: 'Latin America',
+  br: 'South America',
+  kr: 'Korea',
+  korea: 'Korea',
+  cn: 'China',
+  china: 'China',
+  asia: 'Asia',
+  sea: 'Southeast Asia',
+  oce: 'Oceania',
+  anz: 'Oceania',
+  oceania: 'Oceania',
+  cis: 'CIS',
+  ru: 'CIS',
+  world: 'Global',
+  global: 'Global',
+  international: 'Global',
+};
+
+/** Infobox region/server values (`eu`, `EU`, `Europe`, `usca`) → one display name. */
+export function normalizeRegion(raw: string | undefined): string | undefined {
+  const v = plain(raw).replace(/\s+/g, ' ').trim();
+  if (!v) return undefined;
+  const known = REGIONS[v.toLowerCase()];
+  if (known) return known;
+  return /^[A-Za-z][A-Za-z .'-]*$/.test(v) ? v.replace(/\b[a-z]/g, (c) => c.toUpperCase()) : undefined;
+}
+
+/**
+ * One tournament page. A stage subpage without its own infobox (`Nations Cup 2026/League
+ * Stage`) comes back without a start date; inheritFromParents() fills it from its parent page.
+ */
+export function parseTournament(page: TournamentPage): (Omit<ParsedTournament, 'startDate'> & { startDate?: string }) | null {
   const text = stripComments(page.wikitext);
   if (/\{\{\s*Cancelled Tournament/i.test(text)) return null;
   const info = findTemplates(text, 'Infobox league')[0]?.params ?? {};
-  const startDate = isoDate(info.sdate) ?? isoDate(info.date);
-  if (!startDate) return null;
   const id = page.title.replace(/ /g, '_');
   const name = plain(info.name) || page.title.replace(/\//g, ' ');
-  const t: ParsedTournament = { id, name, url: `https://liquipedia.net/heroes/${encodeURI(id)}`, startDate, maps: parseMaps(text) };
+  const t: Omit<ParsedTournament, 'startDate'> & { startDate?: string } = { id, name, url: `https://liquipedia.net/heroes/${encodeURI(id)}`, maps: parseMaps(text) };
+  const startDate = isoDate(info.sdate) ?? isoDate(info.date);
+  if (startDate) t.startDate = startDate;
   if (page.title.includes('/')) t.subpage = page.title.split('/').slice(1).join(' / ');
   const endDate = isoDate(info.edate);
   if (endDate) t.endDate = endDate;
   const tier = Number.parseInt(info.liquipediatier ?? '', 10);
   if (Number.isInteger(tier) && tier >= 1 && tier <= 5) t.tier = tier;
-  const region = plain(info.region ?? info.server ?? info.country);
+  // `country` is a country more often than a region: use it only when it names a known region.
+  const region = normalizeRegion(info.region ?? info.server) ?? REGIONS[plain(info.country).toLowerCase()];
   if (region) t.region = region;
   return t;
+}
+
+/**
+ * Pages without an infobox take dates, tier and region from the nearest parent page
+ * (`A/B/C` → `A/B` → `A`) and its name plus their subpage; pages still undated are dropped.
+ */
+export function inheritFromParents(pages: readonly (Omit<ParsedTournament, 'startDate'> & { startDate?: string })[]): ParsedTournament[] {
+  const byId = new Map(pages.map((p) => [p.id, p]));
+  const out: ParsedTournament[] = [];
+  for (const p of pages) {
+    if (p.startDate) {
+      out.push(p as ParsedTournament);
+      continue;
+    }
+    const parts = p.id.split('/');
+    for (let n = parts.length - 1; n >= 1; n--) {
+      const parent = byId.get(parts.slice(0, n).join('/'));
+      if (!parent?.startDate) continue;
+      const t: ParsedTournament = { ...p, startDate: parent.startDate, name: `${parent.name} (${parts.slice(n).join(' / ').replace(/_/g, ' ')})` };
+      if (parent.endDate) t.endDate = parent.endDate;
+      if (parent.tier !== undefined) t.tier = parent.tier;
+      if (parent.region) t.region = parent.region;
+      out.push(t);
+      break;
+    }
+  }
+  return out;
 }
 
 export interface AggregateOptions {

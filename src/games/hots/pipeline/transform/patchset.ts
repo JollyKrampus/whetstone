@@ -3,6 +3,7 @@
  *
  *  1. Builds: a live/balance/hotfix record gets the first live build published within 3 days
  *     on or after its date (heroes-data2 release dates); PTR records get PTR builds the same way.
+ *     Records are matched oldest first and each build is used once (assignBuilds).
  *  2. version (major): from the build, else from the newest known build published by then,
  *     else from the oldest known build (articles older than every known build).
  *  3. Diffs: a record whose build is a diff's `to` gains (a) "game data" numbers on lines that
@@ -24,12 +25,33 @@ export interface BuildDate {
 /** How long after an article its build may be published. */
 const BUILD_WINDOW_DAYS = 3;
 
-export function buildForRecord(rec: Pick<ParsedPatch, 'date' | 'kind'>, builds: readonly BuildDate[]): string | undefined {
+/** First build of the right kind published within the window, skipping builds already taken. */
+export function buildForRecord(rec: Pick<ParsedPatch, 'date' | 'kind'>, builds: readonly BuildDate[], taken: ReadonlySet<string> = new Set()): string | undefined {
   const ptr = rec.kind === 'ptr';
   const until = addDays(rec.date, BUILD_WINDOW_DAYS);
   return [...builds]
-    .filter((b) => isPtrBuild(b.build) === ptr && b.date >= rec.date && b.date <= until)
+    .filter((b) => !taken.has(b.build) && isPtrBuild(b.build) === ptr && b.date >= rec.date && b.date <= until)
     .sort((a, b) => compareStrings(a.date, b.date) || compareBuilds(a.build, b.build))[0]?.build;
+}
+
+/**
+ * Builds for every record, oldest record first, each build used at most once: notes posted on
+ * consecutive days (a live patch, then a hotfix the next day) take consecutive builds instead of
+ * both claiming the first one. Records that already carry a build keep it.
+ */
+export function assignBuilds(parsed: readonly Pick<ParsedPatch, 'date' | 'kind' | 'build' | 'title'>[], builds: readonly BuildDate[]): (string | undefined)[] {
+  const taken = new Set(parsed.map((p) => p.build).filter((b): b is string => Boolean(b)));
+  const order = parsed.map((p, i) => ({ p, i })).sort((x, y) => compareStrings(x.p.date, y.p.date) || compareStrings(x.p.title, y.p.title) || x.i - y.i);
+  const out: (string | undefined)[] = parsed.map((p) => p.build);
+  for (const { p, i } of order) {
+    if (p.build) continue;
+    const b = buildForRecord(p, builds, taken);
+    if (b) {
+      taken.add(b);
+      out[i] = b;
+    }
+  }
+  return out;
 }
 
 export function majorForDate(date: string, builds: readonly BuildDate[]): string | undefined {
@@ -170,9 +192,10 @@ export function assemblePatches(parsed: readonly ParsedPatch[], opts: AssembleOp
   const records: Omit<Patch, 'id'>[] = [];
   const usedBuilds = new Set<string>();
   const diffByTo = new Map(opts.diffs.map((d) => [d.to, d]));
-  for (const p of parsed) {
-    if (p.date < opts.since) continue;
-    const build = p.build ?? buildForRecord(p, opts.builds);
+  const kept = parsed.filter((p) => p.date >= opts.since);
+  const assigned = assignBuilds(kept, opts.builds);
+  for (const [i, p] of kept.entries()) {
+    const build = assigned[i];
     const version = build ? majorOf(build) : (majorForDate(p.date, opts.builds) ?? opts.fallbackMajor);
     let rec: Patch = { id: '', version, ...p };
     if (build) {
