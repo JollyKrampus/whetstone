@@ -81,6 +81,8 @@ const EFFECT_LIST = `${EFFECTS}(?:\\s*,\\s*(?:and\\s+|or\\s+)?${EFFECT_OR_DOT}|\
 const GERUNDS = '(?:Stunning|Rooting|Slowing|Silencing|Blinding|Polymorphing)\\b';
 /** A word, possibly a masked ability name. */
 const TOKEN = "[\\w'.§-]+";
+/** A word of a noun phrase: not a verb or conjunction that would start a new clause. */
+const SUBJECT_TOKEN = `(?!(?:and|or|but|then|take|takes|deal|deals|dealing|hit|hits|damage|that|who|which)\\b)${TOKEN}`;
 
 /** Units that are not the hero; their actions are not the hero's mechanics. */
 const NON_HERO_UNITS =
@@ -97,7 +99,9 @@ function stripNonApplying(masked: string, ctx: Ctx): string {
   // "Being Stunned or Rooted grants 30 Armor", "…but is Stunned for 1 second".
   s = blank(s, new RegExp(`(?:^|\\b(?:but|and then)\\s+)(?:being|is|gets)\\s+(?:also\\s+)?${STATE_LIST}`, 'gi'));
   // Self as the subject: "all Vikings are Stunned", "Nova is Revealed", "an ally affected by Safeguard is Rooted".
-  s = blank(s, new RegExp(`\\b(?:${ctx.selfWords}|allies|ally|allied Heroes?|teammates?|the boat|Mech)\\b(?:\\s+${TOKEN}){0,4}?\\s+(?:is|are|becomes?|gets?)\\s+(?:also\\s+|then\\s+|instantly\\s+)?${STATE_LIST}`, 'gi'));
+  // The words in between may not contain a verb or conjunction ("Alarak take 165 damage and are
+  // Silenced" is about the enemies hit, not Alarak).
+  s = blank(s, new RegExp(`\\b(?:${ctx.selfWords}|allies|ally|allied Heroes?|teammates?|the boat|Mech)\\b(?:\\s+${SUBJECT_TOKEN}){0,4}?\\s+(?:is|are|becomes?|gets?)\\s+(?:also\\s+|then\\s+|instantly\\s+)?${STATE_LIST}`, 'gi'));
   // Effect lists not used as verbs: "Stuns, Roots, and Slows", "Stun and Silence effects".
   s = blank(s, new RegExp(`\\b${EFFECT_LIST}(?:\\s+effects?)?(?!\\s+(?:them|enemies|enemy|the|nearby|all|target|him|her|it|an?)\\b)`, 'gi'));
   // "Stunning, Rooting, or Slowing a Hero grants…" (a condition, not an effect).
@@ -129,7 +133,8 @@ interface TagRule {
   find: Finder;
   /** Ability kinds that never count for this tag (e.g. mounts for `channel`). */
   skipKinds?: AbilityKind[];
-  /** Read the masked text instead of the CC-cleaned text (non-CC tags). */
+  /** Skip a whole ability/talent whose full text matches (e.g. channels that grant Protected). */
+  skipEntry?: RegExp;
 }
 
 // Allied/ally context near a match.
@@ -445,6 +450,8 @@ const RULES: TagRule[] = [
       /\bknockback\b/i,
       /\bpush(?:es|ing)?\s+(?:[\w']+\s+){0,4}?(?:away|back|aside)\b/i,
       /\bpushed\s+(?:[\w']+\s+)?(?:away|back|aside)\b/i,
+      // "pushing Alarak and all enemies hit … towards the targeted direction"
+      /\bpush(?:es|ing)?\s+(?:[\w'§]+\s+){0,3}?(?:all\s+)?(?:enemies|enemy Heroes|the target|them)\b(?!\s+(?:lanes?|Structures?))/i,
       /\b(?:throw|throws|throwing|toss|tosses|tossing|kick|kicks|kicking|punt|punts|fling|flings)\s+(?:them|the target|target enemy|an enemy|the enemy|enemies|enemy Heroes|the first enemy)\b/i,
       // Enemies sent back to an earlier position (Temporal Loop).
       /\b(?:they|enemies|enemy Heroes|the target)\s+(?:are|is)\s+teleported\b/i,
@@ -484,7 +491,8 @@ const RULES: TagRule[] = [
     tag: 'block',
     find: maskedFinder(
       /\b(?:stacks? of|charges? of|gains?|grants?)\s+Block\b|\bBlock (?:charge|stack)s?\b/,
-      /\bblock(?:s|ing)?\s+(?:the next|incoming|\d+|enemy Basic|Basic)\b/i,
+      // Not "blocks 330 damage with Deflect": damage blocking is not Basic Attack block.
+      /\bblock(?:s|ing)?\s+(?:the next|incoming|\d+\s+(?:enemy\s+)?(?:Hero(?:ic)?\s+)?Basic|enemy Basic|Basic)\b/i,
       /\bparr(?:y|ies|ying)\b/i,
       /\b(?:evade|evades|evading|evasion|dodge|dodges|dodging)\b/i,
       /\breduc\w*\s+the damage (?:of|from)\s+(?:the next\s+)?(?:\d+\s+)?(?:incoming\s+)?(?:enemy\s+)?(?:Hero\s+)?Basic Attacks?\b/i,
@@ -583,8 +591,9 @@ const RULES: TagRule[] = [
         /\bdeal\w*\s+(?:an additional\s+|up to\s+)?\d+\s+(?:bonus\s+|additional\s+|Spell\s+)?damage\s+(?:to\s+)?(?:all\s+)?(?:enemies|nearby enemies)\b/i,
         /\bsplash\b/i,
       ),
-      // Damage the hero takes is not area damage it deals.
-      /\bdamage\s+(?:dealt\s+)?to\s+(?:the\s+)?(?:Mech|him|her|you)\b|\bdamage taken\b/i,
+      // Damage the hero takes is not area damage it deals; a skillshot that stops at the first
+      // enemy is single-target even when it is aimed at an area.
+      /\bdamage\s+(?:dealt\s+)?to\s+(?:the\s+)?(?:Mech|him|her|you)\b|\bdamage taken\b|\bto the first enemy\b(?![^.]*\b(?:nearby enemies|enemies in|all enemies|in an area)\b)/i,
     ),
   },
   {
@@ -603,8 +612,8 @@ const RULES: TagRule[] = [
     tag: 'global',
     find: unless(
       maskedFinder(
+        // Not "unlimited range": that is a long-range shot or beam fired from where the hero stands.
         /\banywhere\b(?!\s+within\s+(?:\d|range))/i,
-        /\bunlimited range\b/i,
         /\bglobal (?:cast )?range\b/i,
         /\bon the Battleground\b/i,
         /\bacross the (?:battlefield|battleground|map)\b/i,
@@ -641,9 +650,14 @@ const RULES: TagRule[] = [
   {
     tag: 'channel',
     skipKinds: SKIP_MOUNT,
+    // A channel that makes the hero Protected or Unstoppable cannot be interrupted (Deflect,
+    // Lightning Breath, Counter-Strike).
+    skipEntry: /\b(?:Unstoppable|Protected|Invulnerab\w*)\b/,
     find: unless(
       maskedFinder(/\bchannel(?:s|ing|ed|led|ling)?\b/i),
-      /\b(?:interrupt\w*|cancel\w*)\s+(?:[\w']+\s+){0,2}?(?:enemy\s+)?channel|\bor Channeling\b|\bcan be cast while channeling\b/i,
+      // Interrupting someone else's channel, abilities usable during a channel, and channels that
+      // make the hero Protected/Unstoppable (they cannot be interrupted) are not a weakness.
+      /\b(?:interrupt\w*|cancel\w*)\s+(?:[\w']+\s+){0,2}?(?:enemy\s+)?channel|\bor Channeling\b|\b(?:can be (?:cast|used)|usable)\s+while\s+channel\w*|\b(?:Unstoppable|Protected|Invulnerab\w*)\b/i,
     ),
   },
 ];
@@ -727,11 +741,16 @@ const AA_BOOST =
   /\b(?:Basic Attacks?|Attack Speed|Attack Damage)\b[^.]{0,60}?\b(?:increas\w*|bonus|additional|more|extra|deal|deals|empower\w*|cleave|splash|bounce)\b|\b(?:increas\w*|bonus|additional|gain\w*|grant\w*)\b[^.]{0,30}?\b(?:Attack Speed|Basic Attack damage|Attack Damage|Basic Attack range)\b/i;
 /** Abilities whose effect is built around Basic Attacks. */
 const AA_MENTION = /\bBasic Attacks?\b|\bAttack Speed\b|\bAttack Damage\b/;
+/** Sentences about Basic Attacks the hero receives ("Parry all incoming Basic Attacks"). */
+const AA_INCOMING = /\b(?:incoming|enemy|enemies'?)\s+(?:Hero\s+)?Basic Attacks?\b/i;
 /** Damage numbers: "deals 153 damage", "dealing 225 damage", "400 to 1100 damage" (→ 1100). */
 const DAMAGE_NUMBER = /\b(\d+)(?:\s+to\s+(\d+))?\s+(?:bonus\s+|additional\s+|Spell\s+|Physical\s+|Ability\s+)?damage\b/g;
 
 /** Largest single-hit damage number in a sentence (not per-second, over-time, shields, structures or quests). */
 function maxHit(text: string): { value: number; at: number; length: number } | null {
+  // "Deal 552 damage to the target … over 4 seconds" is damage over time, not a hit.
+  // Bonus damage for a completed channel is conditional, not a reliable hit.
+  if (/\bover\s+(?:the next\s+)?\d+(?:\.\d+)?\s+seconds?\b|\bper second\b|\bfull duration\b/i.test(text)) return null;
   let best: { value: number; at: number; length: number } | null = null;
   for (const m of text.matchAll(DAMAGE_NUMBER)) {
     const after = text.slice(m.index + m[0].length, m.index + m[0].length + 30);
@@ -749,13 +768,22 @@ interface Derived {
   hits: Hit[];
 }
 
+/** Thresholds of the derived tags, calibrated on the 2.57 roster (docs/THEORY.md). */
+const AA_RELIANT_SCORE = 6;
+const AA_RELIANT_TALENTS = 3;
+const BURST_SINGLE = 220;
+const BURST_PAIR = 400;
+const BURST_HEROIC = 600;
+const POKE_MIN_HIT = 75;
+
 const ASSASSINS = new Set<HeroInput['role']>(['Ranged Assassin', 'Melee Assassin']);
 const DAMAGE_ROLES = new Set<HeroInput['role']>(['Ranged Assassin', 'Melee Assassin', 'Bruiser']);
 
 function derive(hero: HeroInput, entries: Entry[], hits: Map<MechanicTag, Hit[]>): Derived[] {
   const out: Derived[] = [];
-  const firstSentenceHit = (e: Entry, re: RegExp): Hit | null => {
+  const firstSentenceHit = (e: Entry, re: RegExp, veto?: RegExp): Hit | null => {
     for (const s of e.sentences) {
+      if (veto?.test(s.masked)) continue;
       const m = re.exec(s.masked);
       if (m) return { entry: e, sentence: s, at: m.index, length: m[0].length };
     }
@@ -766,10 +794,11 @@ function derive(hero: HeroInput, entries: Entry[], hits: Map<MechanicTag, Hit[]>
 
   // aa-reliant: abilities built around Basic Attacks plus a talent tree that keeps boosting them.
   // Score = 2 × such abilities + boosting talents; damage roles only (tanks/healers are not carries).
-  const aaCore = basics.map((e) => firstSentenceHit(e, AA_MENTION)).filter(isHit);
+  // Deliberately strict (mixed heroes such as Sonya or Sylvanas stay out); curators add the rest.
+  const aaCore = basics.map((e) => firstSentenceHit(e, AA_MENTION, AA_INCOMING)).filter(isHit);
   const aaTalents = entries.filter((e) => e.kind === 'talent').map((e) => firstSentenceHit(e, AA_BOOST)).filter(isHit);
   const aaScore = 2 * aaCore.length + aaTalents.length;
-  const aaReliant = DAMAGE_ROLES.has(hero.role) && ((aaCore.length >= 1 && aaScore >= 5) || aaTalents.length >= 6);
+  const aaReliant = DAMAGE_ROLES.has(hero.role) && aaCore.length >= 1 && aaTalents.length >= AA_RELIANT_TALENTS && aaScore >= AA_RELIANT_SCORE;
   if (aaReliant) out.push({ tag: 'aa-reliant', hits: [...aaCore, ...aaTalents] });
 
   // sustained-dps: Basic-Attack carries, or two or more basic abilities that deal damage over time.
@@ -779,9 +808,9 @@ function derive(hero: HeroInput, entries: Entry[], hits: Map<MechanicTag, Hit[]>
   }
 
   // burst: assassins whose damage comes in large single hits rather than a stream of Basic Attacks
-  // (Blizzard's damage rating ≥ 8, a basic ability hitting for ≥ 280, two hitting for ≥ 400 together,
-  // or a Heroic hitting for ≥ 600).
-  if (ASSASSINS.has(hero.role) && aaScore < 9) {
+  // (a basic ability hitting for ≥ 220, two hitting for ≥ 400 together, or a Heroic hitting for
+  // ≥ 600). Blizzard's damage rating is not used: nearly every assassin is rated 8 or more.
+  if (ASSASSINS.has(hero.role) && !aaReliant) {
     const big: Hit[] = [];
     const basicHits: { hit: Hit; value: number }[] = [];
     for (const e of entries) {
@@ -793,7 +822,7 @@ function derive(hero: HeroInput, entries: Entry[], hits: Map<MechanicTag, Hit[]>
       }
       if (!best) continue;
       if (e.abilityKind === 'heroic') {
-        if (best.value >= 600) big.push(best.hit);
+        if (best.value >= BURST_HEROIC) big.push(best.hit);
       } else {
         basicHits.push(best);
       }
@@ -801,20 +830,20 @@ function derive(hero: HeroInput, entries: Entry[], hits: Map<MechanicTag, Hit[]>
     basicHits.sort((a, b) => b.value - a.value);
     const top = basicHits[0]?.value ?? 0;
     const top2 = top + (basicHits[1]?.value ?? 0);
-    if (hero.ratings.damage >= 8 || top >= 280 || top2 >= 400 || big.length > 0) {
+    if (top >= BURST_SINGLE || top2 >= BURST_PAIR || big.length > 0) {
       out.push({ tag: 'burst', hits: [...basicHits.slice(0, 2).map((b) => b.hit), ...big] });
     }
   }
 
-  // poke: a ranged damage dealer (not a Basic-Attack carry) with two or more damaging basic
-  // abilities. Tooltips rarely say how an ability is aimed, so the role and numbers decide.
-  if (hero.type === 'Ranged' && (hero.role === 'Ranged Assassin' || hero.role === 'Support') && aaScore < 9) {
+  // poke: a ranged damage dealer (not a Basic-Attack carry) with two or more basic abilities that
+  // hit for a real chunk. Tooltips rarely say how an ability is aimed, so role and numbers decide.
+  if (hero.type === 'Ranged' && (hero.role === 'Ranged Assassin' || hero.role === 'Support') && !aaReliant) {
     const shots: Hit[] = [];
     for (const e of entries) {
       if (e.kind !== 'ability' || e.abilityKind !== 'basic') continue;
       for (const s of e.sentences) {
         const m = maxHit(s.masked);
-        if (m && m.value >= 50) {
+        if (m && m.value >= POKE_MIN_HIT) {
           shots.push({ entry: e, sentence: s, at: m.at, length: m.length });
           break;
         }
@@ -857,6 +886,7 @@ export function extractMechanics(hero: HeroInput): Mechanic[] {
   for (const rule of RULES) {
     for (const e of entries) {
       if (e.abilityKind && rule.skipKinds?.includes(e.abilityKind)) continue;
+      if (rule.skipEntry?.test(e.text)) continue;
       for (const s of e.sentences) {
         const found = rule.find(s, e, ctx);
         if (found) {

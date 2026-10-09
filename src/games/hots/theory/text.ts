@@ -15,9 +15,9 @@ export function stripScaling(text: string): string {
 /** Normalises typography the game strings mix (curly quotes, non-breaking spaces). */
 export function normalizeText(text: string): string {
   return stripScaling(text)
-    .replace(/[‘’ʼ]/g, "'")
-    .replace(/[“”]/g, '"')
-    .replace(/ /g, ' ')
+    .replace(/[\u2018\u2019\u02bc]/g, "'")
+    .replace(/[\u201c\u201d]/g, '"')
+    .replace(/[\u00a0\u202f]/g, ' ')
     .replace(/[ \t]+/g, ' ');
 }
 

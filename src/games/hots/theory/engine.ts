@@ -2,9 +2,9 @@
  * Theory engine (SPEC §5.1.6): mechanics + curated YAML → theory.json. Browser-safe and pure:
  * the same heroes, maps and curated bundle always give byte-identical output.
  *
- *   x(a, b) = Σ over matching rules of  weight × factor(a) × factor(b)   (each rule once per pair)
- *           + curated pair weight,                                         clamped to ±2
- *   score   = round(50 + 50 · tanh(x))
+ *   rules(a, b) = Σ over matching rules of  weight × min(factor(a), factor(b))   (each rule once per pair)
+ *   x(a, b)     = clamp(rules, ±RULE_CAP) + curated pair weight,               clamped to ±2
+ *   score       = round(50 + 50 · tanh(x))
  *
  * factor = 1 for a tag the hero always has (a basic ability, its trait, every Heroic choice, a
  * curated trait, a role/type selector) and OPTIONAL_FACTOR (0.6) for a tag it only gets from a
@@ -12,22 +12,27 @@
  *
  * Counters are directed (a counters b) and emitted for every ordered pair with x ≠ 0.
  * Synergies are symmetric (a rule matches either way round) and stored with a < b.
- * Map fit: per (hero, map), Σ of maps.yaml `fit` rules whose map tag and hero tag both match.
- * Reasons: curated "why" lines first, then rule templates rendered with the evidence names.
+ * Map fit: per (hero, map), Σ of maps.yaml `fit` rules whose map tag and hero tag both match
+ * (same cap); heroes no rule matches get no entry.
+ * Reasons: curated "why" lines first, then up to MAX_RULE_REASONS rule templates (strongest first)
+ * rendered with the evidence names.
  */
 import type { Edge, Reason } from '../../../core/game.ts';
 import { HERO_TAGS, type GameMap, type Hero, type HeroTag, type Mechanic, type MapFit, type Rule, type RuleAtom, type Theory } from '../schema.ts';
 import type { CuratedBundle, MergedPair } from './types.ts';
-import { OPTIONAL_FACTOR, theoryScore } from './weights.ts';
+import { OPTIONAL_FACTOR, capRules, theoryScore } from './weights.ts';
 
 /**
  * Version of the extraction + scoring logic. Bump it when extract.ts or engine.ts change what
  * they produce; theory.json `rulesVersion` = `${RULES_VERSION}+<hash of the curated inputs>`.
  */
-export const RULES_VERSION = '1.0';
+export const RULES_VERSION = '1.1';
 
 /** Most evidence names quoted in one reason. */
 export const MAX_REASON_EVIDENCE = 2;
+
+/** Most rule reasons kept per edge or map fit (after the curated ones), strongest first. */
+export const MAX_RULE_REASONS = 4;
 
 // ---- labels ----------------------------------------------------------------------------
 
@@ -200,7 +205,7 @@ export function renderTemplate(template: string, values: Record<string, string>,
     .trim();
 }
 
-interface Contribution {
+export interface Contribution {
   value: number;
   id: string;
   reason: Reason;
@@ -217,7 +222,9 @@ function applyRule(rule: Rule, a: HeroProfile, b: HeroProfile): Contribution | n
   const mb = matchSide(rule.b, b);
   if (!mb) return null;
   const text = renderTemplate(rule.why, { a: a.name, b: b.name, aTag: tagLabel(ma.tag), bTag: tagLabel(mb.tag) }, ma.evidence);
-  return { value: rule.weight * ma.factor * mb.factor, id: rule.id, reason: ruleReason(text, ma.evidence) };
+  // A rule counts at OPTIONAL_FACTOR when either side only matches through a talent (or one of
+  // several Heroics); never less, so two optional sides do not compound.
+  return { value: rule.weight * Math.min(ma.factor, mb.factor), id: rule.id, reason: ruleReason(text, ma.evidence) };
 }
 
 /** A synergy rule counts once per pair, in whichever direction contributes most. */
@@ -239,10 +246,22 @@ function byContribution(a: Contribution, b: Contribution): number {
   return Math.abs(b.value) - Math.abs(a.value) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
 }
 
+/** Capped Σ of rule contributions (rounded so float noise never decides a sign or a score). */
+export function ruleSum(contributions: readonly Contribution[]): number {
+  return round(capRules(contributions.reduce((s, c) => s + c.value, 0)));
+}
+
+function ruleReasons(contributions: readonly Contribution[]): Reason[] {
+  return [...contributions]
+    .sort(byContribution)
+    .slice(0, MAX_RULE_REASONS)
+    .map((c) => c.reason);
+}
+
 function edge(a: string, b: string, contributions: Contribution[], pair: MergedPair | undefined): Edge | null {
-  const x = round(contributions.reduce((s, c) => s + c.value, 0) + (pair?.weight ?? 0));
+  const x = round(ruleSum(contributions) + (pair?.weight ?? 0));
   if (x === 0) return null;
-  const reasons = [...(pair ? curatedReasons(pair) : []), ...[...contributions].sort(byContribution).map((c) => c.reason)];
+  const reasons = [...(pair ? curatedReasons(pair) : []), ...ruleReasons(contributions)];
   return { a, b, score: theoryScore(x), source: pair ? 'curated' : 'theory', reasons };
 }
 
@@ -398,8 +417,8 @@ export function buildTheory(input: BuildTheoryInput): Theory {
         contributions.push({ value: rule.weight * m.factor, id: rule.id, reason: ruleReason(text, m.evidence) });
       }
       if (contributions.length === 0) continue;
-      const x = round(contributions.reduce((s, c) => s + c.value, 0));
-      mapFit.push({ hero: hero.id, map: map.id, score: theoryScore(x), reasons: contributions.sort(byContribution).map((c) => c.reason) });
+      const x = ruleSum(contributions);
+      mapFit.push({ hero: hero.id, map: map.id, score: theoryScore(x), reasons: ruleReasons(contributions) });
     }
   }
 
