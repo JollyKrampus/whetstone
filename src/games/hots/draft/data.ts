@@ -95,6 +95,14 @@ function addLink(table: Map<number, Map<number, TheoryLink>>, a: number, b: numb
   row.set(b, link);
 }
 
+/** Shard format this reader understands (DRAFT_SHARD_SCHEMA in ../schema.ts). */
+export const SHARD_SCHEMA = 2;
+
+/** Fills a reason template's {a}/{b}/{m} tokens with the edge's names (schema 2). */
+export function fillReason(template: string, a: string, b: string, token: '{b}' | '{m}'): string {
+  return template.split('{a}').join(a).split(token).join(b);
+}
+
 function sparse(
   raw: Record<string, unknown>,
   name: string,
@@ -102,6 +110,7 @@ function sparse(
   toKey: string,
   limits: [number, number],
   reasons: readonly string[],
+  names: [readonly string[], readonly string[], '{b}' | '{m}'],
 ): { from: number; to: number; link: TheoryLink }[] {
   const where = `theory.${name}`;
   const from = arrayOf(raw, fromKey, null, where);
@@ -118,7 +127,22 @@ function sparse(
       throw new ShardError(`${where} row ${i} points outside the tables`);
     }
     if (typeof s !== 'number' || !Number.isFinite(s)) throw new ShardError(`${where} row ${i} has no score`);
-    const texts = Array.isArray(refs) ? refs.map((j) => (typeof j === 'number' ? reasons[j] : undefined)).filter((t): t is string => typeof t === 'string') : [];
+    const [fromNames, toNames, token] = names;
+    const text = (j: unknown): string | undefined => {
+      if (typeof j === 'number') return reasons[j];
+      // [i, k] or [i, k, l]: a rule line and its talent conditions, joined with spaces.
+      if (Array.isArray(j) && j.length > 0) {
+        const parts = j.map((k) => (typeof k === 'number' ? reasons[k] : undefined));
+        return parts.every((p) => p !== undefined) ? parts.join(' ') : undefined;
+      }
+      return undefined;
+    };
+    const texts = Array.isArray(refs)
+      ? refs
+          .map(text)
+          .filter((t): t is string => typeof t === 'string')
+          .map((t) => fillReason(t, fromNames[a] ?? '', toNames[b] ?? '', token))
+      : [];
     out.push({ from: a, to: b, link: { score: s, reasons: texts } });
   }
   return out;
@@ -142,7 +166,7 @@ function checkStats(stats: unknown, H: number, M: number): DraftStatsBlock | nul
 /** Decode and check a fetched draft shard. Throws ShardError with a readable message. */
 export function decodeShard(raw: unknown): DraftData {
   if (!isObject(raw)) throw new ShardError('not a JSON object');
-  if (raw.schema !== 1) throw new ShardError(`unsupported schema ${String(raw.schema)}`);
+  if (raw.schema !== SHARD_SCHEMA) throw new ShardError(`unsupported schema ${String(raw.schema)}`);
   const h = objectAt(raw, 'heroes', 'shard');
   const ids = arrayOf(h, 'id', null, 'heroes');
   const H = ids.length;
@@ -191,12 +215,14 @@ export function decodeShard(raw: unknown): DraftData {
   const counters = new Map<number, Map<number, TheoryLink>>();
   const synergies = new Map<number, Map<number, TheoryLink>>();
   const mapFit = new Map<number, Map<number, TheoryLink>>();
-  for (const e of sparse(objectAt(t, 'counters', 'theory'), 'counters', 'a', 'b', [H, H], reasons)) addLink(counters, e.from, e.to, e.link);
-  for (const e of sparse(objectAt(t, 'synergies', 'theory'), 'synergies', 'a', 'b', [H, H], reasons)) {
+  const heroNames = heroes.map((x) => x.name);
+  const mapNameList = maps.map((x) => x.name);
+  for (const e of sparse(objectAt(t, 'counters', 'theory'), 'counters', 'a', 'b', [H, H], reasons, [heroNames, heroNames, '{b}'])) addLink(counters, e.from, e.to, e.link);
+  for (const e of sparse(objectAt(t, 'synergies', 'theory'), 'synergies', 'a', 'b', [H, H], reasons, [heroNames, heroNames, '{b}'])) {
     addLink(synergies, e.from, e.to, e.link);
     addLink(synergies, e.to, e.from, e.link);
   }
-  for (const e of sparse(objectAt(t, 'mapFit', 'theory'), 'mapFit', 'hero', 'map', [H, M], reasons)) addLink(mapFit, e.from, e.to, e.link);
+  for (const e of sparse(objectAt(t, 'mapFit', 'theory'), 'mapFit', 'hero', 'map', [H, M], reasons, [heroNames, mapNameList, '{m}'])) addLink(mapFit, e.from, e.to, e.link);
 
   return {
     build: String(raw.build ?? ''),

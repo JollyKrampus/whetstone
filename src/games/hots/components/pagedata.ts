@@ -3,7 +3,7 @@
  * Node-only (it imports load.ts): call it from .astro frontmatter or static endpoints, never
  * from an island. Everything here is deterministic for a given data snapshot.
  */
-import type { Edge, SourceRef } from '../../../core/game.ts';
+import type { SourceRef } from '../../../core/game.ts';
 import { assignTiers, HOTS_TIERS, type TierInput, type TierResult } from '../../../core/tiers.ts';
 import { sourcesFor } from '../../registry.ts';
 import {
@@ -20,6 +20,7 @@ import {
   type HeroMatchupRow,
   type MapFitRow,
   MODE_LABEL,
+  theoryLists,
 } from '../load.ts';
 import type { GameMap, GameMode, Hero, Patch, StatsWindow, Timeframe, Video } from '../schema.ts';
 import { heroHref, heroPortrait, patchHref } from '../view.ts';
@@ -156,33 +157,13 @@ export interface MatchupLists {
   synergy: HeroMatchupRow[];
 }
 
-function byScore(a: HeroMatchupRow, b: HeroMatchupRow): number {
-  return b.score - a.score || (a.hero.name < b.hero.name ? -1 : a.hero.name > b.hero.name ? 1 : 0);
-}
-
 /**
  * Theory-only lists for a hero (mechanics + curated pairs), whether or not stats exist, so a
- * stats page can still show what the kits say. Same shape and ordering as heroEdges' theory branch.
+ * stats page can still show what the kits say: load.ts theoryLists (gated, curated first).
  */
 export function theoryMatchups(slugOrId: string): MatchupLists | null {
   const hero = getEntity(slugOrId);
-  if (!hero) return null;
-  const theory = getTheory();
-  const row = (edge: Edge, otherId: string): HeroMatchupRow | null => {
-    const other = getEntity(otherId);
-    if (!other) return null;
-    return { hero: other, edge, score: edge.score, source: edge.source, gate: 'listed', reasons: edge.reasons };
-  };
-  const keep = (r: HeroMatchupRow | null): r is HeroMatchupRow => r !== null;
-  return {
-    strong: theory.counters.filter((e) => e.a === hero.id && e.score > 50).map((e) => row(e, e.b)).filter(keep).sort(byScore),
-    weak: theory.counters.filter((e) => e.b === hero.id && e.score > 50).map((e) => row(e, e.a)).filter(keep).sort(byScore),
-    synergy: theory.synergies
-      .filter((e) => (e.a === hero.id || e.b === hero.id) && e.score > 50)
-      .map((e) => row(e, e.a === hero.id ? e.b : e.a))
-      .filter(keep)
-      .sort(byScore),
-  };
+  return hero ? theoryLists(hero) : null;
 }
 
 /** Rows that qualify for the headline list (SPEC §6 gates) and the rest (shown below the bar). */

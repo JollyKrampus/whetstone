@@ -18,7 +18,7 @@ describe('decodeShard', () => {
   it('rejects malformed shards with a readable message', () => {
     expect(() => decodeShard(null)).toThrow(ShardError);
     expect(() => decodeShard(null)).toThrow(/not a JSON object/);
-    expect(() => decodeShard({ ...fixtureShard(), schema: 2 })).toThrow(/unsupported schema/);
+    expect(() => decodeShard({ ...fixtureShard(), schema: 1 })).toThrow(/unsupported schema/);
     const bad = fixtureShard();
     bad.heroes.name.pop();
     expect(() => decodeShard(bad)).toThrow(/heroes.name has 12 entries/);

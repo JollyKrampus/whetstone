@@ -22,7 +22,9 @@
 #            that justified A's tag. When A's tag has no evidence (curated traits, role or
 #            type selectors) the engine drops the " ({evidence})" group from the line.
 #
-# counters: A counters B (directed). synergies: A works well with B (checked both ways, counted once).
+# counters: A counters B (directed). A counter rule that also matches B against A (both heroes Blind
+# and rely on Basic Attacks; both are global split-pushers) is a wash and only counts by how much
+# more it favours A. synergies: A works well with B (checked both ways, counted once).
 # Keep rules generic and mechanical, true for every hero they can match, and explainable in one
 # line. Specific matchups belong in the per-hero files under curated/hots/heroes/.
 version: 2
@@ -33,7 +35,7 @@ counters:
     a: [blind]
     b: [aa-reliant]
     weight: 0.4
-    why: "{a} can Blind ({evidence}), and {b} deals most of its damage with Basic Attacks."
+    why: "{a} can Blind ({evidence}), and Basic Attacks are most of {b}'s damage."
 
   - id: block-vs-auto-attackers
     a: [block, physical-armor]
@@ -60,9 +62,10 @@ counters:
     why: "{a}'s healing undoes the chip damage {b} lands from range."
 
   # --- answers to sustain and high Health -------------------------------------------------
+  # Healers only: a tank or bruiser whose ally healing comes from one talent is not "countered" by it.
   - id: anti-heal-vs-sustain
     a: [anti-heal]
-    b: [role:healer, heal-ally]
+    b: [role:healer]
     weight: 0.35
     why: "{a} reduces healing received ({evidence}), which cuts into {b}'s healing."
 
@@ -107,7 +110,7 @@ counters:
     a: [peel]
     b: [dive]
     weight: 0.2
-    why: "{a} has the crowd control and body-blocking to peel {b} off its targets."
+    why: "{a} has the crowd control and body-blocking to peel {b} off a target."
 
   # --- answers to channels and crowd control ----------------------------------------------
   - id: interrupt-vs-channel
@@ -125,9 +128,15 @@ counters:
   # --- answers to fragile or immobile heroes ----------------------------------------------
   - id: dive-vs-immobile
     a: [dive]
-    b: [immobile, vulnerable-body]
+    b: [immobile]
     weight: 0.35
     why: "{a} can dive onto {b}, who has little mobility to escape."
+  # Fragile is not the same as immobile (Li-Ming can Teleport), so this one is milder.
+  - id: dive-vs-fragile
+    a: [dive]
+    b: [vulnerable-body]
+    weight: 0.25
+    why: "{a} can dive onto {b}, whose small Health pool rarely survives a committed dive."
 
   - id: stealth-hunts-vulnerable
     a: [stealth]
@@ -183,7 +192,7 @@ synergies:
     a: [engage]
     b: ["aoe&burst"]
     weight: 0.2
-    why: "{a} starts fights on its terms, giving {b} grouped targets for its area burst."
+    why: "{a} starts fights on its own terms, giving {b} grouped targets for area burst."
 
   - id: healer-backs-dive-bruiser
     a: [role:healer]
@@ -195,7 +204,7 @@ synergies:
     a: [save]
     b: [dive]
     weight: 0.3
-    why: "{a} can save {b} after it commits to a dive."
+    why: "{a} can save {b} once the dive is committed."
 
   - id: lockdown-for-divers
     a: [stun, root, polymorph, sleep, time-stop]
@@ -213,7 +222,7 @@ synergies:
     a: [peel]
     b: ["immobile&aa-reliant", "immobile&burst", "immobile&role:ranged-assassin"]
     weight: 0.3
-    why: "{a} peels divers off {b}, who cannot escape on its own."
+    why: "{a} peels divers off {b}, who cannot escape alone."
 
   - id: protect-vulnerable-body
     a: [save, peel]
@@ -231,4 +240,4 @@ synergies:
     a: [cleanse]
     b: [aa-reliant]
     weight: 0.2
-    why: "{a} can cleanse crowd control off {b} ({evidence}) so it keeps attacking."
+    why: "{a} can cleanse crowd control off {b} ({evidence}) to keep the attacks coming."

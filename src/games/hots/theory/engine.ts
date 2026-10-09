@@ -2,7 +2,9 @@
  * Theory engine (SPEC §5.1.6): mechanics + curated YAML → theory.json. Browser-safe and pure:
  * the same heroes, maps and curated bundle always give byte-identical output.
  *
- *   rules(a, b) = Σ over matching rules of  weight × min(factor(a), factor(b))   (each rule once per pair)
+ *   rules(a, b) = Σ over matching rules of  net(rule, a, b)                       (each rule once per pair)
+ *   net         = weight × min(factor(a), factor(b)), minus the same rule applied b → a when it
+ *                 also matches that way round (a mirror matchup is a wash), never below 0
  *   x(a, b)     = clamp(rules, ±RULE_CAP) + curated pair weight,               clamped to ±2
  *   score       = round(50 + 50 · tanh(x))
  *
@@ -10,7 +12,8 @@
  * curated trait, a role/type selector) and OPTIONAL_FACTOR (0.6) for a tag it only gets from a
  * talent or from one of several Heroic choices.
  *
- * Counters are directed (a counters b) and emitted for every ordered pair with x ≠ 0.
+ * Counters are directed (a counters b) and emitted for every ordered pair whose score is more than
+ * PRUNE_MARGIN from 50, or that has a curated pair (weights.ts).
  * Synergies are symmetric (a rule matches either way round) and stored with a < b.
  * Map fit: per (hero, map), Σ of maps.yaml `fit` rules whose map tag and hero tag both match
  * (same cap); heroes no rule matches get no entry.
@@ -20,13 +23,13 @@
 import type { Edge, Reason } from '../../../core/game.ts';
 import { HERO_TAGS, type GameMap, type Hero, type HeroTag, type Mechanic, type MapFit, type Rule, type RuleAtom, type Theory } from '../schema.ts';
 import type { CuratedBundle, MergedPair } from './types.ts';
-import { OPTIONAL_FACTOR, capRules, theoryScore } from './weights.ts';
+import { OPTIONAL_FACTOR, capRules, negligible, theoryScore } from './weights.ts';
 
 /**
  * Version of the extraction + scoring logic. Bump it when extract.ts or engine.ts change what
  * they produce; theory.json `rulesVersion` = `${RULES_VERSION}+<hash of the curated inputs>`.
  */
-export const RULES_VERSION = '1.1';
+export const RULES_VERSION = '1.5';
 
 /** Most evidence names quoted in one reason. */
 export const MAX_REASON_EVIDENCE = 2;
@@ -165,6 +168,8 @@ export interface SideMatch {
   /** The first hero tag of the matching expression (or the selector), for {aTag}/{bTag}. */
   tag: RuleAtom;
   evidence: string[];
+  /** When factor < 1: the talent (or Heroic) the hero needs for this match, else undefined. */
+  needs?: string;
 }
 
 /** Best match of a rule side (list of `tag` / `tag&tag` expressions) against a hero. */
@@ -173,6 +178,7 @@ export function matchSide(exprs: readonly string[], profile: HeroProfile): SideM
   for (const expr of exprs) {
     const parts = expr.split('&') as RuleAtom[];
     let factor = 1;
+    let needs: string | undefined;
     const evidence: string[] = [];
     let ok = true;
     for (const part of parts) {
@@ -181,12 +187,13 @@ export function matchSide(exprs: readonly string[], profile: HeroProfile): SideM
         ok = false;
         break;
       }
+      if (info.factor < factor) needs = info.evidence[0];
       factor = Math.min(factor, info.factor);
       for (const e of info.evidence) if (!evidence.includes(e)) evidence.push(e);
     }
     if (!ok) continue;
     const tag = parts.find((p) => !p.includes(':')) ?? (parts[0] as RuleAtom);
-    if (!best || factor > best.factor) best = { factor, tag, evidence };
+    if (!best || factor > best.factor) best = { factor, tag, evidence, ...(factor < 1 && needs ? { needs } : {}) };
   }
   return best;
 }
@@ -211,9 +218,25 @@ export interface Contribution {
   reason: Reason;
 }
 
-function ruleReason(text: string, evidence: readonly string[]): Reason {
+/**
+ * A rule reason. Evidence names are attached only when the template does not already quote them
+ * in "({evidence})": the UI would otherwise show them twice ("… (Toxic Nest) … via Toxic Nest").
+ */
+function ruleReason(template: string, text: string, evidence: readonly string[]): Reason {
   const ev = evidence.slice(0, MAX_REASON_EVIDENCE);
-  return ev.length ? { kind: 'theory', text, evidence: [...ev] } : { kind: 'theory', text };
+  return ev.length && !template.includes('{evidence}') ? { kind: 'theory', text, evidence: [...ev] } : { kind: 'theory', text };
+}
+
+/**
+ * " Only when Genji takes Pathfinder." for a side that matches only through a talent (or one of
+ * several Heroics), so a reason never presents an optional pick as part of the base kit. When both
+ * sides need one: " Only when Chromie takes Timewalker's Pursuit. Tassadar must also take Shadow
+ * Walk." (one sentence per side, so the draft shard can share each; see transform/draft.ts).
+ */
+export function onlyWhen(sides: readonly { name: string; match: SideMatch }[]): string {
+  const [first, ...rest] = sides.filter((s) => s.match.needs);
+  if (!first) return '';
+  return ` Only when ${first.name} takes ${first.match.needs}.` + rest.map((s) => ` ${s.name} must also take ${s.match.needs}.`).join('');
 }
 
 function applyRule(rule: Rule, a: HeroProfile, b: HeroProfile): Contribution | null {
@@ -221,10 +244,30 @@ function applyRule(rule: Rule, a: HeroProfile, b: HeroProfile): Contribution | n
   if (!ma) return null;
   const mb = matchSide(rule.b, b);
   if (!mb) return null;
-  const text = renderTemplate(rule.why, { a: a.name, b: b.name, aTag: tagLabel(ma.tag), bTag: tagLabel(mb.tag) }, ma.evidence);
+  const text =
+    renderTemplate(rule.why, { a: a.name, b: b.name, aTag: tagLabel(ma.tag), bTag: tagLabel(mb.tag) }, ma.evidence) +
+    onlyWhen([
+      { name: a.name, match: ma },
+      { name: b.name, match: mb },
+    ]);
   // A rule counts at OPTIONAL_FACTOR when either side only matches through a talent (or one of
   // several Heroics); never less, so two optional sides do not compound.
-  return { value: rule.weight * Math.min(ma.factor, mb.factor), id: rule.id, reason: ruleReason(text, ma.evidence) };
+  return { value: rule.weight * Math.min(ma.factor, mb.factor), id: rule.id, reason: ruleReason(rule.why, text, ma.evidence) };
+}
+
+/**
+ * A counter rule that also matches the other way round (both heroes blind and rely on Basic
+ * Attacks, both are global split-pushers) is a wash: it only counts by how much more it favours
+ * A, and not at all when it favours B. Positive rules only; a negative rule is a deliberate
+ * penalty and applies as written.
+ */
+export function applyCounterRule(rule: Rule, a: HeroProfile, b: HeroProfile): Contribution | null {
+  const forward = applyRule(rule, a, b);
+  if (!forward || rule.weight <= 0) return forward;
+  const mirror = applyRule(rule, b, a);
+  if (!mirror) return forward;
+  const value = round(forward.value - mirror.value);
+  return value > 0 ? { ...forward, value } : null;
 }
 
 /** A synergy rule counts once per pair, in whichever direction contributes most. */
@@ -261,8 +304,11 @@ function ruleReasons(contributions: readonly Contribution[]): Reason[] {
 function edge(a: string, b: string, contributions: Contribution[], pair: MergedPair | undefined): Edge | null {
   const x = round(ruleSum(contributions) + (pair?.weight ?? 0));
   if (x === 0) return null;
+  const score = theoryScore(x);
+  // Near-neutral generic edges carry no usable signal; a curated pair is always kept.
+  if (!pair && negligible(score)) return null;
   const reasons = [...(pair ? curatedReasons(pair) : []), ...ruleReasons(contributions)];
-  return { a, b, score: theoryScore(x), source: pair ? 'curated' : 'theory', reasons };
+  return { a, b, score, source: pair ? 'curated' : 'theory', reasons };
 }
 
 // ---- mechanics merging and curated traits ----------------------------------------------
@@ -392,7 +438,7 @@ export function buildTheory(input: BuildTheoryInput): Theory {
   for (const A of list) {
     for (const B of list) {
       if (A.id === B.id) continue;
-      const contributions = curated.rules.counters.map((r) => applyRule(r, A, B)).filter((c): c is Contribution => c !== null);
+      const contributions = curated.rules.counters.map((r) => applyCounterRule(r, A, B)).filter((c): c is Contribution => c !== null);
       const e = edge(A.id, B.id, contributions, curatedCounters.get(`${A.id}>${B.id}`));
       if (e) counters.push(e);
       if (A.id < B.id) {
@@ -413,8 +459,8 @@ export function buildTheory(input: BuildTheoryInput): Theory {
         if (!mapTag) continue;
         const m = matchSide(rule.hero, hero);
         if (!m) continue;
-        const text = renderTemplate(rule.why, { hero: hero.name, map: map.name, heroTag: tagLabel(m.tag), mapTag: mapTag.replace(/-/g, ' ') }, m.evidence);
-        contributions.push({ value: rule.weight * m.factor, id: rule.id, reason: ruleReason(text, m.evidence) });
+        const text = renderTemplate(rule.why, { hero: hero.name, map: map.name, heroTag: tagLabel(m.tag), mapTag: mapTag.replace(/-/g, ' ') }, m.evidence) + onlyWhen([{ name: hero.name, match: m }]);
+        contributions.push({ value: rule.weight * m.factor, id: rule.id, reason: ruleReason(rule.why, text, m.evidence) });
       }
       if (contributions.length === 0) continue;
       const x = ruleSum(contributions);

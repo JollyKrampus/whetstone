@@ -2,11 +2,12 @@
 /**
  * The three matchup lists of a hero page: strong against, weak against, works well with.
  * Statistics rows only make the headline list when they pass the SPEC §6 bar (n and |Δ|);
- * the rest stay available, greyed when thin, behind a disclosure. Theory rows are always listed
- * and labelled as theory by their source badge.
+ * the rest stay available, greyed when thin, behind a disclosure. Theory rows follow the theory
+ * bar (load.ts THEORY_GATES: curated matchups, or generic rules scoring 60+), curated first, and
+ * are labelled by their source badge; weaker generic matches sit behind the same disclosure.
  */
 import MatchupList from '../../../components/MatchupList.astro';
-import { GATES, type HeroMatchupRow } from '../load.ts';
+import { GATES, THEORY_GATES, type HeroMatchupRow } from '../load.ts';
 import { toMatchupRow } from '../view.ts';
 import { splitByGate, type MatchupLists } from './pagedata.ts';
 
@@ -54,7 +55,7 @@ const columns = [
     empty: basis === 'stats' ? `No partner clears the bar yet (${bar}).` : 'No synergy rule matches yet.',
   },
 ].map((c) => {
-  const { listed, other } = basis === 'stats' ? splitByGate<HeroMatchupRow>(c.rows) : { listed: c.rows, other: [] };
+  const { listed, other } = splitByGate<HeroMatchupRow>(c.rows);
   return { ...c, listed: listed.map((r) => toMatchupRow(r)), other: other.map((r) => toMatchupRow(r)) };
 });
 ---
@@ -79,8 +80,12 @@ const columns = [
               {c.other.length} more below the bar
             </summary>
             <MatchupList
-              title="Below the reliability bar"
-              subtitle={`Fewer than ${GATES.listMinN} games or an edge under ${GATES.listMinDeltaPp} pp. Dashed rows have fewer than ${GATES.greyBelow} games.`}
+              title={basis === 'stats' ? 'Below the reliability bar' : 'Weaker mechanical edges'}
+              subtitle={
+                basis === 'stats'
+                  ? `Fewer than ${GATES.listMinN} games or an edge under ${GATES.listMinDeltaPp} pp. Dashed rows have fewer than ${GATES.greyBelow} games.`
+                  : `Generic rule matches scoring under ${THEORY_GATES.listMinScore}, with no hand-written matchup behind them.`
+              }
               rows={c.other}
               visible={c.other.length}
               sourceNames={sourceNames}

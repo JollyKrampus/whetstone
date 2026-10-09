@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { repoRoot } from '../../../lib/datadir.ts';
 import { TheorySchema, type GameMap, type Hero, type HeroTag, type Mechanic, type Rule } from '../schema.ts';
 import { loadCurated } from './curated.ts';
-import { RULES_VERSION, applyCuratedTraits, buildTheory, heroProfile, matchSide, mergeMechanics, renderTemplate, ruleSum, tagLabel, theoryRulesVersion } from './engine.ts';
+import { RULES_VERSION, applyCuratedTraits, buildTheory, heroProfile, matchSide, mergeMechanics, onlyWhen, renderTemplate, ruleSum, tagLabel, theoryRulesVersion } from './engine.ts';
 import { extractMechanics } from './extract.ts';
 import type { CuratedBundle, MergedPair } from './types.ts';
-import { CONFIDENCE_WEIGHT, OPTIONAL_FACTOR, RULE_CAP, theoryScore } from './weights.ts';
+import { CONFIDENCE_WEIGHT, OPTIONAL_FACTOR, RULE_CAP, negligible, theoryScore } from './weights.ts';
 import { fixtureHeroInputs } from './__fixtures__/kits.ts';
 
 // ---- builders --------------------------------------------------------------------------
@@ -163,7 +163,11 @@ describe('buildTheory counters', () => {
 
   it('scores a single rule and renders its reason with evidence', () => {
     const t = buildTheory({ heroes: [hero('Aaaa', 'Alpha', ['blind']), hero('Bbbb', 'Beta', ['aa-reliant'])], maps: [], curated: bundle({ counterRules: [blind] }) });
-    expect(t.counters).toEqual([{ a: 'Aaaa', b: 'Bbbb', score: 69, source: 'theory', reasons: [{ kind: 'theory', text: 'Alpha beats Beta with blind (Alpha blind).', evidence: ['Alpha blind'] }] }]);
+    expect(t.counters).toEqual([{ a: 'Aaaa', b: 'Bbbb', score: 69, source: 'theory', reasons: [{ kind: 'theory', text: 'Alpha beats Beta with blind (Alpha blind).' }] }]);
+    // The evidence is quoted in the text, so it is not repeated; a template without it keeps the list.
+    const quiet = rule('quiet', ['blind'], ['aa-reliant'], 0.4, '{a} beats {b}.');
+    const u = buildTheory({ heroes: [hero('Aaaa', 'Alpha', ['blind']), hero('Bbbb', 'Beta', ['aa-reliant'])], maps: [], curated: bundle({ counterRules: [quiet] }) });
+    expect(u.counters[0]?.reasons).toEqual([{ kind: 'theory', text: 'Alpha beats Beta.', evidence: ['Alpha blind'] }]);
   });
 
   it('counts a rule once per pair at 0.6x when either side is talent-only (never compounded)', () => {
@@ -200,6 +204,36 @@ describe('buildTheory counters', () => {
     expect(ruleSum([{ value: -2, id: 'x', reason: { kind: 'theory', text: 'x' } }])).toBe(-RULE_CAP);
   });
 
+  it('drops generic edges within PRUNE_MARGIN of 50 but keeps curated pairs, however weak', () => {
+    const mild = rule('mild', ['blind'], ['aa-reliant'], 0.1);
+    // 0.1 → 55 is kept; 0.1 × 0.6 (talent-only) → 53 is pruned.
+    const heroes = [hero('Aaaa', 'Alpha', ['blind']), hero('Bbbb', 'Beta', ['aa-reliant']), hero('Cccc', 'Gamma', [['blind', 'talent']])];
+    const t = buildTheory({ heroes, maps: [], curated: bundle({ counterRules: [mild] }) });
+    expect(counterOf(t, 'Aaaa', 'Bbbb')?.score).toBe(55);
+    expect(counterOf(t, 'Cccc', 'Bbbb')).toBeUndefined();
+    expect(negligible(54) && negligible(46) && !negligible(55) && !negligible(45)).toBe(true);
+    const withPair = buildTheory({ heroes, maps: [], curated: bundle({ counterRules: [mild], counters: [curatedPair('gamma', 'beta', 0.02)] }) });
+    expect(counterOf(withPair, 'Cccc', 'Bbbb')?.source).toBe('curated');
+  });
+
+  it('treats a counter rule that matches both ways as a wash, netting the difference', () => {
+    // Both Blind and both rely on Basic Attacks: neither counters the other through this rule.
+    const mirror = [hero('Aaaa', 'Alpha', ['blind', 'aa-reliant']), hero('Bbbb', 'Beta', ['blind', 'aa-reliant'])];
+    expect(buildTheory({ heroes: mirror, maps: [], curated: bundle({ counterRules: [blind] }) }).counters).toEqual([]);
+    // Alpha's Blind is always there, Beta's only with a talent: Alpha keeps the difference (0.4 - 0.24).
+    const lopsided = [hero('Aaaa', 'Alpha', ['blind', 'aa-reliant']), hero('Bbbb', 'Beta', [['blind', 'talent'], 'aa-reliant'])];
+    const t = buildTheory({ heroes: lopsided, maps: [], curated: bundle({ counterRules: [blind] }) });
+    expect(counterOf(t, 'Aaaa', 'Bbbb')?.score).toBe(theoryScore(0.4 - 0.4 * OPTIONAL_FACTOR));
+    expect(counterOf(t, 'Bbbb', 'Aaaa')).toBeUndefined();
+  });
+
+  it('says which talent a match needs', () => {
+    const heroes = [hero('Aaaa', 'Alpha', [['blind', 'talent']]), hero('Bbbb', 'Beta', [['aa-reliant', 'talent']])];
+    const t = buildTheory({ heroes, maps: [], curated: bundle({ counterRules: [blind] }) });
+    expect(counterOf(t, 'Aaaa', 'Bbbb')?.reasons[0]?.text).toBe('Alpha beats Beta with blind (Alpha blind talent). Only when Alpha takes Alpha blind talent. Beta must also take Beta aa-reliant talent.');
+    expect(onlyWhen([{ name: 'X', match: { factor: 1, tag: 'blind', evidence: ['Q'] } }])).toBe('');
+  });
+
   it('is directed: the reverse pair only scores with its own rules', () => {
     const t = buildTheory({ heroes: [hero('Aaaa', 'Alpha', ['blind']), hero('Bbbb', 'Beta', ['aa-reliant'])], maps: [], curated: bundle({ counterRules: [blind] }) });
     expect(counterOf(t, 'Bbbb', 'Aaaa')).toBeUndefined();
@@ -227,7 +261,7 @@ describe('buildTheory synergies', () => {
   it('matches either way round, counts once and stores a < b', () => {
     const heroes = [hero('Zzzz', 'Zed', ['stun']), hero('Aaaa', 'Alpha', ['burst'])];
     const t = buildTheory({ heroes, maps: [], curated: bundle({ synergyRules: [ccBurst] }) });
-    expect(t.synergies).toEqual([{ a: 'Aaaa', b: 'Zzzz', score: 65, source: 'theory', reasons: [{ kind: 'theory', text: "Zed's stun (Zed stun) sets up Alpha.", evidence: ['Zed stun'] }] }]);
+    expect(t.synergies).toEqual([{ a: 'Aaaa', b: 'Zzzz', score: 65, source: 'theory', reasons: [{ kind: 'theory', text: "Zed's stun (Zed stun) sets up Alpha." }] }]);
   });
 
   it('takes the stronger direction when both match', () => {
@@ -256,7 +290,7 @@ describe('buildTheory map fit', () => {
     const heroes = [hero('Aaaa', 'Alpha', ['global']), hero('Bbbb', 'Beta', [['immobile', 'curated']]), hero('Cccc', 'Gamma', [])];
     const t = buildTheory({ heroes, maps: MAPS, curated: bundle({ fit }) });
     expect(t.mapFit).toEqual([
-      { hero: 'Aaaa', map: 'big-map', score: 69, reasons: [{ kind: 'theory', text: "Alpha's global presence (Alpha global) helps on Big Map (large).", evidence: ['Alpha global'] }] },
+      { hero: 'Aaaa', map: 'big-map', score: 69, reasons: [{ kind: 'theory', text: "Alpha's global presence (Alpha global) helps on Big Map (large)." }] },
       { hero: 'Bbbb', map: 'big-map', score: 35, reasons: [{ kind: 'theory', text: 'Beta is slow on Big Map.' }] },
     ]);
   });

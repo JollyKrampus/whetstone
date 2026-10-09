@@ -691,17 +691,25 @@ export type Streams = z.infer<typeof StreamsSchema>;
 const Index = z.number().int().nonnegative();
 
 /** Sparse edge list in parallel arrays (COO). `r[i]` indexes into the shard's `reasons` table. */
+/**
+ * A reason reference: an index into `reasons`, or [i, j] / [i, j, k] for those lines joined with a
+ * space (a rule line and its "Only when … takes …" / "… must also take …" conditions, stored apart
+ * so every part is shared).
+ */
+export const ReasonRefSchema = z.union([Index, z.array(Index).min(2).max(3)]);
+export type ReasonRef = z.infer<typeof ReasonRefSchema>;
+
 export const SparseEdgesSchema = z.strictObject({
   a: z.array(Index),
   b: z.array(Index),
   score: z.array(Score),
-  r: z.array(z.array(Index)),
+  r: z.array(z.array(ReasonRefSchema)),
 });
 export const SparseMapFitSchema = z.strictObject({
   hero: z.array(Index),
   map: z.array(Index),
   score: z.array(Score),
-  r: z.array(z.array(Index)),
+  r: z.array(z.array(ReasonRefSchema)),
 });
 
 /** Dense row-major H×H matrix: entry [i*H + j] is "i vs j" (counters) or "i with j" (synergies). */
@@ -733,9 +741,16 @@ export const DraftStatsBlockSchema = z.strictObject({
   maps: z.strictObject({ delta: z.array(z.number().nullable()), n: z.array(Count) }),
 });
 
+/**
+ * Shard format version. 2: reason lines are templates in which `{a}` and `{b}` stand for the
+ * edge's two heroes (map fit: `{a}` the hero, `{m}` the map), so one line serves every pair a
+ * rule matches; readers fill the names back in (src/games/hots/draft/data.ts).
+ */
+export const DRAFT_SHARD_SCHEMA = 2;
+
 export const DraftShardSchema = z
   .strictObject({
-    schema: z.literal(1),
+    schema: z.literal(DRAFT_SHARD_SCHEMA),
     build: BuildSchema,
     major: MajorSchema,
     rulesVersion: z.string().min(1),
@@ -760,7 +775,7 @@ export const DraftShardSchema = z
       kind: z.array(MapKindSchema),
       ranked: z.array(z.boolean()),
     }),
-    /** Deduplicated reason lines referenced by `r` arrays. */
+    /** Deduplicated reason templates referenced by `r` arrays (see DRAFT_SHARD_SCHEMA). */
     reasons: z.array(z.string().min(1)),
     theory: z.strictObject({
       counters: SparseEdgesSchema,
@@ -786,14 +801,14 @@ export const DraftShardSchema = z
       if ((s === 2) !== composite) ctx.addIssue({ code: 'custom', message: 'slots must be 2 exactly for composites', path: ['heroes', 'slots', i] });
     }
     /** `from`/`to` index the hero (or map) tables; every array must have one entry per edge. */
-    const checkSparse = (name: string, from: number[], to: number[], score: number[], r: number[][], limits: [number, number]) => {
+    const checkSparse = (name: string, from: number[], to: number[], score: number[], r: ReasonRef[][], limits: [number, number]) => {
       if (to.length !== from.length || score.length !== from.length || r.length !== from.length) {
         ctx.addIssue({ code: 'custom', message: `theory.${name} arrays differ in length`, path: ['theory', name] });
       }
       if (from.some((x) => x >= limits[0]) || to.some((x) => x >= limits[1])) {
         ctx.addIssue({ code: 'custom', message: `theory.${name} index out of range`, path: ['theory', name] });
       }
-      if (r.some((list) => list.some((x) => x >= R))) {
+      if (r.some((list) => list.some((x) => (typeof x === "number" ? [x] : x).some((i) => i >= R)))) {
         ctx.addIssue({ code: 'custom', message: `theory.${name} reason index out of range`, path: ['theory', name, 'r'] });
       }
     };

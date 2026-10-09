@@ -293,8 +293,8 @@ export { GATES, scoreFromDelta };
 
 /**
  * hidden: never shown · grey: shown muted (low sample) · shown: normal row, not a headline pick ·
- * listed: qualifies for the strong/weak/good-with lists. Theory rows are always `listed` and
- * carry source 'theory' so the UI labels them.
+ * listed: qualifies for the strong/weak/good-with lists. Theory rows use the theory gate
+ * (theoryGate) and carry source 'theory' or 'curated' so the UI labels them.
  */
 export type MatchupGate = 'hidden' | 'grey' | 'shown' | 'listed';
 
@@ -303,6 +303,19 @@ export function statGate(n: number, delta: number, z?: number): MatchupGate {
   const sample = classifySample(n);
   if (sample !== 'ok') return sample;
   return isListable(n, delta, z === undefined ? {} : { z }) ? 'listed' : 'shown';
+}
+
+/**
+ * Theory list gate (docs/METHODOLOGY.md §13, docs/THEORY.md). A theory edge makes the headline
+ * strong/weak/good-with lists when a curator wrote the matchup, or when the generic rules alone
+ * reach listMinScore (x ≥ 0.3: one strong, always-available interaction, or two clear ones; a match
+ * that only works through a talent tops out at 62 on its own). Weaker generic edges
+ * stay available below the bar. The engine already drops edges within ±4 of 50.
+ */
+export const THEORY_GATES = Object.freeze({ listMinScore: 65 });
+
+export function theoryGate(edge: Pick<Edge, 'score' | 'source'>): MatchupGate {
+  return edge.source === 'curated' || edge.score >= THEORY_GATES.listMinScore ? 'listed' : 'shown';
 }
 
 export const MODE_LABEL: Record<GameMode, string> = { sl: 'Storm League', qm: 'Quick Match', aram: 'ARAM' };
@@ -341,6 +354,35 @@ function byScore(a: HeroMatchupRow, b: HeroMatchupRow): number {
   return b.score - a.score || (a.hero.name < b.hero.name ? -1 : a.hero.name > b.hero.name ? 1 : 0);
 }
 
+/** Theory rows: hand-written (curated) matchups first, then generic rule matches, each by score. */
+function byTheory(a: HeroMatchupRow, b: HeroMatchupRow): number {
+  return Number(b.source === 'curated') - Number(a.source === 'curated') || byScore(a, b);
+}
+
+/**
+ * Theory-only strong/weak/good-with lists for a hero entity (mechanics + curated pairs), whatever
+ * stats exist: rows above 50, gated by theoryGate, curated first.
+ */
+export function theoryLists(hero: Hero): Pick<HeroMatchups, 'strong' | 'weak' | 'synergy'> {
+  return memo(`theoryLists:${hero.id}`, () => {
+    const theory = getTheory();
+    const row = (edge: Edge, otherId: string): HeroMatchupRow | null => {
+      const h = getEntity(otherId);
+      return h ? { hero: h, edge, score: edge.score, source: edge.source, gate: theoryGate(edge), reasons: edge.reasons } : null;
+    };
+    const keep = (r: HeroMatchupRow | null): r is HeroMatchupRow => r !== null;
+    return {
+      strong: theory.counters.filter((e) => e.a === hero.id && e.score > 50).map((e) => row(e, e.b)).filter(keep).sort(byTheory),
+      weak: theory.counters.filter((e) => e.b === hero.id && e.score > 50).map((e) => row(e, e.a)).filter(keep).sort(byTheory),
+      synergy: theory.synergies
+        .filter((e) => (e.a === hero.id || e.b === hero.id) && e.score > 50)
+        .map((e) => row(e, e.a === hero.id ? e.b : e.a))
+        .filter(keep)
+        .sort(byTheory),
+    };
+  });
+}
+
 function pairKey(a: string, b: string): string {
   return a < b ? `${a}+${b}` : `${b}+${a}`;
 }
@@ -364,7 +406,7 @@ export function heroEdges(slugOrId: string, opts: { mode?: GameMode; timeframe?:
   const row = (edge: Edge, otherId: string, attached?: Edge): HeroMatchupRow | null => {
     const h = other(otherId);
     if (!h) return null;
-    const gate = edge.source === 'stats' ? statGate(edge.n ?? 0, edge.delta ?? 0, edge.z) : 'listed';
+    const gate = edge.source === 'stats' ? statGate(edge.n ?? 0, edge.delta ?? 0, edge.z) : theoryGate(edge);
     if (gate === 'hidden') return null;
     return {
       hero: h,
@@ -395,18 +437,7 @@ export function heroEdges(slugOrId: string, opts: { mode?: GameMode; timeframe?:
       synergy: synergy.filter(keep).sort(byScore),
     };
   }
-  return {
-    hero,
-    primary: 'theory',
-    label: THEORY_LABEL,
-    strong: theory.counters.filter((e) => e.a === hero.id && e.score > 50).map((e) => row(e, e.b)).filter(keep).sort(byScore),
-    weak: theory.counters.filter((e) => e.b === hero.id && e.score > 50).map((e) => row(e, e.a)).filter(keep).sort(byScore),
-    synergy: theory.synergies
-      .filter((e) => (e.a === hero.id || e.b === hero.id) && e.score > 50)
-      .map((e) => row(e, e.a === hero.id ? e.b : e.a))
-      .filter(keep)
-      .sort(byScore),
-  };
+  return { hero, primary: 'theory', label: THEORY_LABEL, ...theoryLists(hero) };
 }
 
 export interface MapFitRow {

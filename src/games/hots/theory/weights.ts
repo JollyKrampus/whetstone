@@ -33,6 +33,19 @@ export const RULE_CAP = 0.6;
 /** |x| never exceeds this before tanh (score 2..98). */
 export const X_CLAMP = 2;
 
+/**
+ * Generic-rule edges scoring within this many points of 50 (46..54: a single mild rule reached only
+ * through a talent, or rules that cancel out) are left out of theory.json and the draft shard.
+ * Curated pairs are always kept. Pages list theory edges only from THEORY_GATES.listMinScore
+ * (load.ts), so pruning changes nothing they list and roughly halves the file.
+ */
+export const PRUNE_MARGIN = 4;
+
+/** True when a generic-rule edge is too close to neutral to keep (see PRUNE_MARGIN). */
+export function negligible(score: number): boolean {
+  return Math.abs(score - 50) <= PRUNE_MARGIN;
+}
+
 /** Σ rule contributions limited to ±RULE_CAP. */
 export function capRules(sum: number): number {
   return Math.max(-RULE_CAP, Math.min(RULE_CAP, sum));
