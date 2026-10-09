@@ -54,8 +54,8 @@ export async function recentChanges(lp: LiquipediaClient, since: string): Promis
 /** Tournament page titles whose infobox starts in `year` (`sdate=` and the one-day `date=` form). */
 export async function searchTournaments(lp: LiquipediaClient, year: number): Promise<string[]> {
   const titles = new Set<string>();
-  for (const [field, fixture] of [['sdate', 'search-sdate'], ['date', 'search-date']] as const) {
-    const raw = await lp.query({ list: 'search', srsearch: `insource:"${field}=${year}"`, srlimit: '100', srnamespace: '0', srprop: 'timestamp' }, fixture);
+  for (const field of ['sdate', 'date'] as const) {
+    const raw = await lp.query({ list: 'search', srsearch: `insource:"${field}=${year}"`, srlimit: '100', srnamespace: '0', srprop: 'timestamp' }, `search-${field}-${year}`);
     const q = isRecord(raw.query) ? raw.query : {};
     for (const s of Array.isArray(q.search) ? q.search.filter(isRecord) : []) if (typeof s.title === 'string') titles.add(s.title);
   }
@@ -69,11 +69,11 @@ export interface WikiPage {
 }
 
 /** Latest wikitext of each title (missing pages are left out). */
-export async function fetchPages(lp: LiquipediaClient, titles: readonly string[]): Promise<WikiPage[]> {
+export async function fetchPages(lp: LiquipediaClient, titles: readonly string[], fixturePrefix = 'revisions'): Promise<WikiPage[]> {
   const out: WikiPage[] = [];
   for (let i = 0; i < titles.length; i += BATCH) {
     const batch = titles.slice(i, i + BATCH);
-    const raw = await lp.query({ prop: 'revisions', rvprop: 'content|ids', rvslots: 'main', titles: batch.join('|') }, `revisions-${i / BATCH + 1}`);
+    const raw = await lp.query({ prop: 'revisions', rvprop: 'content|ids', rvslots: 'main', titles: batch.join('|') }, `${fixturePrefix}-${i / BATCH + 1}`);
     for (const p of pagesOf(raw)) {
       const rev = Array.isArray(p.revisions) && isRecord(p.revisions[0]) ? p.revisions[0] : null;
       const slots = rev && isRecord(rev.slots) && isRecord(rev.slots.main) ? rev.slots.main : null;

@@ -16,12 +16,16 @@
  * Bug-fix sections, collection/bundle sections, intros and new-hero kit descriptions are skipped,
  * and a hero marked "fully reworked" gets one summary line instead of its whole new kit.
  */
-import type { ChangeDir, Patch, PatchChange, PatchHero, TalentTier } from '../../schema.ts';
+import type { z } from 'zod';
+import type { ChangeDirSchema, Patch, PatchChangeSchema, PatchHeroSchema, TalentTier } from '../../schema.ts';
 import { TALENT_TIERS } from '../../schema.ts';
 import { cleanText, compareStrings, hash16, isoDate, searchKey } from '../util.ts';
 import { findElement, hasClass, isElement, parseHtml, textOf, type HtmlElement } from './html.ts';
 
 export type PatchKind = Patch['kind'];
+export type ChangeDir = z.infer<typeof ChangeDirSchema>;
+export type PatchChange = z.infer<typeof PatchChangeSchema>;
+export type PatchHero = z.infer<typeof PatchHeroSchema>;
 
 /** Text of a change line is cut to this length (schema allows 400). */
 export const MAX_LINE = 300;
@@ -132,7 +136,7 @@ export function changeDirection(text: string, context = ''): ChangeDir | undefin
   return undefined;
 }
 
-export function verdictOf(changes: readonly PatchChange[]): PatchHero['verdict'] {
+export function verdictOf(changes: readonly PatchChange[]): NonNullable<PatchHero['verdict']> {
   const dirs = changes.map((c) => c.dir);
   if (dirs.includes('rework')) return 'rework';
   const buffs = dirs.filter((d) => d === 'buff').length;
@@ -283,6 +287,8 @@ export interface ParseArticleOptions {
   maps: MapIndex;
   /** Name/role per hero id for new-hero lines. */
   heroInfo: ReadonlyMap<string, HeroInfo>;
+  /** Collects block headings in hero sections that match no hero (their lines are skipped). */
+  unmatched?: Set<string>;
 }
 
 function lookupHero(text: string, index: HeroIndex): readonly string[] | null {
@@ -302,7 +308,7 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
   const main = new RecordBuilder(kind, mainDate, meta.title);
   const hotfixes: RecordBuilder[] = [];
   let rec = main;
-  let area: Area = 'preamble';
+  let area = 'preamble' as Area;
   let hero: readonly string[] | null = null;
   let skipHero = false;
   let section: string | null = null;
@@ -407,6 +413,12 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
         const c = classifyLabel(item.text);
         if (c?.hero) resetHero(c.hero.length ? c.hero : null, Boolean(c.skip));
         else if (c?.section) section = c.section;
+        else {
+          // An unknown block (a hero missing from the data, a renamed hero): never attribute its
+          // lines to the previous hero or to the general list.
+          resetHero(null, true);
+          if (item.text.length <= 40) opts.unmatched?.add(item.text);
+        }
       } else if (area === 'map') {
         mapSlug = opts.maps.get(searchKey(item.text)) ?? null;
         mapLabel = item.text;

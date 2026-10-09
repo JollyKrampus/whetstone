@@ -205,7 +205,7 @@ export function aggregatePro(tournaments: readonly ParsedTournament[], opts: Agg
     for (const m of t.maps) {
       totalMaps++;
       const pickedBy = new Map<string, 1 | 2>();
-      for (const side of [1, 2] as const) for (const h of m.picks[side - 1]) {
+      for (const side of [1, 2] as const) for (const h of m.picks[side - 1] ?? []) {
         const id = entity(h);
         if (id && !pickedBy.has(id)) pickedBy.set(id, side);
       }

@@ -11,9 +11,9 @@
  *     "undocumented update" record.
  *  4. Ids `<date>-<kind>[-n]`, newest first.
  */
-import type { Diff, DiffEntry, Patch, PatchChange, PatchHero } from '../../schema.ts';
+import type { Diff, DiffEntry, Patch } from '../../schema.ts';
 import { addDays, compareBuilds, compareStrings, hash16, isPtrBuild, majorOf } from '../util.ts';
-import { verdictOf, type ParsedPatch } from './patches.ts';
+import { verdictOf, type ParsedPatch, type PatchChange, type PatchHero } from './patches.ts';
 
 export interface BuildDate {
   build: string;
