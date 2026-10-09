@@ -96,7 +96,16 @@ const momentumScope =
 >
   <div class="tl">
     <header class="tl__head">
-      <h1>Tier list</h1>
+      {
+        statsOn ? (
+          <h1>Tier list</h1>
+        ) : (
+          <>
+            <p class="kicker">Tier list on hold</p>
+            <h1>Meta without win rates</h1>
+          </>
+        )
+      }
       {
         statsOn ? (
           <p class="tl__lead">

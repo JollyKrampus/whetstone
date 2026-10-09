@@ -70,7 +70,7 @@ interface Props {
 /** Instant redirect for member slugs (cho, gall): meta refresh plus a link, kept out of search. */
 function redirectPage(to: string): string {
   const abs = new URL(to, Astro.site).href;
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Redirecting…</title><meta name="robots" content="noindex"><link rel="canonical" href="${abs}"><meta http-equiv="refresh" content="0;url=${to}"></head><body><p><a href="${to}">Continue to the hero page</a></p></body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark light"><title>Redirecting…</title><meta name="robots" content="noindex"><link rel="canonical" href="${abs}"><meta http-equiv="refresh" content="0;url=${to}"></head><body><p><a href="${to}">Continue to the hero page</a></p></body></html>`;
 }
 
 const record = getHeroById(Astro.props.id);
