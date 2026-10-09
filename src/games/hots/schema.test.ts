@@ -302,6 +302,17 @@ describe('hots load.ts against fixtures', () => {
     expect(load.isFreeToPlay(load.getHeroBySlug('johanna') as Hero)).toBe(false);
   });
 
+  it('treats a rotation fetched after its window ended as stale', () => {
+    const rotation = load.getRotation();
+    expect(rotation).not.toBeNull();
+    if (!rotation) return;
+    expect(load.rotationIsStale(rotation)).toBe(false);
+    expect(load.currentRotation()).toBe(rotation);
+    // Nexus Compendium still listing last week's heroes the day after the switch.
+    expect(load.rotationIsStale({ ...rotation, end: '2026-10-08', fetchedAt: '2026-10-09T04:51:19.159Z' })).toBe(true);
+    expect(load.rotationIsStale({ ...rotation, end: '2026-10-08', fetchedAt: '2026-10-08T10:00:00.000Z' })).toBe(false);
+  });
+
   it('resolves names, nicknames and localized aliases to draftable entities', () => {
     expect(load.resolveHero('Li Ming')?.slug).toBe('liming');
     expect(load.resolveHero('li-ming')?.slug).toBe('liming');

@@ -4,7 +4,7 @@
  */
 import type { SourceRef } from '../../../../core/game.ts';
 import { buildUniverse } from '../../draft/state.ts';
-import { getDraftableEntities, getMaps, getRotation } from '../../load.ts';
+import { currentRotation, getDraftableEntities, getMaps } from '../../load.ts';
 import type { CreditProp, MapOption, RosterHero } from './props.ts';
 
 /** Draftable entities in universe order (release date, id), with what the islands display. */
@@ -47,9 +47,9 @@ export function aramMaps(): MapOption[] {
     .sort(byName);
 }
 
-/** Entity ids in this week's free rotation (a composite is free when any member is). */
+/** Entity ids in this week's free rotation (a composite is free when any member is); none while it is stale. */
 export function freeRotation(roster: readonly RosterHero[]): { ids: string[]; window: { start: string; end: string } | null } {
-  const rotation = getRotation();
+  const rotation = currentRotation();
   if (!rotation) return { ids: [], window: null };
   const free = new Set(rotation.heroes);
   const ids = roster.filter((h) => rotation.allFree || free.has(h.id) || (h.members ?? []).some((m) => free.has(m))).map((h) => h.id);

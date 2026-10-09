@@ -13,7 +13,7 @@ import HeroPoolBar from '../../games/hots/components/HeroPoolBar.tsx';
 import StatsCredit from '../../games/hots/components/StatsCredit.astro';
 import { latestLivePatch, statsModes, tierById } from '../../games/hots/components/pagedata.ts';
 import { PATCH_KIND } from '../../games/hots/components/labels.ts';
-import { getDraftableEntities, getMembers, getMeta, getRotation, hasAsset, isFreeToPlay } from '../../games/hots/load.ts';
+import { getDraftableEntities, getMembers, getMeta, getRotation, hasAsset, isFreeToPlay, rotationIsStale } from '../../games/hots/load.ts';
 import { HOTS_ROLES } from '../../games/hots/schema.ts';
 import { heroHref, heroPortrait, patchHref } from '../../games/hots/view.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
@@ -22,6 +22,7 @@ const meta = getMeta();
 const statsOn = statsModes().length > 0;
 const tiers = statsOn ? tierById() : new Map();
 const rotation = getRotation();
+const rotationStale = rotation ? rotationIsStale(rotation) : false;
 const latest = latestLivePatch();
 const heroes = [...getDraftableEntities()].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 
@@ -104,7 +105,12 @@ const ptr = meta.extra.ptrBuild;
       {
         rotation && (
           <p class="pbanner__rot">
-            {rotation.allFree ? (
+            {rotationStale ? (
+              <>
+                This week's free heroes aren't listed yet: Nexus Compendium last listed the rotation of{' '}
+                {formatDayUTC(rotation.start)} – {formatDayUTC(rotation.end)}, so no hero is marked free.
+              </>
+            ) : rotation.allFree ? (
               <>Every hero is free to play this week.</>
             ) : (
               <>

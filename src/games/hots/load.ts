@@ -231,9 +231,24 @@ export function getRotation(): Rotation | null {
   return publicData.optional('rotation.json', RotationSchema);
 }
 
-/** True when the hero (or any member of a composite) is in the free rotation. */
-export function isFreeToPlay(hero: Hero): boolean {
+/**
+ * True when the rotation's window had already ended when it was fetched: Nexus Compendium can lag
+ * a day or two behind the weekly switch. Pages then say so and mark no hero as free, rather than
+ * badge last week's heroes as "free this week".
+ */
+export function rotationIsStale(rotation: Rotation): boolean {
+  return rotation.end < rotation.fetchedAt.slice(0, 10);
+}
+
+/** The free rotation when it is current, else null (absent or stale). */
+export function currentRotation(): Rotation | null {
   const rotation = getRotation();
+  return rotation && !rotationIsStale(rotation) ? rotation : null;
+}
+
+/** True when the hero (or any member of a composite) is in the current free rotation. */
+export function isFreeToPlay(hero: Hero): boolean {
+  const rotation = currentRotation();
   if (!rotation) return false;
   if (rotation.allFree) return true;
   const ids = hero.members ? [...hero.members] : [hero.id];
