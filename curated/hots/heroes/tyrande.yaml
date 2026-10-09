@@ -1,0 +1,62 @@
+hero: tyrande
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Every basic attack shortens Light of Elune's cooldown and heals Tyrande through Hunter's Mark's passive, so she must keep attacking to keep healing."
+  - tag: global
+    why: "Sentinel's owl crosses the entire battleground, scouting its path and revealing the first Hero it hits."
+counters:
+  # --- strong against ---
+  - a: tyrande
+    b: zeratul
+    why: "Hunter's Mark reveals Zeratul and strips 15 Armor, and Lunar Flare's stun punishes him once he decloaks."
+    evidence: ["Hunter's Mark", "Lunar Flare", "Permanent Cloak"]
+    confidence: medium
+  - a: tyrande
+    b: nova
+    why: "Sentinel and Hunter's Mark reveal Nova out of Permanent Cloak, and at 1300 Health she rarely survives the follow-up."
+    evidence: ["Sentinel", "Hunter's Mark", "Permanent Cloak"]
+    confidence: medium
+  - a: tyrande
+    b: valeera
+    why: "Hunter's Mark reveals Valeera once Vanish's first Unrevealable second ends, and Lunar Flare stuns her in place."
+    evidence: ["Hunter's Mark", "Lunar Flare", "Vanish"]
+    conditions: "Smoke Bomb keeps Valeera Unrevealable inside the cloud."
+    confidence: medium
+  # --- weak against ---
+  - a: johanna
+    b: tyrande
+    why: "Shield Glare blinds Tyrande, so her basic attacks miss and stop shortening Light of Elune's cooldown and healing her."
+    evidence: ["Shield Glare", "Light of Elune", "Hunter's Mark"]
+    confidence: low
+  - a: genji
+    b: tyrande
+    why: "Cyber Agility and Swift Strike reach Tyrande, who has 1511 Health and no escape, and Deflect absorbs her damage while Genji stays on her."
+    evidence: ["Cyber Agility", "Swift Strike", "Deflect"]
+    confidence: medium
+  - a: tracer
+    b: tyrande
+    why: "Tracer Blinks out of Lunar Flare's 0.75-second delay and around Sentinel, and Tyrande has nothing to escape her with."
+    evidence: ["Blink", "Lunar Flare", "Sentinel"]
+    confidence: medium
+  - a: illidan
+    b: tyrande
+    why: "Evasion makes Tyrande's basic attacks miss for 2.5 seconds, so she can't shorten Light of Elune's cooldown or heal herself while Illidan dives her."
+    evidence: ["Evasion", "Dive", "Light of Elune"]
+    confidence: medium
+synergies:
+  - a: raynor
+    b: tyrande
+    why: "Hunter's Mark strips 15 Armor and Trueshot Aura adds 40% Attack Damage, both paying off most on a basic-attack carry like Raynor."
+    evidence: ["Hunter's Mark", "Trueshot Aura", "Give 'Em Some Pepper"]
+    confidence: medium
+  - a: tyrande
+    b: valla
+    why: "Trueshot Aura's 40% Attack Damage and Hunter's Mark's Armor shred amplify Valla's Hatred-stacked basic attacks."
+    evidence: ["Trueshot Aura", "Hunter's Mark", "Hatred"]
+    confidence: medium
+  - a: tyrande
+    b: zuljin
+    why: "Hunter's Mark lowers a target's Armor by 15 while Grievous Throw marks it, so Zul'jin's empowered basic attacks burst it down."
+    evidence: ["Hunter's Mark", "Grievous Throw"]
+    confidence: medium

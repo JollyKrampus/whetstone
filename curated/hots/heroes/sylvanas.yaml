@@ -1,0 +1,62 @@
+hero: sylvanas
+reviewedFor: "2.57"
+traits:
+  - tag: split-push
+    why: "Possession steals enemy minions and Haunting Arrows can stun structures, so Sylvanas pushes a lane down quickly on her own."
+  - tag: waveclear
+    why: "Shadow Dagger spreads from her damage to every nearby enemy, so Sylvanas clears whole minion waves fast."
+counters:
+  # --- strong against ---
+  - a: sylvanas
+    b: probius
+    why: "Haunting Arrows makes Sylvanas' attacks and abilities stun Structures, which shuts down Probius' Photon Cannons and Pylons while she pushes into them."
+    evidence: ["Haunting Arrows", "Photon Cannon", "Warp In Pylon"]
+    conditions: "Haunting Arrows at level 4."
+    confidence: low
+  - a: sylvanas
+    b: thelostvikings
+    why: "Shadow Dagger spreads from Sylvanas' damage to every nearby enemy, so grouped Vikings all take it, and Withering Fire picks off a lone soaking Viking."
+    evidence: ["Shadow Dagger", "Withering Fire"]
+    confidence: low
+  - a: sylvanas
+    b: nazeebo
+    why: "Wailing Arrow's Silence and Mind Control both interrupt Ravenous Spirit, Nazeebo's stationary channel, and Shadow Dagger's spread clears his Corpse Spiders."
+    evidence: ["Wailing Arrow", "Mind Control", "Ravenous Spirit", "Corpse Spiders"]
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: sylvanas
+    why: "Shield Glare blinds Sylvanas for 1.5 seconds, so the basic attacks she needs to stack Black Arrows and spread Shadow Dagger all miss."
+    evidence: ["Shield Glare", "Black Arrows", "Shadow Dagger"]
+    confidence: low
+  - a: genji
+    b: sylvanas
+    why: "Deflect blocks every shot of Withering Fire and throws kunai back, and Swift Strike plus Cyber Agility reach Sylvanas faster than Haunting Wave can carry her away."
+    evidence: ["Deflect", "Swift Strike", "Cyber Agility", "Withering Fire", "Haunting Wave"]
+    confidence: medium
+  - a: illidan
+    b: sylvanas
+    why: "Evasion dodges Sylvanas' basic attacks and Dive follows her after a Haunting Wave teleport; with 1650 Health and no stun she struggles to peel him."
+    evidence: ["Evasion", "Dive", "Haunting Wave"]
+    confidence: low
+  - a: zeratul
+    b: sylvanas
+    why: "Zeratul cloaks onto Sylvanas and Vorpal Blade follows her Haunting Wave teleport, leaving her little room to escape his burst."
+    evidence: ["Permanent Cloak", "Vorpal Blade", "Haunting Wave"]
+    confidence: low
+synergies:
+  - a: sylvanas
+    b: zarya
+    why: "Graviton Surge holds enemies together so Wailing Arrow's center Silence, and Deafening Blast's bonus damage, lands on several Heroes at once."
+    evidence: ["Graviton Surge", "Wailing Arrow", "Deafening Blast"]
+    confidence: medium
+  - a: falstad
+    b: sylvanas
+    why: "Falstad's Flight lets him join fights anywhere while Sylvanas pushes a side lane with Possession, so her pressure doesn't cost the team a body."
+    evidence: ["Flight", "Possession"]
+    confidence: low
+  - a: medivh
+    b: sylvanas
+    why: "Portal lets a split-pushing Sylvanas return to her team instantly, so her lane pressure costs less when a fight breaks out."
+    evidence: ["Portal", "Possession"]
+    confidence: low

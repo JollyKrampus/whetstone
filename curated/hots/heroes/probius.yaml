@@ -1,0 +1,61 @@
+hero: probius
+reviewedFor: "2.57"
+traits:
+  - tag: vulnerable-body
+    why: "1260 Health, a 3-range Basic Attack and Mana regeneration only inside Pylon fields make Probius easy to punish when caught out of position."
+  - tag: siege
+    why: "Photon Cannons, Pylon Overcharge and Disruption Pulse let him take and defend structures from range."
+  - tag: waveclear
+    why: "Disruption Pulse pierces through a whole wave, and Warp Rift explosions finish clumped minions."
+counters:
+  - a: probius
+    b: thelostvikings
+    why: "Disruption Pulse pierces every enemy in its path and detonates Warp Rifts, so three Vikings walking together all take the full combo."
+    evidence: ["Disruption Pulse", "Warp Rift"]
+    confidence: medium
+  - a: probius
+    b: murky
+    why: "Powered Photon Cannons reveal enemies near Probius's Pylons, and Disruption Pulse's piercing damage easily finishes a 730-Health Murky pushing nearby."
+    evidence: ["Photon Cannon", "Warp In Pylon", "Disruption Pulse"]
+    confidence: low
+  - a: probius
+    b: zagara
+    why: "Disruption Pulse pierces through Zagara's Roachlings and Hunter Killers, and Pylon Overcharge holds a structure against her summon-based push."
+    evidence: ["Disruption Pulse", "Pylon Overcharge", "Infested Drop", "Hunter Killer"]
+    confidence: low
+  - a: tracer
+    b: probius
+    why: "Tracer Blinks past Warp Rifts and Photon Cannons onto a 1260-Health target with a 3-range attack and no escape besides Worker Rush, which damage ends."
+    evidence: ["Blink", "Warp Rift", "Photon Cannon", "Worker Rush"]
+    confidence: medium
+  - a: genji
+    b: probius
+    why: "Deflect blocks Disruption Pulse, and Cyber Agility jumps over Null Gate to reach Probius away from his Pylons."
+    evidence: ["Deflect", "Disruption Pulse", "Cyber Agility", "Null Gate"]
+    confidence: medium
+  - a: zeratul
+    b: probius
+    why: "Zeratul approaches from angles a powered Photon Cannon does not reveal, and Singularity Spike plus Cleave kill a 1260-Health Probius."
+    evidence: ["Permanent Cloak", "Photon Cannon", "Singularity Spike", "Cleave"]
+    confidence: medium
+  - a: kerrigan
+    b: probius
+    why: "Ravage leaps past Photon Cannons onto Probius, and a single Primal Grasp into Impaling Blades combo kills him before he can retreat to a Pylon."
+    evidence: ["Ravage", "Primal Grasp", "Impaling Blades", "Photon Cannon"]
+    confidence: medium
+synergies:
+  - a: probius
+    b: tychus
+    why: "Aggressive Matrix gives allies 35% more Attack Damage inside Pylon fields, and Tychus's Minigun Basic Attacks gain the full benefit while Probius holds the area."
+    evidence: ["Aggressive Matrix", "Minigun"]
+    confidence: low
+  - a: probius
+    b: raynor
+    why: "Raynor's Basic Attacks gain Aggressive Matrix's bonus inside Pylon fields, and his Penetrating Round knockback pushes divers off Probius."
+    evidence: ["Aggressive Matrix", "Penetrating Round"]
+    confidence: low
+  - a: mei
+    b: probius
+    why: "Ice Wall traps enemies inside a Warp Rift until it arms and explodes, and Null Gate can cover the other escape side."
+    evidence: ["Ice Wall", "Warp Rift", "Null Gate"]
+    confidence: low

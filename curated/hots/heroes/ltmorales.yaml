@@ -1,0 +1,59 @@
+hero: ltmorales
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Lt. Morales has no dash or blink; Displacement Grenade is her only self-peel, so she depends on her team to keep divers off her."
+  - tag: channel
+    why: "Healing Beam is channeled on one ally, and any Silence or Stun stops her healing completely until she re-targets."
+counters:
+  - a: ltmorales
+    b: lunara
+    why: "Nature's Toxin is steady damage over time, and Healing Beam's continuous healing plus Safeguard Armor out-sustain it on whoever Lunara poisons."
+    evidence: ["Nature's Toxin", "Healing Beam", "Safeguard"]
+    confidence: low
+  - a: ltmorales
+    b: nazeebo
+    why: "Nazeebo's poison and Ravenous Spirit are sustained damage Healing Beam can match tick for tick, and Displacement Grenade can knock him out of his stationary channel."
+    evidence: ["Healing Beam", "Displacement Grenade", "Ravenous Spirit", "Plague of Toads"]
+    confidence: low
+  - a: ltmorales
+    b: azmodan
+    why: "All Shall Burn is a single-target channel, so Safeguard's Armor and Healing Beam on its victim blunt both the damage over time and the finishing hit."
+    evidence: ["All Shall Burn", "Safeguard", "Healing Beam"]
+    confidence: low
+  - a: ana
+    b: ltmorales
+    why: "Biotic Grenade cancels Healing Beam's output for 1.75 seconds, and Sleep Dart takes out a stationary channeler who has no cleanse."
+    evidence: ["Biotic Grenade", "Sleep Dart", "Healing Beam"]
+    confidence: medium
+  - a: valeera
+    b: ltmorales
+    why: "A Garrote Silence from stealth cuts Healing Beam immediately, and Lt. Morales has no movement ability to escape Valeera's follow-up."
+    evidence: ["Vanish", "Eviscerate", "Healing Beam"]
+    confidence: medium
+  - a: tracer
+    b: ltmorales
+    why: "Tracer Blinks past the frontline onto a healer with no escape, and Displacement Grenade, Morales's only answer, is easy to Blink back from."
+    evidence: ["Blink", "Displacement Grenade", "Healing Beam"]
+    confidence: medium
+  - a: zeratul
+    b: ltmorales
+    why: "From Permanent Cloak Zeratul opens on a beaming Lt. Morales who cannot dash away, and Blink returns him after a Displacement Grenade knockback."
+    evidence: ["Permanent Cloak", "Blink", "Displacement Grenade", "Healing Beam"]
+    confidence: medium
+synergies:
+  - a: ltmorales
+    b: valla
+    why: "Stim Drone grants 75% Attack Speed for 10 seconds, multiplying Valla's Hatred-stacked Basic Attacks, while Healing Beam keeps her alive in range."
+    evidence: ["Stim Drone", "Hatred", "Healing Beam"]
+    confidence: medium
+  - a: ltmorales
+    b: tychus
+    why: "Stim Drone's Attack Speed makes every Minigun window hit far more often, and Safeguard lets Tychus stand close enough to shred tanks."
+    evidence: ["Stim Drone", "Minigun", "Safeguard"]
+    confidence: medium
+  - a: ltmorales
+    b: sgthammer
+    why: "Stim Drone turns a sieged Sgt. Hammer into a huge damage source, and Healing Beam plus Safeguard cover her immobility in Siege Mode."
+    evidence: ["Stim Drone", "Siege Mode", "Safeguard", "Healing Beam"]
+    confidence: medium

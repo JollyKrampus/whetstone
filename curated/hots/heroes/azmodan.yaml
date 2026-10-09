@@ -1,0 +1,64 @@
+hero: azmodan
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Azmodan has no dash or blink in his base kit and All Shall Burn slows him further, so divers catch him easily."
+  - tag: channel
+    why: "All Shall Burn only pays out its big final hit if the 2.5-second channel completes, so stuns and displacement waste it."
+  - tag: siege
+    why: "Demon Warriors and Demon Lieutenants keep pushing lanes on their own, so he pressures structures while also fighting."
+counters:
+  # --- strong against ---
+  - a: azmodan
+    b: chogall
+    why: "Cho'gall is a large, slow target that Globe of Annihilation hits reliably, and Total Annihilation adds 4% of max health to every globe."
+    evidence: ["Globe of Annihilation", "Total Annihilation"]
+    conditions: "Total Annihilation at level 16 for the percent damage."
+    confidence: low
+  - a: azmodan
+    b: sgthammer
+    why: "A sieged Hammer stands still, giving Azmodan free Globe of Annihilation hits and full All Shall Burn channels."
+    evidence: ["Globe of Annihilation", "All Shall Burn", "Siege Mode"]
+    confidence: low
+  - a: azmodan
+    b: dva
+    why: "The mech is a big target that has to brawl up close; Globe of Annihilation with Total Annihilation takes 4% of its max health per hit while Demon Warriors pressure the lane."
+    evidence: ["Globe of Annihilation", "Total Annihilation", "Summon Demon Warrior", "Mech Mode"]
+    confidence: low
+  # --- weak against ---
+  - a: zeratul
+    b: azmodan
+    why: "Azmodan has no escape, so Zeratul Blinks onto him from stealth and Cleave plus Singularity Spike kill him before Trample is even available."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Trample"]
+    confidence: medium
+  - a: tracer
+    b: azmodan
+    why: "All Shall Burn locks onto one target while slowing Azmodan by 30%; Tracer Blinks out of the beam and punishes the slowed caster with basic attacks."
+    evidence: ["Blink", "All Shall Burn"]
+    confidence: medium
+  - a: genji
+    b: azmodan
+    why: "Cyber Agility and Swift Strike reach Azmodan through his demons, and he has nothing to escape the follow-up with."
+    evidence: ["Cyber Agility", "Swift Strike", "Summon Demon Warrior"]
+    confidence: medium
+  - a: illidan
+    b: azmodan
+    why: "Dive and Sweeping Strike keep Illidan glued to an immobile Azmodan, and All Shall Burn's slowed channel makes him an easy target."
+    evidence: ["Dive", "Sweeping Strike", "All Shall Burn"]
+    confidence: medium
+synergies:
+  - a: ana
+    b: azmodan
+    why: "Nano Boost refunds mana and recharges Globe of Annihilation 150% faster with 30% Spell Power, letting Azmodan fire globes at a rapid pace."
+    evidence: ["Nano Boost", "Globe of Annihilation"]
+    confidence: medium
+  - a: azmodan
+    b: zarya
+    why: "Graviton Surge clumps heroes so one Globe of Annihilation hits several, triggering Art of Chaos' mana refund and quest stacks."
+    evidence: ["Graviton Surge", "Globe of Annihilation", "Art of Chaos"]
+    confidence: medium
+  - a: azmodan
+    b: mei
+    why: "Ice Wall traps heroes for 2.5 seconds, enough for a full All Shall Burn channel and an easy Globe of Annihilation."
+    evidence: ["Ice Wall", "All Shall Burn", "Globe of Annihilation"]
+    confidence: medium

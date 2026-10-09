@@ -1,0 +1,59 @@
+hero: imperius
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "2375 Health, Molten Armor healing for all of its damage to Heroes, and Angelic Armaments' big shield let him trade inside melee range for a whole fight."
+  - tag: engage
+    why: "Celestial Charge lunges in and stuns, and Wrath of the Angiris lifts a Hero and lets Imperius steer where they land."
+counters:
+  - a: imperius
+    b: nazeebo
+    why: "Celestial Charge's stun interrupts Ravenous Spirit, and Nazeebo has no dash to escape, so Molten Armor heals Imperius through the poison while he stays on him."
+    evidence: ["Celestial Charge", "Ravenous Spirit", "Molten Armor"]
+    confidence: medium
+  - a: imperius
+    b: sgthammer
+    why: "Sgt. Hammer is stationary in Siege Mode; Celestial Charge closes the gap and stuns her, and Wrath of the Angiris can carry her into Imperius's team."
+    evidence: ["Celestial Charge", "Wrath of the Angiris", "Siege Mode"]
+    confidence: medium
+  - a: imperius
+    b: azmodan
+    why: "All Shall Burn slows Azmodan by 30% while he channels, making him an easy Celestial Charge target, and the stun cancels the channel before its finishing damage."
+    evidence: ["All Shall Burn", "Celestial Charge"]
+    confidence: low
+  - a: johanna
+    b: imperius
+    why: "Shield Glare Blinds Imperius, so the Basic Attacks that cash in Valorous Brand for damage and healing miss, and Iron Skin makes Johanna immune to Celestial Charge's stun."
+    evidence: ["Shield Glare", "Iron Skin", "Valorous Brand", "Celestial Charge"]
+    confidence: medium
+  - a: lunara
+    b: imperius
+    why: "Imperius's only gap closer is Celestial Charge on a 10-second cooldown, so Crippling Spores and Dryad's Swiftness let Lunara stack Nature's Toxin while staying out of his reach."
+    evidence: ["Celestial Charge", "Crippling Spores", "Dryad's Swiftness", "Nature's Toxin"]
+    confidence: medium
+  - a: malthael
+    b: imperius
+    why: "Reaper's Mark ticks 2% of maximum Health per second on Imperius's large pool, and Touch of Death halves the Molten Armor and Valorous Brand healing that keeps him alive."
+    evidence: ["Reaper's Mark", "Touch of Death", "Molten Armor", "Valorous Brand"]
+    confidence: medium
+  - a: ana
+    b: imperius
+    why: "Biotic Grenade stops all healing for 1.75 seconds, wiping out Molten Armor's lifesteal mid-trade, and Sleep Dart removes him from a fight he has already committed to."
+    evidence: ["Biotic Grenade", "Sleep Dart", "Molten Armor"]
+    confidence: medium
+synergies:
+  - a: imperius
+    b: kharazim
+    why: "Celestial Charge only stuns if its short channel completes; Cleansing Touch makes Imperius Unstoppable so the channel cannot be interrupted, and Divine Palm backs his all-in."
+    evidence: ["Celestial Charge", "Cleansing Touch", "Divine Palm"]
+    confidence: low
+  - a: imperius
+    b: uther
+    why: "Hand of Protection makes Imperius Unstoppable to protect the Celestial Charge channel, and Devotion's Armor stacks with Sovereign Armor while he trades in melee."
+    evidence: ["Hand of Protection", "Celestial Charge", "Devotion", "Sovereign Armor"]
+    confidence: low
+  - a: imperius
+    b: lucio
+    why: "High Five gives Imperius a heal and a second of Unstoppable mid-channel, and Amp It Up's speed lets a melee bruiser with a single gap closer actually reach his target."
+    evidence: ["High Five", "Amp It Up", "Celestial Charge"]
+    confidence: low

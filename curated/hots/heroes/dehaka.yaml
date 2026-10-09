@@ -1,0 +1,58 @@
+hero: dehaka
+reviewedFor: "2.57"
+traits:
+  - tag: global
+    why: "Brushstalker burrows him to any bush on the map, letting him join or start fights in any lane."
+  - tag: split-push
+    why: "Essence Collection keeps him healthy in a solo lane, and Brushstalker brings him back to the team quickly when a fight starts."
+counters:
+  # --- strong against ---
+  - a: dehaka
+    b: alarak
+    why: "Enduring Swarm gives Dehaka 50 Spell Armor during Dark Swarm, halving Alarak's ability damage, and Burrow's invulnerability dodges Deadly Charge or Counter-Strike."
+    evidence: ["Enduring Swarm", "Dark Swarm", "Burrow", "Deadly Charge", "Counter-Strike"]
+    conditions: "Enduring Swarm at level 1."
+    confidence: low
+  - a: dehaka
+    b: kaelthas
+    why: "Drag stuns and pulls an immobile Kael'thas for 1.75 seconds, and Burrow's 2 seconds of invulnerability sidesteps his Flamestrike and Pyroblast."
+    evidence: ["Drag", "Burrow", "Flamestrike", "Pyroblast"]
+    confidence: low
+  - a: dehaka
+    b: sgthammer
+    why: "Brushstalker lets Dehaka appear behind a sieged Hammer, and Drag hauls her out of position into his team."
+    evidence: ["Brushstalker", "Drag", "Siege Mode"]
+    confidence: low
+  # --- weak against ---
+  - a: malthael
+    b: dehaka
+    why: "Reaper's Mark ticks percent max-health damage that Essence Collection can't keep up with, and Touch of Death halves that healing."
+    evidence: ["Reaper's Mark", "Touch of Death", "Essence Collection"]
+    confidence: medium
+  - a: ana
+    b: dehaka
+    why: "Biotic Grenade stops all healing for 1.75 seconds, wasting an Essence Collection cast or Adaptation's payout."
+    evidence: ["Biotic Grenade", "Essence Collection", "Adaptation"]
+    confidence: medium
+  - a: xul
+    b: dehaka
+    why: "Mortal Wound on Spectral Scythe cuts Dehaka's healing by 75%, and Bone Prison roots him as he emerges from Burrow."
+    evidence: ["Mortal Wound", "Spectral Scythe", "Bone Prison", "Burrow"]
+    conditions: "Mortal Wound at level 20."
+    confidence: low
+synergies:
+  - a: brightwing
+    b: dehaka
+    why: "Brushstalker and Phase Shift let Dehaka and Brightwing appear in any lane, turning side-lane ganks into two-hero collapses."
+    evidence: ["Brushstalker", "Phase Shift"]
+    confidence: medium
+  - a: dehaka
+    b: jaina
+    why: "Drag pulls a stunned target into Jaina's range, an easy Cone of Cold and Frostbolt follow-up."
+    evidence: ["Drag", "Cone of Cold", "Frostbolt"]
+    confidence: medium
+  - a: dehaka
+    b: muradin
+    why: "Drag's stun chains into Storm Bolt, giving the team about 3 seconds of control on one target."
+    evidence: ["Drag", "Storm Bolt"]
+    confidence: medium

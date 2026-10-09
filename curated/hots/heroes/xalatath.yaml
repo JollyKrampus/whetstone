@@ -1,0 +1,61 @@
+hero: xalatath
+reviewedFor: "2.57"
+traits:
+  - tag: poke
+    why: "Shadow Mark and Void Volley chip enemies from long range, and the Dark Heart chases marked targets, so she softens teams before fights start."
+  - tag: burst
+    why: "A fully charged Void Eruption explodes for up to 700 damage at the end of its path, a big punish on anyone caught in it."
+counters:
+  # --- strong against ---
+  - a: xalatath
+    b: sgthammer
+    why: "A sieging Sgt. Hammer stands still, so Shadow Mark's center hit and the Dark Heart's chase-and-detonate land reliably; she can't step away without dropping Siege Mode."
+    evidence: ["Shadow Mark", "Dark Heart Ritual", "Siege Mode"]
+    confidence: low
+  - a: xalatath
+    b: nova
+    why: "Shadow Mark reveals a marked Nova for 4 seconds and the Dark Heart chases her down, stopping her from slipping back into Permanent Cloak at 1300 Health."
+    evidence: ["Shadow Mark", "Dark Heart Ritual", "Permanent Cloak"]
+    confidence: low
+  - a: xalatath
+    b: samuro
+    why: "Shadow Mark reveals Samuro through Wind Walk, and the Dark Heart's pulsing area damage shreds Mirror Images, which take double damage."
+    evidence: ["Shadow Mark", "Dark Heart Ritual", "Mirror Image", "Wind Walk"]
+    confidence: low
+  # --- weak against ---
+  - a: genji
+    b: xalatath
+    why: "Deflect soaks Void Volley's barrage, and Cyber Agility plus Swift Strike catch Xal'atath's 1330 Health once Void Step is on cooldown."
+    evidence: ["Deflect", "Cyber Agility", "Swift Strike", "Void Volley", "Void Step"]
+    confidence: low
+  - a: tracer
+    b: xalatath
+    why: "Tracer's Blinks dodge Shadow Mark's center and Void Eruption's path, and Xal'atath's 1330 Health can't outlast her once Void Step is spent."
+    evidence: ["Blink", "Shadow Mark", "Void Eruption", "Void Step"]
+    confidence: low
+  - a: illidan
+    b: xalatath
+    why: "Evasion makes Xal'atath's basic attacks miss, so she can't charge Void Volley, and Dive sticks to her through Void Step's short teleports."
+    evidence: ["Evasion", "Dive", "Void Volley", "Void Step"]
+    confidence: low
+  - a: valeera
+    b: xalatath
+    why: "Cheap Shot (Blade Flurry from Stealth) stuns Xal'atath before she can Void Step away, and her 1330 Health melts to Valeera's follow-up."
+    evidence: ["Vanish", "Blade Flurry", "Void Step"]
+    confidence: low
+synergies:
+  - a: xalatath
+    b: zarya
+    why: "Graviton Surge holds enemies in place for a fully charged Void Eruption and makes Shadow Mark's center easy to land on several targets."
+    evidence: ["Graviton Surge", "Void Eruption", "Shadow Mark"]
+    confidence: medium
+  - a: jaina
+    b: xalatath
+    why: "Ring of Frost's 3-second root lets Xal'atath charge Void Eruption fully and land Shadow Mark's center on the rooted targets."
+    evidence: ["Ring of Frost", "Void Eruption", "Shadow Mark"]
+    confidence: low
+  - a: muradin
+    b: xalatath
+    why: "Storm Bolt's stun gives Xal'atath a stationary target for Shadow Mark's center, which then sends the Dark Heart after it."
+    evidence: ["Storm Bolt", "Shadow Mark", "Dark Heart Ritual"]
+    confidence: low

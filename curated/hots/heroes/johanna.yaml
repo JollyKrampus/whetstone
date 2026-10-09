@@ -1,0 +1,64 @@
+hero: johanna
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "2625 Health plus Iron Skin's 810-point Unstoppable shield make her the default soak against physical-damage teams."
+  - tag: peel
+    why: "Shield Glare's Blind, Punish's slow and Condemn's pull protect carries without needing to land a long skillshot."
+counters:
+  - a: johanna
+    b: thebutcher
+    why: "Shield Glare Blinds The Butcher for 1.5 seconds and Divine Fortress stacks Physical Armor, so his Basic Attacks miss or hit for little, and Iron Skin ignores the Ruthless Onslaught stun."
+    evidence: ["Shield Glare", "Divine Fortress", "Iron Skin", "Ruthless Onslaught"]
+    confidence: high
+  - a: johanna
+    b: tychus
+    why: "Minigun's percent damage rides on Basic Attacks, which Shield Glare Blinds away for 1.5 seconds, and Iron Skin's large shield absorbs Overkill."
+    evidence: ["Shield Glare", "Iron Skin", "Minigun", "Overkill"]
+    confidence: medium
+  - a: johanna
+    b: valla
+    why: "Valla's Hatred and Strafe damage are Basic Attacks, so Shield Glare blanks her burst windows, and Zealous Glare's extra charge lets Johanna Blind her twice per fight."
+    evidence: ["Shield Glare", "Zealous Glare", "Hatred", "Strafe"]
+    confidence: medium
+  - a: johanna
+    b: raynor
+    why: "Shield Glare cuts off Raynor's Inspire and Give 'Em Some Pepper attack windows, and Divine Fortress Physical Armor shrinks his all-physical damage further."
+    evidence: ["Shield Glare", "Divine Fortress", "Give 'Em Some Pepper", "Inspire"]
+    confidence: medium
+  - a: johanna
+    b: zuljin
+    why: "Zul'jin's damage scales through Basic Attacks with Berserker; a Shield Glare Blind wastes his low-Health power spike while Iron Skin outlasts the rest."
+    evidence: ["Shield Glare", "Berserker", "Iron Skin"]
+    confidence: medium
+  - a: malthael
+    b: johanna
+    why: "Reaper's Mark ticks scale with Johanna's big pool and are not Basic Attacks, so Divine Fortress Physical Armor does little against them, and Last Rites then punishes her missing Health."
+    evidence: ["Reaper's Mark", "Last Rites", "Divine Fortress"]
+    confidence: medium
+  - a: kharazim
+    b: johanna
+    why: "Seven-Sided Strike lands each hit on the highest-Health Hero nearby, usually Johanna, for 7% of her maximum Health per strike, about half her pool over the full heroic."
+    evidence: ["Seven-Sided Strike"]
+    confidence: medium
+  - a: leoric
+    b: johanna
+    why: "Drain Hope takes up to 20% of Johanna's maximum Health while healing Leoric, and Wraith Walk's Unstoppable lets him walk straight out of Condemn and Punish."
+    evidence: ["Drain Hope", "Wraith Walk", "Condemn", "Punish"]
+    confidence: low
+synergies:
+  - a: johanna
+    b: kaelthas
+    why: "Condemn pulls nearby enemies into Johanna after a 1-second wind-up, setting up a tight cluster for Flamestrike and Living Bomb spreads."
+    evidence: ["Condemn", "Flamestrike", "Living Bomb"]
+    confidence: medium
+  - a: johanna
+    b: lili
+    why: "Shield Glare and Blinding Wind give a team two separate Blinds, enough to keep a physical carry like Valla or Raynor missing for most of a fight."
+    evidence: ["Shield Glare", "Blinding Wind"]
+    confidence: medium
+  - a: jaina
+    b: johanna
+    why: "Condemn drags nearby enemies to Johanna and stuns them briefly, bunching them up for Blizzard's three waves and a wide Cone of Cold."
+    evidence: ["Condemn", "Blizzard", "Cone of Cold"]
+    confidence: medium

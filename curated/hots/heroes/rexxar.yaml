@@ -1,0 +1,57 @@
+hero: rexxar
+reviewedFor: "2.57"
+traits:
+  - tag: summons
+    why: "Misha is a separate, controllable bear that tanks, stuns and deals damage; much of Rexxar's power disappears if she dies."
+  - tag: peel
+    why: "Misha, Charge! stuns in a line and Misha can be sent onto a diver, giving Rexxar reliable peel for his backline."
+counters:
+  # --- strong against ---
+  - a: rexxar
+    b: zeratul
+    why: "Unleash the Boars hunts every enemy Hero in a direction and reveals them for 5 seconds, dragging Zeratul out of Permanent Cloak and slowing his escape; Flare can scout his approach."
+    evidence: ["Unleash the Boars", "Flare", "Permanent Cloak"]
+    confidence: low
+  - a: rexxar
+    b: nova
+    why: "Unleash the Boars tracks and reveals Nova for 5 seconds, so she can't slip back into Permanent Cloak, and at 1300 Health she rarely survives Misha's follow-up."
+    evidence: ["Unleash the Boars", "Permanent Cloak", "Ghost Protocol"]
+    confidence: low
+  - a: rexxar
+    b: valeera
+    why: "Unleash the Boars reveals and slows Valeera after Vanish, and Misha, Charge! stuns her before she can reset with another Vanish."
+    evidence: ["Unleash the Boars", "Misha, Charge!", "Vanish"]
+    conditions: "Smoke Bomb makes her Unrevealable inside the cloud."
+    confidence: low
+  # --- weak against ---
+  - a: xul
+    b: rexxar
+    why: "Cursed Strikes slows the attack speed of Heroes and Summons by 40%, so both Rexxar and Misha, who deal most of their damage with basic attacks, lose a big share of their output."
+    evidence: ["Cursed Strikes", "Bestial Wrath"]
+    confidence: medium
+  - a: johanna
+    b: rexxar
+    why: "Shield Glare blinds every enemy in front of Johanna, Misha included, cutting both Rexxar's and his bear's basic-attack damage for 1.5 seconds."
+    evidence: ["Shield Glare", "Bestial Wrath"]
+    confidence: low
+  - a: malthael
+    b: rexxar
+    why: "Reaper's Mark burns 2% max Health per second on any marked non-Structure target, so Malthael's cleaving attacks drain Rexxar and Misha at once and Soul Rip heals him off both."
+    evidence: ["Reaper's Mark", "Soul Rip", "Mend Pet"]
+    confidence: low
+synergies:
+  - a: liming
+    b: rexxar
+    why: "Misha, Charge! stuns in a line for 1.25 seconds, giving Li-Ming a stationary target for a long-range, full-damage Arcane Orb."
+    evidence: ["Misha, Charge!", "Arcane Orb"]
+    confidence: medium
+  - a: kelthuzad
+    b: rexxar
+    why: "Unleash the Boars reveals and slows every enemy Hero in its path for 5 seconds, letting Kel'Thuzad's map-wide Shadow Fissure finish fleeing targets."
+    evidence: ["Unleash the Boars", "Shadow Fissure"]
+    confidence: low
+  - a: kaelthas
+    b: rexxar
+    why: "Misha, Charge! holds targets in place for Flamestrike's delayed blast, and Gravity Lapse extends the lock for a Living Bomb spread."
+    evidence: ["Misha, Charge!", "Flamestrike", "Gravity Lapse"]
+    confidence: medium

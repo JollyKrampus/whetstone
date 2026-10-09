@@ -1,0 +1,76 @@
+hero: zeratul
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Permanent Cloak, Blink and Vorpal Blade let Zeratul approach unseen and stay glued to a backline target."
+  - tag: burst
+    why: "Cleave, Singularity Spike and Might of the Nerazim's empowered attacks combine into a fast kill combo on squishy heroes."
+counters:
+  # --- strong against ---
+  - a: zeratul
+    b: sgthammer
+    why: "Zeratul cloaks up to a sieging Sgt. Hammer and Blink plus Vorpal Blade keep him on her; her only escape is Thrusters, which drops Siege Mode and her damage."
+    evidence: ["Permanent Cloak", "Blink", "Vorpal Blade", "Siege Mode", "Thrusters"]
+    confidence: high
+  - a: zeratul
+    b: valla
+    why: "Valla has 1340 Health and only Vault to escape; Zeratul cloaks in, lands Singularity Spike, and Vorpal Blade follows her Vault."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Vorpal Blade", "Vault"]
+    confidence: medium
+  - a: zeratul
+    b: raynor
+    why: "Zeratul cloaks in, lands Singularity Spike and keeps up with Vorpal Blade; Raynor's only answer is Penetrating Round's knockback, which Vorpal Blade simply undoes."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Vorpal Blade", "Penetrating Round"]
+    confidence: medium
+  - a: zeratul
+    b: whitemane
+    why: "Whitemane's 1400 Health and lack of escape make her Zeratul's easiest target, and his cloaked approach beats her slow, channelled Inquisition response."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Inquisition"]
+    confidence: medium
+  - a: zeratul
+    b: tassadar
+    why: "Zeratul's cloaked approach and Vorpal Blade get around Force Wall, and Tassadar's 1650 Health melts to Cleave plus Singularity Spike."
+    evidence: ["Permanent Cloak", "Vorpal Blade", "Cleave", "Singularity Spike", "Force Wall"]
+    confidence: medium
+  - a: zeratul
+    b: stukov
+    why: "Zeratul cloaks onto a Stukov who has no dash, and Singularity Spike plus Cleave burst him down before Bio-Kill Switch's slows can buy him time."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Cleave", "Bio-Kill Switch"]
+    confidence: low
+  # --- weak against ---
+  - a: tyrande
+    b: zeratul
+    why: "Hunter's Mark reveals Zeratul and strips 15 Armor, and Lunar Flare's stun punishes him once he decloaks."
+    evidence: ["Hunter's Mark", "Lunar Flare", "Permanent Cloak"]
+    confidence: medium
+  - a: uther
+    b: zeratul
+    why: "Divine Shield blanks Zeratul's burst on an ally, and Hammer of Justice's targeted stun stops him once he decloaks."
+    evidence: ["Divine Shield", "Hammer of Justice", "Permanent Cloak"]
+    confidence: medium
+  - a: rexxar
+    b: zeratul
+    why: "Unleash the Boars hunts every enemy Hero in a direction and reveals them for 5 seconds, dragging Zeratul out of Permanent Cloak and slowing his escape; Flare can scout his approach."
+    evidence: ["Unleash the Boars", "Flare", "Permanent Cloak"]
+    confidence: low
+  - a: malthael
+    b: zeratul
+    why: "Reaper's Mark reveals marked enemies, so Zeratul can't re-cloak while Malthael's cleaving attacks keep reapplying it, and the 2% max-Health burn adds up on his 1622 Health."
+    evidence: ["Reaper's Mark", "Permanent Cloak"]
+    confidence: low
+synergies:
+  - a: anubarak
+    b: zeratul
+    why: "Impale and Burrow Charge stun targets so Zeratul can land Singularity Spike and Cleave, and Cocoon removes a peeler from the fight."
+    evidence: ["Impale", "Burrow Charge", "Cocoon", "Singularity Spike", "Cleave"]
+    confidence: low
+  - a: malfurion
+    b: zeratul
+    why: "Entangling Roots holds a target in place for Singularity Spike, and Sentenced to Death adds damage while the Spike's slow and mark are on them."
+    evidence: ["Entangling Roots", "Singularity Spike", "Sentenced to Death"]
+    confidence: low
+  - a: abathur
+    b: zeratul
+    why: "Symbiote on Zeratul adds Spike Burst damage and Carapace shields as he dives, helping him survive the backline long enough to finish a kill."
+    evidence: ["Symbiote", "Spike Burst", "Carapace"]
+    confidence: low

@@ -1,0 +1,61 @@
+hero: rehgar
+reviewedFor: "2.57"
+traits:
+  - tag: save
+    why: "Purge on an ally grants a brief Unstoppable that breaks stuns and roots, and Ancestral Healing restores over a thousand Health in one cast."
+  - tag: peel
+    why: "Earthbind Totem's slow zone and Purge's 80% Slow on an enemy drag divers to a crawl before they reach his backline."
+counters:
+  # --- strong against ---
+  - a: rehgar
+    b: murky
+    why: "Purge on an ally grants Unstoppable, which breaks Octo-Grab's 3-second stun early and removes most of the kill pressure Murky's heroic is built around."
+    evidence: ["Purge", "Octo-Grab"]
+    confidence: medium
+  - a: rehgar
+    b: kerrigan
+    why: "Kerrigan's kills rely on chaining Ravage into Impaling Blades' stun and Primal Grasp; Purge's Unstoppable breaks the stun mid-combo and Earthbind Totem slows her follow-up."
+    evidence: ["Purge", "Earthbind Totem", "Impaling Blades", "Primal Grasp", "Ravage"]
+    confidence: low
+  - a: rehgar
+    b: thebutcher
+    why: "Purge's 80% Slow and Earthbind Totem drag The Butcher to a crawl once Ruthless Onslaught is spent, and Grounded Totem trims his attack speed."
+    evidence: ["Purge", "Earthbind Totem", "Grounded Totem", "Ruthless Onslaught"]
+    confidence: low
+  # --- weak against ---
+  - a: ana
+    b: rehgar
+    why: "Biotic Grenade blocks all healing on the enemies it hits, so a well-timed grenade wastes Chain Heal or the big single heal from Ancestral Healing."
+    evidence: ["Biotic Grenade", "Chain Heal", "Ancestral Healing"]
+    confidence: medium
+  - a: valeera
+    b: rehgar
+    why: "Garrote (Eviscerate from Stealth) silences Rehgar so he can't Chain Heal or Purge, and Wound Poison halves the healing on whoever Valeera is hitting."
+    evidence: ["Eviscerate", "Vanish", "Wound Poison", "Chain Heal", "Purge"]
+    confidence: low
+  - a: stukov
+    b: rehgar
+    why: "Rehgar must stand close to attack and keep Lightning Shield value; Lurking Arm silences him in its zone, shutting off Chain Heal and Purge while he is inside."
+    evidence: ["Lurking Arm", "Chain Heal", "Purge"]
+    confidence: low
+synergies:
+  - a: raynor
+    b: rehgar
+    why: "Bloodlust adds 40% Attack Speed and basic-attack lifesteal, which multiplies Raynor's sustained damage and makes him far harder to burst."
+    evidence: ["Bloodlust", "Inspire", "Give 'Em Some Pepper"]
+    confidence: medium
+  - a: rehgar
+    b: valla
+    why: "Bloodlust's 40% Attack Speed stacks with Hatred, and its lifesteal makes Valla far harder to burst while she keeps attacking."
+    evidence: ["Bloodlust", "Hatred"]
+    confidence: medium
+  - a: illidan
+    b: rehgar
+    why: "Lightning Shield on Illidan damages everything around him as he dives, Electric Charge heals the bearer, and Purge frees him from the stun that would otherwise kill him."
+    evidence: ["Lightning Shield", "Electric Charge", "Purge", "Dive"]
+    confidence: medium
+  - a: rehgar
+    b: sonya
+    why: "Lightning Shield on a Whirlwinding Sonya adds area damage around her, and Bloodlust boosts the basic attacks that fuel her Fury."
+    evidence: ["Lightning Shield", "Bloodlust", "Whirlwind"]
+    confidence: low
