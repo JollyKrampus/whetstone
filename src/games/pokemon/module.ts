@@ -47,6 +47,16 @@ export const pokemon: GameModule = {
       custody: 'A',
     },
     {
+      // Shown wherever sprites appear (every Pokémon page footer); keep in step with SPRITE_CREDIT in pipeline/sprites.ts.
+      id: 'showdown-sprites',
+      name: 'Pokémon Showdown sprites',
+      url: 'https://play.pokemonshowdown.com/sprites/gen5/',
+      attribution: 'Sprites: Pokémon Showdown gen5 sprite set (Smogon sprite project); Pokémon images © Nintendo, Creatures and GAME FREAK.',
+      rule: 'footer',
+      tosNote: 'Self-hosted WebP copies of the legal roster only, re-fetched when the roster changes; never hotlinked.',
+      custody: 'A',
+    },
+    {
       id: 'smogon-calc',
       name: '@smogon/calc',
       url: 'https://github.com/smogon/damage-calc',

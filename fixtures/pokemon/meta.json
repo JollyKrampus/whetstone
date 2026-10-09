@@ -58,6 +58,11 @@
       "doublesBo3": "gen9championsvgc2026regmcbo3",
       "singles": "gen9championsbssregmc"
     },
-    "smogonMonth": "2026-09"
+    "smogonMonth": "2026-09",
+    "sprites": {
+      "count": 20,
+      "credit": "Sprites: Pokémon Showdown gen5 sprite set (Smogon sprite project); Pokémon images © Nintendo, Creatures and GAME FREAK.",
+      "source": "https://play.pokemonshowdown.com/sprites/gen5/"
+    }
   }
 }

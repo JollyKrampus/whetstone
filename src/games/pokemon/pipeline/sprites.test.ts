@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
 import type { Species } from '../schema.ts';
-import { collectSprites, SPRITE_SOURCE, spritePath, toWebp } from './sprites.ts';
+import { collectSprites, SPRITE_CREDIT, SPRITE_SOURCE, spritePath, toWebp } from './sprites.ts';
 import { fakeContext, fakeHttp } from './test-support.ts';
 
 const png = async (): Promise<Uint8Array> =>
@@ -66,5 +66,12 @@ describe('sprites', () => {
     expect([offline.files, reused.files]).toEqual([[], []]);
     expect(offline.missing).toEqual(['a']);
     expect(http.calls).toEqual([]);
+  });
+});
+
+describe('sprite credit', () => {
+  it('matches the footer credit in module.ts', async () => {
+    const { pokemon } = await import('../module.ts');
+    expect(pokemon.sources.find((s) => s.id === 'showdown-sprites')?.attribution).toBe(SPRITE_CREDIT);
   });
 });

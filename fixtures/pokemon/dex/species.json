@@ -24,7 +24,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/archaludon.webp"
   },
   {
     "id": "charizard",
@@ -57,7 +58,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/charizard.webp"
   },
   {
     "id": "charizardmegay",
@@ -86,7 +88,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/charizardmegay.webp"
   },
   {
     "id": "farigiraf",
@@ -113,7 +116,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/farigiraf.webp"
   },
   {
     "id": "garchomp",
@@ -146,7 +150,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/garchomp.webp"
   },
   {
     "id": "garchompmegaz",
@@ -173,7 +178,8 @@
     "requiredItem": "garchompitez",
     "legal": [
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/garchompmegaz.webp"
   },
   {
     "id": "gholdengo",
@@ -198,7 +204,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/gholdengo.webp"
   },
   {
     "id": "golisopod",
@@ -228,7 +235,8 @@
     ],
     "legal": [
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/golisopod.webp"
   },
   {
     "id": "golisopodmega",
@@ -256,7 +264,8 @@
     "requiredItem": "golisopite",
     "legal": [
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/golisopodmega.webp"
   },
   {
     "id": "incineroar",
@@ -282,7 +291,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/incineroar.webp"
   },
   {
     "id": "indeedeef",
@@ -310,7 +320,8 @@
     "weightkg": 28,
     "legal": [
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/indeedeef.webp"
   },
   {
     "id": "kingambit",
@@ -337,7 +348,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/kingambit.webp"
   },
   {
     "id": "pelipper",
@@ -364,7 +376,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/pelipper.webp"
   },
   {
     "id": "raichu",
@@ -397,7 +410,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/raichu.webp"
   },
   {
     "id": "raichumegay",
@@ -448,7 +462,8 @@
     "weightkg": 90,
     "legal": [
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/rillaboom.webp"
   },
   {
     "id": "salamence",
@@ -479,7 +494,8 @@
     ],
     "legal": [
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/salamence.webp"
   },
   {
     "id": "salamencemega",
@@ -507,7 +523,8 @@
     "requiredItem": "salamencite",
     "legal": [
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/salamencemega.webp"
   },
   {
     "id": "sinistcha",
@@ -536,7 +553,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/sinistcha.webp"
   },
   {
     "id": "sneasler",
@@ -563,7 +581,8 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/sneasler.webp"
   },
   {
     "id": "whimsicott",
@@ -590,6 +609,7 @@
     "legal": [
       "M-B",
       "M-C"
-    ]
+    ],
+    "sprite": "img/sprites/whimsicott.webp"
   }
 ]
