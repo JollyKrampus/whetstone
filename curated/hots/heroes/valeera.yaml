@@ -1,0 +1,68 @@
+hero: valeera
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Vanish lets Valeera walk up unseen and open with Cheap Shot's stun and Blind or Garrote's silence from Stealth."
+  - tag: burst
+    why: "Combo Points from Sinister Strike and Blade Flurry cash out in a large Eviscerate, giving her short, sharp kill windows."
+counters:
+  # --- strong against ---
+  - a: valeera
+    b: sgthammer
+    why: "Vanish lets Valeera walk up unseen and open with Cheap Shot (Blade Flurry from Stealth), stunning and blinding a sieging Hammer who can't move away."
+    evidence: ["Vanish", "Blade Flurry", "Siege Mode"]
+    confidence: medium
+  - a: valeera
+    b: tassadar
+    why: "Vanish lets Valeera reach Tassadar unseen, and Cheap Shot (Blade Flurry from Stealth) stuns him before Force Wall or Shadow Walk can save him."
+    evidence: ["Vanish", "Blade Flurry", "Force Wall", "Shadow Walk"]
+    confidence: medium
+  - a: valeera
+    b: whitemane
+    why: "Garrote (Eviscerate from Stealth) silences Whitemane, cutting off Inquisition and Clemency, and her 1400 Health and lack of escape make her an easy kill."
+    evidence: ["Vanish", "Eviscerate", "Inquisition", "Clemency"]
+    confidence: medium
+  - a: valeera
+    b: stukov
+    why: "Valeera opens on Stukov from Vanish and he has no escape; Garrote (Eviscerate from Stealth) silences him so he can't place Lurking Arm, and Wound Poison halves his healing."
+    evidence: ["Vanish", "Eviscerate", "Wound Poison", "Lurking Arm"]
+    confidence: low
+  - a: valeera
+    b: chromie
+    why: "Vanish lets Valeera reach Chromie unseen, and Cheap Shot stuns her before Time Out can be used; 1390 Health can't absorb the combo that follows."
+    evidence: ["Vanish", "Blade Flurry", "Time Out"]
+    confidence: medium
+  # --- weak against ---
+  - a: tyrande
+    b: valeera
+    why: "Hunter's Mark reveals Valeera once Vanish's first Unrevealable second ends, and Lunar Flare stuns her in place."
+    evidence: ["Hunter's Mark", "Lunar Flare", "Vanish"]
+    conditions: "Smoke Bomb keeps Valeera Unrevealable inside the cloud."
+    confidence: medium
+  - a: uther
+    b: valeera
+    why: "Hammer of Justice stuns Valeera as soon as she reveals herself to attack, and Divine Shield wastes the burst she poured into her target."
+    evidence: ["Hammer of Justice", "Divine Shield", "Vanish"]
+    confidence: medium
+  - a: malthael
+    b: valeera
+    why: "Reaper's Mark reveals marked enemies and burns 2% max Health per second, so Valeera can't Vanish out of Malthael's cleave once she is marked."
+    evidence: ["Reaper's Mark", "Vanish"]
+    conditions: "Smoke Bomb's Unrevealable cloud is her answer."
+    confidence: low
+synergies:
+  - a: anubarak
+    b: valeera
+    why: "Impale's stun and Cocoon's removal of a peeler set Valeera up, and Seal Fate makes Sinister Strike hit harder and award an extra Combo Point on stunned targets."
+    evidence: ["Impale", "Cocoon", "Seal Fate", "Sinister Strike"]
+    confidence: medium
+  - a: muradin
+    b: valeera
+    why: "Storm Bolt's 1.25-second stun lets Valeera land Seal Fate-empowered Sinister Strikes and build Combo Points for a full Eviscerate."
+    evidence: ["Storm Bolt", "Seal Fate", "Sinister Strike", "Eviscerate"]
+    confidence: low
+  - a: arthas
+    b: valeera
+    why: "Howling Blast roots enemies in an area, so Valeera's Seal Fate Sinister Strikes deal bonus damage and extra Combo Points on the rooted targets."
+    evidence: ["Howling Blast", "Seal Fate", "Sinister Strike"]
+    confidence: low

@@ -1,0 +1,56 @@
+hero: thelostvikings
+reviewedFor: "2.57"
+traits:
+  - tag: split-push
+    why: "Three separately controlled Vikings can soak or push several lanes at once, spreading the enemy team thin."
+  - tag: vulnerable-body
+    why: "While the player steers one Viking, the others stand idle in their lanes and are easy to pick off with a quick rotation."
+counters:
+  # --- strong against ---
+  - a: thelostvikings
+    b: tychus
+    why: "Minigun's bonus is a share of max Health, and each Viking has a small Health pool, so Tychus' main damage amplifier does little against them."
+    evidence: ["Minigun"]
+    confidence: low
+  - a: thelostvikings
+    b: malthael
+    why: "Reaper's Mark and Soul Rip scale with max Health, so they do little to an individual Viking, and Malthael can't hold three soaked lanes against them."
+    evidence: ["Reaper's Mark", "Soul Rip"]
+    confidence: low
+  - a: thelostvikings
+    b: stitches
+    why: "Gorge and Hook only remove one Viking at a time, and a slow Stitches can't contest the three lanes the Vikings soak."
+    evidence: ["Gorge", "Hook"]
+    confidence: low
+  # --- weak against ---
+  - a: kaelthas
+    b: thelostvikings
+    why: "Living Bomb's explosion spreads to every nearby Hero, so grouped Vikings chain-explode, and a single Flamestrike covers all three."
+    evidence: ["Living Bomb", "Flamestrike"]
+    confidence: medium
+  - a: kelthuzad
+    b: thelostvikings
+    why: "Shadow Fissure can be cast anywhere on the map for 320 damage, enough to kill or chase a lone soaking Viking out of its lane from across the battleground."
+    evidence: ["Shadow Fissure"]
+    confidence: medium
+  - a: ragnaros
+    b: thelostvikings
+    why: "Lava Wave travels the length of a lane, instantly killing its minions and dealing double damage to Heroes, so a lone low-Health Viking soaking that lane loses the wave and often its life."
+    evidence: ["Lava Wave"]
+    confidence: low
+  - a: sonya
+    b: thelostvikings
+    why: "Whirlwind hits every nearby enemy and heals triple against Heroes, so three clumped Vikings feed Sonya healing while Seismic Slam's splash cleaves those behind."
+    evidence: ["Whirlwind", "Seismic Slam"]
+    confidence: low
+synergies:
+  - a: medivh
+    b: thelostvikings
+    why: "Portal lets Vikings in a soaked lane hop straight into a fight and back out again, so their split soak costs the team less."
+    evidence: ["Portal", "Go Go Go!"]
+    confidence: low
+  - a: brightwing
+    b: thelostvikings
+    why: "Phase Shift teleports Brightwing to any allied Hero, including a lone Viking under attack in a side lane, healing it and evening the fight."
+    evidence: ["Phase Shift"]
+    confidence: low

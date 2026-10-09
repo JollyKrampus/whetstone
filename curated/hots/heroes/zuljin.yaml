@@ -1,0 +1,64 @@
+hero: zuljin
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Berserker and Grievous Throw's mark both boost Zul'jin's basic attacks, which make up most of his damage."
+  - tag: immobile
+    why: "Zul'jin has no dash; Voodoo Shuffle only removes slows and roots, so he leans on Taz'dingo! to survive a dive."
+counters:
+  # --- strong against ---
+  - a: zuljin
+    b: garrosh
+    why: "No Mercy makes basic attacks on Grievous Throw-marked Heroes ignore Armor, cancelling Armor Up, and adds 2% of max Health per hit."
+    evidence: ["No Mercy", "Grievous Throw", "Armor Up"]
+    conditions: "No Mercy at level 16."
+    confidence: medium
+  - a: zuljin
+    b: chogall
+    why: "Cho'gall can't escape kiting, and No Mercy's 2% max-Health hits on Grievous Throw-marked targets eat through his huge shared Health pool."
+    evidence: ["No Mercy", "Grievous Throw", "Ogre Hide"]
+    conditions: "No Mercy at level 16."
+    confidence: medium
+  - a: zuljin
+    b: stitches
+    why: "No Mercy adds 2% of Stitches' max Health per marked hit and ignores his Armor, and Taz'dingo! keeps Zul'jin alive through a Hook and Gorge pick."
+    evidence: ["No Mercy", "Taz'dingo!", "Hook", "Gorge"]
+    conditions: "No Mercy at level 16."
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: zuljin
+    why: "Shield Glare blinds Zul'jin, so his Berserker and Grievous Throw-boosted basic attacks miss for 1.5 seconds."
+    evidence: ["Shield Glare", "Berserker", "Grievous Throw"]
+    confidence: medium
+  - a: cassia
+    b: zuljin
+    why: "Blinding Light blinds Zul'jin for 2 seconds, and Avoidance's Armor while Cassia moves blunts the basic attacks he relies on."
+    evidence: ["Blinding Light", "Avoidance", "Berserker"]
+    confidence: medium
+  - a: varian
+    b: zuljin
+    why: "Parry blocks the basic attacks that make up most of Zul'jin's damage, and Taunt silences him so he can't Taz'dingo! at the critical moment."
+    evidence: ["Parry", "Taunt", "Taz'dingo!", "Berserker"]
+    confidence: medium
+  - a: lili
+    b: zuljin
+    why: "Blinding Wind auto-targets nearby enemies, blinding Zul'jin without Li Li needing to aim, and his damage is mostly basic attacks."
+    evidence: ["Blinding Wind", "Berserker"]
+    confidence: medium
+synergies:
+  - a: tyrande
+    b: zuljin
+    why: "Hunter's Mark lowers a target's Armor by 15 while Grievous Throw marks it, so Zul'jin's empowered basic attacks burst it down."
+    evidence: ["Hunter's Mark", "Grievous Throw"]
+    confidence: medium
+  - a: uther
+    b: zuljin
+    why: "Zul'jin attacks faster the lower his Health; Divine Shield and Taz'dingo! let him sit near death at full Berserker speed without dying."
+    evidence: ["Divine Shield", "Taz'dingo!", "Berserker"]
+    confidence: medium
+  - a: rehgar
+    b: zuljin
+    why: "Bloodlust's Attack Speed stacks with Berserker's low-Health attack speed, and its lifesteal lets Zul'jin sit at low Health more safely."
+    evidence: ["Bloodlust", "Berserker"]
+    confidence: medium

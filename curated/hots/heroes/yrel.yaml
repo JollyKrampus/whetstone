@@ -1,0 +1,61 @@
+hero: yrel
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Sacred Ground grants 50 Armor while she stays inside it and Vindication heals her, so Yrel holds space at the front."
+  - tag: engage
+    why: "Avenging Wrath leaps in and slows, and a fully charged Righteous Hammer stuns, giving her a reliable fight opener."
+counters:
+  # --- strong against ---
+  - a: yrel
+    b: thebutcher
+    why: "Dauntless grants Physical Armor whenever Yrel casts, Sacred Ground adds 50 Armor, and Aldor Peacekeeper halves The Butcher's damage, so his basic-attack burst bounces off her."
+    evidence: ["Dauntless", "Sacred Ground", "Aldor Peacekeeper", "Fresh Meat"]
+    confidence: low
+  - a: yrel
+    b: illidan
+    why: "A fully charged Righteous Hammer stuns and knocks Illidan off his target, and Aldor Peacekeeper halves his damage for 4 seconds."
+    evidence: ["Righteous Hammer", "Aldor Peacekeeper", "Dive"]
+    confidence: low
+  - a: yrel
+    b: sonya
+    why: "Aldor Peacekeeper halves Sonya's damage for 4 seconds and Sacred Ground's 50 Armor blunts Whirlwind, so Yrel wins the frontline trade."
+    evidence: ["Aldor Peacekeeper", "Sacred Ground", "Whirlwind"]
+    confidence: low
+  # --- weak against ---
+  - a: malthael
+    b: yrel
+    why: "Reaper's Mark burns 2% of Yrel's 2678 max Health per second, which Sacred Ground's Armor only partly reduces, and Soul Rip heals Malthael off her."
+    evidence: ["Reaper's Mark", "Soul Rip", "Sacred Ground"]
+    confidence: medium
+  - a: tychus
+    b: yrel
+    why: "Minigun's max-Health bonus is strong against Yrel's 2678 Health, and her slowed movement while charging abilities gives Tychus time to keep shooting."
+    evidence: ["Minigun", "Divine Purpose"]
+    confidence: low
+  - a: lucio
+    b: yrel
+    why: "Soundwave knocks Yrel out of Sacred Ground, which only grants Armor while she stays inside, and Push Off kites her through her slow charge-ups."
+    evidence: ["Soundwave", "Push Off", "Sacred Ground"]
+    confidence: low
+  - a: liming
+    b: yrel
+    why: "Wave of Force knocks Yrel out of Sacred Ground, and the 25% slow she takes while charging abilities makes her an easy Arcane Orb target."
+    evidence: ["Wave of Force", "Arcane Orb", "Sacred Ground", "Divine Purpose"]
+    confidence: low
+synergies:
+  - a: kaelthas
+    b: yrel
+    why: "A fully charged Righteous Hammer stuns and Avenging Wrath slows, holding enemies in Flamestrike's delayed blast."
+    evidence: ["Righteous Hammer", "Avenging Wrath", "Flamestrike"]
+    confidence: medium
+  - a: yrel
+    b: zarya
+    why: "Shield Ally covers Yrel while she's slowed charging abilities, and Graviton Surge holds enemies for a fully charged Righteous Hammer or Vindication."
+    evidence: ["Shield Ally", "Graviton Surge", "Righteous Hammer", "Vindication"]
+    confidence: low
+  - a: chromie
+    b: yrel
+    why: "Righteous Hammer's charged stun holds enemies still through Sand Blast's delay and Dragon's Breath's falling blasts."
+    evidence: ["Righteous Hammer", "Sand Blast", "Dragon's Breath"]
+    confidence: low

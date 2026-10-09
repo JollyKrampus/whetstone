@@ -1,0 +1,68 @@
+hero: diablo
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Large health, Fire Stomp's self-heal and Black Soulstone's resurrect let him hold the front line."
+  - tag: peel
+    why: "Overpower and Shadow Charge relocate divers and stun them against terrain."
+  - tag: engage
+    why: "Shadow Charge into Overpower can slam a backliner into a wall for a long stun."
+counters:
+  # --- strong against ---
+  - a: diablo
+    b: illidan
+    why: "Overpower and Shadow Charge are targeted, so Evasion doesn't help Illidan; they throw him away from his target and stun him against terrain."
+    evidence: ["Overpower", "Shadow Charge", "Evasion"]
+    confidence: low
+  - a: diablo
+    b: nazeebo
+    why: "Shadow Charge knocks Nazeebo back and cancels Ravenous Spirit's channel."
+    evidence: ["Shadow Charge", "Ravenous Spirit"]
+    confidence: medium
+  - a: diablo
+    b: kaelthas
+    why: "Kael'thas has no escape; Shadow Charge into terrain stuns him for 1 second and Overpower drags him into Diablo's team."
+    evidence: ["Shadow Charge", "Overpower"]
+    confidence: medium
+  - a: diablo
+    b: ana
+    why: "Ana can't dodge a targeted Shadow Charge; one into a wall stuns her, and Overpower throws her into Diablo's team."
+    evidence: ["Shadow Charge", "Overpower"]
+    confidence: low
+  # --- weak against ---
+  - a: deathwing
+    b: diablo
+    why: "Shadow Charge and Overpower can't knock back or grab an Unstoppable Deathwing, which removes Diablo's whole combo."
+    evidence: ["Aspect of Death", "Shadow Charge", "Overpower"]
+    confidence: medium
+  - a: malthael
+    b: diablo
+    why: "Reaper's Mark ticks 2% of max health per second and grows with Black Soulstone's bonus health, while Touch of Death halves Fire Stomp's heal."
+    evidence: ["Reaper's Mark", "Touch of Death", "Black Soulstone", "Fire Stomp"]
+    confidence: medium
+  - a: tychus
+    b: diablo
+    why: "Minigun's 2.5% max-health bonus per attack shreds Diablo's large health pool, and every Black Soulstone soul makes it worse."
+    evidence: ["Minigun", "Black Soulstone"]
+    confidence: medium
+  - a: leoric
+    b: diablo
+    why: "Drain Hope steals up to 20% of Diablo's max health, and Wraith Walk's Unstoppable lets Leoric walk out of Shadow Charge setups."
+    evidence: ["Drain Hope", "Wraith Walk", "Shadow Charge"]
+    confidence: low
+synergies:
+  - a: diablo
+    b: kelthuzad
+    why: "Apocalypse stuns every enemy hero on the map for 1.75 seconds, letting Kel'Thuzad land Shadow Fissure on whoever he likes."
+    evidence: ["Apocalypse", "Shadow Fissure"]
+    confidence: medium
+  - a: diablo
+    b: falstad
+    why: "Apocalypse's map-wide stun gives Hinterland Blast's 1-second delay time to land on several frozen heroes."
+    evidence: ["Apocalypse", "Hinterland Blast"]
+    confidence: medium
+  - a: diablo
+    b: hanzo
+    why: "Apocalypse stuns everyone at once, an easy Dragonstrike center or long-range Dragon's Arrow."
+    evidence: ["Apocalypse", "Dragonstrike", "Dragon's Arrow"]
+    confidence: medium

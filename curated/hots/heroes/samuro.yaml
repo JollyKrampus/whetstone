@@ -1,0 +1,61 @@
+hero: samuro
+reviewedFor: "2.57"
+traits:
+  - tag: split-push
+    why: "Mirror Images push lanes beside him and Wind Walk gets him out when the enemy collapses, so Samuro pressures side lanes alone."
+  - tag: aa-reliant
+    why: "Critical Strike and his Images' attacks mean nearly all of Samuro's damage comes from basic attacks."
+counters:
+  # --- strong against ---
+  - a: samuro
+    b: sgthammer
+    why: "Wind Walk lets Samuro reach a sieging Sgt. Hammer unseen, and she can't walk away without Thrusters cancelling Siege Mode; Mirror Images split her return fire."
+    evidence: ["Wind Walk", "Mirror Image", "Siege Mode", "Thrusters"]
+    confidence: low
+  - a: samuro
+    b: chromie
+    why: "Sand Blast stops on the first enemy it hits, so Mirror Images soak Chromie's main damage while Samuro closes on her 1390 Health through Wind Walk."
+    evidence: ["Sand Blast", "Mirror Image", "Wind Walk"]
+    confidence: low
+  - a: samuro
+    b: hanzo
+    why: "Storm Bow only hits the first enemy in its path, so Mirror Images eat Hanzo's main nuke, and Wind Walk then puts Samuro on a 1375-Health archer."
+    evidence: ["Storm Bow", "Mirror Image", "Wind Walk"]
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: samuro
+    why: "Shield Glare blinds Samuro and any Mirror Images in front of Johanna, and nearly all of their damage is basic attacks and Critical Strikes."
+    evidence: ["Shield Glare", "Critical Strike", "Mirror Image"]
+    confidence: medium
+  - a: cassia
+    b: samuro
+    why: "Blinding Light blinds Samuro and his Images in an area for 2 seconds, and Avoidance's Armor while Cassia moves blunts his crits."
+    evidence: ["Blinding Light", "Avoidance", "Critical Strike"]
+    confidence: medium
+  - a: jaina
+    b: samuro
+    why: "Mirror Images take double damage, so Cone of Cold and Blizzard wipe them almost instantly, and Frostbite's Chill slows Samuro's chase."
+    evidence: ["Cone of Cold", "Blizzard", "Frostbite", "Mirror Image"]
+    confidence: low
+  - a: mei
+    b: samuro
+    why: "Snow Blind blinds and slows Samuro and every Mirror Image in its area for 1.75 seconds, shutting off the basic attacks and crits that carry his damage."
+    evidence: ["Snow Blind", "Mirror Image", "Critical Strike"]
+    confidence: medium
+synergies:
+  - a: arthas
+    b: samuro
+    why: "Howling Blast's root and Frozen Tempest's slow keep targets impaired, so Merciless Strikes makes every Samuro attack a Critical Strike."
+    evidence: ["Howling Blast", "Frozen Tempest", "Merciless Strikes"]
+    confidence: medium
+  - a: falstad
+    b: samuro
+    why: "Falstad's Flight lets him rejoin fights from anywhere while Samuro holds a side lane, so the team isn't caught a hero short."
+    evidence: ["Flight", "Wind Walk"]
+    confidence: low
+  - a: samuro
+    b: stukov
+    why: "Weighted Pustule's growing Slow keeps targets Slowed for seconds, which turns every Samuro hit into a Critical Strike through Merciless Strikes."
+    evidence: ["Weighted Pustule", "Merciless Strikes"]
+    confidence: low

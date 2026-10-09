@@ -1,0 +1,64 @@
+hero: lili
+reviewedFor: "2.57"
+traits:
+  - tag: peel
+    why: "Blinding Wind auto-targets the two nearest enemies, so it reliably Blinds whoever is diving Li Li or her carry without needing to aim."
+  - tag: channel
+    why: "Jug of 1,000 Cups is her biggest heal and must be channeled, so any Stun or Silence during it cuts off most of her throughput."
+counters:
+  - a: lili
+    b: valla
+    why: "Blinding Wind Blinds Valla for 1.5 seconds (longer with Gale Force), wasting her Hatred stacks and Strafe, whose damage is all Basic Attacks."
+    evidence: ["Blinding Wind", "Gale Force", "Hatred", "Strafe"]
+    confidence: medium
+  - a: lili
+    b: raynor
+    why: "Raynor's damage is almost entirely Basic Attacks, and Blinding Wind needs no aim to hit him, so Li Li can repeatedly cancel his Inspire and Give 'Em Some Pepper windows."
+    evidence: ["Blinding Wind", "Inspire", "Give 'Em Some Pepper"]
+    confidence: medium
+  - a: lili
+    b: thebutcher
+    why: "Blinding Wind prioritizes the nearest Heroes, which a diving Butcher always is, and the Blind stops both his damage and the healing from Butcher's Brand."
+    evidence: ["Blinding Wind", "Butcher's Brand"]
+    confidence: medium
+  - a: lili
+    b: tychus
+    why: "Minigun's percent damage only applies through Basic Attacks that land, so a well-timed Blinding Wind cancels a Minigun window outright."
+    evidence: ["Blinding Wind", "Minigun"]
+    confidence: medium
+  - a: lili
+    b: zuljin
+    why: "Zul'jin's Berserker and Grievous Throw marks are paid out through Basic Attacks, which Blinding Wind turns into misses."
+    evidence: ["Blinding Wind", "Berserker", "Grievous Throw"]
+    confidence: low
+  - a: ana
+    b: lili
+    why: "Biotic Grenade stops healing on everyone it hits for 1.75 seconds, and Li Li's output is steady Healing Brew and Jug ticks that the grenade cancels."
+    evidence: ["Biotic Grenade", "Healing Brew", "Jug of 1,000 Cups"]
+    confidence: medium
+  - a: genji
+    b: lili
+    why: "Genji's damage comes from Shuriken and Swift Strike, so Blinding Wind barely affects him, and Deflect blocks Li Li's damage while he dives her."
+    evidence: ["Shuriken", "Swift Strike", "Deflect", "Blinding Wind"]
+    confidence: medium
+  - a: kerrigan
+    b: lili
+    why: "Kerrigan's combo is mostly Ability damage, so Blinding Wind does little, and Primal Grasp plus Impaling Blades can kill Li Li before Fast Feet helps."
+    evidence: ["Primal Grasp", "Impaling Blades", "Blinding Wind", "Fast Feet"]
+    confidence: low
+synergies:
+  - a: kaelthas
+    b: lili
+    why: "Water Dragon auto-targets the nearest enemy Hero and Slows everyone near them by 70% for 4 seconds, holding the group in place for Flamestrike's delayed blast."
+    evidence: ["Water Dragon", "Flamestrike"]
+    confidence: low
+  - a: lili
+    b: mei
+    why: "Snow Blind and Blinding Wind give an anti-auto-attack lineup two independent Blinds, shutting down both ranged physical carries and melee divers."
+    evidence: ["Snow Blind", "Blinding Wind"]
+    confidence: medium
+  - a: johanna
+    b: lili
+    why: "Johanna's Shield Glare covers the front while Li Li's Blinding Wind protects the back line, so physical attackers rarely get a clean window."
+    evidence: ["Shield Glare", "Blinding Wind"]
+    confidence: medium

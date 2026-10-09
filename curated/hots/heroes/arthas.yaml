@@ -1,0 +1,69 @@
+hero: arthas
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "2750 health, a self-cast Death Coil and ghoul sacrifices from Army of the Dead let him hold the front line through long fights."
+  - tag: peel
+    why: "Howling Blast's root and Frozen Tempest's movement and attack-speed slows stop melee divers from reaching his backline."
+  - tag: mana-hungry
+    why: "Frozen Tempest drains mana every second it runs, so he leans on Frostmourne Hungers' 40-mana refund to keep it up."
+counters:
+  # --- strong against ---
+  - a: arthas
+    b: illidan
+    why: "Illidan's damage and Betrayer's Thirst healing come from basic attacks; Frozen Tempest cuts his attack speed by up to 40% and Howling Blast roots him in place."
+    evidence: ["Frozen Tempest", "Howling Blast", "Betrayer's Thirst"]
+    confidence: medium
+  - a: arthas
+    b: thebutcher
+    why: "Frozen Tempest slows Butcher's attacks by up to 40% and Rime absorbs his hits, starving the Butcher's Brand healing that only comes from basic attacks."
+    evidence: ["Frozen Tempest", "Rime", "Butcher's Brand"]
+    confidence: medium
+  - a: arthas
+    b: artanis
+    why: "Frozen Tempest cuts Artanis' attack speed by up to 40% and Rime blocks a basic attack every 5 seconds, starving Shield Overload's refresh."
+    evidence: ["Frozen Tempest", "Rime", "Shield Overload"]
+    confidence: medium
+  - a: arthas
+    b: varian
+    why: "Twin Blades of Fury Varian depends on attack speed; Frozen Tempest takes up to 40% of it away while its slow keeps him from chasing."
+    evidence: ["Frozen Tempest", "Twin Blades of Fury"]
+    conditions: "Varian on Twin Blades of Fury."
+    confidence: low
+  # --- weak against ---
+  - a: deathwing
+    b: arthas
+    why: "Deathwing is permanently Unstoppable, so Howling Blast's root and the slows from Frozen Tempest and Summon Sindragosa never touch him."
+    evidence: ["Aspect of Death", "Howling Blast", "Frozen Tempest", "Summon Sindragosa"]
+    confidence: medium
+  - a: malthael
+    b: arthas
+    why: "Arthas' large health pool feeds Reaper's Mark's 2% max-health ticks and Soul Rip's healing, and Touch of Death halves his Death Coil self-heal."
+    evidence: ["Reaper's Mark", "Soul Rip", "Touch of Death", "Death Coil"]
+    confidence: medium
+  - a: lunara
+    b: arthas
+    why: "Lunara keeps Arthas poisoned from range and Crippling Spores slows him, so Frozen Tempest and Howling Blast rarely reach her."
+    evidence: ["Nature's Toxin", "Crippling Spores", "Frozen Tempest", "Howling Blast"]
+    confidence: low
+  - a: ana
+    b: arthas
+    why: "Biotic Grenade turns off Death Coil's self-heal and Army of the Dead's sacrifice healing for its duration, his two main sources of sustain."
+    evidence: ["Biotic Grenade", "Death Coil", "Army of the Dead"]
+    confidence: low
+synergies:
+  - a: arthas
+    b: jaina
+    why: "Howling Blast's root holds enemies inside Blizzard, and Frozen Tempest's slow plus Chill keep them from walking out of the waves."
+    evidence: ["Howling Blast", "Frozen Tempest", "Blizzard", "Frostbite"]
+    confidence: medium
+  - a: arthas
+    b: kaelthas
+    why: "Howling Blast roots for 1.25 seconds, long enough for Flamestrike's 1-second delay to land on the same group."
+    evidence: ["Howling Blast", "Flamestrike"]
+    confidence: medium
+  - a: arthas
+    b: hanzo
+    why: "Summon Sindragosa slows enemies by 60% for 4 seconds, an easy window for Dragonstrike's center and fully charged Storm Bows."
+    evidence: ["Summon Sindragosa", "Dragonstrike", "Storm Bow"]
+    confidence: medium

@@ -1,0 +1,74 @@
+hero: etc
+reviewedFor: "2.57"
+traits:
+  - tag: engage
+    why: "Powerslide stuns a group for 1.25 seconds and is his main way to start fights."
+  - tag: peel
+    why: "Face Melt knocks divers off his allies on a 10-second cooldown."
+  - tag: channel
+    why: "Mosh Pit is a channel, so a stun or silence on E.T.C. ends it early."
+counters:
+  # --- strong against ---
+  - a: etc
+    b: illidan
+    why: "Face Melt knocks Illidan off his target and Imposing Presence halves his attack speed, gutting his basic-attack damage and lifesteal."
+    evidence: ["Face Melt", "Imposing Presence", "Betrayer's Thirst"]
+    conditions: "Imposing Presence at level 16 for the attack-speed part."
+    confidence: low
+  - a: etc
+    b: kaelthas
+    why: "Kael'thas has no escape; Powerslide stuns him for 1.25 seconds and Mosh Pit keeps him stunned for his team to burst."
+    evidence: ["Powerslide", "Mosh Pit"]
+    confidence: medium
+  - a: etc
+    b: jaina
+    why: "Jaina can't escape until her quest unlocks Improved Ice Block; Powerslide's stun and a Mosh Pit catch her with no answer."
+    evidence: ["Powerslide", "Mosh Pit", "Improved Ice Block"]
+    confidence: medium
+  - a: etc
+    b: thebutcher
+    why: "Face Melt pushes Butcher away right after Ruthless Onslaught, and Imposing Presence slows the basic attacks Butcher needs to heal."
+    evidence: ["Face Melt", "Imposing Presence", "Ruthless Onslaught", "Butcher's Brand"]
+    confidence: low
+  # --- weak against ---
+  - a: deathwing
+    b: etc
+    why: "Mosh Pit and Powerslide stuns do nothing to a permanently Unstoppable Deathwing, so E.T.C.'s engage and lockdown are wasted on him."
+    evidence: ["Aspect of Death", "Mosh Pit", "Powerslide"]
+    confidence: medium
+  - a: malthael
+    b: etc
+    why: "Reaper's Mark ticks 2% of E.T.C.'s max health per second, and Touch of Death halves Guitar Solo's healing."
+    evidence: ["Reaper's Mark", "Touch of Death", "Guitar Solo"]
+    confidence: medium
+  - a: tyrael
+    b: etc
+    why: "Sanctification makes Tyrael's allies Invulnerable for 3 seconds, so a Mosh Pit started on top of them does nothing."
+    evidence: ["Sanctification", "Mosh Pit"]
+    confidence: low
+  - a: alarak
+    b: etc
+    why: "Discord Strike silences E.T.C. for 1.5 seconds, which ends Mosh Pit if he's channeling it."
+    evidence: ["Discord Strike", "Mosh Pit"]
+    confidence: low
+synergies:
+  - a: alexstrasza
+    b: etc
+    why: "Mosh Pit stuns enemies in place for up to 4 seconds, so all five Cleansing Flame fireballs land on the stunned group."
+    evidence: ["Mosh Pit", "Cleansing Flame"]
+    confidence: medium
+  - a: etc
+    b: jaina
+    why: "Mosh Pit stuns enemies in place for up to 4 seconds, letting every Blizzard wave hit."
+    evidence: ["Mosh Pit", "Blizzard"]
+    confidence: medium
+  - a: etc
+    b: kaelthas
+    why: "Mosh Pit holds enemies through Flamestrike's 1-second delay, and Living Bomb spreads through the packed group."
+    evidence: ["Mosh Pit", "Flamestrike", "Living Bomb"]
+    confidence: medium
+  - a: etc
+    b: guldan
+    why: "Mosh Pit holds a group inside Rain of Destruction's falling meteors."
+    evidence: ["Mosh Pit", "Rain of Destruction"]
+    confidence: medium
