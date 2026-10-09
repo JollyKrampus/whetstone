@@ -245,6 +245,7 @@ const methodologyUrl = `${SITE.repo}/blob/main/docs/METHODOLOGY.md`;
 <style>
   .about {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--sp-7);
     min-width: 0;
   }
@@ -287,8 +288,10 @@ const methodologyUrl = `${SITE.repo}/blob/main/docs/METHODOLOGY.md`;
     border-color: var(--accent);
   }
 
+  /* minmax(0, 1fr): wide Markdown tables scroll inside instead of widening the page on phones. */
   .about__sec {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--sp-4);
     min-width: 0;
   }

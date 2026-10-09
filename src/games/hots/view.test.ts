@@ -2,8 +2,8 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { gameDataDir } from '../../lib/datadir.ts';
-import { clearHotsCache, getDraftableEntities, heroEdges } from './load.ts';
-import { heroHref, heroPortrait, toMatchupRow } from './view.ts';
+import { clearHotsCache, getDraftableEntities, getMaps, heroEdges, heroesForMap, heroMapFit } from './load.ts';
+import { heroFitRow, heroHref, heroPortrait, mapFitRow, mapHref, mapImage, patchHref, toMatchupRow } from './view.ts';
 
 afterEach(() => {
   delete process.env.WHETSTONE_FIXTURE_PRIVATE;
@@ -45,6 +45,40 @@ describe('hots view adapters', () => {
       expect(props.delta).toBe(row.edge.delta);
       expect(props.lowSample).toBe(row.gate === 'grey');
       expect(props.sourceLabel).toBe('Heroes Profile');
+    }
+  });
+});
+
+describe('hots map and patch adapters', () => {
+  it('links maps, map art and patches under the site base', () => {
+    for (const map of getMaps()) {
+      expect(mapHref(map)).toBe(`/whetstone/hots/map/${map.id}/`);
+      expect(mapImage(map)).toBe(`/whetstone/data/hots/${map.image}`);
+    }
+    expect(patchHref({ id: '2026-09-28-patch' })).toBe('/whetstone/hots/patches/2026-09-28-patch/');
+  });
+
+  it('maps theory map fit to MatchupList rows, with or without art', () => {
+    const fit = heroMapFit('abathur')[0];
+    expect(fit).toBeDefined();
+    if (!fit) return;
+    const row = mapFitRow(fit);
+    expect(row).toMatchObject({ id: fit.map.id, name: fit.map.name, href: mapHref(fit.map), image: mapImage(fit.map), score: fit.score, source: 'theory', lowSample: false });
+    expect(row).not.toHaveProperty('n');
+    expect(mapFitRow(fit, { image: null })).not.toHaveProperty('image');
+    expect(mapFitRow(fit, { image: '/x.webp' }).image).toBe('/x.webp');
+  });
+
+  it('carries n and delta for stats map rows', () => {
+    process.env.WHETSTONE_FIXTURE_PRIVATE = '1';
+    clearHotsCache();
+    const map = getMaps().find((m) => m.kind === 'standard');
+    const best = map ? heroesForMap(map.id) : [];
+    expect(best.length).toBeGreaterThan(0);
+    for (const { hero, fit } of best) {
+      const row = heroFitRow(hero, fit);
+      expect(row).toMatchObject({ id: hero.id, href: heroHref(hero), image: heroPortrait(hero), source: 'stats', n: fit.n, delta: fit.delta });
+      expect(row.lowSample).toBe(fit.gate === 'grey');
     }
   });
 });

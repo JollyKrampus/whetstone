@@ -47,6 +47,7 @@ import {
   heroEdges,
   heroMapFit,
   isFreeToPlay,
+  type MapFitRow,
 } from '../../../games/hots/load.ts';
 import type { Hero } from '../../../games/hots/schema.ts';
 import { heroHref, mapFitRow } from '../../../games/hots/view.ts';
@@ -100,7 +101,8 @@ const videos = heroVideos(hero);
 const theory = theoryMatchups(hero.id) ?? { strong: [], weak: [], synergy: [] };
 const maps = getMaps();
 const theoryMaps = theoryMapFit(hero, maps);
-const mapImage = (m: { image: string }) => (hasAsset(m.image) ? undefined : null);
+/** Map rows use the map art when this build has it, a lettered placeholder otherwise. */
+const mapRow = (f: MapFitRow) => mapFitRow(f, hasAsset(f.map.image) ? {} : { image: null });
 
 const windowLabel = (m: ModeOption, p: PeriodOption) => {
   const w = getStatsWindow(m.id, p.id);
@@ -110,6 +112,7 @@ const windowLabel = (m: ModeOption, p: PeriodOption) => {
 const issue = new URL(`${SITE.repo}/issues/new`);
 issue.searchParams.set('template', 'counter-theory.yml');
 issue.searchParams.set('title', `[Theory] ${hero.name} vs/with <Hero B>`);
+issue.searchParams.set('game', 'Heroes of the Storm');
 issue.searchParams.set('a', hero.name);
 issue.searchParams.set('patch', meta.extra.major);
 
@@ -194,7 +197,7 @@ const tabs = [
                       <MatchupList
                         title={`Best maps for ${hero.name}`}
                         subtitle="Score 1–100 · Δ = win rate on the map compared with the hero's overall, in pp · n = games on the map"
-                        rows={heroMapFit(hero.id, { mode: m.id, timeframe: p.id }).map((f) => mapFitRow(f, { image: mapImage(f.map) }))}
+                        rows={heroMapFit(hero.id, { mode: m.id, timeframe: p.id }).map(mapRow)}
                         visible={8}
                         sourceNames={names}
                         emptyText="No map has enough games for this hero in this window yet."
@@ -209,7 +212,7 @@ const tabs = [
                   <MatchupList
                     title={`Best maps for ${hero.name}`}
                     subtitle="Score 1–100 from how the kit fits each map's layout and objective (50 = neutral)"
-                    rows={theoryMaps.map((f) => mapFitRow(f, { image: mapImage(f.map) }))}
+                    rows={theoryMaps.map(mapRow)}
                     visible={8}
                     sourceNames={names}
                     emptyText="No map rule matches this hero yet."
