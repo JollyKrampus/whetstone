@@ -1,2497 +1,2694 @@
 {
-  "rulesVersion": "02303557bb30",
+  "rulesVersion": "1.5+fde7877d97a9",
   "counters": [
     {
       "a": "Abat",
       "b": "Anub",
-      "score": 65,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Abathur's area damage (Toxic Nest) clears Anub'arak's summoned units quickly.",
-          "evidence": [
-            "Toxic Nest"
-          ]
+          "text": "Abathur's area damage (Locust Strain) clears Anub'arak's summoned units quickly."
         }
-      ]
+      ],
+      "score": 57,
+      "source": "theory"
     },
     {
       "a": "Abat",
-      "b": "HXAL",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Abathur's area damage (Toxic Nest) clears Xal'atath's summoned units quickly.",
-          "evidence": [
-            "Toxic Nest"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Anub",
-      "b": "Abat",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Anub'arak can dive onto Abathur, who has little mobility to escape."
-        }
-      ]
-    },
-    {
-      "a": "Anub",
-      "b": "Demo",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Anub'arak can interrupt channels with stun (Impale); Valla has channelled abilities.",
-          "evidence": [
-            "Impale"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Anub",
-      "b": "Diab",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Anub'arak can interrupt channels with stun (Impale); Diablo has channelled abilities.",
-          "evidence": [
-            "Impale"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Anub",
-      "b": "HXAL",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Anub'arak has Spell Armor (Nerubian Armor), which reduces ability burst from Xal'atath.",
-          "evidence": [
-            "Nerubian Armor"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Anub",
       "b": "Malf",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak can dive onto Malfurion, who has little mobility to escape."
+          "text": "Abathur's area damage (Locust Strain) clears Malfurion's summoned units quickly. Only when Malfurion takes Vengeful Roots."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur can interrupt channels with stun (Slapathur), and Malfurion relies on channelled abilities. Only when Abathur takes Slapathur. Malfurion must also take Astral Communion."
         }
-      ]
+      ],
+      "score": 59,
+      "source": "theory"
+    },
+    {
+      "a": "Abat",
+      "b": "Zera",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Abathur can reveal enemies (Toxic Nest), taking away Zeratul's stealth."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur's stun (Slapathur) can stop Zeratul in the middle of a dive. Only when Abathur takes Slapathur."
+        }
+      ],
+      "score": 72,
+      "source": "theory"
+    },
+    {
+      "a": "Anub",
+      "b": "HXAL",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Anub'arak brings Spell Armor (Harden Carapace, The Traitor King), which blunts Xal'atath's ability burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak can interrupt channels with stun (Impale, Burrow Charge), and Xal'atath relies on channelled abilities."
+        }
+      ],
+      "score": 69,
+      "source": "theory"
     },
     {
       "a": "Anub",
       "b": "Tra0",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak has Spell Armor (Nerubian Armor), which reduces ability burst from Tracer.",
-          "evidence": [
-            "Nerubian Armor"
-          ]
+          "text": "Anub'arak brings Spell Armor (Harden Carapace, The Traitor King), which blunts Tracer's ability burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak has the crowd control and body-blocking to peel Tracer off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak's stun (Impale, Burrow Charge) can stop Tracer in the middle of a dive."
         }
-      ]
+      ],
+      "score": 75,
+      "source": "theory"
     },
     {
       "a": "Anub",
       "b": "Wiza",
-      "score": 83,
-      "source": "theory",
       "reasons": [
         {
-          "kind": "theory",
-          "text": "Anub'arak can interrupt channels with stun (Impale); Li-Ming has channelled abilities.",
           "evidence": [
-            "Impale"
-          ]
+            "Harden Carapace",
+            "Impale",
+            "Cocoon",
+            "Teleport"
+          ],
+          "kind": "curated",
+          "text": "Harden Carapace's Spell Armor absorbs Li-Ming's all-Ability damage, and Impale or Cocoon catches her once Teleport is spent, at which point 1270 Health evaporates."
         },
         {
           "kind": "theory",
-          "text": "Anub'arak has Spell Armor (Nerubian Armor), which reduces ability burst from Li-Ming.",
-          "evidence": [
-            "Nerubian Armor"
-          ]
+          "text": "Anub'arak brings Spell Armor (Harden Carapace, The Traitor King), which blunts Li-Ming's ability burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak can interrupt channels with stun (Impale, Burrow Charge), and Li-Ming relies on channelled abilities. Only when Li-Ming takes Disintegrate."
         }
-      ]
+      ],
+      "score": 87,
+      "source": "curated"
     },
     {
       "a": "Anub",
       "b": "Zera",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak's stun (Impale) can stop Zeratul in the middle of a dive.",
-          "evidence": [
-            "Impale"
-          ]
+          "text": "Anub'arak has the crowd control and body-blocking to peel Zeratul off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak's stun (Impale, Burrow Charge) can stop Zeratul in the middle of a dive."
         }
-      ]
+      ],
+      "score": 65,
+      "source": "theory"
     },
     {
       "a": "Anub",
       "b": "chogall",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak can interrupt channels with stun (Impale); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Impale"
-          ]
+          "text": "Anub'arak can interrupt channels with stun (Impale, Burrow Charge), and Cho'gall relies on channelled abilities."
         }
-      ]
+      ],
+      "score": 57,
+      "source": "theory"
+    },
+    {
+      "a": "Crus",
+      "b": "Abat",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna's area damage (Condemn) clears Abathur's summoned units quickly."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna clears waves quickly (Condemn), so Abathur's lane pressure buys less."
+        }
+      ],
+      "score": 62,
+      "source": "theory"
     },
     {
       "a": "Crus",
       "b": "Anub",
-      "score": 80,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Johanna's stun (Condemn) can stop Anub'arak in the middle of a dive.",
-          "evidence": [
-            "Condemn"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Johanna can ignore or remove crowd control (Iron Skin), weakening Anub'arak's stun.",
-          "evidence": [
-            "Iron Skin"
-          ]
+          "text": "Johanna's area damage (Condemn) clears Anub'arak's summoned units quickly."
         }
-      ]
+      ],
+      "score": 57,
+      "source": "theory"
     },
     {
       "a": "Crus",
       "b": "Demo",
-      "score": 97,
-      "source": "curated",
       "reasons": [
         {
-          "kind": "theory",
-          "text": "Johanna can blind basic attacks (Shield Glare), and Valla relies on basic attacks for damage.",
           "evidence": [
-            "Shield Glare"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Johanna can interrupt channels with stun (Condemn); Valla has channelled abilities.",
-          "evidence": [
-            "Condemn"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Johanna can ignore or remove crowd control (Iron Skin), weakening Valla's stun.",
-          "evidence": [
-            "Iron Skin"
-          ]
+            "Shield Glare",
+            "Zealous Glare",
+            "Hatred",
+            "Strafe"
+          ],
+          "kind": "curated",
+          "text": "Valla's Hatred and Strafe damage are Basic Attacks, so Shield Glare blanks her burst windows, and Zealous Glare's extra charge lets Johanna Blind her twice per fight."
         },
         {
           "kind": "curated",
-          "text": "Johanna's Shield Glare blinds enemies in front of her, so Valla's basic attacks miss while the blind lasts, and most of Valla's damage comes from basic attacks.",
-          "evidence": [
-            "Shield Glare"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Diab",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna can interrupt channels with stun (Condemn); Diablo has channelled abilities.",
-          "evidence": [
-            "Condemn"
-          ]
+          "text": "Shield Glare blinds Valla for 1.5 seconds, so her Hatred-stacked attacks miss and the stacks start to fall off."
         },
         {
           "kind": "theory",
-          "text": "Johanna can ignore or remove crowd control (Iron Skin), weakening Diablo's stun.",
-          "evidence": [
-            "Iron Skin"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Malf",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna can ignore or remove crowd control (Iron Skin), weakening Malfurion's root.",
-          "evidence": [
-            "Iron Skin"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Mura",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna can ignore or remove crowd control (Iron Skin), weakening Muradin's stun.",
-          "evidence": [
-            "Iron Skin"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Tra0",
-      "score": 77,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna can blind basic attacks (Shield Glare), and Tracer relies on basic attacks for damage.",
-          "evidence": [
-            "Shield Glare"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Vari",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna can ignore or remove crowd control (Iron Skin), weakening Varian's taunt.",
-          "evidence": [
-            "Iron Skin"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Wiza",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna can interrupt channels with stun (Condemn); Li-Ming has channelled abilities.",
-          "evidence": [
-            "Condemn"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Zera",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna's stun (Condemn) can stop Zeratul in the middle of a dive.",
-          "evidence": [
-            "Condemn"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "chogall",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna can interrupt channels with stun (Condemn); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Condemn"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Demo",
-      "b": "Abat",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla's area damage (Multishot) clears Abathur's summoned units quickly.",
-          "evidence": [
-            "Multishot"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Demo",
-      "b": "Anub",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla's stun (Rain of Vengeance) can stop Anub'arak in the middle of a dive.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
+          "text": "Johanna can Blind (Shield Glare), and Basic Attacks are most of Valla's damage."
         },
         {
           "kind": "theory",
-          "text": "Valla's area damage (Multishot) clears Anub'arak's summoned units quickly.",
-          "evidence": [
-            "Multishot"
-          ]
+          "text": "Johanna can block or armor against Basic Attacks (Divine Fortress), which Valla relies on for damage. Only when Johanna takes Divine Fortress."
         }
-      ]
-    },
-    {
-      "a": "Demo",
-      "b": "Diab",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla can interrupt channels with stun (Rain of Vengeance); Diablo has channelled abilities.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Demo",
-      "b": "HXAL",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla has Spell Armor (Gloom), which reduces ability burst from Xal'atath.",
-          "evidence": [
-            "Gloom"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Valla's area damage (Multishot) clears Xal'atath's summoned units quickly.",
-          "evidence": [
-            "Multishot"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Demo",
-      "b": "Tra0",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla has Spell Armor (Gloom), which reduces ability burst from Tracer.",
-          "evidence": [
-            "Gloom"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Demo",
-      "b": "Wiza",
-      "score": 83,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla can interrupt channels with stun (Rain of Vengeance); Li-Ming has channelled abilities.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Valla has Spell Armor (Gloom), which reduces ability burst from Li-Ming.",
-          "evidence": [
-            "Gloom"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Demo",
-      "b": "Zera",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla's stun (Rain of Vengeance) can stop Zeratul in the middle of a dive.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Demo",
-      "b": "chogall",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla can interrupt channels with stun (Rain of Vengeance); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "Abat",
-      "score": 77,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo's area damage (Fire Stomp) clears Abathur's summoned units quickly.",
-          "evidence": [
-            "Fire Stomp"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Diablo's map-wide reach (Apocalypse) helps answer Abathur's side-lane pressure.",
-          "evidence": [
-            "Apocalypse"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "Anub",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo's stun (Overpower) can stop Anub'arak in the middle of a dive.",
-          "evidence": [
-            "Overpower"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Diablo's area damage (Fire Stomp) clears Anub'arak's summoned units quickly.",
-          "evidence": [
-            "Fire Stomp"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "Demo",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo can interrupt channels with stun (Overpower); Valla has channelled abilities.",
-          "evidence": [
-            "Overpower"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "HXAL",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo has Spell Armor (Soul Shield), which reduces ability burst from Xal'atath.",
-          "evidence": [
-            "Soul Shield"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Diablo's area damage (Fire Stomp) clears Xal'atath's summoned units quickly.",
-          "evidence": [
-            "Fire Stomp"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "Tra0",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo has Spell Armor (Soul Shield), which reduces ability burst from Tracer.",
-          "evidence": [
-            "Soul Shield"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "Wiza",
-      "score": 83,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo can interrupt channels with stun (Overpower); Li-Ming has channelled abilities.",
-          "evidence": [
-            "Overpower"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Diablo has Spell Armor (Soul Shield), which reduces ability burst from Li-Ming.",
-          "evidence": [
-            "Soul Shield"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "Zera",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo's stun (Overpower) can stop Zeratul in the middle of a dive.",
-          "evidence": [
-            "Overpower"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "chogall",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo can interrupt channels with stun (Overpower); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Overpower"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "HXAL",
-      "b": "Abat",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Xal'atath's area damage (Void Eruption) clears Abathur's summoned units quickly.",
-          "evidence": [
-            "Void Eruption"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "HXAL",
-      "b": "Anub",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Xal'atath's silence (Silence of the Lamb) can stop Anub'arak in the middle of a dive.",
-          "evidence": [
-            "Silence of the Lamb"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Xal'atath's area damage (Void Eruption) clears Anub'arak's summoned units quickly.",
-          "evidence": [
-            "Void Eruption"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "HXAL",
-      "b": "Demo",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Xal'atath can interrupt channels with silence (Silence of the Lamb); Valla has channelled abilities.",
-          "evidence": [
-            "Silence of the Lamb"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "HXAL",
-      "b": "Diab",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Xal'atath can interrupt channels with silence (Silence of the Lamb); Diablo has channelled abilities.",
-          "evidence": [
-            "Silence of the Lamb"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "HXAL",
-      "b": "Wiza",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Xal'atath can interrupt channels with silence (Silence of the Lamb); Li-Ming has channelled abilities.",
-          "evidence": [
-            "Silence of the Lamb"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "HXAL",
-      "b": "Zera",
+      ],
       "score": 88,
-      "source": "theory",
+      "source": "curated"
+    },
+    {
+      "a": "Crus",
+      "b": "HXAL",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Xal'atath can reveal enemies (Shadow Mark), taking away the stealth Zeratul relies on.",
-          "evidence": [
-            "Shadow Mark"
-          ]
+          "text": "Johanna can Blind (Shield Glare), and Basic Attacks are most of Xal'atath's damage."
         },
         {
           "kind": "theory",
-          "text": "Xal'atath's silence (Silence of the Lamb) can stop Zeratul in the middle of a dive.",
-          "evidence": [
-            "Silence of the Lamb"
-          ]
+          "text": "Johanna can block or armor against Basic Attacks (Divine Fortress), which Xal'atath relies on for damage. Only when Johanna takes Divine Fortress."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can interrupt channels with stun (Condemn, Falling Sword), and Xal'atath relies on channelled abilities."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna's area damage (Condemn) clears Xal'atath's summoned units quickly. Only when Xal'atath takes Void Convergence."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
+    },
+    {
+      "a": "Crus",
+      "b": "Malf",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna's area damage (Condemn) clears Malfurion's summoned units quickly. Only when Malfurion takes Vengeful Roots."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can interrupt channels with stun (Condemn, Falling Sword), and Malfurion relies on channelled abilities. Only when Malfurion takes Astral Communion."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can ignore or remove crowd control (Iron Skin, Falling Sword), weakening Malfurion's sleep. Only when Malfurion takes Emerald Dreams."
+        }
+      ],
+      "score": 62,
+      "source": "theory"
+    },
+    {
+      "a": "Crus",
+      "b": "Tra0",
+      "reasons": [
+        {
+          "evidence": [
+            "Shield Glare",
+            "Iron Skin"
+          ],
+          "kind": "curated",
+          "text": "Shield Glare blinds Tracer and wipes out her basic-attack damage, while Iron Skin's Shield and Unstoppable shrug off her burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can Blind (Shield Glare), and Basic Attacks are most of Tracer's damage."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna has the crowd control and body-blocking to peel Tracer off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can block or armor against Basic Attacks (Divine Fortress), which Tracer relies on for damage. Only when Johanna takes Divine Fortress."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna's stun (Condemn, Falling Sword) can stop Tracer in the middle of a dive."
+        }
+      ],
+      "score": 88,
+      "source": "curated"
+    },
+    {
+      "a": "Crus",
+      "b": "Vari",
+      "reasons": [
+        {
+          "evidence": [
+            "Shield Glare",
+            "Twin Blades of Fury",
+            "Colossus Smash"
+          ],
+          "kind": "curated",
+          "text": "Shield Glare blinds Varian, nullifying his Twin Blades of Fury or Colossus Smash basic-attack damage for 1.5 seconds."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can ignore or remove crowd control (Iron Skin, Falling Sword), weakening Varian's taunt. Only when Varian takes Taunt."
+        }
+      ],
+      "score": 63,
+      "source": "curated"
+    },
+    {
+      "a": "Crus",
+      "b": "Zera",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna has the crowd control and body-blocking to peel Zeratul off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna's stun (Condemn, Falling Sword) can stop Zeratul in the middle of a dive."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can ignore or remove crowd control (Iron Skin, Falling Sword), weakening Zeratul's Time Stop. Only when Zeratul takes Void Prison."
+        }
+      ],
+      "score": 67,
+      "source": "theory"
+    },
+    {
+      "a": "Crus",
+      "b": "chogall",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna can interrupt channels with stun (Condemn, Falling Sword), and Cho'gall relies on channelled abilities."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can ignore or remove crowd control (Iron Skin, Falling Sword), weakening Cho'gall's stun. Only when Cho'gall takes Favor of the Old Gods."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Abat",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla's area damage (Monster Hunter) clears Abathur's summoned units quickly. Only when Valla takes Monster Hunter."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla clears waves quickly (Monster Hunter), so Abathur's lane pressure buys less. Only when Valla takes Monster Hunter."
+        }
+      ],
+      "score": 57,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Anub",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Anub'arak hardest. Only when Valla takes Manticore."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla's area damage (Monster Hunter) clears Anub'arak's summoned units quickly. Only when Valla takes Monster Hunter."
+        }
+      ],
+      "score": 65,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Crus",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Johanna hardest. Only when Valla takes Manticore."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Diab",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Diablo hardest. Only when Valla takes Manticore."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "HXAL",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla brings Spell Armor (Gloom), which blunts Xal'atath's ability burst. Only when Valla takes Gloom."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla's area damage (Monster Hunter) clears Xal'atath's summoned units quickly. Only when Valla takes Monster Hunter. Xal'atath must also take Void Convergence."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla can interrupt channels with stun (Rain of Vengeance), and Xal'atath relies on channelled abilities. Only when Valla takes Rain of Vengeance."
+        }
+      ],
+      "score": 66,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Malf",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla's area damage (Monster Hunter) clears Malfurion's summoned units quickly. Only when Valla takes Monster Hunter. Malfurion must also take Vengeful Roots."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla can interrupt channels with stun (Rain of Vengeance), and Malfurion relies on channelled abilities. Only when Valla takes Rain of Vengeance. Malfurion must also take Astral Communion."
+        }
+      ],
+      "score": 59,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Mura",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Muradin hardest. Only when Valla takes Manticore."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Tra0",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla brings Spell Armor (Gloom), which blunts Tracer's ability burst. Only when Valla takes Gloom."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla's stun (Rain of Vengeance) can stop Tracer in the middle of a dive. Only when Valla takes Rain of Vengeance."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Vari",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Varian hardest. Only when Valla takes Manticore."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla deals damage based on maximum Health (Manticore), and Varian has a large Health pool. Only when Valla takes Manticore."
+        }
+      ],
+      "score": 67,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Wiza",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Valla brings Spell Armor (Gloom), which blunts Li-Ming's ability burst. Only when Valla takes Gloom."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla can interrupt channels with stun (Rain of Vengeance), and Li-Ming relies on channelled abilities. Only when Valla takes Rain of Vengeance. Li-Ming must also take Disintegrate."
+        }
+      ],
+      "score": 62,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "chogall",
+      "reasons": [
+        {
+          "evidence": [
+            "Manticore",
+            "Ogre Hide"
+          ],
+          "kind": "curated",
+          "text": "Manticore adds 4% of max Health every third hit on the same Hero, which is punishing against Cho'gall's huge Health pool and lack of escapes."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla deals damage based on maximum Health (Manticore), which hits high-Health heroes like Cho'gall hardest. Only when Valla takes Manticore."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla can interrupt channels with stun (Rain of Vengeance), and Cho'gall relies on channelled abilities. Only when Valla takes Rain of Vengeance."
+        }
+      ],
+      "score": 80,
+      "source": "curated"
+    },
+    {
+      "a": "Diab",
+      "b": "Abat",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Diablo's map-wide reach (Apocalypse) helps answer Abathur's side-lane pressure. Only when Diablo takes Apocalypse."
+        }
+      ],
+      "score": 59,
+      "source": "theory"
+    },
+    {
+      "a": "Diab",
+      "b": "HXAL",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Diablo can interrupt channels with stun (Shadow Charge, Overpower), and Xal'atath relies on channelled abilities."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo reduces enemy Armor (Devastating Charge), offsetting Xal'atath's Spell Armor. Only when Diablo takes Devastating Charge. Xal'atath must also take Cloak of Shadows."
+        }
+      ],
+      "score": 62,
+      "source": "theory"
+    },
+    {
+      "a": "Diab",
+      "b": "Malf",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Diablo can interrupt channels with stun (Shadow Charge, Overpower), and Malfurion relies on channelled abilities. Only when Malfurion takes Astral Communion."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo can ignore or remove crowd control (Lightning Breath), weakening Malfurion's sleep. Only when Diablo takes Lightning Breath. Malfurion must also take Emerald Dreams."
+        }
+      ],
+      "score": 57,
+      "source": "theory"
+    },
+    {
+      "a": "Diab",
+      "b": "Tra0",
+      "reasons": [
+        {
+          "evidence": [
+            "Overpower",
+            "Shadow Charge",
+            "Blink"
+          ],
+          "kind": "curated",
+          "text": "Overpower is a targeted grab-and-stun that Blink can't dodge, and Shadow Charge can pin Tracer against a wall for a longer stun."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo has the crowd control and body-blocking to peel Tracer off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo's stun (Shadow Charge, Overpower) can stop Tracer in the middle of a dive."
+        }
+      ],
+      "score": 73,
+      "source": "curated"
+    },
+    {
+      "a": "Diab",
+      "b": "Wiza",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Diablo reduces enemy Armor (Devastating Charge), offsetting Li-Ming's Spell Armor. Only when Diablo takes Devastating Charge. Li-Ming must also take Force Armor."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo can interrupt channels with stun (Shadow Charge, Overpower), and Li-Ming relies on channelled abilities. Only when Li-Ming takes Disintegrate."
+        }
+      ],
+      "score": 59,
+      "source": "theory"
+    },
+    {
+      "a": "Diab",
+      "b": "Zera",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Diablo has the crowd control and body-blocking to peel Zeratul off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo's stun (Shadow Charge, Overpower) can stop Zeratul in the middle of a dive."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo reduces enemy Armor (Devastating Charge), offsetting Zeratul's Spell Armor. Only when Diablo takes Devastating Charge. Zeratul must also take Spell Shield."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo can ignore or remove crowd control (Lightning Breath), weakening Zeratul's Time Stop. Only when Diablo takes Lightning Breath. Zeratul must also take Void Prison."
+        }
+      ],
+      "score": 71,
+      "source": "theory"
+    },
+    {
+      "a": "Diab",
+      "b": "chogall",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Diablo can interrupt channels with stun (Shadow Charge, Overpower), and Cho'gall relies on channelled abilities."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo can ignore or remove crowd control (Lightning Breath), weakening Cho'gall's stun. Only when Diablo takes Lightning Breath. Cho'gall must also take Favor of the Old Gods."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Abat",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath's burst can delete Abathur's small Health pool before help arrives."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath clears waves quickly (Shadow Mark, Dark Heart Ritual), so Abathur's lane pressure buys less."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's area damage (Shadow Mark, Dark Heart Ritual) clears Abathur's summoned units quickly."
+        }
+      ],
+      "score": 67,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Anub",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Anub'arak hardest. Only when Xal'atath takes Toxic Mark."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's area damage (Shadow Mark, Dark Heart Ritual) clears Anub'arak's summoned units quickly."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Anub'arak's Spell Armor. Only when Xal'atath takes Toxic Mark."
+        }
+      ],
+      "score": 71,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Crus",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Johanna hardest. Only when Xal'atath takes Toxic Mark."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Johanna's Physical Armor. Only when Xal'atath takes Toxic Mark. Johanna must also take Divine Fortress."
+        }
+      ],
+      "score": 65,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Demo",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath can Blind (Void Eruption), and Basic Attacks are most of Valla's damage. Only when Xal'atath takes Void Eruption."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Valla's Spell Armor. Only when Xal'atath takes Toxic Mark. Valla must also take Gloom."
+        }
+      ],
+      "score": 66,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Diab",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Diablo hardest. Only when Xal'atath takes Toxic Mark."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Mura",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Muradin hardest. Only when Xal'atath takes Toxic Mark."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Muradin's Physical Armor. Only when Xal'atath takes Toxic Mark. Muradin must also take Dwarf Block."
+        }
+      ],
+      "score": 65,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Tra0",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath can Blind (Void Eruption), and Basic Attacks are most of Tracer's damage. Only when Xal'atath takes Void Eruption."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath brings Spell Armor (Cloak of Shadows, Dark Heart's Protection), which blunts Tracer's ability burst. Only when Xal'atath takes Cloak of Shadows."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) can stop Tracer in the middle of a dive. Only when Xal'atath takes Silence of the Lamb."
+        }
+      ],
+      "score": 71,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Vari",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Varian hardest. Only when Xal'atath takes Toxic Mark."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), and Varian has a large Health pool. Only when Xal'atath takes Toxic Mark."
+        }
+      ],
+      "score": 67,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Wiza",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath's burst can delete Li-Ming's small Health pool before help arrives."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Li-Ming's Spell Armor. Only when Xal'atath takes Toxic Mark. Li-Ming must also take Force Armor."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath can interrupt channels with silence (Silence of the Lamb, Dark Heart's Protection), and Li-Ming relies on channelled abilities. Only when Xal'atath takes Silence of the Lamb. Li-Ming must also take Disintegrate."
+        }
+      ],
+      "score": 68,
+      "source": "theory"
+    },
+    {
+      "a": "HXAL",
+      "b": "Zera",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Xal'atath can reveal enemies (Shadow Mark), taking away Zeratul's stealth."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath reduces enemy Armor (Toxic Mark), offsetting Zeratul's Spell Armor. Only when Xal'atath takes Toxic Mark. Zeratul must also take Spell Shield."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) can stop Zeratul in the middle of a dive. Only when Xal'atath takes Silence of the Lamb."
+        }
+      ],
+      "score": 75,
+      "source": "theory"
     },
     {
       "a": "HXAL",
       "b": "chogall",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Xal'atath can interrupt channels with silence (Silence of the Lamb); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Silence of the Lamb"
-          ]
+          "text": "Xal'atath deals damage based on maximum Health (Toxic Mark), which hits high-Health heroes like Cho'gall hardest. Only when Xal'atath takes Toxic Mark."
         }
-      ]
+      ],
+      "score": 60,
+      "source": "theory"
     },
     {
       "a": "Malf",
-      "b": "Anub",
-      "score": 69,
-      "source": "theory",
+      "b": "HXAL",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Malfurion's root (Entangling Roots) can stop Anub'arak in the middle of a dive.",
-          "evidence": [
-            "Entangling Roots"
-          ]
+          "text": "Malfurion's healing undoes the chip damage Xal'atath lands from range."
         }
-      ]
+      ],
+      "score": 55,
+      "source": "theory"
     },
     {
       "a": "Malf",
-      "b": "Demo",
-      "score": 69,
-      "source": "theory",
+      "b": "Tra0",
       "reasons": [
         {
-          "kind": "theory",
-          "text": "Malfurion can interrupt channels with silence (Twilight Dream); Valla has channelled abilities.",
           "evidence": [
-            "Twilight Dream"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Malf",
-      "b": "Diab",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
+            "Twilight Dream",
+            "Blink",
+            "Recall"
+          ],
+          "kind": "curated",
+          "text": "A Silenced Tracer cannot Blink or Recall, and Twilight Dream's large area covers the spot she dives into, leaving her stranded for 3 seconds."
+        },
         {
           "kind": "theory",
-          "text": "Malfurion can interrupt channels with silence (Twilight Dream); Diablo has channelled abilities.",
-          "evidence": [
-            "Twilight Dream"
-          ]
+          "text": "Malfurion has the crowd control and body-blocking to peel Tracer off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's root (Entangling Roots, Emerald Dreams) can stop Tracer in the middle of a dive."
         }
-      ]
+      ],
+      "score": 80,
+      "source": "curated"
     },
     {
       "a": "Malf",
       "b": "Wiza",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Malfurion can interrupt channels with silence (Twilight Dream); Li-Ming has channelled abilities.",
-          "evidence": [
-            "Twilight Dream"
-          ]
+          "text": "Malfurion's healing undoes the chip damage Li-Ming lands from range."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion can interrupt channels with silence (Twilight Dream, Astral Communion), and Li-Ming relies on channelled abilities. Only when Malfurion takes Twilight Dream. Li-Ming must also take Disintegrate."
         }
-      ]
+      ],
+      "score": 59,
+      "source": "theory"
     },
     {
       "a": "Malf",
       "b": "Zera",
+      "reasons": [
+        {
+          "evidence": [
+            "Moonfire",
+            "Celestial Alignment",
+            "Twilight Dream",
+            "Permanent Cloak",
+            "Blink"
+          ],
+          "kind": "curated",
+          "text": "Moonfire reveals Heroes it hits for 2 seconds (5 with Celestial Alignment), exposing Zeratul's approach, and Twilight Dream's Silence stops his Blink exit."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion can reveal enemies (Moonfire, Celestial Alignment), taking away Zeratul's stealth."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion has the crowd control and body-blocking to peel Zeratul off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's root (Entangling Roots, Emerald Dreams) can stop Zeratul in the middle of a dive."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion can ignore or remove crowd control (Nature's Cure), weakening Zeratul's Time Stop. Only when Malfurion takes Nature's Cure. Zeratul must also take Void Prison."
+        }
+      ],
       "score": 88,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Malfurion can reveal enemies (Moonfire), taking away the stealth Zeratul relies on.",
-          "evidence": [
-            "Moonfire"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Malfurion's root (Entangling Roots) can stop Zeratul in the middle of a dive.",
-          "evidence": [
-            "Entangling Roots"
-          ]
-        }
-      ]
+      "source": "curated"
     },
     {
       "a": "Malf",
       "b": "chogall",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Malfurion can interrupt channels with silence (Twilight Dream); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Twilight Dream"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Mura",
-      "b": "Abat",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Muradin's area damage (Thunder Clap) clears Abathur's summoned units quickly.",
-          "evidence": [
-            "Thunder Clap"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Mura",
-      "b": "Anub",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Muradin's stun (Storm Bolt) can stop Anub'arak in the middle of a dive.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+          "text": "Malfurion's healing undoes the chip damage Cho'gall lands from range."
         },
         {
           "kind": "theory",
-          "text": "Muradin's area damage (Thunder Clap) clears Anub'arak's summoned units quickly.",
-          "evidence": [
-            "Thunder Clap"
-          ]
+          "text": "Malfurion can ignore or remove crowd control (Nature's Cure), weakening Cho'gall's stun. Only when Malfurion takes Nature's Cure. Cho'gall must also take Favor of the Old Gods."
         }
-      ]
+      ],
+      "score": 58,
+      "source": "theory"
     },
     {
       "a": "Mura",
       "b": "Demo",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Muradin can interrupt channels with stun (Storm Bolt); Valla has channelled abilities.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+          "text": "Muradin can block or armor against Basic Attacks (Dwarf Block), which Valla relies on for damage. Only when Muradin takes Dwarf Block."
         }
-      ]
-    },
-    {
-      "a": "Mura",
-      "b": "Diab",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Muradin can interrupt channels with stun (Storm Bolt); Diablo has channelled abilities.",
-          "evidence": [
-            "Storm Bolt"
-          ]
-        }
-      ]
+      ],
+      "score": 59,
+      "source": "theory"
     },
     {
       "a": "Mura",
       "b": "HXAL",
-      "score": 65,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Muradin's area damage (Thunder Clap) clears Xal'atath's summoned units quickly.",
-          "evidence": [
-            "Thunder Clap"
-          ]
+          "text": "Muradin can block or armor against Basic Attacks (Dwarf Block), which Xal'atath relies on for damage. Only when Muradin takes Dwarf Block."
+        },
+        {
+          "kind": "theory",
+          "text": "Muradin can interrupt channels with stun (Storm Bolt, Haymaker), and Xal'atath relies on channelled abilities."
         }
-      ]
+      ],
+      "score": 66,
+      "source": "theory"
     },
     {
       "a": "Mura",
-      "b": "Wiza",
-      "score": 69,
-      "source": "theory",
+      "b": "Tra0",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Muradin can interrupt channels with stun (Storm Bolt); Li-Ming has channelled abilities.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+          "text": "Muradin can block or armor against Basic Attacks (Dwarf Block), which Tracer relies on for damage. Only when Muradin takes Dwarf Block."
+        },
+        {
+          "kind": "theory",
+          "text": "Muradin's stun (Storm Bolt, Haymaker) can stop Tracer in the middle of a dive."
         }
-      ]
+      ],
+      "score": 64,
+      "source": "theory"
     },
     {
       "a": "Mura",
       "b": "Zera",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Muradin's stun (Storm Bolt) can stop Zeratul in the middle of a dive.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+          "text": "Muradin's stun (Storm Bolt, Haymaker) can stop Zeratul in the middle of a dive."
         }
-      ]
+      ],
+      "score": 55,
+      "source": "theory"
     },
     {
       "a": "Mura",
       "b": "chogall",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Muradin can interrupt channels with stun (Storm Bolt); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+          "text": "Muradin can interrupt channels with stun (Storm Bolt, Haymaker), and Cho'gall relies on channelled abilities."
         }
-      ]
+      ],
+      "score": 57,
+      "source": "theory"
     },
     {
       "a": "Tra0",
-      "b": "Anub",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Anub'arak hardest.",
-          "evidence": [
-            "Quantum Spike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Tra0",
-      "b": "Crus",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Johanna hardest.",
-          "evidence": [
-            "Quantum Spike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Tra0",
-      "b": "Diab",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Diablo hardest.",
-          "evidence": [
-            "Quantum Spike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Tra0",
-      "b": "Mura",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Muradin hardest.",
-          "evidence": [
-            "Quantum Spike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Tra0",
-      "b": "Vari",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Varian hardest.",
-          "evidence": [
-            "Quantum Spike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Tra0",
-      "b": "chogall",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Cho'gall hardest.",
-          "evidence": [
-            "Quantum Spike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Anub",
-      "score": 83,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Varian reduces healing (Mortal Strike), which cuts into Anub'arak's heal-self.",
-          "evidence": [
-            "Mortal Strike"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Varian reduces armor (Colossus Smash), offsetting Anub'arak's spell-armor.",
-          "evidence": [
-            "Colossus Smash"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Crus",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Varian reduces healing (Mortal Strike), which cuts into Johanna's heal-self.",
-          "evidence": [
-            "Mortal Strike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Demo",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Varian can block or armor against basic attacks (Parry), which Valla relies on for damage.",
-          "evidence": [
-            "Parry"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Varian reduces armor (Colossus Smash), offsetting Valla's spell-armor.",
-          "evidence": [
-            "Colossus Smash"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Diab",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Varian reduces armor (Colossus Smash), offsetting Diablo's spell-armor.",
-          "evidence": [
-            "Colossus Smash"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Malf",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Varian reduces healing (Mortal Strike), which cuts into Malfurion's heal-ally.",
-          "evidence": [
-            "Mortal Strike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Mura",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Varian reduces healing (Mortal Strike), which cuts into Muradin's heal-self.",
-          "evidence": [
-            "Mortal Strike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Tra0",
-      "score": 86,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Varian can block or armor against basic attacks (Parry), which Tracer relies on for damage.",
-          "evidence": [
-            "Parry"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Varian reduces healing (Mortal Strike), which cuts into Tracer's heal-self.",
-          "evidence": [
-            "Mortal Strike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "chogall",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Varian reduces healing (Mortal Strike), which cuts into Cho'gall's heal-self.",
-          "evidence": [
-            "Mortal Strike"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Wiza",
-      "b": "Anub",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can ignore or remove crowd control (Illusionist), weakening Anub'arak's stun.",
-          "evidence": [
-            "Illusionist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Wiza",
-      "b": "Crus",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can ignore or remove crowd control (Illusionist), weakening Johanna's stun.",
-          "evidence": [
-            "Illusionist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Wiza",
-      "b": "Demo",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can interrupt channels with displace (Wave of Force); Valla has channelled abilities.",
-          "evidence": [
-            "Wave of Force"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Li-Ming can ignore or remove crowd control (Illusionist), weakening Valla's stun.",
-          "evidence": [
-            "Illusionist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Wiza",
-      "b": "Diab",
-      "score": 80,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can interrupt channels with displace (Wave of Force); Diablo has channelled abilities.",
-          "evidence": [
-            "Wave of Force"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Li-Ming can ignore or remove crowd control (Illusionist), weakening Diablo's stun.",
-          "evidence": [
-            "Illusionist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Wiza",
-      "b": "Malf",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can ignore or remove crowd control (Illusionist), weakening Malfurion's root.",
-          "evidence": [
-            "Illusionist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Wiza",
-      "b": "Mura",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can ignore or remove crowd control (Illusionist), weakening Muradin's stun.",
-          "evidence": [
-            "Illusionist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Wiza",
-      "b": "Vari",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can ignore or remove crowd control (Illusionist), weakening Varian's taunt.",
-          "evidence": [
-            "Illusionist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Wiza",
-      "b": "chogall",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can interrupt channels with displace (Wave of Force); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Wave of Force"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Zera",
       "b": "Abat",
-      "score": 83,
-      "source": "theory",
       "reasons": [
         {
-          "kind": "theory",
-          "text": "Zeratul can dive onto Abathur, who has little mobility to escape."
+          "evidence": [
+            "Blink",
+            "Melee",
+            "Reload"
+          ],
+          "kind": "curated",
+          "text": "Three Blink charges let Tracer cover ground fast to find Abathur's body, and her nonstop basic attacks plus Melee kill it before his team can rotate to help."
         },
         {
           "kind": "theory",
-          "text": "Zeratul's area damage (Cleave) clears Abathur's summoned units quickly.",
-          "evidence": [
-            "Cleave"
-          ]
+          "text": "Tracer can dive onto Abathur, whose small Health pool rarely survives a committed dive."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer's burst (Melee) can delete Abathur's small Health pool before help arrives."
         }
-      ]
+      ],
+      "score": 85,
+      "source": "curated"
     },
     {
-      "a": "Zera",
+      "a": "Tra0",
       "b": "Anub",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Anub'arak hardest. Only when Tracer takes Quantum Spike."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Anub'arak's Spell Armor. Only when Tracer takes Heavy Handed."
+        }
+      ],
       "score": 65,
-      "source": "theory",
+      "source": "theory"
+    },
+    {
+      "a": "Tra0",
+      "b": "Crus",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul's area damage (Cleave) clears Anub'arak's summoned units quickly.",
-          "evidence": [
-            "Cleave"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Zera",
-      "b": "Demo",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
+          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Johanna hardest. Only when Tracer takes Quantum Spike."
+        },
         {
           "kind": "theory",
-          "text": "Zeratul can interrupt channels with time-stop (Void Prison); Valla has channelled abilities.",
-          "evidence": [
-            "Void Prison"
-          ]
+          "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Johanna's Physical Armor. Only when Tracer takes Heavy Handed. Johanna must also take Divine Fortress."
         }
-      ]
+      ],
+      "score": 65,
+      "source": "theory"
     },
     {
-      "a": "Zera",
+      "a": "Tra0",
       "b": "Diab",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul can interrupt channels with time-stop (Void Prison); Diablo has channelled abilities.",
-          "evidence": [
-            "Void Prison"
-          ]
+          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Diablo hardest. Only when Tracer takes Quantum Spike."
         }
-      ]
+      ],
+      "score": 60,
+      "source": "theory"
     },
     {
-      "a": "Zera",
+      "a": "Tra0",
       "b": "HXAL",
-      "score": 65,
-      "source": "theory",
       "reasons": [
         {
-          "kind": "theory",
-          "text": "Zeratul's area damage (Cleave) clears Xal'atath's summoned units quickly.",
           "evidence": [
-            "Cleave"
-          ]
+            "Blink",
+            "Shadow Mark",
+            "Void Eruption",
+            "Void Step"
+          ],
+          "kind": "curated",
+          "text": "Tracer's Blinks dodge Shadow Mark's center and Void Eruption's path, and Xal'atath's 1330 Health can't outlast her once Void Step is spent."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer can deny a burst window (Telefrag), wasting Xal'atath's cooldowns. Only when Tracer takes Telefrag."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Xal'atath's Spell Armor. Only when Tracer takes Heavy Handed. Xal'atath must also take Cloak of Shadows."
         }
-      ]
+      ],
+      "score": 69,
+      "source": "curated"
     },
     {
-      "a": "Zera",
-      "b": "Malf",
-      "score": 73,
-      "source": "theory",
+      "a": "Tra0",
+      "b": "Mura",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul can dive onto Malfurion, who has little mobility to escape."
+          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Muradin hardest. Only when Tracer takes Quantum Spike."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Muradin's Physical Armor. Only when Tracer takes Heavy Handed. Muradin must also take Dwarf Block."
         }
-      ]
+      ],
+      "score": 65,
+      "source": "theory"
     },
     {
-      "a": "Zera",
+      "a": "Tra0",
+      "b": "Vari",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Varian hardest. Only when Tracer takes Quantum Spike."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer deals damage based on maximum Health (Quantum Spike), and Varian has a large Health pool. Only when Tracer takes Quantum Spike."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer can ignore or remove crowd control (Recall), weakening Varian's taunt. Only when Varian takes Taunt."
+        }
+      ],
+      "score": 70,
+      "source": "theory"
+    },
+    {
+      "a": "Tra0",
       "b": "Wiza",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul can interrupt channels with time-stop (Void Prison); Li-Ming has channelled abilities.",
-          "evidence": [
-            "Void Prison"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Zera",
-      "b": "chogall",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
+          "text": "Tracer can dive onto Li-Ming, whose small Health pool rarely survives a committed dive."
+        },
         {
           "kind": "theory",
-          "text": "Zeratul can interrupt channels with time-stop (Void Prison); Cho'gall has channelled abilities.",
-          "evidence": [
-            "Void Prison"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "chogall",
-      "b": "Abat",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
+          "text": "Tracer's burst (Melee) can delete Li-Ming's small Health pool before help arrives."
+        },
         {
           "kind": "theory",
-          "text": "Cho'gall's area damage (Dread Orb) clears Abathur's summoned units quickly.",
-          "evidence": [
-            "Dread Orb"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "chogall",
-      "b": "Anub",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
+          "text": "Tracer can deny a burst window (Telefrag), wasting Li-Ming's cooldowns. Only when Tracer takes Telefrag."
+        },
         {
           "kind": "theory",
-          "text": "Cho'gall's area damage (Dread Orb) clears Anub'arak's summoned units quickly.",
-          "evidence": [
-            "Dread Orb"
-          ]
+          "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Li-Ming's Spell Armor. Only when Tracer takes Heavy Handed. Li-Ming must also take Force Armor."
         }
-      ]
-    },
-    {
-      "a": "chogall",
-      "b": "Demo",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Cho'gall can interrupt channels with displace (Surging Fist); Valla has channelled abilities.",
-          "evidence": [
-            "Surging Fist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "chogall",
-      "b": "Diab",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Cho'gall can interrupt channels with displace (Surging Fist); Diablo has channelled abilities.",
-          "evidence": [
-            "Surging Fist"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "chogall",
-      "b": "HXAL",
+      ],
       "score": 77,
-      "source": "theory",
+      "source": "theory"
+    },
+    {
+      "a": "Tra0",
+      "b": "Zera",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall's area damage (Dread Orb) clears Xal'atath's summoned units quickly.",
-          "evidence": [
-            "Dread Orb"
-          ]
+          "text": "Tracer can reveal enemies (Tracer Rounds), taking away Zeratul's stealth. Only when Tracer takes Tracer Rounds."
         },
         {
           "kind": "theory",
-          "text": "Cho'gall can avoid or survive a burst window (Molten Block), wasting Xal'atath's cooldowns.",
-          "evidence": [
-            "Molten Block"
-          ]
+          "text": "Tracer can deny a burst window (Telefrag), wasting Zeratul's cooldowns. Only when Tracer takes Telefrag."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Zeratul's Spell Armor. Only when Tracer takes Heavy Handed. Zeratul must also take Spell Shield."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer can ignore or remove crowd control (Recall), weakening Zeratul's Time Stop. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 73,
+      "source": "theory"
+    },
+    {
+      "a": "Tra0",
+      "b": "chogall",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Tracer deals damage based on maximum Health (Quantum Spike), which hits high-Health heroes like Cho'gall hardest. Only when Tracer takes Quantum Spike."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer can ignore or remove crowd control (Recall), weakening Cho'gall's stun. Only when Cho'gall takes Favor of the Old Gods."
+        }
+      ],
+      "score": 63,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Anub",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian deals damage based on maximum Health (Juggernaut), which hits high-Health heroes like Anub'arak hardest. Only when Varian takes Juggernaut."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces healing received (Mortal Strike), which blunts Anub'arak's self-healing in melee range. Only when Varian takes Mortal Strike. Anub'arak must also take Locust Swarm."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Anub'arak's Spell Armor. Only when Varian takes Colossus Smash."
+        }
+      ],
+      "score": 70,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Crus",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian deals damage based on maximum Health (Juggernaut), which hits high-Health heroes like Johanna hardest. Only when Varian takes Juggernaut."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces healing received (Mortal Strike), which blunts Johanna's self-healing in melee range. Only when Varian takes Mortal Strike. Johanna must also take Laws of Hope."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Johanna's Physical Armor. Only when Varian takes Colossus Smash. Johanna must also take Divine Fortress."
+        }
+      ],
+      "score": 70,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Demo",
+      "reasons": [
+        {
+          "evidence": [
+            "Parry",
+            "Charge",
+            "Taunt",
+            "Hatred"
+          ],
+          "kind": "curated",
+          "text": "Parry blocks all of Valla's basic attacks for 1.25 seconds with two charges, and Charge plus Taunt pin her in place."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian can block or armor against Basic Attacks (Parry, Overpower), which Valla relies on for damage."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Valla's Spell Armor. Only when Varian takes Colossus Smash. Valla must also take Gloom."
+        }
+      ],
+      "score": 83,
+      "source": "curated"
+    },
+    {
+      "a": "Vari",
+      "b": "Diab",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian deals damage based on maximum Health (Juggernaut), which hits high-Health heroes like Diablo hardest. Only when Varian takes Juggernaut."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces healing received (Mortal Strike), which blunts Diablo's self-healing in melee range. Only when Varian takes Mortal Strike."
+        }
+      ],
+      "score": 66,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "HXAL",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian can block or armor against Basic Attacks (Parry, Overpower), which Xal'atath relies on for damage."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian can deny a burst window (Shield Wall), wasting Xal'atath's cooldowns. Only when Varian takes Shield Wall."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Xal'atath's Spell Armor. Only when Varian takes Colossus Smash. Xal'atath must also take Cloak of Shadows."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian can interrupt channels with silence (Taunt), and Xal'atath relies on channelled abilities. Only when Varian takes Taunt."
+        }
+      ],
+      "score": 77,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Malf",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian reduces healing received (Mortal Strike), which cuts into Malfurion's healing. Only when Varian takes Mortal Strike."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian can interrupt channels with silence (Taunt), and Malfurion relies on channelled abilities. Only when Varian takes Taunt. Malfurion must also take Astral Communion."
+        }
+      ],
+      "score": 65,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Mura",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian deals damage based on maximum Health (Juggernaut), which hits high-Health heroes like Muradin hardest. Only when Varian takes Juggernaut."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces healing received (Mortal Strike), which blunts Muradin's self-healing in melee range. Only when Varian takes Mortal Strike."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Muradin's Physical Armor. Only when Varian takes Colossus Smash. Muradin must also take Dwarf Block."
+        }
+      ],
+      "score": 70,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Tra0",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian can block or armor against Basic Attacks (Parry, Overpower), which Tracer relies on for damage."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian has the crowd control and body-blocking to peel Tracer off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian can deny a burst window (Shield Wall), wasting Tracer's cooldowns. Only when Varian takes Shield Wall."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian's silence (Taunt) can stop Tracer in the middle of a dive. Only when Varian takes Taunt."
+        }
+      ],
+      "score": 77,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Wiza",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian can deny a burst window (Shield Wall), wasting Li-Ming's cooldowns. Only when Varian takes Shield Wall."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Li-Ming's Spell Armor. Only when Varian takes Colossus Smash. Li-Ming must also take Force Armor."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian can interrupt channels with silence (Taunt), and Li-Ming relies on channelled abilities. Only when Varian takes Taunt. Li-Ming must also take Disintegrate."
+        }
+      ],
+      "score": 65,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Zera",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian has the crowd control and body-blocking to peel Zeratul off a target."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces healing received (Mortal Strike), which blunts Zeratul's self-healing in melee range. Only when Varian takes Mortal Strike. Zeratul must also take Mending Strikes."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian can deny a burst window (Shield Wall), wasting Zeratul's cooldowns. Only when Varian takes Shield Wall."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Zeratul's Spell Armor. Only when Varian takes Colossus Smash. Zeratul must also take Spell Shield."
+        }
+      ],
+      "score": 76,
+      "source": "theory"
+    },
+    {
+      "a": "Wiza",
+      "b": "Abat",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Li-Ming's burst can delete Abathur's small Health pool before help arrives."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Wiza",
+      "b": "Tra0",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Li-Ming brings Spell Armor (Force Armor), which blunts Tracer's ability burst. Only when Li-Ming takes Force Armor."
+        }
+      ],
+      "score": 57,
+      "source": "theory"
+    },
+    {
+      "a": "Zera",
+      "b": "Abat",
+      "reasons": [
+        {
+          "evidence": [
+            "Permanent Cloak",
+            "Cleave",
+            "Singularity Spike",
+            "Deep Tunnel"
+          ],
+          "kind": "curated",
+          "text": "Permanent Cloak lets Zeratul walk straight up to Abathur's unguarded body, and Cleave plus Singularity Spike kill it before Deep Tunnel's 30-second cooldown can get him out."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can approach unseen (Permanent Cloak) and catch Abathur, who is easy to kill when found alone."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can dive onto Abathur, whose small Health pool rarely survives a committed dive."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul's burst (Singularity Spike, Cleave) can delete Abathur's small Health pool before help arrives."
+        }
+      ],
+      "score": 92,
+      "source": "curated"
+    },
+    {
+      "a": "Zera",
+      "b": "Demo",
+      "reasons": [
+        {
+          "evidence": [
+            "Permanent Cloak",
+            "Singularity Spike",
+            "Vorpal Blade",
+            "Vault"
+          ],
+          "kind": "curated",
+          "text": "Valla has 1340 Health and only Vault to escape; Zeratul cloaks in, lands Singularity Spike, and Vorpal Blade follows her Vault."
+        }
+      ],
+      "score": 69,
+      "source": "curated"
+    },
+    {
+      "a": "Zera",
+      "b": "HXAL",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Zeratul brings Spell Armor (Spell Shield), which blunts Xal'atath's ability burst. Only when Zeratul takes Spell Shield."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can interrupt channels with Time Stop (Void Prison), and Xal'atath relies on channelled abilities. Only when Zeratul takes Void Prison."
+        }
+      ],
+      "score": 62,
+      "source": "theory"
+    },
+    {
+      "a": "Zera",
+      "b": "Tra0",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Zeratul brings Spell Armor (Spell Shield), which blunts Tracer's ability burst. Only when Zeratul takes Spell Shield."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul's Time Stop (Void Prison) can stop Tracer in the middle of a dive. Only when Zeratul takes Void Prison."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Zera",
+      "b": "Wiza",
+      "reasons": [
+        {
+          "evidence": [
+            "Permanent Cloak",
+            "Singularity Spike",
+            "Cleave",
+            "Blink",
+            "Teleport"
+          ],
+          "kind": "curated",
+          "text": "From Permanent Cloak Zeratul lands Singularity Spike and Cleave before Li-Ming sees him, and Blink matches her Teleport if she tries to run."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can approach unseen (Permanent Cloak) and catch Li-Ming, who is easy to kill when found alone."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can dive onto Li-Ming, whose small Health pool rarely survives a committed dive."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul's burst (Singularity Spike, Cleave) can delete Li-Ming's small Health pool before help arrives."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul brings Spell Armor (Spell Shield), which blunts Li-Ming's ability burst. Only when Zeratul takes Spell Shield."
+        }
+      ],
+      "score": 88,
+      "source": "curated"
+    },
+    {
+      "a": "chogall",
+      "b": "Abat",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall's area damage (Shadowflame, Dread Orb) clears Abathur's summoned units quickly."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall clears waves quickly (Shadowflame, Dread Orb), so Abathur's lane pressure buys less."
+        }
+      ],
+      "score": 62,
+      "source": "theory"
+    },
+    {
+      "a": "chogall",
+      "b": "Anub",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Anub'arak hardest. Only when Cho'gall takes Uppercut."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's area damage (Shadowflame, Dread Orb) clears Anub'arak's summoned units quickly."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Anub'arak's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Anub'arak must also take Locust Swarm."
+        }
+      ],
+      "score": 72,
+      "source": "theory"
+    },
+    {
+      "a": "chogall",
+      "b": "Crus",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Johanna hardest. Only when Cho'gall takes Uppercut."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Johanna's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Johanna must also take Laws of Hope."
+        }
+      ],
+      "score": 66,
+      "source": "theory"
+    },
+    {
+      "a": "chogall",
+      "b": "Diab",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Diablo hardest. Only when Cho'gall takes Uppercut."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Diablo's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration."
+        }
+      ],
+      "score": 66,
+      "source": "theory"
+    },
+    {
+      "a": "chogall",
+      "b": "HXAL",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall can deny a burst window (Molten Block), wasting Xal'atath's cooldowns. Only when Cho'gall takes Molten Block."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's area damage (Shadowflame, Dread Orb) clears Xal'atath's summoned units quickly. Only when Xal'atath takes Void Convergence."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can interrupt channels with stun (Hammer of Twilight, Leaden Orb), and Xal'atath relies on channelled abilities."
+        }
+      ],
+      "score": 63,
+      "source": "theory"
+    },
+    {
+      "a": "chogall",
+      "b": "Malf",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which cuts into Malfurion's healing. Only when Cho'gall takes Enraged Regeneration."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's area damage (Shadowflame, Dread Orb) clears Malfurion's summoned units quickly. Only when Malfurion takes Vengeful Roots."
+        }
+      ],
+      "score": 65,
+      "source": "theory"
+    },
+    {
+      "a": "chogall",
+      "b": "Mura",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Muradin hardest. Only when Cho'gall takes Uppercut."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Muradin's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration."
+        }
+      ],
+      "score": 66,
+      "source": "theory"
     },
     {
       "a": "chogall",
       "b": "Tra0",
-      "score": 65,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall can avoid or survive a burst window (Molten Block), wasting Tracer's cooldowns.",
-          "evidence": [
-            "Molten Block"
-          ]
+          "text": "Cho'gall can deny a burst window (Molten Block), wasting Tracer's cooldowns. Only when Cho'gall takes Molten Block."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's stun (Hammer of Twilight, Leaden Orb) can stop Tracer in the middle of a dive."
         }
-      ]
+      ],
+      "score": 61,
+      "source": "theory"
+    },
+    {
+      "a": "chogall",
+      "b": "Vari",
+      "reasons": [
+        {
+          "evidence": [
+            "Ogre Hide",
+            "Twilight Veil",
+            "Shadowflame",
+            "Twin Blades of Fury"
+          ],
+          "kind": "curated",
+          "text": "Twin Blades Varian deals almost all his damage through physical basic attacks, which Ogre Hide's armor (75 with Twilight Veil) cuts sharply while Gall keeps hitting him with Shadowflame in melee range."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), and Varian has a large Health pool. Only when Cho'gall takes Uppercut."
+        }
+      ],
+      "score": 67,
+      "source": "curated"
     },
     {
       "a": "chogall",
       "b": "Wiza",
-      "score": 80,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall can interrupt channels with displace (Surging Fist); Li-Ming has channelled abilities.",
-          "evidence": [
-            "Surging Fist"
-          ]
+          "text": "Cho'gall can deny a burst window (Molten Block), wasting Li-Ming's cooldowns. Only when Cho'gall takes Molten Block."
         },
         {
           "kind": "theory",
-          "text": "Cho'gall can avoid or survive a burst window (Molten Block), wasting Li-Ming's cooldowns.",
-          "evidence": [
-            "Molten Block"
-          ]
+          "text": "Cho'gall can interrupt channels with stun (Hammer of Twilight, Leaden Orb), and Li-Ming relies on channelled abilities. Only when Li-Ming takes Disintegrate."
         }
-      ]
+      ],
+      "score": 60,
+      "source": "theory"
     },
     {
       "a": "chogall",
       "b": "Zera",
-      "score": 65,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall can avoid or survive a burst window (Molten Block), wasting Zeratul's cooldowns.",
-          "evidence": [
-            "Molten Block"
-          ]
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Zeratul's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Zeratul must also take Mending Strikes."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can deny a burst window (Molten Block), wasting Zeratul's cooldowns. Only when Cho'gall takes Molten Block."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's stun (Hammer of Twilight, Leaden Orb) can stop Zeratul in the middle of a dive."
         }
-      ]
+      ],
+      "score": 66,
+      "source": "theory"
     }
   ],
   "synergies": [
     {
       "a": "Abat",
       "b": "Anub",
-      "score": 65,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Abathur can shield or save Anub'arak after Anub'arak commits to a dive (Symbiote).",
-          "evidence": [
-            "Symbiote"
-          ]
+          "text": "Anub'arak can protect Abathur's fragile body when the enemy hunts it."
         }
-      ]
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Abat",
+      "b": "Crus",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna can protect Abathur's fragile body when the enemy hunts it."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Abat",
+      "b": "Demo",
+      "reasons": [
+        {
+          "evidence": [
+            "Ultimate Evolution",
+            "Hatred"
+          ],
+          "kind": "curated",
+          "text": "Ultimate Evolution clones Valla with 20% bonus attack damage, giving the team a second basic-attack carry whose Hatred stacks ramp up just like the original."
+        }
+      ],
+      "score": 69,
+      "source": "curated"
     },
     {
       "a": "Abat",
       "b": "Diab",
-      "score": 65,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo has map-wide reach (Apocalypse) while Abathur pressures a side lane.",
-          "evidence": [
-            "Apocalypse"
-          ]
+          "text": "Diablo can protect Abathur's fragile body when the enemy hunts it."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo has map-wide reach (Apocalypse) while Abathur pressures a side lane. Only when Diablo takes Apocalypse."
         }
-      ]
+      ],
+      "score": 65,
+      "source": "theory"
+    },
+    {
+      "a": "Abat",
+      "b": "HXAL",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Abathur's stun (Slapathur) holds targets still for Xal'atath's burst. Only when Abathur takes Slapathur."
+        }
+      ],
+      "score": 57,
+      "source": "theory"
+    },
+    {
+      "a": "Abat",
+      "b": "Malf",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Malfurion can protect Abathur's fragile body when the enemy hunts it."
+        }
+      ],
+      "score": 60,
+      "source": "theory"
+    },
+    {
+      "a": "Abat",
+      "b": "Tra0",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Abathur's stun (Slapathur) holds targets still for Tracer's burst. Only when Abathur takes Slapathur."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur's stun (Slapathur) lets Tracer dive onto a target that cannot walk away. Only when Abathur takes Slapathur."
+        }
+      ],
+      "score": 62,
+      "source": "theory"
+    },
+    {
+      "a": "Abat",
+      "b": "Vari",
+      "reasons": [
+        {
+          "evidence": [
+            "Symbiote",
+            "Carapace",
+            "Ultimate Evolution",
+            "Twin Blades of Fury"
+          ],
+          "kind": "curated",
+          "text": "Symbiote on a Twin Blades Varian adds shields and Spike Burst while he attacks, and Ultimate Evolution can copy his high basic-attack damage."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian can protect Abathur's fragile body when the enemy hunts it."
+        }
+      ],
+      "score": 77,
+      "source": "curated"
+    },
+    {
+      "a": "Abat",
+      "b": "Wiza",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Abathur's stun (Slapathur) holds targets still for Li-Ming's burst. Only when Abathur takes Slapathur."
+        }
+      ],
+      "score": 57,
+      "source": "theory"
     },
     {
       "a": "Abat",
       "b": "Zera",
-      "score": 65,
-      "source": "theory",
       "reasons": [
         {
-          "kind": "theory",
-          "text": "Abathur can shield or save Zeratul after Zeratul commits to a dive (Symbiote).",
           "evidence": [
-            "Symbiote"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Anub",
-      "b": "Crus",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
+            "Symbiote",
+            "Spike Burst",
+            "Carapace"
+          ],
+          "kind": "curated",
+          "text": "Symbiote on Zeratul adds Spike Burst damage and Carapace shields as he dives, helping him survive the backline long enough to finish a kill."
+        },
         {
           "kind": "theory",
-          "text": "Johanna can shield or save Anub'arak after Anub'arak commits to a dive (Iron Skin).",
-          "evidence": [
-            "Iron Skin"
-          ]
+          "text": "Abathur's stun (Slapathur) holds targets still for Zeratul's burst. Only when Abathur takes Slapathur."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur's stun (Slapathur) lets Zeratul dive onto a target that cannot walk away. Only when Abathur takes Slapathur."
         }
-      ]
+      ],
+      "score": 71,
+      "source": "curated"
     },
     {
       "a": "Anub",
       "b": "HXAL",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak's stun (Impale) holds targets still for Xal'atath's burst.",
-          "evidence": [
-            "Impale"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Anub",
-      "b": "Malf",
-      "score": 65,
-      "source": "theory",
-      "reasons": [
+          "text": "Anub'arak's stun (Impale, Burrow Charge) holds targets still for Xal'atath's burst."
+        },
         {
           "kind": "theory",
-          "text": "Malfurion can heal Anub'arak through a dive (Regrowth).",
-          "evidence": [
-            "Regrowth"
-          ]
+          "text": "Anub'arak starts fights on its own terms, giving Xal'atath grouped targets for area burst."
         }
-      ]
+      ],
+      "score": 71,
+      "source": "theory"
     },
     {
       "a": "Anub",
       "b": "Tra0",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak's stun (Impale) holds targets still for Tracer's burst.",
-          "evidence": [
-            "Impale"
-          ]
+          "text": "Anub'arak's stun (Impale, Burrow Charge) holds targets still for Tracer's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak starts fights on its own terms, giving Tracer grouped targets for area burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak's stun (Impale, Burrow Charge) lets Tracer dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
     },
     {
       "a": "Anub",
       "b": "Wiza",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak's stun (Impale) holds targets still for Li-Ming's burst.",
-          "evidence": [
-            "Impale"
-          ]
+          "text": "Anub'arak's stun (Impale, Burrow Charge) holds targets still for Li-Ming's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak can protect Li-Ming's fragile body when the enemy hunts it."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak starts fights on its own terms, giving Li-Ming grouped targets for area burst. Only when Li-Ming takes Wave of Force."
         }
-      ]
+      ],
+      "score": 76,
+      "source": "theory"
     },
     {
       "a": "Anub",
       "b": "Zera",
-      "score": 83,
-      "source": "theory",
       "reasons": [
         {
-          "kind": "theory",
-          "text": "Anub'arak's stun (Impale) holds targets still for Zeratul's burst.",
           "evidence": [
-            "Impale"
-          ]
+            "Impale",
+            "Burrow Charge",
+            "Cocoon",
+            "Singularity Spike",
+            "Cleave"
+          ],
+          "kind": "curated",
+          "text": "Impale and Burrow Charge stun targets so Zeratul can land Singularity Spike and Cleave, and Cocoon removes a peeler from the fight."
         },
         {
           "kind": "theory",
-          "text": "Anub'arak can shield or save Zeratul after Zeratul commits to a dive (Harden Carapace).",
-          "evidence": [
-            "Harden Carapace"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Anub",
-      "b": "chogall",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
+          "text": "Anub'arak's stun (Impale, Burrow Charge) holds targets still for Zeratul's burst."
+        },
         {
           "kind": "theory",
-          "text": "Anub'arak's stun (Impale) holds targets still for Cho'gall's burst.",
-          "evidence": [
-            "Impale"
-          ]
+          "text": "Anub'arak starts fights on its own terms, giving Zeratul grouped targets for area burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak's stun (Impale, Burrow Charge) lets Zeratul dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 83,
+      "source": "curated"
     },
     {
       "a": "Crus",
       "b": "Demo",
-      "score": 69,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Johanna groups or freezes enemies (Condemn) for Valla's area damage.",
-          "evidence": [
-            "Condemn"
-          ]
+          "text": "Johanna groups or freezes enemies (Condemn) for Valla's area damage."
         }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Diab",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna groups or freezes enemies (Condemn) for Diablo's area damage.",
-          "evidence": [
-            "Condemn"
-          ]
-        }
-      ]
+      ],
+      "score": 65,
+      "source": "theory"
     },
     {
       "a": "Crus",
       "b": "HXAL",
-      "score": 86,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Johanna's stun (Condemn) holds targets still for Xal'atath's burst.",
-          "evidence": [
-            "Condemn"
-          ]
+          "text": "Johanna groups or freezes enemies (Condemn) for Xal'atath's area damage."
         },
         {
           "kind": "theory",
-          "text": "Johanna groups or freezes enemies (Condemn) for Xal'atath's area damage.",
-          "evidence": [
-            "Condemn"
-          ]
+          "text": "Johanna's stun (Condemn, Falling Sword) holds targets still for Xal'atath's burst."
         }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "Mura",
-      "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna groups or freezes enemies (Condemn) for Muradin's area damage.",
-          "evidence": [
-            "Condemn"
-          ]
-        }
-      ]
+      ],
+      "score": 75,
+      "source": "theory"
     },
     {
       "a": "Crus",
       "b": "Tra0",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Johanna's stun (Condemn) holds targets still for Tracer's burst.",
-          "evidence": [
-            "Condemn"
-          ]
+          "text": "Johanna groups or freezes enemies (Condemn) for Tracer's area damage."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna's stun (Condemn, Falling Sword) holds targets still for Tracer's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna's stun (Condemn, Falling Sword) lets Tracer dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
     },
     {
       "a": "Crus",
       "b": "Wiza",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Johanna's stun (Condemn) holds targets still for Li-Ming's burst.",
-          "evidence": [
-            "Condemn"
-          ]
+          "text": "Johanna's stun (Condemn, Falling Sword) holds targets still for Li-Ming's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can protect Li-Ming's fragile body when the enemy hunts it."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna groups or freezes enemies (Condemn) for Li-Ming's area damage. Only when Li-Ming takes Wave of Force."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
     },
     {
       "a": "Crus",
       "b": "Zera",
-      "score": 92,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Johanna's stun (Condemn) holds targets still for Zeratul's burst.",
-          "evidence": [
-            "Condemn"
-          ]
+          "text": "Johanna groups or freezes enemies (Condemn) for Zeratul's area damage."
         },
         {
           "kind": "theory",
-          "text": "Johanna groups or freezes enemies (Condemn) for Zeratul's area damage.",
-          "evidence": [
-            "Condemn"
-          ]
+          "text": "Johanna's stun (Condemn, Falling Sword) holds targets still for Zeratul's burst."
         },
         {
           "kind": "theory",
-          "text": "Johanna can shield or save Zeratul after Zeratul commits to a dive (Iron Skin).",
-          "evidence": [
-            "Iron Skin"
-          ]
+          "text": "Johanna's stun (Condemn, Falling Sword) lets Zeratul dive onto a target that cannot walk away."
         }
-      ]
-    },
-    {
-      "a": "Crus",
-      "b": "chogall",
-      "score": 86,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Johanna's stun (Condemn) holds targets still for Cho'gall's burst.",
-          "evidence": [
-            "Condemn"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Johanna groups or freezes enemies (Condemn) for Cho'gall's area damage.",
-          "evidence": [
-            "Condemn"
-          ]
-        }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
     },
     {
       "a": "Demo",
       "b": "HXAL",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Valla's stun (Rain of Vengeance) holds targets still for Xal'atath's burst.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
+          "text": "Valla's stun (Rain of Vengeance) holds targets still for Xal'atath's burst. Only when Valla takes Rain of Vengeance."
         }
-      ]
+      ],
+      "score": 57,
+      "source": "theory"
+    },
+    {
+      "a": "Demo",
+      "b": "Malf",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Malfurion can cleanse crowd control off Valla (Nature's Cure) to keep the attacks coming. Only when Malfurion takes Nature's Cure."
+        }
+      ],
+      "score": 56,
+      "source": "theory"
     },
     {
       "a": "Demo",
       "b": "Tra0",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Valla's stun (Rain of Vengeance) holds targets still for Tracer's burst.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
+          "text": "Tracer can cleanse crowd control off Valla (Recall) to keep the attacks coming."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla's stun (Rain of Vengeance) holds targets still for Tracer's burst. Only when Valla takes Rain of Vengeance."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla's stun (Rain of Vengeance) lets Tracer dive onto a target that cannot walk away. Only when Valla takes Rain of Vengeance."
         }
-      ]
+      ],
+      "score": 71,
+      "source": "theory"
     },
     {
       "a": "Demo",
       "b": "Wiza",
-      "score": 80,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Valla's stun (Rain of Vengeance) holds targets still for Li-Ming's burst.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Li-Ming can cleanse crowd control off Valla (Illusionist) so it keeps attacking.",
-          "evidence": [
-            "Illusionist"
-          ]
+          "text": "Valla's stun (Rain of Vengeance) holds targets still for Li-Ming's burst. Only when Valla takes Rain of Vengeance."
         }
-      ]
+      ],
+      "score": 57,
+      "source": "theory"
     },
     {
       "a": "Demo",
       "b": "Zera",
-      "score": 86,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Valla's stun (Rain of Vengeance) holds targets still for Zeratul's burst.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
+          "text": "Zeratul groups or freezes enemies (Void Prison) for Valla's area damage. Only when Zeratul takes Void Prison."
         },
         {
           "kind": "theory",
-          "text": "Zeratul groups or freezes enemies (Void Prison) for Valla's area damage.",
-          "evidence": [
-            "Void Prison"
-          ]
+          "text": "Valla's stun (Rain of Vengeance) holds targets still for Zeratul's burst. Only when Valla takes Rain of Vengeance."
+        },
+        {
+          "kind": "theory",
+          "text": "Valla's stun (Rain of Vengeance) lets Zeratul dive onto a target that cannot walk away. Only when Valla takes Rain of Vengeance."
         }
-      ]
+      ],
+      "score": 70,
+      "source": "theory"
     },
     {
       "a": "Demo",
       "b": "chogall",
-      "score": 86,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Valla's stun (Rain of Vengeance) holds targets still for Cho'gall's burst.",
-          "evidence": [
-            "Rain of Vengeance"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Cho'gall groups or freezes enemies (Upheaval) for Valla's area damage.",
-          "evidence": [
-            "Upheaval"
-          ]
+          "text": "Cho'gall groups or freezes enemies (Upheaval) for Valla's area damage."
         }
-      ]
+      ],
+      "score": 65,
+      "source": "theory"
     },
     {
       "a": "Diab",
       "b": "HXAL",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo's stun (Overpower) holds targets still for Xal'atath's burst.",
-          "evidence": [
-            "Overpower"
-          ]
+          "text": "Diablo's stun (Shadow Charge, Overpower) holds targets still for Xal'atath's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo starts fights on its own terms, giving Xal'atath grouped targets for area burst."
         }
-      ]
+      ],
+      "score": 71,
+      "source": "theory"
     },
     {
       "a": "Diab",
       "b": "Tra0",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo's stun (Overpower) holds targets still for Tracer's burst.",
-          "evidence": [
-            "Overpower"
-          ]
+          "text": "Diablo's stun (Shadow Charge, Overpower) holds targets still for Tracer's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo starts fights on its own terms, giving Tracer grouped targets for area burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo's stun (Shadow Charge, Overpower) lets Tracer dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
     },
     {
       "a": "Diab",
       "b": "Wiza",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo's stun (Overpower) holds targets still for Li-Ming's burst.",
-          "evidence": [
-            "Overpower"
-          ]
+          "text": "Diablo's stun (Shadow Charge, Overpower) holds targets still for Li-Ming's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo can protect Li-Ming's fragile body when the enemy hunts it."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo starts fights on its own terms, giving Li-Ming grouped targets for area burst. Only when Li-Ming takes Wave of Force."
         }
-      ]
+      ],
+      "score": 76,
+      "source": "theory"
     },
     {
       "a": "Diab",
       "b": "Zera",
-      "score": 86,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo's stun (Overpower) holds targets still for Zeratul's burst.",
-          "evidence": [
-            "Overpower"
-          ]
+          "text": "Diablo's stun (Shadow Charge, Overpower) holds targets still for Zeratul's burst."
         },
         {
           "kind": "theory",
-          "text": "Zeratul groups or freezes enemies (Void Prison) for Diablo's area damage.",
-          "evidence": [
-            "Void Prison"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Diab",
-      "b": "chogall",
-      "score": 86,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo's stun (Overpower) holds targets still for Cho'gall's burst.",
-          "evidence": [
-            "Overpower"
-          ]
+          "text": "Diablo starts fights on its own terms, giving Zeratul grouped targets for area burst."
         },
         {
           "kind": "theory",
-          "text": "Cho'gall groups or freezes enemies (Upheaval) for Diablo's area damage.",
-          "evidence": [
-            "Upheaval"
-          ]
+          "text": "Diablo's stun (Shadow Charge, Overpower) lets Zeratul dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
     },
     {
       "a": "HXAL",
       "b": "Malf",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Malfurion's root (Entangling Roots) holds targets still for Xal'atath's burst.",
-          "evidence": [
-            "Entangling Roots"
-          ]
+          "text": "Malfurion's root (Entangling Roots, Emerald Dreams) holds targets still for Xal'atath's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion can cleanse crowd control off Xal'atath (Nature's Cure) to keep the attacks coming. Only when Malfurion takes Nature's Cure."
         }
-      ]
+      ],
+      "score": 68,
+      "source": "theory"
     },
     {
       "a": "HXAL",
       "b": "Mura",
-      "score": 73,
-      "source": "theory",
+      "reasons": [
+        {
+          "evidence": [
+            "Storm Bolt",
+            "Shadow Mark",
+            "Dark Heart Ritual"
+          ],
+          "kind": "curated",
+          "text": "Storm Bolt's stun gives Xal'atath a stationary target for Shadow Mark's center, which then sends the Dark Heart after it."
+        },
+        {
+          "kind": "theory",
+          "text": "Muradin's stun (Storm Bolt, Haymaker) holds targets still for Xal'atath's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Muradin starts fights on its own terms, giving Xal'atath grouped targets for area burst."
+        }
+      ],
+      "score": 79,
+      "source": "curated"
+    },
+    {
+      "a": "HXAL",
+      "b": "Tra0",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Muradin's stun (Storm Bolt) holds targets still for Xal'atath's burst.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+          "text": "Tracer can cleanse crowd control off Xal'atath (Recall) to keep the attacks coming."
         }
-      ]
+      ],
+      "score": 60,
+      "source": "theory"
     },
     {
       "a": "HXAL",
       "b": "Vari",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Varian's taunt (Taunt) holds targets still for Xal'atath's burst.",
-          "evidence": [
-            "Taunt"
-          ]
+          "text": "Varian's taunt (Taunt) holds targets still for Xal'atath's burst. Only when Varian takes Taunt."
         }
-      ]
+      ],
+      "score": 57,
+      "source": "theory"
     },
     {
       "a": "HXAL",
       "b": "Zera",
-      "score": 86,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul's time-stop (Void Prison) holds targets still for Xal'atath's burst.",
-          "evidence": [
-            "Void Prison"
-          ]
+          "text": "Zeratul groups or freezes enemies (Void Prison) for Xal'atath's area damage. Only when Zeratul takes Void Prison."
         },
         {
           "kind": "theory",
-          "text": "Zeratul groups or freezes enemies (Void Prison) for Xal'atath's area damage.",
-          "evidence": [
-            "Void Prison"
-          ]
+          "text": "Zeratul's Time Stop (Void Prison) holds targets still for Xal'atath's burst. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 66,
+      "source": "theory"
     },
     {
       "a": "HXAL",
       "b": "chogall",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall groups or freezes enemies (Upheaval) for Xal'atath's area damage."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's stun (Hammer of Twilight, Leaden Orb) holds targets still for Xal'atath's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall starts fights on its own terms, giving Xal'atath grouped targets for area burst."
+        }
+      ],
+      "score": 77,
+      "source": "theory"
+    },
+    {
+      "a": "Malf",
+      "b": "Mura",
+      "reasons": [
+        {
+          "evidence": [
+            "Entangling Roots",
+            "Storm Bolt",
+            "Give 'em the Axe!"
+          ],
+          "kind": "curated",
+          "text": "Entangling Roots holds targets still for Storm Bolt's projectile and counts as a Root for Give 'em the Axe's 40% Basic Attack bonus."
+        }
+      ],
       "score": 69,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Cho'gall groups or freezes enemies (Upheaval) for Xal'atath's area damage.",
-          "evidence": [
-            "Upheaval"
-          ]
-        }
-      ]
+      "source": "curated"
     },
     {
       "a": "Malf",
       "b": "Tra0",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Malfurion's root (Entangling Roots) holds targets still for Tracer's burst.",
-          "evidence": [
-            "Entangling Roots"
-          ]
+          "text": "Malfurion's root (Entangling Roots, Emerald Dreams) holds targets still for Tracer's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's root (Entangling Roots, Emerald Dreams) lets Tracer dive onto a target that cannot walk away."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion can cleanse crowd control off Tracer (Nature's Cure) to keep the attacks coming. Only when Malfurion takes Nature's Cure."
         }
-      ]
+      ],
+      "score": 74,
+      "source": "theory"
     },
     {
       "a": "Malf",
       "b": "Wiza",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
-          "kind": "theory",
-          "text": "Malfurion's root (Entangling Roots) holds targets still for Li-Ming's burst.",
           "evidence": [
-            "Entangling Roots"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Malf",
-      "b": "Zera",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Malfurion's root (Entangling Roots) holds targets still for Zeratul's burst.",
-          "evidence": [
-            "Entangling Roots"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Malf",
-      "b": "chogall",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Malfurion's root (Entangling Roots) holds targets still for Cho'gall's burst.",
-          "evidence": [
-            "Entangling Roots"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Mura",
-      "b": "Tra0",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Muradin's stun (Storm Bolt) holds targets still for Tracer's burst.",
-          "evidence": [
-            "Storm Bolt"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Mura",
-      "b": "Wiza",
-      "score": 86,
-      "source": "curated",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Muradin's stun (Storm Bolt) holds targets still for Li-Ming's burst.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+            "Innervate",
+            "Entangling Roots",
+            "Magic Missiles",
+            "Arcane Orb"
+          ],
+          "kind": "curated",
+          "text": "Innervate refills Li-Ming's Mana and speeds her cooldowns for Magic Missiles spam, and Entangling Roots holds targets for a full-range Arcane Orb."
         },
         {
           "kind": "curated",
-          "text": "Muradin's Storm Bolt stuns its target, which gives Li-Ming time to land Arcane Orb from long range.",
+          "text": "Innervate gives Li-Ming Mana and faster cooldowns during her Magic Missiles spam, and Entangling Roots holds targets still for long Arcane Orbs."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's root (Entangling Roots, Emerald Dreams) holds targets still for Li-Ming's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion can protect Li-Ming's fragile body when the enemy hunts it."
+        }
+      ],
+      "score": 85,
+      "source": "curated"
+    },
+    {
+      "a": "Malf",
+      "b": "Zera",
+      "reasons": [
+        {
+          "evidence": [
+            "Entangling Roots",
+            "Singularity Spike",
+            "Sentenced to Death"
+          ],
+          "kind": "curated",
+          "text": "Entangling Roots holds a target in place for Singularity Spike, and Sentenced to Death adds damage while the Spike's slow and mark are on them."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's root (Entangling Roots, Emerald Dreams) holds targets still for Zeratul's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion can keep Zeratul alive through a dive."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's root (Entangling Roots, Emerald Dreams) lets Zeratul dive onto a target that cannot walk away."
+        }
+      ],
+      "score": 83,
+      "source": "curated"
+    },
+    {
+      "a": "Mura",
+      "b": "Tra0",
+      "reasons": [
+        {
           "evidence": [
             "Storm Bolt",
-            "Arcane Orb"
-          ]
+            "Thunder Clap",
+            "Pulse Bomb"
+          ],
+          "kind": "curated",
+          "text": "Storm Bolt's stun and Thunder Clap's slow hold targets still long enough for Tracer to stick Pulse Bomb."
+        },
+        {
+          "kind": "theory",
+          "text": "Muradin's stun (Storm Bolt, Haymaker) holds targets still for Tracer's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Muradin starts fights on its own terms, giving Tracer grouped targets for area burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Muradin's stun (Storm Bolt, Haymaker) lets Tracer dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 88,
+      "source": "curated"
+    },
+    {
+      "a": "Mura",
+      "b": "Wiza",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Muradin's stun (Storm Bolt, Haymaker) holds targets still for Li-Ming's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Muradin starts fights on its own terms, giving Li-Ming grouped targets for area burst. Only when Li-Ming takes Wave of Force."
+        }
+      ],
+      "score": 68,
+      "source": "theory"
     },
     {
       "a": "Mura",
       "b": "Zera",
-      "score": 86,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Muradin's stun (Storm Bolt) holds targets still for Zeratul's burst.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+          "text": "Muradin's stun (Storm Bolt, Haymaker) holds targets still for Zeratul's burst."
         },
         {
           "kind": "theory",
-          "text": "Zeratul groups or freezes enemies (Void Prison) for Muradin's area damage.",
-          "evidence": [
-            "Void Prison"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Mura",
-      "b": "chogall",
-      "score": 86,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Muradin's stun (Storm Bolt) holds targets still for Cho'gall's burst.",
-          "evidence": [
-            "Storm Bolt"
-          ]
+          "text": "Muradin starts fights on its own terms, giving Zeratul grouped targets for area burst."
         },
         {
           "kind": "theory",
-          "text": "Cho'gall groups or freezes enemies (Upheaval) for Muradin's area damage.",
-          "evidence": [
-            "Upheaval"
-          ]
+          "text": "Muradin's stun (Storm Bolt, Haymaker) lets Zeratul dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
     },
     {
       "a": "Tra0",
       "b": "Vari",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Varian's taunt (Taunt) holds targets still for Tracer's burst.",
-          "evidence": [
-            "Taunt"
-          ]
+          "text": "Varian's taunt (Taunt) holds targets still for Tracer's burst. Only when Varian takes Taunt."
         }
-      ]
-    },
-    {
-      "a": "Tra0",
-      "b": "Wiza",
-      "score": 60,
-      "source": "theory",
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Li-Ming can cleanse crowd control off Tracer (Illusionist) so it keeps attacking.",
-          "evidence": [
-            "Illusionist"
-          ]
-        }
-      ]
+      ],
+      "score": 57,
+      "source": "theory"
     },
     {
       "a": "Tra0",
       "b": "Zera",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul's time-stop (Void Prison) holds targets still for Tracer's burst.",
-          "evidence": [
-            "Void Prison"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Wiza",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
+          "text": "Zeratul groups or freezes enemies (Void Prison) for Tracer's area damage. Only when Zeratul takes Void Prison."
+        },
         {
           "kind": "theory",
-          "text": "Varian's taunt (Taunt) holds targets still for Li-Ming's burst.",
-          "evidence": [
-            "Taunt"
-          ]
-        }
-      ]
-    },
-    {
-      "a": "Vari",
-      "b": "Zera",
-      "score": 73,
-      "source": "theory",
-      "reasons": [
+          "text": "Zeratul's Time Stop (Void Prison) holds targets still for Tracer's burst. Only when Zeratul takes Void Prison."
+        },
         {
           "kind": "theory",
-          "text": "Varian's taunt (Taunt) holds targets still for Zeratul's burst.",
-          "evidence": [
-            "Taunt"
-          ]
+          "text": "Zeratul's Time Stop (Void Prison) lets Tracer dive onto a target that cannot walk away. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 70,
+      "source": "theory"
     },
     {
-      "a": "Vari",
+      "a": "Tra0",
       "b": "chogall",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Varian's taunt (Taunt) holds targets still for Cho'gall's burst.",
-          "evidence": [
-            "Taunt"
-          ]
+          "text": "Cho'gall groups or freezes enemies (Upheaval) for Tracer's area damage."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's stun (Hammer of Twilight, Leaden Orb) holds targets still for Tracer's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall starts fights on its own terms, giving Tracer grouped targets for area burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's stun (Hammer of Twilight, Leaden Orb) lets Tracer dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Wiza",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian can protect Li-Ming's fragile body when the enemy hunts it."
+        },
+        {
+          "kind": "theory",
+          "text": "Varian's taunt (Taunt) holds targets still for Li-Ming's burst. Only when Varian takes Taunt."
+        }
+      ],
+      "score": 67,
+      "source": "theory"
+    },
+    {
+      "a": "Vari",
+      "b": "Zera",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Varian's taunt (Taunt) holds targets still for Zeratul's burst. Only when Varian takes Taunt."
+        }
+      ],
+      "score": 57,
+      "source": "theory"
     },
     {
       "a": "Wiza",
       "b": "Zera",
-      "score": 73,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul's time-stop (Void Prison) holds targets still for Li-Ming's burst.",
-          "evidence": [
-            "Void Prison"
-          ]
+          "text": "Zeratul groups or freezes enemies (Void Prison) for Li-Ming's area damage. Only when Zeratul takes Void Prison. Li-Ming must also take Wave of Force."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul's Time Stop (Void Prison) holds targets still for Li-Ming's burst. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 66,
+      "source": "theory"
+    },
+    {
+      "a": "Wiza",
+      "b": "chogall",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Cho'gall's stun (Hammer of Twilight, Leaden Orb) holds targets still for Li-Ming's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall groups or freezes enemies (Upheaval) for Li-Ming's area damage. Only when Li-Ming takes Wave of Force."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall starts fights on its own terms, giving Li-Ming grouped targets for area burst. Only when Li-Ming takes Wave of Force."
+        }
+      ],
+      "score": 75,
+      "source": "theory"
     },
     {
       "a": "Zera",
       "b": "chogall",
-      "score": 86,
-      "source": "theory",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul's time-stop (Void Prison) holds targets still for Cho'gall's burst.",
-          "evidence": [
-            "Void Prison"
-          ]
+          "text": "Cho'gall groups or freezes enemies (Upheaval) for Zeratul's area damage."
         },
         {
           "kind": "theory",
-          "text": "Zeratul groups or freezes enemies (Void Prison) for Cho'gall's area damage.",
-          "evidence": [
-            "Void Prison"
-          ]
+          "text": "Cho'gall's stun (Hammer of Twilight, Leaden Orb) holds targets still for Zeratul's burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall starts fights on its own terms, giving Zeratul grouped targets for area burst."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's stun (Hammer of Twilight, Leaden Orb) lets Zeratul dive onto a target that cannot walk away."
         }
-      ]
+      ],
+      "score": 77,
+      "source": "theory"
     }
   ],
   "mapFit": [
     {
       "hero": "Abat",
       "map": "battlefield-of-eternity",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Abathur's waveclear (Toxic Nest) helps hold lanes against Battlefield of Eternity's pushing objective.",
-          "evidence": [
-            "Toxic Nest"
-          ]
+          "text": "Battlefield of Eternity has only two lanes, so Abathur's side-lane pressure is easier to answer."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur's summons (Locust Strain, Locust Brood) add damage to Battlefield of Eternity's neutral objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur's waveclear (Locust Strain) helps hold lanes against Battlefield of Eternity's pushing objective."
         }
-      ]
+      ],
+      "score": 55
+    },
+    {
+      "hero": "Abat",
+      "map": "braxis-outpost",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Abathur's waveclear (Locust Strain) holds Braxis Outpost's single lane."
+        }
+      ],
+      "score": 55
     },
     {
       "hero": "Abat",
       "map": "cursed-hollow",
-      "score": 83,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Abathur's map-wide reach (Symbiote) offsets Cursed Hollow's long rotations.",
-          "evidence": [
-            "Symbiote"
-          ]
+          "text": "Abathur's map-wide reach offsets Cursed Hollow's long rotations."
         },
         {
           "kind": "theory",
           "text": "Cursed Hollow has three lanes for Abathur to pressure while the team holds the objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur can reach channelling enemies quickly to contest Cursed Hollow's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur can cover ground quickly (Deep Tunnel, Evolve Monstrosity) on Cursed Hollow's large layout."
         }
-      ]
+      ],
+      "score": 77
     },
     {
       "hero": "Abat",
       "map": "dragon-shire",
-      "score": 90,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Abathur's map-wide reach (Symbiote) offsets Dragon Shire's long rotations.",
-          "evidence": [
-            "Symbiote"
-          ]
+          "text": "Abathur's map-wide reach offsets Dragon Shire's long rotations."
         },
         {
           "kind": "theory",
@@ -2499,912 +2696,958 @@
         },
         {
           "kind": "theory",
-          "text": "Abathur's waveclear (Toxic Nest) helps hold lanes against Dragon Shire's pushing objective.",
-          "evidence": [
-            "Toxic Nest"
-          ]
+          "text": "Abathur can reach channelling enemies quickly to contest Dragon Shire's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur's waveclear (Locust Strain) helps hold lanes against Dragon Shire's pushing objective."
         }
-      ]
+      ],
+      "score": 77
     },
     {
       "hero": "Abat",
       "map": "hanamura-temple",
-      "score": 80,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Abathur's waveclear (Toxic Nest) helps hold lanes against Hanamura Temple's pushing objective.",
-          "evidence": [
-            "Toxic Nest"
-          ]
+          "text": "Abathur can siege structures (Locust Strain, Slapathur), which adds to Hanamura Temple's objective pressure."
         },
         {
           "kind": "theory",
-          "text": "Abathur can siege structures (Bombard Strain), which Hanamura Temple's objective rewards.",
-          "evidence": [
-            "Bombard Strain"
-          ]
+          "text": "Hanamura Temple has only two lanes, so Abathur's side-lane pressure is easier to answer."
+        },
+        {
+          "kind": "theory",
+          "text": "Abathur's waveclear (Locust Strain) helps hold lanes against Hanamura Temple's pushing objective."
         }
-      ]
+      ],
+      "score": 60
     },
     {
       "hero": "Abat",
       "map": "towers-of-doom",
-      "score": 88,
       "reasons": [
+        {
+          "kind": "theory",
+          "text": "Abathur can siege structures (Locust Strain, Slapathur), which adds to Towers of Doom's objective pressure."
+        },
         {
           "kind": "theory",
           "text": "Towers of Doom has three lanes for Abathur to pressure while the team holds the objective."
         },
         {
           "kind": "theory",
-          "text": "Abathur's waveclear (Toxic Nest) helps hold lanes against Towers of Doom's pushing objective.",
-          "evidence": [
-            "Toxic Nest"
-          ]
+          "text": "Abathur can reach channelling enemies quickly to contest Towers of Doom's objective."
         },
         {
           "kind": "theory",
-          "text": "Abathur can siege structures (Bombard Strain), which Towers of Doom's objective rewards.",
-          "evidence": [
-            "Bombard Strain"
-          ]
+          "text": "Abathur's waveclear (Locust Strain) helps hold lanes against Towers of Doom's pushing objective."
         }
-      ]
+      ],
+      "score": 77
+    },
+    {
+      "hero": "Anub",
+      "map": "battlefield-of-eternity",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Anub'arak can start the fights Battlefield of Eternity's objective forces."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak's summons (Scarab Host, Legion of Beetles) add damage to Battlefield of Eternity's neutral objective."
+        }
+      ],
+      "score": 60
+    },
+    {
+      "hero": "Anub",
+      "map": "braxis-outpost",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Anub'arak can start the fights Braxis Outpost's objective forces."
+        }
+      ],
+      "score": 55
     },
     {
       "hero": "Anub",
       "map": "cursed-hollow",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Burrow Charge"
-          ]
+          "text": "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Cursed Hollow's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Anub'arak can cover ground quickly (Burrow Charge) on Cursed Hollow's large layout."
         }
-      ]
+      ],
+      "score": 62
     },
     {
       "hero": "Anub",
       "map": "dragon-shire",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Burrow Charge"
-          ]
+          "text": "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Dragon Shire's objective."
         }
-      ]
+      ],
+      "score": 57
     },
     {
       "hero": "Anub",
       "map": "hanamura-temple",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak can stand on Hanamura Temple's payload and absorb pressure."
+          "text": "Anub'arak can start the fights Hanamura Temple's objective forces."
         }
-      ]
+      ],
+      "score": 55
     },
     {
       "hero": "Anub",
       "map": "towers-of-doom",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Burrow Charge"
-          ]
+          "text": "Anub'arak can reach channelling enemies quickly (Burrow Charge) to contest Towers of Doom's objective."
         }
-      ]
+      ],
+      "score": 57
+    },
+    {
+      "hero": "Crus",
+      "map": "battlefield-of-eternity",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna can group or freeze enemies (Condemn) in Battlefield of Eternity's objective fights."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna's waveclear (Condemn) helps hold lanes against Battlefield of Eternity's pushing objective."
+        }
+      ],
+      "score": 62
+    },
+    {
+      "hero": "Crus",
+      "map": "braxis-outpost",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna can group or freeze enemies (Condemn) in Braxis Outpost's objective fights."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna's waveclear (Condemn) holds Braxis Outpost's single lane."
+        }
+      ],
+      "score": 62
+    },
+    {
+      "hero": "Crus",
+      "map": "dragon-shire",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna's waveclear (Condemn) helps hold lanes against Dragon Shire's pushing objective."
+        }
+      ],
+      "score": 55
     },
     {
       "hero": "Crus",
       "map": "hanamura-temple",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
           "text": "Johanna can stand on Hanamura Temple's payload and absorb pressure."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna can group or freeze enemies (Condemn) in Hanamura Temple's objective fights."
+        },
+        {
+          "kind": "theory",
+          "text": "Johanna's waveclear (Condemn) helps hold lanes against Hanamura Temple's pushing objective."
         }
-      ]
+      ],
+      "score": 71
+    },
+    {
+      "hero": "Crus",
+      "map": "towers-of-doom",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Johanna's waveclear (Condemn) helps hold lanes against Towers of Doom's pushing objective."
+        }
+      ],
+      "score": 55
     },
     {
       "hero": "Demo",
       "map": "battlefield-of-eternity",
-      "score": 80,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Battlefield of Eternity's objective forces teamfights where Valla's area damage (Multishot) is strong.",
-          "evidence": [
-            "Multishot"
-          ]
+          "text": "Valla's sustained damage (Vault, Hatred) speeds up Battlefield of Eternity's race against neutral units."
         },
         {
           "kind": "theory",
-          "text": "Valla's sustained-dps (Hatred) speeds up Battlefield of Eternity's PvE objective.",
-          "evidence": [
-            "Hatred"
-          ]
+          "text": "Valla's waveclear (Monster Hunter) helps hold lanes against Battlefield of Eternity's pushing objective. Only when Valla takes Monster Hunter."
         }
-      ]
+      ],
+      "score": 63
     },
     {
       "hero": "Demo",
       "map": "braxis-outpost",
-      "score": 77,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Braxis Outpost's objective forces teamfights where Valla's area damage (Multishot) is strong.",
-          "evidence": [
-            "Multishot"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Braxis Outpost's single lane suits Valla's poke (Hungering Arrow).",
-          "evidence": [
-            "Hungering Arrow"
-          ]
+          "text": "Valla's waveclear (Monster Hunter) holds Braxis Outpost's single lane. Only when Valla takes Monster Hunter."
         }
-      ]
-    },
-    {
-      "hero": "Demo",
-      "map": "cursed-hollow",
-      "score": 60,
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Valla can reach channelling enemies quickly (Vault) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Vault"
-          ]
-        }
-      ]
+      ],
+      "score": 53
     },
     {
       "hero": "Demo",
       "map": "dragon-shire",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Valla can reach channelling enemies quickly (Vault) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Vault"
-          ]
+          "text": "Valla's waveclear (Monster Hunter) helps hold lanes against Dragon Shire's pushing objective. Only when Valla takes Monster Hunter."
         }
-      ]
+      ],
+      "score": 53
     },
     {
       "hero": "Demo",
       "map": "hanamura-temple",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Hanamura Temple's objective forces teamfights where Valla's area damage (Multishot) is strong.",
-          "evidence": [
-            "Multishot"
-          ]
+          "text": "Valla's waveclear (Monster Hunter) helps hold lanes against Hanamura Temple's pushing objective. Only when Valla takes Monster Hunter."
         }
-      ]
+      ],
+      "score": 53
     },
     {
       "hero": "Demo",
       "map": "towers-of-doom",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Valla can reach channelling enemies quickly (Vault) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Vault"
-          ]
+          "text": "Valla's waveclear (Monster Hunter) helps hold lanes against Towers of Doom's pushing objective. Only when Valla takes Monster Hunter."
         }
-      ]
+      ],
+      "score": 53
     },
     {
       "hero": "Diab",
       "map": "battlefield-of-eternity",
-      "score": 77,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo's waveclear (Fire Stomp) helps hold lanes against Battlefield of Eternity's pushing objective.",
-          "evidence": [
-            "Fire Stomp"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Battlefield of Eternity's objective forces teamfights where Diablo's area damage (Fire Stomp) is strong.",
-          "evidence": [
-            "Fire Stomp"
-          ]
+          "text": "Diablo can start the fights Battlefield of Eternity's objective forces."
         }
-      ]
+      ],
+      "score": 55
     },
     {
       "hero": "Diab",
       "map": "braxis-outpost",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Braxis Outpost's objective forces teamfights where Diablo's area damage (Fire Stomp) is strong.",
-          "evidence": [
-            "Fire Stomp"
-          ]
+          "text": "Diablo can start the fights Braxis Outpost's objective forces."
         }
-      ]
+      ],
+      "score": 55
     },
     {
       "hero": "Diab",
       "map": "cursed-hollow",
-      "score": 80,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo's map-wide reach (Apocalypse) offsets Cursed Hollow's long rotations.",
-          "evidence": [
-            "Apocalypse"
-          ]
+          "text": "Diablo's map-wide reach (Apocalypse) offsets Cursed Hollow's long rotations. Only when Diablo takes Apocalypse."
         },
         {
           "kind": "theory",
-          "text": "Diablo can reach channelling enemies quickly (Shadow Charge) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Shadow Charge"
-          ]
+          "text": "Diablo can reach channelling enemies quickly (Apocalypse) to contest Cursed Hollow's objective. Only when Diablo takes Apocalypse."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo can cover ground quickly (Hellgate) on Cursed Hollow's large layout. Only when Diablo takes Hellgate."
         }
-      ]
+      ],
+      "score": 66
     },
     {
       "hero": "Diab",
       "map": "dragon-shire",
-      "score": 88,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo's map-wide reach (Apocalypse) offsets Dragon Shire's long rotations.",
-          "evidence": [
-            "Apocalypse"
-          ]
+          "text": "Diablo's map-wide reach (Apocalypse) offsets Dragon Shire's long rotations. Only when Diablo takes Apocalypse."
         },
         {
           "kind": "theory",
-          "text": "Diablo's waveclear (Fire Stomp) helps hold lanes against Dragon Shire's pushing objective.",
-          "evidence": [
-            "Fire Stomp"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Diablo can reach channelling enemies quickly (Shadow Charge) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Shadow Charge"
-          ]
+          "text": "Diablo can reach channelling enemies quickly (Apocalypse) to contest Dragon Shire's objective. Only when Diablo takes Apocalypse."
         }
-      ]
+      ],
+      "score": 63
     },
     {
       "hero": "Diab",
       "map": "hanamura-temple",
-      "score": 83,
       "reasons": [
-        {
-          "kind": "theory",
-          "text": "Diablo's waveclear (Fire Stomp) helps hold lanes against Hanamura Temple's pushing objective.",
-          "evidence": [
-            "Fire Stomp"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Hanamura Temple's objective forces teamfights where Diablo's area damage (Fire Stomp) is strong.",
-          "evidence": [
-            "Fire Stomp"
-          ]
-        },
         {
           "kind": "theory",
           "text": "Diablo can stand on Hanamura Temple's payload and absorb pressure."
+        },
+        {
+          "kind": "theory",
+          "text": "Diablo can start the fights Hanamura Temple's objective forces."
         }
-      ]
+      ],
+      "score": 65
     },
     {
       "hero": "Diab",
       "map": "towers-of-doom",
-      "score": 73,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Diablo's waveclear (Fire Stomp) helps hold lanes against Towers of Doom's pushing objective.",
-          "evidence": [
-            "Fire Stomp"
-          ]
-        },
-        {
-          "kind": "theory",
-          "text": "Diablo can reach channelling enemies quickly (Shadow Charge) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Shadow Charge"
-          ]
+          "text": "Diablo can reach channelling enemies quickly (Apocalypse) to contest Towers of Doom's objective. Only when Diablo takes Apocalypse."
         }
-      ]
+      ],
+      "score": 54
     },
     {
       "hero": "HXAL",
       "map": "battlefield-of-eternity",
-      "score": 80,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Battlefield of Eternity's objective forces teamfights where Xal'atath's area damage (Void Eruption) is strong.",
-          "evidence": [
-            "Void Eruption"
-          ]
+          "text": "Battlefield of Eternity's objective forces teamfights where Xal'atath's area burst (Shadow Mark, Dark Heart Ritual) hits several targets."
         },
         {
           "kind": "theory",
-          "text": "Xal'atath's sustained-dps (Void Volley) speeds up Battlefield of Eternity's PvE objective.",
-          "evidence": [
-            "Void Volley"
-          ]
+          "text": "Xal'atath's sustained damage (Void Step, Void Volley) speeds up Battlefield of Eternity's race against neutral units."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's waveclear (Shadow Mark, Dark Heart Ritual) helps hold lanes against Battlefield of Eternity's pushing objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's summons (Void Convergence, Void Summoner) add damage to Battlefield of Eternity's neutral objective. Only when Xal'atath takes Void Convergence."
         }
-      ]
+      ],
+      "score": 75
     },
     {
       "hero": "HXAL",
       "map": "braxis-outpost",
-      "score": 77,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Braxis Outpost's objective forces teamfights where Xal'atath's area damage (Void Eruption) is strong.",
-          "evidence": [
-            "Void Eruption"
-          ]
+          "text": "Braxis Outpost's single lane suits Xal'atath's poke."
         },
         {
           "kind": "theory",
-          "text": "Braxis Outpost's single lane suits Xal'atath's poke (Shadow Mark).",
-          "evidence": [
-            "Shadow Mark"
-          ]
+          "text": "Braxis Outpost's objective forces teamfights where Xal'atath's area burst (Shadow Mark, Dark Heart Ritual) hits several targets."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's waveclear (Shadow Mark, Dark Heart Ritual) holds Braxis Outpost's single lane."
         }
-      ]
+      ],
+      "score": 75
     },
     {
       "hero": "HXAL",
       "map": "cursed-hollow",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Xal'atath can reach channelling enemies quickly (Void Step) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Void Step"
-          ]
+          "text": "Xal'atath can reach channelling enemies quickly (Void Step, Cloak of Shadows) to contest Cursed Hollow's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath can cover ground quickly (Void Step, Cloak of Shadows) on Cursed Hollow's large layout."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Cursed Hollow's objective. Only when Xal'atath takes Silence of the Lamb."
         }
-      ]
+      ],
+      "score": 65
     },
     {
       "hero": "HXAL",
       "map": "dragon-shire",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Xal'atath can reach channelling enemies quickly (Void Step) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Void Step"
-          ]
+          "text": "Xal'atath can reach channelling enemies quickly (Void Step, Cloak of Shadows) to contest Dragon Shire's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's waveclear (Shadow Mark, Dark Heart Ritual) helps hold lanes against Dragon Shire's pushing objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Dragon Shire's objective. Only when Xal'atath takes Silence of the Lamb."
         }
-      ]
+      ],
+      "score": 65
     },
     {
       "hero": "HXAL",
       "map": "hanamura-temple",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Hanamura Temple's objective forces teamfights where Xal'atath's area damage (Void Eruption) is strong.",
-          "evidence": [
-            "Void Eruption"
-          ]
+          "text": "Hanamura Temple's objective forces teamfights where Xal'atath's area burst (Shadow Mark, Dark Heart Ritual) hits several targets."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's waveclear (Shadow Mark, Dark Heart Ritual) helps hold lanes against Hanamura Temple's pushing objective."
         }
-      ]
+      ],
+      "score": 65
     },
     {
       "hero": "HXAL",
       "map": "towers-of-doom",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Xal'atath can reach channelling enemies quickly (Void Step) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Void Step"
-          ]
+          "text": "Xal'atath can reach channelling enemies quickly (Void Step, Cloak of Shadows) to contest Towers of Doom's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's waveclear (Shadow Mark, Dark Heart Ritual) helps hold lanes against Towers of Doom's pushing objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Towers of Doom's objective. Only when Xal'atath takes Silence of the Lamb."
         }
-      ]
+      ],
+      "score": 65
+    },
+    {
+      "hero": "Malf",
+      "map": "battlefield-of-eternity",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Malfurion's summons (Vengeful Roots) add damage to Battlefield of Eternity's neutral objective. Only when Malfurion takes Vengeful Roots."
+        }
+      ],
+      "score": 53
     },
     {
       "hero": "Malf",
       "map": "braxis-outpost",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Braxis Outpost's single lane suits Malfurion's poke (Moonfire).",
-          "evidence": [
-            "Moonfire"
-          ]
+          "text": "Braxis Outpost's single lane suits Malfurion's poke."
         }
-      ]
+      ],
+      "score": 62
     },
     {
       "hero": "Malf",
       "map": "cursed-hollow",
-      "score": 35,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Malfurion has little mobility to rotate across Cursed Hollow's large layout."
+          "text": "Malfurion can reach channelling enemies quickly (Astral Communion) to contest Cursed Hollow's objective. Only when Malfurion takes Astral Communion."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion can cover ground quickly (Astral Communion) on Cursed Hollow's large layout. Only when Malfurion takes Astral Communion."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Cursed Hollow's objective. Only when Malfurion takes Twilight Dream."
         }
-      ]
+      ],
+      "score": 60
+    },
+    {
+      "hero": "Malf",
+      "map": "dragon-shire",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Malfurion can reach channelling enemies quickly (Astral Communion) to contest Dragon Shire's objective. Only when Malfurion takes Astral Communion."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Dragon Shire's objective. Only when Malfurion takes Twilight Dream."
+        }
+      ],
+      "score": 57
+    },
+    {
+      "hero": "Malf",
+      "map": "towers-of-doom",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Malfurion can reach channelling enemies quickly (Astral Communion) to contest Towers of Doom's objective. Only when Malfurion takes Astral Communion."
+        },
+        {
+          "kind": "theory",
+          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Towers of Doom's objective. Only when Malfurion takes Twilight Dream."
+        }
+      ],
+      "score": 57
     },
     {
       "hero": "Mura",
       "map": "battlefield-of-eternity",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Battlefield of Eternity's objective forces teamfights where Muradin's area damage (Thunder Clap) is strong.",
-          "evidence": [
-            "Thunder Clap"
-          ]
+          "text": "Muradin can start the fights Battlefield of Eternity's objective forces."
         }
-      ]
+      ],
+      "score": 55
     },
     {
       "hero": "Mura",
       "map": "braxis-outpost",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Braxis Outpost's objective forces teamfights where Muradin's area damage (Thunder Clap) is strong.",
-          "evidence": [
-            "Thunder Clap"
-          ]
+          "text": "Muradin can start the fights Braxis Outpost's objective forces."
         }
-      ]
-    },
-    {
-      "hero": "Mura",
-      "map": "cursed-hollow",
-      "score": 60,
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Muradin can reach channelling enemies quickly (Dwarf Toss) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Dwarf Toss"
-          ]
-        }
-      ]
-    },
-    {
-      "hero": "Mura",
-      "map": "dragon-shire",
-      "score": 60,
-      "reasons": [
-        {
-          "kind": "theory",
-          "text": "Muradin can reach channelling enemies quickly (Dwarf Toss) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Dwarf Toss"
-          ]
-        }
-      ]
+      ],
+      "score": 55
     },
     {
       "hero": "Mura",
       "map": "hanamura-temple",
-      "score": 73,
       "reasons": [
-        {
-          "kind": "theory",
-          "text": "Hanamura Temple's objective forces teamfights where Muradin's area damage (Thunder Clap) is strong.",
-          "evidence": [
-            "Thunder Clap"
-          ]
-        },
         {
           "kind": "theory",
           "text": "Muradin can stand on Hanamura Temple's payload and absorb pressure."
-        }
-      ]
-    },
-    {
-      "hero": "Mura",
-      "map": "towers-of-doom",
-      "score": 60,
-      "reasons": [
+        },
         {
           "kind": "theory",
-          "text": "Muradin can reach channelling enemies quickly (Dwarf Toss) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Dwarf Toss"
-          ]
+          "text": "Muradin can start the fights Hanamura Temple's objective forces."
         }
-      ]
+      ],
+      "score": 65
     },
     {
       "hero": "Tra0",
       "map": "battlefield-of-eternity",
-      "score": 69,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Tracer's sustained-dps (Reload) speeds up Battlefield of Eternity's PvE objective.",
-          "evidence": [
-            "Reload"
-          ]
+          "text": "Battlefield of Eternity's objective forces teamfights where Tracer's area burst (Pulse Bomb, Telefrag) hits several targets."
+        },
+        {
+          "kind": "theory",
+          "text": "Tracer's percent-Health damage (Quantum Spike) speeds up Battlefield of Eternity's race against neutral units. Only when Tracer takes Quantum Spike."
         }
-      ]
+      ],
+      "score": 65
     },
     {
       "hero": "Tra0",
-      "map": "cursed-hollow",
-      "score": 60,
+      "map": "braxis-outpost",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Tracer can reach channelling enemies quickly (Blink) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Blink"
-          ]
+          "text": "Braxis Outpost's objective forces teamfights where Tracer's area burst (Pulse Bomb, Telefrag) hits several targets."
+        },
+        {
+          "kind": "theory",
+          "text": "Braxis Outpost's single lane leaves Tracer little room to flank around the front line."
         }
-      ]
+      ],
+      "score": 55
     },
     {
       "hero": "Tra0",
-      "map": "dragon-shire",
-      "score": 60,
+      "map": "hanamura-temple",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Tracer can reach channelling enemies quickly (Blink) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Blink"
-          ]
+          "text": "Hanamura Temple's objective forces teamfights where Tracer's area burst (Pulse Bomb, Telefrag) hits several targets."
         }
-      ]
+      ],
+      "score": 60
     },
     {
-      "hero": "Tra0",
-      "map": "towers-of-doom",
-      "score": 60,
+      "hero": "Vari",
+      "map": "battlefield-of-eternity",
       "reasons": [
         {
           "kind": "theory",
-          "text": "Tracer can reach channelling enemies quickly (Blink) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Blink"
-          ]
+          "text": "Varian's percent-Health damage (Juggernaut) speeds up Battlefield of Eternity's race against neutral units. Only when Varian takes Juggernaut."
         }
-      ]
+      ],
+      "score": 56
     },
     {
       "hero": "Vari",
       "map": "cursed-hollow",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Varian can reach channelling enemies quickly (Charge) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Charge"
-          ]
+          "text": "Varian's silence (Taunt) stops enemies channelling Cursed Hollow's objective. Only when Varian takes Taunt."
         }
-      ]
+      ],
+      "score": 53
     },
     {
       "hero": "Vari",
       "map": "dragon-shire",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Varian can reach channelling enemies quickly (Charge) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Charge"
-          ]
+          "text": "Varian's silence (Taunt) stops enemies channelling Dragon Shire's objective. Only when Varian takes Taunt."
         }
-      ]
+      ],
+      "score": 53
     },
     {
       "hero": "Vari",
       "map": "hanamura-temple",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
           "text": "Varian can stand on Hanamura Temple's payload and absorb pressure."
         }
-      ]
+      ],
+      "score": 60
     },
     {
       "hero": "Vari",
       "map": "towers-of-doom",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Varian can reach channelling enemies quickly (Charge) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Charge"
-          ]
+          "text": "Varian's silence (Taunt) stops enemies channelling Towers of Doom's objective. Only when Varian takes Taunt."
         }
-      ]
+      ],
+      "score": 53
+    },
+    {
+      "hero": "Wiza",
+      "map": "battlefield-of-eternity",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Battlefield of Eternity's objective forces teamfights where Li-Ming's area burst (Wave of Force) hits several targets. Only when Li-Ming takes Wave of Force."
+        }
+      ],
+      "score": 56
     },
     {
       "hero": "Wiza",
       "map": "braxis-outpost",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Braxis Outpost's single lane suits Li-Ming's poke (Magic Missiles).",
-          "evidence": [
-            "Magic Missiles"
-          ]
+          "text": "Braxis Outpost's single lane suits Li-Ming's poke (Magic Missiles, Arcane Orb)."
+        },
+        {
+          "kind": "theory",
+          "text": "Braxis Outpost's objective forces teamfights where Li-Ming's area burst (Wave of Force) hits several targets. Only when Li-Ming takes Wave of Force."
         }
-      ]
+      ],
+      "score": 68
     },
     {
       "hero": "Wiza",
       "map": "cursed-hollow",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Li-Ming can reach channelling enemies quickly (Teleport) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Teleport"
-          ]
+          "text": "Li-Ming can reach channelling enemies quickly (Teleport, Aether Walker) to contest Cursed Hollow's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Li-Ming can cover ground quickly (Teleport, Aether Walker) on Cursed Hollow's large layout."
         }
-      ]
+      ],
+      "score": 62
     },
     {
       "hero": "Wiza",
       "map": "dragon-shire",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Li-Ming can reach channelling enemies quickly (Teleport) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Teleport"
-          ]
+          "text": "Li-Ming can reach channelling enemies quickly (Teleport, Aether Walker) to contest Dragon Shire's objective."
         }
-      ]
+      ],
+      "score": 57
+    },
+    {
+      "hero": "Wiza",
+      "map": "hanamura-temple",
+      "reasons": [
+        {
+          "kind": "theory",
+          "text": "Hanamura Temple's objective forces teamfights where Li-Ming's area burst (Wave of Force) hits several targets. Only when Li-Ming takes Wave of Force."
+        }
+      ],
+      "score": 56
     },
     {
       "hero": "Wiza",
       "map": "towers-of-doom",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Li-Ming can reach channelling enemies quickly (Teleport) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Teleport"
-          ]
+          "text": "Li-Ming can reach channelling enemies quickly (Teleport, Aether Walker) to contest Towers of Doom's objective."
         }
-      ]
+      ],
+      "score": 57
     },
     {
       "hero": "Zera",
       "map": "battlefield-of-eternity",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Battlefield of Eternity's objective forces teamfights where Zeratul's area damage (Cleave) is strong.",
-          "evidence": [
-            "Cleave"
-          ]
+          "text": "Battlefield of Eternity's objective forces teamfights where Zeratul's area burst (Cleave, Singularity Spike) hits several targets."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can group or freeze enemies (Void Prison) in Battlefield of Eternity's objective fights. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 64
     },
     {
       "hero": "Zera",
       "map": "braxis-outpost",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Braxis Outpost's objective forces teamfights where Zeratul's area damage (Cleave) is strong.",
-          "evidence": [
-            "Cleave"
-          ]
+          "text": "Braxis Outpost's objective forces teamfights where Zeratul's area burst (Cleave, Singularity Spike) hits several targets."
+        },
+        {
+          "kind": "theory",
+          "text": "Braxis Outpost's single lane leaves Zeratul little room to flank around the front line."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can group or freeze enemies (Void Prison) in Braxis Outpost's objective fights. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 59
     },
     {
       "hero": "Zera",
       "map": "cursed-hollow",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Permanent Cloak"
-          ]
+          "text": "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Cursed Hollow's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can cover ground quickly (Blink, Vorpal Blade) on Cursed Hollow's large layout."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul's Time Stop (Void Prison) stops enemies channelling Cursed Hollow's objective. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 65
     },
     {
       "hero": "Zera",
       "map": "dragon-shire",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Permanent Cloak"
-          ]
+          "text": "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Dragon Shire's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul's Time Stop (Void Prison) stops enemies channelling Dragon Shire's objective. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 60
     },
     {
       "hero": "Zera",
       "map": "hanamura-temple",
-      "score": 65,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Hanamura Temple's objective forces teamfights where Zeratul's area damage (Cleave) is strong.",
-          "evidence": [
-            "Cleave"
-          ]
+          "text": "Hanamura Temple's objective forces teamfights where Zeratul's area burst (Cleave, Singularity Spike) hits several targets."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul can group or freeze enemies (Void Prison) in Hanamura Temple's objective fights. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 64
     },
     {
       "hero": "Zera",
       "map": "towers-of-doom",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Permanent Cloak"
-          ]
+          "text": "Zeratul can reach channelling enemies quickly (Permanent Cloak) to contest Towers of Doom's objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Zeratul's Time Stop (Void Prison) stops enemies channelling Towers of Doom's objective. Only when Zeratul takes Void Prison."
         }
-      ]
+      ],
+      "score": 60
     },
     {
       "hero": "chogall",
       "map": "battlefield-of-eternity",
-      "score": 80,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Battlefield of Eternity's objective forces teamfights where Cho'gall's area damage (Dread Orb) is strong.",
-          "evidence": [
-            "Dread Orb"
-          ]
+          "text": "Cho'gall can group or freeze enemies (Upheaval) in Battlefield of Eternity's objective fights."
         },
         {
           "kind": "theory",
-          "text": "Cho'gall's sustained-dps (Shadow Bolt Volley) speeds up Battlefield of Eternity's PvE objective.",
-          "evidence": [
-            "Shadow Bolt Volley"
-          ]
+          "text": "Cho'gall's percent-Health damage (Uppercut, Searing Shadows) speeds up Battlefield of Eternity's race against neutral units. Only when Cho'gall takes Uppercut."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can start the fights Battlefield of Eternity's objective forces."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's waveclear (Shadowflame, Dread Orb) helps hold lanes against Battlefield of Eternity's pushing objective."
         }
-      ]
+      ],
+      "score": 72
     },
     {
       "hero": "chogall",
       "map": "braxis-outpost",
-      "score": 77,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Braxis Outpost's objective forces teamfights where Cho'gall's area damage (Dread Orb) is strong.",
-          "evidence": [
-            "Dread Orb"
-          ]
+          "text": "Braxis Outpost's single lane suits Cho'gall's poke (Shadowflame, Dread Orb)."
         },
         {
           "kind": "theory",
-          "text": "Braxis Outpost's single lane suits Cho'gall's poke (Shadowflame).",
-          "evidence": [
-            "Shadowflame"
-          ]
+          "text": "Cho'gall can group or freeze enemies (Upheaval) in Braxis Outpost's objective fights."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can start the fights Braxis Outpost's objective forces."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's waveclear (Shadowflame, Dread Orb) holds Braxis Outpost's single lane."
         }
-      ]
+      ],
+      "score": 77
     },
     {
       "hero": "chogall",
       "map": "cursed-hollow",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall can reach channelling enemies quickly (Surging Fist) to contest Cursed Hollow's objective.",
-          "evidence": [
-            "Surging Fist"
-          ]
+          "text": "Cho'gall can reach channelling enemies quickly (Shifting Nether) to contest Cursed Hollow's objective. Only when Cho'gall takes Shifting Nether."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can cover ground quickly (Shifting Nether) on Cursed Hollow's large layout. Only when Cho'gall takes Shifting Nether."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's silence (Deafening Blast) stops enemies channelling Cursed Hollow's objective. Only when Cho'gall takes Deafening Blast."
         }
-      ]
+      ],
+      "score": 60
     },
     {
       "hero": "chogall",
       "map": "dragon-shire",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall can reach channelling enemies quickly (Surging Fist) to contest Dragon Shire's objective.",
-          "evidence": [
-            "Surging Fist"
-          ]
+          "text": "Cho'gall's waveclear (Shadowflame, Dread Orb) helps hold lanes against Dragon Shire's pushing objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can reach channelling enemies quickly (Shifting Nether) to contest Dragon Shire's objective. Only when Cho'gall takes Shifting Nether."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's silence (Deafening Blast) stops enemies channelling Dragon Shire's objective. Only when Cho'gall takes Deafening Blast."
         }
-      ]
+      ],
+      "score": 62
     },
     {
       "hero": "chogall",
       "map": "hanamura-temple",
-      "score": 73,
       "reasons": [
-        {
-          "kind": "theory",
-          "text": "Hanamura Temple's objective forces teamfights where Cho'gall's area damage (Dread Orb) is strong.",
-          "evidence": [
-            "Dread Orb"
-          ]
-        },
         {
           "kind": "theory",
           "text": "Cho'gall can stand on Hanamura Temple's payload and absorb pressure."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can group or freeze enemies (Upheaval) in Hanamura Temple's objective fights."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can start the fights Hanamura Temple's objective forces."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's waveclear (Shadowflame, Dread Orb) helps hold lanes against Hanamura Temple's pushing objective."
         }
-      ]
+      ],
+      "score": 75
     },
     {
       "hero": "chogall",
       "map": "towers-of-doom",
-      "score": 60,
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall can reach channelling enemies quickly (Surging Fist) to contest Towers of Doom's objective.",
-          "evidence": [
-            "Surging Fist"
-          ]
+          "text": "Cho'gall's waveclear (Shadowflame, Dread Orb) helps hold lanes against Towers of Doom's pushing objective."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall can reach channelling enemies quickly (Shifting Nether) to contest Towers of Doom's objective. Only when Cho'gall takes Shifting Nether."
+        },
+        {
+          "kind": "theory",
+          "text": "Cho'gall's silence (Deafening Blast) stops enemies channelling Towers of Doom's objective. Only when Cho'gall takes Deafening Blast."
         }
-      ]
+      ],
+      "score": 62
     }
   ]
 }

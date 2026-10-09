@@ -1,63 +1,189 @@
 [
   {
-    "id": "2.57.0.98304..2.57.0.98348",
-    "from": "2.57.0.98304",
-    "to": "2.57.0.98348",
     "date": "2026-10-05",
+    "from": "2.57.0.98304",
     "heroes": {
       "HXAL": [
         {
-          "kind": "ability",
-          "target": "Void Volley",
-          "field": "damage",
-          "old": 90,
-          "new": 72
-        },
-        {
-          "kind": "ability",
-          "target": "Void Step",
-          "field": "range",
-          "old": 5,
-          "new": 2
-        },
-        {
-          "kind": "talent",
-          "target": "Anchored Core",
           "field": "text",
+          "kind": "ability",
+          "new": "Every basic attack against heroes, and every 2 basic attacks against non-heroes generate charge. Once fully charged Xal'atath can activate Void Volley to unleash a barrage of 6 Void Orbs at a target location, each dealing 72 damage on impact.",
+          "old": "After attacking enemies with her Basic Attacks 5 times, Xal'atath can activate Void Volley to unleash a barrage of 6 Void Orbs at a target location, each dealing 90 damage on impact.",
+          "target": "Void Volley"
+        },
+        {
+          "field": "damage",
+          "kind": "ability",
+          "new": 72,
+          "old": 90,
+          "target": "Void Volley"
+        },
+        {
+          "field": "damage",
+          "kind": "ability",
+          "new": 90,
+          "old": 112,
+          "target": "Void Eruption"
+        },
+        {
+          "field": "damage",
+          "kind": "ability",
+          "new": 166,
+          "old": 175,
+          "target": "Void Eruption"
+        },
+        {
+          "field": "radius",
+          "kind": "talent",
+          "level": "1",
+          "new": "+25%",
+          "old": "+50%",
+          "target": "Anchored Core"
+        },
+        {
+          "field": "text",
+          "kind": "talent",
+          "level": "4",
+          "new": "Each time the Dark Heart damages an enemy Hero, Xal'atath gains a Shield equal to 2% of her maximum Health, up to 10%.",
+          "target": "Dark Barrier"
+        },
+        {
+          "field": "duration",
+          "kind": "talent",
+          "level": "7",
+          "new": 2,
+          "old": 1,
+          "target": "Silence of the Lamb"
+        },
+        {
+          "field": "text",
+          "kind": "talent",
+          "level": "7",
+          "new": "Activating Void Step summons a single Void Minion in Xal'atath's original postion.",
+          "old": "Activating Void Step summons a single Void Minion in Xalatath's original postion.",
+          "target": "Void Summoner"
+        },
+        {
+          "field": "damage",
+          "kind": "talent",
+          "level": "10",
+          "new": 90,
+          "old": 112,
+          "target": "Void Eruption"
+        },
+        {
+          "field": "damage",
+          "kind": "talent",
+          "level": "10",
+          "new": 166,
+          "old": 175,
+          "target": "Void Eruption"
+        },
+        {
+          "field": "text",
+          "kind": "talent",
+          "level": "13",
+          "new": "Detonating the Dark Heart now Silences enemies inside its radius for 1 second.",
+          "old": "Casting Dark Heart Ritual Silences enemies inside its radius for 1 second.",
+          "target": "Dark Heart's Protection"
+        },
+        {
+          "field": "text",
+          "kind": "talent",
           "level": "20",
-          "old": "Radius +50%",
-          "new": "Radius +25%"
+          "new": "Void Convergence's Void Portal self decay is no longer lethal, raises the active Void Portal limit to 2, and can spawn and sustain up to 4 Void Minions.",
+          "old": "Void Convergence's Void Portal no longer has a life duration, raises the active Void Portal limit to 2, and can spawn and sustain up to 4 Void Minions.",
+          "target": "Rift Invasion"
         }
       ]
-    }
+    },
+    "id": "2.57.0.98304..2.57.0.98348",
+    "to": "2.57.0.98348"
   },
   {
-    "id": "2.55.17.98025..2.57.0.98285",
-    "from": "2.55.17.98025",
-    "to": "2.57.0.98285",
+    "date": "2026-09-29",
+    "from": "2.57.0.98285",
+    "heroes": {
+      "HXAL": [
+        {
+          "field": "text",
+          "kind": "talent",
+          "level": "7",
+          "new": "Activating Void Step summons a single Void Minion in Xalatath's original postion.",
+          "old": "Activating Void Step summons a single Void Minion in Xalataths original postion.",
+          "target": "Void Summoner"
+        }
+      ]
+    },
+    "id": "2.57.0.98285..2.57.0.98304",
+    "to": "2.57.0.98304"
+  },
+  {
     "date": "2026-09-28",
+    "from": "2.55.17.98025",
     "heroes": {
       "Abat": [
         {
+          "field": "health",
           "kind": "talent",
-          "target": "Survival Instincts",
+          "level": "13",
+          "new": "40%",
+          "old": "50%",
+          "target": "Bombard Strain"
+        },
+        {
           "field": "text",
-          "level": "1",
-          "old": "Locusts gain 100% Health",
-          "new": "Locusts take 50% less damage from non-Heroic sources"
+          "kind": "talent",
+          "level": "16",
+          "new": "Reduce damage taken by Locusts from non-Heroes by 50% and increase their damage by 60%.",
+          "old": "Increases Locust's Health by 100% and damage by 60%.",
+          "target": "Survival Instincts"
+        },
+        {
+          "field": "damage",
+          "kind": "talent",
+          "level": "16",
+          "new": "50%",
+          "old": "100%",
+          "target": "Survival Instincts"
         }
       ],
       "HXAL": [
         {
-          "kind": "talent-added",
-          "target": "Void Eruption",
-          "level": "10"
+          "kind": "ability-added",
+          "target": "Shadow Mark"
         },
         {
           "kind": "ability-added",
-          "target": "Shadow Mark"
+          "target": "Dark Heart Ritual"
+        },
+        {
+          "kind": "ability-added",
+          "target": "Void Step"
+        },
+        {
+          "kind": "ability-added",
+          "target": "Void Volley"
+        },
+        {
+          "kind": "ability-added",
+          "target": "Void Eruption"
+        },
+        {
+          "kind": "ability-added",
+          "target": "Void Convergence"
+        }
+      ],
+      "Mura": [
+        {
+          "field": "text",
+          "kind": "ability",
+          "new": "Reward: Upon hitting 45 targets, Storm Bolt pierces to hit an additional target, and Muradin's Basic Attacks reduce the cooldown of Storm Bolt by 0.5 seconds and restore 3 Mana.",
+          "target": "Storm Bolt"
         }
       ]
-    }
+    },
+    "id": "2.55.17.98025..2.57.0.98285",
+    "to": "2.57.0.98285"
   }
 ]

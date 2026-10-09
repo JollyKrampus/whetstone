@@ -5,6 +5,8 @@ import { parse as parseYaml } from 'yaml';
 import type { z } from 'zod';
 import { DataValidationError, EdgeSchema, parseData } from '../../core/schemas.ts';
 import { repoRoot } from '../../lib/datadir.ts';
+import { decodeShard } from './draft/data.ts';
+import { entityOrder } from './pipeline/transform/draft.ts';
 import { statsBlockFromWindow } from './draft/statsblock.ts';
 import * as load from './load.ts';
 import {
@@ -127,7 +129,7 @@ describe('hots fixture cross-references', () => {
     expect(byId.get('HXAL')?.isNew).toBe(true);
     for (const h of heroes.filter((x) => !x.members)) {
       expect(h.abilities.length, h.name).toBeGreaterThanOrEqual(3);
-      for (const tier of Object.values(h.talents)) expect(tier.length, h.name).toBe(2);
+      for (const tier of Object.values(h.talents)) expect(tier.length, h.name).toBeGreaterThanOrEqual(2);
     }
   });
 
@@ -156,15 +158,21 @@ describe('hots fixture cross-references', () => {
   it('builds the draft shard from the same heroes, maps and theory', () => {
     const draft = fixture(DraftShardSchema, 'public/draft.json');
     const theory = fixture(TheorySchema, 'theory.json');
-    expect(draft.heroes.id).toEqual(entities.map((h) => h.id));
+    // Append-only shard order: release date, then id.
+    expect(draft.heroes.id).toEqual(entityOrder(entities).map((h) => h.id));
     expect(draft.maps.id).toEqual(maps.map((m) => m.id));
     expect(draft.rulesVersion).toBe(theory.rulesVersion);
     expect(draft.theory.counters.a.length).toBe(theory.counters.length);
     expect(draft.theory.synergies.a.length).toBe(theory.synergies.length);
     expect(draft.theory.mapFit.hero.length).toBe(theory.mapFit.length);
     expect(draft.stats).toBeUndefined();
-    const i = theory.counters.findIndex((e) => e.a === 'Crus' && e.b === 'Demo');
-    expect(draft.theory.counters.r[i]?.map((r) => draft.reasons[r])).toEqual(theory.counters[i]?.reasons.map((r) => r.text));
+    // Reason templates and condition parts decode back to the exact theory.json lines, for every edge.
+    const decoded = decodeShard(draft);
+    const idx = (id: string) => decoded.byId.get(id)?.index ?? -1;
+    for (const e of theory.counters) expect(decoded.counters.get(idx(e.a))?.get(idx(e.b))?.reasons, `${e.a}>${e.b}`).toEqual(e.reasons.map((r) => r.text));
+    for (const e of theory.synergies) expect(decoded.synergies.get(idx(e.a))?.get(idx(e.b))?.reasons).toEqual(e.reasons.map((r) => r.text));
+    const mapIdx = (id: string) => decoded.mapById.get(id)?.index ?? -1;
+    for (const f of theory.mapFit) expect(decoded.mapFit.get(idx(f.hero))?.get(mapIdx(f.map))?.reasons).toEqual(f.reasons.map((r) => r.text));
   });
 
   it('accepts a class-B stats overlay merged into the draft shard', () => {
@@ -288,9 +296,10 @@ describe('hots load.ts against fixtures', () => {
     expect(load.getMembers(load.getEntity('chogall') as Hero).map((h) => h.slug)).toEqual(['cho', 'gall']);
     expect(load.getRankedMaps().map((m) => m.id)).not.toContain('hanamura-temple');
     expect(load.getPatchesSince('2026-09-30').map((p) => p.id)).toEqual(['2026-10-05-hotfix']);
-    expect(load.getHeroPatchHistory(load.getHeroBySlug('xalatath') as Hero)).toHaveLength(2);
+    expect(load.getHeroPatchHistory(load.getHeroBySlug('xalatath') as Hero).map((e) => e.patch.id)).toEqual(['2026-10-05-hotfix', '2026-09-29-hotfix', '2026-09-28-patch', '2026-09-14-ptr']);
     expect(load.getHeroLinks(load.getEntity('chogall') as Hero).length).toBeGreaterThan(0);
-    expect(load.isFreeToPlay(load.getHeroBySlug('johanna') as Hero)).toBe(true);
+    expect(load.isFreeToPlay(load.getHeroBySlug('diablo') as Hero)).toBe(true);
+    expect(load.isFreeToPlay(load.getHeroBySlug('johanna') as Hero)).toBe(false);
   });
 
   it('resolves names, nicknames and localized aliases to draftable entities', () => {
@@ -309,9 +318,17 @@ describe('hots load.ts against fixtures', () => {
     const m = load.heroEdges('johanna');
     expect(m?.primary).toBe('theory');
     expect(m?.label).toBe(load.THEORY_LABEL);
-    expect(m?.strong[0]?.hero.slug).toBe('valla');
+    // Curated matchups first (Tracer and Valla, both 88), then generic rule matches by score.
+    expect(m?.strong.slice(0, 2).map((r) => r.hero.slug)).toEqual(['tracer', 'valla']);
     expect(m?.strong[0]?.source).toBe('curated');
-    expect(m?.strong.every((r) => r.score > 50 && r.gate === 'listed')).toBe(true);
+    const firstGeneric = m?.strong.findIndex((r) => r.source !== 'curated') ?? -1;
+    expect(m?.strong.slice(0, firstGeneric).every((r) => r.source === 'curated')).toBe(true);
+    // The theory bar: curated, or generic rules scoring 65+; the rest is shown below the bar.
+    for (const r of m?.strong ?? []) {
+      expect(r.score).toBeGreaterThan(50);
+      expect(r.gate).toBe(r.source === 'curated' || r.score >= load.THEORY_GATES.listMinScore ? 'listed' : 'shown');
+    }
+    expect(m?.strong.some((r) => r.gate === 'shown')).toBe(true);
     expect(load.heroEdges('cho')?.hero.id).toBe('chogall');
     expect(load.heroEdges('unknown')).toBeNull();
     expect(load.heroMapFit('abathur')[0]?.source).toBe('theory');

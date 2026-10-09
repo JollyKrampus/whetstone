@@ -243,10 +243,12 @@ test.describe('pool filter', () => {
     await ready(page);
     await expect(stepTitle(page)).toHaveText('Your pick');
     await page.locator('#dt-from').selectOption('pool');
-    await page.getByRole('button', { name: /Show all/ }).click({ trial: false }).catch(() => {});
+    // With a short list there is no 'Show all' button; never wait for one.
+    const showAll = page.getByRole('button', { name: /Show all/ });
+    if ((await showAll.count()) > 0) await showAll.click();
     const ids = await page.locator('.dt-now .sg-item').evaluateAll((els) => els.map((el) => el.getAttribute('data-hero')));
-    // Owned Zeratul, favourite Xal'atath, plus the fixture's free rotation.
-    const allowed = new Set(['Zera', 'HXAL', 'Anub', 'Crus', 'Demo', 'Malf', 'Mura', 'Tra0', 'Wiza']);
+    // Owned Zeratul, favourite Xal'atath, plus the fixture's free rotation (Diablo).
+    const allowed = new Set(['Zera', 'HXAL', 'Diab']);
     expect(ids.length).toBeGreaterThan(0);
     for (const id of ids) expect(allowed.has(id!), `${id} is in the pool`).toBe(true);
     await expect(page.locator('.dt-now .sg-item[data-hero="HXAL"]')).toContainText('One of your favourites');

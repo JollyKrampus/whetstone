@@ -1,646 +1,652 @@
 {
+  "general": [
+    {
+      "kind": "news",
+      "label": "Official news and patch notes",
+      "site": "blizzard",
+      "url": "https://news.blizzard.com/en-us/feed/heroes-of-the-storm"
+    },
+    {
+      "kind": "live",
+      "label": "Heroes of the Storm on Twitch",
+      "site": "twitch",
+      "url": "https://www.twitch.tv/directory/category/heroes-of-the-storm"
+    },
+    {
+      "kind": "tierlist",
+      "label": "Icy Veins tier lists",
+      "site": "icy-veins",
+      "url": "https://www.icy-veins.com/heroes/heroes-of-the-storm-tier-list-hub"
+    },
+    {
+      "kind": "tierlist",
+      "label": "Psionic Storm tier list",
+      "site": "psionic-storm",
+      "url": "https://psionic-storm.com/en/tierlist/"
+    },
+    {
+      "kind": "draft",
+      "label": "Heroes Profile",
+      "site": "heroesprofile",
+      "url": "https://www.heroesprofile.com/"
+    },
+    {
+      "kind": "esports",
+      "label": "Heroes of the Storm on Liquipedia",
+      "site": "liquipedia",
+      "url": "https://liquipedia.net/heroes/Main_Page"
+    }
+  ],
   "heroes": {
     "Abat": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Abathur build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/abathur-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Abathur on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/abathur/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Abathur on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/abathur"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Abathur talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Abathur"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Abathur matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Abathur"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Abathur on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Abathur"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Abathur on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Abathur"
       }
     ],
     "Anub": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Anub'arak build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/anubarak-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Anub'arak on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/anubarak/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Anub'arak on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/anubarak"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Anub'arak talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Anub'arak"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Anub'arak matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Anub'arak"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Anub'arak on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Anub'arak"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Anub'arak on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Anub'arak"
       }
     ],
     "CCho": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Cho build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/cho-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Cho on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/cho/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Cho on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/cho"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Cho talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Cho"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Cho matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Cho"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Cho on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Cho"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Cho on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Cho"
+      }
+    ],
+    "Crus": [
+      {
+        "kind": "guide",
+        "label": "Johanna build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/johanna-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Johanna on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/johanna/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Johanna on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/johanna"
+      },
+      {
+        "kind": "talents",
+        "label": "Johanna talents (Heroes Profile)",
+        "site": "heroesprofile",
+        "url": "https://www.heroesprofile.com/Global/Talents/Johanna"
+      },
+      {
+        "kind": "matchups",
+        "label": "Johanna matchups (Heroes Profile)",
+        "site": "heroesprofile",
+        "url": "https://www.heroesprofile.com/Global/Matchups/Johanna"
+      },
+      {
+        "kind": "wiki",
+        "label": "Johanna on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Johanna"
+      },
+      {
+        "kind": "esports",
+        "label": "Johanna on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Johanna"
+      }
+    ],
+    "Demo": [
+      {
+        "kind": "guide",
+        "label": "Valla build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/valla-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Valla on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/valla/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Valla on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/valla"
+      },
+      {
+        "kind": "talents",
+        "label": "Valla talents (Heroes Profile)",
+        "site": "heroesprofile",
+        "url": "https://www.heroesprofile.com/Global/Talents/Valla"
+      },
+      {
+        "kind": "matchups",
+        "label": "Valla matchups (Heroes Profile)",
+        "site": "heroesprofile",
+        "url": "https://www.heroesprofile.com/Global/Matchups/Valla"
+      },
+      {
+        "kind": "wiki",
+        "label": "Valla on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Valla"
+      },
+      {
+        "kind": "esports",
+        "label": "Valla on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Valla"
       }
     ],
     "Diab": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Diablo build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/diablo-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Diablo on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/diablo/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Diablo on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/diablo"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Diablo talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Diablo"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Diablo matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Diablo"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Diablo on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Diablo"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Diablo on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Diablo"
       }
     ],
     "Gall": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Gall build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/gall-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Gall on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/gall/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Gall on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/gall"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Gall talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Gall"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Gall matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Gall"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Gall on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Gall"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Gall on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Gall"
       }
     ],
-    "Crus": [
+    "HXAL": [
       {
+        "kind": "guide",
+        "label": "Xal'atath build guide (Icy Veins)",
         "site": "icy-veins",
-        "kind": "guide",
-        "label": "Johanna build guide (Icy Veins)",
-        "url": "https://www.icy-veins.com/heroes/johanna-build-guide"
+        "url": "https://www.icy-veins.com/heroes/xalatath-build-guide"
       },
       {
+        "kind": "guide",
+        "label": "Xal'atath on Psionic Storm",
         "site": "psionic-storm",
-        "kind": "guide",
-        "label": "Johanna on Psionic Storm",
-        "url": "https://psionic-storm.com/en/heroes/johanna/"
+        "url": "https://psionic-storm.com/en/heroes/xalatath/"
       },
       {
+        "kind": "wiki",
+        "label": "Xal'atath on Nexus Compendium",
         "site": "nexus-compendium",
-        "kind": "wiki",
-        "label": "Johanna on Nexus Compendium",
-        "url": "https://nexuscompendium.com/heroes/johanna"
+        "url": "https://nexuscompendium.com/heroes/xalatath"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
-        "label": "Johanna talents (Heroes Profile)",
-        "url": "https://www.heroesprofile.com/Global/Talents/Johanna"
+        "label": "Xal'atath talents (Heroes Profile)",
+        "site": "heroesprofile",
+        "url": "https://www.heroesprofile.com/Global/Talents/Xal'atath"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
-        "label": "Johanna matchups (Heroes Profile)",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Johanna"
-      },
-      {
-        "site": "fandom",
-        "kind": "wiki",
-        "label": "Johanna on the Heroes Wiki",
-        "url": "https://heroesofthestorm.fandom.com/wiki/Johanna"
-      },
-      {
-        "site": "liquipedia",
-        "kind": "esports",
-        "label": "Johanna on Liquipedia",
-        "url": "https://liquipedia.net/heroes/Johanna"
-      }
-    ],
-    "Wiza": [
-      {
-        "site": "icy-veins",
-        "kind": "guide",
-        "label": "Li-Ming build guide (Icy Veins)",
-        "url": "https://www.icy-veins.com/heroes/li-ming-build-guide"
-      },
-      {
-        "site": "psionic-storm",
-        "kind": "guide",
-        "label": "Li-Ming on Psionic Storm",
-        "url": "https://psionic-storm.com/en/heroes/li-ming/"
-      },
-      {
-        "site": "nexus-compendium",
-        "kind": "wiki",
-        "label": "Li-Ming on Nexus Compendium",
-        "url": "https://nexuscompendium.com/heroes/li-ming"
-      },
-      {
+        "label": "Xal'atath matchups (Heroes Profile)",
         "site": "heroesprofile",
-        "kind": "talents",
-        "label": "Li-Ming talents (Heroes Profile)",
-        "url": "https://www.heroesprofile.com/Global/Talents/Li-Ming"
+        "url": "https://www.heroesprofile.com/Global/Matchups/Xal'atath"
       },
       {
-        "site": "heroesprofile",
-        "kind": "matchups",
-        "label": "Li-Ming matchups (Heroes Profile)",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Li-Ming"
-      },
-      {
-        "site": "fandom",
         "kind": "wiki",
-        "label": "Li-Ming on the Heroes Wiki",
-        "url": "https://heroesofthestorm.fandom.com/wiki/Li-Ming"
-      },
-      {
-        "site": "liquipedia",
-        "kind": "esports",
-        "label": "Li-Ming on Liquipedia",
-        "url": "https://liquipedia.net/heroes/Li-Ming"
+        "label": "Xal'atath on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Xal'atath"
       }
     ],
     "Malf": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Malfurion build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/malfurion-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Malfurion on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/malfurion/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Malfurion on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/malfurion"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Malfurion talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Malfurion"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Malfurion matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Malfurion"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Malfurion on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Malfurion"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Malfurion on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Malfurion"
       }
     ],
     "Mura": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Muradin build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/muradin-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Muradin on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/muradin/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Muradin on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/muradin"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Muradin talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Muradin"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Muradin matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Muradin"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Muradin on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Muradin"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Muradin on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Muradin"
       }
     ],
     "Tra0": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Tracer build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/tracer-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Tracer on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/tracer/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Tracer on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/tracer"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Tracer talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Tracer"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Tracer matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Tracer"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Tracer on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Tracer"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Tracer on Liquipedia",
-        "url": "https://liquipedia.net/heroes/Tracer"
-      }
-    ],
-    "Demo": [
-      {
-        "site": "icy-veins",
-        "kind": "guide",
-        "label": "Valla build guide (Icy Veins)",
-        "url": "https://www.icy-veins.com/heroes/valla-build-guide"
-      },
-      {
-        "site": "psionic-storm",
-        "kind": "guide",
-        "label": "Valla on Psionic Storm",
-        "url": "https://psionic-storm.com/en/heroes/valla/"
-      },
-      {
-        "site": "nexus-compendium",
-        "kind": "wiki",
-        "label": "Valla on Nexus Compendium",
-        "url": "https://nexuscompendium.com/heroes/valla"
-      },
-      {
-        "site": "heroesprofile",
-        "kind": "talents",
-        "label": "Valla talents (Heroes Profile)",
-        "url": "https://www.heroesprofile.com/Global/Talents/Valla"
-      },
-      {
-        "site": "heroesprofile",
-        "kind": "matchups",
-        "label": "Valla matchups (Heroes Profile)",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Valla"
-      },
-      {
-        "site": "fandom",
-        "kind": "wiki",
-        "label": "Valla on the Heroes Wiki",
-        "url": "https://heroesofthestorm.fandom.com/wiki/Valla"
-      },
-      {
         "site": "liquipedia",
-        "kind": "esports",
-        "label": "Valla on Liquipedia",
-        "url": "https://liquipedia.net/heroes/Valla"
+        "url": "https://liquipedia.net/heroes/Tracer"
       }
     ],
     "Vari": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Varian build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/varian-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Varian on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/varian/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Varian on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/varian"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Varian talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Varian"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Varian matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Varian"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Varian on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Varian"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Varian on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Varian"
       }
     ],
-    "HXAL": [
+    "Wiza": [
       {
+        "kind": "guide",
+        "label": "Li-Ming build guide (Icy Veins)",
         "site": "icy-veins",
-        "kind": "guide",
-        "label": "Xal'atath build guide (Icy Veins)",
-        "url": "https://www.icy-veins.com/heroes/xalatath-build-guide"
+        "url": "https://www.icy-veins.com/heroes/li-ming-build-guide"
       },
       {
+        "kind": "guide",
+        "label": "Li-Ming on Psionic Storm",
         "site": "psionic-storm",
-        "kind": "guide",
-        "label": "Xal'atath on Psionic Storm",
-        "url": "https://psionic-storm.com/en/heroes/xalatath/"
+        "url": "https://psionic-storm.com/en/heroes/li-ming/"
       },
       {
+        "kind": "wiki",
+        "label": "Li-Ming on Nexus Compendium",
         "site": "nexus-compendium",
-        "kind": "wiki",
-        "label": "Xal'atath on Nexus Compendium",
-        "url": "https://nexuscompendium.com/heroes/xalatath"
+        "url": "https://nexuscompendium.com/heroes/li-ming"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
-        "label": "Xal'atath talents (Heroes Profile)",
-        "url": "https://www.heroesprofile.com/Global/Talents/Xal'atath"
-      },
-      {
+        "label": "Li-Ming talents (Heroes Profile)",
         "site": "heroesprofile",
-        "kind": "matchups",
-        "label": "Xal'atath matchups (Heroes Profile)",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Xal'atath"
+        "url": "https://www.heroesprofile.com/Global/Talents/Li-Ming"
       },
       {
-        "site": "fandom",
+        "kind": "matchups",
+        "label": "Li-Ming matchups (Heroes Profile)",
+        "site": "heroesprofile",
+        "url": "https://www.heroesprofile.com/Global/Matchups/Li-Ming"
+      },
+      {
         "kind": "wiki",
-        "label": "Xal'atath on the Heroes Wiki",
-        "url": "https://heroesofthestorm.fandom.com/wiki/Xal'atath"
+        "label": "Li-Ming on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Li-Ming"
+      },
+      {
+        "kind": "esports",
+        "label": "Li-Ming on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Li-Ming"
       }
     ],
     "Zera": [
       {
-        "site": "icy-veins",
         "kind": "guide",
         "label": "Zeratul build guide (Icy Veins)",
+        "site": "icy-veins",
         "url": "https://www.icy-veins.com/heroes/zeratul-build-guide"
       },
       {
-        "site": "psionic-storm",
         "kind": "guide",
         "label": "Zeratul on Psionic Storm",
+        "site": "psionic-storm",
         "url": "https://psionic-storm.com/en/heroes/zeratul/"
       },
       {
-        "site": "nexus-compendium",
         "kind": "wiki",
         "label": "Zeratul on Nexus Compendium",
+        "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/zeratul"
       },
       {
-        "site": "heroesprofile",
         "kind": "talents",
         "label": "Zeratul talents (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Talents/Zeratul"
       },
       {
-        "site": "heroesprofile",
         "kind": "matchups",
         "label": "Zeratul matchups (Heroes Profile)",
+        "site": "heroesprofile",
         "url": "https://www.heroesprofile.com/Global/Matchups/Zeratul"
       },
       {
-        "site": "fandom",
         "kind": "wiki",
         "label": "Zeratul on the Heroes Wiki",
+        "site": "fandom",
         "url": "https://heroesofthestorm.fandom.com/wiki/Zeratul"
       },
       {
-        "site": "liquipedia",
         "kind": "esports",
         "label": "Zeratul on Liquipedia",
+        "site": "liquipedia",
         "url": "https://liquipedia.net/heroes/Zeratul"
       }
     ]
-  },
-  "general": [
-    {
-      "site": "blizzard",
-      "kind": "news",
-      "label": "Official news and patch notes",
-      "url": "https://news.blizzard.com/en-us/feed/heroes-of-the-storm"
-    },
-    {
-      "site": "twitch",
-      "kind": "live",
-      "label": "Heroes of the Storm on Twitch",
-      "url": "https://www.twitch.tv/directory/category/heroes-of-the-storm"
-    },
-    {
-      "site": "icy-veins",
-      "kind": "tierlist",
-      "label": "Icy Veins tier lists",
-      "url": "https://www.icy-veins.com/heroes/heroes-of-the-storm-tier-list-hub"
-    },
-    {
-      "site": "psionic-storm",
-      "kind": "tierlist",
-      "label": "Psionic Storm tier list",
-      "url": "https://psionic-storm.com/en/tierlist/"
-    },
-    {
-      "site": "heroesprofile",
-      "kind": "draft",
-      "label": "Heroes Profile",
-      "url": "https://www.heroesprofile.com/"
-    }
-  ]
+  }
 }

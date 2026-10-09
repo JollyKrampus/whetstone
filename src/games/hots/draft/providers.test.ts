@@ -11,18 +11,19 @@ describe('theory providers', () => {
   const providers = pickProviders({ data: theory });
 
   it('labels counters as theory, with the edge reason', () => {
-    // Anub'arak counters Valla in theory (channel interrupt).
-    const s = signals(providers, id("Anub'arak"), ctx({ enemies: [id('Valla')] })).filter((x) => x.key === 'counters');
-    const vs = s.find((x) => x.reasons.some((r) => r.text.includes('Valla has channelled abilities')));
+    // Anub'arak counters Tracer in theory (Spell Armor against her ability burst).
+    const s = signals(providers, id("Anub'arak"), ctx({ enemies: [id('Tracer')] })).filter((x) => x.key === 'counters');
+    const vs = s.find((x) => x.reasons.some((r) => r.text.includes('Spell Armor') && r.text.includes('Tracer')));
     expect(vs?.value).toBeGreaterThan(0);
     expect(vs?.reasons[0]?.kind).toBe('theory');
     expect(vs?.reasons[0]?.source).toBeUndefined();
   });
 
   it('subtracts reverse counters', () => {
-    const s = signals(providers, id('Abathur'), ctx({ enemies: [id("Anub'arak")] }));
+    // Xal'atath's burst threatens Abathur's body; Abathur has no edge back.
+    const s = signals(providers, id('Abathur'), ctx({ enemies: [id("Xal'atath")] }));
     const neg = s.find((x) => x.key === 'counters' && x.value < 0);
-    expect(neg?.reasons[0]?.text).toContain('dive onto Abathur');
+    expect(neg?.reasons[0]?.text).toContain("Abathur's small Health pool");
   });
 
   it('adds synergy with allies and map fit', () => {
@@ -115,10 +116,10 @@ describe('stats providers', () => {
 describe('ban providers', () => {
   it('score a ban as the opponent pick and name what it threatens', () => {
     const prov = banProviders({ data: theory });
-    // We have Valla; Anub'arak counters her, so banning him protects our pick.
-    const c = asOpponent(ctx({ action: 'ban', allies: [id('Valla')] }));
+    // We have Li-Ming; Anub'arak counters her (a curated matchup), so banning him protects our pick.
+    const c = asOpponent(ctx({ action: 'ban', allies: [id('Li-Ming')] }));
     const out = signals(prov, id("Anub'arak"), c);
-    const vs = out.find((x) => x.key === 'counters' && x.value > 0 && x.reasons.some((r) => r.text.includes('Valla')));
+    const vs = out.find((x) => x.key === 'counters' && x.value > 0 && x.reasons.some((r) => r.text.includes('Li-Ming')));
     expect(vs).toBeDefined();
   });
 

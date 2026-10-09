@@ -200,7 +200,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
 
       await page.locator('a[data-tab="talents"]').click();
       await expect(page.locator('#talents .ttier')).toHaveCount(7);
-      await expect(page.locator('#talents [data-talent="AbathurTalentLocustBrood"]')).toBeVisible();
+      await expect(page.locator('#talents [data-talent="AbathurCombatStyleLocustBrood"]')).toBeVisible();
 
       await page.locator('a[data-tab="abilities"]').click();
       await expect(page.locator('#abilities .abil').first()).toBeVisible();
@@ -364,7 +364,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(page).toHaveURL(/\/hots\/patches\/2026-09-28-patch\/$/);
       await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Heroes', exact: true })).toBeVisible();
-      await expect(page.locator('.hx-dir[data-dir="rework"]').first()).toBeVisible();
+      await expect(page.locator('.hx-dir[data-dir="nerf"]').first()).toBeVisible();
       await expect(page.getByRole('link', { name: /Read Blizzard's full notes/ })).toHaveAttribute('href', /^https:\/\/news\.blizzard\.com\//);
 
       await page.goto('hots/patches/2026-10-05-hotfix/');
@@ -381,8 +381,8 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       const summary = page.locator('[data-catchup-summary]');
       const date = page.locator('[data-catchup-date]');
       await expect(date).toHaveValue('2026-09-27');
-      await expect(summary).toContainText('Since 27 Sep 2026: 2 patches');
-      await expect(page.locator('.hx-group[data-hero="Abat"][data-rework="true"]')).toBeVisible();
+      await expect(summary).toContainText('Since 27 Sep 2026: 3 patches');
+      await expect(page.locator('.hx-group[data-hero="Abat"]')).toBeVisible();
       await expect(page.locator('.hx-group[data-hero="HXAL"][data-new="true"]')).toBeVisible();
 
       await hydrated(page, '[data-catchup]');
@@ -400,7 +400,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(summary).toContainText('1 patch');
       await page.getByRole('button', { name: 'Before Patch 2.57' }).click();
       await expect(page).toHaveURL(/#since=2026-09-27$/);
-      await expect(summary).toContainText('2 patches');
+      await expect(summary).toContainText('3 patches');
       expect(errors).toEqual([]);
     });
   });

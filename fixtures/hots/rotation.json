@@ -1,22 +1,16 @@
 {
-  "source": "nexus-compendium",
-  "fetchedAt": "2026-10-08T10:20:00Z",
-  "start": "2026-10-08",
-  "end": "2026-10-15",
   "allFree": false,
+  "end": "2026-10-08",
+  "fetchedAt": "2026-10-09T04:51:19.159Z",
   "heroes": [
-    "Anub",
-    "Crus",
-    "Demo",
-    "Malf",
-    "Mura",
-    "Tra0",
-    "Wiza"
+    "Diab"
   ],
   "ranked": {
+    "end": "2027-02-02",
     "id": "2026-season-3",
     "name": "2026 Season 3",
-    "start": "2026-10-02",
-    "end": "2027-02-02"
-  }
+    "start": "2026-10-02"
+  },
+  "source": "nexus-compendium",
+  "start": "2026-10-01"
 }

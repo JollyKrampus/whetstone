@@ -15,7 +15,7 @@ describe('ARAM helper', () => {
     });
     expect(r.ranked.map((s) => s.hero.name)[0]).toBe('Malfurion');
     expect(r.ranked).toHaveLength(3);
-    expect(r.ranked[0]!.reasons.some((x) => x.kind === 'role')).toBe(true);
+    expect(r.ranked[0]!.signals.some((x) => x.key === 'role' && x.value > 0)).toBe(true);
     const valla = r.ranked.find((s) => s.hero.name === 'Valla')!;
     expect(valla.warning?.text).toBe('Leaves your team without a Healer');
     expect(r.usesStats).toBe(false);

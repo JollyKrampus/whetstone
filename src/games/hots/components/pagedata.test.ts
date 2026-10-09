@@ -141,7 +141,7 @@ describe('patches', () => {
     expect(patches.every((p) => p.version === '2.57')).toBe(true);
     expect(rows.find((r) => r.hero.id === 'HXAL')?.verdict).toBe('new');
     const abathur = rows.find((r) => r.hero.slug === 'abathur');
-    expect(abathur?.verdict).toBe('rework');
+    expect(abathur?.verdict).toBe('nerf');
     expect(abathur?.lines).toBeGreaterThan(0);
     // An unknown major falls back to the newest notes rather than showing nothing.
     expect(patchMomentum('1.0').rows.length).toBeGreaterThan(0);

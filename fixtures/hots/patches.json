@@ -1,131 +1,757 @@
 [
   {
-    "id": "2026-10-05-hotfix",
-    "version": "2.57",
     "build": "2.57.0.98348",
+    "contentHash": "2640a64ec0f4886e",
     "date": "2026-10-05",
-    "title": "Hotfix - 10/5/2026",
-    "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
-    "kind": "hotfix",
-    "contentHash": "da15be395e495736",
-    "general": [
-      "Fixed several interactions between Xal'atath and Time Stop effects."
-    ],
+    "general": [],
     "heroes": {
       "HXAL": {
-        "verdict": "mixed",
         "changes": [
           {
+            "dir": "buff",
             "section": "Abilities",
             "target": "Shadow Mark",
-            "text": "Orb travels faster.",
-            "dir": "buff"
+            "text": "Void Orb speed slightly increased."
           },
           {
+            "dir": "nerf",
             "section": "Abilities",
             "target": "Void Step",
-            "text": "Targeting range 5 → 2; hop distance 7 → 6.5; now stopped by Immobilize effects.",
-            "dir": "nerf"
+            "text": "Targeting range reduced from 5 to 2."
           },
           {
-            "section": "Trait",
+            "dir": "nerf",
+            "section": "Abilities",
+            "target": "Void Step",
+            "text": "Distance between teleport points reduced from 7 to 6.5."
+          },
+          {
+            "dir": "change",
+            "section": "Abilities",
+            "target": "Void Step",
+            "text": "Now prevented and interrupted by Immobilize."
+          },
+          {
+            "dir": "nerf",
+            "section": "Abilities",
             "target": "Void Volley",
-            "text": "Missile damage 90 → 72; gains 1 charge per hero attack and 1 per 2 non-hero attacks.",
-            "dir": "nerf"
+            "text": "Base damage per missile reduced from 90 to 72."
           },
           {
-            "section": "Heroic",
+            "dir": "change",
+            "section": "Abilities",
+            "target": "Void Volley",
+            "text": "Now generates 1 charge for every Basic Attack against enemy Heroes and every 2 Basic Attacks against non-Heroes."
+          },
+          {
+            "dir": "nerf",
+            "section": "Abilities",
             "target": "Void Eruption",
-            "text": "Damage reduced: uncharged by 20%, fully charged by 5%.",
-            "dir": "nerf"
+            "text": "Uncharged damage reduced by 20%."
           },
           {
-            "section": "Level 20",
-            "target": "Anchored Core",
-            "level": "20",
-            "text": "Radius bonus 50% → 25%.",
-            "dir": "nerf"
+            "dir": "nerf",
+            "section": "Abilities",
+            "target": "Void Eruption",
+            "text": "Fully charged damage reduced by 5%."
           },
           {
-            "section": "Level 1",
-            "target": "Dark Barrier",
+            "dir": "nerf",
             "level": "1",
-            "text": "Now triggers only on Heroes.",
-            "dir": "nerf"
+            "section": "Level 1",
+            "target": "Anchored Core",
+            "text": "Radius bonus reduced from 50% to 25%."
           },
           {
+            "dir": "change",
+            "level": "4",
             "section": "Level 4",
+            "target": "Dark Barrier",
+            "text": "Now only triggers when enemy Heroes are hit"
+          },
+          {
+            "dir": "buff",
+            "level": "7",
+            "section": "Level 7",
             "target": "Silence of the Lamb",
-            "level": "4",
-            "text": "Silence duration increased (game data: 2 seconds).",
-            "dir": "buff"
+            "text": "Silence duration increased from 1 to 1.5 seconds."
           },
           {
-            "section": "Level 4",
+            "dir": "change",
+            "level": "13",
+            "section": "Level 13",
             "target": "Dark Heart's Protection",
-            "level": "4",
-            "text": "Now silences marked targets when Dark Heart Ritual detonates on them.",
-            "dir": "buff"
+            "text": "Detonating the Dark Heart on a target affected by Shadow Mark now Silences all enemies hit. Previously silenced on cast."
+          },
+          {
+            "dir": "change",
+            "level": "20",
+            "section": "Level 20",
+            "target": "Rift Invasion",
+            "text": "Portals now have non-lethal Health decay, stopping at 4 Health."
           }
-        ]
+        ],
+        "verdict": "mixed"
       }
-    }
+    },
+    "id": "2026-10-05-hotfix",
+    "kind": "hotfix",
+    "title": "Hotfix - 10/5/2026",
+    "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
+    "version": "2.57"
   },
   {
-    "id": "2026-09-28-patch",
-    "version": "2.57",
-    "build": "2.57.0.98285",
-    "date": "2026-09-28",
-    "title": "Heroes of the Storm Live Patch Notes – September 28, 2026",
-    "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
-    "kind": "patch",
-    "contentHash": "9910f1a60639ebb0",
+    "build": "2.57.0.98304",
+    "contentHash": "7c450a6202b74172",
+    "date": "2026-09-29",
     "general": [
-      "New hero: Xal'atath, the Harbinger of the Void (Ranged Assassin).",
-      "New homescreen and startup music.",
-      "The Healing Fountain cooldown can now be pinged."
+      "Fixed an issue where some players who bought the pre-purchase bundle didn't receive Xal'atath.",
+      "Fixed an exploit with Xal'atath's ultimate.",
+      "Fixed an issue where Level 20 Void Convergence portal would lose life.",
+      "Adjusted colors on Dark Heart to make visibility clearer for enemies."
     ],
-    "maps": {
-      "garden-of-terror": [
-        "Shamblers start 25% weaker and scale back to their previous strength over the match."
-      ],
-      "volskaya-foundry": [
-        "Fixed fort walls having different Health on each side."
-      ]
-    },
     "heroes": {
-      "Abat": {
-        "verdict": "mixed",
-        "changes": [
-          {
-            "section": "Level 13",
-            "target": "Bombard Strain",
-            "level": "13",
-            "text": "Locust decay reduction lowered.",
-            "dir": "nerf"
-          },
-          {
-            "section": "Level 1",
-            "target": "Survival Instincts",
-            "level": "1",
-            "text": "Reworked: Locusts take 50% less damage from non-Heroes instead of gaining 100% Health.",
-            "dir": "rework"
-          }
-        ]
-      },
       "HXAL": {
-        "verdict": "new",
         "changes": [
           {
-            "section": "New Hero",
-            "text": "Xal'atath joins the Nexus as a Ranged Assassin.",
-            "dir": "change"
+            "dir": "change",
+            "level": "7",
+            "section": "Game data",
+            "target": "Void Summoner",
+            "text": "Tooltip text changed."
           }
-        ]
+        ],
+        "verdict": "change"
       }
     },
+    "id": "2026-09-29-hotfix",
+    "kind": "hotfix",
+    "title": "Hotfix - 9/29/2026",
+    "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
+    "version": "2.57"
+  },
+  {
+    "build": "2.57.0.98285",
+    "contentHash": "bf3c8c30c7761e2f",
+    "date": "2026-09-28",
+    "general": [
+      "Updated Homescreen and Startup Music.",
+      "Added the ability to ping your Healing Fountain cooldown."
+    ],
+    "heroes": {
+      "Abat": {
+        "changes": [
+          {
+            "dir": "nerf",
+            "level": "13",
+            "section": "Level 13",
+            "target": "Bombard Strain",
+            "text": "Health decay reduction lowered from 50% to 40%."
+          },
+          {
+            "dir": "change",
+            "level": "16",
+            "section": "Level 16",
+            "target": "Survival Instincts",
+            "text": "Now provides 50% damage reduction against non-Heroes, instead of +100% Health."
+          }
+        ],
+        "verdict": "nerf"
+      },
+      "HXAL": {
+        "changes": [
+          {
+            "dir": "change",
+            "section": "New Hero",
+            "text": "Xal'atath joins the Nexus as a Ranged Assassin."
+          }
+        ],
+        "verdict": "new"
+      },
+      "Mura": {
+        "changes": [
+          {
+            "dir": "change",
+            "section": "Game data",
+            "target": "Storm Bolt",
+            "text": "Tooltip text changed."
+          }
+        ],
+        "verdict": "change"
+      }
+    },
+    "id": "2026-09-28-patch",
+    "kind": "patch",
     "newHeroes": [
       "HXAL"
-    ]
+    ],
+    "title": "Heroes of the Storm Live Patch Notes - September 28, 2026",
+    "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
+    "version": "2.57"
+  },
+  {
+    "build": "2.57.0.98126_ptr",
+    "contentHash": "ab84f4794afd46f1",
+    "date": "2026-09-14",
+    "general": [
+      "Updated Homescreen and Startup Music."
+    ],
+    "heroes": {
+      "Abat": {
+        "changes": [
+          {
+            "dir": "nerf",
+            "level": "13",
+            "section": "Level 13",
+            "target": "Bombard Strain",
+            "text": "Health decay reduction lowered from 50% to 40%."
+          },
+          {
+            "dir": "change",
+            "level": "16",
+            "section": "Level 16",
+            "target": "Survival Instincts",
+            "text": "Now provides 50% damage reduction against non-Heroes, instead of +100% Health."
+          }
+        ],
+        "verdict": "nerf"
+      },
+      "HXAL": {
+        "changes": [
+          {
+            "dir": "change",
+            "section": "New Hero",
+            "text": "Xal'atath joins the Nexus as a Ranged Assassin."
+          }
+        ],
+        "verdict": "new"
+      }
+    },
+    "id": "2026-09-14-ptr",
+    "kind": "ptr",
+    "newHeroes": [
+      "HXAL"
+    ],
+    "title": "Heroes of the Storm PTR Patch Notes - September 14, 2026",
+    "url": "https://news.blizzard.com/en-us/article/24306095/heroes-of-the-storm-ptr-patch-notes-september-14-2026",
+    "version": "2.57"
+  },
+  {
+    "build": "2.55.17.97605",
+    "contentHash": "fac7276447186b14",
+    "date": "2026-07-20",
+    "general": [
+      "Haunted Mines has been added to Ranked.",
+      "Updated Homescreen and Startup Music."
+    ],
+    "heroes": {
+      "Abat": {
+        "changes": [
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "Locust Strain",
+            "text": "Health reduced from 350 to 225."
+          },
+          {
+            "dir": "change",
+            "section": "Base",
+            "target": "Locust Strain",
+            "text": "Locusts no longer have a duration but now lose Health over time."
+          },
+          {
+            "dir": "change",
+            "section": "Base",
+            "target": "Locust Strain",
+            "text": "Locusts now heal for 20% of the damage they deal, and heal for 20% of their maximum Health when a nearby Minion dies."
+          },
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "Locust Strain",
+            "text": "Locust damage reduced from 58 to 36."
+          },
+          {
+            "dir": "change",
+            "section": "Base",
+            "target": "Locust Strain",
+            "text": "Locusts now deal 100% bonus damage to non-Heroes."
+          },
+          {
+            "dir": "change",
+            "section": "Base",
+            "target": "Locust Strain",
+            "text": "Locusts no longer deal 25% bonus damage to Structures."
+          },
+          {
+            "dir": "buff",
+            "level": "1",
+            "section": "Level 1",
+            "target": "Envenomed Nests",
+            "text": "Armor reduction increased from 10 to 15."
+          },
+          {
+            "dir": "change",
+            "level": "1",
+            "section": "Level 1",
+            "target": "Locust Brood",
+            "text": "Moved from Level 16 to Level 1."
+          },
+          {
+            "dir": "nerf",
+            "level": "1",
+            "section": "Level 1",
+            "target": "Locust Brood",
+            "text": "Cooldown increased from 45 to 75 seconds."
+          },
+          {
+            "dir": "change",
+            "level": "4",
+            "section": "Level 4",
+            "target": "(New) Slapathur",
+            "text": "Abathur's Basic Attacks now deal 350% bonus damage, Stun enemies, and disable Structures for 1.5 seconds. This effect has a 6 second cooldown per target against Structures and Heroes."
+          },
+          {
+            "dir": "change",
+            "level": "10",
+            "section": "Level 10",
+            "target": "Evolve Monstrosity",
+            "text": "Now displays as a Quest."
+          },
+          {
+            "dir": "change",
+            "level": "10",
+            "section": "Level 10",
+            "target": "Evolve Monstrosity",
+            "text": "Abathur now has a Monstrosity unit frame for tracking Health and stacks of the unit."
+          },
+          {
+            "dir": "change",
+            "level": "16",
+            "section": "Level 16",
+            "target": "Survival Intincts",
+            "text": "Moved from Level 1 to Level 16."
+          }
+        ],
+        "verdict": "mixed"
+      },
+      "CCho": {
+        "changes": [
+          {
+            "dir": "buff",
+            "level": "1",
+            "section": "Level 1",
+            "target": "Consuming Fire",
+            "text": "Healing bonus increased from 150% to a flat 75 Health."
+          },
+          {
+            "dir": "buff",
+            "level": "1",
+            "section": "Level 1",
+            "target": "Calloused Hide",
+            "text": "Health threshold required to trigger reduced from 60% to 50%."
+          },
+          {
+            "dir": "buff",
+            "level": "7",
+            "section": "Level 7",
+            "target": "Firestarter",
+            "text": "Cooldown reduction per Basic Attack increased from 1 to 1.5 seconds."
+          }
+        ],
+        "verdict": "buff"
+      },
+      "Crus": {
+        "changes": [
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "Shield Glare",
+            "text": "Cooldown increased from 12 to 13 seconds."
+          },
+          {
+            "dir": "nerf",
+            "level": "10",
+            "section": "Level 10",
+            "target": "Blessed Shield",
+            "text": "Cooldown increased from 60 to 65 seconds."
+          }
+        ],
+        "verdict": "nerf"
+      },
+      "Diab": {
+        "changes": [
+          {
+            "dir": "buff",
+            "section": "Base",
+            "target": "Shadow Charge",
+            "text": "Damage increased from 40 to 45."
+          },
+          {
+            "dir": "buff",
+            "section": "Base",
+            "target": "Shadow Charge",
+            "text": "Terrain collision damage increased from 130 to 140."
+          },
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "Fire Stomp",
+            "text": "Damage reduced from 12 to 11."
+          },
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "Fire Stomp",
+            "text": "Return damage reduced from 36 to 34."
+          },
+          {
+            "dir": "buff",
+            "section": "Base",
+            "target": "Overpower",
+            "text": "Damage increased from 73 to 80."
+          },
+          {
+            "dir": "buff",
+            "level": "7",
+            "section": "Level 7",
+            "target": "Diabolical Momentum",
+            "text": "Cooldown reduction per Basic Attack increased from 1.5 to 2 seconds."
+          },
+          {
+            "dir": "buff",
+            "level": "20",
+            "section": "Level 20",
+            "target": "Dying Breath",
+            "text": "Cooldown reduction per Hero hit increased from 25 to 30 seconds."
+          },
+          {
+            "dir": "buff",
+            "level": "20",
+            "section": "Level 20",
+            "target": "Lord of Terror",
+            "text": "Health stolen increased from 10% to 12% maximum Health."
+          }
+        ],
+        "verdict": "mixed"
+      },
+      "Gall": {
+        "changes": [
+          {
+            "dir": "nerf",
+            "level": "4",
+            "section": "Level 4",
+            "target": "Rising Dread",
+            "text": "Bonus per bounce reduced from 25% to 20%."
+          },
+          {
+            "dir": "change",
+            "level": "4",
+            "section": "Level 4",
+            "target": "Bomb's Away",
+            "text": "No longer has a cap on stacks."
+          },
+          {
+            "dir": "nerf",
+            "level": "4",
+            "section": "Level 4",
+            "target": "Bomb's Away",
+            "text": "Damage bonus per stack lowered from 5 to 4."
+          },
+          {
+            "dir": "buff",
+            "level": "7",
+            "section": "Level 7",
+            "target": "Double Trouble",
+            "text": "Shadowflame's cooldown reduction from Quest Reward increased from 0.5 to 1 second."
+          },
+          {
+            "dir": "nerf",
+            "level": "16",
+            "section": "Level 16",
+            "target": "Leaden Orb",
+            "text": "Stun duration reduced from 0.75 seconds to 0.6 seconds."
+          }
+        ],
+        "verdict": "mixed"
+      }
+    },
+    "id": "2026-07-20-patch",
+    "kind": "patch",
+    "maps": {
+      "hanamura-temple": [
+        "Additional brush has been added in several locations."
+      ]
+    },
+    "title": "Heroes of the Storm Live Patch Notes - July 20, 2026",
+    "url": "https://news.blizzard.com/en-us/article/24291432/heroes-of-the-storm-live-patch-notes-july-20-2026",
+    "version": "2.55"
+  },
+  {
+    "build": "2.55.17.97407_ptr",
+    "contentHash": "7a12a1f3cd9e4e35",
+    "date": "2026-06-29",
+    "general": [
+      "Players can now party with unplaced players in Storm League.",
+      "Haunted Mines has been added to Ranked."
+    ],
+    "heroes": {
+      "Abat": {
+        "changes": [
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "Spawn Locust",
+            "text": "Health reduced from 350 to 225."
+          },
+          {
+            "dir": "change",
+            "section": "Base",
+            "target": "Spawn Locust",
+            "text": "Locusts now heal for 20% of the damage they deal, and heal for 20% of their maximum Health when a nearby Minion dies."
+          },
+          {
+            "dir": "buff",
+            "level": "1",
+            "section": "Level 1",
+            "target": "Envenomed Nests",
+            "text": "Armor reduction increased from 10 to 15."
+          },
+          {
+            "dir": "change",
+            "level": "1",
+            "section": "Level 1",
+            "target": "Locust Brood",
+            "text": "Moved from Level 16 to Level 1."
+          },
+          {
+            "dir": "nerf",
+            "level": "1",
+            "section": "Level 1",
+            "target": "Locust Brood",
+            "text": "Cooldown increased from 45 to 75 seconds."
+          },
+          {
+            "dir": "change",
+            "level": "4",
+            "section": "Level 4",
+            "target": "(New) Slapathur",
+            "text": "Abathur's Basic Attacks now Stun non-Heroes and deal 500% additional damage."
+          },
+          {
+            "dir": "change",
+            "level": "10",
+            "section": "Level 10",
+            "target": "Evolve Monstrosity",
+            "text": "Now displays as a Quest."
+          },
+          {
+            "dir": "change",
+            "level": "10",
+            "section": "Level 10",
+            "target": "Evolve Monstrosity",
+            "text": "Abathur now has a Monstrosity unit frame, for tracking Health and stacks of the unit."
+          },
+          {
+            "dir": "change",
+            "level": "16",
+            "section": "Level 16",
+            "target": "Survival Intincts",
+            "text": "Moved from Level 1 to Level 16."
+          },
+          {
+            "dir": "buff",
+            "level": "16",
+            "section": "Level 16",
+            "target": "Survival Intincts",
+            "text": "Health bonus increased from 100% to 200%."
+          }
+        ],
+        "verdict": "mixed"
+      },
+      "CCho": {
+        "changes": [
+          {
+            "dir": "buff",
+            "level": "7",
+            "section": "Level 7",
+            "target": "Calloused Hide",
+            "text": "Health threshold required to trigger reduced from 60% to 40%."
+          },
+          {
+            "dir": "buff",
+            "level": "7",
+            "section": "Level 7",
+            "target": "Firestarter",
+            "text": "Cooldown reduction per Basic Attack increased from 1 to 1.5 seconds."
+          }
+        ],
+        "verdict": "buff"
+      },
+      "Crus": {
+        "changes": [
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "Shield Glare",
+            "text": "Cooldown increased from 12 to 13 seconds."
+          },
+          {
+            "dir": "nerf",
+            "level": "10",
+            "section": "Level 10",
+            "target": "Blessed Shield",
+            "text": "Cooldown increased from 60 to 65 seconds."
+          }
+        ],
+        "verdict": "nerf"
+      },
+      "Diab": {
+        "changes": [
+          {
+            "dir": "buff",
+            "section": "Base",
+            "target": "Shadow Charge",
+            "text": "Damage increased from 40 plus 130 with a collision, to 45 plus 140 with a collision."
+          },
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "Fire Stomp",
+            "text": "Damage decreased from 12 on expansion and 36 on return to 11 on expansion and 34 on return."
+          },
+          {
+            "dir": "buff",
+            "section": "Base",
+            "target": "Overpower",
+            "text": "Damage increased from 73 to 80."
+          },
+          {
+            "dir": "buff",
+            "level": "7",
+            "section": "Level 7",
+            "target": "Diabolical Momentum",
+            "text": "Cooldown reduction per Basic Attack increased from 1.5 to 2 seconds."
+          },
+          {
+            "dir": "buff",
+            "level": "20",
+            "section": "Level 20",
+            "target": "Dying Breath",
+            "text": "Cooldown reduction per Hero hit increased from 25 to 30 seconds."
+          },
+          {
+            "dir": "buff",
+            "level": "20",
+            "section": "Level 20",
+            "target": "Lord of Terror",
+            "text": "Health stolen increased from 10% to 12% maximum Health."
+          }
+        ],
+        "verdict": "mixed"
+      },
+      "Gall": {
+        "changes": [
+          {
+            "dir": "nerf",
+            "level": "4",
+            "section": "Level 4",
+            "target": "Rising Dread",
+            "text": "Bonus per bounce reduced from 25% to 20%."
+          },
+          {
+            "dir": "change",
+            "level": "4",
+            "section": "Level 4",
+            "target": "Bomb's Away",
+            "text": "No longer has a cap on stacks."
+          },
+          {
+            "dir": "nerf",
+            "level": "4",
+            "section": "Level 4",
+            "target": "Bomb's Away",
+            "text": "Damage bonus per stack lowered from 5 to 4."
+          },
+          {
+            "dir": "buff",
+            "level": "7",
+            "section": "Level 7",
+            "target": "Double Trouble",
+            "text": "Shadowflame's cooldown reduction from Quest Reward increased from 0.5 to 1 second."
+          },
+          {
+            "dir": "nerf",
+            "level": "16",
+            "section": "Level 16",
+            "target": "Leaden Orb",
+            "text": "Stun duration reduced from 0.75 seconds to 0.6 seconds."
+          }
+        ],
+        "verdict": "mixed"
+      }
+    },
+    "id": "2026-06-29-ptr",
+    "kind": "ptr",
+    "maps": {
+      "hanamura-temple": [
+        "Additional brush has been added in several locations."
+      ]
+    },
+    "title": "Heroes of the Storm PTR Patch Notes - June 29, 2026",
+    "url": "https://news.blizzard.com/en-us/article/24287550/heroes-of-the-storm-ptr-patch-notes-june-29-2026",
+    "version": "2.55"
+  },
+  {
+    "contentHash": "6065e9a3318963a5",
+    "date": "2026-05-11",
+    "general": [],
+    "heroes": {},
+    "id": "2026-05-11-balance",
+    "kind": "balance",
+    "title": "Heroes of the Storm Balance Patch Notes - May 11, 2026",
+    "url": "https://news.blizzard.com/en-us/article/24276959/heroes-of-the-storm-balance-patch-notes-may-11-2026",
+    "version": "2.55"
+  },
+  {
+    "contentHash": "94ea0b529659ca41",
+    "date": "2026-04-20",
+    "general": [
+      "Unranked Mode has been removed.",
+      "Respawn timers have been reduced in the mid-to-late game. By level 22, respawn timers are back at 65 seconds.",
+      "Updated Homescreen and Startup Music.",
+      "Garden of Terror Classic: The original Garden of Terror has returned to Custom Games!",
+      "Garden of Terror Classic: The name has been changed to Garden of Terror Classic to differentiate from the current Garden of Terror."
+    ],
+    "heroes": {
+      "Mura": {
+        "changes": [
+          {
+            "section": "Base",
+            "target": "It's Hammer Time!",
+            "text": "Muradin gains 5 stacks if a target dies within 3 seconds of being hit by Storm Bolt."
+          },
+          {
+            "dir": "nerf",
+            "section": "Base",
+            "target": "It's Hammer Time!",
+            "text": "Stack requirement for pierce increased from 40 to 45."
+          },
+          {
+            "dir": "nerf",
+            "level": "16",
+            "section": "Level 16",
+            "target": "Dwarf Launch",
+            "text": "Cooldown reduction decreased from 2 seconds to 1 second."
+          }
+        ],
+        "verdict": "nerf"
+      }
+    },
+    "id": "2026-04-20-patch",
+    "kind": "patch",
+    "title": "Heroes of the Storm Live Patch Notes - April 20, 2026",
+    "url": "https://news.blizzard.com/en-us/article/24261475/heroes-of-the-storm-live-patch-notes-april-20-2026",
+    "version": "2.55"
   }
 ]

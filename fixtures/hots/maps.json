@@ -1,15 +1,17 @@
 [
   {
+    "hp": {
+      "id": 1,
+      "name": "Battlefield of Eternity"
+    },
     "id": "battlefield-of-eternity",
-    "name": "Battlefield of Eternity",
-    "kind": "standard",
-    "ranked": true,
-    "rankedSource": "curated",
     "image": "img/maps/replayspreviewimage_battlefieldofeternity.webp",
+    "kind": "standard",
+    "name": "Battlefield of Eternity",
     "profile": {
-      "size": "small",
       "lanes": 2,
-      "objective": "Kill the enemy Immortal before they kill yours; the surviving Immortal pushes a lane.",
+      "objective": "Both teams race to kill the other side's Immortal; the surviving Immortal then pushes a lane.",
+      "size": "small",
       "tags": [
         "two-lane",
         "small",
@@ -18,44 +20,44 @@
         "push-objective"
       ]
     },
-    "hp": {
-      "id": 1,
-      "name": "Battlefield of Eternity"
-    }
+    "ranked": true,
+    "rankedSource": "curated"
   },
   {
+    "hp": {
+      "id": 21,
+      "name": "Braxis Outpost"
+    },
     "id": "braxis-outpost",
-    "name": "Braxis Outpost",
-    "kind": "aram",
-    "ranked": false,
-    "rankedSource": "curated",
     "image": "img/maps/replayspreviewimage_braxisoutpost.webp",
+    "kind": "aram",
+    "name": "Braxis Outpost",
     "profile": {
-      "size": "small",
       "lanes": 1,
-      "objective": "ARAM single lane; destroy the enemy core.",
+      "objective": "ARAM on a single lane; destroy the enemy core.",
+      "size": "small",
       "tags": [
         "single-lane",
         "small",
         "teamfight"
       ]
     },
-    "hp": {
-      "id": 21,
-      "name": "Braxis Outpost"
-    }
+    "ranked": false,
+    "rankedSource": "curated"
   },
   {
+    "hp": {
+      "id": 4,
+      "name": "Cursed Hollow"
+    },
     "id": "cursed-hollow",
-    "name": "Cursed Hollow",
-    "kind": "standard",
-    "ranked": true,
-    "rankedSource": "curated",
     "image": "img/maps/replayspreviewimage_cursedhollow.webp",
+    "kind": "standard",
+    "name": "Cursed Hollow",
     "profile": {
-      "size": "large",
       "lanes": 3,
-      "objective": "Channel tributes as they spawn; a third tribute curses the enemy team, weakening their minions and disabling their towers.",
+      "objective": "Channel tributes as they appear around the map; the team that collects three curses the other, weakening its minions and shutting down its towers.",
+      "size": "large",
       "tags": [
         "three-lane",
         "large",
@@ -63,22 +65,22 @@
         "long-rotations"
       ]
     },
-    "hp": {
-      "id": 4,
-      "name": "Cursed Hollow"
-    }
+    "ranked": true,
+    "rankedSource": "curated"
   },
   {
+    "hp": {
+      "id": 5,
+      "name": "Dragon Shire"
+    },
     "id": "dragon-shire",
-    "name": "Dragon Shire",
-    "kind": "standard",
-    "ranked": true,
-    "rankedSource": "curated",
     "image": "img/maps/replayspreviewimage_dragonshire.webp",
+    "kind": "standard",
+    "name": "Dragon Shire",
     "profile": {
-      "size": "medium",
       "lanes": 3,
-      "objective": "Hold the top and bottom shrines, then channel the statue in the middle to become the Dragon Knight.",
+      "objective": "Hold the top and bottom shrines, then channel the statue in the middle to turn a hero into the lane-pushing Dragon Knight.",
+      "size": "medium",
       "tags": [
         "three-lane",
         "channel-objective",
@@ -86,22 +88,22 @@
         "long-rotations"
       ]
     },
-    "hp": {
-      "id": 5,
-      "name": "Dragon Shire"
-    }
+    "ranked": true,
+    "rankedSource": "curated"
   },
   {
+    "hp": {
+      "id": 7,
+      "name": "Hanamura Temple"
+    },
     "id": "hanamura-temple",
-    "name": "Hanamura Temple",
-    "kind": "standard",
-    "ranked": false,
-    "rankedSource": "curated",
     "image": "img/maps/replayspreviewimage_hanamuratemple.webp",
+    "kind": "standard",
+    "name": "Hanamura Temple",
     "profile": {
-      "size": "medium",
       "lanes": 2,
-      "objective": "Escort your payload to the end of its track, where it fires at the enemy core.",
+      "objective": "Escort your payload along its track by standing next to it; a delivered payload fires on the enemy base.",
+      "size": "medium",
       "tags": [
         "two-lane",
         "escort-objective",
@@ -109,31 +111,29 @@
         "teamfight"
       ]
     },
-    "hp": {
-      "id": 7,
-      "name": "Hanamura Temple"
-    }
+    "ranked": false,
+    "rankedSource": "curated"
   },
   {
+    "hp": {
+      "id": 12,
+      "name": "Towers of Doom"
+    },
     "id": "towers-of-doom",
-    "name": "Towers of Doom",
-    "kind": "standard",
-    "ranked": true,
-    "rankedSource": "curated",
     "image": "img/maps/replayspreviewimage_towersofdoom.webp",
+    "kind": "standard",
+    "name": "Towers of Doom",
     "profile": {
-      "size": "medium",
       "lanes": 3,
-      "objective": "Channel altars when they activate to fire at the enemy core, which heroes cannot attack directly.",
+      "objective": "Capture altars when they activate to fire on the enemy core, which heroes cannot attack directly.",
+      "size": "medium",
       "tags": [
         "three-lane",
         "channel-objective",
         "structure-objective"
       ]
     },
-    "hp": {
-      "id": 12,
-      "name": "Towers of Doom"
-    }
+    "ranked": true,
+    "rankedSource": "curated"
   }
 ]
