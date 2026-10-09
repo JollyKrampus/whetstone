@@ -5,6 +5,7 @@
  * most common choices rather than anyone's actual team.
  */
 import type { Move, Nature, PokemonType, Species, UsageEntry } from '../../schema.ts';
+import { formeLabel } from './dex.ts';
 import { finalStats, type SpTuple } from './stats.ts';
 import { emptySp } from './team.ts';
 
@@ -13,6 +14,7 @@ export interface MetaSet {
   id: string;
   /** Species that registers it (the base species for Megas). */
   base: string;
+  /** Display name ("Mega Salamence"). */
   name: string;
   rank: number;
   /** Weighted usage share (0–1). */
@@ -33,7 +35,7 @@ export interface MetaSet {
 }
 
 export interface MetaSetLookups {
-  species(id: string): Pick<Species, 'id' | 'name' | 'types' | 'base' | 'abilities' | 'megaOf' | 'requiredItem'> | undefined;
+  species(id: string): Pick<Species, 'id' | 'name' | 'types' | 'base' | 'abilities' | 'megaOf' | 'requiredItem' | 'forme' | 'baseSpecies'> | undefined;
   move(id: string): Pick<Move, 'category'> | undefined;
 }
 
@@ -50,7 +52,7 @@ export function metaSetFromUsage(row: UsageEntry, lookups: MetaSetLookups): Meta
   const set: MetaSet = {
     id: species.id,
     base: species.megaOf ?? species.id,
-    name: species.name,
+    name: formeLabel(species),
     rank: row.rank,
     usage: row.usage,
     types: [...species.types],

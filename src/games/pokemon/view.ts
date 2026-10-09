@@ -338,3 +338,22 @@ export function speedPosition(speed: number, entries: readonly SpeedNeighbour[],
     total: others.length,
   };
 }
+
+// ---- islands -----------------------------------------------------------------------------------
+
+/** [a, b, Δ pp, n]: a replay edge as the team-preview island receives it. */
+export type CompactEdge = [string, string, number, number];
+
+/**
+ * Replay edges in compact form for an island prop: only edges with Δ and n, and n at or above the
+ * "hidden" gate (n ≥ 15), sorted for a stable page.
+ */
+export function compactEdges(h2h: { counters: readonly Edge[]; synergies: readonly Edge[] } | null): { counters: CompactEdge[]; synergies: CompactEdge[] } | null {
+  if (!h2h) return null;
+  const pack = (list: readonly Edge[]): CompactEdge[] =>
+    list
+      .filter((e) => e.delta !== undefined && e.n !== undefined && classifySample(e.n) !== 'hidden')
+      .map((e): CompactEdge => [e.a, e.b, Math.round(e.delta! * 100) / 100, e.n!])
+      .sort((x, y) => (x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0));
+  return { counters: pack(h2h.counters), synergies: pack(h2h.synergies) };
+}

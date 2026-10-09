@@ -50,14 +50,23 @@ const edge = (a: string, b: string, delta: number, n: number): Edge => ({
 });
 
 describe('bringWeights', () => {
-  it('turns usage into bring chances that sum to about four', () => {
+  it('turns usage into bring chances that add up to four, none above 1', () => {
     const w = bringWeights(THEIRS);
     const total = [...w.values()].reduce((a, b) => a + b, 0);
-    expect(total).toBeGreaterThan(3.5);
-    expect(total).toBeLessThanOrEqual(4.0001);
+    expect(total).toBeCloseTo(4, 9);
+    expect([...w.values()].every((v) => v > 0 && v <= 1)).toBe(true);
     expect(w.get('t0')!).toBeGreaterThan(w.get('t5')!);
-    // No usage data: the average of the known shares.
-    expect(w.get('t4')!).toBeCloseTo(4 * (1.07 / 5) / (1.07 + 1.07 / 5), 5);
+    // Sneasler is capped at 1; the other five share the remaining three in proportion, with
+    // Whimsicott (no usage) counted at the average known share, 1.07 / 5.
+    expect(w.get('t0')).toBe(1);
+    const rest = 0.28 + 0.25 + 0.12 + 0.05 + 1.07 / 5;
+    expect(w.get('t2')!).toBeCloseTo((3 * 0.28) / rest, 9);
+    expect(w.get('t4')!).toBeCloseTo((3 * (1.07 / 5)) / rest, 9);
+  });
+
+  it('brings everyone when four or fewer are known', () => {
+    const w = bringWeights(THEIRS.slice(0, 4));
+    expect([...w.values()]).toEqual([1, 1, 1, 1]);
   });
 
   it('splits evenly without any usage', () => {
@@ -116,7 +125,7 @@ describe('recommend', () => {
     damage.mine['m4'] = { t0: { move: 'makeitrain', moveName: 'Make It Rain', minPct: 105, maxPct: 124, koN: 1, koChance: 1 } };
     const r = recommend({ mine: MINE, theirs: THEIRS, chart, damage }, 'damage');
     expect(r.ranked[0]!.id).toBe('m4');
-    expect(r.ranked[0]!.reasons[0]!.text).toContain('OHKO Sneasler with Make It Rain');
+    expect(r.ranked[0]!.reasons[0]!.text).toBe('Make It Rain OHKOs Sneasler');
     expect(r.ranked[0]!.reasons[0]!.source).toBe('smogon-calc');
   });
 

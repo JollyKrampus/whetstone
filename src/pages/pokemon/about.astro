@@ -1,0 +1,261 @@
+---
+/**
+ * Pokémon Champions methodology: Stat Points and paste rules, every score and gate, the tier and
+ * team-preview formulas (rendered from the code constants so the page can't drift from them),
+ * sources with their licences and the non-affiliation notice.
+ */
+import '../../games/pokemon/components/pokemon.css';
+import { formatDateTimeUTC, formatDayUTC } from '../../core/format.ts';
+import { GATES } from '../../core/stats.ts';
+import { POKEMON_TIERS } from '../../core/tiers.ts';
+import { gameById, navHref, withBase } from '../../games/registry.ts';
+import { getCurrentRegulation, getMeta } from '../../games/pokemon/load.ts';
+import { buildNow } from '../../games/pokemon/components/server.ts';
+import { PREVIEW_PRESETS, PREVIEW_PRESET_IDS, PREVIEW_SIGNAL_LABEL } from '../../games/pokemon/components/lib/preview.ts';
+import { SP_MAX_STAT, SP_MAX_TOTAL, evToSp } from '../../games/pokemon/components/lib/stats.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+
+const module = gameById('pokemon');
+const regulation = getCurrentRegulation(new Date(buildNow()));
+const meta = getMeta();
+const fetched = new Map(meta.sources.map((s) => [s.id, s]));
+const bands = POKEMON_TIERS.bands.map((b, i, all) => {
+  const upper = i > 0 ? all[i - 1]!.min : null;
+  const range = Number.isFinite(b.min) ? (upper === null ? `${b.min}% or more` : `${b.min}% to under ${upper}%`) : `under ${upper}%`;
+  return { id: b.id, range };
+});
+const signalKeys = ['counters', 'theory', 'role', 'map', 'synergy'] as const;
+const evExamples = [0, 4, 12, 100, 252].map((ev) => ({ ev, sp: evToSp(ev) }));
+const toc = [
+  ['rules', 'Champions rules the tools model'],
+  ['stat-points', 'Stat Points and pastes'],
+  ['sources', 'Where the data comes from'],
+  ['scores', 'Scores on Pokémon pages'],
+  ['tiers', 'Tier list'],
+  ['speed', 'Speed tiers'],
+  ['builder', 'Team builder checks'],
+  ['calc', 'Damage calc'],
+  ['preview', 'Team preview assistant'],
+  ['freshness', 'Freshness and new regulations'],
+  ['legal', 'Licences and disclaimers'],
+] as const;
+---
+
+<GameLayout game="pokemon" title="About the Pokémon tools" description="How Whetstone's Pokémon Champions numbers are computed: Stat Points, usage scores, tiers, speed, damage, team preview, sources and licences." uses={['showdown', 'smogon', 'limitless', 'showdown-replays', 'smogon-calc']}>
+  <article class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">Pokémon Champions · methodology</p>
+      <h1>How the Pokémon numbers work</h1>
+      <p class="pk-lead">
+        Every figure on the Pokémon pages comes from public data and a formula you can check here. When data is thin, the pages say so instead of
+        guessing.
+      </p>
+    </header>
+
+    <nav class="card pk-panel pk-toc" aria-labelledby="toc-h">
+      <h2 id="toc-h" class="pk-label">On this page</h2>
+      <ol>
+        {
+          toc.map(([id, label]) => (
+            <li>
+              <a href={`#${id}`}>{label}</a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h2 id="rules">Champions rules the tools model</h2>
+      <p>
+        The Pokémon section covers ranked VGC Doubles under the current regulation, {regulation.label} ({formatDayUTC(regulation.start)} to {
+          formatDateTimeUTC(regulation.end)
+        }). Teams register up to six Pokémon and bring four. The rules that matter for the tools:
+      </p>
+      <ul>
+        <li>Every Pokémon battles at level 50 with all IVs fixed at 31.</li>
+        <li>Stat Points replace EVs (next section).</li>
+        <li>Species Clause compares National Pokédex numbers, so two formes of one species can't share a team. Item Clause forbids duplicate held items, Mega Stones included.</li>
+        <li>Mega Evolution is the only battle gimmick, once per battle. A team may register several Mega Stones but only one Pokémon Mega Evolves. There is no Terastallization, so Tera Types in pastes are ignored.</li>
+        <li>Moves, items and abilities follow Champions' own balance changes, taken from Pokémon Showdown's Champions data and @smogon/calc's Champions generation, never from the mainline games.</li>
+      </ul>
+
+      <h2 id="stat-points">Stat Points and pastes</h2>
+      <p>
+        Each Pokémon has {SP_MAX_TOTAL} Stat Points to spend, at most {SP_MAX_STAT} in one stat. A point adds one to the stat before the nature applies:
+      </p>
+      <ul>
+        <li><strong>HP</strong> = base + points + 75</li>
+        <li><strong>Other stats</strong> = floor((base + points + 20) × nature), where the nature gives ×1.1, ×1.0 or ×0.9</li>
+      </ul>
+      <p>
+        <strong>Pastes.</strong> Showdown's Champions formats keep the <code>EVs:</code> line and fill it with Stat Points, so Whetstone reads and writes
+        that line as Stat Points. Older pastes from Scarlet and Violet carry real EVs. A paste is treated as EVs when any stat in it is above {SP_MAX_STAT}
+        or any set totals more than {SP_MAX_TOTAL}, which Stat Points never can. Then every set in it is converted the way Pokémon HOME converts a visiting
+        Pokémon: 4 EVs buy the first point in a stat and every further 8 EVs buy one more, up to {SP_MAX_STAT}.
+      </p>
+      <div class="pk-scroll">
+        <table class="pk-table">
+          <caption class="visually-hidden">EV to Stat Point examples</caption>
+          <thead>
+            <tr><th scope="col">EVs in a stat</th>{evExamples.map((e) => <th scope="col" class="pk-num">{e.ev}</th>)}</tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Stat Points</th>{evExamples.map((e) => <td class="pk-num">{e.sp}</td>)}</tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Exports always write Stat Points. Level, IV and Tera lines from imported pastes are reported and dropped, since Champions fixes them.</p>
+
+      <h2 id="sources">Where the data comes from</h2>
+      <p>A daily job collects the data, validates it and keeps the last good copy when a source fails. Each page credits the sources it shows.</p>
+      <ul class="pk-sourcelist">
+        {
+          module.sources.map((s) => {
+            const st = fetched.get(s.id);
+            return (
+              <li>
+                <a href={s.url} rel="noopener external">
+                  {s.name}
+                </a>
+                {s.license && <span class="pk-subtle"> ({s.license})</span>}: {s.attribution}
+                {s.tosNote && <span class="pk-subtle"> {s.tosNote}</span>}
+                {st?.fetchedAt && <span class="pk-subtle"> Last fetched {formatDateTimeUTC(st.fetchedAt)}.</span>}
+              </li>
+            );
+          })
+        }
+      </ul>
+      <p>
+        Smogon's usage statistics describe Pokémon Showdown's ladder, not the in-game ladder, and are published once a month per rating cutoff. Limitless
+        results are grassroots online tournaments with open team lists. Replay head-to-heads come from public best-of-three replays with open team sheets.
+        Player names and handles are removed when the data is collected; only totals and anonymous team sheets are published.
+      </p>
+
+      <h2 id="scores">Scores on Pokémon pages</h2>
+      <p>Matchup lists use a score from 1 to 100 where 50 is neutral, always shown with its sample size (n) and source.</p>
+      <ul>
+        <li>
+          <strong>Replay head-to-head ("beats it in replays", "wins together").</strong> For each pair, the win rate is compared with what both
+          Pokémon's overall results predict, shrunk toward that expectation, and turned into an effect Δ in percentage points. Score = 50 + 50 ×
+          tanh(Δ / 4 pp). Pairs with fewer than {GATES.hideBelow} games are hidden, {GATES.hideBelow}–{GATES.greyBelow - 1} games are greyed, and a pair
+          is only listed when n ≥ {GATES.listMinN} and |Δ| ≥ {GATES.listMinDeltaPp} pp.
+        </li>
+        <li>
+          <strong>Ladder checks.</strong> Smogon reports how often one Pokémon KOs or forces out another when they meet (p) and its spread (sd). Score =
+          100 × (p − 2 × sd), a cautious reading that favours well-sampled checks. Smogon rows under 20 encounters are dropped.
+        </li>
+        <li>
+          <strong>Common teammates.</strong> Score = 50 + 50 × tanh(ln(lift)), where lift is how much more often the partner appears on this Pokémon's teams
+          than on teams overall. 50 means "paired exactly as often as its popularity predicts"; 1.25× is about 61 and 2× about 80.
+        </li>
+      </ul>
+
+      <h2 id="tiers">Tier list</h2>
+      <p>Tiers follow how often a Pokémon is brought, in fixed bands so a Pokémon only moves when its own numbers move:</p>
+      <ul>
+        {bands.map((b) => <li><strong>{b.id}</strong>: {b.range} of teams</li>)}
+      </ul>
+      <p>
+        A tournament win rate adjusts the usage figure only when its 95% Wilson interval lies entirely above or below 50%: half the distance from 50% to
+        the nearer end of the interval is added or subtracted, in points. Fewer than 30 games add nothing, and fewer than {POKEMON_TIERS.minN} teams
+        behind the usage figure mark the Pokémon as early data instead of giving it a tier.
+      </p>
+
+      <h2 id="speed">Speed tiers</h2>
+      <p>
+        Speed tiers list each top Pokémon's most common spread plus its fastest (+Speed nature, {SP_MAX_STAT} points), uninvested and slowest (−Speed
+        nature, 0 points) values. Stat stages apply first, then Choice Scarf (×1.5), Tailwind (×2) and paralysis (×0.5), each rounded down. Under Trick
+        Room the slowest Pokémon moves first. Equal speeds move in random order.
+      </p>
+
+      <h2 id="builder">Team builder checks</h2>
+      <ul>
+        <li><strong>Legality</strong>: roster, Mega formes and items allowed in the regulation; Species and Item Clause; abilities the species can have; moves in its Champions learnset; Stat Point limits; at least four Pokémon (Showdown asks for six); a note when more than one Mega Stone is registered.</li>
+        <li><strong>Weaknesses</strong>: each attacking type against each Pokémon's typing (its Mega typing when holding the stone). Abilities that change a matchup, such as Levitate or Thick Fat, are applied and marked. A type is flagged when it hits two or more of the team and none of them resists it.</li>
+        <li><strong>Coverage</strong>: the best multiplier the team's damaging moves reach against each type, counting abilities that change Normal moves' type.</li>
+        <li><strong>Threats</strong>: each of the most used Pokémon's common set (most used item, ability, spread and moves) is run through the damage calc against every member, in Doubles with no field effects. A KO the calc rates under 50% likely counts one hit later. Pressure = one-hit KOs + 0.4 × two-hit KOs. An "answer" is a member that KOs it back in two hits. A set is flagged when it pressures two or more members and has no answer.</li>
+      </ul>
+      <p>Common sets stand in for real opponents and are labelled as such: they are the most used choices, not anyone's actual team.</p>
+
+      <h2 id="calc">Damage calc</h2>
+      <p>
+        Damage comes from @smogon/calc's Champions generation, which models Stat Points and Champions' move and item changes. It runs in a background
+        worker that the page downloads the first time it calculates. Doubles is the default: moves that hit both foes do 0.75× damage. Weather, terrain,
+        screens, Helping Hand, Friend Guard, stat changes, status and current HP are supported. Results give the damage range as a share of the target's
+        HP and the chance to KO.
+      </p>
+
+      <h2 id="preview">Team preview assistant</h2>
+      <p>
+        The assistant scores each of your six with the same engine as the Heroes of the Storm draft tool. Evidence becomes signals on one scale (1.0 is
+        roughly a 4-point win-rate edge), each signal keeps the reason behind it, and the chosen weights decide how much each kind of evidence counts.
+      </p>
+      <ul>
+        <li><strong>{PREVIEW_SIGNAL_LABEL.counters}</strong>: replay head-to-head effects between your Pokémon and theirs, weighted by how likely each of theirs is to be brought; pairs under {GATES.hideBelow} games are ignored and thin pairs count half.</li>
+        <li><strong>{PREVIEW_SIGNAL_LABEL.theory}</strong>: whether your moves hit theirs super-effectively and whether their typings threaten yours.</li>
+        <li><strong>{PREVIEW_SIGNAL_LABEL.role}</strong>: how much of their likely team you outspeed, plus Tailwind or Trick Room when the speed race favours them, and Intimidate against several physical attackers.</li>
+        <li><strong>{PREVIEW_SIGNAL_LABEL.map}</strong>: one- and two-hit KOs from the damage calc, in both directions.</li>
+        <li><strong>{PREVIEW_SIGNAL_LABEL.synergy}</strong>: replay results of your Pokémon brought together.</li>
+      </ul>
+      <div class="pk-scroll">
+        <table class="pk-table">
+          <caption class="visually-hidden">Weights of each evidence type per setting</caption>
+          <thead>
+            <tr>
+              <th scope="col">Setting</th>
+              {signalKeys.map((k) => <th scope="col" class="pk-num">{PREVIEW_SIGNAL_LABEL[k]}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {
+              PREVIEW_PRESET_IDS.map((id) => (
+                <tr>
+                  <th scope="row">{PREVIEW_PRESETS[id].label}</th>
+                  {signalKeys.map((k) => (
+                    <td class="pk-num">{PREVIEW_PRESETS[id].weights[k] ?? '—'}</td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <strong>Their likely four.</strong> Without bring-rate data, each of their Pokémon's chance is proportional to its ladder usage, scaled so the
+        six chances add up to four, with none above 100% (a capped Pokémon's excess goes to the others). Pokémon without usage data count as the average
+        of the rest. Unless you paste their team sheet, each is assumed to run its most
+        common set.
+      </p>
+      <p>
+        <strong>Bring four and lead two.</strong> Every four-Pokémon combination is scored as the sum of its members' scores plus partner results, minus
+        a penalty when three of the four share a weakness to one of their types. The lead pair is the best-scoring pair of those four with a bonus for
+        Fake Out, turn-one speed control, redirection and moves that hit both foes. The display score is 50 + 50 × tanh(total), from 0 to 100.
+      </p>
+      <p>
+        It can't see their actual sets, items or Stat Points, your play style or the in-game ladder. Use it as a second opinion and check the reasons it
+        gives.
+      </p>
+
+      <h2 id="freshness">Freshness and new regulations</h2>
+      <p>
+        Every page shows how old its data is. When a new regulation starts, Smogon has no usage for it until its first monthly release, so the pages
+        show the legal roster and tournament data and say the ladder numbers are warming up. The regulation banner counts down to the published end
+        time in UTC.
+      </p>
+
+      <h2 id="legal">Licences and disclaimers</h2>
+      <p>
+        Pokédex and mechanics data comes from Pokémon Showdown and damage from @smogon/calc, both MIT licensed. Usage statistics are Smogon's, credited on
+        every page that shows them. Smogon's written sets and analyses, Pikalytics and community wikis are linked, never copied. Tournament data comes
+        from the public Limitless API, requested slowly, and only aggregates are published.
+      </p>
+      <p>
+        Whetstone is an unofficial, non-commercial fan project. It is not affiliated with, endorsed, sponsored or approved by Nintendo, Creatures Inc.,
+        GAME FREAK inc. or The Pokémon Company. Pokémon and Pokémon character names are trademarks of Nintendo, Creatures Inc., GAME FREAK inc. and The
+        Pokémon Company, used here for identification only. See also the <a href={navHref('pokemon')}>Pokémon home</a> and the site-wide
+        <a href={withBase('credits/')}>credits</a>.
+      </p>
+    </div>
+  </article>
+</GameLayout>

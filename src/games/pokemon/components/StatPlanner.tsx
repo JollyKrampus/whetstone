@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks';
-import { NATURES, type Nature } from '../schema.ts';
+import type { Nature } from '../schema.ts';
+import { NATURES } from './lib/vocab.ts';
 import { SP_MAX_STAT, SP_MAX_TOTAL, STAT_IDS, STAT_LABEL, STAT_NAME, finalStats, natureEffect, natureLabel, setSp, spTotal, type SpTuple, type StatTable } from './lib/stats.ts';
 import { spLine } from './lib/paste.ts';
 

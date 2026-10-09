@@ -1,0 +1,48 @@
+---
+/**
+ * Damage calculator: @smogon/calc's Champions generation (gen 0) running in a Web Worker that is
+ * only downloaded when the page first calculates.
+ */
+import '../../games/pokemon/components/pokemon.css';
+import EmptyState from '../../components/EmptyState.astro';
+import { getCurrentRegulation } from '../../games/pokemon/load.ts';
+import DamageCalc from '../../games/pokemon/components/DamageCalc.tsx';
+import { buildNow, topMetaSets, usageLabel } from '../../games/pokemon/components/server.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+import { stagedUrlOrNull } from '../../lib/stagemap.ts';
+
+const regulation = getCurrentRegulation(new Date(buildNow()));
+const dexUrl = stagedUrlOrNull('pokemon', 'dex');
+const metaSets = topMetaSets(50);
+const label = usageLabel();
+---
+
+<GameLayout
+  game="pokemon"
+  title="Damage calc"
+  description={`Pokémon Champions ${regulation.label} damage calculator with Stat Points, Doubles spread damage, weather, terrain and screens.`}
+  uses={['showdown', 'smogon', 'smogon-calc']}
+>
+  <div class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">{regulation.label} · level 50</p>
+      <h1>Damage calc</h1>
+      <p class="pk-lead">
+        Champions damage for both Pokémon at once, with Stat Points, Doubles spread damage, weather, terrain, screens and stat changes. Start from a
+        common ladder set or build your own.
+      </p>
+    </header>
+    {
+      dexUrl ? (
+        <DamageCalc client:load dexUrl={dexUrl} regulation={regulation.id} metaSets={metaSets} usageLabel={label} />
+      ) : (
+        <EmptyState title="The Pokédex isn't published yet" level={2}>
+          <p>The calculator needs the Champions dex from the daily data job. Try again after the next update.</p>
+        </EmptyState>
+      )
+    }
+    <noscript>
+      <p class="pk-issue" data-level="warning"><span class="pk-issue__tag">Note</span><span>The damage calculator runs in your browser and needs JavaScript.</span></p>
+    </noscript>
+  </div>
+</GameLayout>

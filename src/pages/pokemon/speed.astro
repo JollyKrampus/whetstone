@@ -18,7 +18,7 @@ const regulation = getCurrentRegulation(new Date(buildNow()));
 const tiers = getSpeedTiers();
 const usage = currentUsage();
 
-let rows: SpeedRowData[] = [];
+let rows: SpeedRowData[];
 if (tiers) {
   rows = tiers.entries.flatMap((e) => {
     const s = getSpeciesById(e.id);

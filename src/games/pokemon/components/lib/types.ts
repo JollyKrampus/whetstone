@@ -6,7 +6,8 @@
  * A few abilities change what a type does to their holder (Levitate, Flash Fire, absorb
  * abilities, Thick Fat…). They are applied as an explicit, labelled adjustment, never silently.
  */
-import { POKEMON_TYPES, type Move, type PokemonType, type TypeChart } from '../../schema.ts';
+import type { Move, PokemonType, TypeChart } from '../../schema.ts';
+import { POKEMON_TYPES } from './vocab.ts';
 
 export const TYPES: readonly PokemonType[] = POKEMON_TYPES;
 

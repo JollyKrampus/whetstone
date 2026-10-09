@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 /**
- * Damage-calc worker: keeps @smogon/calc (about 150 kB of data gzipped) off the main thread and
+ * Damage-calc worker: keeps @smogon/calc (about 120 kB gzipped) off the main thread and
  * out of every page that doesn't need it. Loaded lazily by ./client.ts.
  */
 import { runCalc, runMatrix } from './calc-core.ts';

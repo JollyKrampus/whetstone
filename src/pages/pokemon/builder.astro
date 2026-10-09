@@ -1,0 +1,58 @@
+---
+/**
+ * Team builder: Showdown paste import/export with Stat Points, legality for the current
+ * regulation, weakness matrix, coverage, speed against the top 50 and a damage-calc threat list
+ * (Web Worker). Everything runs in the browser; the dex shard is fetched from its staged URL.
+ */
+import '../../games/pokemon/components/pokemon.css';
+import EmptyState from '../../components/EmptyState.astro';
+import { navHref } from '../../games/registry.ts';
+import { getCurrentRegulation } from '../../games/pokemon/load.ts';
+import TeamBuilder from '../../games/pokemon/components/TeamBuilder.tsx';
+import { buildNow, topMetaSets, usageLabel } from '../../games/pokemon/components/server.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+import { stagedUrlOrNull } from '../../lib/stagemap.ts';
+
+const regulation = getCurrentRegulation(new Date(buildNow()));
+const dexUrl = stagedUrlOrNull('pokemon', 'dex');
+const metaSets = topMetaSets(50);
+const label = usageLabel();
+---
+
+<GameLayout
+  game="pokemon"
+  title="Team builder"
+  description={`Pokémon Champions ${regulation.label} team builder: Showdown paste import and export with Stat Points, legality, weaknesses, speed tiers and threats.`}
+  uses={['showdown', 'smogon', 'smogon-calc']}
+>
+  <div class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">{regulation.label} · VGC Doubles</p>
+      <h1>Team builder</h1>
+      <p class="pk-lead">
+        Paste a team or build one slot by slot. The builder checks it against the {regulation.label} rules, shows shared weaknesses and coverage gaps,
+        where your Pokémon sit on the speed ladder and which common sets threaten it most. Your team stays in this browser and in the page link.
+      </p>
+    </header>
+    {
+      dexUrl ? (
+        <TeamBuilder
+          client:load
+          dexUrl={dexUrl}
+          regulation={regulation.id}
+          regulationLabel={regulation.label}
+          metaSets={metaSets}
+          usageLabel={label}
+          previewHref={navHref('pokemon', 'preview/')}
+        />
+      ) : (
+        <EmptyState title="The Pokédex isn't published yet" level={2}>
+          <p>The builder needs the Champions dex from the daily data job. Try again after the next update.</p>
+        </EmptyState>
+      )
+    }
+    <noscript>
+      <p class="pk-issue" data-level="warning"><span class="pk-issue__tag">Note</span><span>The team builder runs in your browser and needs JavaScript.</span></p>
+    </noscript>
+  </div>
+</GameLayout>

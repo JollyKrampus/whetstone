@@ -1,12 +1,14 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import type { Edge } from '../../core/game.ts';
 import { assignTiers, POKEMON_TIERS } from '../../core/tiers.ts';
 import { H2HSchema, SpeciesFileSchema, TournamentsSchema, UsageSchema } from './schema.ts';
 import { metaSets } from './components/lib/metasets.ts';
 import {
   checkRows,
   checkScore,
+  compactEdges,
   displayName,
   edgeLists,
   ladderTierRows,
@@ -143,5 +145,22 @@ describe('meta sets and speed position', () => {
     const pos = speedPosition(105, sets.map((s) => ({ id: s.id, speed: s.speed })), 'rillaboom');
     expect(pos.total).toBe(4);
     expect(pos.faster + pos.slower + pos.ties).toBe(4);
+  });
+});
+
+describe('compactEdges', () => {
+  it('keeps edges with n ≥ 15, rounds Δ and sorts', () => {
+    const e = (a: string, b: string, delta: number | undefined, n: number | undefined): Edge => ({
+      a,
+      b,
+      score: 50,
+      source: 'replays',
+      reasons: [],
+      ...(delta !== undefined ? { delta } : {}),
+      ...(n !== undefined ? { n } : {}),
+    });
+    const out = compactEdges({ counters: [e('b', 'a', 1.234, 40), e('a', 'c', -2, 14), e('a', 'b', 3.456, 15), e('a', 'd', undefined, 99)], synergies: [e('a', 'b', 2, 200)] });
+    expect(out).toEqual({ counters: [['a', 'b', 3.46, 15], ['b', 'a', 1.23, 40]], synergies: [['a', 'b', 2, 200]] });
+    expect(compactEdges(null)).toBeNull();
   });
 });

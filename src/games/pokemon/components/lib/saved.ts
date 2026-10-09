@@ -6,6 +6,8 @@ import { createStore, type Store } from '../../../../core/storage.ts';
 import { packTeam, unpackTeam, type Team } from './team.ts';
 
 export const SAVED_KEY = 'teams';
+/** The team being edited in the builder (packTeam text); the team preview reads it too. */
+export const CURRENT_KEY = 'current';
 export const MAX_SAVED = 30;
 
 export interface SavedTeam {

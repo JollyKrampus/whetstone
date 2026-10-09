@@ -11,8 +11,8 @@
  *   synergy  → partner results and teammates   tier   → not used
  *
  * Opponents are weighted by how likely they are to be brought. Without bring-rate data the
- * estimate is usage-based: weight_i = min(1, 4 × usage_i / Σ usage), so the six weights sum to
- * about four. It is labelled as an estimate in the UI.
+ * estimate is usage-based (bringWeights): proportional to usage, capped at 1, summing to four.
+ * It is labelled as an estimate in the UI.
  */
 import type { Edge, Reason } from '../../../../core/game.ts';
 import { scoreCandidates, valueFromDelta, type DraftContext, type Provider, type Ranked, type Signal, type Weights } from '../../../../core/draft.ts';
@@ -120,21 +120,31 @@ function worstStabAgainst(chart: TypeChart, attacker: PreviewMon, defender: Prev
   return Math.max(...attacker.types.map((t) => effectiveness(chart, t, defender.types) * (adjust?.[t] ?? 1)));
 }
 
-/** Estimated chance each of their Pokémon is brought (sums to about 4). */
+/**
+ * Estimated chance each of their Pokémon is brought: proportional to usage, scaled so the chances
+ * add up to the number brought (four, or fewer when fewer are known), never above 1. Capping one
+ * Pokémon at 1 hands its excess to the rest in proportion, so the total stays exact.
+ */
 export function bringWeights(theirs: readonly PreviewMon[]): Map<string, number> {
   const out = new Map<string, number>();
   if (theirs.length === 0) return out;
   const bring = Math.min(4, theirs.length);
   const known = theirs.filter((m) => (m.usage ?? 0) > 0);
-  const total = known.reduce((s, m) => s + (m.usage ?? 0), 0);
   // Pokémon without usage data get the average share of those with it (or an even split).
-  const fallback = known.length ? total / known.length : 1;
-  const sum = theirs.reduce((s, m) => s + ((m.usage ?? 0) > 0 ? (m.usage as number) : fallback), 0);
-  for (const m of theirs) {
-    const u = (m.usage ?? 0) > 0 ? (m.usage as number) : fallback;
-    out.set(m.key, Math.min(1, (bring * u) / sum));
+  const fallback = known.length ? known.reduce((s, m) => s + (m.usage ?? 0), 0) / known.length : 1;
+  const raw = new Map(theirs.map((m) => [m.key, (m.usage ?? 0) > 0 ? (m.usage as number) : fallback]));
+  const capped = new Set<string>();
+  for (;;) {
+    const open = theirs.filter((m) => !capped.has(m.key));
+    const mass = open.reduce((s, m) => s + raw.get(m.key)!, 0);
+    const scale = mass > 0 ? (bring - capped.size) / mass : 0;
+    const over = open.filter((m) => raw.get(m.key)! * scale >= 1);
+    if (over.length === 0 || open.length === over.length) {
+      for (const m of theirs) out.set(m.key, capped.has(m.key) ? 1 : Math.min(1, raw.get(m.key)! * scale));
+      return out;
+    }
+    for (const m of over) capped.add(m.key);
   }
-  return out;
 }
 
 function edgeIndex(edges: readonly Edge[] | undefined): Map<string, Edge> {
@@ -299,10 +309,16 @@ function speedProvider(b: Built): Provider {
   };
 }
 
-function koLabel(c: DamageCell): string {
-  if (c.koN === 1) return c.koChance >= 1 ? 'OHKO' : `${Math.round(c.koChance * 100)}% to OHKO`;
-  if (c.koN === 2) return c.koChance >= 1 ? '2HKO' : `${Math.round(c.koChance * 100)}% to 2HKO`;
-  return `${c.minPct}–${c.maxPct}%`;
+/** "OHKOs" / "2HKOs", or the damage range. */
+function koVerb(c: DamageCell): string {
+  if (c.koN === 1) return 'OHKOs';
+  if (c.koN === 2) return '2HKOs';
+  return `does ${c.minPct}–${c.maxPct}% to`;
+}
+
+/** " (88% chance)" for a KO that isn't guaranteed. */
+function koChanceText(c: DamageCell): string {
+  return (c.koN === 1 || c.koN === 2) && c.koChance < 1 ? ` (${Math.round(c.koChance * 100)}% chance)` : '';
 }
 
 function damageProvider(b: Built, damage: DamageTable): Provider {
@@ -320,23 +336,23 @@ function damageProvider(b: Built, damage: DamageTable): Provider {
       if (mine) {
         const v = mine.koN === 1 ? 0.5 * Math.max(0.5, mine.koChance) : mine.koN === 2 ? 0.25 * Math.max(0.5, mine.koChance) : 0;
         offense += v * w;
-        if (mine.koN === 1 || mine.koN === 2) kos.push(`${koLabel(mine)} ${o.name} with ${mine.moveName}`);
+        if (mine.koN === 1 || mine.koN === 2) kos.push(`${mine.moveName} ${koVerb(mine)} ${o.name}${koChanceText(mine)}`);
       }
       const theirs = damage.theirs[o.key]?.[key];
       if (theirs) {
         const v = theirs.koN === 1 ? 0.5 * Math.max(0.5, theirs.koChance) : theirs.koN === 2 ? 0.12 : 0;
         defense -= v * w;
-        if (theirs.koN === 1) dangers.push(`${o.name}'s ${theirs.moveName} (${koLabel(theirs)})`);
+        if (theirs.koN === 1) dangers.push(`${o.name}'s ${theirs.moveName}${koChanceText(theirs)}`);
       }
     }
     if (offense > 0) {
-      out.push({ key: 'map', value: offense, reasons: [{ kind: 'stat', text: `Can ${kos.slice(0, 2).join('; ')}${kos.length > 2 ? `; +${kos.length - 2} more` : ''}`, source: 'smogon-calc' }] });
+      out.push({ key: 'map', value: offense, reasons: [{ kind: 'stat', text: `${kos.slice(0, 2).join('; ')}${kos.length > 2 ? `; +${kos.length - 2} more` : ''}`, source: 'smogon-calc' }] });
     }
     if (defense < 0) {
       out.push({
         key: 'map',
         value: defense,
-        reasons: [{ kind: 'stat', text: dangers.length ? `Can be KOed in one hit by ${dangers.slice(0, 2).join(', ')}` : 'Takes heavy damage from their common sets', source: 'smogon-calc' }],
+        reasons: [{ kind: 'stat', text: dangers.length ? `Can be OHKOed by ${dangers.slice(0, 2).join(' or ')}` : 'Takes heavy damage from their common sets', source: 'smogon-calc' }],
       });
     }
     return out;
@@ -503,7 +519,7 @@ export function recommend(input: PreviewInput, preset: PreviewPresetId = 'balanc
   }
   for (const r of left) {
     const why = r.warning?.text ?? r.reasons[0]?.text;
-    bringNotes.push(`Leave ${b.mine.get(r.id)?.name ?? r.id} in the back${why ? `: ${why.charAt(0).toLowerCase()}${why.slice(1)}` : ''}.`);
+    bringNotes.push(`Leave ${b.mine.get(r.id)?.name ?? r.id} in the back.${why ? ` ${why}${/[.!?)]$/.test(why) ? '' : '.'}` : ''}`);
   }
 
   let lead: LeadPlan | null = null;

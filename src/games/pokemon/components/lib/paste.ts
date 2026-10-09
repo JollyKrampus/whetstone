@@ -8,7 +8,8 @@
  * Export always writes Stat Points in the `EVs:` line, which is what Showdown's Champions
  * formats import.
  */
-import { NATURES, type Nature } from '../../schema.ts';
+import type { Nature } from '../../schema.ts';
+import { NATURES } from './vocab.ts';
 import { toId, type DexIndex } from './dex.ts';
 import { STAT_IDS, STAT_LABEL, SP_MAX_TOTAL, checkSp, evToSp, looksLikeEvs, spTotal, type SpTuple, type StatId } from './stats.ts';
 import { MOVES_PER_SET, TEAM_SIZE, emptySp, isNature, type PokemonSet, type Team } from './team.ts';

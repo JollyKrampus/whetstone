@@ -3,7 +3,8 @@
  * team sheet lists: base species (Megas are reached through their stone), item, ability, nature,
  * Stat Points and up to four moves. Everything is ids (Showdown toIDs) so it survives renames.
  */
-import { NATURES, type Nature } from '../../schema.ts';
+import type { Nature } from '../../schema.ts';
+import { NATURES } from './vocab.ts';
 import { checkSp, type SpTuple } from './stats.ts';
 
 export const TEAM_SIZE = 6;
