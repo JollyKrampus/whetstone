@@ -19,7 +19,7 @@ const items: Item[] = [
 const dex = dexIndex(species, items);
 
 /** A Bo3 log as Showdown writes it (player names are placeholders). */
-export const SAMPLE_LOG = [
+const SAMPLE_LOG = [
   '|j|☆Alice Example',
   '|j|☆Bob Example',
   '|gametype|doubles',

@@ -42,7 +42,7 @@ entries within the same regulation, and **base stats and types identical to `@sm
 site's calculator). Any mismatch keeps the last-good dex and marks `showdown` failed until the calc or Showdown agree.
 Species the calc does not have yet are a warning. Showdown's `aegislash` is the calc's `aegislashshield`.
 
-`public/dex.json` (≈ 460 KB, ≈ 75 KB gzipped) carries every legal species and forme of the listed regulations, their
+`public/dex.json` (≈ 480 KB, ≈ 72 KB gzipped) carries every legal species and forme of the listed regulations, their
 learnsets, the moves they can learn, items, abilities and the type chart, with Showdown's one-line descriptions
 (descriptions are left out where the Champions mod changes an effect without updating its text).
 
@@ -50,7 +50,7 @@ learnsets, the moves they can learn, items, abilities and the type chart, with S
 
 Decision: **self-host a subset**, as critique D12 decided. One lossless WebP per exported species or Mega, converted
 from Pokémon Showdown's gen5-style sprite set (`play.pokemonshowdown.com/sprites/gen5/`), under `img/sprites/<id>.webp`,
-about 1 MB in total. Defensible because the use is non-commercial, credited and carries the non-affiliation notice;
+about 0.5 MB in total (≈ 1.5 KB each). Defensible because the use is non-commercial, credited and carries the non-affiliation notice;
 self-hosting is what Showdown and `@pkmn/img` ask third parties to do instead of hotlinking; and nothing is taken from
 the Champions client. The images remain © Nintendo, Creatures and GAME FREAK; the newer gen5-style ones were drawn by
 the Smogon sprite project. Credit text and source travel in `meta.extra.sprites` (`getSpriteCredit()` in `load.ts`).
