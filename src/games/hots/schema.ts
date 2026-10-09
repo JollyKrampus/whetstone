@@ -159,6 +159,10 @@ export const HotsMetaExtraSchema = z.strictObject({
   assetsTag: z.string().min(1).exactOptional(),
   /** HP_MODE at generation time; stats exist only when 'on'. */
   hpMode: z.enum(['on', 'off']),
+  /** When the pipeline first saw the current live `build` on the version server. */
+  buildSeenAt: IsoDateTime.exactOptional(),
+  /** heroes-data2 has lagged the live build for more than 48 hours: hero data is from `dataBuild`. */
+  dataPending: z.boolean().exactOptional(),
 });
 export const HotsMetaSchema = gameMetaSchema('hots', HotsMetaExtraSchema);
 export type HotsMeta = z.infer<typeof HotsMetaSchema>;
@@ -263,6 +267,8 @@ export const HeroSchema = z
     hpId: z.number().int().positive().exactOptional(),
     /** heroes-data2 item key (`Wizard` for Li-Ming). */
     hdpId: z.string().min(1).exactOptional(),
+    /** Large draft-screen portrait (180×212), e.g. for hero page headers; `portrait` is the 128×128 pick button. */
+    draftPortrait: DataPath.exactOptional(),
   })
   .superRefine((h, ctx) => {
     if (h.members) {

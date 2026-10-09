@@ -1,0 +1,22 @@
+{
+ "batchcomplete": true,
+ "query": {
+  "searchinfo": {
+   "totalhits": 2
+  },
+  "search": [
+   {
+    "ns": 0,
+    "title": "Nations Cup 2026",
+    "pageid": 33648,
+    "timestamp": "2026-09-24T15:26:35Z"
+   },
+   {
+    "ns": 0,
+    "title": "Copium Cup",
+    "pageid": 33747,
+    "timestamp": "2026-10-05T16:03:30Z"
+   }
+  ]
+ }
+}

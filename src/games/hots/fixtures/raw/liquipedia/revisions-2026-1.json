@@ -1,0 +1,61 @@
+{
+ "batchcomplete": true,
+ "query": {
+  "pages": [
+   {
+    "pageid": 33648,
+    "ns": 0,
+    "title": "Nations Cup 2026",
+    "revisions": [
+     {
+      "revid": 339964,
+      "parentid": 338308,
+      "slots": {
+       "main": {
+        "contentmodel": "wikitext",
+        "contentformat": "text/x-wiki",
+        "content": "{{Infobox league\n|name=Nations Cup 2026\n|shortname=NC 2026\n|tickername=Nations Cup 2026\n|image=Nations Cup 2026 allmode.png\n|icon=Nations Cup 2026 allmode.png\n|organizer=Khaldor\n|sponsor=\n|region=eu\n|server=Europe\n|type=Online\n|country=world\n|prizepoolusd=10000\n|sdate=2026-01-31\n|edate=2026-04-26\n|liquipediatier=1\n|twitch=khaldor\n|youtube=\n|bracket=https://play.toornament.com/en_GB/tournaments/2363823762462392319/stages/\n|rulebook=https://docs.google.com/document/d/1a7iHFhxAZM9WFo32s5l7CQrzEbCAus1ZY0F59XH0qMI/edit?tab=t.0\n|team_number=28\n|bg1=Battlefield of Eternity\n|bg2=Braxis Holdout\n|bg3=Cursed Hollow\n|bg4=Dragon Shire\n|bg5=Garden of Terror\n|bg6=Haunted Mines\n|bg7=Infernal Shrines\n|bg8=Sky Temple\n|bg9=Tomb of the Spider Queen\n|bg10=Towers of Doom\n|previous=Nations_Cup_2023{{!}}Heroes International Nations Cup 2023\n|next=\n}}\n|map1={{Map|map=Haunted Mines\n\t\t|team1side=blue |team2side=red |winner=2\n\t\t|length=17:10\n\t\t<!-- Hero picks -->\n\t\t|t1h1=hogger |t1h2=johanna |t1h3=anduin |t1h4=tychus |t1h5=deathwing\n\t\t|t2h1=blaze |t2h2=chromie |t2h3=malfurion |t2h4=imperius |t2h5=tyrael\n\t\t<!-- Hero bans -->\n\t\t|t1b1=thrall |t1b2=varian |t1b3=genji\n\t\t|t2b1=medivh |t2b2=chen |t2b3=sylvanas\n    }}\n|map2={{Map|map=Towers of Doom\n\t\t|team1side=blue |team2side=red |winner=2\n\t\t|length=18:45\n\t\t<!-- Hero picks -->\n\t\t|t1h1=falstad |t1h2=muradin |t1h3=whitemane |t1h4=leoric |t1h5=sgt\n\t\t|t2h1=sylvanas |t2h2=dehaka |t2h3=garrosh |t2h4=ana |t2h5=liming\n\t\t<!-- Hero bans -->\n\t\t|t1b1=junkrat |t1b2=brightwing |t1b3=genji\n\t\t|t2b1=thrall |t2b2=medivh |t2b3=maiev\n    }}\n|map3={{Map|map=Tomb of the Spider Queen\n\t\t|team1side=blue |team2side=red |winner=2\n\t\t|length=26:17\n\t\t<!-- Hero picks -->\n\t\t|t1h1=guldan |t1h2=dva |t1h3=malganis |t1h4=rehgar |t1h5=alarak\n\t\t|t2h1=maiev |t2h2=rexxar |t2h3=varian |t2h4=tyrande |t2h5=kelthuzad\n\t\t<!-- Hero bans -->\n\t\t|t1b1=yrel |t1b2=diablo |t1b3=hanzo\n\t\t|t2b1=thrall |t2b2=medivh |t2b3=brightwing\n    }}\n|map4={{Map|map=Cursed Hollow\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=16:07\n\t\t<!-- Hero picks -->\n\t\t|t1h1=maiev |t1h2=blaze |t1h3=brightwing |t1h4=muradin |t1h5=valla\n\t\t|t2h1=dehaka |t2h2=rehgar |t2h3=hanzo |t2h4=etc |t2h5=greymane\n\t\t<!-- Hero bans -->\n\t\t|t1b1=falstad |t1b2=johanna |t1b3=sylvanas\n\t\t|t2b1=hogger |t2b2=thrall |t2b3=tyrael\n    }}\n|map5={{Map|map=Haunted Mines\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=15:03\n\t\t<!-- Hero picks -->\n\t\t|t1h1=chen |t1h2=sylvanas |t1h3=tyrael |t1h4=anduin |t1h5=alarak\n\t\t|t2h1=yrel |t2h2=diablo |t2h3=chromie |t2h4=tyrande |t2h5=genji\n\t\t<!-- Hero bans -->\n\t\t|t1b1=thrall |t1b2=johanna |t1b3=uther\n\t\t|t2b1=hogger |t2b2=deathwing |t2b3=garrosh\n    }}\n|map6={{Map|map=Towers of Doom\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=17:55\n\t\t<!-- Hero picks -->\n\t\t|t1h1=garrosh |t1h2=cassia |t1h3=auriel |t1h4=ragnaros |t1h5=zeratul\n\t\t|t2h1=falstad |t2h2=varian |t2h3=lucio |t2h4=liming |t2h5=sonya\n\t\t<!-- Hero bans -->\n\t\t|t1b1=thrall |t1b2=johanna |t1b3=leoric\n\t\t|t2b1=hogger |t2b2=deathwing |t2b3=malfurion\n    }}\n"
+       }
+      }
+     }
+    ]
+   },
+   {
+    "pageid": 33668,
+    "ns": 0,
+    "title": "Nations Cup 2026/League Stage",
+    "revisions": [
+     {
+      "revid": 335943,
+      "parentid": 335942,
+      "slots": {
+       "main": {
+        "contentmodel": "wikitext",
+        "contentformat": "text/x-wiki",
+        "content": "|map1={{Map|map=Battlefield of Eternity\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=18:18\n\t\t<!-- Hero picks -->\n\t\t|t1h1=liming |t1h2=dehaka |t1h3=uther |t1h4=varian |t1h5=cassia\n\t\t|t2h1=blaze |t2h2=anubarak |t2h3=genji |t2h4=stukov |t2h5=lunara\n\t\t<!-- Hero bans -->\n\t\t|t1b1=chen |t1b2=tyrael |t1b3=sylvanas\n\t\t|t2b1=yrel |t2b2=hanzo |t2b3=thrall\n    }}\n|map2={{Map|map=Infernal Shrines\n\t\t|team1side=blue |team2side=red |winner=2\n\t\t|length=15:50\n\t\t<!-- Hero picks -->\n\t\t|t1h1=sylvanas |t1h2=anduin |t1h3=maiev |t1h4=muradin |t1h5=sonya\n\t\t|t2h1=johanna |t2h2=falstad |t2h3=brightwing |t2h4=leoric |t2h5=hanzo\n\t\t<!-- Hero bans -->\n\t\t|t1b1=chen |t1b2=chromie |t1b3=sgt\n\t\t|t2b1=yrel |t2b2=tyrael |t2b3=thrall\n    }}\n|map3={{Map|map=Towers of Doom\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=21:23\n\t\t<!-- Hero picks -->\n\t\t|t1h1=sgt |t1h2=yrel |t1h3=deckard |t1h4=garrosh |t1h5=tracer\n\t\t|t2h1=tyrael |t2h2=lucio |t2h3=junkrat |t2h4=dva |t2h5=thrall\n\t\t<!-- Hero bans -->\n\t\t|t1b1=chen |t1b2=chromie |t1b3=orphea\n\t\t|t2b1=tlv |t2b2=medivh |t2b3=deathwing\n    }}\n|map4={{Map|map=Infernal Shrines\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=23:42\n\t\t<!-- Hero picks -->\n\t\t|t1h1=johanna |t1h2=blaze |t1h3=anduin |t1h4=guldan |t1h5=sgt\n\t\t|t2h1=muradin |t2h2=hanzo |t2h3=leoric |t2h4=ana |t2h5=malthael\n\t\t<!-- Hero bans -->\n\t\t|t1b1=sylvanas |t1b2=hogger |t1b3=junkrat\n\t\t|t2b1=falstad |t2b2=zarya |t2b3=genji\n    }}\n|map5={{Map|map=Garden of Terror\n\t\t|team1side=blue |team2side=red |winner=2\n\t\t|length=27:58\n\t\t<!-- Hero picks -->\n\t\t|t1h1=sylvanas |t1h2=dehaka |t1h3=malfurion |t1h4=nazeebo |t1h5=garrosh\n\t\t|t2h1=brightwing |t2h2=falstad |t2h3=chen |t2h4=anubarak |t2h5=genji\n\t\t<!-- Hero bans -->\n\t\t|t1b1=hogger |t1b2=maiev |t1b3=medivh\n\t\t|t2b1=thrall |t2b2=zarya |t2b3=tracer\n    }}\n|map6={{Map|map=Battlefield of Eternity\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=14:42\n\t\t<!-- Hero picks -->\n\t\t|t1h1=cassia |t1h2=rexxar |t1h3=deckard |t1h4=etc |t1h5=chromie\n\t\t|t2h1=valla |t2h2=auriel |t2h3=hogger |t2h4=malganis |t2h5=arthas\n\t\t<!-- Hero bans -->\n\t\t|t1b1=liming |t1b2=medivh |t1b3=uther\n\t\t|t2b1=zarya |t2b2=deathwing |t2b3=thrall\n    }}\n"
+       }
+      }
+     }
+    ]
+   },
+   {
+    "pageid": 33747,
+    "ns": 0,
+    "title": "Copium Cup",
+    "revisions": [
+     {
+      "revid": 340134,
+      "parentid": 340091,
+      "slots": {
+       "main": {
+        "contentmodel": "wikitext",
+        "contentformat": "text/x-wiki",
+        "content": "{{Infobox league\n|name=Copium Cup\n|shortname=CC\n|tickername=Copium Cup\n|image=\n|series=EC\n|organizer=Raven Court|organizer-link=https://raven-court.com/\n|server=Europe\n|type=Online\n|country=Europe\n|prizepool=500\n|localcurrency=eur\n|sdate=2026-10-03\n|edate=2026-10-04\n|liquipediatier=2\n|web=https://raven-court.com/\n|discord=EpgEauXgK7\n|toornament=2567366089147078655\n|team_number=5\n|bg1=Alterac Pass\n|bg2=Battlefield of Eternity\n|bg3=Braxis Holdout\n|bg4=Dragon Shire\n|bg5=Infernal Shrines\n|bg6=Sky Temple\n|bg7=Tomb of the Spider Queen\n|bg8=Towers of Doom\n|next=\n}}\n|map1={{Map|map=Sky Temple\n\t\t|team1side=blue |team2side=red |winner=2\n\t\t|length=14:47\n\t\t<!-- Hero picks -->\n\t\t|t1h1=hogger |t1h2=brightwing |t1h3=hanzo |t1h4=arthas |t1h5=imperius\n\t\t|t2h1=garrosh |t2h2=xalatath |t2h3=dehaka |t2h4=rehgar |t2h5=lunara\n\t\t<!-- Hero bans -->\n\t\t|t1b1=falstad |t1b2=johanna |t1b3=blaze\n\t\t|t2b1=sylvanas |t2b2=yrel |t2b3=maiev\n    }}\n|map2={{Map|map=Dragon Shire\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=22:37\n\t\t<!-- Hero picks -->\n\t\t|t1h1=xalatath |t1h2=johanna |t1h3=dehaka |t1h4=falstad |t1h5=malfurion\n\t\t|t2h1=blaze |t2h2=brightwing |t2h3=stitches |t2h4=medivh |t2h5=lunara\n\t\t<!-- Hero bans -->\n\t\t|t1b1=hogger |t1b2=yrel |t1b3=liming\n\t\t|t2b1=tlv |t2b2=sylvanas |t2b3=anduin\n    }}\n|map3={{Map|map=Alterac Pass\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=16:20\n\t\t<!-- Hero picks -->\n\t\t|t1h1=falstad |t1h2=blaze |t1h3=anubarak |t1h4=brightwing |t1h5=liming\n\t\t|t2h1=xalatath |t2h2=garrosh |t2h3=dva |t2h4=thrall |t2h5=anduin\n\t\t<!-- Hero bans -->\n\t\t|t1b1=hogger |t1b2=yrel |t1b3=rehgar\n\t\t|t2b1=sylvanas |t2b2=tlv |t2b3=tyrael\n    }}\n|map4={{Map|map=Towers of Doom\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=14:44\n\t\t<!-- Hero picks -->\n\t\t|t1h1=falstad |t1h2=stitches |t1h3=uther |t1h4=zeratul |t1h5=alarak\n\t\t|t2h1=xalatath |t2h2=tyrael |t2h3=tlv |t2h4=thrall |t2h5=rehgar\n\t\t<!-- Hero bans -->\n\t\t|t1b1=hogger |t1b2=yrel |t1b3=anduin\n\t\t|t2b1=brightwing |t2b2=sylvanas |t2b3=dehaka\n    }}\n|map5={{Map|map=Towers of Doom\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=14:24\n\t\t<!-- Hero picks -->\n\t\t|t1h1=xalatath |t1h2=tyrael |t1h3=blaze |t1h4=anduin |t1h5=genji\n\t\t|t2h1=liming |t2h2=brightwing |t2h3=tlv |t2h4=etc |t2h5=sylvanas\n\t\t<!-- Hero bans -->\n\t\t|t1b1=stitches |t1b2=falstad |t1b3=alarak\n\t\t|t2b1=hogger |t2b2=yrel |t2b3=tracer\n    }}\n|map6={{Map|map=Alterac Pass\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=16:47\n\t\t<!-- Hero picks -->\n\t\t|t1h1=blaze |t1h2=brightwing |t1h3=hanzo |t1h4=anubarak |t1h5=genji\n\t\t|t2h1=xalatath |t2h2=tyrael |t2h3=sylvanas |t2h4=malthael |t2h5=anduin\n\t\t<!-- Hero bans -->\n\t\t|t1b1=falstad |t1b2=zeratul |t1b3=samuro\n\t\t|t2b1=hogger |t2b2=yrel |t2b3=tracer\n    }}\n|map7={{Map|map=Sky Temple\n\t\t|team1side=blue |team2side=red |winner=1\n\t\t|length=25:21\n\t\t<!-- Hero picks -->\n\t\t|t1h1=blaze |t1h2=brightwing |t1h3=tyrael |t1h4=hanzo |t1h5=chen\n\t\t|t2h1=xalatath |t2h2=dehaka |t2h3=johanna |t2h4=genji |t2h5=uther\n\t\t<!-- Hero bans -->\n\t\t|t1b1=alarak |t1b2=samuro |t1b3=anduin\n\t\t|t2b1=yrel |t2b2=hogger |t2b3=falstad\n    }}\n|map8={{Map|map=Sky Temple\n\t\t|team1side=blue |team2side=red |winner=2\n\t\t|length=13:29\n\t\t<!-- Hero picks -->\n\t\t|t1h1=falstad |t1h2=brightwing |t1h3=tlv |t1h4=tyrael |t1h5=probius\n\t\t|t2h1=xalatath |t2h2=dehaka |t2h3=johanna |t2h4=maiev |t2h5=uther\n\t\t<!-- Hero bans -->\n\t\t|t1b1=sgt |t1b2=yrel |t1b3=rehgar\n\t\t|t2b1=sylvanas |t2b2=hogger |t2b3=blaze\n    }}\n"
+       }
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

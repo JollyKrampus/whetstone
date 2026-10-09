@@ -1,0 +1,117 @@
+{
+    "RotationHero": {
+        "Heroes": [
+            {
+                "ID": "li-li",
+                "Name": "Li Li",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/li-li",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/li-li.png"
+            },
+            {
+                "ID": "etc",
+                "Name": "E.T.C.",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/etc",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/etc.png"
+            },
+            {
+                "ID": "zagara",
+                "Name": "Zagara",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/zagara",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/zagara.png"
+            },
+            {
+                "ID": "the-butcher",
+                "Name": "The Butcher",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/the-butcher",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/the-butcher.png"
+            },
+            {
+                "ID": "kaelthas",
+                "Name": "Kael'thas",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/kaelthas",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/kaelthas.png"
+            },
+            {
+                "ID": "artanis",
+                "Name": "Artanis",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/artanis",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/artanis.png"
+            },
+            {
+                "ID": "sylvanas",
+                "Name": "Sylvanas",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/sylvanas",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/sylvanas.png"
+            },
+            {
+                "ID": "diablo",
+                "Name": "Diablo",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/diablo",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/diablo.png"
+            },
+            {
+                "ID": "lunara",
+                "Name": "Lunara",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/lunara",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/lunara.png"
+            },
+            {
+                "ID": "whitemane",
+                "Name": "Whitemane",
+                "ReqLevel": 0,
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/whitemane",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/whitemane.png"
+            },
+            {
+                "ID": "rehgar",
+                "Name": "Rehgar",
+                "ReqLevel": "?",
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/rehgar",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/rehgar.png"
+            },
+            {
+                "ID": "azmodan",
+                "Name": "Azmodan",
+                "ReqLevel": "?",
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/azmodan",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/azmodan.png"
+            },
+            {
+                "ID": "yrel",
+                "Name": "Yrel",
+                "ReqLevel": "?",
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/yrel",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/yrel.png"
+            },
+            {
+                "ID": "samuro",
+                "Name": "Samuro",
+                "ReqLevel": "?",
+                "URL": "https:\/\/nexuscompendium.com\/heroes\/samuro",
+                "ImageURL": "https:\/\/nexuscompendium.com\/images\/portraits\/samuro.png"
+            }
+        ],
+        "StartDate": "2026-10-01",
+        "EndDate": "2026-10-08",
+        "Timespan": "1 week",
+        "AllHeroesFree": false,
+        "URL": "https:\/\/nexuscompendium.com\/rotations\/2026-10-01"
+    },
+    "Ranked": {
+        "ID": "2026-season-3",
+        "Name": "2026 Season 3",
+        "StartDate": "2026-10-02",
+        "EndDate": "2027-02-02",
+        "Timespan": "18 weeks",
+        "URL": "https:\/\/nexuscompendium.com\/ranked\/2026-season-3"
+    }
+}

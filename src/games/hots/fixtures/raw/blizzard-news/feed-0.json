@@ -1,0 +1,41 @@
+{
+ "contentItems": [
+  {
+   "contentType": "blogs",
+   "properties": {
+    "newsId": "24303007",
+    "title": "Heroes of the Storm Live Patch Notes - September 28, 2026",
+    "lastUpdated": "2026-09-28T19:35:00Z",
+    "newsUrl": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
+    "category": "News"
+   }
+  },
+  {
+   "contentType": "blogs",
+   "properties": {
+    "newsId": "24303314",
+    "title": "Xal’atath has joined Heroes of the Storm!",
+    "lastUpdated": "2026-09-28T17:07:00Z",
+    "newsUrl": "https://news.blizzard.com/en-us/article/24303314/xalatath-has-joined-heroes-of-the-storm",
+    "category": "News"
+   }
+  },
+  {
+   "contentType": "blogs",
+   "properties": {
+    "newsId": "24306095",
+    "title": "Heroes of the Storm PTR Patch Notes - September 14, 2026",
+    "lastUpdated": "2026-09-14T17:45:00Z",
+    "newsUrl": "https://news.blizzard.com/en-us/article/24306095/heroes-of-the-storm-ptr-patch-notes-september-14-2026",
+    "category": "News"
+   }
+  }
+ ],
+ "pagination": {
+  "offset": 0,
+  "limit": 15,
+  "feedOffset": 0,
+  "feedLimit": 15,
+  "hasNextPage": false
+ }
+}
