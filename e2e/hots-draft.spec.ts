@@ -86,7 +86,8 @@ test.describe('Storm League draft', () => {
     await expect(stepTitle(page)).toHaveText('Your pick');
     await expect(tile(page, 'chogall')).toHaveAttribute('aria-disabled', 'true');
     await expect(tile(page, 'chogall')).toContainText('Needs 2 picks');
-    await tile(page, 'chogall').click();
+    // aria-disabled tiles stay operable so they can explain themselves (force: Playwright treats them as disabled).
+    await tile(page, 'chogall').click({ force: true });
     await expect(page.locator('#dt-pick-msg')).toContainText('6, 8, 12 or 14');
     await expect(page.locator('.tp--a .tp-slot--filled')).toHaveCount(0);
     await expect(page.locator('.dt-now .sg-list [data-hero="chogall"]')).toHaveCount(0);
@@ -110,15 +111,17 @@ test.describe('Storm League draft', () => {
     await expect(page.locator('.sg-modes__why')).toContainText('need match statistics');
 
     const first = page.locator('.dt-now .sg-item').first();
-    const name = (await first.locator('.sg-item__name').innerText()).replace('Rank 1: ', '').trim();
+    const name = (await first.locator('.sg-item__name').innerText()).replace(/^Rank \d+:\s*/, '').trim();
     await first.getByRole('button', { name: `Ban ${name}` }).click();
     await expect(page.locator('.tp--a .tp__bans')).toContainText(name);
     await expect(stepTitle(page)).toBeFocused();
 
     // The breakdown opens on tap and explains the score.
-    const why = page.locator('.dt-now .sg-item').first().getByRole('button', { name: 'Why this score?' });
+    const why = page.locator('.dt-now .sg-item').first().locator('.sg-item__why');
+    await expect(why).toHaveText('Why this score?');
     await why.click();
     await expect(why).toHaveAttribute('aria-expanded', 'true');
+    await expect(why).toHaveText('Hide breakdown');
     await expect(page.locator('.sg-break').first()).toContainText('Total');
 
     await page.getByRole('button', { name: 'Undo' }).click();
@@ -147,7 +150,7 @@ test.describe('Storm League draft', () => {
     await other.goto(url);
     await ready(other);
     await expect(other.locator('#dt-map')).toHaveValue('towers-of-doom');
-    await expect(other.locator('.dt-board')).toHaveText(board);
+    await expect.poll(() => other.locator('.dt-board').innerText()).toBe(board);
     await expect(other.locator('.dt-step__count')).toHaveText('Step 9 of 16');
 
     // A doctored link keeps the longest legal prefix and says so.
@@ -176,9 +179,12 @@ test.describe('Storm League draft', () => {
     await expect(page.locator('.dt-picker button[data-hero]:focus')).toHaveAttribute('data-hero', 'Anub');
     await page.keyboard.press('Enter');
     await expect(page.locator('.tp--b .tp__bans')).toContainText("Anub'arak");
-    // Alias search ("li ming" style nicknames).
+    // Alias search: nicknames rank their hero first; a unique nickname finds only that hero.
     await search.fill('ming');
+    await expect(page.locator('.dt-picker button[data-hero]').first()).toHaveAttribute('data-hero', 'Wiza');
+    await search.fill('slapathur');
     await expect(page.locator('.dt-picker button[data-hero]')).toHaveCount(1);
+    await expect(page.locator('.dt-picker button[data-hero]')).toHaveAttribute('data-hero', 'Abat');
     expect(errors).toEqual([]);
   });
 });
