@@ -1,0 +1,66 @@
+hero: cassia
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Her damage talents (Charged Strikes, Martial Law, Titan's Revenge) all pay off through basic attacks, so blinds blunt her badly."
+  - tag: peel
+    why: "Blinding Light blinds attackers in an area for 2 seconds, shutting down divers who rely on basic attacks."
+counters:
+  # --- strong against ---
+  - a: cassia
+    b: artanis
+    why: "Blinding Light blinds Artanis for 2 seconds, so Twin Blades misses and Shield Overload loses its attack-based cooldown reduction."
+    evidence: ["Blinding Light", "Twin Blades", "Shield Overload"]
+    confidence: medium
+  - a: cassia
+    b: illidan
+    why: "Blinding Light makes Illidan's attacks miss for 2 seconds, removing both his damage and the healing Betrayer's Thirst draws from it."
+    evidence: ["Blinding Light", "Betrayer's Thirst"]
+    confidence: medium
+  - a: cassia
+    b: valla
+    why: "Valla's damage is basic attacks; Blinding Light negates them for 2 seconds while Cassia deals 15% bonus damage to the blinded Valla."
+    evidence: ["Blinding Light", "Hatred"]
+    confidence: medium
+  - a: cassia
+    b: thebutcher
+    why: "Butcher's Brand only heals through basic attacks, so a Blinding Light on him stops both his damage and his sustain."
+    evidence: ["Blinding Light", "Butcher's Brand"]
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: cassia
+    why: "Shield Glare blinds Cassia's basic attacks for 1.5 seconds, and Iron Skin's Unstoppable shield shrugs off Valkyrie's pull."
+    evidence: ["Shield Glare", "Iron Skin", "Valkyrie"]
+    confidence: medium
+  - a: lili
+    b: cassia
+    why: "Blinding Wind blinds Cassia for 1.5 seconds on a 12-second cooldown, wasting the attacks her damage is built on."
+    evidence: ["Blinding Wind"]
+    confidence: low
+  - a: kaelthas
+    b: cassia
+    why: "Gravity Lapse's stun stops Cassia moving, so Avoidance's armor drains away, and Flamestrike lands on her while she stands still."
+    evidence: ["Gravity Lapse", "Flamestrike", "Avoidance"]
+    confidence: low
+  - a: mei
+    b: cassia
+    why: "Snow Blind blinds Cassia for 1.75 seconds, and Blizzard's stun pins her in place so Avoidance's armor fades."
+    evidence: ["Snow Blind", "Blizzard", "Avoidance"]
+    confidence: low
+synergies:
+  - a: cassia
+    b: muradin
+    why: "Storm Bolt's stun makes Martial Law deal 3% max health per attack and gives Valkyrie a stationary target to pull."
+    evidence: ["Storm Bolt", "Martial Law", "Valkyrie"]
+    confidence: medium
+  - a: cassia
+    b: rehgar
+    why: "Bloodlust's 40% attack speed and lifesteal multiply Cassia's basic-attack damage and her Ring of the Leech sustain."
+    evidence: ["Bloodlust", "Ring of the Leech"]
+    confidence: medium
+  - a: cassia
+    b: tyrande
+    why: "Hunter's Mark reduces the target's armor by 15 and reveals them, boosting every one of Cassia's basic attacks."
+    evidence: ["Hunter's Mark", "Martial Law"]
+    confidence: medium

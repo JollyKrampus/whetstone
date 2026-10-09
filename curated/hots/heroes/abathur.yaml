@@ -1,0 +1,76 @@
+hero: abathur
+reviewedFor: "2.57"
+traits:
+  - tag: vulnerable-body
+    why: "While he steers a Symbiote, Abathur's own 685-health body sits alone and nearly defenceless, so hunting it down is the standard answer to him."
+  - tag: global
+    why: "Symbiote can be cast on any allied hero or structure and Deep Tunnel relocates him, so he affects any lane or fight without walking there."
+  - tag: split-push
+    why: "Locust Strain waves and an evolved Monstrosity keep a side lane pushed while Abathur himself is helping a fight elsewhere."
+counters:
+  # --- strong against ---
+  - a: abathur
+    b: zagara
+    why: "Symbiote can sit on a threatened tower, so Abathur answers Zagara's siege in whichever lane she picks; Spike Burst and Stab clean up Roachlings and Hunter Killers before they chip the structure down."
+    evidence: ["Symbiote", "Spike Burst", "Stab", "Infested Drop", "Hunter Killer"]
+    conditions: "Defending structures against a summon-led push rather than a straight teamfight."
+    confidence: low
+  - a: abathur
+    b: thelostvikings
+    why: "Toxic Nests stacked in the side lanes reveal and chunk lone Vikings who are quietly soaking there, and Locusts keep contesting the lanes the Vikings want to hold."
+    evidence: ["Toxic Nest", "Prolific Dispersal", "Locust Strain"]
+    conditions: "Prolific Dispersal at level 4; both teams playing a lane-soak game."
+    confidence: low
+  - a: abathur
+    b: murky
+    why: "Murky wants to farm a lane alone with only 730 health; Toxic Nests reveal him and take big chunks, and with Slapathur Abathur's own attacks stun him every 6 seconds while Locusts hold the wave."
+    evidence: ["Toxic Nest", "Slapathur", "Locust Strain", "Spawn Egg"]
+    conditions: "Slapathur at level 4, or heavy nest coverage in Murky's lane."
+    confidence: low
+  # --- weak against ---
+  - a: zeratul
+    b: abathur
+    why: "Permanent Cloak lets Zeratul walk straight up to Abathur's unguarded body, and Cleave plus Singularity Spike kill it before Deep Tunnel's 30-second cooldown can get him out."
+    evidence: ["Permanent Cloak", "Cleave", "Singularity Spike", "Deep Tunnel"]
+    confidence: high
+  - a: nova
+    b: abathur
+    why: "Nova scouts the bushes behind the lines from stealth and deletes Abathur's 685-health body with Snipe and a few basic attacks before he can react."
+    evidence: ["Permanent Cloak", "Snipe", "Pinning Shot"]
+    confidence: high
+  - a: illidan
+    b: abathur
+    why: "Dive and Sweeping Strike let Illidan reach a hidden Abathur quickly, and Betrayer's Thirst keeps his cooldowns rolling on a target whose only escape is Deep Tunnel."
+    evidence: ["Dive", "Sweeping Strike", "Betrayer's Thirst", "Deep Tunnel"]
+    confidence: medium
+  - a: valeera
+    b: abathur
+    why: "Vanish lets Valeera approach unseen, and her stealth opener locks Abathur in place long enough for Sinister Strike and Eviscerate to finish a body with almost no health."
+    evidence: ["Vanish", "Sinister Strike", "Eviscerate"]
+    confidence: medium
+  - a: tracer
+    b: abathur
+    why: "Three Blink charges let Tracer cover ground fast to find Abathur's body, and her nonstop basic attacks plus Melee kill it before his team can rotate to help."
+    evidence: ["Blink", "Melee", "Reload"]
+    confidence: medium
+  - a: genji
+    b: abathur
+    why: "Cyber Agility hops walls straight to where Abathur hides, and a Shuriken volley plus Swift Strike is more than enough burst for his small health pool."
+    evidence: ["Cyber Agility", "Shuriken", "Swift Strike"]
+    confidence: medium
+synergies:
+  - a: abathur
+    b: illidan
+    why: "A Symbiote on a diving Illidan adds Spike Burst and Stab damage to every jump, and Carapace shields keep him alive deep in the enemy team."
+    evidence: ["Symbiote", "Carapace", "Spike Burst", "Dive"]
+    confidence: medium
+  - a: abathur
+    b: valla
+    why: "Ultimate Evolution clones Valla with 20% bonus attack damage, giving the team a second basic-attack carry whose Hatred stacks ramp up just like the original."
+    evidence: ["Ultimate Evolution", "Hatred"]
+    confidence: medium
+  - a: abathur
+    b: sonya
+    why: "Carapace shields and Soma Transference healing stack with Whirlwind's lifesteal, so a hatted Sonya can stay in melee range far longer than normal."
+    evidence: ["Carapace", "Soma Transference", "Whirlwind"]
+    confidence: medium

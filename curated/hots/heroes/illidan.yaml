@@ -1,0 +1,85 @@
+hero: illidan
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Dive and Sweeping Strike give him repeated gap closers on short cooldowns, and Dive flips him past a target to reach whoever stands behind it."
+  - tag: aa-reliant
+    why: "Most of his damage, and all of Betrayer's Thirst healing and cooldown reduction, comes from Basic Attacks, so anything that stops his attacks stops Illidan."
+counters:
+  - a: illidan
+    b: sgthammer
+    why: "Siege Mode keeps Sgt. Hammer in place, and Dive plus Sweeping Strike reach her past the frontline; her only peel is a single Concussive Blast knockback that Illidan can Dive back through."
+    evidence: ["Siege Mode", "Concussive Blast", "Dive", "Sweeping Strike"]
+    confidence: medium
+  - a: illidan
+    b: raynor
+    why: "Raynor's damage is almost all Basic Attacks, so Evasion blanks his output for 2.5 seconds while Illidan duels him, and Penetrating Round is his only tool to push Illidan away."
+    evidence: ["Evasion", "Give 'Em Some Pepper", "Penetrating Round"]
+    confidence: medium
+  - a: illidan
+    b: valla
+    why: "Valla builds Hatred only by landing Basic Attacks; Evasion makes those attacks miss and stalls her ramp, and Dive keeps up with Vault."
+    evidence: ["Evasion", "Hatred", "Vault", "Dive"]
+    confidence: medium
+  - a: illidan
+    b: zuljin
+    why: "Zul'jin's Berserker attack speed and Grievous Throw bonus are paid out through Basic Attacks, which Evasion denies, and he has no dash to break away from a Dive chain."
+    evidence: ["Evasion", "Berserker", "Grievous Throw", "Dive"]
+    confidence: medium
+  - a: illidan
+    b: ltmorales
+    why: "Lt. Morales has no movement ability and has to stand within Healing Beam range of her target, so repeated Dives keep Illidan on her; Displacement Grenade is her one knockback."
+    evidence: ["Healing Beam", "Displacement Grenade", "Dive"]
+    confidence: medium
+  - a: johanna
+    b: illidan
+    why: "Shield Glare Blinds Illidan for 1.5 seconds, so his Basic Attacks miss and Betrayer's Thirst gives no healing or cooldown reduction, and Iron Skin then absorbs his follow-up."
+    evidence: ["Shield Glare", "Iron Skin", "Betrayer's Thirst"]
+    confidence: high
+  - a: lili
+    b: illidan
+    why: "Blinding Wind auto-targets the nearest enemies, so a diving Illidan is almost always hit, and the Blind cuts off the Basic Attacks that fuel Betrayer's Thirst."
+    evidence: ["Blinding Wind", "Betrayer's Thirst"]
+    confidence: medium
+  - a: arthas
+    b: illidan
+    why: "Frozen Tempest stacks up to 40% Attack Speed and Movement Speed reduction on nearby enemies and Howling Blast roots him; a slowed, rooted Illidan cannot heal through his attacks."
+    evidence: ["Frozen Tempest", "Howling Blast", "Rime", "Betrayer's Thirst"]
+    conditions: "Rime adds stored Physical Armor charges against his hits."
+    confidence: medium
+  - a: muradin
+    b: illidan
+    why: "Thunder Clap cuts Illidan's Attack Speed by 30% (50% with Reverberation) and Storm Bolt stuns him mid-Dive; Imposing Presence slows his attacks even further."
+    evidence: ["Thunder Clap", "Reverberation", "Storm Bolt", "Imposing Presence"]
+    confidence: medium
+  - a: mei
+    b: illidan
+    why: "Snow Blind Blinds every enemy in its area for 1.75 seconds and Blizzard ends in a stun; both shut off the attack chain Illidan needs to keep himself alive."
+    evidence: ["Snow Blind", "Blizzard", "Betrayer's Thirst"]
+    confidence: medium
+  - a: cassia
+    b: illidan
+    why: "Blinding Light Blinds an area for 2 seconds and Avoidance gives Cassia up to 30 Armor while she moves, so Illidan's physical attacks either miss or hit a kiting, armored target."
+    evidence: ["Blinding Light", "Avoidance"]
+    confidence: medium
+synergies:
+  - a: abathur
+    b: illidan
+    why: "Carapace shields and heals Illidan mid-dive, and Adrenal Overload adds 25% Attack Speed, which also speeds up Betrayer's Thirst cooldown reduction."
+    evidence: ["Symbiote", "Carapace", "Adrenal Overload", "Betrayer's Thirst"]
+    confidence: medium
+  - a: illidan
+    b: kharazim
+    why: "Kharazim can Radiant Dash in after Illidan, and Divine Palm or Cleansing Touch covers the moment Illidan gets caught by burst or a stun."
+    evidence: ["Radiant Dash", "Divine Palm", "Cleansing Touch"]
+    confidence: medium
+  - a: illidan
+    b: rehgar
+    why: "Bloodlust adds Attack Speed and lifesteal to Illidan's Basic Attacks, and Lightning Shield placed on him deals area damage while he sticks to a target."
+    evidence: ["Bloodlust", "Lightning Shield", "Betrayer's Thirst"]
+    confidence: medium
+  - a: illidan
+    b: tyrael
+    why: "Judgment stuns a target for 1.5 seconds so Illidan can land a full attack chain, and Sanctification protects him after he commits deep."
+    evidence: ["Judgment", "Sanctification", "Dive"]
+    confidence: medium

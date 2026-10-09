@@ -1,0 +1,56 @@
+hero: gazlowe
+reviewedFor: "2.57"
+traits:
+  - tag: waveclear
+    why: "Deth Lazor's long line and Rock-It! Turrets clear minion waves quickly, letting him hold a lane alone."
+  - tag: immobile
+    why: "Gazlowe has no dash or blink; Robo-Goblin's Unstoppable is his only way out of control effects."
+counters:
+  # --- strong against ---
+  - a: gazlowe
+    b: zagara
+    why: "Deth Lazor's long line and Rock-It! Turrets clear Zagara's Roachlings and Hunter Killers, and Deth Lazor heals Gazlowe while it does."
+    evidence: ["Deth Lazor", "Rock-It! Turret", "Infested Drop", "Hunter Killer"]
+    confidence: low
+  - a: gazlowe
+    b: thelostvikings
+    why: "Deth Lazor hits every Viking standing in its line, and a Rock-It! Turret punishes a lone Viking soaking near it."
+    evidence: ["Deth Lazor", "Rock-It! Turret"]
+    confidence: low
+  - a: gazlowe
+    b: sgthammer
+    why: "A sieged Hammer stands still for Xplodium Charge's 1.25-second fuse, and the stun lets Deth Lazor and turrets finish her."
+    evidence: ["Xplodium Charge", "Deth Lazor", "Siege Mode"]
+    confidence: low
+  # --- weak against ---
+  - a: tracer
+    b: gazlowe
+    why: "Tracer Blinks out of Xplodium Charge before it detonates and dodges Deth Lazor's windup, then out-damages Gazlowe from range."
+    evidence: ["Blink", "Xplodium Charge", "Deth Lazor"]
+    confidence: low
+  - a: genji
+    b: gazlowe
+    why: "Cyber Agility and Swift Strike dodge Xplodium Charge's fuse, and Deflect blocks Deth Lazor."
+    evidence: ["Cyber Agility", "Swift Strike", "Deflect", "Xplodium Charge", "Deth Lazor"]
+    confidence: low
+  - a: lunara
+    b: gazlowe
+    why: "Lunara kites Gazlowe with Crippling Spores' slow and keeps Nature's Toxin ticking from range, and he has no gap-closer to reach her."
+    evidence: ["Crippling Spores", "Nature's Toxin"]
+    confidence: low
+synergies:
+  - a: gazlowe
+    b: kaelthas
+    why: "Grav-O-Bomb 3000 pulls enemies together and stuns them, setting up Flamestrike and Living Bomb."
+    evidence: ["Grav-O-Bomb 3000", "Flamestrike", "Living Bomb"]
+    confidence: medium
+  - a: gazlowe
+    b: jaina
+    why: "Grav-O-Bomb 3000 clumps heroes for Blizzard and Ring of Frost."
+    evidence: ["Grav-O-Bomb 3000", "Blizzard", "Ring of Frost"]
+    confidence: medium
+  - a: gazlowe
+    b: zarya
+    why: "Graviton Surge holds enemies in place for Xplodium Charge's 1.25-second fuse."
+    evidence: ["Graviton Surge", "Xplodium Charge"]
+    confidence: medium

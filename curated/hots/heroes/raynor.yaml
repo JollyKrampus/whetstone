@@ -1,0 +1,72 @@
+hero: raynor
+reviewedFor: "2.57"
+traits:
+  - tag: aa-reliant
+    why: "Nearly all of Raynor's damage is basic attacks: Inspire boosts his attack speed and Give 'Em Some Pepper procs every few hits."
+  - tag: immobile
+    why: "Raynor has no dash or blink; Penetrating Round's knockback is his only self-peel, so divers that land on him are hard to shake."
+counters:
+  # --- strong against ---
+  - a: raynor
+    b: ragnaros
+    why: "Penetrating Round knocks back harder at close range and slows, so a dash-less melee like Ragnaros, whose only speed boost is Blast Wave, struggles to stay on Raynor while Adrenaline Rush out-sustains him."
+    evidence: ["Penetrating Round", "Adrenaline Rush", "Blast Wave"]
+    confidence: low
+  - a: raynor
+    b: murky
+    why: "Raynor's rapid basic attacks and Give 'Em Some Pepper splash shred Murky's 730 Health and his Pufferfish, and Adrenaline Rush lets Raynor ignore Murky's lane harassment."
+    evidence: ["Give 'Em Some Pepper", "Adrenaline Rush", "Pufferfish"]
+    confidence: medium
+  - a: raynor
+    b: stitches
+    why: "Hook drags Raynor in, but Penetrating Round's knockback is strongest at point-blank and shoves Stitches back out, while Bounty Hunter's 3% max-Health bonus punishes his 3020 Health."
+    evidence: ["Penetrating Round", "Bounty Hunter", "Hook"]
+    conditions: "Bounty Hunter at level 16 for the max-Health damage."
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: raynor
+    why: "Shield Glare blinds Raynor for 1.5 seconds, wiping out his basic-attack damage and stalling the Adrenaline Rush cooldown he refunds by attacking."
+    evidence: ["Shield Glare", "Adrenaline Rush"]
+    confidence: medium
+  - a: illidan
+    b: raynor
+    why: "Evasion makes every Raynor basic attack miss for 2.5 seconds while Illidan heals off him with Betrayer's Thirst, and Raynor has no dash to leave the dive."
+    evidence: ["Evasion", "Betrayer's Thirst", "Inspire"]
+    confidence: medium
+  - a: cassia
+    b: raynor
+    why: "Blinding Light blinds Raynor for 2 seconds and Cassia deals bonus damage to blinded targets, while Avoidance's Armor while she moves blunts the basic attacks he relies on."
+    evidence: ["Blinding Light", "Avoidance"]
+    confidence: medium
+  - a: xul
+    b: raynor
+    why: "Cursed Strikes cuts the attack speed of Heroes it hits by 40%, gutting Raynor's Inspire-fuelled damage once Xul reaches him, and Bone Prison's root helps him get there."
+    evidence: ["Cursed Strikes", "Bone Prison", "Inspire"]
+    confidence: low
+  - a: zeratul
+    b: raynor
+    why: "Zeratul cloaks in, lands Singularity Spike and keeps up with Vorpal Blade; Raynor's only answer is Penetrating Round's knockback, which Vorpal Blade simply undoes."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Vorpal Blade", "Penetrating Round"]
+    confidence: medium
+synergies:
+  - a: ltmorales
+    b: raynor
+    why: "Stim Drone's 75% Attack Speed for 10 seconds stacks with Inspire, turning Raynor into a huge damage source while Healing Beam keeps him upright."
+    evidence: ["Stim Drone", "Healing Beam", "Inspire"]
+    confidence: medium
+  - a: raynor
+    b: rehgar
+    why: "Bloodlust adds 40% Attack Speed and basic-attack lifesteal, which multiplies Raynor's sustained damage and makes him far harder to burst."
+    evidence: ["Bloodlust", "Inspire", "Give 'Em Some Pepper"]
+    confidence: medium
+  - a: raynor
+    b: tyrande
+    why: "Hunter's Mark strips 15 Armor and Trueshot Aura adds 40% Attack Damage, both paying off most on a basic-attack carry like Raynor."
+    evidence: ["Hunter's Mark", "Trueshot Aura", "Give 'Em Some Pepper"]
+    confidence: medium
+  - a: johanna
+    b: raynor
+    why: "Shield Glare and Condemn peel divers off an immobile Raynor, letting him keep shooting from behind Johanna's frontline."
+    evidence: ["Shield Glare", "Condemn", "Penetrating Round"]
+    confidence: low

@@ -1,0 +1,56 @@
+hero: thrall
+reviewedFor: "2.57"
+traits:
+  - tag: engage
+    why: "Sundering's long-line stun shoves enemies aside and opens fights from range."
+  - tag: dive
+    why: "Windfury's speed burst and Feral Spirit's root let Thrall run down and pin a fleeing target."
+counters:
+  # --- strong against ---
+  - a: thrall
+    b: thelostvikings
+    why: "Chain Lightning bounces between nearby enemies, so grouped Vikings all take damage, and Crash Lightning rewards hitting several Heroes with one cast."
+    evidence: ["Chain Lightning", "Crash Lightning"]
+    confidence: low
+  - a: thrall
+    b: sgthammer
+    why: "Windfury's 30% speed burst and Feral Spirit's root let Thrall reach and pin a sieging Hammer, who can't relocate without dropping Siege Mode."
+    evidence: ["Windfury", "Feral Spirit", "Siege Mode"]
+    confidence: low
+  - a: thrall
+    b: probius
+    why: "Feral Spirit roots Probius and Windfury closes the distance; with 1260 Health and a Worker Rush that breaks on damage, he can't get away."
+    evidence: ["Feral Spirit", "Windfury", "Worker Rush"]
+    confidence: low
+  # --- weak against ---
+  - a: johanna
+    b: thrall
+    why: "Shield Glare blinds Thrall during Windfury, wasting its three fast attacks and the Frostwolf Resilience stacks they would generate."
+    evidence: ["Shield Glare", "Windfury", "Frostwolf Resilience"]
+    confidence: low
+  - a: xul
+    b: thrall
+    why: "Cursed Strikes cuts Thrall's attack speed by 40%, blunting Windfury's burst and slowing how fast he builds Frostwolf Resilience healing."
+    evidence: ["Cursed Strikes", "Windfury", "Frostwolf Resilience"]
+    confidence: low
+  - a: varian
+    b: thrall
+    why: "Parry negates Windfury's quick basic attacks for 1.25 seconds, and Taunt silences Thrall so he can't Feral Spirit or Chain Lightning for healing stacks."
+    evidence: ["Parry", "Taunt", "Windfury", "Frostwolf Resilience"]
+    confidence: low
+synergies:
+  - a: rehgar
+    b: thrall
+    why: "Lightning Shield on Thrall damages everyone around him as he dives with Windfury, and Bloodlust boosts his attack speed and sustain."
+    evidence: ["Lightning Shield", "Bloodlust", "Windfury"]
+    confidence: low
+  - a: kaelthas
+    b: thrall
+    why: "Sundering's 1-second stun along a long line holds enemies in place for Flamestrike and a spreading Living Bomb."
+    evidence: ["Sundering", "Flamestrike", "Living Bomb"]
+    confidence: medium
+  - a: thrall
+    b: zarya
+    why: "Graviton Surge groups enemies so Sundering's line stun and Earthquake's slowing pulses hit all of them."
+    evidence: ["Graviton Surge", "Sundering", "Earthquake"]
+    confidence: medium

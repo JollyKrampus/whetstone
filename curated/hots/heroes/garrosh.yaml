@@ -1,0 +1,63 @@
+hero: garrosh
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Armor Up gives him more armor as he loses health, so he gets harder to kill the longer he tanks."
+  - tag: engage
+    why: "Wrecking Ball throws an enemy hero into his team, starting the fight on Garrosh's terms."
+  - tag: peel
+    why: "Wrecking Ball can instead throw a diver away from a backliner."
+counters:
+  # --- strong against ---
+  - a: garrosh
+    b: sgthammer
+    why: "Wrecking Ball throws a sieged Hammer out of her firing position and into Garrosh's team."
+    evidence: ["Wrecking Ball", "Siege Mode"]
+    confidence: medium
+  - a: garrosh
+    b: kaelthas
+    why: "An immobile Kael'thas has no way back out after Wrecking Ball throws him into Garrosh's team."
+    evidence: ["Wrecking Ball"]
+    confidence: medium
+  - a: garrosh
+    b: illidan
+    why: "Wrecking Ball throws a diving Illidan into Garrosh's team, and Groundbreaker with Intimidation cuts his attack speed by 30%."
+    evidence: ["Wrecking Ball", "Groundbreaker", "Intimidation"]
+    confidence: low
+  - a: garrosh
+    b: chromie
+    why: "Wrecking Ball throws the immobile Chromie into Garrosh's team, where she has no tool to get back out."
+    evidence: ["Wrecking Ball"]
+    confidence: medium
+  # --- weak against ---
+  - a: anduin
+    b: garrosh
+    why: "When Wrecking Ball throws an ally into Garrosh's team, Leap of Faith pulls them straight back, and they are Unstoppable during the trip."
+    evidence: ["Leap of Faith", "Wrecking Ball"]
+    confidence: medium
+  - a: deathwing
+    b: garrosh
+    why: "Wrecking Ball can't throw an Unstoppable target and Warlord's Challenge's taunt doesn't stick, leaving Garrosh no way to control Deathwing."
+    evidence: ["Aspect of Death", "Wrecking Ball", "Warlord's Challenge"]
+    confidence: medium
+  - a: malthael
+    b: garrosh
+    why: "Reaper's Mark deals percent max-health damage every second, and Touch of Death halves the healing Garrosh gets from Bloodthirst."
+    evidence: ["Reaper's Mark", "Touch of Death", "Bloodthirst"]
+    confidence: medium
+synergies:
+  - a: alarak
+    b: garrosh
+    why: "Wrecking Ball throws a backliner next to Alarak, then Telekinesis pushes them deeper into his team while Discord Strike silences them."
+    evidence: ["Wrecking Ball", "Telekinesis", "Discord Strike"]
+    confidence: medium
+  - a: artanis
+    b: garrosh
+    why: "Phase Prism and Wrecking Ball both relocate enemy heroes, so together they can drag a backliner into the team twice in a row."
+    evidence: ["Phase Prism", "Wrecking Ball"]
+    confidence: medium
+  - a: garrosh
+    b: jaina
+    why: "Wrecking Ball throws its target into Blizzard or Ring of Frost, and the throw's slow keeps them there."
+    evidence: ["Wrecking Ball", "Blizzard", "Ring of Frost"]
+    confidence: medium
