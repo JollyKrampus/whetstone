@@ -129,7 +129,7 @@ export default function CardSearch({ shards, snapshot, sizes }: Props) {
 
   return (
     <div class="csearch">
-      <form class="card csearch__form" role="search" aria-label="Cards" onSubmit={submit}>
+      <form class="card csearch__form" role="search" aria-label="Cards" method="dialog" onSubmit={submit}>
         <label class="field" for="card-q">
           <span class="field__label">Search Arena cards</span>
           <span class="field__hint" id="card-q-hint">

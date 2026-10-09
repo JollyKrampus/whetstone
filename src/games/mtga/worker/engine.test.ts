@@ -177,6 +177,27 @@ describe('Engine tools', () => {
     expect(s.appliedText.startsWith('About\nName Boros Test')).toBe(true);
   });
 
+  it('applies only the chosen swaps', async () => {
+    const { e } = engine();
+    const s = await e.suggest({ text: BOROS, format: 'standard', mode: 'competitive', intensity: 'heavy', wildcards: null, keepCards: [], maxSwaps: 5, meta: null });
+    const first = s.swaps[0];
+    if (!first) return; // nothing to apply with this tiny pool
+    const r = await e.apply({ text: BOROS, swaps: [{ cut: first.cut, add: first.add, qty: first.qty }] });
+    expect(r.text).toContain(first.add);
+    for (const w of s.swaps.slice(1)) if (!BOROS.includes(w.add)) expect(r.text).not.toContain(w.add);
+    // Bad swaps are ignored rather than corrupting the list.
+    const same = await e.apply({ text: BOROS, swaps: [{ cut: 'Shock', add: 'Shock', qty: 99 }] });
+    expect(same.text).toBe(toArenaText(await e.resolve(BOROS)));
+  });
+
+  it('reports the rubric tier scale with the power rating', async () => {
+    const { e } = engine();
+    const r = await e.analyze({ text: BOROS, format: null, meta: null });
+    expect(r.power.scale.map((t) => t.tier)).toEqual([1, 2, 3, 4, 5]);
+    expect(r.power.scale.find((t) => t.tier === r.power.tier)?.label).toBe(r.power.label);
+    expect(r.power.lowConfidence).toBe(true);
+  });
+
   it('searches with Scryfall syntax and reports query errors', async () => {
     const { e } = engine();
     const r = await e.search({ query: 't:creature c:r mv<=1', format: 'standard', order: 'name', limit: 50 });

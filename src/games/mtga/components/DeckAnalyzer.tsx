@@ -75,6 +75,9 @@ export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHr
 
   // Visitor's saved meta lists and meta choice (and later edits from the Meta page in another tab).
   useEffect(() => {
+    // Keep anything typed into the server-rendered box before the island hydrated.
+    const early = textRef.current?.value ?? '';
+    if (early.trim()) setText(early);
     setMyLists(store.get(MY_LISTS_KEY, [], validateMyLists));
     setMetaChoice(store.get(META_CHOICE_KEY, 'auto', validChoice));
     return store.subscribe(MY_LISTS_KEY, (v) => setMyLists(validateMyLists(v) ?? []));
@@ -223,7 +226,7 @@ export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHr
   return (
     <div class={`analyzer${result ? ' analyzer--has-result' : ''}`}>
       <div class="analyzer__input">
-        <form class="card paste" onSubmit={analyze} aria-labelledby="paste-title" data-collapsed={result && !editing ? 'true' : undefined}>
+        <form class="card paste" method="dialog" onSubmit={analyze} aria-labelledby="paste-title" data-collapsed={result && !editing ? 'true' : undefined}>
           <div class="paste__head">
             <h2 id="paste-title" class="paste__title">
               Your deck

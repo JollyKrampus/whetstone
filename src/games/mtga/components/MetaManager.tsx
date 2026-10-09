@@ -354,7 +354,7 @@ export default function MetaManager({ shards, snapshot, deckHref, examples }: Pr
       </section>
 
       <div class="mymeta__tools">
-        <form class="card mymeta__form" ref={formRef} onSubmit={submit} aria-labelledby="addlist-title">
+        <form class="card mymeta__form" ref={formRef} method="dialog" onSubmit={submit} aria-labelledby="addlist-title">
           <h2 id="addlist-title" class="mymeta__ftitle">
             {draft.id ? 'Edit list' : 'Add a list'}
           </h2>

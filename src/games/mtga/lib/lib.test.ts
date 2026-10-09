@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { cardImageUrl, hasBackImage, scryfallCardUrl } from './images.ts';
 import { manaLabel, manaSymbols } from './mana.ts';
-import { curatedSelection, fromSnapshot, mySelection, newListId, sanitizeList, toFraction, toSnapshot, validateMyLists, type MyList } from './metaLists.ts';
+import { curatedSelection, fromSnapshot, mySelection, newListId, percentInput, sanitizeList, toFraction, toSnapshot, validateMyLists, type MyList } from './metaLists.ts';
 import { MAX_DECK_CHARS, decodeDeckText, deckCodec, deckHash, encodeDeckText, readDeckHash } from './share.ts';
 
 const DECK = 'About\nName Boros Test\n\nDeck\n4 Emberheart Challenger\n4 Lightning Strike\n20 Mountain\n\nSideboard\n2 Abrade';
@@ -88,6 +88,15 @@ describe('my meta lists', () => {
     expect(toFraction('7.5%')).toBe(0.075);
     expect(toFraction(-1)).toBeUndefined();
     expect(toFraction('abc')).toBeUndefined();
+  });
+
+  it('reads form fields as percentages, even below one percent', () => {
+    expect(percentInput('12.5')).toBe(0.125);
+    expect(percentInput('12,5 %')).toBe(0.125);
+    expect(percentInput('0.5')).toBe(0.005);
+    expect(percentInput('')).toBeUndefined();
+    expect(percentInput('101')).toBeUndefined();
+    expect(percentInput('lots')).toBeUndefined();
   });
 
   it('builds analyzer selections per format, never from example decks', () => {
