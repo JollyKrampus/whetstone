@@ -271,11 +271,14 @@ export class Engine {
     if (req.format && !STANDARD_POOL_FORMATS.has(req.format)) await this.ensure('arena');
     const deck = await this.resolve(req.text, req.fuzzy === true);
     this.requireCards(deck);
-    const idx = this.index!;
     const legality = FORMAT_IDS.map((f) => legalityView(f, validateDeck(deck, getFormat(f))));
     const format = req.format ?? autoFormat(deck, legality);
     const fmt = getFormat(format);
-    const meta = await this.metaContext(req.meta, idx);
+    const selection = req.meta ?? req.metaByFormat?.[format] ?? null;
+    // Meta lists of a wider format may need cards outside the Standard pool.
+    if (selection && !STANDARD_POOL_FORMATS.has(format)) await this.ensure('arena');
+    const idx = this.index!;
+    const meta = await this.metaContext(selection, idx);
     const asOf = asOfDate(idx);
     const analysis = analyzeDeck(deck, fmt);
     const rating = ratePower(deck, fmt, { asOf, ...(meta ? { meta } : {}) });
@@ -285,11 +288,11 @@ export class Engine {
     for (const e of all) cards[e.oracleId] = cardView(e.card);
 
     let metaView: MetaCompareView | null = null;
-    if (meta && req.meta) {
+    if (meta && selection) {
       const cmp = compareToMeta(deck, meta);
       const closest = cmp?.closest;
       const view: MetaCompareView = {
-        label: req.meta.label,
+        label: selection.label,
         lists: meta.lists.length,
         closest: closest
           ? {

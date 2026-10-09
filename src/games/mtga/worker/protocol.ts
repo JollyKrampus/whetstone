@@ -137,7 +137,10 @@ export interface AnalyzeRequest {
   text: string;
   /** null = pick the narrowest format the deck is legal in. */
   format: FormatId | null;
+  /** Meta lists to use whatever the format; wins over `metaByFormat`. */
   meta: MetaSelection | null;
+  /** Meta lists per format, used for the analyzed format (handy with auto-detection). */
+  metaByFormat?: Partial<Record<FormatId, MetaSelection>>;
   /** Ask Scryfall's fuzzy search for names the local index does not know. */
   fuzzy?: boolean;
 }
@@ -307,4 +310,4 @@ export function isProgress(m: WorkerMessage): m is WorkerProgress {
   return (m as WorkerProgress).type === 'progress';
 }
 
-export type { Role, Mode, Intensity, Rarity };
+export type { Analysis, Color, Dimension, Intensity, Issue, Mode, Rarity, Role, SearchOrder, SimCheck, SimReport, Swap, ValidationIssue, WildcardCounts, WildcardReport };
