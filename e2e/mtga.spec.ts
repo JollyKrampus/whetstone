@@ -185,7 +185,9 @@ test.describe('MTGA Limited ratings', () => {
     const errors = collectErrors(page);
     await page.goto('mtga/limited/');
     await expect(page.locator('[data-attribution="top"]')).toContainText('17Lands');
-    await page.locator('.lset__name a').first().click();
+    // Wait for the set page itself: ready() on the index (which has no islands) would pass at
+    // once and let the sort click below land on server HTML before the table hydrates.
+    await Promise.all([page.waitForURL(/\/mtga\/limited\/[a-z0-9]+\/$/), page.locator('.lset__name a').first().click()]);
     await ready(page);
     await expect(page.locator('[data-attribution="top"]')).toContainText('CC BY 4.0');
     const table = page.locator('.ltable__table');
