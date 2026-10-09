@@ -2233,8 +2233,6 @@ textarea.input {
 /* ---------- card dialog ---------- */
 
 .peek {
-  /* The global reset zeroes margins; a modal dialog centres itself with margin: auto. */
-  margin: auto;
   width: min(52rem, calc(100vw - 2 * var(--gutter)));
   max-height: calc(100dvh - 2rem);
   padding: 0;

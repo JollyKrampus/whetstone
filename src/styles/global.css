@@ -10,6 +10,11 @@
   margin: 0;
 }
 
+/* The reset above also removes the UA's margin: auto, which is what centres a <dialog>. */
+dialog {
+  margin: auto;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
