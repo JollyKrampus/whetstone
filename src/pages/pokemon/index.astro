@@ -9,7 +9,7 @@ import EmptyState from '../../components/EmptyState.astro';
 import EntityGrid from '../../components/EntityGrid.astro';
 import Badge from '../../components/Badge.tsx';
 import type { BadgeSpec, EntityTile } from '../../components/types.ts';
-import { compact, formatDateTimeUTC, formatDayUTC, int, pct } from '../../core/format.ts';
+import { compact, formatDateTimeUTC, int, pct } from '../../core/format.ts';
 import { freshness } from '../../core/freshness.ts';
 import { gameById, navHref } from '../../games/registry.ts';
 import {
@@ -26,13 +26,13 @@ import {
 import type { Species, Usage } from '../../games/pokemon/schema.ts';
 import DataNote from '../../games/pokemon/components/DataNote.astro';
 import RegulationBanner from '../../games/pokemon/components/RegulationBanner.astro';
-import { displayName, monHref, spriteHref, usageText, usageTrend } from '../../games/pokemon/view.ts';
+import { buildNow } from '../../games/pokemon/components/server.ts';
+import { cutoffLabel, displayName, monHref, monthLabel, spriteHref, usageText, usageTrend } from '../../games/pokemon/view.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
-import { usingFixtures } from '../../lib/datadir.ts';
 
 const module = gameById('pokemon');
 const meta = getMeta();
-const now = usingFixtures('pokemon') ? Date.parse(meta.generatedAt) : Date.now();
+const now = buildNow();
 const regulation = getCurrentRegulation(new Date(now));
 const season = getCurrentSeason(new Date(now));
 const regs = getRegulations();
@@ -98,7 +98,6 @@ const tournaments = getTournaments();
 const topSpecies = [...(tournaments?.species ?? [])].sort((a, b) => b.teams - a.teams || (a.id < b.id ? -1 : 1)).slice(0, 6);
 const names = Object.fromEntries(module.sources.map((s) => [s.id, s.name]));
 const fresh = freshness(meta, now, { names });
-const monthLabel = (m: string) => formatDayUTC(`${m}-01T00:00:00Z`).replace(/^1 /, '');
 
 const tools = [
   { path: 'builder/', name: 'Team builder', text: 'Import a Showdown paste, check legality, weaknesses, speed and the threats your team faces.' },
@@ -132,7 +131,7 @@ const tools = [
         usage ? (
           <DataNote
             attribution={usage.attribution}
-            facts={[monthLabel(usage.month), `rating ≥ ${usage.cutoff}`, `${int(usage.battles)} battles`, previousUsage ? `arrows: change vs Reg ${previousReg?.id}` : null]}
+            facts={[monthLabel(usage.month), cutoffLabel(usage.cutoff), `${int(usage.battles)} battles`, previousUsage ? `arrows: change vs Reg ${previousReg?.id}` : null]}
             synthetic={usage.synthetic}
           />
         ) : (

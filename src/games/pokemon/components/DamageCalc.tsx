@@ -135,7 +135,12 @@ function ResultList({ title, response, emptyText }: { title: string; response: C
                 <div class="pk-result__top">
                   <span>
                     <strong>{r.moveName}</strong>
-                    {r.spread && <span class="badge"> spread ×0.75</span>}
+                    {r.spread && (
+                      <>
+                        {' '}
+                        <span class="badge">spread ×0.75</span>
+                      </>
+                    )}
                   </span>
                   <span class="pk-result__pct">
                     {r.max === 0 ? 'No damage' : `${r.minPct}–${r.maxPct}%`}

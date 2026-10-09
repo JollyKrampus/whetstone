@@ -20,6 +20,11 @@ function watch(page: Page): string[] {
   return errors;
 }
 
+/** Resolves once every client:load island on the page has hydrated (Astro drops their ssr attribute). */
+async function hydrated(page: Page): Promise<void> {
+  await page.waitForFunction(() => [...document.querySelectorAll('astro-island[client="load"]')].every((island) => !island.hasAttribute('ssr')));
+}
+
 /** EV-style paste (SV era), so the import has to convert to Stat Points. */
 const EV_PASTE = `Rillaboom @ Miracle Seed
 Ability: Grassy Surge
@@ -120,6 +125,7 @@ test.describe('Pokémon pages', () => {
   test('speed tiers reorder under Trick Room', async ({ page }) => {
     const errors = watch(page);
     await page.goto('pokemon/speed/');
+    await hydrated(page);
     const firstRow = page.locator('table.pk-table tbody tr').first().locator('th');
     const fastest = await firstRow.innerText();
     await page.getByLabel('Trick Room (slowest moves first)').check();
@@ -300,6 +306,8 @@ test.describe('360 px', () => {
     test(`${route} fits without horizontal scrolling`, async ({ page }) => {
       const errors = watch(page);
       await page.goto(route);
+      await hydrated(page);
+      if (route.endsWith('preview/')) await expect(page.locator('.pk-tool[data-ready]')).toBeVisible();
       if (route.endsWith('builder/')) {
         await expect(page.locator('.pk-builder[data-ready]')).toBeVisible();
         await page.getByRole('button', { name: 'Start from the top six' }).click();
