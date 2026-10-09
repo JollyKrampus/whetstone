@@ -375,6 +375,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(page.locator('.hx-group[data-hero="Abat"][data-rework="true"]')).toBeVisible();
       await expect(page.locator('.hx-group[data-hero="HXAL"][data-new="true"]')).toBeVisible();
 
+      await hydrated(page, '[data-catchup]');
       await date.fill('2026-10-01');
       await expect(page).toHaveURL(/#since=2026-10-01$/);
       await expect(summary).toContainText('Since 1 Oct 2026: 1 patch, 1 hero changed');
