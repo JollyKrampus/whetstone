@@ -110,13 +110,19 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(grid.locator('[data-entity]:visible')).toHaveCount(await grid.locator('[data-entity][data-f-role*="Healer"]').count());
       await page.getByRole('button', { name: /^Healer\b/ }).click();
 
-      await page.getByRole('button', { name: /^Free this week\b/ }).click();
-      const free = await grid.locator('[data-entity][data-f-avail*="free"]').count();
-      expect(free).toBeGreaterThan(0);
-      await expect(grid.locator('[data-entity]:visible')).toHaveCount(free);
-      for (const tile of await grid.locator('[data-entity]:visible').all()) await expect(tile).toContainText('Free');
-
-      await page.getByRole('button', { name: 'Clear filters' }).click();
+      const freeChip = page.getByRole('button', { name: /^Free this week\b/ });
+      if ((await freeChip.count()) > 0) {
+        await freeChip.click();
+        const free = await grid.locator('[data-entity][data-f-avail*="free"]').count();
+        expect(free).toBeGreaterThan(0);
+        await expect(grid.locator('[data-entity]:visible')).toHaveCount(free);
+        for (const tile of await grid.locator('[data-entity]:visible').all()) await expect(tile).toContainText('Free');
+        await page.getByRole('button', { name: 'Clear filters' }).click();
+      } else {
+        // Live data can carry last week's rotation (Nexus Compendium lagging): nobody is marked free.
+        await expect(page.locator('.pbanner__rot')).toContainText("aren't listed yet");
+        await expect(grid.locator('[data-entity][data-f-avail*="free"]')).toHaveCount(0);
+      }
       await page.getByRole('button', { name: /^Warcraft\b/ }).click();
       await expect(grid.locator('[data-entity]:visible')).toHaveCount(await grid.locator('[data-entity][data-f-franchise="Warcraft"]').count());
 
