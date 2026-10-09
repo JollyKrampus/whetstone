@@ -1,0 +1,88 @@
+---
+/**
+ * /hots/aram/: ARAM "pick 1 of 3" helper (SPEC §7). Same shard and scoring as the draft, with
+ * gentler role rules; statistics only when an ARAM-mode block is present.
+ */
+import { sourcesFor } from '../../../games/registry.ts';
+import AramHelper from '../../../games/hots/components/draft/AramHelper.tsx';
+import { aramMaps, draftRoster, hpCredit } from '../../../games/hots/components/draft/build.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+import { stagedUrl } from '../../../lib/stagemap.ts';
+
+const shardUrl = stagedUrl('hots', 'draft');
+const roster = draftRoster();
+const maps = aramMaps();
+const credit = hpCredit(sourcesFor('hots', ['heroesprofile'])[0]);
+---
+
+<GameLayout
+  game="hots"
+  title="ARAM pick helper"
+  description="Heroes of the Storm ARAM helper: enter the three heroes you were offered, plus any teammates and enemies you can see, and get them ranked for your team with reasons."
+  inlineCredits={false}
+>
+  <div class="apage">
+    <header class="apage__head">
+      <p class="kicker">ARAM</p>
+      <h1>ARAM pick helper</h1>
+      <p class="apage__lead">
+        Offered three heroes and not sure which to lock? Add them, plus any teammates and enemies you can already see. The helper ranks your options for
+        this particular team: who covers a missing Healer or frontline, who answers the enemies, who pairs well with your teammates.
+      </p>
+    </header>
+
+    <noscript>
+      <p class="apage__nojs">The ARAM helper needs JavaScript.</p>
+    </noscript>
+
+    <AramHelper client:load shardUrl={shardUrl} roster={roster} maps={maps} credit={credit} />
+
+    <section class="apage__how" aria-labelledby="aram-how">
+      <h2 id="aram-how">What it weighs</h2>
+      <p>
+        The same signals as the draft helper, tuned for ARAM: role gaps count for less because nobody drafts, and there is no blind-pick term because
+        the other team cannot answer your choice. Win rates are used only when ARAM statistics are available; Storm League numbers are never applied to
+        ARAM. Without statistics every reason is labelled as theory.
+      </p>
+    </section>
+  </div>
+</GameLayout>
+
+<style>
+  .apage {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .apage__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .apage__lead {
+    max-width: 68ch;
+    color: var(--text-muted);
+  }
+
+  .apage__nojs {
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+  }
+
+  .apage__how {
+    display: grid;
+    gap: var(--sp-3);
+    max-width: 72ch;
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--border);
+  }
+
+  .apage__how h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .apage__how p {
+    color: var(--text-muted);
+  }
+</style>
