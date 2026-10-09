@@ -463,3 +463,38 @@ export function heroesForMap(mapSlug: string, opts: { mode?: GameMode; timeframe
   }
   return out.sort((a, b) => b.fit.score - a.fit.score || (a.hero.name < b.hero.name ? -1 : 1));
 }
+
+// ---- curated inputs and asset checks for the content pages ------------------------------
+// Appended (not merged into the imports above) so parallel edits to this file stay additive.
+import { existsSync, readFileSync } from 'node:fs';
+import { parse as parseYaml } from 'yaml';
+import { parseData } from '../../core/schemas.ts';
+import { repoRoot } from '../../lib/datadir.ts';
+import { CreatorsFileSchema, type CreatorsFile } from './schema.ts';
+
+/**
+ * curated/hots/creators.yaml, validated: the hand-checked video and stream channels
+ * (/hots/live/ shows the `featured` Twitch ones as keyless embeds). Null when the file is absent.
+ */
+export function getCreators(): CreatorsFile | null {
+  return memo('creators', () => {
+    const file = path.join(repoRoot(), 'curated', 'hots', 'creators.yaml');
+    if (!existsSync(file)) return null;
+    return parseData(CreatorsFileSchema, parseYaml(readFileSync(file, 'utf8')), file, { roundTrip: false });
+  });
+}
+
+/**
+ * True when an image path from the data (`img/icons/….webp`) exists in the game's data dir and
+ * will therefore be staged. Pages use it to draw a placeholder instead of linking a missing
+ * file (fixtures ship portraits and map art, not every ability icon).
+ */
+export function hasAsset(rel: string): boolean {
+  const cache = memo('assets', () => new Map<string, boolean>());
+  let hit = cache.get(rel);
+  if (hit === undefined) {
+    hit = !rel.split('/').includes('..') && existsSync(path.join(gameDataDir(GAME), ...rel.split('/')));
+    cache.set(rel, hit);
+  }
+  return hit;
+}

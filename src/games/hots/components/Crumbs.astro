@@ -1,0 +1,45 @@
+---
+/** Breadcrumb trail: linked parents, then the current page (aria-current). */
+interface Props {
+  trail: { label: string; href: string }[];
+  current: string;
+}
+
+const { trail, current } = Astro.props;
+---
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    {
+      trail.map((t) => (
+        <li>
+          <a href={t.href}>{t.label}</a>
+        </li>
+      ))
+    }
+    <li aria-current="page">{current}</li>
+  </ol>
+</nav>
+
+<style>
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .crumbs li + li::before {
+    content: '/';
+    margin-right: var(--sp-1);
+    color: var(--text-faint);
+  }
+
+  .crumbs a {
+    color: var(--text-muted);
+  }
+</style>

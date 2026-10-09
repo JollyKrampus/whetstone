@@ -1,0 +1,183 @@
+---
+/**
+ * Outbound guides and references for a hero (links.json), grouped by purpose, plus recent
+ * YouTube videos when that optional source is on (click-to-load, hidden after 30 days).
+ */
+import SourceAttribution from '../../../components/SourceAttribution.astro';
+import { formatDayUTC } from '../../../core/format.ts';
+import { sourcesFor } from '../../registry.ts';
+import { RETENTION, type Link, type Video } from '../schema.ts';
+import EmbedFacade from './EmbedFacade.astro';
+import Expiring from './Expiring.astro';
+
+interface Props {
+  heroName: string;
+  links: Link[];
+  videos: { fetchedAt: string; videos: Video[] } | null;
+}
+
+const { heroName, links, videos } = Astro.props;
+
+const GROUPS: { title: string; kinds: Link['kind'][] }[] = [
+  { title: 'Guides and builds', kinds: ['guide', 'talents', 'calculator', 'tierlist'] },
+  { title: 'Matchups and drafting', kinds: ['matchups', 'maps', 'draft'] },
+  { title: 'Reference and esports', kinds: ['wiki', 'esports', 'news', 'live'] },
+];
+const groups = GROUPS.map((g) => ({ ...g, links: links.filter((l) => g.kinds.includes(l.kind)) })).filter((g) => g.links.length > 0);
+const host = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+const duration = (sec: number) => {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return m >= 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : `${m}:${String(s).padStart(2, '0')}`;
+};
+const expires = videos ? new Date(Date.parse(videos.fetchedAt) + RETENTION.videosMs).toISOString() : null;
+---
+
+<div class="guides">
+  {
+    groups.length === 0 ? (
+      <p class="guides__none">No outbound guides recorded for {heroName} yet.</p>
+    ) : (
+      <div class="guides__groups">
+        {groups.map((g) => (
+          <section class="guides__group" aria-label={g.title}>
+            <h3 class="kicker">{g.title}</h3>
+            <ul class="guides__list">
+              {g.links.map((l) => (
+                <li>
+                  <a class="glink" href={l.url} rel="noopener" target="_blank">
+                    <span class="glink__label">{l.label}</span>
+                    <span class="glink__host">
+                      {host(l.url)}
+                      <span class="visually-hidden"> (opens in a new tab)</span>
+                    </span>
+                    <svg class="glink__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 5h5v5M19 5l-8 8M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10" />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    )
+  }
+  <p class="guides__note">
+    Whetstone links to these sites and never copies their write-ups; credit and copyright stay with their authors.
+  </p>
+
+  {
+    videos && expires && (
+      <Expiring expiresAt={expires}>
+        <section class="guides__videos" aria-labelledby="hero-videos-h">
+          <h3 id="hero-videos-h">Recent videos</h3>
+          <ul class="guides__vlist">
+            {videos.videos.map((v) => (
+              <li>
+                <EmbedFacade
+                  provider="YouTube"
+                  title={v.title}
+                  meta={`${v.channel} · ${formatDayUTC(v.published)}${v.durationSec ? ` · ${duration(v.durationSec)}` : ''}`}
+                  embedUrl={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0`}
+                  watchUrl={`https://www.youtube.com/watch?v=${v.id}`}
+                />
+              </li>
+            ))}
+          </ul>
+          <SourceAttribution sources={sourcesFor('hots', ['youtube'])} placement="inline" asOf={videos.fetchedAt} />
+        </section>
+      </Expiring>
+    )
+  }
+</div>
+
+<style>
+  .guides {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .guides__none,
+  .guides__note {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .guides__groups {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .guides__group {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .guides__list,
+  .guides__vlist {
+    display: grid;
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .glink {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'label icon'
+      'host icon';
+    align-items: center;
+    column-gap: var(--sp-3);
+    min-height: var(--tap);
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .glink:hover {
+    border-color: var(--accent);
+  }
+
+  .glink__label {
+    grid-area: label;
+    font-weight: 650;
+  }
+
+  .glink__host {
+    grid-area: host;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .glink__icon {
+    grid-area: icon;
+    width: 1rem;
+    height: 1rem;
+    color: var(--text-muted);
+  }
+
+  .guides__videos {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .guides__videos h3 {
+    font-size: var(--fs-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .guides__groups {
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    }
+    .guides__vlist {
+      grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    }
+  }
+</style>

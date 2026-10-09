@@ -1,0 +1,139 @@
+---
+/**
+ * The mechanics tags the theory layer uses for a hero, grouped, each with the evidence behind
+ * it: the ability or talent whose text matched (with the matching snippet), or the curator's
+ * one-line reason for tags the text cannot reveal.
+ */
+import type { Hero } from '../schema.ts';
+import { groupTags, tagLabel } from './labels.ts';
+
+interface Props {
+  hero: Hero;
+  id?: string;
+}
+
+const { hero, id = 'mechanics' } = Astro.props;
+const groups = groupTags(hero.mechanics);
+const kindLabel = { ability: 'Ability', talent: 'Talent', curated: 'Curated note' } as const;
+---
+
+<section class="mech" id={id} aria-labelledby={`${id}-h`}>
+  <div class="mech__head">
+    <h3 id={`${id}-h`}>Mechanics tags</h3>
+    <p class="mech__sub">
+      What the theory layer reads from {hero.name}'s kit. Each tag shows the ability or talent text that produced it;
+      curated notes cover play-style traits the text cannot show.
+    </p>
+  </div>
+  {
+    groups.length === 0 ? (
+      <p class="mech__none">No tags extracted yet.</p>
+    ) : (
+      <div class="mech__groups">
+        {groups.map((g) => (
+          <div class="mech__group" data-group={g.group}>
+            <h4 class="kicker">{g.label}</h4>
+            <dl class="mech__tags">
+              {g.items.map((m) => (
+                <div class="mtag" data-tag={m.tag}>
+                  <dt class="mtag__name">{tagLabel(m.tag)}</dt>
+                  {m.evidence.map((e) => (
+                    <dd class="mtag__ev">
+                      <span class="mtag__kind">{kindLabel[e.kind]}</span>
+                      {e.kind !== 'curated' && <span class="mtag__src">{e.name}</span>}
+                      <span class="mtag__snippet">{e.kind === 'curated' ? e.snippet : `“${e.snippet}”`}</span>
+                    </dd>
+                  ))}
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .mech {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .mech__head {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .mech__head h3 {
+    font-size: var(--fs-xl);
+  }
+
+  .mech__sub,
+  .mech__none {
+    max-width: 72ch;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .mech__groups {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .mech__group {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .mech__tags {
+    display: grid;
+    gap: var(--sp-2);
+    margin: 0;
+  }
+
+  .mtag {
+    display: grid;
+    gap: var(--sp-1);
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--border);
+    border-left: 3px solid color-mix(in srgb, var(--accent) 70%, var(--border));
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+  }
+
+  .mtag__name {
+    font-weight: 700;
+  }
+
+  .mtag__ev {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--sp-2);
+    margin: 0;
+    font-size: var(--fs-sm);
+  }
+
+  .mtag__kind {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    align-self: center;
+  }
+
+  .mtag__src {
+    font-weight: 650;
+  }
+
+  .mtag__snippet {
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 48rem) {
+    .mech__tags {
+      grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    }
+  }
+</style>

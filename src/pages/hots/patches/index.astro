@@ -1,0 +1,156 @@
+---
+/** /hots/patches/ (SPEC §8): every patch, balance update and hotfix in the data, newest first, grouped by major version. */
+import Badge from '../../../components/Badge.tsx';
+import EmptyState from '../../../components/EmptyState.astro';
+import { formatDayUTC } from '../../../core/format.ts';
+import { navHref, versionText } from '../../../games/registry.ts';
+import { countDirs, describeCounts, emptyCounts, PATCH_KIND } from '../../../games/hots/components/labels.ts';
+import { getPatches } from '../../../games/hots/load.ts';
+import type { Patch } from '../../../games/hots/schema.ts';
+import { patchHref } from '../../../games/hots/view.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+const patches = getPatches();
+const versions = [...new Set(patches.map((p) => p.version))];
+const groups = versions.map((v) => ({ version: v, patches: patches.filter((p) => p.version === v) }));
+
+function summary(p: Patch) {
+  const counts = emptyCounts();
+  for (const e of Object.values(p.heroes)) countDirs(e.changes, counts);
+  const heroes = Object.keys(p.heroes).length;
+  return { heroes, counts };
+}
+---
+
+<GameLayout
+  game="hots"
+  title="Heroes of the Storm patch notes"
+  description="Every Heroes of the Storm patch, balance update and hotfix: short summaries of each hero change with buff and nerf markers, linked to Blizzard's official notes."
+>
+  <div class="plist">
+    <header class="plist__head">
+      <h1>Patch notes</h1>
+      <p class="plist__lead">
+        Short summaries of every change, hero by hero, marked as buff, nerf, rework or other change. Each patch links to
+        Blizzard's full notes. Been away? <a href={navHref('hots', 'catch-up/')}>Catch up since you last played</a>.
+      </p>
+    </header>
+
+    {
+      patches.length === 0 ? (
+        <EmptyState title="No patch notes yet" icon="data">
+          <p>The patch notes source hasn't produced data for this build. The page fills in after the next refresh.</p>
+        </EmptyState>
+      ) : (
+        groups.map((g) => (
+          <section class="plist__group" aria-labelledby={`v-${g.version.replace('.', '-')}`}>
+            <h2 id={`v-${g.version.replace('.', '-')}`}>{versionText('hots', g.version)}</h2>
+            <ol class="plist__items">
+              {g.patches.map((p) => {
+                const { heroes, counts } = summary(p);
+                const kind = PATCH_KIND[p.kind];
+                return (
+                  <li class="pcard" data-kind={p.kind} data-patch={p.id}>
+                    <div class="pcard__top">
+                      <time class="pcard__date" datetime={p.date}>
+                        {formatDayUTC(p.date)}
+                      </time>
+                      <Badge tone={kind.tone}>{kind.label}</Badge>
+                      {p.newHeroes && p.newHeroes.length > 0 && <Badge tone="accent">New hero</Badge>}
+                    </div>
+                    <a class="pcard__title" href={patchHref(p)}>
+                      {p.title}
+                    </a>
+                    <p class="pcard__meta">
+                      {heroes > 0 ? `${heroes} hero${heroes === 1 ? '' : 'es'} changed` : 'No hero changes'}
+                      {describeCounts(counts) ? ` · ${describeCounts(counts)}` : ''}
+                      {p.build ? ` · build ${p.build}` : ''}
+                    </p>
+                    {p.general[0] && <p class="pcard__lead">{p.general[0]}</p>}
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+        ))
+      )
+    }
+  </div>
+</GameLayout>
+
+<style>
+  .plist {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .plist__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .plist__lead {
+    max-width: 66ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .plist__group {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .plist__group h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .plist__items {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .pcard {
+    display: grid;
+    gap: var(--sp-1);
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .pcard[data-kind='hotfix'] {
+    border-left: 3px solid var(--warning);
+  }
+
+  .pcard[data-kind='patch'] {
+    border-left: 3px solid var(--accent);
+  }
+
+  .pcard__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .pcard__date {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+  }
+
+  .pcard__title {
+    color: var(--text);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+  }
+
+  .pcard__meta,
+  .pcard__lead {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+</style>

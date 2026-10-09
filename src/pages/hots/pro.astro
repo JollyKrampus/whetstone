@@ -1,0 +1,309 @@
+---
+/**
+ * /hots/pro/ (SPEC §8): pro draft presence from Liquipedia (class A-SA, CC-BY-SA 3.0): picks,
+ * bans and presence per hero over the window, sample size, and the tournaments counted.
+ * The share-alike credit sits next to the numbers.
+ */
+import Badge from '../../components/Badge.tsx';
+import EmptyState from '../../components/EmptyState.astro';
+import SourceAttribution from '../../components/SourceAttribution.astro';
+import { formatDayUTC, int, pct } from '../../core/format.ts';
+import { wilsonInterval } from '../../core/stats.ts';
+import { sourcesFor } from '../../games/registry.ts';
+import { getEntity, getPro, hasAsset } from '../../games/hots/load.ts';
+import { heroHref, heroPortrait } from '../../games/hots/view.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+
+const pro = getPro();
+const rows = (pro?.heroes ?? []).map((h) => ({ ...h, entity: getEntity(h.hero) }));
+const tournaments = [...(pro?.tournaments ?? [])].sort((a, b) => (a.startDate < b.startDate ? 1 : -1));
+const MIN_WR_PICKS = 10;
+---
+
+<GameLayout
+  game="hots"
+  title="Heroes of the Storm pro drafts: picks, bans and presence"
+  description="How often each Heroes of the Storm hero is picked or banned in recent community and pro tournaments, with sample sizes and the events counted. Data from Liquipedia under CC-BY-SA 3.0."
+  uses={pro ? ['liquipedia'] : []}
+  inlineCredits={false}
+>
+  <div class="pro">
+    <header class="pro__head">
+      <h1>Pro drafts</h1>
+      <p class="pro__lead">
+        Presence is the share of drafted maps where a hero was picked or banned by either team. Pro drafts reward
+        coordination and practised combos, so treat this as a view of the competitive scene, not of solo queue.
+      </p>
+    </header>
+
+    {
+      !pro ? (
+        <EmptyState title="No pro draft data yet" icon="data">
+          <p>Tournament drafts appear here once the Liquipedia source has been fetched.</p>
+        </EmptyState>
+      ) : (
+        <>
+          <div class="pro__window">
+            <p>
+              <strong>{pro.window.label}</strong>: {formatDayUTC(pro.window.from)} to {formatDayUTC(pro.window.to)} ·{' '}
+              {int(pro.totals.tournaments)} tournaments · <span data-pro-maps>{int(pro.totals.maps)} drafted maps</span>
+            </p>
+            {pro.synthetic && (
+              <p class="pro__sample">
+                <Badge tone="warning">Sample</Badge> These numbers are synthetic fixtures for testing the page.
+              </p>
+            )}
+            <SourceAttribution sources={sourcesFor('hots', ['liquipedia'])} placement="inline" />
+          </div>
+
+          <section class="pro__sec" aria-labelledby="presence-h">
+            <h2 id="presence-h">Presence by hero</h2>
+            <div class="tablewrap" role="region" aria-labelledby="presence-h" tabindex="0">
+              <table class="ptable">
+                <caption class="visually-hidden">
+                  Picks, bans and presence per hero over {int(pro.totals.maps)} drafted maps, highest presence first
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Hero</th>
+                    <th scope="col">Presence</th>
+                    <th scope="col" class="num">Picks</th>
+                    <th scope="col" class="num">Bans</th>
+                    <th scope="col" class="num">Win rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((r) => {
+                    const wr = r.wins !== undefined && r.picks >= MIN_WR_PICKS ? wilsonInterval(r.wins, r.picks) : null;
+                    return (
+                      <tr data-hero={r.hero}>
+                        <th scope="row">
+                          {r.entity ? (
+                            <a class="ptable__hero" href={heroHref(r.entity)}>
+                              {hasAsset(r.entity.portrait) && <img src={heroPortrait(r.entity)} alt="" width="28" height="28" loading="lazy" />}
+                              <span>{r.entity.name}</span>
+                            </a>
+                          ) : (
+                            r.hero
+                          )}
+                        </th>
+                        <td>
+                          <span class="ptable__presence">
+                            <span class="ptable__bar" aria-hidden="true">
+                              <span class="ptable__fill" style={`--p: ${r.presence}`} />
+                            </span>
+                            <span class="ptable__pct">{pct(r.presence, 1)}</span>
+                          </span>
+                        </td>
+                        <td class="num">
+                          {int(r.picks)} <span class="ptable__rate">{pct(r.pickRate, 0)}</span>
+                        </td>
+                        <td class="num">
+                          {int(r.bans)} <span class="ptable__rate">{pct(r.banRate, 0)}</span>
+                        </td>
+                        <td class="num">
+                          {wr && r.wins !== undefined ? (
+                            <>
+                              {pct(r.wins / r.picks, 0)}{' '}
+                              <span class="ptable__rate">
+                                {pct(wr.lower, 0)}–{pct(wr.upper, 0)}
+                              </span>
+                            </>
+                          ) : (
+                            <span class="ptable__rate" title={`Shown from ${MIN_WR_PICKS} picks`}>
+                              —
+                            </span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p class="pro__note">
+              Pick and ban rates are per drafted map. Win rates appear from {MIN_WR_PICKS} picks, with their 95% range: at pro
+              sample sizes the range is usually wide.
+            </p>
+          </section>
+
+          <section class="pro__sec" aria-labelledby="events-h">
+            <h2 id="events-h">Tournaments counted</h2>
+            <ul class="events">
+              {tournaments.map((t) => (
+                <li class="event">
+                  <a href={t.url} rel="noopener" target="_blank">
+                    {t.name}
+                    <span class="visually-hidden"> on Liquipedia (opens in a new tab)</span>
+                  </a>
+                  <span class="event__meta">
+                    {formatDayUTC(t.startDate)}
+                    {t.endDate && t.endDate !== t.startDate ? ` – ${formatDayUTC(t.endDate)}` : ''}
+                    {t.region ? ` · ${t.region}` : ''}
+                    {t.tier ? ` · tier ${t.tier}` : ''} · {int(t.maps)} maps
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </>
+      )
+    }
+  </div>
+</GameLayout>
+
+<style>
+  .pro {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .pro__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .pro__lead {
+    max-width: 70ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .pro__window {
+    display: grid;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--info);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .pro__sample,
+  .pro__note {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .pro__sec {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .pro__sec h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .tablewrap {
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .tablewrap:focus-visible {
+    outline: var(--focus-ring);
+  }
+
+  .ptable {
+    min-width: 34rem;
+    font-size: var(--fs-sm);
+  }
+
+  .ptable th[scope='row'] {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .ptable td,
+  .ptable th {
+    vertical-align: middle;
+  }
+
+  .ptable .num {
+    text-align: right;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+
+  .ptable__hero {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: var(--text);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .ptable__hero img {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: var(--radius-sm);
+  }
+
+  a.ptable__hero:hover span {
+    text-decoration: underline;
+  }
+
+  .ptable__presence {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-width: 9rem;
+  }
+
+  .ptable__bar {
+    position: relative;
+    flex: 1;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--surface-3);
+    overflow: hidden;
+  }
+
+  .ptable__fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: calc(var(--p) * 100%);
+    border-radius: inherit;
+    background: var(--info);
+  }
+
+  .ptable__pct {
+    min-width: 3.2rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .ptable__rate {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .events {
+    display: grid;
+    gap: var(--sp-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .event {
+    display: grid;
+    gap: 0.1rem;
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .event a {
+    font-weight: 650;
+  }
+
+  .event__meta {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+</style>

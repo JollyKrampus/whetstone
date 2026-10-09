@@ -1,0 +1,68 @@
+---
+/**
+ * One pre-rendered block per game mode and patch window, for use inside <StatsLens>. The child
+ * is a function that receives (mode, period) and returns the markup for that window:
+ *
+ *   <LensBlocks modes={modes}>{(m: ModeOption, p: PeriodOption) => <Lists mode={m.id} timeframe={p.id} />}</LensBlocks>
+ *
+ * A mode without the selected period shows a short note and its current window instead of an
+ * empty panel.
+ */
+import { allPeriods, type ModeOption } from './pagedata.ts';
+
+interface Props {
+  modes: ModeOption[];
+}
+
+const { modes } = Astro.props;
+const hasPrevious = allPeriods(modes).length > 1;
+
+const blocks = await Promise.all(
+  modes.map(async (mode) => ({
+    mode,
+    periods: await Promise.all(
+      mode.periods.map(async (period) => ({ period, html: await Astro.slots.render('default', [mode, period]) })),
+    ),
+  })),
+);
+---
+
+{
+  blocks.map(({ mode, periods }) => (
+    <div class="lens-block" data-mode={mode.id}>
+      {periods.length > 1 || !hasPrevious ? (
+        periods.map(({ period, html }) => (
+          <div class="lens-block__period" data-period={hasPrevious ? period.id : undefined}>
+            <Fragment set:html={html} />
+          </div>
+        ))
+      ) : (
+        <>
+          <p class="lens-block__note" data-period="previous">
+            {mode.label} has no previous-patch window yet, so this shows the current patch.
+          </p>
+          {periods.map(({ html }) => (
+            <Fragment set:html={html} />
+          ))}
+        </>
+      )}
+    </div>
+  ))
+}
+
+<style>
+  .lens-block,
+  .lens-block__period {
+    display: grid;
+    gap: var(--sp-4);
+    min-width: 0;
+  }
+
+  .lens-block__note {
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+</style>

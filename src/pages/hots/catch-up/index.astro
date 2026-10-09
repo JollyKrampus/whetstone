@@ -1,0 +1,78 @@
+---
+/**
+ * /hots/catch-up/ (SPEC §8, roadmap T3): "When did you last play?" Every hero change since a
+ * date, grouped by hero, new heroes and reworks highlighted, shareable as #since=YYYY-MM-DD.
+ * The default (changes since the current major went live) is rendered at build time.
+ */
+import { formatDayUTC } from '../../../core/format.ts';
+import { navHref, versionText } from '../../../games/registry.ts';
+import CatchUp from '../../../games/hots/components/CatchUp.tsx';
+import { catchUp, defaultSince, majorStarts, shiftDate } from '../../../games/hots/components/catchup.ts';
+import { catchUpData, majorSince } from '../../../games/hots/components/pagedata.ts';
+import { getMeta } from '../../../games/hots/load.ts';
+import GameLayout from '../../../layouts/GameLayout.astro';
+
+const meta = getMeta();
+const data = catchUpData();
+const since = defaultSince(majorSince());
+const initial = catchUp(data, since);
+const latestDate = meta.generatedAt.slice(0, 10);
+const oldest = data.patches.at(-1)?.date ?? since;
+const shortcuts = majorStarts(data.patches)
+  .slice(0, 3)
+  .map((m) => ({ label: `Before ${versionText('hots', m.version)}`, since: shiftDate(m.date, -1) }));
+---
+
+<GameLayout
+  game="hots"
+  title="Catch up on Heroes of the Storm changes"
+  description="Back in the Nexus? Pick the day you last played and see every hero buff, nerf and rework since, grouped by hero, plus new heroes."
+>
+  <div class="catch">
+    <header class="catch__head">
+      <h1>Catch up</h1>
+      <p class="catch__lead">
+        Pick the day you last played and see what changed since: every hero, biggest changes first, with new heroes and
+        reworks called out. By default it covers {versionText('hots', meta.extra.major)}, live since
+        {formatDayUTC(majorSince())}.
+      </p>
+    </header>
+
+    <CatchUp
+      client:load
+      initial={initial}
+      defaultSince={since}
+      min={shiftDate(oldest, -1)}
+      max={latestDate}
+      dataUrl={navHref('hots', 'catch-up/changes.json')}
+      shortcuts={shortcuts}
+    />
+
+    <p class="catch__more">
+      Want the full notes? Browse <a href={navHref('hots', 'patches/')}>every patch</a> or open a hero's Patches tab.
+    </p>
+  </div>
+</GameLayout>
+
+<style>
+  .catch {
+    display: grid;
+    gap: var(--sp-5);
+  }
+
+  .catch__head {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .catch__lead {
+    max-width: 66ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .catch__more {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+</style>

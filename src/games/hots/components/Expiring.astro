@@ -1,0 +1,55 @@
+---
+/**
+ * Retention guard for class-C data (DATA.md §7): the browser hides the content once
+ * `expiresAt` has passed (Twitch: 90 minutes after fetch; YouTube: 30 days) and shows the
+ * `stale` slot instead. Re-checked every minute, because a page can stay open past the limit.
+ *
+ * mode 'show-when-fresh': hidden in the server HTML and revealed only after the check (no-JS
+ * visitors see the stale slot); 'hide-when-stale': visible until the check hides it.
+ */
+interface Props {
+  /** ISO timestamp after which the content must not be shown. */
+  expiresAt: string;
+  mode?: 'show-when-fresh' | 'hide-when-stale';
+  class?: string;
+}
+
+const { expiresAt, mode = 'hide-when-stale', class: extra } = Astro.props;
+const freshFirst = mode === 'hide-when-stale';
+---
+
+<div class:list={['expiring', extra]} data-expiring data-expires-at={expiresAt}>
+  <div data-expiring-content hidden={!freshFirst}>
+    <slot />
+  </div>
+  {
+    Astro.slots.has('stale') && (
+      <div data-expiring-stale hidden={freshFirst}>
+        <slot name="stale" />
+      </div>
+    )
+  }
+</div>
+
+<script>
+  function check() {
+    const now = Date.now();
+    for (const box of document.querySelectorAll<HTMLElement>('[data-expiring]')) {
+      const until = Date.parse(box.dataset.expiresAt ?? '');
+      const expired = !Number.isFinite(until) || now > until;
+      const content = box.querySelector<HTMLElement>(':scope > [data-expiring-content]');
+      const stale = box.querySelector<HTMLElement>(':scope > [data-expiring-stale]');
+      if (content) content.hidden = expired;
+      if (stale) stale.hidden = !expired;
+      box.dataset.state = expired ? 'expired' : 'fresh';
+    }
+  }
+  check();
+  setInterval(check, 60_000);
+</script>
+
+<style>
+  .expiring {
+    min-width: 0;
+  }
+</style>

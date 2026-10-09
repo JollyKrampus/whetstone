@@ -1,0 +1,228 @@
+---
+/**
+ * Statistics talent builds for one stats window: the most played and the best by a conservative
+ * win-rate estimate, each with its sample size and a "copy build" button (beta) that copies the
+ * in-game build code.
+ */
+import Badge from '../../../components/Badge.tsx';
+import CopyButton from '../../../components/CopyButton.tsx';
+import { int, pct } from '../../../core/format.ts';
+import { wilsonInterval } from '../../../core/stats.ts';
+import type { Hero, StatsWindow } from '../schema.ts';
+import AssetIcon from './AssetIcon.astro';
+import { resolveBuild, TIERS } from './talents.ts';
+
+interface Props {
+  hero: Hero;
+  /** Heroes whose talents builds may use: the hero, then a composite's members. */
+  owners: Hero[];
+  window: StatsWindow;
+  /** Unique per rendered block (heading ids). */
+  idPrefix: string;
+  /** How many builds per list (default 2). */
+  perList?: number;
+}
+
+const { hero, owners, window, idPrefix, perList = 2 } = Astro.props;
+const all = (window.builds[hero.id] ?? [])
+  .map((b) => ({ build: b, resolved: resolveBuild(owners, b.talents) }))
+  .filter((b): b is { build: typeof b.build; resolved: NonNullable<typeof b.resolved> } => b.resolved !== null);
+
+const popular = [...all].sort((a, b) => b.build.games - a.build.games || b.build.shrunkLower - a.build.shrunkLower).slice(0, perList);
+const shown = new Set(popular.map((b) => b.build));
+const winning = [...all]
+  .sort((a, b) => b.build.shrunkLower - a.build.shrunkLower || b.build.games - a.build.games)
+  .filter((b) => !shown.has(b.build))
+  .slice(0, perList);
+
+const lists = [
+  { key: 'popular', title: 'Most played builds', rows: popular },
+  { key: 'winning', title: 'Strongest builds', rows: winning },
+].filter((l) => l.rows.length > 0);
+---
+
+<section class="tbuilds" aria-labelledby={`${idPrefix}-builds`}>
+  <div class="tbuilds__head">
+    <h3 id={`${idPrefix}-builds`}>Builds from match data</h3>
+    <p class="tbuilds__sub">
+      {window.label} · win rate with its 95% range and sample size. "Strongest" ranks builds by a cautious estimate (the
+      10th percentile after shrinkage), so a lucky small sample cannot top the list.
+    </p>
+  </div>
+  {
+    lists.length === 0 ? (
+      <p class="tbuilds__none">No talent build has enough games in this window yet.</p>
+    ) : (
+      lists.map((list) => (
+        <div class="tbuilds__list" data-builds={list.key}>
+          <h4>{list.title}</h4>
+          <ol class="tbuilds__rows">
+            {list.rows.map(({ build, resolved }) => {
+              const ci = wilsonInterval(build.wins, build.games);
+              return (
+                <li class="tbuild">
+                  <div class="tbuild__stats">
+                    <span class="tbuild__wr">{pct(build.wins / Math.max(1, build.games))}</span>
+                    <span class="tbuild__meta">
+                      {pct(ci.lower)}–{pct(ci.upper)} · n = {int(build.games)} games
+                    </span>
+                    {resolved.owner.id !== hero.id && <Badge tone="neutral">{resolved.owner.name}</Badge>}
+                  </div>
+                  <ol class="tbuild__picks">
+                    {TIERS.map((tier, i) => {
+                      const pick = resolved.picks[i];
+                      return (
+                        <li class="tbuild__pick" data-empty={pick ? undefined : 'true'}>
+                          <span class="tbuild__lvl">{tier}</span>
+                          {pick ? (
+                            <>
+                              <AssetIcon src={pick.icon} fallback={pick.ability ?? pick.name} size={28} />
+                              <span class="tbuild__name">{pick.name}</span>
+                            </>
+                          ) : (
+                            <span class="tbuild__name tbuild__name--open">Open</span>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ol>
+                  {resolved.code && (
+                    <div class="tbuild__copy">
+                      <code class="tbuild__code">{resolved.code}</code>
+                      <CopyButton client:visible text={resolved.code} label="Copy build (beta)" copiedLabel="Build copied" />
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      ))
+    )
+  }
+  <p class="tbuilds__beta">
+    <Badge tone="warning">Beta</Badge> The build code follows the in-game talent build format
+    (<code>[T</code> + one digit per level + hero name<code>]</code>); it has not yet been checked in the current client.
+  </p>
+</section>
+
+<style>
+  .tbuilds {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  .tbuilds__head {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .tbuilds__head h3 {
+    font-size: var(--fs-lg);
+  }
+
+  .tbuilds__sub,
+  .tbuilds__none,
+  .tbuilds__beta {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .tbuilds__list {
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .tbuilds__list h4 {
+    font-size: var(--fs-md);
+  }
+
+  .tbuilds__rows {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .tbuild {
+    display: grid;
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .tbuild__stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-1) var(--sp-3);
+  }
+
+  .tbuild__wr {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xl);
+    font-weight: 750;
+  }
+
+  .tbuild__meta {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .tbuild__picks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: var(--sp-2);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .tbuild__pick {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-width: 0;
+    padding: var(--sp-1) var(--sp-2);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    font-size: var(--fs-sm);
+  }
+
+  .tbuild__lvl {
+    min-width: 1.4rem;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 750;
+  }
+
+  .tbuild__name {
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .tbuild__name--open {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .tbuild__copy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .tbuild__code {
+    padding: 0.2rem var(--sp-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    font-size: var(--fs-sm);
+  }
+</style>

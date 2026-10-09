@@ -1,0 +1,233 @@
+---
+/**
+ * /hots/live/ (SPEC §8, critique C14): keyless by default. A link to the Twitch category,
+ * featured channels from curated/hots/creators.yaml as click-to-load embeds, and, when the
+ * optional Twitch source (class C) is on, a live list that the browser hides 90 minutes after
+ * it was fetched.
+ */
+import SourceAttribution from '../../components/SourceAttribution.astro';
+import { formatDateTimeUTC, int } from '../../core/format.ts';
+import { sourcesFor } from '../../games/registry.ts';
+import EmbedFacade from '../../games/hots/components/EmbedFacade.astro';
+import Expiring from '../../games/hots/components/Expiring.astro';
+import { featuredChannels } from '../../games/hots/components/pagedata.ts';
+import { getCreators, getEntity, getStreams } from '../../games/hots/load.ts';
+import { RETENTION } from '../../games/hots/schema.ts';
+import { heroHref } from '../../games/hots/view.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+
+const CATEGORY = 'https://www.twitch.tv/directory/category/heroes-of-the-storm';
+// Twitch embeds must name every host they run on: the deployed site and local previews.
+const PARENTS = ['jollykrampus.github.io', 'localhost'];
+const playerUrl = (login: string) =>
+  `https://player.twitch.tv/?channel=${encodeURIComponent(login)}&${PARENTS.map((p) => `parent=${p}`).join('&')}&muted=true&autoplay=false`;
+
+const featured = featuredChannels();
+const streams = getStreams();
+const live = streams ? [...streams.streams].sort((a, b) => b.viewers - a.viewers) : [];
+const expires = streams ? new Date(Date.parse(streams.fetchedAt) + RETENTION.streamsDisplayMs).toISOString() : null;
+const youtube = (getCreators()?.creators ?? []).filter((c) => c.youtube);
+const langName: Record<string, string> = { en: 'English', fr: 'French', de: 'German', es: 'Spanish', pt: 'Portuguese', ko: 'Korean', zh: 'Chinese', ru: 'Russian', und: 'Various' };
+---
+
+<GameLayout
+  game="hots"
+  title="Watch Heroes of the Storm live"
+  description="Heroes of the Storm streams and channels: the Twitch category, featured community casters and creators, loaded only when you press play."
+  uses={streams ? ['twitch'] : []}
+  inlineCredits={false}
+>
+  <div class="live">
+    <header class="live__head">
+      <h1>Live</h1>
+      <p class="live__lead">
+        Watch the game on Twitch, or start a featured channel right here. Players load only when you press Play, so this page
+        sends nothing to Twitch or YouTube until you do.
+      </p>
+      <p>
+        <a class="btn btn--primary" href={CATEGORY} rel="noopener" target="_blank">
+          Browse live Heroes of the Storm streams on Twitch<span class="visually-hidden"> (opens in a new tab)</span>
+        </a>
+      </p>
+    </header>
+
+    {
+      streams && expires && (
+        <section class="live__sec" aria-labelledby="now-h">
+          <h2 id="now-h">Live now</h2>
+          <Expiring expiresAt={expires} mode="show-when-fresh">
+            <div class="live__now" data-live-list>
+              <p class="live__asof">As of {formatDateTimeUTC(streams.fetchedAt)}; refreshed with the site's data.</p>
+              <ul class="streams">
+                {live.map((s) => (
+                  <li class="stream">
+                    <a class="stream__name" href={s.url} rel="noopener" target="_blank">
+                      {s.name}
+                      <span class="visually-hidden"> on Twitch (opens in a new tab)</span>
+                    </a>
+                    <span class="stream__title">{s.title}</span>
+                    <span class="stream__meta">
+                      {int(s.viewers)} viewers · {langName[s.lang] ?? s.lang} · live since {formatDateTimeUTC(s.startedAt)}
+                    </span>
+                    {s.heroes && s.heroes.length > 0 && (
+                      <span class="stream__meta">
+                        Playing:{' '}
+                        {s.heroes.map((id, i) => {
+                          const hero = getEntity(id);
+                          return (
+                            <>
+                              {i > 0 ? ', ' : ''}
+                              {hero ? <a href={heroHref(hero)}>{hero.name}</a> : id}
+                            </>
+                          );
+                        })}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+              <SourceAttribution sources={sourcesFor('hots', ['twitch'])} placement="inline" />
+            </div>
+            <p slot="stale" class="live__stale" data-live-stale>
+              The live list is older than 90 minutes, so it's hidden. <a href={CATEGORY} rel="noopener">See who is live on Twitch</a>.
+            </p>
+          </Expiring>
+        </section>
+      )
+    }
+
+    <section class="live__sec" aria-labelledby="featured-h">
+      <h2 id="featured-h">Featured channels</h2>
+      <p class="live__sub">Community casters and the official channel. An offline channel shows Twitch's offline screen.</p>
+      {
+        featured.length === 0 ? (
+          <p class="live__sub">No featured channels are configured.</p>
+        ) : (
+          <ul class="featured">
+            {featured.map((c) => (
+              <li>
+                <EmbedFacade
+                  provider="Twitch"
+                  title={c.name}
+                  meta={`twitch.tv/${c.login}`}
+                  {...(c.notes ? { note: c.notes } : {})}
+                  embedUrl={playerUrl(c.login)}
+                  watchUrl={`https://www.twitch.tv/${c.login}`}
+                  minWidth={400}
+                />
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+
+    {
+      youtube.length > 0 && (
+        <section class="live__sec" aria-labelledby="yt-h">
+          <h2 id="yt-h">Video creators</h2>
+          <p class="live__sub">Channels we checked by hand for regular Heroes of the Storm guides, games and tournaments.</p>
+          <ul class="creators">
+            {youtube.map((c) => (
+              <li class="creator">
+                <a href={`https://www.youtube.com/channel/${c.youtube!.channelId}`} rel="noopener" target="_blank">
+                  {c.name}
+                  <span class="visually-hidden"> on YouTube (opens in a new tab)</span>
+                </a>
+                <span class="creator__meta">
+                  {c.kinds.join(', ')} · {langName[c.lang] ?? c.lang}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+</GameLayout>
+
+<style>
+  .live {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .live__head {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .live__lead {
+    max-width: 66ch;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .live__sec {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .live__sec h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .live__sub,
+  .live__asof,
+  .live__stale {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .live__now {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .live__stale {
+    padding: var(--sp-3);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+  }
+
+  .streams,
+  .featured,
+  .creators {
+    display: grid;
+    gap: var(--sp-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .stream,
+  .creator {
+    display: grid;
+    gap: 0.15rem;
+    padding: var(--sp-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .stream__name,
+  .creator a {
+    font-weight: 700;
+  }
+
+  .stream__meta,
+  .creator__meta {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .streams,
+    .creators {
+      grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    }
+    .featured {
+      grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    }
+  }
+</style>

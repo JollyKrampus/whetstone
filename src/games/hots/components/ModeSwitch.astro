@@ -1,0 +1,145 @@
+---
+/**
+ * Segmented game-mode switch (Storm League / Quick Match / ARAM) for stats views. Same pattern
+ * and look as the shared PeriodToggle, on its own attribute so the two can nest: pre-render
+ * every mode inside the default slot and mark each block with data-mode="<id>".
+ *
+ *   <ModeSwitch name="hero-mode" options={[{ id: 'sl', label: 'Storm League' }, …]}>
+ *     <div data-mode="sl">…</div>
+ *     <div data-mode="aram">…</div>
+ *   </ModeSwitch>
+ *
+ * Works without JS (native radios plus a per-instance :has() rule); with JS the choice is
+ * remembered per `name` under storageKey('hots', 'mode:<name>').
+ */
+interface Option {
+  id: string;
+  label: string;
+  note?: string;
+}
+
+interface Props {
+  /** Unique per page; letters, digits and dashes. */
+  name: string;
+  options: Option[];
+  selected?: string;
+  label?: string;
+  class?: string;
+}
+
+const { name, options, selected, label = 'Game mode', class: extra } = Astro.props;
+const safe = (s: string) => s.replace(/[^A-Za-z0-9_-]/g, '');
+const scope = safe(name);
+const initial = options.some((o) => o.id === selected) ? selected : options[0]?.id;
+const css = options
+  .map((o) => {
+    const id = safe(o.id);
+    return `[data-mode-scope="${scope}"]:has(input[name="${scope}"][value="${id}"]:checked) [data-mode]:not([data-mode="${id}"]){display:none!important}`;
+  })
+  .join('\n');
+---
+
+<div class:list={['mswitch', extra]} data-mode-scope={scope}>
+  <fieldset class="mswitch__switch">
+    <legend class="visually-hidden">{label}</legend>
+    {
+      options.map((o) => (
+        <label class="mswitch__option">
+          <input class="visually-hidden" type="radio" name={scope} value={safe(o.id)} checked={o.id === initial} />
+          <span class="mswitch__label">{o.label}</span>
+          {o.note && <span class="mswitch__note">{o.note}</span>}
+        </label>
+      ))
+    }
+  </fieldset>
+  <div class="mswitch__content">
+    <slot />
+  </div>
+</div>
+
+<Fragment set:html={`<style>${css}</style>`} />
+
+<style>
+  .mswitch {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .mswitch__switch {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-self: start;
+    gap: 2px;
+    padding: 3px;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 3px);
+    background: var(--surface-2);
+    min-inline-size: 0;
+  }
+
+  .mswitch__option {
+    position: relative;
+    display: inline-grid;
+    align-content: center;
+    min-height: 2.5rem;
+    padding: 0.2rem var(--sp-3);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1.2;
+  }
+
+  .mswitch__option:hover {
+    color: var(--text);
+  }
+
+  .mswitch__label {
+    font-size: var(--fs-sm);
+    font-weight: 650;
+  }
+
+  .mswitch__note {
+    font-size: var(--fs-xs);
+    color: var(--text-faint);
+  }
+
+  .mswitch__option:has(input:checked) {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow:
+      var(--shadow-1),
+      inset 0 -2px 0 var(--accent);
+  }
+
+  .mswitch__option:has(input:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: 1px;
+  }
+</style>
+
+<script>
+  // storageKey('hots', 'mode:<name>') shape from src/core/storage.ts (raw string, like PeriodToggle).
+  const PREFIX = 'whetstone:hots:mode:';
+  for (const scope of document.querySelectorAll<HTMLElement>('[data-mode-scope]')) {
+    const name = scope.dataset.modeScope ?? '';
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem(PREFIX + name);
+    } catch {
+      saved = null;
+    }
+    const inputs = [...scope.querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${name}"]`)];
+    const match = inputs.find((i) => i.value === saved);
+    if (match) match.checked = true;
+    for (const input of inputs) {
+      input.addEventListener('change', () => {
+        try {
+          localStorage.setItem(PREFIX + name, input.value);
+        } catch {
+          // Storage unavailable: the choice simply isn't remembered.
+        }
+      });
+    }
+  }
+</script>
