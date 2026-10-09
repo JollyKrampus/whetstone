@@ -1,0 +1,92 @@
+---
+/**
+ * Current regulation and ranked season with a live UTC countdown to the end of the regulation.
+ * The server renders the countdown at build time; a small script keeps it current in the browser.
+ */
+import Badge from '../../../components/Badge.tsx';
+import { formatDateTimeUTC, formatDayUTC } from '../../../core/format.ts';
+import type { Regulation } from '../schema.ts';
+import { countdown, elapsedShare } from './lib/time.ts';
+
+interface Props {
+  regulation: Regulation;
+  season?: Regulation['seasons'][number] | undefined;
+  /** The next regulation, when it has been announced. */
+  next?: Regulation | undefined;
+  /** Build-time clock (ms). */
+  now: number;
+}
+
+const { regulation, season, next, now } = Astro.props;
+const left = countdown(regulation.end, now);
+const share = elapsedShare(regulation.start, regulation.end, now);
+const estimated = regulation.estimatedEnd === true;
+---
+
+<section class="card pk-reg" aria-labelledby="pk-reg-title" data-reg-banner>
+  <div>
+    <p class="kicker">Current ruleset · VGC Doubles</p>
+    <h2 class="pk-reg__title" id="pk-reg-title">{regulation.label}</h2>
+    <p class="pk-reg__window">
+      <time datetime={regulation.start}>{formatDayUTC(regulation.start)}</time> to <time datetime={regulation.end}>{formatDateTimeUTC(regulation.end)}</time>
+      {estimated && ' (end date estimated)'}
+    </p>
+    {
+      season && (
+        <p class="pk-season">
+          <Badge tone="accent">Season {season.id}</Badge>
+          <span>
+            Ranked season {season.id}: {formatDayUTC(season.start)} to {formatDayUTC(season.end)}
+            {season.estimated ? ' (dates estimated)' : ''}
+          </span>
+        </p>
+      )
+    }
+    <div class="pk-reg__bar" role="img" aria-label={`${Math.round(share * 100)}% of ${regulation.label} has passed`} data-reg-progress>
+      <span style={`width: ${(share * 100).toFixed(1)}%`}></span>
+    </div>
+    {regulation.notes && <p class="pk-subtle" style="margin-top: var(--sp-2)">{regulation.notes}</p>}
+  </div>
+  <div class="pk-countdown" data-countdown data-end={regulation.end}>
+    <span class="pk-label" data-countdown-label>{left.ended ? 'Regulation status' : 'Ends in'}</span>
+    <span class="pk-countdown__value" data-countdown-value aria-hidden="true">{left.ended ? 'Ended' : left.text}</span>
+    <span class="visually-hidden" data-countdown-long>{left.ended ? `${regulation.label} has ended.` : `${regulation.label} ends in ${left.long}.`}</span>
+    <span class="pk-subtle">
+      {left.ended ? 'Ended' : 'Closes'}
+      <time datetime={regulation.end}>{formatDateTimeUTC(regulation.end)}</time>
+    </span>
+    {next && <span class="pk-subtle">Next: {next.label} from {formatDayUTC(next.start)}</span>}
+  </div>
+</section>
+
+<script>
+  import { countdown, elapsedShare } from './lib/time.ts';
+
+  function tick() {
+    for (const box of document.querySelectorAll<HTMLElement>('[data-countdown]')) {
+      const end = box.dataset.end;
+      if (!end) continue;
+      const c = countdown(end, Date.now());
+      const value = box.querySelector<HTMLElement>('[data-countdown-value]');
+      const label = box.querySelector<HTMLElement>('[data-countdown-label]');
+      const long = box.querySelector<HTMLElement>('[data-countdown-long]');
+      if (value) value.textContent = c.ended ? 'Ended' : c.text;
+      if (label) label.textContent = c.ended ? 'Regulation status' : 'Ends in';
+      if (long) long.textContent = c.ended ? 'This regulation has ended.' : `Ends in ${c.long}.`;
+    }
+    for (const banner of document.querySelectorAll<HTMLElement>('[data-reg-banner]')) {
+      const bar = banner.querySelector<HTMLElement>('[data-reg-progress]');
+      const times = banner.querySelectorAll<HTMLTimeElement>('.pk-reg__window time');
+      const start = times[0]?.dateTime;
+      const end = times[1]?.dateTime;
+      if (!bar || !start || !end) continue;
+      const share = elapsedShare(start, end, Date.now());
+      const fill = bar.querySelector<HTMLElement>('span');
+      if (fill) fill.style.width = `${(share * 100).toFixed(1)}%`;
+      bar.setAttribute('aria-label', `${Math.round(share * 100)}% of the regulation has passed`);
+    }
+  }
+
+  tick();
+  setInterval(tick, 30_000);
+</script>

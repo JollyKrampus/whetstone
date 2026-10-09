@@ -1,9 +1,267 @@
 ---
-// Placeholder until the pokemon module ships its own index page.
-import GamePlaceholder from '../../components/GamePlaceholder.astro';
+/**
+ * Pokémon Champions home: the regulation in force with a countdown, the ranked season, the
+ * most-used Pokémon on the Showdown ladder (or the legal roster while a new regulation's data
+ * warms up), a tournament snapshot and per-source freshness.
+ */
+import '../../games/pokemon/components/pokemon.css';
+import EmptyState from '../../components/EmptyState.astro';
+import EntityGrid from '../../components/EntityGrid.astro';
+import Badge from '../../components/Badge.tsx';
+import type { BadgeSpec, EntityTile } from '../../components/types.ts';
+import { compact, formatDateTimeUTC, int, pct } from '../../core/format.ts';
+import { freshness } from '../../core/freshness.ts';
+import { gameById, navHref } from '../../games/registry.ts';
+import {
+  getCurrentRegulation,
+  getCurrentSeason,
+  getDefaultUsage,
+  getMeta,
+  getRegulations,
+  getSpecies,
+  getTournaments,
+  getUsage,
+  getUsageIndex,
+} from '../../games/pokemon/load.ts';
+import type { Species, Usage } from '../../games/pokemon/schema.ts';
+import DataNote from '../../games/pokemon/components/DataNote.astro';
+import RegulationBanner from '../../games/pokemon/components/RegulationBanner.astro';
+import { buildNow } from '../../games/pokemon/components/server.ts';
+import { cutoffLabel, displayName, monHref, monthLabel, spriteHref, usageText, usageTrend } from '../../games/pokemon/view.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
+
+const module = gameById('pokemon');
+const meta = getMeta();
+const now = buildNow();
+const regulation = getCurrentRegulation(new Date(now));
+const season = getCurrentSeason(new Date(now));
+const regs = getRegulations();
+const regIndex = regs.findIndex((r) => r.id === regulation.id);
+const previousReg = regIndex > 0 ? regs[regIndex - 1] : undefined;
+const nextReg = regs[regIndex + 1];
+
+const usage = getDefaultUsage(new Date(now));
+let previousUsage: Usage | null = null;
+if (usage && previousReg) {
+  const entry = getUsageIndex()
+    .filter((e) => e.regulation === previousReg.id && e.format === previousReg.formats.doubles)
+    .sort((a, b) => Math.abs(a.cutoff - usage.cutoff) - Math.abs(b.cutoff - usage.cutoff))[0];
+  previousUsage = entry ? getUsage(entry.format, entry.cutoff) : null;
+}
+
+const species = getSpecies();
+const byId = new Map(species.map((s) => [s.id, s]));
+const legal = species.filter((s) => s.legal.includes(regulation.id));
+const TOP = 50;
+
+const isNew = (s: Species) => previousReg !== undefined && !s.legal.includes(previousReg.id);
+
+function tile(s: Species, rank?: number, share?: number): EntityTile {
+  const badges: BadgeSpec[] = [];
+  if (share !== undefined && usage) {
+    const trend = usageTrend(s.id, usage, previousUsage, `Reg ${previousReg?.id ?? ''}`);
+    if (trend && trend.direction === 'up') badges.push({ label: `▲ ${trend.deltaPp.toFixed(1)}`, tone: 'positive', title: trend.label });
+    if (trend && trend.direction === 'down') badges.push({ label: `▼ ${Math.abs(trend.deltaPp).toFixed(1)}`, tone: 'negative', title: trend.label });
+  }
+  if (isNew(s)) badges.push({ label: 'New', tone: 'accent', title: `Legal from ${regulation.label}` });
+  const t: EntityTile = {
+    id: s.id,
+    name: displayName(s),
+    href: monHref(s),
+    subtitle: rank !== undefined && share !== undefined ? `#${rank} · ${usageText(share)}` : s.types.join(' / '),
+    aliases: [s.name, ...(s.baseSpecies ? [s.baseSpecies] : [])],
+    facets: {
+      type: [...s.types],
+      form: s.megaOf ? 'Mega' : 'Regular',
+    },
+    badges,
+  };
+  const img = spriteHref(s);
+  if (img) t.image = img;
+  return t;
+}
+
+const tiles: EntityTile[] = [];
+const seen = new Set<string>();
+for (const row of usage?.pokemon ?? []) {
+  const s = byId.get(row.id);
+  if (!s || !s.legal.includes(regulation.id)) continue;
+  seen.add(s.id);
+  tiles.push(row.rank <= TOP ? tile(s, row.rank, row.usage) : tile(s));
+}
+const byName = (a: Species, b: Species) => (displayName(a) < displayName(b) ? -1 : displayName(a) > displayName(b) ? 1 : 0);
+for (const s of [...legal].sort(byName)) {
+  if (!seen.has(s.id)) tiles.push(tile(s));
+}
+
+const tournaments = getTournaments();
+const topSpecies = [...(tournaments?.species ?? [])].sort((a, b) => b.teams - a.teams || (a.id < b.id ? -1 : 1)).slice(0, 6);
+const names = Object.fromEntries(module.sources.map((s) => [s.id, s.name]));
+const fresh = freshness(meta, now, { names });
+
+const tools = [
+  { path: 'builder/', name: 'Team builder', text: 'Import a Showdown paste, check legality, weaknesses, speed and the threats your team faces.' },
+  { path: 'calc/', name: 'Damage calc', text: 'Champions damage with Stat Points, doubles spread, weather, terrain and screens.' },
+  { path: 'preview/', name: 'Team preview', text: 'Your six against theirs: which four to bring and which two to lead, with reasons.' },
+  { path: 'speed/', name: 'Speed tiers', text: 'Who outspeeds whom at level 50, with Scarf, Tailwind, paralysis and Trick Room.' },
+  { path: 'tiers/', name: 'Tier list', text: 'Usage tiers from the ladder and from tournaments, adjusted only by credible win rates.' },
+  { path: 'teams/', name: 'Tournament teams', text: 'Top-cut teams and archetypes from Limitless events, without player names.' },
+];
 ---
 
-<GameLayout game="pokemon">
-  <GamePlaceholder game="pokemon" />
+<GameLayout game="pokemon" title="Pokémon Champions meta" description="Pokémon Champions VGC Doubles meta: regulation countdown, ladder usage, tournament snapshot and team tools." uses={['smogon', 'limitless', 'showdown']}>
+  <div class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">Pokémon Champions · VGC Doubles</p>
+      <h1>{regulation.label} meta</h1>
+      <p class="pk-lead">
+        Which Pokémon people bring, how they build them and what beats them, refreshed daily from public ladder, replay and
+        tournament data. Every number shows its source and sample size.
+      </p>
+    </header>
+
+    <RegulationBanner regulation={regulation} season={season} next={nextReg} now={now} />
+
+    <section class="pk-section" aria-labelledby="usage-h">
+      <div class="section-head">
+        <h2 id="usage-h">{usage ? 'Most used on the ladder' : 'Legal roster'}</h2>
+        {usage && <span class="pk-subtle">Top {Math.min(TOP, usage.pokemon.length)} by usage, then the rest of the roster</span>}
+      </div>
+      {
+        usage ? (
+          <DataNote
+            attribution={usage.attribution}
+            facts={[monthLabel(usage.month), cutoffLabel(usage.cutoff), `${int(usage.battles)} battles`, previousUsage ? `arrows: change vs Reg ${previousReg?.id}` : null]}
+            synthetic={usage.synthetic}
+          />
+        ) : (
+          <EmptyState title="Ladder data is warming up" icon="data" level={3} compact>
+            <p>
+              Smogon publishes ladder usage once a month, so a new regulation has no ladder numbers for its first weeks. Until then
+              this page lists the legal roster{tournaments ? ' and the tournament snapshot below' : ''}.
+            </p>
+          </EmptyState>
+        )
+      }
+      <EntityGrid
+        id="pokemon-grid"
+        items={tiles}
+        label="Pokémon"
+        placeholder="Search Pokémon, e.g. Rillaboom or Mega"
+        noun={['Pokémon', 'Pokémon']}
+        size="sm"
+        facets={[
+          { id: 'form', label: 'Form', options: [{ value: 'Regular' }, { value: 'Mega' }] },
+          { id: 'type', label: 'Type' },
+        ]}
+        emptyText="No Pokémon are listed for this regulation yet."
+      />
+    </section>
+
+    {
+      tournaments && (
+        <section class="pk-section" aria-labelledby="tour-h">
+          <div class="section-head">
+            <h2 id="tour-h">Tournament snapshot</h2>
+            <a href={navHref('pokemon', 'teams/')}>All tournament teams →</a>
+          </div>
+          <div class="pk-cols">
+            <div class="card pk-panel">
+              <h3>Most registered</h3>
+              <ol class="pk-bars">
+                {topSpecies.map((t) => {
+                  const s = byId.get(t.id);
+                  return (
+                    <li class="pk-bar" style={`--w: ${(t.share * 100).toFixed(1)}%`}>
+                      <span class="pk-bar__label">
+                        {s ? <a href={monHref(s)}>{displayName(s)}</a> : t.id}
+                        <small> · {t.wr !== null ? `WR ${pct(t.wr, 1)}` : 'no games'} · {int(t.teams)} teams</small>
+                      </span>
+                      <span class="pk-bar__value">{pct(t.share, 1)}</span>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+            <div class="card pk-panel">
+              <h3>Archetypes</h3>
+              {tournaments.archetypes.length === 0 ? (
+                <p class="pk-subtle">No recurring cores yet.</p>
+              ) : (
+                <ol class="pk-bars">
+                  {tournaments.archetypes.map((a) => (
+                    <li class="pk-bar" style={`--w: ${(a.share * 100).toFixed(1)}%`}>
+                      <span class="pk-bar__label">
+                        {a.label}
+                        <small> · {int(a.teams)} teams{a.wr !== null ? ` · WR ${pct(a.wr, 1)}` : ''}</small>
+                      </span>
+                      <span class="pk-bar__value">{pct(a.share, 1)}</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </div>
+          </div>
+          <DataNote
+            attribution={tournaments.attribution}
+            facts={[tournaments.window.label, `${int(tournaments.totals.tournaments)} tournaments`, `${int(tournaments.totals.teams)} teams`, 'player names removed']}
+            synthetic={tournaments.synthetic}
+          />
+        </section>
+      )
+    }
+
+    <section class="pk-section" aria-labelledby="tools-h">
+      <h2 id="tools-h">Tools</h2>
+      <ul class="pk-tools">
+        {
+          tools.map((t) => (
+            <li class="card">
+              <a href={navHref('pokemon', t.path)}>
+                <span class="pk-tools__name">{t.name}</span>
+                <p>{t.text}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="pk-section" aria-labelledby="fresh-h">
+      <div class="section-head">
+        <h2 id="fresh-h">Data freshness</h2>
+        <a href={navHref('pokemon', 'about/')}>How the numbers work →</a>
+      </div>
+      <ul class="pk-sources">
+        {
+          fresh.sources.map((s) => (
+            <li class="pk-sources__item">
+              <div class="pk-sources__top">
+                <strong>{s.name}</strong>
+                <Badge tone={s.level === 'fresh' ? 'positive' : s.level === 'aging' ? 'warning' : s.level === 'disabled' ? 'neutral' : 'negative'}>{s.level}</Badge>
+                <span class="pk-subtle">
+                  {s.fetchedAt ? (
+                    <>
+                      {s.status === 'ok' ? 'Updated ' : 'Last good data '}
+                      <time datetime={s.fetchedAt} data-rel-time>
+                        {formatDateTimeUTC(s.fetchedAt)}
+                      </time>
+                    </>
+                  ) : (
+                    s.label
+                  )}
+                </span>
+              </div>
+              {s.detail && <p class="pk-subtle">{s.detail}</p>}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="pk-note">
+        {meta.extra.smogonMonth && <span>Ladder month {monthLabel(meta.extra.smogonMonth)}</span>}
+        {meta.extra.showdownSha && <span>· Showdown data {meta.extra.showdownSha.slice(0, 7)}</span>}
+        <span>· {compact(meta.counts.species ?? legal.length)} species in the dex</span>
+      </p>
+    </section>
+  </div>
 </GameLayout>

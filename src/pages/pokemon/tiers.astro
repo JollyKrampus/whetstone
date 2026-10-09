@@ -1,0 +1,145 @@
+---
+/**
+ * Usage-based tiers (POKEMON_TIERS: S ≥ 20, A ≥ 10, B ≥ 5, C ≥ 2, D below, on usage %), adjusted
+ * by tournament win rate only where its Wilson interval excludes 50 % (core/tiers.ts
+ * pokemonTierValue). Two views: the Showdown ladder (Smogon) and Limitless tournaments.
+ */
+import '../../games/pokemon/components/pokemon.css';
+import EmptyState from '../../components/EmptyState.astro';
+import Tabs from '../../components/Tabs.astro';
+import TierList from '../../components/TierList.astro';
+import type { BadgeSpec, TierRow } from '../../components/types.ts';
+import { int, signed } from '../../core/format.ts';
+import { assignTiers, EARLY, POKEMON_TIERS, type TierResult } from '../../core/tiers.ts';
+import { navHref } from '../../games/registry.ts';
+import { getCurrentRegulation, getSpeciesById, getTournaments } from '../../games/pokemon/load.ts';
+import DataNote from '../../games/pokemon/components/DataNote.astro';
+import { buildNow, currentUsage } from '../../games/pokemon/components/server.ts';
+import {
+  cutoffLabel,
+  displayName,
+  ladderTierRows,
+  monHref,
+  monthLabel,
+  spriteHref,
+  toTierInputs,
+  tournamentTierRows,
+  type TierSourceRow,
+} from '../../games/pokemon/view.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+
+const regulation = getCurrentRegulation(new Date(buildNow()));
+const usage = currentUsage();
+const tournaments = getTournaments();
+
+const TITLES: Record<string, string> = {
+  S: 'Defines the format',
+  A: 'Common',
+  B: 'Regular',
+  C: 'Niche',
+  D: 'Rare',
+};
+const NOTES: Record<string, string> = {
+  S: '20% or more',
+  A: '10–20%',
+  B: '5–10%',
+  C: '2–5%',
+  D: 'under 2%',
+};
+
+function toRows(source: TierSourceRow[], nNoun: string): TierRow[] {
+  const results = assignTiers(toTierInputs(source), POKEMON_TIERS);
+  const byId = new Map(source.map((r) => [r.id, r]));
+  const item = (t: TierResult) => {
+    const src = byId.get(t.id)!;
+    const s = getSpeciesById(t.id);
+    const adjust = t.metric - Math.round(src.usagePct * 100) / 100;
+    const badges: BadgeSpec[] = [];
+    if (Math.abs(adjust) >= 0.05) {
+      badges.push({ label: `WR ${signed(adjust, 1)}`, tone: adjust > 0 ? 'positive' : 'negative', title: `Win-rate adjustment: ${src.wrNote ?? ''}` });
+    }
+    const out: { id: string; name: string; value: string; badges: BadgeSpec[]; href?: string; image?: string } = {
+      id: t.id,
+      name: s ? displayName(s) : t.id,
+      value: src.note,
+      badges,
+    };
+    if (s) out.href = monHref(s);
+    const img = spriteHref(s);
+    if (img) out.image = img;
+    return out;
+  };
+  const tiers: TierRow[] = POKEMON_TIERS.bands.map((b) => ({
+    id: b.id,
+    label: b.id,
+    title: TITLES[b.id] ?? b.id,
+    note: NOTES[b.id] ?? '',
+    items: results.filter((r) => r.tier === b.id).map(item),
+  }));
+  const early = results.filter((r) => r.tier === EARLY);
+  if (early.length) {
+    tiers.push({ id: EARLY, label: '?', title: 'Early data', note: `fewer than ${POKEMON_TIERS.minN} ${nNoun}`, items: early.map(item) });
+  }
+  return tiers;
+}
+
+const ladder = usage ? toRows(ladderTierRows(usage, tournaments), 'appearances') : null;
+const tour = tournaments ? toRows(tournamentTierRows(tournaments), 'teams') : null;
+const tabs = [
+  { id: 'ladder', label: 'Ladder', meta: usage ? cutoffLabel(usage.cutoff) : 'warming up' },
+  { id: 'tournaments', label: 'Tournaments', meta: tournaments ? `${int(tournaments.totals.teams)} teams` : 'no data' },
+];
+---
+
+<GameLayout game="pokemon" title="Pokémon Champions tier list" description={`Usage-based tiers for Pokémon Champions ${regulation.label}, from the ladder and from tournaments, with sample sizes.`} uses={['smogon', 'limitless']}>
+  <div class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">{regulation.label}</p>
+      <h1>Tier list</h1>
+      <p class="pk-lead">
+        Tiers follow how often a Pokémon is brought: S at 20% of teams or more, then A at 10%, B at 5%, C at 2%. A tournament win rate
+        moves a Pokémon only when its 95% interval sits clearly above or below 50%, and then by half the distance. Fewer than {POKEMON_TIERS.minN}
+        teams counts as early data. <a href={navHref('pokemon', 'about/')}>Method</a>
+      </p>
+    </header>
+
+    <Tabs label="Tier list source" tabs={tabs}>
+      <Fragment slot="ladder">
+        {
+          ladder && usage ? (
+            <div class="pk-section">
+              <TierList tiers={ladder} label="Ladder tiers" emptyTierText="None in this tier." />
+              <DataNote
+                attribution={usage.attribution}
+                facts={[monthLabel(usage.month), cutoffLabel(usage.cutoff), `${int(usage.battles)} battles`, tournaments ? 'win-rate adjustment from Limitless' : null]}
+                synthetic={usage.synthetic}
+              />
+            </div>
+          ) : (
+            <EmptyState title="Ladder tiers are warming up" level={2}>
+              <p>Smogon publishes usage monthly; the first numbers for {regulation.label} appear a few weeks after it starts.</p>
+            </EmptyState>
+          )
+        }
+      </Fragment>
+      <Fragment slot="tournaments">
+        {
+          tour && tournaments ? (
+            <div class="pk-section">
+              <TierList tiers={tour} label="Tournament tiers" emptyTierText="None in this tier." />
+              <DataNote
+                attribution={tournaments.attribution}
+                facts={[tournaments.window.label, `${int(tournaments.totals.tournaments)} tournaments`, 'share of registered teams', 'player names removed']}
+                synthetic={tournaments.synthetic}
+              />
+            </div>
+          ) : (
+            <EmptyState title="No tournament data yet" level={2}>
+              <p>Limitless results for {regulation.label} appear here after the first events.</p>
+            </EmptyState>
+          )
+        }
+      </Fragment>
+    </Tabs>
+  </div>
+</GameLayout>

@@ -1,0 +1,222 @@
+---
+/**
+ * Limitless tournament aggregates: archetypes (recurring cores), species results and the latest
+ * top-cut teams. Only aggregates and anonymised team sheets: player names are removed at ingest.
+ */
+import '../../games/pokemon/components/pokemon.css';
+import CopyButton from '../../components/CopyButton.tsx';
+import EmptyState from '../../components/EmptyState.astro';
+import { formatDayUTC, int, pct } from '../../core/format.ts';
+import { wilsonInterval } from '../../core/stats.ts';
+import { navHref } from '../../games/registry.ts';
+import { getCurrentRegulation, getSpeciesById, getTournaments } from '../../games/pokemon/load.ts';
+import DataNote from '../../games/pokemon/components/DataNote.astro';
+import { buildNow, serverDex } from '../../games/pokemon/components/server.ts';
+import { exportTeam } from '../../games/pokemon/components/lib/paste.ts';
+import { encodeTeam, teamHash } from '../../games/pokemon/components/lib/share.ts';
+import type { Team } from '../../games/pokemon/components/lib/team.ts';
+import { displayName, monHref } from '../../games/pokemon/view.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+
+const regulation = getCurrentRegulation(new Date(buildNow()));
+const tournaments = getTournaments();
+const dex = serverDex();
+const nameOf = (id: string) => {
+  const s = getSpeciesById(id);
+  return s ? displayName(s) : id;
+};
+const hrefOf = (id: string) => {
+  const s = getSpeciesById(id);
+  return s ? monHref(s) : undefined;
+};
+const ci = (wins: number, games: number) => (games > 0 ? wilsonInterval(wins, games) : null);
+const tourById = new Map((tournaments?.tournaments ?? []).map((t) => [t.id, t]));
+
+const teams = await Promise.all(
+  (tournaments?.teams ?? []).map(async (t, i) => {
+    const team: Team = t.members.map((m) => ({
+      species: m.species,
+      ...(m.item ? { item: m.item } : {}),
+      ...(m.ability ? { ability: m.ability } : {}),
+      nature: m.nature ?? 'Serious',
+      sp: [0, 0, 0, 0, 0, 0],
+      moves: [...m.moves],
+    }));
+    const payload = await encodeTeam(team);
+    return {
+      key: `team-${i + 1}`,
+      t,
+      tournament: tourById.get(t.tournamentId),
+      paste: exportTeam(team, dex),
+      builder: `${navHref('pokemon', 'builder/')}${teamHash.encode({ team: payload })}`,
+      preview: `${navHref('pokemon', 'preview/')}${teamHash.encode({ them: payload })}`,
+    };
+  }),
+);
+const species = [...(tournaments?.species ?? [])].sort((a, b) => b.teams - a.teams || (a.id < b.id ? -1 : 1));
+---
+
+<GameLayout game="pokemon" title="Tournament teams" description={`Pokémon Champions ${regulation.label} tournament archetypes, results and top-cut teams from Limitless.`} uses={['limitless']}>
+  <div class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">{regulation.label} · Limitless</p>
+      <h1>Tournament teams</h1>
+      <p class="pk-lead">
+        Results from grassroots events on Limitless: which cores keep showing up, how each Pokémon's teams did, and the latest top-cut
+        team sheets. Team sheets carry no Stat Points, so imported teams start with none.
+      </p>
+    </header>
+
+    {
+      !tournaments ? (
+        <EmptyState title="No tournament data yet" level={2}>
+          <p>Limitless results for {regulation.label} appear here after the first events with open team lists.</p>
+        </EmptyState>
+      ) : (
+        <>
+          <DataNote
+            attribution={tournaments.attribution}
+            facts={[
+              tournaments.window.label,
+              `${int(tournaments.totals.tournaments)} tournaments`,
+              `${int(tournaments.totals.players)} players`,
+              'player names removed',
+            ]}
+            synthetic={tournaments.synthetic}
+          />
+
+          <section class="pk-section" aria-labelledby="arch-h">
+            <h2 id="arch-h">Archetypes</h2>
+            {tournaments.archetypes.length === 0 ? (
+              <p class="pk-subtle">No recurring cores in this window yet.</p>
+            ) : (
+              <div class="pk-scroll">
+                <table class="pk-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Archetype</th>
+                      <th scope="col">Core</th>
+                      <th scope="col" class="pk-num">Teams</th>
+                      <th scope="col" class="pk-num">Share</th>
+                      <th scope="col" class="pk-num">Record</th>
+                      <th scope="col" class="pk-num">Win rate (95%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tournaments.archetypes.map((a) => {
+                      const games = a.wins + a.losses + a.ties;
+                      const interval = ci(a.wins + a.ties / 2, games);
+                      return (
+                        <tr>
+                          <th scope="row">{a.label}</th>
+                          <td>
+                            {a.core.map((id, i) => (
+                              <>
+                                {i > 0 && ' + '}
+                                {hrefOf(id) ? <a href={hrefOf(id)}>{nameOf(id)}</a> : nameOf(id)}
+                              </>
+                            ))}
+                          </td>
+                          <td class="pk-num">{int(a.teams)}</td>
+                          <td class="pk-num">{pct(a.share, 1)}</td>
+                          <td class="pk-num">{`${a.wins}–${a.losses}${a.ties ? `–${a.ties}` : ''}`}</td>
+                          <td class="pk-num">
+                            {a.wr !== null ? pct(a.wr, 1) : '—'}
+                            {interval && <span class="pk-subtle"> ({pct(interval.lower, 0)}–{pct(interval.upper, 0)})</span>}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+
+          <section class="pk-section" aria-labelledby="species-h">
+            <h2 id="species-h">Pokémon results</h2>
+            <div class="pk-scroll">
+              <table class="pk-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Pokémon</th>
+                    <th scope="col" class="pk-num">Teams</th>
+                    <th scope="col" class="pk-num">Share</th>
+                    <th scope="col" class="pk-num">Games</th>
+                    <th scope="col" class="pk-num">Win rate (95%)</th>
+                    <th scope="col" class="pk-num">Top cuts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {species.map((s) => {
+                    const games = s.wins + s.losses + s.ties;
+                    const interval = ci(s.wins + s.ties / 2, games);
+                    return (
+                      <tr>
+                        <th scope="row">{hrefOf(s.id) ? <a href={hrefOf(s.id)}>{nameOf(s.id)}</a> : nameOf(s.id)}</th>
+                        <td class="pk-num">{int(s.teams)}</td>
+                        <td class="pk-num">{pct(s.share, 1)}</td>
+                        <td class="pk-num">{int(games)}</td>
+                        <td class="pk-num">
+                          {s.wr !== null ? pct(s.wr, 1) : '—'}
+                          {interval && <span class="pk-subtle"> ({pct(interval.lower, 0)}–{pct(interval.upper, 0)})</span>}
+                        </td>
+                        <td class="pk-num">{s.topCut !== undefined ? int(s.topCut) : '—'}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p class="pk-subtle">Win rates count ties as half a win. The interval is the Wilson 95% interval; small samples give wide ranges.</p>
+          </section>
+
+          <section class="pk-section" aria-labelledby="top-h">
+            <h2 id="top-h">Latest top-cut teams</h2>
+            {teams.length === 0 ? (
+              <p class="pk-subtle">No top-cut team sheets in this window yet.</p>
+            ) : (
+              <ol class="pk-cards">
+                {teams.map(({ key, t, tournament, paste, builder, preview }) => (
+                  <li class="pk-card" id={key}>
+                    <div class="pk-card__head">
+                      <span class="pk-card__name">
+                        #{t.placing} at {tournament ? <a href={tournament.url} rel="noopener external">{tournament.name}</a> : t.tournamentId}
+                      </span>
+                      <span class="pk-card__meta">
+                        <span>{`${t.record.wins}–${t.record.losses}${t.record.ties ? `–${t.record.ties}` : ''}`}</span>
+                        {tournament && <span>{formatDayUTC(tournament.date)}</span>}
+                        {tournament && <span>{int(tournament.players)} players</span>}
+                      </span>
+                    </div>
+                    <ul class="pk-team">
+                      {t.members.map((m) => (
+                        <li>
+                          <strong>{hrefOf(m.species) ? <a href={hrefOf(m.species)}>{nameOf(m.species)}</a> : nameOf(m.species)}</strong>
+                          {m.item && <span>@ {dex.itemName(m.item)}</span>}
+                          <span class="pk-subtle">
+                            {[m.ability ? dex.abilityName(m.ability) : null, m.nature ?? null].filter(Boolean).join(' · ')}
+                          </span>
+                          <span>{m.moves.map((mv) => dex.moveName(mv)).join(', ')}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div class="pk-actions">
+                      <a class="btn btn--sm" href={builder}>
+                        Open in builder
+                      </a>
+                      <a class="btn btn--sm" href={preview}>
+                        Preview against it
+                      </a>
+                      <CopyButton client:visible text={paste} label="Copy paste" class="btn--sm" />
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </section>
+        </>
+      )
+    }
+  </div>
+</GameLayout>

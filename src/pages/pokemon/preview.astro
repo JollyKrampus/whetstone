@@ -1,0 +1,67 @@
+---
+/**
+ * Team Preview assistant: your six against their six → recommended bring-four and lead pair with
+ * the reasons, from the generic draft scorer (core/draft.ts) with Pokémon evidence.
+ */
+import '../../games/pokemon/components/pokemon.css';
+import EmptyState from '../../components/EmptyState.astro';
+import { int } from '../../core/format.ts';
+import { navHref } from '../../games/registry.ts';
+import { getCurrentRegulation, getH2H } from '../../games/pokemon/load.ts';
+import TeamPreview from '../../games/pokemon/components/TeamPreview.tsx';
+import { buildNow, topMetaSets, usageLabel } from '../../games/pokemon/components/server.ts';
+import { compactEdges } from '../../games/pokemon/view.ts';
+import GameLayout from '../../layouts/GameLayout.astro';
+import { stagedUrlOrNull } from '../../lib/stagemap.ts';
+
+const regulation = getCurrentRegulation(new Date(buildNow()));
+const dexUrl = stagedUrlOrNull('pokemon', 'dex');
+// Their side can be anything legal, so the common sets go deeper than the top 50.
+const metaSets = topMetaSets(120);
+const label = usageLabel();
+const h2h = getH2H();
+const edges = compactEdges(h2h);
+const edgesLabel = h2h ? `Showdown Bo3 replays (${h2h.window.label}, ${int(h2h.replays)} replays${h2h.synthetic ? ', sample data' : ''})` : null;
+---
+
+<GameLayout
+  game="pokemon"
+  title="Team preview assistant"
+  description={`Pokémon Champions ${regulation.label} team preview: your six against theirs, which four to bring and which two to lead, with reasons.`}
+  uses={['showdown', 'smogon', 'showdown-replays', 'smogon-calc']}
+>
+  <div class="pk-page">
+    <header class="pk-head">
+      <p class="kicker">{regulation.label} · bring 4 of 6</p>
+      <h1>Team preview</h1>
+      <p class="pk-lead">
+        Enter the six you see at Team Preview. The assistant ranks your six against them from replay results, type matchups, speed and damage
+        calculations, then suggests four to bring and two to lead. Each pick shows why, with sample sizes; treat it as a second opinion, not an answer.
+      </p>
+    </header>
+    {
+      dexUrl ? (
+        <TeamPreview
+          client:load
+          dexUrl={dexUrl}
+          regulation={regulation.id}
+          metaSets={metaSets}
+          usageLabel={label}
+          edges={edges}
+          edgesLabel={edgesLabel}
+          builderHref={navHref('pokemon', 'builder/')}
+        />
+      ) : (
+        <EmptyState title="The Pokédex isn't published yet" level={2}>
+          <p>The assistant needs the Champions dex from the daily data job. Try again after the next update.</p>
+        </EmptyState>
+      )
+    }
+    <noscript>
+      <p class="pk-issue" data-level="warning"><span class="pk-issue__tag">Note</span><span>The team preview assistant runs in your browser and needs JavaScript.</span></p>
+    </noscript>
+    <p class="pk-subtle">
+      How the scores work: <a href={navHref('pokemon', 'about/#preview')}>team preview method</a>.
+    </p>
+  </div>
+</GameLayout>

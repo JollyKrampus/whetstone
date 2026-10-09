@@ -1,0 +1,40 @@
+---
+/**
+ * Usage shares as labelled bars ("Fake Out 83.0%"). The percentage is always printed; the bar is
+ * a visual aid only.
+ */
+import { pct } from '../../../core/format.ts';
+import type { ShareRow } from './ui.ts';
+
+interface Props {
+  title: string;
+  rows: ShareRow[];
+  emptyText?: string;
+  /** Heading level (default 3). */
+  level?: 3 | 4;
+}
+
+const { title, rows, emptyText = 'No data.', level = 3 } = Astro.props;
+const Heading = `h${level}` as 'h3' | 'h4';
+---
+
+<div class="pk-sharebars">
+  <Heading class="pk-list-title">{title}</Heading>
+  {
+    rows.length === 0 ? (
+      <p class="pk-subtle">{emptyText}</p>
+    ) : (
+      <ol class="pk-bars">
+        {rows.map((r) => (
+          <li class="pk-bar" style={`--w: ${Math.max(0, Math.min(100, r.share * 100)).toFixed(1)}%`}>
+            <span class="pk-bar__label">
+              {r.href ? <a href={r.href}>{r.label}</a> : r.label}
+              {r.note && <small> · {r.note}</small>}
+            </span>
+            <span class="pk-bar__value">{pct(r.share, 1)}</span>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</div>
