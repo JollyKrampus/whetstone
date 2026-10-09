@@ -6,6 +6,7 @@
  * Dense matrices are row-major over the shard's hero order: entry [i·H + j] is "i vs j"
  * (counters) or "i with j" (synergies, mirrored). Pairs below the hide gate stay null.
  */
+import { GATES } from '../../../core/stats.ts';
 import type { DraftShard, DraftStatsBlock, GameMode, StatsWindow, Timeframe } from '../schema.ts';
 
 export interface StatsBlockOptions {
@@ -62,7 +63,7 @@ export function statsBlockFromWindow(window: StatsWindow, shard: Pick<DraftShard
     for (const [mapId, s] of Object.entries(perMap)) {
       const j = mapIndex.get(mapId);
       if (j === undefined) continue;
-      maps.delta[i * M + j] = s.games >= 15 ? s.delta : null;
+      maps.delta[i * M + j] = s.games >= GATES.hideBelow ? s.delta : null;
       maps.n[i * M + j] = s.games;
     }
   }

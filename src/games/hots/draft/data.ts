@@ -6,6 +6,7 @@
  * (cheap, no zod in the island bundle); the pipeline already validated it with DraftShardSchema.
  * Only `import type` from ../schema.ts, which keeps zod out of the browser bundle.
  */
+import { GATES } from '../../../core/stats.ts';
 import type { DraftStatsBlock, HeroRole, HeroTag } from '../schema.ts';
 
 export interface DraftHero {
@@ -214,7 +215,8 @@ export function decodeShard(raw: unknown): DraftData {
 
 // ---- lookups -------------------------------------------------------------------------------
 
-export const HIDE_BELOW_N = 15;
+/** Cells with fewer games are hidden (SPEC §6 gate, from src/core/stats.ts). */
+export const HIDE_BELOW_N = GATES.hideBelow;
 
 function cell(score: (number | null)[], delta: (number | null)[], n: number[], k: number): StatCell | null {
   const s = score[k];

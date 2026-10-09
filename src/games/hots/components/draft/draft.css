@@ -1,7 +1,7 @@
 /*
  * Draft tool and ARAM helper (islands under src/games/hots/components/draft/). Global on purpose:
  * Astro's scoped styles cannot reach island markup. Every class is prefixed (dt-, hp-, sg-, tp-,
- * ar-, seg) so nothing leaks into the rest of the site. Colours come from tokens.css only, and
+ * ar-) so nothing leaks into the rest of the site. Colours come from tokens.css only, and
  * team colour is never the only cue (every slot and panel is labelled in text).
  */
 
@@ -103,7 +103,7 @@
 }
 
 /* Segmented control: buttons with aria-pressed. */
-.seg {
+.dt-seg {
   display: inline-flex;
   width: 100%;
   padding: 3px;
@@ -112,11 +112,11 @@
   background: var(--surface-2);
 }
 
-.seg--wrap {
+.dt-seg--wrap {
   flex-wrap: wrap;
 }
 
-.seg__btn {
+.dt-seg__btn {
   flex: 1 1 auto;
   min-height: calc(var(--tap) - 8px);
   padding: 0 var(--sp-2);
@@ -130,11 +130,11 @@
   cursor: pointer;
 }
 
-.seg__btn:hover {
+.dt-seg__btn:hover {
   color: var(--text);
 }
 
-.seg__btn[aria-pressed='true'] {
+.dt-seg__btn[aria-pressed='true'] {
   background: var(--surface);
   color: var(--text);
   box-shadow:
@@ -142,7 +142,7 @@
     var(--shadow-1);
 }
 
-.seg__count {
+.dt-seg__count {
   color: var(--text-faint);
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
@@ -881,8 +881,9 @@ button.tp-slot--filled .tp-slot__x {
 }
 
 .sg-credit {
+  margin: 0;
   color: var(--text);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-md);
 }
 
 .sg-credit a {

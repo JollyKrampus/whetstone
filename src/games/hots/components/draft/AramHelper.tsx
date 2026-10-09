@@ -218,10 +218,10 @@ export default function AramHelper({ shardUrl, roster, maps, credit }: Props) {
         </section>
 
         <section class="ar-inputs" aria-label="Heroes in this game">
-          <div class="seg seg--wrap dt-targets" role="group" aria-label="Add heroes to">
+          <div class="dt-seg dt-seg--wrap dt-targets" role="group" aria-label="Add heroes to">
             {LISTS.map((l) => (
-              <button type="button" key={l.id} class="seg__btn" aria-pressed={target === l.id} onClick={() => setTarget(l.id)}>
-                {l.short} <span class="seg__count">{used(l.id)}/{capacity[l.id]}</span>
+              <button type="button" key={l.id} class="dt-seg__btn" aria-pressed={target === l.id} onClick={() => setTarget(l.id)}>
+                {l.short} <span class="dt-seg__count">{used(l.id)}/{capacity[l.id]}</span>
               </button>
             ))}
           </div>

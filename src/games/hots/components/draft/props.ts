@@ -36,6 +36,17 @@ export interface CreditProp {
   attribution: string;
 }
 
+/**
+ * Split a credit around the source name so the name itself is the link, as SourceAttribution
+ * does: "Data provided by " + [Heroes Profile] + ".". Adds the final full stop when missing.
+ */
+export function creditParts(credit: CreditProp): { before: string; after: string } {
+  const at = credit.attribution.indexOf(credit.name);
+  const stop = /[.!?)]$/.test(credit.attribution) ? '' : '.';
+  if (at < 0) return { before: `${credit.attribution} `, after: stop };
+  return { before: credit.attribution.slice(0, at), after: `${credit.attribution.slice(at + credit.name.length)}${stop}` };
+}
+
 export function portraitUrl(hero: { portrait: string }): string {
   return assetHref('hots', hero.portrait);
 }

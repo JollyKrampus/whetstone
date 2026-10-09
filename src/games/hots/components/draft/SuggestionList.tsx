@@ -5,7 +5,7 @@ import type { PresetId, Weights } from '../../../../core/draft.ts';
 import { fixed, int, pp, signed } from '../../../../core/format.ts';
 import type { Reason } from '../../../../core/game.ts';
 import { breakdown, disabledNote, reasonLabel, type PresetInfo, type Suggestion } from '../../draft/suggest.ts';
-import { portraitUrl, roleText, type CreditProp } from './props.ts';
+import { creditParts, portraitUrl, roleText, type CreditProp } from './props.ts';
 
 interface Props {
   idPrefix: string;
@@ -48,6 +48,20 @@ function ReasonLine({ reason, label, tone }: { reason: Reason; label: string; to
         {meta.length > 0 ? <span class="sg-reason__meta">{tone ? `${label} · ` : ''}{meta.join(' · ')}</span> : tone ? <span class="sg-reason__meta">{label}</span> : null}
       </span>
     </li>
+  );
+}
+
+/** Heroes Profile's required credit: same screen as its numbers, body-size text, a working link. */
+function InlineCredit({ credit }: { credit: CreditProp }) {
+  const { before, after } = creditParts(credit);
+  return (
+    <p class="sg-credit" data-attribution="inline" data-source="heroesprofile">
+      {before}
+      <a href={credit.url} rel="noopener">
+        {credit.name}
+      </a>
+      {after}
+    </p>
   );
 }
 
@@ -155,16 +169,6 @@ export default function SuggestionList(props: Props) {
         {statsLabel ? (
           <>
             <span class="badge badge--stats">Stats</span> <span>{statsLabel}, with theory where data is thin.</span>
-            {credit ? (
-              <span class="sg-credit" data-attribution="inline" data-source="heroesprofile">
-                {' '}
-                {credit.attribution.replace(credit.name, '').trim()}{' '}
-                <a href={credit.url} rel="noopener">
-                  {credit.name}
-                </a>
-                .
-              </span>
-            ) : null}
           </>
         ) : (
           <>
@@ -172,6 +176,7 @@ export default function SuggestionList(props: Props) {
           </>
         )}
       </p>
+      {statsLabel && credit ? <InlineCredit credit={credit} /> : null}
 
       {shown.length === 0 ? (
         <div class="sg-empty">{empty ?? 'No suggestions for this step.'}</div>

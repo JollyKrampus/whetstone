@@ -128,7 +128,7 @@ test.describe('Storm League draft', () => {
     await expect(page.locator('.tp--a .tp__bans .tp-slot--filled')).toHaveCount(0);
     await expect(stepTitle(page)).toHaveText('Your ban');
 
-    await page.locator('#dt-fp-label + .seg').getByRole('button', { name: 'Enemy' }).click();
+    await page.locator('#dt-fp-label + .dt-seg').getByRole('button', { name: 'Enemy' }).click();
     await expect(stepTitle(page)).toHaveText('Enemy ban');
     await expect(page.locator('.tp--b .badge')).toHaveText('First pick');
     expect(new URL(page.url()).hash).toBe('#v=1&m=cursed-hollow&fp=b');

@@ -447,11 +447,11 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
           <span class="dt-field__label" id="dt-mode-label">
             Mode
           </span>
-          <div class="seg" role="group" aria-labelledby="dt-mode-label">
-            <button type="button" class="seg__btn" aria-pressed={mode === 'sl'} onClick={() => changeMode('sl')}>
+          <div class="dt-seg" role="group" aria-labelledby="dt-mode-label">
+            <button type="button" class="dt-seg__btn" aria-pressed={mode === 'sl'} onClick={() => changeMode('sl')}>
               Storm League
             </button>
-            <button type="button" class="seg__btn" aria-pressed={mode === 'free'} onClick={() => changeMode('free')}>
+            <button type="button" class="dt-seg__btn" aria-pressed={mode === 'free'} onClick={() => changeMode('free')}>
               Free
             </button>
           </div>
@@ -491,11 +491,11 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
             <span class="dt-field__label" id="dt-fp-label">
               First pick
             </span>
-            <div class="seg" role="group" aria-labelledby="dt-fp-label">
-              <button type="button" class="seg__btn" aria-pressed={fp === 'a'} onClick={() => changeFirstPick('a')}>
+            <div class="dt-seg" role="group" aria-labelledby="dt-fp-label">
+              <button type="button" class="dt-seg__btn" aria-pressed={fp === 'a'} onClick={() => changeFirstPick('a')}>
                 You
               </button>
-              <button type="button" class="seg__btn" aria-pressed={fp === 'b'} onClick={() => changeFirstPick('b')}>
+              <button type="button" class="dt-seg__btn" aria-pressed={fp === 'b'} onClick={() => changeFirstPick('b')}>
                 Enemy
               </button>
             </div>
@@ -565,9 +565,9 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
                 ))}
               </ol>
             ) : (
-              <div class="seg seg--wrap dt-targets" role="group" aria-label="Add heroes to">
+              <div class="dt-seg dt-seg--wrap dt-targets" role="group" aria-label="Add heroes to">
                 {TARGETS.map((t) => (
-                  <button type="button" key={`${t.team}${t.action}`} class="seg__btn" aria-pressed={t.team === target.team && t.action === target.action} onClick={() => setTarget(t)}>
+                  <button type="button" key={`${t.team}${t.action}`} class="dt-seg__btn" aria-pressed={t.team === target.team && t.action === target.action} onClick={() => setTarget(t)}>
                     {TARGET_LABEL(t)}
                   </button>
                 ))}
