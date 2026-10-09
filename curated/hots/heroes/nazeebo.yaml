@@ -1,0 +1,56 @@
+hero: nazeebo
+reviewedFor: "2.57"
+traits:
+  - tag: immobile
+    why: "Nazeebo has no movement ability and cannot move while channeling Ravenous Spirit, so he relies on Zombie Wall and his frontline for safety."
+  - tag: sustained-dps
+    why: "Plague of Toads and Corpse Spiders stack damage over time, and Voodoo Ritual permanently grows his Health and Mana as the game goes on."
+  - tag: waveclear
+    why: "Voodoo Ritual poisons minions while Zombie Wall and Plague of Toads clear whole waves and feed his quest."
+counters:
+  - a: nazeebo
+    b: chogall
+    why: "Cho'gall's huge, slow body takes every stacking Plague of Toads and a full Ravenous Spirit, while Zombie Wall stalls him from reaching Nazeebo."
+    evidence: ["Plague of Toads", "Ravenous Spirit", "Zombie Wall"]
+    confidence: low
+  - a: nazeebo
+    b: stitches
+    why: "Stitches walks straight into stacked Plague of Toads, and Zombie Wall can trap him away from the Hero he just Hooked."
+    evidence: ["Plague of Toads", "Zombie Wall", "Hook"]
+    confidence: low
+  - a: nazeebo
+    b: thebutcher
+    why: "Zombie Wall can box The Butcher in after Ruthless Onslaught, letting Nazeebo's team kite a melee carry who has no second gap closer."
+    evidence: ["Zombie Wall", "Ruthless Onslaught"]
+    confidence: low
+  - a: anubarak
+    b: nazeebo
+    why: "Harden Carapace's Spell Armor soaks Nazeebo's all-Ability damage, and Burrow Charge or Impale reaches a Witch Doctor who has no escape."
+    evidence: ["Harden Carapace", "Burrow Charge", "Impale"]
+    confidence: medium
+  - a: zeratul
+    b: nazeebo
+    why: "Zeratul reaches a stationary Nazeebo from Permanent Cloak, and Blink lets him leave a Zombie Wall cast around him."
+    evidence: ["Permanent Cloak", "Blink", "Zombie Wall"]
+    confidence: medium
+  - a: genji
+    b: nazeebo
+    why: "Deflect absorbs Ravenous Spirit ticks and Toads, and Cyber Agility jumps over Zombie Wall onto a hero with no escapes."
+    evidence: ["Deflect", "Cyber Agility", "Ravenous Spirit", "Zombie Wall"]
+    confidence: medium
+synergies:
+  - a: nazeebo
+    b: zarya
+    why: "Graviton Surge holds enemies at one point, so a Zombie Wall cast on it traps the whole group for Ring of Poison or Ravenous Spirit."
+    evidence: ["Graviton Surge", "Zombie Wall", "Ring of Poison", "Ravenous Spirit"]
+    confidence: medium
+  - a: mei
+    b: nazeebo
+    why: "Ice Wall and Zombie Wall together box enemies in, giving Plague of Toads and Ravenous Spirit full uptime on the trapped Heroes."
+    evidence: ["Ice Wall", "Zombie Wall", "Plague of Toads", "Ravenous Spirit"]
+    confidence: low
+  - a: nazeebo
+    b: tyrael
+    why: "Sanctification makes allies Invulnerable for 3 seconds, protecting a stationary Nazeebo during part of Ravenous Spirit's 8-second channel."
+    evidence: ["Sanctification", "Ravenous Spirit"]
+    confidence: low

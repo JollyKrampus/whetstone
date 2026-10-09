@@ -1,0 +1,55 @@
+hero: orphea
+reviewedFor: "2.57"
+traits:
+  - tag: sustained-dps
+    why: "Each Basic Ability hit stores Chaos that her next Basic Attack spends for bonus damage and full lifesteal, so she wins drawn-out trades."
+  - tag: aa-reliant
+    why: "Overflowing Chaos only pays out its bonus damage and healing through Basic Attacks, so Orphea must weave attacks between her Abilities."
+counters:
+  - a: orphea
+    b: nazeebo
+    why: "Shadow Waltz's dash carries Orphea out of Zombie Wall, and Overflowing Chaos healing outlasts Nazeebo's damage over time in a long lane trade."
+    evidence: ["Shadow Waltz", "Zombie Wall", "Overflowing Chaos", "Plague of Toads"]
+    confidence: low
+  - a: orphea
+    b: thelostvikings
+    why: "Crushing Jaws pulls all nearby Vikings to one point, and Chomp plus Eternal Feast punish the clump, with Feast repeating while it keeps hitting Heroes."
+    evidence: ["Crushing Jaws", "Chomp", "Eternal Feast"]
+    confidence: low
+  - a: orphea
+    b: sonya
+    why: "Ancient Spear is Sonya's only way in, and Backbiter's dash after Chomp plus Dread's slow let Orphea kite her while Chaos attacks heal back the damage."
+    evidence: ["Ancient Spear", "Backbiter", "Chomp", "Dread", "Overflowing Chaos"]
+    conditions: "Assumes Backbiter at level 4."
+    confidence: low
+  - a: anubarak
+    b: orphea
+    why: "Harden Carapace's Spell Armor blunts Orphea's Ability damage, and Impale catches her once Shadow Waltz's dash has been used."
+    evidence: ["Harden Carapace", "Impale", "Shadow Waltz"]
+    confidence: medium
+  - a: johanna
+    b: orphea
+    why: "Shield Glare Blinds Orphea, so her Chaos-empowered Basic Attacks miss and she loses both the bonus damage and the healing from Overflowing Chaos."
+    evidence: ["Shield Glare", "Overflowing Chaos"]
+    confidence: medium
+  - a: cassia
+    b: orphea
+    why: "Blinding Light shuts off Orphea's Overflowing Chaos attacks and their self-healing, while Cassia's Avoidance Armor reduces the physical part of her damage."
+    evidence: ["Blinding Light", "Avoidance", "Overflowing Chaos"]
+    confidence: low
+synergies:
+  - a: orphea
+    b: zarya
+    why: "Graviton Surge holds Heroes in place, so Eternal Feast keeps re-casting on them every second and Chomp lands on the whole group."
+    evidence: ["Graviton Surge", "Eternal Feast", "Chomp"]
+    confidence: medium
+  - a: jaina
+    b: orphea
+    why: "Ring of Frost's 3-second root keeps targets inside Eternal Feast's area, letting the heroic repeat several times."
+    evidence: ["Ring of Frost", "Eternal Feast"]
+    confidence: medium
+  - a: etc
+    b: orphea
+    why: "Mosh Pit stuns enemies in place for up to 4 seconds, which keeps Eternal Feast repeating on every stunned Hero."
+    evidence: ["Mosh Pit", "Eternal Feast"]
+    confidence: medium

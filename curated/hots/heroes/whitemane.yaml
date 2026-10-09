@@ -1,0 +1,64 @@
+hero: whitemane
+reviewedFor: "2.57"
+traits:
+  - tag: mana-hungry
+    why: "Each Desperation stack adds 40 Mana to Desperate Plea's cost, so spamming heals drains Whitemane's Mana very quickly."
+  - tag: immobile
+    why: "Whitemane has no dash or escape and only 1400 Health, so divers reach her freely."
+counters:
+  # --- strong against ---
+  - a: whitemane
+    b: illidan
+    why: "Inquisition is an ability, so Evasion doesn't stop it; it slows Illidan for 3 seconds while Subjugation halves his damage and Zeal turns Whitemane's damage into healing."
+    evidence: ["Inquisition", "Subjugation", "Zeal", "Evasion"]
+    conditions: "Subjugation at level 13."
+    confidence: low
+  - a: whitemane
+    b: thebutcher
+    why: "Inquisition slows The Butcher by 30% for 3 seconds and Subjugation halves his damage, while Intercession can make his target Unstoppable through Ruthless Onslaught's stun."
+    evidence: ["Inquisition", "Subjugation", "Intercession", "Ruthless Onslaught"]
+    conditions: "Subjugation or Intercession picked."
+    confidence: low
+  - a: whitemane
+    b: malthael
+    why: "Subjugation halves all damage from the Inquisition target, blunting a lone Malthael's cleave, Soul Rip and Reaper's Mark burn while Inquisition slows him by 30%."
+    evidence: ["Inquisition", "Subjugation", "Reaper's Mark", "Soul Rip"]
+    conditions: "Subjugation at level 13."
+    confidence: low
+  # --- weak against ---
+  - a: valeera
+    b: whitemane
+    why: "Garrote (Eviscerate from Stealth) silences Whitemane, cutting off Inquisition and Clemency, and her 1400 Health and lack of escape make her an easy kill."
+    evidence: ["Vanish", "Eviscerate", "Inquisition", "Clemency"]
+    confidence: medium
+  - a: zeratul
+    b: whitemane
+    why: "Whitemane's 1400 Health and lack of escape make her Zeratul's easiest target, and his cloaked approach beats her slow, channelled Inquisition response."
+    evidence: ["Permanent Cloak", "Singularity Spike", "Inquisition"]
+    confidence: medium
+  - a: tracer
+    b: whitemane
+    why: "Tracer Blinks out of Inquisition's channel and around Searing Lash's line, and Whitemane's 1400 Health can't survive her burst."
+    evidence: ["Blink", "Inquisition", "Searing Lash"]
+    confidence: medium
+  - a: ana
+    b: whitemane
+    why: "Biotic Grenade stops all healing on Whitemane's allies caught in it, so Zeal's damage-to-healing and Desperate Plea are wasted on those targets."
+    evidence: ["Biotic Grenade", "Zeal", "Desperate Plea"]
+    confidence: medium
+synergies:
+  - a: whitemane
+    b: zarya
+    why: "Graviton Surge holds enemies inside Divine Reckoning's area, and Shield Ally protects a fragile Whitemane from divers."
+    evidence: ["Graviton Surge", "Divine Reckoning", "Shield Ally"]
+    confidence: medium
+  - a: johanna
+    b: whitemane
+    why: "Shield Glare and Condemn peel divers off Whitemane, letting her channel Inquisition and Clemency without interruption."
+    evidence: ["Shield Glare", "Condemn", "Inquisition", "Clemency"]
+    confidence: medium
+  - a: tyrael
+    b: whitemane
+    why: "Righteousness shields Whitemane and Sanctification protects her while she channels; Zeal then heals Tyrael off the damage she deals."
+    evidence: ["Righteousness", "Sanctification", "Zeal"]
+    confidence: low

@@ -1,0 +1,56 @@
+hero: lucio
+reviewedFor: "2.57"
+traits:
+  - tag: peel
+    why: "Soundwave knocks enemies away from Lúcio and his carry, and Push Off slows a chaser by 75% for a second."
+  - tag: engage
+    why: "Speed Boost, raised to 30% by Amp It Up, moves the whole team in or out of fights faster than enemies can react."
+counters:
+  - a: lucio
+    b: kaelthas
+    why: "Sound Barrier gives every nearby ally a 1296-point shield, enough to absorb a Flamestrike plus Living Bomb chain that would otherwise wipe a clustered team."
+    evidence: ["Sound Barrier", "Flamestrike", "Living Bomb"]
+    conditions: "Requires Sound Barrier at level 10 and good timing on the 1-second cast delay."
+    confidence: low
+  - a: lucio
+    b: junkrat
+    why: "Rocket Ride hangs in the air for 3.75 seconds before landing, giving Lúcio time to cast Sound Barrier so the 935-damage landing hits shields instead of Health."
+    evidence: ["Sound Barrier", "Rocket Ride"]
+    conditions: "Requires Sound Barrier; less effective against RIP-Tire."
+    confidence: low
+  - a: lucio
+    b: thebutcher
+    why: "Soundwave knocks The Butcher off his target once Ruthless Onslaught ends, and Speed Boost lets the team outrun a hero whose only gap closer has a 15-second cooldown."
+    evidence: ["Soundwave", "Crossfade", "Ruthless Onslaught"]
+    confidence: low
+  - a: ana
+    b: lucio
+    why: "Biotic Grenade turns off healing for everyone it hits, and Lúcio's Healing Boost is a constant low tick that the grenade simply erases for its duration."
+    evidence: ["Biotic Grenade", "Crossfade", "Amp It Up"]
+    confidence: medium
+  - a: valeera
+    b: lucio
+    why: "Wound Poison halves the healing received by the allies Valeera hits, and her stealth Silence stops Amp It Up and High Five, Lúcio's only bursts of healing."
+    evidence: ["Wound Poison", "Vanish", "Amp It Up", "High Five"]
+    confidence: low
+  - a: deathwing
+    b: lucio
+    why: "Deathwing is permanently Unstoppable, so Soundwave and Push Off, Lúcio's only peel, do nothing to him, and his low throughput cannot keep up with Molten Flame."
+    evidence: ["Aspect of Death", "Soundwave", "Push Off", "Molten Flame"]
+    confidence: low
+synergies:
+  - a: lucio
+    b: varian
+    why: "Varian needs to stay glued to a target and has only Charge to get there; Amp It Up's 30% Speed Boost gives him extra reach, and High Five frees him if he is caught."
+    evidence: ["Amp It Up", "High Five", "Charge"]
+    confidence: low
+  - a: lucio
+    b: malthael
+    why: "Wraith Strike needs a marked target, so Malthael struggles to start on kiting enemies; Speed Boost lets him walk up and apply Reaper's Mark first."
+    evidence: ["Crossfade", "Wraith Strike", "Reaper's Mark"]
+    confidence: low
+  - a: illidan
+    b: lucio
+    why: "Amp It Up's Movement Speed helps Illidan re-engage while Dive is on cooldown, and High Five makes him Unstoppable for a second when he is focused."
+    evidence: ["Amp It Up", "High Five", "Dive"]
+    confidence: low

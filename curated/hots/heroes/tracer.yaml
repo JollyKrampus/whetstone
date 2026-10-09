@@ -1,0 +1,81 @@
+hero: tracer
+reviewedFor: "2.57"
+traits:
+  - tag: dive
+    why: "Three Blink charges let Tracer flank backliners and leave before they can react."
+  - tag: aa-reliant
+    why: "Most of Tracer's damage is rapid basic attacks fired on the move, which also charge Pulse Bomb."
+counters:
+  # --- strong against ---
+  - a: tracer
+    b: sgthammer
+    why: "Three Blink charges let Tracer flank a stationary Siege Mode Hammer and step around Concussive Blast, and Recall resets her if Spider Mines catch her."
+    evidence: ["Blink", "Recall", "Siege Mode", "Concussive Blast", "Spider Mines"]
+    confidence: medium
+  - a: tracer
+    b: tassadar
+    why: "Tracer Blinks around Force Wall and out of Psionic Storm, and Resonance Beam has to stay locked on a target that keeps teleporting away."
+    evidence: ["Blink", "Recall", "Force Wall", "Psionic Storm", "Resonance Beam"]
+    confidence: medium
+  - a: tracer
+    b: chromie
+    why: "Chromie's damage comes from delayed skillshots like Sand Blast and Dragon's Breath, which Tracer's Blinks dodge, and her 1390 Health can't survive Tracer up close."
+    evidence: ["Blink", "Sand Blast", "Dragon's Breath"]
+    confidence: medium
+  - a: tracer
+    b: probius
+    why: "Tracer Blinks straight through Warp Rift's slow zones, and Probius' 1260 Health and lack of a dash leave him exposed once she reaches him."
+    evidence: ["Blink", "Warp Rift"]
+    confidence: medium
+  - a: tracer
+    b: nazeebo
+    why: "Ravenous Spirit roots Nazeebo in place while he channels, and Tracer's constant movement makes Zombie Wall hard to land on her."
+    evidence: ["Blink", "Melee", "Ravenous Spirit", "Zombie Wall"]
+    confidence: low
+  - a: tracer
+    b: xul
+    why: "Tracer fights from range while Blinking, so Xul's melee Cursed Strikes rarely touch her, and Recall cleanses Bone Prison's Root once it lands."
+    evidence: ["Blink", "Recall", "Cursed Strikes", "Bone Prison"]
+    confidence: low
+  # --- weak against ---
+  - a: lili
+    b: tracer
+    why: "Blinding Wind automatically targets the nearest enemies, so Blink can't dodge it, and the Blind shuts off the basic attacks Tracer's damage depends on."
+    evidence: ["Blinding Wind", "Blink"]
+    confidence: medium
+  - a: uther
+    b: tracer
+    why: "Hammer of Justice is a targeted stun that Blink can't dodge once cast, and Divine Shield blanks Pulse Bomb's burst on an ally."
+    evidence: ["Hammer of Justice", "Divine Shield", "Pulse Bomb", "Blink"]
+    confidence: medium
+  - a: johanna
+    b: tracer
+    why: "Shield Glare blinds Tracer and wipes out her basic-attack damage, while Iron Skin's Shield and Unstoppable shrug off her burst."
+    evidence: ["Shield Glare", "Iron Skin"]
+    confidence: medium
+  - a: cassia
+    b: tracer
+    why: "Blinding Light blinds Tracer for 2 seconds, and Avoidance's Armor while Cassia moves blunts the basic attacks that make up nearly all of Tracer's damage."
+    evidence: ["Blinding Light", "Avoidance"]
+    confidence: medium
+  - a: diablo
+    b: tracer
+    why: "Overpower is a targeted grab-and-stun that Blink can't dodge, and Shadow Charge can pin Tracer against a wall for a longer stun."
+    evidence: ["Overpower", "Shadow Charge", "Blink"]
+    confidence: low
+synergies:
+  - a: tracer
+    b: zarya
+    why: "Graviton Surge holds enemies in place so Pulse Bomb sticks reliably, and Shield Ally gives Tracer a buffer to dive deeper."
+    evidence: ["Graviton Surge", "Shield Ally", "Pulse Bomb"]
+    confidence: medium
+  - a: rehgar
+    b: tracer
+    why: "Bloodlust boosts Tracer's attack speed and adds lifesteal, and Lightning Shield on her damages everything she Blinks past."
+    evidence: ["Bloodlust", "Lightning Shield", "Blink"]
+    confidence: low
+  - a: muradin
+    b: tracer
+    why: "Storm Bolt's stun and Thunder Clap's slow hold targets still long enough for Tracer to stick Pulse Bomb."
+    evidence: ["Storm Bolt", "Thunder Clap", "Pulse Bomb"]
+    confidence: medium

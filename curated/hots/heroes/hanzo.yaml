@@ -1,0 +1,66 @@
+hero: hanzo
+reviewedFor: "2.57"
+traits:
+  - tag: poke
+    why: "A fully charged Storm Bow hits from very long range, and Scatter Arrow ricochets off walls to chip enemies hiding behind them."
+  - tag: aa-reliant
+    why: "His 6.5-range basic attacks hit hard and builds with Redemption or Giant Slayer lean on them, so blinds blunt his damage."
+counters:
+  # --- strong against ---
+  - a: hanzo
+    b: chogall
+    why: "Cho'gall is a big, slow target for charged Storm Bows, and Giant Slayer adds 1.6% max health to every Scatter Arrow and basic attack."
+    evidence: ["Storm Bow", "Giant Slayer", "Scatter Arrow"]
+    confidence: low
+  - a: hanzo
+    b: stitches
+    why: "Stitches is a slow 3020-health target, so Giant Slayer's percent damage chunks him, and Natural Agility hops terrain to stay out of Hook's line."
+    evidence: ["Giant Slayer", "Natural Agility", "Hook"]
+    confidence: low
+  - a: hanzo
+    b: nova
+    why: "Sonic Arrow grants vision and reveals enemies in a large area, exposing Nova's stealth approach and leaving her open to Storm Bow."
+    evidence: ["Sonic Arrow", "Storm Bow", "Permanent Cloak"]
+    confidence: low
+  # --- weak against ---
+  - a: genji
+    b: hanzo
+    why: "Hanzo has only 1375 health and Natural Agility needs terrain to jump; Cyber Agility and Swift Strike reach him before he can get away."
+    evidence: ["Cyber Agility", "Swift Strike", "Natural Agility"]
+    confidence: medium
+  - a: tracer
+    b: hanzo
+    why: "Storm Bow needs charge time and careful aim, and Tracer's Blinks make that nearly impossible while she shreds Hanzo's small health pool."
+    evidence: ["Blink", "Reload", "Storm Bow"]
+    confidence: medium
+  - a: zeratul
+    b: hanzo
+    why: "From stealth Zeratul Blinks onto a 1375-health Hanzo and kills him before Natural Agility can be used."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Natural Agility"]
+    confidence: medium
+  - a: fenix
+    b: hanzo
+    why: "Shield Capacitor absorbs Storm Bow poke and regenerates between hits, so Hanzo's long-range chip damage rarely reaches Fenix's health."
+    evidence: ["Shield Capacitor", "Storm Bow"]
+    confidence: low
+  - a: alexstrasza
+    b: hanzo
+    why: "Hanzo wins by landing long-range single-target chunks between fights; Gift of Life every 7 seconds and Abundance's 20% max-health area heal erase Storm Bow poke before it adds up."
+    evidence: ["Gift of Life", "Abundance", "Storm Bow"]
+    confidence: low
+synergies:
+  - a: arthas
+    b: hanzo
+    why: "Summon Sindragosa slows enemies by 60% for 4 seconds, an easy window for Dragonstrike's center and fully charged Storm Bows."
+    evidence: ["Summon Sindragosa", "Dragonstrike", "Storm Bow"]
+    confidence: medium
+  - a: diablo
+    b: hanzo
+    why: "Apocalypse stuns everyone at once, an easy Dragonstrike center or long-range Dragon's Arrow."
+    evidence: ["Apocalypse", "Dragonstrike", "Dragon's Arrow"]
+    confidence: medium
+  - a: hanzo
+    b: mei
+    why: "Ice Wall traps heroes for 2.5 seconds, holding them inside Dragonstrike's damaging center."
+    evidence: ["Ice Wall", "Dragonstrike"]
+    confidence: medium

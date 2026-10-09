@@ -1,0 +1,54 @@
+hero: malganis
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Vampiric Touch heals him for half the damage he deals to Heroes, so Mal'Ganis sustains himself while standing in the middle of fights."
+  - tag: peel
+    why: "Night Rush passes through enemy Heroes and puts them to Sleep, giving him a strong answer to divers on his backline."
+counters:
+  - a: malganis
+    b: kerrigan
+    why: "Night Rush puts a diving Kerrigan to Sleep and Fel Claws' third slash stuns her mid-combo, while Vampiric Touch heals Mal'Ganis for half of what he deals back."
+    evidence: ["Night Rush", "Fel Claws", "Vampiric Touch"]
+    confidence: low
+  - a: malganis
+    b: illidan
+    why: "Fel Claws and Night Rush are Abilities that Evasion cannot stop, and Winged Guard's Physical Armor blunts the Basic Attacks Illidan needs to heal."
+    evidence: ["Fel Claws", "Night Rush", "Evasion", "Winged Guard"]
+    confidence: low
+  - a: malganis
+    b: thebutcher
+    why: "Night Rush puts The Butcher to Sleep after Ruthless Onslaught lands, and Winged Guard's Physical Armor blocks his biggest swings while Vampiric Touch keeps Mal'Ganis topped up."
+    evidence: ["Night Rush", "Ruthless Onslaught", "Winged Guard", "Vampiric Touch"]
+    confidence: low
+  - a: ana
+    b: malganis
+    why: "Biotic Grenade shuts off Vampiric Touch's healing for 1.75 seconds, removing the self-sustain that makes Mal'Ganis hard to kill."
+    evidence: ["Biotic Grenade", "Vampiric Touch"]
+    confidence: medium
+  - a: johanna
+    b: malganis
+    why: "Sins Exposed cuts Mal'Ganis's healing by 35%, and Iron Skin's Unstoppable makes Johanna immune to Night Rush's Sleep and the Fel Claws stun."
+    evidence: ["Sins Exposed", "Iron Skin", "Night Rush", "Fel Claws", "Vampiric Touch"]
+    confidence: low
+  - a: malthael
+    b: malganis
+    why: "Touch of Death halves Vampiric Touch healing on a marked Mal'Ganis, and Reaper's Mark keeps ticking percent damage on his 2600-Health pool."
+    evidence: ["Touch of Death", "Reaper's Mark", "Vampiric Touch"]
+    confidence: low
+synergies:
+  - a: malganis
+    b: tychus
+    why: "Vampiric Aura heals nearby allies for 20% of the Physical Damage they deal, and Tychus's Minigun output turns that into steady healing."
+    evidence: ["Vampiric Aura", "Minigun"]
+    confidence: medium
+  - a: malganis
+    b: valla
+    why: "Valla's Hatred-fueled Basic Attacks are Physical Damage, so Vampiric Aura gives her lifesteal while she shoots from behind Mal'Ganis."
+    evidence: ["Vampiric Aura", "Hatred"]
+    confidence: medium
+  - a: malganis
+    b: raynor
+    why: "Raynor's rapid Basic Attacks and Give 'Em Some Pepper are Physical Damage, letting Vampiric Aura heal him steadily in extended fights."
+    evidence: ["Vampiric Aura", "Give 'Em Some Pepper"]
+    confidence: medium

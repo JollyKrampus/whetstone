@@ -1,0 +1,67 @@
+hero: hogger
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "With 2260 Health, Dust Devil Armor and Meat healing from Loot Hoard, Hogger is built to stand in the middle of a brawl rather than poke from behind."
+  - tag: engage
+    why: "Hogg Wild makes him Unstoppable while he spins in the chosen direction, so he can start a fight through crowd control that stops most bruisers."
+  - tag: peel
+    why: "Staggering Blow knocks melee off a carry and stuns them on terrain, and a Loot Hoard dropped behind them can supply that wall on demand."
+counters:
+  - a: hogger
+    b: thelostvikings
+    why: "Hogg Wild damages everything around Hogger every 0.125 seconds, so spinning through a grouped Viking trio hits all three small bodies at once, and Garbage Fire adds area damage around Loot Hoard."
+    evidence: ["Hogg Wild", "Garbage Fire", "Loot Hoard"]
+    conditions: "Strongest when the Vikings fight together; split Vikings in other lanes avoid it."
+    confidence: medium
+  - a: hogger
+    b: samuro
+    why: "Mirror Images take double damage, and Hogg Wild plus Garbage Fire are area damage that shred the images while still hitting the real Samuro, taking away his main way to split and juke."
+    evidence: ["Hogg Wild", "Garbage Fire", "Mirror Image"]
+    confidence: low
+  - a: hogger
+    b: illidan
+    why: "Evasion only stops Basic Attacks, while most of Hogger's damage comes from Hogg Wild and Ez-Thro Dynamite; Dust Devil Armor and Staggering Blow knockbacks also blunt Illidan's sticky melee pressure."
+    evidence: ["Evasion", "Hogg Wild", "Ez-Thro Dynamite", "Dust Devil", "Staggering Blow"]
+    confidence: low
+  - a: hogger
+    b: murky
+    why: "Murky's 730 Health melts to Hogg Wild's rapid area ticks, and Ez-Thro Dynamite detonates instantly on a Hero, so Murky cannot trade near Hogger once Safety Bubble is down."
+    evidence: ["Hogg Wild", "Ez-Thro Dynamite", "Safety Bubble"]
+    confidence: low
+  - a: malthael
+    b: hogger
+    why: "Reaper's Mark deals 2% of maximum Health per second and Soul Rip heals Malthael for a share of Hogger's big pool, so Hogger's 2260 Health and Meat sustain feed Malthael instead of outlasting him."
+    evidence: ["Reaper's Mark", "Soul Rip", "Loot Hoard"]
+    confidence: medium
+  - a: tychus
+    b: hogger
+    why: "Minigun adds percent-maximum-Health damage to Tychus's rapid Basic Attacks, and Overkill keeps hitting from range while Hogger's only reach is a Hogg Wild spin he cannot steer once started."
+    evidence: ["Minigun", "Overkill", "Hogg Wild"]
+    confidence: medium
+  - a: lunara
+    b: hogger
+    why: "Hogger has no dependable gap closer beyond Hogg Wild's fixed-direction spin, so Crippling Spores and Dryad's Swiftness let Lunara keep Nature's Toxin ticking while staying outside his chain range."
+    evidence: ["Crippling Spores", "Dryad's Swiftness", "Nature's Toxin", "Hogg Wild"]
+    confidence: low
+synergies:
+  - a: diablo
+    b: hogger
+    why: "Loot Hoard acts as terrain for up to 5 seconds, giving Diablo a wall anywhere on the map to slam Shadow Charge targets into for its terrain stun."
+    evidence: ["Loot Hoard", "Shadow Charge"]
+    confidence: low
+  - a: auriel
+    b: hogger
+    why: "Detainment Strike only stuns on terrain collision; a Loot Hoard placed behind an enemy turns an open-field knockback into a stun and bonus damage."
+    evidence: ["Detainment Strike", "Loot Hoard"]
+    confidence: low
+  - a: hogger
+    b: stukov
+    why: "Massive Shove pushes a Hero until it hits terrain, so a Loot Hoard dropped nearby ends the shove early in a stun right beside Hogger's Staggering Blow."
+    evidence: ["Massive Shove", "Loot Hoard", "Staggering Blow"]
+    confidence: low
+  - a: hogger
+    b: kaelthas
+    why: "Shockwave's initial slam stuns for 1.5 seconds, longer than Flamestrike's 1-second delay, so Kael'thas can land an empowered Flamestrike on everyone Hogger catches."
+    evidence: ["Shockwave", "Flamestrike", "Verdant Spheres"]
+    confidence: medium

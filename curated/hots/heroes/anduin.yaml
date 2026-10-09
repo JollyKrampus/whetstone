@@ -1,0 +1,63 @@
+hero: anduin
+reviewedFor: "2.57"
+traits:
+  - tag: save
+    why: "Leap of Faith instantly pulls a caught ally back to Anduin and makes them Unstoppable while they travel."
+  - tag: immobile
+    why: "Anduin has no movement tool for himself; Leap of Faith only moves allies, so he relies on teammates when he is dived."
+  - tag: channel
+    why: "Flash Heal has a 0.75-second cast and Holy Word: Salvation is a 3-second channel, so stuns and silences cut his healing short."
+counters:
+  # --- strong against ---
+  - a: anduin
+    b: garrosh
+    why: "When Wrecking Ball throws an ally into Garrosh's team, Leap of Faith pulls them straight back, and they are Unstoppable during the trip."
+    evidence: ["Leap of Faith", "Wrecking Ball"]
+    confidence: medium
+  - a: anduin
+    b: stitches
+    why: "Hook drags one ally toward Stitches; Leap of Faith yanks them back before the follow-up arrives, wasting Hook's 16-second cooldown."
+    evidence: ["Leap of Faith", "Hook"]
+    confidence: medium
+  - a: anduin
+    b: kelthuzad
+    why: "Chains of Kel'Thuzad pulls an ally into the enemy team for a short stun; once it ends, Leap of Faith rescues them before Frost Blast or Shadow Fissure follows."
+    evidence: ["Leap of Faith", "Chains of Kel'Thuzad", "Frost Blast", "Shadow Fissure"]
+    confidence: low
+  # --- weak against ---
+  - a: zeratul
+    b: anduin
+    why: "With no personal escape, Anduin dies to a Blink-and-Cleave combo from stealth, and Flash Heal's cast time is too slow to save himself."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Flash Heal"]
+    confidence: medium
+  - a: tracer
+    b: anduin
+    why: "Chastise is a single skillshot that Tracer simply Blinks around, and Anduin cannot outrun her sustained basic attacks."
+    evidence: ["Blink", "Reload", "Chastise"]
+    confidence: medium
+  - a: genji
+    b: anduin
+    why: "Cyber Agility and Swift Strike reach Anduin instantly, and Leap of Faith can pull allies but never Anduin himself to safety."
+    evidence: ["Cyber Agility", "Swift Strike", "Leap of Faith"]
+    confidence: medium
+  - a: kerrigan
+    b: anduin
+    why: "Ravage leaps onto Anduin and Impaling Blades stuns him through Flash Heal's cast, giving Kerrigan a clean kill window on a healer with no mobility."
+    evidence: ["Ravage", "Impaling Blades", "Flash Heal"]
+    confidence: medium
+synergies:
+  - a: anduin
+    b: muradin
+    why: "Lightbomb on Muradin just before Dwarf Toss lands him in the enemy team as it explodes, stunning everyone nearby and shielding him per hero hit."
+    evidence: ["Lightbomb", "Dwarf Toss"]
+    confidence: medium
+  - a: anduin
+    b: genji
+    why: "Genji can commit with Swift Strike and Dragonblade knowing Leap of Faith will pull him back, Unstoppable, if the dive goes wrong."
+    evidence: ["Leap of Faith", "Swift Strike", "Dragonblade"]
+    confidence: medium
+  - a: anduin
+    b: dva
+    why: "Lightbomb on D.Va followed by Boosters into the backline stuns the heroes she knocks around, and the shield grows with each hero hit."
+    evidence: ["Lightbomb", "Boosters"]
+    confidence: medium

@@ -1,0 +1,83 @@
+hero: deathwing
+reviewedFor: "2.57"
+traits:
+  - tag: frontline
+    why: "Big health, up to 40 Armor from his plates and permanent Unstoppable let him walk into the enemy team without being moved."
+  - tag: siege
+    why: "Cataclysm's scorched ground and Burn Beneath My Shadow let him take structures down quickly."
+  - tag: channel
+    why: "Dragonflight takes 3 seconds and can't be started for 6 seconds after he takes damage, so steady chip damage stops him resetting."
+counters:
+  # --- strong against ---
+  - a: deathwing
+    b: etc
+    why: "Mosh Pit and Powerslide stuns do nothing to a permanently Unstoppable Deathwing, so E.T.C.'s engage and lockdown are wasted on him."
+    evidence: ["Aspect of Death", "Mosh Pit", "Powerslide"]
+    confidence: medium
+  - a: deathwing
+    b: stitches
+    why: "Hook can't drag and Gorge can't trap an Unstoppable target, so Stitches loses his playmaking tools against Deathwing."
+    evidence: ["Aspect of Death", "Hook", "Gorge"]
+    confidence: medium
+  - a: deathwing
+    b: anubarak
+    why: "Deathwing is permanently Unstoppable, so Impale, Burrow Charge's stun and Cocoon do nothing to him and Anub'arak loses most of his value."
+    evidence: ["Aspect of Death", "Impale", "Burrow Charge", "Cocoon"]
+    confidence: medium
+  - a: deathwing
+    b: arthas
+    why: "Deathwing is permanently Unstoppable, so Howling Blast's root and the slows from Frozen Tempest and Summon Sindragosa never touch him."
+    evidence: ["Aspect of Death", "Howling Blast", "Frozen Tempest", "Summon Sindragosa"]
+    confidence: medium
+  - a: deathwing
+    b: blaze
+    why: "Deathwing's permanent Unstoppable ignores Jet Propulsion's stun and Oil Spill's slow, the two tools Blaze uses to control a fight."
+    evidence: ["Aspect of Death", "Jet Propulsion", "Oil Spill"]
+    confidence: medium
+  - a: deathwing
+    b: diablo
+    why: "Shadow Charge and Overpower can't knock back or grab an Unstoppable Deathwing, which removes Diablo's whole combo."
+    evidence: ["Aspect of Death", "Shadow Charge", "Overpower"]
+    confidence: medium
+  - a: deathwing
+    b: garrosh
+    why: "Wrecking Ball can't throw an Unstoppable target and Warlord's Challenge's taunt doesn't stick, leaving Garrosh no way to control Deathwing."
+    evidence: ["Aspect of Death", "Wrecking Ball", "Warlord's Challenge"]
+    confidence: medium
+  # --- weak against ---
+  - a: malthael
+    b: deathwing
+    why: "Reaper's Mark ticks 2% of max health per second, and because Deathwing ignores his allies' heals and shields, nothing on his team offsets it."
+    evidence: ["Reaper's Mark", "Aspect of Death"]
+    confidence: medium
+  - a: tychus
+    b: deathwing
+    why: "Minigun adds 2.5% of max health per attack against a big target that friendly healers cannot top up."
+    evidence: ["Minigun", "Aspect of Death"]
+    confidence: medium
+  - a: lunara
+    b: deathwing
+    why: "Nature's Toxin keeps ticking for up to 9 seconds, and Dragonflight can't start for 6 seconds after damage, so Lunara stops Deathwing from flying out to reset."
+    evidence: ["Nature's Toxin", "Crippling Spores", "Dragonflight"]
+    confidence: medium
+  - a: zagara
+    b: deathwing
+    why: "Devouring Maw works on Unstoppable enemies, making it one of the few ways to pull Deathwing out of a fight for 4 seconds."
+    evidence: ["Devouring Maw", "Aspect of Death"]
+    confidence: low
+synergies:
+  - a: deathwing
+    b: jaina
+    why: "Ring of Frost roots for 3 seconds, covering Molten Flame's 1.5-second windup so the whole stream lands."
+    evidence: ["Ring of Frost", "Molten Flame"]
+    confidence: medium
+  - a: deathwing
+    b: kelthuzad
+    why: "Frost Blast roots its targets for 2 seconds, enough for Molten Flame's delayed stream to hit them."
+    evidence: ["Frost Blast", "Molten Flame"]
+    confidence: medium
+  - a: deathwing
+    b: mei
+    why: "Ice Wall traps heroes for 2.5 seconds right in front of Deathwing, setting up Molten Flame and Onslaught."
+    evidence: ["Ice Wall", "Molten Flame", "Onslaught"]
+    confidence: medium
