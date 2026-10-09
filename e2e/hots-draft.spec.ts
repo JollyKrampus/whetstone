@@ -185,10 +185,14 @@ test.describe('Storm League draft', () => {
     await search.press('ArrowDown');
     const focused = page.locator('.dt-picker button[data-hero]:focus');
     await expect(focused).toHaveAttribute('data-hero', 'Abat');
+    // The next tile in the grid (Anub'arak in the fixtures, Alarak with live data).
+    const next = page.locator('.dt-picker button[data-hero]').nth(1);
+    const nextId = (await next.getAttribute('data-hero')) ?? '';
+    const nextName = ((await next.getAttribute('aria-label')) ?? '').replace(/^\S+ /, '').split(',')[0] ?? '';
     await page.keyboard.press('ArrowRight');
-    await expect(page.locator('.dt-picker button[data-hero]:focus')).toHaveAttribute('data-hero', 'Anub');
+    await expect(page.locator('.dt-picker button[data-hero]:focus')).toHaveAttribute('data-hero', nextId);
     await page.keyboard.press('Enter');
-    await expect(page.locator('.tp--b .tp__bans')).toContainText("Anub'arak");
+    await expect(page.locator('.tp--b .tp__bans')).toContainText(nextName);
     // Alias search: nicknames rank their hero first; a unique nickname finds only that hero.
     await search.fill('ming');
     await expect(page.locator('.dt-picker button[data-hero]').first()).toHaveAttribute('data-hero', 'Wiza');
@@ -247,8 +251,11 @@ test.describe('pool filter', () => {
     const showAll = page.getByRole('button', { name: /Show all/ });
     if ((await showAll.count()) > 0) await showAll.click();
     const ids = await page.locator('.dt-now .sg-item').evaluateAll((els) => els.map((el) => el.getAttribute('data-hero')));
-    // Owned Zeratul, favourite Xal'atath, plus the fixture's free rotation (Diablo).
-    const allowed = new Set(['Zera', 'HXAL', 'Diab']);
+    // Owned Zeratul, favourite Xal'atath, plus this week's free rotation (those tiles say "Free").
+    const free = await page
+      .locator('.dt-picker button[data-hero]')
+      .evaluateAll((els) => els.filter((el) => /(^|, )Free(,|$)/.test(el.getAttribute('aria-label') ?? '')).map((el) => el.getAttribute('data-hero')));
+    const allowed = new Set(['Zera', 'HXAL', ...free]);
     expect(ids.length).toBeGreaterThan(0);
     for (const id of ids) expect(allowed.has(id!), `${id} is in the pool`).toBe(true);
     await expect(page.locator('.dt-now .sg-item[data-hero="HXAL"]')).toContainText('One of your favourites');

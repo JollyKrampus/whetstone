@@ -42,7 +42,7 @@ EVs: 252 HP / 4 Def / 252 SpD
 Careful Nature
 - Fake Out
 - Flare Blitz
-- Knock Off
+- Heat Wave
 - Parting Shot
 
 Garchomp @ Life Orb
