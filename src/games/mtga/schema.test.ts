@@ -82,7 +82,11 @@ describe('mtga fixture consistency', () => {
   it('restores omitted defaults the same way with and without zod', () => {
     const raw = (readJson(path.join(FIXTURES, 'public/_cards.arena.json')) as { cards: CompactCardRecord[] }).cards;
     for (const c of raw) expect(hydrateCardRecord(c)).toEqual(CardRecordSchema.parse(c));
-    expect(raw.some((c) => c.oracleText === undefined)).toBe(true);
+    // Shards keep grindstone's empty arrays, but a compact record without them hydrates the same way.
+    const compact: CompactCardRecord = { ...raw[0]! };
+    for (const key of ['manaCost', 'oracleText', 'faces', 'colors', 'colorIdentity', 'producedMana', 'keywords', 'arenaRarity', 'onArena', 'arenaIds', 'edhrecRank', 'gameChanger'] as const) delete compact[key];
+    expect(hydrateCardRecord(compact)).toEqual(CardRecordSchema.parse(compact));
+    expect(hydrateCardRecord(compact)).toMatchObject({ oracleText: '', faces: [], onArena: true, edhrecRank: null, gameChanger: false });
   });
 
   it('example meta decks resolve against the fixture card pool', () => {
@@ -113,7 +117,8 @@ describe('mtga fixture consistency', () => {
       expect(r.totals.games).toBe(e.games);
       for (const c of r.cards) {
         if (c.gihWr !== null && c.gnsWr !== null && c.iwd !== null) expect(c.iwd).toBeCloseTo((c.gihWr - c.gnsWr) * 100, 0);
-        if (c.oracleId) expect(byName.get(c.name)?.oracleId).toBe(c.oracleId);
+        const known = byName.get(c.name);
+        if (c.oracleId && known) expect(known.oracleId).toBe(c.oracleId);
       }
     }
   });
@@ -158,8 +163,9 @@ describe('mtga load.ts against fixtures', () => {
     expect(load.getStandardSets().length).toBe(load.getMeta().extra.standardSets.length);
     expect(load.getCardShard('arena').cards.find((c) => c.name === 'Fire Elemental')?.oracleText).toBe('');
     expect(load.getLimitedIndex()).toHaveLength(1);
-    expect(load.getLimitedRatings('BLB')?.cards.length).toBeGreaterThan(0);
-    expect(load.getLimitedRatings('BLB', 'Sealed')).toBeNull();
+    expect(load.getLimitedRatings('HOB')?.cards.length).toBeGreaterThan(0);
+    expect(load.getLimitedRatings('hob')?.set).toBe('HOB');
+    expect(load.getLimitedRatings('HOB', 'Sealed')).toBeNull();
     expect(load.getMetaSnapshot('standard')?.decks).toHaveLength(2);
     expect(load.getMetaSnapshot('pioneer')).toBeNull();
     expect(load.getMetaSnapshots().map((s) => s.format)).toEqual(['standard']);

@@ -1,0 +1,11 @@
+id,expansion,name,rarity,color_identity,mana_value,types,is_booster
+103405,HOB,"Bilbo Baggins, Burglar",common,U,3,Legendary Creature - Halfling Rogue,True
+103432,HOB,Uneasy Partings,common,U,4,Instant,True
+103484,HOB,Óin the Brave,common,R,2,Legendary Creature - Dwarf Warrior,True
+103434,HOB,Along the Crooked Way,rare,B,3,Enchantment,True
+103456,HOB,Ravening Warg,common,B,2,Creature - Wolf,True
+103397,HOB,An Unexpected Party,rare,W,4,Enchantment,True
+103581,HOB,Mountain,basic,R,0,Basic Land - Mountain,True
+103568,HOB,Hobbit Hole,common,,0,Land,True
+103411,HOB,Enchanted River's Grasp,common,U,3,Enchantment - Aura,True
+103576,HOB,Mountain,basic,R,0,Basic Land - Mountain,False

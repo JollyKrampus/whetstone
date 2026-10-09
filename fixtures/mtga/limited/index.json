@@ -1,10 +1,10 @@
 [
   {
-    "set": "BLB",
+    "file": "limited/HOB.PremierDraft.json",
     "format": "PremierDraft",
-    "file": "limited/BLB.PremierDraft.json",
-    "games": 77769,
-    "lastModified": "2024-09-20T12:00:00Z",
+    "games": 323114,
+    "lastModified": "2026-10-01T13:17:00.000Z",
+    "set": "HOB",
     "synthetic": true
   }
 ]
