@@ -1,0 +1,317 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`rate_power rubric > rates t1-pile as tier 1 1`] = `
+{
+  "archetype": "midrange",
+  "dimensions": [
+    {
+      "confidence": "normal",
+      "name": "Mana base",
+      "reasons": [
+        "Only 0 green sources for 1 five-pip green card at mana value 5; Karsten recommends 10.",
+        "0 lands; about 11 is typical for this deck.",
+      ],
+      "score": 20,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Speed / curve",
+      "reasons": [
+        "Average mana value 3.81 for a midrange deck (target about 2.8).",
+        "41% of nonland cards cost 2 or less (target 35%).",
+        "16 cards at 5+ mana is a heavy top end for this archetype.",
+      ],
+      "score": 55,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Interaction",
+      "reasons": [
+        "2 interactive spells (removal, counters, sweepers); about 4 suits this deck.",
+        "1 of them cost 2 or less.",
+      ],
+      "score": 50,
+      "weight": 0.15,
+    },
+    {
+      "confidence": "normal",
+      "name": "Card quality",
+      "reasons": [
+        "1 of 27 nonland cards appear in the 3 supplied meta lists.",
+        "Not seen in meta lists: Fire Elemental, Raging Goblin, Serra Angel, Shivan Dragon.",
+      ],
+      "score": 3,
+      "weight": 0.25,
+    },
+    {
+      "confidence": "normal",
+      "name": "Consistency",
+      "reasons": [
+        "Simulated: 0% keepable 7-card hands, 0% hit land drops on curve through turn 5, 0% average color availability on curve.",
+        "15% of nonland cards are 4-ofs; 6 singletons dilute draws.",
+        "1 card draw or tutor for more consistency.",
+      ],
+      "score": 7,
+      "weight": 0.2,
+    },
+  ],
+  "label": "Jank / Precon",
+  "rubric": "Constructed (60-card)",
+  "score": 24.7,
+  "tier": 1,
+}
+`;
+
+exports[`rate_power rubric > rates t2-white-weenie as tier 2 1`] = `
+{
+  "archetype": "midrange",
+  "dimensions": [
+    {
+      "confidence": "normal",
+      "name": "Mana base",
+      "reasons": [
+        "Only 2 red sources for 2 two-pip red cards at mana value 6; Karsten recommends 14.",
+        "28 lands; about 24 is typical for this deck.",
+      ],
+      "score": 28,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Speed / curve",
+      "reasons": [
+        "Average mana value 2.94 for a midrange deck (target about 2.8).",
+        "53% of nonland cards cost 2 or less (target 35%).",
+        "8 cards at 5+ mana is a heavy top end for this archetype.",
+      ],
+      "score": 88,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Interaction",
+      "reasons": [
+        "4 interactive spells (removal, counters, sweepers); about 9 suits this deck.",
+        "2 of them cost 2 or less.",
+        "Includes 2 sweepers.",
+      ],
+      "score": 46,
+      "weight": 0.15,
+    },
+    {
+      "confidence": "normal",
+      "name": "Card quality",
+      "reasons": [
+        "2 of 32 nonland cards appear in the 3 supplied meta lists.",
+        "Not seen in meta lists: Serra Angel, Ethereal Armor, Inspiring Overseer, Savannah Lions.",
+      ],
+      "score": 5,
+      "weight": 0.25,
+    },
+    {
+      "confidence": "normal",
+      "name": "Consistency",
+      "reasons": [
+        "Simulated: 86% keepable 7-card hands, 83% hit land drops on curve through turn 4, 76% average color availability on curve.",
+        "13% of nonland cards are 4-ofs.",
+        "5 cards draw or tutor for more consistency.",
+      ],
+      "score": 72,
+      "weight": 0.2,
+    },
+  ],
+  "label": "Casual",
+  "rubric": "Constructed (60-card)",
+  "score": 45.8,
+  "tier": 2,
+}
+`;
+
+exports[`rate_power rubric > rates t3-gruul as tier 3 1`] = `
+{
+  "archetype": "midrange",
+  "dimensions": [
+    {
+      "confidence": "normal",
+      "name": "Mana base",
+      "reasons": [
+        "Only 17 green sources for 2 five-pip green cards at mana value 5; Karsten recommends 23.",
+        "28 lands; about 24 is typical for this deck.",
+      ],
+      "score": 67,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Speed / curve",
+      "reasons": [
+        "Average mana value 3.06 for a midrange deck (target about 2.8).",
+        "53% of nonland cards cost 2 or less (target 35%).",
+        "11 cards at 5+ mana is a heavy top end for this archetype.",
+      ],
+      "score": 77,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Interaction",
+      "reasons": [
+        "7 interactive spells (removal, counters, sweepers); about 9 suits this deck.",
+        "5 of them cost 2 or less.",
+      ],
+      "score": 76,
+      "weight": 0.15,
+    },
+    {
+      "confidence": "normal",
+      "name": "Card quality",
+      "reasons": [
+        "16 of 32 nonland cards appear in the 3 supplied meta lists.",
+        "Not seen in meta lists: Colossal Dreadmaw, Giant Growth, Fire Elemental, Grizzly Bears.",
+      ],
+      "score": 43,
+      "weight": 0.25,
+    },
+    {
+      "confidence": "normal",
+      "name": "Consistency",
+      "reasons": [
+        "Simulated: 86% keepable 7-card hands, 83% hit land drops on curve through turn 4, 77% average color availability on curve.",
+        "50% of nonland cards are 4-ofs.",
+      ],
+      "score": 80,
+      "weight": 0.2,
+    },
+  ],
+  "label": "Focused",
+  "rubric": "Constructed (60-card)",
+  "score": 67,
+  "tier": 3,
+}
+`;
+
+exports[`rate_power rubric > rates t4-boros-midrange as tier 4 1`] = `
+{
+  "archetype": "aggro",
+  "dimensions": [
+    {
+      "confidence": "normal",
+      "name": "Mana base",
+      "reasons": [
+        "Only 0 green sources for 2 one-pip green cards at mana value 2; Karsten recommends 13.",
+      ],
+      "score": 35,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Speed / curve",
+      "reasons": [
+        "Average mana value 2.3 for an aggro deck (target about 2.1).",
+        "80% of nonland cards cost 2 or less (target 55%).",
+        "6 cards at 5+ mana is a heavy top end for this archetype.",
+      ],
+      "score": 84,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Interaction",
+      "reasons": [
+        "14 interactive spells (removal, counters, sweepers); about 6 suits this deck.",
+        "12 of them cost 2 or less.",
+      ],
+      "score": 96,
+      "weight": 0.15,
+    },
+    {
+      "confidence": "normal",
+      "name": "Card quality",
+      "reasons": [
+        "28 of 40 nonland cards appear in the 3 supplied meta lists.",
+        "Not seen in meta lists: Fire Elemental, Grizzly Bears, Savannah Lions, Serra Angel.",
+      ],
+      "score": 64,
+      "weight": 0.25,
+    },
+    {
+      "confidence": "normal",
+      "name": "Consistency",
+      "reasons": [
+        "Simulated: 75% keepable 7-card hands, 80% hit land drops on curve through turn 3, 73% average color availability on curve.",
+        "70% of nonland cards are 4-ofs.",
+        "8 cards draw or tutor for more consistency.",
+      ],
+      "score": 93,
+      "weight": 0.2,
+    },
+  ],
+  "label": "Optimized",
+  "rubric": "Constructed (60-card)",
+  "score": 72.8,
+  "tier": 4,
+}
+`;
+
+exports[`rate_power rubric > rates t5-mono-red as tier 5 1`] = `
+{
+  "archetype": "aggro",
+  "dimensions": [
+    {
+      "confidence": "normal",
+      "name": "Mana base",
+      "reasons": [
+        "Colored sources meet the Karsten targets for every colored card.",
+      ],
+      "score": 100,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Speed / curve",
+      "reasons": [
+        "Average mana value 1.26 for an aggro deck (target about 2.1).",
+        "100% of nonland cards cost 2 or less (target 55%).",
+      ],
+      "score": 100,
+      "weight": 0.2,
+    },
+    {
+      "confidence": "normal",
+      "name": "Interaction",
+      "reasons": [
+        "14 interactive spells (removal, counters, sweepers); about 6 suits this deck.",
+        "14 of them cost 2 or less.",
+      ],
+      "score": 100,
+      "weight": 0.15,
+    },
+    {
+      "confidence": "normal",
+      "name": "Card quality",
+      "reasons": [
+        "38 of 38 nonland cards appear in the 3 supplied meta lists.",
+      ],
+      "score": 94,
+      "weight": 0.25,
+    },
+    {
+      "confidence": "normal",
+      "name": "Consistency",
+      "reasons": [
+        "Simulated: 80% keepable 7-card hands, 100% hit land drops on curve through turn 2, 100% average color availability on curve.",
+        "95% of nonland cards are 4-ofs.",
+        "4 cards draw or tutor for more consistency.",
+      ],
+      "score": 94,
+      "weight": 0.2,
+    },
+  ],
+  "label": "Competitive",
+  "rubric": "Constructed (60-card)",
+  "score": 97.3,
+  "tier": 5,
+}
+`;

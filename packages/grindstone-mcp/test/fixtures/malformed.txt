@@ -1,0 +1,22 @@
+About
+Name Messy List
+
+Companion
+1 Krenko, Tin Street Kingpin
+
+Deck
+4 Lightnig Bolt
+2 A-Monastery Swiftspear
+0 Shock
+this line is nonsense
+2 Brazen Borrower
+1 Wear/Tear (DGM) 135
+1 Commit // Memory (AKR) 52
+2 Shock (M21) 159 *F*
+2 Shock (FDN) 207
+20 Mountain
+
+Sideboard
+1 Goblin Guide
+Maybeboard
+1 Hill Giant

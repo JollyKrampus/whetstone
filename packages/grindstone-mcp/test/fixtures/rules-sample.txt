@@ -1,0 +1,48 @@
+Magic: The Gathering Comprehensive Rules (TEST FIXTURE: invented text, not the real rules)
+
+These rules are effective as of January 1, 2030.
+
+Contents
+
+1. Game Concepts
+100. General
+7. Additional Rules
+702. Keyword Abilities
+Glossary
+Credits
+
+1. Game Concepts
+
+100. General
+
+100.1. These sample rules apply to any game of Sample Magic.
+
+100.1a A two-player game is a game that begins with two players.
+
+100.2. To play, each player needs a deck.
+Example: A player brings a deck of sixty cards.
+
+7. Additional Rules
+
+702. Keyword Abilities
+
+702.19. Stomping
+
+702.19a Stomping is a static ability that changes how an attacking creature assigns combat damage.
+
+702.19b An attacking creature with stomping assigns excess damage to the player or planeswalker it is attacking.
+Example: A 6/6 with stomping blocked by a 2/2 assigns 4 damage to the defending player.
+
+702.19c Stomping over planeswalkers is a variant of stomping.
+
+Glossary
+
+Stomping
+A keyword ability that lets excess combat damage carry over. See rule 702.19.
+
+Two-Player Game
+A game that begins with only two players. See rule 100.1a.
+
+Credits
+
+Sample credits.

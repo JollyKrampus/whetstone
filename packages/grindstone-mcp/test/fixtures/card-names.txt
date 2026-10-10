@@ -1,0 +1,150 @@
+# Cards in the test fixture (scripts/make-fixture.mjs). Keep it small.
+# Basics and lands
+Plains
+Island
+Swamp
+Mountain
+Forest
+Sacred Foundry
+Sundown Pass
+Elegant Parlor
+Sunbillow Verge
+Inspiring Vantage
+Temple of Triumph
+Boros Guildgate
+Wind-Scarred Crag
+Evolving Wilds
+Fabled Passage
+Jungle Hollow
+Stomping Ground
+Rockfall Vale
+Temple Garden
+Hallowed Fountain
+# Red
+Monastery Swiftspear
+Kumano Faces Kakkazan
+Phoenix Chick
+Heartfire Hero
+Emberheart Challenger
+Bloodthirsty Adversary
+Slickshot Show-Off
+Play with Fire
+Shock
+Lightning Strike
+Lightning Bolt
+Burst Lightning
+Abrade
+Boltwave
+Monstrous Rage
+Razorkin Needlehead
+Hired Claw
+Screaming Nemesis
+Sunspine Lynx
+Fear of Missing Out
+Inti, Seneschal of the Sun
+Krenko, Mob Boss
+Dragon Fodder
+Goblin Oriflamme
+Skirk Prospector
+Legion Warboss
+Krenko, Tin Street Kingpin
+Battle Cry Goblin
+Goblin Instigator
+Shivan Dragon
+Fire Elemental
+Raging Goblin
+Bonecrusher Giant
+Fable of the Mirror-Breaker
+Embercleave
+Thrill of Possibility
+Guttersnipe
+Impact Tremors
+Etali, Primal Storm
+Lathliss, Dragon Queen
+Drakuseth, Maw of Flames
+Callous Sell-Sword
+Firebrand Archer
+Dragonmaster Outcast
+# White
+Voice of Victory
+Stroke of Midnight
+Serra Angel
+Pacifism
+Sunfall
+Wrath of God
+Savannah Lions
+Inspiring Overseer
+Cathar Commando
+Giada, Font of Hope
+Enduring Innocence
+Ethereal Armor
+Disenchant
+Mentor of the Meek
+Thalia's Lieutenant
+Adeline, Resplendent Cathar
+The Wandering Emperor
+Brutal Cathar
+Fateful Absence
+Get Lost
+# Multicolor
+Lightning Helix
+Wear // Tear
+Boros Charm
+# Green
+Llanowar Elves
+Grizzly Bears
+Colossal Dreadmaw
+Cultivate
+Rampant Growth
+Tangled Florahedron
+Giant Growth
+Gigantosaurus
+Ram Through
+Lovestruck Beast
+# Blue / black
+Counterspell
+Opt
+Delver of Secrets
+Brazen Borrower
+Commit // Memory
+Fatal Push
+Thoughtseize
+Duress
+Go for the Throat
+Sheoldred, the Apocalypse
+Cut Down
+Oko, Thief of Crowns
+# Copy-limit exceptions
+Seven Dwarves
+Persistent Petitioners
+Relentless Rats
+# Not on Arena
+Goblin Guide
+Hill Giant
+# Feel-bad cards for the casual profile
+Time Warp
+Armageddon
+Drannith Magistrate
+Smothering Tithe
+Rhystic Study
+Control Magic
+# Companions
+Lurrus of the Dream-Den
+Obosh, the Preypiercer
+Jegantha, the Wellspring
+Yorion, Sky Nomad
+Zirda, the Dawnwaker
+Keruga, the Macrosage
+Kaheera, the Orphanguard
+Lutri, the Spellchaser
+Umori, the Collector
+Gyruda, Doom of Depths
+# More burn
+Skewer the Critics
+Fling
+# Cheap white creatures (companion-friendly replacements)
+Spirited Companion
+Selfless Spirit
+Knight of the White Orchid
+Serra Ascendant
+Grand Abolisher
