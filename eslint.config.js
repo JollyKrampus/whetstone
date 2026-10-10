@@ -17,6 +17,8 @@ export default defineConfig(
     'coverage/',
     'test-results/',
     'playwright-report/',
+    // Workspace packages lint with their own configs (npm run lint -w <package>).
+    'packages/',
   ]),
   js.configs.recommended,
   tseslint.configs.recommended,

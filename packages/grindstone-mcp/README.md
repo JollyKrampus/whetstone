@@ -31,9 +31,10 @@ claude mcp add grindstone -- npx -y grindstone-mcp
 
 **From a local checkout**
 
+Grindstone lives in `packages/grindstone-mcp` of the Whetstone monorepo. Run `npm ci` at the repo root; its `prepare` script builds this package. Then:
+
 ```bash
-npm install && npm run build
-claude mcp add grindstone -- node /path/to/grindstone-mcp/dist/index.js
+claude mcp add grindstone -- node /path/to/whetstone/packages/grindstone-mcp/dist/index.js
 ```
 
 On first use Grindstone downloads Scryfall's card data (about 80 MB compressed) and builds a local index, which takes 10–30 seconds. After that it refreshes at most once a day.
@@ -190,13 +191,17 @@ Override them with `GRINDSTONE_CONFIG_DIR` and `GRINDSTONE_CACHE_DIR`. Set `GRIN
 
 ## Development
 
+From the monorepo root (npm workspaces):
+
 ```bash
-npm install
-npm test          # vitest, against a small real-data fixture (no network)
-npm run lint
-npm run typecheck
-npm run build
+npm ci                                  # also builds this package (root "prepare")
+npm test -w grindstone-mcp              # vitest, against a small real-data fixture (no network)
+npm run lint -w grindstone-mcp
+npm run typecheck -w grindstone-mcp
+npm run build -w grindstone-mcp
 ```
+
+CI for this package is `.github/workflows/grindstone-ci.yml` (it only runs on changes under `packages/grindstone-mcp/`). Pushing a `grindstone-v*` tag (e.g. `grindstone-v0.3.0`) publishes it to npm via `grindstone-release.yml`. The Whetstone site imports `grindstone-mcp/core`, so the site's own CI runs for every change here too.
 
 `scripts/make-fixture.mjs` rebuilds `test/fixtures/cards.jsonl` from a downloaded bulk file and `test/fixtures/card-names.txt`.
 

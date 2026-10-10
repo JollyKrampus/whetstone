@@ -27,7 +27,8 @@
     "data": "node pipeline/run.ts --game all",
     "data:offline": "node pipeline/run.ts --game all --offline",
     "data:pull": "node scripts/data-pull.ts",
-    "sync:grindstone": "node scripts/sync-grindstone.ts"
+    "sync:grindstone": "node scripts/sync-grindstone.ts",
+    "prepare": "npm run build -w grindstone-mcp"
   },
   "dependencies": {
     "@astrojs/preact": "6.0.6",
@@ -35,6 +36,7 @@
     "@preact/signals": "2.11.3",
     "@smogon/calc": "0.12.0",
     "astro": "7.3.8",
+    "grindstone-mcp": "^0.3.0",
     "preact": "^10.29.8",
     "yaml": "^2.9.1",
     "zod": "^4.6.5"
@@ -53,5 +55,8 @@
     "typescript-eslint": "^8.71.1",
     "vitest": "^5.0.3",
     "workbox-build": "^7.4.1"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

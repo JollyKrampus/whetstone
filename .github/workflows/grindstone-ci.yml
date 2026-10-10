@@ -1,0 +1,46 @@
+# grindstone-mcp (packages/grindstone-mcp): lint, type-check, unit tests and build on the Node
+# versions it supports. Only runs for changes to the package; the site's ci.yml runs for every
+# change, because the site imports grindstone-mcp/core.
+name: Grindstone CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/grindstone-mcp/**'
+      - 'package-lock.json'
+      - '.github/workflows/grindstone-ci.yml'
+  pull_request:
+    paths:
+      - 'packages/grindstone-mcp/**'
+      - 'package-lock.json'
+      - '.github/workflows/grindstone-ci.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: grindstone-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        node: ['22', '24']
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      # The root "prepare" script builds the package as part of npm ci.
+      - run: npm ci
+      - run: npm run lint -w grindstone-mcp
+      - run: npm run typecheck -w grindstone-mcp
+      - run: npm test -w grindstone-mcp
+      - run: npm run build -w grindstone-mcp

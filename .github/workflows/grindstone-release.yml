@@ -1,0 +1,33 @@
+# Publishes packages/grindstone-mcp to npm when a grindstone-v* tag is pushed
+# (e.g. grindstone-v0.3.0). Needs the NPM_TOKEN repository secret.
+name: Grindstone release
+
+on:
+  push:
+    tags: ['grindstone-v*']
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - run: npm run lint -w grindstone-mcp
+      - run: npm run typecheck -w grindstone-mcp
+      - run: npm test -w grindstone-mcp
+      - run: npm run build -w grindstone-mcp
+      - run: npm publish -w grindstone-mcp --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
