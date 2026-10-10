@@ -130,7 +130,7 @@ export function validateFiles(files: readonly OutputFile[], registry: FileRegist
   const out: ValidationIssue[] = [];
   for (const f of files) {
     if (f.bytes || RESERVED_PATHS.includes(f.path)) continue;
-    const isPrivate = f.custody === 'B' || f.custody === 'C';
+    const isPrivate = f.custody === 'B' || f.custody === 'C' || f.custody === 'D';
     const spec = (isPrivate && opts.overlays ? registryEntry(opts.overlays, f.path) : null) ?? registryEntry(registry, f.path);
     if (!spec) {
       out.push(issue('warn', `${f.path}: no schema registered for this file`, opts.source));

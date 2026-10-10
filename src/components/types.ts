@@ -108,6 +108,8 @@ const EDGE_SOURCE_LABEL: Record<EdgeSource, string> = {
   votes: 'Votes',
   usage: 'Usage',
   replays: 'Replays',
+  community: 'Community',
+  personal: 'Yours',
 };
 
 const EDGE_SOURCE_TONE: Record<EdgeSource, Tone> = {
@@ -117,6 +119,8 @@ const EDGE_SOURCE_TONE: Record<EdgeSource, Tone> = {
   votes: 'neutral',
   usage: 'stats',
   replays: 'stats',
+  community: 'neutral',
+  personal: 'stats',
 };
 
 export function edgeSourceLabel(source: EdgeSource): string {

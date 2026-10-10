@@ -9,6 +9,9 @@ const CUSTODY: Record<CustodyClass, { label: string; text: string }> = {
   'A-SA': { label: 'Share-alike', text: 'Share-alike; published in separate files under the same license.' },
   B: { label: 'Licensed', text: 'Licensed; shown on the site only, never published or committed as data.' },
   C: { label: 'Ephemeral', text: 'Short-lived metadata; never stored, hidden once out of date.' },
+  'A-NC-SA': { label: 'Share-alike, non-commercial', text: 'Non-commercial share-alike; published in separate files under the same license, never for commercial use.' },
+  D: { label: 'Community-derived', text: 'Aggregates derived from public posts, in our own words with links; rebuilt every run, never committed.' },
+  P: { label: 'Personal', text: "The owner's own match records; kept only in the private hub, never published." },
 };
 
 const RULE: Record<AttributionRule, string> = {

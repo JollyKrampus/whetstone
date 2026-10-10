@@ -40,6 +40,8 @@ const KNOWN_SOURCES: Readonly<Record<EdgeSource, true>> = {
   votes: true,
   usage: true,
   replays: true,
+  community: true,
+  personal: true,
 };
 
 const isReason = (r: unknown): boolean =>

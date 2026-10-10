@@ -53,8 +53,8 @@ export function packDir(dir: string, secret?: string): PackResult {
     return isCustody(c) ? c : null;
   };
   const key = secret?.trim() || undefined;
-  // Without a key only files positively known to be class C may leave the runner.
-  const included = all.filter((rel) => key !== undefined || custodyOf(rel) === 'C');
+  // Without a key only files positively known to be class C or D (no licensed data, no raw posts) may leave the runner.
+  const included = all.filter((rel) => key !== undefined || custodyOf(rel) === 'C' || custodyOf(rel) === 'D');
   const dropped = all.filter((rel) => !included.includes(rel));
   if (included.length === 0) return { bytes: null, included, dropped, encrypted: false };
 

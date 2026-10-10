@@ -19,6 +19,8 @@ const KIND_LABEL: Record<ReasonKind, string> = {
   votes: 'Votes',
   pro: 'Pro',
   usage: 'Usage',
+  community: 'Community',
+  personal: 'Yours',
 };
 
 /** "Why" lines under a score: kind tag + text + numbers + evidence. Static-renderable and island-safe. */

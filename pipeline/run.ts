@@ -162,6 +162,11 @@ export function checkResult(game: GameId, result: PipelineResult, secrets: Reado
       err(`${f.path}: unknown custody class ${JSON.stringify(f.custody)}`);
       continue;
     }
+    if (f.custody === 'P') {
+      // Personal records live only in the private hub (SPEC §13.2); a public pipeline must never produce them.
+      err(`${f.path}: class P (personal) data must never be emitted by a public pipeline`);
+      continue;
+    }
     // The same public/*.json path may exist once in current/ and once in private/: the private
     // copy is an overlay that stage.ts merges into the browser shard (e.g. HotS draft + B stats).
     const here = `${isCommittable(f.custody) ? 'current' : 'private'}:${f.path}`;

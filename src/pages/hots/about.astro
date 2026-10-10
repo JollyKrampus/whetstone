@@ -25,7 +25,15 @@ const stats = getStats();
 const modes = statsModes();
 const doc = hotsMethodology(await methodologyDoc.compiledContent());
 const sourceStatus = new Map(meta.sources.map((s) => [s.id, s]));
-const custodyLabel = { A: 'Open', 'A-SA': 'Share-alike', B: 'Licensed', C: 'Ephemeral' } as const;
+const custodyLabel = {
+  A: 'Open',
+  'A-SA': 'Share-alike',
+  'A-NC-SA': 'Share-alike, non-commercial',
+  B: 'Licensed',
+  C: 'Ephemeral',
+  D: 'Community-derived',
+  P: 'Personal',
+} as const;
 const ruleLabel = { inline: 'Next to the data', top: 'Top of the page', footer: 'Page footer' } as const;
 const vocab = groupTags(HERO_TAGS.map((tag: HeroTag) => ({ tag })));
 const ownerActions = `${SITE.repo}/blob/main/docs/OWNER-ACTIONS.md#2-heroes-profile-statistics-for-hots`;

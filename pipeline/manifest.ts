@@ -22,12 +22,14 @@ export function isGameId(value: string): value is GameId {
 }
 
 export function isCustody(value: unknown): value is CustodyClass {
-  return value === 'A' || value === 'A-SA' || value === 'B' || value === 'C';
+  return (
+    value === 'A' || value === 'A-SA' || value === 'A-NC-SA' || value === 'B' || value === 'C' || value === 'D' || value === 'P'
+  );
 }
 
-/** A and A-SA live in current/ (public data branch); B and C only in private/. */
+/** A, A-SA and A-NC-SA live in current/ (public data branch); B, C and D only in private/ (P never reaches the runner). */
 export function isCommittable(custody: CustodyClass): boolean {
-  return custody === 'A' || custody === 'A-SA';
+  return custody === 'A' || custody === 'A-SA' || custody === 'A-NC-SA';
 }
 
 export interface FileIndexEntry {

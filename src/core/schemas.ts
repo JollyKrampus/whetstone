@@ -8,6 +8,7 @@
  * with `parseData`, which round-trips through JSON first.
  */
 import { z } from 'zod';
+import { GAME_IDS } from './game.ts';
 import type {
   CustodyClass,
   Edge,
@@ -39,12 +40,18 @@ export const DataPath = z
   .string()
   .regex(/^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))[A-Za-z0-9._\-/]+$/, 'expected a relative path inside the data dir');
 
-export const GameIdSchema = z.enum(['hots', 'mtga', 'pokemon']);
-export const CustodyClassSchema = z.enum(['A', 'A-SA', 'B', 'C']);
+export const GameIdSchema = z.enum(GAME_IDS);
+export const CustodyClassSchema = z.enum(['A', 'A-SA', 'A-NC-SA', 'B', 'C', 'D', 'P']);
 
 // ---- Reason / Edge ---------------------------------------------------------------------
 
-export const ReasonKindSchema = z.enum(['stat', 'theory', 'curated', 'role', 'map', 'votes', 'pro', 'usage']);
+export const ReasonKindSchema = z.enum(['stat', 'theory', 'curated', 'role', 'map', 'votes', 'pro', 'usage', 'community', 'personal']);
+
+export const CiteSchema = z.strictObject({
+  url: z.url({ protocol: /^https?$/ }),
+  site: z.string().min(1),
+  date: z.string().min(1).exactOptional(),
+});
 
 export const ReasonSchema = z.strictObject({
   kind: ReasonKindSchema,
@@ -54,9 +61,11 @@ export const ReasonSchema = z.strictObject({
   delta: z.number().exactOptional(),
   source: z.string().min(1).exactOptional(),
   evidence: z.array(z.string().min(1)).exactOptional(),
+  conditions: z.array(z.string().min(1)).exactOptional(),
+  cites: z.array(CiteSchema).max(5).exactOptional(),
 });
 
-export const EdgeSourceSchema = z.enum(['stats', 'theory', 'curated', 'votes', 'usage', 'replays']);
+export const EdgeSourceSchema = z.enum(['stats', 'theory', 'curated', 'votes', 'usage', 'replays', 'community', 'personal']);
 
 /** 1..100, 50 = neutral (SPEC §6: round(50 + 50·tanh(x))). */
 export const Score = z.number().int().min(1).max(100);

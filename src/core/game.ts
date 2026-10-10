@@ -3,10 +3,17 @@
  * Browser-safe: types only, no runtime imports. See docs/SPEC.md §4.
  */
 
-export type GameId = 'hots' | 'mtga' | 'pokemon';
+/** Every game the site ships, in display order. The single source of truth for game ids. */
+export const GAME_IDS = ['hots', 'mtga', 'pokemon'] as const;
 
-/** Data custody class (SPEC §1.2). B and C are never committed to git. */
-export type CustodyClass = 'A' | 'A-SA' | 'B' | 'C';
+export type GameId = (typeof GAME_IDS)[number];
+
+/**
+ * Data custody class (SPEC §1.2, §13.2). A, A-SA and A-NC-SA are committed to the public data branch;
+ * B, C and D are never committed (D, aggregates derived from public posts, is rebuilt every run);
+ * P (personal) never leaves the private hub and must never be emitted by a public pipeline.
+ */
+export type CustodyClass = 'A' | 'A-SA' | 'A-NC-SA' | 'B' | 'C' | 'D' | 'P';
 
 /** Where a source's credit must appear: same screen as its data, top of page, or footer. */
 export type AttributionRule = 'inline' | 'top' | 'footer';
@@ -48,7 +55,16 @@ export interface GameMeta {
   extra?: Record<string, unknown>;
 }
 
-export type ReasonKind = 'stat' | 'theory' | 'curated' | 'role' | 'map' | 'votes' | 'pro' | 'usage';
+export type ReasonKind = 'stat' | 'theory' | 'curated' | 'role' | 'map' | 'votes' | 'pro' | 'usage' | 'community' | 'personal';
+
+/** A link to the public post or page a community reason was derived from (no quotes, no usernames). */
+export interface Cite {
+  url: string;
+  /** Host or forum name shown next to the link, e.g. 'Blizzard forums'. */
+  site: string;
+  /** ISO date of the post. */
+  date?: string;
+}
 
 /** One human-readable line explaining a score. */
 export interface Reason {
@@ -62,9 +78,13 @@ export interface Reason {
   source?: string;
   /** Ability/talent/move names (etc.) that justified a theory tag. */
   evidence?: string[];
+  /** Talents, choices or situations the reason depends on, rendered as "Only when …". */
+  conditions?: string[];
+  /** Public sources a community reason was derived from (at most 5). */
+  cites?: Cite[];
 }
 
-export type EdgeSource = 'stats' | 'theory' | 'curated' | 'votes' | 'usage' | 'replays';
+export type EdgeSource = 'stats' | 'theory' | 'curated' | 'votes' | 'usage' | 'replays' | 'community' | 'personal';
 
 /**
  * A scored relation between two entities.

@@ -187,6 +187,10 @@ export function reasonLabel(reason: Reason, key: SignalKey | undefined): string 
       return 'Pro';
     case 'usage':
       return 'Usage';
+    case 'community':
+      return 'Community';
+    case 'personal':
+      return 'Yours';
   }
 }
 
