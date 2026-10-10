@@ -1,4 +1,5 @@
 import { frontTypeLine, isBasicLand, printedCopyLimit } from './cards.js';
+import { companionViolations } from './companions.js';
 import { allEntries, countCards, playEntries, type ResolvedDeck } from './deck.js';
 import type { FormatRules } from './formats.js';
 import type { CardRecord } from './types.js';
@@ -70,6 +71,15 @@ export function validateDeck(deck: ResolvedDeck, fmt: FormatRules): ValidationRe
 
   if (deck.companion && !fmt.commander && !deck.side.some((e) => e.oracleId === deck.companion!.oracleId)) {
     warn('companion_not_in_sideboard', `On Arena the companion also sits in the sideboard; add ${deck.companion.name} there.`);
+  }
+
+  const companion = companionViolations(deck, fmt);
+  if (companion?.cards.length) {
+    const shown = companion.cards.slice(0, 6).join(', ');
+    const more = companion.cards.length > 6 ? ` and ${companion.cards.length - 6} more` : '';
+    err('companion_condition', `${companion.rule.name}: ${companion.rule.condition} Breaking it: ${shown}${more}.`);
+  } else if (deck.companion && !companion) {
+    warn('companion_unknown', `${deck.companion.name} isn't a companion Grindstone knows the deckbuilding rule for.`);
   }
 
   // Legality, Arena availability, copy limits (counted across main, side and commander).

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import defaultBrawl from '../../rubric/brawl-rubric.json' with { type: 'json' };
 import defaultConstructed from '../../rubric/power-rubric.json' with { type: 'json' };
+import defaultSalt from '../../rubric/salt.json' with { type: 'json' };
 
 const tiers = z.array(z.object({ tier: z.number(), label: z.string(), min: z.number() })).min(1);
 const karsten = z.object({
@@ -114,12 +115,30 @@ export interface RubricSource {
   /** A stable key for caching (e.g. the file path the JSON came from). */
   constructed(): { key: string; json: unknown };
   brawl(): { key: string; json: unknown };
+  /** Casual etiquette rules; optional so older custom sources keep working. */
+  salt?(): { key: string; json: unknown };
 }
 
-export const bundledRubrics: RubricSource = {
+export const bundledRubrics: Required<RubricSource> = {
   constructed: () => ({ key: 'bundled:power-rubric.json', json: defaultConstructed }),
   brawl: () => ({ key: 'bundled:brawl-rubric.json', json: defaultBrawl }),
+  salt: () => ({ key: 'bundled:salt.json', json: defaultSalt }),
 };
+
+export const saltRubricSchema = z.object({
+  name: z.string(),
+  gameChangers: z.object({ level: z.enum(['avoid', 'penalize', 'ignore']), reason: z.string(), weight: z.number().optional() }),
+  rules: z.array(
+    z.object({
+      name: z.string(),
+      level: z.enum(['avoid', 'penalize']),
+      weight: z.number().optional(),
+      pattern: z.string().optional(),
+      role: z.string().optional(),
+    }),
+  ),
+});
+export type SaltRubric = z.infer<typeof saltRubricSchema>;
 
 let source: RubricSource = bundledRubrics;
 const cache = new Map<string, unknown>();
@@ -139,6 +158,7 @@ function load<T>(pick: { key: string; json: unknown }, schema: z.ZodType<T>): T 
 
 export const constructedRubric = () => load(source.constructed(), constructedRubricSchema);
 export const brawlRubric = () => load(source.brawl(), brawlRubricSchema);
+export const saltRubric = () => load((source.salt ?? bundledRubrics.salt)(), saltRubricSchema);
 
 /** Sources needed for `pips` colored pips at mana value `mv`, scaled to the deck size. */
 export function karstenSources(table: KarstenTable, pips: number, mv: number, deckSize: number): number {

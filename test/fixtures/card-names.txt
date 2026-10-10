@@ -121,3 +121,30 @@ Relentless Rats
 # Not on Arena
 Goblin Guide
 Hill Giant
+# Feel-bad cards for the casual profile
+Time Warp
+Armageddon
+Drannith Magistrate
+Smothering Tithe
+Rhystic Study
+Control Magic
+# Companions
+Lurrus of the Dream-Den
+Obosh, the Preypiercer
+Jegantha, the Wellspring
+Yorion, Sky Nomad
+Zirda, the Dawnwaker
+Keruga, the Macrosage
+Kaheera, the Orphanguard
+Lutri, the Spellchaser
+Umori, the Collector
+Gyruda, Doom of Depths
+# More burn
+Skewer the Critics
+Fling
+# Cheap white creatures (companion-friendly replacements)
+Spirited Companion
+Selfless Spirit
+Knight of the White Orchid
+Serra Ascendant
+Grand Abolisher

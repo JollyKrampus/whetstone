@@ -1,0 +1,16 @@
+{
+  "name": "Casual table etiquette",
+  "notes": "What the casual profile treats as feel-bad. 'avoid' cards are cut from the casual version and never suggested for it; 'penalize' cards are allowed but scored down by their weight (0-1). Patterns are regexes over lowercased rules text with reminder text removed. 'gameChangers' uses Scryfall's Game Changer flag (the Commander list of format-warping cards).",
+  "gameChangers": { "level": "avoid", "reason": "on the Commander Game Changers list" },
+  "rules": [
+    { "name": "extra turns", "level": "avoid", "pattern": "takes? an extra turn|extra turn after this one" },
+    { "name": "mass land destruction", "level": "avoid", "pattern": "destroy all (?:nonbasic )?lands|each player sacrifices (?:all|\\w+) lands|destroy all permanents" },
+    { "name": "lock pieces", "level": "avoid", "pattern": "(?:your opponents|each opponent|players) can't cast (?!spells during your turn)|can't untap during|spells your opponents cast cost \\{\\d\\} more|players can't search|skip (?:their|your) untap step" },
+    { "name": "no spells on your turn", "level": "penalize", "weight": 0.08, "pattern": "can't cast spells during your turn" },
+    { "name": "mass discard", "level": "avoid", "pattern": "each (?:opponent|player) discards (?:their|his or her) hand|discards? their hand" },
+    { "name": "taking your stuff", "level": "penalize", "weight": 0.15, "pattern": "gain control of target|exchange control" },
+    { "name": "counterspells", "level": "penalize", "weight": 0.1, "role": "counterspell" },
+    { "name": "tutors", "level": "penalize", "weight": 0.1, "role": "tutor" },
+    { "name": "hand attack", "level": "penalize", "weight": 0.08, "pattern": "target (?:opponent|player) reveals their hand[^.]*discards|target opponent discards" }
+  ]
+}

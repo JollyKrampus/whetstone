@@ -133,7 +133,7 @@ describe('tune_my_deck prompt', () => {
       arguments: { decklist: '4 Shock\n56 Mountain', format: 'standard', goal: 'casual', budget: '4 rares' },
     });
     const text = (p.messages[0]!.content as { text: string }).text;
-    for (const step of ['parse_decklist', 'validate_deck', 'analyze_deck', 'rate_power', 'compare_to_meta', 'suggest_upgrades']) {
+    for (const step of ['parse_decklist', 'validate_deck', 'analyze_deck', 'rate_power', 'compare_to_meta', 'build_versions']) {
       expect(text).toContain(step);
     }
     expect(text).toContain('casual');

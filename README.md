@@ -64,6 +64,7 @@ The `tune_my_deck` prompt runs this whole sequence for you.
 | `analyze_deck` | Curve, average mana value, lands, colored pips vs. sources (Karsten table), tapped lands, types, card roles (each with the rule that tagged it), interaction. |
 | `rate_power` | Tier 1–5 with a 0–100 score and per-dimension scores and reasons. |
 | `suggest_upgrades` | Cut X → add Y swaps for `casual` or `competitive` play, within your wildcard budget, without changing more of the deck than you allow. |
+| `build_versions` | Three versions of the deck (same deck with best cards, most competitive, friendly casual), each with swaps, cost, before/after tier and an Arena import. |
 | `wildcard_cost` | Wildcards needed by rarity, at each card's cheapest Arena printing. |
 | `compare_to_meta` | Closest meta archetype, overlap %, missing core cards, unusual inclusions. |
 | `search_cards` | Scryfall-style search over the local index (`t:creature id<=rw mv<=2 f:standard`). |
@@ -91,6 +92,27 @@ Every tool takes a deck as either `text` (an Arena export) or `deck` (the object
 60-card decks are scored on mana base, speed/curve, interaction, card quality and consistency. Brawl decks are scored on mana base, commander synergy, ramp, card draw, interaction and card quality.
 
 **Card quality is only as good as the meta data you give it.** With meta lists it measures how many of your cards top decks play. Without them it falls back to a rough popularity/rarity/age estimate. That estimate leans on EDHREC popularity, so it favors Commander staples, and it's marked `"confidence": "low"`.
+
+### Three versions of your deck
+
+`build_versions` returns three takes on a deck in one call. Each comes with its swaps and reasons, its wildcard cost, the power tier before and after, a legality check, and an **MTG Arena import of the finished deck**:
+
+| Version | What it does |
+|---|---|
+| **Same deck, best cards** (`faithful`) | Plays the same deck, using the best available version of each card. A swap must keep the card's role and card type, its colors, and any tribe the deck is built around. It can cost the same or one mana less, and can't make the colored cost heavier. Tapped or off-color lands get untapped replacements. Example: a 3-mana kill spell becomes a 2-mana one. |
+| **Most competitive** (`competitive`) | As strong as possible, changing as much as needed. It's weighted toward the meta lists you supply, includes land-base upgrades, and has no change cap. |
+| **Friendly casual** (`casual`) | Something a casual table won't get mad at. It swaps out and never adds cards on the "avoid" list in [`rubric/salt.json`](rubric/salt.json): Commander Game Changers, extra turns, mass land destruction, lock pieces and mass discard. It scores down milder ones such as counterspells, tutors and theft. |
+
+Every version:
+- **Replaces cards that make the deck illegal,** such as banned cards, cards not on Arena, or cards that break the companion's condition.
+- **Checks every swap against the format rules** (copy limits including the sideboard, restricted cards, color identity, companion conditions, legality) and drops any swap that would break one.
+- **Never comes out weaker (faithful and competitive):** these two versions keep only optional swaps that don't lower the power score.
+
+`suggest_upgrades` takes the same `profile` to get one version's swaps on their own.
+
+**Prefer premium cards.** With `preferPremium: true`, Grindstone leans toward mythics and rares whenever there's a choice, breaking ties by paper price. It still never exceeds a wildcard budget. To make that your default, put `{ "preferPremium": true }` in `preferences.json` in your config directory.
+
+**Companions.** `validate_deck` checks the deckbuilding condition of every Ikoria companion (Gyruda, Jegantha, Kaheera, Keruga, Lurrus, Lutri, Obosh, Umori, Yorion, Zirda). Zirda's "has an activated ability" check is a text heuristic.
 
 ### Keeping your deck yours
 

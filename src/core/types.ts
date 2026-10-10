@@ -41,6 +41,11 @@ export interface CardRecord {
   latestReleasedAt: string;
   edhrecRank: number | null;
   gameChanger: boolean;
+  /**
+   * Cheapest paper price in USD across printings (nonfoil, else foil), from the snapshot.
+   * Arena has no prices; this is only a tiebreak for "prefer premium" cards.
+   */
+  priceUsd: number | null;
 }
 
 export interface IndexMeta {

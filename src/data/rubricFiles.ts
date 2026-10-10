@@ -18,5 +18,6 @@ export function fileRubricSource(configDir: string): RubricSource {
   return {
     constructed: pick('power-rubric.json', bundledRubrics.constructed),
     brawl: pick('brawl-rubric.json', bundledRubrics.brawl),
+    salt: pick('salt.json', bundledRubrics.salt),
   };
 }

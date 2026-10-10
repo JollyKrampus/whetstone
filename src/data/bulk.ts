@@ -10,7 +10,7 @@ import { aggregateCards, byNameThenId } from '../core/aggregate.js';
 import type { CardRecord, IndexMeta } from '../core/types.js';
 import type { ScryfallClient } from './scryfall.js';
 
-const SCHEMA_VERSION = '1';
+const SCHEMA_VERSION = '2';
 
 export { aggregateCards };
 

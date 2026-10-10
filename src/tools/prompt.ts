@@ -6,7 +6,7 @@ export function registerTunePrompt(server: McpServer) {
     'tune_my_deck',
     {
       title: 'Tune my deck',
-      description: 'Walk through parse → validate → analyze → rate → meta research → compare → suggest for an Arena deck.',
+      description: 'Walk through parse → validate → analyze → rate → meta research → compare → three deck versions for an Arena deck.',
       argsSchema: {
         decklist: z.string().describe('The MTG Arena export'),
         format: z.string().describe('standard, pioneer, historic, timeless, brawl or standardbrawl'),
@@ -34,15 +34,17 @@ export function registerTunePrompt(server: McpServer) {
                   ? [
                       "   For Brawl, ask me to paste my commander's EDHREC page (or any recommendation list). Don't fetch " +
                         'EDHREC yourself; its terms forbid automated access. Pass what I paste as `recommendations` to ' +
-                        'rate_power and suggest_upgrades.',
+                        'rate_power and build_versions.',
                     ]
                   : []),
                 `5. Search the web for the current ${format} metagame on MTG Arena and collect 3-8 recent top decklists ` +
                   'in Arena export format, with meta share and win rate where available. Only use sites that allow it, and say where the lists came from.',
                 '6. compare_to_meta with those lists as metaLists, then rate_power again with them as meta.',
-                `7. suggest_upgrades in ${mode} mode${budget ? ', converting my budget into the wildcards object' : ''}, with the same meta lists.`,
+                `7. build_versions with the same meta lists${budget ? ', converting my budget into the wildcards object' : ''}. It returns three ` +
+                  'versions: "Same deck, best cards", "Most competitive" and "Friendly casual".',
                 '',
-                'Finish with: the current tier, the recommended swaps with reasons and wildcard cost, and what the deck would still be weak against.',
+                `Finish with: the current tier; then each version (lead with the one that fits my ${mode} goal) with its swaps and ` +
+                  'reasons, wildcard cost, tier before → after, and its Arena import in a code block; then what the deck would still be weak against.',
                 'Keep the math from the tools; do your own reasoning only for the narrative.',
                 '',
                 'Decklist:',

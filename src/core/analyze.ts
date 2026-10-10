@@ -76,6 +76,11 @@ export function landColors(c: CardRecord, basicColors: Set<Color>): Color[] {
 export function tappedKind(c: CardRecord): 'unconditional' | 'conditional' | null {
   if (!isLand(c)) return null;
   const text = rulesText(c);
+  // Fetch lands whose land arrives tapped (Evolving Wilds) count as tapped lands;
+  // Fabled Passage untaps it later in the game.
+  if (/onto the battlefield tapped/.test(text) && /search your library/.test(text)) {
+    return /untap that land/.test(text) ? 'conditional' : 'unconditional';
+  }
   if (!/enters (?:the battlefield )?tapped/.test(text)) return null;
   if (/unless|if you don't|if you control|you may pay/.test(text)) return 'conditional';
   return 'unconditional';

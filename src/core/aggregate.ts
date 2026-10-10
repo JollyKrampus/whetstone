@@ -90,6 +90,7 @@ function fromPrinting(c: RawCard): CardRecord {
     latestReleasedAt: c.released_at,
     edhrecRank: null,
     gameChanger: Boolean(c.game_changer),
+    priceUsd: null,
   };
 }
 
@@ -120,6 +121,8 @@ export async function aggregateCards(lines: AsyncIterable<string> | Iterable<str
     if (typeof c.edhrec_rank === 'number') {
       rec.edhrecRank = rec.edhrecRank === null ? c.edhrec_rank : Math.min(rec.edhrecRank, c.edhrec_rank);
     }
+    const price = Number(c.prices?.usd ?? c.prices?.usd_foil);
+    if (Number.isFinite(price) && price > 0) rec.priceUsd = rec.priceUsd === null ? price : Math.min(rec.priceUsd, price);
     const games: string[] = c.games ?? [];
     if (games.includes('arena')) {
       if (!rec.onArena || c.released_at > rec.latestReleasedAt) rec.latestReleasedAt = c.released_at;

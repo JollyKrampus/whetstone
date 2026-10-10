@@ -23,3 +23,6 @@ export * from './meta.js';
 export * from './suggest.js';
 export * from './search.js';
 export * from './rules.js';
+export * from './companions.js';
+export * from './salt.js';
+export * from './versions.js';

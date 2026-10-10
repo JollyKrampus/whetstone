@@ -47,6 +47,7 @@ for await (const line of rl) {
   if (!key || c.layout === 'token' || c.layout === 'art_series' || c.layout === 'reversible_card') continue;
   const slim = pick(c, KEEP);
   if (c.card_faces) slim.card_faces = c.card_faces.map((f) => pick(f, FACE_KEEP));
+  if (c.prices) slim.prices = pick(c.prices, ['usd', 'usd_foil']);
   const list = byName.get(key) ?? [];
   list.push(slim);
   byName.set(key, list);
