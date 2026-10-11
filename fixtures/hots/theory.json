@@ -1,5 +1,5 @@
 {
-  "rulesVersion": "1.5+eef0ce288e1a",
+  "rulesVersion": "1.6+705b0800f5de",
   "counters": [
     {
       "a": "Abat",
@@ -175,7 +175,7 @@
             "Strafe"
           ],
           "kind": "curated",
-          "text": "Valla's Hatred and Strafe damage are Basic Attacks, so Shield Glare blanks her burst windows, and Zealous Glare's extra charge lets Johanna Blind her twice per fight."
+          "text": "Valla's Hatred-boosted damage, and Strafe if she takes it, comes from Basic Attacks, so Shield Glare blanks her burst windows, and Zealous Glare (level 1) lets Johanna Blind her twice per fight."
         },
         {
           "kind": "curated",
@@ -211,7 +211,7 @@
         },
         {
           "kind": "theory",
-          "text": "Johanna's area damage (Condemn) clears Xal'atath's summoned units quickly. Only when Xal'atath takes Void Convergence."
+          "text": "Johanna's area damage (Condemn) clears Xal'atath's summoned units quickly. Only when Xal'atath takes Void Convergence or Void Summoner."
         }
       ],
       "score": 77,
@@ -274,6 +274,9 @@
       "b": "Vari",
       "reasons": [
         {
+          "conditions": [
+            "Varian takes Twin Blades of Fury or Colossus Smash (level 4)"
+          ],
           "evidence": [
             "Shield Glare",
             "Twin Blades of Fury",
@@ -392,7 +395,7 @@
         },
         {
           "kind": "theory",
-          "text": "Valla's area damage (Monster Hunter) clears Xal'atath's summoned units quickly. Only when Valla takes Monster Hunter. Xal'atath must also take Void Convergence."
+          "text": "Valla's area damage (Monster Hunter) clears Xal'atath's summoned units quickly. Only when Valla takes Monster Hunter. Xal'atath must also take Void Convergence or Void Summoner."
         },
         {
           "kind": "theory",
@@ -479,6 +482,9 @@
       "b": "chogall",
       "reasons": [
         {
+          "conditions": [
+            "Valla takes Manticore (level 16)"
+          ],
           "evidence": [
             "Manticore",
             "Ogre Hide"
@@ -495,7 +501,7 @@
           "text": "Valla can interrupt channels with stun (Rain of Vengeance), and Cho'gall relies on channelled abilities. Only when Valla takes Rain of Vengeance."
         }
       ],
-      "score": 79,
+      "score": 72,
       "source": "curated"
     },
     {
@@ -520,7 +526,7 @@
         },
         {
           "kind": "theory",
-          "text": "Diablo reduces enemy Armor (Devastating Charge), offsetting Xal'atath's Spell Armor. Only when Diablo takes Devastating Charge. Xal'atath must also take Cloak of Shadows."
+          "text": "Diablo reduces enemy Armor (Devastating Charge), offsetting Xal'atath's Spell Armor. Only when Diablo takes Devastating Charge. Xal'atath must also take Cloak of Shadows or Dark Heart's Protection."
         }
       ],
       "score": 62,
@@ -733,11 +739,11 @@
         },
         {
           "kind": "theory",
-          "text": "Xal'atath brings Spell Armor (Cloak of Shadows, Dark Heart's Protection), which blunts Tracer's ability burst. Only when Xal'atath takes Cloak of Shadows."
+          "text": "Xal'atath brings Spell Armor (Cloak of Shadows, Dark Heart's Protection), which blunts Tracer's ability burst. Only when Xal'atath takes Cloak of Shadows or Dark Heart's Protection."
         },
         {
           "kind": "theory",
-          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) can stop Tracer in the middle of a dive. Only when Xal'atath takes Silence of the Lamb."
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) can stop Tracer in the middle of a dive. Only when Xal'atath takes Silence of the Lamb or Dark Heart's Protection."
         }
       ],
       "score": 71,
@@ -769,7 +775,7 @@
         },
         {
           "kind": "theory",
-          "text": "Xal'atath can interrupt channels with silence (Silence of the Lamb, Dark Heart's Protection), and Li-Ming relies on channelled abilities. Only when Xal'atath takes Silence of the Lamb. Li-Ming must also take Disintegrate."
+          "text": "Xal'atath can interrupt channels with silence (Silence of the Lamb, Dark Heart's Protection), and Li-Ming relies on channelled abilities. Only when Xal'atath takes Silence of the Lamb or Dark Heart's Protection. Li-Ming must also take Disintegrate."
         }
       ],
       "score": 68,
@@ -789,7 +795,7 @@
         },
         {
           "kind": "theory",
-          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) can stop Zeratul in the middle of a dive. Only when Xal'atath takes Silence of the Lamb."
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) can stop Zeratul in the middle of a dive. Only when Xal'atath takes Silence of the Lamb or Dark Heart's Protection."
         }
       ],
       "score": 75,
@@ -824,6 +830,9 @@
       "b": "Tra0",
       "reasons": [
         {
+          "conditions": [
+            "Malfurion takes Twilight Dream (level 10)"
+          ],
           "evidence": [
             "Twilight Dream",
             "Blink",
@@ -841,7 +850,7 @@
           "text": "Malfurion's root (Entangling Roots, Emerald Dreams) can stop Tracer in the middle of a dive."
         }
       ],
-      "score": 80,
+      "score": 73,
       "source": "curated"
     },
     {
@@ -854,7 +863,7 @@
         },
         {
           "kind": "theory",
-          "text": "Malfurion can interrupt channels with silence (Twilight Dream, Astral Communion), and Li-Ming relies on channelled abilities. Only when Malfurion takes Twilight Dream. Li-Ming must also take Disintegrate."
+          "text": "Malfurion can interrupt channels with silence (Twilight Dream, Astral Communion), and Li-Ming relies on channelled abilities. Only when Malfurion takes Twilight Dream or Astral Communion. Li-Ming must also take Disintegrate."
         }
       ],
       "score": 59,
@@ -873,7 +882,7 @@
             "Blink"
           ],
           "kind": "curated",
-          "text": "Moonfire reveals Heroes it hits for 2 seconds (5 with Celestial Alignment), exposing Zeratul's approach, and Twilight Dream's Silence stops his Blink exit."
+          "text": "Moonfire reveals Heroes it hits for 2 seconds (5 with Celestial Alignment at level 4), exposing Zeratul's approach, and Twilight Dream, if Malfurion takes it, silences his Blink exit."
         },
         {
           "kind": "theory",
@@ -892,7 +901,7 @@
           "text": "Malfurion can ignore or remove crowd control (Nature's Cure), weakening Zeratul's Time Stop. Only when Malfurion takes Nature's Cure. Zeratul must also take Void Prison."
         }
       ],
-      "score": 88,
+      "score": 83,
       "source": "curated"
     },
     {
@@ -1060,7 +1069,7 @@
             "Void Step"
           ],
           "kind": "curated",
-          "text": "Tracer's Blinks dodge Shadow Mark's center and Void Eruption's path, and Xal'atath's 1330 Health can't outlast her once Void Step is spent."
+          "text": "Tracer's Blinks dodge Shadow Mark's center and, if Xal'atath takes it, Void Eruption's path, and her 1330 Health can't outlast Tracer once Void Step is spent."
         },
         {
           "kind": "theory",
@@ -1068,7 +1077,7 @@
         },
         {
           "kind": "theory",
-          "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Xal'atath's Spell Armor. Only when Tracer takes Heavy Handed. Xal'atath must also take Cloak of Shadows."
+          "text": "Tracer reduces enemy Armor (Heavy Handed), offsetting Xal'atath's Spell Armor. Only when Tracer takes Heavy Handed. Xal'atath must also take Cloak of Shadows or Dark Heart's Protection."
         }
       ],
       "score": 69,
@@ -1180,7 +1189,7 @@
         },
         {
           "kind": "theory",
-          "text": "Varian reduces healing received (Mortal Strike), which blunts Anub'arak's self-healing in melee range. Only when Varian takes Mortal Strike. Anub'arak must also take Locust Swarm."
+          "text": "Varian reduces healing received (Mortal Strike), which blunts Anub'arak's self-healing in melee range. Only when Varian takes Mortal Strike. Anub'arak must also take Locust Swarm or Hive Master."
         },
         {
           "kind": "theory",
@@ -1200,7 +1209,7 @@
         },
         {
           "kind": "theory",
-          "text": "Varian reduces healing received (Mortal Strike), which blunts Johanna's self-healing in melee range. Only when Varian takes Mortal Strike. Johanna must also take Laws of Hope."
+          "text": "Varian reduces healing received (Mortal Strike), which blunts Johanna's self-healing in melee range. Only when Varian takes Mortal Strike. Johanna must also take Laws of Hope or Holy Renewal."
         },
         {
           "kind": "theory",
@@ -1222,7 +1231,7 @@
             "Hatred"
           ],
           "kind": "curated",
-          "text": "Parry blocks all of Valla's basic attacks for 1.25 seconds with two charges, and Charge plus Taunt pin her in place."
+          "text": "Parry blocks all of Valla's basic attacks for 1.25 seconds with two charges, and Charge, plus Taunt if Varian takes it, pins her in place."
         },
         {
           "kind": "theory",
@@ -1266,7 +1275,7 @@
         },
         {
           "kind": "theory",
-          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Xal'atath's Spell Armor. Only when Varian takes Colossus Smash. Xal'atath must also take Cloak of Shadows."
+          "text": "Varian reduces enemy Armor (Colossus Smash), offsetting Xal'atath's Spell Armor. Only when Varian takes Colossus Smash. Xal'atath must also take Cloak of Shadows or Dark Heart's Protection."
         },
         {
           "kind": "theory",
@@ -1366,7 +1375,7 @@
         },
         {
           "kind": "theory",
-          "text": "Varian reduces healing received (Mortal Strike), which blunts Zeratul's self-healing in melee range. Only when Varian takes Mortal Strike. Zeratul must also take Mending Strikes."
+          "text": "Varian reduces healing received (Mortal Strike), which blunts Zeratul's self-healing in melee range. Only when Varian takes Mortal Strike. Zeratul must also take Mending Strikes or Shadow Mending."
         },
         {
           "kind": "theory",
@@ -1416,7 +1425,7 @@
             "Deep Tunnel"
           ],
           "kind": "curated",
-          "text": "Permanent Cloak lets Zeratul walk straight up to Abathur's unguarded body, and Cleave plus Singularity Spike kill it before Deep Tunnel's 30-second cooldown can get him out."
+          "text": "Permanent Cloak lets Zeratul walk straight up to Abathur's unguarded body, and Cleave, Singularity Spike and a couple of Basic Attacks take its 685 Health before Deep Tunnel's 30-second cooldown can get him out."
         },
         {
           "kind": "theory",
@@ -1541,7 +1550,7 @@
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Anub'arak hardest. Only when Cho'gall takes Uppercut."
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Anub'arak hardest. Only when Cho'gall takes Uppercut or Searing Shadows."
         },
         {
           "kind": "theory",
@@ -1549,7 +1558,7 @@
         },
         {
           "kind": "theory",
-          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Anub'arak's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Anub'arak must also take Locust Swarm."
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Anub'arak's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Anub'arak must also take Locust Swarm or Hive Master."
         }
       ],
       "score": 71,
@@ -1561,11 +1570,11 @@
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Johanna hardest. Only when Cho'gall takes Uppercut."
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Johanna hardest. Only when Cho'gall takes Uppercut or Searing Shadows."
         },
         {
           "kind": "theory",
-          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Johanna's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Johanna must also take Laws of Hope."
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Johanna's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Johanna must also take Laws of Hope or Holy Renewal."
         }
       ],
       "score": 65,
@@ -1577,7 +1586,7 @@
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Diablo hardest. Only when Cho'gall takes Uppercut."
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Diablo hardest. Only when Cho'gall takes Uppercut or Searing Shadows."
         },
         {
           "kind": "theory",
@@ -1597,7 +1606,7 @@
         },
         {
           "kind": "theory",
-          "text": "Cho'gall's area damage (Shadowflame, Dread Orb) clears Xal'atath's summoned units quickly. Only when Xal'atath takes Void Convergence."
+          "text": "Cho'gall's area damage (Shadowflame, Dread Orb) clears Xal'atath's summoned units quickly. Only when Xal'atath takes Void Convergence or Void Summoner."
         },
         {
           "kind": "theory",
@@ -1629,7 +1638,7 @@
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Muradin hardest. Only when Cho'gall takes Uppercut."
+          "text": "Cho'gall deals damage based on maximum Health (Uppercut, Searing Shadows), which hits high-Health heroes like Muradin hardest. Only when Cho'gall takes Uppercut or Searing Shadows."
         },
         {
           "kind": "theory",
@@ -1660,6 +1669,9 @@
       "b": "Vari",
       "reasons": [
         {
+          "conditions": [
+            "Varian takes Twin Blades of Fury (level 4)"
+          ],
           "evidence": [
             "Ogre Hide",
             "Twilight Veil",
@@ -1667,7 +1679,7 @@
             "Twin Blades of Fury"
           ],
           "kind": "curated",
-          "text": "Twin Blades Varian deals almost all his damage through physical basic attacks, which Ogre Hide's armor (75 with Twilight Veil) cuts sharply while Gall keeps hitting him with Shadowflame in melee range."
+          "text": "Twin Blades Varian deals almost all his damage through physical basic attacks, which Ogre Hide's armor (75 for a moment with Twilight Veil at level 13) cuts sharply while Gall keeps hitting him with Shadowflame in melee range."
         }
       ],
       "score": 60,
@@ -1695,7 +1707,7 @@
       "reasons": [
         {
           "kind": "theory",
-          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Zeratul's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Zeratul must also take Mending Strikes."
+          "text": "Cho'gall reduces healing received (Enraged Regeneration), which blunts Zeratul's self-healing in melee range. Only when Cho'gall takes Enraged Regeneration. Zeratul must also take Mending Strikes or Shadow Mending."
         },
         {
           "kind": "theory",
@@ -1740,6 +1752,9 @@
       "b": "Demo",
       "reasons": [
         {
+          "conditions": [
+            "Abathur takes Ultimate Evolution (level 10)"
+          ],
           "evidence": [
             "Ultimate Evolution",
             "Hatred"
@@ -1748,7 +1763,7 @@
           "text": "Ultimate Evolution clones Valla with 20% bonus attack damage, giving the team a second basic-attack carry whose Hatred stacks ramp up just like the original."
         }
       ],
-      "score": 69,
+      "score": 60,
       "source": "curated"
     },
     {
@@ -1812,6 +1827,9 @@
       "b": "Vari",
       "reasons": [
         {
+          "conditions": [
+            "Varian takes Twin Blades of Fury (level 4)"
+          ],
           "evidence": [
             "Symbiote",
             "Carapace",
@@ -1819,14 +1837,14 @@
             "Twin Blades of Fury"
           ],
           "kind": "curated",
-          "text": "Symbiote on a Twin Blades Varian adds shields and Spike Burst while he attacks, and Ultimate Evolution can copy his high basic-attack damage."
+          "text": "Symbiote on a Twin Blades Varian adds shields and Spike Burst while he attacks, and Ultimate Evolution, if Abathur takes it, can copy his high basic-attack damage."
         },
         {
           "kind": "theory",
           "text": "Varian can protect Abathur's fragile body when the enemy hunts it."
         }
       ],
-      "score": 77,
+      "score": 69,
       "source": "curated"
     },
     {
@@ -1935,7 +1953,7 @@
             "Cleave"
           ],
           "kind": "curated",
-          "text": "Impale and Burrow Charge stun targets so Zeratul can land Singularity Spike and Cleave, and Cocoon removes a peeler from the fight."
+          "text": "Impale and Burrow Charge stun targets so Zeratul can land Singularity Spike and Cleave, and Cocoon, if Anub'arak takes it, removes a peeler from the fight."
         },
         {
           "kind": "theory",
@@ -2317,7 +2335,7 @@
             "Give 'em the Axe!"
           ],
           "kind": "curated",
-          "text": "Entangling Roots holds targets still for Storm Bolt's projectile and counts as a Root for Give 'em the Axe's 40% Basic Attack bonus."
+          "text": "Entangling Roots holds targets still for Storm Bolt's projectile, and with Give 'em the Axe! (level 1) the Root also adds 40% to Muradin's Basic Attacks."
         }
       ],
       "score": 69,
@@ -2384,7 +2402,7 @@
             "Sentenced to Death"
           ],
           "kind": "curated",
-          "text": "Entangling Roots holds a target in place for Singularity Spike, and Sentenced to Death adds damage while the Spike's slow and mark are on them."
+          "text": "Entangling Roots holds a target in place for Singularity Spike, and Sentenced to Death (level 16) adds damage while the Spike's slow and mark are on them."
         },
         {
           "kind": "theory",
@@ -3035,7 +3053,7 @@
         },
         {
           "kind": "theory",
-          "text": "Xal'atath's summons (Void Convergence, Void Summoner) add damage to Battlefield of Eternity's neutral objective. Only when Xal'atath takes Void Convergence."
+          "text": "Xal'atath's summons (Void Convergence, Void Summoner) add damage to Battlefield of Eternity's neutral objective. Only when Xal'atath takes Void Convergence or Void Summoner."
         }
       ],
       "score": 75
@@ -3073,7 +3091,7 @@
         },
         {
           "kind": "theory",
-          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Cursed Hollow's objective. Only when Xal'atath takes Silence of the Lamb."
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Cursed Hollow's objective. Only when Xal'atath takes Silence of the Lamb or Dark Heart's Protection."
         }
       ],
       "score": 65
@@ -3092,7 +3110,7 @@
         },
         {
           "kind": "theory",
-          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Dragon Shire's objective. Only when Xal'atath takes Silence of the Lamb."
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Dragon Shire's objective. Only when Xal'atath takes Silence of the Lamb or Dark Heart's Protection."
         }
       ],
       "score": 65
@@ -3126,7 +3144,7 @@
         },
         {
           "kind": "theory",
-          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Towers of Doom's objective. Only when Xal'atath takes Silence of the Lamb."
+          "text": "Xal'atath's silence (Silence of the Lamb, Dark Heart's Protection) stops enemies channelling Towers of Doom's objective. Only when Xal'atath takes Silence of the Lamb or Dark Heart's Protection."
         }
       ],
       "score": 65
@@ -3167,7 +3185,7 @@
         },
         {
           "kind": "theory",
-          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Cursed Hollow's objective. Only when Malfurion takes Twilight Dream."
+          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Cursed Hollow's objective. Only when Malfurion takes Twilight Dream or Astral Communion."
         }
       ],
       "score": 60
@@ -3182,7 +3200,7 @@
         },
         {
           "kind": "theory",
-          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Dragon Shire's objective. Only when Malfurion takes Twilight Dream."
+          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Dragon Shire's objective. Only when Malfurion takes Twilight Dream or Astral Communion."
         }
       ],
       "score": 57
@@ -3197,7 +3215,7 @@
         },
         {
           "kind": "theory",
-          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Towers of Doom's objective. Only when Malfurion takes Twilight Dream."
+          "text": "Malfurion's silence (Twilight Dream, Astral Communion) stops enemies channelling Towers of Doom's objective. Only when Malfurion takes Twilight Dream or Astral Communion."
         }
       ],
       "score": 57
@@ -3517,7 +3535,7 @@
         },
         {
           "kind": "theory",
-          "text": "Cho'gall's percent-Health damage (Uppercut, Searing Shadows) speeds up Battlefield of Eternity's race against neutral units. Only when Cho'gall takes Uppercut."
+          "text": "Cho'gall's percent-Health damage (Uppercut, Searing Shadows) speeds up Battlefield of Eternity's race against neutral units. Only when Cho'gall takes Uppercut or Searing Shadows."
         },
         {
           "kind": "theory",

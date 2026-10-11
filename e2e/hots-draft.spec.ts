@@ -314,7 +314,7 @@ test.describe('free mode', () => {
     const malf = page.locator('.dt-pair > .sg .sg-item[data-hero="Malf"]');
     await malf.locator('.sg-item__why').click();
     await expect(malf.locator('.sg-break__cond').first()).toContainText('Only when');
-    await expect(malf.locator('.sg-break')).toContainText('Malfurion takes Twilight Dream.');
+    await expect(malf.locator('.sg-break')).toContainText('Malfurion takes Twilight Dream or Astral Communion.');
 
     // The other team's list is actionable too: its hero joins that team, and you keep your target.
     const other = page.locator('.dt-mirror .sg-item').first();

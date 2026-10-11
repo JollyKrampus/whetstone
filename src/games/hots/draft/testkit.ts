@@ -29,7 +29,7 @@ export function statsData(mode: 'sl' | 'aram' = 'sl'): DraftData {
   const stats = fixtureJson<Stats>('fixtures/hots/_private/stats.json');
   const window = stats.modes[mode]?.current;
   if (!window) throw new Error(`fixture stats lack mode ${mode}`);
-  return decodeShard({ ...shard, stats: statsBlockFromWindow(window, shard, { mode, timeframe: 'current', synthetic: true }) });
+  return decodeShard({ ...shard, stats: statsBlockFromWindow(window, shard, { source: 'synthetic', mode, timeframe: 'current', synthetic: true }) });
 }
 
 /** Entity id by display name (fixture names are unique). */

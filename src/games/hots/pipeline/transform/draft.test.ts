@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { DraftShardSchema, type GameMap, type Hero, type Theory } from '../../schema.ts';
 import { FIXTURE_NOW, fixtureRelease, testCurated } from '../test-helpers.ts';
+import { decodeShard, theoryCounter, theoryMapFit } from '../../draft/data.ts';
 import { buildDraftShard, entityOrder } from './draft.ts';
 import { buildHeroes } from './heroes.ts';
 import { buildMaps } from './maps.ts';
@@ -102,6 +103,17 @@ describe('reason conditions in the shard', () => {
     expect(conditions).toEqual(withConditions.counters[0]?.reasons[0]?.conditions);
     const fit = shard.theory.mapFit;
     expect((fit.cond?.c[0] ?? []).map((i) => fill(shard.reasons[i] ?? '', names[fit.hero[0] ?? -1] ?? '', shard.maps.name[fit.map[0] ?? -1] ?? ''))).toEqual(['Cursed Hollow tributes split the teams']);
+  });
+
+  it("is read by the draft island's decoder into each line's conditions", () => {
+    const d = decodeShard(JSON.parse(JSON.stringify(shard)));
+    const a = d.byId.get('Abat')!;
+    const b = d.byId.get('HXAL')!;
+    const link = theoryCounter(d, a.index, b.index)!;
+    expect(link.lines[0]).toMatchObject({ text: `${a.name}'s nests spot ${b.name} early`, conditions: withConditions.counters[0]?.reasons[0]?.conditions });
+    expect(link.lines[1]?.conditions).toEqual([]);
+    const map = d.mapById.get('cursed-hollow')!;
+    expect(theoryMapFit(d, b.index, map.index)?.lines[0]?.conditions).toEqual(['Cursed Hollow tributes split the teams']);
   });
 
   it('rejects a cond table that points outside its rows or reasons', () => {

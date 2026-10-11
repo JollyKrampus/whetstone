@@ -151,6 +151,33 @@ function splitRef(parts: readonly string[]): { line: string; conditions: string[
   return { line: text.slice(0, at), conditions: conditions.map(conditionText).filter(Boolean) };
 }
 
+/**
+ * The optional `cond` table of an edge list (schema 2): entry i says reason r[e[i]][k[i]] holds
+ * only when every condition template c[i] holds. Returns row → reason position → templates.
+ * A missing table means no conditions; entries that point outside the rows or the reasons table
+ * are skipped (the build-time schema already rejects them).
+ */
+function conditionTable(raw: Record<string, unknown>, rows: number, reasons: readonly string[], where: string): Map<number, Map<number, string[]>> {
+  const out = new Map<number, Map<number, string[]>>();
+  if (raw.cond === undefined) return out;
+  if (!isObject(raw.cond)) throw new ShardError(`${where}.cond is not an object`);
+  const e = arrayOf(raw.cond, 'e', null, `${where}.cond`);
+  const k = arrayOf(raw.cond, 'k', e.length, `${where}.cond`);
+  const c = arrayOf(raw.cond, 'c', e.length, `${where}.cond`);
+  for (let i = 0; i < e.length; i++) {
+    const row = e[i];
+    const pos = k[i];
+    const list = c[i];
+    if (typeof row !== 'number' || typeof pos !== 'number' || row < 0 || row >= rows || pos < 0 || !Array.isArray(list)) continue;
+    const templates = list.map((j) => (typeof j === 'number' ? reasons[j] : undefined)).filter((t): t is string => t !== undefined && t.trim() !== '');
+    if (templates.length === 0) continue;
+    let byPos = out.get(row);
+    if (!byPos) out.set(row, (byPos = new Map()));
+    byPos.set(pos, [...(byPos.get(pos) ?? []), ...templates]);
+  }
+  return out;
+}
+
 function sparse(
   raw: Record<string, unknown>,
   name: string,
@@ -165,6 +192,7 @@ function sparse(
   const to = arrayOf(raw, toKey, from.length, where);
   const score = arrayOf(raw, 'score', from.length, where);
   const r = arrayOf(raw, 'r', from.length, where);
+  const cond = conditionTable(raw, from.length, reasons, where);
   const out: { from: number; to: number; link: TheoryLink }[] = [];
   for (let i = 0; i < from.length; i++) {
     const a = from[i];
@@ -188,13 +216,16 @@ function sparse(
     const fill = (t: string) => fillReason(t, fromNames[a] ?? '', toNames[b] ?? '', token);
     const texts: string[] = [];
     const lines: TheoryLine[] = [];
-    for (const ref of Array.isArray(refs) ? refs : []) {
+    const rowCond = cond.get(i);
+    (Array.isArray(refs) ? refs : []).forEach((ref, k) => {
       const parts = partsOf(ref);
-      if (!parts) continue;
+      if (!parts) return;
       texts.push(fill(parts.join(' ')));
       const { line, conditions } = splitRef(parts);
-      lines.push({ text: fill(line), template: line, conditions: conditions.map(fill) });
-    }
+      // Inline (engine) conditions first, then the `cond` table's (curated), each said once.
+      const all = [...conditions, ...(rowCond?.get(k) ?? []).map(conditionText)].map(fill).filter(Boolean);
+      lines.push({ text: fill(line), template: line, conditions: [...new Set(all)] });
+    });
     out.push({ from: a, to: b, link: { score: s, reasons: texts, lines } });
   }
   return out;

@@ -45,9 +45,9 @@ describe('reason lines and conditions', () => {
     const link = theoryCounter(theory, index('Malfurion'), index('Li-Ming'))!;
     const line = link.lines.find((l) => l.text.includes('interrupt channels'))!;
     expect(line.template).toBe('{a} can interrupt channels with silence (Twilight Dream, Astral Communion), and {b} relies on channelled abilities.');
-    expect(line.conditions).toEqual(['Malfurion takes Twilight Dream.', 'Li-Ming must also take Disintegrate.']);
+    expect(line.conditions).toEqual(['Malfurion takes Twilight Dream or Astral Communion.', 'Li-Ming must also take Disintegrate.']);
     // The full lines stay exactly as theory.json words them.
-    expect(link.reasons).toContain(`${line.text} Only when Malfurion takes Twilight Dream. Li-Ming must also take Disintegrate.`);
+    expect(link.reasons).toContain(`${line.text} Only when Malfurion takes Twilight Dream or Astral Communion. Li-Ming must also take Disintegrate.`);
     expect(link.lines).toHaveLength(link.reasons.length);
   });
 
@@ -62,6 +62,27 @@ describe('reason lines and conditions', () => {
     expect(link.lines[0]).toEqual({ text: `${a} pins ${b} down.`, template: '{a} pins {b} down.', conditions: [`${a} takes Big Net.`] });
     expect(link.lines[1]).toEqual({ text: 'Only the line.', template: 'Only the line.', conditions: ['Both teams play a lane-soak game.'] });
     expect(conditionText(' Only when X takes Y. ')).toBe('X takes Y.');
+  });
+
+  it('reads the optional cond table into the right line, names filled, each condition once', () => {
+    const shard = fixtureShard();
+    const at = shard.reasons.length;
+    shard.reasons.push('{a} pins {b} down.', '{a} takes Big Net', 'Only when {b} has no cleanse', '{a} lines up the shot.');
+    shard.theory.counters.r[0] = [at + 3, at];
+    // Reason 1 of row 0 (the second ref) holds only when both conditions hold; a repeat is said once.
+    shard.theory.counters.cond = { e: [0, 0], k: [1, 1], c: [[at + 1, at + 2], [at + 1]] };
+    const d = decodeShard(shard);
+    const link = theoryCounter(d, shard.theory.counters.a[0]!, shard.theory.counters.b[0]!)!;
+    const [a, b] = [d.heroes[shard.theory.counters.a[0]!]!.name, d.heroes[shard.theory.counters.b[0]!]!.name];
+    expect(link.lines[0]!.conditions).toEqual([]);
+    expect(link.lines[1]).toEqual({ text: `${a} pins ${b} down.`, template: '{a} pins {b} down.', conditions: [`${a} takes Big Net`, `${b} has no cleanse`] });
+    // r still decodes as before: the full text carries no curated conditions.
+    expect(link.reasons[1]).toBe(`${a} pins ${b} down.`);
+    // Entries outside the rows are ignored; a malformed table is a readable error.
+    shard.theory.counters.cond = { e: [99_999], k: [0], c: [[at + 1]] };
+    expect(() => decodeShard(shard)).not.toThrow();
+    (shard.theory.counters as Record<string, unknown>).cond = { e: [0], k: [], c: [] };
+    expect(() => decodeShard(shard)).toThrow(ShardError);
   });
 });
 

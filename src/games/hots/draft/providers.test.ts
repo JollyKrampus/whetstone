@@ -86,7 +86,7 @@ describe('theory providers', () => {
     const s = signals(providers, id('Malfurion'), ctx({ enemies: [id('Li-Ming')] })).find((x) => x.key === 'counters' && x.value > 0)!;
     const channel = s.reasons.find((r) => r.text.includes('interrupt channels'))!;
     expect(channel.text).toBe('Malfurion can interrupt channels with silence (Twilight Dream, Astral Communion), and Li-Ming relies on channelled abilities.');
-    expect(channel.conditions).toEqual(['Malfurion takes Twilight Dream.', 'Li-Ming must also take Disintegrate.']);
+    expect(channel.conditions).toEqual(['Malfurion takes Twilight Dream or Astral Communion.', 'Li-Ming must also take Disintegrate.']);
     expect(s.reasons[0]!.conditions).toBeUndefined();
   });
 

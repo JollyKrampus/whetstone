@@ -173,7 +173,7 @@ function main(): void {
   parseData(StatsSchema, stats, 'fixtures/hots/_private/stats.json');
   const window = stats.modes.sl?.current;
   if (!window) throw new Error('fixtures/hots/_private/stats.json has no sl/current window');
-  const overlay = { stats: { ...statsBlockFromWindow(window, shard, { mode: 'sl', timeframe: 'current', synthetic: true }), source: stats.source } };
+  const overlay = { stats: statsBlockFromWindow(window, shard, { source: stats.source, mode: 'sl', timeframe: 'current', synthetic: true }) };
 
   for (const [rel, value] of Object.entries(files)) {
     const entry = HOTS_FILES[rel as keyof typeof HOTS_FILES];

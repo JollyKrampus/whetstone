@@ -62,7 +62,7 @@ describe('hots fixtures match the schemas', () => {
     if (!sl) return;
     // Regenerate with the hots fixture generator when the shard or stats.json change.
     // The overlay carries the producer label of stats.json (make-fixtures.ts).
-    expect(overlay).toEqual({ stats: { ...statsBlockFromWindow(sl, shard, { mode: 'sl', timeframe: 'current', synthetic: true }), source: stats.source } });
+    expect(overlay).toEqual({ stats: statsBlockFromWindow(sl, shard, { source: stats.source, mode: 'sl', timeframe: 'current', synthetic: true }) });
   });
 
   it('marks every private sample as synthetic', () => {
@@ -206,7 +206,7 @@ describe('hots fixture cross-references', () => {
     const hero = (pick: (s: StatsWindow['heroes'][string]) => number) => draft.heroes.id.map((id) => pick(w.heroes[id] as StatsWindow['heroes'][string]));
     const overlay = {
       stats: {
-        synthetic: true, source: 'heroesprofile', mode: 'sl', timeframe: 'current', label: w.label, games: w.games,
+        synthetic: true, source: 'private-hub', mode: 'sl', timeframe: 'current', label: w.label, games: w.games,
         hero: { games: hero((s) => s.games), shrunk: hero((s) => s.shrunk), pick: hero((s) => s.pick), ban: hero((s) => s.ban), tier: draft.heroes.id.map((id) => w.heroes[id]?.tier ?? null) },
         counters: dense(w.counters, false),
         synergies: dense(w.synergies, true),
@@ -312,6 +312,8 @@ describe('hots load.ts against fixtures', () => {
     // Nexus Compendium still listing last week's heroes the day after the switch.
     expect(load.rotationIsStale({ ...rotation, end: '2026-10-08', fetchedAt: '2026-10-09T04:51:19.159Z' })).toBe(true);
     expect(load.rotationIsStale({ ...rotation, end: '2026-10-08', fetchedAt: '2026-10-08T10:00:00.000Z' })).toBe(false);
+    // Flagged by a later run (the switch day passed without a new week); fetchedAt is still inside the window.
+    expect(load.rotationIsStale({ ...rotation, end: '2026-10-08', fetchedAt: '2026-10-07T10:00:00.000Z', lagging: true })).toBe(true);
   });
 
   it('resolves names, nicknames and localized aliases to draftable entities', () => {

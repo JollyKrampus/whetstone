@@ -1,9 +1,9 @@
 /**
  * Build the draft shard's `stats` block (DraftStatsBlockSchema) from one match-statistics
  * window (stats.json, class B). This is the shape `pipeline/stage.ts` overlays onto the public
- * shard; the draft tests use it to run the tool on the synthetic fixture stats. The `source`
- * value is whatever the schema requires today; the draft reads it only to find the SourceRef
- * whose credit it shows.
+ * shard; the draft tests use it to run the tool on the synthetic fixture stats. `source` is the
+ * statistics file's own source id (a SourceRef id, or 'synthetic' for the fixtures); the draft
+ * reads it only to find the SourceRef whose credit it shows.
  *
  * Dense matrices are row-major over the shard's hero order: entry [i·H + j] is "i vs j"
  * (counters) or "i with j" (synergies, mirrored). Pairs below the hide gate stay null.
@@ -12,6 +12,8 @@ import { GATES } from '../../../core/stats.ts';
 import type { DraftShard, DraftStatsBlock, GameMode, StatsWindow, Timeframe } from '../schema.ts';
 
 export interface StatsBlockOptions {
+  /** The statistics file's source id (StatsSchema.source). */
+  source: string;
   mode: GameMode;
   timeframe: Timeframe;
   synthetic?: boolean;
@@ -75,7 +77,7 @@ export function statsBlockFromWindow(window: StatsWindow, shard: Pick<DraftShard
 
   return {
     ...(opts.synthetic ? { synthetic: true as const } : {}),
-    source: 'heroesprofile',
+    source: opts.source,
     mode: opts.mode,
     timeframe: opts.timeframe,
     label: window.label,
