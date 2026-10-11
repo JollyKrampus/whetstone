@@ -73,6 +73,8 @@ describe('licences', () => {
   it('maps bundled module ids to their packages and skips the site itself and virtual modules', () => {
     expect(packageOf(path.join(root, 'node_modules', 'preact', 'dist', 'preact.module.js'), root)?.name).toBe('preact');
     expect(packageOf(path.join(root, 'node_modules', '@preact', 'signals', 'dist', 'signals.module.js'), root)?.name).toBe('@preact/signals');
+    // preact/jsx-runtime has its own package.json ("name": "jsx-runtime"); the module still belongs to preact.
+    expect(packageOf(path.join(root, 'node_modules', 'preact', 'jsx-runtime', 'dist', 'jsxRuntime.module.js'), root)?.name).toBe('preact');
     expect(packageOf(path.join(root, 'src', 'core', 'stats.ts'), root)).toBeNull();
     expect(packageOf('\0virtual:whetstone/accents.css', root)).toBeNull();
   });

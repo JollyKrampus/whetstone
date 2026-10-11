@@ -3,7 +3,8 @@
  *
  * MIT and similar licences require the copyright and permission notice to travel with every copy
  * of the code. astro.config.mjs collects the packages Vite bundles into the client and Web Worker
- * chunks (`licenseCollector`), adds the Workbox runtime that scripts/sw.ts inlines into sw.js, and
+ * chunks (`licenseCollector`), adds the Workbox runtime that scripts/sw.ts inlines into sw.js and
+ * the island runtime Astro inlines into pages, and
  * writes their notices to dist/licenses.txt after the build. The footer and /credits/ link it.
  *
  * Node-only (fs); imported by astro.config.mjs and the unit tests.
@@ -20,6 +21,9 @@ export const SW_PACKAGES: readonly string[] = [
   'workbox-routing',
   'workbox-strategies',
 ];
+
+/** Packages whose code Astro writes into every page that has an island (the inline astro-island hydration runtime). */
+export const INLINE_PACKAGES: readonly string[] = ['astro'];
 
 /**
  * Copyright lines for packages that publish no licence file (checked against their repositories).
@@ -73,15 +77,33 @@ function toInfo(dir: string, pkg: Record<string, unknown>): PackageInfo | null {
   return { name: pkg.name, version: typeof pkg.version === 'string' ? pkg.version : '0.0.0', license, dir, ...(homepage ? { homepage } : {}) };
 }
 
+/** `/x/node_modules/@scope/name/dist/a.js` → `/x/node_modules/@scope/name` (the last node_modules wins). */
+function nodeModulesPackageDir(file: string): string | null {
+  const marker = '/node_modules/';
+  const at = file.lastIndexOf(marker);
+  if (at < 0) return null;
+  const parts = file.slice(at + marker.length).split('/');
+  const take = parts[0]?.startsWith('@') ? 2 : 1;
+  if (parts.length <= take) return null;
+  return file.slice(0, at + marker.length) + parts.slice(0, take).join('/');
+}
+
 /**
- * The package a bundled module belongs to: the nearest package.json above the file that names a
- * package, skipping the site itself (`root`) and nested package.json files that only set "type".
- * Returns null for Whetstone's own code and for virtual modules.
+ * The package a bundled module belongs to. Inside node_modules that is the package directory
+ * right after the last `node_modules/` (so sub-entry manifests such as preact/jsx-runtime's do not
+ * count as packages); elsewhere (workspace packages) the nearest package.json above the file that
+ * names a package, skipping the site itself (`root`). Returns null for Whetstone's own code and
+ * for virtual modules.
  */
 export function packageOf(moduleId: string, root: string): PackageInfo | null {
   if (!moduleId || moduleId.startsWith('\0') || moduleId.includes('virtual:')) return null;
   const file = moduleId.split('?')[0]!.replace(/\\/g, '/');
   if (!path.isAbsolute(file)) return null;
+  const packageDir = nodeModulesPackageDir(file);
+  if (packageDir) {
+    const pkg = readJson(path.join(packageDir, 'package.json'));
+    return pkg ? toInfo(packageDir, pkg) : null;
+  }
   const rootDir = path.resolve(root);
   let dir = path.dirname(file);
   for (;;) {
