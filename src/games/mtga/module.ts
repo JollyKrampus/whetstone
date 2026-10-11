@@ -43,7 +43,7 @@ export const mtga: GameModule = {
     {
       id: 'grindstone-mcp',
       name: 'grindstone-mcp',
-      url: 'https://github.com/JollyKrampus/grindstone-mcp',
+      url: 'https://github.com/JollyKrampus/whetstone/tree/main/packages/grindstone-mcp',
       attribution: 'Deck analysis engine from grindstone-mcp (MIT).',
       rule: 'footer',
       license: 'MIT',
