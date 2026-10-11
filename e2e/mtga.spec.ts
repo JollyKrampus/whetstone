@@ -1,10 +1,14 @@
 /**
  * MTG Arena user flows against the built site (works with fixtures or live data): paste a deck
- * and get an analysis from the worker, share-link round trip with a seeded hand, upgrades with
- * undo, Limited table sorting and filters, card search with the card dialog, and saving a
- * meta list that the analyzer then compares against.
+ * and get an analysis from the worker (text pasted before hydration is kept), share-link round
+ * trip with a seeded hand, upgrades with undo, the curated meta comparison, Limited table sorting
+ * and filters, card search with the card dialog, and saving a meta list that the analyzer then
+ * compares against. With WHETSTONE_FIXTURES=1 the fixture facts (paper prices, curated lists) are
+ * asserted exactly; a live-data build checks the same flows where its data allows.
  */
 import { expect, test, type Page } from '@playwright/test';
+
+const FIXTURES = process.env.WHETSTONE_FIXTURES === '1';
 
 const DECK = `About
 Name E2E Boros
@@ -97,13 +101,55 @@ test.describe('MTGA deck analyzer', () => {
     const dialog = page.getByRole('dialog', { name: 'Lightning Strike' });
     await expect(dialog).toBeVisible();
     await expect(dialog).toContainText('Legal in');
+    if (FIXTURES) await expect(dialog).toContainText(/Paper price\s*about \$\d/);
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();
+
+    // Paper (USD) prices sit next to the wildcard counts when the card data has them.
+    if (FIXTURES) {
+      await expect(page.locator('#deck-wildcards .wc__usd')).toHaveCount(4);
+      await expect(page.locator('#deck-wildcards')).toContainText(/Paper price of the same copies: about \$\d/);
+    }
 
     // Re-analyze in another format from the legality section.
     await page.locator('#deck-legality').getByRole('button', { name: 'Pioneer', exact: true }).click();
     await expect(page.locator('#deck-legality').getByRole('button', { name: 'Pioneer', exact: true })).toHaveAttribute('aria-pressed', 'true', { timeout: 60_000 });
     expect(errors).toEqual([]);
+  });
+
+  test('text pasted before the analyzer loads is kept, and Analyze waits until it works', async ({ page }) => {
+    // Hold the island scripts back, so the server-rendered form is all the visitor has.
+    let release = () => {};
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    await page.route('**/_astro/*.js', async (route) => {
+      await gate;
+      await route.continue();
+    });
+    await page.goto('mtga/deck/', { waitUntil: 'domcontentloaded' });
+    const box = page.getByLabel('Arena export');
+    await box.fill(MONO_RED);
+    await expect(page.getByRole('button', { name: 'Analyze deck' })).toBeDisabled();
+    await expect(page.locator('#paste-loading')).toContainText('Loading the analyzer');
+    release();
+    await ready(page);
+    await expect(box).toHaveValue(/24 Mountain/);
+    await expect(page.locator('#paste-loading')).toHaveCount(0);
+    await page.getByRole('button', { name: 'Analyze deck' }).click();
+    await expect(page.locator('#deck-summary-title')).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByLabel('Arena export')).toHaveValue(/4 Hired Claw/);
+  });
+
+  test('the analyzer compares with the curated meta lists by default', async ({ page }) => {
+    await page.goto('mtga/meta/');
+    const curated = page.locator('.cdeck');
+    test.skip(!FIXTURES && (await page.locator('.cmeta .badge', { hasText: 'example only' }).count()) > 0, 'this build has example lists only');
+    await expect(curated.first()).toBeVisible();
+    // Every curated list links to where it was published.
+    await expect(curated.first().getByRole('link', { name: /Source/ })).toHaveAttribute('href', /^https:\/\/(?:www\.)?magic\.gg\//);
+    await analyze(page, DECK);
+    await expect(page.locator('#deck-meta .dsec__meta')).toContainText('Curated Standard lists');
+    await expect(page.locator('#deck-meta .closest')).toBeVisible();
+    await expect(page.locator('#deck-power .badge--warning')).toHaveCount(0);
   });
 
   test('unknown names are reported with suggestions that fix the line', async ({ page }) => {
@@ -137,15 +183,19 @@ test.describe('MTGA deck analyzer', () => {
 
   test('upgrades can be applied and undone', async ({ page }) => {
     await analyze(page, MONO_RED);
+    await page.getByRole('radio', { name: /Most competitive/ }).check();
     await page.getByRole('radio', { name: /Heavy/ }).check();
     await page.getByRole('button', { name: 'Suggest upgrades' }).click();
     const out = page.locator('.upg__out');
     await expect(out).toBeVisible({ timeout: 30_000 });
     const apply = out.getByRole('button', { name: /^Apply/ });
-    if ((await apply.count()) === 0) {
+    if ((await out.locator('.swap').count()) === 0) {
       await expect(out).toContainText('No upgrade');
       return;
     }
+    // Estimates without meta lists start unticked; tick every swap before applying.
+    for (const box of await out.locator('.swap__pick input').all()) await box.check();
+    await expect(apply).toHaveText(/Apply all swaps/);
     const before = await page.getByLabel('Arena export').inputValue();
     await apply.click();
     await expect(page.getByRole('button', { name: 'Undo upgrade' })).toBeVisible({ timeout: 60_000 });
@@ -195,16 +245,26 @@ test.describe('MTGA Limited ratings', () => {
 
     const gih = table.locator('thead th').filter({ hasText: 'GIH WR' }).first();
     await expect(gih).toHaveAttribute('aria-sort', 'descending');
+    // Low-sample rows (fewer than 500 games in hand) come after all others while a win rate sorts.
     const values = async (col: number) =>
-      (await table.locator(`tbody tr td:nth-child(${col})`).allTextContents()).map((t) => Number.parseFloat(t)).filter((n) => Number.isFinite(n));
+      (await table.locator(`tbody tr:not(.is-low) td:nth-child(${col})`).allTextContents()).map((t) => Number.parseFloat(t)).filter((n) => Number.isFinite(n));
+    const lowLast = async () => {
+      const low = await table.locator('tbody tr').evaluateAll((rows) => rows.map((r) => r.classList.contains('is-low')));
+      expect(low.slice(low.indexOf(true) < 0 ? low.length : low.indexOf(true))).not.toContain(false);
+    };
     const desc = await values(2);
     expect(desc.length).toBeGreaterThan(2);
     expect(desc).toEqual([...desc].sort((a, b) => b - a));
+    await lowLast();
+    await expect(page.locator('.ltable__note')).toContainText('listed after the others');
 
     await gih.getByRole('button').click();
     await expect(gih).toHaveAttribute('aria-sort', 'ascending');
     const asc = await values(2);
     expect(asc).toEqual([...asc].sort((a, b) => a - b));
+    await lowLast();
+    // Colour pips are announced as an image with the colour names.
+    await expect(table.locator('tbody .pips').first()).toHaveAttribute('role', 'img');
     await expect(page).toHaveURL(/#v=1&d=asc/);
 
     // Sort by ATA (lower first) and keep only commons; the view survives a reload.
@@ -246,6 +306,16 @@ test.describe('MTGA card search', () => {
 
     await page.locator('.cgrid__btn').first().click();
     await expect(page.locator('dialog.peek[open] .peek__title')).not.toBeEmpty();
+    await page.keyboard.press('Escape');
+
+    // A card banned in Standard says so on its own line, never under "Legal in".
+    await page.getByLabel('Search Arena cards').fill('heartfire');
+    await page.locator('.csearch__form').getByRole('button', { name: 'Search', exact: true }).click();
+    await page.locator('.cgrid__btn', { hasText: 'Heartfire Hero' }).first().click();
+    const peek = page.locator('dialog.peek[open]');
+    await expect(peek.locator('dt', { hasText: 'Banned in' }).locator('xpath=following-sibling::dd[1]')).toContainText('Standard');
+    await expect(peek.locator('dt', { hasText: 'Legal in' }).locator('xpath=following-sibling::dd[1]')).not.toContainText('Standard,');
+    await expect(peek).not.toContainText('(banned)');
     await page.keyboard.press('Escape');
 
     await page.getByLabel('Search Arena cards').fill('mv<<<');

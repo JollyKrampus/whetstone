@@ -11,10 +11,14 @@
  */
 import {
   CardIndex,
+  INTENSITY,
   analyzeDeck,
+  applySwaps,
   asOfDate,
   brawlRubric,
   buildMeta,
+  companionRule,
+  companionViolations,
   compareToMeta,
   constructedRubric,
   dealSampleHand,
@@ -22,6 +26,7 @@ import {
   parseArenaText,
   ratePower,
   resolveDeck,
+  saltOf,
   searchCards,
   simulateHands,
   suggestUpgrades,
@@ -34,6 +39,7 @@ import {
   type MetaContext,
   type ResolvedDeck,
   type ResolvedEntry,
+  type Swap,
   type ValidationResult,
 } from 'grindstone-mcp/core';
 import { hydrateCardRecord, type CompactCardRecord } from '../schema.ts';
@@ -46,7 +52,9 @@ import {
   type ApplyResult,
   type CardView,
   type CheckListsRequest,
+  type CompanionCheckView,
   type EntryView,
+  type FeelBadView,
   type FormatId,
   type HandRequest,
   type HandResult,
@@ -125,6 +133,7 @@ export function cardView(c: CardRecord): CardView {
     layout: c.layout,
     colors: c.colors,
     rarity: wildcardRarity(c),
+    ...(typeof c.priceUsd === 'number' && c.priceUsd > 0 ? { priceUsd: c.priceUsd } : {}),
     ...(c.power !== undefined ? { power: c.power } : {}),
     ...(c.toughness !== undefined ? { toughness: c.toughness } : {}),
     faces: c.faces,
@@ -136,6 +145,33 @@ export function cardView(c: CardRecord): CardView {
 }
 
 const entryView = (e: ResolvedEntry): EntryView => ({ qty: e.qty, name: e.name, oracleId: e.oracleId });
+
+/** Every card of the deck (commander, companion, main, sideboard) a casual table may find feel-bad. */
+export function feelBadCards(deck: ResolvedDeck): FeelBadView[] {
+  const seen = new Set<string>();
+  const out: FeelBadView[] = [];
+  for (const e of [...(deck.commander ? [deck.commander] : []), ...(deck.companion ? [deck.companion] : []), ...deck.main, ...deck.side]) {
+    if (seen.has(e.oracleId)) continue;
+    seen.add(e.oracleId);
+    const salt = saltOf(e.card);
+    if (salt.avoid.length || salt.penalize.length) out.push({ name: e.name, oracleId: e.oracleId, avoid: salt.avoid, penalize: salt.penalize });
+  }
+  return out;
+}
+
+/** The companion's condition and the cards that break it (null without a companion). */
+export function companionCheck(deck: ResolvedDeck, format: FormatId): CompanionCheckView | null {
+  const companion = deck.companion;
+  if (!companion) return null;
+  const rule = companionRule(companion.card);
+  const broken = companionViolations(deck, getFormat(format));
+  return {
+    name: companion.name,
+    condition: rule?.condition ?? null,
+    breaking: broken?.cards ?? [],
+    inSideboard: deck.side.some((e) => e.oracleId === companion.oracleId),
+  };
+}
 
 function count(entries: { qty: number }[]): number {
   return entries.reduce((n, e) => n + e.qty, 0);
@@ -337,6 +373,8 @@ export class Engine {
       wildcards: wildcardCost(deck),
       simulation,
       meta: metaView,
+      feelBad: feelBadCards(deck),
+      companionCheck: companionCheck(deck, format),
       cards,
       pool: this.pool ?? 'standard',
       asOf,
@@ -368,42 +406,59 @@ export class Engine {
     this.requireCards(deck);
     const fmt = getFormat(req.format);
     const meta = await this.metaContext(req.meta, this.index ?? idx);
-    const result = suggestUpgrades(deck, fmt, this.index ?? idx, {
-      mode: req.mode,
-      intensity: req.intensity,
+    const pool = this.index ?? idx;
+    // The profile sets what a swap may be; the change cap is the visitor's choice ('any' = none).
+    const cap = req.intensity === 'any' ? 100 : (INTENSITY[req.intensity] ?? INTENSITY.normal).percent;
+    const result = suggestUpgrades(deck, fmt, pool, {
+      profile: req.profile,
+      preferPremium: req.preferPremium === true,
+      maxChangePercent: cap,
       maxSwaps: Math.max(1, Math.min(20, Math.round(req.maxSwaps))),
       keepCards: req.keepCards,
-      asOf: asOfDate(this.index ?? idx),
+      asOf: asOfDate(pool),
       ...(req.wildcards ? { wildcards: req.wildcards } : {}),
       ...(meta ? { meta } : {}),
     });
     const cards: Record<string, CardView> = {};
-    const pool = this.index ?? idx;
     for (const s of result.swaps) {
-      for (const name of [s.cut, s.add]) {
-        const c = pool.lookup(name);
+      for (const id of [s.cutOracleId, s.addOracleId]) {
+        const c = pool.byOracle.get(id);
         if (c) cards[c.oracleId] = cardView(c);
       }
     }
     return {
+      profile: req.profile,
+      preferPremium: result.preferPremium,
+      estimateOnly: !meta,
       swaps: result.swaps,
       totalCost: result.totalCost,
       budget: result.budget,
       remaining: result.remaining,
-      changes: result.changes,
-      // grindstone phrases some notes for its MCP tool parameters; this page has no such field.
-      notes: result.notes.map((n) => n.replace(/ or maxChangePercent/g, '')),
+      changes: { cards: result.changes.cards, limit: result.changes.limit, deckSize: result.changes.deckSize },
+      // grindstone phrases some notes for its MCP tool parameters; this page has no such fields.
+      notes: result.notes.map((n) => n.replace(/raise intensity or maxChangePercent for more/g, 'allow more change for more').replace(/ or maxChangePercent/g, '')),
       appliedText: toArenaText(applySwaps(deck, result.swaps, pool)),
       cards,
     };
   }
 
-  /** Apply a chosen subset of suggested swaps (the "Apply selected" button). */
+  /**
+   * Apply a chosen subset of suggested swaps (the "Apply selected" button), by oracle id. A swap
+   * whose cut is not in the main deck (with enough copies) or whose add is unknown is ignored
+   * rather than corrupting the list.
+   */
   async apply(req: Omit<ApplyRequest, 'type'>): Promise<ApplyResult> {
-    const deck = await this.resolve(req.text);
+    let deck = await this.resolve(req.text);
     this.requireCards(deck);
-    const swaps = req.swaps.filter((s) => s && typeof s.cut === 'string' && typeof s.add === 'string' && Number.isInteger(s.qty) && s.qty > 0 && s.qty <= 4);
-    return { text: toArenaText(applySwaps(deck, swaps, this.index!)) };
+    const idx = this.index!;
+    for (const s of req.swaps) {
+      if (!s || typeof s.cutOracleId !== 'string' || typeof s.addOracleId !== 'string' || !Number.isInteger(s.qty) || s.qty < 1 || s.qty > 4) continue;
+      if (s.cutOracleId === s.addOracleId || !idx.byOracle.has(s.addOracleId)) continue;
+      const cut = deck.main.find((e) => e.oracleId === s.cutOracleId);
+      if (!cut || cut.qty < s.qty) continue;
+      deck = applySwaps(deck, [s as Swap], idx);
+    }
+    return { text: toArenaText(deck) };
   }
 
   async search(req: Omit<SearchRequest, 'type'>): Promise<SearchResult> {
@@ -441,19 +496,4 @@ export class Engine {
     }
     return out;
   }
-}
-
-/** A copy of the deck with each swap applied to the main deck (cut qty copies, add qty copies). */
-export function applySwaps(deck: ResolvedDeck, swaps: readonly { cut: string; add: string; qty: number }[], index: CardIndex): ResolvedDeck {
-  const main = deck.main.map((e) => ({ ...e }));
-  for (const s of swaps) {
-    const cut = main.find((e) => e.name === s.cut);
-    if (cut) cut.qty -= s.qty;
-    const card = index.lookup(s.add);
-    if (!card) continue;
-    const existing = main.find((e) => e.oracleId === card.oracleId);
-    if (existing) existing.qty += s.qty;
-    else main.push({ qty: s.qty, name: card.name, oracleId: card.oracleId, card });
-  }
-  return { ...deck, main: main.filter((e) => e.qty > 0) };
 }

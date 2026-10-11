@@ -36,6 +36,12 @@ export const MIN_GAMES = [0, 100, 500, 1000, 2500] as const;
 /** Rows with fewer games in hand than this are marked as low sample. */
 export const LOW_SAMPLE = 500;
 
+/**
+ * Win-rate columns. Sorting by one of them lists low-sample rows (fewer than LOW_SAMPLE games in
+ * hand) after all the others, so a card with a lucky handful of games never tops the table.
+ */
+export const WIN_RATE_KEYS: ReadonlySet<SortKey> = new Set<SortKey>(['gihWr', 'ohWr', 'gdWr', 'gnsWr', 'iwd', 'gpWr']);
+
 /** Lower average pick numbers are better, so they sort ascending by default. */
 export const DEFAULT_DIR: Readonly<Record<SortKey, SortDir>> = {
   name: 'asc',
@@ -103,7 +109,10 @@ function value(row: LimitedRow, key: SortKey): number | string | null {
   }
 }
 
-/** Filter and sort; missing numbers always sort last, ties break by name. */
+/**
+ * Filter and sort; missing numbers always sort last, ties break by name. When sorting by a win
+ * rate, low-sample rows come after every other row (in the same order among themselves).
+ */
 export function viewRows(rows: readonly LimitedRow[], v: LimitedView): LimitedRow[] {
   const deck = normColors(v.colors);
   const rar = normRarities(v.rarities);
@@ -116,7 +125,13 @@ export function viewRows(rows: readonly LimitedRow[], v: LimitedView): LimitedRo
       (q === '' || r.name.toLowerCase().includes(q)),
   );
   const sign = v.dir === 'asc' ? 1 : -1;
+  const lowLast = WIN_RATE_KEYS.has(v.sort);
   return out.sort((a, b) => {
+    if (lowLast) {
+      const la = a.gih < LOW_SAMPLE;
+      const lb = b.gih < LOW_SAMPLE;
+      if (la !== lb) return la ? 1 : -1;
+    }
     const x = value(a, v.sort);
     const y = value(b, v.sort);
     if (x === null && y === null) return a.name.localeCompare(b.name);

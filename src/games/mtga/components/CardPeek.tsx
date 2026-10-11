@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import { IMAGE_CREDIT, IMAGE_SIZES, cardImageUrl, hasBackImage, scryfallCardUrl } from '../lib/images.ts';
 import { FORMAT_IDS, FORMAT_LABELS, type CardView } from '../worker/protocol.ts';
 import ManaCost from './ManaCost.tsx';
+import { usd } from './ui.tsx';
 
 interface Props {
   card: CardView | null;
@@ -9,6 +10,14 @@ interface Props {
 }
 
 const RARITY_LABEL: Record<string, string> = { common: 'Common', uncommon: 'Uncommon', rare: 'Rare', mythic: 'Mythic' };
+
+/** Formats a card can be played in (restricted ones say so) and formats that ban it, kept apart. */
+export function legalityLines(legal: CardView['legal']): { legalIn: string[]; bannedIn: string[] } {
+  return {
+    legalIn: FORMAT_IDS.filter((f) => legal[f] === 'legal' || legal[f] === 'restricted').map((f) => `${FORMAT_LABELS[f]}${legal[f] === 'restricted' ? ' (restricted)' : ''}`),
+    bannedIn: FORMAT_IDS.filter((f) => legal[f] === 'banned').map((f) => FORMAT_LABELS[f]),
+  };
+}
 
 /**
  * Card details in a modal dialog (tap or click a card name; no hover needed). The image is
@@ -33,7 +42,7 @@ export default function CardPeek({ card, onClose }: Props) {
   const src = cardImageUrl(card.scryfallId, 'normal', face);
   const twoImages = hasBackImage(card.layout);
   const faces = card.faces.length > 0 ? card.faces : [{ name: card.name, manaCost: card.manaCost, typeLine: card.typeLine, oracleText: card.oracleText, ...(card.power !== undefined ? { power: card.power, toughness: card.toughness ?? '' } : {}) }];
-  const legal = FORMAT_IDS.filter((f) => card.legal[f]);
+  const { legalIn, bannedIn } = legalityLines(card.legal);
 
   return (
     <dialog
@@ -115,12 +124,20 @@ export default function CardPeek({ card, onClose }: Props) {
               </div>
               <div>
                 <dt>Legal in</dt>
-                <dd>
-                  {legal.length > 0
-                    ? legal.map((f) => `${FORMAT_LABELS[f]}${card.legal[f] === 'banned' ? ' (banned)' : card.legal[f] === 'restricted' ? ' (restricted)' : ''}`).join(', ')
-                    : 'No Arena constructed format'}
-                </dd>
+                <dd>{legalIn.length > 0 ? legalIn.join(', ') : 'No Arena constructed format'}</dd>
               </div>
+              {bannedIn.length > 0 ? (
+                <div>
+                  <dt>Banned in</dt>
+                  <dd>{bannedIn.join(', ')}</dd>
+                </div>
+              ) : null}
+              {card.priceUsd !== undefined ? (
+                <div>
+                  <dt>Paper price</dt>
+                  <dd>about {usd(card.priceUsd)} (cheapest printing)</dd>
+                </div>
+              ) : null}
             </dl>
             <p>
               <a href={scryfallCardUrl(card.set, card.cn, card.name)} rel="noopener" target="_blank">

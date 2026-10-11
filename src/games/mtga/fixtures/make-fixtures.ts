@@ -114,7 +114,10 @@ async function main(): Promise<void> {
     'curated-meta': `fixture: ${decks.length} of the ${curated.decks.length} curated Standard lists`,
     'grindstone-mcp': `grindstone-mcp ${grindstone}, workspace package`,
   };
-  for (const s of meta.sources) if (detail[s.id]) s.detail = detail[s.id];
+  for (const s of meta.sources) {
+    const d = detail[s.id];
+    if (d) s.detail = d;
+  }
   writeFileSync(metaFile, jsonBytes(meta, true));
   console.log(`fixtures/mtga: ${arena.cards.length} Arena cards (${standard.cards.length} Standard), ${decks.length} meta lists, grindstone ${grindstone}`);
 }

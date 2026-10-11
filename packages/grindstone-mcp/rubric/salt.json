@@ -11,6 +11,6 @@
     { "name": "taking your stuff", "level": "penalize", "weight": 0.15, "pattern": "gain control of target|exchange control" },
     { "name": "counterspells", "level": "penalize", "weight": 0.1, "role": "counterspell" },
     { "name": "tutors", "level": "penalize", "weight": 0.1, "role": "tutor" },
-    { "name": "hand attack", "level": "penalize", "weight": 0.08, "pattern": "target (?:opponent|player) reveals their hand[^.]*discards|target opponent discards" }
+    { "name": "hand attack", "level": "penalize", "weight": 0.08, "pattern": "target (?:opponent|player) reveals their hand[^.]*\\.(?: [^.]*\\.)? (?:that player|they) discards|target (?:opponent|player) discards" }
   ]
 }

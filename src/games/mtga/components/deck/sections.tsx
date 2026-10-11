@@ -7,7 +7,7 @@ import type { ComponentChildren } from 'preact';
 import { createStore } from '../../../../core/storage.ts';
 import { CardName } from '../CardPeek.tsx';
 import ManaCost from '../ManaCost.tsx';
-import { COLOR_NAME, Meter, RARITIES, RARITY_LABEL, RarityTag, Section, ColorPip, pct01, plural, toneFor } from '../ui.tsx';
+import { COLOR_NAME, Meter, RARITIES, RARITY_LABEL, RarityTag, Section, ColorPip, pct01, plural, toneFor, usd } from '../ui.tsx';
 import type { MetaChoice } from '../../lib/view.ts';
 import type { AnalyzeResult, CardView, Color, EntryView, FormatId, Rarity, WildcardCounts } from '../../worker/protocol.ts';
 
@@ -40,8 +40,35 @@ function groupOf(card: CardView | undefined): 'Creatures' | 'Lands' | 'Spells' {
   return 'Spells';
 }
 
+/** "a", "a and b", "a, b and c". */
+function listWords(words: readonly string[]): string {
+  return words.length < 2 ? (words[0] ?? '') : `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}`;
+}
+
+/** Feel-bad cards for a casual table (grindstone's salt rubric), as two plain sentences. */
+export function feelBadText(feelBad: AnalyzeResult['feelBad']): string[] {
+  const avoid = feelBad.filter((f) => f.avoid.length > 0);
+  const penalize = feelBad.filter((f) => f.avoid.length === 0 && f.penalize.length > 0);
+  const out: string[] = [];
+  if (avoid.length) {
+    out.push(`Feel-bad at a casual table (the Friendly casual version swaps these out): ${avoid.map((f) => `${f.name} (${f.avoid.join(', ')})`).join('; ')}.`);
+  }
+  if (penalize.length) {
+    out.push(`Scored down in the Friendly casual version: ${penalize.map((f) => `${f.name} (${f.penalize.join(', ')})`).join('; ')}.`);
+  }
+  return out;
+}
+
+/** The companion's condition as one line: met, broken (by which cards), or unknown. */
+export function companionText(c: NonNullable<AnalyzeResult['companionCheck']>): string {
+  if (c.condition === null) return `Whetstone doesn't know a companion condition for ${c.name}, so it can't check it.`;
+  if (c.breaking.length === 0) return `Condition met: ${c.condition}`;
+  return `Condition broken: ${c.condition} Breaking it: ${listWords(c.breaking.slice(0, 8))}${c.breaking.length > 8 ? ` and ${c.breaking.length - 8} more` : ''}.`;
+}
+
 export function DeckList({ result, onPeek }: { result: AnalyzeResult; onPeek: Peek }) {
   const roles = new Map(result.analysis.roles.cards.map((c) => [c.name, c.roles]));
+  const salty = new Map(result.feelBad.map((f) => [f.oracleId, f]));
   const groups = new Map<string, EntryView[]>();
   for (const e of result.main) {
     const g = groupOf(result.cards[e.oracleId]);
@@ -51,12 +78,13 @@ export function DeckList({ result, onPeek }: { result: AnalyzeResult; onPeek: Pe
   const row = (e: EntryView) => {
     const card = result.cards[e.oracleId];
     const tags = roles.get(e.name) ?? [];
+    const salt = salty.get(e.oracleId);
     return (
       <li class="dl__row" key={e.oracleId}>
         <span class="dl__qty">{e.qty}</span>
         <span class="dl__name">
           <CardName card={card} name={e.name} onOpen={onPeek} />
-          {tags.length > 0 ? (
+          {tags.length > 0 || salt?.avoid.length ? (
             <span class="dl__roles">
               {tags.map((t) => (
                 <span class="role" key={t.rule}>
@@ -64,6 +92,11 @@ export function DeckList({ result, onPeek }: { result: AnalyzeResult; onPeek: Pe
                   <span class="role__rule">{t.rule}</span>
                 </span>
               ))}
+              {salt?.avoid.length ? (
+                <span class="badge badge--warning dl__salt">
+                  feel-bad<span class="visually-hidden">: {salt.avoid.join(', ')}</span>
+                </span>
+              ) : null}
             </span>
           ) : null}
         </span>
@@ -89,6 +122,12 @@ export function DeckList({ result, onPeek }: { result: AnalyzeResult; onPeek: Pe
           <div class="dl__group">
             <h3 class="dl__title">Companion</h3>
             <ul class="dl__list">{row(result.companion)}</ul>
+            {result.companionCheck ? (
+              <p class={`dl__companion${result.companionCheck.breaking.length ? ' is-broken' : ''}`}>
+                {companionText(result.companionCheck)}
+                {!result.companionCheck.inSideboard && !result.commander ? ' On Arena the companion also has to sit in the sideboard.' : ''}
+              </p>
+            ) : null}
           </div>
         ) : null}
         {order.map((g) => (
@@ -108,6 +147,11 @@ export function DeckList({ result, onPeek }: { result: AnalyzeResult; onPeek: Pe
           </div>
         ) : null}
       </div>
+      {feelBadText(result.feelBad).map((t, i) => (
+        <p class="dsec__foot" key={i}>
+          {t}
+        </p>
+      ))}
     </Section>
   );
 }
@@ -418,16 +462,30 @@ export function Wildcards({ result, onPeek }: { result: AnalyzeResult; onPeek: P
   const byName = new Map(Object.values(result.cards).map((c) => [c.name, c]));
   const short = RARITIES.map((r) => ({ r, need: Math.max(0, w.byRarity[r] - owned[r]) }));
   const enough = short.every((s) => s.need === 0);
+  const paper = paperBudget(w.cards, (name) => byName.get(name)?.priceUsd);
   return (
-    <Section id="deck-wildcards" title="Wildcard cost" meta={`${w.total} to craft from scratch`}>
+    <Section id="deck-wildcards" title="Wildcard cost" meta={`${w.total} to craft from scratch${paper ? ` · paper about ${usd(paper.total)}` : ''}`}>
       <ul class="wc">
         {RARITIES.map((r) => (
           <li class={`wc__item wc__item--${r}`} key={r}>
             <span class="wc__n">{w.byRarity[r]}</span>
             <RarityTag rarity={r} />
+            {paper ? (
+              <span class="wc__usd">
+                <span class="visually-hidden">paper price </span>
+                {usd(paper.byRarity[r])}
+              </span>
+            ) : null}
           </li>
         ))}
       </ul>
+      {paper ? (
+        <p class="dsec__foot">
+          Paper price of the same copies: about {usd(paper.total)}, at each card's cheapest printing in Scryfall's prices of {result.asOf}
+          {paper.unpriced ? ` (${plural(paper.unpriced, 'card')} without a price left out)` : ''}. Arena itself has no cash prices; this is only a
+          guide to what the cards cost on paper.
+        </p>
+      ) : null}
       <fieldset class="wc__owned">
         <legend>Wildcards you have</legend>
         <div class="wc__inputs">
@@ -450,17 +508,45 @@ export function Wildcards({ result, onPeek }: { result: AnalyzeResult; onPeek: P
       <details class="disclosure">
         <summary>Cost per card ({w.cards.length})</summary>
         <ul class="wc__cards">
-          {w.cards.map((c) => (
-            <li key={c.name}>
-              <span class="wc__qty">{c.qty}×</span> <CardName card={byName.get(c.name)} name={c.name} onOpen={onPeek} /> <RarityTag rarity={c.rarity} short />
-            </li>
-          ))}
+          {w.cards.map((c) => {
+            const price = byName.get(c.name)?.priceUsd;
+            return (
+              <li key={c.name}>
+                <span class="wc__qty">{c.qty}×</span> <CardName card={byName.get(c.name)} name={c.name} onOpen={onPeek} /> <RarityTag rarity={c.rarity} short />
+                {paper && price !== undefined ? <span class="wc__cardusd">{usd(price * c.qty)}</span> : null}
+              </li>
+            );
+          })}
         </ul>
       </details>
       {w.unavailable.length > 0 ? <p class="dsec__foot">Not on Arena: {w.unavailable.join(', ')}.</p> : null}
       <p class="dsec__foot">Counts every copy as uncrafted (Whetstone cannot see your collection), each at its cheapest Arena rarity; basic lands are free.</p>
     </Section>
   );
+}
+
+/**
+ * Paper (USD) price of the cards a wildcard report counts, per rarity, from each card's cheapest
+ * printing. Null when no card has a price (shards built before grindstone 0.3 carry none).
+ */
+export function paperBudget(
+  cards: readonly { name: string; qty: number; rarity: Rarity }[],
+  priceOf: (name: string) => number | undefined,
+): { byRarity: Record<Rarity, number>; total: number; unpriced: number } | null {
+  const byRarity: Record<Rarity, number> = { common: 0, uncommon: 0, rare: 0, mythic: 0 };
+  let priced = 0;
+  let unpriced = 0;
+  for (const c of cards) {
+    const p = priceOf(c.name);
+    if (p === undefined) {
+      unpriced++;
+      continue;
+    }
+    priced++;
+    byRarity[c.rarity] += p * c.qty;
+  }
+  if (priced === 0) return null;
+  return { byRarity, total: RARITIES.reduce((n, r) => n + byRarity[r], 0), unpriced };
 }
 
 // ---- meta comparison --------------------------------------------------------------------------

@@ -13,6 +13,13 @@ export function pct01(v: number | null | undefined, digits = 1): string {
   return v === null || v === undefined || !Number.isFinite(v) ? '—' : `${(v * 100).toFixed(digits)}%`;
 }
 
+const USD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+/** A paper price in US dollars ("$12.40"). */
+export function usd(v: number): string {
+  return USD.format(v);
+}
+
 export function plural(n: number, word: string, many = `${word}s`): string {
   return `${n} ${n === 1 ? word : many}`;
 }

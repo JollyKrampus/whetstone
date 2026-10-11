@@ -4,8 +4,9 @@
  * roles, power tier, hands, wildcard cost, upgrades and a meta comparison.
  *
  * The deck travels in the URL hash (lib/share.ts), so a shared link opens straight into the
- * same analysis; nothing is sent to a server. The server render is the empty paste form, so the
- * page is usable as soon as it hydrates.
+ * same analysis; nothing is sent to a server. The server render is the paste form with its
+ * buttons disabled until the island hydrates ("Loading the analyzer…"); anything pasted before
+ * that is kept (earlyText).
  */
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'preact/hooks';
 import CopyButton from '../../../components/CopyButton.tsx';
@@ -48,6 +49,17 @@ const store = createStore('mtga');
 const META_CHOICE_KEY = 'metaChoice';
 const validChoice = (v: unknown): MetaChoice | undefined => (isMetaChoice(v) ? v : undefined);
 
+/**
+ * Text typed or pasted into the server-rendered box before the island hydrated. Read while the
+ * first (hydrating) render runs, before Preact writes the textarea's value: a layout effect would
+ * be too late, because hydration already replaced the visitor's text with the initial state.
+ */
+function earlyText(): string {
+  if (typeof document === 'undefined') return '';
+  const el = document.getElementById('deck-text');
+  return el instanceof HTMLTextAreaElement ? el.value.replace(/\r\n/g, '\n') : '';
+}
+
 function randomSeed(): number {
   const buf = new Uint32Array(1);
   globalThis.crypto.getRandomValues(buf);
@@ -55,7 +67,9 @@ function randomSeed(): number {
 }
 
 export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHref }: DeckAnalyzerProps) {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(earlyText);
+  // False in the server render and until hydration: the buttons stay disabled until they work.
+  const [ready, setReady] = useState(false);
   const [format, setFormat] = useState<FormatChoice>('auto');
   const [fuzzy, setFuzzy] = useState(false);
   const [phase, setPhase] = useState<Phase>('idle');
@@ -75,9 +89,7 @@ export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHr
 
   // Visitor's saved meta lists and meta choice (and later edits from the Meta page in another tab).
   useLayoutEffect(() => {
-    // Keep anything typed into the server-rendered box before the island hydrated.
-    const early = textRef.current?.value ?? '';
-    if (early.trim()) setText(early);
+    setReady(true);
     setMyLists(store.get(MY_LISTS_KEY, [], validateMyLists));
     setMetaChoice(store.get(META_CHOICE_KEY, 'auto', validChoice));
     return store.subscribe(MY_LISTS_KEY, (v) => setMyLists(validateMyLists(v) ?? []));
@@ -226,7 +238,7 @@ export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHr
   return (
     <div class={`analyzer${result ? ' analyzer--has-result' : ''}`}>
       <div class="analyzer__input">
-        <form class="card paste" method="dialog" onSubmit={analyze} aria-labelledby="paste-title" data-collapsed={result && !editing ? 'true' : undefined}>
+        <form class="card paste" onSubmit={analyze} aria-labelledby="paste-title" data-collapsed={result && !editing ? 'true' : undefined} data-ready={ready ? 'true' : undefined}>
           <div class="paste__head">
             <h2 id="paste-title" class="paste__title">
               Your deck
@@ -277,14 +289,14 @@ export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHr
               </label>
             </div>
             <div class="paste__actions">
-              <button type="submit" class="btn btn--primary" disabled={working}>
+              <button type="submit" class="btn btn--primary" disabled={working || !ready} aria-describedby={ready ? undefined : 'paste-loading'}>
                 {working ? 'Analyzing…' : 'Analyze deck'}
               </button>
               {sample ? (
                 <button
                   type="button"
                   class="btn"
-                  disabled={working}
+                  disabled={working || !ready}
                   onClick={() => {
                     setText(sample.text);
                     setFormat('auto');
@@ -296,9 +308,14 @@ export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHr
                   Try a sample deck
                 </button>
               ) : null}
-              <button type="button" class="btn btn--ghost" onClick={() => fileRef.current?.click()}>
+              <button type="button" class="btn btn--ghost" disabled={!ready} onClick={() => fileRef.current?.click()}>
                 Open a .txt file
               </button>
+              {ready ? null : (
+                <span id="paste-loading" class="paste__loading muted" role="status">
+                  Loading the analyzer… Anything you paste now is kept.
+                </span>
+              )}
               <input ref={fileRef} type="file" accept=".txt,text/plain" class="visually-hidden" tabindex={-1} aria-hidden="true" onChange={loadFile} />
             </div>
           </div>
