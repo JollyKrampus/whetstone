@@ -34,7 +34,7 @@ import { runYoutube } from './steps/youtube.ts';
 import { runTheory, type TheoryLoader } from './theoryHook.ts';
 import { buildDraftShard } from './transform/draft.ts';
 import { buildLinks } from './transform/links.ts';
-import { buildMaps } from './transform/maps.ts';
+import { buildMaps, withCuratedPool } from './transform/maps.ts';
 import { hotsCounts, majorSince } from './transform/meta.ts';
 import { crossCheck, validateHots, validateMeta } from './validate.ts';
 import { error, errorMessage, majorOf } from './util.ts';
@@ -86,10 +86,10 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
   }
   const major = majorOf(builds.live);
 
-  // Maps with the curated Storm League pool; last-good maps in fallback.
+  // Maps with the curated Storm League pool; last-good maps (pool re-applied) in fallback.
   const baseMaps = hd.mapdata ? buildMaps(hd.mapdata, curated.maps, curated.rankedPool) : null;
   if (baseMaps) env.issues.push(...baseMaps.issues);
-  const maps: GameMap[] = baseMaps?.maps ?? hd.previousMaps ?? [];
+  const maps: GameMap[] = baseMaps?.maps ?? withCuratedPool(hd.previousMaps ?? [], curated.rankedPool);
 
   // Patch notes (+ diffs dated by them).
   const news = await runNews(env, { heroes: hd.heroes, maps, diffs: hd.diffs, buildDates: hd.buildDates, major, curated });

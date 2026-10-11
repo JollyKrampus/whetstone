@@ -60,3 +60,12 @@ export function buildMaps(mapdata: Readonly<Record<string, HdpMap>>, curated: Cu
   }
   return { maps, images, issues };
 }
+
+/**
+ * Last-good maps (heroes-data2 unavailable) with `ranked` re-derived from the curated pool, so a
+ * pool decided any other way in an older file (`rankedSource: 'stats'`) is never carried forward
+ * and a pool edit takes effect even while the release cannot be read.
+ */
+export function withCuratedPool(maps: readonly GameMap[], pool: RankedPoolFile): GameMap[] {
+  return maps.map((m) => ({ ...m, ranked: m.kind === 'standard' && pool.maps.includes(m.id), rankedSource: 'curated' }));
+}

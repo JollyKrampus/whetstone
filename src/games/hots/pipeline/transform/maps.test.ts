@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { MapsFileSchema } from '../../schema.ts';
 import { fixtureRelease, testCurated } from '../test-helpers.ts';
-import { buildMaps } from './maps.ts';
+import { buildMaps, withCuratedPool } from './maps.ts';
 
 const curated = testCurated();
 const mapdata = fixtureRelease('2.57.0.98348').maps;
@@ -27,6 +27,14 @@ describe('buildMaps', () => {
     expect(built.maps.filter((m) => m.kind === 'aram').every((m) => !m.ranked)).toBe(true);
     // curated/hots/maps.yaml may still carry legacy Heroes Profile map refs; maps.json never does.
     expect(built.maps.every((m) => !('hp' in m))).toBe(true);
+  });
+
+  it('re-derives the pool of last-good maps from ranked-pool.yaml (fallback path)', () => {
+    // A last-good file whose pool was decided otherwise (stats): every flag flips to the curated pool.
+    const old = built.maps.map((m) => ({ ...m, ranked: m.kind === 'standard' && !m.ranked, rankedSource: 'stats' as const }));
+    const again = withCuratedPool(old, curated.rankedPool);
+    expect(again).toEqual(built.maps);
+    expect(MapsFileSchema.safeParse(again).success).toBe(true);
   });
 
   it('lists the preview image of every published map', () => {

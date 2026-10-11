@@ -256,4 +256,22 @@ describe('no Heroes Profile output', () => {
       expect(readFileSync(path.join(out, 'current', 'hots', file), 'utf8'), file).not.toMatch(/heroes ?profile|hpMode/i);
     }
   });
+
+  it('does not carry a Heroes Profile pool or map refs forward from last-good maps.json', async () => {
+    const out = tempOut();
+    expect((await run({ out })).exitCode).toBe(0);
+    const curatedMaps = readFileSync(path.join(out, 'current/hots/maps.json'), 'utf8');
+    // A last-good file from an HP_MODE=on run: measured pool (flags flipped here) and HP map refs.
+    const legacy = (JSON.parse(curatedMaps) as { id: string; kind: string; ranked: boolean }[]).map((m, i) => ({
+      ...m,
+      ranked: m.kind === 'standard' && !m.ranked,
+      rankedSource: 'stats',
+      hp: { id: i + 1, name: m.id },
+    }));
+    writeFileSync(path.join(out, 'current/hots/maps.json'), JSON.stringify(legacy));
+    const s = await run({ out, down: ['github.com', 'raw.githubusercontent.com'] });
+    expect(s.exitCode).toBe(0);
+    expect(status(meta(out), 'heroes-data2')?.status).toBe('stale');
+    expect(readFileSync(path.join(out, 'current/hots/maps.json'), 'utf8')).toBe(curatedMaps);
+  });
 });
