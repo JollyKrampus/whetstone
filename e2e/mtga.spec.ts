@@ -67,8 +67,12 @@ function collectErrors(page: Page): string[] {
 }
 
 /** Islands render on the server first; wait until every one on the page has hydrated. */
+/**
+ * Wait until the page's tools have hydrated. client:visible islands (the meta page's copy buttons)
+ * only hydrate once scrolled into view, so they are not waited for.
+ */
 async function ready(page: Page) {
-  await expect(page.locator('astro-island[ssr]')).toHaveCount(0, { timeout: 15_000 });
+  await expect(page.locator('astro-island[ssr]:not([client="visible"])')).toHaveCount(0, { timeout: 15_000 });
 }
 
 async function analyze(page: Page, text: string) {
@@ -125,8 +129,10 @@ test.describe('MTGA deck analyzer', () => {
       await gate;
       await route.continue();
     });
-    await page.goto('mtga/deck/', { waitUntil: 'domcontentloaded' });
+    // Module scripts hold DOMContentLoaded back, so only wait for the server HTML itself.
+    await page.goto('mtga/deck/', { waitUntil: 'commit' });
     const box = page.getByLabel('Arena export');
+    await expect(box).toBeEditable();
     await box.fill(MONO_RED);
     await expect(page.getByRole('button', { name: 'Analyze deck' })).toBeDisabled();
     await expect(page.locator('#paste-loading')).toContainText('Loading the analyzer');
@@ -308,7 +314,9 @@ test.describe('MTGA card search', () => {
     await expect(page.locator('dialog.peek[open] .peek__title')).not.toBeEmpty();
     await page.keyboard.press('Escape');
 
-    // A card banned in Standard says so on its own line, never under "Legal in".
+    // A card banned in Standard says so on its own line, never under "Legal in". Search every Arena
+    // card: the Standard filter (the default) leaves banned cards out.
+    await page.locator('#card-f').selectOption('any');
     await page.getByLabel('Search Arena cards').fill('heartfire');
     await page.locator('.csearch__form').getByRole('button', { name: 'Search', exact: true }).click();
     await page.locator('.cgrid__btn', { hasText: 'Heartfire Hero' }).first().click();

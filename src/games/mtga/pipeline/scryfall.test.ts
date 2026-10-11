@@ -91,6 +91,21 @@ describe('toShardRecord', () => {
     expect(good).toMatchObject({ scryfallId: '22222222-2222-4222-8222-222222222222', set: 'tst', cn: '7' });
     const bad = toShardRecord(r!, { id: 'not-a-uuid', set: 'tst', cn: '7', releasedAt: '2026-01-01', hasImage: true });
     expect(bad.scryfallId).toBeUndefined();
+    // No price in the bulk data: the shard leaves the field out (hydration restores null).
+    expect('priceUsd' in good).toBe(false);
+  });
+
+  it("carries the cheapest printing's paper price", async () => {
+    const id = '44444444-4444-4444-8444-444444444444';
+    const [r] = (
+      await foldBulk([
+        printing({ name: 'Zap', oracle_id: id, set: 'aaa', collector_number: '1', prices: { usd: '1.50', usd_foil: '3.00' } }),
+        printing({ name: 'Zap', oracle_id: id, set: 'bbb', collector_number: '2', prices: { usd: null, usd_foil: '0.75' } }),
+        printing({ name: 'Zap', oracle_id: id, set: 'ccc', collector_number: '3', prices: { usd: '0.00' } }),
+      ])
+    ).records;
+    expect(r?.priceUsd).toBe(0.75);
+    expect(toShardRecord(r!, undefined).priceUsd).toBe(0.75);
   });
 
   it('prefers a printing with an image, then the newest one', async () => {
