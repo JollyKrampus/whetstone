@@ -392,7 +392,7 @@ export function Mana({ result }: { result: AnalyzeResult }) {
           ))}
       </ul>
       {c.requirements.length > 0 ? (
-        <div class="tablewrap">
+        <div class="tablewrap" tabindex={0} role="region" aria-label="Colour requirements by card (scrolls sideways)">
           <table class="mtable">
             <caption class="visually-hidden">Colour requirements by card</caption>
             <thead>

@@ -174,7 +174,7 @@ export default function LimitedTable({ rows, label }: Props) {
         </p>
       </div>
 
-      <div class="tablewrap ltable__wrap" tabindex={0} aria-label={`${label} card ratings (scrolls sideways)`}>
+      <div class="tablewrap ltable__wrap" tabindex={0} role="region" aria-label={`${label} card ratings (scrolls sideways)`}>
         <table class="mtable ltable__table">
           <caption class="visually-hidden">
             {label} card ratings, sorted by {COLUMNS.find((c) => c.key === view.sort)?.title} ({view.dir === 'asc' ? 'ascending' : 'descending'})

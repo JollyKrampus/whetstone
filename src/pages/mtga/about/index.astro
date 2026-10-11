@@ -81,7 +81,7 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         sources in the deck with Frank Karsten's targets: the number of sources needed to cast a spell on curve about 90% of the time. For a
         {c.karsten.deckSize}-card deck:
       </p>
-      <div class="tablewrap">
+      <div class="tablewrap" tabindex="0" role="region" aria-label="Coloured sources table (scrolls sideways)">
         <table class="mtable mtable--compact karsten">
           <caption>Coloured sources needed, by coloured pips (rows) and mana value (columns)</caption>
           <thead>
@@ -132,7 +132,7 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         A ramp plan needs something to ramp into: at least {c.inference.ramp.minRamp} ramp cards and an average mana value of about
         {(c.inference.ramp.minAvgMv ?? 2.8).toFixed(1)} or more, or {c.inference.ramp.minTopEnd ?? 6} or more cards at 5+ mana.
       </p>
-      <div class="tablewrap">
+      <div class="tablewrap" tabindex="0" role="region" aria-label={`${c.name} table (scrolls sideways)`}>
         <table class="mtable rubric">
           <caption>{c.name}: what is scored</caption>
           <thead>
@@ -156,7 +156,7 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         </table>
       </div>
       <div class="cols about__cols">
-        <div class="tablewrap">
+        <div class="tablewrap" tabindex="0" role="region" aria-label="Tiers table (scrolls sideways)">
           <table class="mtable mtable--compact">
             <caption>Tiers</caption>
             <thead>
@@ -179,7 +179,7 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
             </tbody>
           </table>
         </div>
-        <div class="tablewrap">
+        <div class="tablewrap" tabindex="0" role="region" aria-label="Targets by plan table (scrolls sideways)">
           <table class="mtable mtable--compact">
             <caption>Targets by plan (60 cards)</caption>
             <thead>
