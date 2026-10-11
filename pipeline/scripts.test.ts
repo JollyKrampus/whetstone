@@ -35,7 +35,8 @@ describe('data-pull git parsing', () => {
     expect(() => parseCatFileBatch(Buffer.from('ccc missing\n'))).toThrow(/unexpected header/);
   });
 
-  it('pulls from a remote the clone has never fetched (blobs come from the cache repository)', () => {
+  // A dozen git processes: on Windows under a full parallel test run that can take well over 20 s.
+  it('pulls from a remote the clone has never fetched (blobs come from the cache repository)', { timeout: 120_000 }, () => {
     const git = (cwd: string, ...args: string[]) => {
       const r = spawnSync('git', ['-c', 'user.name=t', '-c', 'user.email=t@example.com', '-c', 'init.defaultBranch=main', ...args], { cwd, encoding: 'utf8' });
       if (r.status !== 0) throw new Error(`git ${args.join(' ')}: ${r.stderr}`);
