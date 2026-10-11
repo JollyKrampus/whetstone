@@ -9,15 +9,14 @@ counters:
   # --- strong against ---
   - a: ragnaros
     b: sgthammer
-    why: "A sieging Sgt. Hammer cannot step aside without Thrusters cancelling Siege Mode, so Living Meteor's roll hits her for its full duration, and Molten Core turns the Fort she is shelling into a 5000-Health Ragnaros."
+    why: "A sieging Sgt. Hammer cannot step aside without Thrusters cancelling Siege Mode (unless she has Hover Siege Mode at level 7), so Living Meteor's roll hits her for its full duration, and Molten Core turns the Fort she is shelling into a 5000-Health Ragnaros."
     evidence: ["Living Meteor", "Molten Core", "Siege Mode", "Thrusters"]
-    conditions: "Weaker if Hammer takes Hover Siege Mode."
     confidence: low
   - a: ragnaros
     b: zagara
     why: "Molten Core turns a threatened Fort or Keep into a long-range Ragnaros whose Meteor Shower and Molten Swing wipe Roachlings and Hunter Killers, stalling the summon-led siege Zagara relies on."
     evidence: ["Molten Core", "Meteor Shower", "Molten Swing", "Infested Drop", "Hunter Killer"]
-    conditions: "Defending structures rather than an open-field teamfight."
+    conditions: "Ragnaros is defending structures rather than fighting in the open"
     confidence: low
   - a: ragnaros
     b: murky
@@ -28,6 +27,7 @@ counters:
     b: thelostvikings
     why: "Lava Wave travels the length of a lane, instantly killing its minions and dealing double damage to Heroes, so a lone low-Health Viking soaking that lane loses the wave and often its life."
     evidence: ["Lava Wave"]
+    conditions: "Ragnaros takes Lava Wave (level 10)"
     confidence: low
   # --- weak against ---
   - a: malthael
@@ -38,7 +38,7 @@ counters:
   - a: ana
     b: ragnaros
     why: "Ragnaros sustains through Empower Sulfuras' lifesteal; Biotic Grenade shuts off all healing for a moment, and Sleep Dart takes him out of a fight because he has no cleanse or Unstoppable."
-    evidence: ["Biotic Grenade", "Sleep Dart", "Empower Sulfuras", "Cauterize Wounds"]
+    evidence: ["Biotic Grenade", "Sleep Dart", "Empower Sulfuras"]
     confidence: medium
   - a: tychus
     b: ragnaros
@@ -53,16 +53,19 @@ counters:
 synergies:
   - a: etc
     b: ragnaros
-    why: "Mosh Pit stuns everything nearby for 4 seconds, long enough for Living Meteor's full roll and a Sulfuras Smash center hit on helpless targets."
+    why: "Mosh Pit stuns everything nearby for 4 seconds, long enough for Living Meteor's full roll and, if Ragnaros takes it, a Sulfuras Smash center hit on helpless targets."
     evidence: ["Mosh Pit", "Living Meteor", "Sulfuras Smash"]
-    confidence: medium
+    conditions: "E.T.C. takes Mosh Pit (level 10)"
+    confidence: low
   - a: jaina
     b: ragnaros
     why: "Ring of Frost roots enemies for 3 seconds, holding them in place for Sulfuras Smash's 594-damage center and stun."
     evidence: ["Ring of Frost", "Sulfuras Smash"]
-    confidence: medium
+    conditions: ["Jaina takes Ring of Frost (level 10)", "Ragnaros takes Sulfuras Smash (level 10)"]
+    confidence: low
   - a: ragnaros
     b: zarya
-    why: "Graviton Surge drags enemies to one point for 2.5 seconds, so Sulfuras Smash's center and Living Meteor's roll hit several Heroes at once."
+    why: "Graviton Surge drags enemies to one point for 2.5 seconds, so Living Meteor's roll, and Sulfuras Smash's center if Ragnaros takes it, hit several Heroes at once."
     evidence: ["Graviton Surge", "Sulfuras Smash", "Living Meteor"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

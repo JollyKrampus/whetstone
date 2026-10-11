@@ -26,7 +26,7 @@ import {
   type ModeOption,
   type PeriodOption,
 } from '../../games/hots/components/pagedata.ts';
-import { getEntity, getMeta, getPro, getStatsWindow, hasAsset } from '../../games/hots/load.ts';
+import { getEntity, getMeta, getPro, getStatsWindow, hasAsset, statsSourceIds } from '../../games/hots/load.ts';
 import { heroHref, heroPortrait } from '../../games/hots/view.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
 
@@ -99,7 +99,7 @@ const momentumScope =
   description={statsOn
     ? `Heroes of the Storm tier list for ${versionText('hots', meta.version.label)}: fixed win-rate bands with sample sizes and changes since last patch.`
     : 'What the Heroes of the Storm meta looks like without match statistics: pro tournament presence and recent buffs and nerfs per hero.'}
-  uses={statsOn ? ['heroesprofile'] : pro ? ['liquipedia'] : []}
+  uses={statsOn ? statsSourceIds() : pro ? ['liquipedia'] : []}
   inlineCredits={false}
 >
   <div class="tl">

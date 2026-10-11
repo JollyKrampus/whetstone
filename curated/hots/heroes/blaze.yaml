@@ -13,19 +13,18 @@ counters:
     b: illidan
     why: "Nanomachine Coating cuts attack speed by 35% for anyone in oil, and Illidan's damage and Betrayer's Thirst healing all come from basic attacks; Jet Propulsion stuns him off the backline."
     evidence: ["Nanomachine Coating", "Oil Spill", "Jet Propulsion", "Betrayer's Thirst"]
-    conditions: "Nanomachine Coating at level 7."
+    conditions: "Blaze takes Nanomachine Coating (level 7)"
     confidence: low
   - a: blaze
     b: thebutcher
-    why: "Butcher only heals by hitting branded targets in melee; Ignited Oil Spill burns him while he stands there, Nanomachine Coating slows his swings and Pyromania's armor blunts them."
+    why: "The Butcher only heals by hitting branded targets in melee; Ignited Oil Spill burns him while he stands there, Pyromania's 40 Armor blunts his swings, and Nanomachine Coating (level 7) slows them."
     evidence: ["Oil Spill", "Nanomachine Coating", "Pyromania", "Butcher's Brand"]
-    conditions: "Nanomachine Coating at level 7."
     confidence: low
   - a: blaze
     b: varian
     why: "Twin Blades of Fury Varian lives on attack speed; standing in oil with Nanomachine Coating takes 35% of it away while Oil Spill's slow stops him chasing."
     evidence: ["Nanomachine Coating", "Oil Spill", "Twin Blades of Fury"]
-    conditions: "Varian on Twin Blades of Fury; Blaze on Nanomachine Coating."
+    conditions: ["Varian takes Twin Blades of Fury (level 4)", "Blaze takes Nanomachine Coating (level 7)"]
     confidence: low
   # --- weak against ---
   - a: deathwing
@@ -35,9 +34,8 @@ counters:
     confidence: medium
   - a: malthael
     b: blaze
-    why: "Reaper's Mark takes 2% of Blaze's large max health every second, and Touch of Death halves the healing he gets from standing in Ignited Oil Spills."
+    why: "Reaper's Mark takes 2% of Blaze's large maximum health every second, and with Touch of Death (level 7) Malthael also halves the healing Blaze gets from standing in Ignited Oil Spills."
     evidence: ["Reaper's Mark", "Touch of Death", "Oil Spill"]
-    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tychus
     b: blaze
@@ -59,9 +57,11 @@ synergies:
     b: jaina
     why: "Combustion's 60% slow and Jaina's Chill hold enemies inside all three Blizzard waves."
     evidence: ["Combustion", "Blizzard", "Frostbite"]
-    confidence: medium
+    conditions: "Blaze takes Combustion (level 10)"
+    confidence: low
   - a: blaze
     b: zarya
-    why: "Graviton Surge holds heroes inside Ignited Oil Spill and Combustion's area for 2.5 seconds."
+    why: "Graviton Surge holds heroes inside Ignited Oil Spill, and Combustion's area if Blaze takes it, for 2.5 seconds."
     evidence: ["Graviton Surge", "Oil Spill", "Combustion"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

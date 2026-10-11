@@ -10,18 +10,18 @@ traits:
 counters:
   - a: hogger
     b: thelostvikings
-    why: "Hogg Wild damages everything around Hogger every 0.125 seconds, so spinning through a grouped Viking trio hits all three small bodies at once, and Garbage Fire adds area damage around Loot Hoard."
+    why: "Hogg Wild damages everything around Hogger every 0.125 seconds, so spinning through a grouped Viking trio hits all three small bodies at once, and Garbage Fire (level 7) adds area damage around Loot Hoard."
     evidence: ["Hogg Wild", "Garbage Fire", "Loot Hoard"]
-    conditions: "Strongest when the Vikings fight together; split Vikings in other lanes avoid it."
+    conditions: "the Vikings fight together rather than split across lanes"
     confidence: medium
   - a: hogger
     b: samuro
-    why: "Mirror Images take double damage, and Hogg Wild plus Garbage Fire are area damage that shred the images while still hitting the real Samuro, taking away his main way to split and juke."
+    why: "Mirror Images take double damage, and Hogg Wild's area damage (plus Garbage Fire's at level 7) shreds the images while still hitting the real Samuro, taking away his main way to split and juke."
     evidence: ["Hogg Wild", "Garbage Fire", "Mirror Image"]
     confidence: low
   - a: hogger
     b: illidan
-    why: "Evasion only stops Basic Attacks, while most of Hogger's damage comes from Hogg Wild and Ez-Thro Dynamite; Dust Devil Armor and Staggering Blow knockbacks also blunt Illidan's sticky melee pressure."
+    why: "Evasion only stops Basic Attacks, while most of Hogger's damage comes from Hogg Wild and Ez-Thro Dynamite; Staggering Blow's knockback (and Dust Devil's Armor at level 13) also blunts Illidan's sticky melee pressure."
     evidence: ["Evasion", "Hogg Wild", "Ez-Thro Dynamite", "Dust Devil", "Staggering Blow"]
     confidence: low
   - a: hogger
@@ -59,9 +59,11 @@ synergies:
     b: stukov
     why: "Massive Shove pushes a Hero until it hits terrain, so a Loot Hoard dropped nearby ends the shove early in a stun right beside Hogger's Staggering Blow."
     evidence: ["Massive Shove", "Loot Hoard", "Staggering Blow"]
+    conditions: "Stukov takes Massive Shove (level 10)"
     confidence: low
   - a: hogger
     b: kaelthas
     why: "Shockwave's initial slam stuns for 1.5 seconds, longer than Flamestrike's 1-second delay, so Kael'thas can land an empowered Flamestrike on everyone Hogger catches."
     evidence: ["Shockwave", "Flamestrike", "Verdant Spheres"]
-    confidence: medium
+    conditions: "Hogger takes Shockwave (level 10)"
+    confidence: low

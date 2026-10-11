@@ -16,7 +16,7 @@ counters:
     confidence: medium
   - a: stitches
     b: chromie
-    why: "Chromie has 1390 Health and no dash, so a Hook into Slam and Gorge is usually lethal unless she saved Time Out."
+    why: "Chromie has 1390 Health and no dash, so a Hook into Slam (and Gorge, if Stitches takes it) is usually lethal unless she took Time Out at level 13 and saved it."
     evidence: ["Hook", "Slam", "Gorge", "Time Out"]
     confidence: medium
   - a: stitches
@@ -26,7 +26,7 @@ counters:
     confidence: low
   - a: stitches
     b: kelthuzad
-    why: "Kel'Thuzad has no mobility unless he took Shifting Malice; a Hook pulls him away from his team and Slam plus Gorge finish the pick."
+    why: "Kel'Thuzad has no mobility unless he took Shifting Malice; a Hook pulls him away from his team, and Slam, plus Gorge if Stitches takes it, finishes the pick."
     evidence: ["Hook", "Slam", "Gorge", "Shifting Malice"]
     confidence: low
   # --- weak against ---
@@ -53,7 +53,7 @@ counters:
 synergies:
   - a: jaina
     b: stitches
-    why: "A Hook drags its target into Jaina's range for Cone of Cold and Ring of Frost, and Frostbite's Chill makes the follow-up hit 50% harder."
+    why: "A Hook drags its target into Jaina's range for Cone of Cold (and Ring of Frost, if she takes it), and Frostbite's Chill makes the follow-up hit 50% harder."
     evidence: ["Hook", "Cone of Cold", "Ring of Frost", "Frostbite"]
     confidence: medium
   - a: kaelthas

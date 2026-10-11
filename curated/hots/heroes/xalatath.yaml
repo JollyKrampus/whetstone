@@ -30,7 +30,7 @@ counters:
     confidence: low
   - a: tracer
     b: xalatath
-    why: "Tracer's Blinks dodge Shadow Mark's center and Void Eruption's path, and Xal'atath's 1330 Health can't outlast her once Void Step is spent."
+    why: "Tracer's Blinks dodge Shadow Mark's center and, if Xal'atath takes it, Void Eruption's path, and her 1330 Health can't outlast Tracer once Void Step is spent."
     evidence: ["Blink", "Shadow Mark", "Void Eruption", "Void Step"]
     confidence: low
   - a: illidan
@@ -46,13 +46,15 @@ counters:
 synergies:
   - a: xalatath
     b: zarya
-    why: "Graviton Surge holds enemies in place for a fully charged Void Eruption and makes Shadow Mark's center easy to land on several targets."
+    why: "Graviton Surge holds enemies in place so Shadow Mark's center lands on several targets, and Void Eruption, if Xal'atath takes it, charges fully."
     evidence: ["Graviton Surge", "Void Eruption", "Shadow Mark"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: jaina
     b: xalatath
-    why: "Ring of Frost's 3-second root lets Xal'atath charge Void Eruption fully and land Shadow Mark's center on the rooted targets."
+    why: "Ring of Frost's 3-second root lets Xal'atath land Shadow Mark's center on the rooted targets and, if she takes it, charge Void Eruption fully."
     evidence: ["Ring of Frost", "Void Eruption", "Shadow Mark"]
+    conditions: "Jaina takes Ring of Frost (level 10)"
     confidence: low
   - a: muradin
     b: xalatath

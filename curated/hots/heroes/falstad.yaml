@@ -14,18 +14,18 @@ counters:
     confidence: low
   - a: falstad
     b: illidan
-    why: "Mighty Gust pushes Illidan away and slows him by 40%, and Barrel Roll's dash keeps Falstad out of his reach."
+    why: "Barrel Roll's dash keeps Falstad out of Illidan's reach, and Mighty Gust, if Falstad takes it, pushes him away and slows him by 40%."
     evidence: ["Mighty Gust", "Barrel Roll", "Dive"]
     confidence: low
   - a: falstad
     b: thebutcher
-    why: "Mighty Gust shoves a charging Butcher away, and Barrel Roll's dash and shield deny him melee time."
+    why: "Barrel Roll's dash and shield deny The Butcher melee time, and Mighty Gust, if Falstad takes it, shoves him away mid-charge."
     evidence: ["Mighty Gust", "Barrel Roll", "Ruthless Onslaught"]
     confidence: low
   # --- weak against ---
   - a: johanna
     b: falstad
-    why: "Shield Glare blinds Falstad's basic attacks for 1.5 seconds, and Iron Skin's Unstoppable shield ignores Mighty Gust's push."
+    why: "Shield Glare blinds Falstad's basic attacks for 1.5 seconds, and Iron Skin's Unstoppable ignores Mighty Gust's push if Falstad takes it."
     evidence: ["Shield Glare", "Iron Skin", "Mighty Gust"]
     confidence: low
   - a: lili
@@ -35,8 +35,9 @@ counters:
     confidence: low
   - a: nova
     b: falstad
-    why: "Falstad has only 1365 health; Snipe and Triple Tap from stealth kill him before Barrel Roll matters."
+    why: "Falstad has only 1365 health, so a Snipe from stealth followed by Triple Tap can kill him before Barrel Roll matters."
     evidence: ["Snipe", "Triple Tap", "Barrel Roll"]
+    conditions: "Nova takes Triple Tap (level 10)"
     confidence: low
   - a: kerrigan
     b: falstad
@@ -53,9 +54,11 @@ synergies:
     b: falstad
     why: "Apocalypse's map-wide stun gives Hinterland Blast's 1-second delay time to land on several frozen heroes."
     evidence: ["Apocalypse", "Hinterland Blast"]
-    confidence: medium
+    conditions: ["Diablo takes Apocalypse (level 10)", "Falstad takes Hinterland Blast (level 10)"]
+    confidence: low
   - a: falstad
     b: jaina
     why: "Ring of Frost roots for 3 seconds, an easy window for Hinterland Blast's 1-second delay."
     evidence: ["Ring of Frost", "Hinterland Blast"]
-    confidence: medium
+    conditions: ["Jaina takes Ring of Frost (level 10)", "Falstad takes Hinterland Blast (level 10)"]
+    confidence: low

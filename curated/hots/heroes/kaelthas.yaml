@@ -15,14 +15,15 @@ counters:
     confidence: medium
   - a: kaelthas
     b: sgthammer
-    why: "A sieging Sgt. Hammer stands still, so Flamestrike's 1-second delay always lands, and Pyroblast's slow fireball reaches her before she can leave Siege Mode and move."
+    why: "A sieging Sgt. Hammer stands still, so Flamestrike's 1-second delay always lands, and Pyroblast, if Kael'thas takes it, reaches her before she can leave Siege Mode and move."
     evidence: ["Flamestrike", "Pyroblast", "Siege Mode"]
     confidence: medium
   - a: kaelthas
     b: nazeebo
     why: "Nazeebo cannot move while channeling Ravenous Spirit, so Gravity Lapse cancels it and Flamestrike lands on a target that cannot step out."
     evidence: ["Ravenous Spirit", "Gravity Lapse", "Flamestrike"]
-    confidence: medium
+    conditions: "Nazeebo takes Ravenous Spirit (level 10)"
+    confidence: low
   - a: kaelthas
     b: azmodan
     why: "All Shall Burn slows Azmodan and keeps him channeling in one spot, so Flamestrike connects reliably and Gravity Lapse stops the channel before its final burst."
@@ -30,7 +31,7 @@ counters:
     confidence: low
   - a: kaelthas
     b: murky
-    why: "Living Bomb's damage over time and explosion, or a single Flamestrike, exceed Murky's 730 Health, and the same area damage destroys the Pufferfish he spits nearby."
+    why: "Flamestrike and a Living Bomb each take nearly half of Murky's 730 Health, so one rotation leaves him a hit from death, and the same area damage clears the Pufferfish he spits nearby."
     evidence: ["Living Bomb", "Flamestrike", "Pufferfish"]
     confidence: medium
   - a: genji
@@ -40,9 +41,9 @@ counters:
     confidence: medium
   - a: anubarak
     b: kaelthas
-    why: "Harden Carapace's Spell Armor soaks Kael'thas's all-Ability damage, and Burrow Charge or Cocoon reaches and removes an immobile mage."
+    why: "Harden Carapace's Spell Armor soaks Kael'thas's all-Ability damage, Burrow Charge reaches an immobile mage, and Cocoon, if Anub'arak takes it, removes him from the fight."
     evidence: ["Harden Carapace", "Burrow Charge", "Cocoon"]
-    confidence: high
+    confidence: medium
   - a: zeratul
     b: kaelthas
     why: "Zeratul opens from Permanent Cloak with Singularity Spike and Cleave on a target that has no mobility, before Kael'thas can aim Gravity Lapse at him."
@@ -58,12 +59,14 @@ synergies:
     b: kaelthas
     why: "Mosh Pit locks enemies in place for up to 4 seconds, guaranteeing Flamestrike and letting Living Bomb spread across the stunned group."
     evidence: ["Mosh Pit", "Flamestrike", "Living Bomb"]
-    confidence: medium
+    conditions: "E.T.C. takes Mosh Pit (level 10)"
+    confidence: low
   - a: kaelthas
     b: zarya
-    why: "Graviton Surge pulls the enemy team into a ball for 2.5 seconds, the ideal setup for a Burned Flesh Flamestrike and chained Living Bombs."
+    why: "Graviton Surge pulls the enemy team into a ball for 2.5 seconds, the ideal setup for Flamestrike (which adds 8% of maximum health with Burned Flesh at level 7 when it hits two or more) and chained Living Bombs."
     evidence: ["Graviton Surge", "Flamestrike", "Burned Flesh", "Living Bomb"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: kaelthas
     b: malfurion
     why: "Innervate covers Kael'thas's heavy Mana costs and speeds his cooldowns, and Entangling Roots holds targets through Flamestrike's 1-second delay."

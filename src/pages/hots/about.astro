@@ -2,8 +2,8 @@
 /**
  * /hots/about/ (SPEC §8): how the HotS numbers are made. The methodology is rendered from
  * docs/METHODOLOGY.md (HotS parts only), so the page and the repository never disagree; plus the
- * theory layer explained, every source with its licence and credit rule, and how statistics get
- * switched on.
+ * theory layer explained, every source with its licence and credit rule, and where statistics
+ * stand.
  */
 import Badge from '../../components/Badge.tsx';
 import { formatDayUTC, int } from '../../core/format.ts';
@@ -13,7 +13,7 @@ import { SITE, gameById, withBase } from '../../games/registry.ts';
 import { groupTags, tagLabel } from '../../games/hots/components/labels.ts';
 import { hotsMethodology } from '../../games/hots/components/methodology.ts';
 import { statsModes } from '../../games/hots/components/pagedata.ts';
-import { getMeta, getStats, getTheory } from '../../games/hots/load.ts';
+import { getMeta, getStats, getTheory, statsSourceName } from '../../games/hots/load.ts';
 import { HERO_TAGS, type HeroTag } from '../../games/hots/schema.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
 import * as methodologyDoc from '../../../docs/METHODOLOGY.md';
@@ -36,7 +36,6 @@ const custodyLabel = {
 } as const;
 const ruleLabel = { inline: 'Next to the data', top: 'Top of the page', footer: 'Page footer' } as const;
 const vocab = groupTags(HERO_TAGS.map((tag: HeroTag) => ({ tag })));
-const ownerActions = `${SITE.repo}/blob/main/docs/OWNER-ACTIONS.md#2-heroes-profile-statistics-for-hots`;
 const methodologyUrl = `${SITE.repo}/blob/main/docs/METHODOLOGY.md`;
 ---
 
@@ -58,7 +57,7 @@ const methodologyUrl = `${SITE.repo}/blob/main/docs/METHODOLOGY.md`;
         <ul>
           <li><a href="#status">This build</a></li>
           <li><a href="#theory">The theory layer</a></li>
-          <li><a href="#stats">Statistics and how to enable them</a></li>
+          <li><a href="#stats">Statistics</a></li>
           <li><a href="#methodology">Formulas and gates</a></li>
           <li><a href="#sources">Sources and licences</a></li>
         </ul>
@@ -164,23 +163,17 @@ const methodologyUrl = `${SITE.repo}/blob/main/docs/METHODOLOGY.md`;
     </section>
 
     <section class="about__sec prose" id="stats" aria-labelledby="stats-h">
-      <h2 id="stats-h">Statistics and how to enable them</h2>
+      <h2 id="stats-h">Statistics</h2>
       <p>
-        Win rates, counters measured from games, map deltas, talent builds and tiers need match data. For Heroes of the Storm
-        that data comes from Heroes Profile, and only with its owner's written permission and a paid API key. Licensed numbers
-        are never committed to the repository or published as open data; they ship only inside the built site, and every
-        screen that shows them credits Heroes Profile next to the numbers.
+        Win rates, counters measured from games, map deltas, talent builds and tiers need match data. Heroes of the Storm
+        publishes none, and Whetstone builds only on data it owns or that is openly licensed, so it does not rely on a
+        third-party statistics service. The statistics views and their sample-size gates below stay ready for a source that
+        meets that bar; any screen that shows its numbers credits it right next to them.
       </p>
       <p>
         {stats
-          ? 'Statistics are on in this build. Counters only make the headline lists when they pass the sample-size bar below.'
-          : 'Statistics are off in this build, so every score you see comes from the theory layer.'}
-      </p>
-      <p>
-        To switch them on, the site owner sets the <code>HP_MODE</code> variable to <code>on</code> and adds the
-        <code>HP_API_KEY</code> secret; the next daily run fetches the aggregates and the pages light up. Setting
-        <code>HP_MODE</code> back to <code>off</code> and redeploying removes every licensed number. The
-        <a href={ownerActions} rel="noopener">owner checklist</a> has the steps.
+          ? `Statistics are on in this build (${statsSourceName()}). Counters only make the headline lists when they pass the sample-size bar below.`
+          : 'No statistics source is enabled in this build, so every score you see comes from the theory layer.'}
       </p>
       <ul class="gates">
         <li><strong>Hidden</strong> below {GATES.hideBelow} games.</li>

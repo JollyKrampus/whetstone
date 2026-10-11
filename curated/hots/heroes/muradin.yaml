@@ -8,7 +8,7 @@ traits:
 counters:
   - a: muradin
     b: thebutcher
-    why: "Thunder Clap slows The Butcher's Attack Speed by 30% (50% with Reverberation), and Storm Bolt stuns him off a target after Ruthless Onslaught lands."
+    why: "Thunder Clap slows The Butcher's Attack Speed by 30% (50% with Reverberation at level 4), and Storm Bolt stuns him off a target after Ruthless Onslaught lands."
     evidence: ["Thunder Clap", "Reverberation", "Storm Bolt", "Ruthless Onslaught"]
     confidence: medium
   - a: muradin
@@ -18,7 +18,7 @@ counters:
     confidence: low
   - a: muradin
     b: greymane
-    why: "Worgen form turns Greymane into a melee Basic Attacker; Thunder Clap cuts his Attack Speed and Dwarf Block negates his heaviest hits."
+    why: "Worgen form turns Greymane into a melee Basic Attacker; Thunder Clap cuts his Attack Speed by 30%, and Dwarf Block (level 1) takes 75% off three of his hits after each Dwarf Toss."
     evidence: ["Thunder Clap", "Dwarf Block", "Curse of the Worgen"]
     confidence: low
   - a: muradin
@@ -33,7 +33,7 @@ counters:
     confidence: medium
   - a: leoric
     b: muradin
-    why: "Drain Hope's 20% maximum Health drain is large against Muradin's pool, and Wraith Walk's Unstoppable shrugs off Storm Bolt and Haymaker."
+    why: "Drain Hope's 20% maximum Health drain is large against Muradin's pool, and Wraith Walk's Unstoppable shrugs off Storm Bolt and, if Muradin takes it, Haymaker."
     evidence: ["Drain Hope", "Wraith Walk", "Storm Bolt", "Haymaker"]
     confidence: low
   - a: lunara
@@ -44,16 +44,16 @@ counters:
 synergies:
   - a: jaina
     b: muradin
-    why: "Jaina's Chill keeps targets Slowed, which triggers Give 'em the Axe's bonus damage and counts toward Storm Bolt's quest on every Basic Attack."
+    why: "Jaina's Chill keeps targets Slowed, which counts toward Storm Bolt's quest on every Basic Attack, and with Give 'em the Axe! (level 1) also adds 40% to Muradin's Basic Attack damage."
     evidence: ["Frostbite", "Give 'em the Axe!", "Storm Bolt"]
     confidence: medium
   - a: malfurion
     b: muradin
-    why: "Entangling Roots holds targets still for Storm Bolt's projectile and counts as a Root for Give 'em the Axe's 40% Basic Attack bonus."
+    why: "Entangling Roots holds targets still for Storm Bolt's projectile, and with Give 'em the Axe! (level 1) the Root also adds 40% to Muradin's Basic Attacks."
     evidence: ["Entangling Roots", "Storm Bolt", "Give 'em the Axe!"]
     confidence: medium
   - a: muradin
     b: tyrande
-    why: "Lunar Flare's area stun triggers Give 'em the Axe and counts double for Storm Bolt's quest, and Hunter's Mark lowers the target's Armor for Muradin's follow-up."
+    why: "Lunar Flare's area stun counts double for Storm Bolt's quest (and triggers Give 'em the Axe! at level 1), and Hunter's Mark lowers the target's Armor for Muradin's follow-up."
     evidence: ["Lunar Flare", "Hunter's Mark", "Give 'em the Axe!", "Storm Bolt"]
     confidence: low

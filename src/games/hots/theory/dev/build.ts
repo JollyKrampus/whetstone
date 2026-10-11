@@ -31,7 +31,6 @@ export function mapsFromCurated(curated: CuratedBundle): GameMap[] {
       rankedSource: 'curated' as const,
       image: `img/maps/${id}.webp`,
       profile: { size: m.size, lanes: m.lanes, objective: m.objective, tags: m.tags },
-      ...(m.hp ? { hp: m.hp } : {}),
     }))
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 }

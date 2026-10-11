@@ -19,9 +19,8 @@ counters:
     confidence: medium
   - a: raynor
     b: stitches
-    why: "Hook drags Raynor in, but Penetrating Round's knockback is strongest at point-blank and shoves Stitches back out, while Bounty Hunter's 3% max-Health bonus punishes his 3020 Health."
-    evidence: ["Penetrating Round", "Bounty Hunter", "Hook"]
-    conditions: "Bounty Hunter at level 16 for the max-Health damage."
+    why: "Hook drags Raynor in, but Penetrating Round's knockback is strongest at point-blank and shoves Stitches back out, and Bounty Hunter (level 16) makes Give 'Em Some Pepper take 3% of his 3020 Health."
+    evidence: ["Penetrating Round", "Bounty Hunter", "Give 'Em Some Pepper", "Hook"]
     confidence: low
   # --- weak against ---
   - a: johanna
@@ -54,15 +53,17 @@ synergies:
     b: raynor
     why: "Stim Drone's 75% Attack Speed for 10 seconds stacks with Inspire, turning Raynor into a huge damage source while Healing Beam keeps him upright."
     evidence: ["Stim Drone", "Healing Beam", "Inspire"]
-    confidence: medium
+    conditions: "Lt. Morales takes Stim Drone (level 10)"
+    confidence: low
   - a: raynor
     b: rehgar
     why: "Bloodlust adds 40% Attack Speed and basic-attack lifesteal, which multiplies Raynor's sustained damage and makes him far harder to burst."
     evidence: ["Bloodlust", "Inspire", "Give 'Em Some Pepper"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: raynor
     b: tyrande
-    why: "Hunter's Mark strips 15 Armor and Trueshot Aura adds 40% Attack Damage, both paying off most on a basic-attack carry like Raynor."
+    why: "Hunter's Mark strips 15 Armor, and Trueshot Aura (level 1) adds 40% Attack Damage, both paying off most on a basic-attack carry like Raynor."
     evidence: ["Hunter's Mark", "Trueshot Aura", "Give 'Em Some Pepper"]
     confidence: medium
   - a: johanna

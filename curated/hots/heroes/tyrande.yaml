@@ -19,9 +19,8 @@ counters:
     confidence: medium
   - a: tyrande
     b: valeera
-    why: "Hunter's Mark reveals Valeera once Vanish's first Unrevealable second ends, and Lunar Flare stuns her in place."
+    why: "Hunter's Mark reveals Valeera once Vanish's first Unrevealable second ends, and Lunar Flare stuns her in place, though Smoke Bomb keeps her Unrevealable inside its cloud."
     evidence: ["Hunter's Mark", "Lunar Flare", "Vanish"]
-    conditions: "Smoke Bomb keeps Valeera Unrevealable inside the cloud."
     confidence: medium
   # --- weak against ---
   - a: johanna
@@ -47,12 +46,12 @@ counters:
 synergies:
   - a: raynor
     b: tyrande
-    why: "Hunter's Mark strips 15 Armor and Trueshot Aura adds 40% Attack Damage, both paying off most on a basic-attack carry like Raynor."
+    why: "Hunter's Mark strips 15 Armor, and Trueshot Aura (level 1) adds 40% Attack Damage, both paying off most on a basic-attack carry like Raynor."
     evidence: ["Hunter's Mark", "Trueshot Aura", "Give 'Em Some Pepper"]
     confidence: medium
   - a: tyrande
     b: valla
-    why: "Trueshot Aura's 40% Attack Damage and Hunter's Mark's Armor shred amplify Valla's Hatred-stacked basic attacks."
+    why: "Hunter's Mark's Armor shred, and Trueshot Aura's 40% Attack Damage at level 1, amplify Valla's Hatred-stacked basic attacks."
     evidence: ["Trueshot Aura", "Hunter's Mark", "Hatred"]
     confidence: medium
   - a: tyrande

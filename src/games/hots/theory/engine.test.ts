@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { repoRoot } from '../../../lib/datadir.ts';
 import { TheorySchema, type GameMap, type Hero, type HeroTag, type Mechanic, type Rule } from '../schema.ts';
 import { loadCurated } from './curated.ts';
-import { RULES_VERSION, applyCuratedTraits, buildTheory, heroProfile, matchSide, mergeMechanics, onlyWhen, renderTemplate, ruleSum, tagLabel, theoryRulesVersion } from './engine.ts';
+import { RULES_VERSION, applyCuratedTraits, buildTheory, conditionsText, heroProfile, matchSide, mergeMechanics, onlyWhen, orList, renderTemplate, ruleSum, tagLabel, theoryRulesVersion } from './engine.ts';
 import { extractMechanics } from './extract.ts';
 import type { CuratedBundle, MergedPair } from './types.ts';
 import { CONFIDENCE_WEIGHT, OPTIONAL_FACTOR, RULE_CAP, negligible, theoryScore } from './weights.ts';
@@ -79,7 +79,7 @@ function bundle(over: Partial<Pick<CuratedBundle, 'counters' | 'synergies' | 'tr
 }
 
 function curatedPair(a: string, b: string, weight = CONFIDENCE_WEIGHT.medium, why = ['A handwritten reason for the pair.']): MergedPair {
-  return { a, b, why, evidence: ['Some Ability'], conditions: [], confidence: 'medium', weight, reviewedFor: '2.57', sources: ['heroes/x.yaml'] };
+  return { a, b, why, whyConditions: why.map(() => []), evidence: ['Some Ability'], conditions: [], confidence: 'medium', weight, reviewedFor: '2.57', sources: ['heroes/x.yaml'] };
 }
 
 const MAPS: GameMap[] = [
@@ -232,6 +232,43 @@ describe('buildTheory counters', () => {
     const t = buildTheory({ heroes, maps: [], curated: bundle({ counterRules: [blind] }) });
     expect(counterOf(t, 'Aaaa', 'Bbbb')?.reasons[0]?.text).toBe('Alpha beats Beta with blind (Alpha blind talent). Only when Alpha takes Alpha blind talent. Beta must also take Beta aa-reliant talent.');
     expect(onlyWhen([{ name: 'X', match: { factor: 1, tag: 'blind', evidence: ['Q'] } }])).toBe('');
+  });
+
+  it('names every pick that gives an optional tag, not just the first (Lightbomb or Censure)', () => {
+    const anduin = hero('Aaaa', 'Alpha', []);
+    anduin.mechanics = [
+      {
+        tag: 'stun',
+        evidence: [
+          { kind: 'ability', name: 'Alpha Heroic A', snippet: 'x' },
+          { kind: 'talent', name: 'Censure', snippet: 'x' },
+        ],
+      },
+    ];
+    const stunVsChannel = rule('stun-vs-channel', ['stun'], ['channel'], 0.3, '{a} can interrupt channels with stun ({evidence}).');
+    const t = buildTheory({ heroes: [anduin, hero('Bbbb', 'Beta', ['channel'])], maps: [], curated: bundle({ counterRules: [stunVsChannel] }) });
+    expect(counterOf(t, 'Aaaa', 'Bbbb')?.reasons[0]?.text).toBe(
+      'Alpha can interrupt channels with stun (Alpha Heroic A, Censure). Only when Alpha takes Alpha Heroic A or Censure.',
+    );
+    expect(orList(['A'])).toBe('A');
+    expect(orList(['A', 'B', 'C'])).toBe('A, B or C');
+  });
+
+  it('carries each curated line\'s conditions into Reason.conditions, never into the text', () => {
+    const heroes = [hero('Aaaa', 'Alpha', []), hero('Bbbb', 'Beta', [])];
+    const pair: MergedPair = {
+      ...curatedPair('alpha', 'beta', 0.2, ['Needs the talent.', 'Holds anyway.']),
+      whyConditions: [['Alpha takes Big Talent (level 16)'], []],
+      conditions: ['Alpha takes Big Talent (level 16)'],
+    };
+    const e = counterOf(buildTheory({ heroes, maps: [], curated: bundle({ counters: [pair] }) }), 'Aaaa', 'Bbbb');
+    expect(e?.reasons).toEqual([
+      { kind: 'curated', text: 'Needs the talent.', evidence: ['Some Ability'], conditions: ['Alpha takes Big Talent (level 16)'] },
+      { kind: 'curated', text: 'Holds anyway.' },
+    ]);
+    expect(conditionsText(e?.reasons[0]?.conditions)).toBe(' Only when Alpha takes Big Talent (level 16).');
+    expect(conditionsText(['A', 'B'])).toBe(' Only when A, and B.');
+    expect(conditionsText(undefined)).toBe('');
   });
 
   it('is directed: the reverse pair only scores with its own rules', () => {

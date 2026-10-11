@@ -3,9 +3,25 @@
  * (src/components/types.ts), so every HotS page links heroes and portraits the same way.
  * Browser-safe (type-only imports from load.ts); normally called in .astro frontmatter.
  */
+import type { Reason } from '../../core/game.ts';
 import type { MatchupRow } from '../../components/types.ts';
 import { assetHref, navHref } from '../registry.ts';
 import type { HeroMatchupRow, MapFitRow } from './load.ts';
+import { conditionsText } from './theory/engine.ts';
+
+/**
+ * Reasons as the shared ReasonList shows them: a reason's `conditions` (curated matchups that
+ * hold only with a talent, a Heroic or a situation) become " Only when …." at the end of its
+ * text, the same wording generated theory reasons use, so no list ever shows a conditional
+ * claim as part of the base kit. The field is dropped once folded in, so nothing renders it twice.
+ */
+export function displayReasons(reasons: readonly Reason[]): Reason[] {
+  return reasons.map((r) => {
+    if (!r.conditions || r.conditions.length === 0) return r;
+    const { conditions, ...rest } = r;
+    return { ...rest, text: `${r.text}${conditionsText(conditions)}` };
+  });
+}
 
 /** Hero page URL (SPEC §8 /hots/hero/[slug]/). Composite entities use their own slug (chogall). */
 export function heroHref(hero: { slug: string }): string {
@@ -30,7 +46,7 @@ export function toMatchupRow(row: HeroMatchupRow, opts: { sourceLabel?: string }
     image: heroPortrait(row.hero),
     score: row.score,
     source: row.source,
-    reasons: row.reasons,
+    reasons: displayReasons(row.reasons),
     lowSample: row.gate === 'grey',
     ...(row.edge.delta === undefined ? {} : { delta: row.edge.delta }),
     ...(row.edge.n === undefined ? {} : { n: row.edge.n }),
@@ -63,7 +79,7 @@ export function mapFitRow(fit: MapFitRow, opts: { image?: string | null } = {}):
     ...(image ? { image } : {}),
     score: fit.score,
     source: fit.source,
-    reasons: fit.reasons,
+    reasons: displayReasons(fit.reasons),
     lowSample: fit.gate === 'grey',
     ...(fit.delta === undefined ? {} : { delta: fit.delta }),
     ...(fit.n === undefined ? {} : { n: fit.n }),
@@ -79,7 +95,7 @@ export function heroFitRow(hero: { id: string; name: string; slug: string; portr
     image: heroPortrait(hero),
     score: fit.score,
     source: fit.source,
-    reasons: fit.reasons,
+    reasons: displayReasons(fit.reasons),
     lowSample: fit.gate === 'grey',
     ...(fit.delta === undefined ? {} : { delta: fit.delta }),
     ...(fit.n === undefined ? {} : { n: fit.n }),

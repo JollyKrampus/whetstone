@@ -5,12 +5,15 @@ traits:
     why: "Force of Will makes an ally immune to all damage for 1.5 seconds, enough to cancel most burst combos and damage heroics."
   - tag: engage
     why: "Portal lets his whole team teleport across walls to start a fight or flank from an unexpected angle."
+  - tag: stealth
+    op: remove
+    why: "Dust of Disappearance stealths an ally, never Medivh himself, so reveal effects take nothing away from him."
 counters:
   - a: medivh
     b: nova
-    why: "Snipe into Triple Tap is one short burst window, and Force of Will makes the target immune to all damage for 1.5 seconds, wasting Nova's 100-second heroic."
+    why: "Nova's burst is one short window (Snipe, then Triple Tap if she takes it), and Force of Will makes the target immune to all damage for 1.5 seconds, wasting it."
     evidence: ["Force of Will", "Triple Tap", "Snipe"]
-    confidence: high
+    confidence: medium
   - a: medivh
     b: chromie
     why: "Chromie's kills come from timed Sand Blast and Dragon's Breath bursts that Force of Will negates, and Raven Form is immune to effects like Time Trap."
@@ -18,17 +21,17 @@ counters:
     confidence: medium
   - a: medivh
     b: greymane
-    why: "Cursed Bullet and Go for the Throat are single big hits, and a well-timed Force of Will cancels the damage outright and wastes the cooldown."
+    why: "Cursed Bullet or Go for the Throat, whichever Greymane takes, is a single big hit, and a well-timed Force of Will cancels the damage outright and wastes the cooldown."
     evidence: ["Force of Will", "Cursed Bullet", "Go for the Throat"]
     confidence: medium
   - a: medivh
     b: kaelthas
-    why: "Pyroblast and Flamestrike are slow, telegraphed bursts, so Medivh has time to put Force of Will on the target and block all of the damage."
+    why: "Flamestrike, and Pyroblast if Kael'thas takes it, are slow, telegraphed bursts, so Medivh has time to put Force of Will on the target and block all of the damage."
     evidence: ["Force of Will", "Pyroblast", "Flamestrike"]
     confidence: medium
   - a: medivh
     b: liming
-    why: "Li-Ming's Critical Mass snowball depends on securing the first kill; Force of Will denies it by absorbing Arcane Orb and Disintegrate on her target."
+    why: "Li-Ming's Critical Mass snowball depends on securing the first kill; Force of Will denies it by absorbing Arcane Orb, or Disintegrate, on her target."
     evidence: ["Force of Will", "Critical Mass", "Arcane Orb", "Disintegrate"]
     confidence: medium
   - a: valeera
@@ -49,7 +52,7 @@ counters:
 synergies:
   - a: etc
     b: medivh
-    why: "Portal lets E.T.C. appear at an unexpected angle for Powerslide into Mosh Pit, turning a flank into a team-wide stun."
+    why: "Portal lets E.T.C. appear at an unexpected angle for Powerslide's stun, and into Mosh Pit if he takes it, turning a flank into a team-wide stun."
     evidence: ["Portal", "Powerslide", "Mosh Pit"]
     confidence: medium
   - a: garrosh

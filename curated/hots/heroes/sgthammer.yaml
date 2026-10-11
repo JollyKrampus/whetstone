@@ -11,19 +11,19 @@ counters:
   # --- strong against ---
   - a: sgthammer
     b: probius
-    why: "Siege Mode's doubled range and splash let Sgt. Hammer shell Probius' Pylons and Photon Cannons from beyond their reach, splashing Probius when he stands near them."
+    why: "Siege Mode's doubled range and splash let Sgt. Hammer shell Probius' Pylons and Photon Cannons from beyond their reach, splashing Probius when he stands near them (more with Advanced Artillery at level 1)."
     evidence: ["Siege Mode", "Advanced Artillery", "Warp In Pylon", "Photon Cannon"]
     confidence: low
   - a: sgthammer
     b: xul
-    why: "Xul has no gap closer, so a sieging Hammer with doubled range and Concussive Blast's knockback keeps his melee Cursed Strikes away, while Advanced Artillery's splash clears his Skeletal Warriors."
+    why: "Xul has no gap closer, so a sieging Hammer with doubled range and Concussive Blast's knockback keeps his melee Cursed Strikes away, while Siege Mode's splash (wider with Advanced Artillery at level 1) clears his Skeletal Warriors."
     evidence: ["Siege Mode", "Concussive Blast", "Advanced Artillery", "Cursed Strikes", "Raise Skeleton"]
     confidence: low
   - a: sgthammer
     b: chogall
     why: "Cho'gall is a huge, slow target; Giant Killer adds 1.5% of max Health per Siege Mode shot, and Concussive Blast shoves Cho back out after a Surging Fist."
     evidence: ["Siege Mode", "Giant Killer", "Concussive Blast", "Surging Fist"]
-    conditions: "Giant Killer at level 16."
+    conditions: "Sgt. Hammer takes Giant Killer (level 16)"
     confidence: low
   # --- weak against ---
   - a: zeratul
@@ -61,9 +61,10 @@ synergies:
     b: sgthammer
     why: "Stim Drone's 75% Attack Speed on a Siege Mode Hammer multiplies her long-range splash, and Healing Beam reaches her from a safe distance."
     evidence: ["Stim Drone", "Healing Beam", "Siege Mode"]
-    confidence: medium
+    conditions: "Lt. Morales takes Stim Drone (level 10)"
+    confidence: low
   - a: sgthammer
     b: zarya
-    why: "Shield Ally gives an immobile Siege Mode Hammer a 420-damage buffer against divers, and Expulsion Zone knocks them back off her."
+    why: "Shield Ally gives an immobile Siege Mode Hammer a 420-damage buffer against divers, and Expulsion Zone, if Zarya takes it, knocks them back off her."
     evidence: ["Shield Ally", "Expulsion Zone", "Siege Mode"]
     confidence: low

@@ -21,20 +21,21 @@ counters:
     confidence: medium
   - a: brightwing
     b: kelthuzad
-    why: "Soothing Mist's activation frees allies from Frost Nova and Frost Blast roots and from Chains' stun, so they walk out before Shadow Fissure lands."
+    why: "Soothing Mist's activation frees allies from Frost Nova's root, Chains' stun and, if Kel'Thuzad takes it, Frost Blast's root, so they walk out before his follow-up lands."
     evidence: ["Soothing Mist", "Frost Nova", "Frost Blast", "Chains of Kel'Thuzad", "Shadow Fissure"]
     confidence: low
   - a: brightwing
     b: jaina
-    why: "Jaina kills with Chill slows and Ring of Frost's root, and Soothing Mist removes both from everyone nearby."
+    why: "Jaina kills with Chill slows and, if she takes it, Ring of Frost's root; Soothing Mist's activation removes both from every ally nearby."
     evidence: ["Soothing Mist", "Frostbite", "Ring of Frost"]
     confidence: low
   # --- weak against ---
   - a: nova
     b: brightwing
-    why: "Brightwing has only 1425 health and no instant escape; Snipe and Triple Tap from stealth kill her before Phase Shift's 2-second delay finishes."
+    why: "Brightwing has only 1425 health and no instant escape, so a Snipe from stealth followed by Triple Tap can kill her before Phase Shift's 2-second delay finishes."
     evidence: ["Snipe", "Triple Tap", "Permanent Cloak", "Phase Shift"]
-    confidence: medium
+    conditions: "Nova takes Triple Tap (level 10)"
+    confidence: low
   - a: zeratul
     b: brightwing
     why: "Zeratul's Blink and Cleave burst a 1425-health Brightwing, and stealth lets him pick the moment Phase Shift is on cooldown."

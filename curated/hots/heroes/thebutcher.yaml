@@ -14,9 +14,8 @@ counters:
     confidence: medium
   - a: thebutcher
     b: chromie
-    why: "Chromie's 1390 Health and lack of a dash make her easy prey once Ruthless Onslaught connects, and Lamb to the Slaughter can chain and silence her for 3 seconds."
-    evidence: ["Ruthless Onslaught", "Lamb to the Slaughter"]
-    conditions: "Less reliable once Chromie has Time Out or Here and There at level 13."
+    why: "Chromie's 1390 Health and lack of a dash make her easy prey once Ruthless Onslaught connects (less so once she has Time Out or Here and There at level 13), and Lamb to the Slaughter, if The Butcher takes it, can chain and silence her for 3 seconds."
+    evidence: ["Ruthless Onslaught", "Lamb to the Slaughter", "Time Out", "Here and There"]
     confidence: medium
   - a: thebutcher
     b: probius
@@ -27,6 +26,7 @@ counters:
     b: liming
     why: "Lamb to the Slaughter chains and silences Li-Ming for 3 seconds so she can't Teleport out, and Butcher's Brand keeps him healthy while he hits her 1270 Health."
     evidence: ["Lamb to the Slaughter", "Teleport", "Butcher's Brand"]
+    conditions: "The Butcher takes Lamb to the Slaughter (level 10)"
     confidence: low
   # --- weak against ---
   - a: johanna
@@ -41,7 +41,7 @@ counters:
     confidence: medium
   - a: varian
     b: thebutcher
-    why: "Parry blocks all basic attacks for 1.25 seconds with two charges, and Taunt silences The Butcher and forces him to swing at Varian instead of his target."
+    why: "Parry blocks all basic attacks for 1.25 seconds with two charges, and Taunt, if Varian takes it at level 4, silences The Butcher and forces him to swing at Varian instead of his target."
     evidence: ["Parry", "Taunt", "Fresh Meat"]
     confidence: medium
   - a: xul
@@ -64,9 +64,11 @@ synergies:
     b: thebutcher
     why: "Bloodlust's 40% Attack Speed and lifesteal stack with Butcher's Brand healing, making a Bloodlusted Butcher extremely hard to kill in melee."
     evidence: ["Bloodlust", "Butcher's Brand"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: ltmorales
     b: thebutcher
     why: "Stim Drone's 75% Attack Speed on The Butcher multiplies both his Fresh Meat-scaled damage and his Butcher's Brand healing."
     evidence: ["Stim Drone", "Fresh Meat", "Butcher's Brand"]
-    confidence: medium
+    conditions: "Lt. Morales takes Stim Drone (level 10)"
+    confidence: low

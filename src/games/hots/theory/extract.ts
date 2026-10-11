@@ -505,11 +505,19 @@ const RULES: TagRule[] = [
   { tag: 'heal-ally', find: healFinder('ally') },
   {
     tag: 'stealth',
-    find: maskedFinder(
-      /\b(?:gain|gains|gaining|grant|grants|granting|enter|enters|entering|become|becomes|becoming|is|are|remain|remains)\s+(?:[\w']+\s+){0,2}?(?:Stealth|Stealthed|Cloaked|invisible)\b/i,
-      /\bStealth(?:ed)?\s+(?:for|while|when|until|after)\b/i,
-      /\bpermanently\s+(?:Stealthed|Cloaked)\b/i,
-      /\bvanish(?:es|ing)?\b/i,
+    find: unless(
+      maskedFinder(
+        /\b(?:gain|gains|gaining|grant|grants|granting|enter|enters|entering|become|becomes|becoming|is|are|remain|remains)\s+(?:[\w']+\s+){0,2}?(?:Stealth|Stealthed|Cloaked|invisible)\b/i,
+        /\bStealth(?:ed)?\s+(?:for|while|when|until|after)\b/i,
+        /\bpermanently\s+(?:Stealthed|Cloaked)\b/i,
+        /\bvanish(?:es|ing)?\b/i,
+        // Team-wide Stealth (Shadowstalk) includes the hero.
+        /\bgrants?\s+all\s+allied\s+Heroes\s+Stealth\b/i,
+      ),
+      // Not a source of Stealth: the rider every Stealth tooltip repeats ("Remaining stationary …
+      // while Stealthed grants Invisible"), and Stealth given to one ally (Dust of Disappearance),
+      // which the hero itself never gets.
+      /\bwhile\s+Stealthed\s+grants\s+Invisible\b|\bStealths?\s+(?:an|one|target|the target)\s+allied\s+Hero\b/i,
     ),
   },
   {

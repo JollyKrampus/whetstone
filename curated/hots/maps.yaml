@@ -19,7 +19,6 @@
 #                long-rotations          objectives spawn far apart, so teams cross the map often
 #                escort-objective        a moving payload has to be escorted
 #                push-objective          the objective reward is a unit or wave that pushes lanes
-#   hp         Heroes Profile map_id and name (join key for map stats).
 #
 # fit: map tags x hero tags rules. A rule applies when the map has ANY of `map` and the hero
 #   satisfies ANY expression in `hero` (same syntax as rules.yaml). Placeholders in `why`:
@@ -37,7 +36,6 @@ maps:
     lanes: 3
     objective: Kill the guards holding your captured soldiers and free them; the freed cavalry charges down every lane with your minions.
     tags: [three-lane, teamfight, pve-objective, push-objective]
-    hp: { id: 15, name: Alterac Pass }
   battlefield-of-eternity:
     name: Battlefield of Eternity
     kind: standard
@@ -45,7 +43,6 @@ maps:
     lanes: 2
     objective: Both teams race to kill the other side's Immortal; the surviving Immortal then pushes a lane.
     tags: [two-lane, small, pve-objective, teamfight, push-objective]
-    hp: { id: 1, name: Battlefield of Eternity }
   blackhearts-bay:
     name: Blackheart's Bay
     kind: standard
@@ -53,7 +50,6 @@ maps:
     lanes: 3
     objective: Gather doubloons from chests, camps and fallen heroes and hand them in at the ghost ship, which then fires on enemy forts.
     tags: [three-lane, large, channel-objective, structure-objective, long-rotations]
-    hp: { id: 2, name: Blackheart's Bay }
   braxis-holdout:
     name: Braxis Holdout
     kind: standard
@@ -61,7 +57,6 @@ maps:
     lanes: 2
     objective: Hold both beacons to fill your Zerg wave faster than the enemy; the wave then marches on the enemy base.
     tags: [two-lane, small, teamfight, push-objective]
-    hp: { id: 3, name: Braxis Holdout }
   cursed-hollow:
     name: Cursed Hollow
     kind: standard
@@ -69,7 +64,6 @@ maps:
     lanes: 3
     objective: Channel tributes as they appear around the map; the team that collects three curses the other, weakening its minions and shutting down its towers.
     tags: [three-lane, large, channel-objective, long-rotations]
-    hp: { id: 4, name: Cursed Hollow }
   dragon-shire:
     name: Dragon Shire
     kind: standard
@@ -77,7 +71,6 @@ maps:
     lanes: 3
     objective: Hold the top and bottom shrines, then channel the statue in the middle to turn a hero into the lane-pushing Dragon Knight.
     tags: [three-lane, channel-objective, push-objective, long-rotations]
-    hp: { id: 5, name: Dragon Shire }
   garden-of-terror:
     name: Garden of Terror
     kind: standard
@@ -85,7 +78,6 @@ maps:
     lanes: 3
     objective: At night, kill the Shamblers and their guardian for seeds; enough seeds plant a Garden Terror that pushes and disables structures.
     tags: [three-lane, large, pve-objective, push-objective]
-    hp: { id: 6, name: Garden of Terror }
   hanamura-temple:
     name: Hanamura Temple
     kind: standard
@@ -93,7 +85,6 @@ maps:
     lanes: 2
     objective: Escort your payload along its track by standing next to it; a delivered payload fires on the enemy base.
     tags: [two-lane, escort-objective, structure-objective, teamfight]
-    hp: { id: 7, name: Hanamura Temple }
   haunted-mines:
     name: Haunted Mines
     kind: standard
@@ -101,7 +92,6 @@ maps:
     lanes: 2
     objective: Clear the undead in the mines for skulls; the team with more skulls raises the stronger Grave Golem to push for it.
     tags: [two-lane, pve-objective, push-objective]
-    hp: { id: 8, name: Haunted Mines }
   infernal-shrines:
     name: Infernal Shrines
     kind: standard
@@ -109,7 +99,6 @@ maps:
     lanes: 3
     objective: Kill an active shrine's guardians before the other team to summon a Punisher that pushes for you.
     tags: [three-lane, pve-objective, push-objective, teamfight]
-    hp: { id: 9, name: Infernal Shrines }
   sky-temple:
     name: Sky Temple
     kind: standard
@@ -117,7 +106,6 @@ maps:
     lanes: 3
     objective: Capture and hold the active temples; a held temple fires on the other team's structures.
     tags: [three-lane, large, structure-objective, teamfight, long-rotations]
-    hp: { id: 10, name: Sky Temple }
   tomb-of-the-spider-queen:
     name: Tomb of the Spider Queen
     kind: standard
@@ -125,7 +113,6 @@ maps:
     lanes: 3
     objective: Collect the gems dropped by minions and heroes and hand them in to summon Webweavers in every lane.
     tags: [three-lane, push-objective]
-    hp: { id: 11, name: Tomb of the Spider Queen }
   towers-of-doom:
     name: Towers of Doom
     kind: standard
@@ -133,7 +120,6 @@ maps:
     lanes: 3
     objective: Capture altars when they activate to fire on the enemy core, which heroes cannot attack directly.
     tags: [three-lane, channel-objective, structure-objective]
-    hp: { id: 12, name: Towers of Doom }
   volskaya-foundry:
     name: Volskaya Foundry
     kind: standard
@@ -141,7 +127,6 @@ maps:
     lanes: 3
     objective: Hold the control point to earn the Triglav Protector, a robot two heroes pilot together.
     tags: [three-lane, teamfight, push-objective]
-    hp: { id: 14, name: Volskaya Foundry }
   warhead-junction:
     name: Warhead Junction
     kind: standard
@@ -149,7 +134,6 @@ maps:
     lanes: 3
     objective: Pick up the nukes that spawn across the map and channel them onto enemy heroes or structures.
     tags: [three-lane, large, channel-objective, long-rotations]
-    hp: { id: 13, name: Warhead Junction }
   braxis-outpost:
     name: Braxis Outpost
     kind: aram
@@ -157,7 +141,6 @@ maps:
     lanes: 1
     objective: ARAM on a single lane; destroy the enemy core.
     tags: [single-lane, small, teamfight]
-    hp: { id: 21, name: Braxis Outpost }
   industrial-district:
     name: Industrial District
     kind: aram
@@ -165,7 +148,6 @@ maps:
     lanes: 1
     objective: ARAM on a single lane; destroy the enemy core.
     tags: [single-lane, small, teamfight]
-    hp: { id: 17, name: Industrial District }
   lost-cavern:
     name: Lost Cavern
     kind: aram
@@ -173,7 +155,6 @@ maps:
     lanes: 1
     objective: ARAM on a single lane; destroy the enemy core.
     tags: [single-lane, small, teamfight]
-    hp: { id: 18, name: Lost Cavern }
   silver-city:
     name: Silver City
     kind: aram
@@ -181,7 +162,6 @@ maps:
     lanes: 1
     objective: ARAM on a single lane; destroy the enemy core.
     tags: [single-lane, small, teamfight]
-    hp: { id: 20, name: Silver City }
 
 fit:
   # --- map size and rotations -------------------------------------------------------------

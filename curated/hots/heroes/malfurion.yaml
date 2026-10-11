@@ -10,19 +10,19 @@ counters:
     b: genji
     why: "Twilight Dream Silences everyone near Malfurion for 3 seconds, so a diving Genji cannot Deflect, Cyber Agility or Swift Strike his way out."
     evidence: ["Twilight Dream", "Deflect", "Cyber Agility", "Swift Strike"]
-    conditions: "Requires Twilight Dream at level 10."
-    confidence: medium
+    conditions: "Malfurion takes Twilight Dream (level 10)"
+    confidence: low
   - a: malfurion
     b: tracer
     why: "A Silenced Tracer cannot Blink or Recall, and Twilight Dream's large area covers the spot she dives into, leaving her stranded for 3 seconds."
     evidence: ["Twilight Dream", "Blink", "Recall"]
-    conditions: "Requires Twilight Dream at level 10."
-    confidence: medium
+    conditions: "Malfurion takes Twilight Dream (level 10)"
+    confidence: low
   - a: malfurion
     b: zeratul
-    why: "Moonfire reveals Heroes it hits for 2 seconds (5 with Celestial Alignment), exposing Zeratul's approach, and Twilight Dream's Silence stops his Blink exit."
+    why: "Moonfire reveals Heroes it hits for 2 seconds (5 with Celestial Alignment at level 4), exposing Zeratul's approach, and Twilight Dream, if Malfurion takes it, silences his Blink exit."
     evidence: ["Moonfire", "Celestial Alignment", "Twilight Dream", "Permanent Cloak", "Blink"]
-    confidence: medium
+    confidence: low
   - a: ana
     b: malfurion
     why: "Biotic Grenade blocks the Regrowth heal-over-time ticks Malfurion relies on, and Sleep Dart catches a healer with no mobility."
@@ -37,6 +37,7 @@ counters:
     b: malfurion
     why: "Malfurion's healing is slow Regrowth ticks with no burst heal, so Snipe plus Triple Tap kills a target, or Malfurion himself, before the healing can catch up."
     evidence: ["Snipe", "Triple Tap", "Regrowth"]
+    conditions: "Nova takes Triple Tap (level 10)"
     confidence: low
 synergies:
   - a: liming

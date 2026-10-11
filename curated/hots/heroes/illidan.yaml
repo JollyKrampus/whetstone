@@ -43,13 +43,12 @@ counters:
     confidence: medium
   - a: arthas
     b: illidan
-    why: "Frozen Tempest stacks up to 40% Attack Speed and Movement Speed reduction on nearby enemies and Howling Blast roots him; a slowed, rooted Illidan cannot heal through his attacks."
+    why: "Frozen Tempest stacks up to 40% Attack Speed and Movement Speed reduction on nearby enemies and Howling Blast roots him; a slowed, rooted Illidan cannot heal through his attacks, and Rime (level 1) blunts the hits he does land."
     evidence: ["Frozen Tempest", "Howling Blast", "Rime", "Betrayer's Thirst"]
-    conditions: "Rime adds stored Physical Armor charges against his hits."
     confidence: medium
   - a: muradin
     b: illidan
-    why: "Thunder Clap cuts Illidan's Attack Speed by 30% (50% with Reverberation) and Storm Bolt stuns him mid-Dive; Imposing Presence slows his attacks even further."
+    why: "Thunder Clap cuts Illidan's Attack Speed by 30% (50% with Reverberation at level 4) and Storm Bolt stuns him mid-Dive; Imposing Presence (level 16) slows his attacks even further."
     evidence: ["Thunder Clap", "Reverberation", "Storm Bolt", "Imposing Presence"]
     confidence: medium
   - a: mei
@@ -65,21 +64,21 @@ counters:
 synergies:
   - a: abathur
     b: illidan
-    why: "Carapace shields and heals Illidan mid-dive, and Adrenal Overload adds 25% Attack Speed, which also speeds up Betrayer's Thirst cooldown reduction."
+    why: "Carapace shields and heals Illidan mid-dive, and with Adrenal Overload (level 4) the Symbiote also gives him 25% Attack Speed, which speeds up Betrayer's Thirst's cooldown reduction."
     evidence: ["Symbiote", "Carapace", "Adrenal Overload", "Betrayer's Thirst"]
     confidence: medium
   - a: illidan
     b: kharazim
-    why: "Kharazim can Radiant Dash in after Illidan, and Divine Palm or Cleansing Touch covers the moment Illidan gets caught by burst or a stun."
+    why: "Kharazim can Radiant Dash in after Illidan, and Divine Palm or Cleansing Touch (level 16), whichever he takes, covers the moment Illidan gets caught by burst or a stun."
     evidence: ["Radiant Dash", "Divine Palm", "Cleansing Touch"]
     confidence: medium
   - a: illidan
     b: rehgar
-    why: "Bloodlust adds Attack Speed and lifesteal to Illidan's Basic Attacks, and Lightning Shield placed on him deals area damage while he sticks to a target."
+    why: "Lightning Shield placed on Illidan deals area damage while he sticks to a target, and Bloodlust, if Rehgar takes it, adds Attack Speed and lifesteal to his Basic Attacks."
     evidence: ["Bloodlust", "Lightning Shield", "Betrayer's Thirst"]
     confidence: medium
   - a: illidan
     b: tyrael
-    why: "Judgment stuns a target for 1.5 seconds so Illidan can land a full attack chain, and Sanctification protects him after he commits deep."
+    why: "Judgment stuns a target for 1.5 seconds so Illidan can land a full attack chain, or Sanctification keeps him alive after he commits deep, whichever Heroic Tyrael takes."
     evidence: ["Judgment", "Sanctification", "Dive"]
     confidence: medium

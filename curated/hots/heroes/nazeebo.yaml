@@ -10,7 +10,7 @@ traits:
 counters:
   - a: nazeebo
     b: chogall
-    why: "Cho'gall's huge, slow body takes every stacking Plague of Toads and a full Ravenous Spirit, while Zombie Wall stalls him from reaching Nazeebo."
+    why: "Cho'gall's huge, slow body takes every stacking Plague of Toads and, if Nazeebo takes it, a full Ravenous Spirit, while Zombie Wall stalls him from reaching Nazeebo."
     evidence: ["Plague of Toads", "Ravenous Spirit", "Zombie Wall"]
     confidence: low
   - a: nazeebo
@@ -35,22 +35,25 @@ counters:
     confidence: medium
   - a: genji
     b: nazeebo
-    why: "Deflect absorbs Ravenous Spirit ticks and Toads, and Cyber Agility jumps over Zombie Wall onto a hero with no escapes."
+    why: "Deflect absorbs Toads (and Ravenous Spirit ticks, if Nazeebo takes it), and Cyber Agility jumps over Zombie Wall onto a hero with no escapes."
     evidence: ["Deflect", "Cyber Agility", "Ravenous Spirit", "Zombie Wall"]
     confidence: medium
 synergies:
   - a: nazeebo
     b: zarya
-    why: "Graviton Surge holds enemies at one point, so a Zombie Wall cast on it traps the whole group for Ring of Poison or Ravenous Spirit."
+    why: "Graviton Surge holds enemies at one point, so a Zombie Wall cast on it traps the whole group for Ring of Poison (level 16) or Ravenous Spirit."
     evidence: ["Graviton Surge", "Zombie Wall", "Ring of Poison", "Ravenous Spirit"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: mei
     b: nazeebo
-    why: "Ice Wall and Zombie Wall together box enemies in, giving Plague of Toads and Ravenous Spirit full uptime on the trapped Heroes."
+    why: "Ice Wall and Zombie Wall together box enemies in, giving Plague of Toads, and Ravenous Spirit if Nazeebo takes it, full uptime on the trapped Heroes."
     evidence: ["Ice Wall", "Zombie Wall", "Plague of Toads", "Ravenous Spirit"]
+    conditions: "Mei takes Ice Wall (level 10)"
     confidence: low
   - a: nazeebo
     b: tyrael
     why: "Sanctification makes allies Invulnerable for 3 seconds, protecting a stationary Nazeebo during part of Ravenous Spirit's 8-second channel."
     evidence: ["Sanctification", "Ravenous Spirit"]
+    conditions: ["Tyrael takes Sanctification (level 10)", "Nazeebo takes Ravenous Spirit (level 10)"]
     confidence: low

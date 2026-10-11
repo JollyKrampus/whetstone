@@ -15,14 +15,14 @@ counters:
   - a: xul
     b: rexxar
     why: "Cursed Strikes slows the attack speed of Heroes and Summons by 40%, so both Rexxar and Misha, who deal most of their damage with basic attacks, lose a big share of their output."
-    evidence: ["Cursed Strikes", "Bestial Wrath"]
+    evidence: ["Cursed Strikes"]
     confidence: medium
   - a: xul
     b: varian
     why: "Cursed Strikes cuts attack speed by 40%, which hits a Twin Blades of Fury Varian hardest, and Bone Prison roots him in place."
     evidence: ["Cursed Strikes", "Bone Prison", "Twin Blades of Fury"]
-    conditions: "Varian on Twin Blades of Fury."
-    confidence: medium
+    conditions: "Varian takes Twin Blades of Fury (level 4)"
+    confidence: low
   - a: xul
     b: thrall
     why: "Cursed Strikes cuts Thrall's attack speed by 40%, blunting Windfury's burst and slowing how fast he builds Frostwolf Resilience healing."
@@ -56,20 +56,21 @@ counters:
     confidence: low
   - a: sgthammer
     b: xul
-    why: "Xul has no gap closer, so a sieging Hammer with doubled range and Concussive Blast's knockback keeps his melee Cursed Strikes away, while Advanced Artillery's splash clears his Skeletal Warriors."
+    why: "Xul has no gap closer, so a sieging Hammer with doubled range and Concussive Blast's knockback keeps his melee Cursed Strikes away, while Siege Mode's splash (wider with Advanced Artillery at level 1) clears his Skeletal Warriors."
     evidence: ["Siege Mode", "Concussive Blast", "Advanced Artillery", "Cursed Strikes", "Raise Skeleton"]
     confidence: low
 synergies:
   - a: xul
     b: zarya
-    why: "Graviton Surge groups enemies so Poison Nova's missiles hit all of them, and Shield Ally keeps Xul alive while he fights in melee."
+    why: "Shield Ally keeps Xul alive while he fights in melee, and when both take them, Graviton Surge groups enemies so Poison Nova's missiles hit all of them."
     evidence: ["Graviton Surge", "Shield Ally", "Poison Nova"]
-    confidence: medium
+    confidence: low
   - a: mei
     b: xul
-    why: "Ice Wall traps enemies for 2.5 seconds, long enough for Bone Prison's delayed Root and Poison Nova to land."
+    why: "Ice Wall traps enemies for 2.5 seconds, long enough for Bone Prison's delayed Root, and Poison Nova if Xul takes it, to land."
     evidence: ["Ice Wall", "Bone Prison", "Poison Nova"]
-    confidence: medium
+    conditions: "Mei takes Ice Wall (level 10)"
+    confidence: low
   - a: stitches
     b: xul
     why: "Bone Prison's 2-second delay is easy to land on a target that has just been Hooked and Slammed, and its Root then holds them for Xul's skeletons."

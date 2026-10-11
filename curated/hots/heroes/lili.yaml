@@ -8,7 +8,7 @@ traits:
 counters:
   - a: lili
     b: valla
-    why: "Blinding Wind Blinds Valla for 1.5 seconds (longer with Gale Force), wasting her Hatred stacks and Strafe, whose damage is all Basic Attacks."
+    why: "Blinding Wind Blinds Valla for 1.5 seconds (0.75 seconds longer with Gale Force at level 13), wasting her Hatred-boosted attacks and, if she takes it, Strafe, whose damage is all Basic Attacks."
     evidence: ["Blinding Wind", "Gale Force", "Hatred", "Strafe"]
     confidence: medium
   - a: lili
@@ -30,10 +30,10 @@ counters:
     b: zuljin
     why: "Zul'jin's Berserker and Grievous Throw marks are paid out through Basic Attacks, which Blinding Wind turns into misses."
     evidence: ["Blinding Wind", "Berserker", "Grievous Throw"]
-    confidence: low
+    confidence: medium
   - a: ana
     b: lili
-    why: "Biotic Grenade stops healing on everyone it hits for 1.75 seconds, and Li Li's output is steady Healing Brew and Jug ticks that the grenade cancels."
+    why: "Biotic Grenade stops healing on everyone it hits for 1.75 seconds, and Li Li's output is steady Healing Brew casts (plus Jug of 1,000 Cups ticks, if she takes it) that the grenade cancels."
     evidence: ["Biotic Grenade", "Healing Brew", "Jug of 1,000 Cups"]
     confidence: medium
   - a: genji
@@ -43,7 +43,7 @@ counters:
     confidence: medium
   - a: kerrigan
     b: lili
-    why: "Kerrigan's combo is mostly Ability damage, so Blinding Wind does little, and Primal Grasp plus Impaling Blades can kill Li Li before Fast Feet helps."
+    why: "Kerrigan's combo is mostly Ability damage, so Blinding Wind does little, and Primal Grasp pulls Li Li in for Impaling Blades' stun and Kerrigan's Basic Attacks before Fast Feet helps."
     evidence: ["Primal Grasp", "Impaling Blades", "Blinding Wind", "Fast Feet"]
     confidence: low
 synergies:
@@ -51,6 +51,7 @@ synergies:
     b: lili
     why: "Water Dragon auto-targets the nearest enemy Hero and Slows everyone near them by 70% for 4 seconds, holding the group in place for Flamestrike's delayed blast."
     evidence: ["Water Dragon", "Flamestrike"]
+    conditions: "Li Li takes Water Dragon (level 10)"
     confidence: low
   - a: lili
     b: mei

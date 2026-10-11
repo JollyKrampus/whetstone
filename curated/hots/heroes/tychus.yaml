@@ -14,7 +14,7 @@ counters:
     confidence: high
   - a: tychus
     b: chogall
-    why: "Cho'gall's combined Health pool is enormous, so Minigun's max-Health bonus, raised to 4% by The Bigger They Are, melts Cho quickly."
+    why: "Cho'gall's combined Health pool is enormous, so Minigun's maximum-Health bonus (2.5%, or 4% with The Bigger They Are at level 4) melts Cho quickly."
     evidence: ["Minigun", "The Bigger They Are", "Ogre Hide"]
     confidence: high
   - a: tychus
@@ -26,7 +26,7 @@ counters:
     b: deathwing
     why: "Deathwing is permanently Unstoppable so CC can't stop him, but Minigun's max-Health bonus chews through his 2750 Health and knocks off Armor Plates as it goes."
     evidence: ["Minigun", "Aspect of Death"]
-    confidence: low
+    confidence: medium
   - a: tychus
     b: sonya
     why: "Minigun's bonus damage scales with max Health, so Sonya's 2450 Health makes her a prime target, and Frag Grenade's knockback plus Run and Gun keep her from sticking to him."
@@ -52,21 +52,23 @@ counters:
     b: tychus
     why: "Parry blocks every basic attack for 1.25 seconds and stores two charges, so Varian can waste most of a 3-second Minigun window."
     evidence: ["Parry", "Minigun"]
-    conditions: "Varian's Taunt passive raises his max Health, which feeds Minigun, so this holds best for Colossus Smash or Twin Blades builds."
+    conditions: "Varian takes Colossus Smash or Twin Blades of Fury (level 4) rather than Taunt"
     confidence: low
 synergies:
   - a: rehgar
     b: tychus
     why: "Bloodlust's Attack Speed puts more Minigun hits into each window, and its lifesteal keeps Tychus alive at his short range."
     evidence: ["Bloodlust", "Minigun"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: ltmorales
     b: tychus
     why: "Stim Drone's 75% Attack Speed adds more Minigun hits per window, and Healing Beam sustains Tychus while he fights up close."
     evidence: ["Stim Drone", "Healing Beam", "Minigun"]
-    confidence: medium
+    conditions: "Lt. Morales takes Stim Drone (level 10)"
+    confidence: low
   - a: abathur
     b: tychus
-    why: "Symbiote on Tychus adds Carapace shields and Spike Burst while he fights at short range, and Ultimate Evolution can clone him for a second Minigun."
+    why: "Symbiote on Tychus adds Carapace shields and Spike Burst while he fights at short range, and Ultimate Evolution, if Abathur takes it, can clone him for a second Minigun."
     evidence: ["Symbiote", "Carapace", "Ultimate Evolution", "Minigun"]
     confidence: medium

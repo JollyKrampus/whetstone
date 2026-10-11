@@ -10,17 +10,17 @@ counters:
     b: zeratul
     why: "With Natural Perspective, Nature's Toxin reveals poisoned enemies for its whole duration, so one Noxious Blossom on Zeratul's approach strips the value of Permanent Cloak."
     evidence: ["Natural Perspective", "Nature's Toxin", "Noxious Blossom", "Permanent Cloak"]
-    conditions: "Requires the level 1 Natural Perspective talent."
-    confidence: medium
+    conditions: "Lunara takes Natural Perspective (level 1)"
+    confidence: low
   - a: lunara
     b: nova
     why: "Natural Perspective makes Nature's Toxin reveal its target, so a poisoned Nova cannot re-cloak for up to 9 seconds and loses her stealth openers."
     evidence: ["Natural Perspective", "Nature's Toxin", "Permanent Cloak"]
-    conditions: "Requires the level 1 Natural Perspective talent."
-    confidence: medium
+    conditions: "Lunara takes Natural Perspective (level 1)"
+    confidence: low
   - a: lunara
     b: thebutcher
-    why: "The Butcher must walk into melee range with only Ruthless Onslaught to close; Dryad's Swiftness, Leaping Strike and Crippling Spores keep him poisoned and slowed out of reach."
+    why: "The Butcher must walk into melee range with only Ruthless Onslaught to close; Dryad's Swiftness and Crippling Spores, plus Leaping Strike if Lunara takes it, keep him poisoned and slowed out of reach."
     evidence: ["Dryad's Swiftness", "Leaping Strike", "Crippling Spores", "Ruthless Onslaught"]
     confidence: low
   - a: lunara
@@ -30,12 +30,12 @@ counters:
     confidence: low
   - a: valeera
     b: lunara
-    why: "Cloak of Shadows removes every damage over time effect on Valeera, wiping Nature's Toxin stacks, and her stealth opener catches a 1430-Health Lunara."
+    why: "Valeera's stealth opener catches a 1430-Health Lunara, and Cloak of Shadows, if she takes it, wipes every Nature's Toxin stack off her."
     evidence: ["Cloak of Shadows", "Nature's Toxin", "Vanish"]
-    confidence: medium
+    confidence: low
   - a: genji
     b: lunara
-    why: "Deflect blocks Lunara's poke and Basic Attacks while Genji dives in, and Cyber Agility keeps pace with her Dryad's Swiftness and Leaping Strike escapes."
+    why: "Deflect blocks Lunara's poke and Basic Attacks while Genji dives in, and Cyber Agility keeps pace with her Dryad's Swiftness and, if she takes it, Leaping Strike."
     evidence: ["Deflect", "Cyber Agility", "Dryad's Swiftness", "Leaping Strike"]
     confidence: low
   - a: tracer
@@ -48,14 +48,17 @@ synergies:
     b: mei
     why: "Unfair Advantage makes Nature's Toxin deal 60% more to Slowed, Rooted or Stunned Heroes, and Snow Blind, Blizzard and Icing keep targets in that state."
     evidence: ["Unfair Advantage", "Snow Blind", "Blizzard", "Icing"]
-    confidence: medium
+    conditions: "Lunara takes Unfair Advantage (level 16)"
+    confidence: low
   - a: jaina
     b: lunara
     why: "Frostbite's Chill keeps enemies Slowed for 4 seconds at a time, so Unfair Advantage's bonus poison damage is almost always active on Jaina's targets."
     evidence: ["Frostbite", "Unfair Advantage"]
-    confidence: medium
+    conditions: "Lunara takes Unfair Advantage (level 16)"
+    confidence: low
   - a: lunara
     b: tyrande
-    why: "Starfall Slows everything in its area for 6 seconds and Lunar Flare stuns, both of which switch on Unfair Advantage's bonus poison damage."
+    why: "Lunar Flare stuns and, if Tyrande takes it, Starfall slows everything in its area for 6 seconds, both of which switch on Unfair Advantage's bonus poison damage."
     evidence: ["Starfall", "Lunar Flare", "Unfair Advantage"]
+    conditions: "Lunara takes Unfair Advantage (level 16)"
     confidence: low

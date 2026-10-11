@@ -11,19 +11,19 @@ counters:
     b: illidan
     why: "Inquisition is an ability, so Evasion doesn't stop it; it slows Illidan for 3 seconds while Subjugation halves his damage and Zeal turns Whitemane's damage into healing."
     evidence: ["Inquisition", "Subjugation", "Zeal", "Evasion"]
-    conditions: "Subjugation at level 13."
+    conditions: "Whitemane takes Subjugation (level 13)"
     confidence: low
   - a: whitemane
     b: thebutcher
-    why: "Inquisition slows The Butcher by 30% for 3 seconds and Subjugation halves his damage, while Intercession can make his target Unstoppable through Ruthless Onslaught's stun."
+    why: "Inquisition slows The Butcher by 30% for 3 seconds and Subjugation (level 13) halves his damage, while Intercession (level 7) can make his target Unstoppable through Ruthless Onslaught's stun."
     evidence: ["Inquisition", "Subjugation", "Intercession", "Ruthless Onslaught"]
-    conditions: "Subjugation or Intercession picked."
+    conditions: "Whitemane takes Subjugation (level 13) or Intercession (level 7)"
     confidence: low
   - a: whitemane
     b: malthael
     why: "Subjugation halves all damage from the Inquisition target, blunting a lone Malthael's cleave, Soul Rip and Reaper's Mark burn while Inquisition slows him by 30%."
     evidence: ["Inquisition", "Subjugation", "Reaper's Mark", "Soul Rip"]
-    conditions: "Subjugation at level 13."
+    conditions: "Whitemane takes Subjugation (level 13)"
     confidence: low
   # --- weak against ---
   - a: valeera
@@ -49,9 +49,9 @@ counters:
 synergies:
   - a: whitemane
     b: zarya
-    why: "Graviton Surge holds enemies inside Divine Reckoning's area, and Shield Ally protects a fragile Whitemane from divers."
+    why: "Shield Ally protects a fragile Whitemane from divers, and when both take them, Graviton Surge holds enemies inside Divine Reckoning's area."
     evidence: ["Graviton Surge", "Divine Reckoning", "Shield Ally"]
-    confidence: medium
+    confidence: low
   - a: johanna
     b: whitemane
     why: "Shield Glare and Condemn peel divers off Whitemane, letting her channel Inquisition and Clemency without interruption."
@@ -59,6 +59,6 @@ synergies:
     confidence: medium
   - a: tyrael
     b: whitemane
-    why: "Righteousness shields Whitemane and Sanctification protects her while she channels; Zeal then heals Tyrael off the damage she deals."
+    why: "Righteousness shields Whitemane, and Sanctification, if Tyrael takes it, protects her while she channels Inquisition; Zeal then heals Tyrael off the damage she deals."
     evidence: ["Righteousness", "Sanctification", "Zeal"]
     confidence: low

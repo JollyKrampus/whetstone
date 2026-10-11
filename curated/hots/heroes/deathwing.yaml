@@ -9,7 +9,7 @@ counters:
   # --- strong against ---
   - a: deathwing
     b: etc
-    why: "Mosh Pit and Powerslide stuns do nothing to a permanently Unstoppable Deathwing, so E.T.C.'s engage and lockdown are wasted on him."
+    why: "Powerslide's stun, and Mosh Pit's if E.T.C. takes it, do nothing to a permanently Unstoppable Deathwing, so his engage and lockdown are wasted on him."
     evidence: ["Aspect of Death", "Mosh Pit", "Powerslide"]
     confidence: medium
   - a: deathwing
@@ -24,7 +24,7 @@ counters:
     confidence: medium
   - a: deathwing
     b: arthas
-    why: "Deathwing is permanently Unstoppable, so Howling Blast's root and the slows from Frozen Tempest and Summon Sindragosa never touch him."
+    why: "Deathwing is permanently Unstoppable, so Howling Blast's root, Frozen Tempest's slows and, if Arthas takes it, Summon Sindragosa's slow never touch him."
     evidence: ["Aspect of Death", "Howling Blast", "Frozen Tempest", "Summon Sindragosa"]
     confidence: medium
   - a: deathwing
@@ -39,7 +39,7 @@ counters:
     confidence: medium
   - a: deathwing
     b: garrosh
-    why: "Wrecking Ball can't throw an Unstoppable target and Warlord's Challenge's taunt doesn't stick, leaving Garrosh no way to control Deathwing."
+    why: "Wrecking Ball can't throw an Unstoppable target and, if Garrosh takes it, Warlord's Challenge's taunt doesn't stick either, leaving him no way to control Deathwing."
     evidence: ["Aspect of Death", "Wrecking Ball", "Warlord's Challenge"]
     confidence: medium
   # --- weak against ---
@@ -50,7 +50,7 @@ counters:
     confidence: medium
   - a: tychus
     b: deathwing
-    why: "Minigun adds 2.5% of max health per attack against a big target that friendly healers cannot top up."
+    why: "Each Minigun-boosted attack adds 2.5% of maximum health against a big target that friendly healers cannot top up."
     evidence: ["Minigun", "Aspect of Death"]
     confidence: medium
   - a: lunara
@@ -62,20 +62,24 @@ counters:
     b: deathwing
     why: "Devouring Maw works on Unstoppable enemies, making it one of the few ways to pull Deathwing out of a fight for 4 seconds."
     evidence: ["Devouring Maw", "Aspect of Death"]
+    conditions: "Zagara takes Devouring Maw (level 10)"
     confidence: low
 synergies:
   - a: deathwing
     b: jaina
     why: "Ring of Frost roots for 3 seconds, covering Molten Flame's 1.5-second windup so the whole stream lands."
     evidence: ["Ring of Frost", "Molten Flame"]
-    confidence: medium
+    conditions: "Jaina takes Ring of Frost (level 10)"
+    confidence: low
   - a: deathwing
     b: kelthuzad
     why: "Frost Blast roots its targets for 2 seconds, enough for Molten Flame's delayed stream to hit them."
     evidence: ["Frost Blast", "Molten Flame"]
-    confidence: medium
+    conditions: "Kel'Thuzad takes Frost Blast (level 10)"
+    confidence: low
   - a: deathwing
     b: mei
     why: "Ice Wall traps heroes for 2.5 seconds right in front of Deathwing, setting up Molten Flame and Onslaught."
     evidence: ["Ice Wall", "Molten Flame", "Onslaught"]
-    confidence: medium
+    conditions: "Mei takes Ice Wall (level 10)"
+    confidence: low

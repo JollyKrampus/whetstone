@@ -11,19 +11,19 @@ counters:
     b: garrosh
     why: "No Mercy makes basic attacks on Grievous Throw-marked Heroes ignore Armor, cancelling Armor Up, and adds 2% of max Health per hit."
     evidence: ["No Mercy", "Grievous Throw", "Armor Up"]
-    conditions: "No Mercy at level 16."
-    confidence: medium
+    conditions: "Zul'jin takes No Mercy (level 16)"
+    confidence: low
   - a: zuljin
     b: chogall
     why: "Cho'gall can't escape kiting, and No Mercy's 2% max-Health hits on Grievous Throw-marked targets eat through his huge shared Health pool."
     evidence: ["No Mercy", "Grievous Throw", "Ogre Hide"]
-    conditions: "No Mercy at level 16."
-    confidence: medium
+    conditions: "Zul'jin takes No Mercy (level 16)"
+    confidence: low
   - a: zuljin
     b: stitches
-    why: "No Mercy adds 2% of Stitches' max Health per marked hit and ignores his Armor, and Taz'dingo! keeps Zul'jin alive through a Hook and Gorge pick."
+    why: "No Mercy adds 2% of Stitches' maximum Health per marked hit and ignores his Armor, and Taz'dingo!, if Zul'jin takes it, keeps him alive through a Hook (and Gorge) pick."
     evidence: ["No Mercy", "Taz'dingo!", "Hook", "Gorge"]
-    conditions: "No Mercy at level 16."
+    conditions: "Zul'jin takes No Mercy (level 16)"
     confidence: low
   # --- weak against ---
   - a: johanna
@@ -38,7 +38,7 @@ counters:
     confidence: medium
   - a: varian
     b: zuljin
-    why: "Parry blocks the basic attacks that make up most of Zul'jin's damage, and Taunt silences him so he can't Taz'dingo! at the critical moment."
+    why: "Parry blocks the basic attacks that make up most of Zul'jin's damage, and Taunt, if Varian takes it, silences him so he cannot use his Heroic at the critical moment."
     evidence: ["Parry", "Taunt", "Taz'dingo!", "Berserker"]
     confidence: medium
   - a: lili
@@ -54,11 +54,13 @@ synergies:
     confidence: medium
   - a: uther
     b: zuljin
-    why: "Zul'jin attacks faster the lower his Health; Divine Shield and Taz'dingo! let him sit near death at full Berserker speed without dying."
+    why: "Zul'jin attacks faster the lower his Health; Divine Shield, if Uther takes it, or his own Taz'dingo! lets him sit near death at full Berserker speed without dying."
     evidence: ["Divine Shield", "Taz'dingo!", "Berserker"]
-    confidence: medium
+    conditions: "Uther takes Divine Shield or Zul'jin takes Taz'dingo! (level 10)"
+    confidence: low
   - a: rehgar
     b: zuljin
     why: "Bloodlust's Attack Speed stacks with Berserker's low-Health attack speed, and its lifesteal lets Zul'jin sit at low Health more safely."
     evidence: ["Bloodlust", "Berserker"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low

@@ -21,9 +21,8 @@ counters:
     confidence: low
   - a: guldan
     b: thebutcher
-    why: "Horrify fears and silences Butcher for 2 seconds after he charges in, and Drain Life with Curse of Exhaustion slows him and out-heals his melee pressure."
+    why: "Drain Life out-heals The Butcher's melee pressure (and slows him with Curse of Exhaustion at level 7), and Horrify, if Gul'dan takes it, fears and silences him for 2 seconds after he charges in."
     evidence: ["Horrify", "Drain Life", "Curse of Exhaustion", "Ruthless Onslaught"]
-    conditions: "Curse of Exhaustion at level 7 for the slow."
     confidence: low
   # --- weak against ---
   - a: zeratul
@@ -51,14 +50,17 @@ synergies:
     b: guldan
     why: "Nano Boost restores 200 mana to Gul'dan, who does not regenerate mana, and makes Fel Flame recharge 150% faster with 30% Spell Power."
     evidence: ["Nano Boost", "Life Tap", "Fel Flame"]
-    confidence: medium
+    conditions: "Ana takes Nano Boost (level 10)"
+    confidence: low
   - a: etc
     b: guldan
     why: "Mosh Pit holds a group inside Rain of Destruction's falling meteors."
     evidence: ["Mosh Pit", "Rain of Destruction"]
-    confidence: medium
+    conditions: ["E.T.C. takes Mosh Pit (level 10)", "Gul'dan takes Rain of Destruction (level 10)"]
+    confidence: low
   - a: guldan
     b: zarya
     why: "Graviton Surge holds heroes together so Horrify fears the whole group, or Rain of Destruction's meteors keep landing on them."
     evidence: ["Graviton Surge", "Horrify", "Rain of Destruction"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

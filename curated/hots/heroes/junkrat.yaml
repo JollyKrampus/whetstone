@@ -13,7 +13,7 @@ counters:
     confidence: medium
   - a: junkrat
     b: murky
-    why: "Murky's 730 Health falls to a couple of Frag Launcher splashes, and Steel Trap's root keeps him from walking away once Safety Bubble has ended."
+    why: "A full Frag Launcher volley takes about two thirds of Murky's 730 Health, even from behind minions, and Steel Trap's root holds him for the rest once Safety Bubble has ended."
     evidence: ["Frag Launcher", "Steel Trap", "Safety Bubble"]
     confidence: low
   - a: junkrat
@@ -44,14 +44,16 @@ counters:
 synergies:
   - a: junkrat
     b: zarya
-    why: "Graviton Surge holds enemies in place for 2.5 seconds, so RIP-Tire can drive into the middle or Frag Launcher grenades land without bouncing past their targets."
+    why: "Graviton Surge holds enemies in place for 2.5 seconds, so Frag Launcher grenades land without bouncing past their targets, or RIP-Tire, if Junkrat takes it, can drive into the middle."
     evidence: ["Graviton Surge", "RIP-Tire", "Frag Launcher"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: etc
     b: junkrat
     why: "Mosh Pit stuns enemies around E.T.C. for up to 4 seconds, enough to land a pre-aimed Rocket Ride or drive RIP-Tire into the center of the group."
     evidence: ["Mosh Pit", "Rocket Ride", "RIP-Tire"]
-    confidence: medium
+    conditions: "E.T.C. takes Mosh Pit (level 10)"
+    confidence: low
   - a: junkrat
     b: malfurion
     why: "Entangling Roots holds targets in place long enough for Frag Launcher's arcing grenades and Steel Trap to land on Heroes who would otherwise sidestep them."

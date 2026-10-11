@@ -25,7 +25,7 @@ counters:
   # --- weak against ---
   - a: valeera
     b: tassadar
-    why: "Vanish lets Valeera reach Tassadar unseen, and Cheap Shot (Blade Flurry from Stealth) stuns him before Force Wall or Shadow Walk can save him."
+    why: "Vanish lets Valeera reach Tassadar unseen, and Cheap Shot (Blade Flurry from Stealth) stuns him before Force Wall, or Shadow Walk at level 13, can save him."
     evidence: ["Vanish", "Blade Flurry", "Force Wall", "Shadow Walk"]
     confidence: medium
   - a: zeratul
@@ -48,10 +48,11 @@ synergies:
     b: tassadar
     why: "Black Hole pulls enemy Heroes together and stuns those at its center, a perfect setup for Flamestrike and a spreading Living Bomb."
     evidence: ["Black Hole", "Flamestrike", "Living Bomb"]
-    confidence: medium
+    conditions: "Tassadar takes Black Hole (level 10)"
+    confidence: low
   - a: jaina
     b: tassadar
-    why: "Black Hole groups enemies for Blizzard's three waves, and Frostbite's Chill keeps them inside Psionic Storm long enough for it to ramp up."
+    why: "Frostbite's Chill keeps enemies inside Psionic Storm long enough for it to ramp up, and Black Hole, if Tassadar takes it, groups them for Blizzard's three waves."
     evidence: ["Black Hole", "Blizzard", "Frostbite", "Psionic Storm"]
     confidence: medium
   - a: kelthuzad

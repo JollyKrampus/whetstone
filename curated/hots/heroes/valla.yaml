@@ -11,19 +11,19 @@ counters:
     b: chogall
     why: "Manticore adds 4% of max Health every third hit on the same Hero, which is punishing against Cho'gall's huge Health pool and lack of escapes."
     evidence: ["Manticore", "Ogre Hide"]
-    conditions: "Manticore at level 16."
-    confidence: medium
+    conditions: "Valla takes Manticore (level 16)"
+    confidence: low
   - a: valla
     b: blaze
     why: "Blaze's 2900 Health and short range make him a Manticore target, and Vault keeps Valla out of Flame Stream's reach."
     evidence: ["Manticore", "Vault", "Flame Stream"]
-    conditions: "Manticore at level 16."
+    conditions: "Valla takes Manticore (level 16)"
     confidence: low
   - a: valla
     b: stitches
     why: "Manticore's 4% max-Health hits scale off Stitches' 3020 Health, and Vault gets Valla out if Hook lands."
     evidence: ["Manticore", "Vault", "Hook"]
-    conditions: "Manticore at level 16."
+    conditions: "Valla takes Manticore (level 16)"
     confidence: low
   - a: valla
     b: ragnaros
@@ -43,7 +43,7 @@ counters:
     confidence: medium
   - a: varian
     b: valla
-    why: "Parry blocks all of Valla's basic attacks for 1.25 seconds with two charges, and Charge plus Taunt pin her in place."
+    why: "Parry blocks all of Valla's basic attacks for 1.25 seconds with two charges, and Charge, plus Taunt if Varian takes it, pins her in place."
     evidence: ["Parry", "Charge", "Taunt", "Hatred"]
     confidence: medium
   - a: xul
@@ -61,19 +61,21 @@ synergies:
     b: valla
     why: "Bloodlust's 40% Attack Speed stacks with Hatred, and its lifesteal makes Valla far harder to burst while she keeps attacking."
     evidence: ["Bloodlust", "Hatred"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: tyrande
     b: valla
-    why: "Trueshot Aura's 40% Attack Damage and Hunter's Mark's Armor shred amplify Valla's Hatred-stacked basic attacks."
+    why: "Hunter's Mark's Armor shred, and Trueshot Aura's 40% Attack Damage at level 1, amplify Valla's Hatred-stacked basic attacks."
     evidence: ["Trueshot Aura", "Hunter's Mark", "Hatred"]
     confidence: medium
   - a: uther
     b: valla
-    why: "Hammer of Justice and Devotion's Armor protect an immobile basic-attack carry like Valla, and Divine Shield saves her from a committed dive."
+    why: "Hammer of Justice and Devotion's Armor protect an immobile basic-attack carry like Valla, and Divine Shield, if Uther takes it, saves her from a committed dive."
     evidence: ["Hammer of Justice", "Devotion", "Divine Shield", "Hatred"]
     confidence: medium
   - a: ltmorales
     b: valla
     why: "Stim Drone's 75% Attack Speed fills Hatred almost instantly and sharply raises Valla's damage for 10 seconds while Healing Beam keeps her up."
     evidence: ["Stim Drone", "Healing Beam", "Hatred"]
-    confidence: medium
+    conditions: "Lt. Morales takes Stim Drone (level 10)"
+    confidence: low

@@ -10,15 +10,16 @@ counters:
     b: probius
     why: "Probius has 1260 Health and stands near his Pylons, so a stealth Snipe and Pinning Shot plus Triple Tap kill him before Worker Rush gets him out."
     evidence: ["Snipe", "Pinning Shot", "Triple Tap", "Worker Rush"]
-    confidence: medium
+    conditions: "Nova takes Triple Tap (level 10)"
+    confidence: low
   - a: nova
     b: sgthammer
-    why: "Siege Mode keeps Sgt. Hammer still, making Snipe trivial to land, and Triple Tap's three shots kill her before she can unsiege and move."
+    why: "Siege Mode keeps Sgt. Hammer still, making Snipe from stealth trivial to land, and Triple Tap, if Nova takes it, kills her before she can unsiege and move."
     evidence: ["Siege Mode", "Snipe", "Triple Tap"]
     confidence: medium
   - a: nova
     b: kaelthas
-    why: "Kael'thas has no movement ability, so a stealth Snipe and Pinning Shot set up Triple Tap on an immobile 1595-Health mage."
+    why: "Kael'thas has no movement ability, so a stealth Snipe and Pinning Shot set up the rest of Nova's burst, Triple Tap included if she takes it, on an immobile 1595-Health mage."
     evidence: ["Snipe", "Pinning Shot", "Triple Tap", "Permanent Cloak"]
     confidence: medium
   - a: tyrande
@@ -28,7 +29,7 @@ counters:
     confidence: medium
   - a: zarya
     b: nova
-    why: "Shield Ally and Personal Barrier absorb Snipe and Triple Tap bursts, and every shot Nova lands on a shield builds Zarya's Energy."
+    why: "Shield Ally and Personal Barrier absorb Snipe (and Triple Tap, if Nova takes it), and every shot Nova lands on a shield builds Zarya's Energy."
     evidence: ["Shield Ally", "Personal Barrier", "Energy", "Snipe", "Triple Tap"]
     confidence: medium
   - a: hanzo
@@ -41,14 +42,16 @@ synergies:
     b: nova
     why: "Ice Wall traps Heroes for 2.5 seconds, longer than Precision Strike's 1.5-second delay, and leaves a target that cannot sidestep Snipe."
     evidence: ["Ice Wall", "Precision Strike", "Snipe"]
-    confidence: medium
+    conditions: ["Mei takes Ice Wall (level 10)", "Nova takes Precision Strike (level 10)"]
+    confidence: low
   - a: kelthuzad
     b: nova
-    why: "Frost Blast roots for 2 seconds, enough for Precision Strike to land, and Chains of Kel'Thuzad holds targets in place for Snipe."
+    why: "Chains of Kel'Thuzad holds targets in place for Snipe, and when both take them, Frost Blast's 2-second root is long enough for Precision Strike to land."
     evidence: ["Frost Blast", "Precision Strike", "Chains of Kel'Thuzad", "Snipe"]
-    confidence: medium
+    confidence: low
   - a: nova
     b: stitches
-    why: "Gorge releases its victim at Stitches's feet at a known moment, giving Nova a predictable spot for Snipe and Triple Tap."
+    why: "Gorge releases its victim at Stitches's feet at a known moment, giving Nova a predictable spot for Snipe and, if she takes it, Triple Tap."
     evidence: ["Gorge", "Snipe", "Triple Tap"]
+    conditions: "Stitches takes Gorge (level 10)"
     confidence: low

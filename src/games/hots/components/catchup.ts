@@ -30,6 +30,8 @@ export interface CatchUpPatch {
   title: string;
   kind: PatchKind;
   version: string;
+  /** Game build the notes are for ('2.57.0.98285'), when the notes name it. */
+  build?: string;
   href: string;
   general: string[];
   newHeroes: string[];
@@ -109,7 +111,10 @@ export function sinceHash(since: string): string {
   return `#since=${since}`;
 }
 
-/** Start date of each major version seen in the notes, newest first (for "before 2.57" shortcuts). */
+/**
+ * Earliest live note per major version seen in the notes, newest first. This is only the start
+ * of the major when the notes reach back that far: see knownMajorStarts.
+ */
 export function majorStarts(patches: readonly Pick<CatchUpPatch, 'version' | 'date' | 'kind'>[]): { version: string; date: string }[] {
   const first = new Map<string, string>();
   for (const p of patches) {
@@ -120,6 +125,33 @@ export function majorStarts(patches: readonly Pick<CatchUpPatch, 'version' | 'da
   return [...first.entries()]
     .map(([version, date]) => ({ version, date }))
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.version < b.version ? 1 : -1));
+}
+
+export type CatchUpAnchor = { kind: 'major'; version: string; date: string } | { kind: 'oldest'; date: string };
+
+/**
+ * Dates a "catch up since" shortcut can honestly name, newest first:
+ * - the current major, whose go-live date the data knows (meta.extra.majorSince);
+ * - an older major only when its first build (`<version>.0.…`) is in the notes, so its earliest
+ *   note really is its start (the feed reaches back only so far, and the oldest major on file
+ *   usually started long before its first note here);
+ * - the oldest live note on file, as its own anchor, when no major above already starts there.
+ * Never "Before 2.55" for a major whose start the notes do not cover.
+ */
+export function knownMajorStarts(
+  patches: readonly Pick<CatchUpPatch, 'version' | 'date' | 'kind' | 'build'>[],
+  current: { version: string; since: string },
+): CatchUpAnchor[] {
+  const live = patches.filter((p) => p.kind !== 'ptr');
+  const anchors: CatchUpAnchor[] = [{ kind: 'major', version: current.version, date: current.since }];
+  for (const m of majorStarts(live)) {
+    if (m.version === current.version) continue;
+    const first = live.filter((p) => p.version === m.version && p.build?.startsWith(`${m.version}.0.`)).map((p) => p.date);
+    if (first.length > 0) anchors.push({ kind: 'major', version: m.version, date: first.reduce((a, b) => (b < a ? b : a)) });
+  }
+  const oldest = live.map((p) => p.date).reduce<string | null>((a, b) => (a === null || b < a ? b : a), null);
+  if (oldest && !anchors.some((a) => a.date <= oldest)) anchors.push({ kind: 'oldest', date: oldest });
+  return anchors.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }
 
 function heroRef(data: CatchUpData, id: string): CatchUpHeroRef {

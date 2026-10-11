@@ -9,22 +9,22 @@ counters:
   # --- strong against ---
   - a: uther
     b: tracer
-    why: "Hammer of Justice is a targeted stun that Blink can't dodge once cast, and Divine Shield blanks Pulse Bomb's burst on an ally."
+    why: "Hammer of Justice is a targeted stun that Blink can't dodge once cast, and Divine Shield, if Uther takes it, blanks Pulse Bomb's burst on an ally."
     evidence: ["Hammer of Justice", "Divine Shield", "Pulse Bomb", "Blink"]
     confidence: medium
   - a: uther
     b: valeera
-    why: "Hammer of Justice stuns Valeera as soon as she reveals herself to attack, and Divine Shield wastes the burst she poured into her target."
+    why: "Hammer of Justice stuns Valeera as soon as she reveals herself to attack, and Divine Shield, if Uther takes it, wastes the burst she poured into her target."
     evidence: ["Hammer of Justice", "Divine Shield", "Vanish"]
     confidence: medium
   - a: uther
     b: zeratul
-    why: "Divine Shield blanks Zeratul's burst on an ally, and Hammer of Justice's targeted stun stops him once he decloaks."
+    why: "Hammer of Justice's targeted stun stops Zeratul once he decloaks, and Divine Shield, if Uther takes it, blanks his burst on an ally."
     evidence: ["Divine Shield", "Hammer of Justice", "Permanent Cloak"]
     confidence: medium
   - a: uther
     b: greymane
-    why: "Divine Shield wastes Go for the Throat or Cursed Bullet on an ally, and Hammer of Justice stops Greymane as he Darkflights in."
+    why: "Hammer of Justice stops Greymane as he Darkflights in, and Divine Shield, if Uther takes it, wastes Go for the Throat or Cursed Bullet on an ally."
     evidence: ["Divine Shield", "Hammer of Justice", "Go for the Throat", "Cursed Bullet", "Darkflight"]
     confidence: medium
   # --- weak against ---
@@ -35,7 +35,7 @@ counters:
     confidence: medium
   - a: alarak
     b: uther
-    why: "Discord Strike silences a melee-range Uther for 1.5 seconds, stopping Holy Light and Divine Shield while Alarak bursts his target."
+    why: "Discord Strike silences a melee-range Uther for 1.5 seconds, stopping Holy Light (and Divine Shield, if he takes it) while Alarak bursts his target."
     evidence: ["Discord Strike", "Holy Light", "Divine Shield"]
     confidence: low
   - a: stukov
@@ -46,21 +46,22 @@ counters:
 synergies:
   - a: illidan
     b: uther
-    why: "Divine Shield makes a diving Illidan Invulnerable for 3 seconds, and Hammer of Justice stuns the peeler who would otherwise lock him down."
+    why: "Hammer of Justice stuns the peeler who would otherwise lock Illidan down, and Divine Shield, if Uther takes it, makes him Invulnerable for 3 seconds mid-dive."
     evidence: ["Divine Shield", "Hammer of Justice", "Dive"]
     confidence: medium
   - a: uther
     b: valla
-    why: "Hammer of Justice and Devotion's Armor protect an immobile basic-attack carry like Valla, and Divine Shield saves her from a committed dive."
+    why: "Hammer of Justice and Devotion's Armor protect an immobile basic-attack carry like Valla, and Divine Shield, if Uther takes it, saves her from a committed dive."
     evidence: ["Hammer of Justice", "Devotion", "Divine Shield", "Hatred"]
     confidence: medium
   - a: uther
     b: zuljin
-    why: "Zul'jin attacks faster the lower his Health; Divine Shield and Taz'dingo! let him sit near death at full Berserker speed without dying."
+    why: "Zul'jin attacks faster the lower his Health; Divine Shield, if Uther takes it, or his own Taz'dingo! lets him sit near death at full Berserker speed without dying."
     evidence: ["Divine Shield", "Taz'dingo!", "Berserker"]
-    confidence: medium
+    conditions: "Uther takes Divine Shield or Zul'jin takes Taz'dingo! (level 10)"
+    confidence: low
   - a: uther
     b: varian
-    why: "Devotion's Armor and Holy Light keep Varian alive as he Charges in, and Hammer of Justice chains with Taunt to lock a target down."
+    why: "Devotion's Armor and Holy Light keep Varian alive as he Charges in, and Hammer of Justice chains with Taunt, if Varian takes it, to lock a target down."
     evidence: ["Devotion", "Holy Light", "Hammer of Justice", "Charge", "Taunt"]
     confidence: low

@@ -14,8 +14,8 @@ import StatsCredit from '../../../games/hots/components/StatsCredit.astro';
 import StatsLens from '../../../games/hots/components/StatsLens.astro';
 import TheoryNotice from '../../../games/hots/components/TheoryNotice.astro';
 import { MAP_KIND_LABEL, mapTagLabel } from '../../../games/hots/components/labels.ts';
-import { sourceNames, statsModes, theoryHeroesForMap, type ModeOption, type PeriodOption } from '../../../games/hots/components/pagedata.ts';
-import { getMapBySlug, getMaps, getPatches, getStatsWindow, hasAsset, heroesForMap } from '../../../games/hots/load.ts';
+import { sourceNames, splitFit, statsModes, theoryHeroesForMap, type ModeOption, type PeriodOption } from '../../../games/hots/components/pagedata.ts';
+import { getMapBySlug, getMaps, getPatches, getStatsWindow, hasAsset, heroesForMap, statsSourceIds } from '../../../games/hots/load.ts';
 import { mapSlugRedirects, redirectHtml } from '../../../games/hots/redirects.ts';
 import { heroFitRow, mapHref, mapImage, patchHref } from '../../../games/hots/view.ts';
 import Crumbs from '../../../games/hots/components/Crumbs.astro';
@@ -44,7 +44,10 @@ const statsOn = modes.length > 0;
 const names = sourceNames();
 const isAram = map.kind === 'aram';
 const selectedMode = isAram && modes.some((m) => m.id === 'aram') ? 'aram' : undefined;
-const theoryRows = theoryHeroesForMap(map).map(({ hero, fit }) => heroFitRow(hero, fit));
+// Best heroes are those above neutral here; heroes the map works against get their own list.
+const theoryFits = splitFit(theoryHeroesForMap(map).map(({ hero, fit }) => ({ score: fit.score, row: heroFitRow(hero, fit) })));
+const theoryRows = theoryFits.better.map((f) => f.row);
+const theoryHarder = theoryFits.harder.map((f) => f.row);
 const notes = getPatches()
   .filter((p) => p.kind !== 'ptr' && p.maps?.[map.id])
   .map((p) => ({ patch: p, lines: p.maps?.[map.id] ?? [] }));
@@ -58,7 +61,7 @@ const title = `${map.name}: best heroes and map guide`;
 const description = `${map.name} in Heroes of the Storm (${MAP_KIND_LABEL[map.kind]}${map.ranked ? ', Storm League pool' : ''}): ${map.profile.objective} Which heroes fit the map best, and why.`;
 ---
 
-<GameLayout game="hots" title={title} description={description} uses={statsOn ? ['heroesprofile'] : []} inlineCredits={false} navPath="maps/">
+<GameLayout game="hots" title={title} description={description} uses={statsOn ? statsSourceIds() : []} inlineCredits={false} navPath="maps/">
   <article class="mpage" data-map={map.id}>
     <Crumbs trail={[{ label: 'Maps', href: navHref('hots', 'maps/') }]} current={map.name} />
 
@@ -98,7 +101,7 @@ const description = `${map.name} in Heroes of the Storm (${MAP_KIND_LABEL[map.ki
           </div>
           <div>
             <dt>Ranked list</dt>
-            <dd>{map.rankedSource === 'stats' ? 'From match counts' : 'Hand-checked'}</dd>
+            <dd>Hand-checked</dd>
           </div>
         </dl>
         <ul class="mhead__tags" aria-label="Map traits">
@@ -129,27 +132,45 @@ const description = `${map.name} in Heroes of the Storm (${MAP_KIND_LABEL[map.ki
           <StatsLens name={isAram ? 'hots-aram-map' : 'hots-map'} modes={modes} {...(selectedMode ? { selectedMode } : {})}>
             <StatsCredit lead="Hero scores on this map use match statistics." />
             <LensBlocks modes={modes}>
-              {(m: ModeOption, p: PeriodOption) => (
-                <div class="best__block">
-                  <p class="wlabel">{windowLabel(m, p)}</p>
-                  <MatchupList
-                    title={`Heroes on ${map.name}`}
-                    subtitle="Score 1–100 · Δ = the hero's win rate here compared with their overall, in pp · n = games on this map"
-                    rows={heroesForMap(map.id, { mode: m.id, timeframe: p.id })
-                      .filter((r) => r.fit.source === 'stats')
-                      .map(({ hero, fit }) => heroFitRow(hero, fit))}
-                    visible={12}
-                    sourceNames={names}
-                    emptyText="No hero has enough games on this map in this window yet."
-                    level={3}
-                  />
-                </div>
-              )}
+              {(m: ModeOption, p: PeriodOption) => {
+                const fits = splitFit(
+                  heroesForMap(map.id, { mode: m.id, timeframe: p.id })
+                    .filter((r) => r.fit.source === 'stats')
+                    .map(({ hero, fit }) => ({ score: fit.score, row: heroFitRow(hero, fit) })),
+                );
+                return (
+                  <div class="best__block">
+                    <p class="wlabel">{windowLabel(m, p)}</p>
+                    <MatchupList
+                      title={`Heroes on ${map.name}`}
+                      subtitle="Score 1–100 · Δ = the hero's win rate here compared with their overall, in pp · n = games on this map"
+                      rows={fits.better.map((f) => f.row)}
+                      visible={12}
+                      sourceNames={names}
+                      emptyText="No hero wins more often than usual on this map in this window yet."
+                      level={3}
+                    />
+                    {fits.harder.length > 0 && (
+                      <MatchupList
+                        title={`Heroes who struggle on ${map.name}`}
+                        subtitle="Heroes who win less often here than usual, hardest first"
+                        rows={fits.harder.map((f) => f.row)}
+                        visible={6}
+                        sourceNames={names}
+                        level={3}
+                      />
+                    )}
+                  </div>
+                );
+              }}
             </LensBlocks>
             <details class="compare">
               <summary class="btn">Compare with theory (from the kits)</summary>
               <div class="compare__body">
-                <MatchupList title="Theory fit" subtitle="Score 1–100 from kit tags against this map's layout and objective" rows={theoryRows} visible={12} sourceNames={names} emptyText="No map rule matches a hero here yet." level={3} />
+                <MatchupList title="Theory fit" subtitle="Score 1–100 from kit tags against this map's layout and objective" rows={theoryRows} visible={12} sourceNames={names} emptyText="No map rule favours a hero here yet." level={3} />
+                {theoryHarder.length > 0 && (
+                  <MatchupList title="Theory: harder here" subtitle="Score under 50: the map works against the kit, hardest first" rows={theoryHarder} visible={6} sourceNames={names} level={3} />
+                )}
               </div>
             </details>
           </StatsLens>
@@ -162,9 +183,19 @@ const description = `${map.name} in Heroes of the Storm (${MAP_KIND_LABEL[map.ki
               rows={theoryRows}
               visible={12}
               sourceNames={names}
-              emptyText="No map rule matches a hero here yet."
+              emptyText="No map rule favours a hero here yet."
               level={3}
             />
+            {theoryHarder.length > 0 && (
+              <MatchupList
+                title={`Heroes who struggle on ${map.name}`}
+                subtitle="Score under 50: the map's layout or objective works against the kit, hardest first"
+                rows={theoryHarder}
+                visible={6}
+                sourceNames={names}
+                level={3}
+              />
+            )}
           </div>
         )
       }

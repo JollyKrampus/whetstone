@@ -25,9 +25,15 @@ export interface MergedPair {
   b: string;
   /** Up to two distinct handwritten reasons, in file order. */
   why: string[];
+  /**
+   * The conditions of each `why` line (same index): what the file that wrote the line says must be
+   * true for it to hold, as clauses that read after "Only when" ("Blaze takes Nanomachine Coating
+   * (level 7)"). Empty for an unconditional line.
+   */
+  whyConditions: string[][];
   /** Union of the ability/talent names the reasons rely on. */
   evidence: string[];
-  /** Union of talents or situations the matchup depends on. */
+  /** Union of talents or situations the matchup depends on (every file's, also beyond MAX_WHY). */
   conditions: string[];
   /** Highest confidence any file gave. */
   confidence: Confidence;

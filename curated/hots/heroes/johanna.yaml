@@ -8,7 +8,7 @@ traits:
 counters:
   - a: johanna
     b: thebutcher
-    why: "Shield Glare Blinds The Butcher for 1.5 seconds and Divine Fortress stacks Physical Armor, so his Basic Attacks miss or hit for little, and Iron Skin ignores the Ruthless Onslaught stun."
+    why: "Shield Glare Blinds The Butcher for 1.5 seconds so his Basic Attacks miss, Iron Skin ignores the Ruthless Onslaught stun, and Divine Fortress (level 1) adds Physical Armor against the hits that land."
     evidence: ["Shield Glare", "Divine Fortress", "Iron Skin", "Ruthless Onslaught"]
     confidence: high
   - a: johanna
@@ -18,12 +18,12 @@ counters:
     confidence: medium
   - a: johanna
     b: valla
-    why: "Valla's Hatred and Strafe damage are Basic Attacks, so Shield Glare blanks her burst windows, and Zealous Glare's extra charge lets Johanna Blind her twice per fight."
+    why: "Valla's Hatred-boosted damage, and Strafe if she takes it, comes from Basic Attacks, so Shield Glare blanks her burst windows, and Zealous Glare (level 1) lets Johanna Blind her twice per fight."
     evidence: ["Shield Glare", "Zealous Glare", "Hatred", "Strafe"]
     confidence: medium
   - a: johanna
     b: raynor
-    why: "Shield Glare cuts off Raynor's Inspire and Give 'Em Some Pepper attack windows, and Divine Fortress Physical Armor shrinks his all-physical damage further."
+    why: "Shield Glare cuts off Raynor's Inspire and Give 'Em Some Pepper attack windows, and Divine Fortress (level 1) Physical Armor shrinks his all-physical damage further."
     evidence: ["Shield Glare", "Divine Fortress", "Give 'Em Some Pepper", "Inspire"]
     confidence: medium
   - a: johanna
@@ -33,14 +33,15 @@ counters:
     confidence: medium
   - a: malthael
     b: johanna
-    why: "Reaper's Mark ticks scale with Johanna's big pool and are not Basic Attacks, so Divine Fortress Physical Armor does little against them, and Last Rites then punishes her missing Health."
+    why: "Reaper's Mark ticks scale with Johanna's big pool and are not Basic Attacks, so even Divine Fortress Physical Armor does little against them, and Last Rites, if Malthael takes it, then punishes her missing Health."
     evidence: ["Reaper's Mark", "Last Rites", "Divine Fortress"]
     confidence: medium
   - a: kharazim
     b: johanna
     why: "Seven-Sided Strike lands each hit on the highest-Health Hero nearby, usually Johanna, for 7% of her maximum Health per strike, about half her pool over the full heroic."
     evidence: ["Seven-Sided Strike"]
-    confidence: medium
+    conditions: "Kharazim takes Seven-Sided Strike (level 10)"
+    confidence: low
   - a: leoric
     b: johanna
     why: "Drain Hope takes up to 20% of Johanna's maximum Health while healing Leoric, and Wraith Walk's Unstoppable lets him walk straight out of Condemn and Punish."

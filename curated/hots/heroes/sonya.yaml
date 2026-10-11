@@ -15,11 +15,11 @@ counters:
   - a: sonya
     b: chromie
     why: "Ancient Spear yanks Sonya onto Chromie and briefly stuns her; with 1390 Health and no dash, Chromie can't get away unless she took Time Out or Here and There at level 13."
-    evidence: ["Ancient Spear", "Leap", "Time Out", "Here and There"]
+    evidence: ["Ancient Spear", "Time Out", "Here and There"]
     confidence: medium
   - a: sonya
     b: probius
-    why: "Probius has 1260 Health and must stay near his Pylons; Ancient Spear and Leap reach him there, and Whirlwind chews through nearby Photon Cannons."
+    why: "Probius has 1260 Health and must stay near his Pylons; Ancient Spear, and Leap if Sonya takes it, reach him there, and Whirlwind chews through nearby Photon Cannons."
     evidence: ["Ancient Spear", "Leap", "Whirlwind", "Warp In Pylon", "Photon Cannon"]
     confidence: low
   - a: sonya
@@ -40,9 +40,9 @@ counters:
     confidence: medium
   - a: ana
     b: sonya
-    why: "Biotic Grenade cancels all healing for a moment, shutting off Whirlwind's sustain mid-dive, and Sleep Dart stops Sonya before she can follow up with Leap."
+    why: "Biotic Grenade cancels all healing for a moment, shutting off Whirlwind's sustain mid-dive, and Sleep Dart stops Sonya before she can follow up."
     evidence: ["Biotic Grenade", "Sleep Dart", "Whirlwind"]
-    confidence: low
+    confidence: medium
   - a: leoric
     b: sonya
     why: "Drain Hope takes up to 20% of Sonya's max Health and heals Leoric, and Sonya can only break the tether by walking away from the fight she wants."
@@ -51,12 +51,12 @@ counters:
 synergies:
   - a: rehgar
     b: sonya
-    why: "Lightning Shield on a Whirlwinding Sonya adds area damage around her, and Bloodlust boosts the basic attacks that fuel her Fury."
+    why: "Lightning Shield on a Whirlwinding Sonya adds area damage around her, and Bloodlust, if Rehgar takes it, boosts the basic attacks that fuel her Fury."
     evidence: ["Lightning Shield", "Bloodlust", "Whirlwind"]
     confidence: low
   - a: sonya
     b: zarya
-    why: "Shield Ally lets Sonya Whirlwind deep in the enemy team for longer, and Together We Are Strong turns her sustained damage into Zarya Energy."
+    why: "Shield Ally lets Sonya Whirlwind deep in the enemy team for longer, and with Together We Are Strong (level 1) her sustained damage also feeds Zarya's Energy."
     evidence: ["Shield Ally", "Together We Are Strong", "Whirlwind"]
     confidence: low
   - a: abathur

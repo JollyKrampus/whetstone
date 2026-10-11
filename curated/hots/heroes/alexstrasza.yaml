@@ -19,28 +19,26 @@ counters:
     confidence: low
   - a: alexstrasza
     b: greymane
-    why: "Go for the Throat and Cursed Bullet spike a single hero; a healthy Alexstrasza answers with Life-Binder, healing the target and lifting it to her own health percentage."
+    why: "Go for the Throat or Cursed Bullet spikes a single hero; a healthy Alexstrasza answers with Life-Binder, healing the target and lifting it to her own health percentage."
     evidence: ["Life-Binder", "Go for the Throat", "Cursed Bullet"]
-    conditions: "Alexstrasza must be high on health when the spike lands."
+    conditions: ["Alexstrasza takes Life-Binder (level 10)", "she is on high Health when the spike lands"]
     confidence: low
   - a: alexstrasza
     b: jaina
-    why: "Jaina sets up kills with Chill slows and Ring of Frost's root; Dragonqueen gives Alexstrasza resistance to disabling effects, and with Lifeblossom her Breath of Life strips slows and roots off an ally."
+    why: "Jaina sets up kills with Chill slows and, if she takes it, Ring of Frost's root; in Dragonqueen form Alexstrasza shrugs off half of their duration, and with Lifeblossom her Breath of Life strips slows and roots off an ally."
     evidence: ["Dragonqueen", "Lifeblossom", "Breath of Life", "Frostbite", "Ring of Frost"]
-    conditions: "Lifeblossom at level 7, during Dragonqueen."
+    conditions: "Alexstrasza takes Lifeblossom (level 7)"
     confidence: low
   # --- weak against ---
   - a: ana
     b: alexstrasza
-    why: "Biotic Grenade stops all healing for 1.75 seconds; a Gift of Life cast into it still costs Alexstrasza 15% of her health while the heal does nothing."
+    why: "Biotic Grenade stops all healing for 1.75 seconds (longer with Anti-Healer at level 7); a Gift of Life cast into it still costs Alexstrasza 15% of her health while the heal does nothing."
     evidence: ["Biotic Grenade", "Anti-Healer", "Gift of Life"]
-    conditions: "Anti-Healer at level 7 lengthens the block; the base grenade does most of the work."
     confidence: medium
   - a: malthael
     b: alexstrasza
-    why: "Reaper's Mark ticks 2% of max health per second regardless of her heals, Touch of Death halves healing on marked heroes, and Dragonqueen's extra health only makes the ticks bigger."
+    why: "Reaper's Mark ticks 2% of maximum health per second whatever she heals, Dragonqueen's extra health only makes the ticks bigger, and with Touch of Death (level 7) Malthael also halves healing on marked heroes."
     evidence: ["Reaper's Mark", "Touch of Death", "Dragonqueen"]
-    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tracer
     b: alexstrasza
@@ -49,23 +47,26 @@ counters:
     confidence: medium
   - a: garrosh
     b: alexstrasza
-    why: "Body Check cuts healing received by 30% (75% with Inner Rage) on the ally she is trying to save, and Wrecking Ball drags that ally out of her range."
+    why: "Body Check cuts healing received by 30% on the ally she is trying to save (75% with Inner Rage at level 20), and Wrecking Ball drags that ally out of her range."
     evidence: ["Body Check", "Inner Rage", "Wrecking Ball"]
-    conditions: "Body Check at level 1; Inner Rage at 20 for the full reduction."
+    conditions: "Garrosh takes Body Check (level 1)"
     confidence: low
 synergies:
   - a: alexstrasza
     b: etc
-    why: "Mosh Pit stuns enemies in place for up to 4 seconds, so all five Cleansing Flame fireballs land on the stunned group."
+    why: "Mosh Pit stuns a group in place for up to 4 seconds, so most of Cleansing Flame's fireballs land on the stunned enemies while healing E.T.C. in the middle of them."
     evidence: ["Mosh Pit", "Cleansing Flame"]
-    confidence: medium
+    conditions: ["E.T.C. takes Mosh Pit (level 10)", "Alexstrasza takes Cleansing Flame (level 10)"]
+    confidence: low
   - a: alexstrasza
     b: zarya
     why: "Graviton Surge pins heroes together for 2.5 seconds under Cleansing Flame, and Zarya's shields absorb damage while Gift of Life and Abundance catch up."
     evidence: ["Graviton Surge", "Shield Ally", "Cleansing Flame", "Abundance"]
-    confidence: medium
+    conditions: ["Zarya takes Graviton Surge (level 10)", "Alexstrasza takes Cleansing Flame (level 10)"]
+    confidence: low
   - a: alexstrasza
     b: mei
-    why: "Ice Wall traps enemies for 2.5 seconds, a window in which Cleansing Flame fireballs hit the trapped heroes repeatedly."
+    why: "Ice Wall traps enemies for 2.5 seconds, long enough for a couple of Cleansing Flame's fireballs to land on the trapped heroes."
     evidence: ["Ice Wall", "Cleansing Flame"]
-    confidence: medium
+    conditions: ["Mei takes Ice Wall (level 10)", "Alexstrasza takes Cleansing Flame (level 10)"]
+    confidence: low

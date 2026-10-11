@@ -26,11 +26,11 @@ counters:
     b: thebutcher
     why: "Butcher's Brand only heals through basic attacks, so a Blinding Light on him stops both his damage and his sustain."
     evidence: ["Blinding Light", "Butcher's Brand"]
-    confidence: low
+    confidence: medium
   # --- weak against ---
   - a: johanna
     b: cassia
-    why: "Shield Glare blinds Cassia's basic attacks for 1.5 seconds, and Iron Skin's Unstoppable shield shrugs off Valkyrie's pull."
+    why: "Shield Glare blinds Cassia's basic attacks for 1.5 seconds, and Iron Skin's Unstoppable shrugs off Valkyrie's pull if Cassia takes it."
     evidence: ["Shield Glare", "Iron Skin", "Valkyrie"]
     confidence: medium
   - a: lili
@@ -51,16 +51,18 @@ counters:
 synergies:
   - a: cassia
     b: muradin
-    why: "Storm Bolt's stun makes Martial Law deal 3% max health per attack and gives Valkyrie a stationary target to pull."
+    why: "Storm Bolt's stun gives Cassia a target that cannot move: with Martial Law (level 16) her attacks take 3% of its maximum health, and Valkyrie, if she takes it, cannot miss its pull."
     evidence: ["Storm Bolt", "Martial Law", "Valkyrie"]
-    confidence: medium
+    conditions: "Cassia takes Martial Law (level 16) or Valkyrie (level 10)"
+    confidence: low
   - a: cassia
     b: rehgar
-    why: "Bloodlust's 40% attack speed and lifesteal multiply Cassia's basic-attack damage and her Ring of the Leech sustain."
+    why: "Bloodlust's 40% attack speed and lifesteal multiply Cassia's basic-attack damage and her sustain, even more so with Ring of the Leech (level 4)."
     evidence: ["Bloodlust", "Ring of the Leech"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: cassia
     b: tyrande
     why: "Hunter's Mark reduces the target's armor by 15 and reveals them, boosting every one of Cassia's basic attacks."
-    evidence: ["Hunter's Mark", "Martial Law"]
+    evidence: ["Hunter's Mark"]
     confidence: medium

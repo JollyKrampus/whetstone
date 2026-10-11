@@ -12,6 +12,7 @@ import {
   mergePairs,
   mergeTraits,
   nameKey,
+  normalizeCondition,
   readCurated,
   type PairInput,
 } from './curated.ts';
@@ -68,6 +69,13 @@ describe('per-hero file schema', () => {
     expect(HeroCuratedFileSchema.safeParse({ hero: 'valla', reviewedFor: '2.57', counters: [{ ...base, conditions: ['one', 'two'] }] }).success).toBe(true);
   });
 
+  it('rejects conditions that spell out "Only when", "Requires" or "Needs" (the page adds the words)', () => {
+    const base = { a: 'valla', b: 'abathur', why: 'A long enough reason here.', evidence: ['Hatred'], confidence: 'low' };
+    for (const conditions of ['Only when Valla takes Strafe', 'Requires Strafe at level 10.', ['needs Strafe']]) {
+      expect(HeroCuratedFileSchema.safeParse({ hero: 'valla', reviewedFor: '2.57', counters: [{ ...base, conditions }] }).success, String(conditions)).toBe(false);
+    }
+  });
+
   it('rejects unknown keys, duplicate pairs and self pairs', () => {
     const base = { a: 'valla', b: 'abathur', why: 'A long enough reason here.', evidence: ['Hatred'], confidence: 'low' };
     expect(HeroCuratedFileSchema.safeParse({ hero: 'valla', reviewedFor: '2.57', extra: 1 }).success).toBe(false);
@@ -81,10 +89,10 @@ describe('mergePairs', () => {
   it('merges one edge per pair: max confidence, evidence union, two distinct reasons, newest review', () => {
     const { pairs, warnings } = mergePairs(
       [
-        pair({ a: 'zeratul', b: 'abathur', why: 'First reason, long enough.', evidence: ['Cleave'], confidence: 'medium', reviewedFor: '2.56', source: 'heroes/zeratul.yaml' }),
+        pair({ a: 'zeratul', b: 'abathur', why: 'First reason, long enough.', evidence: ['Cleave'], confidence: 'high', reviewedFor: '2.56', source: 'heroes/zeratul.yaml' }),
         pair({ a: 'zeratul', b: 'abathur', why: 'Second reason, long enough.', evidence: ['Cleave', 'Blink'], confidence: 'high', source: 'heroes/abathur.yaml' }),
-        pair({ a: 'zeratul', b: 'abathur', why: 'Third reason, long enough.', conditions: ['late game'], source: 'heroes/abathur.yaml' }),
-        pair({ a: 'zeratul', b: 'abathur', why: 'First reason, long enough.', source: 'counters.yaml' }),
+        pair({ a: 'zeratul', b: 'abathur', why: 'Third reason, long enough.', conditions: ['late game'], confidence: 'high', source: 'heroes/abathur.yaml' }),
+        pair({ a: 'zeratul', b: 'abathur', why: 'First reason, long enough.', conditions: ['Zeratul takes Cleave'], confidence: 'high', source: 'counters.yaml' }),
       ],
       'counters',
     );
@@ -94,8 +102,10 @@ describe('mergePairs', () => {
         a: 'zeratul',
         b: 'abathur',
         why: ['First reason, long enough.', 'Second reason, long enough.'],
+        // Each shown line keeps the conditions of the files that wrote it; the third line is not shown.
+        whyConditions: [['Zeratul takes Cleave'], []],
         evidence: ['Cleave', 'Blink'],
-        conditions: ['late game'],
+        conditions: ['late game', 'Zeratul takes Cleave'],
         confidence: 'high',
         weight: 0.6,
         reviewedFor: '2.57',
@@ -110,6 +120,21 @@ describe('mergePairs', () => {
     const two = mergePairs([pair({ a: 'x', b: 'y', weight: 0.3 }), pair({ a: 'x', b: 'y', weight: 0.5, source: 'heroes/y.yaml' })], 'counters');
     expect(two.pairs[0]?.weight).toBe(0.3);
     expect(two.warnings.map((w) => w.message)).toEqual([expect.stringContaining('different weights')]);
+  });
+
+  it('takes the highest confidence and warns when files disagree on it', () => {
+    const { pairs, warnings } = mergePairs(
+      [pair({ a: 'anubarak', b: 'jaina', confidence: 'medium', source: 'heroes/anubarak.yaml' }), pair({ a: 'anubarak', b: 'jaina', why: 'Another reason, long enough.', confidence: 'high', source: 'heroes/jaina.yaml' })],
+      'counters',
+    );
+    expect(pairs[0]?.confidence).toBe('high');
+    expect(warnings).toEqual([
+      { file: 'heroes/anubarak.yaml', message: 'counters anubarak/jaina: files set different confidence (medium in heroes/anubarak.yaml, high in heroes/jaina.yaml); using high' },
+    ]);
+  });
+
+  it('drops a trailing full stop from conditions, which read after "Only when"', () => {
+    expect(normalizeCondition('  Blaze takes Nanomachine Coating (level 7). ')).toBe('Blaze takes Nanomachine Coating (level 7)');
   });
 
   it('defaults to the confidence weight (.2 / .4 / .6)', () => {

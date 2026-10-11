@@ -8,7 +8,7 @@ traits:
 counters:
   - a: maiev
     b: liming
-    why: "Umbral Bind tethers Li-Ming for 2.5 seconds and yanks her back if Teleport takes her too far, and Containment Disc can remove her before Critical Mass gets going."
+    why: "Umbral Bind tethers Li-Ming for 2.5 seconds and yanks her back if Teleport takes her too far, and Containment Disc, if Maiev takes it, can remove her before Critical Mass gets going."
     evidence: ["Umbral Bind", "Teleport", "Containment Disc", "Critical Mass"]
     confidence: medium
   - a: maiev
@@ -23,7 +23,7 @@ counters:
     confidence: medium
   - a: maiev
     b: genji
-    why: "Cyber Agility and Swift Strike carry Genji away from an Umbral Bind tether, which pulls him straight back, and Vault of the Wardens dodges his Dragonblade lunge."
+    why: "Cyber Agility and Swift Strike carry Genji away from an Umbral Bind tether, which pulls him straight back, and Vault of the Wardens dodges his Dragonblade lunge if he takes it."
     evidence: ["Umbral Bind", "Cyber Agility", "Swift Strike", "Vault of the Wardens", "Dragonblade"]
     confidence: low
   - a: johanna
@@ -51,14 +51,17 @@ synergies:
     b: mephisto
     why: "Warden's Cage keeps knocking escaping enemies back to its center, holding them inside Lightning Nova's ring for its whole duration."
     evidence: ["Warden's Cage", "Lightning Nova"]
-    confidence: medium
+    conditions: "Maiev takes Warden's Cage (level 10)"
+    confidence: low
   - a: jaina
     b: maiev
     why: "Warden's Cage pins a group in place for all three Blizzard waves, and the clustered Heroes let Fan of Knives reset over and over."
     evidence: ["Warden's Cage", "Blizzard", "Fan of Knives"]
-    confidence: medium
+    conditions: "Maiev takes Warden's Cage (level 10)"
+    confidence: low
   - a: kaelthas
     b: maiev
     why: "Warden's Cage keeps Heroes bunched near its center, so Flamestrike and Living Bomb spreads hit everyone trapped inside."
     evidence: ["Warden's Cage", "Flamestrike", "Living Bomb"]
-    confidence: medium
+    conditions: "Maiev takes Warden's Cage (level 10)"
+    confidence: low

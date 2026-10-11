@@ -14,9 +14,8 @@ counters:
     confidence: medium
   - a: ana
     b: leoric
-    why: "Drain Hope's self-heal is Leoric's main sustain; a Biotic Grenade during the drain turns that healing off, and Anti-Healer stretches the window."
+    why: "Drain Hope's self-heal is Leoric's main sustain; a Biotic Grenade during the drain turns that healing off, and Anti-Healer (level 7) stretches the window."
     evidence: ["Biotic Grenade", "Anti-Healer", "Drain Hope"]
-    conditions: "Anti-Healer at level 7 lengthens the block; the base grenade does most of the work."
     confidence: medium
   - a: ana
     b: thebutcher
@@ -25,9 +24,8 @@ counters:
     confidence: medium
   - a: ana
     b: alexstrasza
-    why: "Biotic Grenade stops all healing for 1.75 seconds; a Gift of Life cast into it still costs Alexstrasza 15% of her health while the heal does nothing."
+    why: "Biotic Grenade stops all healing for 1.75 seconds (longer with Anti-Healer at level 7); a Gift of Life cast into it still costs Alexstrasza 15% of her health while the heal does nothing."
     evidence: ["Biotic Grenade", "Anti-Healer", "Gift of Life"]
-    conditions: "Anti-Healer at level 7 lengthens the block; the base grenade does most of the work."
     confidence: medium
   - a: ana
     b: sonya
@@ -60,14 +58,17 @@ synergies:
     b: guldan
     why: "Nano Boost restores 200 mana to Gul'dan, who does not regenerate mana, and makes Fel Flame recharge 150% faster with 30% Spell Power."
     evidence: ["Nano Boost", "Life Tap", "Fel Flame"]
-    confidence: medium
+    conditions: "Ana takes Nano Boost (level 10)"
+    confidence: low
   - a: ana
     b: kaelthas
     why: "Nano Boost speeds Flamestrike, Living Bomb and Gravity Lapse cooldowns by 150% for 8 seconds with 30% Spell Power, turning one engage into a stream of burst."
     evidence: ["Nano Boost", "Flamestrike", "Living Bomb", "Gravity Lapse"]
-    confidence: medium
+    conditions: "Ana takes Nano Boost (level 10)"
+    confidence: low
   - a: ana
     b: liming
     why: "Nano Boost on Li-Ming brings Magic Missiles and Arcane Orb back almost instantly and adds 30% Spell Power to every cast."
     evidence: ["Nano Boost", "Magic Missiles", "Arcane Orb"]
-    confidence: medium
+    conditions: "Ana takes Nano Boost (level 10)"
+    confidence: low

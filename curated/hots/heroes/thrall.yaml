@@ -9,7 +9,7 @@ counters:
   # --- strong against ---
   - a: thrall
     b: thelostvikings
-    why: "Chain Lightning bounces between nearby enemies, so grouped Vikings all take damage, and Crash Lightning rewards hitting several Heroes with one cast."
+    why: "Chain Lightning bounces between nearby enemies, so grouped Vikings all take damage, and Crash Lightning (level 1) rewards hitting several Heroes with one cast."
     evidence: ["Chain Lightning", "Crash Lightning"]
     confidence: low
   - a: thrall
@@ -35,22 +35,24 @@ counters:
     confidence: low
   - a: varian
     b: thrall
-    why: "Parry negates Windfury's quick basic attacks for 1.25 seconds, and Taunt silences Thrall so he can't Feral Spirit or Chain Lightning for healing stacks."
+    why: "Parry negates Windfury's quick basic attacks for 1.25 seconds, and Taunt, if Varian takes it at level 4, silences Thrall so he can't Feral Spirit or Chain Lightning for healing stacks."
     evidence: ["Parry", "Taunt", "Windfury", "Frostwolf Resilience"]
     confidence: low
 synergies:
   - a: rehgar
     b: thrall
-    why: "Lightning Shield on Thrall damages everyone around him as he dives with Windfury, and Bloodlust boosts his attack speed and sustain."
+    why: "Lightning Shield on Thrall damages everyone around him as he dives with Windfury, and Bloodlust, if Rehgar takes it, boosts his attack speed and sustain."
     evidence: ["Lightning Shield", "Bloodlust", "Windfury"]
     confidence: low
   - a: kaelthas
     b: thrall
     why: "Sundering's 1-second stun along a long line holds enemies in place for Flamestrike and a spreading Living Bomb."
     evidence: ["Sundering", "Flamestrike", "Living Bomb"]
-    confidence: medium
+    conditions: "Thrall takes Sundering (level 10)"
+    confidence: low
   - a: thrall
     b: zarya
-    why: "Graviton Surge groups enemies so Sundering's line stun and Earthquake's slowing pulses hit all of them."
+    why: "Graviton Surge groups enemies so Sundering's line stun or Earthquake's slowing pulses, whichever Thrall takes, hit all of them."
     evidence: ["Graviton Surge", "Sundering", "Earthquake"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

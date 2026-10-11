@@ -9,74 +9,78 @@ counters:
   # --- strong against ---
   - a: zarya
     b: illidan
-    why: "Expulsion Zone knocks Illidan back and slows him whenever he re-enters, and Shield Ally soaks his burst on a target while feeding Zarya Energy."
+    why: "Shield Ally soaks Illidan's burst on a target while feeding Zarya Energy, and Expulsion Zone, if Zarya takes it, knocks him back and slows him whenever he re-enters."
     evidence: ["Expulsion Zone", "Shield Ally", "Energy", "Dive"]
     confidence: low
   - a: zarya
     b: valeera
     why: "Shield Ally absorbs Valeera's opener, and Cleansing Shield removes Cheap Shot's stun or Garrote's silence from the target."
     evidence: ["Shield Ally", "Cleansing Shield", "Blade Flurry", "Eviscerate"]
-    conditions: "Cleansing Shield at level 16."
+    conditions: "Zarya takes Cleansing Shield (level 16)"
     confidence: low
   - a: zarya
     b: kerrigan
     why: "Shield Ally soaks the burst from Kerrigan's Ravage and Primal Grasp, and Cleansing Shield frees the target from Impaling Blades' stun so they can walk out before the combo finishes."
     evidence: ["Shield Ally", "Cleansing Shield", "Impaling Blades", "Ravage"]
-    conditions: "Cleansing Shield at level 16."
+    conditions: "Zarya takes Cleansing Shield (level 16)"
     confidence: low
   # --- weak against ---
   - a: varian
     b: zarya
     why: "Shattering Throw deals up to 1400 bonus damage to Shields, popping Personal Barrier or Shield Ally on demand and denying Zarya the Energy she would have gained."
     evidence: ["Shattering Throw", "Personal Barrier", "Shield Ally", "Energy"]
-    conditions: "Shattering Throw at level 13."
-    confidence: medium
+    conditions: "Varian takes Shattering Throw (level 13)"
+    confidence: low
   - a: ltmorales
     b: zarya
     why: "EMP Grenade deals up to 400 bonus damage to Shields, stripping Personal Barrier or Shield Ally before they can build Zarya Energy."
     evidence: ["EMP Grenade", "Personal Barrier", "Shield Ally", "Energy"]
-    conditions: "EMP Grenade at level 13."
+    conditions: "Lt. Morales takes EMP Grenade (level 13)"
     confidence: low
   - a: kelthuzad
     b: zarya
     why: "Strip Shields lets Chains of Kel'Thuzad deal up to 270 bonus damage to Shields, cutting through Zarya's barriers."
     evidence: ["Strip Shields", "Chains of Kel'Thuzad", "Personal Barrier"]
-    conditions: "Strip Shields at level 4."
+    conditions: "Kel'Thuzad takes Strip Shields (level 4)"
     confidence: low
   - a: rehgar
     b: zarya
     why: "Purification makes Purge deal up to 330 damage to Shields and cut healing, popping Shield Ally or Personal Barrier on demand."
     evidence: ["Purification", "Purge", "Shield Ally", "Personal Barrier"]
-    conditions: "Purification at level 7."
+    conditions: "Rehgar takes Purification (level 7)"
     confidence: low
 synergies:
   - a: ragnaros
     b: zarya
-    why: "Graviton Surge drags enemies to one point for 2.5 seconds, so Sulfuras Smash's center and Living Meteor's roll hit several Heroes at once."
+    why: "Graviton Surge drags enemies to one point for 2.5 seconds, so Living Meteor's roll, and Sulfuras Smash's center if Ragnaros takes it, hit several Heroes at once."
     evidence: ["Graviton Surge", "Sulfuras Smash", "Living Meteor"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: stukov
     b: zarya
-    why: "Graviton Surge holds enemies inside Lurking Arm's silence, and Virulent Reaction roots anyone carrying a Weighted Pustule there."
+    why: "Graviton Surge holds enemies inside Lurking Arm's silence, and with Virulent Reaction (level 13) a Weighted Pustule detonating there roots them."
     evidence: ["Graviton Surge", "Lurking Arm", "Virulent Reaction", "Weighted Pustule"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: tracer
     b: zarya
-    why: "Graviton Surge holds enemies in place so Pulse Bomb sticks reliably, and Shield Ally gives Tracer a buffer to dive deeper."
+    why: "Shield Ally gives Tracer a buffer to dive deeper, and Graviton Surge, if Zarya takes it, holds enemies in place so Pulse Bomb sticks reliably."
     evidence: ["Graviton Surge", "Shield Ally", "Pulse Bomb"]
     confidence: medium
   - a: xul
     b: zarya
-    why: "Graviton Surge groups enemies so Poison Nova's missiles hit all of them, and Shield Ally keeps Xul alive while he fights in melee."
+    why: "Shield Ally keeps Xul alive while he fights in melee, and when both take them, Graviton Surge groups enemies so Poison Nova's missiles hit all of them."
     evidence: ["Graviton Surge", "Shield Ally", "Poison Nova"]
-    confidence: medium
+    confidence: low
   - a: xalatath
     b: zarya
-    why: "Graviton Surge holds enemies in place for a fully charged Void Eruption and makes Shadow Mark's center easy to land on several targets."
+    why: "Graviton Surge holds enemies in place so Shadow Mark's center lands on several targets, and Void Eruption, if Xal'atath takes it, charges fully."
     evidence: ["Graviton Surge", "Void Eruption", "Shadow Mark"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: thrall
     b: zarya
-    why: "Graviton Surge groups enemies so Sundering's line stun and Earthquake's slowing pulses hit all of them."
+    why: "Graviton Surge groups enemies so Sundering's line stun or Earthquake's slowing pulses, whichever Thrall takes, hit all of them."
     evidence: ["Graviton Surge", "Sundering", "Earthquake"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

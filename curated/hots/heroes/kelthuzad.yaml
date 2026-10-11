@@ -23,9 +23,9 @@ counters:
     confidence: low
   - a: anubarak
     b: kelthuzad
-    why: "Harden Carapace's Spell Armor blunts the whole combo, Burrow Charge or Impale reaches an immobile Kel'Thuzad before he lands Chains, and Debilitation halves his Spell Power."
+    why: "Harden Carapace's Spell Armor blunts the whole combo, Burrow Charge or Impale reaches an immobile Kel'Thuzad before he lands Chains, and Debilitation (level 16) halves his Spell Power on top."
     evidence: ["Harden Carapace", "Burrow Charge", "Impale", "Debilitation"]
-    confidence: high
+    confidence: medium
   - a: genji
     b: kelthuzad
     why: "Deflect absorbs Death and Decay and Frost Nova, and Cyber Agility plus Swift Strike reach a Kel'Thuzad who has no way to reposition."
@@ -38,7 +38,7 @@ counters:
     confidence: medium
   - a: valeera
     b: kelthuzad
-    why: "From Vanish, Valeera opens with a Garrote Silence that stops Kel'Thuzad from casting his combo, and Cloak of Shadows' Spell Armor blunts whatever he lands afterwards."
+    why: "From Vanish, Valeera opens with a Garrote Silence that stops Kel'Thuzad from casting his combo, and Cloak of Shadows, if she takes it, blunts whatever he lands afterwards with Spell Armor."
     evidence: ["Vanish", "Eviscerate", "Cloak of Shadows"]
     confidence: medium
 synergies:
@@ -46,14 +46,16 @@ synergies:
     b: mei
     why: "Ice Wall traps enemies for 2.5 seconds, so Frost Nova's 1-second center root and Death and Decay land without any chance to dodge."
     evidence: ["Ice Wall", "Frost Nova", "Death and Decay"]
-    confidence: medium
+    conditions: "Mei takes Ice Wall (level 10)"
+    confidence: low
   - a: kelthuzad
     b: malfurion
-    why: "Hungering Cold adds damage on every hit against Rooted enemies, including targets held by Entangling Roots, and Innervate feeds Kel'Thuzad's Mana."
+    why: "Innervate feeds Kel'Thuzad's Mana, Entangling Roots holds targets for his combo, and with Hungering Cold (level 16) every hit on a rooted target deals extra damage."
     evidence: ["Hungering Cold", "Entangling Roots", "Innervate"]
     confidence: medium
   - a: ana
     b: kelthuzad
     why: "Nano Boost's Spell Power and faster Basic Ability recharge let Kel'Thuzad cycle Death and Decay and Frost Nova twice inside one engage."
     evidence: ["Nano Boost", "Death and Decay", "Frost Nova"]
-    confidence: medium
+    conditions: "Ana takes Nano Boost (level 10)"
+    confidence: low
