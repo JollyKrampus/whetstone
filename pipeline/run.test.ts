@@ -311,7 +311,7 @@ describe('context', () => {
         return { meta: meta('hots'), files: baseFiles(), issues: [] };
       },
     };
-    await runPipelines(opts({ hots: probe }, { only: ['tact'], env: { LIQUIPEDIA_UA_CONTACT: ' ', YT_API_KEY: 'yt', SHOWDOWN_EXPORT: 'x.json', GITHUB_TOKEN: 't', OTHER: 'x' } }));
+    await runPipelines(opts({ hots: probe }, { only: ['tact'], env: { LIQUIPEDIA_UA_CONTACT: ' ', YT_API_KEY: 'yt', WHETSTONE_SHOWDOWN_EXPORT: 'x.json', DATA_ARTIFACT_KEY: 'k', GITHUB_TOKEN: 't', OTHER: 'x' } }));
     expect(seen).toHaveLength(1);
     const s = seen[0] as Seen;
     expect(s.prev).toEqual([{ id: 'Abat', name: 'Abathur' }, { id: 'HXAL', name: "Xal'atath" }]);
@@ -322,7 +322,8 @@ describe('context', () => {
     expect(s.secrets.YT_API_KEY).toBe('yt');
     // Only the variables the game's registry entry lists: never another game's, never the GitHub token.
     expect(Object.keys(s.secrets)).not.toContain('OTHER');
-    expect(Object.keys(s.secrets)).not.toContain('SHOWDOWN_EXPORT');
+    expect(Object.keys(s.secrets)).not.toContain('WHETSTONE_SHOWDOWN_EXPORT');
+    expect(Object.keys(s.secrets)).not.toContain('DATA_ARTIFACT_KEY');
     expect(Object.keys(s.secrets)).not.toContain('GITHUB_TOKEN');
     expect(s.tact).toBe(true);
     expect(s.hp).toBe(false);
@@ -349,9 +350,10 @@ describe('secrets', () => {
   });
 
   it('scopes variables per game from the registry', () => {
-    expect(gameEnvNames('pokemon')).toEqual(['SHOWDOWN_EXPORT']);
+    expect(gameEnvNames('pokemon')).toEqual([]);
     expect(gameEnvNames('mtga')).toEqual([]);
     expect(gameEnvNames('hots')).toContain('YT_API_KEY');
-    expect(secretsFromEnv({ YT_API_KEY: 'k', SHOWDOWN_EXPORT: 'e' }, 'pokemon')).toEqual({ SHOWDOWN_EXPORT: 'e' });
+    expect(secretsFromEnv({ YT_API_KEY: 'k', LIQUIPEDIA_UA_CONTACT: 'me' }, 'pokemon')).toEqual({});
+    expect(secretsFromEnv({ YT_API_KEY: ' k ', LIQUIPEDIA_UA_CONTACT: '' }, 'hots')).toMatchObject({ YT_API_KEY: 'k', LIQUIPEDIA_UA_CONTACT: undefined });
   });
 });

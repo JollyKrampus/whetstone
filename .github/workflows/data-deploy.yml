@@ -112,7 +112,7 @@ jobs:
       - run: npm ci
 
       - name: Export the dex from the pinned Showdown commit
-        run: node src/games/pokemon/pipeline/showdown/export-job.ts --out showdown-export
+        run: node src/games/pokemon/pipeline/showdown/export-job.ts --out showdown-export/export.json
 
       - name: Upload the export
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -191,7 +191,9 @@ jobs:
           # those sources "disabled".
           YT_API_KEY: ${{ matrix.game == 'hots' && secrets.YT_API_KEY || '' }}
           LIQUIPEDIA_UA_CONTACT: ${{ vars.LIQUIPEDIA_UA_CONTACT }}
-          SHOWDOWN_EXPORT: ${{ matrix.game == 'pokemon' && format('{0}/showdown-export/export.json', github.workspace) || '' }}
+          # The isolated job's dex export (Pokémon only; validated again before use). Unset when that
+          # job failed: the Pokémon pipeline then keeps its last-good dex and never builds Showdown here.
+          WHETSTONE_SHOWDOWN_EXPORT: ${{ matrix.game == 'pokemon' && needs.showdown-export.result == 'success' && format('{0}/showdown-export/export.json', github.workspace) || '' }}
           # The job's own read-only token: api.github.com calls (heroes-data2 releases, heroes-images
           # tags and trees, the Showdown commit) get 1,000 requests/hour instead of 60 per runner IP.
           # pipeline/http.ts sends it to api.github.com only, never to games, logs or caches.

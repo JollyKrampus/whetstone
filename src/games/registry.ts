@@ -88,8 +88,9 @@ const PRESENTATION: Readonly<Record<GameId, GamePresentation>> = {
         text: 'Pokémon Champions: teams you saved and the team currently open in the builder (the team preview reads it too).',
       },
     ],
-    // SHOWDOWN_EXPORT: path of the dex export made by the isolated showdown-export job (data-deploy.yml).
-    pipeline: { timeoutMinutes: 45, env: ['SHOWDOWN_EXPORT'] },
+    // No credentials. The dex export of the isolated showdown-export job (data-deploy.yml) arrives as
+    // the WHETSTONE_SHOWDOWN_EXPORT file path, which the Pokémon pipeline reads itself.
+    pipeline: { timeoutMinutes: 45 },
   },
 };
 
