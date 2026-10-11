@@ -61,7 +61,8 @@ describe('hots fixtures match the schemas', () => {
     expect(sl).toBeDefined();
     if (!sl) return;
     // Regenerate with the hots fixture generator when the shard or stats.json change.
-    expect(overlay).toEqual({ stats: statsBlockFromWindow(sl, shard, { mode: 'sl', timeframe: 'current', synthetic: true }) });
+    // The overlay carries the producer label of stats.json (make-fixtures.ts).
+    expect(overlay).toEqual({ stats: { ...statsBlockFromWindow(sl, shard, { mode: 'sl', timeframe: 'current', synthetic: true }), source: stats.source } });
   });
 
   it('marks every private sample as synthetic', () => {
