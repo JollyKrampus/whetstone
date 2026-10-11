@@ -1,0 +1,48 @@
+---
+/**
+ * "What players say": community signals about one entity, in our own words, each with links to
+ * the public discussions behind it (SPEC §13.6). Renders nothing when there are no signals.
+ */
+import type { GameId } from '../core/game.ts';
+import { getCommunitySignals } from '../lib/community.ts';
+
+interface Props {
+  game: GameId;
+  subject: string;
+  heading?: string;
+  limit?: number;
+}
+
+const { game, subject, heading = 'What players say', limit = 5 } = Astro.props;
+const signals = getCommunitySignals(game, subject).slice(0, limit);
+---
+
+{
+  signals.length > 0 && (
+    <section class="community" aria-label={heading}>
+      <h2 class="community__title">{heading}</h2>
+      <ul class="community__list">
+        {signals.map((s) => (
+          <li class="community__item">
+            <p class="community__summary">
+              {s.summary}
+              {s.contested && <span class="community__contested"> (contested)</span>}
+            </p>
+            <p class="community__meta">
+              {s.origin === 'curated' ? 'Curated' : `${s.posters} players`}
+              {s.cites.length > 0 && ' · '}
+              {s.cites.map((c, i) => (
+                <>
+                  {i > 0 && ', '}
+                  <a href={c.url} rel="noopener noreferrer external">
+                    {c.site}
+                  </a>
+                </>
+              ))}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
