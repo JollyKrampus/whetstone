@@ -10,5 +10,5 @@
     "types": ["node"]
   },
   "include": [".astro/types.d.ts", "src", "e2e", "scripts", "pipeline", "test", "*.ts"],
-  "exclude": ["dist", "data", "node_modules", "public", "vendor", ".cache"]
+  "exclude": ["dist", "data", "node_modules", "public", ".cache"]
 }

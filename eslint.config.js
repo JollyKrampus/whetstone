@@ -11,7 +11,6 @@ export default defineConfig(
     '.cache/',
     'node_modules/',
     'data/',
-    'vendor/',
     'public/data/',
     'src/generated/',
     'coverage/',
