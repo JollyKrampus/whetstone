@@ -56,6 +56,7 @@ import { heroSlugRedirects, redirectHtml } from '../../../games/hots/redirects.t
 import { heroHref, mapFitRow } from '../../../games/hots/view.ts';
 import Crumbs from '../../../games/hots/components/Crumbs.astro';
 import GameLayout from '../../../layouts/GameLayout.astro';
+import { allowInlineScript } from '../../../lib/csp.ts';
 
 export const getStaticPaths = (() => {
   const pages = getDraftableEntities().map((h) => ({ params: { slug: h.slug }, props: { id: h.id } }));
@@ -92,6 +93,8 @@ const diffs = getDiffs().flatMap((diff) =>
 );
 const links = getHeroLinks(hero);
 const videos = heroVideos(hero);
+// heroescounters-style links (#videos) open the Guides tab; constant code, so its hash goes into the page CSP.
+const videosAlias = allowInlineScript(Astro, "if (location.hash === '#videos') history.replaceState(history.state, '', '#guides');");
 const theory = theoryMatchups(hero.id) ?? { strong: [], weak: [], synergy: [] };
 const maps = getMaps();
 // "Best maps" lists only maps above neutral; maps the kit is worse on get their own list.
@@ -132,9 +135,7 @@ const tabs = [
   <article class="hpage" data-hero={hero.id} data-basis={statsOn ? 'stats' : 'theory'}>
     <Crumbs trail={[{ label: 'Heroes', href: navHref('hots') }]} current={hero.name} />
     <!-- heroescounters-style links (#videos) open the Guides tab; runs before the Tabs script reads the hash. -->
-    <script is:inline>
-      if (location.hash === '#videos') history.replaceState(history.state, '', '#guides');
-    </script>
+    <script is:inline set:html={videosAlias} />
 
     <HeroHeader hero={hero} members={members} free={isFreeToPlay(hero)} tier={tier} lastChanged={history[0]?.patch.date ?? null} />
 

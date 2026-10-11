@@ -145,12 +145,13 @@ function cspGuard() {
  * styles, which cannot run code. Images and frames only from this site and the hosts the pages
  * actually embed (Scryfall card images, YouTube and Twitch on click).
  */
-const CSP_SCRIPT_HASHES = /** @type {const} */ ([
-  // src/pages/hots/hero/[slug].astro: the `#videos` → `#guides` alias (the exact text between the
-  // tags). Remove once that page registers its own hash with allowInlineScript() from src/lib/csp.ts;
-  // cspGuard() fails the build if the script changes and this hash no longer matches.
-  'sha256-F846EnwC0e168Vtgpn2cGKTV+OtLmnVSMLnf1Ubsyvk=',
-]);
+/**
+ * Extra script hashes for inline scripts that cannot register their own. Empty: every constant
+ * inline script registers its hash with allowInlineScript() (src/lib/csp.ts), and cspGuard() fails
+ * the build when one does not.
+ * @type {readonly string[]}
+ */
+const CSP_SCRIPT_HASHES = [];
 
 export default defineConfig({
   site: 'https://jollykrampus.github.io',

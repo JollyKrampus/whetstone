@@ -1,8 +1,8 @@
 ---
 /**
  * Statistics talent builds for one stats window: the most played and the best by a conservative
- * win-rate estimate, each with its sample size and a "copy build" button (beta) that copies the
- * in-game build code.
+ * win-rate estimate, each with its sample size and a "copy build" button that copies the in-game
+ * build code (marked unchecked until the format is verified in the client).
  */
 import Badge from '../../../components/Badge.tsx';
 import CopyButton from '../../../components/CopyButton.tsx';
@@ -89,7 +89,7 @@ const lists = [
                   {resolved.code && (
                     <div class="tbuild__copy">
                       <code class="tbuild__code">{resolved.code}</code>
-                      <CopyButton client:visible text={resolved.code} label="Copy build (beta)" copiedLabel="Build copied" />
+                      <CopyButton client:visible text={resolved.code} label="Copy build" copiedLabel="Build copied" />
                     </div>
                   )}
                 </li>
@@ -100,8 +100,8 @@ const lists = [
       ))
     )
   }
-  <p class="tbuilds__beta">
-    <Badge tone="warning">Beta</Badge> The build code follows the in-game talent build format
+  <p class="tbuilds__unchecked">
+    <Badge tone="warning">Unchecked</Badge> The build code follows the in-game talent build format
     (<code>[T</code> + one digit per level + hero name<code>]</code>); it has not yet been checked in the current client.
   </p>
 </section>
@@ -123,7 +123,7 @@ const lists = [
 
   .tbuilds__sub,
   .tbuilds__none,
-  .tbuilds__beta {
+  .tbuilds__unchecked {
     color: var(--text-muted);
     font-size: var(--fs-sm);
   }

@@ -309,7 +309,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       const builds = page.locator('#talents .tbuilds:visible');
       await expect(builds.getByRole('heading', { name: 'Builds from match data' })).toBeVisible();
       await expect(builds.locator('.tbuild__code').first()).toHaveText(/^\[T[0-7]{7},Abathur\]$/);
-      await expect(builds.getByRole('button', { name: /Copy build \(beta\)/ }).first()).toBeVisible();
+      await expect(builds.getByRole('button', { name: 'Copy build' }).first()).toBeVisible();
       await expect(builds.locator('.tbuild__meta').first()).toContainText('n =');
       await expect(statsCreditLink(page).first()).toBeVisible();
     });

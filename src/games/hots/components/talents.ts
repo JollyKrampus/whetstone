@@ -3,11 +3,10 @@
  * hero's talent tiers, and write the in-game build string `[T{7 digits},{HeroToken}]`.
  * Browser-safe and pure.
  *
- * Build string (beta, research hots-roadmap §6.4): digit i is the 1-based position of the chosen
- * talent at tiers 1/4/7/10/13/16/20, `0` for a tier left open. The hero token is Heroes
- * Profile's `build_copy_name`, which is the English name reduced to letters and digits except
- * for the quirks listed in TOKEN_OVERRIDES. The format still needs one in-game check (critique U8),
- * so the UI labels it beta.
+ * Build string (research hots-roadmap §6.4): digit i is the 1-based position of the chosen
+ * talent at tiers 1/4/7/10/13/16/20, `0` for a tier left open. The hero token is the English
+ * name reduced to letters and digits, except for the quirks listed in TOKEN_OVERRIDES. The format
+ * still needs one in-game check (critique U8), so the UI marks it unchecked.
  */
 import type { Hero, Talent, TalentTier } from '../schema.ts';
 

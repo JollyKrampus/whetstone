@@ -68,8 +68,23 @@ export function dropOtherGames(sectionHtml: string): string {
   }
 }
 
+const escapeAttr = (s: string): string => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
+/**
+ * Wrap each <table> of a section in a keyboard-reachable scroll region (A11Y-4): tables can be
+ * wider than a phone, and a region that scrolls sideways must take focus and have a name.
+ */
+export function scrollableTables(sectionHtml: string, title: string): string {
+  let n = 0;
+  return sectionHtml.replace(/<table\b[\s\S]*?<\/table>/gi, (table) => {
+    n += 1;
+    const name = escapeAttr(`${title || 'Methodology'}: table ${n} (scrolls sideways)`);
+    return `<div class="method__scroll" role="region" tabindex="0" aria-label="${name}">${table}</div>`;
+  });
+}
+
 /** METHODOLOGY.md as it applies to HotS: same sections, other games' subsections removed. */
 export function hotsMethodology(html: string): SplitDoc {
   const doc = splitSections(html);
-  return { intro: doc.intro, sections: doc.sections.map((s) => ({ ...s, html: dropOtherGames(s.html) })) };
+  return { intro: doc.intro, sections: doc.sections.map((s) => ({ ...s, html: scrollableTables(dropOtherGames(s.html), s.title) })) };
 }

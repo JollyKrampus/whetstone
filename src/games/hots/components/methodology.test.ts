@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dropOtherGames, hotsMethodology, splitSections } from './methodology.ts';
+import { dropOtherGames, hotsMethodology, scrollableTables, splitSections } from './methodology.ts';
 
 // Shaped like Astro's compiled Markdown for docs/METHODOLOGY.md.
 const HTML = [
@@ -39,5 +39,15 @@ describe('methodology for /hots/about/', () => {
 
   it('keeps a document without h2 as intro', () => {
     expect(splitSections('<p>Only text</p>')).toEqual({ intro: '<p>Only text</p>', sections: [] });
+  });
+});
+
+describe('scrollableTables', () => {
+  it('wraps every table in a named, focusable scroll region', () => {
+    const html = '<h2 id="x">Gates &amp; bars</h2><table><tr><td>1</td></tr></table><p>t</p><table class="w"><tr><td>2</td></tr></table>';
+    const out = scrollableTables(html, 'Gates & "bars"');
+    expect(out.match(/<div class="method__scroll" role="region" tabindex="0" aria-label="[^"]+">/g)).toHaveLength(2);
+    expect(out).toContain('aria-label="Gates &amp; &quot;bars&quot;: table 2 (scrolls sideways)"><table class="w">');
+    expect(scrollableTables('<p>no tables</p>', 'X')).toBe('<p>no tables</p>');
   });
 });

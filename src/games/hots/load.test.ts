@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import type { Edge } from '../../core/game.ts';
-import { clearHotsCache, getDraftableEntities, getTheory, netCounter, theoryLists, THEORY_GATES } from './load.ts';
+import { clearHotsCache, getDraftableEntities, getPatches, getTheory, netCounter, patchTitle, theoryLists, THEORY_GATES } from './load.ts';
 
 afterEach(() => {
   clearHotsCache();
@@ -80,5 +80,17 @@ describe('theoryLists (fixtures)', () => {
         expect(generic.slice(0, lastListed + 1).every((r) => r.gate === 'listed'), where).toBe(true);
       }
     }
+  });
+});
+
+describe('patchTitle (one date format, COPY-1)', () => {
+  it("rewrites Blizzard's trailing dates in either format and keeps other titles", () => {
+    expect(patchTitle('Hotfix - 10/5/2026', '2026-10-05')).toBe('Hotfix, 5 Oct 2026');
+    expect(patchTitle('Heroes of the Storm Live Patch Notes - September 28, 2026', '2026-09-28')).toBe('Heroes of the Storm Live Patch Notes, 28 Sep 2026');
+    expect(patchTitle('Heroes of the Storm 2.57 Patch Notes', '2026-09-28')).toBe('Heroes of the Storm 2.57 Patch Notes');
+  });
+
+  it('applies to every loaded patch', () => {
+    for (const p of getPatches()) expect(p.title, p.id).not.toMatch(/\d{1,2}\/\d{1,2}\/\d{4}|(?:January|September|October)\s+\d{1,2},\s+\d{4}/);
   });
 });

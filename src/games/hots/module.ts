@@ -89,7 +89,8 @@ export const hots: GameModule = {
       url: 'https://www.twitch.tv/directory/category/heroes-of-the-storm',
       attribution: 'Live data from Twitch.',
       rule: 'inline',
-      tosNote: 'Optional (needs app credentials). Ephemeral: hidden once older than 90 minutes; every stream links to its channel.',
+      tosNote:
+        'Not used: Whetstone fetches no Twitch data and holds no Twitch credentials. The live page links to the Heroes of the Storm category and loads a featured channel’s player only when you click it.',
       custody: 'C',
     },
   ],

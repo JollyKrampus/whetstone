@@ -372,11 +372,14 @@ const methodologyUrl = `${SITE.repo}/blob/main/docs/METHODOLOGY.md`;
     margin: 0;
   }
 
-  /* Methodology HTML comes from Markdown: tables can be wider than a phone, so they scroll inside. */
-  .method :global(table) {
-    display: block;
+  /* Methodology HTML comes from Markdown: tables can be wider than a phone, so each scrolls inside
+     its own focusable region (methodology.ts scrollableTables). */
+  .method :global(.method__scroll) {
     max-width: 100%;
     overflow-x: auto;
+  }
+
+  .method :global(table) {
     font-size: var(--fs-sm);
   }
 

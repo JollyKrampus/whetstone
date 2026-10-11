@@ -10,6 +10,7 @@
  */
 import path from 'node:path';
 import type { Edge, Reason, SourceRef } from '../../core/game.ts';
+import { formatDayUTC } from '../../core/format.ts';
 import { createCachedLoader } from '../../core/schemas.ts';
 import { sourcesFor } from '../registry.ts';
 import { GATES, classifySample, isListable, scoreFromDelta } from '../../core/stats.ts';
@@ -169,8 +170,25 @@ export function getRankedMaps(): GameMap[] {
 // ---- patches / diffs -------------------------------------------------------------------
 
 /** Newest first; empty when the notes source has never succeeded. */
+/** A trailing date in a Blizzard title, in either of its formats ("10/5/2026", "September 28, 2026"). */
+const TITLE_DATE = /\s*[-–—]\s*(?:\d{1,2}\/\d{1,2}\/\d{4}|(?:january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2},?\s+\d{4})\s*$/i;
+
+/**
+ * A patch title with its date in the site's one format (COPY-1): Blizzard writes "Hotfix -
+ * 10/5/2026" and "… Patch Notes - September 28, 2026", which read as "Hotfix, 5 Oct 2026" and
+ * "… Patch Notes, 28 Sep 2026". A title without a trailing date is kept as it is.
+ */
+export function patchTitle(title: string, date: string): string {
+  const base = title.replace(TITLE_DATE, '').trim();
+  return base === title.trim() || base === '' ? title : `${base}, ${formatDayUTC(date)}`;
+}
+
+let patchesCache: { raw: Patch[]; out: Patch[] } | undefined;
+
 export function getPatches(): Patch[] {
-  return publicData.optional('patches.json', PatchesFileSchema) ?? [];
+  const raw = publicData.optional('patches.json', PatchesFileSchema) ?? [];
+  if (patchesCache?.raw !== raw) patchesCache = { raw, out: raw.map((p) => ({ ...p, title: patchTitle(p.title, p.date) })) };
+  return patchesCache.out;
 }
 
 export function getPatch(id: string): Patch | undefined {
@@ -233,12 +251,14 @@ export function getRotation(): Rotation | null {
 }
 
 /**
- * True when the rotation's window had already ended when it was fetched: Nexus Compendium can lag
- * a day or two behind the weekly switch. Pages then say so and mark no hero as free, rather than
- * badge last week's heroes as "free this week".
+ * True when the rotation is behind the weekly switch: the pipeline flagged it `lagging` (its
+ * window had ended at the last run, though the content and its fetchedAt stayed the same), or its
+ * window had already ended when it was first fetched. Nexus Compendium can lag a day or two
+ * behind the switch. Pages then say so and mark no hero as free, rather than badge last week's
+ * heroes as "free this week".
  */
 export function rotationIsStale(rotation: Rotation): boolean {
-  return rotation.end < rotation.fetchedAt.slice(0, 10);
+  return rotation.lagging === true || rotation.end < rotation.fetchedAt.slice(0, 10);
 }
 
 /** The free rotation when it is current, else null (absent or stale). */
