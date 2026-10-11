@@ -243,3 +243,23 @@ test('offline, a page that was never visited falls back to the offline page', as
     await context.setOffline(false);
   }
 });
+
+test('on phones the scroll offset clears the two-row sticky header and the game sections wrap', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  for (const g of games) {
+    await page.goto(`${g.id}/`);
+    const m = await page.evaluate(() => ({
+      header: document.querySelector('header.site-header')?.getBoundingClientRect().height ?? 0,
+      offset: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop),
+      width: document.documentElement.scrollWidth,
+    }));
+    // Focused or linked targets must land below the header (WCAG 2.4.11), and nothing scrolls sideways.
+    expect(m.offset, g.id).toBeGreaterThanOrEqual(m.header);
+    expect(m.width, g.id).toBeLessThanOrEqual(360);
+    // Every section link is on screen: the list wraps instead of hiding links in a sideways scroll.
+    for (const link of await page.locator('.gamebar__link').all()) {
+      const box = await link.boundingBox();
+      expect(box && box.x >= 0 && box.x + box.width <= 360, `${g.id}: ${await link.textContent()}`).toBe(true);
+    }
+  }
+});
