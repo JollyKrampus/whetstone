@@ -44,7 +44,7 @@ const home = module.nav.find((n) => n.path === '');
 
   {
     others.length > 0 && (
-      <nav aria-label={section ? `More ${module.short} sections` : `${module.short} sections`}>
+      <nav aria-label={section ? `More ${module.short} sections` : `All ${module.short} sections`}>
         {section && <h2 class="gph__more">More in {module.short}</h2>}
         <ul class="gph__sections">
           {section && home && (

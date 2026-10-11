@@ -78,7 +78,7 @@ The site reads game data from, per game: `$WHETSTONE_DATA_DIR/current/<game>`, t
 
 Optional credentials for `npm run data` go in a local `.env` file (git-ignored), for example `YT_API_KEY=...` and `LIQUIPEDIA_UA_CONTACT=you@example.com` (added to the User-Agent). Each game's pipeline only sees the variables its registry entry lists (`pipeline.env` in `src/games/registry.ts`). Every source degrades gracefully when its credential is missing.
 
-To record new fixtures for offline runs and tests: `WHETSTONE_RECORD=1 npm run data -- --game <game>`. Recorded responses land in `src/games/<game>/fixtures/raw/`; trim large ones before committing. Record mode never writes class-C responses (video metadata) and applies each source's scrubber (player names become placeholders); check new fixtures for personal data before committing anyway.
+To record new fixtures for offline runs and tests: `WHETSTONE_RECORD=1 npm run data -- --game <game>`. Recorded responses land in `src/games/<game>/fixtures/raw/`; trim large ones before committing. Record mode never writes class-C responses (video metadata) or requests a source marks `noRecord`, and runs a source's `scrub` hook (for example to turn player names into placeholders) before saving. `npm test` fails if a committed fixture holds video metadata or a real player name in tournament standings or replay logs; check new fixtures for personal data before committing anyway.
 
 ## Testing
 
