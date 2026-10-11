@@ -295,11 +295,11 @@
   background: var(--accent);
 }
 
+/* Labels wrap instead of truncating: the note after the name (teams, win rate, Speed) is data and
+ * must stay readable on a phone, where there is no hover to reveal it. */
 .pk-bar__label {
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .pk-bar__label small {

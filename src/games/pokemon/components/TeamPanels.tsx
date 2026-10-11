@@ -75,8 +75,22 @@ export function TypeMatrix({ chart, members }: { chart: TypeChart; members: read
                 </th>
                 {r.cells.map((c) => (
                   <td key={c.id} data-m={c.multiplier === 1 ? undefined : String(c.multiplier)} title={c.byAbility ? 'Changed by ability' : undefined}>
-                    {c.multiplier === 1 ? <span class="pk-subtle" aria-label="neutral">·</span> : multiplierLabel(c.multiplier)}
-                    {c.byAbility ? <span aria-label=" (ability)">*</span> : null}
+                    {c.multiplier === 1 ? (
+                      <>
+                        <span class="pk-subtle" aria-hidden="true">
+                          ·
+                        </span>
+                        <span class="visually-hidden">neutral</span>
+                      </>
+                    ) : (
+                      multiplierLabel(c.multiplier)
+                    )}
+                    {c.byAbility ? (
+                      <>
+                        <span aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (changed by ability)</span>
+                      </>
+                    ) : null}
                   </td>
                 ))}
                 <td class="pk-num">{r.weak || ''}</td>

@@ -4,9 +4,9 @@
  * The server renders the countdown at build time; a small script keeps it current in the browser.
  */
 import Badge from '../../../components/Badge.tsx';
-import { formatDateTimeUTC, formatDayUTC } from '../../../core/format.ts';
+import { formatDayUTC } from '../../../core/format.ts';
 import type { Regulation } from '../schema.ts';
-import { countdown, elapsedShare } from './lib/time.ts';
+import { countdown, dayTimeUTC, elapsedShare } from './lib/time.ts';
 
 interface Props {
   regulation: Regulation;
@@ -28,7 +28,7 @@ const estimated = regulation.estimatedEnd === true;
     <p class="kicker">Current ruleset · VGC Doubles</p>
     <h2 class="pk-reg__title" id="pk-reg-title">{regulation.label}</h2>
     <p class="pk-reg__window">
-      <time datetime={regulation.start}>{formatDayUTC(regulation.start)}</time> to <time datetime={regulation.end}>{formatDateTimeUTC(regulation.end)}</time>
+      <time datetime={regulation.start}>{dayTimeUTC(regulation.start)}</time> to <time datetime={regulation.end}>{dayTimeUTC(regulation.end)}</time>
       {estimated && ' (end date estimated)'}
     </p>
     {
@@ -53,7 +53,7 @@ const estimated = regulation.estimatedEnd === true;
     <span class="visually-hidden" data-countdown-long>{left.ended ? `${regulation.label} has ended.` : `${regulation.label} ends in ${left.long}.`}</span>
     <span class="pk-subtle">
       {left.ended ? 'Ended' : 'Closes'}
-      <time datetime={regulation.end}>{formatDateTimeUTC(regulation.end)}</time>
+      <time datetime={regulation.end}>{dayTimeUTC(regulation.end)}</time>
     </span>
     {next && <span class="pk-subtle">Next: {next.label} from {formatDayUTC(next.start)}</span>}
   </div>
