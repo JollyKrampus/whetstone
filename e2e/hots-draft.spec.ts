@@ -1,7 +1,8 @@
 /**
  * HotS draft helper and ARAM helper flows (SPEC §7) against the committed fixtures:
- * a full 16-step Storm League draft by clicking, Cho'gall step rules, share-link restore,
- * free mode, keyboard use, the ARAM ranking, a phone viewport and statistics mode.
+ * a full 16-step Storm League draft by clicking with its review card, Cho'gall step rules,
+ * share-link restore, the map banner, free mode with the other side's suggestions, keyboard use, the
+ * ARAM ranking, a phone viewport and statistics mode.
  *
  * Statistics mode needs the class-B `stats` block in the draft shard. The statistics build
  * (WHETSTONE_FIXTURE_PRIVATE=1 npm run build, see e2e/hots-pages.spec.ts) gets it from
@@ -44,8 +45,9 @@ async function choose(page: Page, id: string | null) {
 }
 
 test.describe('Storm League draft', () => {
-  test('a full 16-step draft by clicking, with suggestions changing after every step', async ({ page }) => {
+  test('a full 16-step draft by clicking, with suggestions changing after every step and a review at the end', async ({ page, context }) => {
     const errors = watch(page);
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto(DRAFT);
     await ready(page);
     await expect(stepTitle(page)).toHaveText('Your ban');
@@ -78,6 +80,27 @@ test.describe('Storm League draft', () => {
     await expect(tile(page, 'Crus')).toHaveAttribute('aria-disabled', 'true');
     await expect(tile(page, 'Crus')).toContainText('Draft done');
     expect(new URL(page.url()).hash).toMatch(/^#v=1&s=[0-9a-z-]{30}$/);
+
+    // The finished draft gets a review: counters each way, best pairs, composition verdicts.
+    const review = page.locator('.rv');
+    await expect(review.getByRole('heading', { name: 'Draft review' })).toBeVisible();
+    const sides = review.locator('.rv-side');
+    await expect(sides).toHaveCount(2);
+    await expect(sides.first()).toContainText('Best counters into the enemy');
+    await expect(sides.nth(1)).toContainText('Best counters into your team');
+    await expect(sides.nth(1).locator('.rv-pair').first()).toBeVisible();
+    // The enemy drafted no Healer, and the review says so in words.
+    await expect(sides.nth(1).locator('.rv-verdict')).toContainText('No Healer.');
+    await expect(review.locator('.rv-basis').first()).toHaveText(STATS ? /Stat|Theory/ : 'Theory');
+    // A plain-text summary with the share link, for chat.
+    await review.getByRole('button', { name: 'Copy summary' }).click();
+    await expect(review.getByRole('button', { name: 'Summary copied' })).toBeVisible();
+    // The system clipboard may turn line breaks into CRLF (Windows).
+    const copied = (await page.evaluate(() => navigator.clipboard.readText())).replace(/\r\n/g, '\n');
+    expect(copied.split('\n')[0]).toBe('Draft review');
+    expect(copied).toContain("You: Muradin, Malfurion, Li-Ming, Varian, Xal'atath (bans: Abathur, Zeratul)");
+    expect(copied).toContain('Key matchups:');
+    expect(copied.trim().split('\n').at(-1)).toBe(page.url());
     expect(errors).toEqual([]);
   });
 
@@ -110,7 +133,14 @@ test.describe('Storm League draft', () => {
     const errors = watch(page);
     await page.goto(DRAFT);
     await ready(page);
+    await expect(page.locator('.dt-mapbanner')).toHaveCount(0);
     await page.locator('#dt-map').selectOption('cursed-hollow');
+    // The chosen map shows as a banner with its art and pool status.
+    const banner = page.locator('.dt-mapbanner');
+    await expect(banner).toContainText('Cursed Hollow');
+    await expect(banner).toContainText('Storm League pool');
+    await expect(banner.locator('img')).toHaveAttribute('src', /\/whetstone\/data\/hots\/img\/maps\/.+\.webp$/);
+    await expect.poll(() => banner.locator('img').evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
     await expect(page.locator('.sg-modes__chip', { hasText: 'Map' })).not.toHaveAttribute('aria-disabled', 'true');
     if (STATS) {
       await expect(page.locator('.sg-modes__chip', { hasText: 'Win rate' })).not.toHaveAttribute('aria-disabled', 'true');
@@ -203,6 +233,31 @@ test.describe('Storm League draft', () => {
   });
 });
 
+test.describe('ban suggestions', () => {
+  test('opening bans are ranked by threat, with the pro ban rates credited where they are used', async ({ page }) => {
+    const errors = watch(page);
+    await page.goto(DRAFT);
+    await ready(page);
+    await expect(stepTitle(page)).toHaveText('Your ban');
+    const items = page.locator('.dt-now .sg-item');
+    await expect(items.first()).toBeVisible();
+    // Scores never rise down the list.
+    const scores = await items.locator('svg.score-ring').evaluateAll((els) => els.map((el) => Number(el.textContent)));
+    for (let i = 1; i < scores.length; i++) expect(scores[i]).toBeLessThanOrEqual(scores[i - 1]!);
+    if (!STATS) {
+      // Without match statistics, pro ban rates (Liquipedia, CC BY-SA) add a prior, credited on the same screen.
+      const credit = page.locator('.dt-now .sg-credit[data-source="liquipedia"]');
+      await expect(credit).toBeVisible();
+      await expect(credit.getByRole('link', { name: 'Liquipedia' })).toHaveAttribute('href', /liquipedia\.net/);
+      await expect(credit.getByRole('link', { name: 'licence' })).toHaveAttribute('href', /creativecommons\.org\/licenses\/by-sa\/3\.0/);
+      await expect(page.locator('.dt-now .sg-reason--pro').first()).toContainText('pro maps');
+    }
+    // The UI names no statistics provider of its own: without statistics none is credited at all.
+    if (!STATS) await expect(page.locator('.dt-now .sg-credit:not([data-source="liquipedia"])')).toHaveCount(0);
+    expect(errors).toEqual([]);
+  });
+});
+
 test.describe('free mode', () => {
   test('adds heroes to either team in any order, removes them, and shares', async ({ page }) => {
     const errors = watch(page);
@@ -233,6 +288,56 @@ test.describe('free mode', () => {
     await expect(page.locator('.tp--a .tp__picks')).toContainText('Malfurion');
     await expect(page.locator('.tp--b .tp__picks')).toContainText('Muradin');
     await expect(page.locator('.tp--b .tp__bans')).toContainText('Zeratul');
+    expect(errors).toEqual([]);
+  });
+
+  test('also lists suggestions for the other team on request, and shows talent conditions as "Only when"', async ({ page }) => {
+    const errors = watch(page);
+    await page.goto(DRAFT);
+    await ready(page);
+    await page.getByRole('button', { name: 'Free', exact: true }).click();
+    // Li-Ming on the enemy team: Malfurion can silence her Disintegrate channel, but only with talents.
+    await page.locator('.dt-targets').getByRole('button', { name: 'Enemy picks' }).click();
+    await choose(page, 'Wiza');
+    await page.locator('.dt-targets').getByRole('button', { name: 'Your picks' }).click();
+    await expect(page.locator('.dt-mirror')).toHaveCount(0);
+    await page.getByLabel('Also show suggestions for the other team').check();
+    const mirror = page.locator('.dt-mirror');
+    await expect(mirror.getByRole('heading', { name: 'Likely enemy picks' })).toBeVisible();
+    await expect(mirror.locator('.sg-item')).toHaveCount(3);
+    // The choice is remembered.
+    await page.reload();
+    await ready(page);
+    await expect(page.getByLabel('Also show suggestions for the other team')).toBeChecked();
+
+    await page.getByRole('button', { name: 'Show all' }).first().click();
+    const malf = page.locator('.dt-pair > .sg .sg-item[data-hero="Malf"]');
+    await malf.locator('.sg-item__why').click();
+    await expect(malf.locator('.sg-break__cond').first()).toContainText('Only when');
+    await expect(malf.locator('.sg-break')).toContainText('Malfurion takes Twilight Dream.');
+
+    // The other team's list is actionable too: its hero joins that team, and you keep your target.
+    const other = page.locator('.dt-mirror .sg-item').first();
+    const otherId = await other.getAttribute('data-hero');
+    expect(otherId).toBeTruthy();
+    await other.getByRole('button', { name: /^Add .+ to enemy picks$/ }).click();
+    await expect(tile(page, otherId!)).toContainText('Enemy team');
+    await expect(stepTitle(page)).toHaveText('Your picks');
+    expect(errors).toEqual([]);
+  });
+
+  test('reviews the draft once both teams are full', async ({ page }) => {
+    const errors = watch(page);
+    await page.goto(DRAFT);
+    await ready(page);
+    await page.getByRole('button', { name: 'Free', exact: true }).click();
+    for (const id of ['Mura', 'Malf', 'Wiza', 'Vari', 'HXAL']) await choose(page, id);
+    await expect(page.locator('.rv')).toHaveCount(0);
+    await page.locator('.dt-targets').getByRole('button', { name: 'Enemy picks' }).click();
+    for (const id of ['chogall', 'Demo', 'Tra0', 'Anub']) await choose(page, id);
+    const review = page.locator('.rv');
+    await expect(review.getByRole('heading', { name: 'Draft review' })).toBeVisible();
+    await expect(review.locator('.rv-side').nth(1).locator('.rv-verdict')).toContainText('No Healer.');
     expect(errors).toEqual([]);
   });
 });
@@ -330,22 +435,28 @@ async function withStats(page: Page) {
 }
 
 test.describe('statistics mode', () => {
-  test('uses Heroes Profile numbers with an inline credit when the overlay is present', async ({ page }) => {
+  test('uses match statistics when the overlay is present, credited to the source the overlay names', async ({ page }) => {
     const errors = watch(page);
     await withStats(page);
+    const overlay = JSON.parse(readFileSync('fixtures/hots/_private/public/draft.json', 'utf8')) as { stats: { source: string; label: string } };
     await page.goto(`${DRAFT}#v=1&m=cursed-hollow&s=--------`);
     await ready(page);
     await expect(page.locator('.sg-basis')).toContainText('Stats');
-    const credit = page.locator('.sg-credit[data-source="heroesprofile"]');
-    await expect(credit).toContainText('Data provided by');
-    await expect(credit.getByRole('link', { name: 'Heroes Profile' })).toHaveAttribute('href', 'https://www.heroesprofile.com');
+    await expect(page.locator('.sg-basis')).toContainText('Match statistics');
+    await expect(page.locator('.sg-basis')).toContainText(overlay.stats.label);
+    // Whatever source the block names is credited inline (when the site lists it); never a hard-coded provider.
+    const credits = page.locator('.dt-now .sg-credit');
+    for (const c of await credits.all()) {
+      await expect(c).toHaveAttribute('data-source', /.+/);
+      await expect(c.getByRole('link').first()).toHaveAttribute('href', /^https:\/\//);
+    }
+    if ((await credits.count()) > 0) await expect(page.locator(`.dt-now .sg-credit[data-source="${overlay.stats.source}"]`)).toBeVisible();
     const winrate = page.locator('.sg-modes__chip', { hasText: 'Win rate' });
     await expect(winrate).not.toHaveAttribute('aria-disabled', 'true');
     await winrate.click();
     await expect(winrate).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('.dt-now .sg-item').first().locator('.sg-reason--stat')).toContainText('win rate this patch');
     await expect(page.locator('.dt-now .sg-item').first().locator('.sg-reason__meta').first()).toContainText('n =');
-    await expect(page.locator('.dt-now .sg-item').first().locator('.sg-reason__meta').first()).toContainText('Heroes Profile');
     expect(errors).toEqual([]);
   });
 
