@@ -5,7 +5,6 @@
  * sources with their licences and the non-affiliation notice.
  */
 import '../../games/pokemon/components/pokemon.css';
-import { formatDateTimeUTC, formatDayUTC } from '../../core/format.ts';
 import { GATES } from '../../core/stats.ts';
 import { POKEMON_TIERS } from '../../core/tiers.ts';
 import { gameById, navHref, withBase } from '../../games/registry.ts';
@@ -13,6 +12,7 @@ import { getCurrentRegulation, getMeta } from '../../games/pokemon/load.ts';
 import { buildNow } from '../../games/pokemon/components/server.ts';
 import { PREVIEW_PRESETS, PREVIEW_PRESET_IDS, PREVIEW_SIGNAL_LABEL } from '../../games/pokemon/components/lib/preview.ts';
 import { EV_TOTAL_EVIDENCE, SP_MAX_STAT, SP_MAX_TOTAL, evToSp } from '../../games/pokemon/components/lib/stats.ts';
+import { dayTimeUTC, windowText } from '../../games/pokemon/components/lib/time.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
 
 const module = gameById('pokemon');
@@ -68,9 +68,8 @@ const toc = [
     <div class="prose">
       <h2 id="rules">Champions rules the tools model</h2>
       <p>
-        The Pokémon section covers ranked VGC Doubles under the current regulation, {regulation.label} ({formatDayUTC(regulation.start)} to {
-          formatDateTimeUTC(regulation.end)
-        }). Teams register up to six Pokémon and bring four. The rules that matter for the tools:
+        The Pokémon section covers ranked VGC Doubles under the current regulation, {regulation.label} ({windowText(regulation.start, regulation.end)}).
+        Teams register up to six Pokémon and bring four. The rules that matter for the tools:
       </p>
       <ul>
         <li>Every Pokémon battles at level 50 with all IVs fixed at 31.</li>
@@ -122,7 +121,7 @@ const toc = [
                 </a>
                 {s.license && <span class="pk-subtle"> ({s.license})</span>}: {s.attribution}
                 {s.tosNote && <span class="pk-subtle"> {s.tosNote}</span>}
-                {st?.fetchedAt && <span class="pk-subtle"> Last fetched {formatDateTimeUTC(st.fetchedAt)}.</span>}
+                {st?.fetchedAt && <span class="pk-subtle"> Last fetched {dayTimeUTC(st.fetchedAt)}.</span>}
               </li>
             );
           })
@@ -167,8 +166,14 @@ const toc = [
       <h2 id="speed">Speed tiers</h2>
       <p>
         Speed tiers list each top Pokémon's most common spread plus its fastest (+Speed nature, {SP_MAX_STAT} points), uninvested and slowest (−Speed
-        nature, 0 points) values. Stat stages apply first, then Choice Scarf (×1.5), Tailwind (×2) and paralysis (×0.5), each rounded down. Under Trick
-        Room the slowest Pokémon moves first. Equal speeds move in random order.
+        nature, 0 points) values. Stat stages apply first. Tailwind (×2), Choice Scarf (×1.5) and Iron Ball (×0.5) are then combined into one
+        multiplier and rounded once, as the simulator does (a Scarf user under Tailwind gets exactly ×3), and paralysis halves the result last. Under
+        Trick Room the slowest Pokémon moves first. Equal speeds move in random order.
+      </p>
+      <p>
+        Comparisons with "the most used Pokémon" (a Pokémon page's speed line, the builder's speed panel and threat list, team preview) take the
+        top 50 by ladder usage, not the 50 fastest, each at its most common spread and item: Choice Scarf counts when it is that Pokémon's most used
+        item, and the Speed is then shown with "(Scarf)".
       </p>
 
       <h2 id="builder">Team builder checks</h2>
@@ -194,11 +199,15 @@ const toc = [
         roughly a 4-point win-rate edge), each signal keeps the reason behind it, and the chosen weights decide how much each kind of evidence counts.
       </p>
       <ul>
-        <li><strong>{PREVIEW_SIGNAL_LABEL.counters}</strong>: replay head-to-head effects between your Pokémon and theirs, weighted by how likely each of theirs is to be brought; pairs under {GATES.hideBelow} games are ignored and thin pairs count half.</li>
+        <li><strong>{PREVIEW_SIGNAL_LABEL.counters}</strong>: replay head-to-head effects between your Pokémon and theirs, weighted by how likely each of theirs is to be brought; pairs under {GATES.hideBelow} games are ignored and thin pairs count half. A reason only
+          says a Pokémon wins more or less often when the pair passes the same gates as the Pokémon pages (n ≥ {GATES.listMinN} and |Δ| ≥ {GATES.listMinDeltaPp} pp);
+          weaker pairs keep their small weight and are described as "no clear edge yet".</li>
         <li><strong>{PREVIEW_SIGNAL_LABEL.theory}</strong>: whether your moves hit theirs super-effectively and whether their typings threaten yours.</li>
-        <li><strong>{PREVIEW_SIGNAL_LABEL.role}</strong>: how much of their likely team you outspeed, plus Tailwind or Trick Room when the speed race favours them, and Intimidate against several physical attackers.</li>
+        <li><strong>{PREVIEW_SIGNAL_LABEL.role}</strong>: how much of their likely team you outspeed, at Speed in battle (Choice Scarf included), plus Tailwind or Trick Room when the speed race favours them, and Intimidate against several
+          physical attackers. A Pokémon holding its Mega Stone still brings its registered ability in, so its Intimidate counts; damage and types use the
+          Mega's ability.</li>
         <li><strong>{PREVIEW_SIGNAL_LABEL.map}</strong>: one- and two-hit KOs from the damage calc, in both directions.</li>
-        <li><strong>{PREVIEW_SIGNAL_LABEL.synergy}</strong>: replay results of your Pokémon brought together.</li>
+        <li><strong>{PREVIEW_SIGNAL_LABEL.synergy}</strong>: replay results of your Pokémon brought together, worded by the same gates.</li>
       </ul>
       <div class="pk-scroll">
         <table class="pk-table">
@@ -232,7 +241,7 @@ const toc = [
       <p>
         <strong>Bring four and lead two.</strong> Every four-Pokémon combination is scored as the sum of its members' scores plus partner results, minus
         a penalty when three of the four share a weakness to one of their types. The lead pair is the best-scoring pair of those four with a bonus for
-        Fake Out, turn-one speed control, redirection and moves that hit both foes. The display score is 50 + 50 × tanh(total), from 0 to 100.
+        Fake Out, turn-one speed control, redirection, moves that hit both foes, and Intimidate on the way in when they bring two or more physical attackers. The display score is 50 + 50 × tanh(total), from 0 to 100.
       </p>
       <p>
         It can't see their actual sets, items or Stat Points, your play style or the in-game ladder. Use it as a second opinion and check the reasons it

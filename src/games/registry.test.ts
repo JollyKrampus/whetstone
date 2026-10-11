@@ -19,7 +19,7 @@ describe('registry', () => {
     expect(games.map((g) => [g.id, g.status])).toEqual([
       ['hots', 'live'],
       ['mtga', 'beta'],
-      ['pokemon', 'beta'],
+      ['pokemon', 'live'],
     ]);
   });
 
