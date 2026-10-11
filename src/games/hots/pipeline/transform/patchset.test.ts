@@ -108,6 +108,40 @@ describe('enrichWithDiff', () => {
     // Idempotent: enriching an enriched record changes nothing.
     expect(enrichWithDiff(out, DIFF, new Set())).toEqual(out);
   });
+
+  it('does not repeat numbers a numeric change about the same target already shows', () => {
+    const diff: Diff = {
+      id: '2.57.0.98304..2.57.0.98348',
+      from: '2.57.0.98304',
+      to: '2.57.0.98348',
+      heroes: {
+        HXAL: [
+          { kind: 'ability', target: 'Void Volley', field: 'damage', old: 90, new: 72 },
+          { kind: 'ability', target: 'Void Volley', field: 'cooldown', old: 12, new: 10 },
+        ],
+      },
+    };
+    const p: Patch = {
+      id: '2026-10-05-hotfix',
+      version: '2.57',
+      ...rec({
+        heroes: {
+          HXAL: {
+            verdict: 'nerf',
+            changes: [
+              { section: 'Abilities', target: 'Void Volley', kind: 'numeric', stat: 'Base damage per missile', old: 90, new: 72, text: 'Base damage per missile 90 → 72', dir: 'nerf' },
+              { section: 'Abilities', target: 'Void Volley', kind: 'changed', text: "Effect changed (see Blizzard's notes)", dir: 'change' },
+            ],
+          },
+        },
+      }),
+    };
+    const out = enrichWithDiff(p, diff, new Set());
+    expect(out.heroes.HXAL?.changes[1]?.text).toBe("Effect changed; game data: cooldown 12 → 10 (see Blizzard's notes)");
+    // Nothing new to add: the line stays our plain template.
+    const onlyShown = enrichWithDiff(p, { ...diff, heroes: { HXAL: diff.heroes.HXAL?.slice(0, 1) ?? [] } }, new Set());
+    expect(onlyShown.heroes.HXAL?.changes[1]?.text).toBe("Effect changed (see Blizzard's notes)");
+  });
 });
 
 describe('assemblePatches', () => {

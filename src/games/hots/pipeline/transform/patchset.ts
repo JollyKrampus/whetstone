@@ -154,7 +154,12 @@ export function enrichWithDiff(rec: Patch, diff: Diff, newHeroes: ReadonlySet<st
     if (existing) {
       for (const c of existing.changes) {
         if (!c.target || c.kind === 'numeric' || c.text.includes(GAME_DATA_MARK)) continue;
-        const nums = entries.filter((e) => e.target.toLowerCase() === c.target?.toLowerCase() && e.field !== 'text' && e.old !== undefined && e.new !== undefined).slice(0, 2);
+        const target = c.target.toLowerCase();
+        // Numbers a numeric change about the same target already shows are not repeated.
+        const shown = new Set(existing.changes.filter((n) => n.kind === 'numeric' && n.target?.toLowerCase() === target && n.old !== undefined).map((n) => `${n.old}|${n.new}`));
+        const nums = entries
+          .filter((e) => e.target.toLowerCase() === target && e.field !== 'text' && e.old !== undefined && e.new !== undefined && !shown.has(`${numberOf(e.old)}|${numberOf(e.new)}`))
+          .slice(0, 2);
         if (nums.length === 0) continue;
         const extra = nums.map((e) => `${e.field ?? 'value'} ${fmt(e.old)} → ${fmt(e.new)}`).join('; ');
         const text = changeText(c, extra);
