@@ -175,34 +175,92 @@ export function spToEv(sp: number): number {
 }
 
 /**
+ * A set total above this many points is read as EVs even when no single stat is above 32. A
+ * mistyped Stat Point spread (67–130, e.g. 4/32/32 from converting 4/252/252 by eye) stays Stat
+ * Points and is reported as over the budget; real EV spreads total about 500.
+ */
+export const EV_TOTAL_EVIDENCE = 130;
+
+/**
  * Does an `EVs:` line hold real EVs rather than Stat Points? Showdown's Champions formats write
- * Stat Points into the EVs line, so values are read as SP unless one stat is above 32 or the
- * total is above 66, which only EVs can be.
+ * Stat Points into the EVs line, so values are read as SP unless the evidence is strong: one
+ * stat above 32, or a total above 130 (EV_TOTAL_EVIDENCE), neither of which a Stat Point spread
+ * can come close to. Decided per set, so one odd set never converts the rest of a paste.
  */
 export function looksLikeEvs(values: readonly number[]): boolean {
-  return values.some((v) => v > SP_MAX_STAT) || spTotal(values) > SP_MAX_TOTAL;
+  return values.some((v) => v > SP_MAX_STAT) || spTotal(values) > EV_TOTAL_EVIDENCE;
 }
 
-/** Speed after field effects (Choice Scarf ×1.5, Tailwind ×2, paralysis ×0.5), simulator rounding. */
+/**
+ * Speed modifiers. Stages apply to the stat first; Tailwind, Choice Scarf and Iron Ball are
+ * chained 4096-based modifiers rounded once (as the simulator and @smogon/calc's getFinalSpeed
+ * do); paralysis halves the result last.
+ */
 export interface SpeedMods {
   scarf?: boolean;
+  /** Iron Ball halves Speed (×0.5 chained, like Scarf's ×1.5). */
+  ironBall?: boolean;
   tailwind?: boolean;
   paralysis?: boolean;
   /** Stat stages −6..+6 (Icy Wind, Electroweb: −1). */
   stage?: number;
 }
 
-export function stageMultiplier(stage: number): number {
+/** [numerator, denominator] of a stat stage: +1 = 3/2, −1 = 2/3, … */
+export function stageFraction(stage: number): [number, number] {
   const s = clampInt(stage, -6, 6);
-  return s >= 0 ? (2 + s) / 2 : 2 / (2 - s);
+  return s >= 0 ? [2 + s, 2] : [2, 2 - s];
+}
+
+export function stageMultiplier(stage: number): number {
+  const [num, den] = stageFraction(stage);
+  return num / den;
+}
+
+/** Game Freak's rounding: halves round down, anything above .5 rounds up. */
+export function pokeRound(x: number): number {
+  return x % 1 > 0.5 ? Math.ceil(x) : Math.floor(x);
+}
+
+/** Chain one 4096-based modifier onto another (the simulator's chainModify). */
+export function chainModifier(m: number, mod: number): number {
+  return mod === 4096 ? m : (m * mod + 2048) >> 12;
 }
 
 export function modifiedSpeed(speed: number, mods: SpeedMods = {}): number {
-  let s = Math.floor(speed * stageMultiplier(mods.stage ?? 0));
-  // Scarf and Tailwind are chained modifiers; ×1.5 only ever leaves .0 or .5, which the
-  // simulator's round-half-down treats like floor.
-  if (mods.scarf) s = Math.floor((s * 3) / 2);
-  if (mods.tailwind) s = s * 2;
-  if (mods.paralysis) s = Math.floor(s / 2);
-  return s;
+  const [num, den] = stageFraction(mods.stage ?? 0);
+  let s = Math.floor((Math.max(0, Math.trunc(speed)) * num) / den);
+  let m = 4096;
+  if (mods.tailwind) m = chainModifier(m, 8192);
+  if (mods.scarf) m = chainModifier(m, 6144);
+  else if (mods.ironBall) m = chainModifier(m, 2048);
+  m = Math.min(131_172, Math.max(410, m));
+  s = pokeRound((s * m) / 4096);
+  if (mods.paralysis) s = Math.floor((s * 50) / 100);
+  return Math.max(0, s);
+}
+
+/** Held items that change Speed, with the short label shown next to a Speed number. */
+export const SPEED_ITEMS: Readonly<Record<string, string>> = {
+  choicescarf: 'Scarf',
+  ironball: 'Iron Ball',
+};
+
+/** "Scarf" when the item changes Speed, else undefined. */
+export function speedItemLabel(item: string | undefined): string | undefined {
+  return item ? SPEED_ITEMS[item] : undefined;
+}
+
+/**
+ * Speed in battle with the held item (Choice Scarf ×1.5, Iron Ball ×0.5) and any other
+ * modifiers, chained and rounded like the simulator.
+ */
+export function effectiveSpeed(stat: number, item: string | undefined, mods: Omit<SpeedMods, 'scarf' | 'ironBall'> = {}): number {
+  return modifiedSpeed(stat, { ...mods, scarf: item === 'choicescarf', ironBall: item === 'ironball' });
+}
+
+/** "195 (Scarf)" or "130". */
+export function speedText(speed: number, item?: string): string {
+  const label = speedItemLabel(item);
+  return label ? `${speed} (${label})` : String(speed);
 }

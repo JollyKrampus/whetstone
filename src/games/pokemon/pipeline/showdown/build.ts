@@ -7,7 +7,8 @@
  * rule (mod inheritance, the PP rules in scripts.ts init(), format bans) exactly as the
  * simulator does. So:
  *
- *  1. resolve master's commit SHA (GitHub API; git smart-HTTP ref list as a fallback);
+ *  1. take the commit pinned in curated/pokemon/showdown.json (pin.ts), changed only by a
+ *     reviewed pull request; master is never followed automatically;
  *  2. download the source zip of exactly that commit from codeload.github.com (~7 MB) through
  *     the pipeline's Http (UA, retries, dev cache);
  *  3. extract sim/, lib/, data/ (minus random-battles) and config/formats.ts, and transpile
@@ -15,8 +16,12 @@
  *     `node build` needs esbuild and a full `npm ci` of its server dependencies);
  *  4. stub `ts-chacha20`, the only third-party module the Dex/validator path requires (it seeds
  *     the battle PRNG, which the exporter never uses);
- *  5. run export.ts in a child process with an empty environment (no secrets reach code from
- *     the downloaded tree) and validate its JSON.
+ *  5. run export.ts in a child process and validate its JSON.
+ *
+ * Isolation: the child gets no inherited environment variables, but it runs as the same user
+ * as its parent, so that is defence in depth, not a sandbox. Steps 2–5 therefore run in CI only
+ * in their own workflow job, which has no secrets and no write token (export-job.ts) and hands
+ * the data job a JSON file. The data job never builds or runs Showdown code on CI (source.ts).
  *
  * The tree is cached under .cache/showdown/<sha>/ (git-ignored) so local re-runs skip 2–3.
  * The pipeline skips all of this when meta.extra.dexKey is unchanged.
@@ -49,6 +54,10 @@ export function parseRefAdvertisement(text: string, ref: string): string | null 
   return null;
 }
 
+/**
+ * Showdown master's current commit, for the pin CLI (`pin.ts --check`) that prepares a reviewed
+ * bump. The pipeline itself never builds from it.
+ */
 export async function latestSha(http: Http, log: (msg: string) => void = () => {}): Promise<string> {
   try {
     const text = await http.text(`https://api.github.com/repos/${SHOWDOWN_REPO}/commits/${SHOWDOWN_BRANCH}`, {
@@ -160,7 +169,10 @@ export async function buildTree(o: BuildOptions): Promise<string> {
 
 const run = promisify(execFile);
 
-/** Run export.ts on a transpiled tree in a child process with no inherited environment. */
+/**
+ * Run export.ts on a transpiled tree in a child process with no inherited environment (defence
+ * in depth; the isolation that matters is running this in a job without secrets, see above).
+ */
 export async function exportDex(dist: string, request: ExportRequest, sha: string): Promise<RawDexExport> {
   const work = path.dirname(dist);
   const requestFile = path.join(work, 'request.json');

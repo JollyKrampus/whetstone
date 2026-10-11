@@ -2,9 +2,12 @@
  * Showdown paste import/export with Champions Stat Points.
  *
  * Showdown's Champions formats keep the familiar `EVs:` line but fill it with Stat Points
- * ("EVs: 2 HP / 32 Atk / 32 Spe"). Older pastes from Scarlet/Violet carry real EVs. The rule:
- * a paste is read as EVs when any stat in it is above 32 or any set totals more than 66, which
- * Stat Points never can; then every set converts with the HOME rule (see stats.ts evToSp).
+ * ("EVs: 2 HP / 32 Atk / 32 Spe"). Older pastes from Scarlet/Violet carry real EVs. The rule is
+ * decided for each set on its own: a set's line is read as EVs when one stat is above 32 or the
+ * set totals more than 130 (stats.ts looksLikeEvs), which no Stat Point spread comes close to,
+ * and is then converted with the HOME rule (see stats.ts evToSp). Anything else stays Stat
+ * Points, so one mistyped set (say 4/32/32 = 68) is reported as over the 66-point budget instead
+ * of turning the other sets of the paste into tiny EV conversions.
  * Export always writes Stat Points in the `EVs:` line, which is what Showdown's Champions
  * formats import.
  */
@@ -26,7 +29,7 @@ export interface PasteIssue {
 export interface PasteResult {
   team: Team;
   issues: PasteIssue[];
-  /** True when the `EVs:` lines held EVs and were converted to Stat Points. */
+  /** True when at least one set's `EVs:` line held EVs and was converted to Stat Points. */
   convertedFromEvs: boolean;
 }
 
@@ -157,16 +160,22 @@ export function parsePaste(text: string, dex: DexIndex): PasteResult {
     issues.push({ level: 'warning', message: `The paste has ${raws.length} Pokémon; only the first ${TEAM_SIZE} were imported.` });
   }
   const used = raws.slice(0, TEAM_SIZE);
-  const convertedFromEvs = used.some((r) => r.evs !== null && looksLikeEvs(r.evs));
+  // EVs or Stat Points, decided per set (see the header comment).
+  const asEvs = used.map((r) => r.evs !== null && looksLikeEvs(r.evs));
+  const convertedFromEvs = asEvs.some(Boolean);
+  const withLine = used.filter((r) => r.evs !== null).length;
+  const mixed = convertedFromEvs && asEvs.filter(Boolean).length < withLine;
   if (convertedFromEvs) {
     issues.push({
       level: 'info',
-      message: 'The EVs lines hold EVs, so they were converted to Stat Points (4 EVs buy the first point, then 8 per point, max 32).',
+      message: mixed
+        ? 'Some EVs lines hold EVs (a stat above 32 or more than 130 in a set) and were converted to Stat Points (4 EVs buy the first point, then 8 per point, max 32); the others were read as Stat Points.'
+        : 'The EVs lines hold EVs, so they were converted to Stat Points (4 EVs buy the first point, then 8 per point, max 32).',
     });
   }
 
   const team: Team = [];
-  used.forEach((raw) => {
+  used.forEach((raw, index) => {
     const slot = team.length;
     const at = (level: PasteIssueLevel, message: string) => issues.push({ level, slot, message });
     const id = toId(raw.species);
@@ -208,7 +217,9 @@ export function parsePaste(text: string, dex: DexIndex): PasteResult {
     else if (raw.nature) at('warning', `${species.name}: unknown nature "${raw.nature}", using Serious.`);
 
     if (raw.evs) {
-      const sp = (convertedFromEvs ? raw.evs.map(evToSp) : raw.evs) as SpTuple;
+      const fromEvs = asEvs[index] === true;
+      const sp = (fromEvs ? raw.evs.map(evToSp) : raw.evs) as SpTuple;
+      if (mixed) at('info', fromEvs ? `${species.name}: EVs converted to Stat Points.` : `${species.name}: EVs line read as Stat Points.`);
       const check = checkSp(sp);
       if (check.ok) set.sp = sp;
       else {

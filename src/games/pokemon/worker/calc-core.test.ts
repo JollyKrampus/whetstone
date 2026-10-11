@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { betterResult, knowsSpecies, runCalc, runMatrix } from './calc-core.ts';
+import { betterResult, knowsSpecies, percentOfHp, runCalc, runMatrix } from './calc-core.ts';
 import type { CalcMon, MoveResult } from './protocol.ts';
 
 const GARCHOMP: CalcMon = { species: 'garchomp', nature: 'Jolly', sp: [2, 32, 0, 0, 0, 32], ability: 'roughskin' };
@@ -11,10 +11,34 @@ describe('runCalc (Champions, @smogon/calc gen 0)', () => {
     expect(res.errors).toEqual([]);
     const eq = res.results[0]!;
     expect([eq.min, eq.max]).toEqual([138, 164]);
-    expect([eq.minPct, eq.maxPct]).toEqual([68.3, 81.2]);
+    // 164 / 202 = 81.19 %: floored like the calc's own description, not rounded up to 81.2.
+    expect([eq.minPct, eq.maxPct]).toEqual([68.3, 81.1]);
     expect(eq).toMatchObject({ koN: 2, koChance: 1, spread: true, moveName: 'Earthquake' });
     expect(eq.desc).toContain('guaranteed 2HKO');
+    expect(eq.desc).toContain('(68.3 - 81.1%)');
     expect(res.attackerStats).toMatchObject({ hp: 185, atk: 182, spe: 169 });
+  });
+
+  it('prints the same percentages as the description line for every result', () => {
+    const attackers: CalcMon[] = [GARCHOMP, { ...GARCHOMP, item: 'lifeorb' }, { species: 'gholdengo', nature: 'Modest', sp: [2, 0, 0, 32, 0, 32], ability: 'goodasgold' }];
+    const moves = ['earthquake', 'dragonclaw', 'rockslide', 'makeitrain', 'shadowball'];
+    let checked = 0;
+    for (const attacker of attackers) {
+      for (const defender of [INCINEROAR, { ...INCINEROAR, sp: [0, 0, 0, 0, 0, 0] as number[] }]) {
+        const res = runCalc({ attacker, defender, moves, field: { doubles: true } });
+        for (const r of res.results) {
+          if (r.max === 0) continue;
+          const m = /\(([\d.]+) - ([\d.]+)%\)/.exec(r.desc);
+          expect(m, r.desc).not.toBeNull();
+          expect([r.minPct, r.maxPct], r.desc).toEqual([Number(m![1]), Number(m![2])]);
+          checked++;
+        }
+      }
+    }
+    expect(checked).toBeGreaterThan(6);
+    expect(percentOfHp(164, 202)).toBe(81.1);
+    expect(percentOfHp(201, 202)).toBe(99.5);
+    expect(percentOfHp(1, 0)).toBe(0);
   });
 
   it('drops the spread modifier in Singles and applies field effects', () => {

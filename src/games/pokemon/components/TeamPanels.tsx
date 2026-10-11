@@ -12,12 +12,15 @@ import {
   type AttackMove,
   type MemberTyping,
 } from './lib/types.ts';
+import { speedText } from './lib/stats.ts';
 import { ladderPosition, speedLadder, type ThreatRow, type ThreatSummary } from './lib/teamview.ts';
 
 export interface PanelMember extends MemberTyping {
   /** Slot key. */
   id: string;
+  /** Speed stat of the battle forme (the held item is applied by the speed panel). */
   speed: number;
+  item?: string;
 }
 
 /** "Garchomp, Gholdengo and Incineroar". */
@@ -72,8 +75,22 @@ export function TypeMatrix({ chart, members }: { chart: TypeChart; members: read
                 </th>
                 {r.cells.map((c) => (
                   <td key={c.id} data-m={c.multiplier === 1 ? undefined : String(c.multiplier)} title={c.byAbility ? 'Changed by ability' : undefined}>
-                    {c.multiplier === 1 ? <span class="pk-subtle" aria-label="neutral">·</span> : multiplierLabel(c.multiplier)}
-                    {c.byAbility ? <span aria-label=" (ability)">*</span> : null}
+                    {c.multiplier === 1 ? (
+                      <>
+                        <span class="pk-subtle" aria-hidden="true">
+                          ·
+                        </span>
+                        <span class="visually-hidden">neutral</span>
+                      </>
+                    ) : (
+                      multiplierLabel(c.multiplier)
+                    )}
+                    {c.byAbility ? (
+                      <>
+                        <span aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (changed by ability)</span>
+                      </>
+                    ) : null}
                   </td>
                 ))}
                 <td class="pk-num">{r.weak || ''}</td>
@@ -128,7 +145,7 @@ export function SpeedPanel({ members, sets, usageLabel }: { members: readonly Pa
   const [trickRoom, setTrickRoom] = useState(false);
   if (sets.length === 0) return <p class="pk-subtle">Speed comparisons need ladder usage data, which is still warming up for this regulation.</p>;
   const ladder = speedLadder(
-    members.map((m) => ({ key: m.id, name: m.name, speed: m.speed })),
+    members.map((m) => ({ key: m.id, name: m.name, speed: m.speed, item: m.item })),
     sets,
     { tailwind, trickRoom },
   );
@@ -162,7 +179,7 @@ export function SpeedPanel({ members, sets, usageLabel }: { members: readonly Pa
               return (
                 <tr key={m.id}>
                   <th scope="row">{m.name}</th>
-                  <td class="pk-num">{row?.speed ?? m.speed}</td>
+                  <td class="pk-num">{row ? speedText(row.speed, row.item) : m.speed}</td>
                   <td class="pk-num">
                     {pos.before} <span class="pk-subtle">of {pos.total}</span>
                   </td>
@@ -178,7 +195,7 @@ export function SpeedPanel({ members, sets, usageLabel }: { members: readonly Pa
         <ol class="pk-ladder">
           {ladder.map((r) => (
             <li key={r.key} data-mine={r.mine ? 'true' : undefined}>
-              <span class="pk-num">{r.speed}</span>
+              <span class="pk-num">{speedText(r.speed, r.item)}</span>
               <span>
                 {r.name}
                 {r.mine ? <span class="badge badge--accent">Yours</span> : null}
@@ -187,7 +204,10 @@ export function SpeedPanel({ members, sets, usageLabel }: { members: readonly Pa
           ))}
         </ol>
       </details>
-      <p class="pk-subtle">Top Pokémon at their most common spread{usageLabel ? ` (${usageLabel})` : ''}; no Scarf, paralysis or stat changes. Equal speeds move in random order.</p>
+      <p class="pk-subtle">
+        Top Pokémon at their most common spread and item{usageLabel ? ` (${usageLabel})` : ''}: Choice Scarf counts (×1.5) for those that most often hold it,
+        and for yours when you give it one. No paralysis or stat changes. Equal speeds move in random order.
+      </p>
     </div>
   );
 }

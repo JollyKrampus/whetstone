@@ -175,7 +175,7 @@ const tools = [
                     <li class="pk-bar" style={`--w: ${(t.share * 100).toFixed(1)}%`}>
                       <span class="pk-bar__label">
                         {s ? <a href={monHref(s)}>{displayName(s)}</a> : t.id}
-                        <small> · {t.wr !== null ? `WR ${pct(t.wr, 1)}` : 'no games'} · {int(t.teams)} teams</small>
+                        <small> · {t.wr !== null ? `WR\u00a0${pct(t.wr, 1)}` : 'no games'} · {int(t.teams)} teams</small>
                       </span>
                       <span class="pk-bar__value">{pct(t.share, 1)}</span>
                     </li>
@@ -193,7 +193,7 @@ const tools = [
                     <li class="pk-bar" style={`--w: ${(a.share * 100).toFixed(1)}%`}>
                       <span class="pk-bar__label">
                         {a.label}
-                        <small> · {int(a.teams)} teams{a.wr !== null ? ` · WR ${pct(a.wr, 1)}` : ''}</small>
+                        <small> · {int(a.teams)} teams{a.wr !== null ? ` · WR\u00a0${pct(a.wr, 1)}` : ''}</small>
                       </span>
                       <span class="pk-bar__value">{pct(a.share, 1)}</span>
                     </li>

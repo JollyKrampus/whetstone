@@ -115,6 +115,54 @@ describe('recommend', () => {
     expect(withEdges.ranked[0]!.id).toBe('m1');
   });
 
+  it('describes edges below the listing gates neutrally (n ≥ 50 and |Δ| ≥ 1.5 pp)', () => {
+    // Real Reg M-C replay edges are this small: +0.1 pp on 19 games says nothing yet.
+    const h2h = { counters: [edge('incineroar', 'sneasler', 0.1, 19), edge('incineroar', 'kingambit', 0.2, 17), edge('garchomp', 'sneasler', 1.2, 400)], synergies: [] };
+    const r = recommend({ mine: MINE, theirs: THEIRS, chart, h2h }, 'replays');
+    const texts = r.ranked.flatMap((x) => [...x.reasons, ...(x.warning ? [x.warning] : [])]).map((x) => x.text);
+    expect(texts.some((t) => /win (more|less) often/.test(t))).toBe(false);
+    const inc = r.ranked.find((x) => x.id === 'm1')!;
+    expect(inc.reasons).toEqual([{ kind: 'stat', text: 'Replays show no clear edge yet against Sneasler and Kingambit (n = 17–19)', source: 'showdown-replays' }]);
+    // n ≥ 50 but |Δ| < 1.5 pp: still not a finding.
+    expect(r.ranked.find((x) => x.id === 'm3')!.reasons[0]?.text).toBe('Replays show no clear edge yet against Sneasler (n = 400)');
+    // The tiny signal still counts.
+    expect(inc.raw).toBeGreaterThan(0);
+  });
+
+  it('words partner results by the same gates', () => {
+    const h2h = { counters: [], synergies: [edge('incineroar', 'rillaboom', 3, 120), edge('garchomp', 'pelipper', -0.3, 25)] };
+    const r = recommend({ mine: MINE, theirs: THEIRS, chart, h2h }, 'replays');
+    const inc = r.ranked.find((x) => x.id === 'm1')!;
+    expect(inc.reasons[0]).toMatchObject({ text: 'Wins more often when brought with Rillaboom (replays)', delta: 3, n: 120 });
+    const all = r.ranked.flatMap((x) => [...x.reasons, ...(x.warning ? [x.warning] : [])]).map((x) => x.text);
+    expect(all.some((t) => /Pairs well/.test(t))).toBe(false);
+  });
+
+  it('states the Speed basis, Choice Scarf included', () => {
+    const scarfed = MINE.map((m) => (m.key === 'm4' ? { ...m, speed: 223, speedItem: 'choicescarf' } : m));
+    const r = recommend({ mine: scarfed, theirs: THEIRS, chart }, 'speed');
+    const gholdengo = r.ranked.find((x) => x.id === 'm4')!;
+    expect(gholdengo.reasons.map((x) => x.text)).toContainEqual(expect.stringMatching(/^Outspeeds Sneasler, .* and Archaludon \(Speed 223 with Scarf\)$/));
+  });
+
+  it("uses a Mega Stone holder's registered Intimidate for switch-in effects", () => {
+    const physicalFoes = THEIRS.map((m) => (m.key === 't3' ? { ...m, moves: [dex.move('flareblitz') as PreviewMove, dex.move('dragonclaw') as PreviewMove] } : m));
+    const mega = mon('m0', 'salamencemega', ['dracometeor', 'hurricane', 'tailwind', 'protect'], { speed: 189, ability: 'aerilate', base: 'salamence' });
+    const withEntry: PreviewMon = { ...mega, entryAbility: 'intimidate' };
+    const texts = (m: PreviewMon) =>
+      recommend({ mine: [m, ...MINE.slice(1, 4)], theirs: physicalFoes, chart }, 'speed')
+        .ranked.find((x) => x.id === 'm0')!
+        .signals.flatMap((s) => s.reasons.map((x) => x.text));
+    expect(texts(mega).some((t) => /Intimidate/.test(t))).toBe(false);
+    expect(texts(withEntry)).toContainEqual(expect.stringMatching(/^Intimidate weakens \d physical attackers$/));
+    // Four of yours, so every lead pair is one of the six; the Intimidate pairs carry the note.
+    const lead = recommend({ mine: [withEntry, ...MINE.slice(2, 5)], theirs: physicalFoes, chart }, 'types').lead!;
+    const note = /^Salamence-Mega's Intimidate lowers both foes' Attack as it comes in$/;
+    expect(lead.reasons.some((r) => note.test(r))).toBe(lead.leads.includes('m0'));
+    const noEntry = recommend({ mine: [mega, ...MINE.slice(2, 5)], theirs: physicalFoes, chart }, 'types').lead!;
+    expect(noEntry.reasons.some((r) => /Intimidate/.test(r))).toBe(false);
+  });
+
   it('ignores edges below the n = 15 gate', () => {
     const r = recommend({ mine: MINE, theirs: THEIRS, chart, h2h: { counters: [edge('incineroar', 'sneasler', 6, 10)], synergies: [] } }, 'replays');
     expect(r.ranked.find((x) => x.id === 'm1')!.raw).toBe(0);

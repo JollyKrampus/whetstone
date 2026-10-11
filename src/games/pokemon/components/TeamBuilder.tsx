@@ -3,10 +3,11 @@ import CopyButton from '../../../components/CopyButton.tsx';
 import ShareButton from '../../../components/ShareButton.tsx';
 import { onHashChange, readHash, writeHash } from '../../../core/urlstate.ts';
 import ComboInput, { OptionList, type ComboOption } from './ComboInput.tsx';
+import DexStatus from './DexStatus.tsx';
 import IssueList, { type IssueItem } from './IssueList.tsx';
 import SetEditor, { switchSpecies } from './SetEditor.tsx';
 import { Coverage, SpeedPanel, ThreatPanel, TypeMatrix, type PanelMember } from './TeamPanels.tsx';
-import { useAsync, useDebounced, useDex } from './hooks.ts';
+import { typedBeforeHydration, useAsync, useDebounced, useDex } from './hooks.ts';
 import type { DexIndex } from './lib/dex.ts';
 import { checkTeam, issuesForSlot } from './lib/legality.ts';
 import type { MetaSet } from './lib/metasets.ts';
@@ -15,7 +16,7 @@ import { CURRENT_KEY, deleteSaved, listSaved, pokemonStore, saveTeam, savedToTea
 import { decodeTeam, encodeTeam, teamHash } from './lib/share.ts';
 import { packTeam, unpackTeam, TEAM_SIZE, type PokemonSet, type Team } from './lib/team.ts';
 import { attackMoves } from './lib/types.ts';
-import { battleAbility, battleForme, metaToCalcMon, sampleTeam, setDisplayName, setStats, setToCalcMon, summarizeThreats } from './lib/teamview.ts';
+import { battleAbility, battleForme, metaToCalcMon, sampleTeam, setDisplayName, setSpeed, setStats, setToCalcMon, summarizeThreats } from './lib/teamview.ts';
 import { calcClient } from '../worker/client.ts';
 
 interface Props {
@@ -65,10 +66,11 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
   const [team, setTeam] = useState<Team>([]);
   const [ready, setReady] = useState(false);
   const [note, setNote] = useState('');
-  const [paste, setPaste] = useState('');
+  // Text pasted (or a name typed) before the island hydrated stays.
+  const [paste, setPaste] = useState(() => typedBeforeHydration('pk-paste'));
   const [pasteIssues, setPasteIssues] = useState<IssueItem[]>([]);
   const [saved, setSaved] = useState<SavedTeam[]>([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState(() => typedBeforeHydration('pk-team-name'));
   const [savedId, setSavedId] = useState<string | undefined>(undefined);
   const [payload, setPayload] = useState('');
   const written = useRef<string | null>(null);
@@ -133,6 +135,7 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
       const stats = setStats(dex, set);
       if (!forme || !stats) return [];
       const m: PanelMember = { id: `s${i}`, name: setDisplayName(dex, set), types: forme.types, speed: stats.spe };
+      if (set.item) m.item = set.item;
       const ability = battleAbility(dex, set);
       if (ability) m.ability = ability;
       return [m];
@@ -155,7 +158,7 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
     if (!dex || settled.length === 0 || metaSets.length === 0) return null;
     const mine = settled.flatMap((set, i) =>
       dex.speciesById(set.species)
-        ? [{ key: `s${i}`, mon: setToCalcMon(dex, set), moves: set.moves.filter((m) => (dex.move(m)?.category ?? 'Status') !== 'Status'), speed: setStats(dex, set)?.spe ?? 0 }]
+        ? [{ key: `s${i}`, mon: setToCalcMon(dex, set), moves: set.moves.filter((m) => (dex.move(m)?.category ?? 'Status') !== 'Status'), speed: setSpeed(dex, set) ?? 0 }]
         : [],
     );
     return { mine, theirs: metaSets.map((m) => ({ key: m.id, mon: metaToCalcMon(m), moves: m.attacks })) };
@@ -203,7 +206,7 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
 
   const legalText = !report
     ? dexState.status === 'error'
-      ? 'The Pokédex could not be loaded.'
+      ? 'The Champions Pokédex could not load, so the team cannot be checked yet.'
       : 'Loading the Champions Pokédex…'
     : team.length === 0
       ? 'Add Pokémon or import a paste to start.'
@@ -275,8 +278,9 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
           </div>
           <IssueList issues={pasteIssues} label="Import messages" />
           <p class="pk-subtle">
-            Stat Points go in the <code>EVs:</code> line, as Showdown's Champions formats write them. A paste with any stat above 32 or more than 66 points in
-            a set is read as EVs and converted: 4 EVs buy the first point in a stat, then every 8 more buy one, up to 32.
+            Stat Points go in the <code>EVs:</code> line, as Showdown's Champions formats write them. Each set is checked on its own: one with a stat above 32 or
+            more than 130 points is read as EVs and converted (4 EVs buy the first point in a stat, then every 8 more buy one, up to 32). A set with 67–130
+            points stays Stat Points and is flagged as over the 66-point budget.
           </p>
         </section>
 
@@ -358,9 +362,9 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
           </h2>
         </div>
         {!dex ? (
-          <p class="pk-loading" role="status">
-            {dexState.status === 'error' ? dexState.message : 'Loading the Champions Pokédex…'}
-          </p>
+          <div class="pk-loading">
+            <DexStatus state={dexState} retry={dexState.retry} />
+          </div>
         ) : (
           <ol class="pk-slots">
             {team.map((set, i) => (

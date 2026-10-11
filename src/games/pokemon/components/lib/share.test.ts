@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { memoryStorage, createStore } from '../../../../core/storage.ts';
-import { base64UrlToBytes, bytesToBase64Url, decodeTeam, encodeTeam, teamHash } from './share.ts';
+import { MAX_TEAM_TEXT, base64UrlToBytes, bytesToBase64Url, decodeTeam, encodeTeam, inflateCapped, readCapped, teamHash } from './share.ts';
 import { deleteSaved, listSaved, saveTeam, savedToTeam } from './saved.ts';
 import { packTeam, sanitizeSet, unpackTeam, type Team } from './team.ts';
 
@@ -56,6 +56,38 @@ describe('share links', () => {
   it('accepts the uncompressed fallback form', async () => {
     const raw = `0${bytesToBase64Url(new TextEncoder().encode(packTeam(TEAM)))}`;
     expect(await decodeTeam(raw)).toEqual(TEAM);
+  });
+
+  it('refuses a link that inflates past the cap (decompression bomb)', async () => {
+    // About 3 KB of deflate (it fits the link codec's 4000 characters) inflating to 2.5 MB.
+    const bomb = new TextEncoder().encode(`${packTeam(TEAM)}~${'~'.repeat(2_500_000)}`);
+    const body = new Blob([bomb]).stream().pipeThrough(new CompressionStream('deflate-raw'));
+    const packed = new Uint8Array(await new Response(body).arrayBuffer());
+    const payload = `1${bytesToBase64Url(packed)}`;
+    expect(teamHash.decode(`#v=1&t=${payload}`).team).toBe(payload);
+    expect(await inflateCapped(packed)).toBeNull();
+    expect(await decodeTeam(payload)).toEqual([]);
+    // A real team is far below the cap.
+    const real = base64UrlToBytes((await encodeTeam(TEAM)).slice(1));
+    expect((await inflateCapped(real))!.byteLength).toBeLessThan(MAX_TEAM_TEXT / 10);
+  });
+
+  it('stops reading a stream at the limit', async () => {
+    let pulled = 0;
+    const endless = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        pulled++;
+        controller.enqueue(new Uint8Array(1024));
+      },
+    });
+    expect(await readCapped(endless, 4096)).toBeNull();
+    expect(pulled).toBeLessThan(10);
+  });
+
+  it('never unpacks more than six sets', () => {
+    const many = Array.from({ length: 50 }, () => packTeam(TEAM.slice(0, 1))).join('~');
+    expect(unpackTeam(many)).toHaveLength(6);
+    expect(unpackTeam(`${'~'.repeat(100_000)}`)).toEqual([]);
   });
 });
 

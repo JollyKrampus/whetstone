@@ -325,7 +325,25 @@ export function toTierInputs(rows: readonly TierSourceRow[]): TierInput[] {
 
 export interface SpeedNeighbour {
   id: string;
+  /** Speed in battle (the held item applied). */
   speed: number;
+  /** The held item behind `speed` when it changes Speed ('choicescarf'). */
+  item?: string;
+}
+
+/** How many of the most used Pokémon a speed comparison runs against. */
+export const SPEED_RIVALS = 50;
+
+/**
+ * The Pokémon a "how fast is it" comparison runs against: the `limit` most used by usage rank
+ * (not the fastest), each at the Speed of its common set in battle. Feed it common sets
+ * (metaSets), whose `speed` already has Choice Scarf applied when that is the most used item.
+ */
+export function speedRivals(sets: readonly { id: string; rank: number; speed: number; speedItem?: string }[], limit = SPEED_RIVALS): SpeedNeighbour[] {
+  return [...sets]
+    .sort((a, b) => a.rank - b.rank || (a.id < b.id ? -1 : 1))
+    .slice(0, limit)
+    .map((s) => (s.speedItem ? { id: s.id, speed: s.speed, item: s.speedItem } : { id: s.id, speed: s.speed }));
 }
 
 /** Where `speed` lands among the given entries: how many it outspeeds, ties and is outsped by. */

@@ -122,9 +122,11 @@ describe('offline end-to-end run (recorded fixtures)', () => {
     for (const [f, text] of Object.entries(before)) expect(current(f), f).toBe(text);
     const meta = json<PokemonMeta>('meta.json');
     const statuses = Object.fromEntries(meta.sources.map((s) => [s.id, s]));
-    for (const id of ['showdown', 'smogon', 'limitless', 'showdown-replays']) {
+    for (const id of ['smogon', 'limitless', 'showdown-replays']) {
       expect(statuses[id]).toMatchObject({ status: 'failed', fetchedAt: RECORDED_AT.toISOString() });
     }
+    // The dex is keyed by the pinned commit, which is the one already exported: nothing to fetch.
+    expect(statuses['showdown']).toMatchObject({ status: 'ok', detail: expect.stringMatching(/^7332b60, data for M-C/) });
     expect(statuses['smogon-calc']?.status).toBe('ok');
   });
 
