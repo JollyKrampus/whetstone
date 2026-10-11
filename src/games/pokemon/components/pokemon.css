@@ -1577,3 +1577,89 @@
 .prose > h2:first-child {
   margin-top: 0;
 }
+
+/* ---------- loading frames (server HTML before the dex loads) ----------
+ * The calc and team preview render their own frame with placeholders of the final size while the
+ * dex shard loads, so the footer is never in the first viewport and nothing jumps when the tool
+ * appears (CLS). Heights follow the real tool (fixture build, measured at 375 and 1280 px). */
+
+.pk-skel {
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface-3) 55%, transparent);
+}
+
+.pk-skel--results {
+  min-height: 46rem;
+}
+
+.pk-skel--side {
+  min-height: 63rem;
+}
+
+.pk-skel--swap {
+  display: block;
+  width: 8rem;
+  min-height: 2.25rem;
+}
+
+.pk-skel--field {
+  min-height: 26rem;
+}
+
+.pk-skel--team:first-child {
+  min-height: 14rem;
+}
+
+.pk-skel--team {
+  min-height: 40rem;
+}
+
+.pk-skel--plan {
+  min-height: 11.5rem;
+}
+
+/* One placeholder per move while the first calculation runs. */
+.pk-result--pending {
+  min-height: 12rem;
+  background: color-mix(in srgb, var(--surface-3) 40%, var(--surface));
+}
+
+@media (min-width: 56rem) {
+  .pk-skel--results {
+    min-height: 38rem;
+  }
+
+  .pk-skel--team,
+  .pk-skel--team:first-child {
+    min-height: 29.5rem;
+  }
+
+  .pk-skel--plan {
+    min-height: 5.5rem;
+  }
+
+  .pk-result--pending {
+    min-height: 10rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .pk-skel--side {
+    min-height: 53rem;
+  }
+
+  .pk-skel--field {
+    min-height: 19rem;
+  }
+}
+
+.pk-dexerror {
+  display: grid;
+  justify-items: start;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border: 1px solid var(--negative, var(--border-strong));
+  border-radius: var(--radius);
+  background: var(--negative-soft, var(--surface-2));
+  font-size: var(--fs-sm);
+}

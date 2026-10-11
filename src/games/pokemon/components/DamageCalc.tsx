@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { OptionList, type ComboOption } from './ComboInput.tsx';
+import DexStatus from './DexStatus.tsx';
 import SetEditor from './SetEditor.tsx';
-import { useAsync, useDebounced, useDex } from './hooks.ts';
+import { useAsync, useDebounced, useDex, type DexState } from './hooks.ts';
 import type { DexIndex } from './lib/dex.ts';
 import type { MetaSet } from './lib/metasets.ts';
 import { effectiveSpeed } from './lib/stats.ts';
@@ -118,12 +119,22 @@ const FIELD_ABILITIES: Readonly<Record<string, { weather?: WeatherId; terrain?: 
   mistysurge: { terrain: 'Misty' },
 };
 
-function ResultList({ title, response, emptyText }: { title: string; response: CalcResponse | null; emptyText: string }) {
+/**
+ * One direction's results. Before the first answer arrives, `pending` placeholder cards (one per
+ * move) hold the space the results will take, so the page below does not jump.
+ */
+function ResultList({ title, response, emptyText, pending = 0 }: { title: string; response: CalcResponse | null; emptyText: string; pending?: number }) {
   const results = response?.results ?? [];
   return (
     <section class="pk-section" style="gap: var(--sp-2)">
       <h3 class="pk-list-title">{title}</h3>
-      {results.length === 0 && (response?.errors.length ?? 0) === 0 ? (
+      {response === null && pending > 0 ? (
+        <ul class="pk-cards" aria-hidden="true">
+          {Array.from({ length: pending }, (_, i) => (
+            <li class="pk-result pk-result--pending" key={i} />
+          ))}
+        </ul>
+      ) : results.length === 0 && (response?.errors.length ?? 0) === 0 ? (
         <p class="pk-subtle">{emptyText}</p>
       ) : (
         <ul class="pk-cards">
@@ -245,6 +256,32 @@ function SideExtras({ idBase, s, onChange, flags, onFlags, doubles }: { idBase: 
 }
 
 /**
+ * What the server renders and what shows while the dex loads: the calculator's own frame (results
+ * card, two sides, field card) with placeholders of the final size, so nothing below moves when
+ * the tool appears (CLS), and the load status or error with a retry in the results card.
+ */
+function CalcSkeleton({ state, retry }: { state: DexState; retry: () => void }) {
+  return (
+    <div class="pk-calc" data-loading="true">
+      <section class="card pk-panel pk-calc__results" aria-labelledby="pk-results-h">
+        <h2 id="pk-results-h">Results</h2>
+        <DexStatus state={state} retry={retry} />
+        <div class="pk-cols" aria-hidden="true">
+          <div class="pk-skel pk-skel--results" />
+          <div class="pk-skel pk-skel--results" />
+        </div>
+      </section>
+      <div class="pk-calc__sides" aria-hidden="true">
+        <div class="pk-skel pk-skel--side" />
+        <span class="pk-calc__swap pk-skel pk-skel--swap" />
+        <div class="pk-skel pk-skel--side" />
+      </div>
+      <div class="card pk-panel pk-skel--field" aria-hidden="true" />
+    </div>
+  );
+}
+
+/**
  * Island: Champions damage calculator on @smogon/calc (generation 0) in a Web Worker. Both
  * directions are calculated, with Doubles spread damage, weather, terrain, screens, Helping Hand,
  * Friend Guard and a speed check that accounts for Tailwind, Trick Room, Scarf and paralysis.
@@ -320,13 +357,7 @@ export default function DamageCalc({ dexUrl, regulation, metaSets, usageLabel }:
     return { forward, reverse };
   });
 
-  if (!dex || !a || !b) {
-    return (
-      <p class="pk-loading" role="status">
-        {dexState.status === 'error' ? dexState.message : 'Loading the Champions Pokédex…'}
-      </p>
-    );
-  }
+  if (!dex || !a || !b) return <CalcSkeleton state={dexState} retry={dexState.retry} />;
 
   const nameA = setDisplayName(dex, a.set);
   const nameB = setDisplayName(dex, b.set);
@@ -386,8 +417,18 @@ export default function DamageCalc({ dexUrl, regulation, metaSets, usageLabel }:
           {result.status === 'busy' && !done ? 'Calculating…' : result.status === 'error' ? `The calculator failed: ${result.message}` : speedText}
         </p>
         <div class="pk-cols">
-          <ResultList title={`${nameA} → ${nameB}`} response={done?.forward ?? null} emptyText={`Give ${nameA} a move to see its damage.`} />
-          <ResultList title={`${nameB} → ${nameA}`} response={done?.reverse ?? null} emptyText={`Give ${nameB} a move to see its damage.`} />
+          <ResultList
+            title={`${nameA} → ${nameB}`}
+            response={done?.forward ?? null}
+            pending={result.status === 'error' ? 0 : a.set.moves.length}
+            emptyText={`Give ${nameA} a move to see its damage.`}
+          />
+          <ResultList
+            title={`${nameB} → ${nameA}`}
+            response={done?.reverse ?? null}
+            pending={result.status === 'error' ? 0 : b.set.moves.length}
+            emptyText={`Give ${nameB} a move to see its damage.`}
+          />
         </div>
       </section>
 

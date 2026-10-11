@@ -3,10 +3,11 @@ import CopyButton from '../../../components/CopyButton.tsx';
 import ShareButton from '../../../components/ShareButton.tsx';
 import { onHashChange, readHash, writeHash } from '../../../core/urlstate.ts';
 import ComboInput, { OptionList, type ComboOption } from './ComboInput.tsx';
+import DexStatus from './DexStatus.tsx';
 import IssueList, { type IssueItem } from './IssueList.tsx';
 import SetEditor, { switchSpecies } from './SetEditor.tsx';
 import { Coverage, SpeedPanel, ThreatPanel, TypeMatrix, type PanelMember } from './TeamPanels.tsx';
-import { useAsync, useDebounced, useDex } from './hooks.ts';
+import { typedBeforeHydration, useAsync, useDebounced, useDex } from './hooks.ts';
 import type { DexIndex } from './lib/dex.ts';
 import { checkTeam, issuesForSlot } from './lib/legality.ts';
 import type { MetaSet } from './lib/metasets.ts';
@@ -65,10 +66,11 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
   const [team, setTeam] = useState<Team>([]);
   const [ready, setReady] = useState(false);
   const [note, setNote] = useState('');
-  const [paste, setPaste] = useState('');
+  // Text pasted (or a name typed) before the island hydrated stays.
+  const [paste, setPaste] = useState(() => typedBeforeHydration('pk-paste'));
   const [pasteIssues, setPasteIssues] = useState<IssueItem[]>([]);
   const [saved, setSaved] = useState<SavedTeam[]>([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState(() => typedBeforeHydration('pk-team-name'));
   const [savedId, setSavedId] = useState<string | undefined>(undefined);
   const [payload, setPayload] = useState('');
   const written = useRef<string | null>(null);
@@ -204,7 +206,7 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
 
   const legalText = !report
     ? dexState.status === 'error'
-      ? 'The Pokédex could not be loaded.'
+      ? 'The Champions Pokédex could not load, so the team cannot be checked yet.'
       : 'Loading the Champions Pokédex…'
     : team.length === 0
       ? 'Add Pokémon or import a paste to start.'
@@ -360,9 +362,9 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
           </h2>
         </div>
         {!dex ? (
-          <p class="pk-loading" role="status">
-            {dexState.status === 'error' ? dexState.message : 'Loading the Champions Pokédex…'}
-          </p>
+          <div class="pk-loading">
+            <DexStatus state={dexState} retry={dexState.retry} />
+          </div>
         ) : (
           <ol class="pk-slots">
             {team.map((set, i) => (

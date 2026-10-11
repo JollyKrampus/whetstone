@@ -6,9 +6,10 @@ import type { Edge } from '../../../core/game.ts';
 import { signed } from '../../../core/format.ts';
 import { readHash, writeHash } from '../../../core/urlstate.ts';
 import ComboInput, { type ComboOption } from './ComboInput.tsx';
+import DexStatus from './DexStatus.tsx';
 import IssueList, { type IssueItem } from './IssueList.tsx';
 import { TypeList } from './TypeChip.tsx';
-import { useAsync, useDebounced, useDex } from './hooks.ts';
+import { useAsync, useDebounced, useDex, type DexState } from './hooks.ts';
 import type { MetaSet } from './lib/metasets.ts';
 import { parsePaste } from './lib/paste.ts';
 import { speedText } from './lib/stats.ts';
@@ -53,6 +54,35 @@ function PickChips({ mons, onRemove, label }: { mons: readonly { key: string; na
         </li>
       ))}
     </ul>
+  );
+}
+
+/**
+ * Server-rendered frame of the assistant while the dex loads: both team panels and the
+ * recommendation heading at their final size, so the page does not jump when the tool appears,
+ * with the load status (or the error and a retry) in the first panel.
+ */
+function PreviewSkeleton({ state, retry }: { state: DexState; retry: () => void }) {
+  return (
+    <div class="pk-tool" data-loading="true">
+      <div class="pk-vs">
+        <section class="card pk-panel pk-skel--team" aria-labelledby="pv-mine-h">
+          <h2 id="pv-mine-h">Your team</h2>
+          <DexStatus state={state} retry={retry} />
+        </section>
+        <section class="card pk-panel pk-skel--team" aria-labelledby="pv-theirs-h">
+          <h2 id="pv-theirs-h">
+            Their team <span class="pk-subtle pk-num">(0/{TEAM_SIZE})</span>
+          </h2>
+        </section>
+      </div>
+      <section class="pk-section" aria-labelledby="pv-plan-h">
+        <div class="section-head">
+          <h2 id="pv-plan-h">Recommendation</h2>
+        </div>
+        <div class="pk-skel pk-skel--plan" aria-hidden="true" />
+      </section>
+    </div>
   );
 }
 
@@ -168,13 +198,7 @@ export default function TeamPreview({ dexUrl, regulation, metaSets, usageLabel, 
   const addTheirs = (id: string) => setTheirs((t) => (t.length >= TEAM_SIZE || t.some((s) => s.species === id) ? t : [...t, newSet(id)]));
   const weights = PREVIEW_PRESETS[preset].weights;
 
-  if (!dex) {
-    return (
-      <p class="pk-loading" role="status">
-        {dexState.status === 'error' ? dexState.message : 'Loading the Champions Pokédex…'}
-      </p>
-    );
-  }
+  if (!dex) return <PreviewSkeleton state={dexState} retry={dexState.retry} />;
 
   return (
     <div class="pk-tool" data-ready={ready ? 'true' : undefined}>
