@@ -25,15 +25,9 @@ const current = game ? gameById(game) : null;
         {
           games.map((g) => (
             <li>
-              <a
-                class="switcher__link"
-                href={navHref(g)}
-                style={`--accent: var(${g.accent})`}
-                aria-current={g.id === game ? 'true' : undefined}
-              >
+              <a class="switcher__link" href={navHref(g)} data-game={g.id} aria-current={g.id === game ? 'true' : undefined}>
                 <span class="switcher__pip" aria-hidden="true" />
                 <span>{g.short}</span>
-                {g.status !== 'live' && <span class="switcher__status">{g.status}</span>}
               </a>
             </li>
           ))
@@ -162,15 +156,6 @@ const current = game ? gameById(game) : null;
     background: var(--accent);
     transform: rotate(45deg);
     border-radius: 1px;
-  }
-
-  .switcher__status {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-faint);
   }
 
   .site-header__tools {

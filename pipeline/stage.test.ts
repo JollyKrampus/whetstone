@@ -60,7 +60,7 @@ describe('stage', () => {
     expect(r.map).toEqual({
       'hots/_internal': `data/hots/_internal.${shortHash('[]\n')}.json`,
       'hots/draft': `data/hots/draft.${h}.json`,
-      'hots/draft-stats': `data/hots/draft-stats.${shortHash('{"sl":{}}\n')}.json`,
+      'hots/draft-stats': `data/hots/_private/draft-stats.${shortHash('{"sl":{}}\n')}.json`,
       'hots/pro': `data/hots/pro.${shortHash('{}\n')}.json`,
       'mtga/cards.standard': `data/mtga/cards.standard.${shortHash('[1]\n')}.json`,
     });
@@ -120,7 +120,8 @@ describe('stage', () => {
     expect(stage({ root, env: {}, ...quiet }).map['hots/draft']).toBe(`data/hots/draft.${shortHash(pub)}.json`);
     const r = stage({ root, env: { WHETSTONE_FIXTURE_PRIVATE: '1' }, ...quiet });
     const merged = '{"heroes":["Abat"],"stats":{"synthetic":true}}\n';
-    expect(r.map['hots/draft']).toBe(`data/hots/draft.${shortHash(merged)}.json`);
+    // Shards carrying private data live under _private/, which the service worker never caches.
+    expect(r.map['hots/draft']).toBe(`data/hots/_private/draft.${shortHash(merged)}.json`);
     expect(r.manifest.games.hots?.files.draft?.url).toBe(`data/hots/draft.${shortHash(pub)}.json`);
     expect(r.manifest.games.hots?.fixtures).toBe(true);
     // Only public/** of the private directory is staged.
@@ -134,7 +135,7 @@ describe('stage', () => {
     put('data/private/hots/public/draft.json', '{"stats":{"games":10}}\n');
     const r = stage({ root, env: {}, ...quiet });
     const merged = '{"heroes":["Abat"],"schema":1,"stats":{"games":10}}\n';
-    expect(r.map['hots/draft']).toBe(`data/hots/draft.${shortHash(merged)}.json`);
+    expect(r.map['hots/draft']).toBe(`data/hots/_private/draft.${shortHash(merged)}.json`);
     expect(r.manifest.games.hots?.files.draft?.url).toBe(`data/hots/draft.${shortHash(pub)}.json`);
     expect(readFileSync(path.join(root, 'public', ...(r.map['hots/draft'] as string).split('/')), 'utf8')).toBe(merged);
     expect(readFileSync(path.join(root, 'public', 'data', 'hots', `draft.${shortHash(pub)}.json`), 'utf8')).toBe(pub);

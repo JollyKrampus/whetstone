@@ -80,9 +80,9 @@ describe('validateFiles (per-game registries)', () => {
 
   it('checks a class-B overlay against the overlay schema, not the public shard schema', () => {
     const overlay = { path: 'public/draft.json', data: { stats: 'not a stats block' }, custody: 'B' as const };
-    const issues = validateFiles([overlay], HOTS_FILES, { overlays: HOTS_PRIVATE_OVERLAYS, source: 'heroesprofile' });
+    const issues = validateFiles([overlay], HOTS_FILES, { overlays: HOTS_PRIVATE_OVERLAYS, source: 'overlay-source' });
     expect(hasErrors(issues)).toBe(true);
-    expect(issues[0]).toMatchObject({ source: 'heroesprofile' });
+    expect(issues[0]).toMatchObject({ source: 'overlay-source' });
     expect(issues[0]?.message).toMatch(/^public\/draft\.json: stats/);
   });
 

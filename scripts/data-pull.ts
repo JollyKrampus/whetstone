@@ -6,9 +6,10 @@
  *   node scripts/data-pull.ts [--remote origin] [--branch data] [--out data]
  *
  * The branch is fetched shallowly into a separate bare cache repository (.cache/data-branch.git)
- * and blobs are read with ls-tree + cat-file, so your own clone gets no new refs, no shallow
- * marker and no index or working-tree changes. Class B/C data is never on the branch; run
- * `npm run data` with your own keys to get it.
+ * and both the tree and the blobs are read from that cache (ls-tree + cat-file), so your own clone
+ * needs nothing from the data branch and gets no new refs, no shallow marker and no index or
+ * working-tree changes. Class B/C data is never on the branch; run `npm run data` with your own
+ * keys to get it.
  */
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
@@ -66,18 +67,17 @@ export function parseCatFileBatch(out: Buffer): Map<string, Buffer> {
   return blobs;
 }
 
-function main(): number {
-  const { values } = parseArgs({
-    options: {
-      remote: { type: 'string', default: 'origin' },
-      branch: { type: 'string', default: 'data' },
-      out: { type: 'string', default: 'data' },
-    },
-    strict: true,
-  });
-  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-  const { remote, branch } = values;
-  const out = path.resolve(process.cwd(), values.out);
+export interface PullOptions {
+  /** The local clone (git commands run here; the cache lives in <root>/.cache/data-branch.git). */
+  root: string;
+  remote: string;
+  branch: string;
+  /** Absolute output directory (current/ and status.json land here). */
+  out: string;
+}
+
+export function pull(o: PullOptions): number {
+  const { root, remote, branch, out } = o;
 
   const remoteUrl = git(root, ['remote', 'get-url', remote]);
   if (remoteUrl.status !== 0) {
@@ -119,7 +119,8 @@ function main(): number {
     console.log(`${remote}/${branch} (${commit}) has no current/ data yet.`);
     return 0;
   }
-  const batch = git(root, ['cat-file', '--batch'], tree.map((e) => e.sha).join('\n') + '\n');
+  // Blobs come from the cache too: the clone itself has usually never fetched the data branch.
+  const batch = inCache(['cat-file', '--batch'], tree.map((e) => e.sha).join('\n') + '\n');
   if (batch.status !== 0) {
     console.error(`git cat-file failed: ${batch.stderr}`);
     return 1;
@@ -139,6 +140,19 @@ function main(): number {
   console.log(`Pulled ${remote}/${branch} @ ${commit} into ${path.relative(process.cwd(), out) || '.'}/:`);
   for (const game of games) console.log(`  current/${game}: ${counts.get(game)} file(s)`);
   return 0;
+}
+
+function main(): number {
+  const { values } = parseArgs({
+    options: {
+      remote: { type: 'string', default: 'origin' },
+      branch: { type: 'string', default: 'data' },
+      out: { type: 'string', default: 'data' },
+    },
+    strict: true,
+  });
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+  return pull({ root, remote: values.remote, branch: values.branch, out: path.resolve(process.cwd(), values.out) });
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

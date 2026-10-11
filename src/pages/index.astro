@@ -1,8 +1,7 @@
 ---
-import Badge from '../components/Badge.tsx';
 import EmptyState from '../components/EmptyState.astro';
 import FreshnessBadge from '../components/FreshnessBadge.astro';
-import { formatDayUTC, int } from '../core/format.ts';
+import { formatDayUTC, int, numberWord } from '../core/format.ts';
 import { games, navHref, versionText, withBase } from '../games/registry.ts';
 import Base from '../layouts/Base.astro';
 import { loadGameMeta } from '../layouts/gameMeta.ts';
@@ -48,7 +47,7 @@ const news = cards
       <p class="kicker hero__kicker">Meta companion · refreshed daily</p>
       <h1 class="hero__title">Sharpen every <span class="hero__edge">pick</span>.</h1>
       <p class="hero__lead">
-        Counters, drafts, decks and teams for three games, with the reasons, sources and sample sizes behind every
+        Counters, drafts, decks and teams for {numberWord(games.length)} games, with the reasons, sources and sample sizes behind every
         number. Free, static, no accounts, no trackers.
       </p>
       <div class="hero__cta">
@@ -66,10 +65,9 @@ const news = cards
     <ul class="games">
       {
         cards.map(({ game, meta, fixtures, links }) => (
-          <li class="card game-card" style={`--accent: var(${game.accent})`}>
+          <li class="card game-card" data-game={game.id}>
             <div class="game-card__top">
               <span class="kicker game-card__short">{game.short}</span>
-              <Badge tone={game.status === 'live' ? 'positive' : 'accent'}>{game.status}</Badge>
             </div>
             <h3 class="game-card__name">
               <a class="game-card__link" href={navHref(game)}>
@@ -108,7 +106,7 @@ const news = cards
       news.length > 0 ? (
         <ol class="news">
           {news.map((item) => (
-            <li class="news__item" style={`--accent: var(${item.game.accent})`}>
+            <li class="news__item" data-game={item.game.id}>
               <time class="news__date" datetime={item.generatedAt}>
                 {formatDayUTC(item.generatedAt)}
               </time>

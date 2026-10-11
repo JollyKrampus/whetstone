@@ -1,19 +1,24 @@
 /**
- * Class B/C data between workflow jobs. B (Heroes Profile) and C (Twitch/YouTube) data is never
- * committed (SPEC §1.2); it travels from a data job to the build job as a short-lived workflow
- * artifact. Artifacts of a public repository can be downloaded by any signed-in user, so class-B
- * files are only packed when DATA_ARTIFACT_KEY is set (AES-256-GCM); without the key they are
- * left out and the site simply builds without them.
+ * Class B/C/D data between workflow jobs. B (licensed), C (ephemeral video/stream metadata) and D
+ * (aggregates of public posts) are never committed (SPEC §1.2, §13.2); they travel from a data job
+ * to the build job as a short-lived workflow artifact. Artifacts of a public repository can be
+ * downloaded by any signed-in user, so class-B files are only packed when DATA_ARTIFACT_KEY is set
+ * (AES-256-GCM); without the key they are left out and the site simply builds without them.
  *
- *   node pipeline/private.ts pack    --dir data/private/hots --out private-hots.wsb
- *   node pipeline/private.ts unpack  --in private-hots.wsb --dir data/private/hots
+ *   node pipeline/private.ts pack    --dir data/private/<game> --out private-<game>.wsb
+ *   node pipeline/private.ts unpack  --in private-<game>.wsb --dir data/private/<game>
  *   node pipeline/private.ts purge   --dir data/private --custody B
- *   node pipeline/private.ts restore --repo owner/name --games hots,mtga,pokemon --dir data/private
+ *   node pipeline/private.ts restore --repo owner/name [--games a,b] --dir data/private
  *
- * `purge` is the HP_MODE=off kill switch for the build job: it deletes class-B files (by the
- * _files.json custody index; a game directory without an index is removed entirely).
+ * `pack` always writes a bundle after a successful run, even an empty one (a tombstone), so the
+ * newest artifact always describes the latest run: restoring a tombstone removes that game's
+ * private data instead of falling back to an older artifact that still had some.
+ * `purge` deletes files of the given classes (by the _files.json custody index; a game directory
+ * without an index is removed entirely).
  * `restore` downloads the newest unexpired private-<game> artifact produced by a scheduled or
- * dispatched data-deploy run of this repository (never a fork or PR run) and unpacks it.
+ * dispatched data-deploy run of this repository (never a fork or PR run) and unpacks it. An
+ * artifact that cannot be read (for example after DATA_ARTIFACT_KEY was rotated) is skipped with a
+ * warning: that game builds without its private data, the others are unaffected.
  */
 import { execFileSync } from 'node:child_process';
 import { createCipheriv, createDecipheriv, randomBytes, scryptSync } from 'node:crypto';
@@ -25,7 +30,7 @@ import { parseArgs } from 'node:util';
 import { gunzipSync } from 'node:zlib';
 import type { CustodyClass } from '../src/core/game.ts';
 import { compareStrings } from './hash.ts';
-import { FILE_INDEX, buildFileIndex, isCustody, type FileIndex } from './manifest.ts';
+import { FILE_INDEX, GAME_IDS, buildFileIndex, isCustody, type FileIndex } from './manifest.ts';
 import { gzipDeterministic, isSafeRelPath, listFiles, readJson, removeTree, resolveRel, syncTree, writeJsonFile } from './store.ts';
 
 const MAGIC = 'WSB1';
@@ -33,7 +38,8 @@ const FLAG_PLAIN = 0;
 const FLAG_ENCRYPTED = 1;
 
 export interface PackResult {
-  bytes: Uint8Array | null;
+  /** The bundle; with no files to ship it is an empty tombstone bundle. */
+  bytes: Uint8Array;
   included: string[];
   dropped: string[];
   encrypted: boolean;
@@ -43,10 +49,12 @@ function deriveKey(secret: string, salt: Uint8Array): Buffer {
   return scryptSync(secret, salt, 32);
 }
 
-/** Pack a private/<game> directory. Returns bytes=null when there is nothing to ship. */
+/**
+ * Pack a private/<game> directory. When nothing may ship (no files, or only class-B files and no
+ * key), the result is an empty bundle: a tombstone that clears the game's private data on restore.
+ */
 export function packDir(dir: string, secret?: string): PackResult {
   const all = listFiles(dir).filter((rel) => rel !== FILE_INDEX);
-  if (all.length === 0) return { bytes: null, included: [], dropped: [], encrypted: false };
   const index = readJson<FileIndex>(path.join(dir, FILE_INDEX));
   const custodyOf = (rel: string): CustodyClass | null => {
     const c = index?.files[rel]?.custody;
@@ -56,7 +64,6 @@ export function packDir(dir: string, secret?: string): PackResult {
   // Without a key only files positively known to be class C or D (no licensed data, no raw posts) may leave the runner.
   const included = all.filter((rel) => key !== undefined || custodyOf(rel) === 'C' || custodyOf(rel) === 'D');
   const dropped = all.filter((rel) => !included.includes(rel));
-  if (included.length === 0) return { bytes: null, included, dropped, encrypted: false };
 
   const files: Record<string, string> = {};
   const indexInput: Array<{ path: string; bytes: Uint8Array; custody: CustodyClass }> = [];
@@ -105,10 +112,16 @@ export function unpackBundle(bundle: Uint8Array, secret?: string): Map<string, U
   return out;
 }
 
-/** Replace `dir` with the bundle's files. */
+/** True when the bundle carries no files (a tombstone written by a run with nothing to ship). */
+export function isTombstone(files: ReadonlyMap<string, Uint8Array>): boolean {
+  return [...files.keys()].every((rel) => rel === FILE_INDEX);
+}
+
+/** Replace `dir` with the bundle's files; a tombstone leaves no directory at all. */
 export function unpackTo(bundle: Uint8Array, dir: string, secret?: string): string[] {
   const files = unpackBundle(bundle, secret);
   removeTree(dir);
+  if (isTombstone(files)) return [];
   syncTree(dir, files);
   return [...files.keys()].filter((rel) => rel !== FILE_INDEX);
 }
@@ -168,6 +181,8 @@ export interface RestoreOptions {
   /** Runs the gh CLI and returns stdout (injectable for tests). */
   gh?: (args: string[]) => string;
   log?: (line: string) => void;
+  /** Problems that leave one game without private data (default: log with a "warning:" prefix). */
+  warn?: (line: string) => void;
 }
 
 interface ArtifactRow {
@@ -183,6 +198,7 @@ const defaultGh = (args: string[]): string => execFileSync('gh', args, { encodin
 export function restore(o: RestoreOptions): Record<string, number | null> {
   const gh = o.gh ?? defaultGh;
   const log = o.log ?? ((line: string) => console.log(line));
+  const warn = o.warn ?? ((line: string) => log(`warning: ${line}`));
   const now = (o.now ?? new Date()).getTime();
   const maxAgeMs = (o.maxAgeHours ?? 24) * 3_600_000;
   const workflowPath = o.workflowPath ?? '.github/workflows/data-deploy.yml';
@@ -200,6 +216,7 @@ export function restore(o: RestoreOptions): Record<string, number | null> {
       const run = JSON.parse(gh(['api', `repos/${o.repo}/actions/runs/${wr.id}`])) as { path?: string; event?: string };
       if (!run.path?.startsWith(workflowPath) || (run.event !== 'schedule' && run.event !== 'workflow_dispatch')) continue;
       const tmp = mkdtempSync(path.join(tmpdir(), 'whetstone-private-'));
+      const target = path.join(o.dir, game);
       try {
         gh(['run', 'download', String(wr.id), '-R', o.repo, '-n', name, '-D', tmp]);
         const file = path.join(tmp, `${name}.wsb`);
@@ -207,9 +224,17 @@ export function restore(o: RestoreOptions): Record<string, number | null> {
           log(`[private] ${game}: artifact of run ${wr.id} has no ${name}.wsb; skipped`);
           continue;
         }
-        const restored = unpackTo(new Uint8Array(readFileSync(file)), path.join(o.dir, game), o.secret);
-        log(`[private] ${game}: restored ${restored.length} file(s) from run ${wr.id} (${a.created_at})`);
+        const restored = unpackTo(new Uint8Array(readFileSync(file)), target, o.secret);
+        log(
+          restored.length === 0
+            ? `[private] ${game}: run ${wr.id} (${a.created_at}) had no private data to ship; building without B/C data`
+            : `[private] ${game}: restored ${restored.length} file(s) from run ${wr.id} (${a.created_at})`,
+        );
         result[game] = wr.id;
+      } catch (err) {
+        // Fail closed for this game only: a rotated key or a damaged artifact must not stop the deploy.
+        removeTree(target);
+        warn(`private-${game} from run ${wr.id} could not be restored (${err instanceof Error ? err.message : String(err)}); building without B/C data for ${game}`);
       } finally {
         removeTree(tmp);
       }
@@ -230,7 +255,7 @@ function cli(argv: string[], env: NodeJS.ProcessEnv): number {
       in: { type: 'string' },
       custody: { type: 'string', default: 'B' },
       repo: { type: 'string' },
-      games: { type: 'string', default: 'hots,mtga,pokemon' },
+      games: { type: 'string', default: GAME_IDS.join(',') },
       'max-age-hours': { type: 'string', default: '24' },
     },
     strict: true,
@@ -244,12 +269,12 @@ function cli(argv: string[], env: NodeJS.ProcessEnv): number {
       if (!values.dir || !values.out) throw new Error('pack needs --dir and --out');
       const r = packDir(values.dir, secret);
       if (r.dropped.length > 0) warn(`not shipped without DATA_ARTIFACT_KEY: ${r.dropped.join(', ')}`);
-      if (!r.bytes) {
-        console.log(`[private] nothing to pack in ${values.dir}`);
-        return 0;
-      }
       writeFileSync(values.out, r.bytes);
-      console.log(`[private] packed ${r.included.length} file(s) into ${values.out}${r.encrypted ? ' (encrypted)' : ''}`);
+      console.log(
+        r.included.length === 0
+          ? `[private] nothing to ship from ${values.dir}; wrote an empty bundle so the build drops older private data`
+          : `[private] packed ${r.included.length} file(s) into ${values.out}${r.encrypted ? ' (encrypted)' : ''}`,
+      );
       return 0;
     }
     case 'unpack': {
@@ -268,7 +293,7 @@ function cli(argv: string[], env: NodeJS.ProcessEnv): number {
     }
     case 'restore': {
       if (!values.repo || !values.dir) throw new Error('restore needs --repo and --dir');
-      restore({ repo: values.repo, games: values.games.split(',').map((s) => s.trim()).filter(Boolean), dir: values.dir, secret, maxAgeHours: Number(values['max-age-hours']) });
+      restore({ repo: values.repo, games: values.games.split(',').map((s) => s.trim()).filter(Boolean), dir: values.dir, secret, maxAgeHours: Number(values['max-age-hours']), warn });
       return 0;
     }
     default:

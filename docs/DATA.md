@@ -9,16 +9,21 @@ Every file a pipeline writes declares one class (`OutputFile.custody`). The runn
 | Class | Meaning | Written to | Committed? | Public? |
 |---|---|---|---|---|
 | **A** | Our own derivations and openly licensed inputs | `current/<game>/` | Yes, `data` branch | Yes, documented JSON |
-| **A-SA** | Liquipedia-derived, CC-BY-SA 3.0 | `current/<game>/`, **separate files** | Yes, `data` branch | Yes, labelled CC-BY-SA 3.0 |
-| **B** | Heroes Profile (licensed) | `private/<game>/` | **Never** | Only inside the deployed site, under content-hashed names; never listed in any manifest |
-| **C** | Twitch / YouTube metadata (ephemeral) | `private/<game>/` | **Never** | Only inside the deployed site; the browser hides it after its retention window |
+| **A-SA** | Share-alike (Liquipedia CC-BY-SA 3.0, other CC BY-SA wikis) | `current/<game>/`, **separate files** | Yes, `data` branch | Yes, labelled with the licence |
+| **A-NC-SA** | Non-commercial share-alike (CC BY-NC-SA wikis) | `current/<game>/`, **separate files** | Yes, `data` branch | Yes, labelled; never for commercial use |
+| **B** | Licensed for display only (no such source today) | `private/<game>/` | **Never** | Only inside the deployed site, under content-hashed names; never listed in any manifest |
+| **C** | Ephemeral metadata (YouTube video details) | `private/<game>/` | **Never** | Only inside the deployed site; the browser hides it after its retention window |
+| **D** | Aggregates derived from public posts (our own wording, links only) | `private/<game>/` | **Never** | Only inside the deployed site; rebuilt every run |
+| **P** | Personal match records | Never produced here | **Never** | Never; they live only in the private hub. The runner rejects any P output |
+
+Whetstone owns its tooling: everything it shows comes from first-party game data, openly licensed data, our own curation and our own analysis. It uses no third-party statistics aggregator.
 
 Rules that follow from this:
 
-- B and C never enter git, the `data` branch, history files or the public manifest.
-- A-SA content is never mixed into a file of another class (history summaries list A-SA files by hash only).
+- B, C and D never enter git, the `data` branch, history files or the public manifest.
+- A-SA and A-NC-SA content is never mixed into a file of another class (history summaries list such files by hash only).
 - Player names and handles from Limitless or Showdown are removed at ingest; only aggregates and anonymised teams are written.
-- Class B files are only written when `HP_MODE=on`. The runner drops them otherwise, and the build job purges any that arrive from an artifact (section 7).
+- Class B files only leave a data job encrypted (section 7).
 
 ## 2. Layout
 
@@ -34,7 +39,11 @@ current/<game>/            last good data per game (A and A-SA only)
 history/YYYY/MM/DD/<game>.json.gz   daily summary (below)
 status.json                last run per game
 README.md                  pointer to this document
+LICENSE                    MIT, for Whetstone's own data (third-party data keeps its licence)
+NOTICE.md                  every source with its licence, required credit and copyright notice
 ```
+
+`pipeline/publish.ts` rewrites `README.md`, `LICENSE` and `NOTICE.md` on every run; `NOTICE.md` is generated from the sources in `src/games/registry.ts`, so a new game or source appears in it on its own.
 
 `npm run data:pull` copies `current/` and `status.json` into your local `data/`.
 
@@ -78,7 +87,7 @@ The authoritative per-file custody list. `pipeline/private.ts` uses the private 
                        "issues": [] } } }
 ```
 
-`state` is `ok`, `failed` (last good data kept; sources marked `failed` or `stale`) or `skipped` (no pipeline module yet). Issues are capped at 50 per game.
+`state` is `ok`, `failed` (last good data kept; sources marked `failed` or `stale`) or `skipped` (no pipeline module yet). Issues are capped at 50 per game. An `ok` game whose sources partly served last-good data lists them in `degraded`, and the publish job adds `degradedRuns` (source id → consecutive runs it has been degraded); section 8 says what happens next.
 
 ### History summaries
 
@@ -100,7 +109,7 @@ The tables mirror the file registries `HOTS_FILES`, `MTGA_FILES` and `POKEMON_FI
 
 | File | Class | Schema | Content |
 |---|---|---|---|
-| `meta.json` | A | `HotsMetaSchema` | `extra`: `build` (live), `dataBuild` (the heroes-data2 build the hero data comes from), `ptrBuild`, `major` and `majorSince`, `builds` of the major, `assetsTag` (heroes-images tag), `hpMode`, `buildSeenAt` (when the pipeline first saw the live build) and `dataPending` (set only while heroes-data2 lags the live build by more than 48 hours, so the hero data is from `dataBuild`) |
+| `meta.json` | A | `HotsMetaSchema` | `extra`: `build` (live), `dataBuild` (the heroes-data2 build the hero data comes from), `ptrBuild`, `major` and `majorSince`, `builds` of the major, `assetsTag` (heroes-images tag), `buildSeenAt` (when the pipeline first saw the live build) and `dataPending` (set only while heroes-data2 lags the live build by more than 48 hours, so the hero data is from `dataBuild`) |
 | `heroes.json` | A | `HeroesFileSchema` | Roster with roles, abilities, talents, mechanics tags with evidence, `isNew`, `portrait` (hero-select button) and `draftPortrait` (180×212 draft-screen portrait under `img/heroes/`) |
 | `maps.json` | A | `MapsFileSchema` | Maps, kind, ranked flag and its source, profile tags |
 | `patches.json` | A | `PatchesFileSchema` | Patch notes as short factual summaries, per-hero changes, link to the original |
@@ -109,13 +118,12 @@ The tables mirror the file registries `HOTS_FILES`, `MTGA_FILES` and `POKEMON_FI
 | `links.json` | A | `LinksSchema` | Outbound guide links per hero |
 | `rotation.json` | A | `RotationSchema` | Free hero rotation and ranked season (Nexus Compendium, "as of") |
 | `pro.json` | **A-SA** | `ProSchema` | Liquipedia pro picks, bans and presence, CC-BY-SA 3.0 |
-| `public/draft.json` | A | `DraftShardSchema` | Columnar draft shard. Schema 2: reason lines are templates in which `{a}` and `{b}` (map fit: `{a}` and `{m}`) stand for the edge's names, which the reader fills in, and a reference `[i, j]` or `[i, j, k]` joins a rule line with its "Only when … takes …" conditions. A class-B overlay adds `stats` at stage time (section 5) |
+| `public/draft.json` | A | `DraftShardSchema` | Columnar draft shard. Schema 2: reason lines are templates in which `{a}` and `{b}` (map fit: `{a}` and `{m}`) stand for the edge's names, which the reader fills in, and a reference `[i, j]` or `[i, j, k]` joins a rule line with its "Only when … takes …" conditions |
 | `img/**` | A | n/a | WebP portraits, draft portraits, ability and talent icons (64 px) and map images converted from heroes-images at a pinned tag. Files come from jsDelivr, with raw.githubusercontent.com as the fallback for files jsDelivr does not serve (the repository is over its 50 MB package limit) |
 | `img/_index.json` | A | n/a | Image conversion index written with the images: `{ schema: 1, repo, tag, converter, files: { "<img/… path>": { src, blob } } }` (`src` = path in heroes-images, `blob` = sha256 of the source file). Only files whose source or converter changed are converted again |
-| `stats.json` (private) | **B** | `StatsSchema` | Heroes Profile aggregates; only with `HP_MODE=on` |
-| `public/draft.json` (private overlay) | **B** | `DraftStatsBlockSchema` under `stats` | Statistics block merged into the draft shard |
 | `videos.json` (private) | **C** | `VideosSchema` | YouTube video metadata (30-day retention) |
-| `streams.json` (private) | **C** | `StreamsSchema` | Twitch stream metadata (24-hour retention) |
+
+Twitch is not used: no stream metadata is fetched, so there is no `streams.json`; `/hots/live/` links to the Twitch category and featured channels.
 
 ### MTG Arena (`src/games/mtga/schema.ts`)
 
@@ -147,7 +155,7 @@ The tables mirror the file registries `HOTS_FILES`, `MTGA_FILES` and `POKEMON_FI
 
 `node pipeline/stage.ts` (run by `npm run build`) cleans `public/data/` and, per game:
 
-- copies `public/**` from the game's data directory and from its private directory to `public/data/<game>/<name>.<hash8>.<ext>` (the hash is the first 8 hex characters of the content's sha256, so each deploy's files never collide with cached ones);
+- copies `public/**` from the game's data directory to `public/data/<game>/<name>.<hash8>.<ext>` (the hash is the first 8 hex characters of the content's sha256, so each deploy's files never collide with cached ones), and every shard that carries private (B/C/D) data to `public/data/<game>/_private/<name>.<hash8>.<ext>`. The service worker never caches anything under a `_`-prefixed name, so private data on a visitor's device never outlives the deploy that served it;
 - copies `img/**` to `public/data/<game>/img/**` unchanged;
 - writes `src/generated/stage-map.json`, `{ "hots/draft": "data/hots/draft.1a2b3c4d.json", … }`, with paths relative to the site base (`/whetstone/`). Pages resolve a shard at build time with `stagedUrl(game, name)` from `src/lib/stagemap.ts` (or `stagedUrlOrNull` for optional shards) and pass the URL to their island as a prop; islands never import the map. `npm run build` and `npm run dev` stage first; run `node pipeline/stage.ts` before anything else that renders pages;
 - writes `public/data/manifest.json`, served at `https://jollykrampus.github.io/whetstone/data/manifest.json`:
@@ -164,7 +172,7 @@ Manifest rules:
 - Only class A and A-SA shards from the public data directory are listed.
 - B and C shards are staged and mapped for the site but never listed.
 - Shards whose file name starts with `_` are internal assets: staged and mapped, not listed. Use this for anything that must not be presented as a dataset, such as the MTGA card index (Scryfall terms).
-- **Overlay:** when `private/<game>/public/<name>.json` exists next to `current/<game>/public/<name>.json`, the site's copy is their shallow merge (the private keys must not overlap the public ones), and the manifest keeps pointing at the pure class-A file, which is staged too. This is how the HotS draft shard gains its Heroes Profile `stats` block without ever exposing it under a documented name. Fixture builds with `WHETSTONE_FIXTURE_PRIVATE=1` merge `fixtures/<game>/_private/public/**` the same way (the synthetic stats block in `fixtures/hots/_private/public/draft.json`), so the statistics-mode e2e runs the draft and ARAM tools exactly as the live site does.
+- **Overlay:** when `private/<game>/public/<name>.json` exists next to `current/<game>/public/<name>.json`, the site's copy is their shallow merge (the private keys must not overlap the public ones), staged under `_private/`, and the manifest keeps pointing at the pure class-A file, which is staged too. This is how a shard gains a private block without ever exposing it under a documented name. Fixture builds with `WHETSTONE_FIXTURE_PRIVATE=1` merge `fixtures/<game>/_private/public/**` the same way, so the private-sample e2e runs the tools exactly as the live site does.
 
 GitHub Pages serves everything with `Access-Control-Allow-Origin: *` and a 10-minute cache, so external tools can read the documented class-A shards. Please credit the sources listed in the manifest.
 
@@ -174,57 +182,52 @@ GitHub Pages serves everything with `Access-Control-Allow-Origin: *` and a 10-mi
 
 | Rule | Where | Sources |
 |---|---|---|
-| `inline` | Same screen as the data, body-size text with a working link | Heroes Profile ("Data provided by Heroes Profile"), Liquipedia (CC-BY-SA 3.0) |
+| `inline` | Same screen as the data, body-size text with a working link | Liquipedia (CC-BY-SA 3.0), YouTube |
 | `top` | Top of the page | 17Lands (CC BY 4.0) on Limited pages |
 | `footer` | Page footer and the credits page | Blizzard, heroes-data2, heroes-images, Nexus Compendium, Scryfall, grindstone-mcp, Pokémon Showdown, Smogon, Limitless, @smogon/calc |
 
-Every page footer also carries the non-affiliation disclaimers (Blizzard, Wizards of the Coast Fan Content Policy, The Pokémon Company, heroescounters.com, Heroes Profile), and HotS pages carry the Blizzard copyright and trademark line. Heroes Profile attribution must travel with share links and image exports of HP-derived numbers. Never use the Heroes Profile name in Whetstone's name, logo, domain or icon.
+Every page footer also carries the non-affiliation disclaimer and each game's rights notice (`legalNotice` in `src/games/registry.ts`: Blizzard, Wizards of the Coast Fan Content Policy, The Pokémon Company), current game first. The credits page shows each MIT source's copyright line, and `/licenses.txt` (generated by every build from the packages actually bundled into the site's scripts, Web Workers and service worker) carries the licence text of all third-party code the site ships. YouTube API Services: the privacy page says what is fetched and kept, and links the YouTube Terms of Service and the Google Privacy Policy.
 
-## 7. Private data in CI, retention and kill switches
+## 7. Private data in CI and retention
 
-### How B and C data moves
+### How B, C and D data moves
 
 1. The game's data job writes `data/private/<game>/` and packs it with `node pipeline/private.ts pack`. Class-B files are packed only when the `DATA_ARTIFACT_KEY` secret is set; the bundle is then encrypted with AES-256-GCM. Without the key, class-B files are left out (a warning annotation says so) and the site builds without them. Workflow artifacts of a public repository can be downloaded by any signed-in GitHub user, which is why B never travels unencrypted.
-2. The bundle is uploaded as the `private-<game>` artifact with **1 day** retention.
-3. The build job restores the newest unexpired `private-<game>` artifact of a scheduled or dispatched `data-deploy` run of this repository (`pipeline/private.ts restore`; fork and pull-request runs are ignored, artifacts older than 24 hours are ignored). This covers games that failed today and push-triggered rebuilds.
-4. If `HP_MODE` is not `on`, the build job deletes every class-B file before building (`pipeline/private.ts purge --custody B`).
-5. The built site, including hashed shards, is the `github-pages` artifact (1 day retention) and the live deployment.
+2. After every successful run the bundle is uploaded as the `private-<game>` artifact with **1 day** retention, even when it is empty: an empty bundle (a tombstone) records that the run had nothing private to ship.
+3. The build job restores the newest unexpired `private-<game>` artifact of a scheduled or dispatched `data-deploy` run of this repository (`pipeline/private.ts restore`; fork and pull-request runs are ignored, artifacts older than 24 hours are ignored). A tombstone leaves that game without private data; a game that failed today keeps yesterday's bundle while it is younger than 24 hours. An artifact that cannot be read (for example after `DATA_ARTIFACT_KEY` was rotated) only costs that game its private data, with a warning; the build carries on.
+4. The built site, including hashed shards, is the `github-pages` artifact (1 day retention) and the live deployment.
+5. In visitors' browsers, private shards are never cached by the service worker (they are staged under `_private/`), and saved pages expire after 7 days.
 
 ### Retention of class C
 
 | Source | Rule | How Whetstone complies |
 |---|---|---|
-| Twitch | Cache at most 24 hours | Artifacts kept 1 day; the client stops showing streams after 90 minutes and treats anything older than 24 hours as absent; the next deploy replaces the file |
-| YouTube Data API | Refresh or delete within 30 days | Refreshed on each run; the client hides items older than 30 days |
+| YouTube Data API | Refresh or delete within 30 days | Refreshed on each run; the client hides items older than 30 days; artifacts are kept 1 day |
 
-If the cron stops, C data in the last deployment is hidden by the client after its window. To remove it from the deployment as well, unset the credential and run **Data + Deploy** with `force_deploy`.
+Twitch is not used (no stream metadata is fetched).
 
-### Heroes Profile kill switch runbook
+### Removing private data from the live site
 
-Use this when Heroes Profile withdraws permission, the subscription lapses, the terms change, or you decide to stop. HP's terms require that HP data and anything derived from it stop being displayed and are deleted within **30 days**, with backups gone within a further 30 days.
+To stop showing a B, C or D source (credential withdrawn, terms changed, or you decide to stop):
 
-1. **Switch off.** Settings → Secrets and variables → Actions → Variables: set `HP_MODE` to `off` (or delete the variable; off is the default).
-2. **Redeploy without HP data.** Actions → Data + Deploy → Run workflow with `games` = `hots` and `force_deploy` checked. The runner drops class-B outputs, the build purges any restored B files, and the deploy replaces the live site. Check that stats routes no longer show Heroes Profile numbers or the "Data provided by Heroes Profile" credit.
-3. **Remove the credential.** Delete the `HP_API_KEY` secret. Cancel the subscription or Patreon pledge if appropriate.
-4. **Delete artifacts now** instead of waiting for the 1-day expiry:
+1. Delete or unset its credential (Settings → Secrets and variables → Actions), or switch its source off in the game's pipeline.
+2. Run **Data + Deploy** with `games` set to that game and `force_deploy` checked. The run writes a tombstone bundle, the build restores it and the deploy replaces the live site without the data. Visitors' browsers drop it on their next visit: private shards are never cached, saved pages expire within 7 days, and bumping `SW_CACHE_VERSION` in `src/components/offline.ts` clears every saved page and data file on the next visit.
+3. Optionally delete the remaining artifacts at once instead of waiting for the 1-day expiry (in a shell, one artifact id per line):
 
    ```sh
-   gh api --paginate repos/JollyKrampus/whetstone/actions/artifacts \
-     --jq '.artifacts[] | select(.name == "private-hots" or .name == "github-pages") | .id' |
-   while read -r id; do gh api -X DELETE "repos/JollyKrampus/whetstone/actions/artifacts/$id"; done
+   gh api --paginate repos/JollyKrampus/whetstone/actions/artifacts --jq '.artifacts[] | select((.name | startswith("private-")) or .name == "github-pages") | .id' | while read -r id; do gh api -X DELETE "repos/JollyKrampus/whetstone/actions/artifacts/$id"; done
    ```
 
-5. **Delete local copies** on every machine that ran the pipeline with a key: `data/private/hots/`, the HTTP cache `.cache/http/`, and any recorded fixtures containing real HP responses (fixtures must only ever hold HP's placeholder fixture-mode data).
-6. **Nothing to rewrite in git.** Class B is never committed. Confirm with `git log --all --oneline -- '*stats.json'` on the `data` branch (expect no output).
-7. **Rotate** `DATA_ARTIFACT_KEY` (optional; old artifacts are already deleted).
-8. **Record the date** of steps 1 to 5 in the pipeline-failure or tracking issue. The non-compete and no-competing-dataset clauses last 12 months after termination: do not start collecting replays for HotS statistics in that period.
-
-To turn HP back on later: written OK from Heroes Profile, then `HP_API_KEY` secret, `DATA_ARTIFACT_KEY` secret and `HP_MODE=on`.
+4. Delete local copies on every machine that ran the pipeline with the credential: `data/private/<game>/` and the HTTP cache `.cache/http/`. Class-C responses are never recorded as fixtures (`pipeline/http.ts` refuses the class-C API hosts, and their fixture folders are git-ignored).
+5. Nothing to rewrite in git: B, C and D are never committed.
 
 ## 8. Failures and recovery
 
-- A failing source or validation keeps that game's last good data live. The data job fails, the run's `report` job opens (or comments on) an issue labelled `pipeline-failure`, and the next successful run closes it.
-- The site shows a freshness badge from `meta.generatedAt` and per-source status. When nothing changed, the site is not redeployed, but the publish job redeploys anyway once the live data is more than 48 hours old or its `dataHash` differs from the branch, so the badge never lags far.
+- A failing validation keeps that game's last good data live. The data job fails, the run's `report` job opens (or comments on) an issue labelled `pipeline-failure`, and the next successful run closes it.
+- A failing source is softer: the game keeps that source's last good data and the run succeeds, but the source is listed as degraded (`status.json`, the publish summary and the run's step summary). Once a source has been degraded for 2 runs in a row, the report job opens or comments on the `pipeline-failure` issue too, and the issue is never closed while any source is still degraded.
+- The site shows a freshness badge from `meta.generatedAt` and per-source status: a game with degraded sources is never shown as fresh, the badge says how many sources are behind, and it goes stale once the oldest last-good data does; the staleness banner names them with their dates. When nothing changed, the site is not redeployed, but the publish job redeploys anyway once the live data is more than 48 hours old or its `dataHash` differs from the branch, so the badge never lags far.
+- A data job that dies before the pipeline writes its status cannot pass off yesterday's `status.json` as today's: the job deletes the branch copy before running, and `publish.ts` rejects any status that is not newer than the branch's.
+- The Pokémon dex is exported from Pokémon Showdown's source in its own job (`showdown-export`: no token permissions, no secrets); when it fails, the Pokémon data job keeps the last-good dex.
 - To retry: Actions → Data + Deploy → Run workflow (optionally only the failing game). To rebuild without fetching: `games` = `none`.
 - To reproduce locally: `npm run data:pull`, then `npm run data -- --game <game>` (live) or `npm run data:offline -- --game <game>` (fixtures).
 - To see what CI's runners can reach: run the **Egress probe** workflow.

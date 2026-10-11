@@ -11,6 +11,11 @@
  * Credentials: `bearer` maps a host to a token sent as `Authorization: Bearer` to that host only
  * (pipeline/run.ts passes GITHUB_TOKEN for api.github.com). fetch drops the header on a
  * cross-origin redirect, and neither the token nor the header reaches logs, cache keys or fixtures.
+ *
+ * Record mode never writes what must not be committed: responses of the class-C API hosts
+ * (NO_RECORD_HOSTS: video and stream metadata), requests marked `noRecord`, and `request()`
+ * calls. A request's `scrub` hook rewrites the body before it is saved (e.g. replacing player
+ * names), and src/games/<game>/fixtures/raw/{youtube,twitch}/ are git-ignored as a backstop.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -18,6 +23,9 @@ import type { Http, HttpInit, HttpResponse } from '../src/core/game.ts';
 import { sha256, stableStringify } from './hash.ts';
 
 export const USER_AGENT_BASE = 'Whetstone/0.1 (+https://github.com/JollyKrampus/whetstone)';
+
+/** API hosts whose responses are class C (ephemeral metadata): never recorded as fixtures. */
+export const NO_RECORD_HOSTS: ReadonlySet<string> = new Set(['www.googleapis.com', 'youtube.googleapis.com', 'api.twitch.tv', 'id.twitch.tv']);
 
 /** Query parameters whose values must never reach logs, cache keys or fixture names. */
 const SECRET_PARAMS = new Set(['key', 'api_key', 'apikey', 'api_token', 'access_token', 'token', 'client_secret', 'password', 'secret', 'sig', 'signature']);
@@ -242,11 +250,20 @@ export function createHttp(options: HttpOptions): Http {
     return { status: 200, headers: {}, body };
   }
 
-  function writeFixture(key: string, kind: Kind, res: RawResponse): void {
+  function writeFixture(key: string, kind: Kind, res: RawResponse, url: string, scrub?: HttpInit['scrub']): void {
     // An explicit extension in the key wins; otherwise use the preferred extension for the call.
     const target = fixtureCandidates(key, kind)[0] as string;
+    let body = res.body;
+    if (scrub && kind !== 'head') {
+      try {
+        body = scrub(res.body, url);
+      } catch (err) {
+        log(`not recording ${redactUrl(url)}: scrub failed (${err instanceof Error ? err.message : String(err)})`);
+        return;
+      }
+    }
     mkdirSync(path.dirname(target), { recursive: true });
-    writeFileSync(target, kind === 'head' ? stableStringify(res.headers, 2) + '\n' : res.body);
+    writeFileSync(target, kind === 'head' ? stableStringify(res.headers, 2) + '\n' : body);
     log(`recorded fixture ${path.relative(options.root, target).split(path.sep).join('/')}`);
   }
 
@@ -293,14 +310,14 @@ export function createHttp(options: HttpOptions): Http {
     if (options.offline) return readFixture(method, url, key, kind);
 
     const raw = kind === 'raw';
-    const record = options.record === true && !raw;
+    const record = options.record === true && !raw && init.noRecord !== true && !NO_RECORD_HOSTS.has(new URL(url).host);
     const cacheable = options.cache === true && !raw && (method === 'GET' || method === 'HEAD');
     const cp = cacheable ? cachePaths(method, url, init.body) : null;
     const cached = cp ? readCache(cp) : null;
     const ttlMs = (init.ttlHours ?? options.ttlHours ?? 12) * 3_600_000;
     if (cached && now() - cached.meta.savedAt < ttlMs) {
       const res = { status: cached.meta.status, headers: cached.meta.headers, body: cached.body };
-      if (record) writeFixture(key, kind, res);
+      if (record) writeFixture(key, kind, res, url, init.scrub);
       return res;
     }
 
@@ -339,7 +356,7 @@ export function createHttp(options: HttpOptions): Http {
         const meta = { ...cached.meta, savedAt: now() };
         writeCache(cp, meta, cached.body);
         const out = { status: cached.meta.status, headers: cached.meta.headers, body: cached.body };
-        if (record) writeFixture(key, kind, out);
+        if (record) writeFixture(key, kind, out, url, init.scrub);
         return out;
       }
       if (raw) return res;
@@ -361,7 +378,7 @@ export function createHttp(options: HttpOptions): Http {
       if (cp && res.status === 200) {
         writeCache(cp, { url: safeUrl, method, status: res.status, headers: res.headers, savedAt: now() }, res.body);
       }
-      if (record && res.status === 200) writeFixture(key, kind, res);
+      if (record && res.status === 200) writeFixture(key, kind, res, url, init.scrub);
       return res;
     }
     throw new HttpError(`${method} ${safeUrl} failed: ${lastError}`, 0, safeUrl);

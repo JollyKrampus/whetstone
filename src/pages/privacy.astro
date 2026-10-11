@@ -1,8 +1,10 @@
 ---
-import { SITE, withBase } from '../games/registry.ts';
+import { SITE, games, withBase } from '../games/registry.ts';
 import Base from '../layouts/Base.astro';
 
-const UPDATED = '2026-10-09';
+const UPDATED = '2026-10-10';
+// Each game declares the browser storage its pages use (GamePresentation.storage in src/games/registry.ts).
+const rows = games.flatMap((g) => g.storage.map((row) => ({ ...row, game: g.id })));
 ---
 
 <Base title="Privacy" description="What Whetstone stores (only preferences, saved tools and a card cache in your own browser) and which requests leave this site.">
@@ -20,14 +22,14 @@ const UPDATED = '2026-10-09';
     <div class="prose">
       <h2>Stored in your browser</h2>
       <p>
-        A few preferences and the things you save in the tools are kept in your browser's local storage so they survive a
-        reload. They never leave your device, and clearing this site's data in your browser removes them. Keys start with
-        <code>whetstone:</code>:
+        A few preferences and the things you save in the tools are kept in your browser's storage so they survive a reload.
+        They never leave your device, and clearing this site's data in your browser removes them. Local storage keys start
+        with <code>whetstone:</code>:
       </p>
       <table>
         <thead>
           <tr>
-            <th scope="col">Key</th>
+            <th scope="col">Key or database</th>
             <th scope="col">What it holds</th>
           </tr>
         </thead>
@@ -40,34 +42,25 @@ const UPDATED = '2026-10-09';
             <td><code>whetstone:site:period:*</code></td>
             <td>The time period you last picked on stats pages.</td>
           </tr>
-          <tr>
-            <td><code>whetstone:hots:*</code></td>
-            <td>
-              Heroes of the Storm: your hero pool and favourites (<code>pool</code>), the hero grid's dimming choice, the
-              draft tool's sort mode and "suggest from" choice, and the game mode you last picked on stats pages.
-            </td>
-          </tr>
-          <tr>
-            <td><code>whetstone:mtga:*</code></td>
-            <td>MTG Arena: meta decklists you saved, your meta comparison choice and the wildcards you own.</td>
-          </tr>
-          <tr>
-            <td><code>whetstone:pokemon:*</code></td>
-            <td>Pokémon Champions: teams you saved and the team currently open in the builder (the team preview reads it too).</td>
-          </tr>
+          {
+            rows.map((row) => (
+              <tr data-game={row.game}>
+                <td>
+                  <code>{row.key}</code>
+                </td>
+                <td>{row.text}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
-      <p>
-        <strong>Card data cache.</strong> The MTG Arena tools keep a copy of the public card index they analyse with in an
-        IndexedDB database named <code>whetstone-mtga</code> (one record per card pool, replaced when the card data is
-        updated), so the multi-megabyte download happens once. It holds no information about you.
-      </p>
 
       <h2>Offline copy</h2>
       <p>
-        A service worker keeps a copy of the site's scripts, styles and icons, plus the pages, data files, images and tool
-        workers you have opened, so tools keep working on a flaky connection. It lives in your browser's cache storage (caches
-        whose names start with <code>whetstone</code>) and is removed with the rest of the site data.
+        A service worker keeps a copy of the site's scripts, styles and icons, a small offline page, plus the pages, data files,
+        images and tool workers you have opened, so tools keep working on a flaky connection. Saved pages and data files are
+        dropped after a week, images after a month. It lives in your browser's cache storage (caches whose names start with
+        <code>whetstone</code>) and is removed with the rest of the site data.
       </p>
 
       <h2>Share links</h2>
@@ -91,15 +84,33 @@ const UPDATED = '2026-10-09';
         </li>
         <li>
           <strong>Videos and streams, only on click.</strong> Heroes of the Storm guide videos and live streams show a plain
-          card first. Nothing is requested from YouTube or Twitch until you press <em>Play here</em>; the player then loads
-          from <code>www.youtube-nocookie.com</code> or <code>player.twitch.tv</code> under their own privacy policies.
-          <em>Open on YouTube</em> and <em>Open on Twitch</em> are ordinary links.
+          card first. Nothing is requested from YouTube or Twitch until you press <em>Play here</em>; the player then loads from
+          <code>www.youtube-nocookie.com</code> or <code>player.twitch.tv</code> under their own privacy policies (see
+          <a href="#youtube">YouTube videos</a> below). <em>Open on YouTube</em> and <em>Open on Twitch</em> are ordinary links.
         </li>
         <li>
           <strong>Everything else</strong> (data files, hero portraits, ability icons, Pokémon sprites, scripts and styles) is
           served from this site. Outbound links to guides and sources take you to those sites, under their own policies.
         </li>
       </ul>
+
+      <h2 id="youtube">YouTube videos</h2>
+      <p>
+        Heroes of the Storm hero pages can list guide videos. Whetstone uses the
+        <strong>YouTube API Services</strong> to look them up: once a day, the build looks up the recent public uploads of a
+        short list of community channels and keeps each video's id, title, channel name, date, length and view count. It
+        never asks for, receives or stores anything about you or any other viewer, and it uses no YouTube account. The video
+        list is refreshed on every daily build and anything older than 30 days is no longer shown or kept.
+      </p>
+      <p>
+        When you choose to play a video here, or follow a link to YouTube, YouTube's own terms and privacy policy apply to
+        that player or page. By using those YouTube features you agree to be bound by the
+        <a href="https://www.youtube.com/t/terms" rel="noopener">YouTube Terms of Service</a>, and Google handles the data
+        under the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>. You can review or
+        revoke access that any app has to your Google data at
+        <a href="https://security.google.com/settings/security/permissions" rel="noopener">Google's security settings</a>
+        (Whetstone never asks for such access).
+      </p>
 
       <h2>Questions</h2>
       <p>

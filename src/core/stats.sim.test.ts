@@ -5,7 +5,7 @@
  * pair shrinkage → antisymmetry → display gates) and count what a hero page would list.
  *
  * Volumes bracket the critique's 6× uncertainty for Storm League: ~330 games/day (the
- * hotspatchnotes reading) and ~3,000/day (the Heroes Profile id-growth estimate), both over a
+ * hotspatchnotes reading) and ~3,000/day (a high replay-volume estimate), both over a
  * 30-day patch window. Everything is seeded (mulberry32); no Math.random.
  *
  * Set WHETSTONE_SIM_VERBOSE=1 to print the measured rates when recalibrating the gates.

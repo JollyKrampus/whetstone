@@ -5,10 +5,11 @@
  *  - `public/data/manifest.json` (unhashed public manifest built by stage.ts).
  * See docs/DATA.md.
  */
-import type { CustodyClass, GameId, GameMeta, SourceStatus, ValidationIssue } from '../src/core/game.ts';
+import { GAME_IDS, type CustodyClass, type GameId, type GameMeta, type SourceStatus, type ValidationIssue } from '../src/core/game.ts';
 import { compareStrings, sha256 } from './hash.ts';
 
-export const GAME_IDS: readonly GameId[] = ['hots', 'mtga', 'pokemon'];
+/** The one list of games (src/core/game.ts), re-exported for the pipeline tools. */
+export { GAME_IDS };
 export const META_FILE = 'meta.json';
 export const STATUS_FILE = 'status.json';
 export const FILE_INDEX = '_files.json';
@@ -96,6 +97,13 @@ export interface GameStatus {
   sources: SourceStatus[];
   issues: ValidationIssue[];
   detail?: string;
+  /**
+   * Sources of an `ok` run that failed or went stale (last-good data kept for them). The runner
+   * lists them; publish.ts adds how many consecutive runs each has been degraded.
+   */
+  degraded?: string[];
+  /** Source id → consecutive runs it has been degraded, including this one (publish.ts). */
+  degradedRuns?: Record<string, number>;
 }
 
 export interface StatusFile {

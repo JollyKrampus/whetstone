@@ -3,24 +3,92 @@ import { describe, expect, it } from 'vitest';
 // Imported through the package.json "imports" alias on purpose: proves Vitest resolves #games/*.
 import {
   BASE,
+  SITE,
+  accentStylesheet,
   allNavRoutes,
   gameById,
   gameFromPath,
   games,
+  listNames,
   navHref,
+  rightsHolders,
   searchHref,
+  sourceCopyright,
   sourcesFor,
   versionText,
   withBase,
 } from '#games/registry.ts';
+import { GAME_IDS } from '#core/game.ts';
+import { plan, planOutputs } from '../../scripts/plan.ts';
 
 describe('registry', () => {
-  it('lists every game once with the SPEC statuses', () => {
-    expect(games.map((g) => [g.id, g.status])).toEqual([
-      ['hots', 'live'],
-      ['mtga', 'beta'],
-      ['pokemon', 'beta'],
+  it('lists every game of GAME_IDS once, in that order, and every one is live (no beta, SPEC §13)', () => {
+    expect(games.map((g) => g.id)).toEqual([...GAME_IDS]);
+    for (const g of games) expect(g.status).toBe('live');
+  });
+
+  it('resolves the presentation every shared page needs for every game', () => {
+    for (const g of games) {
+      expect(g.legalNotice.heading.length, g.id).toBeGreaterThan(0);
+      expect(g.legalNotice.body.length, g.id).toBeGreaterThan(0);
+      expect(g.legalNotice.owners.length, g.id).toBeGreaterThan(0);
+      expect(g.accentColors.dark, g.id).toMatch(/^#[0-9a-f]{6}$/i);
+      expect(g.accentColors.light, g.id).toMatch(/^#[0-9a-f]{6}$/i);
+      expect(g.storage.length, g.id).toBeGreaterThan(0);
+      for (const row of g.storage) expect(row.key.startsWith('whetstone'), row.key).toBe(true);
+      expect(g.pipeline.timeoutMinutes, g.id).toBeGreaterThan(0);
+      expect(g.searchPath === '#search' || g.searchPath.endsWith('/'), g.id).toBe(true);
+    }
+    expect(rightsHolders()).toContain('Blizzard Entertainment');
+    expect(listNames(['A', 'B', 'C'], 'or')).toBe('A, B or C');
+    for (const g of games) expect(SITE.description).toContain(g.name);
+  });
+
+  it('emits each game accent for both themes and scopes --accent by data-game', () => {
+    const css = accentStylesheet();
+    for (const g of games) {
+      expect(css).toContain(`${g.accent}: ${g.accentColors.dark};`);
+      expect(css).toContain(`${g.accent}: ${g.accentColors.light};`);
+      expect(css).toContain(`[data-game='${g.id}'] {`);
+    }
+    expect(css).toContain(":root[data-theme='light']");
+    expect(css).toContain('@media (prefers-color-scheme: light)');
+    expect(() => accentStylesheet([{ ...gameById('hots'), accentColors: { dark: 'red;}body{', light: '#000' } }])).toThrow(/hex colour/);
+  });
+
+  it('builds the daily data matrix from the registry', () => {
+    const all = plan('schedule', undefined);
+    expect(all.games).toEqual([...GAME_IDS]);
+    expect(all.matrix.include).toEqual(games.map((g) => ({ game: g.id, timeout: g.pipeline.timeoutMinutes })));
+    expect(plan('push', 'all').games).toEqual([]);
+    expect(plan('workflow_dispatch', 'none').games).toEqual([]);
+    expect(plan('workflow_dispatch', 'pokemon, hots').games).toEqual(['hots', 'pokemon']);
+    expect(() => plan('workflow_dispatch', 'hots,nope')).toThrow(/Unknown game 'nope'/);
+    expect(planOutputs(plan('workflow_dispatch', 'mtga'))).toEqual([
+      `matrix={"include":[{"game":"mtga","timeout":${gameById('mtga').pipeline.timeoutMinutes}}]}`,
+      'games=mtga',
+      'run_data=true',
+      'pokemon=false',
     ]);
+  });
+
+  it('keeps the data workflow generic: the matrix comes from scripts/plan.ts, secrets are scoped per game', () => {
+    const yml = readFileSync(new URL('../../.github/workflows/data-deploy.yml', import.meta.url), 'utf8');
+    expect(yml).toContain('node scripts/plan.ts');
+    expect(yml).toContain('matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}');
+    // No hard-coded game list, no Heroes Profile or Twitch secrets, one game per secret.
+    expect(yml).not.toMatch(/hots mtga pokemon|"hots":90/);
+    expect(yml).not.toMatch(/HP_API_KEY|HP_MODE|TWITCH_/);
+    for (const line of yml.split('\n').filter((l) => /secrets\.(?!DATA_ARTIFACT_KEY)/.test(l))) {
+      expect(line, 'secret without a per-game condition').toMatch(/matrix\.game == '[a-z]+' && secrets\./);
+    }
+    // Every action pinned to a full commit SHA.
+    for (const line of yml.split('\n').filter((l) => l.includes('uses:'))) expect(line).toMatch(/@[0-9a-f]{40} # v\d/);
+  });
+
+  it('knows the copyright lines of the MIT sources it redistributes', () => {
+    expect(sourceCopyright(sourcesFor('pokemon', ['showdown'])[0]!)).toMatch(/Guangcong Luo/);
+    expect(sourceCopyright({ id: 'x', name: 'x', url: 'https://x', attribution: 'x', rule: 'footer', custody: 'A', copyright: 'Copyright (c) X' })).toBe('Copyright (c) X');
   });
 
   it('gives every game a CSS accent token, a home nav entry and unique, slash-terminated paths', () => {

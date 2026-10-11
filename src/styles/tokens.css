@@ -16,6 +16,8 @@
   --surface-3: #212a36;
   --border: #2a3441;
   --border-strong: #3b4858;
+  /* Outline of form controls (inputs, selects, chips): at least 3:1 against bg, surface, surface-2 and surface-3 (WCAG 1.4.11). */
+  --control-border: #6b7b8f;
   --text: #e6ebf1;
   --text-muted: #9fabba;
   --text-faint: #8592a3;
@@ -28,10 +30,7 @@
   --edge-soft: rgb(79 216 196 / 0.14);
   --on-edge: #0b0f14;
 
-  /* Game accents (GameModule.accent names one of these). */
-  --accent-hots: #b69cff;
-  --accent-mtga: #f2b84b;
-  --accent-pokemon: #ff7d73;
+  /* Game accents: --accent-<game> comes from src/games/registry.ts (virtual:whetstone/accents.css). */
   --on-accent: #0b0f14;
 
   /* Semantic tones; always paired with text or an icon, never colour alone. */
@@ -83,7 +82,12 @@
   --bevel: 12px;
 
   --content-max: 72rem;
-  --header-h: 3.5rem;
+  /*
+   * Height of the sticky site header (scroll-padding keeps focused and linked targets below it).
+   * Below 48rem the header wraps into two rows: the brand row (one tap target) and the game
+   * switcher (2.5rem links plus padding), plus the bar padding and its 1px border.
+   */
+  --header-h: calc(var(--tap) + 2.5rem + 2 * var(--sp-1) + 2 * var(--sp-2) + 1px);
   --tap: 2.75rem;
 
   --focus-color: var(--edge);
@@ -104,6 +108,7 @@
   --surface-3: #dfe5ec;
   --border: #d3dae3;
   --border-strong: #b3bfcc;
+  --control-border: #768394;
   --text: #111720;
   --text-muted: #4a5667;
   --text-faint: #535f6e;
@@ -115,9 +120,6 @@
   --edge-soft: rgb(8 107 96 / 0.1);
   --on-edge: #ffffff;
 
-  --accent-hots: #6b3fd4;
-  --accent-mtga: #8f5600;
-  --accent-pokemon: #c0282b;
   --on-accent: #ffffff;
 
   --positive: #166c36;
@@ -145,6 +147,7 @@
     --surface-3: #dfe5ec;
     --border: #d3dae3;
     --border-strong: #b3bfcc;
+    --control-border: #768394;
     --text: #111720;
     --text-muted: #4a5667;
     --text-faint: #535f6e;
@@ -156,9 +159,7 @@
     --edge-soft: rgb(8 107 96 / 0.1);
     --on-edge: #ffffff;
 
-    --accent-hots: #6b3fd4;
-    --accent-mtga: #8f5600;
-    --accent-pokemon: #c0282b;
+
     --on-accent: #ffffff;
 
     --positive: #166c36;
@@ -176,20 +177,10 @@
   }
 }
 
-/* Per-game accent scoping (Base.astro sets data-game on <body>). */
-[data-game='hots'] {
-  --accent: var(--accent-hots);
-}
-[data-game='mtga'] {
-  --accent: var(--accent-mtga);
-}
-[data-game='pokemon'] {
-  --accent: var(--accent-pokemon);
-}
-
 @media (min-width: 48rem) {
   :root {
     --gutter: 1.5rem;
+    --header-h: 3.5rem;
   }
 }
 

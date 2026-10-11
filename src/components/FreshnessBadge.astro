@@ -2,6 +2,8 @@
 /**
  * "Patch 2.57 · Updated 3 h ago" pill for a game's data. Server HTML carries the absolute UTC time;
  * the client script swaps in a relative time and re-checks staleness against the visitor's clock.
+ * When some sources served last-good data in the latest run, the pill says how many and is never
+ * "fresh" (src/core/freshness.ts badgeLevel); StaleBanner lists them with their dates.
  */
 import type { GameId, GameMeta } from '../core/game.ts';
 import { formatDateTimeUTC } from '../core/format.ts';
@@ -24,10 +26,11 @@ const report = meta && generatedAt ? freshness(meta, Date.now(), { names }) : nu
 const state: BadgeState = report?.level ?? 'unknown';
 const version = meta?.version.label ? versionText(game, meta.version.label) : null;
 const word = STATE_WORD[state];
+const behind = report?.degraded.length ?? 0;
 ---
 
 <p class:list={['fresh-line', extra]}>
-  <span class="fresh" data-fresh data-state={state} data-generated-at={generatedAt ?? undefined}>
+  <span class="fresh" data-fresh data-state={state} data-generated-at={generatedAt ?? undefined} data-degraded-since={report?.degradedSince ?? undefined} title={report?.label}>
     <span class="fresh__pip" aria-hidden="true"></span>
     {version && <span class="fresh__version">{version}</span>}
     {
@@ -38,6 +41,13 @@ const word = STATE_WORD[state];
       ) : null
     }
     <span class="fresh__state" data-fresh-label hidden={word === ''}>{word}</span>
+    {
+      behind > 0 && (
+        <span class="fresh__behind">
+          {behind === 1 ? '1 source behind' : `${behind} sources behind`}
+        </span>
+      )
+    }
   </span>
   {
     fixtures && (
@@ -125,6 +135,11 @@ const word = STATE_WORD[state];
   .fresh[data-state='stale'] .fresh__state,
   .fresh[data-state='broken'] .fresh__state {
     color: var(--negative);
+  }
+
+  .fresh__behind {
+    color: var(--warning);
+    font-weight: 600;
   }
 
   .fresh__sample {

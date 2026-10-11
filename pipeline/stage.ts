@@ -15,9 +15,13 @@
  *    and mapped but never listed in the manifest.
  *
  * Overlay: when private/<game>/public/<name>.json exists next to current/<game>/public/<name>.json
- * (e.g. a class-B "stats" block for the HotS draft shard), the site gets their shallow merge
- * (top-level keys must not overlap), while the manifest keeps pointing at the pure class-A file,
- * which is staged as well. The public manifest never points at a file containing licensed data.
+ * (e.g. a class-B/C block for a game's shard), the site gets their shallow merge (top-level keys
+ * must not overlap), while the manifest keeps pointing at the pure class-A file, which is staged
+ * as well. The public manifest never points at a file containing B/C data.
+ *
+ * Every shard that contains private (B/C) data, merged or not, is staged under
+ * public/data/<game>/_private/: the "_" keeps it out of the service worker's data cache
+ * (scripts/sw.ts DATA_ROUTE), so a visitor's device never keeps it beyond the deploy that served it.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -35,6 +39,9 @@ import {
   type PublicManifestFile,
 } from './manifest.ts';
 import { copyTree, listFiles, readJson, removeTree, resolveRel } from './store.ts';
+
+/** Sub-directory of public/data/<game>/ for shards that carry class-B/C data (never cached by the service worker). */
+export const PRIVATE_STAGE_DIR = '_private';
 
 export interface DataDirs {
   dir: string | null;
@@ -154,7 +161,7 @@ export function stage(opts: StageOptions): StageResult {
         const custody = custodyOf(index, `public/${rel}`, 'A');
         if (!internal && isCommittable(custody)) files[name] = { url, custody };
       }
-      if (b) map[key] = emit(name, ext, a ? overlay(key, a, b) : b);
+      if (b) map[key] = emit(`${PRIVATE_STAGE_DIR}/${name}`, ext, a ? overlay(key, a, b) : b);
     }
     for (const rel of copyTree(path.join(dir, 'img'), path.join(outDir, 'img'))) staged.push(`data/${game}/img/${rel}`);
 

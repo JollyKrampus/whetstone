@@ -40,6 +40,8 @@ export interface Freshness {
   broken: string[];
   /** Ids of sources whose latest fetch failed but last-good data is being shown. */
   degraded: string[];
+  /** Oldest last-good fetch time among the degraded sources (null when none is degraded). */
+  degradedSince: string | null;
   disabled: string[];
 }
 
@@ -50,6 +52,20 @@ export function levelForAge(ageHours: number, thresholds: FreshnessThresholds = 
   if (ageHours < thresholds.freshHours) return 'fresh';
   if (ageHours < thresholds.agingHours) return 'aging';
   return 'stale';
+}
+
+/**
+ * Badge level from the run time and, when some sources served last-good data, the oldest of
+ * those (SPEC §1.8): a game whose run succeeded but whose sources lag is never "fresh", and goes
+ * stale as soon as its oldest lagging source does. Shared by the server badge and the browser
+ * script that re-grades it against the visitor's clock.
+ */
+export function badgeLevel(generatedAt: TimeInput, degradedSince: TimeInput | null, now: TimeInput, thresholds: FreshnessThresholds = FRESHNESS): 'fresh' | 'aging' | 'stale' {
+  const run = levelForAge(ageOf(generatedAt, now), thresholds);
+  if (degradedSince === null) return run;
+  const lag = levelForAge(ageOf(degradedSince, now), thresholds);
+  const floor = RANK[lag] < RANK.aging ? 'aging' : lag;
+  return RANK[floor] > RANK[run] ? floor : run;
 }
 
 function ageOf(when: TimeInput | null, now: TimeInput): number {
@@ -102,23 +118,28 @@ export function freshness(meta: Pick<GameMeta, 'generatedAt' | 'sources'>, now: 
   });
 
   const broken = sources.filter((s) => s.level === 'broken').map((s) => s.id);
-  const degraded = sources.filter((s) => s.ageHours !== null && (s.status === 'failed' || s.status === 'stale')).map((s) => s.id);
+  const lagging = sources.filter((s) => s.ageHours !== null && (s.status === 'failed' || s.status === 'stale'));
+  const degraded = lagging.map((s) => s.id);
   const disabled = sources.filter((s) => s.level === 'disabled').map((s) => s.id);
+  // Oldest last-good data among the lagging sources (their fetchedAt is the last success).
+  const oldest = lagging.reduce<SourceFreshness | null>((acc, s) => (acc === null || (s.ageHours ?? 0) > (acc.ageHours ?? 0) ? s : acc), null);
+  const degradedSince = oldest?.fetchedAt ?? null;
 
   const ageHours = ageOf(meta.generatedAt, now);
-  let level: FreshnessLevel = levelForAge(ageHours, thresholds);
+  let level: FreshnessLevel = badgeLevel(meta.generatedAt, degradedSince, now, thresholds);
   if (broken.length > 0) level = 'broken';
 
+  const behind = lagging.length > 0 ? `; ${lagging.map((s) => s.name).join(', ')} not refreshed since ${relativeTime(degradedSince as string, now)}` : '';
   let label: string;
   if (level === 'broken') {
     label = `Some data is unavailable: ${broken.map(name).join(', ')}`;
   } else if (!Number.isFinite(ageHours)) {
     label = 'Update time unknown';
-  } else if (level === 'stale') {
+  } else if (levelForAge(ageHours, thresholds) === 'stale') {
     label = `Data may be out of date (updated ${relativeTime(meta.generatedAt, now)})`;
   } else {
-    label = `Updated ${relativeTime(meta.generatedAt, now)}`;
+    label = `Updated ${relativeTime(meta.generatedAt, now)}${behind}`;
   }
 
-  return { generatedAt: meta.generatedAt, ageHours, level, label, sources, broken, degraded, disabled };
+  return { generatedAt: meta.generatedAt, ageHours, level, label, sources, broken, degraded, degradedSince, disabled };
 }

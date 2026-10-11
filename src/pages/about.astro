@@ -1,13 +1,12 @@
 ---
-import Badge from '../components/Badge.tsx';
 import { GATES } from '../core/stats.ts';
-import { SITE, games, navHref, withBase } from '../games/registry.ts';
+import { SITE, games, listNames, navHref, withBase } from '../games/registry.ts';
 import Base from '../layouts/Base.astro';
 
 const flow = [
   {
     title: 'Sources',
-    body: 'Game files and builds, official patch notes, open datasets (MIT, CC BY, CC-BY-SA) and, only with permission, licensed stats.',
+    body: 'Game files and builds, official patch notes, open datasets (MIT, CC BY, CC-BY-SA), our own curated notes and our own analysis. No third-party stats aggregator.',
   },
   {
     title: 'Daily pipeline',
@@ -15,7 +14,7 @@ const flow = [
   },
   {
     title: 'Custody',
-    body: 'Open data is published to a public data branch with history. Share-alike data stays in separate, labelled files. Licensed data is never committed anywhere.',
+    body: 'Open data is published to a public data branch with history and its licence notices. Share-alike data stays in separate, labelled files. Short-lived data such as video details is never committed anywhere.',
   },
   {
     title: 'Static build',
@@ -34,9 +33,9 @@ const flow = [
       <p class="kicker">About</p>
       <h1>A sharper second opinion for every pick.</h1>
       <p class="page__lead">
-        {SITE.name} is a free, open-source meta companion for {games.map((g) => g.name).join(', ').replace(/, ([^,]*)$/, ' and $1')}.
-        It turns public game data and openly licensed statistics into counters, drafts, deck analysis and team building, and it
-        always shows its working.
+        {SITE.name} is a free, open-source meta companion for {listNames(games.map((g) => g.name))}.
+        It turns public game data, openly licensed data and its own analysis into counters, drafts, deck analysis and team
+        building, and it always shows its working.
       </p>
     </header>
 
@@ -45,10 +44,9 @@ const flow = [
       <ul class="about-games">
         {
           games.map((g) => (
-            <li class="about-games__item" style={`--accent: var(${g.accent})`}>
+            <li class="about-games__item" data-game={g.id}>
               <div class="about-games__top">
                 <a href={navHref(g)}>{g.name}</a>
-                <Badge tone={g.status === 'live' ? 'positive' : 'accent'}>{g.status}</Badge>
               </div>
               <p>{g.tagline}</p>
               <a class="about-games__method" href={navHref(g, 'about/')}>

@@ -4,37 +4,50 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import type { GameId, GameMeta, Http, PipelineContext } from '../src/core/game.ts';
+import { gameById, games } from '../src/games/registry.ts';
 import { META_FILE } from './manifest.ts';
 import { readJson, resolveRel } from './store.ts';
 
 /**
- * Environment variables exposed to games as `ctx.secrets`. Anything else stays invisible to them.
- * GITHUB_TOKEN (the workflow's own token in CI) is also handed to the Http client, which sends it
- * to api.github.com only, so GitHub API calls get 1,000 requests/hour instead of 60 per runner IP.
+ * Environment variables a game's pipeline may read through `ctx.secrets`: only the ones its
+ * registry entry lists (GamePresentation.pipeline.env in src/games/registry.ts), so a credential
+ * meant for one game never reaches another game's code. GITHUB_TOKEN (the workflow's own token in
+ * CI) is never exposed to games: the Http client sends it to api.github.com only, so GitHub API
+ * calls get 1,000 requests/hour instead of 60 per runner IP.
  */
-export const SECRET_NAMES = ['HP_API_KEY', 'HP_MODE', 'YT_API_KEY', 'TWITCH_CLIENT_ID', 'TWITCH_CLIENT_SECRET', 'LIQUIPEDIA_UA_CONTACT', 'GITHUB_TOKEN'] as const;
-
-/** Hosts that receive a bearer token from the secrets (pipeline/http.ts `bearer`). */
-export function bearerTokens(secrets: Readonly<Record<string, string | undefined>>): Record<string, string> {
-  return secrets.GITHUB_TOKEN ? { 'api.github.com': secrets.GITHUB_TOKEN } : {};
+export function gameEnvNames(game: GameId): readonly string[] {
+  return [...(gameById(game).pipeline.env ?? []), ...(LEGACY_ENV[game] ?? [])];
 }
 
 /**
- * GitHub passes unset secrets as empty strings; normalise those to undefined. HP_MODE is the
- * Heroes Profile kill switch and is 'off' unless explicitly 'on' (SPEC §1.2).
+ * Transitional: the Heroes Profile step under src/games/hots/pipeline still reads these until the
+ * HotS pipeline drops it (Heroes Profile is removed, SPEC §13). No workflow passes them any more,
+ * so in CI they are always unset and that step stays disabled. Delete this with the step.
  */
-export function secretsFromEnv(env: Readonly<Record<string, string | undefined>>): Readonly<Record<string, string | undefined>> {
+const LEGACY_ENV: Partial<Record<GameId, readonly string[]>> = { hots: ['HP_API_KEY', 'HP_MODE'] };
+
+/** Every variable any game may read (for tooling that has no game context). */
+export function allGameEnvNames(): string[] {
+  return [...new Set(games.flatMap((g) => gameEnvNames(g.id)))].sort();
+}
+
+/** Hosts that receive a bearer token from the environment (pipeline/http.ts `bearer`). */
+export function bearerTokens(env: Readonly<Record<string, string | undefined>>): Record<string, string> {
+  const token = env.GITHUB_TOKEN?.trim();
+  return token ? { 'api.github.com': token } : {};
+}
+
+/**
+ * The variables one game may read, from the environment. GitHub passes unset secrets as empty
+ * strings; those become undefined. Without a game, every game's variables are included.
+ */
+export function secretsFromEnv(env: Readonly<Record<string, string | undefined>>, game?: GameId): Readonly<Record<string, string | undefined>> {
   const out: Record<string, string | undefined> = {};
-  for (const name of SECRET_NAMES) {
+  for (const name of game ? gameEnvNames(game) : allGameEnvNames()) {
     const v = env[name]?.trim();
     out[name] = v ? v : undefined;
   }
-  out.HP_MODE = out.HP_MODE?.toLowerCase() === 'on' ? 'on' : 'off';
   return Object.freeze(out);
-}
-
-export function hpEnabled(secrets: Readonly<Record<string, string | undefined>>): boolean {
-  return secrets.HP_MODE === 'on';
 }
 
 export interface ContextOptions {
@@ -72,7 +85,7 @@ export function createContext(o: ContextOptions): PipelineContext {
   const ctx: PipelineContext = {
     game: o.game,
     http: o.http,
-    secrets: secretsFromEnv(o.env),
+    secrets: secretsFromEnv(o.env, o.game),
     previousMeta,
     now: o.now,
     offline: o.offline,

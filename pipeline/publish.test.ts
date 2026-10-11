@@ -71,6 +71,51 @@ describe('publish', () => {
     expect(st.games.pokemon).toMatchObject({ state: 'failed', dataHash: 'old-pkmn' });
     expect(st.games.pokemon?.sources[0]?.status).toBe('stale');
     expect(existsSync(path.join(store, 'README.md'))).toBe(true);
+    expect(readFileSync(path.join(store, 'LICENSE'), 'utf8')).toContain('MIT License');
+    const notice = readFileSync(path.join(store, 'NOTICE.md'), 'utf8');
+    // Generated from the registry: every game, its open sources with licence and copyright, and the MIT text.
+    expect(notice).toContain('## Heroes of the Storm');
+    expect(notice).toContain('Copyright (c) 2026 Kevin Oliva');
+    expect(notice).toContain('Copyright (c) 2011-2026 Guangcong Luo and other contributors');
+    expect(notice).toContain('CC BY 4.0');
+    expect(notice).toContain('Permission is hereby granted');
+    expect(notice).not.toMatch(/custody [BCD]\b/);
+  });
+
+  it('rejects an artifact that still carries the old status.json of the branch', () => {
+    const old: StatusFile = { schema: 1, updatedAt: '2026-10-08T10:30:00.000Z', games: { hots: { ...status('ok', 'old', true), checkedAt: '2026-10-08T10:30:00.000Z' } } };
+    put(store, 'status.json', JSON.stringify(old));
+    put(store, 'current/hots/meta.json', JSON.stringify(meta('hots', 'old')));
+    // The job died before run.ts wrote a new status: the artifact holds yesterday's file.
+    const base = path.join(artifacts, 'data-hots');
+    put(base, 'status.json', JSON.stringify(old));
+    put(base, 'current/hots/meta.json', JSON.stringify(meta('hots', 'old')));
+    const r = publish({ store, artifacts, games: ['hots'], now });
+    expect(r.failed).toEqual(['hots']);
+    expect(r.changed).toBe(false);
+    expect(r.status.games.hots?.detail).toMatch(/old status.json/);
+  });
+
+  it('counts consecutive degraded runs per source and raises an alert from the second', () => {
+    const degraded = (checkedAt: string, ids: string[]): GameStatus => ({ ...status('ok', 'h', false), checkedAt, degraded: ids });
+    put(store, 'current/hots/meta.json', JSON.stringify(meta('hots', 'h')));
+    artifact('hots', degraded('2026-10-09T10:30:00.000Z', ['liquipedia']));
+    const first = publish({ store, artifacts, games: ['hots'], now });
+    expect(first.degraded).toEqual(['hots:liquipedia(1)']);
+    expect(first.alert).toEqual([]);
+
+    rmSync(artifacts, { recursive: true, force: true });
+    artifact('hots', degraded('2026-10-10T10:30:00.000Z', ['liquipedia', 'tact']));
+    const second = publish({ store, artifacts, games: ['hots'], now: new Date('2026-10-10T10:40:00Z') });
+    expect(second.degraded).toEqual(['hots:liquipedia(2)', 'hots:tact(1)']);
+    expect(second.alert).toEqual(['hots:liquipedia(2)']);
+    expect(second.status.games.hots?.degradedRuns).toEqual({ liquipedia: 2, tact: 1 });
+
+    rmSync(artifacts, { recursive: true, force: true });
+    artifact('hots', degraded('2026-10-11T10:30:00.000Z', []));
+    const recovered = publish({ store, artifacts, games: ['hots'], now: new Date('2026-10-11T10:40:00Z') });
+    expect(recovered.degraded).toEqual([]);
+    expect(recovered.status.games.hots?.degradedRuns).toBeUndefined();
   });
 
   it('treats an ok status without data as a failure', () => {

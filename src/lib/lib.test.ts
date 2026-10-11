@@ -50,7 +50,7 @@ describe('pendingSections', () => {
     name: 'Test',
     short: 'T',
     tagline: '',
-    status: 'beta',
+    status: 'live',
     accent: '--accent-hots',
     sources: [],
     nav: [

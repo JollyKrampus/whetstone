@@ -4,9 +4,9 @@ import path from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { DataPipeline, GameId, GameMeta, Http, OutputFile, PipelineContext, PipelineResult, ValidationIssue } from '../src/core/game.ts';
-import { bearerTokens, isSelected, secretsFromEnv } from './context.ts';
+import { bearerTokens, gameEnvNames, isSelected, secretsFromEnv } from './context.ts';
 import type { FileIndex, StatusFile } from './manifest.ts';
-import { checkResult, failedSources, formatSummary, githubOutputs, loadGamePipeline, runPipelines, type RunOptions } from './run.ts';
+import { checkResult, degradedSources, failedSources, formatSummary, githubOutputs, loadGamePipeline, runPipelines, type RunOptions } from './run.ts';
 import { listFiles } from './store.ts';
 
 let root: string;
@@ -35,7 +35,7 @@ function meta(game: GameId, extra: Partial<PipelineResult['meta']> = {}): Pipeli
     version: { label: '2.57', build: '2.57.0.98348' },
     sources: [
       { id: 'tact', fetchedAt: '2026-10-08T10:17:00.000Z', status: 'ok' },
-      { id: 'heroesprofile', fetchedAt: null, status: 'disabled', detail: 'HP_MODE is off' },
+      { id: 'youtube', fetchedAt: null, status: 'disabled', detail: 'YT_API_KEY not set' },
     ],
     counts: { heroes: 2 },
     ...extra,
@@ -52,7 +52,7 @@ function opts(pipelines: Partial<Record<GameId, DataPipeline | null>>, extra: Pa
     root,
     out,
     games: Object.keys(pipelines) as GameId[],
-    env: { HP_MODE: 'off' },
+    env: {},
     now: new Date('2026-10-08T10:17:00Z'),
     loadPipeline: async (game) => pipelines[game] ?? null,
     httpFor: () => noHttp,
@@ -179,10 +179,10 @@ describe('runPipelines: failure path', () => {
     expect(status.games.hots).toMatchObject({ state: 'failed', changed: false, dataHash: good.dataHash, generatedAt: good.generatedAt });
     expect(status.games.hots?.sources).toEqual([
       { id: 'tact', fetchedAt: '2026-10-08T10:17:00.000Z', status: 'failed', detail: 'heroes.json: hero count dropped to 0' },
-      { id: 'heroesprofile', fetchedAt: null, status: 'disabled', detail: 'HP_MODE is off' },
+      { id: 'youtube', fetchedAt: null, status: 'disabled', detail: 'YT_API_KEY not set' },
     ]);
     expect(status.games.mtga?.state).toBe('ok');
-    expect(githubOutputs(summary.reports)).toEqual(['changed_hots=false', 'changed_mtga=true', 'changed=true', 'failed=hots']);
+    expect(githubOutputs(summary.reports)).toEqual(['changed_hots=false', 'changed_mtga=true', 'changed=true', 'failed=hots', 'degraded=']);
     expect(formatSummary(summary.reports)).toMatch(/hots\s+failed\s+no/);
   });
 
@@ -219,7 +219,7 @@ describe('checkResult', () => {
       { path: 'a.json', data: 2, custody: 'A' },
       { path: 'b.json', data: 1, custody: 'Z' as never },
       { path: 'c.json', data: undefined, custody: 'A' },
-    ]), { HP_MODE: 'on' });
+    ]));
     expect(r.files.map((f) => f.path)).toEqual(['a.json']);
     expect(r.issues.filter((i) => i.level === 'error')).toHaveLength(5);
   });
@@ -231,38 +231,56 @@ describe('checkResult', () => {
       { path: 'public/draft.json', data: { more: {} }, custody: 'C' },
       { path: 'stats.json', data: {}, custody: 'A' },
       { path: 'stats.json', data: {}, custody: 'B' },
-    ]), { HP_MODE: 'on' });
+    ]));
     expect(r.files.map((f) => `${f.custody}:${f.path}`)).toEqual(['A:public/draft.json', 'B:public/draft.json', 'A:stats.json']);
     expect(r.issues.map((i) => i.message)).toEqual(['public/draft.json is emitted more than once', 'stats.json is emitted more than once']);
   });
 
   it('writes an overlay to both trees with the right custody in each index', async () => {
     const files: OutputFile[] = [...baseFiles(), { path: 'public/draft.json', data: { stats: { games: 1 } }, custody: 'B' }];
-    await runPipelines(opts({ hots: fixed(files) }, { env: { HP_MODE: 'on' } }));
+    await runPipelines(opts({ hots: fixed(files) }));
     expect(read('private', 'hots', 'public', 'draft.json')).toBe('{"stats":{"games":1}}\n');
     expect((JSON.parse(read('current', 'hots', '_files.json')) as FileIndex).files['public/draft.json']?.custody).toBe('A');
     expect((JSON.parse(read('private', 'hots', '_files.json')) as FileIndex).files['public/draft.json']?.custody).toBe('B');
   });
 
-  it('enforces the HP kill switch by dropping class-B files unless HP_MODE=on', () => {
-    const files: OutputFile[] = [{ path: 'stats.json', data: {}, custody: 'B' }];
-    const off = checkResult('hots', ok(files), { HP_MODE: 'off' });
-    expect(off.files).toEqual([]);
-    expect(off.issues[0]).toMatchObject({ level: 'warn' });
-    expect(checkResult('hots', ok(files), { HP_MODE: 'on' }).files).toHaveLength(1);
+  it('routes class B like C and D, and refuses class P', () => {
+    const files: OutputFile[] = [
+      { path: 'stats.json', data: {}, custody: 'B' },
+      { path: 'mined.json', data: {}, custody: 'D' },
+      { path: 'mine.json', data: {}, custody: 'P' },
+    ];
+    const r = checkResult('hots', ok(files));
+    expect(r.files.map((f) => f.path)).toEqual(['stats.json', 'mined.json']);
+    expect(r.issues).toEqual([{ level: 'error', message: 'mine.json: class P (personal) data must never be emitted by a public pipeline' }]);
   });
 
   it('checks the meta block', () => {
-    const r = checkResult('hots', { meta: { ...meta('mtga') }, files: [], issues: [] }, {});
+    const r = checkResult('hots', { meta: { ...meta('mtga') }, files: [], issues: [] });
     expect(r.issues[0]?.message).toContain('meta.game');
   });
 
-  it('writes class B only when HP_MODE is on', async () => {
+  it('writes class B to private/ and never to the committed tree', async () => {
     const files: OutputFile[] = [...baseFiles(), { path: 'stats.json', data: { sl: {} }, custody: 'B' }];
-    await runPipelines(opts({ hots: fixed(files) }, { env: { HP_MODE: 'on', HP_API_KEY: 'k' } }));
+    await runPipelines(opts({ hots: fixed(files) }));
     expect(listFiles(path.join(out, 'private', 'hots'))).toEqual(['_files.json', 'stats.json', 'videos.json']);
-    await runPipelines(opts({ hots: fixed(files) }, { env: {} }));
-    expect(listFiles(path.join(out, 'private', 'hots'))).toEqual(['_files.json', 'videos.json']);
+    expect(existsSync(path.join(out, 'current', 'hots', 'stats.json'))).toBe(false);
+  });
+
+  it('reports sources that served last-good data in an ok run as degraded', async () => {
+    const m = meta('hots', {
+      sources: [
+        { id: 'tact', fetchedAt: '2026-10-08T10:17:00.000Z', status: 'ok' },
+        { id: 'liquipedia', fetchedAt: '2026-10-06T10:17:00.000Z', status: 'stale', detail: 'HTTP 503; last-good kept' },
+        { id: 'youtube', fetchedAt: null, status: 'disabled' },
+      ],
+    });
+    const summary = await runPipelines(opts({ hots: fixed(baseFiles(), [], m) }));
+    expect(summary.exitCode).toBe(0);
+    expect(readStatus().games.hots).toMatchObject({ state: 'ok', degraded: ['liquipedia'] });
+    expect(githubOutputs(summary.reports)).toContain('degraded=hots:liquipedia');
+    expect(formatSummary(summary.reports)).toContain('liquipedia');
+    expect(degradedSources(m.sources)).toEqual(['liquipedia']);
   });
 });
 
@@ -288,22 +306,25 @@ describe('context', () => {
           metaHash: ctx.previousMeta?.dataHash,
           secrets: ctx.secrets,
           tact: isSelected(ctx, 'tact'),
-          hp: isSelected(ctx, 'heroesprofile'),
+          hp: isSelected(ctx, 'youtube'),
         });
         return { meta: meta('hots'), files: baseFiles(), issues: [] };
       },
     };
-    await runPipelines(opts({ hots: probe }, { only: ['tact'], env: { HP_MODE: 'ON', HP_API_KEY: ' ', YT_API_KEY: 'yt', OTHER: 'x' } }));
+    await runPipelines(opts({ hots: probe }, { only: ['tact'], env: { LIQUIPEDIA_UA_CONTACT: ' ', YT_API_KEY: 'yt', WHETSTONE_SHOWDOWN_EXPORT: 'x.json', DATA_ARTIFACT_KEY: 'k', GITHUB_TOKEN: 't', OTHER: 'x' } }));
     expect(seen).toHaveLength(1);
     const s = seen[0] as Seen;
     expect(s.prev).toEqual([{ id: 'Abat', name: 'Abathur' }, { id: 'HXAL', name: "Xal'atath" }]);
     expect(s.priv).toEqual({ videos: [] });
     expect(s.missing).toBeNull();
     expect(s.metaHash).toMatch(/^[0-9a-f]{64}$/);
-    expect(s.secrets.HP_MODE).toBe('on');
-    expect(s.secrets.HP_API_KEY).toBeUndefined();
+    expect(s.secrets.LIQUIPEDIA_UA_CONTACT).toBeUndefined();
     expect(s.secrets.YT_API_KEY).toBe('yt');
+    // Only the variables the game's registry entry lists: never another game's, never the GitHub token.
     expect(Object.keys(s.secrets)).not.toContain('OTHER');
+    expect(Object.keys(s.secrets)).not.toContain('WHETSTONE_SHOWDOWN_EXPORT');
+    expect(Object.keys(s.secrets)).not.toContain('DATA_ARTIFACT_KEY');
+    expect(Object.keys(s.secrets)).not.toContain('GITHUB_TOKEN');
     expect(s.tact).toBe(true);
     expect(s.hp).toBe(false);
   });
@@ -322,11 +343,17 @@ describe('helpers', () => {
 });
 
 describe('secrets', () => {
-  it('exposes GITHUB_TOKEN to games and as a bearer token for api.github.com only', () => {
-    const secrets = secretsFromEnv({ GITHUB_TOKEN: ' ghs_x ', HOME: '/root' });
-    expect(secrets.GITHUB_TOKEN).toBe('ghs_x');
-    expect(secrets).not.toHaveProperty('HOME');
-    expect(bearerTokens(secrets)).toEqual({ 'api.github.com': 'ghs_x' });
-    expect(bearerTokens(secretsFromEnv({ GITHUB_TOKEN: '' }))).toEqual({});
+  it('sends GITHUB_TOKEN as a bearer token for api.github.com only, never to games', () => {
+    expect(bearerTokens({ GITHUB_TOKEN: ' ghs_x ', HOME: '/root' })).toEqual({ 'api.github.com': 'ghs_x' });
+    expect(bearerTokens({ GITHUB_TOKEN: '' })).toEqual({});
+    expect(secretsFromEnv({ GITHUB_TOKEN: 'ghs_x' }, 'mtga')).toEqual({});
+  });
+
+  it('scopes variables per game from the registry', () => {
+    expect(gameEnvNames('pokemon')).toEqual([]);
+    expect(gameEnvNames('mtga')).toEqual([]);
+    expect(gameEnvNames('hots')).toContain('YT_API_KEY');
+    expect(secretsFromEnv({ YT_API_KEY: 'k', LIQUIPEDIA_UA_CONTACT: 'me' }, 'pokemon')).toEqual({});
+    expect(secretsFromEnv({ YT_API_KEY: ' k ', LIQUIPEDIA_UA_CONTACT: '' }, 'hots')).toMatchObject({ YT_API_KEY: 'k', LIQUIPEDIA_UA_CONTACT: undefined });
   });
 });

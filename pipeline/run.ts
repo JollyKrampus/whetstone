@@ -1,7 +1,7 @@
 /**
  * Data pipeline runner (SPEC §4, §10).
  *
- *   node pipeline/run.ts [--game hots|mtga|pokemon|all] [--offline] [--out data] [--only src1,src2]
+ *   node pipeline/run.ts [--game <id>|all] [--offline] [--out data] [--only src1,src2]
  *                        [--now 2026-10-08T10:17:00Z] [--history-max-kb 64] [--no-history]
  *
  * For each game: lazily import src/games/<game>/pipeline/index.ts (`export const pipeline`), run
@@ -34,7 +34,7 @@ import type {
   SourceStatus,
   ValidationIssue,
 } from '../src/core/game.ts';
-import { bearerTokens, createContext, gameDirs, hpEnabled, secretsFromEnv } from './context.ts';
+import { bearerTokens, createContext, gameDirs } from './context.ts';
 import { compareStrings, hashTree, jsonBytes, sha256 } from './hash.ts';
 import { createHttp } from './http.ts';
 import {
@@ -126,7 +126,7 @@ interface Checked {
 }
 
 /** Structural checks the runner enforces regardless of game-level validation. */
-export function checkResult(game: GameId, result: PipelineResult, secrets: Readonly<Record<string, string | undefined>>): Checked {
+export function checkResult(game: GameId, result: PipelineResult): Checked {
   const issues: ValidationIssue[] = [];
   const err = (m: string): void => {
     issues.push({ level: 'error', message: m });
@@ -148,7 +148,6 @@ export function checkResult(game: GameId, result: PipelineResult, secrets: Reado
 
   const seen = new Set<string>();
   const files: OutputFile[] = [];
-  const hpOn = hpEnabled(secrets);
   for (const f of result.files) {
     if (!f || typeof f.path !== 'string' || !isSafeRelPath(f.path)) {
       err(`invalid output path ${JSON.stringify(f?.path)}`);
@@ -185,14 +184,14 @@ export function checkResult(game: GameId, result: PipelineResult, secrets: Reado
       err(`${f.path}: neither data nor bytes given`);
       continue;
     }
-    if (f.custody === 'B' && !hpOn) {
-      // Defence in depth for the Heroes Profile kill switch: B data never leaves the runner while off.
-      issues.push({ level: 'warn', message: `${f.path}: dropped class-B output because HP_MODE is off` });
-      continue;
-    }
     files.push(f);
   }
   return { files, issues };
+}
+
+/** Ids of sources whose latest fetch failed or went stale while the game itself succeeded. */
+export function degradedSources(sources: readonly SourceStatus[]): string[] {
+  return sources.filter((s) => s.status === 'failed' || s.status === 'stale').map((s) => s.id);
 }
 
 /** Source statuses to report when the run failed and last-good data stays live. */
@@ -362,7 +361,7 @@ async function processGame(game: GameId, o: Resolved, print: (line: string) => v
         record: o.env.WHETSTONE_RECORD === '1',
         cache: o.env.CI !== 'true' && o.env.WHETSTONE_HTTP_CACHE !== '0',
         contact: o.env.WHETSTONE_CONTACT ?? o.env.LIQUIPEDIA_UA_CONTACT ?? '',
-        bearer: bearerTokens(secretsFromEnv(o.env)),
+        bearer: bearerTokens(o.env),
         log: (m) => log(m),
       });
   const ctx = createContext({ game, root: o.root, out: o.out, http, env: o.env, now: o.now, offline: o.offline, only: o.only, log });
@@ -377,7 +376,7 @@ async function processGame(game: GameId, o: Resolved, print: (line: string) => v
   }
   let files: OutputFile[] = [];
   if (result) {
-    const checked = checkResult(game, result, secretsFromEnv(o.env));
+    const checked = checkResult(game, result);
     issues.push(...(Array.isArray(result.issues) ? result.issues : []), ...checked.issues);
     files = checked.files;
     for (const f of files) {
@@ -391,6 +390,8 @@ async function processGame(game: GameId, o: Resolved, print: (line: string) => v
   }
 
   const written = writeGame(o.out, game, result, files, o.now, o.history);
+  const degraded = degradedSources(written.meta.sources);
+  if (degraded.length > 0) log(`degraded sources (last-good data kept): ${degraded.join(', ')}`);
   return {
     game,
     previousHash: previous?.dataHash ?? null,
@@ -405,6 +406,7 @@ async function processGame(game: GameId, o: Resolved, print: (line: string) => v
       files: written.counts,
       sources: written.meta.sources,
       issues: issues.slice(0, MAX_STATUS_ISSUES),
+      ...(degraded.length > 0 ? { degraded } : {}),
     },
   };
 }
@@ -442,7 +444,7 @@ function escapeAnnotation(s: string): string {
 
 /** Plain-text table for the console. */
 export function formatSummary(reports: readonly GameReport[]): string {
-  const rows = [['game', 'state', 'changed', 'current', 'private', 'issues', 'dataHash', 'time']];
+  const rows = [['game', 'state', 'changed', 'current', 'private', 'issues', 'degraded', 'dataHash', 'time']];
   for (const r of reports) {
     const errors = r.issues.filter((i) => i.level === 'error').length;
     const warns = r.issues.length - errors;
@@ -453,6 +455,7 @@ export function formatSummary(reports: readonly GameReport[]): string {
       String(r.status.files.current),
       String(r.status.files.private),
       `${errors}E ${warns}W`,
+      r.status.degraded?.join(',') || '-',
       r.status.dataHash ? r.status.dataHash.slice(0, 12) : '-',
       `${(r.status.durationMs / 1000).toFixed(1)}s`,
     ]);
@@ -461,15 +464,16 @@ export function formatSummary(reports: readonly GameReport[]): string {
   return rows.map((row) => row.map((cell, c) => cell.padEnd(widths[c]!)).join('  ').trimEnd()).join('\n');
 }
 
-/** Lines for $GITHUB_OUTPUT: changed_<game>, changed (any), failed (comma list). */
+/** Lines for $GITHUB_OUTPUT: changed_<game>, changed (any), failed (comma list), degraded (game:source list). */
 export function githubOutputs(reports: readonly GameReport[]): string[] {
   const lines = reports.map((r) => `changed_${r.game}=${r.status.changed}`);
   lines.push(`changed=${reports.some((r) => r.status.changed)}`);
   lines.push(`failed=${reports.filter((r) => r.status.state === 'failed').map((r) => r.game).join(',')}`);
+  lines.push(`degraded=${reports.flatMap((r) => (r.status.degraded ?? []).map((id) => `${r.game}:${id}`)).join(',')}`);
   return lines;
 }
 
-const USAGE = `Usage: node pipeline/run.ts [--game hots|mtga|pokemon|all] [--offline] [--out data]
+const USAGE = `Usage: node pipeline/run.ts [--game ${GAME_IDS.join('|')}|all] [--offline] [--out data]
                            [--only sourceId,...] [--now ISO] [--history-max-kb 64] [--no-history]`;
 
 function parseCli(argv: readonly string[]) {
@@ -520,7 +524,7 @@ export async function main(argv: readonly string[] = process.argv.slice(2), env:
 
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
   const dotenv = path.join(root, '.env');
-  // Local convenience for HP_API_KEY etc.; CI gets secrets from the workflow environment.
+  // Local convenience for optional credentials (e.g. YT_API_KEY); CI gets them from the workflow environment.
   if (env.CI !== 'true' && existsSync(dotenv)) process.loadEnvFile(dotenv);
 
   const summary = await runPipelines({
