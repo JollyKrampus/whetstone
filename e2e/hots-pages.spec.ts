@@ -253,12 +253,12 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       }
       const rest = page.locator('#counters details[data-rest]').first();
       if ((await rest.count()) > 0) {
-        await rest.locator('summary').click();
+        await rest.locator(':scope > summary').click();
         await expect(rest.locator('.lrow').first()).toBeVisible();
       }
       const below = page.locator('#counters details[data-below]').first();
       if ((await below.count()) > 0) {
-        await below.locator('summary').click();
+        await below.locator(':scope > summary').click();
         await expect(below.locator('.lrow').first()).toBeVisible();
         await expect(below.locator('.lrow__score').first()).toContainText(/\d/);
       }
