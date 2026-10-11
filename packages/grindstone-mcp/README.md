@@ -128,6 +128,16 @@ Every version:
 - **Some cards are never cut:** anything in `keepCards`, and the commander.
 - **In Brawl, every added card must support the commander's theme,** read from its rules text (tokens, sacrifice, +1/+1 counters, a creature type it names, …). The theme is reported as `commanderThemes`.
 
+**No downgrades (0.3.1).** These rules apply to every swap except those that replace a card that has to go (banned, not on Arena, breaking the companion, or feel-bad in the casual version):
+
+- A low-curve deck (average mana value 2.4 or less) never gets a more expensive card.
+- An instant is only replaced by an instant or a card with flash.
+- Budget-minded play (`casual`, without `preferPremium`) never spends a rarer wildcard than the card it replaces.
+- Without meta lists, a swap has to beat the card it replaces by a clear margin on the popularity / rarity / age estimate. "Same deck, best cards" may still swap to a cheaper card doing the same job; the reason then says that the lower cost is the upgrade.
+- Each reason names what actually makes the new card better. "More widely played" appears only when it is true. Otherwise the reason says "rarer", "newer" or "cheaper to craft", and notes that it's an estimate.
+
+See [CHANGELOG.md](CHANGELOG.md) for the full list of changes.
+
 ### Commander recommendations (EDHREC)
 
 Grindstone never fetches EDHREC: its terms forbid automated access. Instead, open your commander's page yourself, select and copy it, and paste it into the chat. Claude passes it to `rate_power` and `suggest_upgrades` as `recommendations`:

@@ -59,16 +59,61 @@ function emptyColors(): Record<Color, number> {
   return { W: 0, U: 0, B: 0, R: 0, G: 0 };
 }
 
-/** Colors a land can make for this deck (fetches count for the basic types the deck runs). */
-export function landColors(c: CardRecord, basicColors: Set<Color>): Color[] {
-  const made = new Set<Color>(c.producedMana.filter((m): m is Color => (COLORS as string[]).includes(m)));
+export const BASIC_TYPES = ['plains', 'island', 'swamp', 'mountain', 'forest'] as const;
+export type BasicType = (typeof BASIC_TYPES)[number];
+const BASIC_TYPE_COLOR: Record<BasicType, Color> = { plains: 'W', island: 'U', swamp: 'B', mountain: 'R', forest: 'G' };
+
+/**
+ * What the deck's fetch effects can find: the colors of its basic lands, and for each basic land
+ * type the colors of its lands with that type (so "an Island or Swamp card" finds a Blood Crypt
+ * as well as a Swamp, and finds nothing blue in a deck without Islands).
+ */
+export interface FetchContext {
+  basics: Set<Color>;
+  types: Record<BasicType, Set<Color>>;
+  basicTypes: Record<BasicType, Set<Color>>;
+}
+
+const ownColors = (c: CardRecord) => c.producedMana.filter((m): m is Color => (COLORS as string[]).includes(m));
+
+/** The fetch context of a deck's lands (main deck and commander). */
+export function fetchContext(entries: { card: CardRecord }[]): FetchContext {
+  const empty = () => Object.fromEntries(BASIC_TYPES.map((t) => [t, new Set<Color>()])) as Record<BasicType, Set<Color>>;
+  const ctx: FetchContext = { basics: new Set(), types: empty(), basicTypes: empty() };
+  for (const e of entries) {
+    if (!isLand(e.card)) continue;
+    const basic = isBasicLand(e.card);
+    const made = ownColors(e.card);
+    if (basic) made.forEach((col) => ctx.basics.add(col));
+    const subtypes = (frontTypeLine(e.card).split('—')[1] ?? '').toLowerCase();
+    for (const t of BASIC_TYPES) {
+      if (!new RegExp(`\\b${t}\\b`).test(subtypes)) continue;
+      made.forEach((col) => ctx.types[t].add(col));
+      if (basic) made.forEach((col) => ctx.basicTypes[t].add(col));
+    }
+  }
+  return ctx;
+}
+
+/**
+ * Colors a land can make for this deck. Fetch effects count for what they can actually find:
+ * with a FetchContext, the deck's own lands of the named types (or its basics); with a plain set
+ * of basic colors (older callers), the basics plus the color of each named basic type.
+ */
+export function landColors(c: CardRecord, deck: Set<Color> | FetchContext): Color[] {
+  const made = new Set<Color>(ownColors(c));
   const text = rulesText(c);
-  const fetch = /search your library for an? ([\w\s,]+?)card/.exec(text);
+  const fetch = /search your library for (?:an?|up to (?:one|two)) ([\w\s,]+?)cards?/.exec(text);
   if (fetch) {
     const what = fetch[1]!;
-    if (/basic land/.test(what)) basicColors.forEach((col) => made.add(col));
-    const typeMap: Record<string, Color> = { plains: 'W', island: 'U', swamp: 'B', mountain: 'R', forest: 'G' };
-    for (const [word, col] of Object.entries(typeMap)) if (what.includes(word)) made.add(col);
+    const ctx = deck instanceof Set ? null : deck;
+    if (/basic land/.test(what)) (ctx ? ctx.basics : (deck as Set<Color>)).forEach((col) => made.add(col));
+    const basicOnly = /\bbasic\b/.test(what);
+    for (const t of BASIC_TYPES) {
+      if (!new RegExp(`\\b${t}\\b`).test(what)) continue;
+      if (!ctx) made.add(BASIC_TYPE_COLOR[t]);
+      else (basicOnly ? ctx.basicTypes[t] : ctx.types[t]).forEach((col) => made.add(col));
+    }
   }
   return COLORS.filter((col) => made.has(col));
 }
@@ -86,10 +131,29 @@ export function tappedKind(c: CardRecord): 'unconditional' | 'conditional' | nul
   return 'unconditional';
 }
 
-export function inferArchetype(a: { averageManaValue: number; creatures: number; interaction: number; ramp: number; deckSize: number }): Archetype {
+/** Defaults for rubric files written before the ramp curve checks existed. */
+const RAMP_MIN_AVG_MV = 2.8;
+const RAMP_MIN_TOP_END = 6;
+
+/**
+ * Checked in order: ramp, control, aggro, else midrange. A ramp plan needs something to ramp
+ * into: enough ramp cards and either an average mana value of about 2.8 or more, or enough
+ * cards at 5+ mana (`topEnd`). Without that, ramp cards are just part of the curve.
+ */
+export function inferArchetype(a: {
+  averageManaValue: number;
+  creatures: number;
+  interaction: number;
+  ramp: number;
+  deckSize: number;
+  /** Nonland cards at mana value 5 or more. */
+  topEnd?: number;
+}): Archetype {
   const r = constructedRubric().inference;
   const scale = a.deckSize / 60;
-  if (a.ramp >= r.ramp.minRamp * scale) return 'ramp';
+  const heavy =
+    a.averageManaValue >= (r.ramp.minAvgMv ?? RAMP_MIN_AVG_MV) || (a.topEnd ?? 0) >= (r.ramp.minTopEnd ?? RAMP_MIN_TOP_END) * scale;
+  if (a.ramp >= r.ramp.minRamp * scale && heavy) return 'ramp';
   if (a.interaction >= r.control.minInteraction * scale && a.creatures <= r.control.maxCreatures * scale) return 'control';
   if (a.averageManaValue <= r.aggro.maxAvgMv && a.creatures >= r.aggro.minCreatures * scale) return 'aggro';
   return 'midrange';
@@ -126,15 +190,12 @@ export function analyzeDeck(deck: ResolvedDeck, fmt: FormatRules): Analysis {
     for (const h of p.hybrid) for (const c of h) pips[c] += e.qty / h.length;
   }
 
-  // Colored sources: lands (fetches count for the basics they can find) plus MDFC land backs.
-  const basicColors = new Set<Color>();
-  for (const e of play) {
-    if (isBasicLand(e.card)) e.card.producedMana.forEach((m) => (COLORS as string[]).includes(m) && basicColors.add(m as Color));
-  }
+  // Colored sources: lands (fetches count for the lands of the deck they can find) plus MDFC land backs.
+  const fetchable = fetchContext(play);
   const sources = emptyColors();
   for (const e of play) {
     if (!isLand(e.card) && !isMdfcLand(e.card)) continue;
-    for (const c of landColors(e.card, basicColors)) sources[c] += e.qty;
+    for (const c of landColors(e.card, fetchable)) sources[c] += e.qty;
   }
 
   // Karsten requirements: the strictest (pips, mana value) pattern per color, with its cards.
@@ -200,7 +261,14 @@ export function analyzeDeck(deck: ResolvedDeck, fmt: FormatRules): Analysis {
   const creatures = play.filter((e) => isCreature(e.card)).reduce((n, e) => n + e.qty, 0);
   const archetype = fmt.commander
     ? 'brawl'
-    : inferArchetype({ averageManaValue, creatures, interaction, ramp: counts.ramp, deckSize });
+    : inferArchetype({
+        averageManaValue,
+        creatures,
+        interaction,
+        ramp: counts.ramp,
+        deckSize,
+        topEnd: curve['5'] + curve['6'] + curve['7+'],
+      });
 
   return {
     format: fmt.id,

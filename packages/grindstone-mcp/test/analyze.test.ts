@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { analyzeDeck, tappedKind } from '../src/core/analyze.js';
+import { analyzeDeck, inferArchetype, tappedKind } from '../src/core/analyze.js';
 import { parseAndResolve } from '../src/core/deck.js';
 import { getFormat } from '../src/core/formats.js';
 import { constructedRubric, karstenSources } from '../src/core/rubric.js';
@@ -26,6 +26,17 @@ describe('role tagging', () => {
     expect(await roleIds('Monastery Swiftspear')).toContain('threat');
     expect(await roleIds('Lightning Helix')).toEqual(expect.arrayContaining(['removal', 'lifegain']));
     expect(await roleIds('Mountain')).toEqual([]);
+  });
+
+  it('counts Treasure as ramp only when a spell, an enter trigger or an activated ability makes it', async () => {
+    expect(await roleIds('Deadly Dispute')).toContain('ramp');
+    expect(await roleIds('Prosperous Innkeeper')).toContain('ramp');
+    expect(await roleIds('Flick a Coin')).toContain('ramp');
+    // Combat damage, attack triggers on a token, saga chapters and opponents' draws are bonuses, not a ramp plan.
+    expect(await roleIds('Ragavan, Nimble Pilferer')).not.toContain('ramp');
+    expect(await roleIds('Professional Face-Breaker')).not.toContain('ramp');
+    expect(await roleIds('Fable of the Mirror-Breaker')).not.toContain('ramp');
+    expect(await roleIds('Smothering Tithe')).not.toContain('ramp');
   });
 
   it('does not tag reminder text', async () => {
@@ -70,10 +81,31 @@ describe('analyzeDeck', () => {
   });
 
   it('counts fetch lands as sources for the basics in the deck', async () => {
-    const deck = await parseAndResolve('4 Evolving Wilds\n10 Mountain\n10 Forest\n36 Llanowar Elves', await fixtureIndex());
+    // Ramp needs a top end to ramp into (Colossal Dreadmaw), not just mana creatures.
+    const deck = await parseAndResolve('4 Evolving Wilds\n10 Mountain\n10 Forest\n24 Llanowar Elves\n12 Colossal Dreadmaw', await fixtureIndex());
     const a = analyzeDeck(deck, getFormat('historic'));
     expect(a.colors.sources).toMatchObject({ R: 14, G: 14 });
     expect(a.archetype).toBe('ramp');
+  });
+
+  it("resolves fetch lands to the colors of the deck's own lands they can find", async () => {
+    const deck = await parseAndResolve(readFixture('timeless-rakdos.txt'), await fixtureIndex());
+    const a = analyzeDeck(deck, getFormat('timeless'));
+    // Polluted Delta and Wooded Foothills find Blood Crypt (a Swamp Mountain), never an Island or a Forest.
+    expect(a.colors.sources).toEqual({ W: 0, U: 0, B: 19, R: 19, G: 0 });
+  });
+
+  it('needs something to ramp into before calling a deck ramp', async () => {
+    const deck = await parseAndResolve(readFixture('timeless-rakdos.txt'), await fixtureIndex());
+    const a = analyzeDeck(deck, getFormat('timeless'));
+    // Ragavan's and Fable's Treasures are combat and token bonuses, not ramp.
+    expect(a.roles.counts.ramp).toBe(0);
+    expect(a.archetype).not.toBe('ramp');
+    const base = { creatures: 10, interaction: 4, ramp: 12, deckSize: 60 };
+    expect(inferArchetype({ ...base, averageManaValue: 1.9 })).not.toBe('ramp');
+    expect(inferArchetype({ ...base, averageManaValue: 1.9, topEnd: 2 })).not.toBe('ramp');
+    expect(inferArchetype({ ...base, averageManaValue: 2.5, topEnd: 6 })).toBe('ramp');
+    expect(inferArchetype({ ...base, averageManaValue: 2.9 })).toBe('ramp');
   });
 
   it('classifies tapped lands', async () => {

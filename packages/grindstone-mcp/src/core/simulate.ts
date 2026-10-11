@@ -1,6 +1,6 @@
 import { type Role, tagRoles } from './roles.js';
-import { landColors, round } from './analyze.js';
-import { castingCost, castingMv, isBasicLand, isLand, isMdfcLand, normalizeName, pipsOf } from './cards.js';
+import { fetchContext, landColors, round } from './analyze.js';
+import { castingCost, castingMv, isLand, isMdfcLand, normalizeName, pipsOf } from './cards.js';
 import { playEntries, type ResolvedDeck } from './deck.js';
 import { type Color, COLORS } from './types.js';
 
@@ -65,16 +65,13 @@ export interface SimCard {
 
 export function buildLibrary(deck: ResolvedDeck): SimCard[] {
   const lib: SimCard[] = [];
-  const basicColors = new Set<Color>();
-  for (const e of playEntries(deck)) {
-    if (isBasicLand(e.card)) e.card.producedMana.forEach((m) => (COLORS as string[]).includes(m) && basicColors.add(m as Color));
-  }
+  const fetchable = fetchContext(playEntries(deck));
   for (const e of deck.main) {
     const land = isLand(e.card) || isMdfcLand(e.card);
     const card: SimCard = {
       name: e.name,
       land,
-      produces: land ? landColors(e.card, basicColors) : [],
+      produces: land ? landColors(e.card, fetchable) : [],
       mv: land ? 0 : castingMv(e.card),
       pips: pipsOf(castingCost(e.card)).hard,
       roles: tagRoles(e.card).map((t) => t.role),

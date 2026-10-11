@@ -1,5 +1,5 @@
 import { type Role, tagRoles } from './roles.js';
-import { analyzeDeck, landColors, tappedKind } from './analyze.js';
+import { analyzeDeck, fetchContext, landColors, tappedKind } from './analyze.js';
 import {
   type CardIndex,
   castingMv,
@@ -17,8 +17,8 @@ import {
 import { countCards, playEntries, type ResolvedDeck, type ResolvedEntry } from './deck.js';
 import type { FormatRules } from './formats.js';
 import type { MetaContext } from './meta.js';
-import { heuristicQuality } from './power.js';
-import { brawlRubric, constructedRubric } from './rubric.js';
+import { heuristicParts, heuristicQuality } from './power.js';
+import { brawlRubric, type ConstructedRubric, constructedRubric } from './rubric.js';
 import { describeRecommendation, recommendationScore, type RecommendationList } from './recs.js';
 import { saltOf } from './salt.js';
 import { companionRule, companionViolations } from './companions.js';
@@ -116,6 +116,16 @@ export interface SuggestResult {
 const SCARCITY: Record<Rarity, number> = { common: 0.25, uncommon: 0.5, rare: 1, mythic: 2 };
 const CASUAL_COST_PENALTY: Record<Rarity, number> = { common: 0, uncommon: 0.04, rare: 0.12, mythic: 0.2 };
 const PREMIUM_BONUS: Record<Rarity, number> = { common: 0, uncommon: 0.03, rare: 0.08, mythic: 0.12 };
+
+const RARITY_RANK: Record<Rarity, number> = { common: 0, uncommon: 1, rare: 2, mythic: 3 };
+
+/**
+ * Without meta lists (or a recommendation list), card strength is only the popularity / rarity /
+ * age estimate, which is noisy. An optional swap must then beat the card it replaces by at least
+ * this much on that estimate (a cheaper card doing the same job counts its mana savings), so the
+ * planner doesn't trade a card for a sidegrade on noise.
+ */
+export const NO_META_MARGIN = 0.1;
 
 const CANDIDATES_PER_CUT = 3;
 const MAIN_TYPES = ['Creature', 'Planeswalker', 'Battle', 'Artifact', 'Enchantment', 'Instant', 'Sorcery'];
@@ -261,6 +271,12 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       companionAllows(c),
   );
   const options: Option[] = [];
+  // A low curve is the plan (aggro, tempo): optional swaps never make a card cost more.
+  const lowCurve = !fmt.commander && analysis.averageManaValue <= constructedRubric().inference.aggro.maxAvgMv;
+  // Budget-minded play never spends a rarer wildcard than the card it replaces.
+  const budgetMinded = mode === 'casual' && !premium;
+  // With neither meta lists nor a recommendation list, strength is only an estimate.
+  const estimateOnly = !meta && !recs;
   for (const cut of cuts) {
     const mv = castingMv(cut.e.card);
     const creature = isCreature(cut.e.card);
@@ -268,6 +284,9 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
     const needsReach = analysis.archetype === 'aggro' && hasReach(cut.e.card);
     const forced = isForced(cut);
     const strict = Boolean(profile?.strict) && !forced;
+    // Instant speed is part of a card's job: an instant is only replaced by an instant (or flash).
+    const instant = isInstantSpeed(cut.e.card);
+    const cutRarity = RARITY_RANK[wildcardRarity(cut.e.card)];
     // "Same deck" leaves cards alone when it can't tell what job they do.
     if (strict && !cut.roles.length) continue;
     const found: Option[] = [];
@@ -276,6 +295,11 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       if (isCreature(c) !== creature) continue;
       if (strict ? addMv > mv || addMv < mv - 1 : Math.abs(addMv - mv) > (forced ? 2 : 1)) continue;
       if (needsReach && !hasReach(c)) continue;
+      if (!forced) {
+        if (lowCurve && addMv > mv) continue;
+        if (instant && !isInstantSpeed(c)) continue;
+        if (budgetMinded && RARITY_RANK[wildcardRarity(c)] > cutRarity) continue;
+      }
       const themeHits = themes ? themes.matches(c) : [];
       // Recommended cards count as on-plan even when the theme regexes miss them.
       if (themes && !themeHits.length && !(recs && recs.cards.has(c.oracleId))) continue;
@@ -292,6 +316,9 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       const gain = add.value - cut.s.value + (mode === 'casual' ? 0.1 * roleFit : 0.05 * roleFit) + cheaper;
       // Feel-bad cards go even when the replacement isn't stronger.
       if (!forced && gain <= (profile?.minGain ?? 0.02)) continue;
+      // On the estimate alone, the role-fit bonus must not carry a sidegrade over the bar. A
+      // "same deck" swap to a cheaper card doing the same job is exempt: the mana is the gain.
+      if (!forced && estimateOnly && !(strict && addMv < mv) && add.value - cut.s.value < NO_META_MARGIN) continue;
       const qty = copiesToAdd(cut.e, c, fmt, deck);
       if (qty < 1) continue;
       found.push({ cut, add, kind: 'spell', shared, themeHits, gain: forced ? Math.max(gain, 0) + 1 : gain, qty, rarity: wildcardRarity(c), forced });
@@ -303,7 +330,7 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
       notes.push(`${cut.e.name} (${why}) has no replacement in the same role; consider cutting it by hand.`);
     }
   }
-  if (profile) options.push(...landOptions(deck, fmt, index, identity, profile.lands, kept, score));
+  if (profile) options.push(...landOptions(deck, fmt, index, identity, profile.lands, kept, score, budgetMinded));
 
   // 3. Greedy selection: forced (feel-bad) cuts first, then best value per wildcard (or plain
   // best value when preferring premium cards), never exceeding the budget or breaking a rule.
@@ -370,6 +397,7 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
               meta,
               themes ? { commander: themes.commander, hits: o.themeHits } : null,
               recs ? describeRecommendation(recs, o.add.card) : null,
+              { heuristics, asOf: opts.asOf, budgetMinded, strict: Boolean(profile?.strict) },
             ),
       wildcardCost: { [o.rarity]: o.qty },
       cutOracleId: o.cut.e.oracleId,
@@ -399,6 +427,11 @@ export function suggestUpgrades(deck: ResolvedDeck, fmt: FormatRules, index: Car
 }
 
 // ---- matching helpers -------------------------------------------------------------------
+
+/** Castable at instant speed: an instant, or a card with flash. */
+function isInstantSpeed(c: CardRecord): boolean {
+  return /\bInstant\b/.test(frontTypeLine(c)) || c.keywords.includes('Flash');
+}
 
 function mainTypes(c: CardRecord): string[] {
   const t = frontTypeLine(c);
@@ -474,12 +507,15 @@ function landOptions(
   level: 'fix' | 'all',
   kept: (e: ResolvedEntry) => boolean,
   score: (c: CardRecord) => Scored,
+  budgetMinded: boolean,
 ): Option[] {
   const colors = COLORS.filter((c) => identity.has(c));
   if (!colors.length) return [];
-  const basicColors = new Set<Color>(colors);
   const inDeck = new Set(playEntries(deck).map((e) => e.oracleId));
-  const makes = (c: CardRecord) => landColors(c, basicColors).filter((col) => identity.has(col));
+  // Fetch lands count for what they can find among this deck's own lands.
+  const fetchable = fetchContext(playEntries(deck));
+  const makes = (c: CardRecord) => landColors(c, fetchable).filter((col) => identity.has(col));
+  const rarityOf = (c: CardRecord): Rarity => (isBasicLand(c) ? 'common' : wildcardRarity(c));
   const landValue = (c: CardRecord) => {
     const kind = tappedKind(c);
     const tempo = kind === 'unconditional' ? 0 : kind === 'conditional' ? 0.75 : 1;
@@ -511,6 +547,7 @@ function landOptions(
     const before = landValue(e.card);
     const cut: Cut = { e, s: score(e.card), roles: [], cutScore: 0, salt: [], illegal: [] };
     const scored = adds
+      .filter((c) => !budgetMinded || RARITY_RANK[rarityOf(c)] <= RARITY_RANK[rarityOf(e.card)])
       .map((c) => ({ c, gain: landValue(c) - before }))
       .filter((x) => x.gain >= 0.05)
       .sort((a, b) => b.gain - a.gain || cmp(a.c.name, b.c.name))
@@ -534,7 +571,7 @@ function landOptions(
         themeHits: [],
         gain,
         qty,
-        rarity: isBasicLand(c) ? 'common' : wildcardRarity(c),
+        rarity: rarityOf(c),
         forced: false,
         landNote: `makes ${madeBy}${tappedKind(c) ? ' and usually enters untapped' : ' and enters untapped'}, replacing ${e.name}, which ${why}`,
       });
@@ -629,6 +666,35 @@ const ROLE_WORDS: Record<Role, string> = {
   lifegain: 'lifegain',
 };
 
+interface EstimateContext {
+  heuristics: ConstructedRubric['cardQuality']['heuristic'];
+  asOf: string;
+  budgetMinded: boolean;
+  /** The "same deck" profile, where a cheaper card doing the same job is the upgrade. */
+  strict: boolean;
+}
+
+/**
+ * Why the estimate prefers `add`: only the parts of the popularity / rarity / age estimate in
+ * which it actually beats `cut` (a cheaper rarity, for budget-minded play), never a blanket
+ * "more widely played".
+ */
+function estimateDrivers(
+  cut: CardRecord,
+  add: CardRecord,
+  ctx: EstimateContext,
+): string[] {
+  const a = heuristicParts(add, ctx.heuristics, ctx.asOf);
+  const c = heuristicParts(cut, ctx.heuristics, ctx.asOf);
+  const out: string[] = [];
+  const EPS = 0.005;
+  if (a.popularity > c.popularity + EPS) out.push('more widely played');
+  if (ctx.budgetMinded && RARITY_RANK[wildcardRarity(add)] < RARITY_RANK[wildcardRarity(cut)]) out.push('cheaper to craft');
+  else if (a.rarity > c.rarity + EPS) out.push('rarer');
+  if (a.recency > c.recency + EPS) out.push('newer');
+  return out;
+}
+
 function reasonFor(
   cut: Cut,
   add: Scored,
@@ -636,6 +702,7 @@ function reasonFor(
   meta: MetaContext | undefined,
   theme: { commander: string; hits: string[] } | null,
   recNote: string | null,
+  estimate: EstimateContext,
 ): string {
   const role = shared.length ? `fills the same ${shared.map((r) => ROLE_WORDS[r]).join('/')} role` : 'fills a similar slot';
   const cutMv = castingMv(cut.e.card);
@@ -652,10 +719,23 @@ function reasonFor(
     const n = meta.lists.filter((l) => l.main.has(add.card.oracleId)).length;
     why = `and appears in ${n} of ${meta.lists.length} meta lists`;
   } else {
-    why = add.card.edhrecRank !== null ? 'and is a more widely played card' : 'and is a stronger card by rarity and age';
+    const drivers = estimateDrivers(cut.e.card, add.card, estimate);
+    if (estimate.strict && addMv < cutMv) {
+      why = `so the lower cost is the upgrade (${meta ? 'it is in none of the meta lists' : 'no meta lists to compare strength'})`;
+    } else {
+      const basis = meta ? 'it is in none of the meta lists, so this is an estimate' : 'estimated without meta lists, low confidence';
+      why = drivers.length
+        ? `and is ${joinWords(drivers)} (${basis})`
+        : `and scores a little higher on popularity, rarity and age (${basis})`;
+    }
   }
   const fits = theme?.hits.length ? `; it supports ${theme.commander}'s ${theme.hits.join('/')} theme` : '';
   return `${add.card.name} ${role}${mv}, ${why}${fits}.`;
+}
+
+/** "a", "a and b", "a, b and c". */
+function joinWords(words: string[]): string {
+  return words.length < 2 ? (words[0] ?? '') : `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}`;
 }
 
 function cmp(a: string, b: string) {
