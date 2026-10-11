@@ -6,9 +6,11 @@ does, applies a small set of mechanical rules an experienced player would accept
 matchups that curators wrote by hand. Everything it produces is labelled as theory in the UI and
 carries the reasons behind each score.
 
-When Heroes Profile statistics are switched on, stats edges become primary and theory reasons are
-shown next to them (`src/games/hots/load.ts`). Without them, theory is all there is, so it has to
-be honest: specific where the kit text is specific, and modest where it is not.
+Heroes of the Storm publishes no match statistics, and Whetstone builds only on first-party or
+openly licensed data plus its own analysis, so theory is what hero pages show. If a statistics
+source that meets that bar is ever enabled, its edges become primary and theory reasons are shown
+next to them (`src/games/hots/load.ts`). Either way theory has to be honest: specific where the
+kit text is specific, and modest where it is not.
 
 Code lives in `src/games/hots/theory/`; curated inputs live in `curated/hots/`.
 
@@ -121,9 +123,9 @@ traits:
 counters:                    # a counters b; this file's hero must be a or b
   - a: zeratul
     b: abathur
-    why: "Permanent Cloak lets Zeratul reach Abathur's body unseen, and Cleave plus Singularity Spike kill it before Deep Tunnel is ready."
+    why: "Permanent Cloak lets Zeratul reach Abathur's body unseen, and Cleave, Singularity Spike and a couple of Basic Attacks take its 685 Health."
     evidence: ["Permanent Cloak", "Cleave", "Singularity Spike", "Deep Tunnel"]
-    conditions: "Abathur is alone in a back-line bush."   # optional, one line or a list
+    conditions: "Abathur is alone in a back-line bush"   # optional: clause(s) shown after "Only when"
     confidence: high          # low | medium | high
     # weight: 0.5             # optional override of the confidence weight
     # reviewedFor: "2.57"     # optional, defaults to the file's
@@ -138,11 +140,21 @@ synergies:                   # stored with a < b (alphabetical)
 `curated/hots/traits.yaml`, `counters.yaml` and `synergies.yaml` hold the same entries for cases
 that do not belong to one hero and are normally empty.
 
+**Conditions.** `conditions` is one clause or a list of clauses that read after "Only when":
+`"Blaze takes Nanomachine Coating (level 7)"`, `"the Vikings split up to soak lanes on their own"`.
+Do not start a clause with "Only when", "Requires" or "Needs" (the loader rejects it, because the
+page adds the words), and a trailing full stop is dropped. The engine keeps each `why` line's
+conditions with it (`Reason.conditions` in theory.json), and every page shows them the way it
+shows generated talent conditions: "Nanomachine Coating cuts attack speed by 35% for anyone in oil
+… Only when Blaze takes Nanomachine Coating (level 7)." Several clauses are joined with ", and".
+
 **Merging.** The same pair may appear in two heroes' files (Zeratul over Abathur is in both). The
-loader keeps one edge per kind and pair: the highest confidence, the union of evidence and
-conditions, up to two distinct `why` lines (global files first, then per-hero files by name), the
-newest `reviewedFor`, and the explicit `weight` if any file sets one (a warning if files disagree),
-else the confidence weight. A counter curated both ways (a > b and b > a) keeps both directed edges
+loader keeps one edge per kind and pair: the highest confidence (a warning if files disagree, since
+the higher one would otherwise silently lift a talent-dependent pair), the union of evidence and
+conditions, up to two distinct `why` lines (global files first, then per-hero files by name), each
+with the conditions of the file that wrote it, the newest `reviewedFor`, and the explicit `weight`
+if any file sets one (a warning if files disagree), else the confidence weight. When two files
+describe the same interaction, give them the same `why` text so the edge shows it once. A counter curated both ways (a > b and b > a) keeps both directed edges
 and is reported as a warning. Duplicate traits are dropped with a warning; adding and removing the
 same tag warns, and the later entry wins.
 
@@ -151,7 +163,8 @@ same tag warns, and the later entry wins.
 - errors (exit code 1): YAML syntax, unknown keys, unknown tags, a pair that does not involve the
   file's hero, a synergy not stored with a < b, a pair without evidence, a file named after another
   hero, an unknown hero slug;
-- warnings: merge conflicts, contradictions and, when hero data is available
+- warnings: merge conflicts (different weights or confidence for one pair), contradictions and,
+  when hero data is available
   (`--heroes data/current/hots/heroes.json`, the default when a pipeline run left one), heroes that
   are not in the current data and evidence names that are not an ability or talent of either hero.
   Evidence names match regardless of case, apostrophe style and punctuation.
@@ -206,13 +219,18 @@ The reason's `evidence` list is only attached when the template does not already
 
 **Talent conditions.** When a side matches only through a talent or one of several Heroics, the
 reason says so, naming the pick: "Abathur can reveal enemies (Toxic Nest), taking away Genji's
-stealth. Only when Genji takes Pathfinder." When both sides need one: "Only when Chromie takes
-Timewalker's Pursuit. Tassadar must also take Shadow Walk."
+stealth. Only when Genji takes Pathfinder." When several picks give the same tag, each one is
+enough and all are named: "Anduin can interrupt channels with stun (Lightbomb, Censure). Only when
+Anduin takes Lightbomb or Censure." When both sides need one: "Only when Chromie takes
+Timewalker's Pursuit. Tassadar must also take Shadow Walk." Curated reasons carry their
+`conditions` the same way (see above).
 
 **Draft shard.** `public/draft.json` (schema 2) stores each reason once as a template, with the
 edge's hero names replaced by `{a}`/`{b}` (map fit: `{a}`/`{m}`) and the talent conditions as separate
 parts, so one line serves every pair a rule matches; `src/games/hots/draft/data.ts` fills the names
-back in. On the 2.57 roster that takes the shard from 2.14 MB (243 KB gzipped) to 518 KB (100 KB).
+back in. A reason's `conditions` belong in the shard as its " Only when …" part
+(`withConditions` in `theory/conditions.ts` gives the same wording the pages use), so the draft
+tool never shows a conditional curated line as part of the base kit. On the 2.57 roster that takes the shard from 2.14 MB (243 KB gzipped) to 518 KB (100 KB).
 
 ## Map fit
 
@@ -237,9 +255,23 @@ Counters and synergies are curated by pull request, one hero file at a time.
 3. Run `node src/games/hots/theory/validate.ts` and `npm test`.
 
 **The evidence rule.** Every pair names, in `evidence`, the abilities or talents its reason relies
-on, spelled as in the game. The reason must be true for the current kit text: if a talent is
-needed, name it in `evidence` and say so in `conditions`. Reasons that cannot point at a kit
-("he is just strong", "pros pick it") do not belong here; they are what statistics are for.
+on, spelled as in the game. The reason must be true for the current kit text. Reasons that cannot
+point at a kit ("he is just strong", "pros pick it") do not belong here; they are what statistics
+are for.
+
+**Optional picks.** Talents and Heroics are choices, so check every name in a reason against the
+hero's kit before calling it part of the matchup:
+
+- If the effect rests entirely on one talent, or on one of two Heroics, name the pick in
+  `conditions` ("Zarya takes Graviton Surge (level 10)") and set `confidence: low`.
+- If the base kit already carries the point and the pick only adds to it, keep the confidence, say
+  so in the line ("and Divine Shield, if Uther takes it, …", "Rime (level 1) …") and leave
+  `conditions` empty.
+- A hero takes one Heroic. Never describe both of a hero's Heroics working together; write "or",
+  "whichever he takes", or pick one and add the condition.
+- Kill arithmetic must hold at every level: Health and damage both grow about 4% a level, so the
+  level-1 ratio is the ratio. "Takes almost half of Murky's 730 Health" is checkable; "kills him"
+  needs the numbers to add up.
 
 **Write it yourself.** `why` is shown verbatim to players. Write one or two plain sentences in
 your own words about the mechanics. Do not copy or paraphrase closely from guides, tier lists,
@@ -252,7 +284,7 @@ Ability and talent names and numbers from the game data are fine.
 |---|---|---|
 | `high` | 0.6 | The interaction is direct and reliable whatever either player does: a hard answer built into both kits (Permanent Cloak reaching an undefended body, a blind against a pure Basic Attack hero). |
 | `medium` | 0.4 | The interaction is real and usually decides trades, but skill, positioning or a common talent can change it. Most entries are medium. |
-| `low` | 0.2 | A real but situational edge: it needs a specific talent, map or team setup, or it only matters in one phase of the game. |
+| `low` | 0.2 | A real but situational edge: it needs a specific talent or one particular Heroic (say which in `conditions`), a map or team setup, or it only matters in one phase of the game. |
 
 Use `weight` only when a matchup is clearly stronger or weaker than its confidence suggests, and
 explain why in the pull request. Negative weights are allowed but almost never needed: write the
@@ -292,6 +324,10 @@ False positives found and fixed during the check (each now has a test):
 - Cheap Shot's "Stun, Blind, and damage an enemy" was read as a list of effect types and lost
   Valeera's stun and blind.
 - Flying Kick ("kick through target enemy") was missing as a dash.
+- Medivh got `stealth` from Dust of Disappearance, which stealths an ally ("Stealth an allied
+  Hero …"), through the rider every Stealth tooltip repeats ("Remaining stationary … while Stealthed
+  grants Invisible"). Stealth given to one ally and that rider no longer count; team-wide Stealth
+  (Tyrande's Shadowstalk) still does. medivh.yaml also removes the tag with `op: remove`.
 
 Remaining known imprecisions (accepted, or left to curators):
 
@@ -307,38 +343,58 @@ Remaining known imprecisions (accepted, or left to curators):
 
 ## What pages list
 
-Hero pages list a theory edge in "strong against", "weak against" or "good with" when a curator
-wrote it, or when its generic rules reach **65** (`THEORY_GATES.listMinScore` in
-`src/games/hots/load.ts`): one strong interaction the hero always has, or two clear ones. A match
-that only works through a talent tops out at 62 on its own, so it never heads a list alone.
-Curated matchups come first, then generic ones, each by score. Edges scoring 55-64 stay one tap
-away under "weaker mechanical edges"; the draft tool weighs every stored edge by its score.
-`docs/METHODOLOGY.md` §11 says the same for players.
+**One list per opponent.** Counters are directed, so A > B and B > A can both be stored. Hero pages
+net the two the way the draft tool scores them, value(A → B) − value(B → A) with value the inverse
+of the score ring, and put the opponent in "strong against" or "weak against" by the sign, never in
+both, with the net as its score (`netCounter` in `src/games/hots/load.ts`). The row lists the
+winning side's reasons first, then what the other kit has going for it. An exact wash lists
+nobody.
+
+**The headline bar.** A row makes "strong against", "weak against" or "good with" when a curator
+wrote the matchup, or when its generic rules reach **65** (`THEORY_GATES.listMinScore`: one strong
+interaction the hero always has, or two clear ones; a match that only works through a talent tops
+out at 62 on its own) **and** it is among the hero's **8** strongest generic rows in that list
+(`THEORY_GATES.listMaxGeneric`). Broad rules ("{a} peels divers off {b}") match much of the roster,
+and without the second bar a list could name nearly everyone. Curated matchups come first, then
+generic ones, each by score. Everything else stays one tap away under "weaker mechanical edges";
+the draft tool weighs every stored edge by its score.
+
+**Page weight.** The first six rows of a list render in full (portrait, score ring, reasons); the
+rest of the list and the rows below the bar render as light text rows (name, score, source, main
+reason), so a hero page stays under 250 KB of HTML.
+
+**Maps.** "Best maps" lists only maps scoring above 50; maps whose layout or objective works against
+the kit (below 50) get their own "Harder maps" list, hardest first. Map pages split their hero
+lists the same way. `docs/METHODOLOGY.md` §11 says the same for players.
 
 ## Calibration on the 2.57 roster
 
-From the live pipeline run of 9 October 2026 (build 2.57.0.98348, rules `1.5`, 90 draftable heroes,
-572 curated counter pairs, 238 curated synergy pairs):
+From the 2.57.0.98348 kits (`dev/build.ts`, rules `1.6`, 90 draftable heroes, 572 curated counter
+pairs, 238 curated synergy pairs, after the curated audit of 10 October 2026):
 
-| | Edges | 55-59 | 60-69 | 70-79 | 80-89 | 90-99 |
+| | Edges | 50-59 | 60-69 | 70-79 | 80-89 | 90-99 |
 |---|---|---|---|---|---|---|
-| Counters | 5,039 of 8,010 ordered pairs | 1,660 | 2,234 | 875 | 262 | 8 |
-| Synergies | 2,590 of 4,005 pairs | 708 | 866 | 898 | 118 | 0 |
+| Counters | 5,009 of 8,010 ordered pairs | 1,658 | 2,219 | 874 | 251 | 7 |
+| Synergies | 2,586 of 4,005 pairs | 710 | 891 | 894 | 91 | 0 |
 
-1,370 map-fit entries. 2,314 counter edges clear the list bar (curated or 65+). 181 generic
-counters sit at the 77 cap. The strongest counters (92) are Johanna over The Butcher and Illidan,
-Genji over Jaina, Medivh over Nova and Zeratul over Abathur and Sgt. Hammer: each a curated pair on
-top of capped rules. The most countered heroes by edges scoring 65+ are Murky, Genji, Nova,
-Zeratul, Valeera, Thrall, Xal'atath, Probius, Li-Ming and Xul (46-55 edges each, mean incoming
-71-74): fragile or Basic-Attack heroes with known hard answers, which matches common experience.
-theory.json is 3.1 MB as compact JSON (284 KB gzipped).
+1,370 map-fit entries. The strongest counters (92) are Johanna over The Butcher and Illidan, Genji
+over Jaina, and Zeratul over Abathur and Sgt. Hammer: each a curated pair on top of capped rules.
+Medivh over Nova fell from 92 to 84 when the audit lowered it to medium (Triple Tap is one of Nova's
+two Heroics). The most countered heroes by edges scoring 65+ are Murky, Zeratul, Nova,
+Genji, Valeera, Thrall, Xal'atath, Li-Ming, Probius and Tracer (46-54 edges each): fragile or
+Basic-Attack heroes with known hard answers, which matches common experience.
 
-Before this tuning (rules `1.1`) the same roster gave 6,489 counters and 2,653 synergies (3.7 MB),
-every edge above 50 was listed (Abathur "weak against" 71 heroes, Zeratul "good with" 85), and
-generic rules produced lines such as "D.Va reduces healing received (Aggression Matrix), which
-cuts into Johanna's healing" at 77 and Abathur and Dehaka "countering" each other at 77 through the
-same global-vs-split-push rule. Now Abathur lists 13 / 28 / 14 heroes (strong / weak / good with),
-curated first, and those lines are gone or carry their talent condition.
+With netting and the top-8 generic bar, the headline lists hold a median of 11 heroes each
+(strong / weak / good with), down from 24 / 24 / 32. No opponent is in both of a hero's counter
+lists (315 pairs were before). The longest lists belong to heroes with many curated pairs: Zarya's 43
+partners (35 curated), Sgt. Hammer's 34 threats and Johanna's 33 victims.
+
+Before the first tuning (rules `1.1`) the same roster gave 6,489 counters and 2,653 synergies
+(3.7 MB), every edge above 50 was listed (Abathur "weak against" 71 heroes, Zeratul "good with"
+85), and generic rules produced lines such as "D.Va reduces healing received (Aggression Matrix),
+which cuts into Johanna's healing" at 77 and Abathur and Dehaka "countering" each other at 77
+through the same global-vs-split-push rule. Now Abathur lists 4 / 15 / 14 heroes (strong / weak /
+good with), curated first, and those lines are gone or carry their talent condition.
 
 ## Known limitations
 
@@ -349,14 +405,14 @@ curated first, and those lines are gone or carry their talent condition.
   from a weak one or a core talent from a niche one. The cap and the 0.6× talent factor limit the
   damage; curated pairs supply the specifics.
 - **Counters are not antisymmetric.** A > B and B > A are scored from different rules, so both can
-  be above 50. They are separate statements ("A has tools against B", "B has tools against A").
-  Only the same rule matching both ways is netted out.
+  be above 50. theory.json keeps them as separate statements ("A has tools against B", "B has
+  tools against A"); hero pages and the draft tool net them per pair (see What pages list).
 - **No team context.** Scores are pairwise. Comps, double support, map timing and talent
   build-paths are left to the draft engine's other signals and to statistics.
 - **Patch drift.** Curated entries carry `reviewedFor`; evidence names are checked against current
   kits, but a numeric change that flips a matchup is only caught when a curator re-reviews it.
-- **Theory is a fallback.** When Heroes Profile statistics exist for a pair, they are primary and
-  theory only explains.
+- **Theory is a fallback.** If a statistics source is ever enabled and has data for a pair, the
+  statistics are primary and theory only explains.
 
 ## Developer tools
 
@@ -374,10 +430,11 @@ node src/games/hots/theory/dev/inspect.ts --hdp <dir> --hero alarak,genji [--sen
 node src/games/hots/theory/validate.ts
 ```
 
-Tests: `extract.test.ts` (golden tags for 18 real kits in `__fixtures__/kits.json` plus synthetic
+Tests: `extract.test.ts` (golden tags for 20 real kits in `__fixtures__/kits.json` plus synthetic
 precision cases), `engine.test.ts` (scoring, caps, merging, composites, reasons, determinism,
-schema), `curated.test.ts` (loader, merge rules, every error with its file path, the real curated
-files), `text.test.ts`, `dev/build.test.ts`. Sample per-hero files for the loader tests live in
+schema, curated conditions, "or" lists of picks), `curated.test.ts` (loader, merge rules and
+warnings, every error with its file path, the real curated files merging without warnings),
+`text.test.ts`, `dev/build.test.ts`, and `src/games/hots/load.test.ts` (netting and the list bar). Sample per-hero files for the loader tests live in
 `__fixtures__/curated/`, never in `curated/hots/heroes/`.
 
 Game data (ability and talent names and tooltip text) comes from Heroes of the Storm via
