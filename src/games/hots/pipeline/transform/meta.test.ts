@@ -10,6 +10,7 @@ const patch = (over: Partial<Patch>): Patch => ({
   url: 'https://news.blizzard.com/x',
   kind: 'patch',
   contentHash: '0123456789abcdef',
+  notes: 'summary',
   general: [],
   heroes: {},
   ...over,

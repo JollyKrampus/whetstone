@@ -6,29 +6,36 @@
  * changing its date. Each record carries the hash of the section text it came from, so a silent
  * hotfix append shows up as a new record and edits as a changed hash.
  *
- * What is kept (copyright: short factual change lines only, never paragraphs):
- *  - general: list lines of the General section and of hotfix sections without a hero;
- *  - maps: list lines under a map name in the Map section;
- *  - heroes: list lines under a hero (Balance section, hotfix hero blocks), with the section
- *    label (Base, Abilities, Talents, Level N…), the ability/talent they are about, and a
- *    buff/nerf/change/rework direction from the numbers and wording;
+ * What is kept is our own structured summary, never Blizzard's sentences (./summary.ts):
+ *  - general: list lines of the General section and of hotfix sections without a hero, kept as
+ *    our category counts ("Interface and audio: 2 changes");
+ *  - maps: per map, numeric changes as templates plus a count of the other changes;
+ *  - heroes: per line under a hero (Balance section, hotfix hero blocks) the section label (Base,
+ *    Abilities, Talents, Level N…), the ability/talent it is about, its kind (numeric with label,
+ *    old → new and unit; or added/removed/reworked/changed/bug fix), a computed direction and a
+ *    template sentence built from those fields;
  *  - new heroes: one line of our own ("X joins the Nexus as a Ranged Assassin.").
  * Bug-fix sections, collection/bundle sections, intros and new-hero kit descriptions are skipped,
- * and a hero marked "fully reworked" gets one summary line instead of its whole new kit.
+ * and a hero marked "fully reworked" gets one summary line instead of its whole new kit. As a last
+ * guard, any stored text that repeats VERBATIM_LIMIT consecutive words of the article is replaced.
  */
 import type { z } from 'zod';
 import type { ChangeDirSchema, Patch, PatchChangeSchema, PatchHeroSchema, TalentTier } from '../../schema.ts';
 import { TALENT_TIERS } from '../../schema.ts';
 import { cleanText, compareStrings, hash16, isoDate, searchKey } from '../util.ts';
 import { findElement, hasClass, isElement, parseHtml, textOf, type HtmlElement } from './html.ts';
+import { changeText, copiesSource, generalSummary, mapSummary, sourceRuns, summarizeLine, type ChangeFacts } from './summary.ts';
 
 export type PatchKind = Patch['kind'];
 export type ChangeDir = z.infer<typeof ChangeDirSchema>;
 export type PatchChange = z.infer<typeof PatchChangeSchema>;
 export type PatchHero = z.infer<typeof PatchHeroSchema>;
 
-/** Text of a change line is cut to this length (schema allows 400). */
+/** Raw lines are cut to this length before they are summarised (they are never stored). */
 export const MAX_LINE = 300;
+/** A list label longer than this is description, not an ability or talent name. */
+const MAX_TARGET_WORDS = 6;
+const MAX_TARGET_CHARS = 60;
 
 export interface ArticleMeta {
   url: string;
@@ -49,6 +56,9 @@ export interface HeroInfo {
 
 /** A parsed record before version/build are assigned. */
 export type ParsedPatch = Omit<Patch, 'id' | 'version'>;
+
+/** Where a change sits in a hero block. */
+type Place = Pick<PatchChange, 'section' | 'target' | 'level'>;
 
 const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
@@ -75,65 +85,15 @@ export function hotfixDate(text: string): string | null {
   return `${m[3]}-${String(Number(m[1])).padStart(2, '0')}-${String(Number(m[2])).padStart(2, '0')}`;
 }
 
-// ---- direction heuristics ---------------------------------------------------------------
-
-const LOWER_IS_BETTER =
-  /\b(cooldowns?|costs?|mana|delay|cast time|channel(?:ing)? time|channel duration|requirements?|required|time to|every\s+[\d.]+\s+seconds?|wind-?up|charge time|damage taken|self[- ]damage)\b/i;
-
-function num(s: string): number {
-  return Number(s.startsWith('.') ? `0${s}` : s);
-}
+// ---- direction ---------------------------------------------------------------------------
 
 /**
- * buff / nerf from "from A to B", "to B, up/down from A", "increased/reduced by N" and the
- * quantity named before the verb (cooldowns, costs and requirements are better when lower).
- * 'rework' for rework wording, 'change' for "Now …"/"No longer …" lines, else undefined.
+ * buff / nerf / change / rework of a raw line: the direction of its first summarised fact
+ * (numbers first: "from A to B", "to B, up from A", "increased by N", with cooldowns, costs and
+ * requirements better when lower; else the wording). Undefined when nothing says.
  */
 export function changeDirection(text: string, context = ''): ChangeDir | undefined {
-  const t = text.replace(/\s+/g, ' ');
-  if (/\brework(?:ed)?\b|\bredesigned\b/i.test(t) || /^rework:/i.test(context)) return 'rework';
-  const N = '(\\.?\\d+(?:\\.\\d+)?)';
-  let oldV: number | null = null;
-  let newV: number | null = null;
-  let subjectEnd = -1;
-  let m = new RegExp(`\\bto\\s+${N}%?[^,.;]*?,?\\s*(up|down)\\s+from\\s+${N}`, 'i').exec(t);
-  if (m) {
-    newV = num(m[1] as string);
-    oldV = num(m[3] as string);
-    subjectEnd = m.index;
-  } else if ((m = new RegExp(`\\bfrom\\s+${N}%?[^.;]*?\\bto\\s+${N}`, 'i').exec(t))) {
-    oldV = num(m[1] as string);
-    newV = num(m[2] as string);
-    subjectEnd = m.index;
-  }
-  let sign = 0;
-  if (oldV !== null && newV !== null && Number.isFinite(oldV) && Number.isFinite(newV) && oldV !== newV) {
-    sign = newV > oldV ? 1 : -1;
-  } else if (!/\bno longer\b/i.test(t)) {
-    const v = /\b(increased|increases|raised|improved|extended|faster|more)\b|\b(reduced|reduces|decreased|lowered|shortened|slower|less|fewer)\b/i.exec(t);
-    if (v) {
-      sign = v[1] ? 1 : -1;
-      subjectEnd = v.index;
-    }
-  }
-  if (sign !== 0) {
-    // The quantity is named in the same clause, just before the verb or "from".
-    const head = subjectEnd >= 0 ? t.slice(0, subjectEnd) : t;
-    const clauseStart = Math.max(0, ...[...head.matchAll(/[.:;](?=\s)/g)].map((x) => (x.index ?? 0) + 1));
-    const subject = `${head.slice(clauseStart)} ${context}`;
-    // "Cooldown reduction", "Mana refund", "Mana restore" are good things to have more of.
-    let lowerBetter =
-      LOWER_IS_BETTER.test(subject) &&
-      !/\b(cooldowns?|costs?|mana)\s+(reduction|refunds?|refresh|restored?|regen(?:eration)?|return(?:ed)?)\b/i.test(subject);
-    if (/\bdecay\b/i.test(subject) && !/\breduction\b/i.test(subject)) lowerBetter = true;
-    if (/\bnow strikes every\b|\bevery\s+[\d.]+\s+seconds?\b/i.test(t) && oldV !== null) lowerBetter = true;
-    const better = lowerBetter ? sign < 0 : sign > 0;
-    return better ? 'buff' : 'nerf';
-  }
-  if (/^(now|no longer|can now|can no longer|will now|is now|are now|new)\b/i.test(t) || /\b(moved|replaced|changed|swapped|now|removed|disabled|added|no longer)\b/i.test(t)) {
-    return 'change';
-  }
-  return undefined;
+  return summarizeLine(text, context)[0]?.dir;
 }
 
 export function verdictOf(changes: readonly PatchChange[]): NonNullable<PatchHero['verdict']> {
@@ -248,11 +208,16 @@ function areaFromHeading(text: string): Area | null {
 }
 
 class RecordBuilder {
+  /** Raw general lines: hashed and counted by category, never stored. */
   readonly general: string[] = [];
+  /** Raw map lines per map slug: summarised by mapSummary, never stored. */
   readonly maps = new Map<string, string[]>();
   readonly heroes = new Map<string, PatchChange[]>();
   readonly newHeroes: string[] = [];
+  /** Raw lines of the section (content hash only). */
   readonly text: string[] = [];
+  /** Hero lines already summarised (id, place and raw text), so a repeated line counts once. */
+  private readonly seen = new Set<string>();
   readonly kind: PatchKind;
   readonly date: string;
   readonly title: string;
@@ -269,14 +234,50 @@ class RecordBuilder {
     if (!list.includes(line)) list.push(line);
     this.maps.set(slug, list);
   }
+  /** One of our own lines (new hero, full rework). */
   addHero(id: string, change: PatchChange): void {
     const list = this.heroes.get(id) ?? [];
     if (!list.some((c) => c.text === change.text && c.target === change.target && c.section === change.section)) list.push(change);
     this.heroes.set(id, list);
   }
+  /** The summarised facts of one raw hero line. */
+  addHeroLine(id: string, place: Place, raw: string, facts: readonly ChangeFacts[]): void {
+    const key = `${id}|${place.section}|${place.target ?? ''}|${raw}`;
+    if (this.seen.has(key)) return;
+    this.seen.add(key);
+    const list = this.heroes.get(id) ?? [];
+    for (const f of facts) addFact(list, place, f);
+    this.heroes.set(id, list);
+  }
   empty(): boolean {
     return this.general.length === 0 && this.maps.size === 0 && this.heroes.size === 0 && this.newHeroes.length === 0;
   }
+}
+
+/**
+ * Adds one fact to a hero's changes: numeric facts once each; qualitative facts of the same kind
+ * and direction about the same target are counted ("2 effect changes") instead of repeated.
+ */
+export function addFact(list: PatchChange[], place: Place, f: ChangeFacts): void {
+  if (f.kind !== 'numeric') {
+    const same = list.find((c) => c.kind === f.kind && c.dir === f.dir && c.section === place.section && c.target === place.target && c.level === place.level);
+    if (same) {
+      same.count = (same.count ?? 1) + 1;
+      same.text = changeText(same);
+      return;
+    }
+  }
+  const change: PatchChange = { ...place, ...f, text: changeText(f) };
+  if (!list.some((c) => c.text === change.text && c.target === change.target && c.section === change.section)) list.push(change);
+}
+
+/** "(New) Slapathur", "New: Slapathur": a talent or ability added in this patch. */
+const NEW_LABEL_RE = /^(?:\(new\)|new:)\s*/i;
+
+/** A list label as a change target: an ability or talent name, never a sentence. */
+function targetName(label: string): string | undefined {
+  const t = label.replace(/^rework:\s*/i, '').replace(NEW_LABEL_RE, '').replace(TARGET_HOTKEY_RE, '').trim();
+  return t && t.length <= MAX_TARGET_CHARS && t.split(/\s+/).length <= MAX_TARGET_WORDS ? t : undefined;
 }
 
 function shortLine(text: string): string {
@@ -291,6 +292,8 @@ export interface ParseArticleOptions {
   heroInfo: ReadonlyMap<string, HeroInfo>;
   /** Collects block headings in hero sections that match no hero (their lines are skipped). */
   unmatched?: Set<string>;
+  /** Called with each stored string that had to be replaced because it repeated the article. */
+  onCopied?: (text: string) => void;
 }
 
 function lookupHero(text: string, index: HeroIndex): readonly string[] | null {
@@ -316,7 +319,7 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
   let section: string | null = null;
   const reworked = new Set<string>();
   // Labels of list items with children, by depth (section, level or target).
-  let labels: { section?: string; target?: string; hero?: readonly string[]; skip?: boolean; rework?: boolean }[] = [];
+  let labels: { section?: string; target?: string | undefined; label?: boolean; hero?: readonly string[]; skip?: boolean; rework?: boolean; added?: boolean }[] = [];
   let mapSlug: string | null = null;
   let mapLabel: string | null = null;
 
@@ -363,15 +366,15 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
       if (markRework(text)) return;
       const ancestors = labels.slice(0, depth);
       const sec = [...ancestors].reverse().find((l) => l?.section)?.section ?? section ?? 'Changes';
-      const target = [...ancestors].reverse().find((l) => l?.target)?.target;
+      const target = [...ancestors].reverse().find((l) => l?.label)?.target;
       const reworkLabel = ancestors.some((l) => l?.rework);
-      const change: PatchChange = { section: sec, text: text.replace(/^rework:\s*/i, '') };
-      if (target) change.target = target;
+      const newLabel = ancestors.some((l) => l?.added);
+      const place: Place = { section: sec };
+      if (target) place.target = target;
       const lm = /^Level (\d+)$/.exec(sec);
-      if (lm && (TALENT_TIERS as readonly string[]).includes(lm[1] ?? '')) change.level = lm[1] as TalentTier;
-      const dir = changeDirection(text, `${reworkLabel ? 'REWORK: ' : ''}${target ?? ''} ${sec}`);
-      if (dir) change.dir = dir;
-      for (const id of hero) if (!reworked.has(id)) rec.addHero(id, change);
+      if (lm && (TALENT_TIERS as readonly string[]).includes(lm[1] ?? '')) place.level = lm[1] as TalentTier;
+      const facts = summarizeLine(text.replace(/^rework:\s*/i, ''), `${reworkLabel ? 'REWORK: ' : newLabel ? 'NEW: ' : ''}${target ?? ''} ${sec}`);
+      for (const id of hero) if (!reworked.has(id)) rec.addHeroLine(id, place, text, facts);
     }
   };
 
@@ -402,7 +405,7 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
           if (main.newHeroes.includes(id)) continue;
           main.newHeroes.push(id);
           const info = opts.heroInfo.get(id);
-          main.addHero(id, { section: 'New Hero', text: `${info?.name ?? name} joins the Nexus as a ${info?.role ?? 'new hero'}.`, dir: 'change' });
+          main.addHero(id, { section: 'New Hero', kind: 'added', text: `${info?.name ?? name} joins the Nexus as a ${info?.role ?? 'new hero'}.`, dir: 'change' });
         }
         continue;
       }
@@ -458,7 +461,8 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
           // A general sub-heading ("Storm League") prefixes nothing; its children are general lines.
         } else {
           const rework = /^rework:/i.test(label);
-          labels[item.depth] = { target: label.replace(/^rework:\s*/i, '').replace(TARGET_HOTKEY_RE, '').trim(), rework };
+          // A label that is a sentence rather than a name still scopes its children, without a target.
+          labels[item.depth] = { label: true, target: targetName(label), rework, added: NEW_LABEL_RE.test(label) };
         }
       }
       continue;
@@ -471,7 +475,7 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
     if (!hero || !/\bfully reworked\b|\bfull rework\b|\bcomplete rework\b/i.test(text)) return false;
     for (const id of hero) {
       if (reworked.has(id)) continue;
-      rec.addHero(id, { section: 'Base', text: 'Full rework: new base abilities and talent tree.', dir: 'rework' });
+      rec.addHero(id, { section: 'Base', kind: 'reworked', text: 'Full rework: new base abilities and talent tree.', dir: 'rework' });
       reworked.add(id);
     }
     return true;
@@ -494,10 +498,26 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
     recordLine(line, depth);
   }
 
+  // Last guard: nothing stored may repeat VERBATIM_LIMIT consecutive words of the article.
+  const runs = sourceRuns(items.flatMap((it) => (it.type === 'li' ? it.lines : it.type === 'heading' || it.type === 'para' ? [it.text] : [])));
+  const guard = (text: string): boolean => {
+    if (!copiesSource(text, runs)) return true;
+    opts.onCopied?.(text);
+    return false;
+  };
+  const safeChange = (c: PatchChange): PatchChange => {
+    const { target, ...rest } = c;
+    const kept: PatchChange = target === undefined || guard(target) ? c : rest;
+    if (guard(kept.text)) return kept;
+    const { stat: _s, old: _o, new: _n, by: _b, unit: _u, count: _c, ...place } = kept;
+    const kind = kept.kind === 'numeric' ? 'changed' : kept.kind;
+    return { ...place, kind, text: changeText({ kind }) };
+  };
+
   const toRecord = (b: RecordBuilder, url: string): ParsedPatch => {
     const heroes: Record<string, PatchHero> = {};
     for (const id of [...b.heroes.keys()].sort(compareStrings)) {
-      const changes = b.heroes.get(id) as PatchChange[];
+      const changes = (b.heroes.get(id) as PatchChange[]).map(safeChange);
       heroes[id] = { verdict: b.newHeroes.includes(id) ? 'new' : verdictOf(changes), changes };
     }
     const rec: ParsedPatch = {
@@ -505,15 +525,85 @@ export function parseArticle(html: string, meta: ArticleMeta, opts: ParseArticle
       title: b.title,
       url,
       kind: b.kind,
+      // Raw lines feed the hash (they are never stored), so an edited or appended section shows up.
       contentHash: hash16(`${b.kind}|${b.date}|${b.text.join('\n')}|${b.general.join('\n')}`),
-      general: b.general,
+      notes: 'summary',
+      general: generalSummary(b.general).filter(guard),
       heroes,
     };
-    if (b.maps.size > 0) rec.maps = Object.fromEntries([...b.maps].sort(([x], [y]) => compareStrings(x, y)));
+    const maps = [...b.maps]
+      .sort(([x], [y]) => compareStrings(x, y))
+      .map(([slug, lines]) => [slug, mapSummary(lines).filter(guard)] as const)
+      .filter(([, lines]) => lines.length > 0);
+    if (maps.length > 0) rec.maps = Object.fromEntries(maps);
     if (b.newHeroes.length > 0) rec.newHeroes = [...b.newHeroes].sort(compareStrings);
     return rec;
   };
   return [...hotfixes, main].filter((b) => !b.empty()).map((b) => toRecord(b, meta.url));
+}
+
+// ---- last-good files from before the summaries ---------------------------------------------
+
+const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+const strings = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string' && x !== '') : []);
+const GAME_DATA_NUMBERS = /^(.+?) (-?\d+(?:\.\d+)?)(%?) → (-?\d+(?:\.\d+)?)(%?)\.?$/;
+const ENRICHED = /\s*\(game data: [^)]*\)\.?$/;
+
+/** One stored change of an old record → our facts, keeping its place and direction. */
+function migrateChange(list: PatchChange[], c: Record<string, unknown>): void {
+  const text = typeof c.text === 'string' ? c.text : '';
+  if (!text) return;
+  const place: Place = { section: typeof c.section === 'string' && c.section ? c.section : 'Changes' };
+  const added = typeof c.target === 'string' && NEW_LABEL_RE.test(c.target);
+  const target = typeof c.target === 'string' ? c.target.replace(NEW_LABEL_RE, '') : '';
+  if (target) place.target = target;
+  if (typeof c.level === 'string' && (TALENT_TIERS as readonly string[]).includes(c.level)) place.level = c.level as TalentTier;
+  const dir = typeof c.dir === 'string' ? (c.dir as ChangeDir) : undefined;
+  const own = (kind: PatchChange['kind'], facts: Partial<PatchChange> = {}): void => {
+    list.push({ ...place, kind, ...facts, text, ...(dir ? { dir } : {}) });
+  };
+  if (place.section === 'New Hero') return own('added');
+  if (text === 'Full rework: new base abilities and talent tree.') return own('reworked');
+  if (place.section === 'Game data') {
+    // Always our own lines; numeric ones get their fields back.
+    const m = GAME_DATA_NUMBERS.exec(text);
+    if (m) {
+      const facts: ChangeFacts = { kind: 'numeric', stat: m[1] as string, old: Number(m[2]), new: Number(m[4]) };
+      if (m[3] || m[5]) facts.unit = '%';
+      list.push({ ...place, ...facts, text: changeText(facts), ...(dir ? { dir } : {}) });
+      return;
+    }
+    return own(/^New\b/.test(text) ? 'added' : /\bremoved\b/i.test(text) ? 'removed' : 'changed');
+  }
+  // Blizzard's sentence: summarise it like a freshly parsed line (game-data numbers are re-added
+  // by enrichWithDiff when the record is assembled).
+  const prefix = dir === 'rework' ? 'REWORK: ' : added ? 'NEW: ' : '';
+  for (const f of summarizeLine(text.replace(ENRICHED, ''), `${prefix}${place.target ?? ''} ${place.section}`)) addFact(list, place, f);
+}
+
+/**
+ * patches.json written before 2026-10-10 (records without `notes`) stored Blizzard's change
+ * sentences. Re-summarises such records the way parseArticle does, so a run that cannot fetch an
+ * article never carries those sentences forward. Anything else is returned unchanged.
+ */
+export function migrateLegacyPatches(raw: unknown): unknown {
+  if (!Array.isArray(raw)) return raw;
+  return raw.map((r) => {
+    if (!isObj(r) || 'notes' in r) return r;
+    const heroes: Record<string, PatchHero> = {};
+    for (const [id, h] of Object.entries(isObj(r.heroes) ? r.heroes : {})) {
+      const list: PatchChange[] = [];
+      for (const c of isObj(h) && Array.isArray(h.changes) ? h.changes : []) if (isObj(c)) migrateChange(list, c);
+      if (list.length > 0) heroes[id] = { verdict: isObj(h) && h.verdict === 'new' ? 'new' : verdictOf(list), changes: list };
+    }
+    const out: Record<string, unknown> = { ...r, notes: 'summary', general: generalSummary(strings(r.general)), heroes };
+    const maps = Object.entries(isObj(r.maps) ? r.maps : {})
+      .map(([slug, lines]) => [slug, mapSummary(strings(lines))] as const)
+      .filter(([, lines]) => lines.length > 0);
+    if (maps.length > 0) out.maps = Object.fromEntries(maps);
+    else delete out.maps;
+    return out;
+  });
 }
 
 /** Map index from map names, slugs and aliases. */

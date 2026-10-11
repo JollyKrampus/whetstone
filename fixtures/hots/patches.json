@@ -9,86 +9,122 @@
         "changes": [
           {
             "dir": "buff",
+            "kind": "changed",
             "section": "Abilities",
             "target": "Shadow Mark",
-            "text": "Void Orb speed slightly increased."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 2,
+            "old": 5,
             "section": "Abilities",
+            "stat": "Targeting range",
             "target": "Void Step",
-            "text": "Targeting range reduced from 5 to 2."
+            "text": "Targeting range 5 → 2"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 6.5,
+            "old": 7,
             "section": "Abilities",
+            "stat": "Distance between teleport points",
             "target": "Void Step",
-            "text": "Distance between teleport points reduced from 7 to 6.5."
+            "text": "Distance between teleport points 7 → 6.5"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "section": "Abilities",
             "target": "Void Step",
-            "text": "Now prevented and interrupted by Immobilize."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 72,
+            "old": 90,
             "section": "Abilities",
+            "stat": "Base damage per missile",
             "target": "Void Volley",
-            "text": "Base damage per missile reduced from 90 to 72."
+            "text": "Base damage per missile 90 → 72"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "section": "Abilities",
             "target": "Void Volley",
-            "text": "Now generates 1 charge for every Basic Attack against enemy Heroes and every 2 Basic Attacks against non-Heroes."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
+            "by": -20,
             "dir": "nerf",
+            "kind": "numeric",
             "section": "Abilities",
+            "stat": "Uncharged damage",
             "target": "Void Eruption",
-            "text": "Uncharged damage reduced by 20%."
+            "text": "Uncharged damage −20%",
+            "unit": "%"
           },
           {
+            "by": -5,
             "dir": "nerf",
+            "kind": "numeric",
             "section": "Abilities",
+            "stat": "Fully charged damage",
             "target": "Void Eruption",
-            "text": "Fully charged damage reduced by 5%."
+            "text": "Fully charged damage −5%",
+            "unit": "%"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "1",
+            "new": 25,
+            "old": 50,
             "section": "Level 1",
+            "stat": "Radius bonus",
             "target": "Anchored Core",
-            "text": "Radius bonus reduced from 50% to 25%."
+            "text": "Radius bonus 50% → 25%",
+            "unit": "%"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "level": "4",
             "section": "Level 4",
             "target": "Dark Barrier",
-            "text": "Now only triggers when enemy Heroes are hit"
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "7",
+            "new": 1.5,
+            "old": 1,
             "section": "Level 7",
+            "stat": "Silence duration",
             "target": "Silence of the Lamb",
-            "text": "Silence duration increased from 1 to 1.5 seconds."
+            "text": "Silence duration 1 s → 1.5 s",
+            "unit": "s"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "level": "13",
             "section": "Level 13",
             "target": "Dark Heart's Protection",
-            "text": "Detonating the Dark Heart on a target affected by Shadow Mark now Silences all enemies hit. Previously silenced on cast."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "level": "20",
             "section": "Level 20",
             "target": "Rift Invasion",
-            "text": "Portals now have non-lethal Health decay, stopping at 4 Health."
+            "text": "Effect changed (see Blizzard's notes)"
           }
         ],
         "verdict": "mixed"
@@ -96,6 +132,7 @@
     },
     "id": "2026-10-05-hotfix",
     "kind": "hotfix",
+    "notes": "summary",
     "title": "Hotfix - 10/5/2026",
     "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
     "version": "2.57"
@@ -105,16 +142,15 @@
     "contentHash": "7c450a6202b74172",
     "date": "2026-09-29",
     "general": [
-      "Fixed an issue where some players who bought the pre-purchase bundle didn't receive Xal'atath.",
-      "Fixed an exploit with Xal'atath's ultimate.",
-      "Fixed an issue where Level 20 Void Convergence portal would lose life.",
-      "Adjusted colors on Dark Heart to make visibility clearer for enemies."
+      "Bug fixes: 3 changes",
+      "Interface and audio: 1 change"
     ],
     "heroes": {
       "HXAL": {
         "changes": [
           {
             "dir": "change",
+            "kind": "changed",
             "level": "7",
             "section": "Game data",
             "target": "Void Summoner",
@@ -126,6 +162,7 @@
     },
     "id": "2026-09-29-hotfix",
     "kind": "hotfix",
+    "notes": "summary",
     "title": "Hotfix - 9/29/2026",
     "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
     "version": "2.57"
@@ -135,25 +172,30 @@
     "contentHash": "bf3c8c30c7761e2f",
     "date": "2026-09-28",
     "general": [
-      "Updated Homescreen and Startup Music.",
-      "Added the ability to ping your Healing Fountain cooldown."
+      "Interface and audio: 2 changes"
     ],
     "heroes": {
       "Abat": {
         "changes": [
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "13",
+            "new": 40,
+            "old": 50,
             "section": "Level 13",
+            "stat": "Health decay reduction",
             "target": "Bombard Strain",
-            "text": "Health decay reduction lowered from 50% to 40%."
+            "text": "Health decay reduction 50% → 40%",
+            "unit": "%"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "level": "16",
             "section": "Level 16",
             "target": "Survival Instincts",
-            "text": "Now provides 50% damage reduction against non-Heroes, instead of +100% Health."
+            "text": "Effect changed (see Blizzard's notes)"
           }
         ],
         "verdict": "nerf"
@@ -162,6 +204,7 @@
         "changes": [
           {
             "dir": "change",
+            "kind": "added",
             "section": "New Hero",
             "text": "Xal'atath joins the Nexus as a Ranged Assassin."
           }
@@ -172,6 +215,7 @@
         "changes": [
           {
             "dir": "change",
+            "kind": "changed",
             "section": "Game data",
             "target": "Storm Bolt",
             "text": "Tooltip text changed."
@@ -185,6 +229,7 @@
     "newHeroes": [
       "HXAL"
     ],
+    "notes": "summary",
     "title": "Heroes of the Storm Live Patch Notes - September 28, 2026",
     "url": "https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026",
     "version": "2.57"
@@ -194,24 +239,30 @@
     "contentHash": "ab84f4794afd46f1",
     "date": "2026-09-14",
     "general": [
-      "Updated Homescreen and Startup Music."
+      "Interface and audio: 1 change"
     ],
     "heroes": {
       "Abat": {
         "changes": [
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "13",
+            "new": 40,
+            "old": 50,
             "section": "Level 13",
+            "stat": "Health decay reduction",
             "target": "Bombard Strain",
-            "text": "Health decay reduction lowered from 50% to 40%."
+            "text": "Health decay reduction 50% → 40%",
+            "unit": "%"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "level": "16",
             "section": "Level 16",
             "target": "Survival Instincts",
-            "text": "Now provides 50% damage reduction against non-Heroes, instead of +100% Health."
+            "text": "Effect changed (see Blizzard's notes)"
           }
         ],
         "verdict": "nerf"
@@ -220,6 +271,7 @@
         "changes": [
           {
             "dir": "change",
+            "kind": "added",
             "section": "New Hero",
             "text": "Xal'atath joins the Nexus as a Ranged Assassin."
           }
@@ -232,6 +284,7 @@
     "newHeroes": [
       "HXAL"
     ],
+    "notes": "summary",
     "title": "Heroes of the Storm PTR Patch Notes - September 14, 2026",
     "url": "https://news.blizzard.com/en-us/article/24306095/heroes-of-the-storm-ptr-patch-notes-september-14-2026",
     "version": "2.57"
@@ -241,96 +294,103 @@
     "contentHash": "fac7276447186b14",
     "date": "2026-07-20",
     "general": [
-      "Haunted Mines has been added to Ranked.",
-      "Updated Homescreen and Startup Music."
+      "Modes and matchmaking: 1 change",
+      "Interface and audio: 1 change"
     ],
     "heroes": {
       "Abat": {
         "changes": [
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 225,
+            "old": 350,
             "section": "Base",
+            "stat": "Health",
             "target": "Locust Strain",
-            "text": "Health reduced from 350 to 225."
+            "text": "Health 350 → 225"
           },
           {
+            "count": 2,
             "dir": "change",
+            "kind": "removed",
             "section": "Base",
             "target": "Locust Strain",
-            "text": "Locusts no longer have a duration but now lose Health over time."
+            "text": "2 effects removed (see Blizzard's notes)"
           },
           {
+            "count": 2,
             "dir": "change",
+            "kind": "changed",
             "section": "Base",
             "target": "Locust Strain",
-            "text": "Locusts now heal for 20% of the damage they deal, and heal for 20% of their maximum Health when a nearby Minion dies."
+            "text": "2 effect changes (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 36,
+            "old": 58,
             "section": "Base",
+            "stat": "Locust damage",
             "target": "Locust Strain",
-            "text": "Locust damage reduced from 58 to 36."
-          },
-          {
-            "dir": "change",
-            "section": "Base",
-            "target": "Locust Strain",
-            "text": "Locusts now deal 100% bonus damage to non-Heroes."
-          },
-          {
-            "dir": "change",
-            "section": "Base",
-            "target": "Locust Strain",
-            "text": "Locusts no longer deal 25% bonus damage to Structures."
+            "text": "Locust damage 58 → 36"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "1",
+            "new": 15,
+            "old": 10,
             "section": "Level 1",
+            "stat": "Armor reduction",
             "target": "Envenomed Nests",
-            "text": "Armor reduction increased from 10 to 15."
+            "text": "Armor reduction 10 → 15"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "level": "1",
             "section": "Level 1",
             "target": "Locust Brood",
-            "text": "Moved from Level 16 to Level 1."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "1",
+            "new": 75,
+            "old": 45,
             "section": "Level 1",
+            "stat": "Cooldown",
             "target": "Locust Brood",
-            "text": "Cooldown increased from 45 to 75 seconds."
+            "text": "Cooldown 45 s → 75 s",
+            "unit": "s"
           },
           {
             "dir": "change",
+            "kind": "added",
             "level": "4",
             "section": "Level 4",
-            "target": "(New) Slapathur",
-            "text": "Abathur's Basic Attacks now deal 350% bonus damage, Stun enemies, and disable Structures for 1.5 seconds. This effect has a 6 second cooldown per target against Structures and Heroes."
+            "target": "Slapathur",
+            "text": "New effect (see Blizzard's notes)"
           },
           {
+            "count": 2,
             "dir": "change",
+            "kind": "changed",
             "level": "10",
             "section": "Level 10",
             "target": "Evolve Monstrosity",
-            "text": "Now displays as a Quest."
+            "text": "2 effect changes (see Blizzard's notes)"
           },
           {
             "dir": "change",
-            "level": "10",
-            "section": "Level 10",
-            "target": "Evolve Monstrosity",
-            "text": "Abathur now has a Monstrosity unit frame for tracking Health and stacks of the unit."
-          },
-          {
-            "dir": "change",
+            "kind": "changed",
             "level": "16",
             "section": "Level 16",
             "target": "Survival Intincts",
-            "text": "Moved from Level 1 to Level 16."
+            "text": "Effect changed (see Blizzard's notes)"
           }
         ],
         "verdict": "mixed"
@@ -339,24 +399,35 @@
         "changes": [
           {
             "dir": "buff",
+            "kind": "changed",
             "level": "1",
             "section": "Level 1",
             "target": "Consuming Fire",
-            "text": "Healing bonus increased from 150% to a flat 75 Health."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "1",
+            "new": 50,
+            "old": 60,
             "section": "Level 1",
+            "stat": "Health",
             "target": "Calloused Hide",
-            "text": "Health threshold required to trigger reduced from 60% to 50%."
+            "text": "Health 60% → 50%",
+            "unit": "%"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "7",
+            "new": 1.5,
+            "old": 1,
             "section": "Level 7",
+            "stat": "Cooldown reduction",
             "target": "Firestarter",
-            "text": "Cooldown reduction per Basic Attack increased from 1 to 1.5 seconds."
+            "text": "Cooldown reduction 1 s → 1.5 s",
+            "unit": "s"
           }
         ],
         "verdict": "buff"
@@ -365,16 +436,26 @@
         "changes": [
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 13,
+            "old": 12,
             "section": "Base",
+            "stat": "Cooldown",
             "target": "Shield Glare",
-            "text": "Cooldown increased from 12 to 13 seconds."
+            "text": "Cooldown 12 s → 13 s",
+            "unit": "s"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "10",
+            "new": 65,
+            "old": 60,
             "section": "Level 10",
+            "stat": "Cooldown",
             "target": "Blessed Shield",
-            "text": "Cooldown increased from 60 to 65 seconds."
+            "text": "Cooldown 60 s → 65 s",
+            "unit": "s"
           }
         ],
         "verdict": "nerf"
@@ -383,54 +464,89 @@
         "changes": [
           {
             "dir": "buff",
+            "kind": "numeric",
+            "new": 45,
+            "old": 40,
             "section": "Base",
+            "stat": "Damage",
             "target": "Shadow Charge",
-            "text": "Damage increased from 40 to 45."
+            "text": "Damage 40 → 45"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
+            "new": 140,
+            "old": 130,
             "section": "Base",
+            "stat": "Terrain collision damage",
             "target": "Shadow Charge",
-            "text": "Terrain collision damage increased from 130 to 140."
+            "text": "Terrain collision damage 130 → 140"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 11,
+            "old": 12,
             "section": "Base",
+            "stat": "Damage",
             "target": "Fire Stomp",
-            "text": "Damage reduced from 12 to 11."
+            "text": "Damage 12 → 11"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 34,
+            "old": 36,
             "section": "Base",
+            "stat": "Return damage",
             "target": "Fire Stomp",
-            "text": "Return damage reduced from 36 to 34."
+            "text": "Return damage 36 → 34"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
+            "new": 80,
+            "old": 73,
             "section": "Base",
+            "stat": "Damage",
             "target": "Overpower",
-            "text": "Damage increased from 73 to 80."
+            "text": "Damage 73 → 80"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "7",
+            "new": 2,
+            "old": 1.5,
             "section": "Level 7",
+            "stat": "Cooldown reduction",
             "target": "Diabolical Momentum",
-            "text": "Cooldown reduction per Basic Attack increased from 1.5 to 2 seconds."
+            "text": "Cooldown reduction 1.5 s → 2 s",
+            "unit": "s"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "20",
+            "new": 30,
+            "old": 25,
             "section": "Level 20",
+            "stat": "Cooldown reduction",
             "target": "Dying Breath",
-            "text": "Cooldown reduction per Hero hit increased from 25 to 30 seconds."
+            "text": "Cooldown reduction 25 s → 30 s",
+            "unit": "s"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "20",
+            "new": 12,
+            "old": 10,
             "section": "Level 20",
+            "stat": "Health stolen",
             "target": "Lord of Terror",
-            "text": "Health stolen increased from 10% to 12% maximum Health."
+            "text": "Health stolen 10% → 12%",
+            "unit": "%"
           }
         ],
         "verdict": "mixed"
@@ -439,38 +555,58 @@
         "changes": [
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "4",
+            "new": 20,
+            "old": 25,
             "section": "Level 4",
+            "stat": "Bonus per bounce",
             "target": "Rising Dread",
-            "text": "Bonus per bounce reduced from 25% to 20%."
+            "text": "Bonus per bounce 25% → 20%",
+            "unit": "%"
           },
           {
             "dir": "change",
+            "kind": "removed",
             "level": "4",
             "section": "Level 4",
             "target": "Bomb's Away",
-            "text": "No longer has a cap on stacks."
+            "text": "Effect removed (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "4",
+            "new": 4,
+            "old": 5,
             "section": "Level 4",
+            "stat": "Damage bonus per stack",
             "target": "Bomb's Away",
-            "text": "Damage bonus per stack lowered from 5 to 4."
+            "text": "Damage bonus per stack 5 → 4"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "7",
+            "new": 1,
+            "old": 0.5,
             "section": "Level 7",
+            "stat": "Cooldown reduction",
             "target": "Double Trouble",
-            "text": "Shadowflame's cooldown reduction from Quest Reward increased from 0.5 to 1 second."
+            "text": "Cooldown reduction 0.5 s → 1 s",
+            "unit": "s"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "16",
+            "new": 0.6,
+            "old": 0.75,
             "section": "Level 16",
+            "stat": "Stun duration",
             "target": "Leaden Orb",
-            "text": "Stun duration reduced from 0.75 seconds to 0.6 seconds."
+            "text": "Stun duration 0.75 s → 0.6 s",
+            "unit": "s"
           }
         ],
         "verdict": "mixed"
@@ -480,9 +616,10 @@
     "kind": "patch",
     "maps": {
       "hanamura-temple": [
-        "Additional brush has been added in several locations."
+        "1 change (see Blizzard's notes)"
       ]
     },
+    "notes": "summary",
     "title": "Heroes of the Storm Live Patch Notes - July 20, 2026",
     "url": "https://news.blizzard.com/en-us/article/24291432/heroes-of-the-storm-live-patch-notes-july-20-2026",
     "version": "2.55"
@@ -492,79 +629,95 @@
     "contentHash": "7a12a1f3cd9e4e35",
     "date": "2026-06-29",
     "general": [
-      "Players can now party with unplaced players in Storm League.",
-      "Haunted Mines has been added to Ranked."
+      "Modes and matchmaking: 2 changes"
     ],
     "heroes": {
       "Abat": {
         "changes": [
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 225,
+            "old": 350,
             "section": "Base",
+            "stat": "Health",
             "target": "Spawn Locust",
-            "text": "Health reduced from 350 to 225."
+            "text": "Health 350 → 225"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "section": "Base",
             "target": "Spawn Locust",
-            "text": "Locusts now heal for 20% of the damage they deal, and heal for 20% of their maximum Health when a nearby Minion dies."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "1",
+            "new": 15,
+            "old": 10,
             "section": "Level 1",
+            "stat": "Armor reduction",
             "target": "Envenomed Nests",
-            "text": "Armor reduction increased from 10 to 15."
+            "text": "Armor reduction 10 → 15"
           },
           {
             "dir": "change",
+            "kind": "changed",
             "level": "1",
             "section": "Level 1",
             "target": "Locust Brood",
-            "text": "Moved from Level 16 to Level 1."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "1",
+            "new": 75,
+            "old": 45,
             "section": "Level 1",
+            "stat": "Cooldown",
             "target": "Locust Brood",
-            "text": "Cooldown increased from 45 to 75 seconds."
+            "text": "Cooldown 45 s → 75 s",
+            "unit": "s"
           },
           {
             "dir": "change",
+            "kind": "added",
             "level": "4",
             "section": "Level 4",
-            "target": "(New) Slapathur",
-            "text": "Abathur's Basic Attacks now Stun non-Heroes and deal 500% additional damage."
+            "target": "Slapathur",
+            "text": "New effect (see Blizzard's notes)"
           },
           {
+            "count": 2,
             "dir": "change",
+            "kind": "changed",
             "level": "10",
             "section": "Level 10",
             "target": "Evolve Monstrosity",
-            "text": "Now displays as a Quest."
+            "text": "2 effect changes (see Blizzard's notes)"
           },
           {
             "dir": "change",
-            "level": "10",
-            "section": "Level 10",
-            "target": "Evolve Monstrosity",
-            "text": "Abathur now has a Monstrosity unit frame, for tracking Health and stacks of the unit."
-          },
-          {
-            "dir": "change",
+            "kind": "changed",
             "level": "16",
             "section": "Level 16",
             "target": "Survival Intincts",
-            "text": "Moved from Level 1 to Level 16."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "16",
+            "new": 200,
+            "old": 100,
             "section": "Level 16",
+            "stat": "Health bonus",
             "target": "Survival Intincts",
-            "text": "Health bonus increased from 100% to 200%."
+            "text": "Health bonus 100% → 200%",
+            "unit": "%"
           }
         ],
         "verdict": "mixed"
@@ -573,17 +726,27 @@
         "changes": [
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "7",
+            "new": 40,
+            "old": 60,
             "section": "Level 7",
+            "stat": "Health",
             "target": "Calloused Hide",
-            "text": "Health threshold required to trigger reduced from 60% to 40%."
+            "text": "Health 60% → 40%",
+            "unit": "%"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "7",
+            "new": 1.5,
+            "old": 1,
             "section": "Level 7",
+            "stat": "Cooldown reduction",
             "target": "Firestarter",
-            "text": "Cooldown reduction per Basic Attack increased from 1 to 1.5 seconds."
+            "text": "Cooldown reduction 1 s → 1.5 s",
+            "unit": "s"
           }
         ],
         "verdict": "buff"
@@ -592,16 +755,26 @@
         "changes": [
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 13,
+            "old": 12,
             "section": "Base",
+            "stat": "Cooldown",
             "target": "Shield Glare",
-            "text": "Cooldown increased from 12 to 13 seconds."
+            "text": "Cooldown 12 s → 13 s",
+            "unit": "s"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "10",
+            "new": 65,
+            "old": 60,
             "section": "Level 10",
+            "stat": "Cooldown",
             "target": "Blessed Shield",
-            "text": "Cooldown increased from 60 to 65 seconds."
+            "text": "Cooldown 60 s → 65 s",
+            "unit": "s"
           }
         ],
         "verdict": "nerf"
@@ -610,42 +783,81 @@
         "changes": [
           {
             "dir": "buff",
+            "kind": "numeric",
+            "new": 45,
+            "old": 40,
+            "section": "Base",
+            "stat": "Damage",
+            "target": "Shadow Charge",
+            "text": "Damage 40 → 45"
+          },
+          {
+            "kind": "changed",
             "section": "Base",
             "target": "Shadow Charge",
-            "text": "Damage increased from 40 plus 130 with a collision, to 45 plus 140 with a collision."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 11,
+            "old": 12,
+            "section": "Base",
+            "stat": "Damage",
+            "target": "Fire Stomp",
+            "text": "Damage 12 → 11"
+          },
+          {
+            "kind": "changed",
             "section": "Base",
             "target": "Fire Stomp",
-            "text": "Damage decreased from 12 on expansion and 36 on return to 11 on expansion and 34 on return."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
+            "new": 80,
+            "old": 73,
             "section": "Base",
+            "stat": "Damage",
             "target": "Overpower",
-            "text": "Damage increased from 73 to 80."
+            "text": "Damage 73 → 80"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "7",
+            "new": 2,
+            "old": 1.5,
             "section": "Level 7",
+            "stat": "Cooldown reduction",
             "target": "Diabolical Momentum",
-            "text": "Cooldown reduction per Basic Attack increased from 1.5 to 2 seconds."
+            "text": "Cooldown reduction 1.5 s → 2 s",
+            "unit": "s"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "20",
+            "new": 30,
+            "old": 25,
             "section": "Level 20",
+            "stat": "Cooldown reduction",
             "target": "Dying Breath",
-            "text": "Cooldown reduction per Hero hit increased from 25 to 30 seconds."
+            "text": "Cooldown reduction 25 s → 30 s",
+            "unit": "s"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "20",
+            "new": 12,
+            "old": 10,
             "section": "Level 20",
+            "stat": "Health stolen",
             "target": "Lord of Terror",
-            "text": "Health stolen increased from 10% to 12% maximum Health."
+            "text": "Health stolen 10% → 12%",
+            "unit": "%"
           }
         ],
         "verdict": "mixed"
@@ -654,38 +866,58 @@
         "changes": [
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "4",
+            "new": 20,
+            "old": 25,
             "section": "Level 4",
+            "stat": "Bonus per bounce",
             "target": "Rising Dread",
-            "text": "Bonus per bounce reduced from 25% to 20%."
+            "text": "Bonus per bounce 25% → 20%",
+            "unit": "%"
           },
           {
             "dir": "change",
+            "kind": "removed",
             "level": "4",
             "section": "Level 4",
             "target": "Bomb's Away",
-            "text": "No longer has a cap on stacks."
+            "text": "Effect removed (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "4",
+            "new": 4,
+            "old": 5,
             "section": "Level 4",
+            "stat": "Damage bonus per stack",
             "target": "Bomb's Away",
-            "text": "Damage bonus per stack lowered from 5 to 4."
+            "text": "Damage bonus per stack 5 → 4"
           },
           {
             "dir": "buff",
+            "kind": "numeric",
             "level": "7",
+            "new": 1,
+            "old": 0.5,
             "section": "Level 7",
+            "stat": "Cooldown reduction",
             "target": "Double Trouble",
-            "text": "Shadowflame's cooldown reduction from Quest Reward increased from 0.5 to 1 second."
+            "text": "Cooldown reduction 0.5 s → 1 s",
+            "unit": "s"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "16",
+            "new": 0.6,
+            "old": 0.75,
             "section": "Level 16",
+            "stat": "Stun duration",
             "target": "Leaden Orb",
-            "text": "Stun duration reduced from 0.75 seconds to 0.6 seconds."
+            "text": "Stun duration 0.75 s → 0.6 s",
+            "unit": "s"
           }
         ],
         "verdict": "mixed"
@@ -695,9 +927,10 @@
     "kind": "ptr",
     "maps": {
       "hanamura-temple": [
-        "Additional brush has been added in several locations."
+        "1 change (see Blizzard's notes)"
       ]
     },
+    "notes": "summary",
     "title": "Heroes of the Storm PTR Patch Notes - June 29, 2026",
     "url": "https://news.blizzard.com/en-us/article/24287550/heroes-of-the-storm-ptr-patch-notes-june-29-2026",
     "version": "2.55"
@@ -709,6 +942,7 @@
     "heroes": {},
     "id": "2026-05-11-balance",
     "kind": "balance",
+    "notes": "summary",
     "title": "Heroes of the Storm Balance Patch Notes - May 11, 2026",
     "url": "https://news.blizzard.com/en-us/article/24276959/heroes-of-the-storm-balance-patch-notes-may-11-2026",
     "version": "2.55"
@@ -717,32 +951,40 @@
     "contentHash": "94ea0b529659ca41",
     "date": "2026-04-20",
     "general": [
-      "Unranked Mode has been removed.",
-      "Respawn timers have been reduced in the mid-to-late game. By level 22, respawn timers are back at 65 seconds.",
-      "Updated Homescreen and Startup Music.",
-      "Garden of Terror Classic: The original Garden of Terror has returned to Custom Games!",
-      "Garden of Terror Classic: The name has been changed to Garden of Terror Classic to differentiate from the current Garden of Terror."
+      "Modes and matchmaking: 2 changes",
+      "Interface and audio: 2 changes",
+      "Gameplay: 1 change"
     ],
     "heroes": {
       "Mura": {
         "changes": [
           {
+            "kind": "changed",
             "section": "Base",
             "target": "It's Hammer Time!",
-            "text": "Muradin gains 5 stacks if a target dies within 3 seconds of being hit by Storm Bolt."
+            "text": "Effect changed (see Blizzard's notes)"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
+            "new": 45,
+            "old": 40,
             "section": "Base",
+            "stat": "Stack requirement for pierce",
             "target": "It's Hammer Time!",
-            "text": "Stack requirement for pierce increased from 40 to 45."
+            "text": "Stack requirement for pierce 40 → 45"
           },
           {
             "dir": "nerf",
+            "kind": "numeric",
             "level": "16",
+            "new": 1,
+            "old": 2,
             "section": "Level 16",
+            "stat": "Cooldown reduction",
             "target": "Dwarf Launch",
-            "text": "Cooldown reduction decreased from 2 seconds to 1 second."
+            "text": "Cooldown reduction 2 s → 1 s",
+            "unit": "s"
           }
         ],
         "verdict": "nerf"
@@ -750,6 +992,7 @@
     },
     "id": "2026-04-20-patch",
     "kind": "patch",
+    "notes": "summary",
     "title": "Heroes of the Storm Live Patch Notes - April 20, 2026",
     "url": "https://news.blizzard.com/en-us/article/24261475/heroes-of-the-storm-live-patch-notes-april-20-2026",
     "version": "2.55"

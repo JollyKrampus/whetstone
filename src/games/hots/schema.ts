@@ -351,21 +351,96 @@ export const MapsFileSchema = z.array(dropLegacyKeys(MapSchema, ['hp'])).superRe
 
 export const ChangeDirSchema = z.enum(['buff', 'nerf', 'change', 'rework']);
 
-export const PatchChangeSchema = z.strictObject({
-  /** Article sub-heading: 'Base', 'Abilities', 'Talents', 'Level 13', 'New Hero'... */
-  section: z.string().min(1),
-  /** Ability or talent the line is about (bold name in the notes). */
-  target: z.string().min(1).exactOptional(),
-  level: TalentTierSchema.exactOptional(),
-  /** Short factual change line (numbers, old → new); never article prose. */
-  text: z.string().min(1).max(400),
-  dir: ChangeDirSchema.exactOptional(),
-});
+/**
+ * What a change does, in our own terms: `numeric` carries the value's label and its numbers;
+ * the rest are qualitative and never carry Blizzard's wording.
+ */
+export const ChangeKindSchema = z.enum(['numeric', 'added', 'removed', 'reworked', 'changed', 'bugfix']);
+/** Units we keep with numbers: percent and seconds. */
+export const ChangeUnitSchema = z.enum(['%', 's']);
+
+/**
+ * One change of one hero, as our own structured summary (never the sentence from the notes).
+ * `text` is a template sentence generated from the other fields, e.g. "Damage 345 → 360",
+ * "Cooldown 12 s → 10 s", "Effect changed (see Blizzard's notes)".
+ */
+export const PatchChangeSchema = z
+  .strictObject({
+    /** Our section label: 'Base', 'Abilities', 'Talents', 'Level 13', 'New Hero', 'Game data'... */
+    section: z.string().min(1).max(40),
+    /** Ability or talent the change is about (its name in the game data). */
+    target: z.string().min(1).max(60).exactOptional(),
+    level: TalentTierSchema.exactOptional(),
+    kind: ChangeKindSchema,
+    /** numeric: short label of the value ('Damage', 'Cooldown', 'Health decay reduction'). */
+    stat: z.string().min(1).max(48).exactOptional(),
+    old: z.number().exactOptional(),
+    new: z.number().exactOptional(),
+    /** numeric without an old value: the signed amount ("reduced by 20%" → -20). */
+    by: z.number().exactOptional(),
+    unit: ChangeUnitSchema.exactOptional(),
+    /** Qualitative lines of one kind about the same target, counted instead of listed. */
+    count: z.number().int().min(2).exactOptional(),
+    /** Our template sentence for the fields above. */
+    text: z.string().min(1).max(160),
+    dir: ChangeDirSchema.exactOptional(),
+  })
+  .superRefine((c, ctx) => {
+    const numbers = c.stat !== undefined || c.old !== undefined || c.new !== undefined || c.by !== undefined || c.unit !== undefined;
+    if (c.kind === 'numeric') {
+      const pair = c.old !== undefined && c.new !== undefined;
+      if (c.stat === undefined || pair === (c.by !== undefined)) {
+        ctx.addIssue({ code: 'custom', message: 'a numeric change needs stat and either old and new, or by' });
+      }
+      if (c.count !== undefined) ctx.addIssue({ code: 'custom', message: 'numeric changes are not counted', path: ['count'] });
+    } else if (numbers) {
+      ctx.addIssue({ code: 'custom', message: `a ${c.kind} change carries no stat, numbers or unit` });
+    }
+  });
 
 export const PatchHeroSchema = z.strictObject({
   verdict: z.enum(['buff', 'nerf', 'mixed', 'rework', 'new', 'change']).exactOptional(),
   changes: z.array(PatchChangeSchema).min(1),
 });
+
+/** Template of a qualitative line converted from a file written before summaries existed. */
+const LEGACY_LINE = "Effect changed (see Blizzard's notes)";
+/** Sections whose lines were always our own words, also in old files. */
+const OWN_SECTIONS = new Set(['New Hero', 'Game data']);
+
+/**
+ * patches.json written before 2026-10-10 stored Blizzard's change sentences. Such a record (it
+ * has no `notes`) is reduced on read to counts and our own lines, so the site never shows those
+ * sentences and a not-yet-refreshed data directory still builds. The pipeline migrates old
+ * records itself, keeping their numbers (transform/patches.ts migrateLegacyPatches).
+ */
+function legacyPatch(value: unknown): unknown {
+  if (typeof value !== 'object' || value === null || Array.isArray(value) || 'notes' in value) return value;
+  const rec = value as Record<string, unknown>;
+  const count = (n: number): string => `${n} ${n === 1 ? 'change' : 'changes'}`;
+  const general = Array.isArray(rec.general) && rec.general.length > 0 ? [`General: ${count(rec.general.length)}`] : [];
+  const maps =
+    typeof rec.maps === 'object' && rec.maps !== null
+      ? Object.fromEntries(Object.entries(rec.maps).map(([slug, lines]) => [slug, [`${count(Array.isArray(lines) ? lines.length : 0)} (see Blizzard's notes)`]]))
+      : rec.maps;
+  const heroes =
+    typeof rec.heroes === 'object' && rec.heroes !== null
+      ? Object.fromEntries(
+          Object.entries(rec.heroes).map(([id, h]) => {
+            const hero = (typeof h === 'object' && h !== null ? h : {}) as { changes?: unknown };
+            const changes = (Array.isArray(hero.changes) ? hero.changes : []).map((c: unknown) => {
+              const ch = (typeof c === 'object' && c !== null ? c : {}) as Record<string, unknown>;
+              const own = OWN_SECTIONS.has(String(ch.section)) || ch.text === 'Full rework: new base abilities and talent tree.';
+              const kind = ch.dir === 'rework' ? 'reworked' : ch.section === 'New Hero' ? 'added' : 'changed';
+              const { text: _text, ...rest } = ch;
+              return { ...rest, kind, text: own ? ch.text : kind === 'reworked' ? "Reworked (see Blizzard's notes)" : LEGACY_LINE };
+            });
+            return [id, { ...hero, changes }];
+          }),
+        )
+      : rec.heroes;
+  return { ...rec, notes: 'summary', general, ...(maps === undefined ? {} : { maps }), heroes };
+}
 
 export const PatchSchema = z.strictObject({
   /** `<date>-<kind>[-n]`, e.g. `2026-09-28-patch`, `2026-10-05-hotfix`. Used in /hots/patches/[id]/. */
@@ -378,16 +453,23 @@ export const PatchSchema = z.strictObject({
   kind: z.enum(['patch', 'balance', 'hotfix', 'ptr']),
   /** Hash of the article section this record was parsed from (hotfixes append silently). */
   contentHash: z.string().regex(/^[0-9a-f]{16,64}$/),
-  general: z.array(z.string().min(1)),
-  maps: z.record(MapSlugSchema, z.array(z.string().min(1)).min(1)).exactOptional(),
+  /**
+   * How the lines were written: 'summary' = our own structured summaries (this schema). Records
+   * without it predate the summaries and are converted on read (legacyPatch).
+   */
+  notes: z.literal('summary'),
+  /** General (system) changes as our category counts, e.g. "Interface and audio: 2 changes". */
+  general: z.array(z.string().min(1).max(80)),
+  /** Per map: numeric changes as templates, then a count of the other changes. */
+  maps: z.record(MapSlugSchema, z.array(z.string().min(1).max(120)).min(1)).exactOptional(),
   /** Keyed by hero id (members, not composites: notes list Cho and Gall separately). */
   heroes: z.record(AttributeIdSchema, PatchHeroSchema),
   newHeroes: z.array(AttributeIdSchema).exactOptional(),
 });
 export type Patch = z.infer<typeof PatchSchema>;
 
-/** Newest first (date desc, then id desc). */
-export const PatchesFileSchema = z.array(PatchSchema).superRefine((list, ctx) => {
+/** Newest first (date desc, then id desc). Records from before the summaries are converted on read. */
+export const PatchesFileSchema = z.array(z.preprocess(legacyPatch, PatchSchema)).superRefine((list, ctx) => {
   checkUnique(ctx, list.map((p) => p.id), 'patch id');
   for (let i = 1; i < list.length; i++) {
     const a = list[i - 1] as Patch;

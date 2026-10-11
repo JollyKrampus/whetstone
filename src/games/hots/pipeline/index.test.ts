@@ -3,16 +3,17 @@
  * (src/games/hots/fixtures/raw/): the offline first run, determinism, last-good fallbacks when
  * sources go down, and that nothing from a removed source (Heroes Profile) is written.
  */
-import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
 import { createHttp } from '../../../../pipeline/http.ts';
 import { runPipelines, type RunSummary } from '../../../../pipeline/run.ts';
 import type { Http } from '../../../core/game.ts';
-import { HOTS_FILES, HotsMetaSchema, type HotsMeta, type Theory } from '../schema.ts';
+import { HOTS_FILES, HotsMetaSchema, type HotsMeta, type Patch, type Theory } from '../schema.ts';
 import { runHots, type HotsPipelineDeps } from './index.ts';
-import { FIXTURE_NOW, REPO_ROOT } from './test-helpers.ts';
+import { FIXTURE_NOW, REPO_ROOT, rawText } from './test-helpers.ts';
+import { longestSharedRun, VERBATIM_LIMIT } from './transform/summary.ts';
 import type { TheoryModule } from './theoryHook.ts';
 
 const dirs: string[] = [];
@@ -143,6 +144,21 @@ describe('offline run on recorded fixtures', () => {
     expect(shard.heroes.id).toEqual(['Abat', 'chogall', 'Alex', 'HXAL']);
   });
 
+  it('stores patch notes as our own summaries: no text repeats 8 words of a recorded article', () => {
+    const articles = ['blizzard-news/article-24303007.txt', 'blizzard-news/article-24306095.txt'].map((f) =>
+      rawText(f).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' '),
+    );
+    const patches = read<Patch[]>(out, 'current/hots/patches.json');
+    expect(patches.every((p) => p.notes === 'summary')).toBe(true);
+    const texts = patches.flatMap((p) => [
+      ...p.general,
+      ...Object.values(p.maps ?? {}).flat(),
+      ...Object.values(p.heroes).flatMap((h) => h.changes.flatMap((c) => [c.text, c.target ?? '', c.stat ?? ''])),
+    ]);
+    expect(texts.length).toBeGreaterThan(20);
+    for (const t of texts) for (const a of articles) expect(longestSharedRun(t, a), t).toBeLessThan(VERBATIM_LIMIT);
+  });
+
   it('is deterministic: the same inputs give the same dataHash', async () => {
     const again = tempOut();
     await run({ out: again });
@@ -182,6 +198,34 @@ describe('offline run on recorded fixtures', () => {
     expect(s.exitCode).toBe(0);
     expect(status(meta(out), 'heroes-data2')?.status).toBe('stale');
     expect(readFileSync(path.join(out, 'current/hots/heroes.json'), 'utf8')).toBe(heroes);
+  });
+
+  it('re-summarises last-good patch notes from before the summaries instead of carrying their sentences forward', async () => {
+    const legacyOut = tempOut();
+    mkdirSync(path.join(legacyOut, 'current', 'hots'), { recursive: true });
+    const legacy = [
+      {
+        id: '2026-09-28-patch',
+        version: '2.57',
+        date: '2026-09-28',
+        title: 'Heroes of the Storm Live Patch Notes - September 28, 2026',
+        url: 'https://news.blizzard.com/en-us/article/24303007/heroes-of-the-storm-live-patch-notes-september-28-2026',
+        kind: 'patch',
+        contentHash: '0123456789abcdef',
+        general: ['Updated Homescreen and Startup Music.'],
+        heroes: { Abat: { verdict: 'change', changes: [{ section: 'Level 16', target: 'Survival Instincts', level: '16', text: 'Now provides 50% damage reduction against non-Heroes, instead of +100% Health.', dir: 'change' }] } },
+      },
+    ];
+    writeFileSync(path.join(legacyOut, 'current', 'hots', 'patches.json'), JSON.stringify(legacy));
+    const s = await run({ out: legacyOut, down: ['news.blizzard.com'] });
+    expect(s.exitCode).toBe(0);
+    const patches = read<Patch[]>(legacyOut, 'current/hots/patches.json');
+    const p = patches.find((x) => x.date === '2026-09-28' && x.kind === 'patch');
+    expect(p?.notes).toBe('summary');
+    expect(p?.general).toEqual(['Interface and audio: 1 change']);
+    // Our template, with the game-data numbers of that build added back.
+    expect(p?.heroes.Abat?.changes[0]).toMatchObject({ target: 'Survival Instincts', kind: 'changed', text: "Effect changed; game data: damage 100% → 50% (see Blizzard's notes)" });
+    expect(readFileSync(path.join(legacyOut, 'current/hots/patches.json'), 'utf8')).not.toMatch(/Homescreen|non-Heroes/);
   });
 
   it('fails the game (keeping nothing half-written) without hero data or last-good', async () => {
