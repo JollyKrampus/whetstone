@@ -29,9 +29,9 @@ After this, the workflow runs daily at 10:17 UTC and on pushes to `main`. A fail
 
 ## 2. Owned data
 
-Whetstone owns its tooling: first-party game data (game files, official patch notes and news), openly licensed data (MIT, CC BY, CC BY-SA), our own curation and our own analysis. It uses no third-party statistics aggregator, so there is no data licence, subscription or API key to obtain for the public site. Heroes Profile is not used. Statistics about your own games will come from the private hub (a later step), never from the public site.
+Whetstone owns its tooling: first-party game data (game files, official patch notes and news), openly licensed data (MIT, CC BY, CC BY-SA), our own curation and our own analysis. It uses no third-party statistics aggregator, so there is no data licence, subscription or API key to obtain for the public site. Statistics about your own games will come from the private hub (planned, SPEC §13.7), never from the public site.
 
-Nothing to do here; this note replaces the former Heroes Profile checklist. If you ever consider a licensed source again, it would be class B (DATA.md section 1): never committed, shipped only encrypted, and removable in one run (DATA.md section 7).
+Nothing to do here. If you ever consider a licensed source, it would be class B (DATA.md section 1): never committed, shipped only encrypted, and removable in one run (DATA.md section 7).
 
 ## 3. Optional sources
 
@@ -40,14 +40,12 @@ Nothing to do here; this note replaces the former Heroes Profile checklist. If y
 
 Unset secrets simply mark their source `disabled`; nothing breaks.
 
-## 4. grindstone-mcp on npm
+## 4. grindstone-mcp releases (optional)
 
-Whetstone currently vendors grindstone's core build in `vendor/grindstone/` (`npm run sync:grindstone`). To switch to the published package:
+grindstone-mcp lives in this repository as the workspace package `packages/grindstone-mcp` (currently 0.3.1). The site imports it as `grindstone-mcp/core`, and the root `prepare` script builds it, so nothing is vendored or synced. Publishing it to npm is only for people who run the MCP server on its own:
 
-- [ ] In the grindstone session/repo: create the public repo `JollyKrampus/grindstone-mcp` and push (the core export is in v0.2.0, commit `2dbc5b3`).
-- [ ] Publish v0.2.0 once by hand from your machine: `npm login`, then `npm publish --access public` in the grindstone repo. (The npm name `grindstone-mcp` was free on 2026-10-08.)
-- [ ] On npmjs.com, configure **trusted publishing** for `JollyKrampus/grindstone-mcp` with its `release.yml` workflow, so later releases publish from CI with provenance and no token.
-- [ ] Then in Whetstone: add `"grindstone-mcp": "^0.2.0"`, replace `#vendor/grindstone/core.js` imports with `grindstone-mcp/core`, delete `vendor/grindstone/` and the `sync:grindstone` script (README → grindstone-mcp).
+- [ ] Give the release workflow (`.github/workflows/grindstone-release.yml`) a way to publish: add an npm automation token as the repository secret `NPM_TOKEN`, or configure **trusted publishing** for the package `grindstone-mcp` with that workflow on npmjs.com (it already requests `id-token: write` and publishes with provenance). (The npm name `grindstone-mcp` was free on 2026-10-08.)
+- [ ] To publish a release, push a tag: `git tag grindstone-v0.3.1 && git push origin grindstone-v0.3.1`. The workflow publishes `packages/grindstone-mcp` at that version.
 
 ## 5. Decisions to make
 
@@ -60,6 +58,8 @@ Defaults are in brackets; the site works either way.
 
 ## 6. Ongoing
 
+- **Refresh the MTGA curated meta** (monthly, and after each Standard ban or set release). Read the newest Wizards magic.gg *Metagame Mentor* (or event decklist) article by hand. Replace the decks in `curated/mtga/meta/standard.json`, copying **card names and counts only**, with each deck's `sourceUrl`, `date` and `metaShare` where the article gives one; update the snapshot date. Then run `npm run data -- --game mtga` (or the Data + Deploy workflow for mtga) and check that `curated-meta` is `ok` with no validation warnings.
+- **Review the Pokémon Showdown pin** (when a regulation or Champions update lands, or monthly). `node src/games/pokemon/pipeline/showdown/pin.ts --check` prints the pinned commit against Showdown's master and the compare link. Read the diff, then `--set <sha>` (or `--set latest`) and open a pull request: the daily job only ever builds the pinned commit, in its isolated export job.
 - Close or act on `pipeline-failure` issues; the next successful run closes them automatically.
 - Review Dependabot PRs weekly (npm and GitHub Actions). Workflow actions are pinned to full commit SHAs with the release in a comment; Dependabot proposes new SHAs, so check the release notes before merging. Preact stays on 10.x and TypeScript below 6.1 until the tooling allows otherwise.
 - `DATA_ARTIFACT_KEY` (optional secret) encrypts class-B data between workflow jobs. With no licensed source in use it is not needed; if you set or rotate it, the next run simply uses the new key (an artifact encrypted with an old key is skipped with a warning).

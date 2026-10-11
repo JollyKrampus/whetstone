@@ -22,7 +22,7 @@ Rules that follow from this:
 
 - B, C and D never enter git, the `data` branch, history files or the public manifest.
 - A-SA and A-NC-SA content is never mixed into a file of another class (history summaries list such files by hash only).
-- Player names and handles from Limitless or Showdown are removed at ingest; only aggregates and anonymised teams are written.
+- Player names and handles from Limitless or Showdown are removed at ingest; only aggregates and anonymised teams are written. Recorded test fixtures get the same treatment: record mode scrubs standings, replay searches and battle logs to placeholders ("Player 1", "Player A") before saving, never records class-C hosts or requests marked `noRecord`, and `pipeline/fixture-privacy.test.ts` checks every committed fixture.
 - Class B files only leave a data job encrypted (section 7).
 
 ## 2. Layout
@@ -109,32 +109,36 @@ The tables mirror the file registries `HOTS_FILES`, `MTGA_FILES` and `POKEMON_FI
 
 | File | Class | Schema | Content |
 |---|---|---|---|
-| `meta.json` | A | `HotsMetaSchema` | `extra`: `build` (live), `dataBuild` (the heroes-data2 build the hero data comes from), `ptrBuild`, `major` and `majorSince`, `builds` of the major, `assetsTag` (heroes-images tag), `buildSeenAt` (when the pipeline first saw the live build) and `dataPending` (set only while heroes-data2 lags the live build by more than 48 hours, so the hero data is from `dataBuild`) |
+| `meta.json` | A | `HotsMetaSchema` | `extra`: `build` (live), `dataBuild` (the heroes-data2 build the hero data comes from), `ptrBuild`, `major` and `majorSince`, `builds` of the major (when the version server's `.version.json` is unknown, the last-good list of the same major is kept, so an outage does not change `dataHash`), `assetsTag` (heroes-images tag), `buildSeenAt` (when the pipeline first saw the live build) and `dataPending` (set only while heroes-data2 lags the live build by more than 48 hours, so the hero data is from `dataBuild`) |
 | `heroes.json` | A | `HeroesFileSchema` | Roster with roles, abilities, talents, mechanics tags with evidence, `isNew`, `portrait` (hero-select button) and `draftPortrait` (180×212 draft-screen portrait under `img/heroes/`) |
-| `maps.json` | A | `MapsFileSchema` | Maps, kind, ranked flag and its source, profile tags |
-| `patches.json` | A | `PatchesFileSchema` | Patch notes as short factual summaries, per-hero changes, link to the original |
+| `maps.json` | A | `MapsFileSchema` | Maps, kind, ranked flag, profile tags. The Storm League pool always comes from `curated/hots/ranked-pool.yaml` (`rankedSource: 'curated'`), also when heroes-data2 is down and last-good maps are re-emitted (the pool is re-applied to them). The enum keeps `'stats'` only for type compatibility |
+| `patches.json` | A | `PatchesFileSchema` | Patch notes as **our own structured summaries**, never Blizzard's sentences (below), per-hero changes and a link to the original (`url`) |
 | `diffs.json` | A | `DiffsFileSchema` | Build-to-build game-data diffs per hero |
-| `theory.json` | A | `TheorySchema` | Theory counters, synergies and map fit with reasons ([THEORY.md](THEORY.md)); generic edges within ±4 of 50 are left out |
-| `links.json` | A | `LinksSchema` | Outbound guide links per hero |
-| `rotation.json` | A | `RotationSchema` | Free hero rotation and ranked season (Nexus Compendium, "as of") |
-| `pro.json` | **A-SA** | `ProSchema` | Liquipedia pro picks, bans and presence, CC-BY-SA 3.0 |
-| `public/draft.json` | A | `DraftShardSchema` | Columnar draft shard. Schema 2: reason lines are templates in which `{a}` and `{b}` (map fit: `{a}` and `{m}`) stand for the edge's names, which the reader fills in, and a reference `[i, j]` or `[i, j, k]` joins a rule line with its "Only when … takes …" conditions |
+| `theory.json` | A | `TheorySchema` | Theory counters, synergies and map fit with reasons ([THEORY.md](THEORY.md)); generic edges within ±4 of 50 are left out; a curated reason's `conditions` stay a separate field |
+| `links.json` | A | `LinksSchema` | Outbound guide links per hero. Reading a last-good file drops links to a site the pipeline no longer links |
+| `rotation.json` | A | `RotationSchema` | Free hero rotation and ranked season (Nexus Compendium, "as of"). `fetchedAt` is when this content was first fetched (it stays while the content is unchanged); `lagging: true` is written when the window had already ended at the run (the source has not published the new week, or could not be fetched), so pages mark no hero free. The flag changes `dataHash` on the switch day, which redeploys the site |
+| `pro.json` | **A-SA** | `ProSchema` | Liquipedia pro picks, bans and presence, CC-BY-SA 3.0. An implausible refresh (no drafted maps at all, or fewer than half of last-good's maps within the same window label) counts as a source failure: last-good is kept and the source is `stale`. A new window label or a first run is not judged |
+| `public/draft.json` | A | `DraftShardSchema` | Columnar draft shard. Schema 2: reason lines are templates in which `{a}` and `{b}` (map fit: `{a}` and `{m}`) stand for the edge's names, which the reader fills in, and a reference `[i, j]` or `[i, j, k]` joins a rule line with its "Only when … takes …" conditions. Each edge list may carry an optional `cond` table `{ e: number[], k: number[], c: number[][] }`: entry i says reason `r[e[i]][k[i]]` holds only when every condition template `c[i]` (indices into `reasons`, at most 8) holds. Readers that ignore `cond` decode `r` unchanged; the table is omitted when no reason has conditions. `Reason.cites` is not carried |
 | `img/**` | A | n/a | WebP portraits, draft portraits, ability and talent icons (64 px) and map images converted from heroes-images at a pinned tag. Files come from jsDelivr, with raw.githubusercontent.com as the fallback for files jsDelivr does not serve (the repository is over its 50 MB package limit) |
 | `img/_index.json` | A | n/a | Image conversion index written with the images: `{ schema: 1, repo, tag, converter, files: { "<img/… path>": { src, blob } } }` (`src` = path in heroes-images, `blob` = sha256 of the source file). Only files whose source or converter changed are converted again |
 | `videos.json` (private) | **C** | `VideosSchema` | YouTube video metadata (30-day retention) |
 
 Twitch is not used: no stream metadata is fetched, so there is no `streams.json`; `/hots/live/` links to the Twitch category and featured channels.
 
+No match-statistics file is produced: Heroes of the Storm publishes no match data Whetstone can use under its own-tooling rule. The generic statistics shapes (`StatsSchema`, the draft shard's `stats` overlay, each with a `source` id) stay for the private hub and for the synthetic sample in `fixtures/hots/_private/` (`source: 'synthetic'`), which exercises the statistics mode in CI. Old last-good files that still carry keys of the removed statistics source (`meta.extra.hpMode`, map `hp` refs) parse, with those keys dropped.
+
+**Patch change records.** Each hero change in `patches.json` is `{ section, target?, level?, kind, stat?, old?, new?, by?, unit?, count?, text, dir? }`: `kind` is `numeric`, `added`, `removed`, `reworked`, `changed` or `bugfix`; `stat` is a label of at most four words from the line, or from our own vocabulary; `old`/`new` or a signed `by` carry the numbers, `unit` is `%` or `s`; `dir` (buff, nerf, change, rework) is computed. `text` is a template built from those fields ("Damage 345 → 360", "Effect changed (see Blizzard's notes)"). Ability and talent names are kept as targets (at most six words). General sections become category counts ("Interface and audio: 2 changes"), map lines numeric templates or counts. Records carry `notes: 'summary'`. As a last guard, any stored string that repeats eight consecutive words of its article is replaced; tests check the parser output, an offline run and the committed fixtures. Last-good files in the older format are summarised again by the pipeline (numbers kept) and cut down to counts by the schema on read.
+
 ### MTG Arena (`src/games/mtga/schema.ts`)
 
 | File | Class | Schema | Content |
 |---|---|---|---|
-| `meta.json` | A | `MtgaMetaSchema` | `extra`: Scryfall snapshot, grindstone version, latest set, Standard sets, curated meta formats |
+| `meta.json` | A | `MtgaMetaSchema` | `extra`: Scryfall snapshot, grindstone version, latest set, Standard sets, curated meta formats. `counts.metaDecks` and the `curated-meta` status count only real lists ("N format(s), M list(s)[, K example list(s) not used as meta]"); the `grindstone-mcp` status reads "grindstone-mcp <version>, workspace package" |
 | `sets.json` | A | `SetsFileSchema` | Arena sets and formats |
-| `public/_cards.standard.json`, `public/_cards.arena.json` | A | `CardShardSchema` | Trimmed card index for the in-browser analyzer. The `_` prefix keeps it out of the public manifest: it is an internal asset, not a dataset (section 5) |
+| `public/_cards.standard.json`, `public/_cards.arena.json` | A | `CardShardSchema` | Trimmed card index for the in-browser analyzer. The `_` prefix keeps it out of the public manifest: it is an internal asset, not a dataset (section 5). Records may carry `priceUsd`: the cheapest USD paper price over the card's printings (nonfoil, else foil), omitted when unknown and read back as `null`; the site shows it as "about $X" (a paper guide; Arena has no cash prices) |
 | `limited/index.json` | A | `LimitedIndexSchema` | Available 17Lands datasets: `[{ set, format, file, games, lastModified }]`, newest set first |
 | `limited/<SET>.<Format>.json` | A | `LimitedRatingsSchema` | Card ratings derived from 17Lands public datasets (CC BY 4.0), one file per set and format (`PremierDraft`, `TradDraft`, `Sealed`), e.g. `limited/HOB.PremierDraft.json`. Pages: `/mtga/limited/<set>/` for Premier Draft and `/mtga/limited/<set>/<format-slug>/` (`trad-draft`, `sealed`) for the others, with lower-case set codes |
-| `meta/<format>.json` | A | `MetaSnapshotSchema` | Hand-curated meta lists from `curated/mtga/meta/`, each with its source URL |
+| `meta/<format>.json` | A | `MetaSnapshotSchema` | Hand-curated meta lists from `curated/mtga/meta/` (card names and counts only), each with its `sourceUrl`, optional `date` (the source's publication date) and `metaShare` where the source gives one. Standard holds real lists from Wizards' magic.gg articles, refreshed about monthly (OWNER-ACTIONS) |
 
 ### Pokémon Champions (`src/games/pokemon/schema.ts`)
 
@@ -142,7 +146,7 @@ Twitch is not used: no stream metadata is fetched, so there is no `streams.json`
 |---|---|---|---|
 | `meta.json` | A | `PokemonMetaSchema` | `extra`: regulation and its window, season, formats, `smogonMonth` (the primary doubles month), `showdownSha` (Showdown commit of the dex), `dexKey` (cache key of the dex export), `warmingUp` (right after a regulation change: `{ regulation, since, sources[], showing? }`, the sources without data for the new regulation yet and the regulation shown meanwhile) and `sprites` (`{ count, source, credit }` for the self-hosted sprites) |
 | `regulations.json` | A | `RegulationsFileSchema` | Regulation windows and format ids (from `curated/pokemon/regulations.yaml`) |
-| `dex/species.json`, `dex/moves.json`, `dex/items.json`, `dex/abilities.json`, `dex/typechart.json`, `dex/learnsets.json` | A | `SpeciesFileSchema` and siblings | Champions dex from Pokémon Showdown (MIT). Species carry `sprite` (`img/sprites/<id>.webp`) when one exists and `cosmeticFormes` (Showdown ids of purely cosmetic formes, folded into the species) |
+| `dex/species.json`, `dex/moves.json`, `dex/items.json`, `dex/abilities.json`, `dex/typechart.json`, `dex/learnsets.json` | A | `SpeciesFileSchema` and siblings | Champions dex from Pokémon Showdown (MIT) at the commit pinned in `curated/pokemon/showdown.json` (`{ sha, reviewedOn, note? }`; nothing follows master, a bump is a pull request: `node src/games/pokemon/pipeline/showdown/pin.ts --check` / `--set <sha|latest>`). The export runs in its own job (`export-job.ts --out <file>`, no secrets) and reaches the data job through `WHETSTONE_SHOWDOWN_EXPORT`, validated again (schema, pinned SHA, regulations); without it the last-good dex is kept with a warning. An unchanged pin re-emits the last-good dex with no network access. Developers may build locally with `WHETSTONE_SHOWDOWN_BUILD=local` (ignored on CI). Species carry `sprite` (`img/sprites/<id>.webp`) when one exists and `cosmeticFormes` (Showdown ids of purely cosmetic formes, folded into the species) |
 | `usage/index.json`, `usage/<format>-<cutoff>.json` | A | `UsageIndexSchema`, `UsageSchema` | Smogon monthly usage, reduced to top-K per field |
 | `tournaments.json` | A | `TournamentsSchema` | Limitless aggregates and top-cut teams, player names removed |
 | `h2h.json` | A | `H2HSchema` | Head-to-head aggregates from Showdown Bo3 replays |

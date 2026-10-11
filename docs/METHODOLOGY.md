@@ -245,32 +245,72 @@ The draft tool scores every hero you could pick or ban right now.
    | Tier | tier 1 |
    | Community | votes 1 (only when votes exist) |
 
-3. **Score.** Total = Σ weight × value. The displayed score is **round(50 + 50 · tanh(total))**,
+3. **One key cannot drown the rest.** Many small edges of one kind (five enemies each countered a
+   little) used to add up to 2–3 and outweigh the role guardrails. So all signals of one key from
+   one provider are **soft-capped together**: their sum becomes **KEY_CAP · tanh(sum / KEY_CAP)**
+   with KEY_CAP = 1.0 (about a 4 pp edge), shared out in proportion, so every reason keeps its
+   share and its sign.
+4. **Score.** Total = Σ weight × value. The displayed score is **round(50 + 50 · tanh(total))**,
    on a 0–100 scale.
-4. **Why and watch-out.**
-   - Up to **three reasons** are shown, from the largest positive contributions.
+5. **Why and watch-out.**
+   - Up to **three reasons** are shown, from the largest positive contributions. A theory edge
+     shows its **headline line** only (curated first); its other lines stay in the breakdown, and
+     lines from the same rule (ignoring the evidence in brackets) count once across edges.
+   - Statistics are worded as a verdict ("Beats your Valla", "Struggles against", "Works well
+     with", "Does well on") only when they pass the list gate of §6 (n ≥ 50 and |Δ| ≥ 1.5 pp).
+     Below it the line is neutral ("+0.5 pp against your Valla: too small to call"), stays in
+     the breakdown and keeps its small value.
+   - A reason that depends on a talent or a situation says so: "Only when …", each condition once.
    - At most **one warning** is shown: the most negative contribution, if it is worth more than
      about 0.4 pp.
-5. **Ties.** Heroes are sorted by total, then alphabetically by id, so the same draft always gives
-   the same list.
+6. **Ties.** Heroes are sorted by total, then by the uncapped evidence behind it (for bans, the
+   summed strength of every counter), then by name. When the top three or more shown scores lie
+   within 2 points, the list says it is a shortlist, not an order.
+
+**Bans.** A ban step ranks heroes by how much they would hurt your team:
+
+- **Breadth:** **0.45 · (1 − e^(−S / 12)) · min(1, picks the other side has left ÷ 5)**, where S
+  sums the strength of every hard counter the hero has among the heroes the other side can still
+  pick. Smooth and never flat, so a hero that counters 26 heroes outranks one that counters 6. The
+  reason names the hardest-countered heroes first.
+- **Pro bans** (theory mode only, when there are no match statistics): the share of pro maps
+  that banned the hero, shrunk toward the average ban rate with 20 pseudo-maps, adds
+  **(shrunk − average) × 3** on the tier key. It is credited to Liquipedia (CC BY-SA 3.0) where it
+  is shown.
 
 **Rules the draft respects:**
 
 - The verified Storm League order with first-pick toggle: 3 bans per team, split 2 + 1.
 - No hero on both teams, and no picking a banned hero.
 - Cho'gall takes two consecutive picks of the same team and is only offered at those steps.
-- Free mode places heroes on either team in any order.
+- Free mode places heroes on either team in any order. It can also list suggestions for the
+  other team; adding one of those heroes puts it on that team and keeps your own target.
 
-**Role needs** (`src/games/hots/draft/roles.ts`). A team should end with a Healer (or a Support
-that shields, saves or heals allies) and a frontline hero (Tank or Bruiser, main or flex role).
+**Role needs** (`src/games/hots/draft/roles.ts`). A team should end with a Healer and a frontline
+hero (Tank or Bruiser, main or flex role). Only a short curated list of non-Healers can stand in
+for the Healer: **Medivh and Zarya** (their shields and saves carry a team through fights). The
+Lost Vikings and Abathur never count.
 
-- A pick that leaves fewer pick slots than unmet needs gets a large penalty and a warning.
+- A pick that leaves fewer pick slots than unmet needs gets a large penalty and a warning ("No
+  Healer").
 - A pick that fills an open need gets a bonus: **0.2 + 0.3 to 0.4 × urgency**, where urgency is
   open needs ÷ picks left. In Storm League urgency starts at 0, because your team's later picks are
   planned. A need nobody available can fill any more is dropped and mentioned once.
 - Smaller penalties, each with its reason: a second main-role Tank, a second (or third) Healer, a
   second Support, a third Melee Assassin, a fourth melee hero, a finished team without ranged
-  damage.
+  damage. On a team's **last two picks** these grow **× 1.75** (× 1.25 in ARAM): the composition
+  is all but decided, so a second Healer costs 0.79 instead of 0.45.
+- **Last-pick guardrails:** a finished team with **no waveclear**, or with **at most one hero with
+  hard crowd control** (stun, root, polymorph, sleep, taunt, fear, time-stop), gets a 0.2 penalty
+  (0.15 in ARAM), but only when someone still available could close the gap. The warning names
+  the heroes and tags behind it ("only Muradin (stun)").
+
+**Draft review.** When the draft is complete (all 16 Storm League steps, or both teams full in
+free mode) a review card shows the three strongest matchups in each direction (each net of the
+edge back, edges below 0.1 left out), the best synergy pair of each team, each team's best and
+weakest map fit and the role verdict, with the same evidence bar as hero pages: statistics that
+pass the list gate when statistics are in use, theory otherwise. A copy button gives a plain-text
+summary for Discord, with the share link and the credits of the data it used.
 
 **ARAM helper.** You choose one of the three heroes you are offered, so there is no draft order.
 The same role needs apply with gentler penalties, with one difference: **a gap you can fill counts

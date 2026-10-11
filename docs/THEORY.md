@@ -228,9 +228,12 @@ Timewalker's Pursuit. Tassadar must also take Shadow Walk." Curated reasons carr
 **Draft shard.** `public/draft.json` (schema 2) stores each reason once as a template, with the
 edge's hero names replaced by `{a}`/`{b}` (map fit: `{a}`/`{m}`) and the talent conditions as separate
 parts, so one line serves every pair a rule matches; `src/games/hots/draft/data.ts` fills the names
-back in. A reason's `conditions` belong in the shard as its " Only when …" part
-(`withConditions` in `theory/conditions.ts` gives the same wording the pages use), so the draft
-tool never shows a conditional curated line as part of the base kit. On the 2.57 roster that takes the shard from 2.14 MB (243 KB gzipped) to 518 KB (100 KB).
+back in. A reason's own `conditions` (a curated line's "Only when …" clauses) are templated the
+same way and listed in each edge list's optional `cond` table (`{ e, k, c }`: row, reason position,
+condition indices), which the draft island reads into that line's conditions; `r` decodes as
+before, and the table is left out when no reason has conditions. So the draft tool never shows a
+conditional curated line as part of the base kit. On the 2.57 roster that takes the shard from
+2.14 MB (243 KB gzipped) to 521 KB (102 KB), conditions included.
 
 ## Map fit
 

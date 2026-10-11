@@ -8,8 +8,8 @@ Whetstone is a free, static, multi-game **meta companion**: counters, drafts, ti
 
 | Game | Route | What you get |
 |---|---|---|
-| Heroes of the Storm | `/hots/` | Data-driven hero grid (search by name or nickname, role/franchise filters, free rotation, your owned heroes and favourites). Hero pages with strong against / weak against / good with lists, best maps, talents, abilities, patch history and guides, from Whetstone's own theory layer, which reads every ability and talent and adds hand-checked matchups ([docs/THEORY.md](docs/THEORY.md)). Map pages, true-order Storm League draft helper with pick/ban suggestions, role guardrails and share links, free-mode draft, ARAM pick-1-of-3 helper, tier list (pro presence and patch momentum until statistics exist), patch notes, "catch up since you last played", pro presence from Liquipedia, live/creator links. heroescounters.com-style URLs (`/hots/hero/li-ming/`, `/hots/map/cursedhollow/`) redirect. |
-| MTG Arena | `/mtga/` | Deck analyzer on [grindstone-mcp](https://github.com/JollyKrampus/grindstone-mcp)'s core, running in your browser: legality in every Arena format, curve, mana, roles, power tier with its breakdown, sample hands and mulligan simulation, wildcard cost, budget upgrades with undo, comparison with curated or your own meta lists, share links. 17Lands Limited ratings per set and format, Scryfall-style card search, meta lists. |
+| Heroes of the Storm | `/hots/` | Data-driven hero grid (search by name or nickname, role/franchise filters, free rotation, your owned heroes and favourites). Hero pages with strong against / weak against / good with lists, best maps, talents, abilities, patch history and guides, from Whetstone's own theory layer, which reads every ability and talent and adds hand-checked matchups ([docs/THEORY.md](docs/THEORY.md)). Map pages, true-order Storm League draft helper with pick/ban suggestions, role guardrails and share links, free-mode draft, ARAM pick-1-of-3 helper, tier list (pro presence and patch momentum: Heroes of the Storm publishes no match statistics Whetstone uses), patch notes, "catch up since you last played", pro presence from Liquipedia, live/creator links. heroescounters.com-style URLs (`/hots/hero/li-ming/`, `/hots/map/cursedhollow/`) redirect. |
+| MTG Arena | `/mtga/` | Deck analyzer on [grindstone-mcp](packages/grindstone-mcp)'s core, running in your browser: legality in every Arena format, curve, mana, roles, power tier with its breakdown, sample hands and mulligan simulation, wildcard cost with paper-price guide, upgrade suggestions in three versions (faithful, competitive, casual) with feel-bad flags, companion checks and undo, comparison with curated Standard lists from magic.gg or your own meta lists, share links. 17Lands Limited ratings per set and format, Scryfall-style card search, meta lists. |
 | Pokémon Champions | `/pokemon/` | Regulation M-C VGC Doubles: usage meta with regulation countdown, tier list, Pokémon pages (Stat Points, usage, sets, teammates, checks), team builder with Showdown paste import/export (EVs converted to Stat Points), legality, type matrix, coverage and threat list, damage calc (@smogon/calc in a worker), speed tiers with Tailwind/Trick Room/Scarf, Limitless tournament teams, team-preview assistant (bring 4, leads). |
 
 <!-- Screenshots: add images under docs/img/ once the first deploy is live. -->
@@ -72,7 +72,7 @@ The site reads game data from, per game: `$WHETSTONE_DATA_DIR/current/<game>`, t
 | `WHETSTONE_DATA_DIR=data npm run build` | Build the site from `data/` (the default when it exists) |
 | `node src/games/hots/theory/validate.ts` | Check the curated HotS theory files (with `data/` present, also against the live roster and kits) |
 | `node src/games/hots/fixtures/make-fixtures.ts` | Rebuild `fixtures/hots` from a live run in `data/` (same small cast, real kits and theory) |
-| `npm run sync:grindstone` | Refresh `vendor/grindstone/` from a local grindstone-mcp checkout (see below) |
+| `npm test -w grindstone-mcp` | Test the grindstone-mcp workspace package (also `npm run lint -w grindstone-mcp`, `npm run typecheck -w grindstone-mcp`) |
 | `npm run build` | Stage data, build the static site into `dist/`, generate the service worker |
 | `npm run preview` | Serve `dist/` |
 
@@ -98,15 +98,14 @@ Playwright never reuses a server it did not start (unless `SMOKE_REUSE=1`), and 
 
 ## grindstone-mcp
 
-The MTGA deck analyzer runs grindstone-mcp's browser-safe core. Until grindstone-mcp is published to npm, a build of it is vendored in `vendor/grindstone/` (with a `VERSION` file recording the source commit) and imported as `#vendor/grindstone/core.js`.
+The MTGA deck analyzer runs grindstone-mcp's browser-safe core. grindstone-mcp is an npm workspace of this repository, `packages/grindstone-mcp` (its own README, SPEC and CHANGELOG are there), imported by the site as `grindstone-mcp/core`. The root `prepare` script builds it (`npm run build -w grindstone-mcp`), so `npm ci` leaves a ready `dist/`. Vite bundles the core into the analyzer's Web Worker.
 
 ```sh
-# in the grindstone-mcp repo: npm run build
-npm run sync:grindstone                      # default source: ~/grindstone-mcp
-npm run sync:grindstone -- --from ../grindstone-mcp
+npm run build -w grindstone-mcp      # rebuild after changing packages/grindstone-mcp/src
+npm test -w grindstone-mcp           # its own tests (also lint and typecheck)
 ```
 
-Once grindstone-mcp 0.2.0 is on npm, switch to the package: add `"grindstone-mcp": "^0.2.0"` to `dependencies`, replace `#vendor/grindstone/core.js` imports with `grindstone-mcp/core`, delete `vendor/grindstone/` and the `sync:grindstone` script, and let Dependabot propose updates.
+Pushing a `grindstone-v<version>` tag publishes the package to npm (`.github/workflows/grindstone-release.yml`, see docs/OWNER-ACTIONS.md).
 
 ## Deploying your own copy
 
@@ -123,8 +122,8 @@ Failures open (and recoveries close) an issue labelled `pipeline-failure`. The s
 Whetstone is built on the work of others. Each page credits the sources whose data it shows; the full list, with each MIT source's copyright line, is on the site's credits page, and `/licenses.txt` carries the licence of every package the site bundles.
 
 - Heroes of the Storm game data and images: [HeroesToolChest](https://github.com/HeroesToolChest) heroes-data2 and heroes-images (MIT); patch notes from Blizzard Entertainment; free rotation from [Nexus Compendium](https://nexuscompendium.com); pro drafts from [Liquipedia](https://liquipedia.net/heroes/) (CC-BY-SA 3.0); guide video details through the YouTube API Services (optional).
-- MTG Arena: card data and images from [Scryfall](https://scryfall.com); Limited data from [17Lands](https://www.17lands.com/public_datasets) (CC BY 4.0); analysis engine from [grindstone-mcp](https://github.com/JollyKrampus/grindstone-mcp) (MIT).
-- Pokémon Champions: [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) data (MIT), [Smogon](https://www.smogon.com/stats/) usage statistics, [Limitless](https://play.limitlesstcg.com) tournament results, and [@smogon/calc](https://github.com/smogon/damage-calc) (MIT).
+- MTG Arena: card data and images from [Scryfall](https://scryfall.com); Limited data from [17Lands](https://www.17lands.com/public_datasets) (CC BY 4.0); analysis engine from [grindstone-mcp](packages/grindstone-mcp) (MIT, a workspace of this repository); curated Standard lists from Wizards of the Coast's magic.gg articles (card names and counts only, linked).
+- Pokémon Champions: [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) data (MIT, from a pinned and reviewed commit), [Smogon](https://www.smogon.com/stats/) usage statistics, [Limitless](https://play.limitlesstcg.com) tournament results, and [@smogon/calc](https://github.com/smogon/damage-calc) (MIT).
 
 Whetstone is a non-commercial fan project. It is not affiliated with or endorsed by Blizzard Entertainment, Wizards of the Coast, The Pokémon Company, Nintendo, Game Freak or heroescounters.com. Heroes of the Storm is a trademark of Blizzard Entertainment, Inc. Magic: The Gathering is a trademark of Wizards of the Coast LLC; Whetstone is unofficial Fan Content permitted under the Fan Content Policy. Pokémon is a trademark of Nintendo, Creatures Inc. and GAME FREAK inc.
 
