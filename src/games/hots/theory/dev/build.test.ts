@@ -40,7 +40,8 @@ describe('dev build report', () => {
 
   it('summarises calibration', () => {
     const stats = calibrationStats(buildTheory({ heroes, maps, curated }), heroes);
-    expect(stats.heroes).toBe(17);
+    // 17 draftable kits in the fixture plus Medivh and Tyrande (stealth golden cases).
+    expect(stats.heroes).toBe(19);
     expect(stats.counters).toBeGreaterThan(0);
     expect(Object.values(stats.counterHistogram).reduce((a, b) => a + b, 0)).toBe(stats.counters);
     expect(stats.mostCountered).toHaveLength(10);

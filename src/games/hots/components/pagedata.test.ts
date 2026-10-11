@@ -11,6 +11,7 @@ import {
   latestLivePatch,
   patchMomentum,
   splitByGate,
+  splitFit,
   statsModes,
   theoryHeroesForMap,
   theoryMapFit,
@@ -131,6 +132,20 @@ describe('map fit', () => {
     const heroes = theoryHeroesForMap(map);
     expect(heroes.some((h) => h.hero.id === hero.id)).toBe(true);
     expect(heroes.every((h) => getDraftableEntities().includes(h.hero))).toBe(true);
+  });
+
+  it('lists only fits above neutral as best, and the ones below as harder, hardest first', () => {
+    const rows = [{ score: 43 }, { score: 72 }, { score: 50 }, { score: 61 }, { score: 38 }, { score: 43 }].map((r, i) => ({ ...r, i }));
+    const { better, harder } = splitFit(rows);
+    expect(better.map((r) => r.i)).toEqual([1, 3]);
+    expect(harder.map((r) => r.i)).toEqual([4, 0, 5]);
+    // A hero whose every map works against the kit gets no "best maps" at all.
+    expect(splitFit([{ score: 43 }, { score: 45 }]).better).toEqual([]);
+    for (const hero of getDraftableEntities()) {
+      const fit = splitFit(theoryMapFit(hero, getMaps()));
+      expect(fit.better.every((m) => m.score > 50), hero.slug).toBe(true);
+      expect(fit.harder.every((m) => m.score < 50), hero.slug).toBe(true);
+    }
   });
 });
 

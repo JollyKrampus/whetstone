@@ -197,12 +197,16 @@ describe('loadCurated', () => {
     expect(zeratulAbathur?.why).toHaveLength(2);
     const zeratulNova = bundle.counters.find((p) => p.a === 'zeratul' && p.b === 'nova');
     expect(zeratulNova).toMatchObject({ weight: 0.3, confidence: 'low', conditions: ['Nova was hit in the last 3 seconds', 'Zeratul has Vorpal Blade ready'], reviewedFor: '2.56' });
-    expect(bundle.synergies).toEqual([expect.objectContaining({ a: 'abathur', b: 'illidan', conditions: ['Illidan dives first.'] })]);
+    expect(bundle.synergies).toEqual([expect.objectContaining({ a: 'abathur', b: 'illidan', conditions: ['Illidan dives first'] })]);
     expect(bundle.traits.nova?.map((t) => `${t.op}:${t.tag}:${t.source}`)).toEqual(['add:immobile:heroes/nova.yaml', 'remove:poke:heroes/nova.yaml']);
     expect(bundle.rules.counters.length).toBeGreaterThan(0);
     expect(Object.keys(bundle.maps.maps)).toContain('cursed-hollow');
     expect(bundle.aliases.chogall).toContain("cho'gall");
-    expect(bundle.warnings).toEqual([expect.stringMatching(/^curated\/hots\/heroes\/nova\.yaml: contradiction: nova counters zeratul/)]);
+    expect(bundle.warnings).toEqual([
+      // The sample files rate Zeratul over Abathur medium and high: the loader keeps high and says so.
+      'curated/hots/heroes/abathur.yaml: counters zeratul/abathur: files set different confidence (medium in heroes/abathur.yaml, high in heroes/zeratul.yaml); using high',
+      expect.stringMatching(/^curated\/hots\/heroes\/nova\.yaml: contradiction: nova counters zeratul/),
+    ]);
   });
 
   it('is deterministic', () => {
@@ -255,8 +259,10 @@ describe('loadCurated', () => {
 
 describe('the repository curated files', () => {
   it('load without errors', () => {
-    const { bundle, errors } = readCurated(ROOT);
+    const { bundle, errors, warnings } = readCurated(ROOT);
     expect(errors.map((e) => `${e.file}: ${e.message}`)).toEqual([]);
+    // Merge warnings too: two files that rate one pair differently must be made to agree.
+    expect(warnings.map((e) => `${e.file}: ${e.message}`)).toEqual([]);
     expect(bundle?.files.length).toBeGreaterThan(0);
     expect(bundle?.rules.counters.length).toBeGreaterThanOrEqual(20);
     expect(bundle?.rules.counters.length).toBeLessThanOrEqual(30);

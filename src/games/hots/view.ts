@@ -7,7 +7,7 @@ import type { Reason } from '../../core/game.ts';
 import type { MatchupRow } from '../../components/types.ts';
 import { assetHref, navHref } from '../registry.ts';
 import type { HeroMatchupRow, MapFitRow } from './load.ts';
-import { conditionsText } from './theory/engine.ts';
+import { withConditions } from './theory/conditions.ts';
 
 /**
  * Reasons as the shared ReasonList shows them: a reason's `conditions` (curated matchups that
@@ -19,7 +19,7 @@ export function displayReasons(reasons: readonly Reason[]): Reason[] {
   return reasons.map((r) => {
     if (!r.conditions || r.conditions.length === 0) return r;
     const { conditions, ...rest } = r;
-    return { ...rest, text: `${r.text}${conditionsText(conditions)}` };
+    return { ...rest, text: withConditions({ text: r.text, conditions }) };
   });
 }
 

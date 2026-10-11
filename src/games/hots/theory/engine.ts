@@ -23,7 +23,11 @@
 import type { Edge, Reason } from '../../../core/game.ts';
 import { HERO_TAGS, type GameMap, type Hero, type HeroTag, type Mechanic, type MapFit, type Rule, type RuleAtom, type Theory } from '../schema.ts';
 import type { CuratedBundle, MergedPair } from './types.ts';
+import { orList } from './conditions.ts';
 import { OPTIONAL_FACTOR, capRules, negligible, theoryScore } from './weights.ts';
+
+// The wording helpers live in conditions.ts (dependency-free, for pages and the draft island).
+export { conditionsText, orList, withConditions } from './conditions.ts';
 
 /**
  * Version of the extraction + scoring logic. Bump it when extract.ts or engine.ts change what
@@ -175,12 +179,6 @@ export interface SideMatch {
   needs?: string;
 }
 
-/** "A", "A or B", "A, B or C". */
-export function orList(names: readonly string[]): string {
-  if (names.length <= 1) return names[0] ?? '';
-  return `${names.slice(0, -1).join(', ')} or ${names[names.length - 1]}`;
-}
-
 /** Best match of a rule side (list of `tag` / `tag&tag` expressions) against a hero. */
 export function matchSide(exprs: readonly string[], profile: HeroProfile): SideMatch | null {
   let best: SideMatch | null = null;
@@ -309,10 +307,6 @@ export function curatedReasons(pair: Pick<MergedPair, 'why' | 'evidence'> & Part
   });
 }
 
-/** " Only when Blaze takes Nanomachine Coating (level 7)." for a reason with conditions, else "". */
-export function conditionsText(conditions: readonly string[] | undefined): string {
-  return conditions && conditions.length > 0 ? ` Only when ${conditions.join(', and ')}.` : '';
-}
 
 const round = (x: number): number => Math.round(x * 1e9) / 1e9;
 
