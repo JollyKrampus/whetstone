@@ -593,8 +593,18 @@ export const RankedSeasonSchema = z.strictObject({
 
 export const RotationSchema = z.strictObject({
   source: z.enum(['nexus-compendium', 'manual']),
-  /** "As of" time shown next to the rotation. */
+  /**
+   * "As of" time shown next to the rotation: when this content was first fetched. It stays put
+   * while the content is unchanged (so dataHash does too); the last check is the source's
+   * `fetchedAt` in meta.json.
+   */
   fetchedAt: IsoDateTime,
+  /**
+   * Present (true) when the window had already ended at the last pipeline run: the source has not
+   * published the new week yet (or could not be fetched), so no hero should be shown as free.
+   * Written on the switch day itself, which changes dataHash and so redeploys the site.
+   */
+  lagging: z.literal(true).exactOptional(),
   start: IsoDate,
   end: IsoDate,
   allFree: z.boolean(),
