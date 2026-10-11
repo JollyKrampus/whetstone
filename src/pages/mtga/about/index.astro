@@ -8,6 +8,7 @@ import { PROFILES, brawlRubric, constructedRubric } from 'grindstone-mcp/core';
 import SourceAttribution from '../../../components/SourceAttribution.astro';
 import '../../../games/mtga/components/mtga.css';
 import { formatDayUTC, int } from '../../../core/format.ts';
+import { LOW_SAMPLE } from '../../../games/mtga/lib/limited.ts';
 import { cardFacts } from '../../../games/mtga/pagedata.ts';
 import { navHref, withBase } from '../../../games/registry.ts';
 import GameLayout from '../../../layouts/GameLayout.astro';
@@ -266,7 +267,8 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         Limited pages are built from 17Lands' public game and draft datasets (licensed CC BY 4.0), downloaded and summarised once a day when a
         file changes. For each card: games-in-hand, opening-hand, drawn and never-seen win rates, improvement when drawn, average pick when last
         seen and when taken, and colour-pair win rates. 17Lands users are stronger than the average Arena player, so win rates run high; the
-        differences between cards are what matters. Rows with fewer than 500 games in hand are marked as low sample.
+        differences between cards are what matters. Rows with fewer than {int(LOW_SAMPLE)} games in hand are marked as low sample, and
+        while you sort by a win rate they are listed after all the others, so a lucky handful of games never tops the table.
       </p>
 
       <h2 id="sources">Sources and privacy</h2>

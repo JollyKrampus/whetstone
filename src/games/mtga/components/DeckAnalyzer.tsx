@@ -347,7 +347,7 @@ export default function DeckAnalyzer({ shards, snapshot, curated, sample, metaHr
               <li>Mana curve, colour sources against Karsten's targets, and tapped lands</li>
               <li>A power tier with the reasons behind each part of the score</li>
               <li>Sample opening hands and a mulligan simulation you can share</li>
-              <li>Wildcards to craft it, and budget upgrades you can apply or undo</li>
+              <li>Wildcards to craft it, and upgrades you can apply or undo</li>
               <li>How close it is to the meta lists you choose</li>
             </ul>
           </div>
