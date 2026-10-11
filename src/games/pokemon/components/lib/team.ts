@@ -96,8 +96,9 @@ export function packTeam(team: Team): string {
 
 export function unpackTeam(text: string): Team {
   if (!text) return [];
-  const out: unknown[] = text.split('~').map((line) => {
-    const [species, item, ability, nature, sp, moves, nick] = line.split('|');
+  // Never look past the sixth set: a link or stored value may carry any number of separators.
+  const out: unknown[] = text.split('~', TEAM_SIZE).map((line) => {
+    const [species, item, ability, nature, sp, moves, nick] = line.split('|', 7);
     let nickname: string | undefined;
     try {
       nickname = nick ? decodeURIComponent(nick) : undefined;
@@ -111,7 +112,7 @@ export function unpackTeam(text: string): Team {
       ...(ability ? { ability } : {}),
       nature: natureName ?? 'Serious',
       sp: sp ? sp.split('.').map(Number) : emptySp(),
-      moves: moves ? moves.split(',').filter(Boolean) : [],
+      moves: moves ? moves.split(',', MOVES_PER_SET * 2).filter(Boolean) : [],
       ...(nickname ? { nickname } : {}),
     };
   });
