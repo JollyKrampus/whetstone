@@ -195,7 +195,7 @@
             "level": "16",
             "section": "Level 16",
             "target": "Survival Instincts",
-            "text": "Effect changed (see Blizzard's notes)"
+            "text": "Effect changed; game data: damage 100% → 50% (see Blizzard's notes)"
           }
         ],
         "verdict": "nerf"

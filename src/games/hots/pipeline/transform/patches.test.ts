@@ -1,5 +1,7 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { FIXTURE_NOW, fixtureRelease, rawText, testCurated } from '../test-helpers.ts';
+import { FIXTURE_NOW, REPO_ROOT, fixtureRelease, rawText, testCurated } from '../test-helpers.ts';
 import { buildHeroes } from './heroes.ts';
 import { buildHeroIndex, buildMapIndex, changeDirection, dateFromTitle, hotfixDate, kindFromTitle, migrateLegacyPatches, parseArticle, verdictOf, type ParsedPatch } from './patches.ts';
 import { PatchesFileSchema } from '../../schema.ts';
@@ -146,6 +148,18 @@ describe('no Blizzard sentences are stored', () => {
     const worst = Math.max(...texts.map((t) => longestSharedRun(t, source)));
     expect(worst).toBeLessThan(VERBATIM_LIMIT);
     expect(copied).toEqual([]);
+  });
+
+  it('the committed site fixture (fixtures/hots/patches.json) repeats no 8-word run of a recorded article', () => {
+    const fixture = PatchesFileSchema.parse(JSON.parse(readFileSync(path.join(REPO_ROOT, 'fixtures', 'hots', 'patches.json'), 'utf8')));
+    expect(fixture.every((p) => p.notes === 'summary')).toBe(true);
+    const texts = fixture.flatMap(storedTexts);
+    expect(texts.length).toBeGreaterThan(50);
+    for (const [file] of articles) {
+      const source = rawText(file).replace(/<[^>]*>/g, ' ').replace(/&#39;|&rsquo;/g, "'").replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ');
+      const worst = texts.map((t) => [t, longestSharedRun(t, source)] as const).sort((a, b) => b[1] - a[1])[0];
+      expect(worst?.[1] ?? 0, worst?.[0]).toBeLessThan(VERBATIM_LIMIT);
+    }
   });
 
   it('never uses a sentence-long list label as a change target', () => {
