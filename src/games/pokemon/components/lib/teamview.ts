@@ -15,7 +15,7 @@ import type { CalcMon, MoveResult, PairSummary } from '../../worker/protocol.ts'
 import { formeLabel, type DexIndex } from './dex.ts';
 import type { MetaSet } from './metasets.ts';
 import type { DamageCell, DamageTable, PreviewMon, PreviewMove } from './preview.ts';
-import { finalStats, statValue, type StatTable } from './stats.ts';
+import { effectiveSpeed, finalStats, speedItemLabel, statValue, type StatTable } from './stats.ts';
 import type { PokemonSet, Team } from './team.ts';
 
 /** The forme a set battles in: its Mega when it holds the matching stone. */
@@ -23,10 +23,28 @@ export function battleForme(dex: DexIndex, set: Pick<PokemonSet, 'species' | 'it
   return dex.megaFor(set.species, set.item) ?? dex.speciesById(set.species);
 }
 
-/** Ability in battle: a Mega forme has its own (first) ability. */
+/**
+ * Ability in battle after Mega Evolution: a Mega forme has its own (first) ability. Use it for
+ * damage and type logic; switch-in effects use entryAbility.
+ */
 export function battleAbility(dex: DexIndex, set: Pick<PokemonSet, 'species' | 'item' | 'ability'>): string | undefined {
   const mega = dex.megaFor(set.species, set.item);
   return mega ? mega.abilities[0] : set.ability;
+}
+
+/**
+ * Ability when the Pokémon first comes in: the registered one, even with a Mega Stone, because a
+ * Pokémon enters in its base forme and Mega Evolves when it first acts. Intimidate, weather and
+ * terrain setters on a Mega Stone holder still trigger on the lead.
+ */
+export function entryAbility(set: Pick<PokemonSet, 'ability'>): string | undefined {
+  return set.ability;
+}
+
+/** Speed in battle: the battle forme's stat with the held item (Choice Scarf ×1.5). */
+export function setSpeed(dex: DexIndex, set: PokemonSet): number | null {
+  const stats = setStats(dex, set);
+  return stats ? effectiveSpeed(stats.spe, set.item) : null;
 }
 
 /** Level-50 stats of the battle forme, or null for an unknown species. */
@@ -84,11 +102,14 @@ export function previewFromSet(dex: DexIndex, set: PokemonSet, key: string): Pre
     base: set.species,
     name: formeLabel(forme),
     types: forme.types,
-    speed: finalStats(forme.base, set.sp, set.nature).spe,
+    speed: effectiveSpeed(finalStats(forme.base, set.sp, set.nature).spe, set.item),
     moves: previewMoves(dex, set.moves),
   };
+  if (set.item && speedItemLabel(set.item)) mon.speedItem = set.item;
   const ability = battleAbility(dex, set);
   if (ability) mon.ability = ability;
+  const entry = entryAbility(set);
+  if (entry && entry !== ability) mon.entryAbility = entry;
   return mon;
 }
 
@@ -130,6 +151,7 @@ export function previewTheirs(dex: DexIndex, entry: PokemonSet, key: string, byB
       moves: previewMoves(dex, meta.moves),
       assumed: true,
     };
+    if (meta.speedItem) mon.speedItem = meta.speedItem;
     if (meta.ability) mon.ability = meta.ability;
     if (usage > 0) mon.usage = usage;
     return mon;
@@ -141,10 +163,11 @@ export function previewTheirs(dex: DexIndex, entry: PokemonSet, key: string, byB
     base: entry.species,
     name: formeLabel(forme),
     types: forme.types,
-    speed: statValue('spe', forme.base.spe, 0),
+    speed: effectiveSpeed(statValue('spe', forme.base.spe, 0), entry.item),
     moves: [],
     assumed: true,
   };
+  if (entry.item && speedItemLabel(entry.item)) mon.speedItem = entry.item;
   if (forme.abilities.length === 1) mon.ability = forme.abilities[0]!;
   return mon;
 }
@@ -215,7 +238,7 @@ export interface ThreatRow {
   worst: ThreatHit | null;
   /** Your Pokémon that 2HKO it back, with their best move. */
   answers: ThreatHit[];
-  /** How many of yours it outspeeds (common spread vs yours, no field effects). */
+  /** How many of yours it outspeeds (Speed in battle with items, no field effects). */
   outspeeds: number;
   pressure: number;
   /** Pressure on two or more of yours and nothing that 2HKOs it back. */
@@ -293,22 +316,28 @@ export function summarizeThreats(
 export interface LadderRow {
   key: string;
   name: string;
+  /** Speed in battle (item and, for your side, Tailwind applied). */
   speed: number;
+  /** The held item that changed it ('choicescarf'), for "(Scarf)" labels. */
+  item?: string;
   mine: boolean;
 }
 
 /**
- * Your Pokémon merged into the top Pokémon's common-spread speeds: fastest first (slowest first
- * under Trick Room). Tailwind doubles your side only. Ties list yours first.
+ * Your Pokémon merged into the top Pokémon's common sets: fastest first (slowest first under
+ * Trick Room). Members give their Speed stat and held item; Choice Scarf and Tailwind (your side
+ * only) are chained like the simulator, so a Scarf user under Tailwind gets exactly ×3. Common
+ * sets come with their Speed in battle (MetaSet.speed). Ties list yours first.
  */
 export function speedLadder(
-  members: readonly { key: string; name: string; speed: number }[],
-  sets: readonly Pick<MetaSet, 'id' | 'name' | 'speed'>[],
+  members: readonly { key: string; name: string; speed: number; item?: string | undefined }[],
+  sets: readonly Pick<MetaSet, 'id' | 'name' | 'speed' | 'speedItem'>[],
   opts: { tailwind?: boolean; trickRoom?: boolean } = {},
 ): LadderRow[] {
+  const row = (r: Omit<LadderRow, 'item'>, item: string | undefined): LadderRow => (item && speedItemLabel(item) ? { ...r, item } : r);
   const rows: LadderRow[] = [
-    ...members.map((m) => ({ key: m.key, name: m.name, speed: opts.tailwind ? m.speed * 2 : m.speed, mine: true })),
-    ...sets.map((s) => ({ key: `meta-${s.id}`, name: s.name, speed: s.speed, mine: false })),
+    ...members.map((m) => row({ key: m.key, name: m.name, speed: effectiveSpeed(m.speed, m.item, { tailwind: Boolean(opts.tailwind) }), mine: true }, m.item)),
+    ...sets.map((s) => row({ key: `meta-${s.id}`, name: s.name, speed: s.speed, mine: false }, s.speedItem)),
   ];
   const dir = opts.trickRoom ? 1 : -1;
   return rows.sort((a, b) => dir * (a.speed - b.speed) || Number(b.mine) - Number(a.mine) || (a.key < b.key ? -1 : 1));

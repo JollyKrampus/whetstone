@@ -4,7 +4,7 @@ import SetEditor from './SetEditor.tsx';
 import { useAsync, useDebounced, useDex } from './hooks.ts';
 import type { DexIndex } from './lib/dex.ts';
 import type { MetaSet } from './lib/metasets.ts';
-import { modifiedSpeed } from './lib/stats.ts';
+import { effectiveSpeed } from './lib/stats.ts';
 import type { PokemonSet } from './lib/team.ts';
 import { battleAbility, metaToSet, setDisplayName, setStats, setToCalcMon } from './lib/teamview.ts';
 import { calcClient } from '../worker/client.ts';
@@ -97,7 +97,7 @@ function toCalcMon(dex: DexIndex, s: Side): CalcMon {
 function speedOf(dex: DexIndex, s: Side, tailwind: boolean): number | null {
   const stats = setStats(dex, s.set);
   if (!stats) return null;
-  return modifiedSpeed(stats.spe, { stage: s.boosts.spe ?? 0, scarf: s.set.item === 'choicescarf', tailwind, paralysis: s.status === 'par' });
+  return effectiveSpeed(stats.spe, s.set.item, { stage: s.boosts.spe ?? 0, tailwind, paralysis: s.status === 'par' });
 }
 
 function koClass(r: MoveResult): string | undefined {

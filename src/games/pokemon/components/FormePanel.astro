@@ -24,16 +24,16 @@ import {
   getUsageIndex,
 } from '../load.ts';
 import type { Regulation, Species, Usage } from '../schema.ts';
-import { checkRows, cutoffLabel, displayName, edgeLists, monHref, monthLabel, speedPosition, teammateRows } from '../view.ts';
+import { checkRows, cutoffLabel, displayName, edgeLists, monHref, monthLabel, speedPosition, speedRivals, teammateRows } from '../view.ts';
 import DataNote from './DataNote.astro';
 import ShareBars from './ShareBars.astro';
 import StatPlanner from './StatPlanner.tsx';
 import TypeChip, { TypeList } from './TypeChip.tsx';
 import type { DexIndex } from './lib/dex.ts';
 import { exportSet } from './lib/paste.ts';
-import { STAT_IDS, STAT_LABEL, STAT_NAME, finalStats } from './lib/stats.ts';
+import { STAT_IDS, STAT_LABEL, STAT_NAME, finalStats, speedItemLabel, speedText } from './lib/stats.ts';
 import { DEFENSIVE_ABILITIES, defenseProfile, groupDefense } from './lib/types.ts';
-import { metaSetFromUsage } from './lib/metasets.ts';
+import { metaSetFromUsage, metaSets } from './lib/metasets.ts';
 
 interface Props {
   forme: Species;
@@ -109,13 +109,22 @@ const sourceNames = { smogon: 'Smogon', 'showdown-replays': 'Showdown replays', 
 // ---- speed
 const speedTiers = getSpeedTiers();
 const speedEntry = speedTiers?.entries.find((e) => e.id === forme.id) ?? null;
-const commonSpeed = speedEntry?.speed ?? (common ? common.speed : null);
+const commonSpeed = speedEntry?.speed ?? (common ? common.speedStat : null);
 const neutral = finalStats(forme.base, [0, 0, 0, 0, 0, 0], 'Serious').spe;
 const fastest = finalStats(forme.base, [0, 0, 0, 0, 0, 32], 'Timid').spe;
 const slowest = finalStats(forme.base, [0, 0, 0, 0, 0, 0], 'Brave').spe;
-const metaSpeeds = (speedTiers?.entries ?? []).slice(0, 50).map((e) => ({ id: e.id, speed: e.speed }));
-const position = commonSpeed !== null && metaSpeeds.length ? speedPosition(commonSpeed, metaSpeeds, forme.id) : null;
-const ordered = [...metaSpeeds.filter((e) => e.id !== forme.id), ...(commonSpeed !== null ? [{ id: forme.id, speed: commonSpeed }] : [])].sort(
+// The comparison: the 50 most used Pokémon of the usage file behind speed.json (usage rank, not
+// Speed), each at its common set's Speed in battle (Choice Scarf when that is its most used item).
+const speedUsage = speedTiers ? getUsage(speedTiers.format, speedTiers.cutoff) : null;
+const setLookups = { species: lookup, move: getMove };
+const rivals = speedRivals(speedUsage ? metaSets(speedUsage.pokemon, setLookups) : []);
+const selfRow = speedUsage?.pokemon.find((p) => p.id === forme.id) ?? null;
+const selfSet = (selfRow ? metaSetFromUsage(selfRow, setLookups) : null) ?? common;
+const battleSpeed = selfSet ? selfSet.speed : commonSpeed;
+const battleItem = selfSet?.speedItem;
+const inTop = rivals.some((r) => r.id === forme.id);
+const position = battleSpeed !== null && rivals.length ? speedPosition(battleSpeed, rivals, forme.id) : null;
+const ordered = [...rivals.filter((e) => e.id !== forme.id), ...(battleSpeed !== null ? [{ id: forme.id, speed: battleSpeed, ...(battleItem ? { item: battleItem } : {}) }] : [])].sort(
   (a, b) => b.speed - a.speed || (a.id < b.id ? -1 : 1),
 );
 const at = ordered.findIndex((e) => e.id === forme.id);
@@ -228,6 +237,20 @@ const pid = forme.id;
               </>
             )
           }
+          {
+            speedEntry?.scarf && (
+              <>
+                <dt>With Choice Scarf</dt>
+                <dd>
+                  <strong class="pk-num">{speedEntry.scarf.speed}</strong>
+                  <span class="pk-subtle">
+                    {' '}
+                    (held by {pct(speedEntry.scarf.share, 0)}{battleItem === 'choicescarf' ? ', its most used item' : ''})
+                  </span>
+                </dd>
+              </>
+            )
+          }
           <dt>Fastest</dt>
           <dd><strong class="pk-num">{fastest}</strong> <span class="pk-subtle">(+Spe nature, 32 SP)</span></dd>
           <dt>Neutral</dt>
@@ -236,9 +259,11 @@ const pid = forme.id;
           <dd><strong class="pk-num">{slowest}</strong> <span class="pk-subtle">(−Spe nature, 0 SP, for Trick Room)</span></dd>
         </dl>
         {
-          position && (
-            <p class="pk-subtle">
-              Outspeeds {position.faster} of the {position.total} most used Pokémon{position.ties ? `, ties ${position.ties}` : ''} at their common spreads.
+          position && battleSpeed !== null && (
+            <p class="pk-subtle" data-speed-position>
+              {battleItem ? `With ${speedItemLabel(battleItem) ?? 'its item'} (Speed ${battleSpeed})` : `At Speed ${battleSpeed}`}, it outspeeds {position.faster} of the{' '}
+              {inTop ? `other ${position.total} Pokémon in the top ${rivals.length}` : `${position.total} most used Pokémon`}
+              {position.ties ? `, ties ${position.ties}` : ''}, each at its most common spread and item.
             </p>
           )
         }
@@ -251,7 +276,7 @@ const pid = forme.id;
                 return (
                   <li class="pk-bar" style={`--w: ${Math.min(100, (n.speed / 250) * 100).toFixed(1)}%`}>
                     <span class="pk-bar__label">{self ? <strong>{name} (this)</strong> : s ? <a href={monHref(s)}>{displayName(s)}</a> : n.id}</span>
-                    <span class="pk-bar__value">{n.speed}</span>
+                    <span class="pk-bar__value">{speedText(n.speed, n.item)}</span>
                   </li>
                 );
               })}

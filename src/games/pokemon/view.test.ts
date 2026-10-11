@@ -15,6 +15,7 @@ import {
   monHref,
   outboundLinks,
   speedPosition,
+  speedRivals,
   teammateRows,
   teammateScore,
   toTierInputs,
@@ -162,5 +163,34 @@ describe('compactEdges', () => {
     const out = compactEdges({ counters: [e('b', 'a', 1.234, 40), e('a', 'c', -2, 14), e('a', 'b', 3.456, 15), e('a', 'd', undefined, 99)], synergies: [e('a', 'b', 2, 200)] });
     expect(out).toEqual({ counters: [['a', 'b', 3.46, 15], ['b', 'a', 1.23, 40]], synergies: [['a', 'b', 2, 200]] });
     expect(compactEdges(null)).toBeNull();
+  });
+
+  it('compares against the most used Pokémon, not the fastest', () => {
+    // speed.json lists entries fastest first. Ten fast but rarely used Pokémon sit at its top;
+    // the 50 most used include Rillaboom (#1, Speed 105) and many slower Pokémon.
+    const rows = [
+      ...Array.from({ length: 10 }, (_, i) => ({ id: `fast${i}`, rank: 51 + i, speed: 200 + i })),
+      { id: 'rillaboom', rank: 1, speed: 105 },
+      ...Array.from({ length: 49 }, (_, i) => ({ id: `mon${i}`, rank: 2 + i, speed: 60 + i * 2 })),
+    ].sort((a, b) => b.speed - a.speed);
+    const rivals = speedRivals(rows);
+    expect(rivals).toHaveLength(50);
+    expect(rivals.some((r) => r.id.startsWith('fast'))).toBe(false);
+    const pos = speedPosition(105, rivals, 'rillaboom');
+    expect(pos.total).toBe(49);
+    expect(pos.faster).toBeGreaterThan(0);
+    expect(pos.faster).toBe(23); // 60, 62, …, 104
+    // The old list (the first 50 rows of the speed file) said 0 of 49 for the same Pokémon.
+    const fastestFifty = rows.slice(0, 50);
+    expect(speedPosition(105, fastestFifty, 'rillaboom').faster).toBeLessThan(pos.faster);
+  });
+
+  it('builds the comparison from common sets in usage order, Scarf included', () => {
+    const shuffled = [...usage.pokemon].sort((a, b) => b.id.localeCompare(a.id));
+    const all = metaSets(shuffled, { species: lookup, move: () => ({ category: 'Physical' }) }, 50);
+    expect(all.map((s) => s.rank)).toEqual([...all.map((s) => s.rank)].sort((a, b) => a - b));
+    const rivals = speedRivals(all, 5);
+    expect(rivals.map((r) => r.id)).toEqual(['rillaboom', 'sneasler', 'incineroar', 'salamencemega', 'kingambit']);
+    expect(speedRivals(all).find((r) => r.id === 'gholdengo')).toEqual({ id: 'gholdengo', speed: 223, item: 'choicescarf' });
   });
 });

@@ -11,6 +11,7 @@ import { TypeList } from './TypeChip.tsx';
 import { useAsync, useDebounced, useDex } from './hooks.ts';
 import type { MetaSet } from './lib/metasets.ts';
 import { parsePaste } from './lib/paste.ts';
+import { speedText } from './lib/stats.ts';
 import { PREVIEW_PRESETS, PREVIEW_PRESET_IDS, PREVIEW_SIGNAL_LABEL, bringText, recommend, type PreviewMon, type PreviewPresetId } from './lib/preview.ts';
 import type { CompactEdge } from '../view.ts';
 import { CURRENT_KEY, listSaved, pokemonStore, savedToTeam, type SavedTeam } from './lib/saved.ts';
@@ -412,7 +413,11 @@ export default function TeamPreview({ dexUrl, regulation, metaSets, usageLabel, 
                 <li class="pk-bar" key={key} style={`--w: ${(weight * 100).toFixed(1)}%`}>
                   <span class="pk-bar__label">
                     {mon.name}
-                    <small> · Speed {mon.speed}{mon.assumed ? ' · common set assumed' : ''}</small>
+                    <small>
+                      {' '}
+                      · Speed {speedText(mon.speed, mon.speedItem)}
+                      {mon.assumed ? ' · common set assumed' : ''}
+                    </small>
                   </span>
                   <span class="pk-bar__value">{bringText(weight)}</span>
                 </li>

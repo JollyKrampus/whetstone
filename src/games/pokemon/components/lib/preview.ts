@@ -13,12 +13,17 @@
  * Opponents are weighted by how likely they are to be brought. Without bring-rate data the
  * estimate is usage-based (bringWeights): proportional to usage, capped at 1, summing to four.
  * It is labelled as an estimate in the UI.
+ *
+ * Replay edges only speak in a direction ("win more often against …") when they pass the
+ * listing gates every Pokémon page uses (n ≥ 50 and |Δ| ≥ 1.5 pp, core/stats isListableEdge).
+ * Weaker edges keep their small, sample-weighted signal but are described neutrally.
  */
 import type { Edge, Reason } from '../../../../core/game.ts';
 import { scoreCandidates, valueFromDelta, type DraftContext, type Provider, type Ranked, type Signal, type Weights } from '../../../../core/draft.ts';
-import { classifySample } from '../../../../core/stats.ts';
+import { classifySample, isListableEdge } from '../../../../core/stats.ts';
 import { pct, pp } from '../../../../core/format.ts';
 import type { Move, PokemonType, TypeChart } from '../../schema.ts';
+import { speedItemLabel } from './stats.ts';
 import { DEFENSIVE_ABILITIES, TYPE_CHANGING_ABILITIES, effectiveness } from './types.ts';
 
 export type PreviewMove = Pick<Move, 'id' | 'name' | 'type' | 'category' | 'basePower' | 'priority' | 'target'>;
@@ -32,8 +37,17 @@ export interface PreviewMon {
   base: string;
   name: string;
   types: readonly PokemonType[];
+  /** Ability in battle (a Mega's own after it Mega Evolves): damage and type logic. */
   ability?: string;
+  /**
+   * Registered ability when it differs from `ability` (a Mega Stone holder): it is the one that
+   * triggers on switch-in, before Mega Evolution (Intimidate on the lead).
+   */
+  entryAbility?: string;
+  /** Speed in battle, held item applied (Choice Scarf ×1.5). */
   speed: number;
+  /** The held item behind `speed` when it changes Speed ('choicescarf'). */
+  speedItem?: string;
   moves: readonly PreviewMove[];
   /** Usage share (0–1) for bring-likelihood; their side only. */
   usage?: number;
@@ -172,6 +186,18 @@ function sampleFactor(n: number | undefined): number {
   return c === 'hidden' ? 0 : c === 'grey' ? 0.5 : 1;
 }
 
+/** "Speed 195 with Scarf" or "Speed 130": the basis of a speed reason. */
+function speedBasis(m: PreviewMon): string {
+  const label = speedItemLabel(m.speedItem);
+  return label ? `Speed ${m.speed} with ${label}` : `Speed ${m.speed}`;
+}
+
+/** The ability that acts when it enters the field (before any Mega Evolution). */
+const switchInAbility = (m: PreviewMon): string | undefined => m.entryAbility ?? m.ability;
+
+/** Their Pokémon that attack physically (Intimidate targets). */
+const physicalAttackers = (list: readonly PreviewMon[]): PreviewMon[] => list.filter((o) => o.moves.some((m) => m.category === 'Physical' && m.basePower > 0));
+
 const names = (list: readonly PreviewMon[]): string => {
   const ns = list.map((m) => m.name);
   if (ns.length <= 2) return ns.join(' and ');
@@ -188,25 +214,50 @@ interface Built {
   synergies: Map<string, Edge>;
 }
 
+/** "n = 17" or "n = 17–24" for a group of edges. */
+function nRange(edges: readonly Edge[]): string {
+  const ns = edges.map((e) => e.n ?? 0);
+  const lo = Math.min(...ns);
+  const hi = Math.max(...ns);
+  return lo === hi ? `n = ${lo}` : `n = ${lo}–${hi}`;
+}
+
 function h2hProvider(b: Built): Provider {
   return (key) => {
     const me = b.mine.get(key);
     if (!me) return null;
     const out: Signal[] = [];
+    // Edges below the listing gates: their signals add up, under one neutral reason.
+    let weak = 0;
+    const weakEdges: Edge[] = [];
+    const weakFoes: PreviewMon[] = [];
     for (const o of b.theirs) {
       const e = findEdge(b.counters, me, o);
       if (!e || e.delta === undefined) continue;
       const f = sampleFactor(e.n) * (b.weights.get(o.key) ?? 0);
       if (f === 0) continue;
-      const better = e.delta >= 0;
+      const value = valueFromDelta(e.delta) * f;
+      if (!isListableEdge(e)) {
+        weak += value;
+        weakEdges.push(e);
+        weakFoes.push(o);
+        continue;
+      }
       const reason: Reason = {
         kind: 'stat',
-        text: better ? `Teams with ${me.name} win more often against ${o.name}` : `Teams with ${me.name} win less often against ${o.name}`,
+        text: e.delta >= 0 ? `Teams with ${me.name} win more often against ${o.name}` : `Teams with ${me.name} win less often against ${o.name}`,
         delta: e.delta,
         source: 'showdown-replays',
       };
       if (e.n !== undefined) reason.n = e.n;
-      out.push({ key: 'counters', value: valueFromDelta(e.delta) * f, reasons: [reason] });
+      out.push({ key: 'counters', value, reasons: [reason] });
+    }
+    if (weakEdges.length > 0) {
+      out.push({
+        key: 'counters',
+        value: weak,
+        reasons: [{ kind: 'stat', text: `Replays show no clear edge yet against ${names(weakFoes)} (${nRange(weakEdges)})`, source: 'showdown-replays' }],
+      });
     }
     return out;
   };
@@ -282,7 +333,7 @@ function speedProvider(b: Built): Provider {
           reasons: [
             {
               kind: 'role',
-              text: share > 0.5 ? `Outspeeds ${names(outsped)} (Speed ${me.speed})` : `Slower than most of their team (Speed ${me.speed})`,
+              text: share > 0.5 ? `Outspeeds ${names(outsped)} (${speedBasis(me)})` : `Slower than most of their team (${speedBasis(me)})`,
             },
           ],
         });
@@ -299,8 +350,9 @@ function speedProvider(b: Built): Provider {
     if (hasMove(me, 'trickroom') && ourAvg < theirAvg) {
       out.push({ key: 'role', value: 0.35, reasons: [{ kind: 'role', text: `Trick Room flips a speed race you lose (${Math.round(ourAvg)} vs ${Math.round(theirAvg)} on average)` }] });
     }
-    if (me.ability === 'intimidate') {
-      const physical = b.theirs.filter((o) => o.moves.some((m) => m.category === 'Physical' && m.basePower > 0));
+    // Intimidate triggers on switch-in, before a Mega Stone holder Mega Evolves.
+    if (switchInAbility(me) === 'intimidate') {
+      const physical = physicalAttackers(b.theirs);
       if (physical.length >= 2) {
         out.push({ key: 'role', value: 0.05 * physical.length, reasons: [{ kind: 'role', text: `Intimidate weakens ${physical.length} physical attackers` }] });
       }
@@ -371,7 +423,14 @@ function synergyProvider(b: Built): Provider {
       if (!e || e.delta === undefined) continue;
       const f = sampleFactor(e.n);
       if (f === 0) continue;
-      const reason: Reason = { kind: 'stat', text: `Pairs well with ${ally.name} in replays`, delta: e.delta, source: 'showdown-replays' };
+      const reason: Reason = isListableEdge(e)
+        ? {
+            kind: 'stat',
+            text: e.delta >= 0 ? `Wins more often when brought with ${ally.name} (replays)` : `Wins less often when brought with ${ally.name} (replays)`,
+            delta: e.delta,
+            source: 'showdown-replays',
+          }
+        : { kind: 'stat', text: `Replays show no clear result yet when brought with ${ally.name}`, source: 'showdown-replays' };
       if (e.n !== undefined) reason.n = e.n;
       // Spread over the allies: a partner only matters if both are brought.
       out.push({ key: 'synergy', value: (valueFromDelta(e.delta) * f) / Math.max(1, ctx.allies.length / 3), reasons: [reason] });
@@ -418,10 +477,16 @@ function pairSynergy(b: Built, x: PreviewMon, y: PreviewMon): number {
   return valueFromDelta(e.delta) * sampleFactor(e.n);
 }
 
-function leadBonus(x: PreviewMon, y: PreviewMon): { value: number; notes: string[] } {
+function leadBonus(x: PreviewMon, y: PreviewMon, theirs: readonly PreviewMon[]): { value: number; notes: string[] } {
   let value = 0;
   const notes: string[] = [];
   const pair = [x, y];
+  // Lead effects come from the ability a Pokémon enters with (a Mega Stone holder's registered one).
+  const intimidate = pair.filter((m) => switchInAbility(m) === 'intimidate');
+  if (intimidate.length && physicalAttackers(theirs).length >= 2) {
+    value += 0.1;
+    notes.push(`${intimidate[0]!.name}'s Intimidate lowers both foes' Attack as it comes in`);
+  }
   const fakeOut = pair.filter((m) => hasMove(m, 'fakeout'));
   if (fakeOut.length) {
     value += 0.25;
@@ -528,7 +593,7 @@ export function recommend(input: PreviewInput, preset: PreviewPresetId = 'balanc
     for (const [x, y] of combinations(bring, 2) as [string, string][]) {
       const mx = b.mine.get(x)!;
       const my = b.mine.get(y)!;
-      const bonus = leadBonus(mx, my);
+      const bonus = leadBonus(mx, my, input.theirs);
       const total = (raw.get(x) ?? 0) + (raw.get(y) ?? 0) + bonus.value + synergyWeight * pairSynergy(b, mx, my);
       if (!bestLead || total > bestLead.total + 1e-9) bestLead = { pair: [x, y], total, notes: bonus.notes };
     }

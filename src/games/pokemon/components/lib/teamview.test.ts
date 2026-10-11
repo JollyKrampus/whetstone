@@ -11,6 +11,7 @@ import {
   battleForme,
   damageTable,
   effectiveHits,
+  entryAbility,
   ladderPosition,
   metaByBase,
   metaToCalcMon,
@@ -19,6 +20,7 @@ import {
   previewTheirs,
   sampleTeam,
   setDisplayName,
+  setSpeed,
   setStats,
   setToCalcMon,
   speedLadder,
@@ -82,6 +84,30 @@ describe('team preview inputs', () => {
     expect(mon.assumed).toBeUndefined();
     expect(mon.moves.map((m) => m.id)).toEqual(['fakeout']);
     expect(mon.usage).toBe(0.47);
+  });
+
+  it('keeps the registered ability for switch-in effects next to the Mega ability', () => {
+    const mon = previewFromSet(dex, SALAMENCE, 'm0')!;
+    expect(mon.ability).toBe('aerilate');
+    expect(mon.entryAbility).toBe('intimidate');
+    expect(entryAbility(SALAMENCE)).toBe('intimidate');
+    // No stone: one ability, nothing extra to keep.
+    expect(previewFromSet(dex, { ...SALAMENCE, item: 'lifeorb' }, 'm0')!.entryAbility).toBeUndefined();
+  });
+
+  it('applies Choice Scarf to your Speed and to common sets that hold it', () => {
+    const scarfChomp: PokemonSet = { species: 'garchomp', item: 'choicescarf', ability: 'roughskin', nature: 'Jolly', sp: [2, 32, 0, 0, 0, 32], moves: ['earthquake'] };
+    expect(previewFromSet(dex, scarfChomp, 'm0')).toMatchObject({ speed: 253, speedItem: 'choicescarf' });
+    expect(setSpeed(dex, scarfChomp)).toBe(253);
+    expect(setSpeed(dex, { ...scarfChomp, item: 'lifeorb' })).toBe(169);
+    // Gholdengo's most used item in the fixture is Choice Scarf: Timid 32 Spe = 149, ×1.5 = 223.
+    const gholdengo = SETS.find((m) => m.id === 'gholdengo')!;
+    expect(gholdengo).toMatchObject({ speedStat: 149, speed: 223, speedItem: 'choicescarf', item: 'choicescarf' });
+    const theirs = previewTheirs(dex, { species: 'gholdengo', nature: 'Serious', sp: [0, 0, 0, 0, 0, 0], moves: [] }, 't0', byBase)!;
+    expect(theirs).toMatchObject({ speed: 223, speedItem: 'choicescarf', assumed: true });
+    const rilla = SETS.find((m) => m.id === 'rillaboom')!;
+    expect(rilla.speed).toBe(rilla.speedStat);
+    expect(rilla.speedItem).toBeUndefined();
   });
 
   it('falls back to types and uninvested speed without a common set', () => {
@@ -161,6 +187,17 @@ describe('speed ladder', () => {
     const tr = speedLadder(members, sets, { trickRoom: true });
     expect(tr[0]!.key).toBe('s1');
     expect(ladderPosition(tr, 's1', true)).toEqual({ before: 3, ties: 0, total: 3 });
+  });
+
+  it('chains your Choice Scarf with Tailwind and labels Scarf users on both sides', () => {
+    const scarf = [{ key: 's0', name: 'Garchomp', speed: 169, item: 'choicescarf' }];
+    const withScarf = [...sets, { id: 'g', name: 'Gholdengo', speed: 223, speedItem: 'choicescarf' }];
+    const plain = speedLadder(scarf, withScarf);
+    expect(plain.find((r) => r.key === 's0')).toMatchObject({ speed: 253, item: 'choicescarf' });
+    expect(plain.find((r) => r.key === 'meta-g')).toMatchObject({ speed: 223, item: 'choicescarf' });
+    expect(plain.find((r) => r.key === 'meta-x')!.item).toBeUndefined();
+    // ×1.5 and ×2 chain to ×3 with one rounding: 507, not 253 × 2 = 506.
+    expect(speedLadder(scarf, withScarf, { tailwind: true }).find((r) => r.key === 's0')!.speed).toBe(507);
   });
 });
 

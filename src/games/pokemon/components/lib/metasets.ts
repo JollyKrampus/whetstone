@@ -6,7 +6,7 @@
  */
 import type { Move, Nature, PokemonType, Species, UsageEntry } from '../../schema.ts';
 import { formeLabel } from './dex.ts';
-import { finalStats, type SpTuple } from './stats.ts';
+import { effectiveSpeed, finalStats, speedItemLabel, type SpTuple } from './stats.ts';
 import { emptySp } from './team.ts';
 
 export interface MetaSet {
@@ -31,7 +31,14 @@ export interface MetaSet {
   /** Most used damaging moves (≤ 4), for damage calcs. */
   attacks: string[];
   /** Speed stat of that spread at level 50. */
+  speedStat: number;
+  /**
+   * Speed in battle: the stat with the set's item applied (Choice Scarf ×1.5). Every speed
+   * comparison uses this one.
+   */
   speed: number;
+  /** The item behind `speed` when it changes Speed ('choicescarf'), for "195 (Scarf)" labels. */
+  speedItem?: string;
 }
 
 export interface MetaSetLookups {
@@ -49,6 +56,7 @@ export function metaSetFromUsage(row: UsageEntry, lookups: MetaSetLookups): Meta
   const attacks = known.filter((m) => lookups.move(m.id)?.category !== 'Status').slice(0, 4).map((m) => m.id);
   const item = species.megaOf && species.requiredItem ? species.requiredItem : row.items[0]?.id;
   const ability = row.abilities[0]?.id ?? species.abilities[0];
+  const speedStat = finalStats(species.base, sp, nature).spe;
   const set: MetaSet = {
     id: species.id,
     base: species.megaOf ?? species.id,
@@ -61,17 +69,22 @@ export function metaSetFromUsage(row: UsageEntry, lookups: MetaSetLookups): Meta
     spreadShare: spread?.share ?? 0,
     moves: known.slice(0, 4).map((m) => m.id),
     attacks,
-    speed: finalStats(species.base, sp, nature).spe,
+    speedStat,
+    speed: effectiveSpeed(speedStat, item),
   };
   if (item) set.item = item;
+  if (item && speedItemLabel(item)) set.speedItem = item;
   if (ability) set.ability = ability;
   return set;
 }
 
-/** The top `limit` usage rows as common sets (rows whose species is unknown are skipped). */
+/**
+ * The `limit` most used Pokémon (by usage rank, whatever order the rows come in) as common sets;
+ * rows whose species is unknown are skipped.
+ */
 export function metaSets(rows: readonly UsageEntry[], lookups: MetaSetLookups, limit = 50): MetaSet[] {
   const out: MetaSet[] = [];
-  for (const row of rows) {
+  for (const row of [...rows].sort((a, b) => a.rank - b.rank)) {
     if (out.length >= limit) break;
     const set = metaSetFromUsage(row, lookups);
     if (set) out.push(set);

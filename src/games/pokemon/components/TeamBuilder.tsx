@@ -15,7 +15,7 @@ import { CURRENT_KEY, deleteSaved, listSaved, pokemonStore, saveTeam, savedToTea
 import { decodeTeam, encodeTeam, teamHash } from './lib/share.ts';
 import { packTeam, unpackTeam, TEAM_SIZE, type PokemonSet, type Team } from './lib/team.ts';
 import { attackMoves } from './lib/types.ts';
-import { battleAbility, battleForme, metaToCalcMon, sampleTeam, setDisplayName, setStats, setToCalcMon, summarizeThreats } from './lib/teamview.ts';
+import { battleAbility, battleForme, metaToCalcMon, sampleTeam, setDisplayName, setSpeed, setStats, setToCalcMon, summarizeThreats } from './lib/teamview.ts';
 import { calcClient } from '../worker/client.ts';
 
 interface Props {
@@ -133,6 +133,7 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
       const stats = setStats(dex, set);
       if (!forme || !stats) return [];
       const m: PanelMember = { id: `s${i}`, name: setDisplayName(dex, set), types: forme.types, speed: stats.spe };
+      if (set.item) m.item = set.item;
       const ability = battleAbility(dex, set);
       if (ability) m.ability = ability;
       return [m];
@@ -155,7 +156,7 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
     if (!dex || settled.length === 0 || metaSets.length === 0) return null;
     const mine = settled.flatMap((set, i) =>
       dex.speciesById(set.species)
-        ? [{ key: `s${i}`, mon: setToCalcMon(dex, set), moves: set.moves.filter((m) => (dex.move(m)?.category ?? 'Status') !== 'Status'), speed: setStats(dex, set)?.spe ?? 0 }]
+        ? [{ key: `s${i}`, mon: setToCalcMon(dex, set), moves: set.moves.filter((m) => (dex.move(m)?.category ?? 'Status') !== 'Status'), speed: setSpeed(dex, set) ?? 0 }]
         : [],
     );
     return { mine, theirs: metaSets.map((m) => ({ key: m.id, mon: metaToCalcMon(m), moves: m.attacks })) };
