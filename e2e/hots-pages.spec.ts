@@ -230,7 +230,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       test.skip(STATS, 'theory build only');
       await page.goto('hots/hero/abathur/');
       const notice = page.locator('#counters [data-theory-notice]');
-      await expect(notice).toContainText('Scores come from mechanics and curated matchups until match statistics are enabled');
+      await expect(notice).toContainText('Scores come from mechanics and curated matchups, not from match statistics');
       await expect(notice.getByRole('link', { name: 'How theory scores work' })).toHaveAttribute('href', `${BASE}hots/about/#theory`);
       await expect(page.locator('#counters .mrow .badge', { hasText: 'Theory' }).first()).toBeVisible();
       await expect(page.locator('.mrow .badge', { hasText: 'Stats' })).toHaveCount(0);
