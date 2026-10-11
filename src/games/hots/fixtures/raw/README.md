@@ -19,7 +19,7 @@ upstream responses recorded on 2026-10-08, trimmed to stay small:
 | `liquipedia/recentchanges.json` | Liquipedia MediaWiki API | an empty change list, so a second offline run takes the incremental path |
 
 Game data and patch notes are © Blizzard Entertainment. Liquipedia content is CC-BY-SA 3.0
-(https://liquipedia.net/heroes/). Nothing from Heroes Profile is ever recorded here.
+(https://liquipedia.net/heroes/). No licensed or third-party match statistics are ever recorded here.
 
 To refresh a fixture, run the pipeline with `WHETSTONE_RECORD=1` against the live sources into a
 scratch directory, then trim the recorded file the same way before committing it.

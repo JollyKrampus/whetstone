@@ -15,7 +15,6 @@ export const SOURCE_IDS = [
   'blizzard-news',
   'nexus-compendium',
   'liquipedia',
-  'heroesprofile',
   'youtube',
   'twitch',
 ] as const;

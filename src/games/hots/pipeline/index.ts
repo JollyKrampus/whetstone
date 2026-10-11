@@ -7,12 +7,14 @@
  * fallback and status, validate.ts checks the outputs. Order:
  *
  *   builds (TACT + heroes-data2 .version.json)
- *   → heroes-data2 (heroes, models, diffs)        → blizzard-news (patches, diff dates, major start)
- *   → heroesprofile (gated, class B)              → maps (ranked pool from HP shares or curated)
+ *   → heroes-data2 (heroes, models, diffs) → maps (ranked pool from curated/hots/ranked-pool.yaml)
+ *   → blizzard-news (patch summaries, diff dates, major start)
  *   → theory hook (mechanics, theory.json)        → heroes-images (img/** when the set changed)
  *   → nexus-compendium (rotation) → liquipedia (pro.json A-SA, hero pages) → links
- *   → youtube (gated, class C) → twitch (disabled in v0.1) → draft shard (+ class-B overlay)
- *   → meta + validation.
+ *   → youtube (gated, class C) → twitch (disabled) → draft shard (class A) → meta + validation.
+ *
+ * Every output is first-party or openly licensed data plus our own analysis: there is no licensed
+ * (class B) source, so the pipeline writes no stats.json and no draft-shard stats overlay.
  *
  * Every source can fail on its own: its last-good files are re-emitted from ctx.previous() and
  * its status becomes 'stale' with a warning. Only a missing heroes.json (no release and no
@@ -24,7 +26,6 @@ import { loadPipelineCurated, type PipelineCurated } from './curated.ts';
 import { detectBuilds, majorBuilds } from './steps/builds.ts';
 import { createEnv, orderedStatuses, previousFile, setStatus, type RunEnv } from './steps/common.ts';
 import { runHeroesData } from './steps/heroesData.ts';
-import { runHeroesProfile, type HeroesProfileDeps } from './steps/heroesprofile.ts';
 import { runImages } from './steps/images.ts';
 import { runLiquipedia } from './steps/liquipedia.ts';
 import { runNews } from './steps/news.ts';
@@ -33,17 +34,14 @@ import { runYoutube } from './steps/youtube.ts';
 import { runTheory, type TheoryLoader } from './theoryHook.ts';
 import { buildDraftShard } from './transform/draft.ts';
 import { buildLinks } from './transform/links.ts';
-import { buildMaps } from './transform/maps.ts';
+import { buildMaps, withCuratedPool } from './transform/maps.ts';
 import { hotsCounts, majorSince } from './transform/meta.ts';
-import { buildDraftStatsBlock } from './transform/stats.ts';
 import { crossCheck, validateHots, validateMeta } from './validate.ts';
 import { error, errorMessage, majorOf } from './util.ts';
 
 export interface HotsPipelineDeps {
   /** Theory engine loader (tests inject a stub; default imports ../theory/index.ts). */
   theory?: TheoryLoader;
-  /** Heroes Profile transport and sleep (tests). */
-  heroesprofile?: HeroesProfileDeps;
   /** Curated inputs (tests); default reads curated/hots/*.yaml under ctx.root. */
   curated?: PipelineCurated;
 }
@@ -88,10 +86,10 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
   }
   const major = majorOf(builds.live);
 
-  // Maps without HP shares first (patch notes only need names); last-good maps in fallback.
-  const baseMaps = hd.mapdata ? buildMaps(hd.mapdata, curated.maps, curated.rankedPool, null) : null;
+  // Maps with the curated Storm League pool; last-good maps (pool re-applied) in fallback.
+  const baseMaps = hd.mapdata ? buildMaps(hd.mapdata, curated.maps, curated.rankedPool) : null;
   if (baseMaps) env.issues.push(...baseMaps.issues);
-  let maps: GameMap[] = baseMaps?.maps ?? hd.previousMaps ?? [];
+  const maps: GameMap[] = baseMaps?.maps ?? withCuratedPool(hd.previousMaps ?? [], curated.rankedPool);
 
   // Patch notes (+ diffs dated by them).
   const news = await runNews(env, { heroes: hd.heroes, maps, diffs: hd.diffs, buildDates: hd.buildDates, major, curated });
@@ -102,11 +100,8 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
     previous: env.prevMeta ? { major: env.prevMeta.extra.major, majorSince: env.prevMeta.extra.majorSince } : null,
     today: env.today,
   });
-  const liveBuilds = majorBuilds(builds.versions, builds.live);
-
-  // Heroes Profile (gated): stats and the ranked map pool.
-  const hp = await runHeroesProfile(env, { heroes: hd.heroes, maps, major, majorSince: since, versions: builds.versions, liveBuilds }, deps.heroesprofile);
-  if (hd.mapdata && hp.shares && hp.shares.size > 0) maps = buildMaps(hd.mapdata, curated.maps, curated.rankedPool, hp.shares).maps;
+  // Without .version.json (heroes-data2 down or not selected) the major's builds come from last-good.
+  const liveBuilds = majorBuilds(builds.versions.length > 0 ? builds.versions : (env.prevMeta?.extra.builds ?? []), builds.live);
 
   // Theory: mechanics for every hero record, theory.json for draftable entities.
   const prevHeroes = await previousFile(env, 'heroes.json', HeroesFileSchema);
@@ -131,7 +126,7 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
   const videos = await runYoutube(env, { heroes: hd.heroes, maps, curated });
   setStatus(env, 'twitch', 'disabled', 'live streams are linked out in v0.1; no Twitch data is fetched');
 
-  // Draft shard (class A) and its class-B stats overlay.
+  // Draft shard (class A).
   const shard = buildDraftShard({ build: builds.live, major, heroes, maps, theory: theory.theory });
 
   const files: OutputFile[] = [
@@ -146,10 +141,6 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
   ];
   if (rotation) files.push(file('rotation.json', rotation));
   if (lp.pro) files.push(file('pro.json', lp.pro, 'A-SA'));
-  if (hp.stats?.modes.sl) {
-    files.push(file('stats.json', hp.stats, 'B'));
-    files.push(file('public/draft.json', { stats: buildDraftStatsBlock(shard, hp.stats.modes.sl.current) }, 'B'));
-  }
   if (videos) files.push(file('videos.json', videos, 'C'));
 
   const counts = hotsCounts({ heroes, mapCount: maps.length, patches: news.patches, pro: lp.pro, theory: theory.theory });
@@ -159,7 +150,6 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
     major,
     majorSince: since,
     builds: liveBuilds,
-    hpMode: ctx.secrets.HP_MODE === 'on' ? 'on' : 'off',
     buildSeenAt: builds.buildSeenAt,
   };
   if (builds.ptr) extra.ptrBuild = builds.ptr;

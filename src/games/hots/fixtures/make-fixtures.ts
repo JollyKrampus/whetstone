@@ -11,8 +11,9 @@
  * to keep the fixtures small (pages draw placeholders through hasAsset).
  *
  * Stays synthetic and is only re-keyed: pro.json (Liquipedia-derived data is CC BY-SA, so the
- * repository ships made-up numbers) and fixtures/hots/_private/** (Heroes Profile, YouTube and
- * Twitch samples). The draft shard and its synthetic stats overlay are rebuilt from the result.
+ * repository ships made-up numbers) and fixtures/hots/_private/** (synthetic statistics, YouTube
+ * and Twitch samples for the site's statistics mode). The draft shard and its synthetic stats
+ * overlay are rebuilt from the result.
  * Every file is checked against its schema before anything is written.
  */
 import { createHash } from 'node:crypto';
@@ -99,9 +100,10 @@ function main(): void {
   const links = read<Links>(src, 'links.json');
   const fixtureLinks: Links = { ...links, heroes: Object.fromEntries(Object.entries(links.heroes).filter(([id]) => heroIds.has(id))) };
 
-  const rotation = read<Rotation>(src, 'rotation.json');
+  const { lagging: _lagging, ...rotation } = read<Rotation>(src, 'rotation.json');
   // Keep the fixture rotation current even when the live one was fetched after its window ended
-  // (rotationIsStale): the stale path has its own unit test, and fixtures should show free heroes.
+  // or is flagged `lagging` (the run came on the switch day): the stale paths have their own unit
+  // tests, and fixtures should show free heroes.
   const fetchedAt = rotation.fetchedAt.slice(0, 10) > rotation.end ? `${rotation.end}T12:00:00.000Z` : rotation.fetchedAt;
   const fixtureRotation: Rotation = { ...rotation, fetchedAt, heroes: rotation.heroes.filter((id) => heroIds.has(id)) };
 
@@ -146,7 +148,7 @@ function main(): void {
   };
   files['meta.json'] = meta;
 
-  // The synthetic Heroes Profile sample keeps its numbers; its talent builds are re-pointed at real
+  // The synthetic statistics sample keeps its numbers; its talent builds are re-pointed at real
   // talent ids (deterministically: build k takes the (k + level)-th talent of each tier), and its
   // overlay follows the new shard order.
   const stats = parseData(StatsSchema, read(OUT, '_private/stats.json'), 'fixtures/hots/_private/stats.json');
@@ -171,7 +173,7 @@ function main(): void {
   parseData(StatsSchema, stats, 'fixtures/hots/_private/stats.json');
   const window = stats.modes.sl?.current;
   if (!window) throw new Error('fixtures/hots/_private/stats.json has no sl/current window');
-  const overlay = { stats: statsBlockFromWindow(window, shard, { mode: 'sl', timeframe: 'current', synthetic: true }) };
+  const overlay = { stats: { ...statsBlockFromWindow(window, shard, { mode: 'sl', timeframe: 'current', synthetic: true }), source: stats.source } };
 
   for (const [rel, value] of Object.entries(files)) {
     const entry = HOTS_FILES[rel as keyof typeof HOTS_FILES];

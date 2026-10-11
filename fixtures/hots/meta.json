@@ -8,7 +8,7 @@
     "theoryCounters": 94,
     "theorySynergies": 50
   },
-  "dataHash": "21f56f6f14ab7367",
+  "dataHash": "101d12a1a28de2d3",
   "extra": {
     "assetsTag": "v2.57.0.98285",
     "build": "2.57.0.98348",
@@ -19,7 +19,6 @@
       "2.57.0.98285"
     ],
     "dataBuild": "2.57.0.98348",
-    "hpMode": "off",
     "major": "2.57",
     "majorSince": "2026-09-28"
   },
@@ -61,12 +60,6 @@
       "fetchedAt": "2026-10-09T05:31:20.090Z",
       "id": "liquipedia",
       "status": "ok"
-    },
-    {
-      "detail": "HP_MODE=off",
-      "fetchedAt": null,
-      "id": "heroesprofile",
-      "status": "disabled"
     },
     {
       "detail": "YT_API_KEY not set",

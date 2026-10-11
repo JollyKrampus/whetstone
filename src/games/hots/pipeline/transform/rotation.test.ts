@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { RotationSchema } from '../../schema.ts';
 import { rawJson } from '../test-helpers.ts';
 import { searchKey } from '../util.ts';
-import { buildRotation, stableRotation } from './rotation.ts';
+import { buildRotation, markLagging, stableRotation } from './rotation.ts';
 
 const raw = rawJson<{ RotationHero: { Heroes: { Name: string }[]; StartDate: string; EndDate: string } }>('nexus-compendium/currently.json');
 /** Index of every hero the recorded rotation names, as the real roster would provide. */
@@ -31,6 +31,24 @@ describe('buildRotation', () => {
 
   it('rejects responses without a rotation', () => {
     expect(() => buildRotation({}, index, '2026-10-08T10:20:00.000Z', '2026-10-08')).toThrow(/RotationHero/);
+  });
+
+  it('flags last week on the switch day although its content and "as of" time did not change (two daily runs)', () => {
+    // Run 1, inside the window (2026-10-01..2026-10-08): current.
+    const day1 = markLagging(stableRotation(buildRotation(raw, index, '2026-10-07T10:20:00.000Z', '2026-10-07').rotation, null), '2026-10-07');
+    expect(day1.lagging).toBeUndefined();
+    // Run 2, after the switch: the source still reports the same week, so the content-stable
+    // fetchedAt stays inside the old window and cannot reveal it; the flag does.
+    const day2 = markLagging(stableRotation(buildRotation(raw, index, '2026-10-09T10:20:00.000Z', '2026-10-09').rotation, day1), '2026-10-09');
+    expect(day2.fetchedAt).toBe(day1.fetchedAt);
+    expect(day2.end < day2.fetchedAt.slice(0, 10)).toBe(false);
+    expect(day2.lagging).toBe(true);
+    expect(RotationSchema.safeParse(day2).success).toBe(true);
+    // Run 3, the source has switched: a new window, no flag.
+    const next = { ...raw, RotationHero: { ...raw.RotationHero, StartDate: '2026-10-08', EndDate: '2026-10-15' } };
+    const day3 = markLagging(stableRotation(buildRotation(next, index, '2026-10-10T10:20:00.000Z', '2026-10-10').rotation, day2), '2026-10-10');
+    expect(day3.lagging).toBeUndefined();
+    expect(day3.fetchedAt).toBe('2026-10-10T10:20:00.000Z');
   });
 
   it('keeps the previous "as of" time when nothing changed', () => {

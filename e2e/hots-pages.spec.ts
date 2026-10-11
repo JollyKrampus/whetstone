@@ -467,7 +467,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(method.getByRole('heading', { name: /Counters and synergies/ })).toBeVisible();
       await expect(method).not.toContainText('Pokémon Champions');
       await expect(page.locator('#status')).toContainText(STATS ? 'Statistics on' : 'Theory only');
-      await expect(page.locator('#sources [data-source="heroesprofile"]')).toBeVisible();
+      await expect(page.locator('#sources [data-source="heroesprofile"]')).toHaveCount(0);
       await expect(page.locator('#sources [data-source="liquipedia"]')).toContainText('CC-BY-SA 3.0');
     });
   });

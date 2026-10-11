@@ -6,15 +6,16 @@
  *     Records are matched oldest first and each build is used once (assignBuilds).
  *  2. version (major): from the build, else from the newest known build published by then,
  *     else from the oldest known build (articles older than every known build).
- *  3. Diffs: a record whose build is a diff's `to` gains (a) "game data" numbers on lines that
- *     name a changed ability/talent but carry no numbers and (b) lines for heroes the article
- *     does not mention (section "Game data"). A diff no article matches becomes its own
- *     "undocumented update" record.
+ *  3. Diffs: a record whose build is a diff's `to` gains (a) "game data" numbers on qualitative
+ *     changes of a changed ability/talent and (b) changes for heroes the article does not mention
+ *     (section "Game data"). A diff no article matches becomes its own "undocumented update"
+ *     record. Every line here is our own, built from the game data.
  *  4. Ids `<date>-<kind>[-n]`, newest first.
  */
 import type { Diff, DiffEntry, Patch } from '../../schema.ts';
 import { addDays, compareBuilds, compareStrings, hash16, isPtrBuild, majorOf } from '../util.ts';
 import { verdictOf, type ParsedPatch, type PatchChange, type PatchHero } from './patches.ts';
+import { changeText, type ChangeFacts } from './summary.ts';
 
 export interface BuildDate {
   build: string;
@@ -92,36 +93,58 @@ function capitalise(s: string): string {
 /** Section of every line derived from game data (never from article text). */
 export const GAME_DATA_SECTION = 'Game data';
 
+/** Numeric facts of a diff entry when both values are numbers ("60 Mana" → 60, "125%" → 125 %). */
+export function diffFacts(e: DiffEntry): ChangeFacts | null {
+  if (e.kind !== 'stat' && e.kind !== 'ability' && e.kind !== 'talent') return null;
+  if (e.field === 'text') return null;
+  const o = numberOf(e.old);
+  const n = numberOf(e.new);
+  if (o === null || n === null || e.old === undefined || e.new === undefined) return null;
+  const facts: ChangeFacts = { kind: 'numeric', stat: e.kind === 'stat' ? e.target : capitalise(e.field ?? 'value'), old: o, new: n };
+  if (/%/.test(`${e.old}${e.new}`)) facts.unit = '%';
+  return facts;
+}
+
 /** One short line of our own for a diff entry. */
 export function diffLine(e: DiffEntry): PatchChange {
-  const base = (text: string): PatchChange => {
-    const c: PatchChange = { section: GAME_DATA_SECTION, text };
+  const base = (kind: PatchChange['kind'], text: string, facts?: ChangeFacts): PatchChange => {
+    const c: PatchChange = { section: GAME_DATA_SECTION, kind, text };
     if (e.kind !== 'stat') c.target = e.target;
     if (e.level) c.level = e.level;
+    if (facts) {
+      c.stat = facts.stat as string;
+      c.old = facts.old as number;
+      c.new = facts.new as number;
+      if (facts.unit) c.unit = facts.unit;
+    }
     const dir = diffDirection(e);
     if (dir) c.dir = dir;
     return c;
   };
   switch (e.kind) {
-    case 'stat':
-      return base(`${e.target} ${fmt(e.old)} → ${fmt(e.new)}.`);
     case 'ability-added':
-      return base('New ability.');
+      return base('added', 'New ability.');
     case 'ability-removed':
-      return base('Ability removed.');
+      return base('removed', 'Ability removed.');
     case 'talent-added':
-      return base(`New level ${e.level ?? '?'} talent.`);
+      return base('added', `New level ${e.level ?? '?'} talent.`);
     case 'talent-removed':
-      return base('Talent removed.');
+      return base('removed', 'Talent removed.');
     case 'talent-moved':
-      return base(`Moved from level ${fmt(e.old)} to level ${fmt(e.new)}.`);
-    default:
-      if (e.field === 'text') return base('Tooltip text changed.');
-      return base(`${capitalise(e.field ?? 'value')} ${fmt(e.old)} → ${fmt(e.new)}.`);
+      return base('changed', `Moved from level ${fmt(e.old)} to level ${fmt(e.new)}.`);
+    default: {
+      if (e.field === 'text') return base('changed', 'Tooltip text changed.');
+      const facts = diffFacts(e);
+      if (facts) return base('numeric', changeText(facts), facts);
+      return base('changed', `${e.kind === 'stat' ? e.target : capitalise(e.field ?? 'value')} ${fmt(e.old)} → ${fmt(e.new)}`);
+    }
   }
 }
 
-/** Adds diff numbers and silent hero changes to a record (mutates a copy). */
+/** Marks a qualitative change that already carries game-data numbers. */
+const GAME_DATA_MARK = '; game data: ';
+
+/** Adds diff numbers and silent hero changes to a record (works on a copy; idempotent). */
 export function enrichWithDiff(rec: Patch, diff: Diff, newHeroes: ReadonlySet<string>): Patch {
   const heroes: Record<string, PatchHero> = {};
   for (const [id, h] of Object.entries(rec.heroes)) heroes[id] = { ...h, changes: h.changes.map((c) => ({ ...c })) };
@@ -130,12 +153,17 @@ export function enrichWithDiff(rec: Patch, diff: Diff, newHeroes: ReadonlySet<st
     const existing = heroes[id];
     if (existing) {
       for (const c of existing.changes) {
-        if (!c.target || /\d/.test(c.text)) continue;
-        const nums = entries.filter((e) => e.target.toLowerCase() === c.target?.toLowerCase() && e.field !== 'text' && e.old !== undefined && e.new !== undefined).slice(0, 2);
+        if (!c.target || c.kind === 'numeric' || c.text.includes(GAME_DATA_MARK)) continue;
+        const target = c.target.toLowerCase();
+        // Numbers a numeric change about the same target already shows are not repeated.
+        const shown = new Set(existing.changes.filter((n) => n.kind === 'numeric' && n.target?.toLowerCase() === target && n.old !== undefined).map((n) => `${n.old}|${n.new}`));
+        const nums = entries
+          .filter((e) => e.target.toLowerCase() === target && e.field !== 'text' && e.old !== undefined && e.new !== undefined && !shown.has(`${numberOf(e.old)}|${numberOf(e.new)}`))
+          .slice(0, 2);
         if (nums.length === 0) continue;
         const extra = nums.map((e) => `${e.field ?? 'value'} ${fmt(e.old)} → ${fmt(e.new)}`).join('; ');
-        const text = `${c.text.replace(/\.$/, '')} (game data: ${extra}).`;
-        if (text.length <= 400) c.text = text;
+        const text = changeText(c, extra);
+        if (text.length <= 160) c.text = text;
       }
       continue;
     }
@@ -159,6 +187,7 @@ function silentRecord(diff: Diff, date: string): Omit<Patch, 'id'> {
     url: `https://github.com/HeroesToolChest/heroes-data2/releases/tag/v${diff.to}`,
     kind: 'hotfix',
     contentHash: hash16(JSON.stringify(diff.heroes)),
+    notes: 'summary',
     general: [],
     heroes,
   };

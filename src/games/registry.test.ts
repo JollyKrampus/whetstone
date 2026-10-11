@@ -102,8 +102,8 @@ describe('registry', () => {
   });
 
   it('declares attribution the way each source requires', () => {
-    const hp = sourcesFor('hots', ['heroesprofile'])[0];
-    expect(hp).toMatchObject({ rule: 'inline', custody: 'B', attribution: 'Data provided by Heroes Profile' });
+    // Heroes Profile was removed as a source (2026-10-10).
+    expect(sourcesFor('hots', ['heroesprofile'])).toEqual([]);
     expect(sourcesFor('hots', ['liquipedia'])[0]).toMatchObject({ custody: 'A-SA', license: 'CC-BY-SA 3.0' });
     expect(sourcesFor('mtga', ['17lands'])[0]).toMatchObject({ rule: 'top', license: 'CC BY 4.0' });
     expect(sourcesFor('mtga', ['scryfall'])[0]?.attribution).toBe('Card data and images courtesy of Scryfall');

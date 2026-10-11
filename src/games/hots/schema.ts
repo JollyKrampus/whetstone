@@ -143,9 +143,23 @@ function sortedBy<T>(key: (x: T) => string, what: string) {
   };
 }
 
+/**
+ * Accepts last-good files written before Heroes Profile was removed as a source (2026-10-10):
+ * drops keys only it used, so a data branch that still holds them parses (and the next run
+ * rewrites them). The output type never has them and the pipeline never writes them.
+ */
+function dropLegacyKeys<T extends z.ZodType>(schema: T, keys: readonly string[]) {
+  return z.preprocess((value: unknown) => {
+    if (typeof value !== 'object' || value === null || Array.isArray(value) || !keys.some((k) => k in value)) return value;
+    const copy: Record<string, unknown> = { ...(value as Record<string, unknown>) };
+    for (const k of keys) delete copy[k];
+    return copy;
+  }, schema);
+}
+
 // ---- meta.json -------------------------------------------------------------------------
 
-export const HotsMetaExtraSchema = z.strictObject({
+const HotsMetaExtraObject = z.strictObject({
   /** Live build (TACT). */
   build: BuildSchema,
   /** heroes-data2 build the hero data was generated from; differs from `build` while data lags. */
@@ -157,13 +171,13 @@ export const HotsMetaExtraSchema = z.strictObject({
   builds: z.array(BuildSchema).min(1),
   /** heroes-images tag the vendored images come from. */
   assetsTag: z.string().min(1).exactOptional(),
-  /** HP_MODE at generation time; stats exist only when 'on'. */
-  hpMode: z.enum(['on', 'off']),
   /** When the pipeline first saw the current live `build` on the version server. */
   buildSeenAt: IsoDateTime.exactOptional(),
   /** heroes-data2 has lagged the live build for more than 48 hours: hero data is from `dataBuild`. */
   dataPending: z.boolean().exactOptional(),
 });
+/** meta.json `extra`. A legacy `hpMode` (Heroes Profile switch, removed) is dropped on read. */
+export const HotsMetaExtraSchema = dropLegacyKeys(HotsMetaExtraObject, ['hpMode']);
 export const HotsMetaSchema = gameMetaSchema('hots', HotsMetaExtraSchema);
 export type HotsMeta = z.infer<typeof HotsMetaSchema>;
 
@@ -192,7 +206,7 @@ export type Ability = z.infer<typeof AbilitySchema>;
 export const TalentAbilitySchema = z.enum(['Q', 'W', 'E', 'R', 'D', 'Z', 'Active', 'Passive']);
 
 export const TalentSchema = z.strictObject({
-  /** heroes-data2 talentId == HP talent_name (join key for talent stats). */
+  /** heroes-data2 talentId (also the key talent builds refer to). */
   id: z.string().min(1),
   name: z.string().min(1),
   text: z.string().min(1),
@@ -259,12 +273,10 @@ export const HeroSchema = z
     /** Member only: id of the composite it belongs to. */
     memberOf: HeroSlugSchema.exactOptional(),
     mechanics: z.array(MechanicSchema),
-    /** Last build whose data diff touched this hero (derived, never from HP). */
+    /** Last build whose data diff touched this hero (derived from the game-data diffs). */
     lastChangedBuild: BuildSchema.exactOptional(),
     /** Released within the "new hero" window; drives the badge and "early data" labels. */
     isNew: z.boolean(),
-    /** Heroes Profile numeric id (join key for HP stats). */
-    hpId: z.number().int().positive().exactOptional(),
     /** heroes-data2 item key (`Wizard` for Li-Ming). */
     hdpId: z.string().min(1).exactOptional(),
     /** Large draft-screen portrait (180×212), e.g. for hero page headers; `portrait` is the 128×128 pick button. */
@@ -313,28 +325,24 @@ export const MapProfileSchema = z.strictObject({
   tags: z.array(MapTagSchema),
 });
 
-export const HpMapRefSchema = z.strictObject({
-  /** Heroes Profile map_id. */
-  id: z.number().int().positive(),
-  /** Heroes Profile map `name` (stats with group_by_map are keyed by it). */
-  name: z.string().min(1),
-});
-
 export const MapSchema = z.strictObject({
   id: MapSlugSchema,
   name: z.string().min(1),
   kind: MapKindSchema,
   /** In the current Storm League pool. */
   ranked: z.boolean(),
-  /** How `ranked` was decided: HP map-level game share (≥ 1.5 %) or curated/hots/ranked-pool.yaml. */
+  /**
+   * How `ranked` was decided. The pipeline always writes 'curated' (curated/hots/ranked-pool.yaml);
+   * 'stats' is kept only so readers of older files and a future measured pool still type-check.
+   */
   rankedSource: z.enum(['stats', 'curated']),
   image: DataPath,
   profile: MapProfileSchema,
-  hp: HpMapRefSchema.exactOptional(),
 });
 export type GameMap = z.infer<typeof MapSchema>;
 
-export const MapsFileSchema = z.array(MapSchema).superRefine((list, ctx) => {
+/** maps.json. A legacy `hp` key (Heroes Profile map ref, removed) is dropped on read. */
+export const MapsFileSchema = z.array(dropLegacyKeys(MapSchema, ['hp'])).superRefine((list, ctx) => {
   checkUnique(ctx, list.map((m) => m.id), 'map id');
   sortedBy<GameMap>((m) => m.id, 'maps (by id)')(list, ctx);
 });
@@ -343,21 +351,96 @@ export const MapsFileSchema = z.array(MapSchema).superRefine((list, ctx) => {
 
 export const ChangeDirSchema = z.enum(['buff', 'nerf', 'change', 'rework']);
 
-export const PatchChangeSchema = z.strictObject({
-  /** Article sub-heading: 'Base', 'Abilities', 'Talents', 'Level 13', 'New Hero'... */
-  section: z.string().min(1),
-  /** Ability or talent the line is about (bold name in the notes). */
-  target: z.string().min(1).exactOptional(),
-  level: TalentTierSchema.exactOptional(),
-  /** Short factual change line (numbers, old → new); never article prose. */
-  text: z.string().min(1).max(400),
-  dir: ChangeDirSchema.exactOptional(),
-});
+/**
+ * What a change does, in our own terms: `numeric` carries the value's label and its numbers;
+ * the rest are qualitative and never carry Blizzard's wording.
+ */
+export const ChangeKindSchema = z.enum(['numeric', 'added', 'removed', 'reworked', 'changed', 'bugfix']);
+/** Units we keep with numbers: percent and seconds. */
+export const ChangeUnitSchema = z.enum(['%', 's']);
+
+/**
+ * One change of one hero, as our own structured summary (never the sentence from the notes).
+ * `text` is a template sentence generated from the other fields, e.g. "Damage 345 → 360",
+ * "Cooldown 12 s → 10 s", "Effect changed (see Blizzard's notes)".
+ */
+export const PatchChangeSchema = z
+  .strictObject({
+    /** Our section label: 'Base', 'Abilities', 'Talents', 'Level 13', 'New Hero', 'Game data'... */
+    section: z.string().min(1).max(40),
+    /** Ability or talent the change is about (its name in the game data). */
+    target: z.string().min(1).max(60).exactOptional(),
+    level: TalentTierSchema.exactOptional(),
+    kind: ChangeKindSchema,
+    /** numeric: short label of the value ('Damage', 'Cooldown', 'Health decay reduction'). */
+    stat: z.string().min(1).max(48).exactOptional(),
+    old: z.number().exactOptional(),
+    new: z.number().exactOptional(),
+    /** numeric without an old value: the signed amount ("reduced by 20%" → -20). */
+    by: z.number().exactOptional(),
+    unit: ChangeUnitSchema.exactOptional(),
+    /** Qualitative lines of one kind about the same target, counted instead of listed. */
+    count: z.number().int().min(2).exactOptional(),
+    /** Our template sentence for the fields above. */
+    text: z.string().min(1).max(160),
+    dir: ChangeDirSchema.exactOptional(),
+  })
+  .superRefine((c, ctx) => {
+    const numbers = c.stat !== undefined || c.old !== undefined || c.new !== undefined || c.by !== undefined || c.unit !== undefined;
+    if (c.kind === 'numeric') {
+      const pair = c.old !== undefined && c.new !== undefined;
+      if (c.stat === undefined || pair === (c.by !== undefined)) {
+        ctx.addIssue({ code: 'custom', message: 'a numeric change needs stat and either old and new, or by' });
+      }
+      if (c.count !== undefined) ctx.addIssue({ code: 'custom', message: 'numeric changes are not counted', path: ['count'] });
+    } else if (numbers) {
+      ctx.addIssue({ code: 'custom', message: `a ${c.kind} change carries no stat, numbers or unit` });
+    }
+  });
 
 export const PatchHeroSchema = z.strictObject({
   verdict: z.enum(['buff', 'nerf', 'mixed', 'rework', 'new', 'change']).exactOptional(),
   changes: z.array(PatchChangeSchema).min(1),
 });
+
+/** Template of a qualitative line converted from a file written before summaries existed. */
+const LEGACY_LINE = "Effect changed (see Blizzard's notes)";
+/** Sections whose lines were always our own words, also in old files. */
+const OWN_SECTIONS = new Set(['New Hero', 'Game data']);
+
+/**
+ * patches.json written before 2026-10-10 stored Blizzard's change sentences. Such a record (it
+ * has no `notes`) is reduced on read to counts and our own lines, so the site never shows those
+ * sentences and a not-yet-refreshed data directory still builds. The pipeline migrates old
+ * records itself, keeping their numbers (transform/patches.ts migrateLegacyPatches).
+ */
+function legacyPatch(value: unknown): unknown {
+  if (typeof value !== 'object' || value === null || Array.isArray(value) || 'notes' in value) return value;
+  const rec = value as Record<string, unknown>;
+  const count = (n: number): string => `${n} ${n === 1 ? 'change' : 'changes'}`;
+  const general = Array.isArray(rec.general) && rec.general.length > 0 ? [`General: ${count(rec.general.length)}`] : [];
+  const maps =
+    typeof rec.maps === 'object' && rec.maps !== null
+      ? Object.fromEntries(Object.entries(rec.maps).map(([slug, lines]) => [slug, [`${count(Array.isArray(lines) ? lines.length : 0)} (see Blizzard's notes)`]]))
+      : rec.maps;
+  const heroes =
+    typeof rec.heroes === 'object' && rec.heroes !== null
+      ? Object.fromEntries(
+          Object.entries(rec.heroes).map(([id, h]) => {
+            const hero = (typeof h === 'object' && h !== null ? h : {}) as { changes?: unknown };
+            const changes = (Array.isArray(hero.changes) ? hero.changes : []).map((c: unknown) => {
+              const ch = (typeof c === 'object' && c !== null ? c : {}) as Record<string, unknown>;
+              const own = OWN_SECTIONS.has(String(ch.section)) || ch.text === 'Full rework: new base abilities and talent tree.';
+              const kind = ch.dir === 'rework' ? 'reworked' : ch.section === 'New Hero' ? 'added' : 'changed';
+              const { text: _text, ...rest } = ch;
+              return { ...rest, kind, text: own ? ch.text : kind === 'reworked' ? "Reworked (see Blizzard's notes)" : LEGACY_LINE };
+            });
+            return [id, { ...hero, changes }];
+          }),
+        )
+      : rec.heroes;
+  return { ...rec, notes: 'summary', general, ...(maps === undefined ? {} : { maps }), heroes };
+}
 
 export const PatchSchema = z.strictObject({
   /** `<date>-<kind>[-n]`, e.g. `2026-09-28-patch`, `2026-10-05-hotfix`. Used in /hots/patches/[id]/. */
@@ -370,16 +453,23 @@ export const PatchSchema = z.strictObject({
   kind: z.enum(['patch', 'balance', 'hotfix', 'ptr']),
   /** Hash of the article section this record was parsed from (hotfixes append silently). */
   contentHash: z.string().regex(/^[0-9a-f]{16,64}$/),
-  general: z.array(z.string().min(1)),
-  maps: z.record(MapSlugSchema, z.array(z.string().min(1)).min(1)).exactOptional(),
+  /**
+   * How the lines were written: 'summary' = our own structured summaries (this schema). Records
+   * without it predate the summaries and are converted on read (legacyPatch).
+   */
+  notes: z.literal('summary'),
+  /** General (system) changes as our category counts, e.g. "Interface and audio: 2 changes". */
+  general: z.array(z.string().min(1).max(80)),
+  /** Per map: numeric changes as templates, then a count of the other changes. */
+  maps: z.record(MapSlugSchema, z.array(z.string().min(1).max(120)).min(1)).exactOptional(),
   /** Keyed by hero id (members, not composites: notes list Cho and Gall separately). */
   heroes: z.record(AttributeIdSchema, PatchHeroSchema),
   newHeroes: z.array(AttributeIdSchema).exactOptional(),
 });
 export type Patch = z.infer<typeof PatchSchema>;
 
-/** Newest first (date desc, then id desc). */
-export const PatchesFileSchema = z.array(PatchSchema).superRefine((list, ctx) => {
+/** Newest first (date desc, then id desc). Records from before the summaries are converted on read. */
+export const PatchesFileSchema = z.array(z.preprocess(legacyPatch, PatchSchema)).superRefine((list, ctx) => {
   checkUnique(ctx, list.map((p) => p.id), 'patch id');
   for (let i = 1; i < list.length; i++) {
     const a = list[i - 1] as Patch;
@@ -460,18 +550,36 @@ export type Theory = z.infer<typeof TheorySchema>;
 // ---- links.json ------------------------------------------------------------------------
 
 export const LinkSchema = z.strictObject({
-  site: z.enum(['icy-veins', 'psionic-storm', 'nexus-compendium', 'heroesprofile', 'liquipedia', 'fandom', 'blizzard', 'youtube', 'twitch']),
+  site: z.enum(['icy-veins', 'psionic-storm', 'nexus-compendium', 'liquipedia', 'fandom', 'blizzard', 'youtube', 'twitch']),
   kind: z.enum(['guide', 'talents', 'calculator', 'matchups', 'maps', 'draft', 'wiki', 'esports', 'news', 'tierlist', 'live']),
   label: z.string().min(1),
   url: Url,
 });
 export type Link = z.infer<typeof LinkSchema>;
 
-export const LinksSchema = z.strictObject({
-  /** Keyed by hero id (members, not composites; a composite page merges its members' links). */
-  heroes: z.record(AttributeIdSchema, z.array(LinkSchema)),
-  general: z.array(LinkSchema),
-});
+/** Links of a source that was removed (Heroes Profile, 2026-10-10) are dropped from last-good files. */
+const REMOVED_LINK_SITES: ReadonlySet<unknown> = new Set(['heroesprofile']);
+
+function dropRemovedLinks(value: unknown): unknown {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) return value;
+  const keep = (list: unknown): unknown =>
+    Array.isArray(list) ? list.filter((l) => !(typeof l === 'object' && l !== null && REMOVED_LINK_SITES.has((l as { site?: unknown }).site))) : list;
+  const v = value as { heroes?: unknown; general?: unknown };
+  const heroes =
+    typeof v.heroes === 'object' && v.heroes !== null && !Array.isArray(v.heroes)
+      ? Object.fromEntries(Object.entries(v.heroes).map(([id, list]) => [id, keep(list)]))
+      : v.heroes;
+  return { ...value, heroes, general: keep(v.general) };
+}
+
+export const LinksSchema = z.preprocess(
+  dropRemovedLinks,
+  z.strictObject({
+    /** Keyed by hero id (members, not composites; a composite page merges its members' links). */
+    heroes: z.record(AttributeIdSchema, z.array(LinkSchema)),
+    general: z.array(LinkSchema),
+  }),
+);
 export type Links = z.infer<typeof LinksSchema>;
 
 // ---- rotation.json ---------------------------------------------------------------------
@@ -485,8 +593,18 @@ export const RankedSeasonSchema = z.strictObject({
 
 export const RotationSchema = z.strictObject({
   source: z.enum(['nexus-compendium', 'manual']),
-  /** "As of" time shown next to the rotation. */
+  /**
+   * "As of" time shown next to the rotation: when this content was first fetched. It stays put
+   * while the content is unchanged (so dataHash does too); the last check is the source's
+   * `fetchedAt` in meta.json.
+   */
   fetchedAt: IsoDateTime,
+  /**
+   * Present (true) when the window had already ended at the last pipeline run: the source has not
+   * published the new week yet (or could not be fetched), so no hero should be shown as free.
+   * Written on the switch day itself, which changes dataHash and so redeploys the site.
+   */
+  lagging: z.literal(true).exactOptional(),
   start: IsoDate,
   end: IsoDate,
   allFree: z.boolean(),
@@ -548,7 +666,12 @@ export const ProSchema = z
   });
 export type Pro = z.infer<typeof ProSchema>;
 
-// ---- stats.json (class B, private, Heroes Profile v1) ----------------------------------
+// ---- stats.json (private match statistics) ----------------------------------------------
+//
+// Generic aggregate shapes (hero win rates, pair matrices, map deltas, talent builds) for a
+// private statistics source. The public pipeline has no producer for them since Heroes Profile
+// was removed (2026-10-10); the synthetic sample in fixtures/hots/_private exercises the site's
+// statistics mode, and the private hub can reuse the shapes.
 
 export const HeroStatSchema = z.strictObject({
   games: Count,
@@ -615,7 +738,8 @@ export const StatsSchema = z.strictObject({
   schema: z.literal(1),
   /** Fixture-only marker; load.ts refuses synthetic stats outside fixtures. */
   synthetic: z.literal(true).exactOptional(),
-  source: z.literal('heroesprofile'),
+  /** SourceRef id (or fixture label) of the producer. */
+  source: Slug,
   fetchedAt: IsoDateTime,
   major: MajorSchema,
   builds: z.array(BuildSchema).min(1),
@@ -690,7 +814,6 @@ export type Streams = z.infer<typeof StreamsSchema>;
 
 const Index = z.number().int().nonnegative();
 
-/** Sparse edge list in parallel arrays (COO). `r[i]` indexes into the shard's `reasons` table. */
 /**
  * A reason reference: an index into `reasons`, or [i, j] / [i, j, k] for those lines joined with a
  * space (a rule line and its "Only when … takes …" / "… must also take …" conditions, stored apart
@@ -699,17 +822,36 @@ const Index = z.number().int().nonnegative();
 export const ReasonRefSchema = z.union([Index, z.array(Index).min(2).max(3)]);
 export type ReasonRef = z.infer<typeof ReasonRefSchema>;
 
+/** Most conditions kept per reason in the shard. */
+export const MAX_SHARD_CONDITIONS = 8;
+
+/**
+ * Conditions of reasons (Reason.conditions: talents or situations the reason depends on), sparse:
+ * entry i says reason `k[i]` of row `e[i]` of the same table holds when all of `c[i]` hold, each
+ * an index into `reasons` (templates with the same name tokens). Absent when no reason has any;
+ * readers that predate it still decode `r` unchanged.
+ */
+export const SparseConditionsSchema = z.strictObject({
+  e: z.array(Index),
+  k: z.array(Index),
+  c: z.array(z.array(Index).min(1).max(MAX_SHARD_CONDITIONS)),
+});
+export type SparseConditions = z.infer<typeof SparseConditionsSchema>;
+
+/** Sparse edge list in parallel arrays (COO). `r[i]` indexes into the shard's `reasons` table. */
 export const SparseEdgesSchema = z.strictObject({
   a: z.array(Index),
   b: z.array(Index),
   score: z.array(Score),
   r: z.array(z.array(ReasonRefSchema)),
+  cond: SparseConditionsSchema.exactOptional(),
 });
 export const SparseMapFitSchema = z.strictObject({
   hero: z.array(Index),
   map: z.array(Index),
   score: z.array(Score),
   r: z.array(z.array(ReasonRefSchema)),
+  cond: SparseConditionsSchema.exactOptional(),
 });
 
 /** Dense row-major H×H matrix: entry [i*H + j] is "i vs j" (counters) or "i with j" (synergies). */
@@ -722,7 +864,8 @@ export const DenseMatrixSchema = z.strictObject({
 
 export const DraftStatsBlockSchema = z.strictObject({
   synthetic: z.literal(true).exactOptional(),
-  source: z.literal('heroesprofile'),
+  /** SourceRef id (or fixture label) of the producer. */
+  source: Slug,
   mode: GameModeSchema,
   timeframe: TimeframeSchema,
   label: z.string().min(1),
@@ -744,7 +887,8 @@ export const DraftStatsBlockSchema = z.strictObject({
 /**
  * Shard format version. 2: reason lines are templates in which `{a}` and `{b}` stand for the
  * edge's two heroes (map fit: `{a}` the hero, `{m}` the map), so one line serves every pair a
- * rule matches; readers fill the names back in (src/games/hots/draft/data.ts).
+ * rule matches; readers fill the names back in (src/games/hots/draft/data.ts). An optional `cond`
+ * table per edge list adds reason conditions without changing how `r` decodes (still schema 2).
  */
 export const DRAFT_SHARD_SCHEMA = 2;
 
@@ -782,7 +926,7 @@ export const DraftShardSchema = z
       synergies: SparseEdgesSchema,
       mapFit: SparseMapFitSchema,
     }),
-    /** Merged at stage time when private stats exist (class B, hashed name only). */
+    /** Merged at stage time when private stats exist (private overlay, hashed name only). */
     stats: DraftStatsBlockSchema.exactOptional(),
   })
   .superRefine((d, ctx) => {
@@ -801,7 +945,7 @@ export const DraftShardSchema = z
       if ((s === 2) !== composite) ctx.addIssue({ code: 'custom', message: 'slots must be 2 exactly for composites', path: ['heroes', 'slots', i] });
     }
     /** `from`/`to` index the hero (or map) tables; every array must have one entry per edge. */
-    const checkSparse = (name: string, from: number[], to: number[], score: number[], r: ReasonRef[][], limits: [number, number]) => {
+    const checkSparse = (name: string, from: number[], to: number[], score: number[], r: ReasonRef[][], limits: [number, number], cond?: SparseConditions) => {
       if (to.length !== from.length || score.length !== from.length || r.length !== from.length) {
         ctx.addIssue({ code: 'custom', message: `theory.${name} arrays differ in length`, path: ['theory', name] });
       }
@@ -811,11 +955,18 @@ export const DraftShardSchema = z
       if (r.some((list) => list.some((x) => (typeof x === "number" ? [x] : x).some((i) => i >= R)))) {
         ctx.addIssue({ code: 'custom', message: `theory.${name} reason index out of range`, path: ['theory', name, 'r'] });
       }
+      if (cond) {
+        if (cond.k.length !== cond.e.length || cond.c.length !== cond.e.length) {
+          ctx.addIssue({ code: 'custom', message: `theory.${name}.cond arrays differ in length`, path: ['theory', name, 'cond'] });
+        }
+        const bad = cond.e.some((row, i) => row >= r.length || (cond.k[i] ?? 0) >= (r[row]?.length ?? 0) || (cond.c[i] ?? []).some((x) => x >= R));
+        if (bad) ctx.addIssue({ code: 'custom', message: `theory.${name}.cond points outside the rows, their reasons or the reasons table`, path: ['theory', name, 'cond'] });
+      }
     };
     const t = d.theory;
-    checkSparse('counters', t.counters.a, t.counters.b, t.counters.score, t.counters.r, [H, H]);
-    checkSparse('synergies', t.synergies.a, t.synergies.b, t.synergies.score, t.synergies.r, [H, H]);
-    checkSparse('mapFit', t.mapFit.hero, t.mapFit.map, t.mapFit.score, t.mapFit.r, [H, M]);
+    checkSparse('counters', t.counters.a, t.counters.b, t.counters.score, t.counters.r, [H, H], t.counters.cond);
+    checkSparse('synergies', t.synergies.a, t.synergies.b, t.synergies.score, t.synergies.r, [H, H], t.synergies.cond);
+    checkSparse('mapFit', t.mapFit.hero, t.mapFit.map, t.mapFit.score, t.mapFit.r, [H, M], t.mapFit.cond);
     if (d.stats) {
       const s = d.stats;
       for (const [k, v] of Object.entries(s.hero)) {
@@ -915,7 +1066,11 @@ export const CuratedMapSchema = z.strictObject({
   lanes: MapProfileSchema.shape.lanes,
   objective: z.string().min(1),
   tags: z.array(MapTagSchema).min(1),
-  hp: HpMapRefSchema.exactOptional(),
+  /**
+   * Deprecated: a Heroes Profile map ref from before that source was removed (2026-10-10).
+   * Accepted until curated/hots/maps.yaml drops it; never published.
+   */
+  hp: z.strictObject({ id: z.number().int().positive(), name: z.string().min(1) }).exactOptional(),
   notes: z.string().min(1).exactOptional(),
 });
 

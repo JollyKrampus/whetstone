@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DATA_LAG_HOURS, lagState, majorBuilds, newestLive } from './builds.ts';
 import { MAX_CHAIN, diffChain, firstRunBaseline, firstRunChain } from './heroesData.ts';
-import { hpGate, previousMajor } from './heroesprofile.ts';
 import { pagesFromLinks, proWindow } from './liquipedia.ts';
 import { fallbackBuildDates, reusableRecords } from './news.ts';
 import { heroTargets } from './youtube.ts';
@@ -40,16 +39,7 @@ describe('diff chains', () => {
   });
 });
 
-describe('gates and windows', () => {
-  it('enables Heroes Profile only with HP_MODE=on, a key and network access', () => {
-    expect(hpGate({ HP_MODE: 'off', HP_API_KEY: 'k' }, false)).toBe('HP_MODE=off');
-    expect(hpGate({ HP_MODE: 'on' }, false)).toBe('HP_API_KEY not set');
-    expect(hpGate({ HP_MODE: 'on', HP_API_KEY: 'k' }, true)).toMatch(/offline/);
-    expect(hpGate({ HP_MODE: 'on', HP_API_KEY: 'k' }, false)).toBeNull();
-    expect(previousMajor(VERSIONS, '2.57')).toBe('2.55');
-    expect(previousMajor(VERSIONS, '2.55')).toBeNull();
-  });
-
+describe('windows', () => {
   it('extends the pro window to last year while this year is thin', () => {
     expect(proWindow('2026-10-08', 600)).toMatchObject({ label: '2026 tournaments', from: '2026-01-01', years: [2026] });
     expect(proWindow('2027-01-10', 12)).toMatchObject({ label: '2026–2027 tournaments', from: '2026-01-01', to: '2027-12-31', years: [2026, 2027] });

@@ -66,6 +66,7 @@ export function buildRotation(raw: unknown, heroIndex: ReadonlyMap<string, reado
 /**
  * Keeps the previous `fetchedAt` when nothing but the fetch time changed, so an unchanged
  * rotation does not count as new data every day (the source status carries the fetch time).
+ * Staleness is not read from `fetchedAt` for that reason: see markLagging.
  */
 export function stableRotation(next: Rotation, previous: Rotation | null): Rotation {
   if (!previous) return next;
@@ -76,4 +77,15 @@ export function stableRotation(next: Rotation, previous: Rotation | null): Rotat
     previous.heroes.join() === next.heroes.join() &&
     JSON.stringify(previous.ranked) === JSON.stringify(next.ranked);
   return same ? { ...next, fetchedAt: previous.fetchedAt } : next;
+}
+
+/**
+ * Sets `lagging` when the rotation's window ended before `today` (the run's UTC date), else
+ * removes it. Applied to every rotation the step writes (fresh, unchanged or last-good), so the
+ * site can tell last week's heroes from this week's even when the content did not change
+ * (hots-logic/F4: a content-stable `fetchedAt` stays inside the old window).
+ */
+export function markLagging(rotation: Rotation, today: string): Rotation {
+  const { lagging: _old, ...rest } = rotation;
+  return rotation.end < today ? { ...rest, lagging: true } : rest;
 }

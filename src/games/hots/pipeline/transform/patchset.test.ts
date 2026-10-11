@@ -17,6 +17,7 @@ const rec = (over: Partial<ParsedPatch>): ParsedPatch => ({
   url: 'https://news.blizzard.com/en-us/article/1/x',
   kind: 'patch',
   contentHash: '0123456789abcdef',
+  notes: 'summary',
   general: [],
   heroes: {},
   ...over,
@@ -66,14 +67,21 @@ describe('diff lines', () => {
   });
 
   it('writes short lines of our own', () => {
-    expect(diffLine({ kind: 'stat', target: 'Health', old: 1698, new: 1780 })).toEqual({ section: 'Game data', text: 'Health 1698 → 1780.', dir: 'buff' });
+    expect(diffLine({ kind: 'stat', target: 'Health', old: 1698, new: 1780 })).toEqual({ section: 'Game data', kind: 'numeric', stat: 'Health', old: 1698, new: 1780, text: 'Health 1698 → 1780', dir: 'buff' });
     expect(diffLine({ kind: 'talent', target: 'Anchored Core', level: '1', field: 'radius', old: '50%', new: '25%' })).toEqual({
       section: 'Game data',
       target: 'Anchored Core',
       level: '1',
-      text: 'Radius 50% → 25%.',
+      kind: 'numeric',
+      stat: 'Radius',
+      old: 50,
+      new: 25,
+      unit: '%',
+      text: 'Radius 50% → 25%',
       dir: 'nerf',
     });
+    expect(diffLine({ kind: 'talent-added', target: 'New One', level: '4' })).toMatchObject({ kind: 'added', text: 'New level 4 talent.' });
+    expect(diffLine({ kind: 'ability', target: 'X', field: 'cooldown', new: 40 })).toMatchObject({ kind: 'changed', text: 'Cooldown — → 40' });
   });
 });
 
@@ -84,18 +92,55 @@ describe('enrichWithDiff', () => {
       version: '2.57',
       ...rec({
         heroes: {
-          Abat: { verdict: 'nerf', changes: [{ section: 'Level 13', target: 'Bombard Strain', text: 'Health decay reduction lowered.', dir: 'nerf' }] },
-          Alex: { verdict: 'buff', changes: [{ section: 'Base', text: 'Health increased from 1698 to 1780.', dir: 'buff' }] },
+          Abat: { verdict: 'nerf', changes: [{ section: 'Level 13', target: 'Bombard Strain', kind: 'changed', text: "Effect changed (see Blizzard's notes)", dir: 'nerf' }] },
+          Alex: { verdict: 'buff', changes: [{ section: 'Base', kind: 'numeric', stat: 'Health', old: 1698, new: 1780, text: 'Health 1698 → 1780', dir: 'buff' }] },
         },
       }),
     };
     const out = enrichWithDiff(p, DIFF, new Set());
-    expect(out.heroes.Abat?.changes[0]?.text).toBe('Health decay reduction lowered (game data: reduction 50% → 40%).');
+    expect(out.heroes.Abat?.changes[0]?.text).toBe("Effect changed; game data: reduction 50% → 40% (see Blizzard's notes)");
     expect(out.heroes.Alex?.changes).toHaveLength(1);
-    expect(out.heroes.Garr).toEqual({ verdict: 'nerf', changes: [{ section: 'Game data', target: 'Unrivaled Strength', level: '1', text: 'Damage 125% → 75%.', dir: 'nerf' }] });
+    expect(out.heroes.Garr).toEqual({
+      verdict: 'nerf',
+      changes: [{ section: 'Game data', target: 'Unrivaled Strength', level: '1', kind: 'numeric', stat: 'Damage', old: 125, new: 75, unit: '%', text: 'Damage 125% → 75%', dir: 'nerf' }],
+    });
     expect(Object.keys(out.heroes)).toEqual(['Abat', 'Alex', 'Garr']);
     // Idempotent: enriching an enriched record changes nothing.
     expect(enrichWithDiff(out, DIFF, new Set())).toEqual(out);
+  });
+
+  it('does not repeat numbers a numeric change about the same target already shows', () => {
+    const diff: Diff = {
+      id: '2.57.0.98304..2.57.0.98348',
+      from: '2.57.0.98304',
+      to: '2.57.0.98348',
+      heroes: {
+        HXAL: [
+          { kind: 'ability', target: 'Void Volley', field: 'damage', old: 90, new: 72 },
+          { kind: 'ability', target: 'Void Volley', field: 'cooldown', old: 12, new: 10 },
+        ],
+      },
+    };
+    const p: Patch = {
+      id: '2026-10-05-hotfix',
+      version: '2.57',
+      ...rec({
+        heroes: {
+          HXAL: {
+            verdict: 'nerf',
+            changes: [
+              { section: 'Abilities', target: 'Void Volley', kind: 'numeric', stat: 'Base damage per missile', old: 90, new: 72, text: 'Base damage per missile 90 → 72', dir: 'nerf' },
+              { section: 'Abilities', target: 'Void Volley', kind: 'changed', text: "Effect changed (see Blizzard's notes)", dir: 'change' },
+            ],
+          },
+        },
+      }),
+    };
+    const out = enrichWithDiff(p, diff, new Set());
+    expect(out.heroes.HXAL?.changes[1]?.text).toBe("Effect changed; game data: cooldown 12 → 10 (see Blizzard's notes)");
+    // Nothing new to add: the line stays our plain template.
+    const onlyShown = enrichWithDiff(p, { ...diff, heroes: { HXAL: diff.heroes.HXAL?.slice(0, 1) ?? [] } }, new Set());
+    expect(onlyShown.heroes.HXAL?.changes[1]?.text).toBe("Effect changed (see Blizzard's notes)");
   });
 });
 
@@ -115,7 +160,7 @@ describe('assemblePatches', () => {
       ['2026-09-14-ptr', '2.57.0.98126_ptr', 'ptr'],
     ]);
     expect(patches[0]?.title).toMatch(/Undocumented game data update/);
-    expect(patches[0]?.heroes.HXAL?.changes[0]?.text).toBe('Damage 90 → 72.');
+    expect(patches[0]?.heroes.HXAL?.changes[0]?.text).toBe('Damage 90 → 72');
     expect(patches[1]?.heroes.Alex).toBeDefined();
     expect(PatchesFileSchema.safeParse(patches).success).toBe(true);
   });

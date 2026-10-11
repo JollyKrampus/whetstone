@@ -19,7 +19,8 @@ export const hots: GameModule = {
       license: 'Blizzard fan-site terms (non-commercial)',
       tosNote:
         'Personal, non-commercial, revocable fan-site license; copyright and trademark notices required. ' +
-        'Patch notes are our own short summaries with links to the originals.',
+        "We store no sentences from the patch notes: each change is kept as our own structured summary (what changed, " +
+        'old and new numbers, buff or nerf, or the kind of change), and every patch links to the original notes.',
       custody: 'A',
     },
     {
@@ -48,20 +49,8 @@ export const hots: GameModule = {
       attribution: 'Portraits and icons via HeroesToolChest heroes-images (MIT); artwork © Blizzard Entertainment.',
       rule: 'footer',
       license: 'MIT (artwork © Blizzard Entertainment)',
-      tosNote: 'A pinned subset is converted to WebP and self-hosted; a build switch removes all artwork.',
+      tosNote: 'A pinned subset of portraits, icons and map images is converted to WebP and self-hosted with this credit.',
       custody: 'A',
-    },
-    {
-      id: 'heroesprofile',
-      name: 'Heroes Profile',
-      url: 'https://www.heroesprofile.com',
-      attribution: 'Data provided by Heroes Profile',
-      rule: 'inline',
-      license: 'Heroes Profile API terms (licensed)',
-      tosNote:
-        'Licensed API data: displayed only while the license lasts, never redistributed or committed, ' +
-        'credited on the same screen as the numbers. Disabled until Heroes Profile approves.',
-      custody: 'B',
     },
     {
       id: 'liquipedia',
