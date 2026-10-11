@@ -194,10 +194,14 @@ describe('offline run on recorded fixtures', () => {
 
   it('falls back to last-good hero data when heroes-data2 is down', async () => {
     const heroes = readFileSync(path.join(out, 'current/hots/heroes.json'), 'utf8');
+    const builds = meta(out).extra.builds;
+    expect(builds.length).toBeGreaterThan(1);
     const s = await run({ out, down: ['github.com', 'raw.githubusercontent.com'] });
     expect(s.exitCode).toBe(0);
     expect(status(meta(out), 'heroes-data2')?.status).toBe('stale');
     expect(readFileSync(path.join(out, 'current/hots/heroes.json'), 'utf8')).toBe(heroes);
+    // The major's build list (from .version.json) is kept from last-good, not cut to the live build.
+    expect(meta(out).extra.builds).toEqual(builds);
   });
 
   it('re-summarises last-good patch notes from before the summaries instead of carrying their sentences forward', async () => {

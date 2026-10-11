@@ -100,7 +100,8 @@ export async function runHots(ctx: PipelineContext, deps: HotsPipelineDeps = {})
     previous: env.prevMeta ? { major: env.prevMeta.extra.major, majorSince: env.prevMeta.extra.majorSince } : null,
     today: env.today,
   });
-  const liveBuilds = majorBuilds(builds.versions, builds.live);
+  // Without .version.json (heroes-data2 down or not selected) the major's builds come from last-good.
+  const liveBuilds = majorBuilds(builds.versions.length > 0 ? builds.versions : (env.prevMeta?.extra.builds ?? []), builds.live);
 
   // Theory: mechanics for every hero record, theory.json for draftable entities.
   const prevHeroes = await previousFile(env, 'heroes.json', HeroesFileSchema);
