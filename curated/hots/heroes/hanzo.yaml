@@ -36,8 +36,8 @@ counters:
     confidence: medium
   - a: zeratul
     b: hanzo
-    why: "From stealth Zeratul Blinks onto a 1375-health Hanzo and kills him before Natural Agility can be used."
-    evidence: ["Permanent Cloak", "Blink", "Cleave", "Natural Agility"]
+    why: "Natural Agility only leaps over terrain and has a 25-second cooldown, so a Zeratul who Blinks onto him from stealth lands Cleave, Singularity Spike and several Basic Attacks on a 1375-Health Hanzo before he can get away."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Natural Agility"]
     confidence: medium
   - a: fenix
     b: hanzo

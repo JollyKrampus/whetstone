@@ -27,8 +27,8 @@ counters:
   # --- weak against ---
   - a: zeratul
     b: anduin
-    why: "With no personal escape, Anduin dies to a Blink-and-Cleave combo from stealth, and Flash Heal's cast time is too slow to save himself."
-    evidence: ["Permanent Cloak", "Blink", "Cleave", "Flash Heal"]
+    why: "With no personal escape, Anduin cannot get away once Zeratul Blinks onto him from stealth, and Flash Heal's 0.75-second cast cannot keep up with Cleave, Singularity Spike and the Basic Attacks that follow."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Flash Heal"]
     confidence: medium
   - a: tracer
     b: anduin

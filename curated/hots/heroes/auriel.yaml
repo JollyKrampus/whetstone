@@ -32,8 +32,8 @@ counters:
     confidence: medium
   - a: zeratul
     b: auriel
-    why: "Auriel has no escape until Angelic Flight at 20, so Zeratul's Blink-and-Cleave combo from stealth kills her before Ray of Heaven matters."
-    evidence: ["Permanent Cloak", "Blink", "Cleave", "Angelic Flight"]
+    why: "Auriel has no escape until Angelic Flight at level 20, so once Zeratul Blinks onto her from stealth she has to stand and take Cleave, Singularity Spike and his Basic Attacks."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Angelic Flight"]
     confidence: medium
   - a: tracer
     b: auriel

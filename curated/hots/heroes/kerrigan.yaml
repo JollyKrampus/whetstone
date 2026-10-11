@@ -15,8 +15,8 @@ counters:
     confidence: medium
   - a: kerrigan
     b: probius
-    why: "Probius has 1260 Health and must stay near his Pylons, so Ravage closes the gap past Photon Cannons and a single combo kills him."
-    evidence: ["Ravage", "Impaling Blades", "Warp In Pylon", "Photon Cannon"]
+    why: "Ravage leaps past Photon Cannons onto Probius, Primal Grasp pulls him back in and Impaling Blades stuns him, and with her Basic Attacks that takes most of his 1260 Health before he can retreat to a Pylon."
+    evidence: ["Ravage", "Primal Grasp", "Impaling Blades", "Warp In Pylon", "Photon Cannon"]
     confidence: medium
   - a: kerrigan
     b: kaelthas

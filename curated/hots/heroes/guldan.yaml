@@ -27,8 +27,8 @@ counters:
   # --- weak against ---
   - a: zeratul
     b: guldan
-    why: "Gul'dan has no escape before Demonic Circle, so a Blink-and-Cleave combo from stealth kills him before Drain Life can sustain him."
-    evidence: ["Permanent Cloak", "Blink", "Cleave", "Drain Life"]
+    why: "Gul'dan has no escape before Demonic Circle at level 20, so once Zeratul Blinks onto him from stealth, Cleave, Singularity Spike and Basic Attacks outpace what Drain Life heals back."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Drain Life"]
     confidence: medium
   - a: tracer
     b: guldan
