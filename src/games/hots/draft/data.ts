@@ -35,10 +35,32 @@ export interface DraftMap {
   ranked: boolean;
 }
 
+/** One reason line of a theory edge, apart from the conditions it depends on. */
+export interface TheoryLine {
+  /** The line with the edge's names filled in, without its conditions. */
+  text: string;
+  /**
+   * The shared template the line came from (names as {a}/{b}/{m}). Two edges matched by the
+   * same rule share it, so "the same rule again, for another enemy" can be told apart from a
+   * different reason.
+   */
+  template: string;
+  /**
+   * What the line depends on, one sentence each with names filled in: an engine condition
+   * ("Only when Anduin takes Lightbomb.") loses its "Only when " lead, so every condition reads
+   * the same way ("Anduin takes Lightbomb."); a curated condition is kept as written. Empty when
+   * the line always holds. The UI renders them as "Only when …".
+   */
+  conditions: readonly string[];
+}
+
 /** One theory edge: score 1..100 (50 neutral) and its reason sentences. */
 export interface TheoryLink {
   score: number;
+  /** Each line in full, conditions included, exactly as theory.json words it. */
   reasons: readonly string[];
+  /** The same lines split from their conditions, in theory.json order (curated lines first). */
+  lines: readonly TheoryLine[];
 }
 
 /** A statistics cell that passed the "hidden" gate (n ≥ 15, score present). */
@@ -63,8 +85,10 @@ export interface DraftData {
   synergies: ReadonlyMap<number, ReadonlyMap<number, TheoryLink>>;
   /** hero index → map index → fit. */
   mapFit: ReadonlyMap<number, ReadonlyMap<number, TheoryLink>>;
-  /** Heroes Profile block merged in at stage time (class B); null when HP is off. */
+  /** Match-statistics block merged in at stage time (class B); null without statistics. */
   stats: DraftStatsBlock | null;
+  /** SourceRef id of the statistics block (its credit and reason labels), null when unknown. */
+  statsSource: string | null;
 }
 
 export class ShardError extends Error {
@@ -103,6 +127,30 @@ export function fillReason(template: string, a: string, b: string, token: '{b}' 
   return template.split('{a}').join(a).split(token).join(b);
 }
 
+const ONLY_WHEN = 'Only when ';
+
+/** A condition part as the UI shows it after "Only when": the engine's lead words dropped. */
+export function conditionText(part: string): string {
+  const t = part.trim();
+  return t.startsWith(ONLY_WHEN) ? t.slice(ONLY_WHEN.length) : t;
+}
+
+/**
+ * Splits one reason reference into its line and conditions. A reference [i, j(, k)] already
+ * stores them apart (the first part is the line, the rest conditions); a single index may still
+ * carry the engine's " Only when …" sentences inline, which are split off the same way.
+ */
+function splitRef(parts: readonly string[]): { line: string; conditions: string[] } {
+  if (parts.length > 1) return { line: parts[0]!, conditions: parts.slice(1).map(conditionText).filter(Boolean) };
+  const text = parts[0] ?? '';
+  const at = text.indexOf(` ${ONLY_WHEN}`);
+  if (at < 0) return { line: text, conditions: [] };
+  const rest = text.slice(at + 1);
+  const also = rest.search(/ {[ab]} must also take /);
+  const conditions = also < 0 ? [rest] : [rest.slice(0, also), rest.slice(also + 1)];
+  return { line: text.slice(0, at), conditions: conditions.map(conditionText).filter(Boolean) };
+}
+
 function sparse(
   raw: Record<string, unknown>,
   name: string,
@@ -128,22 +176,26 @@ function sparse(
     }
     if (typeof s !== 'number' || !Number.isFinite(s)) throw new ShardError(`${where} row ${i} has no score`);
     const [fromNames, toNames, token] = names;
-    const text = (j: unknown): string | undefined => {
-      if (typeof j === 'number') return reasons[j];
-      // [i, k] or [i, k, l]: a rule line and its talent conditions, joined with spaces.
+    // A number, or [i, k] / [i, k, l]: a line and its talent conditions (joined with spaces in full).
+    const partsOf = (j: unknown): string[] | undefined => {
+      if (typeof j === 'number') return reasons[j] === undefined ? undefined : [reasons[j]];
       if (Array.isArray(j) && j.length > 0) {
         const parts = j.map((k) => (typeof k === 'number' ? reasons[k] : undefined));
-        return parts.every((p) => p !== undefined) ? parts.join(' ') : undefined;
+        return parts.every((p) => p !== undefined) ? (parts as string[]) : undefined;
       }
       return undefined;
     };
-    const texts = Array.isArray(refs)
-      ? refs
-          .map(text)
-          .filter((t): t is string => typeof t === 'string')
-          .map((t) => fillReason(t, fromNames[a] ?? '', toNames[b] ?? '', token))
-      : [];
-    out.push({ from: a, to: b, link: { score: s, reasons: texts } });
+    const fill = (t: string) => fillReason(t, fromNames[a] ?? '', toNames[b] ?? '', token);
+    const texts: string[] = [];
+    const lines: TheoryLine[] = [];
+    for (const ref of Array.isArray(refs) ? refs : []) {
+      const parts = partsOf(ref);
+      if (!parts) continue;
+      texts.push(fill(parts.join(' ')));
+      const { line, conditions } = splitRef(parts);
+      lines.push({ text: fill(line), template: line, conditions: conditions.map(fill) });
+    }
+    out.push({ from: a, to: b, link: { score: s, reasons: texts, lines } });
   }
   return out;
 }
@@ -223,6 +275,7 @@ export function decodeShard(raw: unknown): DraftData {
     addLink(synergies, e.to, e.from, e.link);
   }
   for (const e of sparse(objectAt(t, 'mapFit', 'theory'), 'mapFit', 'hero', 'map', [H, M], reasons, [heroNames, mapNameList, '{m}'])) addLink(mapFit, e.from, e.to, e.link);
+  const stats = checkStats(raw.stats, H, M);
 
   return {
     build: String(raw.build ?? ''),
@@ -235,7 +288,8 @@ export function decodeShard(raw: unknown): DraftData {
     counters,
     synergies,
     mapFit,
-    stats: checkStats(raw.stats, H, M),
+    stats,
+    statsSource: stats && typeof (stats as { source?: unknown }).source === 'string' ? String((stats as { source?: unknown }).source) : null,
   };
 }
 

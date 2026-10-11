@@ -1,7 +1,9 @@
 /**
- * Build the draft shard's `stats` block (DraftStatsBlockSchema) from one Heroes Profile stats
+ * Build the draft shard's `stats` block (DraftStatsBlockSchema) from one match-statistics
  * window (stats.json, class B). This is the shape `pipeline/stage.ts` overlays onto the public
- * shard; the draft tests use it to run the tool on the synthetic fixture stats.
+ * shard; the draft tests use it to run the tool on the synthetic fixture stats. The `source`
+ * value is whatever the schema requires today; the draft reads it only to find the SourceRef
+ * whose credit it shows.
  *
  * Dense matrices are row-major over the shard's hero order: entry [i·H + j] is "i vs j"
  * (counters) or "i with j" (synergies, mirrored). Pairs below the hide gate stay null.
