@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { CardIndex } from '#vendor/grindstone/core.js';
+import { CardIndex } from 'grindstone-mcp/core';
 import { repoRoot } from '../../../lib/datadir.ts';
 import { CardShardSchema } from '../schema.ts';
 import { loadCurated, validateSnapshot } from './curated.ts';

@@ -8,7 +8,7 @@
  */
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { buildMeta, getFormat, parseAndResolve, parseSnapshot, validateDeck, type CardIndex } from '#vendor/grindstone/core.js';
+import { buildMeta, getFormat, parseAndResolve, parseSnapshot, validateDeck, type CardIndex } from 'grindstone-mcp/core';
 import type { ValidationIssue } from '../../../core/game.ts';
 import { ConstructedFormatSchema, MetaSnapshotSchema, type ConstructedFormat, type MetaSnapshot } from '../schema.ts';
 

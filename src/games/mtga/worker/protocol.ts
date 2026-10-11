@@ -24,7 +24,7 @@ import type {
   ValidationIssue,
   WildcardCounts,
   WildcardReport,
-} from '#vendor/grindstone/core.js';
+} from 'grindstone-mcp/core';
 
 /** Arena constructed formats grindstone validates, in display order. */
 export const FORMAT_IDS = ['standard', 'pioneer', 'historic', 'timeless', 'brawl', 'standardbrawl'] as const;

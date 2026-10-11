@@ -14,7 +14,7 @@
  *   IWD = GIH WR − GNS WR, in percentage points
  * Node-only.
  */
-import type { CardIndex } from '#vendor/grindstone/core.js';
+import type { CardIndex } from 'grindstone-mcp/core';
 import { COLORS, limitedFile, type CardRating, type LimitedFormat, type LimitedIndex, type LimitedRatings } from '../schema.ts';
 import { intAt, parseCsvLine, readCsvObjects, scanFields, truthyAt } from './csv.ts';
 

@@ -6,15 +6,16 @@
  *   curated-meta   curated/mtga/meta/<format>.json, validated against the fresh card index
  *   17lands        public datasets for the newest Arena sets → limited/<SET>.<Format>.json
  *                  (each dataset gated on its S3 Last-Modified; runtime capped for the 30-minute job)
- *   grindstone-mcp the vendored engine whose aggregateCards built the shards (status only)
+ *   grindstone-mcp the workspace package (packages/grindstone-mcp) whose aggregateCards built the
+ *                  shards (status only)
  *
  * Partial fallback: a source that fails keeps its last-good files (status `failed`, a warning);
  * only missing card data with nothing to fall back on is an error. `--only` is honoured: sources
  * that are not selected re-emit their last-good files.
  */
 import { readFileSync } from 'node:fs';
-import path from 'node:path';
-import { CardIndex } from '#vendor/grindstone/core.js';
+import { createRequire } from 'node:module';
+import { CardIndex } from 'grindstone-mcp/core';
 import type { DataPipeline, OutputFile, PipelineContext, PipelineResult, SourceStatus, ValidationIssue } from '../../../core/game.ts';
 import { isSelected } from '../../../../pipeline/context.ts';
 import { checkCount, validateFiles } from '../../../../pipeline/validate.ts';
@@ -67,13 +68,17 @@ const errMsg = (err: unknown): string => (err instanceof Error ? err.message : S
 
 export interface GrindstoneVersion {
   version: string;
-  sha: string;
 }
 
-export function readGrindstoneVersion(root: string): GrindstoneVersion {
-  const raw = JSON.parse(readFileSync(path.join(root, 'vendor', 'grindstone', 'VERSION'), 'utf8')) as Partial<GrindstoneVersion>;
-  if (typeof raw.version !== 'string' || typeof raw.sha !== 'string') throw new Error('vendor/grindstone/VERSION lacks version/sha');
-  return { version: raw.version, sha: raw.sha };
+/**
+ * Version of the grindstone-mcp package Node resolves for `grindstone-mcp/core` (the workspace
+ * package in packages/grindstone-mcp, built by the root `prepare` script).
+ */
+export function readGrindstoneVersion(): GrindstoneVersion {
+  const file = createRequire(import.meta.url).resolve('grindstone-mcp/package.json');
+  const raw = JSON.parse(readFileSync(file, 'utf8')) as { name?: unknown; version?: unknown };
+  if (raw.name !== 'grindstone-mcp' || typeof raw.version !== 'string') throw new Error(`${file} is not a grindstone-mcp package.json`);
+  return { version: raw.version };
 }
 
 function previousStatus(ctx: PipelineContext, id: string): SourceStatus | undefined {
@@ -363,7 +368,7 @@ async function limitedStep(ctx: PipelineContext, sets: readonly MtgSet[], index:
 export async function runMtga(ctx: PipelineContext): Promise<PipelineResult> {
   const issues: ValidationIssue[] = [];
   const files: OutputFile[] = [];
-  const gs = readGrindstoneVersion(ctx.root);
+  const gs = readGrindstoneVersion();
 
   const cards = await cardsStep(ctx, gs.version);
   issues.push(...cards.issues);
@@ -371,7 +376,7 @@ export async function runMtga(ctx: PipelineContext): Promise<PipelineResult> {
     id: 'grindstone-mcp',
     fetchedAt: ctx.now.toISOString(),
     status: 'ok',
-    detail: `grindstone-mcp ${gs.version} (${gs.sha.slice(0, 7)}), vendored`,
+    detail: `grindstone-mcp ${gs.version}, workspace package`,
   };
   if (!cards.data) {
     // Nothing usable: the runner keeps every last-good file for the game.

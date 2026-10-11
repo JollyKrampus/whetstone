@@ -127,6 +127,12 @@ export const CardRecordSchema = z.strictObject({
   latestReleasedAt: IsoDate,
   edhrecRank: z.number().int().positive().nullable().default(null),
   gameChanger: z.boolean().default(false),
+  /**
+   * Cheapest paper price in USD over all printings (nonfoil, else foil) in the Scryfall snapshot
+   * (grindstone 0.3+). Arena has no cash prices: shown only as a paper-budget hint. Shards omit
+   * it when unknown; shards built before grindstone 0.3 have none.
+   */
+  priceUsd: z.number().positive().nullable().default(null),
   // Whetstone extras (ignored by grindstone): build image URLs without an API call.
   /** Scryfall id of the newest Arena printing. */
   scryfallId: Uuid.exactOptional(),
@@ -197,6 +203,7 @@ export function hydrateCardRecord(c: CompactCardRecord): CardRecord {
     arenaIds: c.arenaIds ?? [],
     edhrecRank: c.edhrecRank ?? null,
     gameChanger: c.gameChanger ?? false,
+    priceUsd: c.priceUsd ?? null,
   };
 }
 

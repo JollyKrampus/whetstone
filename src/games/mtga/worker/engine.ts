@@ -35,7 +35,7 @@ import {
   type ResolvedDeck,
   type ResolvedEntry,
   type ValidationResult,
-} from '#vendor/grindstone/core.js';
+} from 'grindstone-mcp/core';
 import { hydrateCardRecord, type CompactCardRecord } from '../schema.ts';
 import {
   FORMAT_IDS,

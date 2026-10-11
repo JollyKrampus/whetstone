@@ -1,10 +1,10 @@
 ---
 /**
  * /mtga/about/ (SPEC §8): methodology of the MTGA tools (grindstone's rubric, read from the
- * vendored rubric files so the page never drifts from the engine), sources, privacy notes and the
- * Wizards Fan Content Policy notice.
+ * grindstone-mcp package the analyzer runs, so the page never drifts from the engine), sources,
+ * privacy notes and the Wizards Fan Content Policy notice.
  */
-import { brawlRubric, constructedRubric } from '#vendor/grindstone/core.js';
+import { brawlRubric, constructedRubric } from 'grindstone-mcp/core';
 import SourceAttribution from '../../../components/SourceAttribution.astro';
 import '../../../games/mtga/components/mtga.css';
 import { formatDayUTC, int } from '../../../core/format.ts';
