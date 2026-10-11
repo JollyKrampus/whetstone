@@ -5,9 +5,12 @@ import {
   fixed,
   formatDateTimeUTC,
   formatDateUTC,
+  formatDayRangeUTC,
+  formatDayTimeUTC,
   formatDayUTC,
   hoursBetween,
   int,
+  numberWord,
   pct,
   pp,
   relativeTime,
@@ -108,5 +111,21 @@ describe('time', () => {
     expect(formatDateUTC('bad')).toBe(MISSING);
     expect(formatDateTimeUTC('bad')).toBe(MISSING);
     expect(formatDayUTC('bad')).toBe(MISSING);
+  });
+});
+
+describe('prose formats', () => {
+  it('uses one day format for both ends of a range', () => {
+    expect(formatDayTimeUTC('2026-12-02T01:59:00Z')).toBe('2 Dec 2026, 01:59 UTC');
+    expect(formatDayRangeUTC('2026-09-09T00:00:00Z', '2026-12-02T01:59:00Z')).toBe('9 Sep 2026 to 2 Dec 2026');
+    expect(formatDayRangeUTC('2026-09-09T00:00:00Z', '2026-12-02T01:59:00Z', { endTime: true })).toBe('9 Sep 2026 to 2 Dec 2026, 01:59 UTC');
+    expect(formatDayTimeUTC('bad')).toBe(MISSING);
+  });
+
+  it('spells small counts', () => {
+    expect(numberWord(3)).toBe('three');
+    expect(numberWord(5)).toBe('five');
+    expect(numberWord(13)).toBe('13');
+    expect(numberWord(1500)).toBe('1,500');
   });
 });

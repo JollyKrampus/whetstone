@@ -28,6 +28,8 @@ export interface SourceRef {
   license?: string;
   /** One-line summary of the terms that constrain how we use it. */
   tosNote?: string;
+  /** Copyright line the licence asks us to keep with copies (MIT and similar), shown on /credits/. */
+  copyright?: string;
   custody: CustodyClass;
 }
 
@@ -142,6 +144,18 @@ export interface Http {
 }
 
 export interface HttpInit {
+  /**
+   * Never write this response as an offline fixture, even in record mode (WHETSTONE_RECORD=1).
+   * Set it for class-C sources (video and stream metadata) and anything else that must not be
+   * committed. pipeline/http.ts also refuses to record the class-C API hosts on its own.
+   */
+  noRecord?: boolean;
+  /**
+   * Record-mode hook: rewrite the response body before it is saved as a fixture (for example to
+   * replace player names with placeholders). It never changes what the pipeline receives. When it
+   * throws, nothing is recorded.
+   */
+  scrub?: (body: Uint8Array, url: string) => Uint8Array;
   headers?: Record<string, string>;
   /** Minimum milliseconds between requests to the same host (default 250). */
   spacingMs?: number;
@@ -186,15 +200,73 @@ export interface NavItem {
   path: string;
 }
 
+/** Rich text as plain strings and links, so notices can carry a link without HTML. */
+export type RichText = readonly (string | { text: string; href: string })[];
+
+/** The rights and trademark notice a game needs on every page (SiteFooter shows all of them, current game first). */
+export interface LegalNotice {
+  /** Short heading, usually the full game title. */
+  heading: string;
+  body: RichText;
+  /** Rights holders named in the footer's "not affiliated with, endorsed … by" sentence. */
+  owners: readonly string[];
+}
+
+/** The game's accent colour per theme; registry.ts emits them as `--accent-<id>` CSS variables. */
+export interface AccentColors {
+  dark: string;
+  light: string;
+}
+
+/** One row of the privacy page's "stored in your browser" table. */
+export interface StorageNote {
+  /** Key or key pattern, e.g. 'whetstone:hots:*'. */
+  key: string;
+  /** What it holds, in plain words. */
+  text: string;
+}
+
+/** How the daily data job runs this game. */
+export interface PipelineSettings {
+  /** Minutes before the game's data job is cancelled (data-deploy.yml matrix). */
+  timeoutMinutes: number;
+  /**
+   * Environment variables (credentials or flags) the game's pipeline may read through
+   * `ctx.secrets`, besides the runner's shared ones. Nothing else reaches the game.
+   */
+  env?: readonly string[];
+}
+
+/**
+ * Per-game presentation that shared code (footer, privacy page, header search, version labels,
+ * theme, data workflow) reads from the registry, so adding a game never means editing them.
+ * A module may declare these itself; src/games/registry.ts supplies them otherwise.
+ */
+export interface GamePresentation {
+  legalNotice: LegalNotice;
+  accentColors: AccentColors;
+  /** Where the header's search button goes, relative to /<game>/ (e.g. '#search' or 'search/'). */
+  searchPath: string;
+  /** Word before a data version ('Patch' → "Patch 2.57"); '' when the label stands alone. */
+  versionPrefix: string;
+  /** Browser storage this game's pages use (privacy page). */
+  storage: readonly StorageNote[];
+  pipeline: PipelineSettings;
+}
+
 /** Browser-safe game metadata. The pipeline lives in src/games/<id>/pipeline/index.ts and is imported lazily by pipeline/run.ts. */
-export interface GameModule {
+export interface GameModule extends Partial<GamePresentation> {
   id: GameId;
   name: string;
   short: string;
   tagline: string;
-  status: 'live' | 'beta' | 'planned';
+  /** Every shipped game is live (SPEC §13); 'planned' is for a module that is registered but not built yet. */
+  status: 'live' | 'planned';
   /** CSS custom property name holding the game's accent colour, e.g. '--accent-hots'. */
   accent: string;
   sources: SourceRef[];
   nav: NavItem[];
 }
+
+/** A registered game with its presentation resolved (what src/games/registry.ts hands out). */
+export type Game = GameModule & GamePresentation;

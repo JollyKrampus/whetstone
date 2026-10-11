@@ -1,10 +1,16 @@
 # Daily data refresh and site deploy (docs/SPEC.md §10, critique D3).
 #
-#   plan → data (one job per game) → publish (data branch) → build → deploy → report
+#   plan → showdown-export (isolated) → data (one job per game) → publish (data branch) → build → deploy → report
 #
-# Push to main skips data/publish and rebuilds from the data branch. Class B/C data (Heroes
-# Profile, Twitch/YouTube) never touches git: it moves from a data job to the build job as a
-# short-lived, encrypted-when-licensed artifact (pipeline/private.ts). See docs/DATA.md.
+# Push to main skips data/publish and rebuilds from the data branch. Short-lived class B/C/D data
+# never touches git: it moves from a data job to the build job as a short-lived artifact,
+# encrypted when it holds class B (pipeline/private.ts). See docs/DATA.md.
+#
+# Supply chain: every action is pinned to a full commit SHA (the comment names its release;
+# Dependabot proposes updates), no job keeps git credentials on disk, and each game's data job
+# only receives the secrets that game uses. The Pokémon dex is exported from upstream Pokémon
+# Showdown code in its own job with no permissions and no secrets; the Pokémon data job only
+# reads and validates the JSON it uploads.
 name: Data + Deploy
 
 on:
@@ -24,7 +30,7 @@ on:
   workflow_dispatch:
     inputs:
       games:
-        description: 'Games to refresh: "all", "none" (rebuild only) or a comma list (hots,mtga,pokemon)'
+        description: 'Games to refresh: "all", "none" (rebuild only) or a comma list of game ids (see src/core/game.ts GAME_IDS)'
         type: string
         default: all
       force_deploy:
@@ -45,49 +51,83 @@ env:
   SITE_URL: https://jollykrampus.github.io/whetstone/
 
 jobs:
+  # The game list and per-game timeouts come from the registry (scripts/plan.ts), so a new game
+  # joins the daily run without editing this file.
   plan:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+    permissions:
+      contents: read
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
       games: ${{ steps.plan.outputs.games }}
       run_data: ${{ steps.plan.outputs.run_data }}
+      pokemon: ${{ steps.plan.outputs.pokemon }}
+      showdown_script: ${{ steps.plan.outputs.showdown_script }}
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # Cone mode: the listed directories plus the root files (.node-version).
+          sparse-checkout: |
+            src/core
+            src/games
+            scripts
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+
       - name: Choose games and per-game timeouts
         id: plan
         env:
           EVENT: ${{ github.event_name }}
           GAMES: ${{ inputs.games }}
         run: |
-          set -euf
-          all="hots mtga pokemon"
-          sel=""
-          if [ "$EVENT" = "push" ] || [ "${GAMES:-}" = "none" ]; then
-            sel=""
-          elif [ -z "${GAMES:-}" ] || [ "$GAMES" = "all" ]; then
-            sel="$all"
-          else
-            for g in $(printf '%s' "$GAMES" | tr ',' ' '); do
-              case " $all " in
-                *" $g "*) sel="$sel $g" ;;
-                *) echo "::error::Unknown game '$g' (expected hots, mtga, pokemon, all or none)"; exit 1 ;;
-              esac
-            done
-          fi
-          matrix=$(jq -cn --arg sel "$sel" '{"hots":90,"mtga":30,"pokemon":45} as $t
-            | {include: [$sel | split(" ") | .[] | select(length > 0) | {game: ., timeout: $t[.]}]}')
-          games=$(printf '%s' "$sel" | xargs | tr ' ' ',')
-          {
-            echo "matrix=$matrix"
-            echo "games=$games"
-            if [ -n "$games" ]; then echo "run_data=true"; else echo "run_data=false"; fi
-          } >> "$GITHUB_OUTPUT"
-          echo "games: ${games:-none}"
+          node scripts/plan.ts --event "$EVENT" --games "${GAMES:-}"
+          # The isolated export job runs once the Pokémon pipeline ships its export script.
+          if [ -f src/games/pokemon/pipeline/showdown/export-job.ts ]; then echo "showdown_script=true" >> "$GITHUB_OUTPUT"; fi
+
+  # Builds the Pokémon Champions dex from Pokémon Showdown's source at the commit pinned in the
+  # repository and uploads only the exported JSON. This job runs third-party code, so it has no
+  # token permissions, no secrets and no git credentials; the Pokémon data job validates its
+  # output (RawDexExportSchema) before using it. Runs once the export script exists.
+  showdown-export:
+    name: showdown export (isolated)
+    needs: plan
+    if: needs.plan.outputs.pokemon == 'true' && needs.plan.outputs.showdown_script == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions: {}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - run: npm ci
+
+      - name: Export the dex from the pinned Showdown commit
+        run: node src/games/pokemon/pipeline/showdown/export-job.ts --out showdown-export
+
+      - name: Upload the export
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: showdown-export
+          path: showdown-export/
+          retention-days: 1
+          if-no-files-found: error
 
   data:
     name: data (${{ matrix.game }})
-    needs: plan
-    if: needs.plan.outputs.run_data == 'true'
+    needs: [plan, showdown-export]
+    # Runs even when the isolated export failed or was skipped: the Pokémon pipeline then keeps
+    # its last-good dex rather than building upstream code itself.
+    if: ${{ !cancelled() && needs.plan.result == 'success' && needs.plan.outputs.run_data == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: ${{ matrix.timeout }}
     permissions:
@@ -98,7 +138,7 @@ jobs:
     env:
       GAME: ${{ matrix.game }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -115,14 +155,27 @@ jobs:
 
       - name: Check out last-good data
         if: steps.branch.outputs.exists == 'true'
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: data
           path: data
           sparse-checkout: current
           persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      # Cone mode always brings the branch's root files. The run writes a fresh status.json; if
+      # it dies first, no stale copy may be uploaded as today's result (publish.ts also checks).
+      - name: Drop the branch's status file
+        run: rm -f data/status.json
+
+      - name: Download the isolated Showdown export
+        if: matrix.game == 'pokemon' && needs.showdown-export.result == 'success'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        continue-on-error: true
+        with:
+          name: showdown-export
+          path: showdown-export
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .node-version
           cache: npm
@@ -133,22 +186,21 @@ jobs:
         id: run
         run: node pipeline/run.ts --game "$GAME" --out data
         env:
-          # Unset secrets arrive as empty strings; the pipeline marks those sources "disabled".
-          HP_MODE: ${{ vars.HP_MODE }}
-          HP_API_KEY: ${{ secrets.HP_API_KEY }}
-          YT_API_KEY: ${{ secrets.YT_API_KEY }}
-          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
-          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+          # Each game gets only its own secrets (the runner also passes a game only the variables
+          # its registry entry lists). Unset secrets arrive as empty strings; the pipeline marks
+          # those sources "disabled".
+          YT_API_KEY: ${{ matrix.game == 'hots' && secrets.YT_API_KEY || '' }}
           LIQUIPEDIA_UA_CONTACT: ${{ vars.LIQUIPEDIA_UA_CONTACT }}
+          SHOWDOWN_EXPORT: ${{ matrix.game == 'pokemon' && format('{0}/showdown-export/export.json', github.workspace) || '' }}
           # The job's own read-only token: api.github.com calls (heroes-data2 releases, heroes-images
           # tags and trees, the Showdown commit) get 1,000 requests/hour instead of 60 per runner IP.
-          # pipeline/http.ts sends it to api.github.com only, never to logs or caches.
+          # pipeline/http.ts sends it to api.github.com only, never to games, logs or caches.
           GITHUB_TOKEN: ${{ github.token }}
 
       # Uploaded even when the run failed: status.json tells publish to keep last-good data.
       - name: Upload open data (A, A-SA, history, status)
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: data-${{ matrix.game }}
           path: |
@@ -158,22 +210,24 @@ jobs:
           retention-days: 7
           if-no-files-found: warn
 
-      - name: Pack private data (B, C)
+      # Always a bundle after a successful run, an empty one when there is nothing to ship, so the
+      # build never restores older private data for this game.
+      - name: Pack private data (B, C, D)
         if: steps.run.outcome == 'success'
         run: node pipeline/private.ts pack --dir "data/private/$GAME" --out "private-$GAME.wsb"
         env:
           DATA_ARTIFACT_KEY: ${{ secrets.DATA_ARTIFACT_KEY }}
 
-      # One day of retention keeps Twitch data inside its 24 h cache limit.
+      # One day of retention keeps short-lived data inside its cache limits.
       - name: Upload private data
         if: steps.run.outcome == 'success'
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: private-${{ matrix.game }}
           path: private-${{ matrix.game }}.wsb
           retention-days: 1
           compression-level: 0
-          if-no-files-found: ignore
+          if-no-files-found: error
 
   publish:
     needs: [plan, data]
@@ -186,13 +240,15 @@ jobs:
       changed: ${{ steps.publish.outputs.changed }}
       deploy: ${{ steps.publish.outputs.deploy }}
       failed: ${{ steps.publish.outputs.failed }}
+      degraded: ${{ steps.publish.outputs.degraded }}
+      alert: ${{ steps.publish.outputs.alert }}
       sha: ${{ steps.push.outputs.sha }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .node-version
 
@@ -209,17 +265,19 @@ jobs:
 
       - name: Check out the data branch
         if: steps.branch.outputs.exists == 'true'
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: data
           path: .data-store
+          persist-credentials: false
 
-      # First run: a second checkout gets push credentials, then becomes an empty orphan branch.
+      # First run: an empty workspace that becomes the orphan data branch.
       - name: Check out a workspace for a new data branch
         if: steps.branch.outputs.exists != 'true'
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: .data-store
+          persist-credentials: false
 
       - name: Start the orphan data branch
         if: steps.branch.outputs.exists != 'true'
@@ -228,7 +286,7 @@ jobs:
 
       # A job that died before uploading leaves no artifact; publish.ts then keeps last-good data.
       - name: Download open data
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         continue-on-error: true
         with:
           pattern: data-*
@@ -240,11 +298,13 @@ jobs:
           GAMES: ${{ needs.plan.outputs.games }}
         run: node pipeline/publish.ts --store .data-store --artifacts artifacts --games "$GAMES" --live-manifest "${SITE_URL}data/manifest.json"
 
+      # The token is handed to git for this one push only (never written to .git/config).
       - name: Commit and push
         id: push
         working-directory: .data-store
         env:
           SUMMARY: ${{ steps.publish.outputs.summary }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -253,7 +313,9 @@ jobs:
             echo "Nothing to commit."
           else
             git commit -q -m "data: $(date -u +%Y-%m-%dT%H:%MZ) $SUMMARY"
-            git push -q origin HEAD:refs/heads/data
+            auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+            echo "::add-mask::$auth"
+            git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push -q "https://github.com/$GITHUB_REPOSITORY.git" HEAD:refs/heads/data
           fi
           echo "sha=$(git rev-parse --verify -q HEAD || true)" >> "$GITHUB_OUTPUT"
 
@@ -273,7 +335,7 @@ jobs:
     env:
       WHETSTONE_DATA_DIR: data
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -291,33 +353,30 @@ jobs:
       # Without a data branch yet, the build falls back to fixtures/ (src/lib/datadir.ts).
       - name: Check out published data
         if: steps.branch.outputs.exists == 'true'
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.publish.outputs.sha || 'data' }}
           path: data
           sparse-checkout: current
           persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .node-version
           cache: npm
 
       - run: npm ci
 
-      # Newest unexpired private-<game> artifact of a scheduled/dispatched run of this workflow
-      # (this run's, or the last good one for games that failed or on push builds).
-      - name: Restore private data (B, C)
+      # Newest unexpired private-<game> artifact of a scheduled/dispatched run of this workflow:
+      # this run's (an empty bundle clears the game's private data), or the last good one for
+      # games that failed or on push builds. An unreadable bundle only costs that game its B/C data.
+      - name: Restore private data (B, C, D)
         run: node pipeline/private.ts restore --repo "$GITHUB_REPOSITORY" --dir data/private
         env:
           GH_TOKEN: ${{ github.token }}
           DATA_ARTIFACT_KEY: ${{ secrets.DATA_ARTIFACT_KEY }}
 
-      - name: Heroes Profile kill switch (HP_MODE is not "on")
-        if: vars.HP_MODE != 'on'
-        run: node pipeline/private.ts purge --dir data/private --custody B
-
-      - uses: actions/cache@v6
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: node_modules/.astro
           key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
@@ -326,7 +385,7 @@ jobs:
       - name: Build (stage data, astro build, service worker)
         run: npm run build
 
-      - uses: actions/upload-pages-artifact@v5
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: dist
 
@@ -347,10 +406,10 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
 
   report:
-    needs: [plan, data, publish, build, deploy]
+    needs: [plan, showdown-export, data, publish, build, deploy]
     if: ${{ always() && github.event_name != 'push' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -361,21 +420,28 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
     steps:
+      # A failed or cancelled job opens (or comments on) the issue. So does a source that has served
+      # last-good data for several runs in a row (publish's "alert"), although its game succeeded.
+      # The issue is only closed when nothing failed and no source is degraded.
       - name: Open, update or close the pipeline-failure issue
         env:
           FAILED: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
           FAILED_GAMES: ${{ needs.publish.outputs.failed }}
+          DEGRADED: ${{ needs.publish.outputs.degraded }}
+          ALERT: ${{ needs.publish.outputs.alert }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           gh label create pipeline-failure --color B60205 --description "The daily data pipeline failed" >/dev/null 2>&1 || true
           n=$(gh issue list --label pipeline-failure --state open --limit 1 --json number --jq '.[0].number // empty')
-          if [ "$FAILED" = "true" ]; then
-            body=$(printf 'Run: %s\nFailed games: %s\n\nLast-good data stays live. Recovery steps: docs/DATA.md.' "$RUN_URL" "${FAILED_GAMES:-see the run}")
+          if [ "$FAILED" = "true" ] || [ -n "$ALERT" ]; then
+            body=$(printf 'Run: %s\nFailed games: %s\nSources serving last-good data (game:source(runs in a row)): %s\n\nLast-good data stays live. Recovery steps: docs/DATA.md.' "$RUN_URL" "${FAILED_GAMES:-none}" "${DEGRADED:-none}")
             if [ -n "$n" ]; then
               gh issue comment "$n" --body "$body"
             else
               gh issue create --title "Daily data pipeline failed" --label pipeline-failure --body "$body"
             fi
+          elif [ -n "$DEGRADED" ]; then
+            echo "Degraded sources ($DEGRADED): leaving any open pipeline-failure issue open."
           elif [ -n "$n" ]; then
             gh issue close "$n" --comment "Recovered in $RUN_URL"
           fi

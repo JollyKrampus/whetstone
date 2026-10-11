@@ -1,0 +1,118 @@
+---
+/**
+ * Offline fallback (UX-5). scripts/sw.ts precaches this page and serves it whenever a navigation
+ * fails without a saved copy, so an unvisited page shows this instead of the browser's network
+ * error. The script lists the pages the service worker has saved on this device. Not in the
+ * sitemap (astro.config.mjs) and noindex.
+ */
+import { withBase } from '../games/registry.ts';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Offline" description="You're offline and this page isn't saved on this device yet." noindex>
+  <section class="container off" aria-labelledby="off-title">
+    <p class="kicker">Offline</p>
+    <h1 id="off-title">You're offline.</h1>
+    <p class="off__lead">
+      This page isn't saved on this device yet, and the network can't be reached right now. Pages and tools you opened
+      before keep working without a connection.
+    </p>
+    <div class="off__actions">
+      <button class="btn btn--primary" type="button" data-offline-retry>Try again</button>
+      <a class="btn" href={withBase()}>Home</a>
+    </div>
+    <section class="off__saved" aria-labelledby="off-saved-title" data-offline-saved hidden>
+      <h2 id="off-saved-title">Saved on this device</h2>
+      <ul class="off__list" data-offline-list></ul>
+    </section>
+  </section>
+</Base>
+
+<script>
+  import { OFFLINE_PATH, SW_CACHES } from '../components/offline.ts';
+
+  const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+  const MAX = 40;
+
+  document.querySelector<HTMLButtonElement>('[data-offline-retry]')?.addEventListener('click', () => location.reload());
+
+  /** Page title from a saved copy, without the site suffix; falls back to the path. */
+  async function titleOf(res: Response | undefined, path: string): Promise<string> {
+    try {
+      const html = res ? await res.text() : '';
+      const m = /<title>([^<]*)<\/title>/i.exec(html);
+      const t = m?.[1]?.replace(/\s*·\s*Whetstone.*$/, '').trim();
+      if (t) return new DOMParser().parseFromString(t, 'text/html').documentElement.textContent ?? t;
+    } catch {
+      // fall through to the path
+    }
+    return path.slice(base.length).replace(/\/$/, '').split('/').join(' › ') || 'Home';
+  }
+
+  async function listSaved(): Promise<void> {
+    if (!('caches' in window)) return;
+    const section = document.querySelector<HTMLElement>('[data-offline-saved]');
+    const list = document.querySelector<HTMLUListElement>('[data-offline-list]');
+    if (!section || !list) return;
+    let cache: Cache;
+    try {
+      cache = await caches.open(SW_CACHES.pages);
+    } catch {
+      return;
+    }
+    const requests = (await cache.keys())
+      .map((req) => new URL(req.url))
+      .filter((url) => url.origin === location.origin && url.pathname.startsWith(base) && url.pathname !== `${base}${OFFLINE_PATH}`)
+      .sort((a, b) => a.pathname.localeCompare(b.pathname))
+      .slice(0, MAX);
+    if (requests.length === 0) return;
+    for (const url of requests) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = url.pathname;
+      a.textContent = await titleOf(await cache.match(url.href), url.pathname);
+      li.append(a);
+      list.append(li);
+    }
+    section.hidden = false;
+  }
+
+  void listSaved();
+</script>
+
+<style>
+  .off {
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+    padding-block: var(--sp-8);
+    max-width: 48rem;
+  }
+
+  .off__lead {
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+
+  .off__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  .off__saved {
+    display: grid;
+    gap: var(--sp-3);
+    margin-top: var(--sp-4);
+  }
+
+  .off__saved h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .off__list {
+    display: grid;
+    gap: var(--sp-2);
+    padding-left: 1.25rem;
+  }
+</style>

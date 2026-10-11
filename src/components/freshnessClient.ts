@@ -5,7 +5,7 @@
  * per-source status). Imported by both components; Vite runs it once per page.
  */
 import { formatDateTimeUTC, hoursBetween, relativeTime } from '../core/format.ts';
-import { levelForAge } from '../core/freshness.ts';
+import { badgeLevel, levelForAge } from '../core/freshness.ts';
 import { STATE_WORD } from './freshness.ts';
 
 function refresh() {
@@ -21,7 +21,7 @@ function refresh() {
   for (const badge of document.querySelectorAll<HTMLElement>('[data-fresh]')) {
     const at = badge.dataset.generatedAt;
     if (!at || badge.dataset.state === 'broken' || badge.dataset.state === 'unknown') continue;
-    const level = levelForAge(hoursBetween(at, now));
+    const level = badgeLevel(at, badge.dataset.degradedSince ?? null, now);
     badge.dataset.state = level;
     const word = badge.querySelector<HTMLElement>('[data-fresh-label]');
     if (word) {

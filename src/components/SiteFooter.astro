@@ -1,6 +1,6 @@
 ---
 import type { GameId } from '../core/game.ts';
-import { SITE, gameById, withBase } from '../games/registry.ts';
+import { SITE, gameById, games, listNames, rightsHolders, withBase } from '../games/registry.ts';
 import SourceAttribution from './SourceAttribution.astro';
 
 interface Props {
@@ -13,16 +13,11 @@ const current = game ? gameById(game) : null;
 const hasFooterCredits = current?.sources.some((s) => s.rule === 'footer') ?? false;
 
 /*
- * Non-affiliation and rights notices. Wording follows each rights holder's published fan
- * guidance (Blizzard copyright notices page, Wizards Fan Content Policy). Order puts the
+ * Rights and trademark notices come from each game's registry entry (GamePresentation.legalNotice;
+ * wording follows the rights holder's published fan guidance). Every page carries all of them,
  * current game first.
  */
-const notices: { game: GameId; heading: string }[] = [
-  { game: 'hots', heading: 'Heroes of the Storm' },
-  { game: 'mtga', heading: 'Magic: The Gathering Arena' },
-  { game: 'pokemon', heading: 'Pokémon Champions' },
-];
-const ordered = game ? [...notices.filter((n) => n.game === game), ...notices.filter((n) => n.game !== game)] : notices;
+const ordered = game ? [...games.filter((g) => g.id === game), ...games.filter((g) => g.id !== game)] : games;
 ---
 
 <footer class="site-footer">
@@ -49,6 +44,7 @@ const ordered = game ? [...notices.filter((n) => n.game === game), ...notices.fi
           <li><a href={withBase('about/')}>About</a></li>
           <li><a href={withBase('credits/')}>Credits</a></li>
           <li><a href={withBase('privacy/')}>Privacy</a></li>
+          <li><a href={withBase('licenses.txt')}>Software licences</a></li>
           <li><a href={SITE.repo} rel="noopener">Source code</a></li>
           <li><a href={SITE.feedback} rel="noopener">Feedback</a></li>
         </ul>
@@ -57,36 +53,14 @@ const ordered = game ? [...notices.filter((n) => n.game === game), ...notices.fi
       <section class="site-footer__legal" aria-label="Legal notices">
         <p>
           <strong>Whetstone is an unofficial fan project.</strong> It is not affiliated with, endorsed, sponsored or approved
-          by Blizzard Entertainment, Wizards of the Coast, The Pokémon Company, Nintendo, Creatures Inc. or GAME FREAK inc.,
-          and is not affiliated with heroescounters.com or Heroes Profile.
+          by {listNames(rightsHolders(), 'or')}, and is not affiliated with heroescounters.com.
         </p>
         <dl class="site-footer__notices">
           {
-            ordered.map((n) => (
-              <div class="site-footer__notice" data-current={n.game === game ? 'true' : undefined}>
-                <dt>{n.heading}</dt>
-                {n.game === 'hots' && (
-                  <dd>
-                    ©2014 Blizzard Entertainment, Inc. All rights reserved. Heroes of the Storm is a trademark of Blizzard
-                    Entertainment, Inc. Game content and materials are used under Blizzard's fan-site terms for
-                    non-commercial use.
-                  </dd>
-                )}
-                {n.game === 'mtga' && (
-                  <dd>
-                    Whetstone is unofficial Fan Content permitted under the{' '}
-                    <a href="https://company.wizards.com/en/legal/fancontentpolicy" rel="noopener">Fan Content Policy</a>.
-                    Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast.
-                    ©Wizards of the Coast LLC.
-                  </dd>
-                )}
-                {n.game === 'pokemon' && (
-                  <dd>
-                    Pokémon and all related names are trademarks of Nintendo, Creatures Inc., GAME FREAK inc. and The
-                    Pokémon Company. ©Nintendo, Creatures Inc., GAME FREAK inc., The Pokémon Company. Used here for
-                    identification only.
-                  </dd>
-                )}
+            ordered.map((g) => (
+              <div class="site-footer__notice" data-game={g.id} data-current={g.id === game ? 'true' : undefined}>
+                <dt>{g.legalNotice.heading}</dt>
+                <dd>{g.legalNotice.body.map((part) => (typeof part === 'string' ? part : <a href={part.href} rel="noopener">{part.text}</a>))}</dd>
               </div>
             ))
           }

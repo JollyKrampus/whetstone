@@ -16,7 +16,7 @@ import Base from '../layouts/Base.astro';
       {
         games.map((g) => (
           <li>
-            <a class="btn" href={navHref(g)} style={`--accent: var(${g.accent})`}>
+            <a class="btn" href={navHref(g)} data-game={g.id}>
               {g.name}
             </a>
           </li>

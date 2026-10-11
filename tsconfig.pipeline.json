@@ -11,6 +11,6 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["pipeline", "scripts", "src/games/*/pipeline", "src/games/hots/theory", "src/games/*/fixtures/*.ts"],
+  "include": ["types/node-import-meta.d.ts", "pipeline", "scripts", "src/games/*/pipeline", "src/games/hots/theory", "src/games/*/fixtures/*.ts"],
   "exclude": ["node_modules", "dist", "data", "**/*.test.ts"]
 }

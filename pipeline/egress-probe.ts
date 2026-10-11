@@ -42,8 +42,6 @@ export const PROBES: readonly Probe[] = [
   { name: 'jsDelivr API (heroes-images tags)', url: 'https://data.jsdelivr.com/v1/packages/gh/HeroesToolChest/heroes-images', expect: [200] },
   { name: 'Nexus Compendium API', url: 'https://nexuscompendium.com/api/currently/herorotation', expect: [200] },
   { name: 'Liquipedia MediaWiki API', url: 'https://liquipedia.net/heroes/api.php?action=query&meta=siteinfo&format=json', expect: [200] },
-  // 401 is the healthy answer without a key; a challenge page would be 403/503 HTML.
-  { name: 'Heroes Profile API v1', url: 'https://www.heroesprofile.com/api/external/v1/patches', expect: [401] },
   // Without a key the API answers 403 JSON (400 for some errors); only used when YT_API_KEY is set.
   { name: 'YouTube Data API', url: 'https://www.googleapis.com/youtube/v3/videos?part=id&id=probe', expect: [400, 403] },
   // MTG Arena

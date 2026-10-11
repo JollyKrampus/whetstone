@@ -8,7 +8,7 @@ Whetstone is a free, static, multi-game **meta companion**: counters, drafts, ti
 
 | Game | Route | What you get |
 |---|---|---|
-| Heroes of the Storm | `/hots/` | Data-driven hero grid (search by name or nickname, role/franchise filters, free rotation, your owned heroes and favourites). Hero pages with strong against / weak against / good with lists, best maps, talents, abilities, patch history and guides: statistics when licensed Heroes Profile data is enabled, otherwise the theory layer, which reads every ability and talent and adds hand-checked matchups ([docs/THEORY.md](docs/THEORY.md)). Map pages, true-order Storm League draft helper with pick/ban suggestions, role guardrails and share links, free-mode draft, ARAM pick-1-of-3 helper, tier list (pro presence and patch momentum until statistics exist), patch notes, "catch up since you last played", pro presence from Liquipedia, live/creator links. heroescounters.com-style URLs (`/hots/hero/li-ming/`, `/hots/map/cursedhollow/`) redirect. |
+| Heroes of the Storm | `/hots/` | Data-driven hero grid (search by name or nickname, role/franchise filters, free rotation, your owned heroes and favourites). Hero pages with strong against / weak against / good with lists, best maps, talents, abilities, patch history and guides, from Whetstone's own theory layer, which reads every ability and talent and adds hand-checked matchups ([docs/THEORY.md](docs/THEORY.md)). Map pages, true-order Storm League draft helper with pick/ban suggestions, role guardrails and share links, free-mode draft, ARAM pick-1-of-3 helper, tier list (pro presence and patch momentum until statistics exist), patch notes, "catch up since you last played", pro presence from Liquipedia, live/creator links. heroescounters.com-style URLs (`/hots/hero/li-ming/`, `/hots/map/cursedhollow/`) redirect. |
 | MTG Arena | `/mtga/` | Deck analyzer on [grindstone-mcp](https://github.com/JollyKrampus/grindstone-mcp)'s core, running in your browser: legality in every Arena format, curve, mana, roles, power tier with its breakdown, sample hands and mulligan simulation, wildcard cost, budget upgrades with undo, comparison with curated or your own meta lists, share links. 17Lands Limited ratings per set and format, Scryfall-style card search, meta lists. |
 | Pokémon Champions | `/pokemon/` | Regulation M-C VGC Doubles: usage meta with regulation countdown, tier list, Pokémon pages (Stat Points, usage, sets, teammates, checks), team builder with Showdown paste import/export (EVs converted to Stat Points), legality, type matrix, coverage and threat list, damage calc (@smogon/calc in a worker), speed tiers with Tailwind/Trick Room/Scarf, Limitless tournament teams, team-preview assistant (bring 4, leads). |
 
@@ -26,12 +26,13 @@ sources ──► data job per game (pipeline/run.ts) ──► data branch (ope
 - `src/games/<game>/pipeline/` fetches and transforms one game's sources; `pipeline/run.ts` validates, writes and hashes the result and keeps the last good data when anything fails.
 - The public, orphan `data` branch holds `current/<game>/` (open data), `history/YYYY/MM/DD/<game>.json.gz` and `status.json`.
 - `pipeline/stage.ts` copies browser shards into `public/data/<game>/` under content-hashed names and writes `public/data/manifest.json`.
-- Astro builds every page statically; interactive tools are Preact islands. A Workbox service worker keeps the site usable offline.
+- Astro builds every page statically; interactive tools are Preact islands. Every page carries a Content-Security-Policy, and each build writes `/licenses.txt` with the licence of every third-party package the site ships. A Workbox service worker keeps visited pages and tools usable offline and shows an offline page for the rest.
+- Games are registered in one place: `GAME_IDS` (`src/core/game.ts`) plus the registry entry in `src/games/registry.ts`. Header, footer notices, theme accents, the privacy page, the data workflow's matrix and the pipeline tools all read from there.
 
 ### CI and the daily data run
 
-- **CI** (`.github/workflows/ci.yml`, every push and pull request): lint, type-check (`astro check` plus `tsc` with Node's own resolution for the pipelines), unit tests, the HotS theory validator, a build from the committed `fixtures/`, the Playwright suite, then a second build in statistics mode (`WHETSTONE_FIXTURE_PRIVATE=1`, synthetic Heroes Profile samples) with the HotS page, draft and ARAM specs against it. No secrets, no network data.
-- **Data + Deploy** (`.github/workflows/data-deploy.yml`, daily at 10:17 UTC, on push to `main` and by hand): one data job per game (`node pipeline/run.ts --game <game>` with the workflow's own `GITHUB_TOKEN` for GitHub API calls and any optional secrets), a publish job that commits open data to the `data` branch, a build job that restores it (plus the short-lived encrypted class-B artifact when Heroes Profile is on), stages and builds the site, then deploy to GitHub Pages and a report job that opens or closes a `pipeline-failure` issue. Pushes rebuild from the `data` branch without fetching.
+- **CI** (`.github/workflows/ci.yml`, every push and pull request): lint, type-check (`astro check` plus `tsc` with Node's own resolution for the pipelines), unit tests, the HotS theory validator, a build from the committed `fixtures/`, the Playwright suite, then a second build with the synthetic private samples (`WHETSTONE_FIXTURE_PRIVATE=1`) with the HotS page, draft and ARAM specs against it. No secrets, no network data.
+- **Data + Deploy** (`.github/workflows/data-deploy.yml`, daily at 10:17 UTC, on push to `main` and by hand): a plan job that reads the game list and timeouts from the registry (`scripts/plan.ts`), an isolated job that exports the Pokémon dex from Pokémon Showdown's source with no permissions and no secrets, one data job per game (`node pipeline/run.ts --game <game>` with the workflow's own `GITHUB_TOKEN` for GitHub API calls and only that game's optional secrets), a publish job that commits open data to the `data` branch, a build job that restores it (plus each game's short-lived private artifact), stages and builds the site, then deploy to GitHub Pages and a report job that opens or closes a `pipeline-failure` issue (failed games, or a source stuck on last-good data for two runs). Pushes rebuild from the `data` branch without fetching. Every action is pinned to a commit SHA.
 - **Egress probe** (`.github/workflows/egress-probe.yml`, by hand): one request to every host the pipelines contact, to check that GitHub's runners are not blocked.
 
 The full contract is in [docs/SPEC.md](docs/SPEC.md). Data layout, licences and retention rules are in [docs/DATA.md](docs/DATA.md).
@@ -42,8 +43,12 @@ The full contract is in [docs/SPEC.md](docs/SPEC.md). Data layout, licences and 
 |---|---|---|
 | **A**, open / own | Our own derivations and openly licensed inputs (heroes-data2, Blizzard patch summaries, 17Lands-derived ratings, Smogon/Limitless/Showdown aggregates, curated files) | Public `data` branch, documented JSON |
 | **A-SA**, share-alike | Liquipedia-derived pro data (CC-BY-SA 3.0) | Public `data` branch, separate files |
-| **B**, licensed | Heroes Profile statistics | Never committed. Fetched fresh each run, shipped only inside the site under hashed names, behind the `HP_MODE` kill switch (off by default) |
-| **C**, ephemeral | Twitch and YouTube metadata | Never committed. Shipped only inside the site; the browser hides it after its retention window |
+| **A-NC-SA**, non-commercial share-alike | Data from CC BY-NC-SA wikis | Public `data` branch, separate files |
+| **B**, licensed | Display-only licensed data (none in use) | Never committed. Shipped only inside the site under hashed names, encrypted between workflow jobs |
+| **C**, ephemeral | YouTube video metadata | Never committed. Shipped only inside the site; the browser hides it after its retention window |
+| **D**, community-derived | Aggregates of public posts, in our own words with links | Never committed. Rebuilt every run, shipped only inside the site |
+
+Whetstone owns its tooling: first-party game data, openly licensed data, our own curation and our own analysis; no third-party statistics aggregator.
 
 Player names from tournament or replay sources are stripped at ingest; only aggregates are published.
 
@@ -71,9 +76,9 @@ The site reads game data from, per game: `$WHETSTONE_DATA_DIR/current/<game>`, t
 | `npm run build` | Stage data, build the static site into `dist/`, generate the service worker |
 | `npm run preview` | Serve `dist/` |
 
-Optional credentials for `npm run data` go in a local `.env` file (git-ignored), for example `HP_MODE=on` with `HP_API_KEY=...`, `YT_API_KEY=...`, `TWITCH_CLIENT_ID=...`, `TWITCH_CLIENT_SECRET=...`, and `LIQUIPEDIA_UA_CONTACT=you@example.com` (added to the User-Agent). Every source degrades gracefully when its credential is missing.
+Optional credentials for `npm run data` go in a local `.env` file (git-ignored), for example `YT_API_KEY=...` and `LIQUIPEDIA_UA_CONTACT=you@example.com` (added to the User-Agent). Each game's pipeline only sees the variables its registry entry lists (`pipeline.env` in `src/games/registry.ts`). Every source degrades gracefully when its credential is missing.
 
-To record new fixtures for offline runs and tests: `WHETSTONE_RECORD=1 npm run data -- --game <game>`. Recorded responses land in `src/games/<game>/fixtures/raw/`; trim large ones before committing.
+To record new fixtures for offline runs and tests: `WHETSTONE_RECORD=1 npm run data -- --game <game>`. Recorded responses land in `src/games/<game>/fixtures/raw/`; trim large ones before committing. Record mode never writes class-C responses (video metadata) and applies each source's scrubber (player names become placeholders); check new fixtures for personal data before committing anyway.
 
 ## Testing
 
@@ -84,7 +89,7 @@ npm test               # vitest; always reads fixtures/ (WHETSTONE_FIXTURES=1), 
 npx playwright install chromium
 npm run build && npm run e2e   # Playwright serves dist/ with astro preview on SMOKE_PORT (default 4321)
 
-# statistics mode, as in CI
+# with the synthetic private samples, as in CI
 WHETSTONE_FIXTURE_PRIVATE=1 WHETSTONE_OUT_DIR=.cache/dist-stats npm run build
 WHETSTONE_FIXTURE_PRIVATE=1 WHETSTONE_OUT_DIR=.cache/dist-stats SMOKE_PORT=4322 npx playwright test e2e/hots-pages.spec.ts e2e/hots-draft.spec.ts
 ```
@@ -109,20 +114,20 @@ Once grindstone-mcp 0.2.0 is on npm, switch to the package: add `"grindstone-mcp
 2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
 3. Run the **Egress probe** workflow once to check that every data source answers GitHub's runners.
 4. Run **Data + Deploy** with *Run workflow*. The first run creates the `data` branch and deploys the site; after that it runs daily at 10:17 UTC and on every push to `main`.
-5. Optional: add secrets and variables as described in [docs/OWNER-ACTIONS.md](docs/OWNER-ACTIONS.md), which lists every owner-only step (publishing, Heroes Profile permission and keys, optional sources, open decisions).
+5. Optional: add secrets and variables as described in [docs/OWNER-ACTIONS.md](docs/OWNER-ACTIONS.md), which lists every owner-only step (publishing, optional sources, open decisions).
 
-Failures open (and recoveries close) an issue labelled `pipeline-failure`. The site always keeps serving the last good data.
+Failures open (and recoveries close) an issue labelled `pipeline-failure`. The site always keeps serving the last good data, and its freshness badge says when a source is behind.
 
 ## Credits
 
-Whetstone is built on the work of others. Each page credits the sources whose data it shows; the full list is on the site's credits page.
+Whetstone is built on the work of others. Each page credits the sources whose data it shows; the full list, with each MIT source's copyright line, is on the site's credits page, and `/licenses.txt` carries the licence of every package the site bundles.
 
-- Heroes of the Storm game data and images: [HeroesToolChest](https://github.com/HeroesToolChest) heroes-data2 and heroes-images (MIT); patch notes from Blizzard Entertainment; free rotation from [Nexus Compendium](https://nexuscompendium.com); pro drafts from [Liquipedia](https://liquipedia.net/heroes/) (CC-BY-SA 3.0); statistics, when enabled, provided by [Heroes Profile](https://www.heroesprofile.com).
+- Heroes of the Storm game data and images: [HeroesToolChest](https://github.com/HeroesToolChest) heroes-data2 and heroes-images (MIT); patch notes from Blizzard Entertainment; free rotation from [Nexus Compendium](https://nexuscompendium.com); pro drafts from [Liquipedia](https://liquipedia.net/heroes/) (CC-BY-SA 3.0); guide video details through the YouTube API Services (optional).
 - MTG Arena: card data and images from [Scryfall](https://scryfall.com); Limited data from [17Lands](https://www.17lands.com/public_datasets) (CC BY 4.0); analysis engine from [grindstone-mcp](https://github.com/JollyKrampus/grindstone-mcp) (MIT).
 - Pokémon Champions: [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) data (MIT), [Smogon](https://www.smogon.com/stats/) usage statistics, [Limitless](https://play.limitlesstcg.com) tournament results, and [@smogon/calc](https://github.com/smogon/damage-calc) (MIT).
 
-Whetstone is a non-commercial fan project. It is not affiliated with or endorsed by Blizzard Entertainment, Wizards of the Coast, The Pokémon Company, Nintendo, Game Freak, heroescounters.com or Heroes Profile. Heroes of the Storm is a trademark of Blizzard Entertainment, Inc. Magic: The Gathering is a trademark of Wizards of the Coast LLC; Whetstone is unofficial Fan Content permitted under the Fan Content Policy. Pokémon is a trademark of Nintendo, Creatures Inc. and GAME FREAK inc.
+Whetstone is a non-commercial fan project. It is not affiliated with or endorsed by Blizzard Entertainment, Wizards of the Coast, The Pokémon Company, Nintendo, Game Freak or heroescounters.com. Heroes of the Storm is a trademark of Blizzard Entertainment, Inc. Magic: The Gathering is a trademark of Wizards of the Coast LLC; Whetstone is unofficial Fan Content permitted under the Fan Content Policy. Pokémon is a trademark of Nintendo, Creatures Inc. and GAME FREAK inc.
 
 ## Licence
 
-Code: [MIT](LICENSE). Data on the `data` branch keeps the licence of its sources (see [docs/DATA.md](docs/DATA.md)); Liquipedia-derived files are CC-BY-SA 3.0.
+Code: [MIT](LICENSE). Data on the `data` branch keeps the licence of its sources (its `NOTICE.md` lists them, see also [docs/DATA.md](docs/DATA.md)); Whetstone's own data there is MIT, and Liquipedia-derived files are CC-BY-SA 3.0.

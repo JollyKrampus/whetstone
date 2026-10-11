@@ -17,12 +17,12 @@ describe('egress probe', () => {
   });
 
   it('accepts the expected status and flags anything else', async () => {
-    const hp = { name: 'HP', url: 'https://www.heroesprofile.com/api/external/v1/patches', expect: [401] };
-    const ok = await runProbe(hp, 'ua', fetchReturning(new Response('{}', { status: 401, headers: { 'content-type': 'application/json' } })));
-    expect(ok).toMatchObject({ ok: true, status: 401, contentType: 'application/json' });
-    const blocked = await runProbe(hp, 'ua', fetchReturning(new Response('<html>Just a moment...</html>', { status: 403 })));
+    const yt = { name: 'YouTube', url: 'https://www.googleapis.com/youtube/v3/videos?part=id&id=probe', expect: [400, 403] };
+    const ok = await runProbe(yt, 'ua', fetchReturning(new Response('{}', { status: 403, headers: { 'content-type': 'application/json' } })));
+    expect(ok).toMatchObject({ ok: true, status: 403, contentType: 'application/json' });
+    const blocked = await runProbe(yt, 'ua', fetchReturning(new Response('<html>Just a moment...</html>', { status: 403 })));
     expect(blocked).toMatchObject({ ok: false, challenge: true, note: 'bot challenge' });
-    const down = await runProbe(hp, 'ua', (async () => Promise.reject(new TypeError('fetch failed'))) as unknown as typeof fetch);
+    const down = await runProbe(yt, 'ua', (async () => Promise.reject(new TypeError('fetch failed'))) as unknown as typeof fetch);
     expect(down).toMatchObject({ ok: false, status: 0, note: 'fetch failed' });
   });
 });

@@ -59,36 +59,57 @@
 }
 
 /* ---------- ScoreRing ---------- */
+/*
+ * A 300° gauge open at the bottom, drawn by one conic-gradient on ::before (masked to a ring) and
+ * the number as the element's text. ScoreRing.tsx sets --score (1-100) and --ring-size.
+ * The arc starts at 210° (bottom left) and sweeps clockwise: score × 3° filled, the rest of the
+ * 300° is track, the last 60° stay open.
+ */
 .score-ring {
+  --ring-size: 44px;
+  --ring-fill: var(--accent);
+  --ring-track: var(--surface-3);
+  position: relative;
+  display: inline-grid;
+  place-items: center;
   flex: none;
-  overflow: visible;
+  width: var(--ring-size);
+  height: var(--ring-size);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: calc(var(--ring-size) * 0.295);
+  font-weight: 750;
+  line-height: 1;
 }
-.score-ring__track {
-  stroke: var(--surface-3);
-}
-.score-ring__fill {
-  stroke: var(--accent);
-}
-.score-ring--positive .score-ring__fill {
-  stroke: var(--positive);
-}
-.score-ring--negative .score-ring__fill {
-  stroke: var(--negative);
-}
-.score-ring--neutral .score-ring__fill {
-  stroke: var(--steel-2);
-}
-.score-ring--muted .score-ring__fill {
-  stroke: var(--steel-1);
+.score-ring::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--ring-size) * 0.045);
+  border-radius: 50%;
+  background: conic-gradient(
+    from 210deg,
+    var(--ring-fill) calc(var(--score, 50) * 3deg),
+    var(--ring-track) 0 300deg,
+    transparent 0
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--ring-size) * 0.091 - 0.5px), #000 calc(100% - var(--ring-size) * 0.091));
+  mask: radial-gradient(farthest-side, transparent calc(100% - var(--ring-size) * 0.091 - 0.5px), #000 calc(100% - var(--ring-size) * 0.091));
 }
 .score-ring__value {
-  fill: var(--text);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 750;
+  position: relative;
 }
-.score-ring--muted .score-ring__value {
-  fill: var(--text-muted);
+.score-ring--positive {
+  --ring-fill: var(--positive);
+}
+.score-ring--negative {
+  --ring-fill: var(--negative);
+}
+.score-ring--neutral {
+  --ring-fill: var(--steel-2);
+}
+.score-ring--muted {
+  --ring-fill: var(--steel-1);
+  color: var(--text-muted);
 }
 
 /* ---------- ReasonList ---------- */
@@ -168,7 +189,7 @@
   width: 100%;
   min-height: 3rem;
   padding: 0 3rem 0 2.6rem;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius);
   background: var(--surface);
   color: var(--text);

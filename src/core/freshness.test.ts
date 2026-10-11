@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { GameMeta, SourceStatus } from './game.ts';
-import { FRESHNESS, freshness, levelForAge } from './freshness.ts';
+import { FRESHNESS, badgeLevel, freshness, levelForAge } from './freshness.ts';
 
 const NOW = '2026-10-08T12:00:00Z';
 
@@ -55,17 +55,20 @@ describe('freshness', () => {
       meta('2026-10-08T10:17:00Z', [
         { id: 'heroes-data2', fetchedAt: '2026-10-08T10:15:00Z', status: 'ok' },
         { id: 'blizzard-news', fetchedAt: '2026-10-06T10:00:00Z', status: 'stale', detail: 'HTTP 503' },
-        { id: 'heroesprofile', fetchedAt: null, status: 'disabled', detail: 'HP_MODE=off' },
+        { id: 'youtube', fetchedAt: null, status: 'disabled', detail: 'YT_API_KEY not set' },
         { id: 'nexuscompendium', fetchedAt: null, status: 'ok' },
       ]),
       NOW,
       { names: { 'heroes-data2': 'heroes-data2', 'blizzard-news': 'Blizzard news' } },
     );
-    expect(f.level).toBe('fresh');
+    // The run is fresh, but a source serving 2-day-old data keeps the game from reading as fresh.
+    expect(f.level).toBe('aging');
+    expect(f.label).toBe('Updated 1 h ago; Blizzard news not refreshed since 2 days ago');
+    expect(f.degradedSince).toBe('2026-10-06T10:00:00Z');
     expect(f.sources.map((s) => [s.id, s.level])).toEqual([
       ['heroes-data2', 'fresh'],
       ['blizzard-news', 'aging'],
-      ['heroesprofile', 'disabled'],
+      ['youtube', 'disabled'],
       ['nexuscompendium', 'stale'],
     ]);
     expect(f.sources[1]).toMatchObject({
@@ -74,11 +77,11 @@ describe('freshness', () => {
       detail: 'HTTP 503',
       ageHours: 50,
     });
-    expect(f.sources[2]).toMatchObject({ ageHours: null, label: 'Disabled', detail: 'HP_MODE=off' });
+    expect(f.sources[2]).toMatchObject({ ageHours: null, label: 'Disabled', detail: 'YT_API_KEY not set' });
     expect(f.sources[3]!.label).toBe('Never updated');
     expect('detail' in f.sources[0]!).toBe(false);
     expect(f.degraded).toEqual(['blizzard-news']);
-    expect(f.disabled).toEqual(['heroesprofile']);
+    expect(f.disabled).toEqual(['youtube']);
     expect(f.broken).toEqual([]);
   });
 
@@ -100,5 +103,17 @@ describe('freshness', () => {
     expect(f.broken).toEqual(['liquipedia']);
     expect(f.label).toBe('Some data is unavailable: Liquipedia');
     expect(f.sources[0]).toMatchObject({ level: 'broken', label: 'Failed, no data yet' });
+  });
+});
+
+describe('badgeLevel', () => {
+  it('follows the run time when every source is current', () => {
+    expect(badgeLevel('2026-10-08T10:00:00Z', null, NOW)).toBe('fresh');
+    expect(badgeLevel('2026-10-05T10:00:00Z', null, NOW)).toBe('stale');
+  });
+
+  it('is at least aging while any source serves last-good data, and stale once that data is', () => {
+    expect(badgeLevel('2026-10-08T10:00:00Z', '2026-10-08T09:00:00Z', NOW)).toBe('aging');
+    expect(badgeLevel('2026-10-08T10:00:00Z', '2026-10-05T09:00:00Z', NOW)).toBe('stale');
   });
 });

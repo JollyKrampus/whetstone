@@ -6,7 +6,7 @@ export const pokemon: GameModule = {
   name: 'Pokémon Champions',
   short: 'Pokémon',
   tagline: 'VGC Doubles meta, team builder, damage calc, speed tiers and team preview.',
-  status: 'beta',
+  status: 'live',
   accent: '--accent-pokemon',
   sources: [
     {

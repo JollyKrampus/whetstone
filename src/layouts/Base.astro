@@ -3,8 +3,13 @@
  * Document shell for every page: metadata, pre-paint theme, skip link, header, main, footer.
  * Slots: default (main content), `subheader` (between header and main, e.g. a game bar),
  * `head` (extra <head> tags).
+ *
+ * The two inline scripts (pre-paint theme, service-worker registration) are built as constant
+ * strings so their hashes can go into the page's Content-Security-Policy (src/lib/csp.ts).
  */
 import '../styles/tokens.css';
+// Per-game accent colours generated from src/games/registry.ts (served by astro.config.mjs).
+import 'virtual:whetstone/accents.css';
 import '../styles/global.css';
 import '../styles/components.css';
 import type { GameId } from '../core/game.ts';
@@ -12,6 +17,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { THEME_COLORS, THEME_KEY } from '../components/theme.ts';
 import { BASE, SITE, gameById, withBase } from '../games/registry.ts';
+import { allowInlineScript } from '../lib/csp.ts';
 
 interface Props {
   /** Page title without the site name; omit on the home page. */
@@ -31,6 +37,42 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.origin).href;
 const ogImage = new URL(withBase(image), Astro.site ?? SITE.origin).href;
 const gameName = game ? gameById(game).name : undefined;
 const isProd = import.meta.env.PROD;
+
+// Runs before first paint so the stored theme never flashes the wrong colours.
+const themeScript = allowInlineScript(
+  Astro,
+  `(function () {
+  var key = ${JSON.stringify(THEME_KEY)};
+  var colors = ${JSON.stringify(THEME_COLORS)};
+  var root = document.documentElement;
+  var theme;
+  try {
+    theme = localStorage.getItem(key);
+  } catch (e) {
+    theme = null;
+  }
+  if (theme !== 'light' && theme !== 'dark') {
+    theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  root.setAttribute('data-theme', theme);
+  root.classList.remove('no-js');
+  root.classList.add('js');
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', colors[theme]);
+})();`,
+);
+
+// Offline shell (scripts/sw.ts). Registration failures are harmless: the site works without it.
+const swScript = isProd
+  ? allowInlineScript(
+      Astro,
+      `if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register(${JSON.stringify(withBase('sw.js'))}, { scope: ${JSON.stringify(BASE)} }).catch(function () {});
+  });
+}`,
+    )
+  : null;
 ---
 
 <!doctype html>
@@ -39,24 +81,7 @@ const isProd = import.meta.env.PROD;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content={THEME_COLORS.dark} />
-    <script is:inline define:vars={{ key: THEME_KEY, colors: THEME_COLORS }}>
-      // Runs before first paint so the stored theme never flashes the wrong colours.
-      const root = document.documentElement;
-      let theme;
-      try {
-        theme = localStorage.getItem(key);
-      } catch {
-        theme = null;
-      }
-      if (theme !== 'light' && theme !== 'dark') {
-        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      }
-      root.setAttribute('data-theme', theme);
-      root.classList.remove('no-js');
-      root.classList.add('js');
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', colors[theme]);
-    </script>
+    <script is:inline set:html={themeScript} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -91,18 +116,7 @@ const isProd = import.meta.env.PROD;
       <slot />
     </main>
     <SiteFooter game={game} />
-    {
-      isProd && (
-        <script is:inline define:vars={{ swUrl: withBase('sw.js'), scope: BASE }}>
-          // Offline shell (scripts/sw.ts). Registration failures are harmless: the site works without it.
-          if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-              navigator.serviceWorker.register(swUrl, { scope: scope }).catch(function () {});
-            });
-          }
-        </script>
-      )
-    }
+    {swScript && <script is:inline set:html={swScript} />}
   </body>
 </html>
 

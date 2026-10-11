@@ -247,6 +247,28 @@ describe('offline fixtures and record mode', () => {
     const offline = make({ fetch: stubFetch([]).fetch, offline: true });
     await expect(offline.json('https://nexuscompendium.com/api/currently/herorotation', { fixture: 'nc/rotation' })).resolves.toEqual({ rotation: ['Abathur'] });
   });
+
+  it('never records class-C hosts or requests marked noRecord, but still returns them', async () => {
+    const s = stubFetch([json({ items: ['video'] }), json({ data: ['stream'] }), json({ standings: ['Player'] })]);
+    const live = make({ fetch: s.fetch, record: true });
+    await expect(live.json('https://www.googleapis.com/youtube/v3/videos?id=x&key=k', { fixture: 'youtube/videos-1' })).resolves.toEqual({ items: ['video'] });
+    await expect(live.json('https://api.twitch.tv/helix/streams?game_id=1', { fixture: 'twitch/streams' })).resolves.toEqual({ data: ['stream'] });
+    await expect(live.json('https://play.limitlesstcg.com/api/x', { fixture: 'limitless/x', noRecord: true })).resolves.toEqual({ standings: ['Player'] });
+    expect(existsSync(raw())).toBe(false);
+  });
+
+  it('records the scrubbed body and skips recording when the scrubber throws', async () => {
+    const s = stubFetch([json({ name: 'RealPlayer', wins: 3 }), json({ name: 'Other' })]);
+    const live = make({ fetch: s.fetch, record: true });
+    const scrub = (body: Uint8Array): Uint8Array => new TextEncoder().encode(new TextDecoder().decode(body).replace('RealPlayer', 'Player 1'));
+    await expect(live.json('https://play.limitlesstcg.com/api/s', { fixture: 'limitless/s', scrub })).resolves.toEqual({ name: 'RealPlayer', wins: 3 });
+    expect(readFileSync(path.join(raw(), 'limitless', 's.json'), 'utf8')).toBe('{"name":"Player 1","wins":3}');
+    const boom = (): Uint8Array => {
+      throw new Error('unknown shape');
+    };
+    await live.json('https://play.limitlesstcg.com/api/t', { fixture: 'limitless/t', scrub: boom });
+    expect(existsSync(path.join(raw(), 'limitless', 't.json'))).toBe(false);
+  });
 });
 
 describe('request() for status-driven APIs', () => {

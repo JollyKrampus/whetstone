@@ -137,3 +137,26 @@ export function formatDayUTC(value: TimeInput): string {
   const d = new Date(t);
   return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
+
+/** `2 Dec 2026, 01:59 UTC`: the prose day format plus a time, for deadlines next to formatDayUTC dates. */
+export function formatDayTimeUTC(value: TimeInput): string {
+  const t = toTime(value);
+  if (!Number.isFinite(t)) return MISSING;
+  const d = new Date(t);
+  return `${formatDayUTC(t)}, ${pad2(d.getUTCHours())}:${pad2(d.getUTCMinutes())} UTC`;
+}
+
+/**
+ * A date range in one format, for prose: `9 Sep 2026 to 2 Dec 2026`, or with `endTime`
+ * `9 Sep 2026 to 2 Dec 2026, 01:59 UTC` (one style for both ends, never ISO next to prose).
+ */
+export function formatDayRangeUTC(from: TimeInput, to: TimeInput, opts: { endTime?: boolean } = {}): string {
+  return `${formatDayUTC(from)} to ${opts.endTime ? formatDayTimeUTC(to) : formatDayUTC(to)}`;
+}
+
+const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+
+/** Small counts as words for prose ("five games"); 13 and up stay digits. */
+export function numberWord(n: number): string {
+  return Number.isInteger(n) && n >= 0 && n < NUMBER_WORDS.length ? (NUMBER_WORDS[n] as string) : int(n);
+}

@@ -4,7 +4,7 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { CustodyClass } from '../src/core/game.ts';
 import { buildFileIndex, type FileIndex } from './manifest.ts';
-import { packDir, purge, restore, unpackBundle, unpackTo } from './private.ts';
+import { isTombstone, packDir, purge, restore, unpackBundle, unpackTo } from './private.ts';
 import { listFiles } from './store.ts';
 
 let root: string;
@@ -37,21 +37,23 @@ describe('pack / unpack', () => {
     expect(r.encrypted).toBe(false);
     expect(r.included).toEqual(['videos.json']);
     expect(r.dropped).toEqual(['public/draft-stats.json', 'stats.json']);
-    const files = unpackBundle(r.bytes as Uint8Array);
+    const files = unpackBundle(r.bytes);
     expect([...files.keys()]).toEqual(['videos.json', '_files.json']);
     expect((JSON.parse(new TextDecoder().decode(files.get('_files.json'))) as FileIndex).files['videos.json']?.custody).toBe('C');
   });
 
-  it('ships nothing without a key when custody is unknown', () => {
+  it('ships nothing without a key when custody is unknown (an empty tombstone bundle)', () => {
     const dir = makePrivate('hots', { 'stats.json': 'B' }, false);
-    expect(packDir(dir).bytes).toBeNull();
+    const r = packDir(dir);
+    expect(r.included).toEqual([]);
+    expect(isTombstone(unpackBundle(r.bytes))).toBe(true);
   });
 
   it('encrypts with a key, round-trips, and rejects a missing or wrong key', () => {
     const dir = makePrivate('hots', { 'stats.json': 'B', 'videos.json': 'C' });
     const r = packDir(dir, 'correct horse battery staple');
     expect(r.encrypted).toBe(true);
-    const bundle = r.bytes as Uint8Array;
+    const bundle = r.bytes;
     expect(Buffer.from(bundle).includes(Buffer.from('stats.json'))).toBe(false);
     const target = path.join(root, 'restored', 'hots');
     expect(unpackTo(bundle, target, 'correct horse battery staple')).toEqual(['stats.json', 'videos.json']);
@@ -60,8 +62,12 @@ describe('pack / unpack', () => {
     expect(() => unpackBundle(bundle, 'wrong')).toThrow();
   });
 
-  it('returns null for an empty or missing directory', () => {
-    expect(packDir(path.join(root, 'nothing')).bytes).toBeNull();
+  it('writes a tombstone for an empty or missing directory, and restoring it clears older private data', () => {
+    const r = packDir(path.join(root, 'nothing'));
+    expect(r.included).toEqual([]);
+    const target = makePrivate('hots', { 'videos.json': 'C' });
+    expect(unpackTo(r.bytes, target)).toEqual([]);
+    expect(listFiles(path.join(root, 'private'))).toEqual([]);
   });
 
   it('rejects foreign files', () => {
@@ -69,7 +75,7 @@ describe('pack / unpack', () => {
   });
 });
 
-describe('purge (HP kill switch)', () => {
+describe('purge', () => {
   it('removes class-B files, keeps others, and fails closed without an index', () => {
     makePrivate('hots', { 'stats.json': 'B', 'public/draft-stats.json': 'B', 'videos.json': 'C' });
     makePrivate('mtga', { 'x.json': 'B' }, false);
@@ -89,7 +95,7 @@ describe('purge (HP kill switch)', () => {
 
 describe('restore', () => {
   it('uses the newest unexpired artifact from a scheduled data-deploy run of this repository', () => {
-    const bundle = packDir(makePrivate('hots', { 'videos.json': 'C' })).bytes as Uint8Array;
+    const bundle = packDir(makePrivate('hots', { 'videos.json': 'C' })).bytes;
     const now = new Date('2026-10-09T12:00:00Z');
     const artifacts = {
       artifacts: [
@@ -126,5 +132,49 @@ describe('restore', () => {
       throw new Error('should not download');
     };
     expect(restore({ repo: 'o/r', games: ['hots'], dir: root, gh, now: new Date('2026-10-09T00:00:00Z'), log: () => {} })).toEqual({ hots: null });
+  });
+
+  /** gh stub serving one scheduled data-deploy artifact per game with the given bundle. */
+  function oneArtifact(bundles: Record<string, Uint8Array>) {
+    return (args: string[]): string => {
+      if (args[0] === 'api' && args[1]?.includes('/actions/artifacts')) {
+        const name = /name=([^&]+)/.exec(args[1])?.[1] ?? '';
+        const game = name.replace('private-', '');
+        const rows = bundles[game] ? [{ id: 1, name, expired: false, created_at: '2026-10-09T11:00:00Z', workflow_run: { id: 77, repository_id: 1, head_repository_id: 1, head_branch: 'main' } }] : [];
+        return JSON.stringify({ artifacts: rows });
+      }
+      if (args[0] === 'api') return JSON.stringify({ path: '.github/workflows/data-deploy.yml', event: 'schedule' });
+      if (args[0] === 'run' && args[1] === 'download') {
+        const name = args[args.indexOf('-n') + 1] as string;
+        const dest = args[args.indexOf('-D') + 1] as string;
+        writeFileSync(path.join(dest, `${name}.wsb`), bundles[name.replace('private-', '')] as Uint8Array);
+        return '';
+      }
+      throw new Error(`unexpected gh ${args.join(' ')}`);
+    };
+  }
+
+  it('restores a tombstone as "no private data" instead of falling back to an older artifact', () => {
+    const tombstone = packDir(path.join(root, 'empty')).bytes;
+    const dir = path.join(root, 'restored');
+    makePrivate('hots', { 'videos.json': 'C' });
+    mkdirSync(path.join(dir, 'hots'), { recursive: true });
+    writeFileSync(path.join(dir, 'hots', 'stale.json'), '{}');
+    const r = restore({ repo: 'o/r', games: ['hots'], dir, gh: oneArtifact({ hots: tombstone }), now: new Date('2026-10-09T12:00:00Z'), log: () => {} });
+    expect(r).toEqual({ hots: 77 });
+    expect(listFiles(dir)).toEqual([]);
+  });
+
+  it('skips an artifact it cannot decrypt for that game only and keeps going', () => {
+    const encrypted = packDir(makePrivate('hots', { 'stats.json': 'B' }), 'old key').bytes;
+    const plain = packDir(makePrivate('mtga', { 'videos.json': 'C' })).bytes;
+    const dir = path.join(root, 'restored');
+    const warnings: string[] = [];
+    const r = restore({ repo: 'o/r', games: ['hots', 'mtga'], dir, secret: 'new key', gh: oneArtifact({ hots: encrypted, mtga: plain }), now: new Date('2026-10-09T12:00:00Z'), log: () => {}, warn: (w) => warnings.push(w) });
+    expect(r).toEqual({ hots: null, mtga: 77 });
+    expect(listFiles(dir)).toEqual(['mtga/_files.json', 'mtga/videos.json']);
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0]).toContain('private-hots from run 77 could not be restored');
+    expect(warnings[0]).toContain('building without B/C data for hots');
   });
 });

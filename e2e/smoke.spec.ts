@@ -113,12 +113,36 @@ test.describe('home', () => {
       '©Wizards of the Coast LLC',
       'The Pokémon Company',
       'heroescounters.com',
-      'Heroes Profile',
     ]) {
       await expect(footer).toContainText(text);
     }
+    // Every game's notice comes from its registry entry, so a new game brings its own.
+    for (const g of games) await expect(footer.locator(`.site-footer__notice[data-game="${g.id}"] dt`)).toHaveText(g.legalNotice.heading);
+    await expect(footer).not.toContainText('Heroes Profile');
     await expect(footer.getByRole('link', { name: 'Credits' })).toHaveAttribute('href', `${BASE_PATH}credits/`);
     await expect(footer.getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', `${BASE_PATH}privacy/`);
+    await expect(footer.getByRole('link', { name: 'Software licences' })).toHaveAttribute('href', `${BASE_PATH}licenses.txt`);
+  });
+
+  test('no game is labelled beta or alpha', async ({ page }) => {
+    for (const route of ['./', ...games.map((g) => `${g.id}/`)]) {
+      await page.goto(route);
+      await expect(page.locator('body')).not.toContainText(/\b(beta|alpha)\b/i);
+    }
+  });
+
+  test('ships a Content-Security-Policy and the third-party licence notices', async ({ page, request }) => {
+    await page.goto('./');
+    const csp = await page.locator('meta[http-equiv="content-security-policy"]').getAttribute('content');
+    expect(csp).toContain("default-src 'self'");
+    expect(csp).toContain("object-src 'none'");
+    expect(csp).toMatch(/script-src 'self' 'sha256-/);
+    expect(csp).not.toMatch(/script-src[^;]*'unsafe-inline'/);
+    const res = await request.get('licenses.txt');
+    expect(res.status()).toBe(200);
+    const text = await res.text();
+    for (const pkg of ['preact', '@smogon/calc', 'workbox-core', 'zod']) expect(text, pkg).toContain(pkg);
+    expect(text).toContain('Permission is hereby granted');
   });
 });
 
@@ -197,4 +221,25 @@ test('unknown URLs get the 404 page', async ({ page }) => {
   expect(res?.status()).toBe(404);
   await expect(page.locator('h1')).toContainText('Lost the edge');
   await expect(page.getByRole('link', { name: 'Home' })).toHaveAttribute('href', BASE_PATH);
+});
+
+test('offline, a page that was never visited falls back to the offline page', async ({ page, context }) => {
+  test.setTimeout(60_000);
+  await page.goto('./');
+  // The service worker registers on load (production builds only) and takes control right away.
+  await page.waitForFunction(() => navigator.serviceWorker?.controller !== null && navigator.serviceWorker?.controller !== undefined, null, { timeout: 30_000 });
+  await page.goto('about/');
+  await context.setOffline(true);
+  try {
+    await page.goto('credits/');
+    await expect(page.locator('h1')).toHaveText("You're offline.");
+    await expect(page.getByRole('button', { name: 'Try again' })).toBeVisible();
+    // Pages opened before are listed as saved on this device.
+    await expect(page.locator('[data-offline-list] a').first()).toBeVisible();
+    // A page opened before still comes from the saved copy.
+    await page.goto('about/');
+    await expect(page.locator('h1')).not.toHaveText("You're offline.");
+  } finally {
+    await context.setOffline(false);
+  }
 });

@@ -6,7 +6,7 @@ export const mtga: GameModule = {
   name: 'MTG Arena',
   short: 'MTGA',
   tagline: 'Paste a deck for legality, curve, power tier and upgrades, plus Limited ratings.',
-  status: 'beta',
+  status: 'live',
   accent: '--accent-mtga',
   sources: [
     {

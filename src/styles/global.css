@@ -64,6 +64,17 @@ select {
   color: inherit;
 }
 
+/*
+ * Baseline outline for text fields and selects that no component styles: --control-border keeps
+ * the field's edge at 3:1 or more against every surface (WCAG 1.4.11). Zero specificity beyond the
+ * element, so component classes still decide their own look (and should use the same token).
+ */
+input:where(:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='hidden'], [type='button'], [type='submit'], [type='reset'])),
+textarea,
+select {
+  border-color: var(--control-border);
+}
+
 h1,
 h2,
 h3,
@@ -311,7 +322,7 @@ summary {
   gap: var(--sp-1);
   min-height: 2.25rem;
   padding: 0 var(--sp-3);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: 999px;
   background: var(--surface);
   color: var(--text-muted);
@@ -434,5 +445,50 @@ details > summary::-webkit-details-marker {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Windows High Contrast and other forced-colour modes drop backgrounds, box shadows and
+ * background-drawn pseudo-elements, which is how pressed, selected and current states are drawn
+ * here. Give every such state a system-colour outline or underline instead, and keep the small
+ * state markers visible in the system highlight colour.
+ */
+@media (forced-colors: active) {
+  [aria-pressed='true'],
+  [aria-selected='true'],
+  [aria-checked='true'][role] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  [aria-current]:not([aria-current='false']) {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+  }
+
+  input[type='radio']:checked + * {
+    outline: 2px solid Highlight;
+    outline-offset: 1px;
+  }
+
+  .chip[aria-pressed='true']::before,
+  .tabs__tab[aria-selected='true']::after,
+  .gamebar__link[aria-current]::after,
+  .switcher__pip,
+  .gamebar__pip {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+
+  .score-ring::before {
+    forced-color-adjust: none;
+    background: conic-gradient(from 210deg, Highlight calc(var(--score, 50) * 3deg), GrayText 0 300deg, transparent 0);
+  }
+
+  .card::before,
+  .card::after {
+    display: none;
   }
 }

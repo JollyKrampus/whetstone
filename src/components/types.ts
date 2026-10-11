@@ -58,7 +58,7 @@ export interface MatchupRow {
   /** Sample size behind the score. */
   n?: number;
   source: EdgeSource;
-  /** Overrides the default label derived from `source` (e.g. "Heroes Profile"). */
+  /** Overrides the default label derived from `source` (e.g. "Liquipedia"). */
   sourceLabel?: string;
   reasons?: Reason[];
   /** Force the greyed low-sample style; by default derived from n via the SPEC §6 gates. */

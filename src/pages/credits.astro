@@ -1,7 +1,7 @@
 ---
 import Badge from '../components/Badge.tsx';
 import type { AttributionRule, CustodyClass } from '../core/game.ts';
-import { SITE, games, navHref } from '../games/registry.ts';
+import { SITE, games, navHref, sourceCopyright, withBase } from '../games/registry.ts';
 import Base from '../layouts/Base.astro';
 
 const CUSTODY: Record<CustodyClass, { label: string; text: string }> = {
@@ -20,6 +20,8 @@ const RULE: Record<AttributionRule, string> = {
   footer: 'Credited in the footer of its game pages',
 };
 
+const MIT_URL = 'https://opensource.org/license/mit';
+
 const software = [
   { name: 'Astro', url: 'https://astro.build', license: 'MIT', use: 'Static site generator' },
   { name: 'Preact', url: 'https://preactjs.com', license: 'MIT', use: 'Interactive islands' },
@@ -34,14 +36,14 @@ const software = [
       <p class="kicker">Credits</p>
       <h1>Built on other people's good work.</h1>
       <p class="credits__lead">
-        Every data source, its license and how it's credited. Licensed and share-alike data is handled exactly as its terms
-        ask; nothing here is endorsed by the projects listed.
+        Every data source, its license and how it's credited. Share-alike and short-lived data is handled exactly as its
+        terms ask; nothing here is endorsed by the projects listed.
       </p>
     </header>
 
     {
       games.map((g) => (
-        <section class="credits__game" style={`--accent: var(${g.accent})`} aria-labelledby={`credits-${g.id}`}>
+        <section class="credits__game" data-game={g.id} aria-labelledby={`credits-${g.id}`}>
           <h2 id={`credits-${g.id}`}>
             <a href={navHref(g)}>{g.name}</a>
           </h2>
@@ -60,6 +62,16 @@ const software = [
                   </span>
                 </div>
                 <p class="source__credit">{s.attribution}</p>
+                {sourceCopyright(s) && (
+                  <p class="source__copyright">
+                    {sourceCopyright(s)}.{' '}
+                    {s.license === 'MIT' || s.license?.startsWith('MIT') ? (
+                      <>
+                        Used under the <a href={MIT_URL} rel="license noopener">MIT License</a>.
+                      </>
+                    ) : null}
+                  </p>
+                )}
                 <dl class="source__facts">
                   <div>
                     <dt>Credit</dt>
@@ -104,6 +116,15 @@ const software = [
           <p class="source__credit">
             Original. Game names, logos and artwork belong to their owners and are used for identification only; see the
             notices in the footer. Source code: <a href={SITE.repo} rel="noopener">{SITE.repo.replace('https://', '')}</a>.
+          </p>
+        </li>
+        <li class="source" id="licenses">
+          <div class="source__top">
+            <a class="source__name" href={withBase('licenses.txt')}>Third-party licence notices</a>
+          </div>
+          <p class="source__credit">
+            The full licence text and copyright notice of every open-source package bundled into this site's scripts, Web
+            Workers and service worker, generated with each build.
           </p>
         </li>
       </ul>
@@ -195,6 +216,11 @@ const software = [
 
   .source__credit {
     color: var(--text);
+  }
+
+  .source__copyright {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
   }
 
   .source__facts {

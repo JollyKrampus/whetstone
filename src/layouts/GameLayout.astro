@@ -4,10 +4,14 @@
  * game's module.ts), staleness banners, required source credits, then the page content.
  *
  * Attribution (SPEC §1.5): list the source ids the page displays in `uses`. 'top'-rule sources
- * are credited above the content; 'inline'-rule sources (Heroes Profile, Liquipedia) are credited
+ * are credited above the content; 'inline'-rule sources (e.g. Liquipedia, CC-BY-SA) are credited
  * right under it unless the page renders its own <SourceAttribution> beside the data and passes
  * inlineCredits={false}. Footer-rule credits are always in the site footer. The `attribution`
  * slot is for any extra page-level credit.
+ *
+ * The game bar is a labelled <section> (a region landmark), so the game name, the freshness pill
+ * and the section links are inside a landmark. The section links wrap onto as many rows as they
+ * need: every section stays visible on a phone, with no hidden sideways scroll.
  */
 import type { GameId } from '../core/game.ts';
 import FreshnessBadge from '../components/FreshnessBadge.astro';
@@ -55,12 +59,11 @@ const active = explicit ?? byUrl;
 <Base title={title ?? module.name} description={description ?? `${module.name}: ${module.tagline}`} game={game} noindex={noindex} {...(image ? { image } : {})}>
   <Fragment slot="head"><slot name="head" /></Fragment>
 
-  <div slot="subheader" class="gamebar" style={`--accent: var(${module.accent})`}>
+  <section slot="subheader" class="gamebar" aria-label={module.name}>
     <div class="container gamebar__top">
       <a class="gamebar__name" href={navHref(game)}>
         <span class="gamebar__pip" aria-hidden="true"></span>
         <span>{module.name}</span>
-        {module.status !== 'live' && <span class="gamebar__status">{module.status}</span>}
       </a>
       <FreshnessBadge game={game} meta={meta} fixtures={fixtures} />
     </div>
@@ -77,23 +80,7 @@ const active = explicit ?? byUrl;
         }
       </ul>
     </nav>
-    {/*
-      On narrow screens the sub-nav scrolls sideways; bring the current section into view before
-      first paint (a plain scrollLeft jump: no animation, no vertical scroll, no layout shift).
-    */}
-    <script is:inline>
-      (function () {
-        const nav = document.currentScript && document.currentScript.previousElementSibling;
-        const link = nav && nav.querySelector('[aria-current="page"]');
-        if (!link || nav.scrollWidth <= nav.clientWidth) return;
-        const fade = 32; // the right-edge fade mask (2rem)
-        const n = nav.getBoundingClientRect();
-        const l = link.getBoundingClientRect();
-        if (l.right > n.right - fade) nav.scrollLeft += l.right - n.right + fade;
-        else if (l.left < n.left) nav.scrollLeft -= n.left - l.left;
-      })();
-    </script>
-  </div>
+  </section>
 
   <div class="container game-page">
     <div class="game-page__notices">
@@ -154,55 +141,33 @@ const active = explicit ?? byUrl;
     transform: rotate(45deg);
   }
 
-  .gamebar__status {
-    padding: 0 0.4rem;
-    border: 1px solid color-mix(in srgb, var(--accent) 60%, var(--border));
-    border-radius: var(--radius-sm);
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 650;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .gamebar__nav {
-    overflow-x: auto;
-    scrollbar-width: none;
-    /* Fade the right edge so a clipped tab reads as "scroll for more". */
-    mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
-  }
-
-  .gamebar__nav::-webkit-scrollbar {
-    display: none;
-  }
-
+  /*
+   * Phones: the links wrap into rows (a tab row that scrolls sideways hid half the sections with
+   * no visible cue). Links are slightly shorter than a full tap target to keep the rows compact,
+   * still well above the 24px minimum, and the list is pulled left so the first column lines up
+   * with the game name.
+   */
   .gamebar__list {
     display: flex;
-    gap: var(--sp-1);
+    flex-wrap: wrap;
+    gap: 0 var(--sp-1);
     margin: 0 auto;
+    padding-inline: calc(var(--gutter) - var(--sp-2));
+    padding-bottom: var(--sp-1);
     list-style: none;
-  }
-
-  .gamebar__list > li:last-child {
-    padding-right: 2rem;
   }
 
   .gamebar__link {
     position: relative;
     display: inline-flex;
     align-items: center;
-    min-height: var(--tap);
-    padding: 0 var(--sp-3);
+    min-height: 2.5rem;
+    padding: 0 var(--sp-2);
     color: var(--text-muted);
     font-size: var(--fs-sm);
     font-weight: 650;
     text-decoration: none;
     white-space: nowrap;
-  }
-
-  .gamebar__list > li:first-child .gamebar__link {
-    padding-left: 0;
   }
 
   .gamebar__link:hover {
@@ -216,16 +181,12 @@ const active = explicit ?? byUrl;
   .gamebar__link[aria-current='page']::after {
     content: '';
     position: absolute;
-    left: var(--sp-3);
-    right: var(--sp-3);
-    bottom: 0;
+    left: var(--sp-2);
+    right: var(--sp-2);
+    bottom: 0.2rem;
     height: 3px;
-    border-radius: 3px 3px 0 0;
+    border-radius: 3px;
     background: var(--accent);
-  }
-
-  .gamebar__list > li:first-child .gamebar__link[aria-current='page']::after {
-    left: 0;
   }
 
   .game-page {
@@ -254,11 +215,29 @@ const active = explicit ?? byUrl;
   }
 
   @media (min-width: 48rem) {
-    .gamebar__nav {
-      mask-image: none;
+    .gamebar__list {
+      padding-inline: var(--gutter);
+      padding-bottom: 0;
     }
-    .gamebar__list > li:last-child {
-      padding-right: 0;
+
+    .gamebar__link {
+      min-height: var(--tap);
+      padding: 0 var(--sp-3);
+    }
+
+    .gamebar__list > li:first-child .gamebar__link {
+      padding-left: 0;
+    }
+
+    .gamebar__link[aria-current='page']::after {
+      left: var(--sp-3);
+      right: var(--sp-3);
+      bottom: 0;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .gamebar__list > li:first-child .gamebar__link[aria-current='page']::after {
+      left: 0;
     }
   }
 </style>

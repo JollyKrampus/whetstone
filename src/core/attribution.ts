@@ -1,6 +1,6 @@
 /**
  * Which credits a page must show, and where (SPEC §1.5): `inline` next to the data it covers
- * (Heroes Profile), `top` of the page (17Lands CC BY), or the `footer`. Components feed in every
+ * (e.g. Liquipedia, CC-BY-SA), `top` of the page (17Lands CC BY), or the `footer`. Components feed in every
  * SourceRef whose data appears on the page; this dedupes and orders them deterministically.
  */
 import type { AttributionRule, SourceRef } from './game.ts';

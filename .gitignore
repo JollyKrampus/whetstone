@@ -18,3 +18,7 @@ playwright-report/
 *.wsb
 .claude/
 *.stackdump
+
+# Class-C (ephemeral) API responses must never be committed, even when recorded by hand (pipeline/http.ts also refuses).
+src/games/*/fixtures/raw/youtube/
+src/games/*/fixtures/raw/twitch/
