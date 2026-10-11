@@ -40,7 +40,7 @@ import { SL_ROLES, roleVerdicts, type RoleConfig } from './roles.ts';
 /** Theory counter edges at or above this score count as "hard counters" for blind-pick safety. */
 export const STRONG_THEORY_SCORE = 70;
 
-/** Soft cap per provider and key (see the module comment): about a 6 pp edge at most. */
+/** Soft cap per provider and key (see the module comment): about a 4 pp edge at most (1.0 on the signal scale). */
 export const KEY_CAP = 1.0;
 
 /**
