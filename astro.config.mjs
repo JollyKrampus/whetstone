@@ -7,7 +7,8 @@ import sitemap from '@astrojs/sitemap';
 import { accentStylesheet } from './src/games/registry.ts';
 import { redirectPaths } from './src/games/hots/redirects.ts';
 import { pendingSections } from './src/lib/routes.ts';
-import { SW_PACKAGES, installedPackage, packageOf, renderLicenses } from './scripts/licenses.ts';
+import { checkDist } from './scripts/csp-check.ts';
+import { INLINE_PACKAGES, SW_PACKAGES, installedPackage, packageOf, renderLicenses } from './scripts/licenses.ts';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const BASE = '/whetstone';
@@ -99,16 +100,38 @@ function licenseCollector(options = {}) {
   };
 }
 
-/** Writes dist/licenses.txt once the build is done (bundled packages plus the service worker's Workbox runtime). */
+/** Writes dist/licenses.txt once the build is done (bundled packages, the service worker's Workbox runtime and Astro's inline island runtime). */
 function licensesFile() {
   return {
     name: 'whetstone:licenses',
     hooks: {
       /** @param {{ dir: URL }} options */
       'astro:build:done': ({ dir }) => {
-        const sw = SW_PACKAGES.map((name) => installedPackage(name, ROOT)).filter((p) => p !== null);
-        const text = renderLicenses([...shipped.values(), ...sw]);
+        const always = [...SW_PACKAGES, ...INLINE_PACKAGES].map((name) => installedPackage(name, ROOT)).filter((p) => p !== null);
+        const text = renderLicenses([...shipped.values(), ...always]);
         writeFileSync(new URL('licenses.txt', dir), text);
+      },
+    },
+  };
+}
+
+/**
+ * Fails the build when a page has an inline script its CSP does not allow (or an inline event
+ * handler): such a script would silently stop running in browsers (scripts/csp-check.ts).
+ */
+function cspGuard() {
+  return {
+    name: 'whetstone:csp-guard',
+    hooks: {
+      /** @param {{ dir: URL }} options */
+      'astro:build:done': ({ dir }) => {
+        const problems = checkDist(fileURLToPath(dir));
+        if (problems.length > 0) {
+          throw new Error(
+            `[whetstone] ${problems.length} CSP problem(s); register constant inline scripts with allowInlineScript() (src/lib/csp.ts) ` +
+              `or update CSP_SCRIPT_HASHES in astro.config.mjs:\n${problems.slice(0, 20).join('\n')}`,
+          );
+        }
       },
     },
   };
@@ -123,9 +146,10 @@ function licensesFile() {
  * actually embed (Scryfall card images, YouTube and Twitch on click).
  */
 const CSP_SCRIPT_HASHES = /** @type {const} */ ([
-  // src/pages/hots/hero/[slug].astro: the `#videos` → `#guides` alias. Remove once that page
-  // registers its own hash with allowInlineScript() from src/lib/csp.ts.
-  'sha256-k9+Xoj1whVVdLXxmYKKM50Nih+kCTuH8UZuQWPAki0E=',
+  // src/pages/hots/hero/[slug].astro: the `#videos` → `#guides` alias (the exact text between the
+  // tags). Remove once that page registers its own hash with allowInlineScript() from src/lib/csp.ts;
+  // cspGuard() fails the build if the script changes and this hash no longer matches.
+  'sha256-F846EnwC0e168Vtgpn2cGKTV+OtLmnVSMLnf1Ubsyvk=',
 ]);
 
 export default defineConfig({
@@ -140,7 +164,7 @@ export default defineConfig({
   // Astro 7 defaults to JSX whitespace rules, which silently glue inline elements together
   // ("2.57·updated"). HTML-aware compression keeps authored spacing predictable.
   compressHTML: true,
-  integrations: [preact(), sitemap({ filter: (page) => !noindexPaths.has(new URL(page).pathname) }), licensesFile()],
+  integrations: [preact(), sitemap({ filter: (page) => !noindexPaths.has(new URL(page).pathname) }), licensesFile(), cspGuard()],
   security: {
     csp: {
       algorithm: 'SHA-256',
