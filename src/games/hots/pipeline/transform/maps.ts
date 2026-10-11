@@ -1,14 +1,13 @@
 /**
  * maps.json: heroes-data2 `mapdata` (names, preview images) × curated/hots/maps.yaml (kind,
- * profile, HP map ref) × the Storm League pool. Pure.
+ * profile) × the Storm League pool. Pure.
  *
  * Only maps with a curated profile are published (standard and ARAM). Brawls, arenas and
  * sandboxes in mapdata are hidden on purpose (critique D11); any other unknown map is reported
  * so a curator can add its profile.
  *
- * `ranked`: from Heroes Profile map-level Storm League game shares when that data exists in this
- * run (a standard map with share ≥ 1.5 % is in the pool, `rankedSource: 'stats'`), else from
- * curated/hots/ranked-pool.yaml (`rankedSource: 'curated'`).
+ * `ranked`: always from curated/hots/ranked-pool.yaml (`rankedSource: 'curated'`). The pool is
+ * first-party knowledge kept by hand; no third-party match statistics decide it.
  */
 import type { ValidationIssue } from '../../../../core/game.ts';
 import type { CuratedMapsFile, GameMap, RankedPoolFile } from '../../schema.ts';
@@ -16,9 +15,6 @@ import { compareStrings, kebabSlug, warn } from '../util.ts';
 import { mapImagePath } from './heroes.ts';
 import type { ImageRef } from './images.ts';
 import type { HdpMap } from './release.ts';
-
-/** SL pool threshold on a map's share of Storm League games (SPEC §5). */
-export const RANKED_MIN_SHARE = 0.015;
 
 /** mapdata entries that are brawls, arenas, sandboxes or event modes (never listed). */
 const HIDDEN_MAP = /\b(sandbox|arena|brawl|heroic|classic|racing|party|trial grounds|checkpoint|revenge|deadman|escape from)\b/i;
@@ -30,15 +26,7 @@ export interface BuiltMaps {
   issues: ValidationIssue[];
 }
 
-/** Map slug → share of SL games, from HP map-level stats (absent when HP is off). */
-export type MapShares = ReadonlyMap<string, number>;
-
-export function buildMaps(
-  mapdata: Readonly<Record<string, HdpMap>>,
-  curated: CuratedMapsFile,
-  pool: RankedPoolFile,
-  shares: MapShares | null,
-): BuiltMaps {
+export function buildMaps(mapdata: Readonly<Record<string, HdpMap>>, curated: CuratedMapsFile, pool: RankedPoolFile): BuiltMaps {
   const issues: ValidationIssue[] = [];
   const images: ImageRef[] = [];
   const bySlug = new Map<string, { name: string; map: HdpMap }>();
@@ -46,7 +34,6 @@ export function buildMaps(
     const slug = kebabSlug(name);
     if (!bySlug.has(slug)) bySlug.set(slug, { name, map });
   }
-  const useStats = shares !== null && shares.size > 0;
   const maps: GameMap[] = [];
   for (const [slug, c] of Object.entries(curated.maps).sort(([a], [b]) => compareStrings(a, b))) {
     const raw = bySlug.get(slug);
@@ -57,18 +44,15 @@ export function buildMaps(
     }
     const image = mapImagePath(file);
     images.push({ out: image, file, folder: 'replaypreviews' });
-    const ranked = c.kind === 'standard' && (useStats ? (shares.get(slug) ?? 0) >= RANKED_MIN_SHARE : pool.maps.includes(slug));
-    const m: GameMap = {
+    maps.push({
       id: slug,
       name: c.name,
       kind: c.kind,
-      ranked,
-      rankedSource: useStats ? 'stats' : 'curated',
+      ranked: c.kind === 'standard' && pool.maps.includes(slug),
+      rankedSource: 'curated',
       image,
       profile: { size: c.size, lanes: c.lanes, objective: c.objective, tags: [...c.tags] },
-    };
-    if (c.hp) m.hp = { ...c.hp };
-    maps.push(m);
+    });
   }
   for (const [slug, { name }] of [...bySlug].sort(([a], [b]) => compareStrings(a, b))) {
     if (curated.maps[slug] || HIDDEN_MAP.test(name)) continue;

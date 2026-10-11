@@ -143,9 +143,23 @@ function sortedBy<T>(key: (x: T) => string, what: string) {
   };
 }
 
+/**
+ * Accepts last-good files written before Heroes Profile was removed as a source (2026-10-10):
+ * drops keys only it used, so a data branch that still holds them parses (and the next run
+ * rewrites them). The output type never has them and the pipeline never writes them.
+ */
+function dropLegacyKeys<T extends z.ZodType>(schema: T, keys: readonly string[]) {
+  return z.preprocess((value: unknown) => {
+    if (typeof value !== 'object' || value === null || Array.isArray(value) || !keys.some((k) => k in value)) return value;
+    const copy: Record<string, unknown> = { ...(value as Record<string, unknown>) };
+    for (const k of keys) delete copy[k];
+    return copy;
+  }, schema);
+}
+
 // ---- meta.json -------------------------------------------------------------------------
 
-export const HotsMetaExtraSchema = z.strictObject({
+const HotsMetaExtraObject = z.strictObject({
   /** Live build (TACT). */
   build: BuildSchema,
   /** heroes-data2 build the hero data was generated from; differs from `build` while data lags. */
@@ -157,13 +171,13 @@ export const HotsMetaExtraSchema = z.strictObject({
   builds: z.array(BuildSchema).min(1),
   /** heroes-images tag the vendored images come from. */
   assetsTag: z.string().min(1).exactOptional(),
-  /** HP_MODE at generation time; stats exist only when 'on'. */
-  hpMode: z.enum(['on', 'off']),
   /** When the pipeline first saw the current live `build` on the version server. */
   buildSeenAt: IsoDateTime.exactOptional(),
   /** heroes-data2 has lagged the live build for more than 48 hours: hero data is from `dataBuild`. */
   dataPending: z.boolean().exactOptional(),
 });
+/** meta.json `extra`. A legacy `hpMode` (Heroes Profile switch, removed) is dropped on read. */
+export const HotsMetaExtraSchema = dropLegacyKeys(HotsMetaExtraObject, ['hpMode']);
 export const HotsMetaSchema = gameMetaSchema('hots', HotsMetaExtraSchema);
 export type HotsMeta = z.infer<typeof HotsMetaSchema>;
 
@@ -192,7 +206,7 @@ export type Ability = z.infer<typeof AbilitySchema>;
 export const TalentAbilitySchema = z.enum(['Q', 'W', 'E', 'R', 'D', 'Z', 'Active', 'Passive']);
 
 export const TalentSchema = z.strictObject({
-  /** heroes-data2 talentId == HP talent_name (join key for talent stats). */
+  /** heroes-data2 talentId (also the key talent builds refer to). */
   id: z.string().min(1),
   name: z.string().min(1),
   text: z.string().min(1),
@@ -259,12 +273,10 @@ export const HeroSchema = z
     /** Member only: id of the composite it belongs to. */
     memberOf: HeroSlugSchema.exactOptional(),
     mechanics: z.array(MechanicSchema),
-    /** Last build whose data diff touched this hero (derived, never from HP). */
+    /** Last build whose data diff touched this hero (derived from the game-data diffs). */
     lastChangedBuild: BuildSchema.exactOptional(),
     /** Released within the "new hero" window; drives the badge and "early data" labels. */
     isNew: z.boolean(),
-    /** Heroes Profile numeric id (join key for HP stats). */
-    hpId: z.number().int().positive().exactOptional(),
     /** heroes-data2 item key (`Wizard` for Li-Ming). */
     hdpId: z.string().min(1).exactOptional(),
     /** Large draft-screen portrait (180×212), e.g. for hero page headers; `portrait` is the 128×128 pick button. */
@@ -313,28 +325,24 @@ export const MapProfileSchema = z.strictObject({
   tags: z.array(MapTagSchema),
 });
 
-export const HpMapRefSchema = z.strictObject({
-  /** Heroes Profile map_id. */
-  id: z.number().int().positive(),
-  /** Heroes Profile map `name` (stats with group_by_map are keyed by it). */
-  name: z.string().min(1),
-});
-
 export const MapSchema = z.strictObject({
   id: MapSlugSchema,
   name: z.string().min(1),
   kind: MapKindSchema,
   /** In the current Storm League pool. */
   ranked: z.boolean(),
-  /** How `ranked` was decided: HP map-level game share (≥ 1.5 %) or curated/hots/ranked-pool.yaml. */
+  /**
+   * How `ranked` was decided. The pipeline always writes 'curated' (curated/hots/ranked-pool.yaml);
+   * 'stats' is kept only so readers of older files and a future measured pool still type-check.
+   */
   rankedSource: z.enum(['stats', 'curated']),
   image: DataPath,
   profile: MapProfileSchema,
-  hp: HpMapRefSchema.exactOptional(),
 });
 export type GameMap = z.infer<typeof MapSchema>;
 
-export const MapsFileSchema = z.array(MapSchema).superRefine((list, ctx) => {
+/** maps.json. A legacy `hp` key (Heroes Profile map ref, removed) is dropped on read. */
+export const MapsFileSchema = z.array(dropLegacyKeys(MapSchema, ['hp'])).superRefine((list, ctx) => {
   checkUnique(ctx, list.map((m) => m.id), 'map id');
   sortedBy<GameMap>((m) => m.id, 'maps (by id)')(list, ctx);
 });
@@ -460,18 +468,36 @@ export type Theory = z.infer<typeof TheorySchema>;
 // ---- links.json ------------------------------------------------------------------------
 
 export const LinkSchema = z.strictObject({
-  site: z.enum(['icy-veins', 'psionic-storm', 'nexus-compendium', 'heroesprofile', 'liquipedia', 'fandom', 'blizzard', 'youtube', 'twitch']),
+  site: z.enum(['icy-veins', 'psionic-storm', 'nexus-compendium', 'liquipedia', 'fandom', 'blizzard', 'youtube', 'twitch']),
   kind: z.enum(['guide', 'talents', 'calculator', 'matchups', 'maps', 'draft', 'wiki', 'esports', 'news', 'tierlist', 'live']),
   label: z.string().min(1),
   url: Url,
 });
 export type Link = z.infer<typeof LinkSchema>;
 
-export const LinksSchema = z.strictObject({
-  /** Keyed by hero id (members, not composites; a composite page merges its members' links). */
-  heroes: z.record(AttributeIdSchema, z.array(LinkSchema)),
-  general: z.array(LinkSchema),
-});
+/** Links of a source that was removed (Heroes Profile, 2026-10-10) are dropped from last-good files. */
+const REMOVED_LINK_SITES: ReadonlySet<unknown> = new Set(['heroesprofile']);
+
+function dropRemovedLinks(value: unknown): unknown {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) return value;
+  const keep = (list: unknown): unknown =>
+    Array.isArray(list) ? list.filter((l) => !(typeof l === 'object' && l !== null && REMOVED_LINK_SITES.has((l as { site?: unknown }).site))) : list;
+  const v = value as { heroes?: unknown; general?: unknown };
+  const heroes =
+    typeof v.heroes === 'object' && v.heroes !== null && !Array.isArray(v.heroes)
+      ? Object.fromEntries(Object.entries(v.heroes).map(([id, list]) => [id, keep(list)]))
+      : v.heroes;
+  return { ...value, heroes, general: keep(v.general) };
+}
+
+export const LinksSchema = z.preprocess(
+  dropRemovedLinks,
+  z.strictObject({
+    /** Keyed by hero id (members, not composites; a composite page merges its members' links). */
+    heroes: z.record(AttributeIdSchema, z.array(LinkSchema)),
+    general: z.array(LinkSchema),
+  }),
+);
 export type Links = z.infer<typeof LinksSchema>;
 
 // ---- rotation.json ---------------------------------------------------------------------
@@ -548,7 +574,12 @@ export const ProSchema = z
   });
 export type Pro = z.infer<typeof ProSchema>;
 
-// ---- stats.json (class B, private, Heroes Profile v1) ----------------------------------
+// ---- stats.json (private match statistics) ----------------------------------------------
+//
+// Generic aggregate shapes (hero win rates, pair matrices, map deltas, talent builds) for a
+// private statistics source. The public pipeline has no producer for them since Heroes Profile
+// was removed (2026-10-10); the synthetic sample in fixtures/hots/_private exercises the site's
+// statistics mode, and the private hub can reuse the shapes.
 
 export const HeroStatSchema = z.strictObject({
   games: Count,
@@ -615,7 +646,8 @@ export const StatsSchema = z.strictObject({
   schema: z.literal(1),
   /** Fixture-only marker; load.ts refuses synthetic stats outside fixtures. */
   synthetic: z.literal(true).exactOptional(),
-  source: z.literal('heroesprofile'),
+  /** SourceRef id (or fixture label) of the producer. */
+  source: Slug,
   fetchedAt: IsoDateTime,
   major: MajorSchema,
   builds: z.array(BuildSchema).min(1),
@@ -722,7 +754,8 @@ export const DenseMatrixSchema = z.strictObject({
 
 export const DraftStatsBlockSchema = z.strictObject({
   synthetic: z.literal(true).exactOptional(),
-  source: z.literal('heroesprofile'),
+  /** SourceRef id (or fixture label) of the producer. */
+  source: Slug,
   mode: GameModeSchema,
   timeframe: TimeframeSchema,
   label: z.string().min(1),
@@ -782,7 +815,7 @@ export const DraftShardSchema = z
       synergies: SparseEdgesSchema,
       mapFit: SparseMapFitSchema,
     }),
-    /** Merged at stage time when private stats exist (class B, hashed name only). */
+    /** Merged at stage time when private stats exist (private overlay, hashed name only). */
     stats: DraftStatsBlockSchema.exactOptional(),
   })
   .superRefine((d, ctx) => {
@@ -915,7 +948,11 @@ export const CuratedMapSchema = z.strictObject({
   lanes: MapProfileSchema.shape.lanes,
   objective: z.string().min(1),
   tags: z.array(MapTagSchema).min(1),
-  hp: HpMapRefSchema.exactOptional(),
+  /**
+   * Deprecated: a Heroes Profile map ref from before that source was removed (2026-10-10).
+   * Accepted until curated/hots/maps.yaml drops it; never published.
+   */
+  hp: z.strictObject({ id: z.number().int().positive(), name: z.string().min(1) }).exactOptional(),
   notes: z.string().min(1).exactOptional(),
 });
 

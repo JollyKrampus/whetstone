@@ -1,18 +1,17 @@
 /**
  * End-to-end runs of the HotS pipeline through pipeline/run.ts against the recorded fixtures
  * (src/games/hots/fixtures/raw/): the offline first run, determinism, last-good fallbacks when
- * sources go down, and the gated Heroes Profile path with a synthetic transport.
+ * sources go down, and that nothing from a removed source (Heroes Profile) is written.
  */
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
 import { createHttp } from '../../../../pipeline/http.ts';
 import { runPipelines, type RunSummary } from '../../../../pipeline/run.ts';
 import type { Http } from '../../../core/game.ts';
-import { HOTS_FILES, HOTS_PRIVATE_OVERLAYS, HotsMetaSchema, type HotsMeta, type Theory } from '../schema.ts';
+import { HOTS_FILES, HotsMetaSchema, type HotsMeta, type Theory } from '../schema.ts';
 import { runHots, type HotsPipelineDeps } from './index.ts';
-import type { HpTransport } from './sources/heroesprofile.ts';
 import { FIXTURE_NOW, REPO_ROOT } from './test-helpers.ts';
 import type { TheoryModule } from './theoryHook.ts';
 
@@ -107,7 +106,7 @@ describe('offline run on recorded fixtures', () => {
   it('records builds, the major and per-source statuses in meta.json', () => {
     const m = meta(out);
     expect(m.version).toEqual({ label: '2.57', build: '2.57.0.98348', since: '2026-09-28' });
-    expect(m.extra).toMatchObject({ build: '2.57.0.98348', dataBuild: '2.57.0.98348', major: '2.57', builds: ['2.57.0.98348', '2.57.0.98285'], assetsTag: 'v2.57.0.98285', hpMode: 'off' });
+    expect(m.extra).toMatchObject({ build: '2.57.0.98348', dataBuild: '2.57.0.98348', major: '2.57', builds: ['2.57.0.98348', '2.57.0.98285'], assetsTag: 'v2.57.0.98285' });
     expect(m.extra.dataPending).toBeUndefined();
     expect(m.sources.map((s) => [s.id, s.status])).toEqual([
       ['tact', 'ok'],
@@ -117,7 +116,6 @@ describe('offline run on recorded fixtures', () => {
       // The trimmed roster has none of the heroes in the recorded rotation.
       ['nexus-compendium', 'failed'],
       ['liquipedia', 'ok'],
-      ['heroesprofile', 'disabled'],
       ['youtube', 'disabled'],
       ['twitch', 'disabled'],
     ]);
@@ -195,48 +193,23 @@ describe('offline run on recorded fixtures', () => {
   });
 });
 
-describe('gated Heroes Profile path (synthetic transport)', () => {
-  /** Synthetic numbers in a plausible response shape; never real HP data. */
-  const transport: HpTransport = async (url) => {
-    const u = new URL(url);
-    const names = ['Abathur', 'Alexstrasza', 'Cho', 'Gall', "Xal'atath"];
-    let body: unknown;
-    if (u.pathname.endsWith('/heroes/stats')) {
-      body = u.searchParams.has('group_by_map')
-        ? names.flatMap((n) => [
-            { hero: n, map: 'Cursed Hollow', games: 400, wins: 200 },
-            { hero: n, map: 'Sky Temple', games: 2, wins: 1 },
-          ])
-        : names.map((n, i) => ({ hero: n, games: 1000, wins: 480 + 10 * i, bans: 50 }));
-    } else if (u.pathname.endsWith('/builds/all')) {
-      body = [{ hero: "Xal'atath", talents: ['XalatathTalentA'], games: 300, wins: 160 }];
-    } else {
-      const hero = u.searchParams.get('hero') ?? '';
-      body = { ally: names.filter((n) => n !== hero).map((n) => ({ name: n, games: 100, wins: 52 })), enemy: names.filter((n) => n !== hero).map((n) => ({ name: n, games: 120, wins: 60 })) };
-    }
-    return { status: 200, headers: {}, body: JSON.stringify(body) };
-  };
+describe('no Heroes Profile output', () => {
+  /** Every file under a directory, relative, with forward slashes. */
+  const walk = (dir: string, base = dir): string[] =>
+    existsSync(dir) ? readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name), base) : [path.relative(base, path.join(dir, e.name)).split(path.sep).join('/')])) : [];
 
-  it('writes stats.json and the draft overlay as class B, and ranks maps from game shares', async () => {
+  it('writes no statistics, no private overlay and no Heroes Profile ids, links or switches, even with the old secrets set', async () => {
     const out = tempOut();
-    const s = await run({ out, env: { HP_MODE: 'on', HP_API_KEY: 'test-key' }, deps: { heroesprofile: { transport, sleep: async () => {} } } });
+    const s = await run({ out, env: { HP_MODE: 'on', HP_API_KEY: 'test-key' } });
     expect(s.exitCode).toBe(0);
+    expect(walk(path.join(out, 'private', 'hots'))).toEqual([]);
     const m = meta(out);
-    expect(status(m, 'heroesprofile')?.status).toBe('ok');
-    expect(m.extra.hpMode).toBe('on');
-    const stats = read(out, 'private/hots/stats.json');
-    expect(HOTS_FILES['stats.json'].schema.safeParse(stats).success).toBe(true);
-    expect(HOTS_PRIVATE_OVERLAYS['public/draft.json'].schema.safeParse(read(out, 'private/hots/public/draft.json')).success).toBe(true);
-    const maps = read<{ id: string; ranked: boolean; rankedSource: string }[]>(out, 'current/hots/maps.json');
-    expect(maps.find((x) => x.id === 'cursed-hollow')).toMatchObject({ ranked: true, rankedSource: 'stats' });
-    expect(maps.find((x) => x.id === 'sky-temple')).toMatchObject({ ranked: false, rankedSource: 'stats' });
-    // Class B never lands in current/ (the public, committed tree).
-    expect(Object.keys(read<{ files: object }>(out, 'current/hots/_files.json').files)).not.toContain('stats.json');
-  });
-
-  it('drops class-B output when HP_MODE is off even if a key is present', async () => {
-    const out = tempOut();
-    await run({ out, env: { HP_API_KEY: 'test-key' }, deps: { heroesprofile: { transport } } });
-    expect(status(meta(out), 'heroesprofile')).toMatchObject({ status: 'disabled', detail: 'HP_MODE=off' });
+    expect(m.sources.map((x) => x.id)).not.toContain('heroesprofile');
+    expect('hpMode' in m.extra).toBe(false);
+    const maps = read<{ rankedSource: string }[]>(out, 'current/hots/maps.json');
+    expect(maps.every((x) => x.rankedSource === 'curated' && !('hp' in x))).toBe(true);
+    for (const file of walk(path.join(out, 'current', 'hots')).filter((f) => f.endsWith('.json'))) {
+      expect(readFileSync(path.join(out, 'current', 'hots', file), 'utf8'), file).not.toMatch(/heroes ?profile|hpMode/i);
+    }
   });
 });

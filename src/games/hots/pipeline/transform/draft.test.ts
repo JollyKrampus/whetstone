@@ -9,7 +9,7 @@ const heroes: Hero[] = buildHeroes(fixtureRelease('2.57.0.98348'), { aliases: te
   ...h,
   mechanics: h.id === 'HXAL' ? [{ tag: 'reveal', evidence: [{ kind: 'ability', name: 'Shadow Mark', snippet: 'Revealed' }] }] : [],
 }));
-const maps: GameMap[] = buildMaps(fixtureRelease('2.57.0.98348').maps, testCurated().maps, testCurated().rankedPool, null).maps;
+const maps: GameMap[] = buildMaps(fixtureRelease('2.57.0.98348').maps, testCurated().maps, testCurated().rankedPool).maps;
 const theory: Theory = {
   rulesVersion: 'test',
   counters: [

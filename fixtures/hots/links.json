@@ -25,12 +25,6 @@
       "url": "https://psionic-storm.com/en/tierlist/"
     },
     {
-      "kind": "draft",
-      "label": "Heroes Profile",
-      "site": "heroesprofile",
-      "url": "https://www.heroesprofile.com/"
-    },
-    {
       "kind": "esports",
       "label": "Heroes of the Storm on Liquipedia",
       "site": "liquipedia",
@@ -56,18 +50,6 @@
         "label": "Abathur on Nexus Compendium",
         "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/abathur"
-      },
-      {
-        "kind": "talents",
-        "label": "Abathur talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Abathur"
-      },
-      {
-        "kind": "matchups",
-        "label": "Abathur matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Abathur"
       },
       {
         "kind": "wiki",
@@ -102,18 +84,6 @@
         "url": "https://nexuscompendium.com/heroes/anubarak"
       },
       {
-        "kind": "talents",
-        "label": "Anub'arak talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Anub'arak"
-      },
-      {
-        "kind": "matchups",
-        "label": "Anub'arak matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Anub'arak"
-      },
-      {
         "kind": "wiki",
         "label": "Anub'arak on the Heroes Wiki",
         "site": "fandom",
@@ -144,18 +114,6 @@
         "label": "Cho on Nexus Compendium",
         "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/cho"
-      },
-      {
-        "kind": "talents",
-        "label": "Cho talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Cho"
-      },
-      {
-        "kind": "matchups",
-        "label": "Cho matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Cho"
       },
       {
         "kind": "wiki",
@@ -190,18 +148,6 @@
         "url": "https://nexuscompendium.com/heroes/johanna"
       },
       {
-        "kind": "talents",
-        "label": "Johanna talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Johanna"
-      },
-      {
-        "kind": "matchups",
-        "label": "Johanna matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Johanna"
-      },
-      {
         "kind": "wiki",
         "label": "Johanna on the Heroes Wiki",
         "site": "fandom",
@@ -232,18 +178,6 @@
         "label": "Valla on Nexus Compendium",
         "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/valla"
-      },
-      {
-        "kind": "talents",
-        "label": "Valla talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Valla"
-      },
-      {
-        "kind": "matchups",
-        "label": "Valla matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Valla"
       },
       {
         "kind": "wiki",
@@ -278,18 +212,6 @@
         "url": "https://nexuscompendium.com/heroes/diablo"
       },
       {
-        "kind": "talents",
-        "label": "Diablo talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Diablo"
-      },
-      {
-        "kind": "matchups",
-        "label": "Diablo matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Diablo"
-      },
-      {
         "kind": "wiki",
         "label": "Diablo on the Heroes Wiki",
         "site": "fandom",
@@ -320,18 +242,6 @@
         "label": "Gall on Nexus Compendium",
         "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/gall"
-      },
-      {
-        "kind": "talents",
-        "label": "Gall talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Gall"
-      },
-      {
-        "kind": "matchups",
-        "label": "Gall matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Gall"
       },
       {
         "kind": "wiki",
@@ -366,18 +276,6 @@
         "url": "https://nexuscompendium.com/heroes/xalatath"
       },
       {
-        "kind": "talents",
-        "label": "Xal'atath talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Xal'atath"
-      },
-      {
-        "kind": "matchups",
-        "label": "Xal'atath matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Xal'atath"
-      },
-      {
         "kind": "wiki",
         "label": "Xal'atath on the Heroes Wiki",
         "site": "fandom",
@@ -402,18 +300,6 @@
         "label": "Malfurion on Nexus Compendium",
         "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/malfurion"
-      },
-      {
-        "kind": "talents",
-        "label": "Malfurion talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Malfurion"
-      },
-      {
-        "kind": "matchups",
-        "label": "Malfurion matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Malfurion"
       },
       {
         "kind": "wiki",
@@ -448,18 +334,6 @@
         "url": "https://nexuscompendium.com/heroes/muradin"
       },
       {
-        "kind": "talents",
-        "label": "Muradin talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Muradin"
-      },
-      {
-        "kind": "matchups",
-        "label": "Muradin matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Muradin"
-      },
-      {
         "kind": "wiki",
         "label": "Muradin on the Heroes Wiki",
         "site": "fandom",
@@ -490,18 +364,6 @@
         "label": "Tracer on Nexus Compendium",
         "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/tracer"
-      },
-      {
-        "kind": "talents",
-        "label": "Tracer talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Tracer"
-      },
-      {
-        "kind": "matchups",
-        "label": "Tracer matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Tracer"
       },
       {
         "kind": "wiki",
@@ -536,18 +398,6 @@
         "url": "https://nexuscompendium.com/heroes/varian"
       },
       {
-        "kind": "talents",
-        "label": "Varian talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Varian"
-      },
-      {
-        "kind": "matchups",
-        "label": "Varian matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Varian"
-      },
-      {
         "kind": "wiki",
         "label": "Varian on the Heroes Wiki",
         "site": "fandom",
@@ -580,18 +430,6 @@
         "url": "https://nexuscompendium.com/heroes/li-ming"
       },
       {
-        "kind": "talents",
-        "label": "Li-Ming talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Li-Ming"
-      },
-      {
-        "kind": "matchups",
-        "label": "Li-Ming matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Li-Ming"
-      },
-      {
         "kind": "wiki",
         "label": "Li-Ming on the Heroes Wiki",
         "site": "fandom",
@@ -622,18 +460,6 @@
         "label": "Zeratul on Nexus Compendium",
         "site": "nexus-compendium",
         "url": "https://nexuscompendium.com/heroes/zeratul"
-      },
-      {
-        "kind": "talents",
-        "label": "Zeratul talents (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Talents/Zeratul"
-      },
-      {
-        "kind": "matchups",
-        "label": "Zeratul matchups (Heroes Profile)",
-        "site": "heroesprofile",
-        "url": "https://www.heroesprofile.com/Global/Matchups/Zeratul"
       },
       {
         "kind": "wiki",

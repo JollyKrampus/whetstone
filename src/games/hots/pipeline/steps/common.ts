@@ -7,7 +7,7 @@
  *  - stale:    fetch failed (or was not attempted with --only); last-good data is re-emitted and
  *              fetchedAt keeps the last successful fetch.
  *  - failed:   fetch failed and there is no last-good data for it.
- *  - disabled: switched off (missing key, HP_MODE=off, offline run for keyed sources).
+ *  - disabled: switched off (missing key, offline run for keyed sources, not built yet).
  */
 import type { ZodType } from 'zod';
 import { isSelected } from '../../../../../pipeline/context.ts';

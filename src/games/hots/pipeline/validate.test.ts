@@ -40,7 +40,7 @@ describe('validateMeta', () => {
       version: { label: '2.57', build: '2.57.0.98348', since: '2026-09-28' },
       sources: [],
       counts: { heroes: 91 },
-      extra: { build: '2.57.0.98348', major: '2.57', majorSince: '2026-09-28', builds: ['2.57.0.98348'], hpMode: 'off' },
+      extra: { build: '2.57.0.98348', major: '2.57', majorSince: '2026-09-28', builds: ['2.57.0.98348'] },
     };
     expect(validateMeta(meta, '2026-10-08T10:00:00.000Z')).toEqual([]);
     expect(validateMeta({ ...meta, extra: { ...meta.extra, builds: [] } }, '2026-10-08T10:00:00.000Z')[0]?.message).toMatch(/extra\.builds/);
