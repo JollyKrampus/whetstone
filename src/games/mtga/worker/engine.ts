@@ -12,6 +12,7 @@
 import {
   CardIndex,
   INTENSITY,
+  PROFILES,
   analyzeDeck,
   applySwaps,
   asOfDate,
@@ -37,6 +38,7 @@ import {
   type FuzzyLookup,
   type IndexMeta,
   type MetaContext,
+  type Profile,
   type ResolvedDeck,
   type ResolvedEntry,
   type Swap,
@@ -407,12 +409,14 @@ export class Engine {
     const fmt = getFormat(req.format);
     const meta = await this.metaContext(req.meta, this.index ?? idx);
     const pool = this.index ?? idx;
-    // The profile sets what a swap may be; the change cap is the visitor's choice ('any' = none).
-    const cap = req.intensity === 'any' ? 100 : (INTENSITY[req.intensity] ?? INTENSITY.normal).percent;
+    const profile: Profile = Object.hasOwn(PROFILES, req.profile) ? req.profile : 'faithful';
+    // The profile sets what a swap may be and, by default ('version'), how much may change; the
+    // visitor can pick another cap ('any' = none).
+    const cap = req.intensity === 'version' ? undefined : req.intensity === 'any' ? 100 : (INTENSITY[req.intensity] ?? INTENSITY.normal).percent;
     const result = suggestUpgrades(deck, fmt, pool, {
-      profile: req.profile,
+      profile,
       preferPremium: req.preferPremium === true,
-      maxChangePercent: cap,
+      ...(cap !== undefined ? { maxChangePercent: cap } : {}),
       maxSwaps: Math.max(1, Math.min(20, Math.round(req.maxSwaps))),
       keepCards: req.keepCards,
       asOf: asOfDate(pool),
@@ -427,9 +431,9 @@ export class Engine {
       }
     }
     return {
-      profile: req.profile,
+      profile,
       preferPremium: result.preferPremium,
-      estimateOnly: !meta,
+      estimateOnly: !meta?.lists.length,
       swaps: result.swaps,
       totalCost: result.totalCost,
       budget: result.budget,

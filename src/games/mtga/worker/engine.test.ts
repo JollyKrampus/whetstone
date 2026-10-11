@@ -2,8 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 import { repoRoot } from '../../../lib/datadir.ts';
+import { PROFILES } from 'grindstone-mcp/core';
 import { Engine, EngineError, arenaName, autoFormat, toArenaText, type ShardData } from './engine.ts';
-import { FORMAT_IDS, type LegalityView, type Pool } from './protocol.ts';
+import { FORMAT_IDS, PROFILE_CHANGE_PERCENT, type ChangeCap, type LegalityView, type Pool, type Profile } from './protocol.ts';
 
 const FIXTURES = path.join(repoRoot(), 'fixtures', 'mtga', 'public');
 const shard = (pool: Pool): ShardData => JSON.parse(fs.readFileSync(path.join(FIXTURES, `_cards.${pool}.json`), 'utf8')) as ShardData;
@@ -181,6 +182,21 @@ describe('Engine tools', () => {
     expect(s.appliedText.startsWith('About\nName Boros Test')).toBe(true);
   });
 
+  it("uses the version's own change cap unless the visitor picks one", async () => {
+    // The page states each version's cap without loading grindstone; it must match grindstone's.
+    for (const p of ['faithful', 'competitive', 'casual'] as const) expect(PROFILE_CHANGE_PERCENT[p]).toBe(PROFILES[p].percent);
+    const { e } = engine();
+    const run = (profile: Profile, intensity: ChangeCap) =>
+      e.suggest({ text: BOROS, format: 'standard', profile, preferPremium: false, intensity, wildcards: null, keepCards: [], maxSwaps: 5, meta: null });
+    expect((await run('faithful', 'version')).changes.limit).toBe(15); // 25% of 60
+    expect((await run('casual', 'version')).changes.limit).toBe(9); // 15% of 60
+    expect((await run('competitive', 'version')).changes.limit).toBe(60);
+    expect((await run('competitive', 'light')).changes.limit).toBe(4); // 7% of 60
+    expect((await run('casual', 'any')).changes.limit).toBe(60);
+    // A profile the page doesn't know falls back to the faithful version.
+    expect((await run('nonsense' as Profile, 'version')).profile).toBe('faithful');
+  });
+
   it('applies only the chosen swaps', async () => {
     const { e } = engine();
     const s = await e.suggest({ text: BOROS, format: 'standard', profile: 'competitive', preferPremium: false, intensity: 'any', wildcards: null, keepCards: [], maxSwaps: 5, meta: null });
@@ -275,6 +291,8 @@ describe('export helpers', () => {
     expect(r.feelBad.every((f) => f.avoid.length + f.penalize.length > 0)).toBe(true);
     // Sheoldred is no companion: grindstone knows no condition for it.
     expect(r.companionCheck).toMatchObject({ name: 'Sheoldred, the Apocalypse', condition: null, breaking: [] });
+    // The legality section carries grindstone's companion issue in every format.
+    for (const l of r.legality) expect(l.issues.map((i) => i.code)).toContain('companion_unknown');
     const priced = Object.values(r.cards).filter((c) => c.priceUsd !== undefined);
     expect(priced.length).toBeGreaterThan(0);
     for (const c of priced) expect(c.priceUsd).toBeGreaterThan(0);

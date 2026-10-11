@@ -11,7 +11,7 @@
 import { useLayoutEffect, useState } from 'preact/hooks';
 import { createStore } from '../../../../core/storage.ts';
 import { analyzer } from '../../worker/client.ts';
-import type { AnalyzeResult, CardView, ChangeCap, MetaSelection, Profile, Rarity, SuggestView, WildcardCounts } from '../../worker/protocol.ts';
+import { PROFILE_CHANGE_PERCENT, type AnalyzeResult, type CardView, type ChangeCap, type MetaSelection, type Profile, type Rarity, type SuggestView, type WildcardCounts } from '../../worker/protocol.ts';
 import { CardName } from '../CardPeek.tsx';
 import { Busy, Notice, RARITIES, RARITY_LABEL, RarityTag, Section, plural, usd } from '../ui.tsx';
 
@@ -33,11 +33,15 @@ const PROFILES: readonly { id: Profile; label: string; note: string }[] = [
   { id: 'casual', label: 'Friendly casual', note: 'no feel-bad cards, no rarer wildcards' },
 ];
 
-const CAPS: readonly { id: ChangeCap; label: string; note: string }[] = [
+/** "about 25% of the deck" or "no limit" for a change cap in percent. */
+const capNote = (percent: number, suffix = '') => (percent >= 100 ? 'no limit' : `about ${percent}%${suffix}`);
+
+/** The visitor's change caps; 'version' (the default) uses the chosen version's own cap. */
+const CAPS: readonly { id: Exclude<ChangeCap, 'version'>; label: string; note: string }[] = [
   { id: 'light', label: 'Light', note: 'about 7% of the deck' },
-  { id: 'normal', label: 'Normal', note: 'about 15%' },
-  { id: 'heavy', label: 'Heavy', note: 'about 30%' },
-  { id: 'any', label: 'Any', note: 'no limit' },
+  { id: 'normal', label: 'Normal', note: capNote(15) },
+  { id: 'heavy', label: 'Heavy', note: capNote(30) },
+  { id: 'any', label: 'Any', note: capNote(100) },
 ];
 
 const store = createStore('mtga');
@@ -49,7 +53,7 @@ const isLandType = (c: CardView | undefined) => /\bLand\b/.test((c?.typeLine ?? 
 
 export function Upgrades({ result, meta, onApply, onPeek, busy }: Props) {
   const [profile, setProfile] = useState<Profile>('faithful');
-  const [intensity, setIntensity] = useState<ChangeCap>('normal');
+  const [intensity, setIntensity] = useState<ChangeCap>('version');
   const [premium, setPremium] = useState(false);
   const [limit, setLimit] = useState(false);
   const [budget, setBudget] = useState<WildcardCounts>({ common: 8, uncommon: 6, rare: 4, mythic: 1 });
@@ -168,6 +172,11 @@ export function Upgrades({ result, meta, onApply, onPeek, busy }: Props) {
           <fieldset class="seg">
             <legend class="seg__legend">How much may change</legend>
             <div class="seg__options">
+              <label class="seg__opt">
+                <input type="radio" name="upg-intensity" value="version" checked={intensity === 'version'} onChange={() => setIntensity('version')} />
+                <span class="seg__label">Version's own</span>
+                <span class="seg__note">{capNote(PROFILE_CHANGE_PERCENT[profile], ' of the deck')}</span>
+              </label>
               {CAPS.map((m) => (
                 <label key={m.id} class="seg__opt">
                   <input type="radio" name="upg-intensity" value={m.id} checked={intensity === m.id} onChange={() => setIntensity(m.id)} />

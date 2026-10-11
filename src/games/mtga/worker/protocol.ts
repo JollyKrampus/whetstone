@@ -222,8 +222,17 @@ export interface HandResult {
   ids: Record<string, string>;
 }
 
-/** How much of the deck may change: grindstone's intensities, or 'any' for no cap. */
-export type ChangeCap = Intensity | 'any';
+/**
+ * How much of the deck may change: the chosen version's own cap ('version'), one of grindstone's
+ * intensities, or 'any' for no cap.
+ */
+export type ChangeCap = 'version' | Intensity | 'any';
+
+/**
+ * Each version's own change cap in percent of the deck (grindstone's PROFILES[p].percent; 100 =
+ * no cap). Kept here so the page can say it without loading grindstone; a test pins it.
+ */
+export const PROFILE_CHANGE_PERCENT: Readonly<Record<Profile, number>> = { faithful: 25, competitive: 100, casual: 15 };
 
 export interface SuggestRequest {
   type: 'suggest';
