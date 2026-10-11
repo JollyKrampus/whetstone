@@ -1,0 +1,55 @@
+{
+  "files": {
+    "diffs.json": {
+      "bytes": 11064,
+      "custody": "A",
+      "sha256": "5571cea69abae6b52f4539c40fd87579c1455b2ec13ac6ec48e904cf47a96196"
+    },
+    "heroes.json": {
+      "bytes": 1624709,
+      "custody": "A",
+      "sha256": "6776b0978a3265d96c7e3ebb3f4e589e6c104f319f99de736ee02edff1aacb5e"
+    },
+    "links.json": {
+      "bytes": 81769,
+      "custody": "A",
+      "sha256": "4dbd9f1cafd74c6895522b31fc8a1dedc163bc15ffe59eb9be2555459dab351c"
+    },
+    "maps.json": {
+      "bytes": 9490,
+      "custody": "A",
+      "sha256": "8545d106995fe5497a98dc62a71430d64dd4b4c6390b1a4e03f4ba2ff9166603"
+    },
+    "patches.json": {
+      "bytes": 340289,
+      "custody": "A",
+      "sha256": "96a6bee58d8cff8091fb2017a72b054905912e50afc70d17007765aa18a44399"
+    },
+    "pro.json": {
+      "bytes": 21841,
+      "custody": "A-SA",
+      "sha256": "f6aac4ad47a5c0b72e6a70922f7455e80613b4df31f00d4dbd7f272b80871822"
+    },
+    "public/draft.json": {
+      "bytes": 533329,
+      "custody": "A",
+      "sha256": "25ab78920491a169eb066e39e83f616fa45a758c423bfcddade443ee2ef80937"
+    },
+    "rotation.json": {
+      "bytes": 477,
+      "custody": "A",
+      "sha256": "e3414c7b28d0d88ad77f231eddd54f40f7ff7618bbb27994ecac1cac2e6ccf76"
+    },
+    "theory.json": {
+      "bytes": 4482264,
+      "custody": "A",
+      "sha256": "cd32dce035ad0e21db66be6ea598d63cdb5d1c56849976f71845f0504c3dc5b5"
+    }
+  },
+  "img": {
+    "bytes": 3546401,
+    "files": 1236,
+    "sha256": "b51e5251911dfac4b0afd60c045c2c94986e759adff5a11c813cc87dd5a2c3b9"
+  },
+  "schema": 1
+}

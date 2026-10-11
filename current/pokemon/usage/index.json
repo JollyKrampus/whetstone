@@ -1,0 +1,74 @@
+[
+  {
+    "battles": 69462,
+    "cutoff": 0,
+    "file": "usage/gen9championsbssregmc-0.json",
+    "format": "gen9championsbssregmc",
+    "month": "2026-09",
+    "regulation": "M-C"
+  },
+  {
+    "battles": 69462,
+    "cutoff": 1500,
+    "file": "usage/gen9championsbssregmc-1500.json",
+    "format": "gen9championsbssregmc",
+    "month": "2026-09",
+    "regulation": "M-C"
+  },
+  {
+    "battles": 69462,
+    "cutoff": 1760,
+    "file": "usage/gen9championsbssregmc-1760.json",
+    "format": "gen9championsbssregmc",
+    "month": "2026-09",
+    "regulation": "M-C"
+  },
+  {
+    "battles": 1631943,
+    "cutoff": 0,
+    "file": "usage/gen9championsvgc2026regmc-0.json",
+    "format": "gen9championsvgc2026regmc",
+    "month": "2026-09",
+    "regulation": "M-C"
+  },
+  {
+    "battles": 1631943,
+    "cutoff": 1500,
+    "file": "usage/gen9championsvgc2026regmc-1500.json",
+    "format": "gen9championsvgc2026regmc",
+    "month": "2026-09",
+    "regulation": "M-C"
+  },
+  {
+    "battles": 1631943,
+    "cutoff": 1760,
+    "file": "usage/gen9championsvgc2026regmc-1760.json",
+    "format": "gen9championsvgc2026regmc",
+    "month": "2026-09",
+    "regulation": "M-C"
+  },
+  {
+    "battles": 223477,
+    "cutoff": 0,
+    "file": "usage/gen9championsvgc2026regmcbo3-0.json",
+    "format": "gen9championsvgc2026regmcbo3",
+    "month": "2026-09",
+    "regulation": "M-C"
+  },
+  {
+    "battles": 223477,
+    "cutoff": 1500,
+    "file": "usage/gen9championsvgc2026regmcbo3-1500.json",
+    "format": "gen9championsvgc2026regmcbo3",
+    "month": "2026-09",
+    "regulation": "M-C"
+  },
+  {
+    "battles": 223477,
+    "cutoff": 1760,
+    "file": "usage/gen9championsvgc2026regmcbo3-1760.json",
+    "format": "gen9championsvgc2026regmcbo3",
+    "month": "2026-09",
+    "regulation": "M-C"
+  }
+]

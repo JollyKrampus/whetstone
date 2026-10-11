@@ -1,0 +1,60 @@
+{
+  "files": {
+    "limited/HOB.PremierDraft.json": {
+      "bytes": 99169,
+      "custody": "A",
+      "sha256": "d91e5e5717fc3724d9cac7f1b234cdca7678629efb1d0d35ff794675e6b1d3f2"
+    },
+    "limited/HOB.Sealed.json": {
+      "bytes": 93935,
+      "custody": "A",
+      "sha256": "131708f0aa60e866d88930a9d291db9af1985ae35e32ef830bc8e30e8b0c55df"
+    },
+    "limited/HOB.TradDraft.json": {
+      "bytes": 97176,
+      "custody": "A",
+      "sha256": "7e6d4fcfe01b5a1972e4c0d27a6d108177bedbde0920bc773b11e5a17c93f109"
+    },
+    "limited/MSH.PremierDraft.json": {
+      "bytes": 170253,
+      "custody": "A",
+      "sha256": "2c7bebcec04a79ed942ef1b967332aa9679eea81568f2667876fdb79f8d55349"
+    },
+    "limited/MSH.Sealed.json": {
+      "bytes": 160899,
+      "custody": "A",
+      "sha256": "6ccd1709cc0e15dd8539c619a3cadfa58d6d09324737bc5b308a1c662a92f319"
+    },
+    "limited/MSH.TradDraft.json": {
+      "bytes": 167796,
+      "custody": "A",
+      "sha256": "9e2d4eb55344b1e40070e6258d34381c92d35c40bb941d9b1c9f9199a3ff89be"
+    },
+    "limited/index.json": {
+      "bytes": 983,
+      "custody": "A",
+      "sha256": "8acee39d3efb4fe8be0f7770980b811299b52434c96ed9f95859f08d6a46144a"
+    },
+    "meta/standard.json": {
+      "bytes": 8952,
+      "custody": "A",
+      "sha256": "8d3527f80056957b656acb9209dc96ec231a4100446b0218902a2592b3dfa39f"
+    },
+    "public/_cards.arena.json": {
+      "bytes": 13803397,
+      "custody": "A",
+      "sha256": "fe63cfcd2ff9a9864cc717cfd5b33413748a560c9886446508dca2bd340630b6"
+    },
+    "public/_cards.standard.json": {
+      "bytes": 4749731,
+      "custody": "A",
+      "sha256": "e6142ac7344fb44dcd8177672c2640f10d26dbe5c2e0d8675f4a8c7c276ab0f6"
+    },
+    "sets.json": {
+      "bytes": 35635,
+      "custody": "A",
+      "sha256": "a399999c51b915fd4bcfb2c1ecb0f2ed37dd64665a4673d7211fd3ff70b53138"
+    }
+  },
+  "schema": 1
+}

@@ -1,0 +1,168 @@
+{
+  "games": {
+    "hots": {
+      "changed": true,
+      "checkedAt": "2026-10-11T02:46:38.742Z",
+      "dataHash": "52410620a84ae672432a48b5b56dae47460db1728f8fd804ab78ab11426cf056",
+      "durationMs": 128364,
+      "files": {
+        "current": 1245,
+        "private": 0
+      },
+      "generatedAt": "2026-10-11T02:46:38.742Z",
+      "issues": [
+        {
+          "level": "warn",
+          "message": "nexus-compendium: the rotation it reports ended on 2026-10-08; it has not switched to the new week yet",
+          "source": "nexus-compendium"
+        }
+      ],
+      "sources": [
+        {
+          "fetchedAt": "2026-10-11T02:46:38.742Z",
+          "id": "tact",
+          "status": "ok"
+        },
+        {
+          "fetchedAt": "2026-10-11T02:46:38.742Z",
+          "id": "heroes-data2",
+          "status": "ok"
+        },
+        {
+          "detail": "v2.57.0.98285: 1235 images",
+          "fetchedAt": "2026-10-11T02:46:38.742Z",
+          "id": "heroes-images",
+          "status": "ok"
+        },
+        {
+          "detail": "24 patch-note articles since 2025-01-01",
+          "fetchedAt": "2026-10-11T02:46:38.742Z",
+          "id": "blizzard-news",
+          "status": "ok"
+        },
+        {
+          "detail": "rotation not yet updated upstream (window ended 2026-10-08)",
+          "fetchedAt": "2026-10-11T02:46:38.742Z",
+          "id": "nexus-compendium",
+          "status": "ok"
+        },
+        {
+          "detail": "23 tournaments, 777 drafted maps",
+          "fetchedAt": "2026-10-11T02:46:38.742Z",
+          "id": "liquipedia",
+          "status": "ok"
+        },
+        {
+          "detail": "YT_API_KEY not set",
+          "fetchedAt": null,
+          "id": "youtube",
+          "status": "disabled"
+        },
+        {
+          "detail": "live streams are linked out in v0.1; no Twitch data is fetched",
+          "fetchedAt": null,
+          "id": "twitch",
+          "status": "disabled"
+        }
+      ],
+      "state": "ok"
+    },
+    "mtga": {
+      "changed": true,
+      "checkedAt": "2026-10-11T02:46:41.511Z",
+      "dataHash": "ee073c8407b23121d309fcdf04d16e985c6dd1778fb1eb5b515e745443baa884",
+      "durationMs": 107704,
+      "files": {
+        "current": 11,
+        "private": 0
+      },
+      "generatedAt": "2026-10-11T02:46:41.511Z",
+      "issues": [
+        {
+          "level": "warn",
+          "message": "public/_cards.arena.json is 13.2 MB"
+        }
+      ],
+      "sources": [
+        {
+          "detail": "default_cards 2026-10-10T21:06:04.155+00:00: 16254 Arena cards, 5177 Standard",
+          "fetchedAt": "2026-10-11T02:46:41.511Z",
+          "id": "scryfall",
+          "status": "ok"
+        },
+        {
+          "detail": "HOB PremierDraft, HOB TradDraft, HOB Sealed, MSH PremierDraft, MSH TradDraft, MSH Sealed",
+          "fetchedAt": "2026-10-11T02:46:41.511Z",
+          "id": "17lands",
+          "status": "ok"
+        },
+        {
+          "detail": "1 format(s), 10 list(s)",
+          "fetchedAt": "2026-10-11T02:46:41.511Z",
+          "id": "curated-meta",
+          "status": "ok"
+        },
+        {
+          "detail": "grindstone-mcp 0.3.1, workspace package",
+          "fetchedAt": "2026-10-11T02:46:41.511Z",
+          "id": "grindstone-mcp",
+          "status": "ok"
+        }
+      ],
+      "state": "ok"
+    },
+    "pokemon": {
+      "changed": true,
+      "checkedAt": "2026-10-11T02:46:36.309Z",
+      "dataHash": "0661166c828c290a8d61f3a72e7b8bfd4dfd26c8f70cfa95b9b45ec46ed4ac54",
+      "durationMs": 598389,
+      "files": {
+        "current": 362,
+        "private": 0
+      },
+      "generatedAt": "2026-10-11T02:46:36.309Z",
+      "issues": [
+        {
+          "level": "warn",
+          "message": "no sprite for barbaraclemega, dragalgemega, eelektrossmega, falinksmega, malamarmega, pyroarmega, raichumegax, raichumegay, scolipedemega, scraftymega, staraptormega",
+          "source": "showdown"
+        }
+      ],
+      "sources": [
+        {
+          "detail": "7332b60, data for M-C; M-B: 240 species + 76 Megas; M-C: 269 species + 82 Megas; 340/351 sprites",
+          "fetchedAt": "2026-10-11T02:46:36.309Z",
+          "id": "showdown",
+          "status": "ok"
+        },
+        {
+          "detail": "September 2026, M-C: 9 files (gen9championsbssregmc, gen9championsvgc2026regmc, gen9championsvgc2026regmcbo3; cutoffs 0/1500/1760)",
+          "fetchedAt": "2026-10-11T02:46:36.309Z",
+          "id": "smogon",
+          "status": "ok"
+        },
+        {
+          "detail": "40 M-C events (largest of the last 30 days with team lists), 4189 teams",
+          "fetchedAt": "2026-10-11T02:46:36.309Z",
+          "id": "limitless",
+          "status": "ok"
+        },
+        {
+          "detail": "493 gen9championsvgc2026regmcbo3 games from 2026-10-10 to 2026-10-11; 180 counter and 87 synergy edges (n ≥ 15)",
+          "fetchedAt": "2026-10-11T02:46:36.309Z",
+          "id": "showdown-replays",
+          "status": "ok"
+        },
+        {
+          "detail": "@smogon/calc 0.12.0 (Champions = generation 0): 351 species match the dex",
+          "fetchedAt": "2026-10-11T02:46:36.309Z",
+          "id": "smogon-calc",
+          "status": "ok"
+        }
+      ],
+      "state": "ok"
+    }
+  },
+  "schema": 1,
+  "updatedAt": "2026-10-11T02:56:49.651Z"
+}

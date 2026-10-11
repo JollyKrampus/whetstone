@@ -1,0 +1,1056 @@
+{
+  "attribution": {
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "liquipedia",
+    "text": "Pro draft data from Liquipedia, licensed CC-BY-SA 3.0",
+    "url": "https://liquipedia.net/heroes/"
+  },
+  "heroes": [
+    {
+      "banRate": 0.296,
+      "bans": 230,
+      "hero": "Crus",
+      "pickRate": 0.3153,
+      "picks": 245,
+      "presence": 0.6113,
+      "wins": 128
+    },
+    {
+      "banRate": 0.3423,
+      "bans": 266,
+      "hero": "HOGG",
+      "pickRate": 0.2162,
+      "picks": 168,
+      "presence": 0.5586,
+      "wins": 94
+    },
+    {
+      "banRate": 0.2754,
+      "bans": 214,
+      "hero": "Sylv",
+      "pickRate": 0.2432,
+      "picks": 189,
+      "presence": 0.5187,
+      "wins": 98
+    },
+    {
+      "banRate": 0.2613,
+      "bans": 203,
+      "hero": "Fals",
+      "pickRate": 0.2381,
+      "picks": 185,
+      "presence": 0.4994,
+      "wins": 92
+    },
+    {
+      "banRate": 0.1261,
+      "bans": 98,
+      "hero": "Fire",
+      "pickRate": 0.3411,
+      "picks": 265,
+      "presence": 0.4672,
+      "wins": 137
+    },
+    {
+      "banRate": 0.2896,
+      "bans": 225,
+      "hero": "Garr",
+      "pickRate": 0.1763,
+      "picks": 137,
+      "presence": 0.4659,
+      "wins": 73
+    },
+    {
+      "banRate": 0.2484,
+      "bans": 193,
+      "hero": "Chro",
+      "pickRate": 0.1815,
+      "picks": 141,
+      "presence": 0.4299,
+      "wins": 72
+    },
+    {
+      "banRate": 0.2625,
+      "bans": 204,
+      "hero": "Maie",
+      "pickRate": 0.1673,
+      "picks": 130,
+      "presence": 0.4299,
+      "wins": 65
+    },
+    {
+      "banRate": 0.1506,
+      "bans": 117,
+      "hero": "YREL",
+      "pickRate": 0.26,
+      "picks": 202,
+      "presence": 0.4106,
+      "wins": 115
+    },
+    {
+      "banRate": 0.103,
+      "bans": 80,
+      "hero": "Faer",
+      "pickRate": 0.2947,
+      "picks": 229,
+      "presence": 0.3977,
+      "wins": 119
+    },
+    {
+      "banRate": 0.1158,
+      "bans": 90,
+      "hero": "Hanz",
+      "pickRate": 0.26,
+      "picks": 202,
+      "presence": 0.3758,
+      "wins": 101
+    },
+    {
+      "banRate": 0.0875,
+      "bans": 68,
+      "hero": "Andu",
+      "pickRate": 0.2806,
+      "picks": 218,
+      "presence": 0.3681,
+      "wins": 94
+    },
+    {
+      "banRate": 0.1107,
+      "bans": 86,
+      "hero": "Tyrl",
+      "pickRate": 0.2342,
+      "picks": 182,
+      "presence": 0.3449,
+      "wins": 98
+    },
+    {
+      "banRate": 0.0952,
+      "bans": 74,
+      "hero": "Deha",
+      "pickRate": 0.2471,
+      "picks": 192,
+      "presence": 0.3423,
+      "wins": 100
+    },
+    {
+      "banRate": 0.0412,
+      "bans": 32,
+      "hero": "Rehg",
+      "pickRate": 0.2844,
+      "picks": 221,
+      "presence": 0.3256,
+      "wins": 101
+    },
+    {
+      "banRate": 0.0746,
+      "bans": 58,
+      "hero": "Wiza",
+      "pickRate": 0.2368,
+      "picks": 184,
+      "presence": 0.3115,
+      "wins": 99
+    },
+    {
+      "banRate": 0.1544,
+      "bans": 120,
+      "hero": "Thra",
+      "pickRate": 0.1532,
+      "picks": 119,
+      "presence": 0.3076,
+      "wins": 58
+    },
+    {
+      "banRate": 0.1171,
+      "bans": 91,
+      "hero": "Demo",
+      "pickRate": 0.1634,
+      "picks": 127,
+      "presence": 0.2806,
+      "wins": 62
+    },
+    {
+      "banRate": 0.0399,
+      "bans": 31,
+      "hero": "Mura",
+      "pickRate": 0.2355,
+      "picks": 183,
+      "presence": 0.2754,
+      "wins": 87
+    },
+    {
+      "banRate": 0.157,
+      "bans": 122,
+      "hero": "Luci",
+      "pickRate": 0.1158,
+      "picks": 90,
+      "presence": 0.2728,
+      "wins": 48
+    },
+    {
+      "banRate": 0.0927,
+      "bans": 72,
+      "hero": "Genj",
+      "pickRate": 0.175,
+      "picks": 136,
+      "presence": 0.2677,
+      "wins": 64
+    },
+    {
+      "banRate": 0.036,
+      "bans": 28,
+      "hero": "Malf",
+      "pickRate": 0.2317,
+      "picks": 180,
+      "presence": 0.2677,
+      "wins": 102
+    },
+    {
+      "banRate": 0.1017,
+      "bans": 79,
+      "hero": "Junk",
+      "pickRate": 0.1634,
+      "picks": 127,
+      "presence": 0.2651,
+      "wins": 55
+    },
+    {
+      "banRate": 0.0463,
+      "bans": 36,
+      "hero": "Leor",
+      "pickRate": 0.2136,
+      "picks": 166,
+      "presence": 0.26,
+      "wins": 78
+    },
+    {
+      "banRate": 0.0566,
+      "bans": 44,
+      "hero": "L90E",
+      "pickRate": 0.1969,
+      "picks": 153,
+      "presence": 0.2535,
+      "wins": 64
+    },
+    {
+      "banRate": 0.1429,
+      "bans": 111,
+      "hero": "Sgth",
+      "pickRate": 0.0978,
+      "picks": 76,
+      "presence": 0.2407,
+      "wins": 41
+    },
+    {
+      "banRate": 0.0734,
+      "bans": 57,
+      "hero": "Diab",
+      "pickRate": 0.1622,
+      "picks": 126,
+      "presence": 0.2355,
+      "wins": 61
+    },
+    {
+      "banRate": 0.0824,
+      "bans": 64,
+      "hero": "Anub",
+      "pickRate": 0.1519,
+      "picks": 118,
+      "presence": 0.2342,
+      "wins": 62
+    },
+    {
+      "banRate": 0.1364,
+      "bans": 106,
+      "hero": "DEAT",
+      "pickRate": 0.0901,
+      "picks": 70,
+      "presence": 0.2265,
+      "wins": 35
+    },
+    {
+      "banRate": 0.0682,
+      "bans": 53,
+      "hero": "Guld",
+      "pickRate": 0.1493,
+      "picks": 116,
+      "presence": 0.2175,
+      "wins": 71
+    },
+    {
+      "banRate": 0.094,
+      "bans": 73,
+      "hero": "Chen",
+      "pickRate": 0.1197,
+      "picks": 93,
+      "presence": 0.2136,
+      "wins": 52
+    },
+    {
+      "banRate": 0.1223,
+      "bans": 95,
+      "hero": "Mdvh",
+      "pickRate": 0.0656,
+      "picks": 51,
+      "presence": 0.1879,
+      "wins": 30
+    },
+    {
+      "banRate": 0.0283,
+      "bans": 22,
+      "hero": "Vari",
+      "pickRate": 0.1519,
+      "picks": 118,
+      "presence": 0.1802,
+      "wins": 49
+    },
+    {
+      "banRate": 0.0309,
+      "bans": 24,
+      "hero": "Genn",
+      "pickRate": 0.1338,
+      "picks": 104,
+      "presence": 0.1647,
+      "wins": 49
+    },
+    {
+      "banRate": 0.0528,
+      "bans": 41,
+      "hero": "HANA",
+      "pickRate": 0.1107,
+      "picks": 86,
+      "presence": 0.1634,
+      "wins": 48
+    },
+    {
+      "banRate": 0.045,
+      "bans": 35,
+      "hero": "Auri",
+      "pickRate": 0.1171,
+      "picks": 91,
+      "presence": 0.1622,
+      "wins": 43
+    },
+    {
+      "banRate": 0.0399,
+      "bans": 31,
+      "hero": "Uthe",
+      "pickRate": 0.1223,
+      "picks": 95,
+      "presence": 0.1622,
+      "wins": 42
+    },
+    {
+      "banRate": 0.0257,
+      "bans": 20,
+      "hero": "Amaz",
+      "pickRate": 0.1313,
+      "picks": 102,
+      "presence": 0.157,
+      "wins": 44
+    },
+    {
+      "banRate": 0.0232,
+      "bans": 18,
+      "hero": "Arth",
+      "pickRate": 0.1313,
+      "picks": 102,
+      "presence": 0.1544,
+      "wins": 58
+    },
+    {
+      "banRate": 0.112,
+      "bans": 87,
+      "hero": "Lost",
+      "pickRate": 0.0425,
+      "picks": 33,
+      "presence": 0.1544,
+      "wins": 21
+    },
+    {
+      "banRate": 0.0245,
+      "bans": 19,
+      "hero": "Tych",
+      "pickRate": 0.1287,
+      "picks": 100,
+      "presence": 0.1532,
+      "wins": 41
+    },
+    {
+      "banRate": 0.0721,
+      "bans": 56,
+      "hero": "Zera",
+      "pickRate": 0.0798,
+      "picks": 62,
+      "presence": 0.1519,
+      "wins": 31
+    },
+    {
+      "banRate": 0.0631,
+      "bans": 49,
+      "hero": "Tra0",
+      "pickRate": 0.0875,
+      "picks": 68,
+      "presence": 0.1506,
+      "wins": 45
+    },
+    {
+      "banRate": 0.0528,
+      "bans": 41,
+      "hero": "Alar",
+      "pickRate": 0.0862,
+      "picks": 67,
+      "presence": 0.139,
+      "wins": 28
+    },
+    {
+      "banRate": 0.0695,
+      "bans": 54,
+      "hero": "Stit",
+      "pickRate": 0.0695,
+      "picks": 54,
+      "presence": 0.139,
+      "wins": 24
+    },
+    {
+      "banRate": 0.0335,
+      "bans": 26,
+      "hero": "STUK",
+      "pickRate": 0.0965,
+      "picks": 75,
+      "presence": 0.13,
+      "wins": 31
+    },
+    {
+      "banRate": 0.027,
+      "bans": 21,
+      "hero": "Barb",
+      "pickRate": 0.0991,
+      "picks": 77,
+      "presence": 0.1261,
+      "wins": 33
+    },
+    {
+      "banRate": 0.036,
+      "bans": 28,
+      "hero": "MALT",
+      "pickRate": 0.0901,
+      "picks": 70,
+      "presence": 0.1261,
+      "wins": 25
+    },
+    {
+      "banRate": 0.045,
+      "bans": 35,
+      "hero": "ORPH",
+      "pickRate": 0.0798,
+      "picks": 62,
+      "presence": 0.1248,
+      "wins": 26
+    },
+    {
+      "banRate": 0.0952,
+      "bans": 74,
+      "hero": "chogall",
+      "pickRate": 0.027,
+      "picks": 21,
+      "presence": 0.1223,
+      "wins": 10
+    },
+    {
+      "banRate": 0.0373,
+      "bans": 29,
+      "hero": "WHIT",
+      "pickRate": 0.0785,
+      "picks": 61,
+      "presence": 0.1158,
+      "wins": 25
+    },
+    {
+      "banRate": 0.0605,
+      "bans": 47,
+      "hero": "NXHU",
+      "pickRate": 0.0515,
+      "picks": 40,
+      "presence": 0.112,
+      "wins": 25
+    },
+    {
+      "banRate": 0.0167,
+      "bans": 13,
+      "hero": "Tyrd",
+      "pickRate": 0.0927,
+      "picks": 72,
+      "presence": 0.1094,
+      "wins": 45
+    },
+    {
+      "banRate": 0.0154,
+      "bans": 12,
+      "hero": "DECK",
+      "pickRate": 0.0927,
+      "picks": 72,
+      "presence": 0.1081,
+      "wins": 42
+    },
+    {
+      "banRate": 0.0103,
+      "bans": 8,
+      "hero": "IMPE",
+      "pickRate": 0.0837,
+      "picks": 65,
+      "presence": 0.094,
+      "wins": 33
+    },
+    {
+      "banRate": 0.009,
+      "bans": 7,
+      "hero": "Kael",
+      "pickRate": 0.0824,
+      "picks": 64,
+      "presence": 0.0914,
+      "wins": 28
+    },
+    {
+      "banRate": 0.0116,
+      "bans": 9,
+      "hero": "Jain",
+      "pickRate": 0.0759,
+      "picks": 59,
+      "presence": 0.0875,
+      "wins": 25
+    },
+    {
+      "banRate": 0.0373,
+      "bans": 29,
+      "hero": "MEPH",
+      "pickRate": 0.0476,
+      "picks": 37,
+      "presence": 0.0849,
+      "wins": 16
+    },
+    {
+      "banRate": 0.0129,
+      "bans": 10,
+      "hero": "MalG",
+      "pickRate": 0.0618,
+      "picks": 48,
+      "presence": 0.0746,
+      "wins": 27
+    },
+    {
+      "banRate": 0.0116,
+      "bans": 9,
+      "hero": "DVA0",
+      "pickRate": 0.0618,
+      "picks": 48,
+      "presence": 0.0734,
+      "wins": 22
+    },
+    {
+      "banRate": 0.0232,
+      "bans": 18,
+      "hero": "Alex",
+      "pickRate": 0.0476,
+      "picks": 37,
+      "presence": 0.0708,
+      "wins": 19
+    },
+    {
+      "banRate": 0.0039,
+      "bans": 3,
+      "hero": "Rayn",
+      "pickRate": 0.0644,
+      "picks": 50,
+      "presence": 0.0682,
+      "wins": 22
+    },
+    {
+      "banRate": 0.0129,
+      "bans": 10,
+      "hero": "Rexx",
+      "pickRate": 0.0489,
+      "picks": 38,
+      "presence": 0.0618,
+      "wins": 25
+    },
+    {
+      "banRate": 0.009,
+      "bans": 7,
+      "hero": "Zaga",
+      "pickRate": 0.0515,
+      "picks": 40,
+      "presence": 0.0605,
+      "wins": 17
+    },
+    {
+      "banRate": 0.0257,
+      "bans": 20,
+      "hero": "Illi",
+      "pickRate": 0.0322,
+      "picks": 25,
+      "presence": 0.0579,
+      "wins": 9
+    },
+    {
+      "banRate": 0.0219,
+      "bans": 17,
+      "hero": "Kerr",
+      "pickRate": 0.036,
+      "picks": 28,
+      "presence": 0.0579,
+      "wins": 17
+    },
+    {
+      "banRate": 0.0309,
+      "bans": 24,
+      "hero": "Samu",
+      "pickRate": 0.0257,
+      "picks": 20,
+      "presence": 0.0566,
+      "wins": 7
+    },
+    {
+      "banRate": 0.0257,
+      "bans": 20,
+      "hero": "Abat",
+      "pickRate": 0.0296,
+      "picks": 23,
+      "presence": 0.0553,
+      "wins": 15
+    },
+    {
+      "banRate": 0.0103,
+      "bans": 8,
+      "hero": "HXAL",
+      "pickRate": 0.045,
+      "picks": 35,
+      "presence": 0.0553,
+      "wins": 23
+    },
+    {
+      "banRate": 0.0051,
+      "bans": 4,
+      "hero": "Ragn",
+      "pickRate": 0.0476,
+      "picks": 37,
+      "presence": 0.0528,
+      "wins": 19
+    },
+    {
+      "banRate": 0.036,
+      "bans": 28,
+      "hero": "Zary",
+      "pickRate": 0.0167,
+      "picks": 13,
+      "presence": 0.0528,
+      "wins": 7
+    },
+    {
+      "banRate": 0.0064,
+      "bans": 5,
+      "hero": "Necr",
+      "pickRate": 0.045,
+      "picks": 35,
+      "presence": 0.0515,
+      "wins": 19
+    },
+    {
+      "banRate": 0.0026,
+      "bans": 2,
+      "hero": "Drya",
+      "pickRate": 0.0463,
+      "picks": 36,
+      "presence": 0.0489,
+      "wins": 15
+    },
+    {
+      "banRate": 0.0026,
+      "bans": 2,
+      "hero": "HMEI",
+      "pickRate": 0.0438,
+      "picks": 34,
+      "presence": 0.0463,
+      "wins": 19
+    },
+    {
+      "banRate": 0.0039,
+      "bans": 3,
+      "hero": "Monk",
+      "pickRate": 0.0399,
+      "picks": 31,
+      "presence": 0.0438,
+      "wins": 17
+    },
+    {
+      "banRate": 0.0026,
+      "bans": 2,
+      "hero": "Witc",
+      "pickRate": 0.0412,
+      "picks": 32,
+      "presence": 0.0438,
+      "wins": 14
+    },
+    {
+      "banRate": 0.0026,
+      "bans": 2,
+      "hero": "Arts",
+      "pickRate": 0.0399,
+      "picks": 31,
+      "presence": 0.0425,
+      "wins": 10
+    },
+    {
+      "banRate": 0.0206,
+      "bans": 16,
+      "hero": "Murk",
+      "pickRate": 0.0193,
+      "picks": 15,
+      "presence": 0.0399,
+      "wins": 7
+    },
+    {
+      "banRate": 0.0039,
+      "bans": 3,
+      "hero": "FENX",
+      "pickRate": 0.0309,
+      "picks": 24,
+      "presence": 0.0347,
+      "wins": 12
+    },
+    {
+      "banRate": 0.0051,
+      "bans": 4,
+      "hero": "LiLi",
+      "pickRate": 0.0283,
+      "picks": 22,
+      "presence": 0.0335,
+      "wins": 7
+    },
+    {
+      "banRate": 0.0077,
+      "bans": 6,
+      "hero": "Prob",
+      "pickRate": 0.0257,
+      "picks": 20,
+      "presence": 0.0335,
+      "wins": 10
+    },
+    {
+      "banRate": 0,
+      "bans": 0,
+      "hero": "Tass",
+      "pickRate": 0.0322,
+      "picks": 25,
+      "presence": 0.0322,
+      "wins": 10
+    },
+    {
+      "banRate": 0.0039,
+      "bans": 3,
+      "hero": "KelT",
+      "pickRate": 0.0257,
+      "picks": 20,
+      "presence": 0.0296,
+      "wins": 9
+    },
+    {
+      "banRate": 0.0077,
+      "bans": 6,
+      "hero": "VALE",
+      "pickRate": 0.0206,
+      "picks": 16,
+      "presence": 0.0283,
+      "wins": 8
+    },
+    {
+      "banRate": 0.009,
+      "bans": 7,
+      "hero": "ZULJ",
+      "pickRate": 0.018,
+      "picks": 14,
+      "presence": 0.027,
+      "wins": 6
+    },
+    {
+      "banRate": 0.0013,
+      "bans": 1,
+      "hero": "Azmo",
+      "pickRate": 0.0232,
+      "picks": 18,
+      "presence": 0.0245,
+      "wins": 10
+    },
+    {
+      "banRate": 0.0013,
+      "bans": 1,
+      "hero": "Tink",
+      "pickRate": 0.0206,
+      "picks": 16,
+      "presence": 0.0219,
+      "wins": 6
+    },
+    {
+      "banRate": 0.0026,
+      "bans": 2,
+      "hero": "Medi",
+      "pickRate": 0.0154,
+      "picks": 12,
+      "presence": 0.018,
+      "wins": 6
+    },
+    {
+      "banRate": 0.0051,
+      "bans": 4,
+      "hero": "Butc",
+      "pickRate": 0.0103,
+      "picks": 8,
+      "presence": 0.0154,
+      "wins": 6
+    },
+    {
+      "banRate": 0,
+      "bans": 0,
+      "hero": "Nova",
+      "pickRate": 0.0103,
+      "picks": 8,
+      "presence": 0.0103,
+      "wins": 2
+    }
+  ],
+  "totals": {
+    "maps": 777,
+    "tournaments": 23
+  },
+  "tournaments": [
+    {
+      "endDate": "2026-10-18",
+      "id": "Heroes_Captains_Clash/Season_3",
+      "maps": 11,
+      "name": "Heroes Captains Clash Season 3",
+      "region": "North America",
+      "startDate": "2026-10-10",
+      "tier": 2,
+      "url": "https://liquipedia.net/heroes/Heroes_Captains_Clash/Season_3"
+    },
+    {
+      "endDate": "2026-10-04",
+      "id": "Copium_Cup",
+      "maps": 35,
+      "name": "Copium Cup",
+      "region": "Europe",
+      "startDate": "2026-10-03",
+      "tier": 2,
+      "url": "https://liquipedia.net/heroes/Copium_Cup"
+    },
+    {
+      "id": "Blizzard_Classic_Cup/2026",
+      "maps": 3,
+      "name": "Blizzard Classic Cup 2026",
+      "region": "North America",
+      "startDate": "2026-09-12",
+      "tier": 1,
+      "url": "https://liquipedia.net/heroes/Blizzard_Classic_Cup/2026"
+    },
+    {
+      "endDate": "2026-09-26",
+      "id": "Calamity_Invitational",
+      "maps": 26,
+      "name": "Calamity Invitational",
+      "region": "Americas",
+      "startDate": "2026-09-02",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/Calamity_Invitational"
+    },
+    {
+      "endDate": "2026-09-06",
+      "id": "Khaldors_Underdog_Cup/5/Div_1",
+      "maps": 37,
+      "name": "Khaldor's Big Dog Cup 2026",
+      "region": "Europe",
+      "startDate": "2026-08-29",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/Khaldors_Underdog_Cup/5/Div_1"
+    },
+    {
+      "endDate": "2026-08-23",
+      "id": "Meta_Dymy/4",
+      "maps": 61,
+      "name": "META DYMY #4",
+      "region": "Europe",
+      "startDate": "2026-08-15",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/Meta_Dymy/4"
+    },
+    {
+      "endDate": "2026-08-28",
+      "id": "Light_Hots_Tournament/2026",
+      "maps": 42,
+      "name": "Light Hots Tournament 2026",
+      "region": "Europe",
+      "startDate": "2026-08-01",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/Light_Hots_Tournament/2026"
+    },
+    {
+      "endDate": "2026-07-26",
+      "id": "Eternal_Conflict/Season_2",
+      "maps": 22,
+      "name": "Eternal Conflict Season 2 Finale",
+      "region": "Europe",
+      "startDate": "2026-07-25",
+      "tier": 2,
+      "url": "https://liquipedia.net/heroes/Eternal_Conflict/Season_2"
+    },
+    {
+      "id": "Eternal_Conflict/Season_2/Episode_3",
+      "maps": 18,
+      "name": "Eternal Conflict Season 2 Episode 3",
+      "region": "Europe",
+      "startDate": "2026-07-19",
+      "tier": 2,
+      "url": "https://liquipedia.net/heroes/Eternal_Conflict/Season_2/Episode_3"
+    },
+    {
+      "id": "Eternal_Conflict/Season_2/Episode_2",
+      "maps": 22,
+      "name": "Eternal Conflict Season 2 Episode 2",
+      "region": "Europe",
+      "startDate": "2026-07-12",
+      "tier": 2,
+      "url": "https://liquipedia.net/heroes/Eternal_Conflict/Season_2/Episode_2"
+    },
+    {
+      "id": "Eternal_Conflict/Season_2/Episode_1",
+      "maps": 21,
+      "name": "Eternal Conflict Season 2 Episode 1",
+      "region": "Europe",
+      "startDate": "2026-07-05",
+      "tier": 2,
+      "url": "https://liquipedia.net/heroes/Eternal_Conflict/Season_2/Episode_1"
+    },
+    {
+      "endDate": "2026-09-07",
+      "id": "Nexus_MM_Rumble/3",
+      "maps": 10,
+      "name": "Nexus Meta Madness Rumble #3",
+      "region": "Europe",
+      "startDate": "2026-06-22",
+      "tier": 4,
+      "url": "https://liquipedia.net/heroes/Nexus_MM_Rumble/3"
+    },
+    {
+      "endDate": "2026-06-18",
+      "id": "E-Pulse/Heroes_Pulsing/2",
+      "maps": 8,
+      "name": "Heroes Pulsing #2",
+      "region": "Europe",
+      "startDate": "2026-06-11",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/E-Pulse/Heroes_Pulsing/2"
+    },
+    {
+      "endDate": "2026-06-28",
+      "id": "Murky_Cup/3",
+      "maps": 80,
+      "name": "Murky Cup 2026",
+      "region": "Europe",
+      "startDate": "2026-05-30",
+      "tier": 2,
+      "url": "https://liquipedia.net/heroes/Murky_Cup/3"
+    },
+    {
+      "endDate": "2026-05-21",
+      "id": "E-Pulse/Heroes_Pulsing/1",
+      "maps": 8,
+      "name": "Heroes Pulsing #1",
+      "region": "Europe",
+      "startDate": "2026-05-14",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/E-Pulse/Heroes_Pulsing/1"
+    },
+    {
+      "endDate": "2026-05-10",
+      "id": "Khaldors_Underdog_Cup/4/Div_5",
+      "maps": 37,
+      "name": "Khaldor's Underdog Cup 2026 (4 / Div 5)",
+      "region": "Europe",
+      "startDate": "2026-05-02",
+      "tier": 4,
+      "url": "https://liquipedia.net/heroes/Khaldors_Underdog_Cup/4/Div_5"
+    },
+    {
+      "endDate": "2026-03-29",
+      "id": "NationLESS_Cup",
+      "maps": 36,
+      "name": "NationLESS Cup",
+      "region": "Europe",
+      "startDate": "2026-03-21",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/NationLESS_Cup"
+    },
+    {
+      "endDate": "2026-04-26",
+      "id": "Nations_Cup_2026",
+      "maps": 38,
+      "name": "Nations Cup 2026",
+      "region": "Europe",
+      "startDate": "2026-01-31",
+      "tier": 1,
+      "url": "https://liquipedia.net/heroes/Nations_Cup_2026"
+    },
+    {
+      "endDate": "2026-04-26",
+      "id": "Nations_Cup_2026/League_Stage",
+      "maps": 64,
+      "name": "Nations Cup 2026 (League Stage)",
+      "region": "Europe",
+      "startDate": "2026-01-31",
+      "tier": 1,
+      "url": "https://liquipedia.net/heroes/Nations_Cup_2026/League_Stage"
+    },
+    {
+      "endDate": "2026-04-26",
+      "id": "Nations_Cup_2026/Qualifiers",
+      "maps": 101,
+      "name": "Nations Cup 2026 (Qualifiers)",
+      "region": "Europe",
+      "startDate": "2026-01-31",
+      "tier": 1,
+      "url": "https://liquipedia.net/heroes/Nations_Cup_2026/Qualifiers"
+    },
+    {
+      "id": "Tektek_Cup/1",
+      "maps": 16,
+      "name": "Tektek Cup #1",
+      "region": "Europe",
+      "startDate": "2026-01-24",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/Tektek_Cup/1"
+    },
+    {
+      "id": "NA_Kuram_Kup",
+      "maps": 23,
+      "name": "NA Kuram Kup",
+      "region": "North America",
+      "startDate": "2026-01-11",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/NA_Kuram_Kup"
+    },
+    {
+      "endDate": "2026-01-25",
+      "id": "Khaldors_Underdog_Cup/3/Div_2-3",
+      "maps": 58,
+      "name": "Khaldor's Underdog Cup 2026 (3 / Div 2-3)",
+      "region": "Europe",
+      "startDate": "2026-01-10",
+      "tier": 3,
+      "url": "https://liquipedia.net/heroes/Khaldors_Underdog_Cup/3/Div_2-3"
+    }
+  ],
+  "window": {
+    "from": "2026-01-01",
+    "label": "2026 tournaments",
+    "to": "2026-12-31"
+  }
+}

@@ -1,0 +1,4826 @@
+{
+  "attribution": {
+    "source": "showdown-replays",
+    "text": "Matchups: public Pokémon Showdown Bo3 replays; player names removed",
+    "url": "https://replay.pokemonshowdown.com/"
+  },
+  "counters": [
+    {
+      "a": "arcaninehisui",
+      "b": "garchompmegaz",
+      "delta": -0.07,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% vs Garchomp-Mega-Z (expected 50.0%), n=15"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.78
+    },
+    {
+      "a": "arcaninehisui",
+      "b": "incineroar",
+      "delta": 0.1,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0.1,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 60.0% vs Incineroar (expected 50.0%), n=20"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.9
+    },
+    {
+      "a": "arcaninehisui",
+      "b": "indeedeef",
+      "delta": -0.07,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 41.2% vs Indeedee-F (expected 50.0%), n=17"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.73
+    },
+    {
+      "a": "archaludon",
+      "b": "charizardmegay",
+      "delta": -0.07,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% vs Charizard-Mega-Y (expected 50.0%), n=15"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.77
+    },
+    {
+      "a": "archaludon",
+      "b": "gholdengo",
+      "delta": 0.05,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 55.0% vs Gholdengo (expected 50.1%), n=20"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.44
+    },
+    {
+      "a": "archaludon",
+      "b": "incineroar",
+      "delta": 0.17,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 62.1% vs Incineroar (expected 50.2%), n=29"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.27
+    },
+    {
+      "a": "archaludon",
+      "b": "indeedeef",
+      "delta": 0.17,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 70.6% vs Indeedee-F (expected 50.3%), n=17"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.67
+    },
+    {
+      "a": "archaludon",
+      "b": "raichumegay",
+      "delta": 0,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Raichu-Mega-Y (expected 50.3%), n=18"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.02
+    },
+    {
+      "a": "archaludon",
+      "b": "rillaboom",
+      "delta": 0.19,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": 0.19,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% vs Rillaboom (expected 50.2%), n=24"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.61
+    },
+    {
+      "a": "archaludon",
+      "b": "sneasler",
+      "delta": 0.1,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.1,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 61.1% vs Sneasler (expected 50.1%), n=18"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.93
+    },
+    {
+      "a": "basculegion",
+      "b": "gholdengo",
+      "delta": -0.05,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 44.4% vs Gholdengo (expected 49.9%), n=18"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.46
+    },
+    {
+      "a": "basculegion",
+      "b": "incineroar",
+      "delta": -0.17,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% vs Incineroar (expected 50.0%), n=21"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.53
+    },
+    {
+      "a": "basculegion",
+      "b": "raichumegay",
+      "delta": 0.15,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% vs Raichu-Mega-Y (expected 50.1%), n=18"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.41
+    },
+    {
+      "a": "basculegion",
+      "b": "rillaboom",
+      "delta": 0.2,
+      "n": 28,
+      "reasons": [
+        {
+          "delta": 0.2,
+          "kind": "stat",
+          "n": 28,
+          "source": "showdown-replays",
+          "text": "Wins 64.3% vs Rillaboom (expected 50.0%), n=28"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.51
+    },
+    {
+      "a": "basculegion",
+      "b": "sneasler",
+      "delta": -0.2,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": -0.2,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 30.0% vs Sneasler (expected 49.9%), n=20"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.78
+    },
+    {
+      "a": "cameruptmega",
+      "b": "rillaboom",
+      "delta": -0.05,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 45.8% vs Rillaboom (expected 50.0%), n=24"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.41
+    },
+    {
+      "a": "charizardmegay",
+      "b": "archaludon",
+      "delta": 0.07,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 60.0% vs Archaludon (expected 50.0%), n=15"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.77
+    },
+    {
+      "a": "charizardmegay",
+      "b": "gholdengo",
+      "delta": 0.12,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": 0.12,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 63.2% vs Gholdengo (expected 50.1%), n=19"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.14
+    },
+    {
+      "a": "charizardmegay",
+      "b": "incineroar",
+      "delta": 0.12,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": 0.12,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 58.6% vs Incineroar (expected 50.2%), n=29"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.9
+    },
+    {
+      "a": "charizardmegay",
+      "b": "raichumegay",
+      "delta": 0.1,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": 0.1,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 59.1% vs Raichu-Mega-Y (expected 50.3%), n=22"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.82
+    },
+    {
+      "a": "charizardmegay",
+      "b": "rillaboom",
+      "delta": 0.17,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% vs Rillaboom (expected 50.2%), n=21"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.51
+    },
+    {
+      "a": "charizardmegay",
+      "b": "sneasler",
+      "delta": 0,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Sneasler (expected 50.1%), n=16"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.01
+    },
+    {
+      "a": "excadrill",
+      "b": "gholdengo",
+      "delta": -0.02,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 47.4% vs Gholdengo (expected 49.9%), n=19"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.22
+    },
+    {
+      "a": "excadrill",
+      "b": "incineroar",
+      "delta": 0.15,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 63.6% vs Incineroar (expected 50.1%), n=22"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.27
+    },
+    {
+      "a": "excadrill",
+      "b": "rillaboom",
+      "delta": -0.12,
+      "n": 37,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 37,
+          "source": "showdown-replays",
+          "text": "Wins 43.2% vs Rillaboom (expected 50.1%), n=37"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -0.83
+    },
+    {
+      "a": "floettemega",
+      "b": "gholdengo",
+      "delta": -0.07,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% vs Gholdengo (expected 49.9%), n=15"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.76
+    },
+    {
+      "a": "floettemega",
+      "b": "incineroar",
+      "delta": -0.02,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 46.7% vs Incineroar (expected 50.0%), n=15"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.26
+    },
+    {
+      "a": "floettemega",
+      "b": "indeedeef",
+      "delta": 0,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Indeedee-F (expected 50.1%), n=20"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.01
+    },
+    {
+      "a": "floettemega",
+      "b": "kingambit",
+      "delta": 0,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Kingambit (expected 50.0%), n=16"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0
+    },
+    {
+      "a": "floettemega",
+      "b": "rillaboom",
+      "delta": 0.07,
+      "n": 31,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 31,
+          "source": "showdown-replays",
+          "text": "Wins 54.8% vs Rillaboom (expected 50.0%), n=31"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.54
+    },
+    {
+      "a": "floettemega",
+      "b": "sneasler",
+      "delta": -0.17,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% vs Sneasler (expected 49.9%), n=21"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.52
+    },
+    {
+      "a": "garchomp",
+      "b": "garchompmegaz",
+      "delta": -0.05,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 44.4% vs Garchomp-Mega-Z (expected 50.1%), n=18"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.48
+    },
+    {
+      "a": "garchomp",
+      "b": "gholdengo",
+      "delta": -0.07,
+      "n": 27,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 27,
+          "source": "showdown-replays",
+          "text": "Wins 44.4% vs Gholdengo (expected 50.0%), n=27"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.57
+    },
+    {
+      "a": "garchomp",
+      "b": "incineroar",
+      "delta": 0.15,
+      "n": 32,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 32,
+          "source": "showdown-replays",
+          "text": "Wins 59.4% vs Incineroar (expected 50.1%), n=32"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.05
+    },
+    {
+      "a": "garchomp",
+      "b": "raichumegay",
+      "delta": 0.1,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": 0.1,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 59.1% vs Raichu-Mega-Y (expected 50.2%), n=22"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.84
+    },
+    {
+      "a": "garchomp",
+      "b": "rillaboom",
+      "delta": -0.17,
+      "n": 37,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 37,
+          "source": "showdown-replays",
+          "text": "Wins 40.5% vs Rillaboom (expected 50.1%), n=37"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.16
+    },
+    {
+      "a": "garchomp",
+      "b": "salamencemega",
+      "delta": -0.12,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% vs Salamence-Mega (expected 50.0%), n=15"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.29
+    },
+    {
+      "a": "garchomp",
+      "b": "sneasler",
+      "delta": -0.12,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 36.8% vs Sneasler (expected 50.0%), n=19"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.15
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "arcaninehisui",
+      "delta": 0.07,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 60.0% vs Arcanine-Hisui (expected 50.0%), n=15"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.78
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "garchomp",
+      "delta": 0.05,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 55.6% vs Garchomp (expected 49.9%), n=18"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.48
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "gholdengo",
+      "delta": -0.07,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 42.1% vs Gholdengo (expected 49.8%), n=19"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.67
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "incineroar",
+      "delta": -0.07,
+      "n": 31,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 31,
+          "source": "showdown-replays",
+          "text": "Wins 45.2% vs Incineroar (expected 50.0%), n=31"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.53
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "indeedeef",
+      "delta": 0.12,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.12,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 61.9% vs Indeedee-F (expected 50.0%), n=21"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.09
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "raichumegay",
+      "delta": 0,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Raichu-Mega-Y (expected 50.0%), n=20"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "rillaboom",
+      "delta": 0.1,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.1,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 61.1% vs Rillaboom (expected 50.0%), n=18"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.95
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "sneasler",
+      "delta": -0.1,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": -0.1,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 41.7% vs Sneasler (expected 49.8%), n=24"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.8
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "volcarona",
+      "delta": 0.02,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 52.2% vs Volcarona (expected 50.1%), n=23"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.2
+    },
+    {
+      "a": "gholdengo",
+      "b": "archaludon",
+      "delta": -0.05,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 45.0% vs Archaludon (expected 49.9%), n=20"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.44
+    },
+    {
+      "a": "gholdengo",
+      "b": "basculegion",
+      "delta": 0.05,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 55.6% vs Basculegion (expected 50.1%), n=18"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.46
+    },
+    {
+      "a": "gholdengo",
+      "b": "charizardmegay",
+      "delta": -0.12,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 36.8% vs Charizard-Mega-Y (expected 49.9%), n=19"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.14
+    },
+    {
+      "a": "gholdengo",
+      "b": "excadrill",
+      "delta": 0.02,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 52.6% vs Excadrill (expected 50.1%), n=19"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.22
+    },
+    {
+      "a": "gholdengo",
+      "b": "floettemega",
+      "delta": 0.07,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 60.0% vs Floette-Mega (expected 50.1%), n=15"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.76
+    },
+    {
+      "a": "gholdengo",
+      "b": "garchomp",
+      "delta": 0.07,
+      "n": 27,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 27,
+          "source": "showdown-replays",
+          "text": "Wins 55.6% vs Garchomp (expected 50.0%), n=27"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.57
+    },
+    {
+      "a": "gholdengo",
+      "b": "garchompmegaz",
+      "delta": 0.07,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 57.9% vs Garchomp-Mega-Z (expected 50.2%), n=19"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.67
+    },
+    {
+      "a": "gholdengo",
+      "b": "incineroar",
+      "delta": -0.03,
+      "n": 53,
+      "reasons": [
+        {
+          "delta": -0.03,
+          "kind": "stat",
+          "n": 53,
+          "source": "showdown-replays",
+          "text": "Wins 49.1% vs Incineroar (expected 50.1%), n=53"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.16
+    },
+    {
+      "a": "gholdengo",
+      "b": "indeedeef",
+      "delta": 0.07,
+      "n": 25,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 25,
+          "source": "showdown-replays",
+          "text": "Wins 56.0% vs Indeedee-F (expected 50.2%), n=25"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.58
+    },
+    {
+      "a": "gholdengo",
+      "b": "kingambit",
+      "delta": 0.02,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 52.4% vs Kingambit (expected 50.1%), n=21"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.21
+    },
+    {
+      "a": "gholdengo",
+      "b": "raichumegay",
+      "delta": 0.02,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 52.2% vs Raichu-Mega-Y (expected 50.2%), n=23"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.19
+    },
+    {
+      "a": "gholdengo",
+      "b": "rillaboom",
+      "delta": 0.29,
+      "n": 34,
+      "reasons": [
+        {
+          "delta": 0.29,
+          "kind": "stat",
+          "n": 34,
+          "source": "showdown-replays",
+          "text": "Wins 67.6% vs Rillaboom (expected 50.1%), n=34"
+        }
+      ],
+      "score": 54,
+      "source": "replays",
+      "z": 2.04
+    },
+    {
+      "a": "gholdengo",
+      "b": "salamencemega",
+      "delta": 0.07,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 57.9% vs Salamence-Mega (expected 50.1%), n=19"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.68
+    },
+    {
+      "a": "gholdengo",
+      "b": "sneasler",
+      "delta": 0.05,
+      "n": 32,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 32,
+          "source": "showdown-replays",
+          "text": "Wins 53.1% vs Sneasler (expected 50.0%), n=32"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.35
+    },
+    {
+      "a": "gholdengo",
+      "b": "volcarona",
+      "delta": 0.15,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% vs Volcarona (expected 50.3%), n=18"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.39
+    },
+    {
+      "a": "hatterene",
+      "b": "rillaboom",
+      "delta": -0.08,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": -0.08,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 42.9% vs Rillaboom (expected 50.1%), n=21"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.66
+    },
+    {
+      "a": "incineroar",
+      "b": "arcaninehisui",
+      "delta": -0.1,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": -0.1,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% vs Arcanine-Hisui (expected 50.0%), n=20"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.9
+    },
+    {
+      "a": "incineroar",
+      "b": "archaludon",
+      "delta": -0.17,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 37.9% vs Archaludon (expected 49.8%), n=29"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.27
+    },
+    {
+      "a": "incineroar",
+      "b": "basculegion",
+      "delta": 0.17,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% vs Basculegion (expected 50.0%), n=21"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.53
+    },
+    {
+      "a": "incineroar",
+      "b": "charizardmegay",
+      "delta": -0.12,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 41.4% vs Charizard-Mega-Y (expected 49.8%), n=29"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.9
+    },
+    {
+      "a": "incineroar",
+      "b": "excadrill",
+      "delta": -0.15,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 36.4% vs Excadrill (expected 49.9%), n=22"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.27
+    },
+    {
+      "a": "incineroar",
+      "b": "floettemega",
+      "delta": 0.02,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 53.3% vs Floette-Mega (expected 50.0%), n=15"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.26
+    },
+    {
+      "a": "incineroar",
+      "b": "garchomp",
+      "delta": -0.15,
+      "n": 32,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 32,
+          "source": "showdown-replays",
+          "text": "Wins 40.6% vs Garchomp (expected 49.9%), n=32"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.05
+    },
+    {
+      "a": "incineroar",
+      "b": "garchompmegaz",
+      "delta": 0.07,
+      "n": 31,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 31,
+          "source": "showdown-replays",
+          "text": "Wins 54.8% vs Garchomp-Mega-Z (expected 50.0%), n=31"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.53
+    },
+    {
+      "a": "incineroar",
+      "b": "gholdengo",
+      "delta": 0.03,
+      "n": 53,
+      "reasons": [
+        {
+          "delta": 0.03,
+          "kind": "stat",
+          "n": 53,
+          "source": "showdown-replays",
+          "text": "Wins 50.9% vs Gholdengo (expected 49.9%), n=53"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.16
+    },
+    {
+      "a": "incineroar",
+      "b": "indeedeef",
+      "delta": -0.15,
+      "n": 40,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 40,
+          "source": "showdown-replays",
+          "text": "Wins 42.5% vs Indeedee-F (expected 50.0%), n=40"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -0.95
+    },
+    {
+      "a": "incineroar",
+      "b": "kingambit",
+      "delta": -0.02,
+      "n": 33,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 33,
+          "source": "showdown-replays",
+          "text": "Wins 48.5% vs Kingambit (expected 50.0%), n=33"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.17
+    },
+    {
+      "a": "incineroar",
+      "b": "milotic",
+      "delta": -0.07,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 41.2% vs Milotic (expected 50.0%), n=17"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.73
+    },
+    {
+      "a": "incineroar",
+      "b": "pelipper",
+      "delta": -0.07,
+      "n": 27,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 27,
+          "source": "showdown-replays",
+          "text": "Wins 44.4% vs Pelipper (expected 50.0%), n=27"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.58
+    },
+    {
+      "a": "incineroar",
+      "b": "raichumegay",
+      "delta": 0.17,
+      "n": 45,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 45,
+          "source": "showdown-replays",
+          "text": "Wins 57.8% vs Raichu-Mega-Y (expected 50.1%), n=45"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.04
+    },
+    {
+      "a": "incineroar",
+      "b": "rillaboom",
+      "delta": 0.15,
+      "n": 62,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 62,
+          "source": "showdown-replays",
+          "text": "Wins 54.8% vs Rillaboom (expected 50.0%), n=62"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 0.76
+    },
+    {
+      "a": "incineroar",
+      "b": "salamencemega",
+      "delta": 0.03,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": 0.03,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 52.2% vs Salamence-Mega (expected 49.9%), n=23"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.22
+    },
+    {
+      "a": "incineroar",
+      "b": "sneasler",
+      "delta": -0.04,
+      "n": 56,
+      "reasons": [
+        {
+          "delta": -0.04,
+          "kind": "stat",
+          "n": 56,
+          "source": "showdown-replays",
+          "text": "Wins 48.2% vs Sneasler (expected 49.9%), n=56"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.25
+    },
+    {
+      "a": "incineroar",
+      "b": "staraptormega",
+      "delta": -0.27,
+      "n": 25,
+      "reasons": [
+        {
+          "delta": -0.27,
+          "kind": "stat",
+          "n": 25,
+          "source": "showdown-replays",
+          "text": "Wins 28.0% vs Staraptor-Mega (expected 49.9%), n=25"
+        }
+      ],
+      "score": 47,
+      "source": "replays",
+      "z": -2.19
+    },
+    {
+      "a": "incineroar",
+      "b": "toxapex",
+      "delta": 0,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Toxapex (expected 50.0%), n=16"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0
+    },
+    {
+      "a": "incineroar",
+      "b": "tyranitarmega",
+      "delta": -0.15,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 36.4% vs Tyranitar-Mega (expected 49.9%), n=22"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.27
+    },
+    {
+      "a": "incineroar",
+      "b": "volcarona",
+      "delta": 0.05,
+      "n": 32,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 32,
+          "source": "showdown-replays",
+          "text": "Wins 53.1% vs Volcarona (expected 50.1%), n=32"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.34
+    },
+    {
+      "a": "indeedeef",
+      "b": "arcaninehisui",
+      "delta": 0.07,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 58.8% vs Arcanine-Hisui (expected 50.0%), n=17"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.73
+    },
+    {
+      "a": "indeedeef",
+      "b": "archaludon",
+      "delta": -0.17,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 29.4% vs Archaludon (expected 49.7%), n=17"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.67
+    },
+    {
+      "a": "indeedeef",
+      "b": "floettemega",
+      "delta": 0,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Floette-Mega (expected 49.9%), n=20"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.01
+    },
+    {
+      "a": "indeedeef",
+      "b": "garchompmegaz",
+      "delta": -0.12,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 38.1% vs Garchomp-Mega-Z (expected 50.0%), n=21"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.09
+    },
+    {
+      "a": "indeedeef",
+      "b": "gholdengo",
+      "delta": -0.07,
+      "n": 25,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 25,
+          "source": "showdown-replays",
+          "text": "Wins 44.0% vs Gholdengo (expected 49.8%), n=25"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.58
+    },
+    {
+      "a": "indeedeef",
+      "b": "incineroar",
+      "delta": 0.15,
+      "n": 40,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 40,
+          "source": "showdown-replays",
+          "text": "Wins 57.5% vs Incineroar (expected 50.0%), n=40"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 0.95
+    },
+    {
+      "a": "indeedeef",
+      "b": "kingambit",
+      "delta": -0.05,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 45.8% vs Kingambit (expected 50.0%), n=24"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.4
+    },
+    {
+      "a": "indeedeef",
+      "b": "pelipper",
+      "delta": -0.02,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 47.1% vs Pelipper (expected 49.9%), n=17"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.24
+    },
+    {
+      "a": "indeedeef",
+      "b": "raichumegay",
+      "delta": 0.05,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 53.8% vs Raichu-Mega-Y (expected 50.0%), n=26"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.39
+    },
+    {
+      "a": "indeedeef",
+      "b": "rillaboom",
+      "delta": -0.19,
+      "n": 76,
+      "reasons": [
+        {
+          "delta": -0.19,
+          "kind": "stat",
+          "n": 76,
+          "source": "showdown-replays",
+          "text": "Wins 44.7% vs Rillaboom (expected 49.9%), n=76"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -0.91
+    },
+    {
+      "a": "indeedeef",
+      "b": "sneasler",
+      "delta": 0.05,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 53.8% vs Sneasler (expected 49.8%), n=26"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.41
+    },
+    {
+      "a": "indeedeef",
+      "b": "sylveon",
+      "delta": 0,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Sylveon (expected 49.8%), n=18"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.02
+    },
+    {
+      "a": "indeedeef",
+      "b": "volcarona",
+      "delta": 0.1,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.1,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 61.1% vs Volcarona (expected 50.1%), n=18"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.94
+    },
+    {
+      "a": "kingambit",
+      "b": "floettemega",
+      "delta": 0,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Floette-Mega (expected 50.0%), n=16"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0
+    },
+    {
+      "a": "kingambit",
+      "b": "gholdengo",
+      "delta": -0.02,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 47.6% vs Gholdengo (expected 49.9%), n=21"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.21
+    },
+    {
+      "a": "kingambit",
+      "b": "incineroar",
+      "delta": 0.02,
+      "n": 33,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 33,
+          "source": "showdown-replays",
+          "text": "Wins 51.5% vs Incineroar (expected 50.0%), n=33"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.17
+    },
+    {
+      "a": "kingambit",
+      "b": "indeedeef",
+      "delta": 0.05,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 54.2% vs Indeedee-F (expected 50.0%), n=24"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.4
+    },
+    {
+      "a": "kingambit",
+      "b": "raichumegay",
+      "delta": -0.12,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 38.1% vs Raichu-Mega-Y (expected 50.1%), n=21"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.1
+    },
+    {
+      "a": "kingambit",
+      "b": "rillaboom",
+      "delta": -0.15,
+      "n": 42,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 42,
+          "source": "showdown-replays",
+          "text": "Wins 42.9% vs Rillaboom (expected 50.0%), n=42"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -0.92
+    },
+    {
+      "a": "kingambit",
+      "b": "sneasler",
+      "delta": -0.17,
+      "n": 31,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 31,
+          "source": "showdown-replays",
+          "text": "Wins 38.7% vs Sneasler (expected 49.9%), n=31"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.24
+    },
+    {
+      "a": "kingambit",
+      "b": "volcarona",
+      "delta": 0.02,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 52.9% vs Volcarona (expected 50.1%), n=17"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.23
+    },
+    {
+      "a": "milotic",
+      "b": "incineroar",
+      "delta": 0.07,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 58.8% vs Incineroar (expected 50.0%), n=17"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.73
+    },
+    {
+      "a": "milotic",
+      "b": "rillaboom",
+      "delta": -0.2,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": -0.2,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 30.0% vs Rillaboom (expected 50.0%), n=20"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.79
+    },
+    {
+      "a": "pelipper",
+      "b": "incineroar",
+      "delta": 0.07,
+      "n": 27,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 27,
+          "source": "showdown-replays",
+          "text": "Wins 55.6% vs Incineroar (expected 50.0%), n=27"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.58
+    },
+    {
+      "a": "pelipper",
+      "b": "indeedeef",
+      "delta": 0.02,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 52.9% vs Indeedee-F (expected 50.1%), n=17"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.24
+    },
+    {
+      "a": "pelipper",
+      "b": "raichumegay",
+      "delta": -0.03,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.03,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 46.7% vs Raichu-Mega-Y (expected 50.1%), n=15"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.26
+    },
+    {
+      "a": "pelipper",
+      "b": "rillaboom",
+      "delta": 0.17,
+      "n": 27,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 27,
+          "source": "showdown-replays",
+          "text": "Wins 63.0% vs Rillaboom (expected 50.0%), n=27"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.35
+    },
+    {
+      "a": "pelipper",
+      "b": "sneasler",
+      "delta": -0.17,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 31.6% vs Sneasler (expected 49.9%), n=19"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.59
+    },
+    {
+      "a": "raichumegay",
+      "b": "archaludon",
+      "delta": 0,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Archaludon (expected 49.7%), n=18"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.02
+    },
+    {
+      "a": "raichumegay",
+      "b": "basculegion",
+      "delta": -0.15,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% vs Basculegion (expected 49.9%), n=18"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.41
+    },
+    {
+      "a": "raichumegay",
+      "b": "charizardmegay",
+      "delta": -0.1,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": -0.1,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 40.9% vs Charizard-Mega-Y (expected 49.7%), n=22"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.82
+    },
+    {
+      "a": "raichumegay",
+      "b": "garchomp",
+      "delta": -0.1,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": -0.1,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 40.9% vs Garchomp (expected 49.8%), n=22"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.84
+    },
+    {
+      "a": "raichumegay",
+      "b": "garchompmegaz",
+      "delta": 0,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Garchomp-Mega-Z (expected 50.0%), n=20"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0
+    },
+    {
+      "a": "raichumegay",
+      "b": "gholdengo",
+      "delta": -0.02,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 47.8% vs Gholdengo (expected 49.8%), n=23"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.19
+    },
+    {
+      "a": "raichumegay",
+      "b": "incineroar",
+      "delta": -0.17,
+      "n": 45,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 45,
+          "source": "showdown-replays",
+          "text": "Wins 42.2% vs Incineroar (expected 49.9%), n=45"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.04
+    },
+    {
+      "a": "raichumegay",
+      "b": "indeedeef",
+      "delta": -0.05,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 46.2% vs Indeedee-F (expected 50.0%), n=26"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.39
+    },
+    {
+      "a": "raichumegay",
+      "b": "kingambit",
+      "delta": 0.12,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.12,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 61.9% vs Kingambit (expected 49.9%), n=21"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.1
+    },
+    {
+      "a": "raichumegay",
+      "b": "pelipper",
+      "delta": 0.03,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.03,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 53.3% vs Pelipper (expected 49.9%), n=15"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.26
+    },
+    {
+      "a": "raichumegay",
+      "b": "rillaboom",
+      "delta": -0.07,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 44.8% vs Rillaboom (expected 49.9%), n=29"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.55
+    },
+    {
+      "a": "raichumegay",
+      "b": "salamencemega",
+      "delta": -0.07,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% vs Salamence-Mega (expected 49.9%), n=15"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.76
+    },
+    {
+      "a": "raichumegay",
+      "b": "sneasler",
+      "delta": -0.02,
+      "n": 31,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 31,
+          "source": "showdown-replays",
+          "text": "Wins 48.4% vs Sneasler (expected 49.8%), n=31"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.16
+    },
+    {
+      "a": "rillaboom",
+      "b": "archaludon",
+      "delta": -0.19,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": -0.19,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% vs Archaludon (expected 49.8%), n=24"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.61
+    },
+    {
+      "a": "rillaboom",
+      "b": "basculegion",
+      "delta": -0.2,
+      "n": 28,
+      "reasons": [
+        {
+          "delta": -0.2,
+          "kind": "stat",
+          "n": 28,
+          "source": "showdown-replays",
+          "text": "Wins 35.7% vs Basculegion (expected 50.0%), n=28"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.51
+    },
+    {
+      "a": "rillaboom",
+      "b": "cameruptmega",
+      "delta": 0.05,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 54.2% vs Camerupt-Mega (expected 50.0%), n=24"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.41
+    },
+    {
+      "a": "rillaboom",
+      "b": "charizardmegay",
+      "delta": -0.17,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% vs Charizard-Mega-Y (expected 49.8%), n=21"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.51
+    },
+    {
+      "a": "rillaboom",
+      "b": "excadrill",
+      "delta": 0.12,
+      "n": 37,
+      "reasons": [
+        {
+          "delta": 0.12,
+          "kind": "stat",
+          "n": 37,
+          "source": "showdown-replays",
+          "text": "Wins 56.8% vs Excadrill (expected 49.9%), n=37"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 0.83
+    },
+    {
+      "a": "rillaboom",
+      "b": "floettemega",
+      "delta": -0.07,
+      "n": 31,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 31,
+          "source": "showdown-replays",
+          "text": "Wins 45.2% vs Floette-Mega (expected 50.0%), n=31"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.54
+    },
+    {
+      "a": "rillaboom",
+      "b": "garchomp",
+      "delta": 0.17,
+      "n": 37,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 37,
+          "source": "showdown-replays",
+          "text": "Wins 59.5% vs Garchomp (expected 49.9%), n=37"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.16
+    },
+    {
+      "a": "rillaboom",
+      "b": "garchompmegaz",
+      "delta": -0.1,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.1,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 38.9% vs Garchomp-Mega-Z (expected 50.0%), n=18"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.95
+    },
+    {
+      "a": "rillaboom",
+      "b": "gholdengo",
+      "delta": -0.29,
+      "n": 34,
+      "reasons": [
+        {
+          "delta": -0.29,
+          "kind": "stat",
+          "n": 34,
+          "source": "showdown-replays",
+          "text": "Wins 32.4% vs Gholdengo (expected 49.9%), n=34"
+        }
+      ],
+      "score": 46,
+      "source": "replays",
+      "z": -2.04
+    },
+    {
+      "a": "rillaboom",
+      "b": "hatterene",
+      "delta": 0.08,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.08,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 57.1% vs Hatterene (expected 49.9%), n=21"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.66
+    },
+    {
+      "a": "rillaboom",
+      "b": "incineroar",
+      "delta": -0.15,
+      "n": 62,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 62,
+          "source": "showdown-replays",
+          "text": "Wins 45.2% vs Incineroar (expected 50.0%), n=62"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -0.76
+    },
+    {
+      "a": "rillaboom",
+      "b": "indeedeef",
+      "delta": 0.19,
+      "n": 76,
+      "reasons": [
+        {
+          "delta": 0.19,
+          "kind": "stat",
+          "n": 76,
+          "source": "showdown-replays",
+          "text": "Wins 55.3% vs Indeedee-F (expected 50.1%), n=76"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 0.91
+    },
+    {
+      "a": "rillaboom",
+      "b": "kingambit",
+      "delta": 0.15,
+      "n": 42,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 42,
+          "source": "showdown-replays",
+          "text": "Wins 57.1% vs Kingambit (expected 50.0%), n=42"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 0.92
+    },
+    {
+      "a": "rillaboom",
+      "b": "milotic",
+      "delta": 0.2,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0.2,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 70.0% vs Milotic (expected 50.0%), n=20"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.79
+    },
+    {
+      "a": "rillaboom",
+      "b": "pelipper",
+      "delta": -0.17,
+      "n": 27,
+      "reasons": [
+        {
+          "delta": -0.17,
+          "kind": "stat",
+          "n": 27,
+          "source": "showdown-replays",
+          "text": "Wins 37.0% vs Pelipper (expected 50.0%), n=27"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.35
+    },
+    {
+      "a": "rillaboom",
+      "b": "raichumegay",
+      "delta": 0.07,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 55.2% vs Raichu-Mega-Y (expected 50.1%), n=29"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.55
+    },
+    {
+      "a": "rillaboom",
+      "b": "salamencemega",
+      "delta": -0.05,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 46.2% vs Salamence-Mega (expected 49.9%), n=26"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.39
+    },
+    {
+      "a": "rillaboom",
+      "b": "sneasler",
+      "delta": -0.24,
+      "n": 64,
+      "reasons": [
+        {
+          "delta": -0.24,
+          "kind": "stat",
+          "n": 64,
+          "source": "showdown-replays",
+          "text": "Wins 42.2% vs Sneasler (expected 49.9%), n=64"
+        }
+      ],
+      "score": 47,
+      "source": "replays",
+      "z": -1.23
+    },
+    {
+      "a": "rillaboom",
+      "b": "staraptormega",
+      "delta": -0.07,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 42.1% vs Staraptor-Mega (expected 49.9%), n=19"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.68
+    },
+    {
+      "a": "rillaboom",
+      "b": "sylveon",
+      "delta": -0.12,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% vs Sylveon (expected 49.8%), n=15"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.28
+    },
+    {
+      "a": "rillaboom",
+      "b": "tyranitarmega",
+      "delta": 0.15,
+      "n": 28,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 28,
+          "source": "showdown-replays",
+          "text": "Wins 60.7% vs Tyranitar-Mega (expected 49.9%), n=28"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.15
+    },
+    {
+      "a": "rillaboom",
+      "b": "volcarona",
+      "delta": -0.08,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": -0.08,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 41.2% vs Volcarona (expected 50.1%), n=17"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.74
+    },
+    {
+      "a": "salamencemega",
+      "b": "garchomp",
+      "delta": 0.12,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.12,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% vs Garchomp (expected 50.0%), n=15"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.29
+    },
+    {
+      "a": "salamencemega",
+      "b": "gholdengo",
+      "delta": -0.07,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.07,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 42.1% vs Gholdengo (expected 49.9%), n=19"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.68
+    },
+    {
+      "a": "salamencemega",
+      "b": "incineroar",
+      "delta": -0.03,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": -0.03,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 47.8% vs Incineroar (expected 50.1%), n=23"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.22
+    },
+    {
+      "a": "salamencemega",
+      "b": "raichumegay",
+      "delta": 0.07,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 60.0% vs Raichu-Mega-Y (expected 50.1%), n=15"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.76
+    },
+    {
+      "a": "salamencemega",
+      "b": "rillaboom",
+      "delta": 0.05,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 53.8% vs Rillaboom (expected 50.1%), n=26"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.39
+    },
+    {
+      "a": "sneasler",
+      "b": "archaludon",
+      "delta": -0.1,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.1,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 38.9% vs Archaludon (expected 49.9%), n=18"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.93
+    },
+    {
+      "a": "sneasler",
+      "b": "basculegion",
+      "delta": 0.2,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0.2,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 70.0% vs Basculegion (expected 50.1%), n=20"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.78
+    },
+    {
+      "a": "sneasler",
+      "b": "charizardmegay",
+      "delta": 0,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Charizard-Mega-Y (expected 49.9%), n=16"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.01
+    },
+    {
+      "a": "sneasler",
+      "b": "floettemega",
+      "delta": 0.17,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% vs Floette-Mega (expected 50.1%), n=21"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.52
+    },
+    {
+      "a": "sneasler",
+      "b": "garchomp",
+      "delta": 0.12,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": 0.12,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 63.2% vs Garchomp (expected 50.0%), n=19"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.15
+    },
+    {
+      "a": "sneasler",
+      "b": "garchompmegaz",
+      "delta": 0.1,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": 0.1,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 58.3% vs Garchomp-Mega-Z (expected 50.2%), n=24"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.8
+    },
+    {
+      "a": "sneasler",
+      "b": "gholdengo",
+      "delta": -0.05,
+      "n": 32,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 32,
+          "source": "showdown-replays",
+          "text": "Wins 46.9% vs Gholdengo (expected 50.0%), n=32"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.35
+    },
+    {
+      "a": "sneasler",
+      "b": "incineroar",
+      "delta": 0.04,
+      "n": 56,
+      "reasons": [
+        {
+          "delta": 0.04,
+          "kind": "stat",
+          "n": 56,
+          "source": "showdown-replays",
+          "text": "Wins 51.8% vs Incineroar (expected 50.1%), n=56"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.25
+    },
+    {
+      "a": "sneasler",
+      "b": "indeedeef",
+      "delta": -0.05,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 46.2% vs Indeedee-F (expected 50.2%), n=26"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.41
+    },
+    {
+      "a": "sneasler",
+      "b": "kingambit",
+      "delta": 0.17,
+      "n": 31,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 31,
+          "source": "showdown-replays",
+          "text": "Wins 61.3% vs Kingambit (expected 50.1%), n=31"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.24
+    },
+    {
+      "a": "sneasler",
+      "b": "pelipper",
+      "delta": 0.17,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": 0.17,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 68.4% vs Pelipper (expected 50.1%), n=19"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.59
+    },
+    {
+      "a": "sneasler",
+      "b": "raichumegay",
+      "delta": 0.02,
+      "n": 31,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 31,
+          "source": "showdown-replays",
+          "text": "Wins 51.6% vs Raichu-Mega-Y (expected 50.2%), n=31"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.16
+    },
+    {
+      "a": "sneasler",
+      "b": "rillaboom",
+      "delta": 0.24,
+      "n": 64,
+      "reasons": [
+        {
+          "delta": 0.24,
+          "kind": "stat",
+          "n": 64,
+          "source": "showdown-replays",
+          "text": "Wins 57.8% vs Rillaboom (expected 50.1%), n=64"
+        }
+      ],
+      "score": 53,
+      "source": "replays",
+      "z": 1.23
+    },
+    {
+      "a": "sneasler",
+      "b": "volcarona",
+      "delta": 0.05,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.05,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 55.6% vs Volcarona (expected 50.3%), n=18"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.45
+    },
+    {
+      "a": "staraptormega",
+      "b": "incineroar",
+      "delta": 0.27,
+      "n": 25,
+      "reasons": [
+        {
+          "delta": 0.27,
+          "kind": "stat",
+          "n": 25,
+          "source": "showdown-replays",
+          "text": "Wins 72.0% vs Incineroar (expected 50.1%), n=25"
+        }
+      ],
+      "score": 53,
+      "source": "replays",
+      "z": 2.19
+    },
+    {
+      "a": "staraptormega",
+      "b": "rillaboom",
+      "delta": 0.07,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": 0.07,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 57.9% vs Rillaboom (expected 50.1%), n=19"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.68
+    },
+    {
+      "a": "sylveon",
+      "b": "indeedeef",
+      "delta": 0,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Indeedee-F (expected 50.2%), n=18"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.02
+    },
+    {
+      "a": "sylveon",
+      "b": "rillaboom",
+      "delta": 0.12,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.12,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% vs Rillaboom (expected 50.2%), n=15"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.28
+    },
+    {
+      "a": "toxapex",
+      "b": "incineroar",
+      "delta": 0,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% vs Incineroar (expected 50.0%), n=16"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0
+    },
+    {
+      "a": "tyranitarmega",
+      "b": "incineroar",
+      "delta": 0.15,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": 0.15,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 63.6% vs Incineroar (expected 50.1%), n=22"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 1.27
+    },
+    {
+      "a": "tyranitarmega",
+      "b": "rillaboom",
+      "delta": -0.15,
+      "n": 28,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 28,
+          "source": "showdown-replays",
+          "text": "Wins 39.3% vs Rillaboom (expected 50.1%), n=28"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.15
+    },
+    {
+      "a": "volcarona",
+      "b": "garchompmegaz",
+      "delta": -0.02,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 47.8% vs Garchomp-Mega-Z (expected 49.9%), n=23"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.2
+    },
+    {
+      "a": "volcarona",
+      "b": "gholdengo",
+      "delta": -0.15,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.15,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% vs Gholdengo (expected 49.7%), n=18"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -1.39
+    },
+    {
+      "a": "volcarona",
+      "b": "incineroar",
+      "delta": -0.05,
+      "n": 32,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 32,
+          "source": "showdown-replays",
+          "text": "Wins 46.9% vs Incineroar (expected 49.9%), n=32"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.34
+    },
+    {
+      "a": "volcarona",
+      "b": "indeedeef",
+      "delta": -0.1,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.1,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 38.9% vs Indeedee-F (expected 49.9%), n=18"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.94
+    },
+    {
+      "a": "volcarona",
+      "b": "kingambit",
+      "delta": -0.02,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 47.1% vs Kingambit (expected 49.9%), n=17"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.23
+    },
+    {
+      "a": "volcarona",
+      "b": "rillaboom",
+      "delta": 0.08,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 0.08,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 58.8% vs Rillaboom (expected 49.9%), n=17"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.74
+    },
+    {
+      "a": "volcarona",
+      "b": "sneasler",
+      "delta": -0.05,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.05,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 44.4% vs Sneasler (expected 49.7%), n=18"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.45
+    }
+  ],
+  "format": "gen9championsvgc2026regmcbo3",
+  "regulation": "M-C",
+  "replays": 493,
+  "source": "showdown-replays",
+  "synergies": [
+    {
+      "a": "arcaninehisui",
+      "b": "gholdengo",
+      "delta": 0.32,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": 0.32,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.7%), n=22"
+        }
+      ],
+      "score": 54,
+      "source": "replays",
+      "z": 0.31
+    },
+    {
+      "a": "arcaninehisui",
+      "b": "raichumegay",
+      "delta": 0.74,
+      "n": 37,
+      "reasons": [
+        {
+          "delta": 0.74,
+          "kind": "stat",
+          "n": 37,
+          "source": "showdown-replays",
+          "text": "Wins 51.4% together (expected 46.5%), n=37"
+        }
+      ],
+      "score": 59,
+      "source": "replays",
+      "z": 0.59
+    },
+    {
+      "a": "arcaninehisui",
+      "b": "rillaboom",
+      "delta": 0.56,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": 0.56,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 52.2% together (expected 46.6%), n=23"
+        }
+      ],
+      "score": 57,
+      "source": "replays",
+      "z": 0.54
+    },
+    {
+      "a": "arcaninehisui",
+      "b": "staraptormega",
+      "delta": 0.32,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": 0.32,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.7%), n=22"
+        }
+      ],
+      "score": 54,
+      "source": "replays",
+      "z": 0.31
+    },
+    {
+      "a": "archaludon",
+      "b": "basculegionf",
+      "delta": 1.36,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 1.36,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 64.7% together (expected 46.9%), n=17"
+        }
+      ],
+      "score": 66,
+      "source": "replays",
+      "z": 1.47
+    },
+    {
+      "a": "archaludon",
+      "b": "garchompmegaz",
+      "delta": -0.4,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.4,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 42.1% together (expected 46.8%), n=19"
+        }
+      ],
+      "score": 45,
+      "source": "replays",
+      "z": -0.41
+    },
+    {
+      "a": "archaludon",
+      "b": "golisopodmega",
+      "delta": 0.28,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0.28,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.8%), n=20"
+        }
+      ],
+      "score": 54,
+      "source": "replays",
+      "z": 0.29
+    },
+    {
+      "a": "archaludon",
+      "b": "grimmsnarl",
+      "delta": -0.86,
+      "n": 30,
+      "reasons": [
+        {
+          "delta": -0.86,
+          "kind": "stat",
+          "n": 30,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% together (expected 46.7%), n=30"
+        }
+      ],
+      "score": 39,
+      "source": "replays",
+      "z": -0.74
+    },
+    {
+      "a": "archaludon",
+      "b": "pelipper",
+      "delta": 1.17,
+      "n": 70,
+      "reasons": [
+        {
+          "delta": 1.17,
+          "kind": "stat",
+          "n": 70,
+          "source": "showdown-replays",
+          "text": "Wins 51.4% together (expected 46.8%), n=70"
+        }
+      ],
+      "score": 64,
+      "source": "replays",
+      "z": 0.77
+    },
+    {
+      "a": "archaludon",
+      "b": "politoed",
+      "delta": 2.93,
+      "n": 24,
+      "reasons": [
+        {
+          "delta": 2.93,
+          "kind": "stat",
+          "n": 24,
+          "source": "showdown-replays",
+          "text": "Wins 75.0% together (expected 46.9%), n=24"
+        }
+      ],
+      "score": 81,
+      "source": "replays",
+      "z": 2.75
+    },
+    {
+      "a": "armarouge",
+      "b": "indeedeef",
+      "delta": -1.02,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": -1.02,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 35.0% together (expected 46.5%), n=20"
+        }
+      ],
+      "score": 38,
+      "source": "replays",
+      "z": -1.03
+    },
+    {
+      "a": "basculegion",
+      "b": "incineroar",
+      "delta": -0.02,
+      "n": 28,
+      "reasons": [
+        {
+          "delta": -0.02,
+          "kind": "stat",
+          "n": 28,
+          "source": "showdown-replays",
+          "text": "Wins 46.4% together (expected 46.6%), n=28"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": -0.02
+    },
+    {
+      "a": "basculegion",
+      "b": "rillaboom",
+      "delta": 2.1,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": 2.1,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 65.4% together (expected 46.6%), n=26"
+        }
+      ],
+      "score": 74,
+      "source": "replays",
+      "z": 1.92
+    },
+    {
+      "a": "basculegion",
+      "b": "sneasler",
+      "delta": -0.6,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": -0.6,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% together (expected 46.7%), n=20"
+        }
+      ],
+      "score": 43,
+      "source": "replays",
+      "z": -0.6
+    },
+    {
+      "a": "basculegionf",
+      "b": "politoed",
+      "delta": 0.44,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.44,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 53.3% together (expected 46.8%), n=15"
+        }
+      ],
+      "score": 56,
+      "source": "replays",
+      "z": 0.51
+    },
+    {
+      "a": "cameruptmega",
+      "b": "hatterene",
+      "delta": -0.12,
+      "n": 37,
+      "reasons": [
+        {
+          "delta": -0.12,
+          "kind": "stat",
+          "n": 37,
+          "source": "showdown-replays",
+          "text": "Wins 45.9% together (expected 46.7%), n=37"
+        }
+      ],
+      "score": 49,
+      "source": "replays",
+      "z": -0.09
+    },
+    {
+      "a": "cameruptmega",
+      "b": "indeedeef",
+      "delta": 0.2,
+      "n": 44,
+      "reasons": [
+        {
+          "delta": 0.2,
+          "kind": "stat",
+          "n": 44,
+          "source": "showdown-replays",
+          "text": "Wins 47.7% together (expected 46.6%), n=44"
+        }
+      ],
+      "score": 53,
+      "source": "replays",
+      "z": 0.15
+    },
+    {
+      "a": "cameruptmega",
+      "b": "kingambit",
+      "delta": -0.84,
+      "n": 30,
+      "reasons": [
+        {
+          "delta": -0.84,
+          "kind": "stat",
+          "n": 30,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% together (expected 46.6%), n=30"
+        }
+      ],
+      "score": 40,
+      "source": "replays",
+      "z": -0.73
+    },
+    {
+      "a": "charizardmegay",
+      "b": "garchomp",
+      "delta": 2.73,
+      "n": 35,
+      "reasons": [
+        {
+          "delta": 2.73,
+          "kind": "stat",
+          "n": 35,
+          "source": "showdown-replays",
+          "text": "Wins 65.7% together (expected 46.9%), n=35"
+        }
+      ],
+      "score": 80,
+      "source": "replays",
+      "z": 2.23
+    },
+    {
+      "a": "charizardmegay",
+      "b": "incineroar",
+      "delta": 1.72,
+      "n": 38,
+      "reasons": [
+        {
+          "delta": 1.72,
+          "kind": "stat",
+          "n": 38,
+          "source": "showdown-replays",
+          "text": "Wins 57.9% together (expected 46.8%), n=38"
+        }
+      ],
+      "score": 70,
+      "source": "replays",
+      "z": 1.37
+    },
+    {
+      "a": "charizardmegay",
+      "b": "sylveon",
+      "delta": 2.28,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": 2.28,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 65.5% together (expected 47.0%), n=29"
+        }
+      ],
+      "score": 76,
+      "source": "replays",
+      "z": 2
+    },
+    {
+      "a": "charizardmegay",
+      "b": "toxapex",
+      "delta": 0.25,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": 0.25,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.8%), n=18"
+        }
+      ],
+      "score": 53,
+      "source": "replays",
+      "z": 0.27
+    },
+    {
+      "a": "charizardmegay",
+      "b": "venusaur",
+      "delta": 2.73,
+      "n": 41,
+      "reasons": [
+        {
+          "delta": 2.73,
+          "kind": "stat",
+          "n": 41,
+          "source": "showdown-replays",
+          "text": "Wins 63.4% together (expected 47.0%), n=41"
+        }
+      ],
+      "score": 80,
+      "source": "replays",
+      "z": 2.11
+    },
+    {
+      "a": "delphoxmega",
+      "b": "kingambit",
+      "delta": -0.18,
+      "n": 18,
+      "reasons": [
+        {
+          "delta": -0.18,
+          "kind": "stat",
+          "n": 18,
+          "source": "showdown-replays",
+          "text": "Wins 44.4% together (expected 46.7%), n=18"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -0.19
+    },
+    {
+      "a": "espathra",
+      "b": "raichumegax",
+      "delta": 1.14,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 1.14,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 62.5% together (expected 46.7%), n=16"
+        }
+      ],
+      "score": 64,
+      "source": "replays",
+      "z": 1.27
+    },
+    {
+      "a": "excadrill",
+      "b": "indeedeef",
+      "delta": -0.45,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.45,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 40.0% together (expected 46.6%), n=15"
+        }
+      ],
+      "score": 44,
+      "source": "replays",
+      "z": -0.52
+    },
+    {
+      "a": "excadrill",
+      "b": "milotic",
+      "delta": 0.9,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.9,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 60.0% together (expected 46.7%), n=15"
+        }
+      ],
+      "score": 61,
+      "source": "replays",
+      "z": 1.03
+    },
+    {
+      "a": "excadrill",
+      "b": "salamencemega",
+      "delta": 0.66,
+      "n": 33,
+      "reasons": [
+        {
+          "delta": 0.66,
+          "kind": "stat",
+          "n": 33,
+          "source": "showdown-replays",
+          "text": "Wins 51.5% together (expected 46.8%), n=33"
+        }
+      ],
+      "score": 58,
+      "source": "replays",
+      "z": 0.55
+    },
+    {
+      "a": "excadrill",
+      "b": "sneasler",
+      "delta": 0.44,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.44,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 53.3% together (expected 46.8%), n=15"
+        }
+      ],
+      "score": 56,
+      "source": "replays",
+      "z": 0.51
+    },
+    {
+      "a": "excadrill",
+      "b": "tyranitarmega",
+      "delta": 1.52,
+      "n": 68,
+      "reasons": [
+        {
+          "delta": 1.52,
+          "kind": "stat",
+          "n": 68,
+          "source": "showdown-replays",
+          "text": "Wins 52.9% together (expected 46.8%), n=68"
+        }
+      ],
+      "score": 68,
+      "source": "replays",
+      "z": 1.01
+    },
+    {
+      "a": "farigiraf",
+      "b": "sylveon",
+      "delta": 0.23,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0.23,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.8%), n=16"
+        }
+      ],
+      "score": 53,
+      "source": "replays",
+      "z": 0.26
+    },
+    {
+      "a": "floettemega",
+      "b": "garchomp",
+      "delta": 1.82,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 1.82,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 70.6% together (expected 46.7%), n=17"
+        }
+      ],
+      "score": 71,
+      "source": "replays",
+      "z": 1.97
+    },
+    {
+      "a": "floettemega",
+      "b": "gholdengo",
+      "delta": -0.43,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": -0.43,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 41.2% together (expected 46.8%), n=17"
+        }
+      ],
+      "score": 45,
+      "source": "replays",
+      "z": -0.46
+    },
+    {
+      "a": "floettemega",
+      "b": "incineroar",
+      "delta": -1.44,
+      "n": 42,
+      "reasons": [
+        {
+          "delta": -1.44,
+          "kind": "stat",
+          "n": 42,
+          "source": "showdown-replays",
+          "text": "Wins 38.1% together (expected 46.6%), n=42"
+        }
+      ],
+      "score": 33,
+      "source": "replays",
+      "z": -1.11
+    },
+    {
+      "a": "floettemega",
+      "b": "rillaboom",
+      "delta": -2.52,
+      "n": 39,
+      "reasons": [
+        {
+          "delta": -2.52,
+          "kind": "stat",
+          "n": 39,
+          "source": "showdown-replays",
+          "text": "Wins 30.8% together (expected 46.6%), n=39"
+        }
+      ],
+      "score": 22,
+      "source": "replays",
+      "z": -1.98
+    },
+    {
+      "a": "floettemega",
+      "b": "sneasler",
+      "delta": 0.02,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 47.1% together (expected 46.7%), n=17"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.03
+    },
+    {
+      "a": "floettemega",
+      "b": "volcarona",
+      "delta": -1.8,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -1.8,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 20.0% together (expected 46.5%), n=15"
+        }
+      ],
+      "score": 29,
+      "source": "replays",
+      "z": -2.06
+    },
+    {
+      "a": "garchomp",
+      "b": "incineroar",
+      "delta": 1.15,
+      "n": 41,
+      "reasons": [
+        {
+          "delta": 1.15,
+          "kind": "stat",
+          "n": 41,
+          "source": "showdown-replays",
+          "text": "Wins 53.7% together (expected 46.7%), n=41"
+        }
+      ],
+      "score": 64,
+      "source": "replays",
+      "z": 0.89
+    },
+    {
+      "a": "garchomp",
+      "b": "rillaboom",
+      "delta": 0.03,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 0.03,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 47.1% together (expected 46.7%), n=17"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.03
+    },
+    {
+      "a": "garchomp",
+      "b": "sylveon",
+      "delta": 0.3,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": 0.3,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.9%), n=22"
+        }
+      ],
+      "score": 54,
+      "source": "replays",
+      "z": 0.29
+    },
+    {
+      "a": "garchomp",
+      "b": "toxapex",
+      "delta": 0.24,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0.24,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.7%), n=16"
+        }
+      ],
+      "score": 53,
+      "source": "replays",
+      "z": 0.26
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "gholdengo",
+      "delta": 0.02,
+      "n": 47,
+      "reasons": [
+        {
+          "delta": 0.02,
+          "kind": "stat",
+          "n": 47,
+          "source": "showdown-replays",
+          "text": "Wins 46.8% together (expected 46.7%), n=47"
+        }
+      ],
+      "score": 50,
+      "source": "replays",
+      "z": 0.01
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "grimmsnarl",
+      "delta": -1.01,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": -1.01,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 35.0% together (expected 46.5%), n=20"
+        }
+      ],
+      "score": 38,
+      "source": "replays",
+      "z": -1.03
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "incineroar",
+      "delta": 0.8,
+      "n": 62,
+      "reasons": [
+        {
+          "delta": 0.8,
+          "kind": "stat",
+          "n": 62,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.6%), n=62"
+        }
+      ],
+      "score": 60,
+      "source": "replays",
+      "z": 0.54
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "pelipper",
+      "delta": -0.55,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": -0.55,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 40.9% together (expected 46.6%), n=22"
+        }
+      ],
+      "score": 43,
+      "source": "replays",
+      "z": -0.53
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "rillaboom",
+      "delta": -0.65,
+      "n": 53,
+      "reasons": [
+        {
+          "delta": -0.65,
+          "kind": "stat",
+          "n": 53,
+          "source": "showdown-replays",
+          "text": "Wins 43.4% together (expected 46.6%), n=53"
+        }
+      ],
+      "score": 42,
+      "source": "replays",
+      "z": -0.46
+    },
+    {
+      "a": "garchompmegaz",
+      "b": "volcarona",
+      "delta": 0.41,
+      "n": 43,
+      "reasons": [
+        {
+          "delta": 0.41,
+          "kind": "stat",
+          "n": 43,
+          "source": "showdown-replays",
+          "text": "Wins 48.8% together (expected 46.4%), n=43"
+        }
+      ],
+      "score": 55,
+      "source": "replays",
+      "z": 0.31
+    },
+    {
+      "a": "gardevoirmega",
+      "b": "indeedeef",
+      "delta": 0.53,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.53,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 52.4% together (expected 46.6%), n=21"
+        }
+      ],
+      "score": 57,
+      "source": "replays",
+      "z": 0.53
+    },
+    {
+      "a": "gholdengo",
+      "b": "incineroar",
+      "delta": 2.09,
+      "n": 69,
+      "reasons": [
+        {
+          "delta": 2.09,
+          "kind": "stat",
+          "n": 69,
+          "source": "showdown-replays",
+          "text": "Wins 55.1% together (expected 46.7%), n=69"
+        }
+      ],
+      "score": 74,
+      "source": "replays",
+      "z": 1.39
+    },
+    {
+      "a": "gholdengo",
+      "b": "raichumegay",
+      "delta": -0.18,
+      "n": 61,
+      "reasons": [
+        {
+          "delta": -0.18,
+          "kind": "stat",
+          "n": 61,
+          "source": "showdown-replays",
+          "text": "Wins 45.9% together (expected 46.7%), n=61"
+        }
+      ],
+      "score": 48,
+      "source": "replays",
+      "z": -0.12
+    },
+    {
+      "a": "gholdengo",
+      "b": "rillaboom",
+      "delta": 0.69,
+      "n": 94,
+      "reasons": [
+        {
+          "delta": 0.69,
+          "kind": "stat",
+          "n": 94,
+          "source": "showdown-replays",
+          "text": "Wins 48.9% together (expected 46.7%), n=94"
+        }
+      ],
+      "score": 58,
+      "source": "replays",
+      "z": 0.43
+    },
+    {
+      "a": "gholdengo",
+      "b": "staraptormega",
+      "delta": 2.27,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 2.27,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 71.4% together (expected 46.8%), n=21"
+        }
+      ],
+      "score": 76,
+      "source": "replays",
+      "z": 2.26
+    },
+    {
+      "a": "gholdengo",
+      "b": "volcarona",
+      "delta": 0.14,
+      "n": 40,
+      "reasons": [
+        {
+          "delta": 0.14,
+          "kind": "stat",
+          "n": 40,
+          "source": "showdown-replays",
+          "text": "Wins 47.5% together (expected 46.6%), n=40"
+        }
+      ],
+      "score": 52,
+      "source": "replays",
+      "z": 0.11
+    },
+    {
+      "a": "golisopodmega",
+      "b": "pelipper",
+      "delta": -1.43,
+      "n": 22,
+      "reasons": [
+        {
+          "delta": -1.43,
+          "kind": "stat",
+          "n": 22,
+          "source": "showdown-replays",
+          "text": "Wins 31.8% together (expected 46.6%), n=22"
+        }
+      ],
+      "score": 33,
+      "source": "replays",
+      "z": -1.39
+    },
+    {
+      "a": "grimmsnarl",
+      "b": "pelipper",
+      "delta": -1.48,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": -1.48,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 34.5% together (expected 46.5%), n=29"
+        }
+      ],
+      "score": 32,
+      "source": "replays",
+      "z": -1.3
+    },
+    {
+      "a": "hatterene",
+      "b": "indeedeef",
+      "delta": 1.38,
+      "n": 42,
+      "reasons": [
+        {
+          "delta": 1.38,
+          "kind": "stat",
+          "n": 42,
+          "source": "showdown-replays",
+          "text": "Wins 54.8% together (expected 46.6%), n=42"
+        }
+      ],
+      "score": 67,
+      "source": "replays",
+      "z": 1.05
+    },
+    {
+      "a": "hatterene",
+      "b": "kingambit",
+      "delta": 0.37,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": 0.37,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.7%), n=26"
+        }
+      ],
+      "score": 55,
+      "source": "replays",
+      "z": 0.34
+    },
+    {
+      "a": "incineroar",
+      "b": "kingambit",
+      "delta": 0.54,
+      "n": 21,
+      "reasons": [
+        {
+          "delta": 0.54,
+          "kind": "stat",
+          "n": 21,
+          "source": "showdown-replays",
+          "text": "Wins 52.4% together (expected 46.6%), n=21"
+        }
+      ],
+      "score": 57,
+      "source": "replays",
+      "z": 0.53
+    },
+    {
+      "a": "incineroar",
+      "b": "milotic",
+      "delta": -1.71,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -1.71,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 26.3% together (expected 46.6%), n=19"
+        }
+      ],
+      "score": 30,
+      "source": "replays",
+      "z": -1.77
+    },
+    {
+      "a": "incineroar",
+      "b": "raichumegay",
+      "delta": -1.32,
+      "n": 37,
+      "reasons": [
+        {
+          "delta": -1.32,
+          "kind": "stat",
+          "n": 37,
+          "source": "showdown-replays",
+          "text": "Wins 37.8% together (expected 46.5%), n=37"
+        }
+      ],
+      "score": 34,
+      "source": "replays",
+      "z": -1.06
+    },
+    {
+      "a": "incineroar",
+      "b": "rillaboom",
+      "delta": -2.85,
+      "n": 98,
+      "reasons": [
+        {
+          "delta": -2.85,
+          "kind": "stat",
+          "n": 98,
+          "source": "showdown-replays",
+          "text": "Wins 37.8% together (expected 46.6%), n=98"
+        }
+      ],
+      "score": 19,
+      "source": "replays",
+      "z": -1.76
+    },
+    {
+      "a": "incineroar",
+      "b": "salamencemega",
+      "delta": 0.9,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.9,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 60.0% together (expected 46.7%), n=15"
+        }
+      ],
+      "score": 61,
+      "source": "replays",
+      "z": 1.03
+    },
+    {
+      "a": "incineroar",
+      "b": "sneasler",
+      "delta": -0.44,
+      "n": 43,
+      "reasons": [
+        {
+          "delta": -0.44,
+          "kind": "stat",
+          "n": 43,
+          "source": "showdown-replays",
+          "text": "Wins 44.2% together (expected 46.7%), n=43"
+        }
+      ],
+      "score": 45,
+      "source": "replays",
+      "z": -0.33
+    },
+    {
+      "a": "incineroar",
+      "b": "sylveon",
+      "delta": 1.42,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": 1.42,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 60.9% together (expected 46.8%), n=23"
+        }
+      ],
+      "score": 67,
+      "source": "replays",
+      "z": 1.35
+    },
+    {
+      "a": "incineroar",
+      "b": "toxapex",
+      "delta": -0.9,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": -0.9,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 33.3% together (expected 46.6%), n=15"
+        }
+      ],
+      "score": 39,
+      "source": "replays",
+      "z": -1.03
+    },
+    {
+      "a": "incineroar",
+      "b": "venusaur",
+      "delta": 0.69,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0.69,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 56.3% together (expected 46.7%), n=16"
+        }
+      ],
+      "score": 59,
+      "source": "replays",
+      "z": 0.76
+    },
+    {
+      "a": "incineroar",
+      "b": "volcarona",
+      "delta": 0.09,
+      "n": 49,
+      "reasons": [
+        {
+          "delta": 0.09,
+          "kind": "stat",
+          "n": 49,
+          "source": "showdown-replays",
+          "text": "Wins 46.9% together (expected 46.5%), n=49"
+        }
+      ],
+      "score": 51,
+      "source": "replays",
+      "z": 0.06
+    },
+    {
+      "a": "indeedeef",
+      "b": "kingambit",
+      "delta": -0.44,
+      "n": 41,
+      "reasons": [
+        {
+          "delta": -0.44,
+          "kind": "stat",
+          "n": 41,
+          "source": "showdown-replays",
+          "text": "Wins 43.9% together (expected 46.5%), n=41"
+        }
+      ],
+      "score": 45,
+      "source": "replays",
+      "z": -0.34
+    },
+    {
+      "a": "indeedeef",
+      "b": "sneasler",
+      "delta": 0.4,
+      "n": 28,
+      "reasons": [
+        {
+          "delta": 0.4,
+          "kind": "stat",
+          "n": 28,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.7%), n=28"
+        }
+      ],
+      "score": 55,
+      "source": "replays",
+      "z": 0.35
+    },
+    {
+      "a": "kingambit",
+      "b": "rillaboom",
+      "delta": 0.3,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 0.3,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 50.0% together (expected 46.6%), n=20"
+        }
+      ],
+      "score": 54,
+      "source": "replays",
+      "z": 0.3
+    },
+    {
+      "a": "kingambit",
+      "b": "salamencemega",
+      "delta": 0.5,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": 0.5,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 52.6% together (expected 46.7%), n=19"
+        }
+      ],
+      "score": 56,
+      "source": "replays",
+      "z": 0.52
+    },
+    {
+      "a": "kingambit",
+      "b": "sneasler",
+      "delta": -0.5,
+      "n": 39,
+      "reasons": [
+        {
+          "delta": -0.5,
+          "kind": "stat",
+          "n": 39,
+          "source": "showdown-replays",
+          "text": "Wins 43.6% together (expected 46.7%), n=39"
+        }
+      ],
+      "score": 44,
+      "source": "replays",
+      "z": -0.39
+    },
+    {
+      "a": "milotic",
+      "b": "rillaboom",
+      "delta": 1.87,
+      "n": 23,
+      "reasons": [
+        {
+          "delta": 1.87,
+          "kind": "stat",
+          "n": 23,
+          "source": "showdown-replays",
+          "text": "Wins 65.2% together (expected 46.6%), n=23"
+        }
+      ],
+      "score": 72,
+      "source": "replays",
+      "z": 1.79
+    },
+    {
+      "a": "milotic",
+      "b": "tyranitarmega",
+      "delta": 1.82,
+      "n": 17,
+      "reasons": [
+        {
+          "delta": 1.82,
+          "kind": "stat",
+          "n": 17,
+          "source": "showdown-replays",
+          "text": "Wins 70.6% together (expected 46.7%), n=17"
+        }
+      ],
+      "score": 71,
+      "source": "replays",
+      "z": 1.97
+    },
+    {
+      "a": "primarina",
+      "b": "raichumegay",
+      "delta": 1.62,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": 1.62,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 65.0% together (expected 46.7%), n=20"
+        }
+      ],
+      "score": 69,
+      "source": "replays",
+      "z": 1.64
+    },
+    {
+      "a": "raichumegay",
+      "b": "rillaboom",
+      "delta": -0.43,
+      "n": 67,
+      "reasons": [
+        {
+          "delta": -0.43,
+          "kind": "stat",
+          "n": 67,
+          "source": "showdown-replays",
+          "text": "Wins 44.8% together (expected 46.5%), n=67"
+        }
+      ],
+      "score": 45,
+      "source": "replays",
+      "z": -0.29
+    },
+    {
+      "a": "raichumegay",
+      "b": "staraptormega",
+      "delta": 1.24,
+      "n": 26,
+      "reasons": [
+        {
+          "delta": 1.24,
+          "kind": "stat",
+          "n": 26,
+          "source": "showdown-replays",
+          "text": "Wins 57.7% together (expected 46.6%), n=26"
+        }
+      ],
+      "score": 65,
+      "source": "replays",
+      "z": 1.13
+    },
+    {
+      "a": "raichumegay",
+      "b": "volcarona",
+      "delta": -1.45,
+      "n": 20,
+      "reasons": [
+        {
+          "delta": -1.45,
+          "kind": "stat",
+          "n": 20,
+          "source": "showdown-replays",
+          "text": "Wins 30.0% together (expected 46.4%), n=20"
+        }
+      ],
+      "score": 33,
+      "source": "replays",
+      "z": -1.47
+    },
+    {
+      "a": "rillaboom",
+      "b": "salamencemega",
+      "delta": -0.39,
+      "n": 19,
+      "reasons": [
+        {
+          "delta": -0.39,
+          "kind": "stat",
+          "n": 19,
+          "source": "showdown-replays",
+          "text": "Wins 42.1% together (expected 46.7%), n=19"
+        }
+      ],
+      "score": 45,
+      "source": "replays",
+      "z": -0.4
+    },
+    {
+      "a": "rillaboom",
+      "b": "sneasler",
+      "delta": 1.62,
+      "n": 51,
+      "reasons": [
+        {
+          "delta": 1.62,
+          "kind": "stat",
+          "n": 51,
+          "source": "showdown-replays",
+          "text": "Wins 54.9% together (expected 46.7%), n=51"
+        }
+      ],
+      "score": 69,
+      "source": "replays",
+      "z": 1.17
+    },
+    {
+      "a": "rillaboom",
+      "b": "staraptormega",
+      "delta": 2.74,
+      "n": 25,
+      "reasons": [
+        {
+          "delta": 2.74,
+          "kind": "stat",
+          "n": 25,
+          "source": "showdown-replays",
+          "text": "Wins 72.0% together (expected 46.7%), n=25"
+        }
+      ],
+      "score": 80,
+      "source": "replays",
+      "z": 2.53
+    },
+    {
+      "a": "rillaboom",
+      "b": "volcarona",
+      "delta": -3.89,
+      "n": 47,
+      "reasons": [
+        {
+          "delta": -3.89,
+          "kind": "stat",
+          "n": 47,
+          "source": "showdown-replays",
+          "text": "Wins 25.5% together (expected 46.5%), n=47"
+        }
+      ],
+      "score": 12,
+      "source": "replays",
+      "z": -2.88
+    },
+    {
+      "a": "salamencemega",
+      "b": "sneasler",
+      "delta": 1.38,
+      "n": 46,
+      "reasons": [
+        {
+          "delta": 1.38,
+          "kind": "stat",
+          "n": 46,
+          "source": "showdown-replays",
+          "text": "Wins 54.3% together (expected 46.8%), n=46"
+        }
+      ],
+      "score": 67,
+      "source": "replays",
+      "z": 1.02
+    },
+    {
+      "a": "salamencemega",
+      "b": "tyranitarmega",
+      "delta": 0.61,
+      "n": 29,
+      "reasons": [
+        {
+          "delta": 0.61,
+          "kind": "stat",
+          "n": 29,
+          "source": "showdown-replays",
+          "text": "Wins 51.7% together (expected 46.8%), n=29"
+        }
+      ],
+      "score": 58,
+      "source": "replays",
+      "z": 0.53
+    },
+    {
+      "a": "sneasler",
+      "b": "sylveon",
+      "delta": 0.89,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 0.89,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 60.0% together (expected 46.9%), n=15"
+        }
+      ],
+      "score": 61,
+      "source": "replays",
+      "z": 1.02
+    },
+    {
+      "a": "sneasler",
+      "b": "tyranitarmega",
+      "delta": 0.68,
+      "n": 16,
+      "reasons": [
+        {
+          "delta": 0.68,
+          "kind": "stat",
+          "n": 16,
+          "source": "showdown-replays",
+          "text": "Wins 56.3% together (expected 46.9%), n=16"
+        }
+      ],
+      "score": 58,
+      "source": "replays",
+      "z": 0.75
+    },
+    {
+      "a": "sylveon",
+      "b": "venusaur",
+      "delta": 1.34,
+      "n": 15,
+      "reasons": [
+        {
+          "delta": 1.34,
+          "kind": "stat",
+          "n": 15,
+          "source": "showdown-replays",
+          "text": "Wins 66.7% together (expected 46.9%), n=15"
+        }
+      ],
+      "score": 66,
+      "source": "replays",
+      "z": 1.53
+    }
+  ],
+  "window": {
+    "from": "2026-10-10",
+    "label": "Last 30 days",
+    "to": "2026-10-11"
+  }
+}

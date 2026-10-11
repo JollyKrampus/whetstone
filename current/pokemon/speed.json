@@ -1,0 +1,1152 @@
+{
+  "cutoff": 1760,
+  "entries": [
+    {
+      "base": 151,
+      "id": "absolmegaz",
+      "max": 223,
+      "min": 153,
+      "nature": "Jolly",
+      "neutral": 171,
+      "share": 0.5714,
+      "sp": 32,
+      "speed": 223
+    },
+    {
+      "base": 151,
+      "id": "lucariomegaz",
+      "max": 223,
+      "min": 153,
+      "nature": "Timid",
+      "neutral": 171,
+      "share": 0.5107,
+      "sp": 32,
+      "speed": 223
+    },
+    {
+      "base": 150,
+      "id": "aerodactylmega",
+      "max": 222,
+      "min": 153,
+      "nature": "Jolly",
+      "neutral": 170,
+      "share": 0.8088,
+      "sp": 32,
+      "speed": 222,
+      "tailwind": 0.9037
+    },
+    {
+      "base": 150,
+      "id": "alakazammega",
+      "max": 222,
+      "min": 153,
+      "nature": "Timid",
+      "neutral": 170,
+      "share": 0.6568,
+      "sp": 32,
+      "speed": 222
+    },
+    {
+      "base": 142,
+      "id": "dragapult",
+      "max": 213,
+      "min": 145,
+      "nature": "Timid",
+      "neutral": 162,
+      "scarf": {
+        "share": 0.0127,
+        "speed": 319
+      },
+      "share": 0.5156,
+      "sp": 32,
+      "speed": 213
+    },
+    {
+      "base": 134,
+      "id": "delphoxmega",
+      "max": 204,
+      "min": 138,
+      "nature": "Timid",
+      "neutral": 154,
+      "share": 1,
+      "sp": 32,
+      "speed": 204
+    },
+    {
+      "base": 151,
+      "id": "garchompmegaz",
+      "max": 223,
+      "min": 153,
+      "nature": "Modest",
+      "neutral": 171,
+      "share": 0.5519,
+      "sp": 32,
+      "speed": 203
+    },
+    {
+      "base": 130,
+      "id": "aerodactyl",
+      "max": 200,
+      "min": 135,
+      "nature": "Jolly",
+      "neutral": 150,
+      "share": 0.9644,
+      "sp": 32,
+      "speed": 200,
+      "tailwind": 0.9318
+    },
+    {
+      "base": 130,
+      "id": "raichumegay",
+      "max": 200,
+      "min": 135,
+      "nature": "Timid",
+      "neutral": 150,
+      "share": 0.5568,
+      "sp": 32,
+      "speed": 200
+    },
+    {
+      "base": 126,
+      "id": "pyroarmega",
+      "max": 195,
+      "min": 131,
+      "nature": "Timid",
+      "neutral": 146,
+      "share": 0.8914,
+      "sp": 32,
+      "speed": 195
+    },
+    {
+      "base": 126,
+      "id": "talonflame",
+      "max": 195,
+      "min": 131,
+      "nature": "Jolly",
+      "neutral": 146,
+      "share": 0.8315,
+      "sp": 32,
+      "speed": 195,
+      "tailwind": 0.986
+    },
+    {
+      "base": 124,
+      "id": "meowsticfmega",
+      "max": 193,
+      "min": 129,
+      "nature": "Timid",
+      "neutral": 144,
+      "share": 0.9221,
+      "sp": 32,
+      "speed": 193
+    },
+    {
+      "base": 123,
+      "id": "meowscarada",
+      "max": 192,
+      "min": 128,
+      "nature": "Jolly",
+      "neutral": 143,
+      "scarf": {
+        "share": 0.567,
+        "speed": 288
+      },
+      "share": 0.6849,
+      "sp": 32,
+      "speed": 192
+    },
+    {
+      "base": 120,
+      "id": "froslassmega",
+      "max": 189,
+      "min": 126,
+      "nature": "Timid",
+      "neutral": 140,
+      "share": 0.9158,
+      "sp": 32,
+      "speed": 189
+    },
+    {
+      "base": 120,
+      "id": "salamencemega",
+      "max": 189,
+      "min": 126,
+      "nature": "Timid",
+      "neutral": 140,
+      "share": 0.814,
+      "sp": 32,
+      "speed": 189,
+      "tailwind": 0.7151
+    },
+    {
+      "base": 116,
+      "id": "whimsicott",
+      "max": 184,
+      "min": 122,
+      "nature": "Timid",
+      "neutral": 136,
+      "share": 0.7853,
+      "sp": 32,
+      "speed": 184,
+      "tailwind": 0.9851
+    },
+    {
+      "base": 111,
+      "id": "maushold",
+      "max": 179,
+      "min": 117,
+      "nature": "Jolly",
+      "neutral": 131,
+      "share": 0.8663,
+      "sp": 32,
+      "speed": 179
+    },
+    {
+      "base": 110,
+      "id": "metagrossmega",
+      "max": 178,
+      "min": 117,
+      "nature": "Jolly",
+      "neutral": 130,
+      "share": 0.4277,
+      "sp": 32,
+      "speed": 178
+    },
+    {
+      "base": 110,
+      "id": "raichumegax",
+      "max": 178,
+      "min": 117,
+      "nature": "Jolly",
+      "neutral": 130,
+      "share": 0.6254,
+      "sp": 32,
+      "speed": 178
+    },
+    {
+      "base": 110,
+      "id": "staraptormega",
+      "max": 178,
+      "min": 117,
+      "nature": "Jolly",
+      "neutral": 130,
+      "share": 1,
+      "sp": 32,
+      "speed": 178,
+      "tailwind": 0.694
+    },
+    {
+      "base": 109,
+      "id": "ninetalesalola",
+      "max": 177,
+      "min": 116,
+      "nature": "Timid",
+      "neutral": 129,
+      "scarf": {
+        "share": 0.1525,
+        "speed": 265
+      },
+      "share": 0.9266,
+      "sp": 32,
+      "speed": 177
+    },
+    {
+      "base": 106,
+      "id": "liepard",
+      "max": 173,
+      "min": 113,
+      "nature": "Jolly",
+      "neutral": 126,
+      "share": 0.8602,
+      "sp": 32,
+      "speed": 173
+    },
+    {
+      "base": 105,
+      "id": "pawmot",
+      "max": 172,
+      "min": 112,
+      "nature": "Jolly",
+      "neutral": 125,
+      "scarf": {
+        "share": 0.0076,
+        "speed": 258
+      },
+      "share": 0.7753,
+      "sp": 32,
+      "speed": 172
+    },
+    {
+      "base": 120,
+      "id": "sneasler",
+      "max": 189,
+      "min": 126,
+      "nature": "Adamant",
+      "neutral": 140,
+      "share": 0.5856,
+      "sp": 32,
+      "speed": 172
+    },
+    {
+      "base": 130,
+      "id": "gengarmega",
+      "max": 200,
+      "min": 135,
+      "nature": "Modest",
+      "neutral": 150,
+      "share": 0.2859,
+      "sp": 20,
+      "speed": 170
+    },
+    {
+      "base": 102,
+      "id": "floettemega",
+      "max": 169,
+      "min": 109,
+      "nature": "Timid",
+      "neutral": 122,
+      "share": 0.506,
+      "sp": 32,
+      "speed": 169
+    },
+    {
+      "base": 102,
+      "id": "garchomp",
+      "max": 169,
+      "min": 109,
+      "nature": "Jolly",
+      "neutral": 122,
+      "scarf": {
+        "share": 0.3758,
+        "speed": 253
+      },
+      "share": 0.5866,
+      "sp": 32,
+      "speed": 169
+    },
+    {
+      "base": 101,
+      "id": "glimmoramega",
+      "max": 168,
+      "min": 108,
+      "nature": "Timid",
+      "neutral": 121,
+      "share": 0.6151,
+      "sp": 32,
+      "speed": 168
+    },
+    {
+      "base": 100,
+      "id": "charizardmegay",
+      "max": 167,
+      "min": 108,
+      "nature": "Timid",
+      "neutral": 120,
+      "share": 0.3945,
+      "sp": 32,
+      "speed": 167
+    },
+    {
+      "base": 100,
+      "id": "gardevoirmega",
+      "max": 167,
+      "min": 108,
+      "nature": "Timid",
+      "neutral": 120,
+      "share": 0.3869,
+      "sp": 32,
+      "speed": 167,
+      "trickRoom": 0.3407
+    },
+    {
+      "base": 110,
+      "id": "lycanrocdusk",
+      "max": 178,
+      "min": 117,
+      "nature": "Adamant",
+      "neutral": 130,
+      "scarf": {
+        "share": 0.003,
+        "speed": 243
+      },
+      "share": 0.5795,
+      "sp": 32,
+      "speed": 162
+    },
+    {
+      "base": 95,
+      "id": "indeedee",
+      "max": 161,
+      "min": 103,
+      "nature": "Timid",
+      "neutral": 115,
+      "scarf": {
+        "share": 0.6345,
+        "speed": 241
+      },
+      "share": 0.5446,
+      "sp": 32,
+      "speed": 161,
+      "trickRoom": 0.4286
+    },
+    {
+      "base": 105,
+      "id": "espathra",
+      "max": 172,
+      "min": 112,
+      "nature": "Modest",
+      "neutral": 125,
+      "share": 0.3571,
+      "sp": 32,
+      "speed": 157
+    },
+    {
+      "base": 90,
+      "id": "annihilape",
+      "max": 156,
+      "min": 99,
+      "nature": "Jolly",
+      "neutral": 110,
+      "scarf": {
+        "share": 0.512,
+        "speed": 234
+      },
+      "share": 0.436,
+      "sp": 32,
+      "speed": 156
+    },
+    {
+      "base": 90,
+      "id": "arcaninehisui",
+      "max": 156,
+      "min": 99,
+      "nature": "Jolly",
+      "neutral": 110,
+      "scarf": {
+        "share": 0.0281,
+        "speed": 234
+      },
+      "share": 0.8949,
+      "sp": 32,
+      "speed": 156
+    },
+    {
+      "base": 89,
+      "id": "vivillon",
+      "max": 155,
+      "min": 98,
+      "nature": "Timid",
+      "neutral": 109,
+      "scarf": {
+        "share": 0.0525,
+        "speed": 232
+      },
+      "share": 1,
+      "sp": 32,
+      "speed": 155,
+      "tailwind": 0.1754
+    },
+    {
+      "base": 87,
+      "id": "baxcalibur",
+      "max": 152,
+      "min": 96,
+      "nature": "Jolly",
+      "neutral": 107,
+      "scarf": {
+        "share": 0.1727,
+        "speed": 228
+      },
+      "share": 0.4029,
+      "sp": 32,
+      "speed": 152
+    },
+    {
+      "base": 100,
+      "id": "blazikenmega",
+      "max": 167,
+      "min": 108,
+      "nature": "Adamant",
+      "neutral": 120,
+      "share": 0.7191,
+      "sp": 32,
+      "speed": 152
+    },
+    {
+      "base": 100,
+      "id": "dragonitemega",
+      "max": 167,
+      "min": 108,
+      "nature": "Modest",
+      "neutral": 120,
+      "share": 0.7901,
+      "sp": 32,
+      "speed": 152,
+      "tailwind": 0.587
+    },
+    {
+      "base": 85,
+      "id": "archaludon",
+      "max": 150,
+      "min": 94,
+      "nature": "Timid",
+      "neutral": 105,
+      "scarf": {
+        "share": 0.0102,
+        "speed": 225
+      },
+      "share": 0.3443,
+      "sp": 32,
+      "speed": 150
+    },
+    {
+      "base": 98,
+      "id": "hydreigon",
+      "max": 165,
+      "min": 106,
+      "nature": "Modest",
+      "neutral": 118,
+      "scarf": {
+        "share": 0.4932,
+        "speed": 225
+      },
+      "share": 0.4879,
+      "sp": 32,
+      "speed": 150,
+      "tailwind": 0.2284
+    },
+    {
+      "base": 85,
+      "id": "kleavor",
+      "max": 150,
+      "min": 94,
+      "nature": "Jolly",
+      "neutral": 105,
+      "scarf": {
+        "share": 0.4337,
+        "speed": 225
+      },
+      "share": 0.5359,
+      "sp": 32,
+      "speed": 150,
+      "tailwind": 0.1886
+    },
+    {
+      "base": 100,
+      "id": "staraptor",
+      "max": 167,
+      "min": 108,
+      "nature": "Adamant",
+      "neutral": 120,
+      "scarf": {
+        "share": 0.9916,
+        "speed": 225
+      },
+      "share": 0.5473,
+      "sp": 30,
+      "speed": 150,
+      "tailwind": 0.0749
+    },
+    {
+      "base": 84,
+      "id": "gholdengo",
+      "max": 149,
+      "min": 93,
+      "nature": "Timid",
+      "neutral": 104,
+      "scarf": {
+        "share": 0.0475,
+        "speed": 223
+      },
+      "share": 0.55,
+      "sp": 32,
+      "speed": 149
+    },
+    {
+      "base": 95,
+      "id": "typhlosionhisui",
+      "max": 161,
+      "min": 103,
+      "nature": "Modest",
+      "neutral": 115,
+      "scarf": {
+        "share": 0.7895,
+        "speed": 220
+      },
+      "share": 0.5132,
+      "sp": 32,
+      "speed": 147
+    },
+    {
+      "base": 78,
+      "id": "basculegion",
+      "max": 143,
+      "min": 88,
+      "nature": "Jolly",
+      "neutral": 98,
+      "scarf": {
+        "share": 0.4106,
+        "speed": 214
+      },
+      "share": 0.5498,
+      "sp": 32,
+      "speed": 143
+    },
+    {
+      "base": 88,
+      "id": "excadrill",
+      "max": 154,
+      "min": 97,
+      "nature": "Adamant",
+      "neutral": 108,
+      "scarf": {
+        "share": 0.0071,
+        "speed": 210
+      },
+      "share": 0.6946,
+      "sp": 32,
+      "speed": 140
+    },
+    {
+      "base": 87,
+      "id": "baxcaliburmega",
+      "max": 152,
+      "min": 96,
+      "nature": "Adamant",
+      "neutral": 107,
+      "share": 0.3264,
+      "sp": 32,
+      "speed": 139
+    },
+    {
+      "base": 86,
+      "id": "glimmora",
+      "max": 151,
+      "min": 95,
+      "nature": "Modest",
+      "neutral": 106,
+      "scarf": {
+        "share": 0.0456,
+        "speed": 207
+      },
+      "share": 0.5188,
+      "sp": 32,
+      "speed": 138
+    },
+    {
+      "base": 85,
+      "id": "kommoo",
+      "max": 150,
+      "min": 94,
+      "nature": "Modest",
+      "neutral": 105,
+      "share": 0.7474,
+      "sp": 32,
+      "speed": 137
+    },
+    {
+      "base": 100,
+      "id": "volcarona",
+      "max": 167,
+      "min": 108,
+      "nature": "Modest",
+      "neutral": 120,
+      "share": 0.2493,
+      "sp": 17,
+      "speed": 137,
+      "tailwind": 0.3582
+    },
+    {
+      "base": 72,
+      "id": "tsareena",
+      "max": 136,
+      "min": 82,
+      "nature": "Jolly",
+      "neutral": 92,
+      "scarf": {
+        "share": 0.1438,
+        "speed": 204
+      },
+      "share": 0.4589,
+      "sp": 32,
+      "speed": 136
+    },
+    {
+      "base": 71,
+      "id": "tyranitarmega",
+      "max": 135,
+      "min": 81,
+      "nature": "Jolly",
+      "neutral": 91,
+      "share": 0.6029,
+      "sp": 32,
+      "speed": 135
+    },
+    {
+      "base": 80,
+      "id": "dragonite",
+      "max": 145,
+      "min": 90,
+      "nature": "Adamant",
+      "neutral": 100,
+      "share": 0.3005,
+      "sp": 32,
+      "speed": 132,
+      "tailwind": 0.1987
+    },
+    {
+      "base": 80,
+      "id": "mamoswine",
+      "max": 145,
+      "min": 90,
+      "nature": "Adamant",
+      "neutral": 100,
+      "scarf": {
+        "share": 0.2456,
+        "speed": 198
+      },
+      "share": 0.5694,
+      "sp": 32,
+      "speed": 132
+    },
+    {
+      "base": 80,
+      "id": "venusaur",
+      "max": 145,
+      "min": 90,
+      "nature": "Modest",
+      "neutral": 100,
+      "share": 0.8854,
+      "sp": 32,
+      "speed": 132
+    },
+    {
+      "base": 78,
+      "id": "basculegionf",
+      "max": 143,
+      "min": 88,
+      "nature": "Modest",
+      "neutral": 98,
+      "scarf": {
+        "share": 0.0916,
+        "speed": 195
+      },
+      "share": 0.7651,
+      "sp": 32,
+      "speed": 130
+    },
+    {
+      "base": 78,
+      "id": "blastoisemega",
+      "max": 143,
+      "min": 88,
+      "nature": "Modest",
+      "neutral": 98,
+      "share": 0.4984,
+      "sp": 32,
+      "speed": 130
+    },
+    {
+      "base": 65,
+      "id": "pelipper",
+      "max": 128,
+      "min": 76,
+      "nature": "Timid",
+      "neutral": 85,
+      "scarf": {
+        "share": 0.0766,
+        "speed": 192
+      },
+      "share": 0.3554,
+      "sp": 32,
+      "speed": 128,
+      "tailwind": 0.7437
+    },
+    {
+      "base": 75,
+      "id": "toxtricity",
+      "max": 139,
+      "min": 85,
+      "nature": "Modest",
+      "neutral": 95,
+      "scarf": {
+        "share": 0.2486,
+        "speed": 190
+      },
+      "share": 0.4502,
+      "sp": 32,
+      "speed": 127
+    },
+    {
+      "base": 61,
+      "id": "tyranitar",
+      "max": 124,
+      "min": 72,
+      "nature": "Jolly",
+      "neutral": 81,
+      "scarf": {
+        "share": 0.2803,
+        "speed": 186
+      },
+      "share": 0.4383,
+      "sp": 32,
+      "speed": 124
+    },
+    {
+      "base": 70,
+      "id": "swampertmega",
+      "max": 134,
+      "min": 81,
+      "nature": "Adamant",
+      "neutral": 90,
+      "share": 0.395,
+      "sp": 32,
+      "speed": 122
+    },
+    {
+      "base": 60,
+      "id": "aegislash",
+      "max": 123,
+      "min": 72,
+      "nature": "Adamant",
+      "neutral": 80,
+      "share": 0.4538,
+      "sp": 32,
+      "speed": 112
+    },
+    {
+      "base": 86,
+      "id": "rotomwash",
+      "max": 151,
+      "min": 95,
+      "nature": "Modest",
+      "neutral": 106,
+      "scarf": {
+        "share": 0.205,
+        "speed": 168
+      },
+      "share": 0.3236,
+      "sp": 6,
+      "speed": 112
+    },
+    {
+      "base": 85,
+      "id": "ceruledge",
+      "max": 150,
+      "min": 94,
+      "nature": "Adamant",
+      "neutral": 105,
+      "share": 0.2358,
+      "sp": 1,
+      "speed": 106
+    },
+    {
+      "base": 86,
+      "id": "rotomheat",
+      "max": 151,
+      "min": 95,
+      "nature": "Bold",
+      "neutral": 106,
+      "scarf": {
+        "share": 0.3228,
+        "speed": 159
+      },
+      "share": 0.3691,
+      "sp": 0,
+      "speed": 106
+    },
+    {
+      "base": 85,
+      "id": "rillaboom",
+      "max": 150,
+      "min": 94,
+      "nature": "Adamant",
+      "neutral": 105,
+      "share": 0.2977,
+      "sp": 0,
+      "speed": 105
+    },
+    {
+      "base": 81,
+      "id": "milotic",
+      "max": 146,
+      "min": 90,
+      "nature": "Calm",
+      "neutral": 101,
+      "scarf": {
+        "share": 0.0063,
+        "speed": 151
+      },
+      "share": 0.5325,
+      "sp": 0,
+      "speed": 101
+    },
+    {
+      "base": 80,
+      "id": "meganiummega",
+      "max": 145,
+      "min": 90,
+      "nature": "Modest",
+      "neutral": 100,
+      "share": 0.317,
+      "sp": 0,
+      "speed": 100
+    },
+    {
+      "base": 75,
+      "id": "scovillainmega",
+      "max": 139,
+      "min": 85,
+      "nature": "Bold",
+      "neutral": 95,
+      "share": 0.9004,
+      "sp": 0,
+      "speed": 95
+    },
+    {
+      "base": 60,
+      "id": "sylveon",
+      "max": 123,
+      "min": 72,
+      "nature": "Modest",
+      "neutral": 80,
+      "share": 0.3197,
+      "sp": 15,
+      "speed": 95
+    },
+    {
+      "base": 85,
+      "id": "indeedeef",
+      "max": 150,
+      "min": 94,
+      "nature": "Relaxed",
+      "neutral": 105,
+      "share": 0.5411,
+      "sp": 0,
+      "speed": 94,
+      "trickRoom": 0.7372
+    },
+    {
+      "base": 80,
+      "id": "gallade",
+      "max": 145,
+      "min": 90,
+      "nature": "Brave",
+      "neutral": 100,
+      "share": 0.5601,
+      "sp": 0,
+      "speed": 90,
+      "trickRoom": 0.643
+    },
+    {
+      "base": 70,
+      "id": "politoed",
+      "max": 134,
+      "min": 81,
+      "nature": "Calm",
+      "neutral": 90,
+      "scarf": {
+        "share": 0.0579,
+        "speed": 135
+      },
+      "share": 0.4362,
+      "sp": 0,
+      "speed": 90
+    },
+    {
+      "base": 70,
+      "id": "sinistcha",
+      "max": 134,
+      "min": 81,
+      "nature": "Bold",
+      "neutral": 90,
+      "share": 0.6464,
+      "sp": 0,
+      "speed": 90,
+      "trickRoom": 0.7635
+    },
+    {
+      "base": 67,
+      "id": "corviknight",
+      "max": 130,
+      "min": 78,
+      "nature": "Careful",
+      "neutral": 87,
+      "share": 0.5899,
+      "sp": 0,
+      "speed": 87,
+      "tailwind": 0.4069
+    },
+    {
+      "base": 75,
+      "id": "armarouge",
+      "max": 139,
+      "min": 85,
+      "nature": "Quiet",
+      "neutral": 95,
+      "share": 0.4968,
+      "sp": 0,
+      "speed": 85,
+      "trickRoom": 0.4833
+    },
+    {
+      "base": 60,
+      "id": "farigiraf",
+      "max": 123,
+      "min": 72,
+      "nature": "Bold",
+      "neutral": 80,
+      "share": 0.6754,
+      "sp": 0,
+      "speed": 80,
+      "trickRoom": 0.9797
+    },
+    {
+      "base": 60,
+      "id": "incineroar",
+      "max": 123,
+      "min": 72,
+      "nature": "Careful",
+      "neutral": 80,
+      "share": 0.6283,
+      "sp": 0,
+      "speed": 80
+    },
+    {
+      "base": 60,
+      "id": "primarina",
+      "max": 123,
+      "min": 72,
+      "nature": "Modest",
+      "neutral": 80,
+      "share": 0.4428,
+      "sp": 0,
+      "speed": 80
+    },
+    {
+      "base": 60,
+      "id": "grimmsnarl",
+      "max": 123,
+      "min": 72,
+      "nature": "Sassy",
+      "neutral": 80,
+      "share": 0.5831,
+      "sp": 0,
+      "speed": 72
+    },
+    {
+      "base": 50,
+      "id": "kingambit",
+      "max": 112,
+      "min": 63,
+      "nature": "Adamant",
+      "neutral": 70,
+      "share": 0.4453,
+      "sp": 0,
+      "speed": 70
+    },
+    {
+      "base": 50,
+      "id": "sableye",
+      "max": 112,
+      "min": 63,
+      "nature": "Calm",
+      "neutral": 70,
+      "share": 0.8227,
+      "sp": 0,
+      "speed": 70
+    },
+    {
+      "base": 50,
+      "id": "mawilemega",
+      "max": 112,
+      "min": 63,
+      "nature": "Brave",
+      "neutral": 70,
+      "share": 0.7064,
+      "sp": 0,
+      "speed": 63
+    },
+    {
+      "base": 40,
+      "id": "golisopodmega",
+      "max": 101,
+      "min": 54,
+      "nature": "Adamant",
+      "neutral": 60,
+      "share": 0.5568,
+      "sp": 0,
+      "speed": 60
+    },
+    {
+      "base": 42,
+      "id": "grapploct",
+      "max": 103,
+      "min": 55,
+      "nature": "Brave",
+      "neutral": 62,
+      "share": 0.8018,
+      "sp": 0,
+      "speed": 55
+    },
+    {
+      "base": 35,
+      "id": "toxapex",
+      "max": 95,
+      "min": 49,
+      "nature": "Bold",
+      "neutral": 55,
+      "share": 0.7909,
+      "sp": 0,
+      "speed": 55
+    },
+    {
+      "base": 29,
+      "id": "hatterene",
+      "max": 89,
+      "min": 44,
+      "nature": "Quiet",
+      "neutral": 49,
+      "share": 0.9496,
+      "sp": 0,
+      "speed": 44,
+      "trickRoom": 0.9416
+    },
+    {
+      "base": 20,
+      "id": "cameruptmega",
+      "max": 79,
+      "min": 36,
+      "nature": "Quiet",
+      "neutral": 40,
+      "share": 0.908,
+      "sp": 0,
+      "speed": 36
+    },
+    {
+      "base": 20,
+      "id": "torkoal",
+      "max": 79,
+      "min": 36,
+      "nature": "Quiet",
+      "neutral": 40,
+      "share": 0.886,
+      "sp": 0,
+      "speed": 36
+    },
+    {
+      "base": 15,
+      "id": "pincurchin",
+      "max": 73,
+      "min": 31,
+      "nature": "Relaxed",
+      "neutral": 35,
+      "share": 0.9233,
+      "sp": 0,
+      "speed": 31
+    }
+  ],
+  "format": "gen9championsvgc2026regmc",
+  "month": "2026-09",
+  "regulation": "M-C"
+}

@@ -1,0 +1,10484 @@
+[
+  {
+    "abilities": [
+      "snowwarning",
+      "soundproof"
+    ],
+    "base": {
+      "atk": 92,
+      "def": 75,
+      "hp": 90,
+      "spa": 92,
+      "spd": 85,
+      "spe": 60
+    },
+    "id": "abomasnow",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "abomasnowmega"
+    ],
+    "name": "Abomasnow",
+    "num": 460,
+    "sprite": "img/sprites/abomasnow.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Ice"
+    ],
+    "weightkg": 135.5
+  },
+  {
+    "abilities": [
+      "snowwarning"
+    ],
+    "base": {
+      "atk": 132,
+      "def": 105,
+      "hp": 90,
+      "spa": 132,
+      "spd": 105,
+      "spe": 30
+    },
+    "baseSpecies": "Abomasnow",
+    "forme": "Mega",
+    "id": "abomasnowmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "abomasnow",
+    "name": "Abomasnow-Mega",
+    "num": 460,
+    "requiredItem": "abomasite",
+    "sprite": "img/sprites/abomasnowmega.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Ice"
+    ],
+    "weightkg": 185
+  },
+  {
+    "abilities": [
+      "pressure",
+      "superluck",
+      "justified"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 60,
+      "hp": 65,
+      "spa": 75,
+      "spd": 60,
+      "spe": 75
+    },
+    "id": "absol",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "absolmega",
+      "absolmegaz"
+    ],
+    "name": "Absol",
+    "num": 359,
+    "sprite": "img/sprites/absol.webp",
+    "tier": "RU",
+    "types": [
+      "Dark"
+    ],
+    "weightkg": 47
+  },
+  {
+    "abilities": [
+      "magicbounce"
+    ],
+    "base": {
+      "atk": 150,
+      "def": 60,
+      "hp": 65,
+      "spa": 115,
+      "spd": 60,
+      "spe": 115
+    },
+    "baseSpecies": "Absol",
+    "forme": "Mega",
+    "id": "absolmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "absol",
+    "name": "Absol-Mega",
+    "num": 359,
+    "requiredItem": "absolite",
+    "sprite": "img/sprites/absolmega.webp",
+    "tier": "RU",
+    "types": [
+      "Dark"
+    ],
+    "weightkg": 49
+  },
+  {
+    "abilities": [
+      "sharpness"
+    ],
+    "base": {
+      "atk": 154,
+      "def": 60,
+      "hp": 65,
+      "spa": 75,
+      "spd": 60,
+      "spe": 151
+    },
+    "baseSpecies": "Absol",
+    "forme": "Mega-Z",
+    "id": "absolmegaz",
+    "legal": [
+      "M-C"
+    ],
+    "megaOf": "absol",
+    "name": "Absol-Mega-Z",
+    "num": 359,
+    "requiredItem": "absolitez",
+    "sprite": "img/sprites/absolmegaz.webp",
+    "tier": "OU",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "weightkg": 49
+  },
+  {
+    "abilities": [
+      "stancechange"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 140,
+      "hp": 60,
+      "spa": 50,
+      "spd": 140,
+      "spe": 60
+    },
+    "id": "aegislash",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Aegislash",
+    "num": 681,
+    "sprite": "img/sprites/aegislash.webp",
+    "tier": "OU",
+    "types": [
+      "Steel",
+      "Ghost"
+    ],
+    "weightkg": 53
+  },
+  {
+    "abilities": [
+      "rockhead",
+      "pressure",
+      "unnerve"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 65,
+      "hp": 80,
+      "spa": 60,
+      "spd": 75,
+      "spe": 130
+    },
+    "id": "aerodactyl",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "aerodactylmega"
+    ],
+    "name": "Aerodactyl",
+    "num": 142,
+    "sprite": "img/sprites/aerodactyl.webp",
+    "tier": "RU",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "weightkg": 59
+  },
+  {
+    "abilities": [
+      "toughclaws"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 85,
+      "hp": 80,
+      "spa": 70,
+      "spd": 95,
+      "spe": 150
+    },
+    "baseSpecies": "Aerodactyl",
+    "forme": "Mega",
+    "id": "aerodactylmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "aerodactyl",
+    "name": "Aerodactyl-Mega",
+    "num": 142,
+    "requiredItem": "aerodactylite",
+    "sprite": "img/sprites/aerodactylmega.webp",
+    "tier": "RU",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "weightkg": 79
+  },
+  {
+    "abilities": [
+      "sturdy",
+      "rockhead",
+      "heavymetal"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 180,
+      "hp": 70,
+      "spa": 60,
+      "spd": 60,
+      "spe": 50
+    },
+    "id": "aggron",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "aggronmega"
+    ],
+    "name": "Aggron",
+    "num": 306,
+    "sprite": "img/sprites/aggron.webp",
+    "tier": "RU",
+    "types": [
+      "Steel",
+      "Rock"
+    ],
+    "weightkg": 360
+  },
+  {
+    "abilities": [
+      "filter"
+    ],
+    "base": {
+      "atk": 140,
+      "def": 230,
+      "hp": 70,
+      "spa": 60,
+      "spd": 80,
+      "spe": 50
+    },
+    "baseSpecies": "Aggron",
+    "forme": "Mega",
+    "id": "aggronmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "aggron",
+    "name": "Aggron-Mega",
+    "num": 306,
+    "requiredItem": "aggronite",
+    "sprite": "img/sprites/aggronmega.webp",
+    "tier": "RU",
+    "types": [
+      "Steel"
+    ],
+    "weightkg": 395
+  },
+  {
+    "abilities": [
+      "synchronize",
+      "innerfocus",
+      "magicguard"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 45,
+      "hp": 55,
+      "spa": 135,
+      "spd": 95,
+      "spe": 120
+    },
+    "id": "alakazam",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "alakazammega"
+    ],
+    "name": "Alakazam",
+    "num": 65,
+    "sprite": "img/sprites/alakazam.webp",
+    "tier": "UU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 48
+  },
+  {
+    "abilities": [
+      "trace"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 65,
+      "hp": 55,
+      "spa": 175,
+      "spd": 105,
+      "spe": 150
+    },
+    "baseSpecies": "Alakazam",
+    "forme": "Mega",
+    "id": "alakazammega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "alakazam",
+    "name": "Alakazam-Mega",
+    "num": 65,
+    "requiredItem": "alakazite",
+    "sprite": "img/sprites/alakazammega.webp",
+    "tier": "Uber",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 48
+  },
+  {
+    "abilities": [
+      "sweetveil",
+      "aromaveil"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 75,
+      "hp": 65,
+      "spa": 110,
+      "spd": 121,
+      "spe": 64
+    },
+    "cosmeticFormes": [
+      "alcremiecaramelswirl",
+      "alcremielemoncream",
+      "alcremiematchacream",
+      "alcremiemintcream",
+      "alcremierainbowswirl",
+      "alcremierubycream",
+      "alcremierubyswirl",
+      "alcremiesaltedcream"
+    ],
+    "id": "alcremie",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Alcremie",
+    "num": 869,
+    "sprite": "img/sprites/alcremie.webp",
+    "tier": "RU",
+    "types": [
+      "Fairy"
+    ],
+    "weightkg": 0.5
+  },
+  {
+    "abilities": [
+      "naturalcure",
+      "cloudnine"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 90,
+      "hp": 75,
+      "spa": 70,
+      "spd": 105,
+      "spe": 80
+    },
+    "id": "altaria",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "altariamega"
+    ],
+    "name": "Altaria",
+    "num": 334,
+    "sprite": "img/sprites/altaria.webp",
+    "tier": "RU",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "weightkg": 20.6
+  },
+  {
+    "abilities": [
+      "pixilate"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 110,
+      "hp": 75,
+      "spa": 110,
+      "spd": 105,
+      "spe": 80
+    },
+    "baseSpecies": "Altaria",
+    "forme": "Mega",
+    "id": "altariamega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "altaria",
+    "name": "Altaria-Mega",
+    "num": 334,
+    "requiredItem": "altarianite",
+    "sprite": "img/sprites/altariamega.webp",
+    "tier": "RU",
+    "types": [
+      "Dragon",
+      "Fairy"
+    ],
+    "weightkg": 20.6
+  },
+  {
+    "abilities": [
+      "static",
+      "plus"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 85,
+      "hp": 90,
+      "spa": 115,
+      "spd": 90,
+      "spe": 55
+    },
+    "id": "ampharos",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "ampharosmega"
+    ],
+    "name": "Ampharos",
+    "num": 181,
+    "sprite": "img/sprites/ampharos.webp",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 61.5
+  },
+  {
+    "abilities": [
+      "moldbreaker"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 105,
+      "hp": 90,
+      "spa": 165,
+      "spd": 110,
+      "spe": 45
+    },
+    "baseSpecies": "Ampharos",
+    "forme": "Mega",
+    "id": "ampharosmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "ampharos",
+    "name": "Ampharos-Mega",
+    "num": 181,
+    "requiredItem": "ampharosite",
+    "sprite": "img/sprites/ampharosmega.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Dragon"
+    ],
+    "weightkg": 61.5
+  },
+  {
+    "abilities": [
+      "vitalspirit",
+      "innerfocus",
+      "defiant"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 80,
+      "hp": 110,
+      "spa": 50,
+      "spd": 90,
+      "spe": 90
+    },
+    "id": "annihilape",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Annihilape",
+    "num": 979,
+    "sprite": "img/sprites/annihilape.webp",
+    "tier": "OU",
+    "types": [
+      "Fighting",
+      "Ghost"
+    ],
+    "weightkg": 56
+  },
+  {
+    "abilities": [
+      "ripen",
+      "gluttony",
+      "thickfat"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 80,
+      "hp": 110,
+      "spa": 100,
+      "spd": 80,
+      "spe": 30
+    },
+    "id": "appletun",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Appletun",
+    "num": 842,
+    "sprite": "img/sprites/appletun.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "weightkg": 13
+  },
+  {
+    "abilities": [
+      "waterbubble",
+      "waterabsorb"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 92,
+      "hp": 68,
+      "spa": 50,
+      "spd": 132,
+      "spe": 42
+    },
+    "id": "araquanid",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Araquanid",
+    "num": 752,
+    "sprite": "img/sprites/araquanid.webp",
+    "tier": "OU",
+    "types": [
+      "Water",
+      "Bug"
+    ],
+    "weightkg": 82
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "shedskin",
+      "unnerve"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 69,
+      "hp": 60,
+      "spa": 65,
+      "spd": 79,
+      "spe": 80
+    },
+    "id": "arbok",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Arbok",
+    "num": 24,
+    "sprite": "img/sprites/arbok.webp",
+    "tier": "RU",
+    "types": [
+      "Poison"
+    ],
+    "weightkg": 65
+  },
+  {
+    "abilities": [
+      "seedsower",
+      "harvest"
+    ],
+    "base": {
+      "atk": 69,
+      "def": 90,
+      "hp": 78,
+      "spa": 125,
+      "spd": 109,
+      "spe": 39
+    },
+    "id": "arboliva",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Arboliva",
+    "num": 930,
+    "sprite": "img/sprites/arboliva.webp",
+    "tier": "UU",
+    "types": [
+      "Grass",
+      "Normal"
+    ],
+    "weightkg": 48.2
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "flashfire",
+      "justified"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 80,
+      "hp": 90,
+      "spa": 100,
+      "spd": 80,
+      "spe": 95
+    },
+    "id": "arcanine",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Arcanine",
+    "num": 59,
+    "otherFormes": [
+      "arcaninehisui"
+    ],
+    "sprite": "img/sprites/arcanine.webp",
+    "tier": "RU",
+    "types": [
+      "Fire"
+    ],
+    "weightkg": 155
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "flashfire",
+      "rockhead"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 80,
+      "hp": 95,
+      "spa": 95,
+      "spd": 80,
+      "spe": 90
+    },
+    "baseSpecies": "Arcanine",
+    "forme": "Hisui",
+    "id": "arcaninehisui",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Arcanine-Hisui",
+    "num": 59,
+    "sprite": "img/sprites/arcaninehisui.webp",
+    "tier": "UU",
+    "types": [
+      "Fire",
+      "Rock"
+    ],
+    "weightkg": 168
+  },
+  {
+    "abilities": [
+      "stamina",
+      "sturdy",
+      "stalwart"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 130,
+      "hp": 90,
+      "spa": 125,
+      "spd": 65,
+      "spe": 85
+    },
+    "id": "archaludon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Archaludon",
+    "num": 1018,
+    "sprite": "img/sprites/archaludon.webp",
+    "tier": "OU",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "weightkg": 60
+  },
+  {
+    "abilities": [
+      "swarm",
+      "insomnia",
+      "sniper"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 70,
+      "hp": 70,
+      "spa": 60,
+      "spd": 70,
+      "spe": 40
+    },
+    "id": "ariados",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Ariados",
+    "num": 168,
+    "sprite": "img/sprites/ariados.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "weightkg": 33.5
+  },
+  {
+    "abilities": [
+      "flashfire",
+      "weakarmor"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 100,
+      "hp": 85,
+      "spa": 125,
+      "spd": 80,
+      "spe": 75
+    },
+    "id": "armarouge",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Armarouge",
+    "num": 936,
+    "sprite": "img/sprites/armarouge.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "weightkg": 85
+  },
+  {
+    "abilities": [
+      "healer",
+      "aromaveil"
+    ],
+    "base": {
+      "atk": 72,
+      "def": 72,
+      "hp": 101,
+      "spa": 99,
+      "spd": 89,
+      "spe": 29
+    },
+    "id": "aromatisse",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Aromatisse",
+    "num": 683,
+    "sprite": "img/sprites/aromatisse.webp",
+    "tier": "RU",
+    "types": [
+      "Fairy"
+    ],
+    "weightkg": 15.5
+  },
+  {
+    "abilities": [
+      "healer",
+      "regenerator",
+      "klutz"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 86,
+      "hp": 103,
+      "spa": 60,
+      "spd": 86,
+      "spe": 50
+    },
+    "id": "audino",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "audinomega"
+    ],
+    "name": "Audino",
+    "num": 531,
+    "sprite": "img/sprites/audino.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 31
+  },
+  {
+    "abilities": [
+      "healer"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 126,
+      "hp": 103,
+      "spa": 80,
+      "spd": 126,
+      "spe": 50
+    },
+    "baseSpecies": "Audino",
+    "forme": "Mega",
+    "id": "audinomega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "audino",
+    "name": "Audino-Mega",
+    "num": 531,
+    "requiredItem": "audinite",
+    "sprite": "img/sprites/audinomega.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Fairy"
+    ],
+    "weightkg": 32
+  },
+  {
+    "abilities": [
+      "refrigerate",
+      "snowwarning"
+    ],
+    "base": {
+      "atk": 77,
+      "def": 72,
+      "hp": 123,
+      "spa": 99,
+      "spd": 92,
+      "spe": 58
+    },
+    "id": "aurorus",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Aurorus",
+    "num": 699,
+    "sprite": "img/sprites/aurorus.webp",
+    "tier": "RU",
+    "types": [
+      "Rock",
+      "Ice"
+    ],
+    "weightkg": 225
+  },
+  {
+    "abilities": [
+      "owntempo",
+      "icebody",
+      "sturdy"
+    ],
+    "base": {
+      "atk": 117,
+      "def": 184,
+      "hp": 95,
+      "spa": 44,
+      "spd": 46,
+      "spe": 28
+    },
+    "id": "avalugg",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Avalugg",
+    "num": 713,
+    "otherFormes": [
+      "avalugghisui"
+    ],
+    "sprite": "img/sprites/avalugg.webp",
+    "tier": "RU",
+    "types": [
+      "Ice"
+    ],
+    "weightkg": 505
+  },
+  {
+    "abilities": [
+      "strongjaw",
+      "icebody",
+      "sturdy"
+    ],
+    "base": {
+      "atk": 127,
+      "def": 184,
+      "hp": 95,
+      "spa": 34,
+      "spd": 36,
+      "spe": 38
+    },
+    "baseSpecies": "Avalugg",
+    "forme": "Hisui",
+    "id": "avalugghisui",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Avalugg-Hisui",
+    "num": 713,
+    "sprite": "img/sprites/avalugghisui.webp",
+    "tier": "RU",
+    "types": [
+      "Ice",
+      "Rock"
+    ],
+    "weightkg": 262.4
+  },
+  {
+    "abilities": [
+      "thickfat",
+      "hugepower",
+      "sapsipper"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 80,
+      "hp": 100,
+      "spa": 60,
+      "spd": 80,
+      "spe": 50
+    },
+    "id": "azumarill",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Azumarill",
+    "num": 184,
+    "sprite": "img/sprites/azumarill.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Fairy"
+    ],
+    "weightkg": 28.5
+  },
+  {
+    "abilities": [
+      "insomnia",
+      "frisk",
+      "cursedbody"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 65,
+      "hp": 64,
+      "spa": 83,
+      "spd": 63,
+      "spe": 65
+    },
+    "id": "banette",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "banettemega"
+    ],
+    "name": "Banette",
+    "num": 354,
+    "sprite": "img/sprites/banette.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost"
+    ],
+    "weightkg": 12.5
+  },
+  {
+    "abilities": [
+      "prankster"
+    ],
+    "base": {
+      "atk": 165,
+      "def": 75,
+      "hp": 64,
+      "spa": 93,
+      "spd": 83,
+      "spe": 75
+    },
+    "baseSpecies": "Banette",
+    "forme": "Mega",
+    "id": "banettemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "banette",
+    "name": "Banette-Mega",
+    "num": 354,
+    "requiredItem": "banettite",
+    "sprite": "img/sprites/banettemega.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost"
+    ],
+    "weightkg": 13
+  },
+  {
+    "abilities": [
+      "toughclaws",
+      "sniper",
+      "pickpocket"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 115,
+      "hp": 72,
+      "spa": 54,
+      "spd": 86,
+      "spe": 68
+    },
+    "id": "barbaracle",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "barbaraclemega"
+    ],
+    "name": "Barbaracle",
+    "num": 689,
+    "sprite": "img/sprites/barbaracle.webp",
+    "tier": "RU",
+    "types": [
+      "Rock",
+      "Water"
+    ],
+    "weightkg": 96
+  },
+  {
+    "abilities": [
+      "toughclaws"
+    ],
+    "base": {
+      "atk": 140,
+      "def": 130,
+      "hp": 72,
+      "spa": 64,
+      "spd": 106,
+      "spe": 88
+    },
+    "baseSpecies": "Barbaracle",
+    "forme": "Mega",
+    "id": "barbaraclemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "barbaracle",
+    "name": "Barbaracle-Mega",
+    "num": 689,
+    "requiredItem": "barbaracite",
+    "tier": "UUBL",
+    "types": [
+      "Rock",
+      "Fighting"
+    ],
+    "weightkg": 100
+  },
+  {
+    "abilities": [
+      "swiftswim",
+      "adaptability",
+      "moldbreaker"
+    ],
+    "base": {
+      "atk": 112,
+      "def": 65,
+      "hp": 120,
+      "spa": 80,
+      "spd": 75,
+      "spe": 78
+    },
+    "id": "basculegion",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Basculegion",
+    "num": 902,
+    "otherFormes": [
+      "basculegionf"
+    ],
+    "sprite": "img/sprites/basculegion.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Ghost"
+    ],
+    "weightkg": 110
+  },
+  {
+    "abilities": [
+      "swiftswim",
+      "adaptability",
+      "moldbreaker"
+    ],
+    "base": {
+      "atk": 92,
+      "def": 65,
+      "hp": 120,
+      "spa": 100,
+      "spd": 75,
+      "spe": 78
+    },
+    "baseSpecies": "Basculegion",
+    "forme": "F",
+    "id": "basculegionf",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Basculegion-F",
+    "num": 902,
+    "sprite": "img/sprites/basculegionf.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Ghost"
+    ],
+    "weightkg": 110
+  },
+  {
+    "abilities": [
+      "sturdy",
+      "soundproof"
+    ],
+    "base": {
+      "atk": 52,
+      "def": 168,
+      "hp": 60,
+      "spa": 47,
+      "spd": 138,
+      "spe": 30
+    },
+    "id": "bastiodon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Bastiodon",
+    "num": 411,
+    "sprite": "img/sprites/bastiodon.webp",
+    "tier": "RU",
+    "types": [
+      "Rock",
+      "Steel"
+    ],
+    "weightkg": 149.5
+  },
+  {
+    "abilities": [
+      "thermalexchange",
+      "icebody"
+    ],
+    "base": {
+      "atk": 145,
+      "def": 92,
+      "hp": 115,
+      "spa": 75,
+      "spd": 86,
+      "spe": 87
+    },
+    "id": "baxcalibur",
+    "legal": [
+      "M-C"
+    ],
+    "megas": [
+      "baxcaliburmega"
+    ],
+    "name": "Baxcalibur",
+    "num": 998,
+    "sprite": "img/sprites/baxcalibur.webp",
+    "tier": "Uber",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "weightkg": 210
+  },
+  {
+    "abilities": [
+      "thermalexchange"
+    ],
+    "base": {
+      "atk": 175,
+      "def": 117,
+      "hp": 115,
+      "spa": 105,
+      "spd": 101,
+      "spe": 87
+    },
+    "baseSpecies": "Baxcalibur",
+    "forme": "Mega",
+    "id": "baxcaliburmega",
+    "legal": [
+      "M-C"
+    ],
+    "megaOf": "baxcalibur",
+    "name": "Baxcalibur-Mega",
+    "num": 998,
+    "requiredItem": "baxcalibrite",
+    "sprite": "img/sprites/baxcaliburmega.webp",
+    "tier": "Uber",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "weightkg": 315
+  },
+  {
+    "abilities": [
+      "snowcloak",
+      "slushrush",
+      "swiftswim"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 80,
+      "hp": 95,
+      "spa": 70,
+      "spd": 80,
+      "spe": 50
+    },
+    "id": "beartic",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Beartic",
+    "num": 614,
+    "sprite": "img/sprites/beartic.webp",
+    "tier": "RU",
+    "types": [
+      "Ice"
+    ],
+    "weightkg": 260
+  },
+  {
+    "abilities": [
+      "swarm",
+      "sniper"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 40,
+      "hp": 65,
+      "spa": 45,
+      "spd": 80,
+      "spe": 75
+    },
+    "id": "beedrill",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "beedrillmega"
+    ],
+    "name": "Beedrill",
+    "num": 15,
+    "sprite": "img/sprites/beedrill.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "weightkg": 29.5
+  },
+  {
+    "abilities": [
+      "adaptability"
+    ],
+    "base": {
+      "atk": 150,
+      "def": 40,
+      "hp": 65,
+      "spa": 15,
+      "spd": 80,
+      "spe": 145
+    },
+    "baseSpecies": "Beedrill",
+    "forme": "Mega",
+    "id": "beedrillmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "beedrill",
+    "name": "Beedrill-Mega",
+    "num": 15,
+    "requiredItem": "beedrillite",
+    "sprite": "img/sprites/beedrillmega.webp",
+    "tier": "UU",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "weightkg": 40.5
+  },
+  {
+    "abilities": [
+      "electromorphosis",
+      "static",
+      "damp"
+    ],
+    "base": {
+      "atk": 64,
+      "def": 91,
+      "hp": 109,
+      "spa": 103,
+      "spd": 83,
+      "spe": 45
+    },
+    "id": "bellibolt",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Bellibolt",
+    "num": 939,
+    "sprite": "img/sprites/bellibolt.webp",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 113
+  },
+  {
+    "abilities": [
+      "torrent",
+      "raindish"
+    ],
+    "base": {
+      "atk": 83,
+      "def": 100,
+      "hp": 79,
+      "spa": 85,
+      "spd": 105,
+      "spe": 78
+    },
+    "id": "blastoise",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "blastoisemega"
+    ],
+    "name": "Blastoise",
+    "num": 9,
+    "sprite": "img/sprites/blastoise.webp",
+    "tier": "RU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 85.5
+  },
+  {
+    "abilities": [
+      "megalauncher"
+    ],
+    "base": {
+      "atk": 103,
+      "def": 120,
+      "hp": 79,
+      "spa": 135,
+      "spd": 115,
+      "spe": 78
+    },
+    "baseSpecies": "Blastoise",
+    "forme": "Mega",
+    "id": "blastoisemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "blastoise",
+    "name": "Blastoise-Mega",
+    "num": 9,
+    "requiredItem": "blastoisinite",
+    "sprite": "img/sprites/blastoisemega.webp",
+    "tier": "Uber",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 101.1
+  },
+  {
+    "abilities": [
+      "blaze",
+      "speedboost"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 70,
+      "hp": 80,
+      "spa": 110,
+      "spd": 70,
+      "spe": 80
+    },
+    "id": "blaziken",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "blazikenmega"
+    ],
+    "name": "Blaziken",
+    "num": 257,
+    "sprite": "img/sprites/blaziken.webp",
+    "tier": "OU",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "weightkg": 52
+  },
+  {
+    "abilities": [
+      "speedboost"
+    ],
+    "base": {
+      "atk": 160,
+      "def": 80,
+      "hp": 80,
+      "spa": 130,
+      "spd": 80,
+      "spe": 100
+    },
+    "baseSpecies": "Blaziken",
+    "forme": "Mega",
+    "id": "blazikenmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "blaziken",
+    "name": "Blaziken-Mega",
+    "num": 257,
+    "requiredItem": "blazikenite",
+    "sprite": "img/sprites/blazikenmega.webp",
+    "tier": "Uber",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "weightkg": 52
+  },
+  {
+    "abilities": [
+      "magmaarmor",
+      "solidrock",
+      "angerpoint"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 70,
+      "hp": 70,
+      "spa": 105,
+      "spd": 75,
+      "spe": 40
+    },
+    "id": "camerupt",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "cameruptmega"
+    ],
+    "name": "Camerupt",
+    "num": 323,
+    "sprite": "img/sprites/camerupt.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Ground"
+    ],
+    "weightkg": 220
+  },
+  {
+    "abilities": [
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 100,
+      "hp": 70,
+      "spa": 145,
+      "spd": 105,
+      "spe": 20
+    },
+    "baseSpecies": "Camerupt",
+    "forme": "Mega",
+    "id": "cameruptmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "camerupt",
+    "name": "Camerupt-Mega",
+    "num": 323,
+    "requiredItem": "cameruptite",
+    "sprite": "img/sprites/cameruptmega.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Ground"
+    ],
+    "weightkg": 320.5
+  },
+  {
+    "abilities": [
+      "forecast"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 70,
+      "hp": 70,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    },
+    "id": "castform",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Castform",
+    "num": 351,
+    "sprite": "img/sprites/castform.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 0.8
+  },
+  {
+    "abilities": [
+      "flashfire",
+      "weakarmor"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 80,
+      "hp": 75,
+      "spa": 60,
+      "spd": 100,
+      "spe": 85
+    },
+    "id": "ceruledge",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Ceruledge",
+    "num": 937,
+    "sprite": "img/sprites/ceruledge.webp",
+    "tier": "OU",
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "weightkg": 62
+  },
+  {
+    "abilities": [
+      "flashfire",
+      "flamebody",
+      "infiltrator"
+    ],
+    "base": {
+      "atk": 55,
+      "def": 90,
+      "hp": 60,
+      "spa": 145,
+      "spd": 90,
+      "spe": 80
+    },
+    "id": "chandelure",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "chandeluremega"
+    ],
+    "name": "Chandelure",
+    "num": 609,
+    "sprite": "img/sprites/chandelure.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost",
+      "Fire"
+    ],
+    "weightkg": 34.3
+  },
+  {
+    "abilities": [
+      "infiltrator"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 110,
+      "hp": 60,
+      "spa": 175,
+      "spd": 110,
+      "spe": 90
+    },
+    "baseSpecies": "Chandelure",
+    "forme": "Mega",
+    "id": "chandeluremega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "chandelure",
+    "name": "Chandelure-Mega",
+    "num": 609,
+    "requiredItem": "chandelurite",
+    "sprite": "img/sprites/chandeluremega.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost",
+      "Fire"
+    ],
+    "weightkg": 69.6
+  },
+  {
+    "abilities": [
+      "blaze",
+      "solarpower"
+    ],
+    "base": {
+      "atk": 84,
+      "def": 78,
+      "hp": 78,
+      "spa": 109,
+      "spd": 85,
+      "spe": 100
+    },
+    "id": "charizard",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "charizardmegax",
+      "charizardmegay"
+    ],
+    "name": "Charizard",
+    "num": 6,
+    "sprite": "img/sprites/charizard.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "weightkg": 90.5
+  },
+  {
+    "abilities": [
+      "toughclaws"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 111,
+      "hp": 78,
+      "spa": 130,
+      "spd": 85,
+      "spe": 100
+    },
+    "baseSpecies": "Charizard",
+    "forme": "Mega-X",
+    "id": "charizardmegax",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "charizard",
+    "name": "Charizard-Mega-X",
+    "num": 6,
+    "requiredItem": "charizarditex",
+    "sprite": "img/sprites/charizardmegax.webp",
+    "tier": "UUBL",
+    "types": [
+      "Fire",
+      "Dragon"
+    ],
+    "weightkg": 110.5
+  },
+  {
+    "abilities": [
+      "drought"
+    ],
+    "base": {
+      "atk": 104,
+      "def": 78,
+      "hp": 78,
+      "spa": 159,
+      "spd": 115,
+      "spe": 100
+    },
+    "baseSpecies": "Charizard",
+    "forme": "Mega-Y",
+    "id": "charizardmegay",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "charizard",
+    "name": "Charizard-Mega-Y",
+    "num": 6,
+    "requiredItem": "charizarditey",
+    "sprite": "img/sprites/charizardmegay.webp",
+    "tier": "UUBL",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "weightkg": 100.5
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "bulletproof"
+    ],
+    "base": {
+      "atk": 107,
+      "def": 122,
+      "hp": 88,
+      "spa": 74,
+      "spd": 75,
+      "spe": 64
+    },
+    "id": "chesnaught",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "chesnaughtmega"
+    ],
+    "name": "Chesnaught",
+    "num": 652,
+    "sprite": "img/sprites/chesnaught.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "weightkg": 90
+  },
+  {
+    "abilities": [
+      "bulletproof"
+    ],
+    "base": {
+      "atk": 137,
+      "def": 172,
+      "hp": 88,
+      "spa": 74,
+      "spd": 115,
+      "spe": 44
+    },
+    "baseSpecies": "Chesnaught",
+    "forme": "Mega",
+    "id": "chesnaughtmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "chesnaught",
+    "name": "Chesnaught-Mega",
+    "num": 652,
+    "requiredItem": "chesnaughtite",
+    "sprite": "img/sprites/chesnaughtmega.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "weightkg": 90
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 80,
+      "hp": 75,
+      "spa": 95,
+      "spd": 90,
+      "spe": 65
+    },
+    "id": "chimecho",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "chimechomega"
+    ],
+    "name": "Chimecho",
+    "num": 358,
+    "sprite": "img/sprites/chimecho.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 1
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 110,
+      "hp": 75,
+      "spa": 135,
+      "spd": 120,
+      "spe": 65
+    },
+    "baseSpecies": "Chimecho",
+    "forme": "Mega",
+    "id": "chimechomega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "chimecho",
+    "name": "Chimecho-Mega",
+    "num": 358,
+    "requiredItem": "chimechite",
+    "sprite": "img/sprites/chimechomega.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "weightkg": 8
+  },
+  {
+    "abilities": [
+      "blaze",
+      "libero"
+    ],
+    "base": {
+      "atk": 116,
+      "def": 75,
+      "hp": 80,
+      "spa": 65,
+      "spd": 75,
+      "spe": 119
+    },
+    "id": "cinderace",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Cinderace",
+    "num": 815,
+    "sprite": "img/sprites/cinderace.webp",
+    "tier": "OU",
+    "types": [
+      "Fire"
+    ],
+    "weightkg": 33
+  },
+  {
+    "abilities": [
+      "megalauncher"
+    ],
+    "base": {
+      "atk": 73,
+      "def": 88,
+      "hp": 71,
+      "spa": 120,
+      "spd": 89,
+      "spe": 59
+    },
+    "id": "clawitzer",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Clawitzer",
+    "num": 693,
+    "sprite": "img/sprites/clawitzer.webp",
+    "tier": "RU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 35.3
+  },
+  {
+    "abilities": [
+      "cutecharm",
+      "magicguard",
+      "unaware"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 73,
+      "hp": 95,
+      "spa": 95,
+      "spd": 90,
+      "spe": 60
+    },
+    "id": "clefable",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "clefablemega"
+    ],
+    "name": "Clefable",
+    "num": 36,
+    "sprite": "img/sprites/clefable.webp",
+    "tier": "OU",
+    "types": [
+      "Fairy"
+    ],
+    "weightkg": 40
+  },
+  {
+    "abilities": [
+      "magicbounce"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 93,
+      "hp": 95,
+      "spa": 135,
+      "spd": 110,
+      "spe": 70
+    },
+    "baseSpecies": "Clefable",
+    "forme": "Mega",
+    "id": "clefablemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "clefable",
+    "name": "Clefable-Mega",
+    "num": 36,
+    "requiredItem": "clefablite",
+    "sprite": "img/sprites/clefablemega.webp",
+    "tier": "(OU)",
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "weightkg": 42.3
+  },
+  {
+    "abilities": [
+      "mummy"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 145,
+      "hp": 58,
+      "spa": 95,
+      "spd": 105,
+      "spe": 30
+    },
+    "id": "cofagrigus",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Cofagrigus",
+    "num": 563,
+    "sprite": "img/sprites/cofagrigus.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost"
+    ],
+    "weightkg": 76.5
+  },
+  {
+    "abilities": [
+      "guts",
+      "sheerforce",
+      "ironfist"
+    ],
+    "base": {
+      "atk": 140,
+      "def": 95,
+      "hp": 105,
+      "spa": 55,
+      "spd": 65,
+      "spe": 45
+    },
+    "id": "conkeldurr",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Conkeldurr",
+    "num": 534,
+    "sprite": "img/sprites/conkeldurr.webp",
+    "tier": "UU",
+    "types": [
+      "Fighting"
+    ],
+    "weightkg": 87
+  },
+  {
+    "abilities": [
+      "pressure",
+      "unnerve",
+      "mirrorarmor"
+    ],
+    "base": {
+      "atk": 87,
+      "def": 105,
+      "hp": 98,
+      "spa": 53,
+      "spd": 85,
+      "spe": 67
+    },
+    "id": "corviknight",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Corviknight",
+    "num": 823,
+    "sprite": "img/sprites/corviknight.webp",
+    "tier": "OU",
+    "types": [
+      "Flying",
+      "Steel"
+    ],
+    "weightkg": 75
+  },
+  {
+    "abilities": [
+      "hypercutter",
+      "ironfist",
+      "angerpoint"
+    ],
+    "base": {
+      "atk": 132,
+      "def": 77,
+      "hp": 97,
+      "spa": 62,
+      "spd": 67,
+      "spe": 43
+    },
+    "id": "crabominable",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "crabominablemega"
+    ],
+    "name": "Crabominable",
+    "num": 740,
+    "sprite": "img/sprites/crabominable.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting",
+      "Ice"
+    ],
+    "weightkg": 180
+  },
+  {
+    "abilities": [
+      "ironfist"
+    ],
+    "base": {
+      "atk": 157,
+      "def": 122,
+      "hp": 97,
+      "spa": 62,
+      "spd": 107,
+      "spe": 33
+    },
+    "baseSpecies": "Crabominable",
+    "forme": "Mega",
+    "id": "crabominablemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "crabominable",
+    "name": "Crabominable-Mega",
+    "num": 740,
+    "requiredItem": "crabominite",
+    "sprite": "img/sprites/crabominablemega.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting",
+      "Ice"
+    ],
+    "weightkg": 252.8
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "longreach"
+    ],
+    "base": {
+      "atk": 107,
+      "def": 75,
+      "hp": 78,
+      "spa": 100,
+      "spd": 100,
+      "spe": 70
+    },
+    "id": "decidueye",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Decidueye",
+    "num": 724,
+    "otherFormes": [
+      "decidueyehisui"
+    ],
+    "sprite": "img/sprites/decidueye.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Ghost"
+    ],
+    "weightkg": 36.6
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "scrappy"
+    ],
+    "base": {
+      "atk": 112,
+      "def": 80,
+      "hp": 88,
+      "spa": 95,
+      "spd": 95,
+      "spe": 60
+    },
+    "baseSpecies": "Decidueye",
+    "forme": "Hisui",
+    "id": "decidueyehisui",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Decidueye-Hisui",
+    "num": 724,
+    "sprite": "img/sprites/decidueyehisui.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "weightkg": 37
+  },
+  {
+    "abilities": [
+      "cheekpouch",
+      "pickup",
+      "plus"
+    ],
+    "base": {
+      "atk": 58,
+      "def": 57,
+      "hp": 67,
+      "spa": 81,
+      "spd": 67,
+      "spe": 101
+    },
+    "id": "dedenne",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Dedenne",
+    "num": 702,
+    "sprite": "img/sprites/dedenne.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Fairy"
+    ],
+    "weightkg": 2.2
+  },
+  {
+    "abilities": [
+      "blaze",
+      "magician"
+    ],
+    "base": {
+      "atk": 69,
+      "def": 72,
+      "hp": 75,
+      "spa": 114,
+      "spd": 100,
+      "spe": 104
+    },
+    "id": "delphox",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "delphoxmega"
+    ],
+    "name": "Delphox",
+    "num": 655,
+    "sprite": "img/sprites/delphox.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "weightkg": 39
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 69,
+      "def": 72,
+      "hp": 75,
+      "spa": 159,
+      "spd": 125,
+      "spe": 134
+    },
+    "baseSpecies": "Delphox",
+    "forme": "Mega",
+    "id": "delphoxmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "delphox",
+    "name": "Delphox-Mega",
+    "num": 655,
+    "requiredItem": "delphoxite",
+    "sprite": "img/sprites/delphoxmega.webp",
+    "tier": "UU",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "weightkg": 39
+  },
+  {
+    "abilities": [
+      "pickup",
+      "cheekpouch",
+      "hugepower"
+    ],
+    "base": {
+      "atk": 56,
+      "def": 77,
+      "hp": 85,
+      "spa": 50,
+      "spd": 77,
+      "spe": 78
+    },
+    "id": "diggersby",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Diggersby",
+    "num": 660,
+    "sprite": "img/sprites/diggersby.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Ground"
+    ],
+    "weightkg": 42.4
+  },
+  {
+    "abilities": [
+      "limber",
+      "imposter"
+    ],
+    "base": {
+      "atk": 48,
+      "def": 48,
+      "hp": 48,
+      "spa": 48,
+      "spd": 48,
+      "spe": 48
+    },
+    "id": "ditto",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Ditto",
+    "num": 132,
+    "sprite": "img/sprites/ditto.webp",
+    "tier": "OU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 4
+  },
+  {
+    "abilities": [
+      "poisonpoint",
+      "poisontouch",
+      "adaptability"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 90,
+      "hp": 65,
+      "spa": 97,
+      "spd": 123,
+      "spe": 44
+    },
+    "id": "dragalge",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "dragalgemega"
+    ],
+    "name": "Dragalge",
+    "num": 691,
+    "sprite": "img/sprites/dragalge.webp",
+    "tier": "RU",
+    "types": [
+      "Poison",
+      "Dragon"
+    ],
+    "weightkg": 81.5
+  },
+  {
+    "abilities": [
+      "regenerator"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 105,
+      "hp": 65,
+      "spa": 132,
+      "spd": 163,
+      "spe": 44
+    },
+    "baseSpecies": "Dragalge",
+    "forme": "Mega",
+    "id": "dragalgemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "dragalge",
+    "name": "Dragalge-Mega",
+    "num": 691,
+    "requiredItem": "dragalgite",
+    "tier": "UU",
+    "types": [
+      "Poison",
+      "Dragon"
+    ],
+    "weightkg": 100.3
+  },
+  {
+    "abilities": [
+      "clearbody",
+      "infiltrator",
+      "cursedbody"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 75,
+      "hp": 88,
+      "spa": 100,
+      "spd": 75,
+      "spe": 142
+    },
+    "id": "dragapult",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Dragapult",
+    "num": 887,
+    "sprite": "img/sprites/dragapult.webp",
+    "tier": "OU",
+    "types": [
+      "Dragon",
+      "Ghost"
+    ],
+    "weightkg": 50
+  },
+  {
+    "abilities": [
+      "innerfocus",
+      "multiscale"
+    ],
+    "base": {
+      "atk": 134,
+      "def": 95,
+      "hp": 91,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    },
+    "id": "dragonite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "dragonitemega"
+    ],
+    "name": "Dragonite",
+    "num": 149,
+    "sprite": "img/sprites/dragonite.webp",
+    "tier": "OU",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "weightkg": 210
+  },
+  {
+    "abilities": [
+      "multiscale"
+    ],
+    "base": {
+      "atk": 124,
+      "def": 115,
+      "hp": 91,
+      "spa": 145,
+      "spd": 125,
+      "spe": 100
+    },
+    "baseSpecies": "Dragonite",
+    "forme": "Mega",
+    "id": "dragonitemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "dragonite",
+    "name": "Dragonite-Mega",
+    "num": 149,
+    "requiredItem": "dragoninite",
+    "sprite": "img/sprites/dragonitemega.webp",
+    "tier": "(OU)",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "weightkg": 290
+  },
+  {
+    "abilities": [
+      "berserk",
+      "sapsipper",
+      "cloudnine"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 85,
+      "hp": 78,
+      "spa": 135,
+      "spd": 91,
+      "spe": 36
+    },
+    "id": "drampa",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "drampamega"
+    ],
+    "name": "Drampa",
+    "num": 780,
+    "sprite": "img/sprites/drampa.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Dragon"
+    ],
+    "weightkg": 185
+  },
+  {
+    "abilities": [
+      "berserk"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 110,
+      "hp": 78,
+      "spa": 160,
+      "spd": 116,
+      "spe": 36
+    },
+    "baseSpecies": "Drampa",
+    "forme": "Mega",
+    "id": "drampamega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "drampa",
+    "name": "Drampa-Mega",
+    "num": 780,
+    "requiredItem": "drampanite",
+    "sprite": "img/sprites/drampamega.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Dragon"
+    ],
+    "weightkg": 240.5
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 80,
+      "hp": 85,
+      "spa": 105,
+      "spd": 80,
+      "spe": 50
+    },
+    "id": "eelektross",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "eelektrossmega"
+    ],
+    "name": "Eelektross",
+    "num": 604,
+    "sprite": "img/sprites/eelektross.webp",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 80.5
+  },
+  {
+    "abilities": [
+      "eelevate"
+    ],
+    "base": {
+      "atk": 145,
+      "def": 80,
+      "hp": 85,
+      "spa": 135,
+      "spd": 90,
+      "spe": 80
+    },
+    "baseSpecies": "Eelektross",
+    "forme": "Mega",
+    "id": "eelektrossmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "eelektross",
+    "name": "Eelektross-Mega",
+    "num": 604,
+    "requiredItem": "eelektrossite",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 180
+  },
+  {
+    "abilities": [
+      "blaze",
+      "reckless"
+    ],
+    "base": {
+      "atk": 123,
+      "def": 65,
+      "hp": 110,
+      "spa": 100,
+      "spd": 65,
+      "spe": 65
+    },
+    "id": "emboar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "emboarmega"
+    ],
+    "name": "Emboar",
+    "num": 500,
+    "sprite": "img/sprites/emboar.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "weightkg": 150
+  },
+  {
+    "abilities": [
+      "moldbreaker"
+    ],
+    "base": {
+      "atk": 148,
+      "def": 75,
+      "hp": 110,
+      "spa": 110,
+      "spd": 110,
+      "spe": 75
+    },
+    "baseSpecies": "Emboar",
+    "forme": "Mega",
+    "id": "emboarmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "emboar",
+    "name": "Emboar-Mega",
+    "num": 500,
+    "requiredItem": "emboarite",
+    "sprite": "img/sprites/emboarmega.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "weightkg": 180.3
+  },
+  {
+    "abilities": [
+      "static",
+      "motordrive"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 60,
+      "hp": 55,
+      "spa": 75,
+      "spd": 60,
+      "spe": 103
+    },
+    "id": "emolga",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Emolga",
+    "num": 587,
+    "sprite": "img/sprites/emolga.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "weightkg": 5
+  },
+  {
+    "abilities": [
+      "torrent",
+      "competitive"
+    ],
+    "base": {
+      "atk": 86,
+      "def": 88,
+      "hp": 84,
+      "spa": 111,
+      "spd": 101,
+      "spe": 60
+    },
+    "id": "empoleon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Empoleon",
+    "num": 395,
+    "sprite": "img/sprites/empoleon.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Steel"
+    ],
+    "weightkg": 84.5
+  },
+  {
+    "abilities": [
+      "opportunist",
+      "frisk",
+      "speedboost"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 60,
+      "hp": 95,
+      "spa": 101,
+      "spd": 60,
+      "spe": 105
+    },
+    "id": "espathra",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Espathra",
+    "num": 956,
+    "sprite": "img/sprites/espathra.webp",
+    "tier": "UUBL",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 90
+  },
+  {
+    "abilities": [
+      "synchronize",
+      "magicbounce"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 60,
+      "hp": 65,
+      "spa": 130,
+      "spd": 95,
+      "spe": 110
+    },
+    "id": "espeon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Espeon",
+    "num": 196,
+    "sprite": "img/sprites/espeon.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 26.5
+  },
+  {
+    "abilities": [
+      "sandrush",
+      "sandforce",
+      "moldbreaker"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 60,
+      "hp": 110,
+      "spa": 50,
+      "spd": 65,
+      "spe": 88
+    },
+    "id": "excadrill",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "excadrillmega"
+    ],
+    "name": "Excadrill",
+    "num": 530,
+    "sprite": "img/sprites/excadrill.webp",
+    "tier": "OU",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "weightkg": 40.4
+  },
+  {
+    "abilities": [
+      "piercingdrill"
+    ],
+    "base": {
+      "atk": 165,
+      "def": 100,
+      "hp": 110,
+      "spa": 65,
+      "spd": 65,
+      "spe": 103
+    },
+    "baseSpecies": "Excadrill",
+    "forme": "Mega",
+    "id": "excadrillmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "excadrill",
+    "name": "Excadrill-Mega",
+    "num": 530,
+    "requiredItem": "excadrite",
+    "sprite": "img/sprites/excadrillmega.webp",
+    "tier": "(OU)",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "weightkg": 60
+  },
+  {
+    "abilities": [
+      "battlearmor",
+      "defiant"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 100,
+      "hp": 65,
+      "spa": 70,
+      "spd": 60,
+      "spe": 75
+    },
+    "id": "falinks",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "falinksmega"
+    ],
+    "name": "Falinks",
+    "num": 870,
+    "sprite": "img/sprites/falinks.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting"
+    ],
+    "weightkg": 62
+  },
+  {
+    "abilities": [
+      "defiant"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 135,
+      "hp": 65,
+      "spa": 70,
+      "spd": 65,
+      "spe": 100
+    },
+    "baseSpecies": "Falinks",
+    "forme": "Mega",
+    "id": "falinksmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "falinks",
+    "name": "Falinks-Mega",
+    "num": 870,
+    "requiredItem": "falinksite",
+    "tier": "RU",
+    "types": [
+      "Fighting"
+    ],
+    "weightkg": 99
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "innerfocus",
+      "defiant"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 55,
+      "hp": 52,
+      "spa": 58,
+      "spd": 62,
+      "spe": 60
+    },
+    "id": "farfetchd",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Farfetch’d",
+    "num": 83,
+    "sprite": "img/sprites/farfetchd.webp",
+    "tier": "UU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 15
+  },
+  {
+    "abilities": [
+      "cudchew",
+      "armortail",
+      "sapsipper"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 70,
+      "hp": 120,
+      "spa": 110,
+      "spd": 70,
+      "spe": 60
+    },
+    "id": "farigiraf",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Farigiraf",
+    "num": 981,
+    "sprite": "img/sprites/farigiraf.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Psychic"
+    ],
+    "weightkg": 160
+  },
+  {
+    "abilities": [
+      "torrent",
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 100,
+      "hp": 85,
+      "spa": 79,
+      "spd": 83,
+      "spe": 78
+    },
+    "id": "feraligatr",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "feraligatrmega"
+    ],
+    "name": "Feraligatr",
+    "num": 160,
+    "sprite": "img/sprites/feraligatr.webp",
+    "tier": "RU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 88.8
+  },
+  {
+    "abilities": [
+      "dragonize"
+    ],
+    "base": {
+      "atk": 160,
+      "def": 125,
+      "hp": 85,
+      "spa": 89,
+      "spd": 93,
+      "spe": 78
+    },
+    "baseSpecies": "Feraligatr",
+    "forme": "Mega",
+    "id": "feraligatrmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "feraligatr",
+    "name": "Feraligatr-Mega",
+    "num": 160,
+    "requiredItem": "feraligite",
+    "sprite": "img/sprites/feraligatrmega.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "weightkg": 108.8
+  },
+  {
+    "abilities": [
+      "ripen",
+      "gluttony",
+      "hustle"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 80,
+      "hp": 70,
+      "spa": 95,
+      "spd": 60,
+      "spe": 70
+    },
+    "id": "flapple",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Flapple",
+    "num": 841,
+    "sprite": "img/sprites/flapple.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "weightkg": 1
+  },
+  {
+    "abilities": [
+      "flashfire",
+      "guts"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 60,
+      "hp": 65,
+      "spa": 95,
+      "spd": 110,
+      "spe": 65
+    },
+    "id": "flareon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Flareon",
+    "num": 136,
+    "sprite": "img/sprites/flareon.webp",
+    "tier": "RU",
+    "types": [
+      "Fire"
+    ],
+    "weightkg": 25
+  },
+  {
+    "abilities": [
+      "flowerveil",
+      "symbiosis"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 67,
+      "hp": 74,
+      "spa": 125,
+      "spd": 128,
+      "spe": 92
+    },
+    "baseSpecies": "Floette",
+    "forme": "Eternal",
+    "id": "floetteeternal",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "floettemega"
+    ],
+    "name": "Floette-Eternal",
+    "num": 670,
+    "sprite": "img/sprites/floetteeternal.webp",
+    "tier": "RU",
+    "types": [
+      "Fairy"
+    ],
+    "weightkg": 0.9
+  },
+  {
+    "abilities": [
+      "fairyaura"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 87,
+      "hp": 74,
+      "spa": 155,
+      "spd": 148,
+      "spe": 102
+    },
+    "baseSpecies": "Floette",
+    "forme": "Mega",
+    "id": "floettemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "floetteeternal",
+    "name": "Floette-Mega",
+    "num": 670,
+    "requiredItem": "floettite",
+    "sprite": "img/sprites/floettemega.webp",
+    "tier": "UUBL",
+    "types": [
+      "Fairy"
+    ],
+    "weightkg": 100.8
+  },
+  {
+    "abilities": [
+      "flowerveil",
+      "symbiosis"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 68,
+      "hp": 78,
+      "spa": 112,
+      "spd": 154,
+      "spe": 75
+    },
+    "cosmeticFormes": [
+      "florgesblue",
+      "florgesorange",
+      "florgeswhite",
+      "florgesyellow"
+    ],
+    "id": "florges",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Florges",
+    "num": 671,
+    "sprite": "img/sprites/florges.webp",
+    "tier": "RU",
+    "types": [
+      "Fairy"
+    ],
+    "weightkg": 10
+  },
+  {
+    "abilities": [
+      "sturdy",
+      "overcoat"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 140,
+      "hp": 75,
+      "spa": 60,
+      "spd": 60,
+      "spe": 40
+    },
+    "id": "forretress",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Forretress",
+    "num": 205,
+    "sprite": "img/sprites/forretress.webp",
+    "tier": "UU",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "weightkg": 125.8
+  },
+  {
+    "abilities": [
+      "snowcloak",
+      "cursedbody"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 70,
+      "hp": 70,
+      "spa": 80,
+      "spd": 70,
+      "spe": 110
+    },
+    "id": "froslass",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "froslassmega"
+    ],
+    "name": "Froslass",
+    "num": 478,
+    "sprite": "img/sprites/froslass.webp",
+    "tier": "RU",
+    "types": [
+      "Ice",
+      "Ghost"
+    ],
+    "weightkg": 26.6
+  },
+  {
+    "abilities": [
+      "snowwarning"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 70,
+      "hp": 70,
+      "spa": 140,
+      "spd": 100,
+      "spe": 120
+    },
+    "baseSpecies": "Froslass",
+    "forme": "Mega",
+    "id": "froslassmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "froslass",
+    "name": "Froslass-Mega",
+    "num": 478,
+    "requiredItem": "froslassite",
+    "sprite": "img/sprites/froslassmega.webp",
+    "tier": "UUBL",
+    "types": [
+      "Ice",
+      "Ghost"
+    ],
+    "weightkg": 29.6
+  },
+  {
+    "abilities": [
+      "furcoat"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 60,
+      "hp": 75,
+      "spa": 65,
+      "spd": 90,
+      "spe": 102
+    },
+    "cosmeticFormes": [
+      "furfroudandy",
+      "furfroudebutante",
+      "furfroudiamond",
+      "furfrouheart",
+      "furfroukabuki",
+      "furfroulareine",
+      "furfroumatron",
+      "furfroupharaoh",
+      "furfroustar"
+    ],
+    "id": "furfrou",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Furfrou",
+    "num": 676,
+    "sprite": "img/sprites/furfrou.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 28
+  },
+  {
+    "abilities": [
+      "steadfast",
+      "sharpness",
+      "justified"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 65,
+      "hp": 68,
+      "spa": 65,
+      "spd": 115,
+      "spe": 80
+    },
+    "id": "gallade",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "gallademega"
+    ],
+    "name": "Gallade",
+    "num": 475,
+    "sprite": "img/sprites/gallade.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "weightkg": 52
+  },
+  {
+    "abilities": [
+      "innerfocus"
+    ],
+    "base": {
+      "atk": 165,
+      "def": 95,
+      "hp": 68,
+      "spa": 65,
+      "spd": 115,
+      "spe": 110
+    },
+    "baseSpecies": "Gallade",
+    "forme": "Mega",
+    "id": "gallademega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "gallade",
+    "name": "Gallade-Mega",
+    "num": 475,
+    "requiredItem": "galladite",
+    "sprite": "img/sprites/gallademega.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "weightkg": 56.4
+  },
+  {
+    "abilities": [
+      "stench",
+      "weakarmor",
+      "aftermath"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 82,
+      "hp": 80,
+      "spa": 60,
+      "spd": 82,
+      "spe": 75
+    },
+    "id": "garbodor",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Garbodor",
+    "num": 569,
+    "sprite": "img/sprites/garbodor.webp",
+    "tier": "RU",
+    "types": [
+      "Poison"
+    ],
+    "weightkg": 107.3
+  },
+  {
+    "abilities": [
+      "sandveil",
+      "roughskin"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 95,
+      "hp": 108,
+      "spa": 80,
+      "spd": 85,
+      "spe": 102
+    },
+    "id": "garchomp",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "garchompmega",
+      "garchompmegaz"
+    ],
+    "name": "Garchomp",
+    "num": 445,
+    "sprite": "img/sprites/garchomp.webp",
+    "tier": "OU",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "weightkg": 95
+  },
+  {
+    "abilities": [
+      "sandforce"
+    ],
+    "base": {
+      "atk": 170,
+      "def": 115,
+      "hp": 108,
+      "spa": 120,
+      "spd": 95,
+      "spe": 92
+    },
+    "baseSpecies": "Garchomp",
+    "forme": "Mega",
+    "id": "garchompmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "garchomp",
+    "name": "Garchomp-Mega",
+    "num": 445,
+    "requiredItem": "garchompite",
+    "sprite": "img/sprites/garchompmega.webp",
+    "tier": "(OU)",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "weightkg": 95
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 85,
+      "hp": 108,
+      "spa": 141,
+      "spd": 85,
+      "spe": 151
+    },
+    "baseSpecies": "Garchomp",
+    "forme": "Mega-Z",
+    "id": "garchompmegaz",
+    "legal": [
+      "M-C"
+    ],
+    "megaOf": "garchomp",
+    "name": "Garchomp-Mega-Z",
+    "num": 445,
+    "requiredItem": "garchompitez",
+    "sprite": "img/sprites/garchompmegaz.webp",
+    "tier": "OU",
+    "types": [
+      "Dragon"
+    ],
+    "weightkg": 99
+  },
+  {
+    "abilities": [
+      "synchronize",
+      "trace",
+      "telepathy"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 65,
+      "hp": 68,
+      "spa": 125,
+      "spd": 115,
+      "spe": 80
+    },
+    "id": "gardevoir",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "gardevoirmega"
+    ],
+    "name": "Gardevoir",
+    "num": 282,
+    "sprite": "img/sprites/gardevoir.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "weightkg": 48.4
+  },
+  {
+    "abilities": [
+      "pixilate"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 65,
+      "hp": 68,
+      "spa": 165,
+      "spd": 135,
+      "spe": 100
+    },
+    "baseSpecies": "Gardevoir",
+    "forme": "Mega",
+    "id": "gardevoirmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "gardevoir",
+    "name": "Gardevoir-Mega",
+    "num": 282,
+    "requiredItem": "gardevoirite",
+    "sprite": "img/sprites/gardevoirmega.webp",
+    "tier": "UUBL",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "weightkg": 48.4
+  },
+  {
+    "abilities": [
+      "purifyingsalt",
+      "sturdy",
+      "clearbody"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 130,
+      "hp": 100,
+      "spa": 45,
+      "spd": 90,
+      "spe": 35
+    },
+    "id": "garganacl",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Garganacl",
+    "num": 934,
+    "sprite": "img/sprites/garganacl.webp",
+    "tier": "RU",
+    "types": [
+      "Rock"
+    ],
+    "weightkg": 240
+  },
+  {
+    "abilities": [
+      "cursedbody"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 60,
+      "hp": 60,
+      "spa": 130,
+      "spd": 75,
+      "spe": 110
+    },
+    "id": "gengar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "gengarmega"
+    ],
+    "name": "Gengar",
+    "num": 94,
+    "sprite": "img/sprites/gengar.webp",
+    "tier": "UU",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "weightkg": 40.5
+  },
+  {
+    "abilities": [
+      "shadowtag"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 80,
+      "hp": 60,
+      "spa": 170,
+      "spd": 95,
+      "spe": 130
+    },
+    "baseSpecies": "Gengar",
+    "forme": "Mega",
+    "id": "gengarmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "gengar",
+    "name": "Gengar-Mega",
+    "num": 94,
+    "requiredItem": "gengarite",
+    "sprite": "img/sprites/gengarmega.webp",
+    "tier": "Uber",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "weightkg": 40.5
+  },
+  {
+    "abilities": [
+      "goodasgold"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 95,
+      "hp": 87,
+      "spa": 133,
+      "spd": 91,
+      "spe": 84
+    },
+    "id": "gholdengo",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Gholdengo",
+    "num": 1000,
+    "sprite": "img/sprites/gholdengo.webp",
+    "tier": "Uber",
+    "types": [
+      "Steel",
+      "Ghost"
+    ],
+    "weightkg": 30
+  },
+  {
+    "abilities": [
+      "snowcloak",
+      "icebody"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 110,
+      "hp": 65,
+      "spa": 130,
+      "spd": 95,
+      "spe": 65
+    },
+    "id": "glaceon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Glaceon",
+    "num": 471,
+    "sprite": "img/sprites/glaceon.webp",
+    "tier": "RU",
+    "types": [
+      "Ice"
+    ],
+    "weightkg": 25.9
+  },
+  {
+    "abilities": [
+      "innerfocus",
+      "icebody",
+      "moody"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 80,
+      "hp": 80,
+      "spa": 80,
+      "spd": 80,
+      "spe": 80
+    },
+    "id": "glalie",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "glaliemega"
+    ],
+    "name": "Glalie",
+    "num": 362,
+    "sprite": "img/sprites/glalie.webp",
+    "tier": "RU",
+    "types": [
+      "Ice"
+    ],
+    "weightkg": 256.5
+  },
+  {
+    "abilities": [
+      "refrigerate"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 80,
+      "hp": 80,
+      "spa": 120,
+      "spd": 80,
+      "spe": 100
+    },
+    "baseSpecies": "Glalie",
+    "forme": "Mega",
+    "id": "glaliemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "glalie",
+    "name": "Glalie-Mega",
+    "num": 362,
+    "requiredItem": "glalitite",
+    "sprite": "img/sprites/glaliemega.webp",
+    "tier": "RU",
+    "types": [
+      "Ice"
+    ],
+    "weightkg": 350.2
+  },
+  {
+    "abilities": [
+      "toxicdebris",
+      "corrosion"
+    ],
+    "base": {
+      "atk": 55,
+      "def": 90,
+      "hp": 83,
+      "spa": 130,
+      "spd": 81,
+      "spe": 86
+    },
+    "id": "glimmora",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "glimmoramega"
+    ],
+    "name": "Glimmora",
+    "num": 970,
+    "sprite": "img/sprites/glimmora.webp",
+    "tier": "OU",
+    "types": [
+      "Rock",
+      "Poison"
+    ],
+    "weightkg": 45
+  },
+  {
+    "abilities": [
+      "adaptability"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 105,
+      "hp": 83,
+      "spa": 150,
+      "spd": 96,
+      "spe": 101
+    },
+    "baseSpecies": "Glimmora",
+    "forme": "Mega",
+    "id": "glimmoramega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "glimmora",
+    "name": "Glimmora-Mega",
+    "num": 970,
+    "requiredItem": "glimmoranite",
+    "sprite": "img/sprites/glimmoramega.webp",
+    "tier": "(OU)",
+    "types": [
+      "Rock",
+      "Poison"
+    ],
+    "weightkg": 77
+  },
+  {
+    "abilities": [
+      "hypercutter",
+      "sandveil",
+      "poisonheal"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 125,
+      "hp": 75,
+      "spa": 45,
+      "spd": 75,
+      "spe": 95
+    },
+    "id": "gliscor",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Gliscor",
+    "num": 472,
+    "sprite": "img/sprites/gliscor.webp",
+    "tier": "UU",
+    "types": [
+      "Ground",
+      "Flying"
+    ],
+    "weightkg": 42.5
+  },
+  {
+    "abilities": [
+      "sapsipper",
+      "grasspelt"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 62,
+      "hp": 123,
+      "spa": 97,
+      "spd": 81,
+      "spe": 68
+    },
+    "id": "gogoat",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Gogoat",
+    "num": 673,
+    "sprite": "img/sprites/gogoat.webp",
+    "tier": "UU",
+    "types": [
+      "Grass"
+    ],
+    "weightkg": 91
+  },
+  {
+    "abilities": [
+      "emergencyexit"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 140,
+      "hp": 75,
+      "spa": 60,
+      "spd": 90,
+      "spe": 40
+    },
+    "id": "golisopod",
+    "legal": [
+      "M-C"
+    ],
+    "megas": [
+      "golisopodmega"
+    ],
+    "name": "Golisopod",
+    "num": 768,
+    "sprite": "img/sprites/golisopod.webp",
+    "tier": "UU",
+    "types": [
+      "Bug",
+      "Water"
+    ],
+    "weightkg": 108
+  },
+  {
+    "abilities": [
+      "toughclaws"
+    ],
+    "base": {
+      "atk": 150,
+      "def": 175,
+      "hp": 75,
+      "spa": 70,
+      "spd": 120,
+      "spe": 40
+    },
+    "baseSpecies": "Golisopod",
+    "forme": "Mega",
+    "id": "golisopodmega",
+    "legal": [
+      "M-C"
+    ],
+    "megaOf": "golisopod",
+    "name": "Golisopod-Mega",
+    "num": 768,
+    "requiredItem": "golisopite",
+    "sprite": "img/sprites/golisopodmega.webp",
+    "tier": "OU",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "weightkg": 148
+  },
+  {
+    "abilities": [
+      "ironfist",
+      "klutz",
+      "noguard"
+    ],
+    "base": {
+      "atk": 124,
+      "def": 80,
+      "hp": 89,
+      "spa": 55,
+      "spd": 80,
+      "spe": 55
+    },
+    "id": "golurk",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "golurkmega"
+    ],
+    "name": "Golurk",
+    "num": 623,
+    "sprite": "img/sprites/golurk.webp",
+    "tier": "RU",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "weightkg": 330
+  },
+  {
+    "abilities": [
+      "unseenfist"
+    ],
+    "base": {
+      "atk": 159,
+      "def": 105,
+      "hp": 89,
+      "spa": 70,
+      "spd": 105,
+      "spe": 55
+    },
+    "baseSpecies": "Golurk",
+    "forme": "Mega",
+    "id": "golurkmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "golurk",
+    "name": "Golurk-Mega",
+    "num": 623,
+    "requiredItem": "golurkite",
+    "sprite": "img/sprites/golurkmega.webp",
+    "tier": "RU",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "weightkg": 330
+  },
+  {
+    "abilities": [
+      "sapsipper",
+      "hydration",
+      "gooey"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 70,
+      "hp": 90,
+      "spa": 110,
+      "spd": 150,
+      "spe": 80
+    },
+    "id": "goodra",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Goodra",
+    "num": 706,
+    "otherFormes": [
+      "goodrahisui"
+    ],
+    "sprite": "img/sprites/goodra.webp",
+    "tier": "RU",
+    "types": [
+      "Dragon"
+    ],
+    "weightkg": 150.5
+  },
+  {
+    "abilities": [
+      "sapsipper",
+      "shellarmor",
+      "gooey"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 100,
+      "hp": 80,
+      "spa": 110,
+      "spd": 150,
+      "spe": 60
+    },
+    "baseSpecies": "Goodra",
+    "forme": "Hisui",
+    "id": "goodrahisui",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Goodra-Hisui",
+    "num": 706,
+    "sprite": "img/sprites/goodrahisui.webp",
+    "tier": "UU",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "weightkg": 334.1
+  },
+  {
+    "abilities": [
+      "pickup",
+      "frisk",
+      "insomnia"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 122,
+      "hp": 65,
+      "spa": 58,
+      "spd": 75,
+      "spe": 84
+    },
+    "id": "gourgeist",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Gourgeist",
+    "num": 711,
+    "otherFormes": [
+      "gourgeistlarge",
+      "gourgeistsmall",
+      "gourgeistsuper"
+    ],
+    "sprite": "img/sprites/gourgeist.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "weightkg": 12.5
+  },
+  {
+    "abilities": [
+      "pickup",
+      "frisk",
+      "insomnia"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 122,
+      "hp": 75,
+      "spa": 58,
+      "spd": 75,
+      "spe": 69
+    },
+    "baseSpecies": "Gourgeist",
+    "forme": "Large",
+    "id": "gourgeistlarge",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Gourgeist-Large",
+    "num": 711,
+    "sprite": "img/sprites/gourgeistlarge.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "weightkg": 14
+  },
+  {
+    "abilities": [
+      "pickup",
+      "frisk",
+      "insomnia"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 122,
+      "hp": 55,
+      "spa": 58,
+      "spd": 75,
+      "spe": 99
+    },
+    "baseSpecies": "Gourgeist",
+    "forme": "Small",
+    "id": "gourgeistsmall",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Gourgeist-Small",
+    "num": 711,
+    "sprite": "img/sprites/gourgeistsmall.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "weightkg": 9.5
+  },
+  {
+    "abilities": [
+      "pickup",
+      "frisk",
+      "insomnia"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 122,
+      "hp": 85,
+      "spa": 58,
+      "spd": 75,
+      "spe": 54
+    },
+    "baseSpecies": "Gourgeist",
+    "forme": "Super",
+    "id": "gourgeistsuper",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Gourgeist-Super",
+    "num": 711,
+    "sprite": "img/sprites/gourgeistsuper.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "weightkg": 39
+  },
+  {
+    "abilities": [
+      "limber",
+      "technician"
+    ],
+    "base": {
+      "atk": 118,
+      "def": 90,
+      "hp": 80,
+      "spa": 70,
+      "spd": 80,
+      "spe": 42
+    },
+    "id": "grapploct",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Grapploct",
+    "num": 853,
+    "sprite": "img/sprites/grapploct.webp",
+    "tier": "UU",
+    "types": [
+      "Fighting"
+    ],
+    "weightkg": 39
+  },
+  {
+    "abilities": [
+      "torrent",
+      "protean",
+      "battlebond"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 67,
+      "hp": 72,
+      "spa": 103,
+      "spd": 71,
+      "spe": 122
+    },
+    "id": "greninja",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "greninjamega"
+    ],
+    "name": "Greninja",
+    "num": 658,
+    "sprite": "img/sprites/greninja.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "weightkg": 40
+  },
+  {
+    "abilities": [
+      "protean"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 77,
+      "hp": 72,
+      "spa": 133,
+      "spd": 81,
+      "spe": 142
+    },
+    "baseSpecies": "Greninja",
+    "forme": "Mega",
+    "id": "greninjamega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "greninja",
+    "name": "Greninja-Mega",
+    "num": 658,
+    "requiredItem": "greninjite",
+    "sprite": "img/sprites/greninjamega.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "weightkg": 40
+  },
+  {
+    "abilities": [
+      "prankster",
+      "frisk",
+      "pickpocket"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 65,
+      "hp": 95,
+      "spa": 95,
+      "spd": 75,
+      "spe": 60
+    },
+    "id": "grimmsnarl",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Grimmsnarl",
+    "num": 861,
+    "sprite": "img/sprites/grimmsnarl.webp",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Fairy"
+    ],
+    "weightkg": 61
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "moxie"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 79,
+      "hp": 95,
+      "spa": 60,
+      "spd": 100,
+      "spe": 81
+    },
+    "id": "gyarados",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "gyaradosmega"
+    ],
+    "name": "Gyarados",
+    "num": 130,
+    "sprite": "img/sprites/gyarados.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Flying"
+    ],
+    "weightkg": 235
+  },
+  {
+    "abilities": [
+      "moldbreaker"
+    ],
+    "base": {
+      "atk": 155,
+      "def": 109,
+      "hp": 95,
+      "spa": 70,
+      "spd": 130,
+      "spe": 81
+    },
+    "baseSpecies": "Gyarados",
+    "forme": "Mega",
+    "id": "gyaradosmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "gyarados",
+    "name": "Gyarados-Mega",
+    "num": 130,
+    "requiredItem": "gyaradosite",
+    "sprite": "img/sprites/gyaradosmega.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "weightkg": 305
+  },
+  {
+    "abilities": [
+      "healer",
+      "anticipation",
+      "magicbounce"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 95,
+      "hp": 57,
+      "spa": 136,
+      "spd": 103,
+      "spe": 29
+    },
+    "id": "hatterene",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Hatterene",
+    "num": 858,
+    "sprite": "img/sprites/hatterene.webp",
+    "tier": "OU",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "weightkg": 5.1
+  },
+  {
+    "abilities": [
+      "limber",
+      "unburden",
+      "moldbreaker"
+    ],
+    "base": {
+      "atk": 92,
+      "def": 75,
+      "hp": 78,
+      "spa": 74,
+      "spd": 63,
+      "spe": 118
+    },
+    "id": "hawlucha",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "hawluchamega"
+    ],
+    "name": "Hawlucha",
+    "num": 701,
+    "sprite": "img/sprites/hawlucha.webp",
+    "tier": "UU",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "weightkg": 21.5
+  },
+  {
+    "abilities": [
+      "noguard"
+    ],
+    "base": {
+      "atk": 137,
+      "def": 100,
+      "hp": 78,
+      "spa": 74,
+      "spd": 93,
+      "spe": 118
+    },
+    "baseSpecies": "Hawlucha",
+    "forme": "Mega",
+    "id": "hawluchamega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "hawlucha",
+    "name": "Hawlucha-Mega",
+    "num": 701,
+    "requiredItem": "hawluchanite",
+    "sprite": "img/sprites/hawluchamega.webp",
+    "tier": "UU",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "weightkg": 25
+  },
+  {
+    "abilities": [
+      "dryskin",
+      "sandveil",
+      "solarpower"
+    ],
+    "base": {
+      "atk": 55,
+      "def": 52,
+      "hp": 62,
+      "spa": 109,
+      "spd": 94,
+      "spe": 109
+    },
+    "id": "heliolisk",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Heliolisk",
+    "num": 695,
+    "sprite": "img/sprites/heliolisk.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Normal"
+    ],
+    "weightkg": 21
+  },
+  {
+    "abilities": [
+      "swarm",
+      "guts",
+      "moxie"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 75,
+      "hp": 80,
+      "spa": 40,
+      "spd": 95,
+      "spe": 85
+    },
+    "id": "heracross",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "heracrossmega"
+    ],
+    "name": "Heracross",
+    "num": 214,
+    "sprite": "img/sprites/heracross.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Fighting"
+    ],
+    "weightkg": 54
+  },
+  {
+    "abilities": [
+      "skilllink"
+    ],
+    "base": {
+      "atk": 185,
+      "def": 115,
+      "hp": 80,
+      "spa": 40,
+      "spd": 105,
+      "spe": 75
+    },
+    "baseSpecies": "Heracross",
+    "forme": "Mega",
+    "id": "heracrossmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "heracross",
+    "name": "Heracross-Mega",
+    "num": 214,
+    "requiredItem": "heracronite",
+    "sprite": "img/sprites/heracrossmega.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Fighting"
+    ],
+    "weightkg": 62.5
+  },
+  {
+    "abilities": [
+      "sandstream",
+      "sandforce"
+    ],
+    "base": {
+      "atk": 112,
+      "def": 118,
+      "hp": 108,
+      "spa": 68,
+      "spd": 72,
+      "spe": 47
+    },
+    "id": "hippowdon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Hippowdon",
+    "num": 450,
+    "sprite": "img/sprites/hippowdon.webp",
+    "tier": "UU",
+    "types": [
+      "Ground"
+    ],
+    "weightkg": 300
+  },
+  {
+    "abilities": [
+      "earlybird",
+      "flashfire",
+      "unnerve"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 50,
+      "hp": 75,
+      "spa": 110,
+      "spd": 80,
+      "spe": 95
+    },
+    "id": "houndoom",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "houndoommega"
+    ],
+    "name": "Houndoom",
+    "num": 229,
+    "sprite": "img/sprites/houndoom.webp",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Fire"
+    ],
+    "weightkg": 35
+  },
+  {
+    "abilities": [
+      "solarpower"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 90,
+      "hp": 75,
+      "spa": 140,
+      "spd": 90,
+      "spe": 115
+    },
+    "baseSpecies": "Houndoom",
+    "forme": "Mega",
+    "id": "houndoommega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "houndoom",
+    "name": "Houndoom-Mega",
+    "num": 229,
+    "requiredItem": "houndoominite",
+    "sprite": "img/sprites/houndoommega.webp",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Fire"
+    ],
+    "weightkg": 49.5
+  },
+  {
+    "abilities": [
+      "sandrush",
+      "fluffy"
+    ],
+    "base": {
+      "atk": 101,
+      "def": 100,
+      "hp": 72,
+      "spa": 50,
+      "spd": 97,
+      "spe": 68
+    },
+    "id": "houndstone",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Houndstone",
+    "num": 972,
+    "sprite": "img/sprites/houndstone.webp",
+    "tier": "UU",
+    "types": [
+      "Ghost"
+    ],
+    "weightkg": 15
+  },
+  {
+    "abilities": [
+      "supersweetsyrup",
+      "regenerator",
+      "stickyhold"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 110,
+      "hp": 106,
+      "spa": 120,
+      "spd": 80,
+      "spe": 44
+    },
+    "id": "hydrapple",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Hydrapple",
+    "num": 1019,
+    "sprite": "img/sprites/hydrapple.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "weightkg": 93
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 90,
+      "hp": 92,
+      "spa": 125,
+      "spd": 90,
+      "spe": 98
+    },
+    "id": "hydreigon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Hydreigon",
+    "num": 635,
+    "sprite": "img/sprites/hydreigon.webp",
+    "tier": "OU",
+    "types": [
+      "Dark",
+      "Dragon"
+    ],
+    "weightkg": 160
+  },
+  {
+    "abilities": [
+      "blaze",
+      "intimidate"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 90,
+      "hp": 95,
+      "spa": 80,
+      "spd": 90,
+      "spe": 60
+    },
+    "id": "incineroar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Incineroar",
+    "num": 727,
+    "sprite": "img/sprites/incineroar.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Dark"
+    ],
+    "weightkg": 83
+  },
+  {
+    "abilities": [
+      "innerfocus",
+      "synchronize",
+      "psychicsurge"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 55,
+      "hp": 60,
+      "spa": 105,
+      "spd": 95,
+      "spe": 95
+    },
+    "id": "indeedee",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Indeedee",
+    "num": 876,
+    "otherFormes": [
+      "indeedeef"
+    ],
+    "sprite": "img/sprites/indeedee.webp",
+    "tier": "UU",
+    "types": [
+      "Psychic",
+      "Normal"
+    ],
+    "weightkg": 28
+  },
+  {
+    "abilities": [
+      "owntempo",
+      "synchronize",
+      "psychicsurge"
+    ],
+    "base": {
+      "atk": 55,
+      "def": 65,
+      "hp": 70,
+      "spa": 95,
+      "spd": 105,
+      "spe": 85
+    },
+    "baseSpecies": "Indeedee",
+    "forme": "F",
+    "id": "indeedeef",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Indeedee-F",
+    "num": 876,
+    "sprite": "img/sprites/indeedeef.webp",
+    "tier": "UU",
+    "types": [
+      "Psychic",
+      "Normal"
+    ],
+    "weightkg": 28
+  },
+  {
+    "abilities": [
+      "blaze",
+      "ironfist"
+    ],
+    "base": {
+      "atk": 104,
+      "def": 71,
+      "hp": 76,
+      "spa": 104,
+      "spd": 71,
+      "spe": 108
+    },
+    "id": "infernape",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Infernape",
+    "num": 392,
+    "sprite": "img/sprites/infernape.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "weightkg": 55
+  },
+  {
+    "abilities": [
+      "torrent",
+      "sniper"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 65,
+      "hp": 70,
+      "spa": 125,
+      "spd": 65,
+      "spe": 120
+    },
+    "id": "inteleon",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Inteleon",
+    "num": 818,
+    "sprite": "img/sprites/inteleon.webp",
+    "tier": "UU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 45.2
+  },
+  {
+    "abilities": [
+      "voltabsorb",
+      "quickfeet"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 60,
+      "hp": 65,
+      "spa": 110,
+      "spd": 95,
+      "spe": 130
+    },
+    "id": "jolteon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Jolteon",
+    "num": 135,
+    "sprite": "img/sprites/jolteon.webp",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 24.5
+  },
+  {
+    "abilities": [
+      "earlybird",
+      "scrappy",
+      "innerfocus"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 80,
+      "hp": 105,
+      "spa": 40,
+      "spd": 80,
+      "spe": 90
+    },
+    "id": "kangaskhan",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "kangaskhanmega"
+    ],
+    "name": "Kangaskhan",
+    "num": 115,
+    "sprite": "img/sprites/kangaskhan.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 80
+  },
+  {
+    "abilities": [
+      "parentalbond"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 100,
+      "hp": 105,
+      "spa": 60,
+      "spd": 100,
+      "spe": 100
+    },
+    "baseSpecies": "Kangaskhan",
+    "forme": "Mega",
+    "id": "kangaskhanmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "kangaskhan",
+    "name": "Kangaskhan-Mega",
+    "num": 115,
+    "requiredItem": "kangaskhanite",
+    "sprite": "img/sprites/kangaskhanmega.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 100
+  },
+  {
+    "abilities": [
+      "defiant",
+      "supremeoverlord",
+      "pressure"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 120,
+      "hp": 100,
+      "spa": 60,
+      "spd": 85,
+      "spe": 50
+    },
+    "id": "kingambit",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Kingambit",
+    "num": 983,
+    "sprite": "img/sprites/kingambit.webp",
+    "tier": "OU",
+    "types": [
+      "Dark",
+      "Steel"
+    ],
+    "weightkg": 120
+  },
+  {
+    "abilities": [
+      "swarm",
+      "sheerforce",
+      "sharpness"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 95,
+      "hp": 70,
+      "spa": 45,
+      "spd": 70,
+      "spe": 85
+    },
+    "id": "kleavor",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Kleavor",
+    "num": 900,
+    "sprite": "img/sprites/kleavor.webp",
+    "tier": "UU",
+    "types": [
+      "Bug",
+      "Rock"
+    ],
+    "weightkg": 89
+  },
+  {
+    "abilities": [
+      "prankster",
+      "magician"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 91,
+      "hp": 57,
+      "spa": 80,
+      "spd": 87,
+      "spe": 75
+    },
+    "id": "klefki",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Klefki",
+    "num": 707,
+    "sprite": "img/sprites/klefki.webp",
+    "tier": "UU",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "weightkg": 3
+  },
+  {
+    "abilities": [
+      "bulletproof",
+      "soundproof",
+      "overcoat"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 125,
+      "hp": 75,
+      "spa": 100,
+      "spd": 105,
+      "spe": 85
+    },
+    "id": "kommoo",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Kommo-o",
+    "num": 784,
+    "sprite": "img/sprites/kommoo.webp",
+    "tier": "UU",
+    "types": [
+      "Dragon",
+      "Fighting"
+    ],
+    "weightkg": 78.2
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "moxie",
+      "angerpoint"
+    ],
+    "base": {
+      "atk": 117,
+      "def": 80,
+      "hp": 95,
+      "spa": 65,
+      "spd": 70,
+      "spe": 92
+    },
+    "id": "krookodile",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Krookodile",
+    "num": 553,
+    "sprite": "img/sprites/krookodile.webp",
+    "tier": "RU",
+    "types": [
+      "Ground",
+      "Dark"
+    ],
+    "weightkg": 96.3
+  },
+  {
+    "abilities": [
+      "leafguard",
+      "chlorophyll"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 130,
+      "hp": 65,
+      "spa": 60,
+      "spd": 65,
+      "spe": 95
+    },
+    "id": "leafeon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Leafeon",
+    "num": 470,
+    "sprite": "img/sprites/leafeon.webp",
+    "tier": "RU",
+    "types": [
+      "Grass"
+    ],
+    "weightkg": 25.5
+  },
+  {
+    "abilities": [
+      "limber",
+      "unburden",
+      "prankster"
+    ],
+    "base": {
+      "atk": 88,
+      "def": 50,
+      "hp": 64,
+      "spa": 88,
+      "spd": 50,
+      "spe": 106
+    },
+    "id": "liepard",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Liepard",
+    "num": 510,
+    "sprite": "img/sprites/liepard.webp",
+    "tier": "RU",
+    "types": [
+      "Dark"
+    ],
+    "weightkg": 37.5
+  },
+  {
+    "abilities": [
+      "cutecharm",
+      "klutz",
+      "limber"
+    ],
+    "base": {
+      "atk": 76,
+      "def": 84,
+      "hp": 65,
+      "spa": 54,
+      "spd": 96,
+      "spe": 105
+    },
+    "id": "lopunny",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "lopunnymega"
+    ],
+    "name": "Lopunny",
+    "num": 428,
+    "sprite": "img/sprites/lopunny.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 33.3
+  },
+  {
+    "abilities": [
+      "scrappy"
+    ],
+    "base": {
+      "atk": 136,
+      "def": 94,
+      "hp": 65,
+      "spa": 54,
+      "spd": 96,
+      "spe": 135
+    },
+    "baseSpecies": "Lopunny",
+    "forme": "Mega",
+    "id": "lopunnymega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "lopunny",
+    "name": "Lopunny-Mega",
+    "num": 428,
+    "requiredItem": "lopunnite",
+    "sprite": "img/sprites/lopunnymega.webp",
+    "tier": "UUBL",
+    "types": [
+      "Normal",
+      "Fighting"
+    ],
+    "weightkg": 28.3
+  },
+  {
+    "abilities": [
+      "steadfast",
+      "innerfocus",
+      "justified"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 70,
+      "hp": 70,
+      "spa": 115,
+      "spd": 70,
+      "spe": 90
+    },
+    "id": "lucario",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "lucariomega",
+      "lucariomegaz"
+    ],
+    "name": "Lucario",
+    "num": 448,
+    "sprite": "img/sprites/lucario.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "weightkg": 54
+  },
+  {
+    "abilities": [
+      "adaptability"
+    ],
+    "base": {
+      "atk": 145,
+      "def": 88,
+      "hp": 70,
+      "spa": 140,
+      "spd": 70,
+      "spe": 112
+    },
+    "baseSpecies": "Lucario",
+    "forme": "Mega",
+    "id": "lucariomega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "lucario",
+    "name": "Lucario-Mega",
+    "num": 448,
+    "requiredItem": "lucarionite",
+    "sprite": "img/sprites/lucariomega.webp",
+    "tier": "Uber",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "weightkg": 57.5
+  },
+  {
+    "abilities": [
+      "auraguard"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 70,
+      "hp": 70,
+      "spa": 164,
+      "spd": 70,
+      "spe": 151
+    },
+    "baseSpecies": "Lucario",
+    "forme": "Mega-Z",
+    "id": "lucariomegaz",
+    "legal": [
+      "M-C"
+    ],
+    "megaOf": "lucario",
+    "name": "Lucario-Mega-Z",
+    "num": 448,
+    "requiredItem": "lucarionitez",
+    "sprite": "img/sprites/lucariomegaz.webp",
+    "tier": "Uber",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "weightkg": 49.4
+  },
+  {
+    "abilities": [
+      "rivalry",
+      "intimidate",
+      "guts"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 79,
+      "hp": 80,
+      "spa": 95,
+      "spd": 79,
+      "spe": 70
+    },
+    "id": "luxray",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Luxray",
+    "num": 405,
+    "sprite": "img/sprites/luxray.webp",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 42
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "sandrush",
+      "steadfast"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 65,
+      "hp": 75,
+      "spa": 55,
+      "spd": 65,
+      "spe": 112
+    },
+    "id": "lycanroc",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Lycanroc",
+    "num": 745,
+    "otherFormes": [
+      "lycanrocdusk",
+      "lycanrocmidnight"
+    ],
+    "sprite": "img/sprites/lycanroc.webp",
+    "tier": "RU",
+    "types": [
+      "Rock"
+    ],
+    "weightkg": 25
+  },
+  {
+    "abilities": [
+      "toughclaws"
+    ],
+    "base": {
+      "atk": 117,
+      "def": 65,
+      "hp": 75,
+      "spa": 55,
+      "spd": 65,
+      "spe": 110
+    },
+    "baseSpecies": "Lycanroc",
+    "forme": "Dusk",
+    "id": "lycanrocdusk",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Lycanroc-Dusk",
+    "num": 745,
+    "sprite": "img/sprites/lycanrocdusk.webp",
+    "tier": "RU",
+    "types": [
+      "Rock"
+    ],
+    "weightkg": 25
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "vitalspirit",
+      "noguard"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 75,
+      "hp": 85,
+      "spa": 55,
+      "spd": 75,
+      "spe": 82
+    },
+    "baseSpecies": "Lycanroc",
+    "forme": "Midnight",
+    "id": "lycanrocmidnight",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Lycanroc-Midnight",
+    "num": 745,
+    "sprite": "img/sprites/lycanrocmidnight.webp",
+    "tier": "RU",
+    "types": [
+      "Rock"
+    ],
+    "weightkg": 25
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "guarddog",
+      "stakeout"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 90,
+      "hp": 80,
+      "spa": 60,
+      "spd": 70,
+      "spe": 85
+    },
+    "id": "mabosstiff",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Mabosstiff",
+    "num": 943,
+    "sprite": "img/sprites/mabosstiff.webp",
+    "tier": "UU",
+    "types": [
+      "Dark"
+    ],
+    "weightkg": 61
+  },
+  {
+    "abilities": [
+      "guts",
+      "noguard",
+      "steadfast"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 80,
+      "hp": 90,
+      "spa": 65,
+      "spd": 85,
+      "spe": 55
+    },
+    "id": "machamp",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Machamp",
+    "num": 68,
+    "sprite": "img/sprites/machamp.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting"
+    ],
+    "weightkg": 130
+  },
+  {
+    "abilities": [
+      "contrary",
+      "suctioncups",
+      "infiltrator"
+    ],
+    "base": {
+      "atk": 92,
+      "def": 88,
+      "hp": 86,
+      "spa": 68,
+      "spd": 75,
+      "spe": 73
+    },
+    "id": "malamar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "malamarmega"
+    ],
+    "name": "Malamar",
+    "num": 687,
+    "sprite": "img/sprites/malamar.webp",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Psychic"
+    ],
+    "weightkg": 47
+  },
+  {
+    "abilities": [
+      "contrary"
+    ],
+    "base": {
+      "atk": 102,
+      "def": 88,
+      "hp": 86,
+      "spa": 98,
+      "spd": 120,
+      "spe": 88
+    },
+    "baseSpecies": "Malamar",
+    "forme": "Mega",
+    "id": "malamarmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "malamar",
+    "name": "Malamar-Mega",
+    "num": 687,
+    "requiredItem": "malamarite",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Psychic"
+    ],
+    "weightkg": 69.8
+  },
+  {
+    "abilities": [
+      "oblivious",
+      "snowcloak",
+      "thickfat"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 80,
+      "hp": 110,
+      "spa": 70,
+      "spd": 60,
+      "spe": 80
+    },
+    "id": "mamoswine",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Mamoswine",
+    "num": 473,
+    "sprite": "img/sprites/mamoswine.webp",
+    "tier": "RU",
+    "types": [
+      "Ice",
+      "Ground"
+    ],
+    "weightkg": 291
+  },
+  {
+    "abilities": [
+      "static",
+      "lightningrod",
+      "minus"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 60,
+      "hp": 70,
+      "spa": 105,
+      "spd": 60,
+      "spe": 105
+    },
+    "id": "manectric",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "manectricmega"
+    ],
+    "name": "Manectric",
+    "num": 310,
+    "sprite": "img/sprites/manectric.webp",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 40.2
+  },
+  {
+    "abilities": [
+      "intimidate"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 80,
+      "hp": 70,
+      "spa": 135,
+      "spd": 80,
+      "spe": 135
+    },
+    "baseSpecies": "Manectric",
+    "forme": "Mega",
+    "id": "manectricmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "manectric",
+    "name": "Manectric-Mega",
+    "num": 310,
+    "requiredItem": "manectite",
+    "sprite": "img/sprites/manectricmega.webp",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 44
+  },
+  {
+    "abilities": [
+      "friendguard",
+      "cheekpouch",
+      "technician"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 70,
+      "hp": 74,
+      "spa": 65,
+      "spd": 75,
+      "spe": 111
+    },
+    "id": "maushold",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Maushold",
+    "num": 925,
+    "otherFormes": [
+      "mausholdfour"
+    ],
+    "sprite": "img/sprites/maushold.webp",
+    "tier": "UU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 2.3
+  },
+  {
+    "abilities": [
+      "friendguard",
+      "cheekpouch",
+      "technician"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 70,
+      "hp": 74,
+      "spa": 65,
+      "spd": 75,
+      "spe": 111
+    },
+    "baseSpecies": "Maushold",
+    "forme": "Four",
+    "id": "mausholdfour",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Maushold-Four",
+    "num": 925,
+    "sprite": "img/sprites/mausholdfour.webp",
+    "tier": "UU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 2.8
+  },
+  {
+    "abilities": [
+      "hypercutter",
+      "intimidate",
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 85,
+      "hp": 50,
+      "spa": 55,
+      "spd": 55,
+      "spe": 50
+    },
+    "id": "mawile",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "mawilemega"
+    ],
+    "name": "Mawile",
+    "num": 303,
+    "sprite": "img/sprites/mawile.webp",
+    "tier": "RU",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "weightkg": 11.5
+  },
+  {
+    "abilities": [
+      "hugepower"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 125,
+      "hp": 50,
+      "spa": 55,
+      "spd": 95,
+      "spe": 50
+    },
+    "baseSpecies": "Mawile",
+    "forme": "Mega",
+    "id": "mawilemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "mawile",
+    "name": "Mawile-Mega",
+    "num": 303,
+    "requiredItem": "mawilite",
+    "sprite": "img/sprites/mawilemega.webp",
+    "tier": "UU",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "weightkg": 23.5
+  },
+  {
+    "abilities": [
+      "purepower",
+      "telepathy"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 75,
+      "hp": 60,
+      "spa": 60,
+      "spd": 75,
+      "spe": 80
+    },
+    "id": "medicham",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "medichammega"
+    ],
+    "name": "Medicham",
+    "num": 308,
+    "sprite": "img/sprites/medicham.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting",
+      "Psychic"
+    ],
+    "weightkg": 31.5
+  },
+  {
+    "abilities": [
+      "purepower"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 85,
+      "hp": 60,
+      "spa": 80,
+      "spd": 85,
+      "spe": 100
+    },
+    "baseSpecies": "Medicham",
+    "forme": "Mega",
+    "id": "medichammega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "medicham",
+    "name": "Medicham-Mega",
+    "num": 308,
+    "requiredItem": "medichamite",
+    "sprite": "img/sprites/medichammega.webp",
+    "tier": "UUBL",
+    "types": [
+      "Fighting",
+      "Psychic"
+    ],
+    "weightkg": 31.5
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "leafguard"
+    ],
+    "base": {
+      "atk": 82,
+      "def": 100,
+      "hp": 80,
+      "spa": 83,
+      "spd": 100,
+      "spe": 80
+    },
+    "id": "meganium",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "meganiummega"
+    ],
+    "name": "Meganium",
+    "num": 154,
+    "sprite": "img/sprites/meganium.webp",
+    "tier": "RU",
+    "types": [
+      "Grass"
+    ],
+    "weightkg": 100.5
+  },
+  {
+    "abilities": [
+      "megasol"
+    ],
+    "base": {
+      "atk": 92,
+      "def": 115,
+      "hp": 80,
+      "spa": 143,
+      "spd": 115,
+      "spe": 80
+    },
+    "baseSpecies": "Meganium",
+    "forme": "Mega",
+    "id": "meganiummega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "meganium",
+    "name": "Meganium-Mega",
+    "num": 154,
+    "requiredItem": "meganiumite",
+    "sprite": "img/sprites/meganiummega.webp",
+    "tier": "UUBL",
+    "types": [
+      "Grass",
+      "Fairy"
+    ],
+    "weightkg": 201
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "protean"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 70,
+      "hp": 76,
+      "spa": 81,
+      "spd": 70,
+      "spe": 123
+    },
+    "id": "meowscarada",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Meowscarada",
+    "num": 908,
+    "sprite": "img/sprites/meowscarada.webp",
+    "tier": "OU",
+    "types": [
+      "Grass",
+      "Dark"
+    ],
+    "weightkg": 31.2
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "infiltrator",
+      "prankster"
+    ],
+    "base": {
+      "atk": 48,
+      "def": 76,
+      "hp": 74,
+      "spa": 83,
+      "spd": 81,
+      "spe": 104
+    },
+    "id": "meowstic",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "meowsticmmega"
+    ],
+    "name": "Meowstic",
+    "num": 678,
+    "otherFormes": [
+      "meowsticf"
+    ],
+    "sprite": "img/sprites/meowstic.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 8.5
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "infiltrator",
+      "competitive"
+    ],
+    "base": {
+      "atk": 48,
+      "def": 76,
+      "hp": 74,
+      "spa": 83,
+      "spd": 81,
+      "spe": 104
+    },
+    "baseSpecies": "Meowstic",
+    "forme": "F",
+    "id": "meowsticf",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "meowsticfmega"
+    ],
+    "name": "Meowstic-F",
+    "num": 678,
+    "sprite": "img/sprites/meowsticf.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 8.5
+  },
+  {
+    "abilities": [
+      "trace"
+    ],
+    "base": {
+      "atk": 48,
+      "def": 76,
+      "hp": 74,
+      "spa": 143,
+      "spd": 101,
+      "spe": 124
+    },
+    "baseSpecies": "Meowstic",
+    "forme": "F-Mega",
+    "id": "meowsticfmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "meowsticf",
+    "name": "Meowstic-F-Mega",
+    "num": 678,
+    "requiredItem": "meowsticite",
+    "sprite": "img/sprites/meowsticfmega.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 10.1
+  },
+  {
+    "abilities": [
+      "trace"
+    ],
+    "base": {
+      "atk": 48,
+      "def": 76,
+      "hp": 74,
+      "spa": 143,
+      "spd": 101,
+      "spe": 124
+    },
+    "baseSpecies": "Meowstic",
+    "forme": "M-Mega",
+    "id": "meowsticmmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "meowstic",
+    "name": "Meowstic-M-Mega",
+    "num": 678,
+    "requiredItem": "meowsticite",
+    "sprite": "img/sprites/meowsticmmega.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 10.1
+  },
+  {
+    "abilities": [
+      "clearbody",
+      "lightmetal"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 130,
+      "hp": 80,
+      "spa": 95,
+      "spd": 90,
+      "spe": 70
+    },
+    "id": "metagross",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "metagrossmega"
+    ],
+    "name": "Metagross",
+    "num": 376,
+    "sprite": "img/sprites/metagross.webp",
+    "tier": "RU",
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "weightkg": 550
+  },
+  {
+    "abilities": [
+      "toughclaws"
+    ],
+    "base": {
+      "atk": 145,
+      "def": 150,
+      "hp": 80,
+      "spa": 105,
+      "spd": 110,
+      "spe": 110
+    },
+    "baseSpecies": "Metagross",
+    "forme": "Mega",
+    "id": "metagrossmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "metagross",
+    "name": "Metagross-Mega",
+    "num": 376,
+    "requiredItem": "metagrossite",
+    "sprite": "img/sprites/metagrossmega.webp",
+    "tier": "UUBL",
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "weightkg": 942.9
+  },
+  {
+    "abilities": [
+      "marvelscale",
+      "competitive",
+      "cutecharm"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 79,
+      "hp": 95,
+      "spa": 100,
+      "spd": 125,
+      "spe": 81
+    },
+    "id": "milotic",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Milotic",
+    "num": 350,
+    "sprite": "img/sprites/milotic.webp",
+    "tier": "RU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 162
+  },
+  {
+    "abilities": [
+      "disguise"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 80,
+      "hp": 55,
+      "spa": 50,
+      "spd": 105,
+      "spe": 96
+    },
+    "id": "mimikyu",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Mimikyu",
+    "num": 778,
+    "sprite": "img/sprites/mimikyu.webp",
+    "tier": "UU",
+    "types": [
+      "Ghost",
+      "Fairy"
+    ],
+    "weightkg": 0.7
+  },
+  {
+    "abilities": [
+      "hungerswitch"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 58,
+      "hp": 58,
+      "spa": 70,
+      "spd": 58,
+      "spe": 97
+    },
+    "id": "morpeko",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Morpeko",
+    "num": 877,
+    "sprite": "img/sprites/morpeko.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Dark"
+    ],
+    "weightkg": 3
+  },
+  {
+    "abilities": [
+      "soundproof",
+      "filter",
+      "technician"
+    ],
+    "base": {
+      "atk": 45,
+      "def": 65,
+      "hp": 40,
+      "spa": 100,
+      "spd": 120,
+      "spe": 90
+    },
+    "id": "mrmime",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Mr. Mime",
+    "num": 122,
+    "sprite": "img/sprites/mrmime.webp",
+    "tier": "UU",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "weightkg": 54.5
+  },
+  {
+    "abilities": [
+      "tangledfeet",
+      "screencleaner",
+      "icebody"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 75,
+      "hp": 80,
+      "spa": 110,
+      "spd": 100,
+      "spe": 70
+    },
+    "id": "mrrime",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Mr. Rime",
+    "num": 866,
+    "sprite": "img/sprites/mrrime.webp",
+    "tier": "RU",
+    "types": [
+      "Ice",
+      "Psychic"
+    ],
+    "weightkg": 58.2
+  },
+  {
+    "abilities": [
+      "owntempo",
+      "stamina",
+      "innerfocus"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 100,
+      "hp": 100,
+      "spa": 55,
+      "spd": 85,
+      "spe": 35
+    },
+    "id": "mudsdale",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Mudsdale",
+    "num": 750,
+    "sprite": "img/sprites/mudsdale.webp",
+    "tier": "RU",
+    "types": [
+      "Ground"
+    ],
+    "weightkg": 920
+  },
+  {
+    "abilities": [
+      "forewarn",
+      "synchronize",
+      "telepathy"
+    ],
+    "base": {
+      "atk": 55,
+      "def": 85,
+      "hp": 116,
+      "spa": 107,
+      "spd": 95,
+      "spe": 29
+    },
+    "id": "musharna",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Musharna",
+    "num": 518,
+    "sprite": "img/sprites/musharna.webp",
+    "tier": "RU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 60.5
+  },
+  {
+    "abilities": [
+      "flashfire",
+      "drought"
+    ],
+    "base": {
+      "atk": 76,
+      "def": 75,
+      "hp": 73,
+      "spa": 81,
+      "spd": 100,
+      "spe": 100
+    },
+    "id": "ninetales",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Ninetales",
+    "num": 38,
+    "otherFormes": [
+      "ninetalesalola"
+    ],
+    "sprite": "img/sprites/ninetales.webp",
+    "tier": "RU",
+    "types": [
+      "Fire"
+    ],
+    "weightkg": 19.9
+  },
+  {
+    "abilities": [
+      "snowcloak",
+      "snowwarning"
+    ],
+    "base": {
+      "atk": 67,
+      "def": 75,
+      "hp": 73,
+      "spa": 81,
+      "spd": 100,
+      "spe": 109
+    },
+    "baseSpecies": "Ninetales",
+    "forme": "Alola",
+    "id": "ninetalesalola",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Ninetales-Alola",
+    "num": 38,
+    "sprite": "img/sprites/ninetalesalola.webp",
+    "tier": "RU",
+    "types": [
+      "Ice",
+      "Fairy"
+    ],
+    "weightkg": 19.9
+  },
+  {
+    "abilities": [
+      "frisk",
+      "infiltrator",
+      "telepathy"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 80,
+      "hp": 85,
+      "spa": 97,
+      "spd": 80,
+      "spe": 123
+    },
+    "id": "noivern",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Noivern",
+    "num": 715,
+    "sprite": "img/sprites/noivern.webp",
+    "tier": "RU",
+    "types": [
+      "Flying",
+      "Dragon"
+    ],
+    "weightkg": 85
+  },
+  {
+    "abilities": [
+      "innerfocus",
+      "telepathy",
+      "symbiosis"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 80,
+      "hp": 90,
+      "spa": 90,
+      "spd": 110,
+      "spe": 60
+    },
+    "id": "oranguru",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Oranguru",
+    "num": 765,
+    "sprite": "img/sprites/oranguru.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Psychic"
+    ],
+    "weightkg": 76
+  },
+  {
+    "abilities": [
+      "eartheater",
+      "sandveil"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 145,
+      "hp": 70,
+      "spa": 60,
+      "spd": 55,
+      "spe": 65
+    },
+    "id": "orthworm",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Orthworm",
+    "num": 968,
+    "sprite": "img/sprites/orthworm.webp",
+    "tier": "RU",
+    "types": [
+      "Steel"
+    ],
+    "weightkg": 310
+  },
+  {
+    "abilities": [
+      "poisonpoint",
+      "swiftswim",
+      "intimidate"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 95,
+      "hp": 85,
+      "spa": 65,
+      "spd": 65,
+      "spe": 85
+    },
+    "id": "overqwil",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Overqwil",
+    "num": 904,
+    "sprite": "img/sprites/overqwil.webp",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Poison"
+    ],
+    "weightkg": 60.5
+  },
+  {
+    "abilities": [
+      "zerotohero"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 72,
+      "hp": 100,
+      "spa": 53,
+      "spd": 62,
+      "spe": 100
+    },
+    "id": "palafin",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Palafin",
+    "num": 964,
+    "sprite": "img/sprites/palafin.webp",
+    "tier": "Uber",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 60.2
+  },
+  {
+    "abilities": [
+      "ironfist",
+      "moldbreaker",
+      "scrappy"
+    ],
+    "base": {
+      "atk": 124,
+      "def": 78,
+      "hp": 95,
+      "spa": 69,
+      "spd": 71,
+      "spe": 58
+    },
+    "id": "pangoro",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Pangoro",
+    "num": 675,
+    "sprite": "img/sprites/pangoro.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting",
+      "Dark"
+    ],
+    "weightkg": 136
+  },
+  {
+    "abilities": [
+      "receiver",
+      "defiant"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 90,
+      "hp": 100,
+      "spa": 40,
+      "spd": 60,
+      "spe": 80
+    },
+    "id": "passimian",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Passimian",
+    "num": 766,
+    "sprite": "img/sprites/passimian.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting"
+    ],
+    "weightkg": 82.8
+  },
+  {
+    "abilities": [
+      "voltabsorb",
+      "naturalcure",
+      "ironfist"
+    ],
+    "base": {
+      "atk": 115,
+      "def": 70,
+      "hp": 70,
+      "spa": 70,
+      "spd": 60,
+      "spe": 105
+    },
+    "id": "pawmot",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Pawmot",
+    "num": 923,
+    "sprite": "img/sprites/pawmot.webp",
+    "tier": "OU",
+    "types": [
+      "Electric",
+      "Fighting"
+    ],
+    "weightkg": 41
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "drizzle",
+      "raindish"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 100,
+      "hp": 60,
+      "spa": 95,
+      "spd": 70,
+      "spe": 65
+    },
+    "id": "pelipper",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Pelipper",
+    "num": 279,
+    "sprite": "img/sprites/pelipper.webp",
+    "tier": "OU",
+    "types": [
+      "Water",
+      "Flying"
+    ],
+    "weightkg": 28
+  },
+  {
+    "abilities": [
+      "battlearmor",
+      "toughclaws",
+      "steelyspirit"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 100,
+      "hp": 70,
+      "spa": 50,
+      "spd": 60,
+      "spe": 50
+    },
+    "id": "perrserker",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Perrserker",
+    "num": 863,
+    "sprite": "img/sprites/perrserker.webp",
+    "tier": "UU",
+    "types": [
+      "Steel"
+    ],
+    "weightkg": 28
+  },
+  {
+    "abilities": [
+      "limber",
+      "technician",
+      "unnerve"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 60,
+      "hp": 65,
+      "spa": 65,
+      "spd": 65,
+      "spe": 115
+    },
+    "id": "persian",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Persian",
+    "num": 53,
+    "otherFormes": [
+      "persianalola"
+    ],
+    "sprite": "img/sprites/persian.webp",
+    "tier": "UU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 32
+  },
+  {
+    "abilities": [
+      "furcoat",
+      "technician",
+      "rattled"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 60,
+      "hp": 65,
+      "spa": 75,
+      "spd": 65,
+      "spe": 115
+    },
+    "baseSpecies": "Persian",
+    "forme": "Alola",
+    "id": "persianalola",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Persian-Alola",
+    "num": 53,
+    "sprite": "img/sprites/persianalola.webp",
+    "tier": "UU",
+    "types": [
+      "Dark"
+    ],
+    "weightkg": 33
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "tangledfeet",
+      "bigpecks"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 75,
+      "hp": 83,
+      "spa": 70,
+      "spd": 70,
+      "spe": 101
+    },
+    "id": "pidgeot",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "pidgeotmega"
+    ],
+    "name": "Pidgeot",
+    "num": 18,
+    "sprite": "img/sprites/pidgeot.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 39.5
+  },
+  {
+    "abilities": [
+      "noguard"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 80,
+      "hp": 83,
+      "spa": 135,
+      "spd": 80,
+      "spe": 121
+    },
+    "baseSpecies": "Pidgeot",
+    "forme": "Mega",
+    "id": "pidgeotmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "pidgeot",
+    "name": "Pidgeot-Mega",
+    "num": 18,
+    "requiredItem": "pidgeotite",
+    "sprite": "img/sprites/pidgeotmega.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 50.5
+  },
+  {
+    "abilities": [
+      "static",
+      "lightningrod"
+    ],
+    "base": {
+      "atk": 55,
+      "def": 40,
+      "hp": 35,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    },
+    "id": "pikachu",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Pikachu",
+    "num": 25,
+    "sprite": "img/sprites/pikachu.webp",
+    "tier": "NFE",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 6
+  },
+  {
+    "abilities": [
+      "lightningrod",
+      "electricsurge"
+    ],
+    "base": {
+      "atk": 101,
+      "def": 95,
+      "hp": 48,
+      "spa": 91,
+      "spd": 85,
+      "spe": 15
+    },
+    "id": "pincurchin",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Pincurchin",
+    "num": 871,
+    "sprite": "img/sprites/pincurchin.webp",
+    "tier": "UU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 1
+  },
+  {
+    "abilities": [
+      "hypercutter",
+      "moldbreaker",
+      "moxie"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 100,
+      "hp": 65,
+      "spa": 55,
+      "spd": 70,
+      "spe": 85
+    },
+    "id": "pinsir",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "pinsirmega"
+    ],
+    "name": "Pinsir",
+    "num": 127,
+    "sprite": "img/sprites/pinsir.webp",
+    "tier": "RU",
+    "types": [
+      "Bug"
+    ],
+    "weightkg": 55
+  },
+  {
+    "abilities": [
+      "aerilate"
+    ],
+    "base": {
+      "atk": 155,
+      "def": 120,
+      "hp": 65,
+      "spa": 65,
+      "spd": 90,
+      "spe": 105
+    },
+    "baseSpecies": "Pinsir",
+    "forme": "Mega",
+    "id": "pinsirmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "pinsir",
+    "name": "Pinsir-Mega",
+    "num": 127,
+    "requiredItem": "pinsirite",
+    "sprite": "img/sprites/pinsirmega.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "weightkg": 59
+  },
+  {
+    "abilities": [
+      "waterabsorb",
+      "damp",
+      "drizzle"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 75,
+      "hp": 90,
+      "spa": 90,
+      "spd": 100,
+      "spe": 70
+    },
+    "id": "politoed",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Politoed",
+    "num": 186,
+    "sprite": "img/sprites/politoed.webp",
+    "tier": "RU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 33.9
+  },
+  {
+    "abilities": [
+      "weakarmor",
+      "cursedbody"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 65,
+      "hp": 60,
+      "spa": 134,
+      "spd": 114,
+      "spe": 70
+    },
+    "id": "polteageist",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Polteageist",
+    "num": 855,
+    "otherFormes": [
+      "polteageistantique"
+    ],
+    "sprite": "img/sprites/polteageist.webp",
+    "tier": "UUBL",
+    "types": [
+      "Ghost"
+    ],
+    "weightkg": 0.4
+  },
+  {
+    "abilities": [
+      "weakarmor",
+      "cursedbody"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 65,
+      "hp": 60,
+      "spa": 134,
+      "spd": 114,
+      "spe": 70
+    },
+    "baseSpecies": "Polteageist",
+    "forme": "Antique",
+    "id": "polteageistantique",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Polteageist-Antique",
+    "num": 855,
+    "sprite": "img/sprites/polteageistantique.webp",
+    "tier": "UUBL",
+    "types": [
+      "Ghost"
+    ],
+    "weightkg": 0.4
+  },
+  {
+    "abilities": [
+      "torrent",
+      "liquidvoice"
+    ],
+    "base": {
+      "atk": 74,
+      "def": 74,
+      "hp": 80,
+      "spa": 126,
+      "spd": 116,
+      "spe": 60
+    },
+    "id": "primarina",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Primarina",
+    "num": 730,
+    "sprite": "img/sprites/primarina.webp",
+    "tier": "OU",
+    "types": [
+      "Water",
+      "Fairy"
+    ],
+    "weightkg": 44
+  },
+  {
+    "abilities": [
+      "rivalry",
+      "unnerve",
+      "moxie"
+    ],
+    "base": {
+      "atk": 68,
+      "def": 72,
+      "hp": 86,
+      "spa": 109,
+      "spd": 66,
+      "spe": 106
+    },
+    "id": "pyroar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "pyroarmega"
+    ],
+    "name": "Pyroar",
+    "num": 668,
+    "sprite": "img/sprites/pyroar.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Normal"
+    ],
+    "weightkg": 81.5
+  },
+  {
+    "abilities": [
+      "firemane"
+    ],
+    "base": {
+      "atk": 88,
+      "def": 92,
+      "hp": 86,
+      "spa": 129,
+      "spd": 86,
+      "spe": 126
+    },
+    "baseSpecies": "Pyroar",
+    "forme": "Mega",
+    "id": "pyroarmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "pyroar",
+    "name": "Pyroar-Mega",
+    "num": 668,
+    "requiredItem": "pyroarite",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Normal"
+    ],
+    "weightkg": 93.3
+  },
+  {
+    "abilities": [
+      "torrent",
+      "moxie"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 80,
+      "hp": 85,
+      "spa": 85,
+      "spd": 75,
+      "spe": 85
+    },
+    "id": "quaquaval",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Quaquaval",
+    "num": 914,
+    "sprite": "img/sprites/quaquaval.webp",
+    "tier": "OU",
+    "types": [
+      "Water",
+      "Fighting"
+    ],
+    "weightkg": 61.9
+  },
+  {
+    "abilities": [
+      "poisonpoint",
+      "swiftswim",
+      "intimidate"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 85,
+      "hp": 65,
+      "spa": 55,
+      "spd": 55,
+      "spe": 85
+    },
+    "id": "qwilfish",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Qwilfish",
+    "num": 211,
+    "sprite": "img/sprites/qwilfish.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Poison"
+    ],
+    "weightkg": 3.9
+  },
+  {
+    "abilities": [
+      "static",
+      "lightningrod"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 55,
+      "hp": 60,
+      "spa": 90,
+      "spd": 80,
+      "spe": 110
+    },
+    "id": "raichu",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "raichumegax",
+      "raichumegay"
+    ],
+    "name": "Raichu",
+    "num": 26,
+    "otherFormes": [
+      "raichualola"
+    ],
+    "sprite": "img/sprites/raichu.webp",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 30
+  },
+  {
+    "abilities": [
+      "surgesurfer"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 50,
+      "hp": 60,
+      "spa": 95,
+      "spd": 85,
+      "spe": 110
+    },
+    "baseSpecies": "Raichu",
+    "forme": "Alola",
+    "id": "raichualola",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Raichu-Alola",
+    "num": 26,
+    "sprite": "img/sprites/raichualola.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Psychic"
+    ],
+    "weightkg": 21
+  },
+  {
+    "abilities": [
+      "electricsurge"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 95,
+      "hp": 60,
+      "spa": 90,
+      "spd": 95,
+      "spe": 110
+    },
+    "baseSpecies": "Raichu",
+    "forme": "Mega-X",
+    "id": "raichumegax",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "raichu",
+    "name": "Raichu-Mega-X",
+    "num": 26,
+    "requiredItem": "raichunitex",
+    "tier": "RU",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 38
+  },
+  {
+    "abilities": [
+      "noguard"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 55,
+      "hp": 60,
+      "spa": 160,
+      "spd": 80,
+      "spe": 130
+    },
+    "baseSpecies": "Raichu",
+    "forme": "Mega-Y",
+    "id": "raichumegay",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "raichu",
+    "name": "Raichu-Mega-Y",
+    "num": 26,
+    "requiredItem": "raichunitey",
+    "tier": "Uber",
+    "types": [
+      "Electric"
+    ],
+    "weightkg": 26
+  },
+  {
+    "abilities": [
+      "moldbreaker",
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 165,
+      "def": 60,
+      "hp": 97,
+      "spa": 65,
+      "spd": 50,
+      "spe": 58
+    },
+    "id": "rampardos",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rampardos",
+    "num": 409,
+    "sprite": "img/sprites/rampardos.webp",
+    "tier": "RU",
+    "types": [
+      "Rock"
+    ],
+    "weightkg": 102.5
+  },
+  {
+    "abilities": [
+      "overcoat",
+      "magicguard",
+      "regenerator"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 75,
+      "hp": 110,
+      "spa": 125,
+      "spd": 85,
+      "spe": 30
+    },
+    "id": "reuniclus",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Reuniclus",
+    "num": 579,
+    "sprite": "img/sprites/reuniclus.webp",
+    "tier": "UU",
+    "types": [
+      "Psychic"
+    ],
+    "weightkg": 20.1
+  },
+  {
+    "abilities": [
+      "lightningrod",
+      "solidrock",
+      "reckless"
+    ],
+    "base": {
+      "atk": 140,
+      "def": 130,
+      "hp": 115,
+      "spa": 55,
+      "spd": 55,
+      "spe": 40
+    },
+    "id": "rhyperior",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rhyperior",
+    "num": 464,
+    "sprite": "img/sprites/rhyperior.webp",
+    "tier": "RU",
+    "types": [
+      "Ground",
+      "Rock"
+    ],
+    "weightkg": 282.8
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "grassysurge"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 90,
+      "hp": 100,
+      "spa": 60,
+      "spd": 70,
+      "spe": 85
+    },
+    "id": "rillaboom",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Rillaboom",
+    "num": 812,
+    "sprite": "img/sprites/rillaboom.webp",
+    "tier": "OU",
+    "types": [
+      "Grass"
+    ],
+    "weightkg": 90
+  },
+  {
+    "abilities": [
+      "naturalcure",
+      "poisonpoint",
+      "technician"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 65,
+      "hp": 60,
+      "spa": 125,
+      "spd": 105,
+      "spe": 90
+    },
+    "id": "roserade",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Roserade",
+    "num": 407,
+    "sprite": "img/sprites/roserade.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "weightkg": 14.5
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 50,
+      "def": 77,
+      "hp": 50,
+      "spa": 95,
+      "spd": 77,
+      "spe": 91
+    },
+    "id": "rotom",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rotom",
+    "num": 479,
+    "otherFormes": [
+      "rotomfan",
+      "rotomfrost",
+      "rotomheat",
+      "rotommow",
+      "rotomwash"
+    ],
+    "sprite": "img/sprites/rotom.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Ghost"
+    ],
+    "weightkg": 0.3
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 107,
+      "hp": 50,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "baseSpecies": "Rotom",
+    "forme": "Fan",
+    "id": "rotomfan",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rotom-Fan",
+    "num": 479,
+    "sprite": "img/sprites/rotomfan.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "weightkg": 0.3
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 107,
+      "hp": 50,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "baseSpecies": "Rotom",
+    "forme": "Frost",
+    "id": "rotomfrost",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rotom-Frost",
+    "num": 479,
+    "sprite": "img/sprites/rotomfrost.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Ice"
+    ],
+    "weightkg": 0.3
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 107,
+      "hp": 50,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "baseSpecies": "Rotom",
+    "forme": "Heat",
+    "id": "rotomheat",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rotom-Heat",
+    "num": 479,
+    "sprite": "img/sprites/rotomheat.webp",
+    "tier": "RU",
+    "types": [
+      "Electric",
+      "Fire"
+    ],
+    "weightkg": 0.3
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 107,
+      "hp": 50,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "baseSpecies": "Rotom",
+    "forme": "Mow",
+    "id": "rotommow",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rotom-Mow",
+    "num": 479,
+    "sprite": "img/sprites/rotommow.webp",
+    "tier": "UU",
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "weightkg": 0.3
+  },
+  {
+    "abilities": [
+      "levitate"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 107,
+      "hp": 50,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "baseSpecies": "Rotom",
+    "forme": "Wash",
+    "id": "rotomwash",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rotom-Wash",
+    "num": 479,
+    "sprite": "img/sprites/rotomwash.webp",
+    "tier": "OU",
+    "types": [
+      "Electric",
+      "Water"
+    ],
+    "weightkg": 0.3
+  },
+  {
+    "abilities": [
+      "wanderingspirit"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 145,
+      "hp": 58,
+      "spa": 50,
+      "spd": 105,
+      "spe": 30
+    },
+    "id": "runerigus",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Runerigus",
+    "num": 867,
+    "sprite": "img/sprites/runerigus.webp",
+    "tier": "RU",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "weightkg": 66.6
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "stall",
+      "prankster"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 75,
+      "hp": 50,
+      "spa": 65,
+      "spd": 65,
+      "spe": 50
+    },
+    "id": "sableye",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "sableyemega"
+    ],
+    "name": "Sableye",
+    "num": 302,
+    "sprite": "img/sprites/sableye.webp",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "weightkg": 11
+  },
+  {
+    "abilities": [
+      "magicbounce"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 125,
+      "hp": 50,
+      "spa": 85,
+      "spd": 115,
+      "spe": 20
+    },
+    "baseSpecies": "Sableye",
+    "forme": "Mega",
+    "id": "sableyemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "sableye",
+    "name": "Sableye-Mega",
+    "num": 302,
+    "requiredItem": "sablenite",
+    "sprite": "img/sprites/sableyemega.webp",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "weightkg": 161
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "moxie"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 80,
+      "hp": 95,
+      "spa": 110,
+      "spd": 80,
+      "spe": 100
+    },
+    "id": "salamence",
+    "legal": [
+      "M-C"
+    ],
+    "megas": [
+      "salamencemega"
+    ],
+    "name": "Salamence",
+    "num": 373,
+    "sprite": "img/sprites/salamence.webp",
+    "tier": "UU",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "weightkg": 102.6
+  },
+  {
+    "abilities": [
+      "aerilate"
+    ],
+    "base": {
+      "atk": 145,
+      "def": 130,
+      "hp": 95,
+      "spa": 120,
+      "spd": 90,
+      "spe": 120
+    },
+    "baseSpecies": "Salamence",
+    "forme": "Mega",
+    "id": "salamencemega",
+    "legal": [
+      "M-C"
+    ],
+    "megaOf": "salamence",
+    "name": "Salamence-Mega",
+    "num": 373,
+    "requiredItem": "salamencite",
+    "sprite": "img/sprites/salamencemega.webp",
+    "tier": "Uber",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "weightkg": 112.6
+  },
+  {
+    "abilities": [
+      "corrosion",
+      "oblivious"
+    ],
+    "base": {
+      "atk": 64,
+      "def": 60,
+      "hp": 68,
+      "spa": 111,
+      "spd": 60,
+      "spe": 117
+    },
+    "id": "salazzle",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Salazzle",
+    "num": 758,
+    "sprite": "img/sprites/salazzle.webp",
+    "tier": "RU",
+    "types": [
+      "Poison",
+      "Fire"
+    ],
+    "weightkg": 22.2
+  },
+  {
+    "abilities": [
+      "torrent",
+      "shellarmor"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 85,
+      "hp": 95,
+      "spa": 108,
+      "spd": 70,
+      "spe": 70
+    },
+    "id": "samurott",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Samurott",
+    "num": 503,
+    "otherFormes": [
+      "samurotthisui"
+    ],
+    "sprite": "img/sprites/samurott.webp",
+    "tier": "RU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 94.6
+  },
+  {
+    "abilities": [
+      "torrent",
+      "sharpness"
+    ],
+    "base": {
+      "atk": 108,
+      "def": 80,
+      "hp": 90,
+      "spa": 100,
+      "spd": 65,
+      "spe": 85
+    },
+    "baseSpecies": "Samurott",
+    "forme": "Hisui",
+    "id": "samurotthisui",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Samurott-Hisui",
+    "num": 503,
+    "sprite": "img/sprites/samurotthisui.webp",
+    "tier": "OU",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "weightkg": 58.2
+  },
+  {
+    "abilities": [
+      "sandspit",
+      "shedskin",
+      "sandveil"
+    ],
+    "base": {
+      "atk": 107,
+      "def": 125,
+      "hp": 72,
+      "spa": 65,
+      "spd": 70,
+      "spe": 71
+    },
+    "id": "sandaconda",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Sandaconda",
+    "num": 844,
+    "sprite": "img/sprites/sandaconda.webp",
+    "tier": "RU",
+    "types": [
+      "Ground"
+    ],
+    "weightkg": 65.5
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "unburden"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 65,
+      "hp": 70,
+      "spa": 105,
+      "spd": 85,
+      "spe": 120
+    },
+    "id": "sceptile",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "sceptilemega"
+    ],
+    "name": "Sceptile",
+    "num": 254,
+    "sprite": "img/sprites/sceptile.webp",
+    "tier": "RU",
+    "types": [
+      "Grass"
+    ],
+    "weightkg": 52.2
+  },
+  {
+    "abilities": [
+      "lightningrod"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 75,
+      "hp": 70,
+      "spa": 145,
+      "spd": 85,
+      "spe": 145
+    },
+    "baseSpecies": "Sceptile",
+    "forme": "Mega",
+    "id": "sceptilemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "sceptile",
+    "name": "Sceptile-Mega",
+    "num": 254,
+    "requiredItem": "sceptilite",
+    "sprite": "img/sprites/sceptilemega.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "weightkg": 55.2
+  },
+  {
+    "abilities": [
+      "swarm",
+      "technician",
+      "lightmetal"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 100,
+      "hp": 70,
+      "spa": 55,
+      "spd": 80,
+      "spe": 65
+    },
+    "id": "scizor",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "scizormega"
+    ],
+    "name": "Scizor",
+    "num": 212,
+    "sprite": "img/sprites/scizor.webp",
+    "tier": "UU",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "weightkg": 118
+  },
+  {
+    "abilities": [
+      "technician"
+    ],
+    "base": {
+      "atk": 150,
+      "def": 140,
+      "hp": 70,
+      "spa": 65,
+      "spd": 100,
+      "spe": 75
+    },
+    "baseSpecies": "Scizor",
+    "forme": "Mega",
+    "id": "scizormega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "scizor",
+    "name": "Scizor-Mega",
+    "num": 212,
+    "requiredItem": "scizorite",
+    "sprite": "img/sprites/scizormega.webp",
+    "tier": "UU",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "weightkg": 125
+  },
+  {
+    "abilities": [
+      "poisonpoint",
+      "swarm",
+      "speedboost"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 89,
+      "hp": 60,
+      "spa": 55,
+      "spd": 69,
+      "spe": 112
+    },
+    "id": "scolipede",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "scolipedemega"
+    ],
+    "name": "Scolipede",
+    "num": 545,
+    "sprite": "img/sprites/scolipede.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "weightkg": 200.5
+  },
+  {
+    "abilities": [
+      "shellarmor"
+    ],
+    "base": {
+      "atk": 140,
+      "def": 149,
+      "hp": 60,
+      "spa": 75,
+      "spd": 99,
+      "spe": 62
+    },
+    "baseSpecies": "Scolipede",
+    "forme": "Mega",
+    "id": "scolipedemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "scolipede",
+    "name": "Scolipede-Mega",
+    "num": 545,
+    "requiredItem": "scolipite",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "weightkg": 230.5
+  },
+  {
+    "abilities": [
+      "chlorophyll",
+      "insomnia",
+      "moody"
+    ],
+    "base": {
+      "atk": 108,
+      "def": 65,
+      "hp": 65,
+      "spa": 108,
+      "spd": 65,
+      "spe": 75
+    },
+    "id": "scovillain",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "scovillainmega"
+    ],
+    "name": "Scovillain",
+    "num": 952,
+    "sprite": "img/sprites/scovillain.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "weightkg": 15
+  },
+  {
+    "abilities": [
+      "spicyspray"
+    ],
+    "base": {
+      "atk": 138,
+      "def": 85,
+      "hp": 65,
+      "spa": 138,
+      "spd": 85,
+      "spe": 75
+    },
+    "baseSpecies": "Scovillain",
+    "forme": "Mega",
+    "id": "scovillainmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "scovillain",
+    "name": "Scovillain-Mega",
+    "num": 952,
+    "requiredItem": "scovillainite",
+    "sprite": "img/sprites/scovillainmega.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "weightkg": 22
+  },
+  {
+    "abilities": [
+      "shedskin",
+      "moxie",
+      "intimidate"
+    ],
+    "base": {
+      "atk": 90,
+      "def": 115,
+      "hp": 65,
+      "spa": 45,
+      "spd": 115,
+      "spe": 58
+    },
+    "id": "scrafty",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "scraftymega"
+    ],
+    "name": "Scrafty",
+    "num": 560,
+    "sprite": "img/sprites/scrafty.webp",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Fighting"
+    ],
+    "weightkg": 30
+  },
+  {
+    "abilities": [
+      "intimidate"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 135,
+      "hp": 65,
+      "spa": 55,
+      "spd": 135,
+      "spe": 68
+    },
+    "baseSpecies": "Scrafty",
+    "forme": "Mega",
+    "id": "scraftymega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "scrafty",
+    "name": "Scrafty-Mega",
+    "num": 560,
+    "requiredItem": "scraftinite",
+    "tier": "RU",
+    "types": [
+      "Dark",
+      "Fighting"
+    ],
+    "weightkg": 31
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "contrary"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 95,
+      "hp": 75,
+      "spa": 75,
+      "spd": 95,
+      "spe": 113
+    },
+    "id": "serperior",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Serperior",
+    "num": 497,
+    "sprite": "img/sprites/serperior.webp",
+    "tier": "RU",
+    "types": [
+      "Grass"
+    ],
+    "weightkg": 63
+  },
+  {
+    "abilities": [
+      "roughskin",
+      "speedboost"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 40,
+      "hp": 70,
+      "spa": 95,
+      "spd": 40,
+      "spe": 95
+    },
+    "id": "sharpedo",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "sharpedomega"
+    ],
+    "name": "Sharpedo",
+    "num": 319,
+    "sprite": "img/sprites/sharpedo.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "weightkg": 88.8
+  },
+  {
+    "abilities": [
+      "strongjaw"
+    ],
+    "base": {
+      "atk": 140,
+      "def": 70,
+      "hp": 70,
+      "spa": 110,
+      "spd": 65,
+      "spe": 105
+    },
+    "baseSpecies": "Sharpedo",
+    "forme": "Mega",
+    "id": "sharpedomega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "sharpedo",
+    "name": "Sharpedo-Mega",
+    "num": 319,
+    "requiredItem": "sharpedonite",
+    "sprite": "img/sprites/sharpedomega.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "weightkg": 130.3
+  },
+  {
+    "abilities": [
+      "gluttony",
+      "torrent"
+    ],
+    "base": {
+      "atk": 98,
+      "def": 63,
+      "hp": 75,
+      "spa": 98,
+      "spd": 63,
+      "spe": 101
+    },
+    "id": "simipour",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Simipour",
+    "num": 516,
+    "sprite": "img/sprites/simipour.webp",
+    "tier": "RU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 29
+  },
+  {
+    "abilities": [
+      "gluttony",
+      "overgrow"
+    ],
+    "base": {
+      "atk": 98,
+      "def": 63,
+      "hp": 75,
+      "spa": 98,
+      "spd": 63,
+      "spe": 101
+    },
+    "id": "simisage",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Simisage",
+    "num": 512,
+    "sprite": "img/sprites/simisage.webp",
+    "tier": "RU",
+    "types": [
+      "Grass"
+    ],
+    "weightkg": 30.5
+  },
+  {
+    "abilities": [
+      "gluttony",
+      "blaze"
+    ],
+    "base": {
+      "atk": 98,
+      "def": 63,
+      "hp": 75,
+      "spa": 98,
+      "spd": 63,
+      "spe": 101
+    },
+    "id": "simisear",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Simisear",
+    "num": 514,
+    "sprite": "img/sprites/simisear.webp",
+    "tier": "RU",
+    "types": [
+      "Fire"
+    ],
+    "weightkg": 28
+  },
+  {
+    "abilities": [
+      "hospitality",
+      "heatproof"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 106,
+      "hp": 71,
+      "spa": 121,
+      "spd": 80,
+      "spe": 70
+    },
+    "id": "sinistcha",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Sinistcha",
+    "num": 1013,
+    "otherFormes": [
+      "sinistchamasterpiece"
+    ],
+    "sprite": "img/sprites/sinistcha.webp",
+    "tier": "UU",
+    "types": [
+      "Grass",
+      "Ghost"
+    ],
+    "weightkg": 2.2
+  },
+  {
+    "abilities": [
+      "hospitality",
+      "heatproof"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 106,
+      "hp": 71,
+      "spa": 121,
+      "spd": 80,
+      "spe": 70
+    },
+    "baseSpecies": "Sinistcha",
+    "forme": "Masterpiece",
+    "id": "sinistchamasterpiece",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Sinistcha-Masterpiece",
+    "num": 1013,
+    "sprite": "img/sprites/sinistchamasterpiece.webp",
+    "tier": "UU",
+    "types": [
+      "Grass",
+      "Ghost"
+    ],
+    "weightkg": 2.2
+  },
+  {
+    "abilities": [
+      "steadfast",
+      "scrappy"
+    ],
+    "base": {
+      "atk": 135,
+      "def": 95,
+      "hp": 62,
+      "spa": 68,
+      "spd": 82,
+      "spe": 65
+    },
+    "id": "sirfetchd",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Sirfetch’d",
+    "num": 865,
+    "sprite": "img/sprites/sirfetchd.webp",
+    "tier": "UU",
+    "types": [
+      "Fighting"
+    ],
+    "weightkg": 117
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "sturdy",
+      "weakarmor"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 140,
+      "hp": 65,
+      "spa": 40,
+      "spd": 70,
+      "spe": 70
+    },
+    "id": "skarmory",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "skarmorymega"
+    ],
+    "name": "Skarmory",
+    "num": 227,
+    "sprite": "img/sprites/skarmory.webp",
+    "tier": "UU",
+    "types": [
+      "Steel",
+      "Flying"
+    ],
+    "weightkg": 50.5
+  },
+  {
+    "abilities": [
+      "stalwart"
+    ],
+    "base": {
+      "atk": 140,
+      "def": 110,
+      "hp": 65,
+      "spa": 40,
+      "spd": 100,
+      "spe": 110
+    },
+    "baseSpecies": "Skarmory",
+    "forme": "Mega",
+    "id": "skarmorymega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "skarmory",
+    "name": "Skarmory-Mega",
+    "num": 227,
+    "requiredItem": "skarmorite",
+    "sprite": "img/sprites/skarmorymega.webp",
+    "tier": "UU",
+    "types": [
+      "Steel",
+      "Flying"
+    ],
+    "weightkg": 40.4
+  },
+  {
+    "abilities": [
+      "blaze",
+      "unaware"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 100,
+      "hp": 104,
+      "spa": 110,
+      "spd": 75,
+      "spe": 66
+    },
+    "id": "skeledirge",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Skeledirge",
+    "num": 911,
+    "sprite": "img/sprites/skeledirge.webp",
+    "tier": "UU",
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "weightkg": 326.5
+  },
+  {
+    "abilities": [
+      "oblivious",
+      "owntempo",
+      "regenerator"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 110,
+      "hp": 95,
+      "spa": 100,
+      "spd": 80,
+      "spe": 30
+    },
+    "id": "slowbro",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "slowbromega"
+    ],
+    "name": "Slowbro",
+    "num": 80,
+    "otherFormes": [
+      "slowbrogalar"
+    ],
+    "sprite": "img/sprites/slowbro.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "weightkg": 78.5
+  },
+  {
+    "abilities": [
+      "quickdraw",
+      "owntempo",
+      "regenerator"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 95,
+      "hp": 95,
+      "spa": 100,
+      "spd": 70,
+      "spe": 30
+    },
+    "baseSpecies": "Slowbro",
+    "forme": "Galar",
+    "id": "slowbrogalar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Slowbro-Galar",
+    "num": 80,
+    "sprite": "img/sprites/slowbrogalar.webp",
+    "tier": "RU",
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "weightkg": 70.5
+  },
+  {
+    "abilities": [
+      "shellarmor"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 180,
+      "hp": 95,
+      "spa": 130,
+      "spd": 80,
+      "spe": 30
+    },
+    "baseSpecies": "Slowbro",
+    "forme": "Mega",
+    "id": "slowbromega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "slowbro",
+    "name": "Slowbro-Mega",
+    "num": 80,
+    "requiredItem": "slowbronite",
+    "sprite": "img/sprites/slowbromega.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "weightkg": 120
+  },
+  {
+    "abilities": [
+      "oblivious",
+      "owntempo",
+      "regenerator"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 80,
+      "hp": 95,
+      "spa": 100,
+      "spd": 110,
+      "spe": 30
+    },
+    "id": "slowking",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Slowking",
+    "num": 199,
+    "otherFormes": [
+      "slowkinggalar"
+    ],
+    "sprite": "img/sprites/slowking.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "weightkg": 79.5
+  },
+  {
+    "abilities": [
+      "curiousmedicine",
+      "owntempo",
+      "regenerator"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 80,
+      "hp": 95,
+      "spa": 110,
+      "spd": 110,
+      "spe": 30
+    },
+    "baseSpecies": "Slowking",
+    "forme": "Galar",
+    "id": "slowkinggalar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Slowking-Galar",
+    "num": 199,
+    "sprite": "img/sprites/slowkinggalar.webp",
+    "tier": "OU",
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "weightkg": 79.5
+  },
+  {
+    "abilities": [
+      "sweetveil",
+      "unburden"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 86,
+      "hp": 82,
+      "spa": 85,
+      "spd": 75,
+      "spe": 72
+    },
+    "id": "slurpuff",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Slurpuff",
+    "num": 685,
+    "sprite": "img/sprites/slurpuff.webp",
+    "tier": "RU",
+    "types": [
+      "Fairy"
+    ],
+    "weightkg": 5
+  },
+  {
+    "abilities": [
+      "pressure",
+      "unburden",
+      "poisontouch"
+    ],
+    "base": {
+      "atk": 130,
+      "def": 60,
+      "hp": 80,
+      "spa": 40,
+      "spd": 80,
+      "spe": 120
+    },
+    "id": "sneasler",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Sneasler",
+    "num": 903,
+    "sprite": "img/sprites/sneasler.webp",
+    "tier": "OU",
+    "types": [
+      "Fighting",
+      "Poison"
+    ],
+    "weightkg": 43
+  },
+  {
+    "abilities": [
+      "immunity",
+      "thickfat",
+      "gluttony"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 65,
+      "hp": 160,
+      "spa": 65,
+      "spd": 110,
+      "spe": 30
+    },
+    "id": "snorlax",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Snorlax",
+    "num": 143,
+    "sprite": "img/sprites/snorlax.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 460
+  },
+  {
+    "abilities": [
+      "pressure",
+      "infiltrator"
+    ],
+    "base": {
+      "atk": 92,
+      "def": 108,
+      "hp": 50,
+      "spa": 92,
+      "spd": 108,
+      "spe": 35
+    },
+    "id": "spiritomb",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Spiritomb",
+    "num": 442,
+    "sprite": "img/sprites/spiritomb.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost",
+      "Dark"
+    ],
+    "weightkg": 108
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "hustle",
+      "guts"
+    ],
+    "base": {
+      "atk": 96,
+      "def": 51,
+      "hp": 82,
+      "spa": 45,
+      "spd": 51,
+      "spe": 92
+    },
+    "id": "squawkabilly",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Squawkabilly",
+    "num": 931,
+    "otherFormes": [
+      "squawkabillyblue",
+      "squawkabillywhite",
+      "squawkabillyyellow"
+    ],
+    "sprite": "img/sprites/squawkabilly.webp",
+    "tier": "UU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 2.4
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "hustle",
+      "guts"
+    ],
+    "base": {
+      "atk": 96,
+      "def": 51,
+      "hp": 82,
+      "spa": 45,
+      "spd": 51,
+      "spe": 92
+    },
+    "baseSpecies": "Squawkabilly",
+    "forme": "Blue",
+    "id": "squawkabillyblue",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Squawkabilly-Blue",
+    "num": 931,
+    "sprite": "img/sprites/squawkabillyblue.webp",
+    "tier": "UU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 2.4
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "hustle",
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 96,
+      "def": 51,
+      "hp": 82,
+      "spa": 45,
+      "spd": 51,
+      "spe": 92
+    },
+    "baseSpecies": "Squawkabilly",
+    "forme": "White",
+    "id": "squawkabillywhite",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Squawkabilly-White",
+    "num": 931,
+    "sprite": "img/sprites/squawkabillywhite.webp",
+    "tier": "UU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 2.4
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "hustle",
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 96,
+      "def": 51,
+      "hp": 82,
+      "spa": 45,
+      "spd": 51,
+      "spe": 92
+    },
+    "baseSpecies": "Squawkabilly",
+    "forme": "Yellow",
+    "id": "squawkabillyyellow",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Squawkabilly-Yellow",
+    "num": 931,
+    "sprite": "img/sprites/squawkabillyyellow.webp",
+    "tier": "UU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 2.4
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "reckless"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 70,
+      "hp": 85,
+      "spa": 50,
+      "spd": 60,
+      "spe": 100
+    },
+    "id": "staraptor",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "staraptormega"
+    ],
+    "name": "Staraptor",
+    "num": 398,
+    "sprite": "img/sprites/staraptor.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 24.9
+  },
+  {
+    "abilities": [
+      "contrary"
+    ],
+    "base": {
+      "atk": 140,
+      "def": 100,
+      "hp": 85,
+      "spa": 60,
+      "spd": 90,
+      "spe": 110
+    },
+    "baseSpecies": "Staraptor",
+    "forme": "Mega",
+    "id": "staraptormega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "staraptor",
+    "name": "Staraptor-Mega",
+    "num": 398,
+    "requiredItem": "staraptite",
+    "tier": "UU",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "weightkg": 50
+  },
+  {
+    "abilities": [
+      "illuminate",
+      "naturalcure",
+      "analytic"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 85,
+      "hp": 60,
+      "spa": 100,
+      "spd": 85,
+      "spe": 115
+    },
+    "id": "starmie",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "starmiemega"
+    ],
+    "name": "Starmie",
+    "num": 121,
+    "sprite": "img/sprites/starmie.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "weightkg": 80
+  },
+  {
+    "abilities": [
+      "hugepower"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 105,
+      "hp": 60,
+      "spa": 130,
+      "spd": 105,
+      "spe": 120
+    },
+    "baseSpecies": "Starmie",
+    "forme": "Mega",
+    "id": "starmiemega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "starmie",
+    "name": "Starmie-Mega",
+    "num": 121,
+    "requiredItem": "starminite",
+    "sprite": "img/sprites/starmiemega.webp",
+    "tier": "Uber",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "weightkg": 80
+  },
+  {
+    "abilities": [
+      "rockhead",
+      "sturdy",
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 200,
+      "hp": 75,
+      "spa": 55,
+      "spd": 65,
+      "spe": 30
+    },
+    "id": "steelix",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "steelixmega"
+    ],
+    "name": "Steelix",
+    "num": 208,
+    "sprite": "img/sprites/steelix.webp",
+    "tier": "RU",
+    "types": [
+      "Steel",
+      "Ground"
+    ],
+    "weightkg": 400
+  },
+  {
+    "abilities": [
+      "sandforce"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 230,
+      "hp": 75,
+      "spa": 55,
+      "spd": 95,
+      "spe": 30
+    },
+    "baseSpecies": "Steelix",
+    "forme": "Mega",
+    "id": "steelixmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "steelix",
+    "name": "Steelix-Mega",
+    "num": 208,
+    "requiredItem": "steelixite",
+    "sprite": "img/sprites/steelixmega.webp",
+    "tier": "RU",
+    "types": [
+      "Steel",
+      "Ground"
+    ],
+    "weightkg": 740
+  },
+  {
+    "abilities": [
+      "static",
+      "limber",
+      "sandveil"
+    ],
+    "base": {
+      "atk": 66,
+      "def": 84,
+      "hp": 109,
+      "spa": 81,
+      "spd": 99,
+      "spe": 32
+    },
+    "id": "stunfisk",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Stunfisk",
+    "num": 618,
+    "otherFormes": [
+      "stunfiskgalar"
+    ],
+    "sprite": "img/sprites/stunfisk.webp",
+    "tier": "RU",
+    "types": [
+      "Ground",
+      "Electric"
+    ],
+    "weightkg": 11
+  },
+  {
+    "abilities": [
+      "mimicry"
+    ],
+    "base": {
+      "atk": 81,
+      "def": 99,
+      "hp": 109,
+      "spa": 66,
+      "spd": 84,
+      "spe": 32
+    },
+    "baseSpecies": "Stunfisk",
+    "forme": "Galar",
+    "id": "stunfiskgalar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Stunfisk-Galar",
+    "num": 618,
+    "sprite": "img/sprites/stunfiskgalar.webp",
+    "tier": "RU",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "weightkg": 20.5
+  },
+  {
+    "abilities": [
+      "liquidooze",
+      "stickyhold",
+      "gluttony"
+    ],
+    "base": {
+      "atk": 73,
+      "def": 83,
+      "hp": 100,
+      "spa": 73,
+      "spd": 83,
+      "spe": 55
+    },
+    "id": "swalot",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Swalot",
+    "num": 317,
+    "sprite": "img/sprites/swalot.webp",
+    "tier": "UU",
+    "types": [
+      "Poison"
+    ],
+    "weightkg": 80
+  },
+  {
+    "abilities": [
+      "torrent",
+      "damp"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 90,
+      "hp": 100,
+      "spa": 85,
+      "spd": 90,
+      "spe": 60
+    },
+    "id": "swampert",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "swampertmega"
+    ],
+    "name": "Swampert",
+    "num": 260,
+    "sprite": "img/sprites/swampert.webp",
+    "tier": "RU",
+    "types": [
+      "Water",
+      "Ground"
+    ],
+    "weightkg": 81.9
+  },
+  {
+    "abilities": [
+      "swiftswim"
+    ],
+    "base": {
+      "atk": 150,
+      "def": 110,
+      "hp": 100,
+      "spa": 95,
+      "spd": 110,
+      "spe": 70
+    },
+    "baseSpecies": "Swampert",
+    "forme": "Mega",
+    "id": "swampertmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "swampert",
+    "name": "Swampert-Mega",
+    "num": 260,
+    "requiredItem": "swampertite",
+    "sprite": "img/sprites/swampertmega.webp",
+    "tier": "UU",
+    "types": [
+      "Water",
+      "Ground"
+    ],
+    "weightkg": 102
+  },
+  {
+    "abilities": [
+      "cutecharm",
+      "pixilate"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 65,
+      "hp": 95,
+      "spa": 110,
+      "spd": 130,
+      "spe": 60
+    },
+    "id": "sylveon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Sylveon",
+    "num": 700,
+    "sprite": "img/sprites/sylveon.webp",
+    "tier": "RU",
+    "types": [
+      "Fairy"
+    ],
+    "weightkg": 23.5
+  },
+  {
+    "abilities": [
+      "flamebody",
+      "galewings"
+    ],
+    "base": {
+      "atk": 81,
+      "def": 71,
+      "hp": 78,
+      "spa": 74,
+      "spd": 69,
+      "spe": 126
+    },
+    "id": "talonflame",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Talonflame",
+    "num": 663,
+    "sprite": "img/sprites/talonflame.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "weightkg": 24.5
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "angerpoint",
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 95,
+      "hp": 75,
+      "spa": 40,
+      "spd": 70,
+      "spe": 110
+    },
+    "id": "tauros",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Tauros",
+    "num": 128,
+    "otherFormes": [
+      "taurospaldeaaqua",
+      "taurospaldeablaze",
+      "taurospaldeacombat"
+    ],
+    "sprite": "img/sprites/tauros.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 88.4
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "angerpoint",
+      "cudchew"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 105,
+      "hp": 75,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    },
+    "baseSpecies": "Tauros",
+    "forme": "Paldea-Aqua",
+    "id": "taurospaldeaaqua",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Tauros-Paldea-Aqua",
+    "num": 128,
+    "sprite": "img/sprites/taurospaldeaaqua.webp",
+    "tier": "UU",
+    "types": [
+      "Fighting",
+      "Water"
+    ],
+    "weightkg": 110
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "angerpoint",
+      "cudchew"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 105,
+      "hp": 75,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    },
+    "baseSpecies": "Tauros",
+    "forme": "Paldea-Blaze",
+    "id": "taurospaldeablaze",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Tauros-Paldea-Blaze",
+    "num": 128,
+    "sprite": "img/sprites/taurospaldeablaze.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting",
+      "Fire"
+    ],
+    "weightkg": 85
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "angerpoint",
+      "cudchew"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 105,
+      "hp": 75,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    },
+    "baseSpecies": "Tauros",
+    "forme": "Paldea-Combat",
+    "id": "taurospaldeacombat",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Tauros-Paldea-Combat",
+    "num": 128,
+    "sprite": "img/sprites/taurospaldeacombat.webp",
+    "tier": "RU",
+    "types": [
+      "Fighting"
+    ],
+    "weightkg": 115
+  },
+  {
+    "abilities": [
+      "runaway",
+      "unburden",
+      "stakeout"
+    ],
+    "base": {
+      "atk": 58,
+      "def": 58,
+      "hp": 70,
+      "spa": 87,
+      "spd": 92,
+      "spe": 90
+    },
+    "id": "thievul",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Thievul",
+    "num": 828,
+    "sprite": "img/sprites/thievul.webp",
+    "tier": "UU",
+    "types": [
+      "Dark"
+    ],
+    "weightkg": 19.9
+  },
+  {
+    "abilities": [
+      "moldbreaker",
+      "owntempo",
+      "pickpocket"
+    ],
+    "base": {
+      "atk": 75,
+      "def": 77,
+      "hp": 85,
+      "spa": 70,
+      "spd": 105,
+      "spe": 94
+    },
+    "id": "tinkaton",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Tinkaton",
+    "num": 959,
+    "sprite": "img/sprites/tinkaton.webp",
+    "tier": "UU",
+    "types": [
+      "Fairy",
+      "Steel"
+    ],
+    "weightkg": 112.8
+  },
+  {
+    "abilities": [
+      "whitesmoke",
+      "drought",
+      "shellarmor"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 140,
+      "hp": 70,
+      "spa": 85,
+      "spd": 70,
+      "spe": 20
+    },
+    "id": "torkoal",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Torkoal",
+    "num": 324,
+    "sprite": "img/sprites/torkoal.webp",
+    "tier": "RU",
+    "types": [
+      "Fire"
+    ],
+    "weightkg": 80.4
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "shellarmor"
+    ],
+    "base": {
+      "atk": 109,
+      "def": 105,
+      "hp": 95,
+      "spa": 75,
+      "spd": 85,
+      "spe": 56
+    },
+    "id": "torterra",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Torterra",
+    "num": 389,
+    "sprite": "img/sprites/torterra.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Ground"
+    ],
+    "weightkg": 310
+  },
+  {
+    "abilities": [
+      "keeneye",
+      "skilllink",
+      "sheerforce"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 75,
+      "hp": 80,
+      "spa": 75,
+      "spd": 75,
+      "spe": 60
+    },
+    "id": "toucannon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Toucannon",
+    "num": 733,
+    "sprite": "img/sprites/toucannon.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "weightkg": 26
+  },
+  {
+    "abilities": [
+      "merciless",
+      "limber",
+      "regenerator"
+    ],
+    "base": {
+      "atk": 63,
+      "def": 152,
+      "hp": 50,
+      "spa": 53,
+      "spd": 142,
+      "spe": 35
+    },
+    "id": "toxapex",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Toxapex",
+    "num": 748,
+    "sprite": "img/sprites/toxapex.webp",
+    "tier": "OU",
+    "types": [
+      "Poison",
+      "Water"
+    ],
+    "weightkg": 14.5
+  },
+  {
+    "abilities": [
+      "anticipation",
+      "dryskin",
+      "poisontouch"
+    ],
+    "base": {
+      "atk": 106,
+      "def": 65,
+      "hp": 83,
+      "spa": 86,
+      "spd": 65,
+      "spe": 85
+    },
+    "id": "toxicroak",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Toxicroak",
+    "num": 454,
+    "sprite": "img/sprites/toxicroak.webp",
+    "tier": "RU",
+    "types": [
+      "Poison",
+      "Fighting"
+    ],
+    "weightkg": 44.4
+  },
+  {
+    "abilities": [
+      "punkrock",
+      "plus",
+      "technician"
+    ],
+    "base": {
+      "atk": 98,
+      "def": 70,
+      "hp": 75,
+      "spa": 114,
+      "spd": 70,
+      "spe": 75
+    },
+    "id": "toxtricity",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Toxtricity",
+    "num": 849,
+    "otherFormes": [
+      "toxtricitylowkey"
+    ],
+    "sprite": "img/sprites/toxtricity.webp",
+    "tier": "UU",
+    "types": [
+      "Electric",
+      "Poison"
+    ],
+    "weightkg": 40
+  },
+  {
+    "abilities": [
+      "punkrock",
+      "minus",
+      "technician"
+    ],
+    "base": {
+      "atk": 98,
+      "def": 70,
+      "hp": 75,
+      "spa": 114,
+      "spd": 70,
+      "spe": 75
+    },
+    "baseSpecies": "Toxtricity",
+    "forme": "Low-Key",
+    "id": "toxtricitylowkey",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Toxtricity-Low-Key",
+    "num": 849,
+    "sprite": "img/sprites/toxtricitylowkey.webp",
+    "tier": "UU",
+    "types": [
+      "Electric",
+      "Poison"
+    ],
+    "weightkg": 40
+  },
+  {
+    "abilities": [
+      "naturalcure",
+      "frisk",
+      "harvest"
+    ],
+    "base": {
+      "atk": 110,
+      "def": 76,
+      "hp": 85,
+      "spa": 65,
+      "spd": 82,
+      "spe": 56
+    },
+    "id": "trevenant",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Trevenant",
+    "num": 709,
+    "sprite": "img/sprites/trevenant.webp",
+    "tier": "RU",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "weightkg": 71
+  },
+  {
+    "abilities": [
+      "leafguard",
+      "queenlymajesty",
+      "sweetveil"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 98,
+      "hp": 72,
+      "spa": 50,
+      "spd": 98,
+      "spe": 72
+    },
+    "id": "tsareena",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Tsareena",
+    "num": 763,
+    "sprite": "img/sprites/tsareena.webp",
+    "tier": "UU",
+    "types": [
+      "Grass"
+    ],
+    "weightkg": 21.4
+  },
+  {
+    "abilities": [
+      "blaze",
+      "flashfire"
+    ],
+    "base": {
+      "atk": 84,
+      "def": 78,
+      "hp": 78,
+      "spa": 109,
+      "spd": 85,
+      "spe": 100
+    },
+    "id": "typhlosion",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Typhlosion",
+    "num": 157,
+    "otherFormes": [
+      "typhlosionhisui"
+    ],
+    "sprite": "img/sprites/typhlosion.webp",
+    "tier": "RU",
+    "types": [
+      "Fire"
+    ],
+    "weightkg": 79.5
+  },
+  {
+    "abilities": [
+      "blaze",
+      "frisk"
+    ],
+    "base": {
+      "atk": 84,
+      "def": 78,
+      "hp": 73,
+      "spa": 119,
+      "spd": 85,
+      "spe": 95
+    },
+    "baseSpecies": "Typhlosion",
+    "forme": "Hisui",
+    "id": "typhlosionhisui",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Typhlosion-Hisui",
+    "num": 157,
+    "sprite": "img/sprites/typhlosionhisui.webp",
+    "tier": "RU",
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "weightkg": 69.8
+  },
+  {
+    "abilities": [
+      "sandstream",
+      "unnerve"
+    ],
+    "base": {
+      "atk": 134,
+      "def": 110,
+      "hp": 100,
+      "spa": 95,
+      "spd": 100,
+      "spe": 61
+    },
+    "id": "tyranitar",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "tyranitarmega"
+    ],
+    "name": "Tyranitar",
+    "num": 248,
+    "sprite": "img/sprites/tyranitar.webp",
+    "tier": "RU",
+    "types": [
+      "Rock",
+      "Dark"
+    ],
+    "weightkg": 202
+  },
+  {
+    "abilities": [
+      "sandstream"
+    ],
+    "base": {
+      "atk": 164,
+      "def": 150,
+      "hp": 100,
+      "spa": 95,
+      "spd": 120,
+      "spe": 71
+    },
+    "baseSpecies": "Tyranitar",
+    "forme": "Mega",
+    "id": "tyranitarmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "tyranitar",
+    "name": "Tyranitar-Mega",
+    "num": 248,
+    "requiredItem": "tyranitarite",
+    "sprite": "img/sprites/tyranitarmega.webp",
+    "tier": "RU",
+    "types": [
+      "Rock",
+      "Dark"
+    ],
+    "weightkg": 255
+  },
+  {
+    "abilities": [
+      "strongjaw",
+      "rockhead"
+    ],
+    "base": {
+      "atk": 121,
+      "def": 119,
+      "hp": 82,
+      "spa": 69,
+      "spd": 59,
+      "spe": 71
+    },
+    "id": "tyrantrum",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Tyrantrum",
+    "num": 697,
+    "sprite": "img/sprites/tyrantrum.webp",
+    "tier": "RU",
+    "types": [
+      "Rock",
+      "Dragon"
+    ],
+    "weightkg": 270
+  },
+  {
+    "abilities": [
+      "synchronize",
+      "innerfocus"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 110,
+      "hp": 95,
+      "spa": 60,
+      "spd": 130,
+      "spe": 65
+    },
+    "id": "umbreon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Umbreon",
+    "num": 197,
+    "sprite": "img/sprites/umbreon.webp",
+    "tier": "UU",
+    "types": [
+      "Dark"
+    ],
+    "weightkg": 27
+  },
+  {
+    "abilities": [
+      "icebody",
+      "snowwarning",
+      "weakarmor"
+    ],
+    "base": {
+      "atk": 95,
+      "def": 85,
+      "hp": 71,
+      "spa": 110,
+      "spd": 95,
+      "spe": 79
+    },
+    "id": "vanilluxe",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Vanilluxe",
+    "num": 584,
+    "sprite": "img/sprites/vanilluxe.webp",
+    "tier": "RU",
+    "types": [
+      "Ice"
+    ],
+    "weightkg": 57.5
+  },
+  {
+    "abilities": [
+      "waterabsorb",
+      "hydration"
+    ],
+    "base": {
+      "atk": 65,
+      "def": 60,
+      "hp": 130,
+      "spa": 110,
+      "spd": 95,
+      "spe": 65
+    },
+    "id": "vaporeon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Vaporeon",
+    "num": 134,
+    "sprite": "img/sprites/vaporeon.webp",
+    "tier": "RU",
+    "types": [
+      "Water"
+    ],
+    "weightkg": 29
+  },
+  {
+    "abilities": [
+      "overgrow",
+      "chlorophyll"
+    ],
+    "base": {
+      "atk": 82,
+      "def": 83,
+      "hp": 80,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    },
+    "id": "venusaur",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "venusaurmega"
+    ],
+    "name": "Venusaur",
+    "num": 3,
+    "sprite": "img/sprites/venusaur.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "weightkg": 100
+  },
+  {
+    "abilities": [
+      "thickfat"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 123,
+      "hp": 80,
+      "spa": 122,
+      "spd": 120,
+      "spe": 80
+    },
+    "baseSpecies": "Venusaur",
+    "forme": "Mega",
+    "id": "venusaurmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "venusaur",
+    "name": "Venusaur-Mega",
+    "num": 3,
+    "requiredItem": "venusaurite",
+    "sprite": "img/sprites/venusaurmega.webp",
+    "tier": "UU",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "weightkg": 155.5
+  },
+  {
+    "abilities": [
+      "chlorophyll",
+      "gluttony"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 65,
+      "hp": 80,
+      "spa": 100,
+      "spd": 70,
+      "spe": 70
+    },
+    "id": "victreebel",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megas": [
+      "victreebelmega"
+    ],
+    "name": "Victreebel",
+    "num": 71,
+    "sprite": "img/sprites/victreebel.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "weightkg": 15.5
+  },
+  {
+    "abilities": [
+      "innardsout"
+    ],
+    "base": {
+      "atk": 125,
+      "def": 85,
+      "hp": 80,
+      "spa": 135,
+      "spd": 95,
+      "spe": 70
+    },
+    "baseSpecies": "Victreebel",
+    "forme": "Mega",
+    "id": "victreebelmega",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "megaOf": "victreebel",
+    "name": "Victreebel-Mega",
+    "num": 71,
+    "requiredItem": "victreebelite",
+    "sprite": "img/sprites/victreebelmega.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "weightkg": 125.5
+  },
+  {
+    "abilities": [
+      "chlorophyll",
+      "effectspore"
+    ],
+    "base": {
+      "atk": 80,
+      "def": 85,
+      "hp": 75,
+      "spa": 110,
+      "spd": 90,
+      "spe": 50
+    },
+    "id": "vileplume",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Vileplume",
+    "num": 45,
+    "sprite": "img/sprites/vileplume.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "weightkg": 18.6
+  },
+  {
+    "abilities": [
+      "shielddust",
+      "compoundeyes",
+      "friendguard"
+    ],
+    "base": {
+      "atk": 52,
+      "def": 50,
+      "hp": 80,
+      "spa": 90,
+      "spd": 50,
+      "spe": 89
+    },
+    "cosmeticFormes": [
+      "vivillonarchipelago",
+      "vivilloncontinental",
+      "vivillonelegant",
+      "vivillongarden",
+      "vivillonhighplains",
+      "vivillonicysnow",
+      "vivillonjungle",
+      "vivillonmarine",
+      "vivillonmodern",
+      "vivillonmonsoon",
+      "vivillonocean",
+      "vivillonpolar",
+      "vivillonriver",
+      "vivillonsandstorm",
+      "vivillonsavanna",
+      "vivillonsun",
+      "vivillontundra"
+    ],
+    "id": "vivillon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Vivillon",
+    "num": 666,
+    "otherFormes": [
+      "vivillonfancy",
+      "vivillonpokeball"
+    ],
+    "sprite": "img/sprites/vivillon.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "weightkg": 17
+  },
+  {
+    "abilities": [
+      "shielddust",
+      "compoundeyes",
+      "friendguard"
+    ],
+    "base": {
+      "atk": 52,
+      "def": 50,
+      "hp": 80,
+      "spa": 90,
+      "spd": 50,
+      "spe": 89
+    },
+    "baseSpecies": "Vivillon",
+    "forme": "Fancy",
+    "id": "vivillonfancy",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Vivillon-Fancy",
+    "num": 666,
+    "sprite": "img/sprites/vivillonfancy.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "weightkg": 17
+  },
+  {
+    "abilities": [
+      "shielddust",
+      "compoundeyes",
+      "friendguard"
+    ],
+    "base": {
+      "atk": 52,
+      "def": 50,
+      "hp": 80,
+      "spa": 90,
+      "spd": 50,
+      "spe": 89
+    },
+    "baseSpecies": "Vivillon",
+    "forme": "Pokeball",
+    "id": "vivillonpokeball",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Vivillon-Pokeball",
+    "num": 666,
+    "sprite": "img/sprites/vivillonpokeball.webp",
+    "tier": "RU",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "weightkg": 17
+  },
+  {
+    "abilities": [
+      "flamebody",
+      "swarm"
+    ],
+    "base": {
+      "atk": 60,
+      "def": 65,
+      "hp": 85,
+      "spa": 135,
+      "spd": 105,
+      "spe": 100
+    },
+    "id": "volcarona",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Volcarona",
+    "num": 637,
+    "sprite": "img/sprites/volcarona.webp",
+    "tier": "OU",
+    "types": [
+      "Bug",
+      "Fire"
+    ],
+    "weightkg": 46
+  },
+  {
+    "abilities": [
+      "illuminate",
+      "keeneye",
+      "analytic"
+    ],
+    "base": {
+      "atk": 85,
+      "def": 69,
+      "hp": 60,
+      "spa": 60,
+      "spd": 69,
+      "spe": 77
+    },
+    "id": "watchog",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Watchog",
+    "num": 505,
+    "sprite": "img/sprites/watchog.webp",
+    "tier": "RU",
+    "types": [
+      "Normal"
+    ],
+    "weightkg": 27
+  },
+  {
+    "abilities": [
+      "pressure",
+      "pickpocket"
+    ],
+    "base": {
+      "atk": 120,
+      "def": 65,
+      "hp": 70,
+      "spa": 45,
+      "spd": 85,
+      "spe": 125
+    },
+    "id": "weavile",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Weavile",
+    "num": 461,
+    "sprite": "img/sprites/weavile.webp",
+    "tier": "UU",
+    "types": [
+      "Dark",
+      "Ice"
+    ],
+    "weightkg": 34
+  },
+  {
+    "abilities": [
+      "prankster",
+      "infiltrator",
+      "chlorophyll"
+    ],
+    "base": {
+      "atk": 67,
+      "def": 85,
+      "hp": 60,
+      "spa": 77,
+      "spd": 75,
+      "spe": 116
+    },
+    "id": "whimsicott",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Whimsicott",
+    "num": 547,
+    "sprite": "img/sprites/whimsicott.webp",
+    "tier": "RU",
+    "types": [
+      "Grass",
+      "Fairy"
+    ],
+    "weightkg": 6.6
+  },
+  {
+    "abilities": [
+      "cutecharm",
+      "competitive",
+      "frisk"
+    ],
+    "base": {
+      "atk": 70,
+      "def": 45,
+      "hp": 140,
+      "spa": 85,
+      "spd": 50,
+      "spe": 45
+    },
+    "id": "wigglytuff",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Wigglytuff",
+    "num": 40,
+    "sprite": "img/sprites/wigglytuff.webp",
+    "tier": "UU",
+    "types": [
+      "Normal",
+      "Fairy"
+    ],
+    "weightkg": 12
+  },
+  {
+    "abilities": [
+      "intimidate",
+      "frisk",
+      "sapsipper"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 72,
+      "hp": 103,
+      "spa": 105,
+      "spd": 75,
+      "spe": 65
+    },
+    "id": "wyrdeer",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Wyrdeer",
+    "num": 899,
+    "sprite": "img/sprites/wyrdeer.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Psychic"
+    ],
+    "weightkg": 95.1
+  },
+  {
+    "abilities": [
+      "illusion"
+    ],
+    "base": {
+      "atk": 105,
+      "def": 60,
+      "hp": 60,
+      "spa": 120,
+      "spd": 60,
+      "spe": 105
+    },
+    "id": "zoroark",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Zoroark",
+    "num": 571,
+    "otherFormes": [
+      "zoroarkhisui"
+    ],
+    "sprite": "img/sprites/zoroark.webp",
+    "tier": "RU",
+    "types": [
+      "Dark"
+    ],
+    "weightkg": 81.1
+  },
+  {
+    "abilities": [
+      "illusion"
+    ],
+    "base": {
+      "atk": 100,
+      "def": 60,
+      "hp": 55,
+      "spa": 125,
+      "spd": 60,
+      "spe": 110
+    },
+    "baseSpecies": "Zoroark",
+    "forme": "Hisui",
+    "id": "zoroarkhisui",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Zoroark-Hisui",
+    "num": 571,
+    "sprite": "img/sprites/zoroarkhisui.webp",
+    "tier": "RU",
+    "types": [
+      "Normal",
+      "Ghost"
+    ],
+    "weightkg": 73
+  }
+]

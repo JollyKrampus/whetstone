@@ -1,0 +1,1801 @@
+[
+  {
+    "desc": "If held by an Abomasnow, this item allows it to Mega Evolve in battle.",
+    "id": "abomasite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "abomasnow",
+      "forme": "abomasnowmega"
+    },
+    "name": "Abomasite"
+  },
+  {
+    "desc": "If held by an Absol, this item allows it to Mega Evolve into Mega Absol in battle.",
+    "id": "absolite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "absol",
+      "forme": "absolmega"
+    },
+    "name": "Absolite"
+  },
+  {
+    "desc": "If held by an Absol, this item allows it to Mega Evolve into Mega Absol Z in battle.",
+    "id": "absolitez",
+    "legal": [
+      "M-C"
+    ],
+    "mega": {
+      "base": "absol",
+      "forme": "absolmegaz"
+    },
+    "name": "Absolite Z"
+  },
+  {
+    "desc": "If held by an Aerodactyl, this item allows it to Mega Evolve in battle.",
+    "id": "aerodactylite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "aerodactyl",
+      "forme": "aerodactylmega"
+    },
+    "name": "Aerodactylite"
+  },
+  {
+    "desc": "If held by an Aggron, this item allows it to Mega Evolve in battle.",
+    "id": "aggronite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "aggron",
+      "forme": "aggronmega"
+    },
+    "name": "Aggronite"
+  },
+  {
+    "desc": "Holder is immune to Ground-type attacks. Pops when holder is hit.",
+    "id": "airballoon",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Air Balloon"
+  },
+  {
+    "desc": "If held by an Alakazam, this item allows it to Mega Evolve in battle.",
+    "id": "alakazite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "alakazam",
+      "forme": "alakazammega"
+    },
+    "name": "Alakazite"
+  },
+  {
+    "desc": "If held by an Altaria, this item allows it to Mega Evolve in battle.",
+    "id": "altarianite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "altaria",
+      "forme": "altariamega"
+    },
+    "name": "Altarianite"
+  },
+  {
+    "desc": "If held by an Ampharos, this item allows it to Mega Evolve in battle.",
+    "id": "ampharosite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "ampharos",
+      "forme": "ampharosmega"
+    },
+    "name": "Ampharosite"
+  },
+  {
+    "desc": "Holder is cured if it is frozen. Single use.",
+    "id": "aspearberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Aspear Berry"
+  },
+  {
+    "desc": "If held by an Audino, this item allows it to Mega Evolve in battle.",
+    "id": "audinite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "audino",
+      "forme": "audinomega"
+    },
+    "name": "Audinite"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Steel-type attack. Single use.",
+    "id": "babiriberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Babiri Berry"
+  },
+  {
+    "desc": "If held by a Banette, this item allows it to Mega Evolve in battle.",
+    "id": "banettite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "banette",
+      "forme": "banettemega"
+    },
+    "name": "Banettite"
+  },
+  {
+    "desc": "If held by a Barbaracle, this item allows it to Mega Evolve in battle.",
+    "id": "barbaracite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "barbaracle",
+      "forme": "barbaraclemega"
+    },
+    "name": "Barbaracite"
+  },
+  {
+    "desc": "If held by a Baxcalibur, this item allows it to Mega Evolve in battle.",
+    "id": "baxcalibrite",
+    "legal": [
+      "M-C"
+    ],
+    "mega": {
+      "base": "baxcalibur",
+      "forme": "baxcaliburmega"
+    },
+    "name": "Baxcalibrite"
+  },
+  {
+    "desc": "If held by a Beedrill, this item allows it to Mega Evolve in battle.",
+    "id": "beedrillite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "beedrill",
+      "forme": "beedrillmega"
+    },
+    "name": "Beedrillite"
+  },
+  {
+    "desc": "Holder gains 1.3× HP from draining/Aqua Ring/Ingrain/Leech Seed/Strength Sap.",
+    "id": "bigroot",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Big Root"
+  },
+  {
+    "desc": "Holder's partial-trapping moves deal 1/6 max HP per turn instead of 1/8.",
+    "id": "bindingband",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Binding Band"
+  },
+  {
+    "desc": "Holder's Fighting-type attacks have 1.2× power.",
+    "id": "blackbelt",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Black Belt"
+  },
+  {
+    "desc": "Holder's Dark-type attacks have 1.2× power.",
+    "id": "blackglasses",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Black Glasses"
+  },
+  {
+    "desc": "If held by a Blastoise, this item allows it to Mega Evolve in battle.",
+    "id": "blastoisinite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "blastoise",
+      "forme": "blastoisemega"
+    },
+    "name": "Blastoisinite"
+  },
+  {
+    "desc": "If held by a Blaziken, this item allows it to Mega Evolve in battle.",
+    "id": "blazikenite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "blaziken",
+      "forme": "blazikenmega"
+    },
+    "name": "Blazikenite"
+  },
+  {
+    "desc": "The accuracy of attacks against the holder is 0.9×.",
+    "id": "brightpowder",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Bright Powder"
+  },
+  {
+    "desc": "If held by a Camerupt, this item allows it to Mega Evolve in battle.",
+    "id": "cameruptite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "camerupt",
+      "forme": "cameruptmega"
+    },
+    "name": "Cameruptite"
+  },
+  {
+    "desc": "If held by a Chandelure, this item allows it to Mega Evolve in battle.",
+    "id": "chandelurite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "chandelure",
+      "forme": "chandeluremega"
+    },
+    "name": "Chandelurite"
+  },
+  {
+    "desc": "Holder's Fire-type attacks have 1.2× power.",
+    "id": "charcoal",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Charcoal"
+  },
+  {
+    "desc": "If held by a Charizard, this item allows it to Mega Evolve into Mega Charizard X.",
+    "id": "charizarditex",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "charizard",
+      "forme": "charizardmegax"
+    },
+    "name": "Charizardite X"
+  },
+  {
+    "desc": "If held by a Charizard, this item allows it to Mega Evolve into Mega Charizard Y.",
+    "id": "charizarditey",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "charizard",
+      "forme": "charizardmegay"
+    },
+    "name": "Charizardite Y"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Rock-type attack. Single use.",
+    "id": "chartiberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Charti Berry"
+  },
+  {
+    "desc": "Holder cures itself if it is paralyzed. Single use.",
+    "id": "cheriberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Cheri Berry"
+  },
+  {
+    "desc": "If held by a Chesnaught, this item allows it to Mega Evolve in battle.",
+    "id": "chesnaughtite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "chesnaught",
+      "forme": "chesnaughtmega"
+    },
+    "name": "Chesnaughtite"
+  },
+  {
+    "desc": "Holder wakes up if it is asleep. Single use.",
+    "id": "chestoberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Chesto Berry"
+  },
+  {
+    "desc": "Halves damage taken from a Normal-type attack. Single use.",
+    "id": "chilanberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Chilan Berry"
+  },
+  {
+    "desc": "If held by a Chimecho, this item allows it to Mega Evolve in battle.",
+    "id": "chimechite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "chimecho",
+      "forme": "chimechomega"
+    },
+    "name": "Chimechite"
+  },
+  {
+    "desc": "Holder's Speed is 1.5×, but it can only select the first move it executes.",
+    "id": "choicescarf",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Choice Scarf"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Fighting-type attack. Single use.",
+    "id": "chopleberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Chople Berry"
+  },
+  {
+    "desc": "If held by a Clefable, this item allows it to Mega Evolve in battle.",
+    "id": "clefablite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "clefable",
+      "forme": "clefablemega"
+    },
+    "name": "Clefablite"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Flying-type attack. Single use.",
+    "id": "cobaberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Coba Berry"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Dark-type attack. Single use.",
+    "id": "colburberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Colbur Berry"
+  },
+  {
+    "desc": "If held by a Crabominable, this item allows it to Mega Evolve in battle.",
+    "id": "crabominite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "crabominable",
+      "forme": "crabominablemega"
+    },
+    "name": "Crabominite"
+  },
+  {
+    "desc": "Holder's use of Rain Dance lasts 8 turns instead of 5.",
+    "id": "damprock",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Damp Rock"
+  },
+  {
+    "desc": "If held by a Delphox, this item allows it to Mega Evolve in battle.",
+    "id": "delphoxite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "delphox",
+      "forme": "delphoxmega"
+    },
+    "name": "Delphoxite"
+  },
+  {
+    "desc": "If held by a Dragalge, this item allows it to Mega Evolve in battle.",
+    "id": "dragalgite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "dragalge",
+      "forme": "dragalgemega"
+    },
+    "name": "Dragalgite"
+  },
+  {
+    "desc": "Holder's Dragon-type attacks have 1.2× power.",
+    "id": "dragonfang",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Dragon Fang"
+  },
+  {
+    "desc": "If held by a Dragonite, this item allows it to Mega Evolve in battle.",
+    "id": "dragoninite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "dragonite",
+      "forme": "dragonitemega"
+    },
+    "name": "Dragoninite"
+  },
+  {
+    "desc": "If held by a Drampa, this item allows it to Mega Evolve in battle.",
+    "id": "drampanite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "drampa",
+      "forme": "drampamega"
+    },
+    "name": "Drampanite"
+  },
+  {
+    "desc": "If held by an Eelektross, this item allows it to Mega Evolve in battle.",
+    "id": "eelektrossite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "eelektross",
+      "forme": "eelektrossmega"
+    },
+    "name": "Eelektrossite"
+  },
+  {
+    "id": "ejectbutton",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Eject Button"
+  },
+  {
+    "desc": "If the terrain is Electric Terrain, raises holder's Defense by 1 stage. Single use.",
+    "id": "electricseed",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Electric Seed"
+  },
+  {
+    "desc": "If held by an Emboar, this item allows it to Mega Evolve in battle.",
+    "id": "emboarite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "emboar",
+      "forme": "emboarmega"
+    },
+    "name": "Emboarite"
+  },
+  {
+    "desc": "If held by an Excadrill, this item allows it to Mega Evolve in battle.",
+    "id": "excadrite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "excadrill",
+      "forme": "excadrillmega"
+    },
+    "name": "Excadrite"
+  },
+  {
+    "desc": "Holder's attacks that are super effective against the target do 1.2× damage.",
+    "id": "expertbelt",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Expert Belt"
+  },
+  {
+    "desc": "Holder's Fairy-type attacks have 1.2× power.",
+    "id": "fairyfeather",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Fairy Feather"
+  },
+  {
+    "desc": "If held by a Falinks, this item allows it to Mega Evolve in battle.",
+    "id": "falinksite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "falinks",
+      "forme": "falinksmega"
+    },
+    "name": "Falinksite"
+  },
+  {
+    "desc": "If held by a Feraligatr, this item allows it to Mega Evolve in battle.",
+    "id": "feraligite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "feraligatr",
+      "forme": "feraligatrmega"
+    },
+    "name": "Feraligite"
+  },
+  {
+    "desc": "If held by an Eternal Flower Floette, this item allows it to Mega Evolve in battle.",
+    "id": "floettite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "floetteeternal",
+      "forme": "floettemega"
+    },
+    "name": "Floettite"
+  },
+  {
+    "desc": "Holder has a 10% chance to survive an attack that would KO it with 1 HP.",
+    "id": "focusband",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Focus Band"
+  },
+  {
+    "desc": "If holder's HP is full, will survive an attack that would KO it with 1 HP. Single use.",
+    "id": "focussash",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Focus Sash"
+  },
+  {
+    "desc": "If held by a Froslass, this item allows it to Mega Evolve in battle.",
+    "id": "froslassite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "froslass",
+      "forme": "froslassmega"
+    },
+    "name": "Froslassite"
+  },
+  {
+    "desc": "If held by a Gallade, this item allows it to Mega Evolve in battle.",
+    "id": "galladite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "gallade",
+      "forme": "gallademega"
+    },
+    "name": "Galladite"
+  },
+  {
+    "desc": "If held by a Garchomp, this item allows it to Mega Evolve into Mega Garchomp.",
+    "id": "garchompite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "garchomp",
+      "forme": "garchompmega"
+    },
+    "name": "Garchompite"
+  },
+  {
+    "desc": "If held by a Garchomp, this item allows it to Mega Evolve into Mega Garchomp Z.",
+    "id": "garchompitez",
+    "legal": [
+      "M-C"
+    ],
+    "mega": {
+      "base": "garchomp",
+      "forme": "garchompmegaz"
+    },
+    "name": "Garchompite Z"
+  },
+  {
+    "desc": "If held by a Gardevoir, this item allows it to Mega Evolve in battle.",
+    "id": "gardevoirite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "gardevoir",
+      "forme": "gardevoirmega"
+    },
+    "name": "Gardevoirite"
+  },
+  {
+    "desc": "If held by a Gengar, this item allows it to Mega Evolve in battle.",
+    "id": "gengarite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "gengar",
+      "forme": "gengarmega"
+    },
+    "name": "Gengarite"
+  },
+  {
+    "desc": "If held by a Glalie, this item allows it to Mega Evolve in battle.",
+    "id": "glalitite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "glalie",
+      "forme": "glaliemega"
+    },
+    "name": "Glalitite"
+  },
+  {
+    "desc": "If held by a Glimmora, this item allows it to Mega Evolve in battle.",
+    "id": "glimmoranite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "glimmora",
+      "forme": "glimmoramega"
+    },
+    "name": "Glimmoranite"
+  },
+  {
+    "desc": "If held by a Golisopod, this item allows it to Mega Evolve in battle.",
+    "id": "golisopite",
+    "legal": [
+      "M-C"
+    ],
+    "mega": {
+      "base": "golisopod",
+      "forme": "golisopodmega"
+    },
+    "name": "Golisopite"
+  },
+  {
+    "desc": "If held by a Golurk, this item allows it to Mega Evolve in battle.",
+    "id": "golurkite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "golurk",
+      "forme": "golurkmega"
+    },
+    "name": "Golurkite"
+  },
+  {
+    "desc": "If the terrain is Grassy Terrain, raises holder's Defense by 1 stage. Single use.",
+    "id": "grassyseed",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Grassy Seed"
+  },
+  {
+    "desc": "If held by a Greninja, this item allows it to Mega Evolve in battle.",
+    "id": "greninjite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "greninja",
+      "forme": "greninjamega"
+    },
+    "name": "Greninjite"
+  },
+  {
+    "desc": "If held by a Gyarados, this item allows it to Mega Evolve in battle.",
+    "id": "gyaradosite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "gyarados",
+      "forme": "gyaradosmega"
+    },
+    "name": "Gyaradosite"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Dragon-type attack. Single use.",
+    "id": "habanberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Haban Berry"
+  },
+  {
+    "desc": "Holder's Rock-type attacks have 1.2× power.",
+    "id": "hardstone",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Hard Stone"
+  },
+  {
+    "desc": "If held by a Hawlucha, this item allows it to Mega Evolve in battle.",
+    "id": "hawluchanite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "hawlucha",
+      "forme": "hawluchamega"
+    },
+    "name": "Hawluchanite"
+  },
+  {
+    "desc": "Holder's use of Sunny Day lasts 8 turns instead of 5.",
+    "id": "heatrock",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Heat Rock"
+  },
+  {
+    "desc": "If held by a Heracross, this item allows it to Mega Evolve in battle.",
+    "id": "heracronite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "heracross",
+      "forme": "heracrossmega"
+    },
+    "name": "Heracronite"
+  },
+  {
+    "desc": "If held by a Houndoom, this item allows it to Mega Evolve in battle.",
+    "id": "houndoominite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "houndoom",
+      "forme": "houndoommega"
+    },
+    "name": "Houndoominite"
+  },
+  {
+    "desc": "Holder's use of Snowscape lasts 8 turns instead of 5.",
+    "id": "icyrock",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Icy Rock"
+  },
+  {
+    "desc": "Holder is grounded, Speed halved. If Flying type, takes neutral Ground damage.",
+    "id": "ironball",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Iron Ball"
+  },
+  {
+    "desc": "If held by a Kangaskhan, this item allows it to Mega Evolve in battle.",
+    "id": "kangaskhanite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "kangaskhan",
+      "forme": "kangaskhanmega"
+    },
+    "name": "Kangaskhanite"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Ghost-type attack. Single use.",
+    "id": "kasibberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Kasib Berry"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Poison-type attack. Single use.",
+    "id": "kebiaberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Kebia Berry"
+  },
+  {
+    "desc": "Holder's attacks without a chance to flinch gain a 10% chance to flinch.",
+    "id": "kingsrock",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "King's Rock"
+  },
+  {
+    "desc": "If held by a Farfetch’d or Sirfetch’d, its critical hit ratio is raised by 2 stages.",
+    "id": "leek",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Leek"
+  },
+  {
+    "desc": "At the end of every turn, holder restores 1/16 of its max HP.",
+    "id": "leftovers",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Leftovers"
+  },
+  {
+    "desc": "Restores 10 PP to the first of the holder's moves to reach 0 PP. Single use.",
+    "id": "leppaberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Leppa Berry"
+  },
+  {
+    "desc": "Holder's attacks do 1.3× damage, and it loses 1/10 its max HP after the attack.",
+    "id": "lifeorb",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Life Orb"
+  },
+  {
+    "desc": "If held by a Pikachu, its Attack and Sp. Atk are doubled.",
+    "id": "lightball",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Light Ball"
+  },
+  {
+    "desc": "Holder's use of Aurora Veil, Light Screen, or Reflect lasts 8 turns instead of 5.",
+    "id": "lightclay",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Light Clay"
+  },
+  {
+    "desc": "If held by a Lopunny, this item allows it to Mega Evolve in battle.",
+    "id": "lopunnite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "lopunny",
+      "forme": "lopunnymega"
+    },
+    "name": "Lopunnite"
+  },
+  {
+    "desc": "If held by a Lucario, this item allows it to Mega Evolve into Mega Lucario in battle.",
+    "id": "lucarionite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "lucario",
+      "forme": "lucariomega"
+    },
+    "name": "Lucarionite"
+  },
+  {
+    "desc": "If held by a Lucario, this item allows it to Mega Evolve into Mega Lucario Z in battle.",
+    "id": "lucarionitez",
+    "legal": [
+      "M-C"
+    ],
+    "mega": {
+      "base": "lucario",
+      "forme": "lucariomegaz"
+    },
+    "name": "Lucarionite Z"
+  },
+  {
+    "desc": "Holder cures itself if it has a non-volatile status or is confused. Single use.",
+    "id": "lumberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Lum Berry"
+  },
+  {
+    "desc": "Holder's Electric-type attacks have 1.2× power.",
+    "id": "magnet",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Magnet"
+  },
+  {
+    "desc": "If held by a Malamar, this item allows it to Mega Evolve in battle.",
+    "id": "malamarite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "malamar",
+      "forme": "malamarmega"
+    },
+    "name": "Malamarite"
+  },
+  {
+    "desc": "If held by a Manectric, this item allows it to Mega Evolve in battle.",
+    "id": "manectite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "manectric",
+      "forme": "manectricmega"
+    },
+    "name": "Manectite"
+  },
+  {
+    "desc": "If held by a Mawile, this item allows it to Mega Evolve in battle.",
+    "id": "mawilite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "mawile",
+      "forme": "mawilemega"
+    },
+    "name": "Mawilite"
+  },
+  {
+    "desc": "If held by a Medicham, this item allows it to Mega Evolve in battle.",
+    "id": "medichamite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "medicham",
+      "forme": "medichammega"
+    },
+    "name": "Medichamite"
+  },
+  {
+    "desc": "If held by a Meganium, this item allows it to Mega Evolve in battle.",
+    "id": "meganiumite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "meganium",
+      "forme": "meganiummega"
+    },
+    "name": "Meganiumite"
+  },
+  {
+    "desc": "Cures holder of Attract, Disable, Encore, Heal Block, Taunt, Torment. Single use.",
+    "id": "mentalherb",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Mental Herb"
+  },
+  {
+    "desc": "If held by a Meowstic, this item allows it to Mega Evolve in battle.",
+    "id": "meowsticite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "meowstic",
+      "forme": "meowsticmmega"
+    },
+    "name": "Meowsticite"
+  },
+  {
+    "desc": "If held by a Metagross, this item allows it to Mega Evolve in battle.",
+    "id": "metagrossite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "metagross",
+      "forme": "metagrossmega"
+    },
+    "name": "Metagrossite"
+  },
+  {
+    "desc": "Holder's Steel-type attacks have 1.2× power.",
+    "id": "metalcoat",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Metal Coat"
+  },
+  {
+    "desc": "Damage of moves used on consecutive turns is increased. Max 2× after 5 turns.",
+    "id": "metronome",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Metronome"
+  },
+  {
+    "desc": "Holder's Grass-type attacks have 1.2× power.",
+    "id": "miracleseed",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Miracle Seed"
+  },
+  {
+    "desc": "If the terrain is Misty Terrain, raises holder's Sp. Def by 1 stage. Single use.",
+    "id": "mistyseed",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Misty Seed"
+  },
+  {
+    "desc": "Holder's physical attacks have 1.1× power.",
+    "id": "muscleband",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Muscle Band"
+  },
+  {
+    "desc": "Holder's Water-type attacks have 1.2× power.",
+    "id": "mysticwater",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Mystic Water"
+  },
+  {
+    "desc": "Holder's Ice-type attacks have 1.2× power.",
+    "id": "nevermeltice",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Never-Melt Ice"
+  },
+  {
+    "desc": "Holder's first successful Normal-type attack will have 1.3× power. Single use.",
+    "id": "normalgem",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Normal Gem"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Fire-type attack. Single use.",
+    "id": "occaberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Occa Berry"
+  },
+  {
+    "desc": "Restores 10 HP when at 1/2 max HP or less. Single use.",
+    "id": "oranberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Oran Berry"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Water-type attack. Single use.",
+    "id": "passhoberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Passho Berry"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Psychic-type attack. Single use.",
+    "id": "payapaberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Payapa Berry"
+  },
+  {
+    "desc": "Holder is cured if it is poisoned. Single use.",
+    "id": "pechaberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Pecha Berry"
+  },
+  {
+    "desc": "Holder is cured if it is confused. Single use.",
+    "id": "persimberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Persim Berry"
+  },
+  {
+    "desc": "If held by a Pidgeot, this item allows it to Mega Evolve in battle.",
+    "id": "pidgeotite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "pidgeot",
+      "forme": "pidgeotmega"
+    },
+    "name": "Pidgeotite"
+  },
+  {
+    "desc": "If held by a Pinsir, this item allows it to Mega Evolve in battle.",
+    "id": "pinsirite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "pinsir",
+      "forme": "pinsirmega"
+    },
+    "name": "Pinsirite"
+  },
+  {
+    "desc": "Holder's Poison-type attacks have 1.2× power.",
+    "id": "poisonbarb",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Poison Barb"
+  },
+  {
+    "desc": "If the terrain is Psychic Terrain, raises holder's Sp. Def by 1 stage. Single use.",
+    "id": "psychicseed",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Psychic Seed"
+  },
+  {
+    "desc": "If held by a Pyroar, this item allows it to Mega Evolve in battle.",
+    "id": "pyroarite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "pyroar",
+      "forme": "pyroarmega"
+    },
+    "name": "Pyroarite"
+  },
+  {
+    "desc": "Each turn, holder has a 20% chance to move first in its priority bracket.",
+    "id": "quickclaw",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Quick Claw"
+  },
+  {
+    "desc": "If held by a Raichu, this item allows it to Mega Evolve into Mega Raichu X in battle.",
+    "id": "raichunitex",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "raichu",
+      "forme": "raichumegax"
+    },
+    "name": "Raichunite X"
+  },
+  {
+    "desc": "If held by a Raichu, this item allows it to Mega Evolve into Mega Raichu Y in battle.",
+    "id": "raichunitey",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "raichu",
+      "forme": "raichumegay"
+    },
+    "name": "Raichunite Y"
+  },
+  {
+    "desc": "Holder is cured if it is burned. Single use.",
+    "id": "rawstberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rawst Berry"
+  },
+  {
+    "desc": "If holder survives a hit, attacker is forced to switch to a random ally. Single use.",
+    "id": "redcard",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Red Card"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Grass-type attack. Single use.",
+    "id": "rindoberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Rindo Berry"
+  },
+  {
+    "desc": "If holder is hit by a contact move, the attacker loses 1/6 of its max HP.",
+    "id": "rockyhelmet",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Rocky Helmet"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Fairy-type attack. Single use.",
+    "id": "roseliberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Roseli Berry"
+  },
+  {
+    "desc": "If held by a Sableye, this item allows it to Mega Evolve in battle.",
+    "id": "sablenite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "sableye",
+      "forme": "sableyemega"
+    },
+    "name": "Sablenite"
+  },
+  {
+    "desc": "If held by a Salamence, this item allows it to Mega Evolve in battle.",
+    "id": "salamencite",
+    "legal": [
+      "M-C"
+    ],
+    "mega": {
+      "base": "salamence",
+      "forme": "salamencemega"
+    },
+    "name": "Salamencite"
+  },
+  {
+    "desc": "If held by a Sceptile, this item allows it to Mega Evolve in battle.",
+    "id": "sceptilite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "sceptile",
+      "forme": "sceptilemega"
+    },
+    "name": "Sceptilite"
+  },
+  {
+    "desc": "If held by a Scizor, this item allows it to Mega Evolve in battle.",
+    "id": "scizorite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "scizor",
+      "forme": "scizormega"
+    },
+    "name": "Scizorite"
+  },
+  {
+    "desc": "If held by a Scolipede, this item allows it to Mega Evolve in battle.",
+    "id": "scolipite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "scolipede",
+      "forme": "scolipedemega"
+    },
+    "name": "Scolipite"
+  },
+  {
+    "desc": "Holder's critical hit ratio is raised by 1 stage.",
+    "id": "scopelens",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Scope Lens"
+  },
+  {
+    "desc": "If held by a Scovillain, this item allows it to Mega Evolve in battle.",
+    "id": "scovillainite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "scovillain",
+      "forme": "scovillainmega"
+    },
+    "name": "Scovillainite"
+  },
+  {
+    "desc": "If held by a Scrafty, this item allows it to Mega Evolve in battle.",
+    "id": "scraftinite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "scrafty",
+      "forme": "scraftymega"
+    },
+    "name": "Scraftinite"
+  },
+  {
+    "desc": "Holder's Flying-type attacks have 1.2× power.",
+    "id": "sharpbeak",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Sharp Beak"
+  },
+  {
+    "desc": "If held by a Sharpedo, this item allows it to Mega Evolve in battle.",
+    "id": "sharpedonite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "sharpedo",
+      "forme": "sharpedomega"
+    },
+    "name": "Sharpedonite"
+  },
+  {
+    "desc": "Holder cannot be prevented from choosing to switch out by any effect.",
+    "id": "shedshell",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Shed Shell"
+  },
+  {
+    "desc": "After an attack, holder gains 1/8 of the damage in HP dealt to other Pokemon.",
+    "id": "shellbell",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Shell Bell"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Ground-type attack. Single use.",
+    "id": "shucaberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Shuca Berry"
+  },
+  {
+    "desc": "Holder's Normal-type attacks have 1.2× power.",
+    "id": "silkscarf",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Silk Scarf"
+  },
+  {
+    "desc": "Holder's Bug-type attacks have 1.2× power.",
+    "id": "silverpowder",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Silver Powder"
+  },
+  {
+    "desc": "Restores 1/4 max HP when at 1/2 max HP or less. Single use.",
+    "id": "sitrusberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Sitrus Berry"
+  },
+  {
+    "desc": "If held by a Skarmory, this item allows it to Mega Evolve in battle.",
+    "id": "skarmorite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "skarmory",
+      "forme": "skarmorymega"
+    },
+    "name": "Skarmorite"
+  },
+  {
+    "desc": "If held by a Slowbro (not Galarian Slowbro), this item allows it to Mega Evolve.",
+    "id": "slowbronite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "slowbro",
+      "forme": "slowbromega"
+    },
+    "name": "Slowbronite"
+  },
+  {
+    "desc": "Holder's use of Sandstorm lasts 8 turns instead of 5.",
+    "id": "smoothrock",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Smooth Rock"
+  },
+  {
+    "desc": "Holder's Ground-type attacks have 1.2× power.",
+    "id": "softsand",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Soft Sand"
+  },
+  {
+    "desc": "Holder's Ghost-type attacks have 1.2× power.",
+    "id": "spelltag",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Spell Tag"
+  },
+  {
+    "desc": "If held by a Staraptor, this item allows it to Mega Evolve in battle.",
+    "id": "staraptite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "staraptor",
+      "forme": "staraptormega"
+    },
+    "name": "Staraptite"
+  },
+  {
+    "desc": "If held by a Starmie, this item allows it to Mega Evolve in battle.",
+    "id": "starminite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "starmie",
+      "forme": "starmiemega"
+    },
+    "name": "Starminite"
+  },
+  {
+    "desc": "If held by a Steelix, this item allows it to Mega Evolve in battle.",
+    "id": "steelixite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "steelix",
+      "forme": "steelixmega"
+    },
+    "name": "Steelixite"
+  },
+  {
+    "desc": "If held by a Swampert, this item allows it to Mega Evolve in battle.",
+    "id": "swampertite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "swampert",
+      "forme": "swampertmega"
+    },
+    "name": "Swampertite"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Bug-type attack. Single use.",
+    "id": "tangaberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Tanga Berry"
+  },
+  {
+    "desc": "Holder's use of Electric/Grassy/Misty/Psychic Terrain lasts 8 turns instead of 5.",
+    "id": "terrainextender",
+    "legal": [
+      "M-C"
+    ],
+    "name": "Terrain Extender"
+  },
+  {
+    "desc": "Holder's Psychic-type attacks have 1.2× power.",
+    "id": "twistedspoon",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Twisted Spoon"
+  },
+  {
+    "desc": "If held by a Tyranitar, this item allows it to Mega Evolve in battle.",
+    "id": "tyranitarite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "tyranitar",
+      "forme": "tyranitarmega"
+    },
+    "name": "Tyranitarite"
+  },
+  {
+    "desc": "If held by a Venusaur, this item allows it to Mega Evolve in battle.",
+    "id": "venusaurite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "venusaur",
+      "forme": "venusaurmega"
+    },
+    "name": "Venusaurite"
+  },
+  {
+    "desc": "If held by a Victreebel, this item allows it to Mega Evolve in battle.",
+    "id": "victreebelite",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "mega": {
+      "base": "victreebel",
+      "forme": "victreebelmega"
+    },
+    "name": "Victreebelite"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Electric-type attack. Single use.",
+    "id": "wacanberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Wacan Berry"
+  },
+  {
+    "desc": "Restores all lowered stat stages to 0 when one is less than 0. Single use.",
+    "id": "whiteherb",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "White Herb"
+  },
+  {
+    "desc": "The accuracy of attacks by the holder is 1.1×.",
+    "id": "widelens",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Wide Lens"
+  },
+  {
+    "desc": "Holder's special attacks have 1.1× power.",
+    "id": "wiseglasses",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Wise Glasses"
+  },
+  {
+    "desc": "Halves damage taken from a supereffective Ice-type attack. Single use.",
+    "id": "yacheberry",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Yache Berry"
+  },
+  {
+    "desc": "The accuracy of attacks by the holder is 1.2× if it moves after its target.",
+    "id": "zoomlens",
+    "legal": [
+      "M-B",
+      "M-C"
+    ],
+    "name": "Zoom Lens"
+  }
+]

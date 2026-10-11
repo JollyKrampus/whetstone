@@ -1,0 +1,44 @@
+[
+  {
+    "file": "limited/HOB.PremierDraft.json",
+    "format": "PremierDraft",
+    "games": 323114,
+    "lastModified": "2026-10-01T13:17:00.000Z",
+    "set": "HOB"
+  },
+  {
+    "file": "limited/HOB.TradDraft.json",
+    "format": "TradDraft",
+    "games": 39541,
+    "lastModified": "2026-10-01T13:16:59.000Z",
+    "set": "HOB"
+  },
+  {
+    "file": "limited/HOB.Sealed.json",
+    "format": "Sealed",
+    "games": 59310,
+    "lastModified": "2026-10-01T13:16:56.000Z",
+    "set": "HOB"
+  },
+  {
+    "file": "limited/MSH.PremierDraft.json",
+    "format": "PremierDraft",
+    "games": 377514,
+    "lastModified": "2026-07-27T18:11:30.000Z",
+    "set": "MSH"
+  },
+  {
+    "file": "limited/MSH.TradDraft.json",
+    "format": "TradDraft",
+    "games": 41361,
+    "lastModified": "2026-07-27T18:11:28.000Z",
+    "set": "MSH"
+  },
+  {
+    "file": "limited/MSH.Sealed.json",
+    "format": "Sealed",
+    "games": 52331,
+    "lastModified": "2026-07-27T18:11:25.000Z",
+    "set": "MSH"
+  }
+]

@@ -1,0 +1,1766 @@
+[
+  {
+    "arena": true,
+    "cardCount": 12,
+    "code": "MDD",
+    "kind": "expansion",
+    "name": "Marvel: Darkhold Destiny",
+    "releasedAt": "2027-04-09",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 91,
+    "code": "TRK",
+    "kind": "expansion",
+    "name": "Star Trek",
+    "releasedAt": "2026-11-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 3,
+    "code": "MBC",
+    "kind": "draft_innovation",
+    "name": "Mystery Booster Commander Edition",
+    "releasedAt": "2026-11-09",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "YFRA",
+    "kind": "alchemy",
+    "name": "Alchemy: Reality Fracture",
+    "releasedAt": "2026-10-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 285,
+    "code": "FRA",
+    "kind": "expansion",
+    "name": "Reality Fracture",
+    "releasedAt": "2026-10-02",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 15,
+    "code": "FRC",
+    "kind": "commander",
+    "name": "Reality Fracture Commander",
+    "releasedAt": "2026-10-02",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 193,
+    "code": "HOB",
+    "kind": "expansion",
+    "name": "The Hobbit",
+    "releasedAt": "2026-08-14",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 103,
+    "code": "HOC",
+    "kind": "eternal",
+    "name": "The Hobbit Eternal",
+    "releasedAt": "2026-08-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 94,
+    "code": "MAR",
+    "kind": "masterpiece",
+    "name": "Marvel Universe",
+    "releasedAt": "2026-06-26",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 351,
+    "code": "MSC",
+    "kind": "commander",
+    "name": "Marvel Super Heroes Commander",
+    "releasedAt": "2026-06-26",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 281,
+    "code": "MSH",
+    "kind": "expansion",
+    "name": "Marvel Super Heroes",
+    "releasedAt": "2026-06-26",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 32,
+    "code": "YSOS",
+    "kind": "alchemy",
+    "name": "Alchemy: Secrets of Strixhaven",
+    "releasedAt": "2026-05-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 65,
+    "code": "SOA",
+    "kind": "masterpiece",
+    "name": "Secrets of Strixhaven Mystical Archive",
+    "releasedAt": "2026-04-24",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 10,
+    "code": "SOC",
+    "kind": "commander",
+    "name": "Secrets of Strixhaven Commander",
+    "releasedAt": "2026-04-24",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 271,
+    "code": "SOS",
+    "kind": "expansion",
+    "name": "Secrets of Strixhaven",
+    "releasedAt": "2026-04-24",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 20,
+    "code": "PZA",
+    "kind": "masterpiece",
+    "name": "Teenage Mutant Ninja Turtles Source Material",
+    "releasedAt": "2026-03-06",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "TMC",
+    "kind": "eternal",
+    "name": "Teenage Mutant Ninja Turtles Eternal",
+    "releasedAt": "2026-03-06",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 195,
+    "code": "TMT",
+    "kind": "expansion",
+    "name": "Teenage Mutant Ninja Turtles",
+    "releasedAt": "2026-03-06",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 33,
+    "code": "YECL",
+    "kind": "alchemy",
+    "name": "Alchemy: Lorwyn Eclipsed",
+    "releasedAt": "2026-02-03",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 4,
+    "code": "ECC",
+    "kind": "commander",
+    "name": "Lorwyn Eclipsed Commander",
+    "releasedAt": "2026-01-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 273,
+    "code": "ECL",
+    "kind": "expansion",
+    "name": "Lorwyn Eclipsed",
+    "releasedAt": "2026-01-23",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 286,
+    "code": "TLA",
+    "kind": "expansion",
+    "name": "Avatar: The Last Airbender",
+    "releasedAt": "2025-11-21",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 241,
+    "code": "TLE",
+    "kind": "eternal",
+    "name": "Avatar: The Last Airbender Eternal",
+    "releasedAt": "2025-11-21",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 193,
+    "code": "SPM",
+    "kind": "expansion",
+    "name": "Marvel's Spider-Man",
+    "releasedAt": "2025-09-26",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "AA3",
+    "kind": "box",
+    "name": "Arena Anthology 3",
+    "releasedAt": "2025-09-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 28,
+    "code": "AA4",
+    "kind": "box",
+    "name": "Arena Anthology 4",
+    "releasedAt": "2025-09-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 40,
+    "code": "OMB",
+    "kind": "masterpiece",
+    "name": "Through the Omenpaths Bonus Sheet",
+    "releasedAt": "2025-09-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 26,
+    "code": "AA1",
+    "kind": "box",
+    "name": "Arena Anthology 1",
+    "releasedAt": "2025-08-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "AA2",
+    "kind": "box",
+    "name": "Arena Anthology 2",
+    "releasedAt": "2025-08-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 41,
+    "code": "YEOE",
+    "kind": "alchemy",
+    "name": "Alchemy: Edge of Eternities",
+    "releasedAt": "2025-08-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 4,
+    "code": "EOC",
+    "kind": "commander",
+    "name": "Edge of Eternities Commander",
+    "releasedAt": "2025-08-01",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 266,
+    "code": "EOE",
+    "kind": "expansion",
+    "name": "Edge of Eternities",
+    "releasedAt": "2025-08-01",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 45,
+    "code": "EOS",
+    "kind": "masterpiece",
+    "name": "Edge of Eternities: Stellar Sights",
+    "releasedAt": "2025-08-01",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 64,
+    "code": "FCA",
+    "kind": "masterpiece",
+    "name": "Final Fantasy: Through the Ages",
+    "releasedAt": "2025-06-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 21,
+    "code": "FIC",
+    "kind": "commander",
+    "name": "Final Fantasy Commander",
+    "releasedAt": "2025-06-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 312,
+    "code": "FIN",
+    "kind": "expansion",
+    "name": "Final Fantasy",
+    "releasedAt": "2025-06-13",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 11,
+    "code": "PA1",
+    "kind": "box",
+    "name": "Pioneer Anthology 1",
+    "releasedAt": "2025-05-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 30,
+    "code": "YTDM",
+    "kind": "alchemy",
+    "name": "Alchemy: Tarkir",
+    "releasedAt": "2025-04-29",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 10,
+    "code": "TDC",
+    "kind": "commander",
+    "name": "Tarkir: Dragonstorm Commander",
+    "releasedAt": "2025-04-11",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 276,
+    "code": "TDM",
+    "kind": "expansion",
+    "name": "Tarkir: Dragonstorm",
+    "releasedAt": "2025-04-11",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 31,
+    "code": "YDFT",
+    "kind": "alchemy",
+    "name": "Alchemy: Aetherdrift",
+    "releasedAt": "2025-03-04",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 276,
+    "code": "DFT",
+    "kind": "expansion",
+    "name": "Aetherdrift",
+    "releasedAt": "2025-02-14",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 4,
+    "code": "DRC",
+    "kind": "commander",
+    "name": "Aetherdrift Commander",
+    "releasedAt": "2025-02-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 398,
+    "code": "PIO",
+    "kind": "masters",
+    "name": "Pioneer Masters",
+    "releasedAt": "2024-12-10",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 517,
+    "code": "FDN",
+    "kind": "core",
+    "name": "Foundations",
+    "releasedAt": "2024-11-15",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 768,
+    "code": "J25",
+    "kind": "draft_innovation",
+    "name": "Foundations Jumpstart",
+    "releasedAt": "2024-11-15",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 30,
+    "code": "YDSK",
+    "kind": "alchemy",
+    "name": "Alchemy: Duskmourn",
+    "releasedAt": "2024-10-15",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 276,
+    "code": "DSK",
+    "kind": "expansion",
+    "name": "Duskmourn: House of Horror",
+    "releasedAt": "2024-09-27",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 30,
+    "code": "YBLB",
+    "kind": "alchemy",
+    "name": "Alchemy: Bloomburrow",
+    "releasedAt": "2024-08-20",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 279,
+    "code": "BLB",
+    "kind": "expansion",
+    "name": "Bloomburrow",
+    "releasedAt": "2024-08-02",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "BLC",
+    "kind": "commander",
+    "name": "Bloomburrow Commander",
+    "releasedAt": "2024-08-02",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 8,
+    "code": "M3C",
+    "kind": "commander",
+    "name": "Modern Horizons 3 Commander",
+    "releasedAt": "2024-06-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 309,
+    "code": "MH3",
+    "kind": "draft_innovation",
+    "name": "Modern Horizons 3",
+    "releasedAt": "2024-06-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 30,
+    "code": "YOTJ",
+    "kind": "alchemy",
+    "name": "Alchemy: Outlaws of Thunder Junction",
+    "releasedAt": "2024-05-07",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 30,
+    "code": "BIG",
+    "kind": "expansion",
+    "name": "The Big Score",
+    "releasedAt": "2024-04-19",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 4,
+    "code": "OTC",
+    "kind": "commander",
+    "name": "Outlaws of Thunder Junction Commander",
+    "releasedAt": "2024-04-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 276,
+    "code": "OTJ",
+    "kind": "expansion",
+    "name": "Outlaws of Thunder Junction",
+    "releasedAt": "2024-04-19",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 65,
+    "code": "OTP",
+    "kind": "masterpiece",
+    "name": "Breaking News",
+    "releasedAt": "2024-04-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 30,
+    "code": "YMKM",
+    "kind": "alchemy",
+    "name": "Alchemy: Murders at Karlov Manor",
+    "releasedAt": "2024-03-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "CLU",
+    "kind": "draft_innovation",
+    "name": "Ravnica: Clue Edition",
+    "releasedAt": "2024-02-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 279,
+    "code": "MKM",
+    "kind": "expansion",
+    "name": "Murders at Karlov Manor",
+    "releasedAt": "2024-02-09",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 31,
+    "code": "YLCI",
+    "kind": "alchemy",
+    "name": "Alchemy: Ixalan",
+    "releasedAt": "2023-12-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 4,
+    "code": "LCC",
+    "kind": "commander",
+    "name": "The Lost Caverns of Ixalan Commander",
+    "releasedAt": "2023-11-17",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 291,
+    "code": "LCI",
+    "kind": "expansion",
+    "name": "The Lost Caverns of Ixalan",
+    "releasedAt": "2023-11-17",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 130,
+    "code": "SPG",
+    "kind": "masterpiece",
+    "name": "Special Guests",
+    "releasedAt": "2023-11-17",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 31,
+    "code": "YWOE",
+    "kind": "alchemy",
+    "name": "Alchemy: Wilds of Eldraine",
+    "releasedAt": "2023-10-10",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 281,
+    "code": "WOE",
+    "kind": "expansion",
+    "name": "Wilds of Eldraine",
+    "releasedAt": "2023-09-08",
+    "standard": true
+  },
+  {
+    "arena": true,
+    "cardCount": 63,
+    "code": "WOT",
+    "kind": "masterpiece",
+    "name": "Wilds of Eldraine: Enchanting Tales",
+    "releasedAt": "2023-09-08",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "CMM",
+    "kind": "masters",
+    "name": "Commander Masters",
+    "releasedAt": "2023-08-04",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "EA3",
+    "kind": "box",
+    "name": "Explorer Anthology 3",
+    "releasedAt": "2023-07-18",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "HA7",
+    "kind": "box",
+    "name": "Historic Anthology 7",
+    "releasedAt": "2023-07-18",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 41,
+    "code": "LTC",
+    "kind": "commander",
+    "name": "Tales of Middle-earth Commander",
+    "releasedAt": "2023-06-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 289,
+    "code": "LTR",
+    "kind": "draft_innovation",
+    "name": "The Lord of the Rings: Tales of Middle-earth",
+    "releasedAt": "2023-06-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 50,
+    "code": "MAT",
+    "kind": "expansion",
+    "name": "March of the Machine: The Aftermath",
+    "releasedAt": "2023-05-12",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 4,
+    "code": "MOC",
+    "kind": "commander",
+    "name": "March of the Machine Commander",
+    "releasedAt": "2023-04-21",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 296,
+    "code": "MOM",
+    "kind": "expansion",
+    "name": "March of the Machine",
+    "releasedAt": "2023-04-21",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 65,
+    "code": "MUL",
+    "kind": "masterpiece",
+    "name": "Multiverse Legends",
+    "releasedAt": "2023-04-21",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 284,
+    "code": "SIR",
+    "kind": "masters",
+    "name": "Shadows over Innistrad Remastered",
+    "releasedAt": "2023-03-21",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 76,
+    "code": "SIS",
+    "kind": "masters",
+    "name": "Shadows of the Past",
+    "releasedAt": "2023-03-21",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 31,
+    "code": "YONE",
+    "kind": "alchemy",
+    "name": "Alchemy: Phyrexia",
+    "releasedAt": "2023-02-28",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "ONC",
+    "kind": "commander",
+    "name": "Phyrexia: All Will Be One Commander",
+    "releasedAt": "2023-02-10",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 271,
+    "code": "ONE",
+    "kind": "expansion",
+    "name": "Phyrexia: All Will Be One",
+    "releasedAt": "2023-02-10",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "DMR",
+    "kind": "masters",
+    "name": "Dominaria Remastered",
+    "releasedAt": "2023-01-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "EA2",
+    "kind": "box",
+    "name": "Explorer Anthology 2",
+    "releasedAt": "2022-12-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 31,
+    "code": "YBRO",
+    "kind": "alchemy",
+    "name": "Alchemy: The Brothers' War",
+    "releasedAt": "2022-12-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 280,
+    "code": "BRO",
+    "kind": "expansion",
+    "name": "The Brothers' War",
+    "releasedAt": "2022-11-18",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 63,
+    "code": "BRR",
+    "kind": "masterpiece",
+    "name": "The Brothers' War Retro Artifacts",
+    "releasedAt": "2022-11-18",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "UNF",
+    "kind": "funny",
+    "name": "Unfinity",
+    "releasedAt": "2022-10-07",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 39,
+    "code": "YDMU",
+    "kind": "alchemy",
+    "name": "Alchemy: Dominaria",
+    "releasedAt": "2022-10-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "DMC",
+    "kind": "commander",
+    "name": "Dominaria United Commander",
+    "releasedAt": "2022-09-09",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 271,
+    "code": "DMU",
+    "kind": "expansion",
+    "name": "Dominaria United",
+    "releasedAt": "2022-09-09",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 20,
+    "code": "EA1",
+    "kind": "box",
+    "name": "Explorer Anthology 1",
+    "releasedAt": "2022-07-28",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 20,
+    "code": "HA6",
+    "kind": "box",
+    "name": "Historic Anthology 6",
+    "releasedAt": "2022-07-28",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "2X2",
+    "kind": "masters",
+    "name": "Double Masters 2022",
+    "releasedAt": "2022-07-08",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 393,
+    "code": "HBG",
+    "kind": "alchemy",
+    "name": "Alchemy Horizons: Baldur's Gate",
+    "releasedAt": "2022-07-07",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "CLB",
+    "kind": "draft_innovation",
+    "name": "Commander Legends: Battle for Baldur's Gate",
+    "releasedAt": "2022-06-10",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 30,
+    "code": "YSNC",
+    "kind": "alchemy",
+    "name": "Alchemy: New Capenna",
+    "releasedAt": "2022-06-02",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 266,
+    "code": "SNC",
+    "kind": "expansion",
+    "name": "Streets of New Capenna",
+    "releasedAt": "2022-04-29",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 30,
+    "code": "YNEO",
+    "kind": "alchemy",
+    "name": "Alchemy: Kamigawa",
+    "releasedAt": "2022-03-17",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 287,
+    "code": "NEO",
+    "kind": "expansion",
+    "name": "Kamigawa: Neon Dynasty",
+    "releasedAt": "2022-02-18",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 63,
+    "code": "YMID",
+    "kind": "alchemy",
+    "name": "Alchemy: Innistrad",
+    "releasedAt": "2021-12-09",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 272,
+    "code": "VOW",
+    "kind": "expansion",
+    "name": "Innistrad: Crimson Vow",
+    "releasedAt": "2021-11-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 272,
+    "code": "MID",
+    "kind": "expansion",
+    "name": "Innistrad: Midnight Hunt",
+    "releasedAt": "2021-09-24",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 389,
+    "code": "J21",
+    "kind": "draft_innovation",
+    "name": "Jumpstart: Historic Horizons",
+    "releasedAt": "2021-08-26",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 266,
+    "code": "AFR",
+    "kind": "expansion",
+    "name": "Adventures in the Forgotten Realms",
+    "releasedAt": "2021-07-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 17,
+    "code": "MH2",
+    "kind": "draft_innovation",
+    "name": "Modern Horizons 2",
+    "releasedAt": "2021-06-18",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "HA5",
+    "kind": "box",
+    "name": "Historic Anthology 5",
+    "releasedAt": "2021-05-27",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "C21",
+    "kind": "commander",
+    "name": "Commander 2021",
+    "releasedAt": "2021-04-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 63,
+    "code": "STA",
+    "kind": "masterpiece",
+    "name": "Strixhaven Mystical Archive",
+    "releasedAt": "2021-04-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 280,
+    "code": "STX",
+    "kind": "expansion",
+    "name": "Strixhaven: School of Mages",
+    "releasedAt": "2021-04-23",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "HA4",
+    "kind": "box",
+    "name": "Historic Anthology 4",
+    "releasedAt": "2021-03-11",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 305,
+    "code": "KHM",
+    "kind": "expansion",
+    "name": "Kaldheim",
+    "releasedAt": "2021-02-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "CMR",
+    "kind": "draft_innovation",
+    "name": "Commander Legends",
+    "releasedAt": "2020-11-20",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 292,
+    "code": "KLR",
+    "kind": "masters",
+    "name": "Kaladesh Remastered",
+    "releasedAt": "2020-11-12",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 270,
+    "code": "ZNR",
+    "kind": "expansion",
+    "name": "Zendikar Rising",
+    "releasedAt": "2020-09-25",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 309,
+    "code": "AKR",
+    "kind": "masters",
+    "name": "Amonkhet Remastered",
+    "releasedAt": "2020-08-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 118,
+    "code": "ANB",
+    "kind": "starter",
+    "name": "Arena Beginner Set",
+    "releasedAt": "2020-08-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "2XM",
+    "kind": "masters",
+    "name": "Double Masters",
+    "releasedAt": "2020-08-07",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 18,
+    "code": "AJMP",
+    "kind": "starter",
+    "name": "Jumpstart Arena Exclusives",
+    "releasedAt": "2020-07-17",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 440,
+    "code": "JMP",
+    "kind": "draft_innovation",
+    "name": "Jumpstart",
+    "releasedAt": "2020-07-17",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 285,
+    "code": "M21",
+    "kind": "core",
+    "name": "Core Set 2021",
+    "releasedAt": "2020-07-03",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 27,
+    "code": "HA3",
+    "kind": "box",
+    "name": "Historic Anthology 3",
+    "releasedAt": "2020-05-21",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 265,
+    "code": "IKO",
+    "kind": "expansion",
+    "name": "Ikoria: Lair of Behemoths",
+    "releasedAt": "2020-04-24",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 25,
+    "code": "HA2",
+    "kind": "box",
+    "name": "Historic Anthology 2",
+    "releasedAt": "2020-03-12",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 23,
+    "code": "PANA",
+    "kind": "promo",
+    "name": "MTG Arena Promos",
+    "releasedAt": "2020-03-12",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 273,
+    "code": "THB",
+    "kind": "expansion",
+    "name": "Theros Beyond Death",
+    "releasedAt": "2020-01-24",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 20,
+    "code": "HA1",
+    "kind": "box",
+    "name": "Historic Anthology 1",
+    "releasedAt": "2019-11-21",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 285,
+    "code": "ELD",
+    "kind": "expansion",
+    "name": "Throne of Eldraine",
+    "releasedAt": "2019-10-04",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 329,
+    "code": "M20",
+    "kind": "core",
+    "name": "Core Set 2020",
+    "releasedAt": "2019-07-12",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 3,
+    "code": "MH1",
+    "kind": "draft_innovation",
+    "name": "Modern Horizons",
+    "releasedAt": "2019-06-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 265,
+    "code": "WAR",
+    "kind": "expansion",
+    "name": "War of the Spark",
+    "releasedAt": "2019-05-03",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 268,
+    "code": "RNA",
+    "kind": "expansion",
+    "name": "Ravnica Allegiance",
+    "releasedAt": "2019-01-25",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 5,
+    "code": "UMA",
+    "kind": "masters",
+    "name": "Ultimate Masters",
+    "releasedAt": "2018-12-07",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 5,
+    "code": "G18",
+    "kind": "box",
+    "name": "M19 Gift Pack",
+    "releasedAt": "2018-11-16",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 268,
+    "code": "GRN",
+    "kind": "expansion",
+    "name": "Guilds of Ravnica",
+    "releasedAt": "2018-10-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "C18",
+    "kind": "commander",
+    "name": "Commander 2018",
+    "releasedAt": "2018-08-10",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 14,
+    "code": "ANA",
+    "kind": "starter",
+    "name": "Arena New Player Experience",
+    "releasedAt": "2018-07-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 14,
+    "code": "OANA",
+    "kind": "starter",
+    "name": "Arena New Player Experience Cards",
+    "releasedAt": "2018-07-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 299,
+    "code": "M19",
+    "kind": "core",
+    "name": "Core Set 2019",
+    "releasedAt": "2018-07-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 265,
+    "code": "DOM",
+    "kind": "expansion",
+    "name": "Dominaria",
+    "releasedAt": "2018-04-27",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "PDOM",
+    "kind": "promo",
+    "name": "Dominaria Promos",
+    "releasedAt": "2018-04-27",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "DDU",
+    "kind": "duel_deck",
+    "name": "Duel Decks: Elves vs. Inventors",
+    "releasedAt": "2018-04-06",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 205,
+    "code": "RIX",
+    "kind": "expansion",
+    "name": "Rivals of Ixalan",
+    "releasedAt": "2018-01-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "IMA",
+    "kind": "masters",
+    "name": "Iconic Masters",
+    "releasedAt": "2017-11-17",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 274,
+    "code": "XLN",
+    "kind": "expansion",
+    "name": "Ixalan",
+    "releasedAt": "2017-09-29",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "HOU",
+    "kind": "expansion",
+    "name": "Hour of Devastation",
+    "releasedAt": "2017-07-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "AKH",
+    "kind": "expansion",
+    "name": "Amonkhet",
+    "releasedAt": "2017-04-28",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "AER",
+    "kind": "expansion",
+    "name": "Aether Revolt",
+    "releasedAt": "2017-01-20",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "C16",
+    "kind": "commander",
+    "name": "Commander 2016",
+    "releasedAt": "2016-11-11",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "KLD",
+    "kind": "expansion",
+    "name": "Kaladesh",
+    "releasedAt": "2016-09-30",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "SOI",
+    "kind": "expansion",
+    "name": "Shadows over Innistrad",
+    "releasedAt": "2016-04-08",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 7,
+    "code": "OGW",
+    "kind": "expansion",
+    "name": "Oath of the Gatewatch",
+    "releasedAt": "2016-01-22",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "BFZ",
+    "kind": "expansion",
+    "name": "Battle for Zendikar",
+    "releasedAt": "2015-10-02",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 3,
+    "code": "ORI",
+    "kind": "core",
+    "name": "Magic Origins",
+    "releasedAt": "2015-07-17",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "DTK",
+    "kind": "expansion",
+    "name": "Dragons of Tarkir",
+    "releasedAt": "2015-03-27",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "GVL",
+    "kind": "duel_deck",
+    "name": "Duel Decks Anthology: Garruk vs. Liliana",
+    "releasedAt": "2014-12-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 3,
+    "code": "PRM",
+    "kind": "promo",
+    "name": "Magic Online Promos",
+    "releasedAt": "2014-10-17",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 254,
+    "code": "KTK",
+    "kind": "expansion",
+    "name": "Khans of Tarkir",
+    "releasedAt": "2014-09-26",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 5,
+    "code": "VMA",
+    "kind": "masters",
+    "name": "Vintage Masters",
+    "releasedAt": "2014-06-16",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "JOU",
+    "kind": "expansion",
+    "name": "Journey into Nyx",
+    "releasedAt": "2014-05-02",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "C13",
+    "kind": "commander",
+    "name": "Commander 2013",
+    "releasedAt": "2013-11-01",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "DDL",
+    "kind": "duel_deck",
+    "name": "Duel Decks: Heroes vs. Monsters",
+    "releasedAt": "2013-09-06",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "M14",
+    "kind": "core",
+    "name": "Magic 2014",
+    "releasedAt": "2013-07-19",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "DGM",
+    "kind": "expansion",
+    "name": "Dragon's Maze",
+    "releasedAt": "2013-05-03",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "GTC",
+    "kind": "expansion",
+    "name": "Gatecrash",
+    "releasedAt": "2013-02-01",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "RTR",
+    "kind": "expansion",
+    "name": "Return to Ravnica",
+    "releasedAt": "2012-10-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "M13",
+    "kind": "core",
+    "name": "Magic 2013",
+    "releasedAt": "2012-07-13",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "DKA",
+    "kind": "expansion",
+    "name": "Dark Ascension",
+    "releasedAt": "2012-02-03",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "ISD",
+    "kind": "expansion",
+    "name": "Innistrad",
+    "releasedAt": "2011-09-30",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "M12",
+    "kind": "core",
+    "name": "Magic 2012",
+    "releasedAt": "2011-07-15",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "MBS",
+    "kind": "expansion",
+    "name": "Mirrodin Besieged",
+    "releasedAt": "2011-02-04",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 3,
+    "code": "SOM",
+    "kind": "expansion",
+    "name": "Scars of Mirrodin",
+    "releasedAt": "2010-10-01",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "M11",
+    "kind": "core",
+    "name": "Magic 2011",
+    "releasedAt": "2010-07-16",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 6,
+    "code": "WWK",
+    "kind": "expansion",
+    "name": "Worldwake",
+    "releasedAt": "2010-02-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "ZEN",
+    "kind": "expansion",
+    "name": "Zendikar",
+    "releasedAt": "2009-10-02",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "ARB",
+    "kind": "expansion",
+    "name": "Alara Reborn",
+    "releasedAt": "2009-04-30",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 5,
+    "code": "EVE",
+    "kind": "expansion",
+    "name": "Eventide",
+    "releasedAt": "2008-07-25",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 11,
+    "code": "SHM",
+    "kind": "expansion",
+    "name": "Shadowmoor",
+    "releasedAt": "2008-05-02",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 9,
+    "code": "MOR",
+    "kind": "expansion",
+    "name": "Morningtide",
+    "releasedAt": "2008-02-01",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 19,
+    "code": "LRW",
+    "kind": "expansion",
+    "name": "Lorwyn",
+    "releasedAt": "2007-10-12",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "FUT",
+    "kind": "expansion",
+    "name": "Future Sight",
+    "releasedAt": "2007-05-04",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "DIS",
+    "kind": "expansion",
+    "name": "Dissension",
+    "releasedAt": "2006-05-05",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "RAV",
+    "kind": "expansion",
+    "name": "Ravnica: City of Guilds",
+    "releasedAt": "2005-10-07",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "SOK",
+    "kind": "expansion",
+    "name": "Saviors of Kamigawa",
+    "releasedAt": "2005-06-03",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "5DN",
+    "kind": "expansion",
+    "name": "Fifth Dawn",
+    "releasedAt": "2004-06-04",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 4,
+    "code": "MRD",
+    "kind": "expansion",
+    "name": "Mirrodin",
+    "releasedAt": "2003-10-02",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "SCG",
+    "kind": "expansion",
+    "name": "Scourge",
+    "releasedAt": "2003-05-26",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "ONS",
+    "kind": "expansion",
+    "name": "Onslaught",
+    "releasedAt": "2002-10-07",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "ODY",
+    "kind": "expansion",
+    "name": "Odyssey",
+    "releasedAt": "2001-10-01",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "APC",
+    "kind": "expansion",
+    "name": "Apocalypse",
+    "releasedAt": "2001-06-04",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "NEM",
+    "kind": "expansion",
+    "name": "Nemesis",
+    "releasedAt": "2000-02-14",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "ULG",
+    "kind": "expansion",
+    "name": "Urza's Legacy",
+    "releasedAt": "1999-02-15",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "EXO",
+    "kind": "expansion",
+    "name": "Exodus",
+    "releasedAt": "1998-06-15",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 2,
+    "code": "MIR",
+    "kind": "expansion",
+    "name": "Mirage",
+    "releasedAt": "1996-10-08",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "ICE",
+    "kind": "expansion",
+    "name": "Ice Age",
+    "releasedAt": "1995-06-03",
+    "standard": false
+  },
+  {
+    "arena": true,
+    "cardCount": 1,
+    "code": "FEM",
+    "kind": "expansion",
+    "name": "Fallen Empires",
+    "releasedAt": "1994-11-01",
+    "standard": false
+  }
+]

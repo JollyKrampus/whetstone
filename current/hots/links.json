@@ -1,0 +1,2822 @@
+{
+  "general": [
+    {
+      "kind": "news",
+      "label": "Official news and patch notes",
+      "site": "blizzard",
+      "url": "https://news.blizzard.com/en-us/feed/heroes-of-the-storm"
+    },
+    {
+      "kind": "live",
+      "label": "Heroes of the Storm on Twitch",
+      "site": "twitch",
+      "url": "https://www.twitch.tv/directory/category/heroes-of-the-storm"
+    },
+    {
+      "kind": "tierlist",
+      "label": "Icy Veins tier lists",
+      "site": "icy-veins",
+      "url": "https://www.icy-veins.com/heroes/heroes-of-the-storm-tier-list-hub"
+    },
+    {
+      "kind": "tierlist",
+      "label": "Psionic Storm tier list",
+      "site": "psionic-storm",
+      "url": "https://psionic-storm.com/en/tierlist/"
+    },
+    {
+      "kind": "esports",
+      "label": "Heroes of the Storm on Liquipedia",
+      "site": "liquipedia",
+      "url": "https://liquipedia.net/heroes/Main_Page"
+    }
+  ],
+  "heroes": {
+    "Abat": [
+      {
+        "kind": "guide",
+        "label": "Abathur build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/abathur-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Abathur on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/abathur/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Abathur on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/abathur"
+      },
+      {
+        "kind": "wiki",
+        "label": "Abathur on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Abathur"
+      },
+      {
+        "kind": "esports",
+        "label": "Abathur on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Abathur"
+      }
+    ],
+    "Alar": [
+      {
+        "kind": "guide",
+        "label": "Alarak build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/alarak-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Alarak on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/alarak/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Alarak on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/alarak"
+      },
+      {
+        "kind": "wiki",
+        "label": "Alarak on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Alarak"
+      },
+      {
+        "kind": "esports",
+        "label": "Alarak on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Alarak"
+      }
+    ],
+    "Alex": [
+      {
+        "kind": "guide",
+        "label": "Alexstrasza build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/alexstrasza-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Alexstrasza on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/alexstrasza/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Alexstrasza on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/alexstrasza"
+      },
+      {
+        "kind": "wiki",
+        "label": "Alexstrasza on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Alexstrasza"
+      }
+    ],
+    "Amaz": [
+      {
+        "kind": "guide",
+        "label": "Cassia build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/cassia-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Cassia on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/cassia/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Cassia on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/cassia"
+      },
+      {
+        "kind": "wiki",
+        "label": "Cassia on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Cassia"
+      },
+      {
+        "kind": "esports",
+        "label": "Cassia on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Cassia"
+      }
+    ],
+    "Andu": [
+      {
+        "kind": "guide",
+        "label": "Anduin build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/anduin-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Anduin on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/anduin/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Anduin on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/anduin"
+      },
+      {
+        "kind": "wiki",
+        "label": "Anduin on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Anduin"
+      }
+    ],
+    "Anub": [
+      {
+        "kind": "guide",
+        "label": "Anub'arak build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/anubarak-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Anub'arak on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/anubarak/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Anub'arak on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/anubarak"
+      },
+      {
+        "kind": "wiki",
+        "label": "Anub'arak on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Anub'arak"
+      },
+      {
+        "kind": "esports",
+        "label": "Anub'arak on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Anub'arak"
+      }
+    ],
+    "Arth": [
+      {
+        "kind": "guide",
+        "label": "Arthas build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/arthas-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Arthas on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/arthas/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Arthas on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/arthas"
+      },
+      {
+        "kind": "wiki",
+        "label": "Arthas on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Arthas"
+      },
+      {
+        "kind": "esports",
+        "label": "Arthas on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Arthas"
+      }
+    ],
+    "Arts": [
+      {
+        "kind": "guide",
+        "label": "Artanis build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/artanis-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Artanis on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/artanis/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Artanis on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/artanis"
+      },
+      {
+        "kind": "wiki",
+        "label": "Artanis on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Artanis"
+      },
+      {
+        "kind": "esports",
+        "label": "Artanis on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Artanis"
+      }
+    ],
+    "Auri": [
+      {
+        "kind": "guide",
+        "label": "Auriel build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/auriel-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Auriel on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/auriel/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Auriel on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/auriel"
+      },
+      {
+        "kind": "wiki",
+        "label": "Auriel on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Auriel"
+      },
+      {
+        "kind": "esports",
+        "label": "Auriel on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Auriel"
+      }
+    ],
+    "Azmo": [
+      {
+        "kind": "guide",
+        "label": "Azmodan build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/azmodan-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Azmodan on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/azmodan/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Azmodan on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/azmodan"
+      },
+      {
+        "kind": "wiki",
+        "label": "Azmodan on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Azmodan"
+      },
+      {
+        "kind": "esports",
+        "label": "Azmodan on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Azmodan"
+      }
+    ],
+    "Barb": [
+      {
+        "kind": "guide",
+        "label": "Sonya build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/sonya-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Sonya on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/sonya/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Sonya on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/sonya"
+      },
+      {
+        "kind": "wiki",
+        "label": "Sonya on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Sonya"
+      },
+      {
+        "kind": "esports",
+        "label": "Sonya on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Sonya"
+      }
+    ],
+    "Butc": [
+      {
+        "kind": "guide",
+        "label": "The Butcher build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/the-butcher-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "The Butcher on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/the-butcher/"
+      },
+      {
+        "kind": "wiki",
+        "label": "The Butcher on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/the-butcher"
+      },
+      {
+        "kind": "wiki",
+        "label": "The Butcher on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/The_Butcher"
+      },
+      {
+        "kind": "esports",
+        "label": "The Butcher on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/The_Butcher"
+      }
+    ],
+    "CCho": [
+      {
+        "kind": "guide",
+        "label": "Cho build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/cho-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Cho on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/cho/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Cho on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/cho"
+      },
+      {
+        "kind": "wiki",
+        "label": "Cho on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Cho"
+      },
+      {
+        "kind": "esports",
+        "label": "Cho on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Cho"
+      }
+    ],
+    "Chen": [
+      {
+        "kind": "guide",
+        "label": "Chen build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/chen-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Chen on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/chen/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Chen on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/chen"
+      },
+      {
+        "kind": "wiki",
+        "label": "Chen on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Chen"
+      },
+      {
+        "kind": "esports",
+        "label": "Chen on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Chen"
+      }
+    ],
+    "Chro": [
+      {
+        "kind": "guide",
+        "label": "Chromie build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/chromie-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Chromie on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/chromie/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Chromie on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/chromie"
+      },
+      {
+        "kind": "wiki",
+        "label": "Chromie on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Chromie"
+      },
+      {
+        "kind": "esports",
+        "label": "Chromie on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Chromie"
+      }
+    ],
+    "Crus": [
+      {
+        "kind": "guide",
+        "label": "Johanna build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/johanna-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Johanna on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/johanna/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Johanna on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/johanna"
+      },
+      {
+        "kind": "wiki",
+        "label": "Johanna on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Johanna"
+      },
+      {
+        "kind": "esports",
+        "label": "Johanna on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Johanna"
+      }
+    ],
+    "DEAT": [
+      {
+        "kind": "guide",
+        "label": "Deathwing build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/deathwing-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Deathwing on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/deathwing/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Deathwing on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/deathwing"
+      },
+      {
+        "kind": "wiki",
+        "label": "Deathwing on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Deathwing"
+      }
+    ],
+    "DECK": [
+      {
+        "kind": "guide",
+        "label": "Deckard build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/deckard-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Deckard on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/deckard/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Deckard on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/deckard"
+      },
+      {
+        "kind": "wiki",
+        "label": "Deckard on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Deckard"
+      }
+    ],
+    "DVA0": [
+      {
+        "kind": "guide",
+        "label": "D.Va build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/dva-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "D.Va on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/dva/"
+      },
+      {
+        "kind": "wiki",
+        "label": "D.Va on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/dva"
+      },
+      {
+        "kind": "wiki",
+        "label": "D.Va on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/D.Va"
+      },
+      {
+        "kind": "esports",
+        "label": "D.Va on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/D.Va"
+      }
+    ],
+    "Deha": [
+      {
+        "kind": "guide",
+        "label": "Dehaka build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/dehaka-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Dehaka on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/dehaka/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Dehaka on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/dehaka"
+      },
+      {
+        "kind": "wiki",
+        "label": "Dehaka on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Dehaka"
+      },
+      {
+        "kind": "esports",
+        "label": "Dehaka on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Dehaka"
+      }
+    ],
+    "Demo": [
+      {
+        "kind": "guide",
+        "label": "Valla build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/valla-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Valla on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/valla/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Valla on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/valla"
+      },
+      {
+        "kind": "wiki",
+        "label": "Valla on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Valla"
+      },
+      {
+        "kind": "esports",
+        "label": "Valla on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Valla"
+      }
+    ],
+    "Diab": [
+      {
+        "kind": "guide",
+        "label": "Diablo build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/diablo-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Diablo on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/diablo/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Diablo on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/diablo"
+      },
+      {
+        "kind": "wiki",
+        "label": "Diablo on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Diablo"
+      },
+      {
+        "kind": "esports",
+        "label": "Diablo on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Diablo"
+      }
+    ],
+    "Drya": [
+      {
+        "kind": "guide",
+        "label": "Lunara build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/lunara-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Lunara on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/lunara/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Lunara on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/lunara"
+      },
+      {
+        "kind": "wiki",
+        "label": "Lunara on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Lunara"
+      },
+      {
+        "kind": "esports",
+        "label": "Lunara on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Lunara"
+      }
+    ],
+    "FENX": [
+      {
+        "kind": "guide",
+        "label": "Fenix build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/fenix-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Fenix on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/fenix/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Fenix on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/fenix"
+      },
+      {
+        "kind": "wiki",
+        "label": "Fenix on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Fenix"
+      }
+    ],
+    "Faer": [
+      {
+        "kind": "guide",
+        "label": "Brightwing build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/brightwing-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Brightwing on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/brightwing/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Brightwing on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/brightwing"
+      },
+      {
+        "kind": "wiki",
+        "label": "Brightwing on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Brightwing"
+      },
+      {
+        "kind": "esports",
+        "label": "Brightwing on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Brightwing"
+      }
+    ],
+    "Fals": [
+      {
+        "kind": "guide",
+        "label": "Falstad build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/falstad-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Falstad on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/falstad/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Falstad on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/falstad"
+      },
+      {
+        "kind": "wiki",
+        "label": "Falstad on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Falstad"
+      },
+      {
+        "kind": "esports",
+        "label": "Falstad on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Falstad"
+      }
+    ],
+    "Fire": [
+      {
+        "kind": "guide",
+        "label": "Blaze build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/blaze-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Blaze on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/blaze/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Blaze on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/blaze"
+      },
+      {
+        "kind": "wiki",
+        "label": "Blaze on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Blaze"
+      }
+    ],
+    "Gall": [
+      {
+        "kind": "guide",
+        "label": "Gall build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/gall-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Gall on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/gall/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Gall on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/gall"
+      },
+      {
+        "kind": "wiki",
+        "label": "Gall on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Gall"
+      },
+      {
+        "kind": "esports",
+        "label": "Gall on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Gall"
+      }
+    ],
+    "Garr": [
+      {
+        "kind": "guide",
+        "label": "Garrosh build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/garrosh-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Garrosh on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/garrosh/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Garrosh on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/garrosh"
+      },
+      {
+        "kind": "wiki",
+        "label": "Garrosh on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Garrosh"
+      }
+    ],
+    "Genj": [
+      {
+        "kind": "guide",
+        "label": "Genji build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/genji-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Genji on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/genji/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Genji on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/genji"
+      },
+      {
+        "kind": "wiki",
+        "label": "Genji on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Genji"
+      },
+      {
+        "kind": "esports",
+        "label": "Genji on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Genji"
+      }
+    ],
+    "Genn": [
+      {
+        "kind": "guide",
+        "label": "Greymane build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/greymane-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Greymane on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/greymane/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Greymane on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/greymane"
+      },
+      {
+        "kind": "wiki",
+        "label": "Greymane on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Greymane"
+      },
+      {
+        "kind": "esports",
+        "label": "Greymane on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Greymane"
+      }
+    ],
+    "Guld": [
+      {
+        "kind": "guide",
+        "label": "Gul'dan build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/guldan-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Gul'dan on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/guldan/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Gul'dan on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/guldan"
+      },
+      {
+        "kind": "wiki",
+        "label": "Gul'dan on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Gul'dan"
+      },
+      {
+        "kind": "esports",
+        "label": "Gul'dan on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Gul'dan"
+      }
+    ],
+    "HANA": [
+      {
+        "kind": "guide",
+        "label": "Ana build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/ana-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Ana on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/ana/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Ana on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/ana"
+      },
+      {
+        "kind": "wiki",
+        "label": "Ana on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Ana"
+      }
+    ],
+    "HMEI": [
+      {
+        "kind": "guide",
+        "label": "Mei build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/mei-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Mei on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/mei/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Mei on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/mei"
+      },
+      {
+        "kind": "wiki",
+        "label": "Mei on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Mei"
+      }
+    ],
+    "HOGG": [
+      {
+        "kind": "guide",
+        "label": "Hogger build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/hogger-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Hogger on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/hogger/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Hogger on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/hogger"
+      },
+      {
+        "kind": "wiki",
+        "label": "Hogger on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Hogger"
+      }
+    ],
+    "HXAL": [
+      {
+        "kind": "guide",
+        "label": "Xal'atath build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/xalatath-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Xal'atath on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/xalatath/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Xal'atath on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/xalatath"
+      },
+      {
+        "kind": "wiki",
+        "label": "Xal'atath on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Xal'atath"
+      }
+    ],
+    "Hanz": [
+      {
+        "kind": "guide",
+        "label": "Hanzo build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/hanzo-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Hanzo on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/hanzo/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Hanzo on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/hanzo"
+      },
+      {
+        "kind": "wiki",
+        "label": "Hanzo on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Hanzo"
+      }
+    ],
+    "IMPE": [
+      {
+        "kind": "guide",
+        "label": "Imperius build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/imperius-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Imperius on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/imperius/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Imperius on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/imperius"
+      },
+      {
+        "kind": "wiki",
+        "label": "Imperius on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Imperius"
+      }
+    ],
+    "Illi": [
+      {
+        "kind": "guide",
+        "label": "Illidan build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/illidan-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Illidan on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/illidan/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Illidan on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/illidan"
+      },
+      {
+        "kind": "wiki",
+        "label": "Illidan on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Illidan"
+      },
+      {
+        "kind": "esports",
+        "label": "Illidan on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Illidan"
+      }
+    ],
+    "Jain": [
+      {
+        "kind": "guide",
+        "label": "Jaina build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/jaina-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Jaina on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/jaina/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Jaina on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/jaina"
+      },
+      {
+        "kind": "wiki",
+        "label": "Jaina on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Jaina"
+      },
+      {
+        "kind": "esports",
+        "label": "Jaina on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Jaina"
+      }
+    ],
+    "Junk": [
+      {
+        "kind": "guide",
+        "label": "Junkrat build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/junkrat-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Junkrat on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/junkrat/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Junkrat on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/junkrat"
+      },
+      {
+        "kind": "wiki",
+        "label": "Junkrat on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Junkrat"
+      }
+    ],
+    "Kael": [
+      {
+        "kind": "guide",
+        "label": "Kael'thas build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/kaelthas-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Kael'thas on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/kaelthas/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Kael'thas on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/kaelthas"
+      },
+      {
+        "kind": "wiki",
+        "label": "Kael'thas on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Kael'thas"
+      },
+      {
+        "kind": "esports",
+        "label": "Kael'thas on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Kael'thas"
+      }
+    ],
+    "KelT": [
+      {
+        "kind": "guide",
+        "label": "Kel'Thuzad build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/kel-thuzad-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Kel'Thuzad on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/kelthuzad/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Kel'Thuzad on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/kelthuzad"
+      },
+      {
+        "kind": "wiki",
+        "label": "Kel'Thuzad on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Kel'Thuzad"
+      }
+    ],
+    "Kerr": [
+      {
+        "kind": "guide",
+        "label": "Kerrigan build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/kerrigan-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Kerrigan on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/kerrigan/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Kerrigan on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/kerrigan"
+      },
+      {
+        "kind": "wiki",
+        "label": "Kerrigan on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Kerrigan"
+      },
+      {
+        "kind": "esports",
+        "label": "Kerrigan on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Kerrigan"
+      }
+    ],
+    "L90E": [
+      {
+        "kind": "guide",
+        "label": "E.T.C. build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/e-t-c-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "E.T.C. on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/etc/"
+      },
+      {
+        "kind": "wiki",
+        "label": "E.T.C. on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/etc"
+      },
+      {
+        "kind": "wiki",
+        "label": "E.T.C. on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/E.T.C."
+      },
+      {
+        "kind": "esports",
+        "label": "E.T.C. on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/E.T.C."
+      }
+    ],
+    "Leor": [
+      {
+        "kind": "guide",
+        "label": "Leoric build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/leoric-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Leoric on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/leoric/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Leoric on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/leoric"
+      },
+      {
+        "kind": "wiki",
+        "label": "Leoric on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Leoric"
+      },
+      {
+        "kind": "esports",
+        "label": "Leoric on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Leoric"
+      }
+    ],
+    "LiLi": [
+      {
+        "kind": "guide",
+        "label": "Li Li build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/li-li-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Li Li on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/li-li/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Li Li on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/li-li"
+      },
+      {
+        "kind": "wiki",
+        "label": "Li Li on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Li_Li"
+      },
+      {
+        "kind": "esports",
+        "label": "Li Li on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Li_Li"
+      }
+    ],
+    "Lost": [
+      {
+        "kind": "guide",
+        "label": "The Lost Vikings build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/the-lost-vikings-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "The Lost Vikings on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/the-lost-vikings/"
+      },
+      {
+        "kind": "wiki",
+        "label": "The Lost Vikings on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/the-lost-vikings"
+      },
+      {
+        "kind": "wiki",
+        "label": "The Lost Vikings on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/The_Lost_Vikings"
+      },
+      {
+        "kind": "esports",
+        "label": "The Lost Vikings on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/The_Lost_Vikings"
+      }
+    ],
+    "Luci": [
+      {
+        "kind": "guide",
+        "label": "Lúcio build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/lucio-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Lúcio on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/lucio/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Lúcio on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/lucio"
+      },
+      {
+        "kind": "wiki",
+        "label": "Lúcio on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/L%C3%BAcio"
+      },
+      {
+        "kind": "esports",
+        "label": "Lúcio on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/L%C3%BAcio"
+      }
+    ],
+    "MALT": [
+      {
+        "kind": "guide",
+        "label": "Malthael build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/malthael-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Malthael on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/malthael/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Malthael on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/malthael"
+      },
+      {
+        "kind": "wiki",
+        "label": "Malthael on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Malthael"
+      },
+      {
+        "kind": "esports",
+        "label": "Malthael on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Malthael"
+      }
+    ],
+    "MEPH": [
+      {
+        "kind": "guide",
+        "label": "Mephisto build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/mephisto-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Mephisto on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/mephisto/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Mephisto on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/mephisto"
+      },
+      {
+        "kind": "wiki",
+        "label": "Mephisto on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Mephisto"
+      }
+    ],
+    "Maie": [
+      {
+        "kind": "guide",
+        "label": "Maiev build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/maiev-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Maiev on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/maiev/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Maiev on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/maiev"
+      },
+      {
+        "kind": "wiki",
+        "label": "Maiev on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Maiev"
+      },
+      {
+        "kind": "esports",
+        "label": "Maiev on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Maiev"
+      }
+    ],
+    "MalG": [
+      {
+        "kind": "guide",
+        "label": "Mal'Ganis build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/malganis-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Mal'Ganis on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/malganis/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Mal'Ganis on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/malganis"
+      },
+      {
+        "kind": "wiki",
+        "label": "Mal'Ganis on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Mal'Ganis"
+      }
+    ],
+    "Malf": [
+      {
+        "kind": "guide",
+        "label": "Malfurion build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/malfurion-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Malfurion on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/malfurion/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Malfurion on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/malfurion"
+      },
+      {
+        "kind": "wiki",
+        "label": "Malfurion on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Malfurion"
+      },
+      {
+        "kind": "esports",
+        "label": "Malfurion on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Malfurion"
+      }
+    ],
+    "Mdvh": [
+      {
+        "kind": "guide",
+        "label": "Medivh build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/medivh-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Medivh on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/medivh/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Medivh on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/medivh"
+      },
+      {
+        "kind": "wiki",
+        "label": "Medivh on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Medivh"
+      },
+      {
+        "kind": "esports",
+        "label": "Medivh on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Medivh"
+      }
+    ],
+    "Medi": [
+      {
+        "kind": "guide",
+        "label": "Lt. Morales build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/lt-morales-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Lt. Morales on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/lt-morales/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Lt. Morales on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/lt-morales"
+      },
+      {
+        "kind": "wiki",
+        "label": "Lt. Morales on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Lt._Morales"
+      },
+      {
+        "kind": "esports",
+        "label": "Lt. Morales on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Lt._Morales"
+      }
+    ],
+    "Monk": [
+      {
+        "kind": "guide",
+        "label": "Kharazim build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/kharazim-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Kharazim on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/kharazim/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Kharazim on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/kharazim"
+      },
+      {
+        "kind": "wiki",
+        "label": "Kharazim on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Kharazim"
+      },
+      {
+        "kind": "esports",
+        "label": "Kharazim on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Kharazim"
+      }
+    ],
+    "Mura": [
+      {
+        "kind": "guide",
+        "label": "Muradin build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/muradin-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Muradin on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/muradin/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Muradin on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/muradin"
+      },
+      {
+        "kind": "wiki",
+        "label": "Muradin on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Muradin"
+      },
+      {
+        "kind": "esports",
+        "label": "Muradin on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Muradin"
+      }
+    ],
+    "Murk": [
+      {
+        "kind": "guide",
+        "label": "Murky build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/murky-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Murky on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/murky/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Murky on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/murky"
+      },
+      {
+        "kind": "wiki",
+        "label": "Murky on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Murky"
+      },
+      {
+        "kind": "esports",
+        "label": "Murky on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Murky"
+      }
+    ],
+    "NXHU": [
+      {
+        "kind": "guide",
+        "label": "Qhira build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/qhira-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Qhira on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/qhira/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Qhira on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/qhira"
+      },
+      {
+        "kind": "wiki",
+        "label": "Qhira on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Qhira"
+      }
+    ],
+    "Necr": [
+      {
+        "kind": "guide",
+        "label": "Xul build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/xul-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Xul on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/xul/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Xul on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/xul"
+      },
+      {
+        "kind": "wiki",
+        "label": "Xul on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Xul"
+      },
+      {
+        "kind": "esports",
+        "label": "Xul on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Xul"
+      }
+    ],
+    "Nova": [
+      {
+        "kind": "guide",
+        "label": "Nova build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/nova-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Nova on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/nova/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Nova on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/nova"
+      },
+      {
+        "kind": "wiki",
+        "label": "Nova on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Nova"
+      },
+      {
+        "kind": "esports",
+        "label": "Nova on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Nova"
+      }
+    ],
+    "ORPH": [
+      {
+        "kind": "guide",
+        "label": "Orphea build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/orphea-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Orphea on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/orphea/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Orphea on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/orphea"
+      },
+      {
+        "kind": "wiki",
+        "label": "Orphea on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Orphea"
+      }
+    ],
+    "Prob": [
+      {
+        "kind": "guide",
+        "label": "Probius build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/probius-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Probius on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/probius/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Probius on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/probius"
+      },
+      {
+        "kind": "wiki",
+        "label": "Probius on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Probius"
+      },
+      {
+        "kind": "esports",
+        "label": "Probius on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Probius"
+      }
+    ],
+    "Ragn": [
+      {
+        "kind": "guide",
+        "label": "Ragnaros build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/ragnaros-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Ragnaros on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/ragnaros/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Ragnaros on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/ragnaros"
+      },
+      {
+        "kind": "wiki",
+        "label": "Ragnaros on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Ragnaros"
+      },
+      {
+        "kind": "esports",
+        "label": "Ragnaros on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Ragnaros"
+      }
+    ],
+    "Rayn": [
+      {
+        "kind": "guide",
+        "label": "Raynor build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/raynor-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Raynor on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/raynor/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Raynor on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/raynor"
+      },
+      {
+        "kind": "wiki",
+        "label": "Raynor on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Raynor"
+      },
+      {
+        "kind": "esports",
+        "label": "Raynor on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Raynor"
+      }
+    ],
+    "Rehg": [
+      {
+        "kind": "guide",
+        "label": "Rehgar build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/rehgar-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Rehgar on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/rehgar/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Rehgar on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/rehgar"
+      },
+      {
+        "kind": "wiki",
+        "label": "Rehgar on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Rehgar"
+      },
+      {
+        "kind": "esports",
+        "label": "Rehgar on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Rehgar"
+      }
+    ],
+    "Rexx": [
+      {
+        "kind": "guide",
+        "label": "Rexxar build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/rexxar-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Rexxar on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/rexxar/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Rexxar on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/rexxar"
+      },
+      {
+        "kind": "wiki",
+        "label": "Rexxar on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Rexxar"
+      },
+      {
+        "kind": "esports",
+        "label": "Rexxar on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Rexxar"
+      }
+    ],
+    "STUK": [
+      {
+        "kind": "guide",
+        "label": "Stukov build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/stukov-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Stukov on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/stukov/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Stukov on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/stukov"
+      },
+      {
+        "kind": "wiki",
+        "label": "Stukov on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Stukov"
+      },
+      {
+        "kind": "esports",
+        "label": "Stukov on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Stukov"
+      }
+    ],
+    "Samu": [
+      {
+        "kind": "guide",
+        "label": "Samuro build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/samuro-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Samuro on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/samuro/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Samuro on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/samuro"
+      },
+      {
+        "kind": "wiki",
+        "label": "Samuro on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Samuro"
+      },
+      {
+        "kind": "esports",
+        "label": "Samuro on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Samuro"
+      }
+    ],
+    "Sgth": [
+      {
+        "kind": "guide",
+        "label": "Sgt. Hammer build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/sgt-hammer-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Sgt. Hammer on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/sgt-hammer/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Sgt. Hammer on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/sgt-hammer"
+      },
+      {
+        "kind": "wiki",
+        "label": "Sgt. Hammer on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Sgt._Hammer"
+      },
+      {
+        "kind": "esports",
+        "label": "Sgt. Hammer on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Sgt._Hammer"
+      }
+    ],
+    "Stit": [
+      {
+        "kind": "guide",
+        "label": "Stitches build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/stitches-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Stitches on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/stitches/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Stitches on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/stitches"
+      },
+      {
+        "kind": "wiki",
+        "label": "Stitches on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Stitches"
+      },
+      {
+        "kind": "esports",
+        "label": "Stitches on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Stitches"
+      }
+    ],
+    "Sylv": [
+      {
+        "kind": "guide",
+        "label": "Sylvanas build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/sylvanas-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Sylvanas on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/sylvanas/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Sylvanas on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/sylvanas"
+      },
+      {
+        "kind": "wiki",
+        "label": "Sylvanas on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Sylvanas"
+      },
+      {
+        "kind": "esports",
+        "label": "Sylvanas on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Sylvanas"
+      }
+    ],
+    "Tass": [
+      {
+        "kind": "guide",
+        "label": "Tassadar build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/tassadar-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Tassadar on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/tassadar/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tassadar on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/tassadar"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tassadar on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Tassadar"
+      },
+      {
+        "kind": "esports",
+        "label": "Tassadar on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Tassadar"
+      }
+    ],
+    "Thra": [
+      {
+        "kind": "guide",
+        "label": "Thrall build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/thrall-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Thrall on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/thrall/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Thrall on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/thrall"
+      },
+      {
+        "kind": "wiki",
+        "label": "Thrall on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Thrall"
+      },
+      {
+        "kind": "esports",
+        "label": "Thrall on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Thrall"
+      }
+    ],
+    "Tink": [
+      {
+        "kind": "guide",
+        "label": "Gazlowe build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/gazlowe-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Gazlowe on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/gazlowe/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Gazlowe on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/gazlowe"
+      },
+      {
+        "kind": "wiki",
+        "label": "Gazlowe on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Gazlowe"
+      },
+      {
+        "kind": "esports",
+        "label": "Gazlowe on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Gazlowe"
+      }
+    ],
+    "Tra0": [
+      {
+        "kind": "guide",
+        "label": "Tracer build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/tracer-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Tracer on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/tracer/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tracer on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/tracer"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tracer on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Tracer"
+      },
+      {
+        "kind": "esports",
+        "label": "Tracer on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Tracer"
+      }
+    ],
+    "Tych": [
+      {
+        "kind": "guide",
+        "label": "Tychus build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/tychus-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Tychus on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/tychus/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tychus on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/tychus"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tychus on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Tychus"
+      },
+      {
+        "kind": "esports",
+        "label": "Tychus on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Tychus"
+      }
+    ],
+    "Tyrd": [
+      {
+        "kind": "guide",
+        "label": "Tyrande build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/tyrande-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Tyrande on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/tyrande/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tyrande on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/tyrande"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tyrande on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Tyrande"
+      },
+      {
+        "kind": "esports",
+        "label": "Tyrande on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Tyrande"
+      }
+    ],
+    "Tyrl": [
+      {
+        "kind": "guide",
+        "label": "Tyrael build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/tyrael-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Tyrael on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/tyrael/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tyrael on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/tyrael"
+      },
+      {
+        "kind": "wiki",
+        "label": "Tyrael on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Tyrael"
+      },
+      {
+        "kind": "esports",
+        "label": "Tyrael on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Tyrael"
+      }
+    ],
+    "Uthe": [
+      {
+        "kind": "guide",
+        "label": "Uther build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/uther-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Uther on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/uther/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Uther on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/uther"
+      },
+      {
+        "kind": "wiki",
+        "label": "Uther on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Uther"
+      },
+      {
+        "kind": "esports",
+        "label": "Uther on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Uther"
+      }
+    ],
+    "VALE": [
+      {
+        "kind": "guide",
+        "label": "Valeera build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/valeera-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Valeera on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/valeera/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Valeera on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/valeera"
+      },
+      {
+        "kind": "wiki",
+        "label": "Valeera on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Valeera"
+      },
+      {
+        "kind": "esports",
+        "label": "Valeera on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Valeera"
+      }
+    ],
+    "Vari": [
+      {
+        "kind": "guide",
+        "label": "Varian build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/varian-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Varian on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/varian/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Varian on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/varian"
+      },
+      {
+        "kind": "wiki",
+        "label": "Varian on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Varian"
+      },
+      {
+        "kind": "esports",
+        "label": "Varian on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Varian"
+      }
+    ],
+    "WHIT": [
+      {
+        "kind": "guide",
+        "label": "Whitemane build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/whitemane-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Whitemane on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/whitemane/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Whitemane on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/whitemane"
+      },
+      {
+        "kind": "wiki",
+        "label": "Whitemane on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Whitemane"
+      }
+    ],
+    "Witc": [
+      {
+        "kind": "guide",
+        "label": "Nazeebo build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/nazeebo-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Nazeebo on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/nazeebo/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Nazeebo on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/nazeebo"
+      },
+      {
+        "kind": "wiki",
+        "label": "Nazeebo on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Nazeebo"
+      },
+      {
+        "kind": "esports",
+        "label": "Nazeebo on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Nazeebo"
+      }
+    ],
+    "Wiza": [
+      {
+        "kind": "guide",
+        "label": "Li-Ming build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/li-ming-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Li-Ming on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/li-ming/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Li-Ming on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/li-ming"
+      },
+      {
+        "kind": "wiki",
+        "label": "Li-Ming on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Li-Ming"
+      },
+      {
+        "kind": "esports",
+        "label": "Li-Ming on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Li-Ming"
+      }
+    ],
+    "YREL": [
+      {
+        "kind": "guide",
+        "label": "Yrel build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/yrel-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Yrel on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/yrel/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Yrel on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/yrel"
+      },
+      {
+        "kind": "wiki",
+        "label": "Yrel on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Yrel"
+      }
+    ],
+    "ZULJ": [
+      {
+        "kind": "guide",
+        "label": "Zul'jin build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/zuljin-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Zul'jin on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/zuljin/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Zul'jin on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/zuljin"
+      },
+      {
+        "kind": "wiki",
+        "label": "Zul'jin on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Zul'jin"
+      },
+      {
+        "kind": "esports",
+        "label": "Zul'jin on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Zul'jin"
+      }
+    ],
+    "Zaga": [
+      {
+        "kind": "guide",
+        "label": "Zagara build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/zagara-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Zagara on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/zagara/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Zagara on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/zagara"
+      },
+      {
+        "kind": "wiki",
+        "label": "Zagara on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Zagara"
+      },
+      {
+        "kind": "esports",
+        "label": "Zagara on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Zagara"
+      }
+    ],
+    "Zary": [
+      {
+        "kind": "guide",
+        "label": "Zarya build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/zarya-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Zarya on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/zarya/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Zarya on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/zarya"
+      },
+      {
+        "kind": "wiki",
+        "label": "Zarya on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Zarya"
+      },
+      {
+        "kind": "esports",
+        "label": "Zarya on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Zarya"
+      }
+    ],
+    "Zera": [
+      {
+        "kind": "guide",
+        "label": "Zeratul build guide (Icy Veins)",
+        "site": "icy-veins",
+        "url": "https://www.icy-veins.com/heroes/zeratul-build-guide"
+      },
+      {
+        "kind": "guide",
+        "label": "Zeratul on Psionic Storm",
+        "site": "psionic-storm",
+        "url": "https://psionic-storm.com/en/heroes/zeratul/"
+      },
+      {
+        "kind": "wiki",
+        "label": "Zeratul on Nexus Compendium",
+        "site": "nexus-compendium",
+        "url": "https://nexuscompendium.com/heroes/zeratul"
+      },
+      {
+        "kind": "wiki",
+        "label": "Zeratul on the Heroes Wiki",
+        "site": "fandom",
+        "url": "https://heroesofthestorm.fandom.com/wiki/Zeratul"
+      },
+      {
+        "kind": "esports",
+        "label": "Zeratul on Liquipedia",
+        "site": "liquipedia",
+        "url": "https://liquipedia.net/heroes/Zeratul"
+      }
+    ]
+  }
+}

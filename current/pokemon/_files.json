@@ -1,0 +1,120 @@
+{
+  "files": {
+    "dex/abilities.json": {
+      "bytes": 31189,
+      "custody": "A",
+      "sha256": "76c578ad43cb3c40c30fb49cb4876a9848f30454f59c15f3a35b8231cd4881ce"
+    },
+    "dex/items.json": {
+      "bytes": 37211,
+      "custody": "A",
+      "sha256": "b54452806977783d0f051491a72c64b2b75fa35bf98e9c5ac39cae35a17efd55"
+    },
+    "dex/learnsets.json": {
+      "bytes": 273864,
+      "custody": "A",
+      "sha256": "aea2026c24ffbf25e8007ed502c27fdef14208b9e917ce00e9458306b2767e40"
+    },
+    "dex/moves.json": {
+      "bytes": 178002,
+      "custody": "A",
+      "sha256": "eb214f640bfcdc1edcdb1e6160e1de5e3087eb356d2f63f0aa4571061f28d2e3"
+    },
+    "dex/species.json": {
+      "bytes": 170374,
+      "custody": "A",
+      "sha256": "6511d22bd004d962f037f87553ca1756afea9120554c8408505b3a57a3a2f9d6"
+    },
+    "dex/typechart.json": {
+      "bytes": 6724,
+      "custody": "A",
+      "sha256": "107cf2358b4922c0228252ebd3f894dd2b06e4a7ca1ca9140accfba76bcf8d6f"
+    },
+    "h2h.json": {
+      "bytes": 103503,
+      "custody": "A",
+      "sha256": "3f70e2cd7823dbca1abe620c3c7160f79e1b4a45a4f55c8793fe41036d7c3e80"
+    },
+    "ledger/showdown-replays.json": {
+      "bytes": 45985,
+      "custody": "A",
+      "sha256": "60866e221bf34bf4df3aa01deda12207f030e89bfeeb973903efe744a40d8506"
+    },
+    "public/dex.json": {
+      "bytes": 477270,
+      "custody": "A",
+      "sha256": "c86913195198a610fca15da92fa0bab50d06bfb34c6987f54a0c853cd22f11b2"
+    },
+    "regulations.json": {
+      "bytes": 1969,
+      "custody": "A",
+      "sha256": "f81cfe37669a33e062ff84f4b8da61df61b5cb52b34faf0cda1aaab67b7e3fb3"
+    },
+    "speed.json": {
+      "bytes": 20832,
+      "custody": "A",
+      "sha256": "d05c771b93d5c1da048bec706295836c12aa771f96797db748f622e7da3999b4"
+    },
+    "tournaments.json": {
+      "bytes": 543324,
+      "custody": "A",
+      "sha256": "52219ac69dc30b120a8862fb526ecafe2d92b30c798fefa544dd22573c72b0de"
+    },
+    "usage/gen9championsbssregmc-0.json": {
+      "bytes": 1568658,
+      "custody": "A",
+      "sha256": "2c830923f15a5a1a7c8dadcc8a07ff8c6873645ee642887dae4b684bae3b05d0"
+    },
+    "usage/gen9championsbssregmc-1500.json": {
+      "bytes": 1470900,
+      "custody": "A",
+      "sha256": "27f37d3b6f3e87a3bf83844f9298958b9df6003b53687fd5d432c737fb36d89d"
+    },
+    "usage/gen9championsbssregmc-1760.json": {
+      "bytes": 1060055,
+      "custody": "A",
+      "sha256": "9ce229f7ce0fe2ef2b054c8ecba5f548a80ca6c3e5f68fb53d227517b1fd4805"
+    },
+    "usage/gen9championsvgc2026regmc-0.json": {
+      "bytes": 1885694,
+      "custody": "A",
+      "sha256": "3090d652475308342434cb1eb95c7f52367cab2f9c26d455060792bcbb622ab2"
+    },
+    "usage/gen9championsvgc2026regmc-1500.json": {
+      "bytes": 1722336,
+      "custody": "A",
+      "sha256": "8cbe27e9dbf2503ad5b5a27dd04d58b3de771ea889a2609ad4cd46d04f186ea6"
+    },
+    "usage/gen9championsvgc2026regmc-1760.json": {
+      "bytes": 1113971,
+      "custody": "A",
+      "sha256": "1ecf5198e75735bfbea8a873b76f47875b9913171c14e9005bb0254f92370611"
+    },
+    "usage/gen9championsvgc2026regmcbo3-0.json": {
+      "bytes": 1481381,
+      "custody": "A",
+      "sha256": "ccd6fb4cb8e7e8a62724ade73a0ddfda46444a3c1856c9c18f19063f4753919b"
+    },
+    "usage/gen9championsvgc2026regmcbo3-1500.json": {
+      "bytes": 1217025,
+      "custody": "A",
+      "sha256": "3f741b875e9857fbe3c36f84a30e8f4ee3ea66703e070b08a372a95e549acb1f"
+    },
+    "usage/gen9championsvgc2026regmcbo3-1760.json": {
+      "bytes": 760457,
+      "custody": "A",
+      "sha256": "ff197659480fee2cff9f0e17568f687bb84a8a07aab81f10b56c36c6d6c0ee37"
+    },
+    "usage/index.json": {
+      "bytes": 1779,
+      "custody": "A",
+      "sha256": "799f7f28ec9e4da3a6da59554676c475a3e1170ba992bfd77197723f8bc566f2"
+    }
+  },
+  "img": {
+    "bytes": 522700,
+    "files": 340,
+    "sha256": "9ef9b88dbaa62a4e5d94c4a93a0921d06fe8d4f726fc55eba67d333b262782d0"
+  },
+  "schema": 1
+}

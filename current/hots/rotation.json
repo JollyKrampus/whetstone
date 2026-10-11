@@ -1,0 +1,30 @@
+{
+  "allFree": false,
+  "end": "2026-10-08",
+  "fetchedAt": "2026-10-11T02:46:38.742Z",
+  "heroes": [
+    "Arts",
+    "Azmo",
+    "Butc",
+    "Diab",
+    "Drya",
+    "Kael",
+    "L90E",
+    "LiLi",
+    "Rehg",
+    "Samu",
+    "Sylv",
+    "WHIT",
+    "YREL",
+    "Zaga"
+  ],
+  "lagging": true,
+  "ranked": {
+    "end": "2027-02-02",
+    "id": "2026-season-3",
+    "name": "2026 Season 3",
+    "start": "2026-10-02"
+  },
+  "source": "nexus-compendium",
+  "start": "2026-10-01"
+}

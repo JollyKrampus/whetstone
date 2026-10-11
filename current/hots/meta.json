@@ -1,0 +1,81 @@
+{
+  "counts": {
+    "heroes": 91,
+    "maps": 19,
+    "patches": 26,
+    "proMaps": 777,
+    "talents": 1941,
+    "theoryCounters": 5025,
+    "theorySynergies": 2590
+  },
+  "dataHash": "52410620a84ae672432a48b5b56dae47460db1728f8fd804ab78ab11426cf056",
+  "extra": {
+    "assetsTag": "v2.57.0.98285",
+    "build": "2.57.0.98348",
+    "buildSeenAt": "2026-10-11T02:46:38.742Z",
+    "builds": [
+      "2.57.0.98348",
+      "2.57.0.98304",
+      "2.57.0.98285"
+    ],
+    "dataBuild": "2.57.0.98348",
+    "major": "2.57",
+    "majorSince": "2026-09-28"
+  },
+  "game": "hots",
+  "generatedAt": "2026-10-11T02:46:38.742Z",
+  "schema": 1,
+  "sources": [
+    {
+      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "id": "tact",
+      "status": "ok"
+    },
+    {
+      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "id": "heroes-data2",
+      "status": "ok"
+    },
+    {
+      "detail": "v2.57.0.98285: 1235 images",
+      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "id": "heroes-images",
+      "status": "ok"
+    },
+    {
+      "detail": "24 patch-note articles since 2025-01-01",
+      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "id": "blizzard-news",
+      "status": "ok"
+    },
+    {
+      "detail": "rotation not yet updated upstream (window ended 2026-10-08)",
+      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "id": "nexus-compendium",
+      "status": "ok"
+    },
+    {
+      "detail": "23 tournaments, 777 drafted maps",
+      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "id": "liquipedia",
+      "status": "ok"
+    },
+    {
+      "detail": "YT_API_KEY not set",
+      "fetchedAt": null,
+      "id": "youtube",
+      "status": "disabled"
+    },
+    {
+      "detail": "live streams are linked out in v0.1; no Twitch data is fetched",
+      "fetchedAt": null,
+      "id": "twitch",
+      "status": "disabled"
+    }
+  ],
+  "version": {
+    "build": "2.57.0.98348",
+    "label": "2.57",
+    "since": "2026-09-28"
+  }
+}

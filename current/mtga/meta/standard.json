@@ -1,0 +1,86 @@
+{
+  "curator": "whetstone",
+  "date": "2026-10-08",
+  "decks": [
+    {
+      "archetype": "Izzet Prowess",
+      "date": "2026-10-08",
+      "list": "Deck\n2 Bounce Off\n4 Burst Lightning\n2 Eddymurk Crab\n4 Elusive Otter\n4 Flow State\n2 Impractical Joke\n4 Island\n1 Mountain\n2 Multiversal Passage\n4 Opt\n4 Pompous Battlemage\n4 Riverpyre Verge\n2 Secret Identity\n4 Sleight of Hand\n4 Slickshot Show-Off\n1 Spell Snare\n4 Spirebluff Canal\n1 Starting Town\n4 Steam Vents\n1 Stock Up\n1 Vibrant Outburst\n1 Wild Ride\n\nSideboard\n1 Broadside Barrage\n2 Colorstorm Stallion\n1 Disdainful Stroke\n2 Fire Magic\n1 Sear\n2 Soul-Guide Lantern\n2 Spell Pierce\n2 Spell Snare\n2 Sunspine Lynx",
+      "metaShare": 0.038,
+      "name": "Izzet Prowess",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Orzhov Life Gain",
+      "date": "2026-10-08",
+      "list": "Deck\n3 Ajani Resolute\n4 Amalia Benavides Aguirre\n2 Bleachbone Verge\n4 Case of the Uneaten Feast\n3 Concealed Courtyard\n4 Enlightened Confidant\n3 Erode\n1 Essence Channeler\n4 Godless Shrine\n4 Haliya, Guided by Light\n4 Hinterland Sanctifier\n3 Liliana the Faultless\n3 Lunar Convocation\n3 Moseo, Vein's New Dean\n3 Multiversal Passage\n3 Plains\n3 Shattered Sanctum\n2 Starscape Cleric\n3 Starting Town\n1 Swamp\n\nSideboard\n3 Clarion Conqueror\n1 Curious Farm Animals\n1 Decorum Dissertation\n4 Duress\n2 Enduring Innocence\n2 Seam Rip\n2 Strategic Betrayal",
+      "metaShare": 0.083,
+      "name": "Orzhov Life Gain",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Rakdos Lizards",
+      "date": "2026-10-08",
+      "list": "Deck\n4 Blazemire Verge\n4 Blood Crypt\n4 Burst Lightning\n2 Cavern of Souls\n4 Fireglass Mentor\n4 Flamecache Gecko\n3 Gev, Scaled Scorch\n3 Haunted Ridge\n4 Hired Claw\n3 Ingris Stingerquill\n4 Iridescent Vinelasher\n4 Master of Barbs\n4 Mountain\n2 Rockface Village\n4 Stingerquill Charm\n4 Swamp\n3 Valley Flamecaller\n\nSideboard\n2 Bitter Triumph\n4 Duress\n2 Laughing Jasper Flint\n4 Magebane Lizard\n3 Requiting Hex",
+      "metaShare": 0.038,
+      "name": "Rakdos Lizards",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Dimir Midrange",
+      "date": "2026-10-08",
+      "list": "Deck\n4 Watery Grave\n4 Island\n4 Gloomlake Verge\n3 Swamp\n2 Hidden Lair\n2 Shipwreck Marsh\n2 Restless Reef\n2 Soulstone Sanctuary\n4 Floodpits Drowner\n4 Dream Beavers\n4 Enduring Curiosity\n3 Spyglass Siren\n2 Azure Beastbinder\n1 Tishana's Tidebinder\n1 Preacher of the Schism\n1 The Wondrous Wasp\n1 Yuriko, Hope from the Shadows\n4 Kaito, Bane of Nightmares\n4 Requiting Hex\n2 Bitter Triumph\n2 We Say Thee Nay!\n2 Shoot the Sheriff\n1 Strategic Betrayal\n1 Spell Snare\n\nSideboard\n3 Strategic Betrayal\n2 Day of Black Sun\n1 Wan Shi Tong, Librarian\n2 Torpor Orb\n2 Vren, the Relentless\n2 Duress\n1 Annul\n2 Flashfreeze",
+      "metaShare": 0.087,
+      "name": "Dimir Midrange",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Jeskai Lessons",
+      "date": "2026-10-08",
+      "list": "Deck\n4 Abandon Attachments\n4 Accumulate Wisdom\n1 Chandra, Torch of Defiance\n4 Combustion Technique\n3 Deserted Beach\n4 Firebending Lesson\n1 Flashback\n4 Geist of Saint Thalia\n4 Great Hall of the Biblioplex\n1 Inspiring Vantage\n1 Island\n2 It'll Quench Ya!\n4 Jeskai Revelation\n1 Mistrise Village\n1 Mountain\n1 Ral, Crackling Wit\n2 Riverpyre Verge\n1 Sacred Foundry\n2 Spell Snare\n2 Spirebluff Canal\n4 Steam Vents\n3 Stormcarved Coast\n4 Tablet of Discovery\n1 Wan Shi Tong, Librarian\n1 Winternight Stories\n\nSideboard\n2 Day of Judgment\n1 Disdainful Stroke\n1 Emeritus of Ideation\n2 Flashfreeze\n1 Ghost Vacuum\n1 Negate\n2 Price of Freedom\n1 Riverchurn Monument\n1 Soul-Guide Lantern\n2 Spell Snare\n1 Wan Shi Tong, Librarian",
+      "name": "Jeskai Lessons",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Azorius Control",
+      "date": "2026-10-08",
+      "list": "Deck\n4 Consult the Star Charts\n4 Countersculpt\n1 Day of Judgment\n3 Demolition Field\n4 Deserted Beach\n2 Erode\n2 Fatehold Charm\n4 Floodfarm Verge\n4 Get Lost\n4 Hallowed Fountain\n3 Island\n4 Jace's Machinations\n3 No More Lies\n2 Petrified Hamlet\n2 Pinnacle Starcage\n2 Plains\n2 Restless Anchorage\n3 Seam Rip\n4 The Theorist, Jace Beleren\n2 Theorist's Sanctum\n1 Three Steps Ahead\n\nSideboard\n2 Beza, the Bounding Spring\n2 Captain Marvel, Earth's Protector\n1 Day of Judgment\n2 Disdainful Stroke\n1 Elspeth, Storm Slayer\n1 Emeritus of Ideation\n1 Erode\n2 Flashfreeze\n2 Pinnacle Starcage\n1 Seam Rip",
+      "metaShare": 0.043,
+      "name": "Azorius Control",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Dimir Deceit",
+      "date": "2026-10-08",
+      "list": "Deck\n3 Bitter Triumph\n2 Cavern of Souls\n1 Deadly Cover-Up\n4 Deceit\n3 Duress\n4 Gloomlake Verge\n2 Multiversal Passage\n2 Overlord of the Balemurk\n4 Requiting Hex\n4 Restless Reef\n4 Seasoned Cryomancer\n4 Shipwreck Marsh\n1 Strategic Betrayal\n4 Superior Spider-Man\n4 Swamp\n3 Theorix Charm\n3 Uldaros Theorix\n2 Undercity Sewers\n4 Watery Grave\n2 Winternight Stories\n\nSideboard\n1 Ancient Vendetta\n1 Annul\n2 Day of Black Sun\n2 Flashfreeze\n1 Ghost Vacuum\n1 Harvester of Misery\n2 Negate\n2 Oildeep Gearhulk\n2 Qarsi Revenant\n1 Strategic Betrayal",
+      "name": "Dimir Deceit",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Golgari Midrange",
+      "date": "2026-10-08",
+      "list": "Deck\n1 Nowhere to Run\n1 Bitter Triumph\n1 Garruk, Veiled Butcher\n1 Strategic Betrayal\n1 Decorum Dissertation\n2 Shoot the Sheriff\n2 Deadly Cover-Up\n3 Professor Dellian Fel\n3 Requiting Hex\n3 Duress\n4 Witherbloom Charm\n2 Emeritus of Abundance\n3 Environmental Scientist\n4 Simulacrum Shaper\n4 Vraska, the Cutting Glare\n1 Great Hall of the Biblioplex\n1 Restless Cottage\n2 Wastewood Verge\n3 Forest\n3 Deathcap Glade\n4 Blooming Marsh\n4 Overgrown Tomb\n7 Swamp\n\nSideboard\n2 Vicious Rivalry\n2 Inside Information\n2 Intimidation Tactics\n1 Head of the Hunt\n2 Maelstrom Pulse\n2 Terminal Criticism\n1 Nowhere to Run\n1 Bitter Triumph\n2 Strategic Betrayal",
+      "metaShare": 0.035,
+      "name": "Golgari Midrange",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Golgari Graveyard",
+      "date": "2026-10-08",
+      "list": "Deck\n1 Altanak, the Thrice-Called\n1 Analyze the Pollen\n2 Bitter Triumph\n4 Blooming Marsh\n4 Dark Matter Manipulator\n2 Deathcap Glade\n2 Diamond Weapon\n2 Forest\n2 Hollow Marauder\n4 Huskburster Swarm\n1 Liliana the Repentant\n4 Overgrown Tomb\n4 Overlord of the Balemurk\n1 Ral Zarek, Guest Lecturer\n2 Requiting Hex\n4 Rubblebelt Maverick\n4 Say Its Name\n2 Swamp\n4 Tarmogoyf\n4 Town Greeter\n2 Underground Mortuary\n4 Wastewood Verge\n\nSideboard\n2 Bitter Triumph\n3 Duress\n2 Professor Dellian Fel\n1 Ral Zarek, Guest Lecturer\n1 Requiting Hex\n3 Strategic Betrayal\n3 Witherbloom Charm",
+      "name": "Golgari Graveyard",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture"
+    },
+    {
+      "archetype": "Jund Sacrifice",
+      "date": "2026-09-24",
+      "list": "Deck\n1 Forest\n4 Blooming Marsh\n4 Overgrown Tomb\n4 Greedy Freebooter\n4 Lively Dirge\n1 Goldvein Hydra\n4 Starting Town\n4 Gene Pollinator\n4 Biotech Specialist\n3 Deadly Precision\n4 Obsessive Pursuit\n4 The Sackville-Bagginses\n4 Umbral Collar Zealot\n1 Rottenmouth Viper\n3 Blazemire Verge\n3 Stomping Ground\n2 Swamp\n2 Mutagen Man, Living Ooze\n2 Callous Inspector\n2 Tragic Trajectory\n\nSideboard\n3 Duress\n2 Shoot the Sheriff\n3 Strategic Betrayal\n1 Professor Dellian Fel\n1 The Ooze\n1 Vicious Rivalry\n1 Phoenix Fleet Airship\n2 Surrak, Elusive Hunter\n1 Urgent Necropsy",
+      "metaShare": 0.085,
+      "name": "Jund Sacrifice",
+      "notes": "List from the 24 September 2026 article (before Reality Fracture); meta share from the 8 October 2026 article.",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-hottest-standard-decks-winning-september-2026-rcqs"
+    }
+  ],
+  "format": "standard",
+  "source": "Decklists published by Wizards of the Coast in magic.gg's Metagame Mentor articles, read by hand (card names and counts only). Meta share is the archetype's share of the winning decks those articles counted, where they list it."
+}
