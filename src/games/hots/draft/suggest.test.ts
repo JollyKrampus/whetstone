@@ -182,6 +182,7 @@ describe('order and flat lists', () => {
       'Anduin takes Lightbomb. Prolific Dispersal at level 4.',
     );
     expect(conditionsText({ kind: 'theory', text: 'x' })).toBeNull();
+    expect(conditionsText({ kind: 'theory', text: 'x', conditions: ['Anduin takes Lightbomb', ' Anduin takes Lightbomb.', ''] })).toBe('Anduin takes Lightbomb.');
     const pro = { source: 'liquipedia', label: 'w', maps: 50, bans: { [id('Valla')]: 20 } };
     const list = suggest({ data: theory, ctx: sequentialContext(startSequential(slConfig('a', entityRules(theory.heroes))))!, candidates: ALL, preset: 'composite', pro });
     expect(sourcesUsed(list)).toContain('liquipedia');

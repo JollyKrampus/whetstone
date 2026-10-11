@@ -208,7 +208,7 @@ export function keyMatchups(review: DraftReview, max = SUMMARY_MATCHUPS): { pair
 function reasonLine(r: Reason): string {
   const cond = conditionsText(r);
   const stat = r.kind === 'stat' && r.delta !== undefined ? ` (${pp(r.delta)}${r.n !== undefined ? `, n = ${int(r.n)}` : ''})` : '';
-  return `${r.text}${stat}${cond ? ` Only when: ${cond}` : ''}`;
+  return `${r.text}${stat}${cond ? ` Only when ${cond}` : ''}`;
 }
 
 /** Plain text for chat (Discord-friendly: one line per item, "-" bullets, no markup beyond that). */

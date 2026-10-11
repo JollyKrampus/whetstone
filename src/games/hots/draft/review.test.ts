@@ -58,6 +58,15 @@ describe('draft review', () => {
     expect(text).not.toMatch(/<|>|\*\*/);
   });
 
+  it('keeps a reason\'s conditions in the copied text as "Only when …"', () => {
+    const top = keyMatchups(review)[0]!;
+    const pair = { ...top.pair, reason: { ...top.pair.reason, conditions: ['Malfurion takes Twilight Dream.'] } };
+    const side = review[top.side];
+    const changed = { ...review, [top.side]: { ...side, counters: side.counters.map((c) => (c === top.pair ? pair : c)) } };
+    expect(reviewText(changed)).toContain(`${pair.reason.text} Only when Malfurion takes Twilight Dream.`);
+    if (keyMatchups(review).every((k) => !k.pair.reason.conditions?.length)) expect(reviewText(review)).not.toContain('Only when');
+  });
+
   it('uses listable statistics when a block is in use, with the credit in the copied text', () => {
     const r = reviewDraft(stats, input);
     const all = [...r.ours.counters, ...r.theirs.counters];

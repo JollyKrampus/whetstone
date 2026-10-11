@@ -18,7 +18,7 @@ export function fixtureShard(): DraftShard {
   return fixtureJson<DraftShard>('fixtures/hots/public/draft.json');
 }
 
-/** The fixture shard, theory only (HP off). */
+/** The fixture shard, theory only (no match statistics). */
 export function theoryData(): DraftData {
   return decodeShard(fixtureShard());
 }

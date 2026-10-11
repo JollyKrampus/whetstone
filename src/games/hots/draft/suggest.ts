@@ -273,9 +273,9 @@ export function reasonLabel(reason: Reason, key: SignalKey | undefined): string 
  * "Only when" label; null when the reason always holds.
  */
 export function conditionsText(reason: Reason): string | null {
-  const list = (reason.conditions ?? []).map((c) => c.trim()).filter(Boolean);
-  if (list.length === 0) return null;
-  return list.map((c) => (/[.!?]$/.test(c) ? c : `${c}.`)).join(' ');
+  // One sentence each, said once (the same talent may arrive inline and as a curated condition).
+  const list = [...new Set((reason.conditions ?? []).map((c) => c.trim()).filter(Boolean).map((c) => (/[.!?]$/.test(c) ? c : `${c}.`)))];
+  return list.length === 0 ? null : list.join(' ');
 }
 
 /** Does any suggestion rest on match statistics (their source must be credited inline)? */
@@ -283,14 +283,12 @@ export function usesStats(list: readonly Suggestion[]): boolean {
   return list.some((s) => s.signals.some((sig) => sig.reasons.some((r) => r.kind === 'stat')));
 }
 
-/** SourceRef ids behind the given suggestions' weighted signals (for inline credits), first seen first. */
+/**
+ * SourceRef ids behind the given suggestions' signals (for inline credits), first seen first.
+ * Weight-0 signals count too: the breakdown still shows their numbers.
+ */
 export function sourcesUsed(list: readonly Suggestion[]): string[] {
   const out = new Set<string>();
-  for (const s of list) {
-    for (const sig of s.signals) {
-      if (sig.weight === 0) continue;
-      for (const r of sig.reasons) if (r.source) out.add(r.source);
-    }
-  }
+  for (const s of list) for (const sig of s.signals) for (const r of sig.reasons) if (r.source) out.add(r.source);
   return [...out];
 }
