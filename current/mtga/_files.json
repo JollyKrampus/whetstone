@@ -41,14 +41,14 @@
       "sha256": "8d3527f80056957b656acb9209dc96ec231a4100446b0218902a2592b3dfa39f"
     },
     "public/_cards.arena.json": {
-      "bytes": 13803397,
+      "bytes": 13803337,
       "custody": "A",
-      "sha256": "fe63cfcd2ff9a9864cc717cfd5b33413748a560c9886446508dca2bd340630b6"
+      "sha256": "b9092c431ddd4d85550bf980804280050cb964093bedb36e0c39e461ee32ed87"
     },
     "public/_cards.standard.json": {
-      "bytes": 4749731,
+      "bytes": 4749699,
       "custody": "A",
-      "sha256": "e6142ac7344fb44dcd8177672c2640f10d26dbe5c2e0d8675f4a8c7c276ab0f6"
+      "sha256": "f4fd1f3db1cb2f76a3c1de9b43a52bbfe4bbf6fb9c57b3d8cbb05aa913f68ff7"
     },
     "sets.json": {
       "bytes": 35635,

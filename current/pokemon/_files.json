@@ -31,14 +31,14 @@
       "sha256": "107cf2358b4922c0228252ebd3f894dd2b06e4a7ca1ca9140accfba76bcf8d6f"
     },
     "h2h.json": {
-      "bytes": 103503,
+      "bytes": 237669,
       "custody": "A",
-      "sha256": "3f70e2cd7823dbca1abe620c3c7160f79e1b4a45a4f55c8793fe41036d7c3e80"
+      "sha256": "b562170469c786367d0a556fab7e4521456469a358d250e8914b45ea401280c5"
     },
     "ledger/showdown-replays.json": {
-      "bytes": 45985,
+      "bytes": 90643,
       "custody": "A",
-      "sha256": "60866e221bf34bf4df3aa01deda12207f030e89bfeeb973903efe744a40d8506"
+      "sha256": "7d7b89f2ac6c9e744f650aead127f963d74ce7e547ad39696b093685393ff8e2"
     },
     "public/dex.json": {
       "bytes": 477270,

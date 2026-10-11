@@ -3,12 +3,12 @@
     "heroes": 91,
     "maps": 19,
     "patches": 26,
-    "proMaps": 777,
+    "proMaps": 782,
     "talents": 1941,
     "theoryCounters": 5025,
     "theorySynergies": 2590
   },
-  "dataHash": "52410620a84ae672432a48b5b56dae47460db1728f8fd804ab78ab11426cf056",
+  "dataHash": "6bdedecb4c65057d417bbad6371b8aaafae22ed468f968dde991fb2e5b67eef9",
   "extra": {
     "assetsTag": "v2.57.0.98285",
     "build": "2.57.0.98348",
@@ -23,40 +23,40 @@
     "majorSince": "2026-09-28"
   },
   "game": "hots",
-  "generatedAt": "2026-10-11T02:46:38.742Z",
+  "generatedAt": "2026-10-11T16:21:02.754Z",
   "schema": 1,
   "sources": [
     {
-      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "fetchedAt": "2026-10-11T16:21:02.754Z",
       "id": "tact",
       "status": "ok"
     },
     {
-      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "fetchedAt": "2026-10-11T16:21:02.754Z",
       "id": "heroes-data2",
       "status": "ok"
     },
     {
       "detail": "v2.57.0.98285: 1235 images",
-      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "fetchedAt": "2026-10-11T16:21:02.754Z",
       "id": "heroes-images",
       "status": "ok"
     },
     {
       "detail": "24 patch-note articles since 2025-01-01",
-      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "fetchedAt": "2026-10-11T16:21:02.754Z",
       "id": "blizzard-news",
       "status": "ok"
     },
     {
       "detail": "rotation not yet updated upstream (window ended 2026-10-08)",
-      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "fetchedAt": "2026-10-11T16:21:02.754Z",
       "id": "nexus-compendium",
       "status": "ok"
     },
     {
-      "detail": "23 tournaments, 777 drafted maps",
-      "fetchedAt": "2026-10-11T02:46:38.742Z",
+      "detail": "23 tournaments, 782 drafted maps",
+      "fetchedAt": "2026-10-11T16:21:02.754Z",
       "id": "liquipedia",
       "status": "ok"
     },
