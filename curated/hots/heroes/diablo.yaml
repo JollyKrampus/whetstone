@@ -18,7 +18,8 @@ counters:
     b: nazeebo
     why: "Shadow Charge knocks Nazeebo back and cancels Ravenous Spirit's channel."
     evidence: ["Shadow Charge", "Ravenous Spirit"]
-    confidence: medium
+    conditions: "Nazeebo takes Ravenous Spirit (level 10)"
+    confidence: low
   - a: diablo
     b: kaelthas
     why: "Kael'thas has no escape; Shadow Charge into terrain stuns him for 1 second and Overpower drags him into Diablo's team."
@@ -37,9 +38,8 @@ counters:
     confidence: medium
   - a: malthael
     b: diablo
-    why: "Reaper's Mark ticks 2% of max health per second and grows with Black Soulstone's bonus health, while Touch of Death halves Fire Stomp's heal."
+    why: "Reaper's Mark ticks 2% of maximum health per second and grows with Black Soulstone's bonus health, and with Touch of Death (level 7) Malthael also halves Fire Stomp's healing."
     evidence: ["Reaper's Mark", "Touch of Death", "Black Soulstone", "Fire Stomp"]
-    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tychus
     b: diablo
@@ -56,14 +56,17 @@ synergies:
     b: kelthuzad
     why: "Apocalypse stuns every enemy hero on the map for 1.75 seconds, letting Kel'Thuzad land Shadow Fissure on whoever he likes."
     evidence: ["Apocalypse", "Shadow Fissure"]
-    confidence: medium
+    conditions: ["Diablo takes Apocalypse (level 10)", "Kel'Thuzad takes Shadow Fissure (level 10)"]
+    confidence: low
   - a: diablo
     b: falstad
     why: "Apocalypse's map-wide stun gives Hinterland Blast's 1-second delay time to land on several frozen heroes."
     evidence: ["Apocalypse", "Hinterland Blast"]
-    confidence: medium
+    conditions: ["Diablo takes Apocalypse (level 10)", "Falstad takes Hinterland Blast (level 10)"]
+    confidence: low
   - a: diablo
     b: hanzo
-    why: "Apocalypse stuns everyone at once, an easy Dragonstrike center or long-range Dragon's Arrow."
+    why: "Apocalypse stuns every enemy hero at once, an easy target for Dragonstrike's center or a long-range Dragon's Arrow, whichever Hanzo takes."
     evidence: ["Apocalypse", "Dragonstrike", "Dragon's Arrow"]
-    confidence: medium
+    conditions: "Diablo takes Apocalypse (level 10)"
+    confidence: low

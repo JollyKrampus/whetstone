@@ -1,0 +1,75 @@
+---
+/**
+ * A MatchupList whose overflow folds into light text rows: the first `head` rows render in full
+ * (portrait, score ring, reasons) and the rest sit behind "View N more" as LightRows (name, score,
+ * facts, reasons). The shared MatchupList renders every overflow row in full, which made hero and
+ * map pages several hundred kilobytes; HotS pages use this wrapper for long lists instead.
+ */
+import MatchupList from '../../../components/MatchupList.astro';
+import type { MatchupRow } from '../../../components/types.ts';
+import LightRows from './LightRows.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  rows: MatchupRow[];
+  /** Rows rendered in full before the fold (default 6). */
+  head?: number;
+  sourceNames?: Record<string, string>;
+  emptyText?: string;
+  level?: 2 | 3 | 4;
+  id?: string;
+  /** Marks the fold for tests and styling (data-rest). */
+  foldKey?: string;
+}
+
+const { title, subtitle, rows, head = 6, sourceNames, emptyText, level = 3, id, foldKey } = Astro.props;
+const top = rows.slice(0, head);
+const rest = rows.slice(head);
+---
+
+<div class="flist">
+  <MatchupList
+    title={title}
+    {...subtitle ? { subtitle } : {}}
+    rows={top}
+    visible={head}
+    {...sourceNames ? { sourceNames } : {}}
+    {...emptyText ? { emptyText } : {}}
+    level={level}
+    {...id ? { id } : {}}
+  />
+  {
+    rest.length > 0 && (
+      <details class="flist__fold" data-rest={foldKey ?? ''}>
+        <summary class="btn btn--ghost">View {rest.length} more</summary>
+        <div class="flist__body">
+          <LightRows rows={rest} start={head + 1} />
+        </div>
+      </details>
+    )
+  }
+</div>
+
+<style is:global>
+  .flist {
+    display: grid;
+    gap: var(--sp-3);
+    align-content: start;
+    min-width: 0;
+  }
+
+  .flist__fold {
+    display: grid;
+    gap: var(--sp-3);
+  }
+
+  .flist__fold > summary {
+    justify-self: start;
+    border-color: var(--border);
+  }
+
+  .flist__body {
+    margin-top: var(--sp-3);
+  }
+</style>

@@ -45,7 +45,7 @@ counters:
     confidence: medium
   - a: uther
     b: genji
-    why: "Hammer of Justice is a targeted 1-second stun Genji can't dodge, and Divine Shield saves the ally he dived."
+    why: "Hammer of Justice is a targeted 1-second stun Genji cannot dodge, and Divine Shield, if Uther takes it, saves the ally he dived."
     evidence: ["Hammer of Justice", "Divine Shield", "Swift Strike"]
     confidence: medium
   - a: diablo
@@ -61,16 +61,18 @@ counters:
 synergies:
   - a: anduin
     b: genji
-    why: "Genji can commit with Swift Strike and Dragonblade knowing Leap of Faith will pull him back, Unstoppable, if the dive goes wrong."
+    why: "Genji can commit with Swift Strike, or Dragonblade when he has it, knowing Leap of Faith will pull him back, Unstoppable, if the dive goes wrong."
     evidence: ["Leap of Faith", "Swift Strike", "Dragonblade"]
     confidence: medium
   - a: genji
     b: mei
     why: "Ice Wall traps heroes for 2.5 seconds, perfect for Dragonblade's wide slashes."
     evidence: ["Ice Wall", "Dragonblade"]
-    confidence: medium
+    conditions: ["Mei takes Ice Wall (level 10)", "Genji takes Dragonblade (level 10)"]
+    confidence: low
   - a: genji
     b: zarya
     why: "Graviton Surge holds heroes together for Dragonblade's arcs or X-Strike's delayed detonation."
     evidence: ["Graviton Surge", "Dragonblade", "X-Strike"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

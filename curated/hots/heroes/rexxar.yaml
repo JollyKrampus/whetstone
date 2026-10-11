@@ -9,30 +9,32 @@ counters:
   # --- strong against ---
   - a: rexxar
     b: zeratul
-    why: "Unleash the Boars hunts every enemy Hero in a direction and reveals them for 5 seconds, dragging Zeratul out of Permanent Cloak and slowing his escape; Flare can scout his approach."
+    why: "Unleash the Boars hunts every enemy Hero in a direction and reveals them for 5 seconds, dragging Zeratul out of Permanent Cloak and slowing his escape, and Flare (level 1) can scout his approach."
     evidence: ["Unleash the Boars", "Flare", "Permanent Cloak"]
+    conditions: "Rexxar takes Unleash the Boars (level 10) or Flare (level 1)"
     confidence: low
   - a: rexxar
     b: nova
     why: "Unleash the Boars tracks and reveals Nova for 5 seconds, so she can't slip back into Permanent Cloak, and at 1300 Health she rarely survives Misha's follow-up."
     evidence: ["Unleash the Boars", "Permanent Cloak", "Ghost Protocol"]
+    conditions: "Rexxar takes Unleash the Boars (level 10)"
     confidence: low
   - a: rexxar
     b: valeera
-    why: "Unleash the Boars reveals and slows Valeera after Vanish, and Misha, Charge! stuns her before she can reset with another Vanish."
+    why: "Unleash the Boars reveals and slows Valeera after Vanish, and Misha, Charge! stuns her before she can reset with another Vanish, though Smoke Bomb keeps her Unrevealable inside its cloud."
     evidence: ["Unleash the Boars", "Misha, Charge!", "Vanish"]
-    conditions: "Smoke Bomb makes her Unrevealable inside the cloud."
+    conditions: "Rexxar takes Unleash the Boars (level 10)"
     confidence: low
   # --- weak against ---
   - a: xul
     b: rexxar
     why: "Cursed Strikes slows the attack speed of Heroes and Summons by 40%, so both Rexxar and Misha, who deal most of their damage with basic attacks, lose a big share of their output."
-    evidence: ["Cursed Strikes", "Bestial Wrath"]
+    evidence: ["Cursed Strikes"]
     confidence: medium
   - a: johanna
     b: rexxar
     why: "Shield Glare blinds every enemy in front of Johanna, Misha included, cutting both Rexxar's and his bear's basic-attack damage for 1.5 seconds."
-    evidence: ["Shield Glare", "Bestial Wrath"]
+    evidence: ["Shield Glare"]
     confidence: low
   - a: malthael
     b: rexxar
@@ -49,6 +51,7 @@ synergies:
     b: rexxar
     why: "Unleash the Boars reveals and slows every enemy Hero in its path for 5 seconds, letting Kel'Thuzad's map-wide Shadow Fissure finish fleeing targets."
     evidence: ["Unleash the Boars", "Shadow Fissure"]
+    conditions: ["Rexxar takes Unleash the Boars (level 10)", "Kel'Thuzad takes Shadow Fissure (level 10)"]
     confidence: low
   - a: kaelthas
     b: rexxar

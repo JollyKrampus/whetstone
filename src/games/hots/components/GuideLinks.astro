@@ -86,20 +86,27 @@ const expires = videos ? new Date(Date.parse(videos.fetchedAt) + RETENTION.video
             ))}
           </ul>
           <SourceAttribution sources={sourcesFor('hots', ['youtube'])} placement="inline" asOf={videos.fetchedAt} />
+          {/* YouTube API Services policies: a visible link to YouTube's terms wherever API data shows. */}
+          <p class="guides__ytterms" data-youtube-terms>
+            Video details come from YouTube API Services; playing a video here means agreeing to the{' '}
+            <a href="https://www.youtube.com/t/terms" rel="noopener">YouTube Terms of Service</a>. See also the{' '}
+            <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.
+          </p>
         </section>
       </Expiring>
     )
   }
 </div>
 
-<style>
+<style is:global>
   .guides {
     display: grid;
     gap: var(--sp-5);
   }
 
   .guides__none,
-  .guides__note {
+  .guides__note,
+  .guides__ytterms {
     color: var(--text-muted);
     font-size: var(--fs-sm);
   }

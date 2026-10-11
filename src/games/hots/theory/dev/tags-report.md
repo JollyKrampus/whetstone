@@ -282,7 +282,6 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **dot** *(talent only)*: Conflagration (talent)
 - **waveclear**: Incinerate, Onslaught
 - **siege**: Cataclysm, curated (curated/hots/heroes/deathwing.yaml)
-- **channel**: curated (curated/hots/heroes/deathwing.yaml)
 - **frontline**: curated (curated/hots/heroes/deathwing.yaml)
 
 ## Deckard (Healer)
@@ -810,7 +809,6 @@ evidence is a talent (or one of several Heroic choices) counts at 0.6x in the ru
 - **time-stop**: Ley Line Seal, Medivh Cheats! (talent)
 - **heal-self** *(talent only)*: Mystic Assault (talent)
 - **heal-ally**: Force of Will
-- **stealth** *(talent only)*: Dust of Disappearance (talent)
 - **reveal** *(talent only)*: Dust of Appearance (talent)
 - **teleport**: Portal
 - **aoe**: Arcane Rift, Arcane Explosion (talent)

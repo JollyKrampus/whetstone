@@ -2,13 +2,18 @@
 /**
  * The three matchup lists of a hero page: strong against, weak against, works well with.
  * Statistics rows only make the headline list when they pass the SPEC §6 bar (n and |Δ|);
- * the rest stay available, greyed when thin, behind a disclosure. Theory rows follow the theory
- * bar (load.ts THEORY_GATES: curated matchups, or generic rules scoring 60+), curated first, and
- * are labelled by their source badge; weaker generic matches sit behind the same disclosure.
+ * theory rows follow the theory bar (load.ts THEORY_GATES: curated matchups, plus the hero's
+ * strongest generic rule matches scoring 65+), curated first, labelled by their source badge.
+ *
+ * Page weight: only the first HEAD rows of a list render as full rows (portrait, score ring,
+ * reasons). The rest of the list ("View N more") and everything below the bar render as light
+ * text rows (LightRows: name, score, facts, reasons), so a hero with many curated matchups stays
+ * well under 250 KB of HTML instead of 300-600 KB of rings most visitors never open.
  */
-import MatchupList from '../../../components/MatchupList.astro';
 import { GATES, THEORY_GATES, type HeroMatchupRow } from '../load.ts';
 import { toMatchupRow } from '../view.ts';
+import FoldedList from './FoldedList.astro';
+import LightRows from './LightRows.astro';
 import { splitByGate, type MatchupLists } from './pagedata.ts';
 
 interface Props {
@@ -20,6 +25,9 @@ interface Props {
   idPrefix: string;
 }
 
+/** Full rows shown at the top of each list; the rest of the list folds into light rows. */
+const HEAD = 6;
+
 const { heroName, lists, basis, sourceNames, idPrefix } = Astro.props;
 const bar = `at least ${GATES.listMinN} games and an edge of ${GATES.listMinDeltaPp} pp`;
 
@@ -30,7 +38,7 @@ const columns = [
     subtitle:
       basis === 'stats'
         ? `Score 1–100 · Δ = ${heroName}'s edge over the expected result, in pp · n = games`
-        : 'Score 1–100 from how the kits interact (50 = neutral)',
+        : `Score 1–100 for ${heroName}'s net edge once both kits are weighed (50 = neutral)`,
     rows: lists.strong,
     empty: basis === 'stats' ? `No counter clears the bar yet (${bar}).` : `No mechanical edge for ${heroName} found yet.`,
   },
@@ -40,7 +48,7 @@ const columns = [
     subtitle:
       basis === 'stats'
         ? `Score 1–100 · Δ = their edge over ${heroName}, in pp · n = games`
-        : `Score 1–100 for how hard they punish ${heroName}'s kit`,
+        : `Score 1–100 for their net edge over ${heroName}'s kit`,
     rows: lists.weak,
     empty: basis === 'stats' ? `No threat clears the bar yet (${bar}).` : `No hero has a mechanical edge on ${heroName} in our rules yet.`,
   },
@@ -56,41 +64,38 @@ const columns = [
   },
 ].map((c) => {
   const { listed, other } = splitByGate<HeroMatchupRow>(c.rows);
-  return { ...c, listed: listed.map((r) => toMatchupRow(r)), other: other.map((r) => toMatchupRow(r)) };
+  return { ...c, rows: listed.map((r) => toMatchupRow(r)), other: other.map((r) => toMatchupRow(r)) };
 });
+
+const belowNote =
+  basis === 'stats'
+    ? `Fewer than ${GATES.listMinN} games or an edge under ${GATES.listMinDeltaPp} pp; "low sample" marks fewer than ${GATES.greyBelow} games.`
+    : `Generic rule matches with no hand-written matchup behind them: scoring under ${THEORY_GATES.listMinScore}, or past the ${THEORY_GATES.listMaxGeneric} strongest.`;
 ---
 
 <div class="ccols" data-basis={basis}>
   {
     columns.map((c) => (
       <div class="ccols__col" data-list={c.key}>
-        <MatchupList
+        <FoldedList
           id={`${idPrefix}-${c.key}`}
           title={c.title}
           subtitle={c.subtitle}
-          rows={c.listed}
-          visible={8}
+          rows={c.rows}
+          head={HEAD}
           sourceNames={sourceNames}
           emptyText={c.empty}
           level={3}
+          foldKey={c.key}
         />
         {c.other.length > 0 && (
-          <details class="ccols__below">
-            <summary class="btn btn--ghost">
-              {c.other.length} more below the bar
-            </summary>
-            <MatchupList
-              title={basis === 'stats' ? 'Below the reliability bar' : 'Weaker mechanical edges'}
-              subtitle={
-                basis === 'stats'
-                  ? `Fewer than ${GATES.listMinN} games or an edge under ${GATES.listMinDeltaPp} pp. Dashed rows have fewer than ${GATES.greyBelow} games.`
-                  : `Generic rule matches scoring under ${THEORY_GATES.listMinScore}, with no hand-written matchup behind them.`
-              }
-              rows={c.other}
-              visible={c.other.length}
-              sourceNames={sourceNames}
-              level={4}
-            />
+          <details class="ccols__below" data-below={c.key}>
+            <summary class="btn btn--ghost">{c.other.length} more below the bar</summary>
+            <div class="ccols__belowbody">
+              <h4 class="ccols__belowtitle">{basis === 'stats' ? 'Below the reliability bar' : 'Weaker mechanical edges'}</h4>
+              <p class="ccols__note">{belowNote}</p>
+              <LightRows rows={c.other} reasons="first" />
+            </div>
           </details>
         )}
       </div>
@@ -98,7 +103,7 @@ const columns = [
   }
 </div>
 
-<style>
+<style is:global>
   .ccols {
     display: grid;
     gap: var(--sp-6);
@@ -119,6 +124,21 @@ const columns = [
   .ccols__below > summary {
     justify-self: start;
     border-color: var(--border);
+  }
+
+  .ccols__belowbody {
+    display: grid;
+    gap: var(--sp-2);
+    margin-top: var(--sp-3);
+  }
+
+  .ccols__belowtitle {
+    font-size: var(--fs-md);
+  }
+
+  .ccols__note {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
   }
 
   @media (min-width: 64rem) {

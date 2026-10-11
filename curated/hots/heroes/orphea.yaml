@@ -13,14 +13,14 @@ counters:
     confidence: low
   - a: orphea
     b: thelostvikings
-    why: "Crushing Jaws pulls all nearby Vikings to one point, and Chomp plus Eternal Feast punish the clump, with Feast repeating while it keeps hitting Heroes."
+    why: "Chomp hits a grouped Viking trio at once, and either Heroic punishes the clump: Crushing Jaws pulls all nearby Vikings to one point, or Eternal Feast keeps repeating while it hits Heroes."
     evidence: ["Crushing Jaws", "Chomp", "Eternal Feast"]
     confidence: low
   - a: orphea
     b: sonya
     why: "Ancient Spear is Sonya's only basic gap closer, and Backbiter's dash after Chomp plus Dread's slow let Orphea kite her while Chaos attacks heal back the damage."
     evidence: ["Ancient Spear", "Backbiter", "Chomp", "Dread", "Overflowing Chaos"]
-    conditions: "Assumes Backbiter at level 4."
+    conditions: "Orphea takes Backbiter (level 4)"
     confidence: low
   - a: anubarak
     b: orphea
@@ -42,14 +42,17 @@ synergies:
     b: zarya
     why: "Graviton Surge holds Heroes in place, so Eternal Feast keeps re-casting on them every second and Chomp lands on the whole group."
     evidence: ["Graviton Surge", "Eternal Feast", "Chomp"]
-    confidence: medium
+    conditions: ["Zarya takes Graviton Surge (level 10)", "Orphea takes Eternal Feast (level 10)"]
+    confidence: low
   - a: jaina
     b: orphea
     why: "Ring of Frost's 3-second root keeps targets inside Eternal Feast's area, letting the heroic repeat several times."
     evidence: ["Ring of Frost", "Eternal Feast"]
-    confidence: medium
+    conditions: ["Jaina takes Ring of Frost (level 10)", "Orphea takes Eternal Feast (level 10)"]
+    confidence: low
   - a: etc
     b: orphea
     why: "Mosh Pit stuns enemies in place for up to 4 seconds, which keeps Eternal Feast repeating on every stunned Hero."
     evidence: ["Mosh Pit", "Eternal Feast"]
-    confidence: medium
+    conditions: ["E.T.C. takes Mosh Pit (level 10)", "Orphea takes Eternal Feast (level 10)"]
+    confidence: low

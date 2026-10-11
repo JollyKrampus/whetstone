@@ -3,7 +3,7 @@ import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { gameDataDir } from '../../lib/datadir.ts';
 import { clearHotsCache, getDraftableEntities, getMaps, heroEdges, heroesForMap, heroMapFit } from './load.ts';
-import { heroFitRow, heroHref, heroPortrait, mapFitRow, mapHref, mapImage, patchHref, toMatchupRow } from './view.ts';
+import { displayReasons, heroFitRow, heroHref, heroPortrait, mapFitRow, mapHref, mapImage, patchHref, toMatchupRow } from './view.ts';
 
 afterEach(() => {
   delete process.env.WHETSTONE_FIXTURE_PRIVATE;
@@ -40,11 +40,39 @@ describe('hots view adapters', () => {
     const rows = [...(edges?.strong ?? []), ...(edges?.weak ?? []), ...(edges?.synergy ?? [])];
     expect(rows.length).toBeGreaterThan(0);
     for (const row of rows) {
-      const props = toMatchupRow(row, { sourceLabel: 'Heroes Profile' });
+      const props = toMatchupRow(row, { sourceLabel: 'Some Statistics Source' });
       expect(props.n).toBe(row.edge.n);
       expect(props.delta).toBe(row.edge.delta);
       expect(props.lowSample).toBe(row.gate === 'grey');
-      expect(props.sourceLabel).toBe('Heroes Profile');
+      expect(props.sourceLabel).toBe('Some Statistics Source');
+    }
+  });
+});
+
+describe('reason conditions', () => {
+  it('folds the conditions of a curated reason into its text as "Only when …", like generated reasons', () => {
+    const out = displayReasons([
+      { kind: 'curated', text: 'Nanomachine Coating cuts attack speed for anyone in oil.', evidence: ['Nanomachine Coating'], conditions: ['Blaze takes Nanomachine Coating (level 7)'] },
+      { kind: 'curated', text: 'Holds with the base kit.' },
+      { kind: 'theory', text: 'Two picks needed.', conditions: ['A takes X', 'B takes Y'] },
+    ]);
+    expect(out).toEqual([
+      { kind: 'curated', text: 'Nanomachine Coating cuts attack speed for anyone in oil. Only when Blaze takes Nanomachine Coating (level 7).', evidence: ['Nanomachine Coating'] },
+      { kind: 'curated', text: 'Holds with the base kit.' },
+      { kind: 'theory', text: 'Two picks needed. Only when A takes X, and B takes Y.' },
+    ]);
+  });
+
+  it('shows the conditions on every matchup row a page renders', () => {
+    for (const hero of getDraftableEntities()) {
+      const edges = heroEdges(hero.id);
+      for (const row of [...(edges?.strong ?? []), ...(edges?.weak ?? []), ...(edges?.synergy ?? [])]) {
+        const props = toMatchupRow(row);
+        expect(props.reasons?.some((r) => r.conditions !== undefined), hero.slug).toBe(false);
+        row.reasons.forEach((r, i) => {
+          if (r.conditions?.length) expect(props.reasons?.[i]?.text).toContain(' Only when ');
+        });
+      }
     }
   });
 });

@@ -8,12 +8,12 @@ traits:
 counters:
   - a: imperius
     b: nazeebo
-    why: "Celestial Charge's stun interrupts Ravenous Spirit, and Nazeebo has no dash to escape, so Molten Armor heals Imperius through the poison while he stays on him."
+    why: "Nazeebo has no dash to escape, so Imperius stays on him while Molten Armor heals him through the poison, and Celestial Charge's stun interrupts Ravenous Spirit if Nazeebo takes it."
     evidence: ["Celestial Charge", "Ravenous Spirit", "Molten Armor"]
     confidence: medium
   - a: imperius
     b: sgthammer
-    why: "Sgt. Hammer is stationary in Siege Mode; Celestial Charge closes the gap and stuns her, and Wrath of the Angiris can carry her into Imperius's team."
+    why: "Sgt. Hammer is stationary in Siege Mode; Celestial Charge closes the gap and stuns her, and Wrath of the Angiris, if Imperius takes it, can carry her into his team."
     evidence: ["Celestial Charge", "Wrath of the Angiris", "Siege Mode"]
     confidence: medium
   - a: imperius
@@ -33,7 +33,7 @@ counters:
     confidence: medium
   - a: malthael
     b: imperius
-    why: "Reaper's Mark ticks 2% of maximum Health per second on Imperius's large pool, and Touch of Death halves the Molten Armor and Valorous Brand healing that keeps him alive."
+    why: "Reaper's Mark ticks 2% of maximum Health per second on Imperius's large pool, and with Touch of Death (level 7) Malthael also halves the Molten Armor and Valorous Brand healing that keeps him alive."
     evidence: ["Reaper's Mark", "Touch of Death", "Molten Armor", "Valorous Brand"]
     confidence: medium
   - a: ana
@@ -44,16 +44,18 @@ counters:
 synergies:
   - a: imperius
     b: kharazim
-    why: "Celestial Charge only stuns if its short channel completes; Cleansing Touch makes Imperius Unstoppable so the channel cannot be interrupted, and Divine Palm backs his all-in."
+    why: "Celestial Charge only stuns if its short channel completes; Cleansing Touch makes Imperius Unstoppable so the channel cannot be interrupted, and Divine Palm, if Kharazim takes it, backs his all-in."
     evidence: ["Celestial Charge", "Cleansing Touch", "Divine Palm"]
+    conditions: "Kharazim takes Cleansing Touch (level 16)"
     confidence: low
   - a: imperius
     b: uther
-    why: "Hand of Protection makes Imperius Unstoppable to protect the Celestial Charge channel, and Devotion's Armor stacks with Sovereign Armor while he trades in melee."
+    why: "Hand of Protection makes Imperius Unstoppable to protect the Celestial Charge channel, and Devotion's Armor stacks with Sovereign Armor (level 4) while he trades in melee."
     evidence: ["Hand of Protection", "Celestial Charge", "Devotion", "Sovereign Armor"]
+    conditions: "Uther takes Hand of Protection (level 7)"
     confidence: low
   - a: imperius
     b: lucio
-    why: "High Five gives Imperius a heal and a second of Unstoppable mid-channel, and Amp It Up's speed lets a melee bruiser with a single gap closer actually reach his target."
+    why: "Amp It Up's speed lets a melee bruiser with a single gap closer actually reach his target, and High Five, if Lúcio takes it, gives Imperius a heal and a second of Unstoppable mid-channel."
     evidence: ["High Five", "Amp It Up", "Celestial Charge"]
     confidence: low

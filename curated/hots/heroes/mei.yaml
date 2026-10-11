@@ -10,12 +10,12 @@ traits:
 counters:
   - a: mei
     b: valla
-    why: "Snow Blind Blinds Valla for 1.75 seconds, wasting her Hatred-stacked Basic Attacks and Strafe, while its slow helps Mei's team reach her."
+    why: "Snow Blind Blinds Valla for 1.75 seconds, wasting her Hatred-stacked Basic Attacks and, if she takes it, Strafe, while its slow helps Mei's team reach her."
     evidence: ["Snow Blind", "Hatred", "Strafe"]
     confidence: medium
   - a: mei
     b: thebutcher
-    why: "Snow Blind Blinds and slows The Butcher, Icing knocks him off his target, and Ice Wall cuts him off from the backline."
+    why: "Snow Blind Blinds and slows The Butcher, Icing knocks him off his target, and Ice Wall, if Mei takes it, cuts him off from the backline."
     evidence: ["Snow Blind", "Icing", "Ice Wall"]
     confidence: medium
   - a: mei
@@ -30,32 +30,32 @@ counters:
     confidence: medium
   - a: deathwing
     b: mei
-    why: "Deathwing is permanently Unstoppable, so Blizzard's stun, Icing's knockback and Ice Wall's trap do nothing to him, leaving Mei with little but Snow Blind."
+    why: "Deathwing is permanently Unstoppable, so Blizzard's stun, Icing's knockback and, if Mei takes it, Ice Wall's trap do nothing to him, leaving her with little but Snow Blind."
     evidence: ["Aspect of Death", "Blizzard", "Icing", "Ice Wall"]
     confidence: medium
   - a: leoric
     b: mei
-    why: "Drain Hope is Ability damage that Snow Blind cannot stop and takes 20% of Mei's large pool, and Wraith Walk's Unstoppable carries Leoric out of Ice Wall and Blizzard."
+    why: "Drain Hope is Ability damage that Snow Blind cannot stop and takes 20% of Mei's large pool, and Wraith Walk's Unstoppable carries Leoric out of Blizzard and, if she takes it, Ice Wall."
     evidence: ["Drain Hope", "Wraith Walk", "Snow Blind", "Ice Wall"]
     confidence: low
   - a: brightwing
     b: mei
-    why: "Soothing Mist removes Stuns, Roots and Slows from nearby allies, undoing Blizzard's stun and Ice Wall's lingering slow that Mei's catches depend on."
+    why: "Soothing Mist removes Stuns, Roots and Slows from nearby allies, undoing Blizzard's stun and, if Mei takes it, Ice Wall's lingering slow that her catches depend on."
     evidence: ["Soothing Mist", "Blizzard", "Ice Wall"]
     confidence: low
 synergies:
   - a: kaelthas
     b: mei
-    why: "Ice Wall traps enemies for 2.5 seconds so Flamestrike's delay always lands, and Blizzard's stun lets Living Bomb spread through the frozen group."
+    why: "Blizzard's end stun lets Flamestrike's delay land and Living Bomb spread through the frozen group, and Ice Wall, if Mei takes it, traps them for 2.5 seconds on top."
     evidence: ["Ice Wall", "Blizzard", "Flamestrike", "Living Bomb"]
     confidence: medium
   - a: chromie
     b: mei
-    why: "Ice Wall traps and Blizzard's end stun give Chromie a stationary target for Sand Blast's delay and all three Dragon's Breath blasts."
-    evidence: ["Ice Wall", "Blizzard", "Sand Blast", "Dragon's Breath"]
+    why: "Blizzard's end stun, and Ice Wall if Mei takes it, give Chromie a stationary target for Sand Blast's delay and all three Dragon's Breath blasts."
+    evidence: ["Blizzard", "Ice Wall", "Sand Blast", "Dragon's Breath"]
     confidence: medium
   - a: jaina
     b: mei
-    why: "Mei's Blizzard ends in a stun right where Jaina's Blizzard waves are landing, and Ice Wall keeps Chilled targets from walking out of Ring of Frost."
+    why: "Mei's Blizzard ends in a stun right where Jaina's Blizzard waves are landing, and Ice Wall, if Mei takes it, traps Chilled targets for all three waves or inside Ring of Frost."
     evidence: ["Blizzard", "Ice Wall", "Ring of Frost", "Frostbite"]
     confidence: medium

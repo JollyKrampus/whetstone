@@ -13,24 +13,24 @@ counters:
     b: zagara
     why: "Symbiote can sit on a threatened tower, so Abathur answers Zagara's siege in whichever lane she picks; Spike Burst and Stab clean up Roachlings and Hunter Killers before they chip the structure down."
     evidence: ["Symbiote", "Spike Burst", "Stab", "Infested Drop", "Hunter Killer"]
-    conditions: "Defending structures against a summon-led push rather than a straight teamfight."
+    conditions: "Abathur is defending structures from a summon-led push rather than fighting in the open"
     confidence: low
   - a: abathur
     b: thelostvikings
-    why: "Toxic Nests stacked in the side lanes reveal and chunk lone Vikings who are quietly soaking there, and Locusts keep contesting the lanes the Vikings want to hold."
+    why: "Toxic Nests stacked in the side lanes reveal and chunk lone Vikings who are quietly soaking there (Prolific Dispersal at level 4 adds charges), and Locusts keep contesting the lanes the Vikings want to hold."
     evidence: ["Toxic Nest", "Prolific Dispersal", "Locust Strain"]
-    conditions: "Prolific Dispersal at level 4; both teams playing a lane-soak game."
+    conditions: "the Vikings split up to soak lanes on their own"
     confidence: low
   - a: abathur
     b: murky
     why: "Murky wants to farm a lane alone with only 730 health; Toxic Nests reveal him and take big chunks, and with Slapathur Abathur's own attacks stun him every 6 seconds while Locusts hold the wave."
     evidence: ["Toxic Nest", "Slapathur", "Locust Strain", "Spawn Egg"]
-    conditions: "Slapathur at level 4, or heavy nest coverage in Murky's lane."
+    conditions: "Murky is farming a lane alone"
     confidence: low
   # --- weak against ---
   - a: zeratul
     b: abathur
-    why: "Permanent Cloak lets Zeratul walk straight up to Abathur's unguarded body, and Cleave plus Singularity Spike kill it before Deep Tunnel's 30-second cooldown can get him out."
+    why: "Permanent Cloak lets Zeratul walk straight up to Abathur's unguarded body, and Cleave, Singularity Spike and a couple of Basic Attacks take its 685 Health before Deep Tunnel's 30-second cooldown can get him out."
     evidence: ["Permanent Cloak", "Cleave", "Singularity Spike", "Deep Tunnel"]
     confidence: high
   - a: nova
@@ -68,9 +68,10 @@ synergies:
     b: valla
     why: "Ultimate Evolution clones Valla with 20% bonus attack damage, giving the team a second basic-attack carry whose Hatred stacks ramp up just like the original."
     evidence: ["Ultimate Evolution", "Hatred"]
-    confidence: medium
+    conditions: "Abathur takes Ultimate Evolution (level 10)"
+    confidence: low
   - a: abathur
     b: sonya
-    why: "Carapace shields and Soma Transference healing stack with Whirlwind's lifesteal, so a hatted Sonya can stay in melee range far longer than normal."
+    why: "Carapace shields stack with Whirlwind's lifesteal, so a hatted Sonya can stay in melee range far longer than normal; Soma Transference (level 13) adds a heal for every hero Spike Burst hits."
     evidence: ["Carapace", "Soma Transference", "Whirlwind"]
     confidence: medium

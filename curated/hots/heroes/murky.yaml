@@ -10,35 +10,38 @@ counters:
     b: ltmorales
     why: "Octo-Grab makes Murky Unstoppable and Stuns Lt. Morales for 3 seconds, cutting Healing Beam on a healer who has no way to cleanse it."
     evidence: ["Octo-Grab", "Healing Beam"]
+    conditions: "Murky takes Octo-Grab (level 10)"
     confidence: low
   - a: murky
     b: nazeebo
-    why: "Octo-Grab's 3-second Stun breaks Ravenous Spirit's channel and holds a dash-less Nazeebo in place for a Pufferfish that he cannot walk away from."
+    why: "Octo-Grab's 3-second Stun holds a dash-less Nazeebo in place for a Pufferfish he cannot walk away from, and breaks Ravenous Spirit's channel if he is casting it."
     evidence: ["Octo-Grab", "Ravenous Spirit", "Pufferfish"]
+    conditions: "Murky takes Octo-Grab (level 10)"
     confidence: low
   - a: murky
     b: lili
-    why: "Octo-Grab Stuns Li Li for 3 seconds, cancelling Jug of 1,000 Cups mid-channel, and Murky is Unstoppable while it lasts so she cannot peel him off."
+    why: "Octo-Grab Stuns Li Li for 3 seconds, cancelling Jug of 1,000 Cups if she is channeling it, and Murky is Unstoppable while it lasts so she cannot peel him off."
     evidence: ["Octo-Grab", "Jug of 1,000 Cups"]
+    conditions: "Murky takes Octo-Grab (level 10)"
     confidence: low
   - a: jaina
     b: murky
-    why: "A Frostbolt into Cone of Cold on a Chilled Murky does more than his 730 Health, and Blizzard punishes him for Sliming a wave."
+    why: "Frostbolt into Cone of Cold on a Chilled Murky takes over 80% of his 730 Health, so any follow-up finishes him, and Blizzard punishes him for Sliming a wave."
     evidence: ["Frostbolt", "Cone of Cold", "Frostbite", "Blizzard", "Slime"]
     confidence: medium
   - a: junkrat
     b: murky
-    why: "Frag Launcher's splash finds Murky behind minions and finishes 730 Health quickly, and Steel Trap holds him once Safety Bubble is used."
+    why: "A full Frag Launcher volley takes about two thirds of Murky's 730 Health, even from behind minions, and Steel Trap's root holds him for the rest once Safety Bubble has ended."
     evidence: ["Frag Launcher", "Steel Trap", "Safety Bubble"]
     confidence: low
   - a: liming
     b: murky
-    why: "One Magic Missiles volley kills Murky, and each of his frequent deaths is a Takedown that refreshes Li-Ming's cooldowns through Critical Mass."
+    why: "Three Magic Missiles take over half of Murky's 730 Health from range, and every Murky death is a Takedown that refreshes all of Li-Ming's cooldowns through Critical Mass."
     evidence: ["Magic Missiles", "Critical Mass"]
     confidence: medium
   - a: kaelthas
     b: murky
-    why: "Living Bomb or Flamestrike alone can exceed Murky's 730 Health, and the same area damage clears the Pufferfish he spits nearby."
+    why: "Flamestrike and a Living Bomb each take nearly half of Murky's 730 Health, so one rotation leaves him a hit from death, and the same area damage clears the Pufferfish he spits nearby."
     evidence: ["Living Bomb", "Flamestrike", "Pufferfish"]
     confidence: medium
 synergies:
@@ -46,14 +49,16 @@ synergies:
     b: murky
     why: "Ice Wall traps enemies for 2.5 seconds, so a Pufferfish dropped as the wall lands has its 2.75-second fuse nearly covered, and Blizzard's stun can fill the gap."
     evidence: ["Ice Wall", "Blizzard", "Pufferfish"]
+    conditions: "Mei takes Ice Wall (level 10)"
     confidence: low
   - a: malfurion
     b: murky
-    why: "Entangling Roots holds a group in place while a Pufferfish fuse burns down, and Tufferfish adds damage against the Slimed targets inside."
+    why: "Entangling Roots holds a group in place while a Pufferfish fuse burns down, and Tufferfish (level 4) adds damage against the Slimed targets inside."
     evidence: ["Entangling Roots", "Pufferfish", "Tufferfish", "Slime"]
     confidence: low
   - a: murky
     b: zarya
     why: "Graviton Surge holds enemies at its center for 2.5 seconds, so a Pufferfish placed there detonates on the whole pulled group."
     evidence: ["Graviton Surge", "Pufferfish"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

@@ -3,7 +3,6 @@
  * Node-only (it imports load.ts): call it from .astro frontmatter or static endpoints, never
  * from an island. Everything here is deterministic for a given data snapshot.
  */
-import type { SourceRef } from '../../../core/game.ts';
 import { assignTiers, HOTS_TIERS, type TierInput, type TierResult } from '../../../core/tiers.ts';
 import { sourcesFor } from '../../registry.ts';
 import {
@@ -68,11 +67,6 @@ export function allPeriods(modes: readonly ModeOption[]): PeriodOption[] {
   const byId = new Map<Timeframe, PeriodOption>();
   for (const m of modes) for (const p of m.periods) if (!byId.has(p.id)) byId.set(p.id, { ...p, note: '' });
   return (['current', 'previous'] as const).flatMap((id) => (byId.has(id) ? [byId.get(id)!] : []));
-}
-
-/** SourceRef for Heroes Profile (inline credit wherever stats show). */
-export function hpSource(): SourceRef[] {
-  return sourcesFor('hots', ['heroesprofile']);
 }
 
 /** SourceRef.id -> display name, for reason lines. */
@@ -171,6 +165,22 @@ export function splitByGate<T extends { gate: string }>(rows: readonly T[]): { l
   return { listed: rows.filter((r) => r.gate === 'listed'), other: rows.filter((r) => r.gate !== 'listed') };
 }
 
+/**
+ * Map-fit rows split at neutral: `better` (score above 50, best first) for "Best maps" / "Best
+ * heroes", `harder` (below 50, hardest first) for their own list; exactly 50 is in neither. A
+ * hero whose every map scores below 50 must never get a "best maps" list of maps it is worse on.
+ */
+export function splitFit<T extends { score: number }>(rows: readonly T[]): { better: T[]; harder: T[] } {
+  return {
+    better: rows.filter((r) => r.score > 50),
+    harder: rows
+      .map((r, i) => ({ r, i }))
+      .filter(({ r }) => r.score < 50)
+      .sort((a, b) => a.r.score - b.r.score || a.i - b.i)
+      .map(({ r }) => r),
+  };
+}
+
 /** Theory map fit for a hero, best first (independent of stats). */
 export function theoryMapFit(hero: Hero, maps: readonly GameMap[]): MapFitRow[] {
   const byId = new Map(maps.map((m) => [m.id, m]));
@@ -265,6 +275,7 @@ export function catchUpData(): CatchUpData {
     title: p.title,
     kind: p.kind,
     version: p.version,
+    ...(p.build ? { build: p.build } : {}),
     href: patchHref(p),
     general: p.general,
     newHeroes: p.newHeroes ?? [],

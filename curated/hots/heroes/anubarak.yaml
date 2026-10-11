@@ -45,7 +45,7 @@ counters:
     confidence: medium
   - a: zuljin
     b: anubarak
-    why: "Zul'jin's damage is basic attacks that speed up as he loses health, which Harden Carapace's Spell Armor ignores, and Taz'dingo! makes diving him with Burrow Charge pointless."
+    why: "Zul'jin's damage is basic attacks that speed up as he loses health, which Harden Carapace's Spell Armor ignores, and with Taz'dingo!, if he takes it, he outlasts a Burrow Charge dive."
     evidence: ["Berserker", "Taz'dingo!", "Harden Carapace", "Burrow Charge"]
     confidence: low
 synergies:

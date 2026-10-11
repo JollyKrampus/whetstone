@@ -7,7 +7,7 @@
 import { formatDayUTC } from '../../../core/format.ts';
 import { navHref, versionText } from '../../../games/registry.ts';
 import CatchUp from '../../../games/hots/components/CatchUp.tsx';
-import { catchUp, defaultSince, majorStarts, shiftDate } from '../../../games/hots/components/catchup.ts';
+import { catchUp, defaultSince, knownMajorStarts, shiftDate } from '../../../games/hots/components/catchup.ts';
 import { catchUpData, majorSince } from '../../../games/hots/components/pagedata.ts';
 import { getMeta } from '../../../games/hots/load.ts';
 import GameLayout from '../../../layouts/GameLayout.astro';
@@ -18,9 +18,17 @@ const since = defaultSince(majorSince());
 const initial = catchUp(data, since);
 const latestDate = meta.generatedAt.slice(0, 10);
 const oldest = data.patches.at(-1)?.date ?? since;
-const shortcuts = majorStarts(data.patches)
+const month = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+// "Before <major>" only where the notes cover the major's start; the oldest notes are named by date.
+const shortcuts = knownMajorStarts(data.patches, { version: meta.extra.major, since: majorSince() })
   .slice(0, 3)
-  .map((m) => ({ label: `Before ${versionText('hots', m.version)}`, since: shiftDate(m.date, -1) }));
+  .map((a) => ({
+    label:
+      a.kind === 'major'
+        ? `Before ${versionText('hots', a.version)}`
+        : `Since the oldest notes we have (${month.format(new Date(`${a.date}T00:00:00Z`))})`,
+    since: shiftDate(a.date, -1),
+  }));
 ---
 
 <GameLayout

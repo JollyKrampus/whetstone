@@ -13,7 +13,7 @@ import HeroPoolBar from '../../games/hots/components/HeroPoolBar.tsx';
 import StatsCredit from '../../games/hots/components/StatsCredit.astro';
 import { latestLivePatch, statsModes, tierById } from '../../games/hots/components/pagedata.ts';
 import { PATCH_KIND } from '../../games/hots/components/labels.ts';
-import { getDraftableEntities, getMembers, getMeta, getRotation, hasAsset, isFreeToPlay, rotationIsStale } from '../../games/hots/load.ts';
+import { getDraftableEntities, getMembers, getMeta, getRotation, hasAsset, isFreeToPlay, rotationIsStale, statsSourceIds } from '../../games/hots/load.ts';
 import { HOTS_ROLES } from '../../games/hots/schema.ts';
 import { heroHref, heroPortrait, patchHref } from '../../games/hots/view.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
@@ -66,7 +66,7 @@ const ptr = meta.extra.ptrBuild;
   game="hots"
   title="Heroes of the Storm heroes: counters, maps and talents"
   description={`Every Heroes of the Storm hero in ${version}: counters, synergies, best maps, talents and patch changes, with the reasons and sample sizes behind each one.`}
-  uses={statsOn ? ['heroesprofile'] : []}
+  uses={statsOn ? statsSourceIds() : []}
   inlineCredits={false}
 >
   <div class="hgrid">

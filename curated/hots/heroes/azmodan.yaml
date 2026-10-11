@@ -11,9 +11,8 @@ counters:
   # --- strong against ---
   - a: azmodan
     b: chogall
-    why: "Cho'gall is a large, slow target that Globe of Annihilation hits reliably, and Total Annihilation adds 4% of max health to every globe."
+    why: "Cho'gall is a large, slow target that Globe of Annihilation hits reliably, and Total Annihilation (level 16) adds 4% of maximum health to every globe."
     evidence: ["Globe of Annihilation", "Total Annihilation"]
-    conditions: "Total Annihilation at level 16 for the percent damage."
     confidence: low
   - a: azmodan
     b: sgthammer
@@ -22,14 +21,13 @@ counters:
     confidence: low
   - a: azmodan
     b: dva
-    why: "The mech is a big target that has to brawl up close; Globe of Annihilation with Total Annihilation takes 4% of its max health per hit while Demon Warriors pressure the lane."
+    why: "The mech is a big target that has to brawl up close, so Globe of Annihilation hits it reliably (for 4% more of its maximum health with Total Annihilation at level 16) while Demon Warriors pressure the lane."
     evidence: ["Globe of Annihilation", "Total Annihilation", "Summon Demon Warrior", "Mech Mode"]
-    conditions: "Total Annihilation at level 16 for the percent damage."
     confidence: low
   # --- weak against ---
   - a: zeratul
     b: azmodan
-    why: "Azmodan has no escape, so Zeratul Blinks onto him from stealth and Cleave plus Singularity Spike kill him before Trample is even available."
+    why: "Azmodan has no escape until Trample at level 16, so a Zeratul who Blinks onto him from stealth keeps Cleave, Singularity Spike and Basic Attacks on him with nothing Azmodan can do to leave."
     evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Trample"]
     confidence: medium
   - a: tracer
@@ -52,14 +50,17 @@ synergies:
     b: azmodan
     why: "Nano Boost refunds mana and recharges Globe of Annihilation 150% faster with 30% Spell Power, letting Azmodan fire globes at a rapid pace."
     evidence: ["Nano Boost", "Globe of Annihilation"]
-    confidence: medium
+    conditions: "Ana takes Nano Boost (level 10)"
+    confidence: low
   - a: azmodan
     b: zarya
-    why: "Graviton Surge clumps heroes so one Globe of Annihilation hits several, triggering Art of Chaos' mana refund and quest stacks."
+    why: "Graviton Surge clumps heroes so one Globe of Annihilation hits several of them, which also refunds Mana through Art of Chaos at level 7."
     evidence: ["Graviton Surge", "Globe of Annihilation", "Art of Chaos"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: azmodan
     b: mei
     why: "Ice Wall traps heroes for 2.5 seconds, enough for a full All Shall Burn channel and an easy Globe of Annihilation."
     evidence: ["Ice Wall", "All Shall Burn", "Globe of Annihilation"]
-    confidence: medium
+    conditions: "Mei takes Ice Wall (level 10)"
+    confidence: low

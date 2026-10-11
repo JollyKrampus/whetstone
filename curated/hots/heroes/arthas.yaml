@@ -16,33 +16,30 @@ counters:
     confidence: medium
   - a: arthas
     b: thebutcher
-    why: "Frozen Tempest slows Butcher's attacks by up to 40% and Rime absorbs his hits, starving the Butcher's Brand healing that only comes from basic attacks."
+    why: "Frozen Tempest slows The Butcher's attacks by up to 40%, starving the Butcher's Brand healing that only comes from his basic attacks, and Rime (level 1) cuts the damage of his next hit by 75% every 5 seconds."
     evidence: ["Frozen Tempest", "Rime", "Butcher's Brand"]
-    conditions: "Rime at level 1 adds the attack-blocking armor; Frozen Tempest works without it."
     confidence: medium
   - a: arthas
     b: artanis
-    why: "Frozen Tempest cuts Artanis' attack speed by up to 40% and Rime blocks a basic attack every 5 seconds, starving Shield Overload's refresh."
+    why: "Frozen Tempest cuts Artanis' attack speed by up to 40%, so he lands fewer of the basic attacks that recharge Shield Overload, and with Rime (level 1) Arthas takes 75% less damage from his next hit every 5 seconds."
     evidence: ["Frozen Tempest", "Rime", "Shield Overload"]
-    conditions: "Rime at level 1 adds the attack-blocking armor; Frozen Tempest works without it."
     confidence: medium
   - a: arthas
     b: varian
     why: "Twin Blades of Fury Varian depends on attack speed; Frozen Tempest takes up to 40% of it away while its slow keeps him from chasing."
     evidence: ["Frozen Tempest", "Twin Blades of Fury"]
-    conditions: "Varian on Twin Blades of Fury."
+    conditions: "Varian takes Twin Blades of Fury (level 4)"
     confidence: low
   # --- weak against ---
   - a: deathwing
     b: arthas
-    why: "Deathwing is permanently Unstoppable, so Howling Blast's root and the slows from Frozen Tempest and Summon Sindragosa never touch him."
+    why: "Deathwing is permanently Unstoppable, so Howling Blast's root, Frozen Tempest's slows and, if Arthas takes it, Summon Sindragosa's slow never touch him."
     evidence: ["Aspect of Death", "Howling Blast", "Frozen Tempest", "Summon Sindragosa"]
     confidence: medium
   - a: malthael
     b: arthas
-    why: "Arthas' large health pool feeds Reaper's Mark's 2% max-health ticks and Soul Rip's healing, and Touch of Death halves his Death Coil self-heal."
+    why: "Arthas' large health pool feeds Reaper's Mark's 2% max-health ticks and Soul Rip's healing, and with Touch of Death (level 7) Malthael also halves his Death Coil self-heal."
     evidence: ["Reaper's Mark", "Soul Rip", "Touch of Death", "Death Coil"]
-    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: lunara
     b: arthas
@@ -51,7 +48,7 @@ counters:
     confidence: low
   - a: ana
     b: arthas
-    why: "Biotic Grenade turns off Death Coil's self-heal and Army of the Dead's sacrifice healing for its duration, his two main sources of sustain."
+    why: "Biotic Grenade turns off Death Coil's self-heal, his main source of sustain, and the sacrifice healing of Army of the Dead when he takes it."
     evidence: ["Biotic Grenade", "Death Coil", "Army of the Dead"]
     confidence: low
 synergies:
@@ -67,6 +64,7 @@ synergies:
     confidence: medium
   - a: arthas
     b: hanzo
-    why: "Summon Sindragosa slows enemies by 60% for 4 seconds, an easy window for Dragonstrike's center and fully charged Storm Bows."
+    why: "Summon Sindragosa slows enemies by 60% for 4 seconds, an easy window for fully charged Storm Bows and, if Hanzo has it, Dragonstrike's center."
     evidence: ["Summon Sindragosa", "Dragonstrike", "Storm Bow"]
-    confidence: medium
+    conditions: "Arthas takes Summon Sindragosa (level 10)"
+    confidence: low

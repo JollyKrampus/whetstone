@@ -20,7 +20,7 @@ counters:
     confidence: low
   - a: probius
     b: zagara
-    why: "Disruption Pulse pierces through Zagara's Roachlings and Hunter Killers, and Pylon Overcharge holds a structure against her summon-based push."
+    why: "Disruption Pulse pierces through Zagara's Roachlings and Hunter Killers, and Pylon Overcharge, if Probius takes it, holds a structure against her summon-based push."
     evidence: ["Disruption Pulse", "Pylon Overcharge", "Infested Drop", "Hunter Killer"]
     confidence: low
   - a: tracer
@@ -30,17 +30,17 @@ counters:
     confidence: medium
   - a: genji
     b: probius
-    why: "Deflect blocks Disruption Pulse, and Cyber Agility jumps over Null Gate to reach Probius away from his Pylons."
+    why: "Deflect blocks Disruption Pulse, and Cyber Agility hops terrain (and Null Gate, if Probius takes it) to reach him away from his Pylons."
     evidence: ["Deflect", "Disruption Pulse", "Cyber Agility", "Null Gate"]
     confidence: medium
   - a: zeratul
     b: probius
-    why: "Zeratul approaches from angles a powered Photon Cannon does not reveal, and Singularity Spike plus Cleave kill a 1260-Health Probius."
+    why: "Zeratul approaches from angles a powered Photon Cannon does not reveal, and Singularity Spike, Cleave and a few Basic Attacks take most of a 1260-Health Probius."
     evidence: ["Permanent Cloak", "Photon Cannon", "Singularity Spike", "Cleave"]
     confidence: medium
   - a: kerrigan
     b: probius
-    why: "Ravage leaps past Photon Cannons onto Probius, and a single Primal Grasp into Impaling Blades combo kills him before he can retreat to a Pylon."
+    why: "Ravage leaps past Photon Cannons onto Probius, Primal Grasp pulls him back in and Impaling Blades stuns him, and with her Basic Attacks that takes most of his 1260 Health before he can retreat to a Pylon."
     evidence: ["Ravage", "Primal Grasp", "Impaling Blades", "Photon Cannon"]
     confidence: medium
 synergies:
@@ -48,14 +48,16 @@ synergies:
     b: tychus
     why: "Aggressive Matrix gives allies 35% more Attack Damage inside Pylon fields, and Tychus's Minigun Basic Attacks gain the full benefit while Probius holds the area."
     evidence: ["Aggressive Matrix", "Minigun"]
+    conditions: "Probius takes Aggressive Matrix (level 13)"
     confidence: low
   - a: probius
     b: raynor
-    why: "Raynor's Basic Attacks gain Aggressive Matrix's bonus inside Pylon fields, and his Penetrating Round knockback pushes divers off Probius."
+    why: "Penetrating Round's knockback pushes divers off Probius, and with Aggressive Matrix (level 13) Raynor's Basic Attacks deal 35% more damage inside Pylon fields."
     evidence: ["Aggressive Matrix", "Penetrating Round"]
     confidence: low
   - a: mei
     b: probius
-    why: "Ice Wall traps enemies inside a Warp Rift until it arms and explodes, and Null Gate can cover the other escape side."
+    why: "Ice Wall traps enemies inside a Warp Rift until it arms and explodes, and Null Gate, if Probius takes it, can cover the other escape side."
     evidence: ["Ice Wall", "Warp Rift", "Null Gate"]
+    conditions: "Mei takes Ice Wall (level 10)"
     confidence: low

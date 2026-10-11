@@ -13,10 +13,12 @@ Two conventions hold everywhere:
 
 ## 1. Where the numbers come from
 
-Statistics need match data. For Heroes of the Storm that data can only come from Heroes Profile,
-and only once its owner has agreed to our use. Until then (and whenever that source is off), hero
-pages show **theory**: matchups derived from ability and talent text plus hand-written notes.
-Theory is always labelled as theory and never mixed into a statistic.
+Statistics need match data. Heroes of the Storm publishes none, and Whetstone builds only on data
+it owns or that is openly licensed, plus its own analysis. So Heroes of the Storm pages show
+**theory**: matchups derived from ability and talent text plus hand-written notes. The statistics
+rules below stay ready for a match-data source that meets that bar; any page that shows its
+numbers credits it right next to them. Theory is always labelled as theory and never mixed into a
+statistic.
 
 Every number on a page shows **how many games** (`n`) it rests on and where it came from.
 
@@ -283,17 +285,29 @@ about what kits do to each other, plus matchups that curators wrote and checked 
 current kit text. Theory scores use the same 1–100 ring, but they measure how hard one kit
 punishes another, not how often a matchup is won.
 
+**One list per opponent.** Both heroes of a pair can have tools against each other, so the data
+holds two directed scores. A hero page nets them the way the draft tool does: value(you → them)
+− value(them → you), where value is the inverse of the ring formula (§10). The opponent appears
+under "strong against" if the net is positive and under "weak against" if it is negative, never
+under both, with the net as its score. Its reasons show both sides, the winning side first.
+
 | Rule | Threshold | Effect |
 |---|---|---|
 | Not stored | generic score within 4 points of 50 | Too close to neutral to mean anything; left out of the data. Curated matchups are always kept. |
-| Listed as "strong against", "weak against" or "good with" | curated, or generic score ≥ **65** | One strong interaction the hero always has, or two clear ones. A match that only works through a talent tops out at 62 on its own. |
-| Below the bar | generic score 55–64 | Shown behind "weaker mechanical edges" under the list. |
+| Listed as "strong against", "weak against" or "good with" | curated, or a generic score ≥ **65** that is among the hero's **8** strongest generic rows in that list | One strong interaction the hero always has, or two clear ones. A match that only works through a talent tops out at 62 on its own. Broad rules match much of the roster, so only the strongest few generic matches head a list. |
+| Below the bar | every other row above 50 | Shown behind "weaker mechanical edges" under the list. |
 
 Within a list, curated matchups come first, then generic ones, each by score. A reason that only
-holds when a hero takes a certain talent or Heroic says so ("Only when Genji takes Pathfinder").
-A rule that applies both ways round (both heroes blind, both rely on Basic Attacks) is a wash
-and only counts by how much more it favours one side. The draft tool uses every stored theory
-edge, weighted by its score.
+holds when a hero takes a certain talent or Heroic says so, naming every pick that works ("Only
+when Anduin takes Lightbomb or Censure"); a hand-written matchup that depends on a talent, a
+Heroic or a situation carries the same "Only when …" line, and is rated low confidence when the
+whole effect rests on that one choice. A rule that applies both ways round (both heroes blind,
+both rely on Basic Attacks) is a wash and only counts by how much more it favours one side. The
+draft tool uses every stored theory edge, weighted by its score.
+
+**Map fit.** A hero page's "Best maps" lists only maps scoring above 50. Maps whose layout or
+objective works against the kit (below 50) are listed separately as "Harder maps", hardest first.
+Map pages split their hero lists the same way.
 
 ## 12. Freshness
 
@@ -307,8 +321,8 @@ Every page shows how old its data is. The data job runs once a day.
 | Broken | a source failed and has never produced data |
 
 A source whose latest fetch failed keeps showing its last good data. It is labelled as such and is
-never called "fresh". Disabled sources (for example Heroes Profile before permission) are listed
-as disabled, not broken.
+never called "fresh". Disabled sources (for example an optional source the site owner has not
+switched on) are listed as disabled, not broken.
 
 ## 13. Known biases
 

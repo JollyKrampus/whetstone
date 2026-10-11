@@ -19,7 +19,7 @@ counters:
     confidence: low
   - a: stukov
     b: thebutcher
-    why: "Lurking Arm silences The Butcher so he can't Hamstring or apply a fresh Brand, and Flailing Swipe knocks him off his target after Ruthless Onslaught lands."
+    why: "Lurking Arm silences The Butcher so he can't Hamstring or apply a fresh Brand, and Flailing Swipe, if Stukov takes it, knocks him off his target after Ruthless Onslaught lands."
     evidence: ["Lurking Arm", "Flailing Swipe", "Hamstring", "Butcher's Brand", "Ruthless Onslaught"]
     confidence: low
   # --- weak against ---
@@ -30,25 +30,27 @@ counters:
     confidence: medium
   - a: valeera
     b: stukov
-    why: "Valeera opens on Stukov from Vanish and he has no escape; Garrote (Eviscerate from Stealth) silences him so he can't place Lurking Arm, and Wound Poison halves his healing."
+    why: "Valeera opens on Stukov from Vanish and he has no escape; Garrote (Eviscerate from Stealth) silences him so he can't place Lurking Arm, and Wound Poison (level 4) halves his healing."
     evidence: ["Vanish", "Eviscerate", "Wound Poison", "Lurking Arm"]
     confidence: low
   - a: zeratul
     b: stukov
-    why: "Zeratul cloaks onto a Stukov who has no dash, and Singularity Spike plus Cleave burst him down before Bio-Kill Switch's slows can buy him time."
+    why: "Zeratul cloaks onto a Stukov who has no dash and keeps Singularity Spike, Cleave and Basic Attacks on him before Bio-Kill Switch's slows can buy him time."
     evidence: ["Permanent Cloak", "Singularity Spike", "Cleave", "Bio-Kill Switch"]
     confidence: low
 synergies:
   - a: stukov
     b: zarya
-    why: "Graviton Surge holds enemies inside Lurking Arm's silence, and Virulent Reaction roots anyone carrying a Weighted Pustule there."
+    why: "Graviton Surge holds enemies inside Lurking Arm's silence, and with Virulent Reaction (level 13) a Weighted Pustule detonating there roots them."
     evidence: ["Graviton Surge", "Lurking Arm", "Virulent Reaction", "Weighted Pustule"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: mei
     b: stukov
     why: "Ice Wall traps enemies for 2.5 seconds, keeping them inside Lurking Arm's silence and damage area."
     evidence: ["Ice Wall", "Lurking Arm"]
-    confidence: medium
+    conditions: "Mei takes Ice Wall (level 10)"
+    confidence: low
   - a: garrosh
     b: stukov
     why: "Wrecking Ball throws an enemy into Lurking Arm, silencing them on landing while Garrosh's team collapses on the target."
@@ -58,4 +60,5 @@ synergies:
     b: stukov
     why: "Weighted Pustule's growing Slow keeps targets Slowed for seconds, which turns every Samuro hit into a Critical Strike through Merciless Strikes."
     evidence: ["Weighted Pustule", "Merciless Strikes"]
+    conditions: "Samuro takes Merciless Strikes (level 16)"
     confidence: low

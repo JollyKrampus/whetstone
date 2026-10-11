@@ -11,18 +11,17 @@ counters:
   # --- strong against ---
   - a: deckard
     b: illidan
-    why: "Illidan has to stay on top of his target; Horadric Cube's slow sets up Scroll of Sealing's root, and Stay Awhile and Listen sleeps him when he dives into a group."
+    why: "Illidan has to stay on top of his target; Horadric Cube's slow sets up Scroll of Sealing's root, and Stay Awhile and Listen, if Deckard takes it, sleeps him when he dives into a group."
     evidence: ["Horadric Cube", "Scroll Of Sealing", "Stay Awhile and Listen", "Dive"]
     confidence: low
   - a: deckard
     b: kerrigan
-    why: "Kerrigan commits in melee after Ravage; Scroll of Sealing roots her inside the triangle and Kanai's Cube cuts her damage by 30%."
+    why: "Kerrigan commits in melee after Ravage; Scroll of Sealing roots her inside the triangle, and Kanai's Cube (level 7) cuts her damage by 30%."
     evidence: ["Scroll Of Sealing", "Kanai's Cube", "Ravage"]
-    conditions: "Kanai's Cube at level 7 for the damage reduction."
     confidence: low
   - a: deckard
     b: thebutcher
-    why: "Ruthless Onslaught brings Butcher straight into the group, where Stay Awhile and Listen sleeps him and Scroll of Sealing roots him once the Unstoppable charge ends."
+    why: "Ruthless Onslaught brings The Butcher straight into the group, where Scroll of Sealing roots him once the Unstoppable charge ends and Stay Awhile and Listen, if Deckard takes it, sleeps him."
     evidence: ["Stay Awhile and Listen", "Scroll Of Sealing", "Ruthless Onslaught"]
     confidence: low
   # --- weak against ---
@@ -56,9 +55,11 @@ synergies:
     b: mei
     why: "Ice Wall traps heroes in place while Scroll of Sealing's triangle forms, so it roots several at once."
     evidence: ["Ice Wall", "Scroll Of Sealing"]
-    confidence: medium
+    conditions: "Mei takes Ice Wall (level 10)"
+    confidence: low
   - a: deckard
     b: zarya
-    why: "Graviton Surge holds heroes inside the forming Scroll of Sealing, which deals 200% more damage with Scroll of Stone Curse when it catches two or more."
+    why: "Graviton Surge holds heroes inside the forming Scroll of Sealing so it roots several at once, and with Scroll of Stone Curse (level 16) it deals 200% more damage when it catches two or more."
     evidence: ["Graviton Surge", "Scroll Of Sealing", "Scroll of Stone Curse"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

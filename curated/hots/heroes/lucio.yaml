@@ -10,13 +10,13 @@ counters:
     b: kaelthas
     why: "Sound Barrier gives every nearby ally a 1296-point shield, enough to absorb a Flamestrike plus Living Bomb chain that would otherwise wipe a clustered team."
     evidence: ["Sound Barrier", "Flamestrike", "Living Bomb"]
-    conditions: "Requires Sound Barrier at level 10 and good timing on the 1-second cast delay."
+    conditions: "Lúcio takes Sound Barrier (level 10)"
     confidence: low
   - a: lucio
     b: junkrat
     why: "Rocket Ride hangs in the air for 3.75 seconds before landing, giving Lúcio time to cast Sound Barrier so the 935-damage landing hits shields instead of Health."
     evidence: ["Sound Barrier", "Rocket Ride"]
-    conditions: "Requires Sound Barrier; less effective against RIP-Tire."
+    conditions: ["Lúcio takes Sound Barrier (level 10)", "Junkrat takes Rocket Ride (level 10)"]
     confidence: low
   - a: lucio
     b: thebutcher
@@ -30,7 +30,7 @@ counters:
     confidence: medium
   - a: valeera
     b: lucio
-    why: "Wound Poison halves the healing received by the allies Valeera hits, and her stealth Silence stops Amp It Up and High Five, Lúcio's only bursts of healing."
+    why: "Valeera's stealth Silence stops Amp It Up (and High Five, if Lúcio takes it), his only bursts of healing, and Wound Poison (level 4) halves the healing received by the allies she hits."
     evidence: ["Wound Poison", "Vanish", "Amp It Up", "High Five"]
     confidence: low
   - a: deathwing
@@ -41,7 +41,7 @@ counters:
 synergies:
   - a: lucio
     b: varian
-    why: "Varian needs to stay glued to a target and has only Charge to get there; Amp It Up's 30% Speed Boost gives him extra reach, and High Five frees him if he is caught."
+    why: "Varian needs to stay glued to a target and has only Charge to get there; Amp It Up's 30% Speed Boost gives him extra reach, and High Five, if Lúcio takes it, frees him when he is caught."
     evidence: ["Amp It Up", "High Five", "Charge"]
     confidence: low
   - a: lucio
@@ -51,6 +51,6 @@ synergies:
     confidence: low
   - a: illidan
     b: lucio
-    why: "Amp It Up's Movement Speed helps Illidan re-engage while Dive is on cooldown, and High Five makes him Unstoppable for a second when he is focused."
+    why: "Amp It Up's Movement Speed helps Illidan re-engage while Dive is on cooldown, and High Five, if Lúcio takes it, makes him Unstoppable for a second when he is focused."
     evidence: ["Amp It Up", "High Five", "Dive"]
     confidence: low

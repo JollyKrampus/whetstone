@@ -15,8 +15,8 @@ counters:
     confidence: medium
   - a: kerrigan
     b: probius
-    why: "Probius has 1260 Health and must stay near his Pylons, so Ravage closes the gap past Photon Cannons and a single combo kills him."
-    evidence: ["Ravage", "Impaling Blades", "Warp In Pylon", "Photon Cannon"]
+    why: "Ravage leaps past Photon Cannons onto Probius, Primal Grasp pulls him back in and Impaling Blades stuns him, and with her Basic Attacks that takes most of his 1260 Health before he can retreat to a Pylon."
+    evidence: ["Ravage", "Primal Grasp", "Impaling Blades", "Warp In Pylon", "Photon Cannon"]
     confidence: medium
   - a: kerrigan
     b: kaelthas
@@ -25,14 +25,14 @@ counters:
     confidence: low
   - a: kerrigan
     b: chromie
-    why: "Chromie has 1390 Health and no mobility, so a Ravage onto her bypasses her long range, and Time Out is her only answer until it is spent."
+    why: "Chromie has 1390 Health and no mobility, so a Ravage onto her bypasses her long range, and Time Out (level 13), if she takes it, is her only answer until it is spent."
     evidence: ["Ravage", "Primal Grasp", "Time Out"]
     confidence: low
   - a: anubarak
     b: kerrigan
-    why: "Debilitation halves Kerrigan's Spell Power after Impale or Burrow Charge, gutting her ability-heavy combo, and Cocoon removes her mid-dive."
+    why: "Impale or Burrow Charge catches Kerrigan as she dives, Debilitation (level 16) then halves her Spell Power to gut her ability-heavy combo, and Cocoon, if Anub'arak takes it, removes her mid-dive."
     evidence: ["Debilitation", "Impale", "Burrow Charge", "Cocoon"]
-    confidence: medium
+    confidence: low
   - a: brightwing
     b: kerrigan
     why: "Polymorph Silences Kerrigan and stops her attacking for 1.5 seconds, breaking the Ravage, Grasp and Blades sequence she needs to finish a kill."
@@ -40,7 +40,7 @@ counters:
     confidence: medium
   - a: uther
     b: kerrigan
-    why: "Hammer of Justice stuns Kerrigan out of her combo, and Divine Shield makes her dive target Invulnerable, wasting her cooldowns."
+    why: "Hammer of Justice stuns Kerrigan out of her combo, and Divine Shield, if Uther takes it, makes her dive target Invulnerable, wasting her cooldowns."
     evidence: ["Hammer of Justice", "Divine Shield"]
     confidence: medium
   - a: johanna
@@ -53,14 +53,16 @@ synergies:
     b: mei
     why: "Ice Wall traps enemies for 2.5 seconds, more than Impaling Blades' 1.25-second delay, so Kerrigan's stun lands even without Primal Grasp."
     evidence: ["Ice Wall", "Impaling Blades", "Primal Grasp"]
-    confidence: medium
+    conditions: "Mei takes Ice Wall (level 10)"
+    confidence: low
   - a: kerrigan
     b: zarya
-    why: "Graviton Surge holds enemies together so Impaling Blades and Maelstrom hit several Heroes at once."
+    why: "Graviton Surge holds enemies together so Impaling Blades, and Maelstrom if Kerrigan takes it, hit several Heroes at once."
     evidence: ["Graviton Surge", "Impaling Blades", "Maelstrom"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: kerrigan
     b: kharazim
-    why: "Kharazim can Radiant Dash in behind Kerrigan's Ravage, heal her with Breath of Heaven, and use Divine Palm to keep her alive at the bottom of a deep dive."
+    why: "Kharazim can Radiant Dash in behind Kerrigan's Ravage, heal her with Breath of Heaven and, if he takes it, use Divine Palm to keep her alive at the bottom of a deep dive."
     evidence: ["Radiant Dash", "Breath of Heaven", "Divine Palm", "Ravage"]
     confidence: medium

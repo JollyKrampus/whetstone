@@ -9,15 +9,14 @@ counters:
   # --- strong against ---
   - a: hanzo
     b: chogall
-    why: "Cho'gall is a big, slow target for charged Storm Bows, and Giant Slayer adds 1.6% max health to every Scatter Arrow and basic attack."
+    why: "Cho'gall is a big, slow target for charged Storm Bows, and Giant Slayer (level 16) adds 1.6% of maximum health to every Scatter Arrow and basic attack."
     evidence: ["Storm Bow", "Giant Slayer", "Scatter Arrow"]
-    conditions: "Giant Slayer at level 16 for the percent damage."
     confidence: low
   - a: hanzo
     b: stitches
     why: "Stitches is a slow 3020-health target, so Giant Slayer's percent damage chunks him, and Natural Agility hops terrain to stay out of Hook's line."
     evidence: ["Giant Slayer", "Natural Agility", "Hook"]
-    conditions: "Giant Slayer at level 16 for the percent damage."
+    conditions: "Hanzo takes Giant Slayer (level 16)"
     confidence: low
   - a: hanzo
     b: nova
@@ -37,8 +36,8 @@ counters:
     confidence: medium
   - a: zeratul
     b: hanzo
-    why: "From stealth Zeratul Blinks onto a 1375-health Hanzo and kills him before Natural Agility can be used."
-    evidence: ["Permanent Cloak", "Blink", "Cleave", "Natural Agility"]
+    why: "Natural Agility only leaps over terrain and has a 25-second cooldown, so a Zeratul who Blinks onto him from stealth lands Cleave, Singularity Spike and several Basic Attacks on a 1375-Health Hanzo before he can get away."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Natural Agility"]
     confidence: medium
   - a: fenix
     b: hanzo
@@ -53,16 +52,19 @@ counters:
 synergies:
   - a: arthas
     b: hanzo
-    why: "Summon Sindragosa slows enemies by 60% for 4 seconds, an easy window for Dragonstrike's center and fully charged Storm Bows."
+    why: "Summon Sindragosa slows enemies by 60% for 4 seconds, an easy window for fully charged Storm Bows and, if Hanzo has it, Dragonstrike's center."
     evidence: ["Summon Sindragosa", "Dragonstrike", "Storm Bow"]
-    confidence: medium
+    conditions: "Arthas takes Summon Sindragosa (level 10)"
+    confidence: low
   - a: diablo
     b: hanzo
-    why: "Apocalypse stuns everyone at once, an easy Dragonstrike center or long-range Dragon's Arrow."
+    why: "Apocalypse stuns every enemy hero at once, an easy target for Dragonstrike's center or a long-range Dragon's Arrow, whichever Hanzo takes."
     evidence: ["Apocalypse", "Dragonstrike", "Dragon's Arrow"]
-    confidence: medium
+    conditions: "Diablo takes Apocalypse (level 10)"
+    confidence: low
   - a: hanzo
     b: mei
     why: "Ice Wall traps heroes for 2.5 seconds, holding them inside Dragonstrike's damaging center."
     evidence: ["Ice Wall", "Dragonstrike"]
-    confidence: medium
+    conditions: ["Mei takes Ice Wall (level 10)", "Hanzo takes Dragonstrike (level 10)"]
+    confidence: low

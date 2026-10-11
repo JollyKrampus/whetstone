@@ -28,7 +28,7 @@ counters:
     confidence: medium
   - a: johanna
     b: qhira
-    why: "Shield Glare Blinds the Basic Attacks that stack Blood Rage's bleed, and Iron Skin's Unstoppable shield soaks Final Strike's burst."
+    why: "Shield Glare Blinds the Basic Attacks that stack Blood Rage's bleed, and Iron Skin's Unstoppable shield soaks Final Strike's burst if Qhira takes it."
     evidence: ["Shield Glare", "Blood Rage", "Iron Skin", "Final Strike"]
     confidence: low
   - a: ana
@@ -46,14 +46,16 @@ synergies:
     b: zarya
     why: "Graviton Surge pulls enemies together so Unrelenting Strikes' expanding sword stuns all of them for 1.5 seconds."
     evidence: ["Graviton Surge", "Unrelenting Strikes"]
-    confidence: medium
+    conditions: ["Zarya takes Graviton Surge (level 10)", "Qhira takes Unrelenting Strikes (level 10)"]
+    confidence: low
   - a: qhira
     b: rehgar
     why: "Bloodlust's Attack Speed and lifesteal stack with Blood Rage's healing, letting Qhira win extended fights in the enemy backline."
     evidence: ["Bloodlust", "Blood Rage"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: kharazim
     b: qhira
-    why: "Radiant Dash lets Kharazim follow a Grappling Hook dive, and Divine Palm or Cleansing Touch covers Qhira once Revolving Sweep's Immunity ends."
+    why: "Radiant Dash lets Kharazim follow a Grappling Hook dive, and Divine Palm or Cleansing Touch (level 16), whichever he takes, covers Qhira once Revolving Sweep's Immunity ends."
     evidence: ["Radiant Dash", "Divine Palm", "Cleansing Touch", "Grappling Hook", "Revolving Sweep"]
     confidence: medium

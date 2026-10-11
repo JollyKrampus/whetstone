@@ -48,7 +48,8 @@ synergies:
     b: samuro
     why: "Howling Blast's root and Frozen Tempest's slow keep targets impaired, so Merciless Strikes makes every Samuro attack a Critical Strike."
     evidence: ["Howling Blast", "Frozen Tempest", "Merciless Strikes"]
-    confidence: medium
+    conditions: "Samuro takes Merciless Strikes (level 16)"
+    confidence: low
   - a: falstad
     b: samuro
     why: "Falstad's Flight lets him rejoin fights from anywhere while Samuro holds a side lane, so the team isn't caught a hero short."
@@ -58,4 +59,5 @@ synergies:
     b: stukov
     why: "Weighted Pustule's growing Slow keeps targets Slowed for seconds, which turns every Samuro hit into a Critical Strike through Merciless Strikes."
     evidence: ["Weighted Pustule", "Merciless Strikes"]
+    conditions: "Samuro takes Merciless Strikes (level 16)"
     confidence: low

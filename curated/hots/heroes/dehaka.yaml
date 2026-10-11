@@ -11,11 +11,11 @@ counters:
     b: alarak
     why: "Enduring Swarm gives Dehaka 50 Spell Armor during Dark Swarm, halving Alarak's ability damage, and Burrow's invulnerability dodges Deadly Charge or Counter-Strike."
     evidence: ["Enduring Swarm", "Dark Swarm", "Burrow", "Deadly Charge", "Counter-Strike"]
-    conditions: "Enduring Swarm at level 1."
+    conditions: "Dehaka takes Enduring Swarm (level 1)"
     confidence: low
   - a: dehaka
     b: kaelthas
-    why: "Drag stuns and pulls an immobile Kael'thas for 1.75 seconds, and Burrow's 2 seconds of invulnerability sidesteps his Flamestrike and Pyroblast."
+    why: "Drag stuns and pulls an immobile Kael'thas for 1.75 seconds, and Burrow's 2 seconds of invulnerability sidesteps his Flamestrike, or a Pyroblast."
     evidence: ["Drag", "Burrow", "Flamestrike", "Pyroblast"]
     confidence: low
   - a: dehaka
@@ -26,20 +26,19 @@ counters:
   # --- weak against ---
   - a: malthael
     b: dehaka
-    why: "Reaper's Mark ticks percent max-health damage that Essence Collection can't keep up with, and Touch of Death halves that healing."
+    why: "Reaper's Mark ticks percent maximum-health damage that Essence Collection can't keep up with, and with Touch of Death (level 7) Malthael also halves that healing."
     evidence: ["Reaper's Mark", "Touch of Death", "Essence Collection"]
-    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: ana
     b: dehaka
-    why: "Biotic Grenade stops all healing for 1.75 seconds, wasting an Essence Collection cast or Adaptation's payout."
+    why: "Biotic Grenade stops all healing for 1.75 seconds, wasting an Essence Collection cast or, if he takes it, Adaptation's payout."
     evidence: ["Biotic Grenade", "Essence Collection", "Adaptation"]
     confidence: medium
   - a: xul
     b: dehaka
     why: "Mortal Wound on Spectral Scythe cuts Dehaka's healing by 75%, and Bone Prison roots him as he emerges from Burrow."
     evidence: ["Mortal Wound", "Spectral Scythe", "Bone Prison", "Burrow"]
-    conditions: "Mortal Wound at level 20."
+    conditions: "Xul takes Mortal Wound (level 20)"
     confidence: low
 synergies:
   - a: brightwing

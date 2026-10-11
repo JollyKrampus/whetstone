@@ -1,12 +1,12 @@
 ---
 /**
- * The Heroes Profile credit, rendered right next to any statistics (SPEC §1.5 inline rule: same
- * screen, body-size text, working link), plus a plain note when the numbers are a synthetic
- * fixture sample rather than real matches.
+ * The credit for whatever source provided the statistics, rendered right next to them (SPEC §1.5
+ * inline rule: same screen, body-size text, working link). The source comes from the statistics
+ * file's own `source` id, looked up in the game module's SourceRefs, so no source is hard-coded
+ * here. Adds a plain note when the numbers are a synthetic fixture sample rather than real matches.
  */
 import SourceAttribution from '../../../components/SourceAttribution.astro';
-import { getStats } from '../load.ts';
-import { hpSource } from './pagedata.ts';
+import { getStats, statsSources } from '../load.ts';
 
 interface Props {
   /** What the numbers on this screen are, e.g. "Tier badges use Storm League win rates." */
@@ -16,13 +16,14 @@ interface Props {
 
 const { lead, class: extra } = Astro.props;
 const stats = getStats();
+const sources = statsSources();
 ---
 
 {
   stats && (
-    <div class:list={['scredit', extra]} data-hp-credit>
+    <div class:list={['scredit', extra]} data-stats-credit>
       {lead && <p class="scredit__lead">{lead}</p>}
-      <SourceAttribution sources={hpSource()} placement="inline" asOf={stats.fetchedAt} />
+      {sources.length > 0 && <SourceAttribution sources={sources} placement="inline" asOf={stats.fetchedAt} />}
       {stats.synthetic && (
         <p class="scredit__sample">
           Sample build: these numbers are synthetic fixtures for testing the pages, not real matches.

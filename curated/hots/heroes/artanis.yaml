@@ -16,12 +16,14 @@ counters:
     b: valla
     why: "Suppression Pulse blinds every enemy in a large area for 4 seconds from any range, wiping out Valla's basic-attack damage for a whole fight window."
     evidence: ["Suppression Pulse", "Hatred"]
-    confidence: medium
+    conditions: "Artanis takes Suppression Pulse (level 10)"
+    confidence: low
   - a: artanis
     b: zuljin
     why: "Suppression Pulse's 4-second blind reaches Zul'jin anywhere on the map, and nearly all of his damage is basic attacks boosted by Berserker."
     evidence: ["Suppression Pulse", "Berserker"]
-    confidence: medium
+    conditions: "Artanis takes Suppression Pulse (level 10)"
+    confidence: low
   - a: artanis
     b: chromie
     why: "Phase Prism pulls an immobile Chromie into Artanis' team, and Twin Blades closes the gap again if she survives the swap."
@@ -40,9 +42,8 @@ counters:
     confidence: medium
   - a: arthas
     b: artanis
-    why: "Frozen Tempest cuts Artanis' attack speed by up to 40% and Rime blocks a basic attack every 5 seconds, starving Shield Overload's refresh."
+    why: "Frozen Tempest cuts Artanis' attack speed by up to 40%, so he lands fewer of the basic attacks that recharge Shield Overload, and with Rime (level 1) Arthas takes 75% less damage from his next hit every 5 seconds."
     evidence: ["Frozen Tempest", "Rime", "Shield Overload"]
-    conditions: "Rime at level 1 adds the attack-blocking armor; Frozen Tempest works without it."
     confidence: medium
   - a: lili
     b: artanis
@@ -59,9 +60,11 @@ synergies:
     b: rehgar
     why: "Bloodlust's 40% attack speed means more basic attacks, and every Artanis attack lowers Shield Overload's cooldown by 4 seconds."
     evidence: ["Bloodlust", "Shield Overload"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: artanis
     b: zarya
     why: "Graviton Surge keeps enemies grouped so Blade Dash's return hits several heroes, each one cutting Shield Overload's cooldown by 2 seconds."
     evidence: ["Graviton Surge", "Blade Dash", "Shield Overload"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

@@ -16,7 +16,8 @@ counters:
     b: nazeebo
     why: "Nazeebo cannot move while channeling Ravenous Spirit for up to 8 seconds, letting all three Dragon's Breath blasts and repeated Sand Blasts hit him."
     evidence: ["Dragon's Breath", "Sand Blast", "Ravenous Spirit"]
-    confidence: medium
+    conditions: "Nazeebo takes Ravenous Spirit (level 10)"
+    confidence: low
   - a: chromie
     b: azmodan
     why: "All Shall Burn slows Azmodan by 30% while he channels, giving Chromie free Sand Blasts and Dragon's Breath hits on a target that can't dodge."
@@ -25,7 +26,7 @@ counters:
   # --- weak against ---
   - a: zeratul
     b: chromie
-    why: "Chromie cannot escape a Blink from stealth, and Cleave plus Singularity Spike kill her before Time Trap can be set up."
+    why: "Chromie has no escape in her base kit, so after a Blink from stealth, Cleave, Singularity Spike and a few Basic Attacks take most of her 1390 Health before Time Trap can be set up."
     evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Time Trap"]
     confidence: high
   - a: tracer
@@ -66,11 +67,12 @@ synergies:
     confidence: medium
   - a: chromie
     b: mei
-    why: "Ice Wall traps heroes for 2.5 seconds, enough for all three Dragon's Breath blasts to land."
-    evidence: ["Ice Wall", "Dragon's Breath"]
+    why: "Blizzard's end stun, and Ice Wall if Mei takes it, give Chromie a stationary target for Sand Blast's delay and all three Dragon's Breath blasts."
+    evidence: ["Blizzard", "Ice Wall", "Sand Blast", "Dragon's Breath"]
     confidence: medium
   - a: chromie
     b: zarya
-    why: "Graviton Surge holds heroes in one spot so Dragon's Breath and Sand Blast hit the whole clump."
+    why: "Graviton Surge holds heroes in one spot so all three Dragon's Breath blasts land on the clump, and Sand Blast hits a target that cannot dodge."
     evidence: ["Graviton Surge", "Dragon's Breath", "Sand Blast"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

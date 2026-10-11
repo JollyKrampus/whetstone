@@ -12,11 +12,12 @@
  *   counters:  [ { a, b, why, evidence: [names], conditions?, confidence, weight?, reviewedFor? } ]
  *   synergies: [ same shape, stored with a < b ]
  *
- * Merge rules: one edge per (kind, a, b); confidence = highest; evidence and conditions = union;
- * up to two distinct `why` lines (file order: counters.yaml / synergies.yaml first, then the
- * per-hero files by name); weight = an explicit weight if any file sets one, else the confidence
- * weight (low .2, medium .4, high .6). A counter curated both ways (a>b and b>a) keeps both
- * directed edges and is reported as a warning.
+ * Merge rules: one edge per (kind, a, b); confidence = highest (files that disagree get a
+ * warning); evidence and conditions = union; up to two distinct `why` lines (file order:
+ * counters.yaml / synergies.yaml first, then the per-hero files by name), each keeping the
+ * conditions of the file that wrote it; weight = an explicit weight if any file sets one, else the
+ * confidence weight (low .2, medium .4, high .6). A counter curated both ways (a>b and b>a) keeps
+ * both directed edges and is reported as a warning.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -41,12 +42,24 @@ import { CONFIDENCE_RANK, CONFIDENCE_WEIGHT, type Confidence } from './weights.t
 // ---- per-hero file schema --------------------------------------------------------------
 
 /**
- * A pair in a per-hero file: CuratedPair with required evidence, `conditions` as one line or a
- * list, and `reviewedFor` defaulting to the file's.
+ * A condition: a clause that reads after "Only when" ("Blaze takes Nanomachine Coating (level 7)").
+ * The engine and the pages add the words, so a condition never starts with them.
+ */
+const ConditionSchema = z
+  .string()
+  .min(1)
+  .refine(
+    (s) => !/^\s*(?:only when|requires|needs)\b/i.test(s),
+    'write the condition as a clause that reads after "Only when" ("Blaze takes Nanomachine Coating (level 7)"); the page adds those words',
+  );
+
+/**
+ * A pair in a per-hero file: CuratedPair with required evidence, `conditions` as one clause or a
+ * list of clauses, and `reviewedFor` defaulting to the file's.
  */
 export const HeroCuratedPairSchema = CuratedPairSchema.extend({
   evidence: z.array(z.string().min(1)).min(1, 'name at least one ability or talent the reason relies on'),
-  conditions: z.union([z.string().min(1), z.array(z.string().min(1)).min(1)]).exactOptional(),
+  conditions: z.union([ConditionSchema, z.array(ConditionSchema).min(1)]).exactOptional(),
   reviewedFor: MajorSchema.exactOptional(),
 });
 export type HeroCuratedPair = z.infer<typeof HeroCuratedPairSchema>;
@@ -127,8 +140,17 @@ export interface PairInput {
   source: string;
 }
 
+/**
+ * A condition as a clause that reads after "Only when" (the engine and pages add the words and
+ * the full stop): trimmed, trailing full stop dropped.
+ */
+export function normalizeCondition(text: string): string {
+  return text.trim().replace(/\.+$/, '').trim();
+}
+
 function normalizePair(p: CuratedPair | HeroCuratedPair, source: string, fallbackMajor: string): PairInput {
-  const conditions = p.conditions === undefined ? [] : typeof p.conditions === 'string' ? [p.conditions] : [...p.conditions];
+  const raw = p.conditions === undefined ? [] : typeof p.conditions === 'string' ? [p.conditions] : [...p.conditions];
+  const conditions = raw.map(normalizeCondition).filter((c) => c.length > 0);
   return {
     a: p.a,
     b: p.b,
@@ -150,31 +172,50 @@ export const MAX_WHY = 2;
  * and stored with a < b. Returns the merged list sorted by (a, b) plus warnings.
  */
 export function mergePairs(pairs: readonly PairInput[], kind: 'counters' | 'synergies'): { pairs: MergedPair[]; warnings: CuratedIssue[] } {
-  const merged = new Map<string, MergedPair & { explicit: { weight: number; source: string }[] }>();
+  type Building = MergedPair & { explicit: { weight: number; source: string }[]; rated: { confidence: Confidence; source: string }[] };
+  const merged = new Map<string, Building>();
   const warnings: CuratedIssue[] = [];
   for (const p of pairs) {
     const [a, b] = kind === 'synergies' && p.b < p.a ? [p.b, p.a] : [p.a, p.b];
     const key = `${a}|${b}`;
     let cur = merged.get(key);
     if (!cur) {
-      cur = { a, b, why: [], evidence: [], conditions: [], confidence: p.confidence, weight: 0, reviewedFor: p.reviewedFor, sources: [], explicit: [] };
+      cur = { a, b, why: [], whyConditions: [], evidence: [], conditions: [], confidence: p.confidence, weight: 0, reviewedFor: p.reviewedFor, sources: [], explicit: [], rated: [] };
       merged.set(key, cur);
     }
-    if (cur.why.length < MAX_WHY && !cur.why.includes(p.why)) cur.why.push(p.why);
+    // Each line keeps the conditions of the file(s) that wrote it.
+    const line = cur.why.indexOf(p.why);
+    if (line >= 0) {
+      const own = cur.whyConditions[line] ?? [];
+      for (const c of p.conditions) if (!own.includes(c)) own.push(c);
+      cur.whyConditions[line] = own;
+    } else if (cur.why.length < MAX_WHY) {
+      cur.why.push(p.why);
+      cur.whyConditions.push([...p.conditions]);
+    }
     for (const e of p.evidence) if (!cur.evidence.includes(e)) cur.evidence.push(e);
     for (const c of p.conditions) if (!cur.conditions.includes(c)) cur.conditions.push(c);
     if (CONFIDENCE_RANK[p.confidence] > CONFIDENCE_RANK[cur.confidence]) cur.confidence = p.confidence;
     if (compareMajor(p.reviewedFor, cur.reviewedFor) > 0) cur.reviewedFor = p.reviewedFor;
     if (!cur.sources.includes(p.source)) cur.sources.push(p.source);
     if (p.weight !== undefined) cur.explicit.push({ weight: p.weight, source: p.source });
+    cur.rated.push({ confidence: p.confidence, source: p.source });
   }
   const out: MergedPair[] = [];
-  for (const { explicit, ...pair } of merged.values()) {
+  for (const { explicit, rated, ...pair } of merged.values()) {
     const first = explicit[0];
     if (first && explicit.some((e) => e.weight !== first.weight)) {
       warnings.push({
         file: first.source,
         message: `${kind} ${pair.a}/${pair.b}: files set different weights (${explicit.map((e) => `${e.weight} in ${e.source}`).join(', ')}); using ${first.weight}`,
+      });
+    }
+    // The highest confidence wins, which can lift a talent-dependent pair: make curators agree.
+    const firstRated = rated[0];
+    if (firstRated && rated.some((r) => r.confidence !== firstRated.confidence)) {
+      warnings.push({
+        file: firstRated.source,
+        message: `${kind} ${pair.a}/${pair.b}: files set different confidence (${rated.map((r) => `${r.confidence} in ${r.source}`).join(', ')}); using ${pair.confidence}`,
       });
     }
     out.push({ ...pair, weight: first ? first.weight : CONFIDENCE_WEIGHT[pair.confidence], sources: [...pair.sources].sort(cmp) });

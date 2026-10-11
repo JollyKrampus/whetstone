@@ -9,18 +9,18 @@ counters:
   # --- strong against ---
   - a: greymane
     b: chromie
-    why: "Darkflight leaps onto an immobile Chromie and Go for the Throat finishes her small health pool before Time Trap can help."
+    why: "Darkflight leaps onto an immobile Chromie, and Worgen attacks (or Go for the Throat, if Greymane takes it) finish her small health pool before Time Trap can help."
     evidence: ["Darkflight", "Go for the Throat", "Time Trap"]
     confidence: medium
   - a: greymane
     b: chogall
-    why: "Cursed Bullet takes 35% of current health, a huge chunk of Cho's pool, and Alpha Killer adds 3% max health to every Worgen attack."
+    why: "Cursed Bullet takes 35% of current health, a huge chunk of Cho'gall's pool, and Alpha Killer (level 16) adds 3% of maximum health to every Worgen attack."
     evidence: ["Cursed Bullet", "Alpha Killer"]
-    conditions: "Alpha Killer at level 16 for the percent damage; Cursed Bullet works without it."
+    conditions: "Greymane takes Cursed Bullet (level 10) or Alpha Killer (level 16)"
     confidence: low
   - a: greymane
     b: kaelthas
-    why: "Darkflight and Go for the Throat reach an immobile Kael'thas, who has no way to escape the Worgen follow-up."
+    why: "Darkflight (and Go for the Throat, if Greymane takes it) reaches an immobile Kael'thas, who has no way to escape the Worgen follow-up."
     evidence: ["Darkflight", "Go for the Throat"]
     confidence: medium
   - a: greymane
@@ -46,7 +46,7 @@ counters:
     confidence: low
   - a: mei
     b: greymane
-    why: "Snow Blind blinds and slows Greymane for 1.75 seconds, and Ice Wall cuts him off from his team after he Darkflights in."
+    why: "Snow Blind blinds and slows Greymane for 1.75 seconds, and Ice Wall, if Mei takes it, cuts him off from his team after he Darkflights in."
     evidence: ["Snow Blind", "Ice Wall", "Darkflight"]
     confidence: low
 synergies:
@@ -54,14 +54,16 @@ synergies:
     b: jaina
     why: "Chill slows enable Lord of His Pack, giving Worgen Greymane 50% bonus basic-attack damage against slowed targets."
     evidence: ["Frostbite", "Lord of His Pack"]
-    confidence: medium
+    conditions: "Greymane takes Lord of His Pack (level 16)"
+    confidence: low
   - a: greymane
     b: rehgar
     why: "Bloodlust's attack speed stacks with Inner Beast, and its lifesteal keeps a Worgen Greymane alive in melee."
     evidence: ["Bloodlust", "Inner Beast"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: greymane
     b: tyrande
-    why: "Hunter's Mark reveals and strips 15 armor from a target right before Greymane leaps on it with Go for the Throat."
+    why: "Hunter's Mark reveals and strips 15 armor from a target right before Greymane leaps on it with Darkflight or Go for the Throat."
     evidence: ["Hunter's Mark", "Go for the Throat"]
     confidence: medium

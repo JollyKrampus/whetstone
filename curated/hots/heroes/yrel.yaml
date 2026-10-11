@@ -9,23 +9,25 @@ counters:
   # --- strong against ---
   - a: yrel
     b: thebutcher
-    why: "Dauntless grants Physical Armor whenever Yrel casts, Sacred Ground adds 50 Armor, and Aldor Peacekeeper halves The Butcher's damage, so his basic-attack burst bounces off her."
+    why: "Yrel stacks Armor against his basic-attack burst: Dauntless (level 1) grants Physical Armor whenever she casts, Sacred Ground adds 50 Armor, and Aldor Peacekeeper (level 13) halves his damage."
     evidence: ["Dauntless", "Sacred Ground", "Aldor Peacekeeper", "Fresh Meat"]
+    conditions: "Yrel takes Dauntless (level 1), Sacred Ground (level 10) or Aldor Peacekeeper (level 13)"
     confidence: low
   - a: yrel
     b: illidan
-    why: "A fully charged Righteous Hammer stuns and knocks Illidan off his target, and Aldor Peacekeeper halves his damage for 4 seconds."
+    why: "A fully charged Righteous Hammer stuns and knocks Illidan off his target, and Aldor Peacekeeper (level 13) halves his damage for 4 seconds."
     evidence: ["Righteous Hammer", "Aldor Peacekeeper", "Dive"]
     confidence: low
   - a: yrel
     b: sonya
-    why: "Aldor Peacekeeper halves Sonya's damage for 4 seconds and Sacred Ground's 50 Armor blunts Whirlwind, so Yrel wins the frontline trade."
+    why: "Aldor Peacekeeper (level 13) halves Sonya's damage for 4 seconds and Sacred Ground's 50 Armor blunts Whirlwind, so Yrel wins the frontline trade."
     evidence: ["Aldor Peacekeeper", "Sacred Ground", "Whirlwind"]
+    conditions: "Yrel takes Aldor Peacekeeper (level 13) or Sacred Ground (level 10)"
     confidence: low
   # --- weak against ---
   - a: malthael
     b: yrel
-    why: "Reaper's Mark burns 2% of Yrel's 2678 max Health per second, which Sacred Ground's Armor only partly reduces, and Soul Rip heals Malthael off her."
+    why: "Reaper's Mark burns 2% of Yrel's 2678 maximum Health per second, which even Sacred Ground's Armor only partly reduces, and Soul Rip heals Malthael off her."
     evidence: ["Reaper's Mark", "Soul Rip", "Sacred Ground"]
     confidence: medium
   - a: tychus
@@ -37,10 +39,11 @@ counters:
     b: yrel
     why: "Soundwave knocks Yrel out of Sacred Ground, which only grants Armor while she stays inside, and Push Off kites her through her slow charge-ups."
     evidence: ["Soundwave", "Push Off", "Sacred Ground"]
+    conditions: "Yrel takes Sacred Ground (level 10)"
     confidence: low
   - a: liming
     b: yrel
-    why: "Wave of Force knocks Yrel out of Sacred Ground, and the 25% slow she takes while charging abilities makes her an easy Arcane Orb target."
+    why: "The 25% slow Yrel takes while charging abilities makes her an easy Arcane Orb target, and Wave of Force, if Li-Ming takes it, knocks her out of Sacred Ground."
     evidence: ["Wave of Force", "Arcane Orb", "Sacred Ground", "Divine Purpose"]
     confidence: low
 synergies:
@@ -51,7 +54,7 @@ synergies:
     confidence: medium
   - a: yrel
     b: zarya
-    why: "Shield Ally covers Yrel while she's slowed charging abilities, and Graviton Surge holds enemies for a fully charged Righteous Hammer or Vindication."
+    why: "Shield Ally covers Yrel while she's slowed charging abilities, and Graviton Surge, if Zarya takes it, holds enemies for a fully charged Righteous Hammer or Vindication."
     evidence: ["Shield Ally", "Graviton Surge", "Righteous Hammer", "Vindication"]
     confidence: low
   - a: chromie

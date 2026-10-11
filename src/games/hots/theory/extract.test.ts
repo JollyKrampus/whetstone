@@ -26,9 +26,12 @@ const GOLDEN: Record<string, string[]> = {
   johanna: ['stun', 'slow', 'blind', 'pull', 'unstoppable', 'physical-armor', 'shield', 'heal-self', 'heal-ally', 'dash', 'aoe', 'waveclear'],
   lucio: ['stun', 'slow', 'displace', 'unstoppable', 'cleanse', 'shield', 'heal-self', 'heal-ally', 'unkillable', 'anti-heal', 'aoe', 'waveclear'],
   malthael: ['slow', 'unstoppable', 'spell-armor', 'physical-armor', 'heal-self', 'reveal', 'teleport', 'percent-hp-damage', 'anti-heal'],
+  // No stealth: Dust of Disappearance stealths an ally, never Medivh.
+  medivh: ['slow', 'silence', 'polymorph', 'time-stop', 'heal-self', 'heal-ally', 'reveal', 'teleport', 'aoe'],
   nova: ['slow', 'stealth', 'armor-shred', 'burst', 'poke', 'aoe', 'summons'],
   stitches: ['stun', 'slow', 'pull', 'unstoppable', 'shield', 'heal-self', 'teleport', 'unkillable', 'percent-hp-damage', 'anti-heal', 'armor-shred', 'aoe', 'dot', 'waveclear'],
   tracer: ['slow', 'displace', 'cleanse', 'shield', 'heal-self', 'reveal', 'dash', 'unkillable', 'percent-hp-damage', 'armor-shred', 'burst', 'aoe'],
+  tyrande: ['stun', 'slow', 'cleanse', 'spell-armor', 'heal-self', 'heal-ally', 'stealth', 'reveal', 'percent-hp-damage', 'armor-shred', 'aoe'],
   valla: ['stun', 'slow', 'spell-armor', 'heal-self', 'dash', 'percent-hp-damage', 'sustained-dps', 'aoe', 'waveclear', 'aa-reliant'],
   varian: ['slow', 'silence', 'taunt', 'invulnerable', 'block', 'heal-self', 'dash', 'percent-hp-damage', 'anti-heal', 'armor-shred'],
   zeratul: ['slow', 'time-stop', 'spell-armor', 'shield', 'heal-self', 'stealth', 'reveal', 'teleport', 'burst', 'aoe', 'dot'],
@@ -144,6 +147,15 @@ describe('extractMechanics precision on real kits', () => {
     expect(tags(of('valla'))).toContain('aa-reliant');
     for (const slug of ['zeratul', 'genji', 'tracer', 'varian']) expect(tags(of(slug)), slug).not.toContain('aa-reliant');
   });
+
+  it('reads Stealth the hero gains, not Stealth given to one ally or the Invisible rider', () => {
+    // Dust of Disappearance: "Stealth an allied Hero …. Remaining stationary … while Stealthed grants Invisible."
+    expect(tags(of('medivh'))).not.toContain('stealth');
+    // Shadowstalk stealths every allied Hero, Tyrande included.
+    expect(evidence(of('tyrande'), 'stealth')).toEqual(['Shadowstalk']);
+    expect(evidence(of('nova'), 'stealth')).toContain('Permanent Cloak');
+    expect(evidence(of('zeratul'), 'stealth')).toContain('Permanent Cloak');
+  });
 });
 
 // ---- synthetic sentences ---------------------------------------------------------------
@@ -202,6 +214,13 @@ describe('extractMechanics on synthetic text', () => {
   it('does not read breaking enemy Shields as gaining one', () => {
     expect(synth('Deals 200% bonus damage to Shields.')).not.toContain('shield');
     expect(synth('Gain a 200 point Shield for 3 seconds.')).toContain('shield');
+  });
+
+  it('does not read Stealth for one ally or the stationary-Invisible rider as the hero stealthing', () => {
+    expect(synth('Stealth an allied Hero for 40 seconds.')).not.toContain('stealth');
+    expect(synth('Remaining stationary for at least 1.5 seconds while Stealthed grants Invisible.')).not.toContain('stealth');
+    expect(synth('Grant all allied Heroes Stealth for 10 seconds.')).toContain('stealth');
+    expect(synth('Gain Stealth when out of combat for 3 seconds.')).toContain('stealth');
   });
 
   it('does not read the hero being revealed as a reveal', () => {

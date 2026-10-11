@@ -43,14 +43,17 @@ synergies:
     b: kaelthas
     why: "Grav-O-Bomb 3000 pulls enemies together and stuns them, setting up Flamestrike and Living Bomb."
     evidence: ["Grav-O-Bomb 3000", "Flamestrike", "Living Bomb"]
-    confidence: medium
+    conditions: "Gazlowe takes Grav-O-Bomb 3000 (level 10)"
+    confidence: low
   - a: gazlowe
     b: jaina
-    why: "Grav-O-Bomb 3000 clumps heroes for Blizzard and Ring of Frost."
+    why: "Grav-O-Bomb 3000 clumps heroes for Blizzard and, if Jaina takes it, Ring of Frost."
     evidence: ["Grav-O-Bomb 3000", "Blizzard", "Ring of Frost"]
-    confidence: medium
+    conditions: "Gazlowe takes Grav-O-Bomb 3000 (level 10)"
+    confidence: low
   - a: gazlowe
     b: zarya
     why: "Graviton Surge holds enemies in place for Xplodium Charge's 1.25-second fuse."
     evidence: ["Graviton Surge", "Xplodium Charge"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

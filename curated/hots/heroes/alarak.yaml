@@ -9,15 +9,14 @@ counters:
   # --- strong against ---
   - a: alarak
     b: liming
-    why: "Discord Strike's 1.5-second silence takes Teleport away from Li-Ming, and Sadism-boosted Lightning Surge then finishes a 1270-health mage with no other way out."
+    why: "A landed Discord Strike silences Li-Ming for 1.5 seconds, taking Teleport away, and Sadism-boosted Lightning Surge then finishes a 1270-health mage with no other way out."
     evidence: ["Discord Strike", "Lightning Surge", "Sadism", "Teleport"]
-    conditions: "Discord Strike has a 0.5-second delay, so it must be aimed where Li-Ming will be."
     confidence: medium
   - a: alarak
     b: tracer
     why: "A landed Discord Strike silences Tracer, locking Blink and Recall for 1.5 seconds; without them she can't escape Alarak's follow-up burst on her small health pool."
     evidence: ["Discord Strike", "Lightning Surge", "Blink", "Recall"]
-    conditions: "Requires landing the delayed strike, usually after Tracer has spent Blink charges."
+    conditions: "Tracer has already spent her Blink charges"
     confidence: medium
   - a: alarak
     b: jaina
@@ -26,7 +25,7 @@ counters:
     confidence: medium
   - a: alarak
     b: lili
-    why: "All of Li Li's healing comes from abilities; Discord Strike silences Healing Brew and stops a Jug of 1,000 Cups channel, while Lightning Surge chunks her 1500 health."
+    why: "All of Li Li's healing comes from abilities; Discord Strike silences Healing Brew (and stops a Jug of 1,000 Cups channel when she has it), while Lightning Surge chunks her 1500 health."
     evidence: ["Discord Strike", "Lightning Surge", "Healing Brew", "Jug of 1,000 Cups"]
     confidence: medium
   # --- weak against ---
@@ -44,7 +43,7 @@ counters:
     b: alarak
     why: "Enduring Swarm gives Dehaka 50 Spell Armor during Dark Swarm, halving Alarak's ability damage, and Burrow's invulnerability dodges Deadly Charge or Counter-Strike."
     evidence: ["Enduring Swarm", "Dark Swarm", "Burrow", "Deadly Charge", "Counter-Strike"]
-    conditions: "Enduring Swarm at level 1."
+    conditions: "Dehaka takes Enduring Swarm (level 1)"
     confidence: low
   - a: johanna
     b: alarak
@@ -54,12 +53,13 @@ counters:
 synergies:
   - a: alarak
     b: zarya
-    why: "Graviton Surge holds enemies in a clump for 2.5 seconds, long enough for Discord Strike's delayed hit to silence several of them and complete Chaos Reigns."
-    evidence: ["Graviton Surge", "Discord Strike", "Chaos Reigns"]
-    confidence: medium
+    why: "Graviton Surge holds enemies in a clump for 2.5 seconds, long enough for Discord Strike's delayed hit to silence several of them at once."
+    evidence: ["Graviton Surge", "Discord Strike"]
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: alarak
     b: muradin
-    why: "Storm Bolt's 1.25-second stun covers Discord Strike's 0.5-second delay, and with Mocking Strikes Alarak's attacks on the stunned target cut his cooldowns twice as fast."
+    why: "Storm Bolt's 1.25-second stun covers Discord Strike's 0.5-second delay, and with Mocking Strikes (level 16) Alarak's attacks on the stunned target cut his cooldowns twice as fast."
     evidence: ["Storm Bolt", "Discord Strike", "Mocking Strikes"]
     confidence: medium
   - a: alarak

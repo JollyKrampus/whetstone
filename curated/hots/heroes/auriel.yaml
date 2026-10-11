@@ -9,18 +9,20 @@ counters:
   # --- strong against ---
   - a: auriel
     b: nova
-    why: "Snipe and Triple Tap commit to one target; Crystal Aegis puts that target in Stasis so the shots are wasted, and Resurrect undoes the pick if it lands anyway."
+    why: "Snipe, and Triple Tap if Nova takes it, commit to one target; Crystal Aegis puts that target in Stasis so the shots are wasted, or Resurrect undoes the pick if it lands."
     evidence: ["Crystal Aegis", "Resurrect", "Snipe", "Triple Tap"]
     confidence: low
   - a: auriel
     b: kaelthas
-    why: "Pyroblast's slow fireball gives Auriel time to Crystal Aegis its target, and the energy her team stores through Bestow Hope refills everyone after the burst."
+    why: "Pyroblast's slow fireball gives Auriel time to Crystal Aegis its target, and the energy stored through Bestow Hope lets Ray of Heaven heal the splash damage afterwards."
     evidence: ["Crystal Aegis", "Bestow Hope", "Ray of Heaven", "Pyroblast"]
+    conditions: ["Auriel takes Crystal Aegis (level 10)", "Kael'thas takes Pyroblast (level 10)"]
     confidence: low
   - a: auriel
     b: greymane
-    why: "Go for the Throat and Cursed Bullet spike one hero; Crystal Aegis on that hero denies the kill that would reset Go for the Throat for a second leap."
-    evidence: ["Crystal Aegis", "Go for the Throat", "Cursed Bullet"]
+    why: "Go for the Throat spikes one hero; Crystal Aegis on that hero denies the kill that would reset it for a second leap."
+    evidence: ["Crystal Aegis", "Go for the Throat"]
+    conditions: ["Auriel takes Crystal Aegis (level 10)", "Greymane takes Go for the Throat (level 10)"]
     confidence: low
   # --- weak against ---
   - a: ana
@@ -30,8 +32,8 @@ counters:
     confidence: medium
   - a: zeratul
     b: auriel
-    why: "Auriel has no escape until Angelic Flight at 20, so Zeratul's Blink-and-Cleave combo from stealth kills her before Ray of Heaven matters."
-    evidence: ["Permanent Cloak", "Blink", "Cleave", "Angelic Flight"]
+    why: "Auriel has no escape until Angelic Flight at level 20, so once Zeratul Blinks onto her from stealth she has to stand and take Cleave, Singularity Spike and his Basic Attacks."
+    evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Angelic Flight"]
     confidence: medium
   - a: tracer
     b: auriel
@@ -40,7 +42,7 @@ counters:
     confidence: medium
   - a: valeera
     b: auriel
-    why: "Valeera's stealth opener locks down an immobile Auriel, and Smoke Bomb protects Valeera while she finishes the kill."
+    why: "Valeera's stealth opener locks down an immobile Auriel, and Smoke Bomb, if she takes it, protects Valeera while she finishes the kill."
     evidence: ["Vanish", "Smoke Bomb", "Eviscerate"]
     confidence: low
 synergies:
@@ -51,11 +53,12 @@ synergies:
     confidence: medium
   - a: auriel
     b: valla
-    why: "Bestow Hope on Valla turns her constant Hatred-boosted attacks into Ray of Heaven energy, and Will of Heaven adds 20% attack speed on top."
+    why: "Bestow Hope on Valla turns her constant Hatred-boosted attacks into Ray of Heaven energy, and Will of Heaven (level 16) adds 20% attack speed on top."
     evidence: ["Bestow Hope", "Will of Heaven", "Hatred"]
     confidence: medium
   - a: auriel
     b: muradin
     why: "Crystal Aegis on Muradin after a Dwarf Toss lets him survive the collapse, and its 255-damage burst hits the heroes crowding him."
     evidence: ["Crystal Aegis", "Dwarf Toss"]
+    conditions: "Auriel takes Crystal Aegis (level 10)"
     confidence: low

@@ -26,7 +26,7 @@ import {
   type ModeOption,
   type PeriodOption,
 } from '../../games/hots/components/pagedata.ts';
-import { getEntity, getMeta, getPro, getStatsWindow, hasAsset } from '../../games/hots/load.ts';
+import { getEntity, getMeta, getPro, getStatsWindow, hasAsset, statsSourceIds } from '../../games/hots/load.ts';
 import { heroHref, heroPortrait } from '../../games/hots/view.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
 
@@ -99,7 +99,7 @@ const momentumScope =
   description={statsOn
     ? `Heroes of the Storm tier list for ${versionText('hots', meta.version.label)}: fixed win-rate bands with sample sizes and changes since last patch.`
     : 'What the Heroes of the Storm meta looks like without match statistics: pro tournament presence and recent buffs and nerfs per hero.'}
-  uses={statsOn ? ['heroesprofile'] : pro ? ['liquipedia'] : []}
+  uses={statsOn ? statsSourceIds() : pro ? ['liquipedia'] : []}
   inlineCredits={false}
 >
   <div class="tl">
@@ -123,9 +123,9 @@ const momentumScope =
           </p>
         ) : (
           <p class="tl__lead">
-            A tier list needs win rates, and match statistics are not enabled in this build. Rather than rank heroes by
-            opinion, this page shows two things that are measured: how often pros pick and ban each hero, and who the latest
-            patches pushed up or down. <a href={navHref('hots', 'about/#stats')}>How statistics get enabled</a>.
+            A tier list needs win rates, and Heroes of the Storm publishes no match statistics that Whetstone can use. Rather
+            than rank heroes by opinion, this page shows two things that are measured: how often pros pick and ban each hero,
+            and who the latest patches pushed up or down. <a href={navHref('hots', 'about/#stats')}>Why there are no win rates</a>.
           </p>
         )
       }

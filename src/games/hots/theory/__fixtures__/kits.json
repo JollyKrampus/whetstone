@@ -1788,6 +1788,154 @@
    }
   },
   {
+   "id": "Mdvh",
+   "slug": "medivh",
+   "name": "Medivh",
+   "role": "Support",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Arcane Rift",
+     "kind": "basic",
+     "text": "Launch a rift that deals 170 (+4% per level) damage to enemies in its path. If an enemy Hero is hit, reduce its cooldown by 5 seconds and refund 50 Mana.\n\nQuest: Hit 40 enemy Heroes with Arcane Rift without dying.\n\nReward: Permanently increase the damage dealt by 75 and cooldown reduction for hitting a Hero by 1 second."
+    },
+    {
+     "name": "Force of Will",
+     "kind": "basic",
+     "text": "Protect an allied Hero from all damage for 1.5 seconds. Upon expiration, Force of Will heals the target for 20% of the damage it absorbed."
+    },
+    {
+     "name": "Portal",
+     "kind": "basic",
+     "text": "Create a set of portals between Medivh and the target location, allowing allies to teleport between both. The portals last 6 seconds."
+    },
+    {
+     "name": "Raven Form",
+     "kind": "trait",
+     "text": "Instead of mounting, Medivh can transform into a raven, increasing Movement Speed by 20%. While transformed, Medivh can see and fly over all terrain and is immune to all effects."
+    },
+    {
+     "name": "Poly Bomb",
+     "kind": "heroic",
+     "text": "Polymorph an enemy Hero for 2 seconds, Silencing them and making them unable to attack. On expiration, Poly Bomb spreads to other nearby enemy Heroes."
+    },
+    {
+     "name": "Ley Line Seal",
+     "kind": "heroic",
+     "text": "After 0.5 seconds, unleash a wave of energy that places enemy Heroes in Time Stop for 3 seconds."
+    },
+    {
+     "name": "Raven Form",
+     "kind": "mount",
+     "text": "Transform into a raven, increasing Movement Speed by 20%. While transformed, Medivh can see and fly over terrain and is immune to all effects."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Winds of Celerity",
+      "text": "Increases Raven Form's Movement Speed bonus by 100%."
+     },
+     {
+      "name": "Raven’s Intellect",
+      "text": "Raven Form increases Medivh's Mana and Health Regeneration by 200%."
+     },
+     {
+      "name": "Portal Mastery",
+      "text": "Medivh can manually place both Portal locations and it no longer breaks Raven Form.\n\nActivate Medivh's Trait to cancel an unlinked Portal."
+     }
+    ],
+    "4": [
+     {
+      "name": "Mage Armor",
+      "text": "The first time an ally uses a Portal, they gain 40 Armor for 5 seconds, reducing their damage taken by 40%."
+     },
+     {
+      "name": "Raven Familiar",
+      "text": "A Raven Familiar joins allies each time they use a Portal. The Raven will dive at the ally's next Basic Attack against a Hero within 5 seconds, dealing 114 (+4% per level) damage and Slowing them by 20% for 2.5 seconds."
+     },
+     {
+      "name": "Dust of Appearance",
+      "text": "Activate to greatly increase sight range for 5 seconds and reveal enemy Heroes in the area for 8 seconds. Does not cancel Raven Form.\n\nPassive: Increase Medivh's sight range while in Raven Form by 25%."
+     }
+    ],
+    "7": [
+     {
+      "name": "Mystic Assault",
+      "text": "If Arcane Rift hits an enemy Hero, Medivh's next Basic Attack within 6 seconds deals 50% more damage and heals for 50% of the damage dealt."
+     },
+     {
+      "name": "Arcane Explosion",
+      "text": "When Force of Will expires, it deals 80 (+4% per level) damage to nearby enemies, plus 50% of the damage it prevented, up to 315 (+4% per level) additional damage."
+     },
+     {
+      "name": "Force of Magic",
+      "text": "Preventing at least 268 (+4% per level) damage with a single cast of Force of Will grants 35% Spell Power for 15 seconds. Stacks up to 2 times."
+     }
+    ],
+    "10": [
+     {
+      "name": "Poly Bomb",
+      "text": "Polymorph an enemy Hero for 2 seconds, Silencing them and making them unable to attack. On expiration, Poly Bomb spreads to other nearby enemy Heroes."
+     },
+     {
+      "name": "Ley Line Seal",
+      "text": "After 0.5 seconds, unleash a wave of energy that places enemy Heroes in Time Stop for 3 seconds."
+     }
+    ],
+    "13": [
+     {
+      "name": "Circle of Protection",
+      "text": "Force of Will also applies to allies near the target."
+     },
+     {
+      "name": "Enduring Will",
+      "text": "Preventing at least 268 (+4% per level) damage with Force of Will reduces its cooldown to 4 seconds."
+     },
+     {
+      "name": "Reabsorption",
+      "text": "Increase the amount of healing from Force of Will to 70% of the damage it absorbed."
+     }
+    ],
+    "16": [
+     {
+      "name": "Arcane Charge",
+      "text": "When Arcane Rift damages an enemy Hero, the next Arcane Rift deals 15% more damage."
+     },
+     {
+      "name": "Temporal Flux",
+      "text": "Basic Attacks reduce Medivh's Heroic Ability cooldown by 3%. Each enemy Hero hit by Arcane Rift reduces Medivh's Heroic Ability cooldown by 9%."
+     },
+     {
+      "name": "Stable Portal",
+      "text": "Decrease Portal cooldown by 25% and increase Portal duration by 50%."
+     }
+    ],
+    "20": [
+     {
+      "name": "Glyph Of Poly Bomb",
+      "text": "Poly Bomb now hits an area, instantly Polymorphing enemy Heroes, hitting the same area again 1 second later.\n\nPoly Bomb's duration is reduced to 1 second, and the spread radius is increased by 25%."
+     },
+     {
+      "name": "Medivh Cheats!",
+      "text": "Increase the duration of the Time Stop by 33% and gain the ability to redirect the wave once while it's active."
+     },
+     {
+      "name": "Guardian of Tirisfal",
+      "text": "Minions and Catapults hit by Arcane Rift are instantly killed. Range is increased by 50%."
+     },
+     {
+      "name": "Arcane Brilliance",
+      "text": "Activate to instantly restore 200 mana to all nearby allied Heroes and grant them 15% Spell Power for 10 seconds."
+     },
+     {
+      "name": "Dust of Disappearance",
+      "text": "Stealth an allied Hero for 40 seconds, they are Unrevealable for the first 0.5 seconds. Remaining stationary for at least 1.5 seconds while Stealthed grants Invisible.\n\nStores up to 2 charges."
+     }
+    ]
+   }
+  },
+  {
    "id": "Nova",
    "slug": "nova",
    "name": "Nova",
@@ -2230,6 +2378,145 @@
      {
       "name": "Composition B",
       "text": "Successfully sticking a Pulse Bomb to an enemy Hero also drops another one at their feet that deals 50% damage and explodes slightly earlier."
+     }
+    ]
+   }
+  },
+  {
+   "id": "Tyrd",
+   "slug": "tyrande",
+   "name": "Tyrande",
+   "role": "Healer",
+   "type": "Ranged",
+   "abilities": [
+    {
+     "name": "Light of Elune",
+     "kind": "basic",
+     "text": "Heal an ally Hero for 270 (+4% per level). Light of Elune's cooldown is reduced by 1.5 seconds every time Tyrande hits an enemy with a Basic Attack or damages an enemy Hero.\n\nStores up to 2 charges. Cooldown replenishes all charges at the same time."
+    },
+    {
+     "name": "Sentinel",
+     "kind": "basic",
+     "text": "Send an Owl across the battleground revealing its path, dealing 120 (+4% per level) damage to the first Hero hit, and revealing them for 5 seconds. If a Hero revealed by Sentinel dies, refresh its cooldown."
+    },
+    {
+     "name": "Lunar Flare",
+     "kind": "basic",
+     "text": "After 0.75 seconds, deal 150 (+4% per level) damage and Stun enemies in the target area for 0.75 seconds. Restores 25 Mana per enemy hit.\n\nQuest: Hitting a Hero with Lunar Flare increases its damage by 3%, up to 120%. Double this bonus if the Hero dies within 3 seconds.\n\nReward: After hitting 10 Heroes, increase Lunar Flare's range by 30%.\n\nReward: After hitting 20 Heroes, Sentinel now pierces the first Hero hit.\n\nMythic Reward: After hitting 40 Heroes, Every 8th Basic Attacks fires a Lunar Flare, prioritizing Heroes. Attack Range increased by 1."
+    },
+    {
+     "name": "Hunter's Mark",
+     "kind": "trait",
+     "text": "Reveal a non-Structure enemy and reduce their Armor by 15 for 4 seconds.\n\nPassive: Tyrande's Basic Attacks heal her for 1% of her maximum Health, doubled against targets with Hunter's Mark."
+    },
+    {
+     "name": "Shadowstalk",
+     "kind": "heroic",
+     "text": "Grant all allied Heroes Stealth for 10 seconds and heal them for 380 (+4% per level) Health over 10 seconds. Remaining stationary for at least 1.5 seconds while Stealthed grants Invisible."
+    },
+    {
+     "name": "Starfall",
+     "kind": "heroic",
+     "text": "Deal 92 (+4% per level) damage per second and Slow enemies by 20% in an area. Lasts 6 seconds."
+    }
+   ],
+   "talents": {
+    "1": [
+     {
+      "name": "Ranger",
+      "text": "Sentinel width is increased by 25% and deals up to 250% more damage based on distance traveled."
+     },
+     {
+      "name": "Moonlit Arrows",
+      "text": "Basic Attacks decrease the cooldown of Light of Elune by an additional 0.5 seconds."
+     },
+     {
+      "name": "Trueshot Aura",
+      "text": "Activate to grant Tyrande and nearby allied Heroes 40% increased Attack Damage for 5 seconds, and to reset the cooldown of Hunter's Mark."
+     }
+    ],
+    "4": [
+     {
+      "name": "Everlasting Light",
+      "text": "If Light of Elune's second charge is cast on a different target from the first, it heals for 80% more."
+     },
+     {
+      "name": "Mark of Mending",
+      "text": "Tyrande's Basic Attacks against Marked targets heal other allied Heroes near the enemy for 4% of their maximum Health."
+     },
+     {
+      "name": "Elune's Chosen",
+      "text": "Activate to make Tyrande's Basic Attacks heal target allied Hero for 175% of the damage dealt. Lasts for 8 seconds."
+     }
+    ],
+    "7": [
+     {
+      "name": "Elune's Gift",
+      "text": "Hitting an enemy Hero with Lunar Flare grants 20% Spell Power for 10 seconds."
+     },
+     {
+      "name": "Kaldorei Resistance",
+      "text": "Light of Elune grants the target 10 Spell Armor for 2 seconds. This effect stacks up to 2 times."
+     },
+     {
+      "name": "Huntress' Fury",
+      "text": "Tyrande's Basic Attacks against targets with Hunter's Mark bounce to nearby enemy Heroes.\n\nPassive: Increase Hunter's Mark duration by 1 second, and its cast range by 25%."
+     }
+    ],
+    "10": [
+     {
+      "name": "Shadowstalk",
+      "text": "Grant all allied Heroes Stealth for 10 seconds and heal them for 380 (+4% per level) Health over 10 seconds. Remaining stationary for at least 1.5 seconds while Stealthed grants Invisible."
+     },
+     {
+      "name": "Starfall",
+      "text": "Deal 92 (+4% per level) damage per second and Slow enemies by 20% in an area. Lasts 6 seconds."
+     }
+    ],
+    "13": [
+     {
+      "name": "Quickening Blessing",
+      "text": "Gain 5% Movement Speed. Light of Elune increases the target's Movement Speed by 25% for 3 seconds."
+     },
+     {
+      "name": "Harsh Moonlight",
+      "text": "Sentinel Slows enemies hit by 35% and reduces their damage dealt by 35% for 3 seconds."
+     },
+     {
+      "name": "Ranger's Mark",
+      "text": "Basic Attacks reduce the cooldown of Hunter's Mark by 2 second. Basic Attacks against marked targets reduce the cooldown of Lunar Flare by 4 seconds."
+     }
+    ],
+    "16": [
+     {
+      "name": "Celestial Attunement",
+      "text": "Light of Elune removes Stuns, Silences, and Slows from its target."
+     },
+     {
+      "name": "Empower",
+      "text": "Reduce Sentinel's cooldown by 3 seconds. Heroes hit by Sentinel takes bonus damage equal to 6% of their maximum Health."
+     },
+     {
+      "name": "Darnassian Archery",
+      "text": "Basic Attacks against enemy Heroes grant a stacking 12% increased Attack Damage bonus for 4 seconds."
+     }
+    ],
+    "20": [
+     {
+      "name": "Eyes of the Huntress",
+      "text": "Shadowstalk reveals all enemy Heroes for 10 seconds and heals for 100% more."
+     },
+     {
+      "name": "Celestial Wrath",
+      "text": "Increase the Slow of Starfall to 60% and cause it to apply Hunter's Mark to enemy Heroes while inside of its area of effect."
+     },
+     {
+      "name": "Commander of Sentinels",
+      "text": "Sentinel gains a 2nd charge."
+     },
+     {
+      "name": "Iceblade Arrows",
+      "text": "Increase Attack Speed by 20%. Basic Attacks against enemy Heroes reduce their damage dealt by 8% for 2 seconds. This effect stacks up to 5 times."
      }
     ]
    }

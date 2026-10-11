@@ -29,9 +29,8 @@ counters:
     confidence: medium
   - a: tracer
     b: nazeebo
-    why: "Nazeebo has no dash, so Tracer Blinks onto his 1502 Health and Melee bursts him; she can Blink out of Zombie Wall during its 1-second delay, and he can't step away while channelling Ravenous Spirit."
+    why: "Nazeebo has no dash, so Tracer Blinks onto his 1502 Health and Melee bursts him; she can Blink out of Zombie Wall during its 1-second delay, he can't step away while channelling Ravenous Spirit, and only Ice Block at level 13 gives him an escape."
     evidence: ["Blink", "Melee", "Ravenous Spirit", "Zombie Wall"]
-    conditions: "Ice Block at level 13 gives him one escape."
     confidence: low
   - a: tracer
     b: xul
@@ -46,7 +45,7 @@ counters:
     confidence: medium
   - a: uther
     b: tracer
-    why: "Hammer of Justice is a targeted stun that Blink can't dodge once cast, and Divine Shield blanks Pulse Bomb's burst on an ally."
+    why: "Hammer of Justice is a targeted stun that Blink can't dodge once cast, and Divine Shield, if Uther takes it, blanks Pulse Bomb's burst on an ally."
     evidence: ["Hammer of Justice", "Divine Shield", "Pulse Bomb", "Blink"]
     confidence: medium
   - a: johanna
@@ -67,12 +66,12 @@ counters:
 synergies:
   - a: tracer
     b: zarya
-    why: "Graviton Surge holds enemies in place so Pulse Bomb sticks reliably, and Shield Ally gives Tracer a buffer to dive deeper."
+    why: "Shield Ally gives Tracer a buffer to dive deeper, and Graviton Surge, if Zarya takes it, holds enemies in place so Pulse Bomb sticks reliably."
     evidence: ["Graviton Surge", "Shield Ally", "Pulse Bomb"]
     confidence: medium
   - a: rehgar
     b: tracer
-    why: "Bloodlust boosts Tracer's attack speed and adds lifesteal, and Lightning Shield on her damages everything she Blinks past."
+    why: "Lightning Shield on Tracer damages everything she Blinks past, and Bloodlust, if Rehgar takes it, boosts her attack speed and adds lifesteal."
     evidence: ["Bloodlust", "Lightning Shield", "Blink"]
     confidence: low
   - a: muradin

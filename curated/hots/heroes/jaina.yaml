@@ -4,7 +4,7 @@ traits:
   - tag: vulnerable-body
     why: "Only 1365 Health and no dash; until her quest unlocks Ice Block she survives dives purely through positioning."
   - tag: burst
-    why: "Frostbite makes Chilled targets take 50% more damage from her Abilities, so Frostbolt into Cone of Cold deletes squishy Heroes in one rotation."
+    why: "Frostbite makes Chilled targets take 50% more damage from her Abilities, so one Frostbolt into Cone of Cold rotation takes close to half of a squishy Hero's Health."
   - tag: mana-hungry
     why: "Blizzard costs 90 Mana and her rotation is spammy, so without Arcane Intellect or Regeneration Globes she runs dry in long fights."
 counters:
@@ -25,14 +25,14 @@ counters:
     confidence: low
   - a: jaina
     b: thebutcher
-    why: "The Butcher must stay attached to deal damage; once Ruthless Onslaught lands, Chill slows and Ring of Frost's 3-second root let Jaina's team peel and burst him."
+    why: "The Butcher must stay attached to deal damage; once Ruthless Onslaught lands, Chill slows and, if Jaina takes it, Ring of Frost's 3-second root let her team peel and burst him."
     evidence: ["Ruthless Onslaught", "Frostbite", "Ring of Frost"]
     confidence: low
   - a: anubarak
     b: jaina
     why: "Harden Carapace's Spell Armor and shield soak Jaina's Ability-only damage, and Impale or Burrow Charge reaches her through the frontline, where 1365 Health melts."
     evidence: ["Harden Carapace", "Impale", "Burrow Charge"]
-    confidence: high
+    confidence: medium
   - a: genji
     b: jaina
     why: "Deflect blocks Frostbolt and Blizzard while Genji closes the distance with Cyber Agility and Swift Strike, and Jaina has no movement ability to escape."
@@ -50,14 +50,14 @@ counters:
     confidence: medium
   - a: valeera
     b: jaina
-    why: "Garrote from Vanish Silences Jaina so she cannot cast or use Ice Block, and Cloak of Shadows gives Valeera 75 Spell Armor against the counterattack."
+    why: "Garrote from Vanish Silences Jaina so she cannot cast or use Ice Block, and Cloak of Shadows, if Valeera takes it, gives her 75 Spell Armor against the counterattack."
     evidence: ["Vanish", "Eviscerate", "Cloak of Shadows", "Improved Ice Block"]
     confidence: medium
 synergies:
   - a: jaina
     b: mei
-    why: "Ice Wall traps enemies for 2.5 seconds, long enough for all three waves of Blizzard, and Mei's own Blizzard stun lines up with Ring of Frost."
-    evidence: ["Ice Wall", "Blizzard", "Ring of Frost"]
+    why: "Mei's Blizzard ends in a stun right where Jaina's Blizzard waves are landing, and Ice Wall, if Mei takes it, traps Chilled targets for all three waves or inside Ring of Frost."
+    evidence: ["Blizzard", "Ice Wall", "Ring of Frost", "Frostbite"]
     confidence: medium
   - a: jaina
     b: malfurion
@@ -66,11 +66,13 @@ synergies:
     confidence: medium
   - a: jaina
     b: zarya
-    why: "Graviton Surge pins the enemy team together for 2.5 seconds, a perfect window for Blizzard's three waves or Ring of Frost's delayed root."
+    why: "Graviton Surge pins the enemy team together for 2.5 seconds, a perfect window for Blizzard's three waves or, if Jaina takes it, Ring of Frost's delayed root."
     evidence: ["Graviton Surge", "Blizzard", "Ring of Frost"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: ana
     b: jaina
     why: "Nano Boost gives 30% Spell Power and 150% faster Basic Ability recharge, letting Jaina chain extra Frostbolts and Cones of Cold on Chilled targets."
     evidence: ["Nano Boost", "Frostbolt", "Cone of Cold"]
-    confidence: medium
+    conditions: "Ana takes Nano Boost (level 10)"
+    confidence: low

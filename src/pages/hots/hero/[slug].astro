@@ -4,13 +4,13 @@
  * composite members (cho, gall -> chogall) and URL-style aliases (li-ming -> liming), see
  * src/games/hots/redirects.ts. Sections live in tabs with hash deep links:
  * #counters #maps #talents #abilities #history #guides. Statistics views carry a mode and
- * patch-window switch and the Heroes Profile credit; theory views say they are theory.
+ * patch-window switch and the credit of the source that provided them; theory views say they are theory.
  */
 import type { GetStaticPaths } from 'astro';
-import MatchupList from '../../../components/MatchupList.astro';
 import Tabs from '../../../components/Tabs.astro';
 import { int } from '../../../core/format.ts';
 import { SITE, navHref } from '../../../games/registry.ts';
+import FoldedList from '../../../games/hots/components/FoldedList.astro';
 import AbilityList from '../../../games/hots/components/AbilityList.astro';
 import CounterColumns from '../../../games/hots/components/CounterColumns.astro';
 import GuideLinks from '../../../games/hots/components/GuideLinks.astro';
@@ -26,6 +26,7 @@ import TheoryNotice from '../../../games/hots/components/TheoryNotice.astro';
 import {
   heroVideos,
   sourceNames,
+  splitFit,
   statsModes,
   theoryMapFit,
   theoryMatchups,
@@ -47,6 +48,7 @@ import {
   heroEdges,
   heroMapFit,
   isFreeToPlay,
+  statsSourceIds,
   type MapFitRow,
 } from '../../../games/hots/load.ts';
 import type { Hero } from '../../../games/hots/schema.ts';
@@ -92,7 +94,8 @@ const links = getHeroLinks(hero);
 const videos = heroVideos(hero);
 const theory = theoryMatchups(hero.id) ?? { strong: [], weak: [], synergy: [] };
 const maps = getMaps();
-const theoryMaps = theoryMapFit(hero, maps);
+// "Best maps" lists only maps above neutral; maps the kit is worse on get their own list.
+const theoryMaps = splitFit(theoryMapFit(hero, maps));
 /** Map rows use the map art when this build has it, a lettered placeholder otherwise. */
 const mapRow = (f: MapFitRow) => mapFitRow(f, hasAsset(f.map.image) ? {} : { image: null });
 
@@ -125,7 +128,7 @@ const tabs = [
 ];
 ---
 
-<GameLayout game="hots" title={title} description={description} uses={statsOn ? ['heroesprofile'] : []} inlineCredits={false} navPath="">
+<GameLayout game="hots" title={title} description={description} uses={statsOn ? statsSourceIds() : []} inlineCredits={false} navPath="">
   <article class="hpage" data-hero={hero.id} data-basis={statsOn ? 'stats' : 'theory'}>
     <Crumbs trail={[{ label: 'Heroes', href: navHref('hots') }]} current={hero.name} />
     <!-- heroescounters-style links (#videos) open the Guides tab; runs before the Tabs script reads the hash. -->
@@ -187,33 +190,60 @@ const tabs = [
             {
               statsOn ? (
                 <LensBlocks modes={modes}>
-                  {(m: ModeOption, p: PeriodOption) => (
-                    <div class="panel__block">
-                      <p class="wlabel">{windowLabel(m, p)}</p>
-                      <MatchupList
-                        title={`Best maps for ${hero.name}`}
-                        subtitle="Score 1–100 · Δ = win rate on the map compared with the hero's overall, in pp · n = games on the map"
-                        rows={heroMapFit(hero.id, { mode: m.id, timeframe: p.id }).map(mapRow)}
-                        visible={8}
-                        sourceNames={names}
-                        emptyText="No map has enough games for this hero in this window yet."
-                        level={3}
-                      />
-                    </div>
-                  )}
+                  {(m: ModeOption, p: PeriodOption) => {
+                    const fits = splitFit(heroMapFit(hero.id, { mode: m.id, timeframe: p.id }));
+                    return (
+                      <div class="panel__block">
+                        <p class="wlabel">{windowLabel(m, p)}</p>
+                        <FoldedList
+                          title={`Best maps for ${hero.name}`}
+                          subtitle="Score 1–100 · Δ = win rate on the map compared with the hero's overall, in pp · n = games on the map"
+                          rows={fits.better.map(mapRow)}
+                          head={6}
+                          sourceNames={names}
+                          emptyText={`No map shows ${hero.name} above their usual win rate in this window yet.`}
+                          level={3}
+                        />
+                        {fits.harder.length > 0 && (
+                          <FoldedList
+                            title={`Harder maps for ${hero.name}`}
+                            subtitle="Maps where the hero wins less often than usual, hardest first"
+                            rows={fits.harder.map(mapRow)}
+                            head={3}
+                            sourceNames={names}
+                            level={3}
+                          />
+                        )}
+                      </div>
+                    );
+                  }}
                 </LensBlocks>
               ) : (
                 <>
                   <TheoryNotice detail="Map scores match the hero's kit tags against each map's layout and objective." />
-                  <MatchupList
+                  <FoldedList
                     title={`Best maps for ${hero.name}`}
                     subtitle="Score 1–100 from how the kit fits each map's layout and objective (50 = neutral)"
-                    rows={theoryMaps.map(mapRow)}
-                    visible={8}
+                    rows={theoryMaps.better.map(mapRow)}
+                    head={6}
                     sourceNames={names}
-                    emptyText="No map rule matches this hero yet."
+                    emptyText={
+                      theoryMaps.harder.length > 0
+                        ? `No map plays to ${hero.name}'s kit in our rules; the harder maps are listed below.`
+                        : 'No map rule matches this hero yet.'
+                    }
                     level={3}
                   />
+                  {theoryMaps.harder.length > 0 && (
+                    <FoldedList
+                      title={`Harder maps for ${hero.name}`}
+                      subtitle="Score under 50: the map's layout or objective works against the kit, hardest first"
+                      rows={theoryMaps.harder.map(mapRow)}
+                      head={3}
+                      sourceNames={names}
+                      level={3}
+                    />
+                  )}
                 </>
               )
             }

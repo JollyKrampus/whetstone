@@ -23,7 +23,7 @@ counters:
     confidence: medium
   - a: anubarak
     b: mephisto
-    why: "Mephisto's damage is entirely Abilities, so Harden Carapace's 40 Spell Armor blunts it, and Debilitation halves his Spell Power after Impale or Burrow Charge."
+    why: "Mephisto's damage is entirely Abilities, so Harden Carapace's 40 Spell Armor blunts it, and Debilitation (level 16) halves his Spell Power after Impale or Burrow Charge."
     evidence: ["Harden Carapace", "Debilitation", "Impale", "Burrow Charge"]
     confidence: medium
   - a: genji
@@ -35,18 +35,21 @@ counters:
     b: mephisto
     why: "Withering Flames cuts Mephisto's Spell Power by 60% after Chen Ignites him, and Stagger delays the damage Mephisto's ramping Lightning Nova deals to Chen."
     evidence: ["Withering Flames", "Keg Smash", "Stagger", "Lightning Nova"]
+    conditions: "Chen takes Withering Flames (level 4)"
     confidence: low
 synergies:
   - a: mephisto
     b: zarya
     why: "Graviton Surge holds Heroes together for 2.5 seconds, so a Shade of Mephisto onto the group keeps all of them inside Lightning Nova as it ramps."
     evidence: ["Graviton Surge", "Shade of Mephisto", "Lightning Nova"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low
   - a: etc
     b: mephisto
-    why: "Mosh Pit stuns enemies around E.T.C. for up to 4 seconds, long enough for a full Lightning Nova and Durance of Hate to spread across the stunned team."
+    why: "Mosh Pit stuns enemies around E.T.C. for up to 4 seconds, long enough for a full Lightning Nova, and Durance of Hate if Mephisto takes it, to spread across the stunned team."
     evidence: ["Mosh Pit", "Lightning Nova", "Durance of Hate"]
-    confidence: medium
+    conditions: "E.T.C. takes Mosh Pit (level 10)"
+    confidence: low
   - a: johanna
     b: mephisto
     why: "Condemn pulls nearby enemies to Johanna after a short delay, dragging them into a Lightning Nova ring Mephisto has Shaded onto her position."

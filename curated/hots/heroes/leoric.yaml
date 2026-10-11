@@ -28,7 +28,7 @@ counters:
     confidence: medium
   - a: malthael
     b: leoric
-    why: "Reaper's Mark ticks percent-maximum-Health damage on Leoric's large pool, and Touch of Death halves Drain Hope's healing while Soul Rip keeps Malthael healthy."
+    why: "Reaper's Mark ticks percent-maximum-Health damage on Leoric's large pool, Soul Rip keeps Malthael healthy, and with Touch of Death (level 7) he also halves Drain Hope's healing."
     evidence: ["Reaper's Mark", "Touch of Death", "Soul Rip", "Drain Hope"]
     confidence: medium
   - a: tychus
@@ -46,14 +46,17 @@ synergies:
     b: leoric
     why: "Entomb pins a Hero in a pocket for up to 4 seconds, so Chromie's delayed Sand Blast and all three Dragon's Breath blasts land on a target that cannot sidestep."
     evidence: ["Entomb", "Sand Blast", "Dragon's Breath"]
+    conditions: "Leoric takes Entomb (level 10)"
     confidence: low
   - a: jaina
     b: leoric
-    why: "Entomb pins enemies in a pocket for up to 4 seconds, so all three Blizzard waves and Ring of Frost land on targets that cannot walk out."
+    why: "Entomb pins enemies in a pocket for up to 4 seconds, so all three Blizzard waves, and Ring of Frost if Jaina takes it, land on targets that cannot walk out."
     evidence: ["Entomb", "Blizzard", "Ring of Frost"]
-    confidence: medium
+    conditions: "Leoric takes Entomb (level 10)"
+    confidence: low
   - a: kaelthas
     b: leoric
     why: "Entomb blocks a retreat path long enough for Flamestrike's 1-second delay and Living Bomb's spread to finish the trapped Heroes."
     evidence: ["Entomb", "Flamestrike", "Living Bomb"]
-    confidence: medium
+    conditions: "Leoric takes Entomb (level 10)"
+    confidence: low

@@ -13,7 +13,7 @@ counters:
     confidence: low
   - a: ltmorales
     b: nazeebo
-    why: "Nazeebo's poison and Ravenous Spirit are sustained damage Healing Beam can match tick for tick, and Displacement Grenade can knock him out of his stationary channel."
+    why: "Nazeebo's poison, and Ravenous Spirit if he takes it, is sustained damage Healing Beam can match tick for tick, and Displacement Grenade can knock him out of that stationary channel."
     evidence: ["Healing Beam", "Displacement Grenade", "Ravenous Spirit", "Plague of Toads"]
     confidence: low
   - a: ltmorales
@@ -46,14 +46,17 @@ synergies:
     b: valla
     why: "Stim Drone grants 75% Attack Speed for 10 seconds, multiplying Valla's Hatred-stacked Basic Attacks, while Healing Beam keeps her alive in range."
     evidence: ["Stim Drone", "Hatred", "Healing Beam"]
-    confidence: medium
+    conditions: "Lt. Morales takes Stim Drone (level 10)"
+    confidence: low
   - a: ltmorales
     b: tychus
     why: "Stim Drone's Attack Speed makes every Minigun window hit far more often, and Safeguard lets Tychus stand close enough to shred tanks."
     evidence: ["Stim Drone", "Minigun", "Safeguard"]
-    confidence: medium
+    conditions: "Lt. Morales takes Stim Drone (level 10)"
+    confidence: low
   - a: ltmorales
     b: sgthammer
     why: "Stim Drone turns a sieged Sgt. Hammer into a huge damage source, and Healing Beam plus Safeguard cover her immobility in Siege Mode."
     evidence: ["Stim Drone", "Siege Mode", "Safeguard", "Healing Beam"]
-    confidence: medium
+    conditions: "Lt. Morales takes Stim Drone (level 10)"
+    confidence: low

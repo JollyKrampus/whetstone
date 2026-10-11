@@ -19,7 +19,7 @@ counters:
     confidence: low
   - a: thelostvikings
     b: stitches
-    why: "Gorge and Hook only remove one Viking at a time, and a slow Stitches can't contest the three lanes the Vikings soak."
+    why: "Hook, and Gorge if Stitches takes it, only removes one Viking at a time, and a slow Stitches can't contest the three lanes the Vikings soak."
     evidence: ["Gorge", "Hook"]
     confidence: low
   # --- weak against ---
@@ -30,13 +30,15 @@ counters:
     confidence: medium
   - a: kelthuzad
     b: thelostvikings
-    why: "Shadow Fissure can be cast anywhere on the map for 320 damage, enough to kill or chase a lone soaking Viking out of its lane from across the battleground."
+    why: "Shadow Fissure can be cast anywhere on the map for 320 damage, enough to finish a damaged Viking or chase a lone soaking one out of its lane from across the battleground."
     evidence: ["Shadow Fissure"]
-    confidence: medium
+    conditions: "Kel'Thuzad takes Shadow Fissure (level 10)"
+    confidence: low
   - a: ragnaros
     b: thelostvikings
     why: "Lava Wave travels the length of a lane, instantly killing its minions and dealing double damage to Heroes, so a lone low-Health Viking soaking that lane loses the wave and often its life."
     evidence: ["Lava Wave"]
+    conditions: "Ragnaros takes Lava Wave (level 10)"
     confidence: low
   - a: sonya
     b: thelostvikings

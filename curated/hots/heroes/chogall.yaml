@@ -9,9 +9,8 @@ counters:
   # --- strong against ---
   - a: chogall
     b: illidan
-    why: "Ogre Hide's armor, raised to 75 by Twilight Veil, blunts Illidan's basic attacks and the Betrayer's Thirst healing they feed, while Cho's Hammer of Twilight and Gall's Shadowflame punish him for staying close."
-    evidence: ["Ogre Hide", "Twilight Veil", "Shadowflame", "Hammer of Twilight", "Betrayer's Thirst"]
-    conditions: "Twilight Veil at level 13 for the 75-armor window; base Ogre Hide still helps."
+    why: "Ogre Hide's armor (75 for 4 seconds with Twilight Veil at level 13) blunts Illidan's basic attacks and the Betrayer's Thirst healing they feed, while Gall's Shadowflame punishes him for staying close."
+    evidence: ["Ogre Hide", "Twilight Veil", "Shadowflame", "Betrayer's Thirst"]
     confidence: low
   - a: chogall
     b: thebutcher
@@ -20,46 +19,47 @@ counters:
     confidence: low
   - a: chogall
     b: varian
-    why: "Twin Blades Varian deals almost all his damage through physical basic attacks, which Ogre Hide's armor (75 with Twilight Veil) cuts sharply while Gall keeps hitting him with Shadowflame in melee range."
+    why: "Twin Blades Varian deals almost all his damage through physical basic attacks, which Ogre Hide's armor (75 for a moment with Twilight Veil at level 13) cuts sharply while Gall keeps hitting him with Shadowflame in melee range."
     evidence: ["Ogre Hide", "Twilight Veil", "Shadowflame", "Twin Blades of Fury"]
-    conditions: "Varian on Twin Blades of Fury; Twilight Veil at level 13 for the full armor."
+    conditions: "Varian takes Twin Blades of Fury (level 4)"
     confidence: low
   # --- weak against ---
   - a: malthael
     b: chogall
-    why: "Reaper's Mark deals 2% of Cho's large max health every second, and Touch of Death halves Consuming Blaze's healing."
+    why: "Reaper's Mark deals 2% of Cho's large maximum health every second, and with Touch of Death (level 7) Malthael also halves Consuming Blaze's healing."
     evidence: ["Reaper's Mark", "Touch of Death", "Consuming Blaze"]
-    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
-    confidence: medium
+    confidence: high
   - a: tychus
     b: chogall
-    why: "Minigun adds 2.5% of max health to every attack, and Cho's huge health pool makes that bonus enormous."
+    why: "While Minigun is active, every attack adds 2.5% of maximum health, and Cho'gall's huge pool makes that bonus enormous."
     evidence: ["Minigun"]
-    confidence: medium
+    confidence: high
   - a: azmodan
     b: chogall
-    why: "Cho'gall is a large, slow target that Globe of Annihilation hits reliably, and Total Annihilation adds 4% of max health to every globe."
+    why: "Cho'gall is a large, slow target that Globe of Annihilation hits reliably, and Total Annihilation (level 16) adds 4% of maximum health to every globe."
     evidence: ["Globe of Annihilation", "Total Annihilation"]
-    conditions: "Total Annihilation at level 16 for the percent damage."
     confidence: low
   - a: leoric
     b: chogall
     why: "Drain Hope takes up to 20% of the target's max health and heals Leoric, which is massive against Cho's health pool."
     evidence: ["Drain Hope"]
-    confidence: low
+    confidence: medium
 synergies:
   - a: ana
     b: chogall
     why: "Nano Boost on Gall makes Shadowflame and Dread Orb recharge 150% faster with 30% Spell Power, a huge damage window."
     evidence: ["Nano Boost", "Shadowflame", "Dread Orb"]
-    confidence: medium
+    conditions: "Ana takes Nano Boost (level 10)"
+    confidence: low
   - a: chogall
     b: kaelthas
     why: "Upheaval pulls enemies together after 1 second, then Flamestrike and Living Bomb hit the whole group."
     evidence: ["Upheaval", "Flamestrike", "Living Bomb"]
-    confidence: medium
+    conditions: "Cho takes Upheaval (level 10)"
+    confidence: low
   - a: chogall
     b: zarya
     why: "Graviton Surge and Upheaval chain into several seconds of grouped enemies for Gall's Shadowflame and Runic Blast."
     evidence: ["Graviton Surge", "Upheaval", "Shadowflame", "Runic Blast"]
-    confidence: medium
+    conditions: ["Zarya takes Graviton Surge (level 10)", "Cho takes Upheaval (level 10)"]
+    confidence: low

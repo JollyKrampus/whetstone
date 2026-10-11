@@ -21,6 +21,7 @@ counters:
     b: liming
     why: "Disintegrate is a long beam Li-Ming has to channel in place; Defense Matrix on her reduces it by 60% for most of its duration."
     evidence: ["Defense Matrix", "Disintegrate"]
+    conditions: "Li-Ming takes Disintegrate (level 10)"
     confidence: low
   - a: dva
     b: zagara
@@ -35,9 +36,8 @@ counters:
     confidence: medium
   - a: azmodan
     b: dva
-    why: "The mech is a big target that has to brawl up close; Globe of Annihilation with Total Annihilation takes 4% of its max health per hit while Demon Warriors pressure the lane."
+    why: "The mech is a big target that has to brawl up close, so Globe of Annihilation hits it reliably (for 4% more of its maximum health with Total Annihilation at level 16) while Demon Warriors pressure the lane."
     evidence: ["Globe of Annihilation", "Total Annihilation", "Summon Demon Warrior", "Mech Mode"]
-    conditions: "Total Annihilation at level 16 for the percent damage."
     confidence: low
   - a: leoric
     b: dva
@@ -49,14 +49,17 @@ synergies:
     b: dva
     why: "Lightbomb on D.Va followed by Boosters into the backline stuns the heroes she knocks around, and the shield grows with each hero hit."
     evidence: ["Lightbomb", "Boosters"]
-    confidence: medium
+    conditions: "Anduin takes Lightbomb (level 10)"
+    confidence: low
   - a: dva
     b: mei
     why: "Ice Wall traps heroes for 2.5 seconds, holding them inside Self-Destruct's blast radius."
     evidence: ["Ice Wall", "Self-Destruct"]
-    confidence: medium
+    conditions: "Mei takes Ice Wall (level 10)"
+    confidence: low
   - a: dva
     b: zarya
     why: "Graviton Surge holds enemies in one spot so the center of Self-Destruct lands on several of them."
     evidence: ["Graviton Surge", "Self-Destruct"]
-    confidence: medium
+    conditions: "Zarya takes Graviton Surge (level 10)"
+    confidence: low

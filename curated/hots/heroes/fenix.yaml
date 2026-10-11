@@ -37,27 +37,30 @@ counters:
     b: fenix
     why: "Shattering Throw deals up to 1400 bonus damage to shields, wiping out Shield Capacitor in a single hit."
     evidence: ["Shattering Throw", "Shield Capacitor"]
-    conditions: "Shattering Throw at level 13."
+    conditions: "Varian takes Shattering Throw (level 13)"
     confidence: low
   - a: kelthuzad
     b: fenix
     why: "Strip Shields adds up to 270 damage against shields to Chains of Kel'Thuzad, and the pull and stun hold Fenix in place for Frost Nova."
     evidence: ["Strip Shields", "Chains of Kel'Thuzad", "Frost Nova", "Shield Capacitor"]
-    conditions: "Strip Shields at level 4."
+    conditions: "Kel'Thuzad takes Strip Shields (level 4)"
     confidence: low
 synergies:
   - a: arthas
     b: fenix
-    why: "Summon Sindragosa and Frozen Tempest keep enemies slowed, and Purification Salvo deals 50% more damage to slowed targets."
+    why: "Frozen Tempest, and Summon Sindragosa if Arthas takes it, keeps enemies slowed, and Purification Salvo deals 50% more damage to slowed targets."
     evidence: ["Summon Sindragosa", "Frozen Tempest", "Purification Salvo"]
-    confidence: medium
+    conditions: "Fenix takes Purification Salvo (level 10)"
+    confidence: low
   - a: fenix
     b: jaina
-    why: "Chill slows let Purification Salvo hit slowed targets for 50% more, and Combat Advantage boosts Plasma Cutter against them."
+    why: "Chill slows let Purification Salvo hit slowed targets for 50% more, and with Combat Advantage (level 7) Plasma Cutter also deals 35% more to them."
     evidence: ["Frostbite", "Purification Salvo", "Combat Advantage", "Plasma Cutter"]
-    confidence: medium
+    conditions: "Fenix takes Purification Salvo (level 10) or Combat Advantage (level 7)"
+    confidence: low
   - a: fenix
     b: rehgar
     why: "Bloodlust's 40% attack speed and lifesteal supercharge Fenix's rapid basic attacks."
     evidence: ["Bloodlust", "Shield Capacitor"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low

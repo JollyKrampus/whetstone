@@ -23,13 +23,17 @@
 import type { Edge, Reason } from '../../../core/game.ts';
 import { HERO_TAGS, type GameMap, type Hero, type HeroTag, type Mechanic, type MapFit, type Rule, type RuleAtom, type Theory } from '../schema.ts';
 import type { CuratedBundle, MergedPair } from './types.ts';
+import { orList } from './conditions.ts';
 import { OPTIONAL_FACTOR, capRules, negligible, theoryScore } from './weights.ts';
+
+// The wording helpers live in conditions.ts (dependency-free, for pages and the draft island).
+export { conditionsText, orList, withConditions } from './conditions.ts';
 
 /**
  * Version of the extraction + scoring logic. Bump it when extract.ts or engine.ts change what
  * they produce; theory.json `rulesVersion` = `${RULES_VERSION}+<hash of the curated inputs>`.
  */
-export const RULES_VERSION = '1.5';
+export const RULES_VERSION = '1.6';
 
 /** Most evidence names quoted in one reason. */
 export const MAX_REASON_EVIDENCE = 2;
@@ -168,7 +172,10 @@ export interface SideMatch {
   /** The first hero tag of the matching expression (or the selector), for {aTag}/{bTag}. */
   tag: RuleAtom;
   evidence: string[];
-  /** When factor < 1: the talent (or Heroic) the hero needs for this match, else undefined. */
+  /**
+   * When factor < 1: the picks that give the hero this match, any one of which is enough
+   * ("Lightbomb or Censure"), else undefined.
+   */
   needs?: string;
 }
 
@@ -187,7 +194,9 @@ export function matchSide(exprs: readonly string[], profile: HeroProfile): SideM
         ok = false;
         break;
       }
-      if (info.factor < factor) needs = info.evidence[0];
+      // An optional tag can come from several talents or Heroics: name every one of them, since
+      // any single one is enough (never "takes Lightbomb" when Censure does the same).
+      if (info.factor < factor) needs = orList(info.evidence);
       factor = Math.min(factor, info.factor);
       for (const e of info.evidence) if (!evidence.includes(e)) evidence.push(e);
     }
@@ -229,9 +238,11 @@ function ruleReason(template: string, text: string, evidence: readonly string[])
 
 /**
  * " Only when Genji takes Pathfinder." for a side that matches only through a talent (or one of
- * several Heroics), so a reason never presents an optional pick as part of the base kit. When both
- * sides need one: " Only when Chromie takes Timewalker's Pursuit. Tassadar must also take Shadow
- * Walk." (one sentence per side, so the draft shard can share each; see transform/draft.ts).
+ * several Heroics), so a reason never presents an optional pick as part of the base kit; several
+ * picks that each give the tag are all named (" Only when Anduin takes Lightbomb or Censure.").
+ * When both sides need one: " Only when Chromie takes Timewalker's Pursuit. Tassadar must also
+ * take Shadow Walk." (one sentence per side, so the draft shard can share each; see
+ * transform/draft.ts).
  */
 export function onlyWhen(sides: readonly { name: string; match: SideMatch }[]): string {
   const [first, ...rest] = sides.filter((s) => s.match.needs);
@@ -279,9 +290,23 @@ function applySynergyRule(rule: Rule, x: HeroProfile, y: HeroProfile): Contribut
   return Math.abs(two.value) > Math.abs(one.value) ? two : one;
 }
 
-function curatedReasons(pair: MergedPair): Reason[] {
-  return pair.why.map((text, i) => (i === 0 && pair.evidence.length ? { kind: 'curated', text, evidence: [...pair.evidence] } : { kind: 'curated', text }));
+/**
+ * The curated "why" lines. The first carries the pair's evidence; each carries the conditions of
+ * the file that wrote it (Reason.conditions, clauses the pages render as "Only when …"), so a
+ * talent- or Heroic-dependent line never reads as part of the base kit.
+ */
+export function curatedReasons(pair: Pick<MergedPair, 'why' | 'evidence'> & Partial<Pick<MergedPair, 'whyConditions'>>): Reason[] {
+  return pair.why.map((text, i) => {
+    const conditions = pair.whyConditions?.[i] ?? [];
+    return {
+      kind: 'curated',
+      text,
+      ...(i === 0 && pair.evidence.length ? { evidence: [...pair.evidence] } : {}),
+      ...(conditions.length ? { conditions: [...conditions] } : {}),
+    };
+  });
 }
+
 
 const round = (x: number): number => Math.round(x * 1e9) / 1e9;
 

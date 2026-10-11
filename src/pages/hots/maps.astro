@@ -1,11 +1,9 @@
 ---
 /** /hots/maps/ (SPEC §8): every map, Storm League pool first, then other standard maps, ARAM and brawls. */
 import EntityGrid from '../../components/EntityGrid.astro';
-import SourceAttribution from '../../components/SourceAttribution.astro';
 import type { EntityTile } from '../../components/types.ts';
 import { navHref } from '../../games/registry.ts';
 import { MAP_KIND_LABEL, mapTagLabel } from '../../games/hots/components/labels.ts';
-import { hpSource } from '../../games/hots/components/pagedata.ts';
 import { getMaps, hasAsset } from '../../games/hots/load.ts';
 import type { GameMap } from '../../games/hots/schema.ts';
 import { mapHref, mapImage } from '../../games/hots/view.ts';
@@ -56,14 +54,12 @@ const groups = [
   },
 ].filter((g) => g.maps.length > 0);
 
-const poolFromStats = maps.some((m) => m.ranked && m.rankedSource === 'stats');
 ---
 
 <GameLayout
   game="hots"
   title="Heroes of the Storm maps"
   description="Every Heroes of the Storm map: the Storm League pool, ARAM maps, layouts and objectives, and the heroes that suit each one."
-  uses={poolFromStats ? ['heroesprofile'] : []}
   inlineCredits={false}
 >
   <div class="mapsx">
@@ -92,18 +88,9 @@ const poolFromStats = maps.some((m) => m.ranked && m.rankedSource === 'stats');
       ))
     }
 
-    <div class="mapsx__source">
-      {
-        poolFromStats ? (
-          <>
-            The ranked pool is measured from current match counts.{' '}
-            <SourceAttribution sources={hpSource()} placement="inline" class="mapsx__credit" />
-          </>
-        ) : (
-          <>The ranked pool comes from Whetstone's hand-checked list until match statistics can confirm it.</>
-        )
-      }
-    </div>
+    <p class="mapsx__source">
+      The ranked pool is Whetstone's own hand-checked list, reviewed each patch against what the game offers in Storm League.
+    </p>
   </div>
 </GameLayout>
 
@@ -150,9 +137,5 @@ const poolFromStats = maps.some((m) => m.ranked && m.rankedSource === 'stats');
     max-width: 70ch;
     color: var(--text-muted);
     font-size: var(--fs-sm);
-  }
-
-  .mapsx__source :global(.mapsx__credit) {
-    display: inline;
   }
 </style>

@@ -21,9 +21,8 @@ counters:
     confidence: medium
   - a: garrosh
     b: illidan
-    why: "Wrecking Ball throws a diving Illidan into Garrosh's team, and Groundbreaker with Intimidation cuts his attack speed by 30%."
+    why: "Wrecking Ball throws a diving Illidan into Garrosh's team, and with Intimidation (level 7) Groundbreaker also cuts his attack speed by 30%."
     evidence: ["Wrecking Ball", "Groundbreaker", "Intimidation"]
-    conditions: "Intimidation at level 7 for the attack-speed cut."
     confidence: low
   - a: garrosh
     b: chromie
@@ -38,14 +37,13 @@ counters:
     confidence: medium
   - a: deathwing
     b: garrosh
-    why: "Wrecking Ball can't throw an Unstoppable target and Warlord's Challenge's taunt doesn't stick, leaving Garrosh no way to control Deathwing."
+    why: "Wrecking Ball can't throw an Unstoppable target and, if Garrosh takes it, Warlord's Challenge's taunt doesn't stick either, leaving him no way to control Deathwing."
     evidence: ["Aspect of Death", "Wrecking Ball", "Warlord's Challenge"]
     confidence: medium
   - a: malthael
     b: garrosh
-    why: "Reaper's Mark deals percent max-health damage every second, and Touch of Death halves the healing Garrosh gets from Bloodthirst."
+    why: "Reaper's Mark deals percent maximum-health damage every second, and with Touch of Death (level 7) Malthael also halves the healing Garrosh gets from Bloodthirst."
     evidence: ["Reaper's Mark", "Touch of Death", "Bloodthirst"]
-    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
 synergies:
   - a: alarak

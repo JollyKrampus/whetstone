@@ -330,15 +330,16 @@ describe('hots load.ts against fixtures', () => {
     const m = load.heroEdges('johanna');
     expect(m?.primary).toBe('theory');
     expect(m?.label).toBe(load.THEORY_LABEL);
-    // Curated matchups first (Tracer and Valla, both 88), then generic rule matches by score.
-    expect(m?.strong.slice(0, 2).map((r) => r.hero.slug)).toEqual(['tracer', 'valla']);
+    // Curated matchups first (Tracer and Valla, netted against their edges back), then generic rule matches by score.
+    expect(m?.strong.slice(0, 2).map((r) => r.hero.slug).sort()).toEqual(['tracer', 'valla']);
     expect(m?.strong[0]?.source).toBe('curated');
     const firstGeneric = m?.strong.findIndex((r) => r.source !== 'curated') ?? -1;
     expect(m?.strong.slice(0, firstGeneric).every((r) => r.source === 'curated')).toBe(true);
-    // The theory bar: curated, or generic rules scoring 65+; the rest is shown below the bar.
+    // The theory bar: curated, or one of the strongest generic rows scoring 65+ (load.test.ts has the details).
     for (const r of m?.strong ?? []) {
       expect(r.score).toBeGreaterThan(50);
-      expect(r.gate).toBe(r.source === 'curated' || r.score >= load.THEORY_GATES.listMinScore ? 'listed' : 'shown');
+      if (r.source === 'curated') expect(r.gate).toBe('listed');
+      else if (r.score < load.THEORY_GATES.listMinScore) expect(r.gate).toBe('shown');
     }
     expect(m?.strong.some((r) => r.gate === 'shown')).toBe(true);
     expect(load.heroEdges('cho')?.hero.id).toBe('chogall');

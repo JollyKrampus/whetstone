@@ -3,6 +3,7 @@ import {
   catchUp,
   defaultSince,
   isIsoDate,
+  knownMajorStarts,
   majorStarts,
   readSince,
   shiftDate,
@@ -72,6 +73,24 @@ describe('catch-up dates', () => {
       { version: '2.57', date: '2026-09-28' },
       { version: '2.56', date: '2026-06-01' },
     ]);
+  });
+
+  it('names a major only when its start is known, and the oldest notes by date', () => {
+    const current = { version: '2.57', since: '2026-09-28' };
+    // 2.56's only note is a mid-major build: its start is unknown, so the oldest note is an anchor of its own.
+    expect(knownMajorStarts(DATA.patches, current)).toEqual([
+      { kind: 'major', version: '2.57', date: '2026-09-28' },
+      { kind: 'oldest', date: '2026-06-01' },
+    ]);
+    // With the 2.56.0 build in the notes, 2.56's start is known and nothing older is on file.
+    const withStart = DATA.patches.map((p) => (p.version === '2.56' ? { ...p, build: '2.56.0.90000' } : p));
+    expect(knownMajorStarts(withStart, current)).toEqual([
+      { kind: 'major', version: '2.57', date: '2026-09-28' },
+      { kind: 'major', version: '2.56', date: '2026-06-01' },
+    ]);
+    // A later 2.56 build does not make its start known.
+    const midMajor = DATA.patches.map((p) => (p.version === '2.56' ? { ...p, build: '2.56.17.90000' } : p));
+    expect(knownMajorStarts(midMajor, current).map((a) => a.kind)).toEqual(['major', 'oldest']);
   });
 });
 

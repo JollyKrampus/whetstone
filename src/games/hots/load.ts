@@ -9,8 +9,9 @@
  * WHETSTONE_FIXTURE_PRIVATE=1 (synthetic samples for UI work and tests).
  */
 import path from 'node:path';
-import type { Edge, Reason } from '../../core/game.ts';
+import type { Edge, Reason, SourceRef } from '../../core/game.ts';
 import { createCachedLoader } from '../../core/schemas.ts';
+import { sourcesFor } from '../registry.ts';
 import { GATES, classifySample, isListable, scoreFromDelta } from '../../core/stats.ts';
 import { gameDataDir, gamePrivateDir, readGameJson, usingFixtures } from '../../lib/datadir.ts';
 import {
@@ -267,9 +268,31 @@ export function getDraftShard(): DraftShard | null {
 
 // ---- private: stats (B), videos and streams (C) ----------------------------------------
 
-/** Heroes Profile aggregates, or null when HP is off / not fetched. */
+/**
+ * Match statistics (class B), or null when no statistics source is enabled. The file names the
+ * source that provided it (`source`, a SourceRef id): pages credit that source, never a fixed one.
+ */
 export function getStats(): Stats | null {
   return guardSynthetic(privateData.optional('stats.json', StatsSchema), 'stats.json');
+}
+
+/**
+ * The SourceRef behind the statistics (looked up by the file's `source` id in the game module),
+ * for credits next to the numbers. Empty when there are no statistics or the id is unknown.
+ */
+export function statsSources(): SourceRef[] {
+  const id = getStats()?.source;
+  return id ? sourcesFor(GAME, [id]) : [];
+}
+
+/** Ids of statsSources(), for a layout's `uses` list (credits the page shows). */
+export function statsSourceIds(): string[] {
+  return statsSources().map((s) => s.id);
+}
+
+/** Display name of the statistics source ("match statistics" when it is not a known SourceRef). */
+export function statsSourceName(): string {
+  return statsSources()[0]?.name ?? 'match statistics';
 }
 
 export function getStatsWindow(mode: GameMode = 'sl', timeframe: Timeframe = 'current'): StatsWindow | null {
@@ -321,16 +344,54 @@ export function statGate(n: number, delta: number, z?: number): MatchupGate {
 }
 
 /**
- * Theory list gate (docs/METHODOLOGY.md §11, docs/THEORY.md). A theory edge makes the headline
- * strong/weak/good-with lists when a curator wrote the matchup, or when the generic rules alone
- * reach listMinScore (x ≥ 0.3: one strong, always-available interaction, or two clear ones; a match
- * that only works through a talent tops out at 62 on its own). Weaker generic edges
- * stay available below the bar. The engine already drops edges within ±4 of 50.
+ * Theory list gate (docs/METHODOLOGY.md §11, docs/THEORY.md). A theory row makes the headline
+ * strong/weak/good-with lists when a curator wrote the matchup, or when its generic rules reach
+ * listMinScore (x ≥ 0.3: one strong, always-available interaction, or two clear ones; a match that
+ * only works through a talent tops out at 62 on its own) AND it is among the hero's
+ * listMaxGeneric strongest generic rows in that list. Broad rules match much of the roster, so
+ * without the second bar a list could name nearly everyone and say nothing. Every other row stays
+ * available below the bar. The engine already drops edges within ±4 of 50.
  */
-export const THEORY_GATES = Object.freeze({ listMinScore: 65 });
+export const THEORY_GATES = Object.freeze({ listMinScore: 65, listMaxGeneric: 8 });
 
+/** The edge-level part of the theory gate (curated, or generic at listMinScore); see THEORY_GATES. */
 export function theoryGate(edge: Pick<Edge, 'score' | 'source'>): MatchupGate {
   return edge.source === 'curated' || edge.score >= THEORY_GATES.listMinScore ? 'listed' : 'shown';
+}
+
+/**
+ * Applies the list-level part of the theory gate to rows already sorted by byTheory: past the
+ * first listMaxGeneric generic rows that clear listMinScore, generic rows go below the bar.
+ */
+function gateTheoryList(rows: HeroMatchupRow[]): HeroMatchupRow[] {
+  let generic = 0;
+  return rows.map((r) => {
+    if (r.source === 'curated' || r.gate !== 'listed') return r;
+    generic += 1;
+    return generic <= THEORY_GATES.listMaxGeneric ? r : { ...r, gate: 'shown' };
+  });
+}
+
+/** Signal value of a 1-100 theory score, as the draft reads it (inverse of 50 + 50·tanh(x)). */
+function theoryValue(score: number): number {
+  const x = Math.min(0.995, Math.max(-0.995, (score - 50) / 50));
+  return Math.atanh(x);
+}
+
+/**
+ * One row per opponent from both directed counter edges, netted the way the draft scores them
+ * (value(hero → other) − value(other → hero)): the opponent goes in "strong against" or "weak
+ * against" by the sign, never in both, with the net as its score. Reasons: the winning side's
+ * first, then the other side's (so the page still shows what the losing kit has going for it).
+ * The row is curated when the winning direction is. Null for an exact wash.
+ */
+export function netCounter(fwd: Edge | undefined, rev: Edge | undefined): { side: 'strong' | 'weak'; edge: Edge } | null {
+  const net = (fwd ? theoryValue(fwd.score) : 0) - (rev ? theoryValue(rev.score) : 0);
+  if (Math.abs(net) < 1e-9) return null;
+  const [win, lose] = net > 0 ? [fwd, rev] : [rev, fwd];
+  if (!win) return null;
+  const score = Math.max(1, Math.min(100, Math.round(50 + 50 * Math.tanh(Math.abs(net)))));
+  return { side: net > 0 ? 'strong' : 'weak', edge: { ...win, score, reasons: [...win.reasons, ...(lose?.reasons ?? [])] } };
 }
 
 export const MODE_LABEL: Record<GameMode, string> = { sl: 'Storm League', qm: 'Quick Match', aram: 'ARAM' };
@@ -353,7 +414,7 @@ export interface HeroMatchupRow {
 export interface HeroMatchups {
   hero: Hero;
   primary: 'stats' | 'theory';
-  /** Human label of the data basis, e.g. "Win rates · Heroes Profile · Storm League · …". */
+  /** Human label of the data basis, e.g. "Win rates · <source> · Storm League · …". */
   label: string;
   mode?: GameMode;
   timeframe?: Timeframe;
@@ -376,7 +437,8 @@ function byTheory(a: HeroMatchupRow, b: HeroMatchupRow): number {
 
 /**
  * Theory-only strong/weak/good-with lists for a hero entity (mechanics + curated pairs), whatever
- * stats exist: rows above 50, gated by theoryGate, curated first.
+ * stats exist. Counters are netted per opponent (netCounter), so an opponent is in one list only;
+ * rows above 50, curated first, gated by THEORY_GATES (curated, or one of the strongest generic).
  */
 export function theoryLists(hero: Hero): Pick<HeroMatchups, 'strong' | 'weak' | 'synergy'> {
   return memo(`theoryLists:${hero.id}`, () => {
@@ -386,14 +448,29 @@ export function theoryLists(hero: Hero): Pick<HeroMatchups, 'strong' | 'weak' | 
       return h ? { hero: h, edge, score: edge.score, source: edge.source, gate: theoryGate(edge), reasons: edge.reasons } : null;
     };
     const keep = (r: HeroMatchupRow | null): r is HeroMatchupRow => r !== null;
+    const fwd = new Map<string, Edge>();
+    const rev = new Map<string, Edge>();
+    for (const e of theory.counters) {
+      if (e.a === hero.id) fwd.set(e.b, e);
+      else if (e.b === hero.id) rev.set(e.a, e);
+    }
+    const strong: HeroMatchupRow[] = [];
+    const weak: HeroMatchupRow[] = [];
+    for (const other of [...new Set([...fwd.keys(), ...rev.keys()])].sort()) {
+      const net = netCounter(fwd.get(other), rev.get(other));
+      const r = net && net.edge.score > 50 ? row(net.edge, other) : null;
+      if (r) (net?.side === 'strong' ? strong : weak).push(r);
+    }
     return {
-      strong: theory.counters.filter((e) => e.a === hero.id && e.score > 50).map((e) => row(e, e.b)).filter(keep).sort(byTheory),
-      weak: theory.counters.filter((e) => e.b === hero.id && e.score > 50).map((e) => row(e, e.a)).filter(keep).sort(byTheory),
-      synergy: theory.synergies
-        .filter((e) => (e.a === hero.id || e.b === hero.id) && e.score > 50)
-        .map((e) => row(e, e.a === hero.id ? e.b : e.a))
-        .filter(keep)
-        .sort(byTheory),
+      strong: gateTheoryList(strong.sort(byTheory)),
+      weak: gateTheoryList(weak.sort(byTheory)),
+      synergy: gateTheoryList(
+        theory.synergies
+          .filter((e) => (e.a === hero.id || e.b === hero.id) && e.score > 50)
+          .map((e) => row(e, e.a === hero.id ? e.b : e.a))
+          .filter(keep)
+          .sort(byTheory),
+      ),
     };
   });
 }
@@ -444,7 +521,7 @@ export function heroEdges(slugOrId: string, opts: { mode?: GameMode; timeframe?:
     return {
       hero,
       primary: 'stats',
-      label: `Win rates · Heroes Profile · ${MODE_LABEL[mode]} · ${window.label}`,
+      label: `Win rates · ${statsSourceName()} · ${MODE_LABEL[mode]} · ${window.label}`,
       mode,
       timeframe,
       strong: strong.filter(keep).sort(byScore),
@@ -487,7 +564,7 @@ export function heroMapFit(slugOrId: string, opts: { mode?: GameMode; timeframe?
         text: `${s.delta >= 0 ? '+' : ''}${s.delta.toFixed(1)} pp on ${map.name} over ${s.games} games`,
         n: s.games,
         delta: s.delta,
-        source: 'heroesprofile',
+        source: getStats()?.source ?? 'stats',
       };
       rows.push({ map, score: scoreFromDelta(s.delta), source: 'stats', gate, reasons: [stat, ...(theoryByMap.get(mapId)?.reasons ?? [])], n: s.games, delta: s.delta });
     }

@@ -13,12 +13,12 @@ counters:
     confidence: high
   - a: malthael
     b: stitches
-    why: "Stitches's 3020 Health makes every Reaper's Mark tick and Soul Rip heal larger, and Last Rites punishes the missing Health he carries between Devour heals."
+    why: "Stitches's 3020 Health makes every Reaper's Mark tick and Soul Rip heal larger, and Last Rites, if Malthael takes it, punishes the missing Health he carries between Devour heals."
     evidence: ["Reaper's Mark", "Soul Rip", "Last Rites", "Devour"]
     confidence: medium
   - a: malthael
     b: diablo
-    why: "Black Soulstone's bonus maximum Health directly increases Reaper's Mark and Soul Rip value, and Touch of Death halves Diablo's Fire Stomp healing."
+    why: "Black Soulstone's bonus maximum Health directly increases Reaper's Mark and Soul Rip value, and Touch of Death (level 7) halves Diablo's Fire Stomp healing."
     evidence: ["Reaper's Mark", "Soul Rip", "Black Soulstone", "Touch of Death", "Fire Stomp"]
     confidence: medium
   - a: malthael
@@ -44,14 +44,15 @@ counters:
 synergies:
   - a: abathur
     b: malthael
-    why: "Adrenal Overload's Attack Speed spreads and refreshes Reaper's Mark faster, and Carapace keeps Malthael alive while he dives for Soul Rip value."
+    why: "Carapace keeps Malthael alive while he dives for Soul Rip value, and with Adrenal Overload (level 4) the Symbiote's Attack Speed spreads and refreshes Reaper's Mark faster."
     evidence: ["Adrenal Overload", "Carapace", "Reaper's Mark", "Soul Rip"]
     confidence: medium
   - a: malthael
     b: rehgar
     why: "Bloodlust adds 40% Attack Speed and lifesteal on top of Soul Rip healing, letting Malthael mark the whole enemy team quickly."
     evidence: ["Bloodlust", "Soul Rip", "Reaper's Mark"]
-    confidence: medium
+    conditions: "Rehgar takes Bloodlust (level 10)"
+    confidence: low
   - a: malthael
     b: tyrande
     why: "Hunter's Mark lowers a target's Armor by 15, so Malthael's Basic Attacks and Reaper's Mark ticks hit harder on the Hero Tyrande has already focused."

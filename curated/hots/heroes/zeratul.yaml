@@ -29,12 +29,12 @@ counters:
     confidence: medium
   - a: zeratul
     b: tassadar
-    why: "Zeratul's cloaked approach and Vorpal Blade get around Force Wall, and Tassadar's 1650 Health melts to Cleave plus Singularity Spike."
+    why: "Zeratul's cloaked approach and Vorpal Blade get around Force Wall, so Tassadar cannot wall him off while Cleave, Singularity Spike and Basic Attacks wear down his 1650 Health."
     evidence: ["Permanent Cloak", "Vorpal Blade", "Cleave", "Singularity Spike", "Force Wall"]
     confidence: medium
   - a: zeratul
     b: stukov
-    why: "Zeratul cloaks onto a Stukov who has no dash, and Singularity Spike plus Cleave burst him down before Bio-Kill Switch's slows can buy him time."
+    why: "Zeratul cloaks onto a Stukov who has no dash and keeps Singularity Spike, Cleave and Basic Attacks on him before Bio-Kill Switch's slows can buy him time."
     evidence: ["Permanent Cloak", "Singularity Spike", "Cleave", "Bio-Kill Switch"]
     confidence: low
   # --- weak against ---
@@ -45,13 +45,14 @@ counters:
     confidence: medium
   - a: uther
     b: zeratul
-    why: "Divine Shield blanks Zeratul's burst on an ally, and Hammer of Justice's targeted stun stops him once he decloaks."
+    why: "Hammer of Justice's targeted stun stops Zeratul once he decloaks, and Divine Shield, if Uther takes it, blanks his burst on an ally."
     evidence: ["Divine Shield", "Hammer of Justice", "Permanent Cloak"]
     confidence: medium
   - a: rexxar
     b: zeratul
-    why: "Unleash the Boars hunts every enemy Hero in a direction and reveals them for 5 seconds, dragging Zeratul out of Permanent Cloak and slowing his escape; Flare can scout his approach."
+    why: "Unleash the Boars hunts every enemy Hero in a direction and reveals them for 5 seconds, dragging Zeratul out of Permanent Cloak and slowing his escape, and Flare (level 1) can scout his approach."
     evidence: ["Unleash the Boars", "Flare", "Permanent Cloak"]
+    conditions: "Rexxar takes Unleash the Boars (level 10) or Flare (level 1)"
     confidence: low
   - a: malthael
     b: zeratul
@@ -61,12 +62,12 @@ counters:
 synergies:
   - a: anubarak
     b: zeratul
-    why: "Impale and Burrow Charge stun targets so Zeratul can land Singularity Spike and Cleave, and Cocoon removes a peeler from the fight."
+    why: "Impale and Burrow Charge stun targets so Zeratul can land Singularity Spike and Cleave, and Cocoon, if Anub'arak takes it, removes a peeler from the fight."
     evidence: ["Impale", "Burrow Charge", "Cocoon", "Singularity Spike", "Cleave"]
     confidence: low
   - a: malfurion
     b: zeratul
-    why: "Entangling Roots holds a target in place for Singularity Spike, and Sentenced to Death adds damage while the Spike's slow and mark are on them."
+    why: "Entangling Roots holds a target in place for Singularity Spike, and Sentenced to Death (level 16) adds damage while the Spike's slow and mark are on them."
     evidence: ["Entangling Roots", "Singularity Spike", "Sentenced to Death"]
     confidence: low
   - a: abathur

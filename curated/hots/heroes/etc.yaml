@@ -13,64 +13,69 @@ counters:
     b: illidan
     why: "Face Melt knocks Illidan off his target and Imposing Presence halves his attack speed, gutting his basic-attack damage and lifesteal."
     evidence: ["Face Melt", "Imposing Presence", "Betrayer's Thirst"]
-    conditions: "Imposing Presence at level 16 for the attack-speed part."
+    conditions: "E.T.C. takes Imposing Presence (level 16)"
     confidence: low
   - a: etc
     b: kaelthas
-    why: "Kael'thas has no escape; Powerslide stuns him for 1.25 seconds and Mosh Pit keeps him stunned for his team to burst."
+    why: "Kael'thas has no escape; Powerslide stuns him for 1.25 seconds, and Mosh Pit, if E.T.C. takes it, keeps him stunned for his team to burst."
     evidence: ["Powerslide", "Mosh Pit"]
     confidence: medium
   - a: etc
     b: jaina
-    why: "Jaina can't escape until her quest unlocks Improved Ice Block; Powerslide's stun and a Mosh Pit catch her with no answer."
+    why: "Jaina can't escape until her quest unlocks Improved Ice Block; Powerslide's stun, and a Mosh Pit if E.T.C. takes it, catch her with no answer."
     evidence: ["Powerslide", "Mosh Pit", "Improved Ice Block"]
     confidence: medium
   - a: etc
     b: thebutcher
     why: "Face Melt pushes Butcher away right after Ruthless Onslaught, and Imposing Presence slows the basic attacks Butcher needs to heal."
     evidence: ["Face Melt", "Imposing Presence", "Ruthless Onslaught", "Butcher's Brand"]
-    conditions: "Imposing Presence at level 16 for the attack-speed slow."
+    conditions: "E.T.C. takes Imposing Presence (level 16)"
     confidence: low
   # --- weak against ---
   - a: deathwing
     b: etc
-    why: "Mosh Pit and Powerslide stuns do nothing to a permanently Unstoppable Deathwing, so E.T.C.'s engage and lockdown are wasted on him."
+    why: "Powerslide's stun, and Mosh Pit's if E.T.C. takes it, do nothing to a permanently Unstoppable Deathwing, so his engage and lockdown are wasted on him."
     evidence: ["Aspect of Death", "Mosh Pit", "Powerslide"]
     confidence: medium
   - a: malthael
     b: etc
-    why: "Reaper's Mark ticks 2% of E.T.C.'s max health per second, and Touch of Death halves Guitar Solo's healing."
+    why: "Reaper's Mark ticks 2% of E.T.C.'s maximum health per second, and with Touch of Death (level 7) Malthael also halves Guitar Solo's healing."
     evidence: ["Reaper's Mark", "Touch of Death", "Guitar Solo"]
-    conditions: "Touch of Death at level 7 for the healing cut; Reaper's Mark ticks apply regardless."
     confidence: medium
   - a: tyrael
     b: etc
     why: "Sanctification makes Tyrael's allies Invulnerable for 3 seconds, so a Mosh Pit started on top of them does nothing."
     evidence: ["Sanctification", "Mosh Pit"]
+    conditions: ["Tyrael takes Sanctification (level 10)", "E.T.C. takes Mosh Pit (level 10)"]
     confidence: low
   - a: alarak
     b: etc
     why: "Discord Strike silences E.T.C. for 1.5 seconds, which ends Mosh Pit if he's channeling it."
     evidence: ["Discord Strike", "Mosh Pit"]
+    conditions: "E.T.C. takes Mosh Pit (level 10)"
     confidence: low
 synergies:
   - a: alexstrasza
     b: etc
-    why: "Mosh Pit stuns enemies in place for up to 4 seconds, so all five Cleansing Flame fireballs land on the stunned group."
+    why: "Mosh Pit stuns a group in place for up to 4 seconds, so most of Cleansing Flame's fireballs land on the stunned enemies while healing E.T.C. in the middle of them."
     evidence: ["Mosh Pit", "Cleansing Flame"]
-    confidence: medium
+    conditions: ["E.T.C. takes Mosh Pit (level 10)", "Alexstrasza takes Cleansing Flame (level 10)"]
+    confidence: low
   - a: etc
     b: jaina
     why: "Mosh Pit stuns enemies in place for up to 4 seconds, letting every Blizzard wave hit."
     evidence: ["Mosh Pit", "Blizzard"]
-    confidence: medium
+    conditions: "E.T.C. takes Mosh Pit (level 10)"
+    confidence: low
   - a: etc
     b: kaelthas
     why: "Mosh Pit holds enemies through Flamestrike's 1-second delay, and Living Bomb spreads through the packed group."
     evidence: ["Mosh Pit", "Flamestrike", "Living Bomb"]
-    confidence: medium
+    conditions: "E.T.C. takes Mosh Pit (level 10)"
+    confidence: low
   - a: etc
     b: guldan
     why: "Mosh Pit holds a group inside Rain of Destruction's falling meteors."
     evidence: ["Mosh Pit", "Rain of Destruction"]
-    confidence: medium
+    conditions: ["E.T.C. takes Mosh Pit (level 10)", "Gul'dan takes Rain of Destruction (level 10)"]
+    confidence: low
