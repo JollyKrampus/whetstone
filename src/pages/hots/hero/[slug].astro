@@ -7,10 +7,10 @@
  * patch-window switch and the credit of the source that provided them; theory views say they are theory.
  */
 import type { GetStaticPaths } from 'astro';
-import MatchupList from '../../../components/MatchupList.astro';
 import Tabs from '../../../components/Tabs.astro';
 import { int } from '../../../core/format.ts';
 import { SITE, navHref } from '../../../games/registry.ts';
+import FoldedList from '../../../games/hots/components/FoldedList.astro';
 import AbilityList from '../../../games/hots/components/AbilityList.astro';
 import CounterColumns from '../../../games/hots/components/CounterColumns.astro';
 import GuideLinks from '../../../games/hots/components/GuideLinks.astro';
@@ -195,21 +195,21 @@ const tabs = [
                     return (
                       <div class="panel__block">
                         <p class="wlabel">{windowLabel(m, p)}</p>
-                        <MatchupList
+                        <FoldedList
                           title={`Best maps for ${hero.name}`}
                           subtitle="Score 1–100 · Δ = win rate on the map compared with the hero's overall, in pp · n = games on the map"
                           rows={fits.better.map(mapRow)}
-                          visible={8}
+                          head={6}
                           sourceNames={names}
                           emptyText={`No map shows ${hero.name} above their usual win rate in this window yet.`}
                           level={3}
                         />
                         {fits.harder.length > 0 && (
-                          <MatchupList
+                          <FoldedList
                             title={`Harder maps for ${hero.name}`}
                             subtitle="Maps where the hero wins less often than usual, hardest first"
                             rows={fits.harder.map(mapRow)}
-                            visible={4}
+                            head={3}
                             sourceNames={names}
                             level={3}
                           />
@@ -221,11 +221,11 @@ const tabs = [
               ) : (
                 <>
                   <TheoryNotice detail="Map scores match the hero's kit tags against each map's layout and objective." />
-                  <MatchupList
+                  <FoldedList
                     title={`Best maps for ${hero.name}`}
                     subtitle="Score 1–100 from how the kit fits each map's layout and objective (50 = neutral)"
                     rows={theoryMaps.better.map(mapRow)}
-                    visible={8}
+                    head={6}
                     sourceNames={names}
                     emptyText={
                       theoryMaps.harder.length > 0
@@ -235,11 +235,11 @@ const tabs = [
                     level={3}
                   />
                   {theoryMaps.harder.length > 0 && (
-                    <MatchupList
+                    <FoldedList
                       title={`Harder maps for ${hero.name}`}
                       subtitle="Score under 50: the map's layout or objective works against the kit, hardest first"
                       rows={theoryMaps.harder.map(mapRow)}
-                      visible={4}
+                      head={3}
                       sourceNames={names}
                       level={3}
                     />

@@ -4,15 +4,16 @@
  * Statistics rows only make the headline list when they pass the SPEC §6 bar (n and |Δ|);
  * theory rows follow the theory bar (load.ts THEORY_GATES: curated matchups, plus the hero's
  * strongest generic rule matches scoring 65+), curated first, labelled by their source badge.
- * Everything else sits behind a "below the bar" disclosure as a light text list (name, score,
- * source and the main reason): full rows with rings for every opponent made hero pages several
- * hundred kilobytes for lists most visitors never open.
+ *
+ * Page weight: only the first HEAD rows of a list render as full rows (portrait, score ring,
+ * reasons). The rest of the list ("View N more") and everything below the bar render as light
+ * text rows (LightRows: name, score, facts, reasons), so a hero with many curated matchups stays
+ * well under 250 KB of HTML instead of 300-600 KB of rings most visitors never open.
  */
-import MatchupList from '../../../components/MatchupList.astro';
-import { edgeSourceLabel, type MatchupRow } from '../../../components/types.ts';
-import { int, pp } from '../../../core/format.ts';
 import { GATES, THEORY_GATES, type HeroMatchupRow } from '../load.ts';
 import { toMatchupRow } from '../view.ts';
+import FoldedList from './FoldedList.astro';
+import LightRows from './LightRows.astro';
 import { splitByGate, type MatchupLists } from './pagedata.ts';
 
 interface Props {
@@ -23,6 +24,9 @@ interface Props {
   /** Prefix for element ids, unique per rendered block. */
   idPrefix: string;
 }
+
+/** Full rows shown at the top of each list; the rest of the list folds into light rows. */
+const HEAD = 6;
 
 const { heroName, lists, basis, sourceNames, idPrefix } = Astro.props;
 const bar = `at least ${GATES.listMinN} games and an edge of ${GATES.listMinDeltaPp} pp`;
@@ -60,36 +64,29 @@ const columns = [
   },
 ].map((c) => {
   const { listed, other } = splitByGate<HeroMatchupRow>(c.rows);
-  return { ...c, listed: listed.map((r) => toMatchupRow(r)), other: other.map((r) => toMatchupRow(r)) };
+  return { ...c, rows: listed.map((r) => toMatchupRow(r)), other: other.map((r) => toMatchupRow(r)) };
 });
 
 const belowNote =
   basis === 'stats'
     ? `Fewer than ${GATES.listMinN} games or an edge under ${GATES.listMinDeltaPp} pp; "low sample" marks fewer than ${GATES.greyBelow} games.`
     : `Generic rule matches with no hand-written matchup behind them: scoring under ${THEORY_GATES.listMinScore}, or past the ${THEORY_GATES.listMaxGeneric} strongest.`;
-
-/** One compact line: what the full row shows, minus the ring and the expandable reasons. */
-const facts = (r: MatchupRow): string[] => [
-  ...(r.delta !== undefined ? [pp(r.delta)] : []),
-  ...(r.n !== undefined ? [`n = ${int(r.n)}`] : []),
-  r.sourceLabel ?? edgeSourceLabel(r.source),
-  ...(r.lowSample ? ['low sample'] : []),
-];
 ---
 
 <div class="ccols" data-basis={basis}>
   {
     columns.map((c) => (
       <div class="ccols__col" data-list={c.key}>
-        <MatchupList
+        <FoldedList
           id={`${idPrefix}-${c.key}`}
           title={c.title}
           subtitle={c.subtitle}
-          rows={c.listed}
-          visible={8}
+          rows={c.rows}
+          head={HEAD}
           sourceNames={sourceNames}
           emptyText={c.empty}
           level={3}
+          foldKey={c.key}
         />
         {c.other.length > 0 && (
           <details class="ccols__below" data-below={c.key}>
@@ -97,21 +94,7 @@ const facts = (r: MatchupRow): string[] => [
             <div class="ccols__belowbody">
               <h4 class="ccols__belowtitle">{basis === 'stats' ? 'Below the reliability bar' : 'Weaker mechanical edges'}</h4>
               <p class="ccols__note">{belowNote}</p>
-              <ol class="lrows">
-                {c.other.map((r) => (
-                  <li class="lrow" data-id={r.id} data-low={r.lowSample ? 'true' : undefined}>
-                    <span class="lrow__head">
-                      {r.href ? <a href={r.href}>{r.name}</a> : <span>{r.name}</span>}
-                      <span class="lrow__score">
-                        <span class="visually-hidden">Score </span>
-                        {Math.round(r.score)}
-                      </span>
-                      <span class="lrow__facts">{facts(r).join(' · ')}</span>
-                    </span>
-                    {r.reasons?.[0] && <span class="lrow__why">{r.reasons[0].text}</span>}
-                  </li>
-                ))}
-              </ol>
+              <LightRows rows={c.other} reasons="first" />
             </div>
           </details>
         )}
@@ -120,7 +103,7 @@ const facts = (r: MatchupRow): string[] => [
   }
 </div>
 
-<style>
+<style is:global>
   .ccols {
     display: grid;
     gap: var(--sp-6);
@@ -156,52 +139,6 @@ const facts = (r: MatchupRow): string[] => [
   .ccols__note {
     color: var(--text-muted);
     font-size: var(--fs-sm);
-  }
-
-  .lrows {
-    display: grid;
-    gap: var(--sp-1);
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .lrow {
-    display: grid;
-    gap: 0.1rem;
-    padding: var(--sp-1) 0;
-    border-bottom: 1px solid var(--border);
-    min-width: 0;
-  }
-
-  .lrow__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--sp-1) var(--sp-2);
-  }
-
-  .lrow__head > a {
-    font-weight: 650;
-  }
-
-  .lrow__score {
-    font-family: var(--font-mono);
-    font-weight: 650;
-  }
-
-  .lrow__facts,
-  .lrow__why {
-    color: var(--text-muted);
-    font-size: var(--fs-xs);
-  }
-
-  .lrow__why {
-    overflow-wrap: anywhere;
-  }
-
-  .lrow[data-low] .lrow__head > a {
-    opacity: 0.8;
   }
 
   @media (min-width: 64rem) {

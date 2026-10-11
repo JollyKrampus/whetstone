@@ -1,0 +1,124 @@
+---
+/**
+ * Matchup rows as a light text list: linked name, score, the compact facts (Δ, n, source, low
+ * sample) and the main reason, with any further reasons behind a native disclosure. Used for the
+ * rows a hero page folds away (past the first rows of a list, or below the bar), where a full
+ * MatchupRowItem with its portrait and score ring cost about 2.7 KB a row and pushed hero pages
+ * past 300 KB. Styles are global (prefixed .lrow) so the rows carry no scoped-style attributes.
+ */
+import { edgeSourceLabel, type MatchupRow } from '../../../components/types.ts';
+import { int, pp } from '../../../core/format.ts';
+
+interface Props {
+  rows: readonly MatchupRow[];
+  /** 1-based number of the first row, when the list continues a ranked list above it. */
+  start?: number;
+  /** "first": only the main reason (rows below the bar); "all" (default): the rest behind a disclosure. */
+  reasons?: 'first' | 'all';
+}
+
+const { rows, start, reasons = 'all' } = Astro.props;
+
+/** What the full row shows, minus the ring and the reasons. */
+const facts = (r: MatchupRow): string =>
+  [...(r.delta !== undefined ? [pp(r.delta)] : []), ...(r.n !== undefined ? [`n = ${int(r.n)}`] : []), r.sourceLabel ?? edgeSourceLabel(r.source), ...(r.lowSample ? ['low sample'] : [])].join(
+    ' · ',
+  );
+---
+
+<ol class="lrows" start={start}>
+  {
+    rows.map((r) => {
+      const [first, ...rest] = r.reasons ?? [];
+      const more = reasons === 'all' ? rest : [];
+      return (
+        <li class="lrow" data-id={r.id} data-low={r.lowSample ? 'true' : undefined}>
+          <span class="lrow__head">
+            {r.href ? <a href={r.href}>{r.name}</a> : <span>{r.name}</span>}
+            <span class="lrow__score">
+              <span class="visually-hidden">Score </span>
+              {Math.round(r.score)}
+            </span>
+            <span class="lrow__facts">{facts(r)}</span>
+          </span>
+          {first && <span class="lrow__why">{first.text}</span>}
+          {more.length > 0 && (
+            <details class="lrow__more">
+              <summary>
+                {more.length} more {more.length === 1 ? 'reason' : 'reasons'}
+              </summary>
+              <ul>
+                {more.map((x) => (
+                  <li>{x.text}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </li>
+      );
+    })
+  }
+</ol>
+
+<style is:global>
+  .lrows {
+    display: grid;
+    gap: var(--sp-1);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .lrow {
+    display: grid;
+    gap: 0.1rem;
+    padding: var(--sp-1) 0;
+    border-bottom: 1px solid var(--border);
+    min-width: 0;
+  }
+
+  .lrow__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-1) var(--sp-2);
+  }
+
+  .lrow__head > a {
+    font-weight: 650;
+  }
+
+  .lrow__score {
+    font-family: var(--font-mono);
+    font-weight: 650;
+  }
+
+  .lrow__facts,
+  .lrow__why,
+  .lrow__more {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .lrow__why,
+  .lrow__more li {
+    overflow-wrap: anywhere;
+  }
+
+  .lrow__more > summary {
+    cursor: pointer;
+    color: var(--accent);
+    inline-size: fit-content;
+  }
+
+  .lrow__more > ul {
+    display: grid;
+    gap: 0.1rem;
+    padding-inline-start: var(--sp-4);
+    margin: var(--sp-1) 0 0;
+  }
+
+  .lrow[data-low] .lrow__head > a {
+    opacity: 0.8;
+  }
+</style>

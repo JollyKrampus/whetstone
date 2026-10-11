@@ -6,9 +6,9 @@
  */
 import type { GetStaticPaths } from 'astro';
 import Badge from '../../../components/Badge.tsx';
-import MatchupList from '../../../components/MatchupList.astro';
 import { formatDayUTC, int } from '../../../core/format.ts';
 import { navHref } from '../../../games/registry.ts';
+import FoldedList from '../../../games/hots/components/FoldedList.astro';
 import LensBlocks from '../../../games/hots/components/LensBlocks.astro';
 import StatsCredit from '../../../games/hots/components/StatsCredit.astro';
 import StatsLens from '../../../games/hots/components/StatsLens.astro';
@@ -141,21 +141,21 @@ const description = `${map.name} in Heroes of the Storm (${MAP_KIND_LABEL[map.ki
                 return (
                   <div class="best__block">
                     <p class="wlabel">{windowLabel(m, p)}</p>
-                    <MatchupList
+                    <FoldedList
                       title={`Heroes on ${map.name}`}
                       subtitle="Score 1–100 · Δ = the hero's win rate here compared with their overall, in pp · n = games on this map"
                       rows={fits.better.map((f) => f.row)}
-                      visible={12}
+                      head={8}
                       sourceNames={names}
                       emptyText="No hero wins more often than usual on this map in this window yet."
                       level={3}
                     />
                     {fits.harder.length > 0 && (
-                      <MatchupList
+                      <FoldedList
                         title={`Heroes who struggle on ${map.name}`}
                         subtitle="Heroes who win less often here than usual, hardest first"
                         rows={fits.harder.map((f) => f.row)}
-                        visible={6}
+                        head={4}
                         sourceNames={names}
                         level={3}
                       />
@@ -167,9 +167,9 @@ const description = `${map.name} in Heroes of the Storm (${MAP_KIND_LABEL[map.ki
             <details class="compare">
               <summary class="btn">Compare with theory (from the kits)</summary>
               <div class="compare__body">
-                <MatchupList title="Theory fit" subtitle="Score 1–100 from kit tags against this map's layout and objective" rows={theoryRows} visible={12} sourceNames={names} emptyText="No map rule favours a hero here yet." level={3} />
+                <FoldedList title="Theory fit" subtitle="Score 1–100 from kit tags against this map's layout and objective" rows={theoryRows} head={8} sourceNames={names} emptyText="No map rule favours a hero here yet." level={3} />
                 {theoryHarder.length > 0 && (
-                  <MatchupList title="Theory: harder here" subtitle="Score under 50: the map works against the kit, hardest first" rows={theoryHarder} visible={6} sourceNames={names} level={3} />
+                  <FoldedList title="Theory: harder here" subtitle="Score under 50: the map works against the kit, hardest first" rows={theoryHarder} head={4} sourceNames={names} level={3} />
                 )}
               </div>
             </details>
@@ -177,21 +177,21 @@ const description = `${map.name} in Heroes of the Storm (${MAP_KIND_LABEL[map.ki
         ) : (
           <div class="best__block">
             <TheoryNotice detail="Map scores match each hero's kit tags (global presence, waveclear, channel stopping…) against this map's layout and objective." />
-            <MatchupList
+            <FoldedList
               title={`Heroes on ${map.name}`}
               subtitle="Score 1–100 from how the kit fits this map (50 = neutral)"
               rows={theoryRows}
-              visible={12}
+              head={8}
               sourceNames={names}
               emptyText="No map rule favours a hero here yet."
               level={3}
             />
             {theoryHarder.length > 0 && (
-              <MatchupList
+              <FoldedList
                 title={`Heroes who struggle on ${map.name}`}
                 subtitle="Score under 50: the map's layout or objective works against the kit, hardest first"
                 rows={theoryHarder}
-                visible={6}
+                head={4}
                 sourceNames={names}
                 level={3}
               />

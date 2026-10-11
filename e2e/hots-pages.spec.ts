@@ -238,7 +238,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(statsCredit(page)).toHaveCount(0);
     });
 
-    test('lists each opponent in one counter list only, with weaker edges as a light list', async ({ page }) => {
+    test('lists each opponent in one counter list only, with folded rows as a light list', async ({ page }) => {
       test.skip(STATS, 'theory build only');
       for (const slug of ['abathur', 'johanna', 'xalatath']) {
         await page.goto(`hots/hero/${slug}/`);
@@ -247,8 +247,14 @@ test.describe(`HotS pages (${MODE} build)`, () => {
         const strong = await ids('strong');
         const weak = await ids('weak');
         expect(strong.filter((id) => weak.includes(id)), `${slug}: opponents in both lists`).toEqual([]);
-        // Below-the-bar rows carry no score ring or reason disclosure, only a compact line.
-        await expect(page.locator('#counters .ccols__below .mrow')).toHaveCount(0);
+        // Folded rows (the rest of a list, and below the bar) are light text rows: no portrait or score ring.
+        await expect(page.locator('#counters :is(.flist__fold, .ccols__below) :is(.mrow, .score-ring)')).toHaveCount(0);
+        for (const list of ['strong', 'weak', 'synergy']) expect(await page.locator(`#counters [data-list="${list}"] .mrow`).count()).toBeLessThanOrEqual(6);
+      }
+      const rest = page.locator('#counters details[data-rest]').first();
+      if ((await rest.count()) > 0) {
+        await rest.locator('summary').click();
+        await expect(rest.locator('.lrow').first()).toBeVisible();
       }
       const below = page.locator('#counters details[data-below]').first();
       if ((await below.count()) > 0) {
@@ -261,9 +267,20 @@ test.describe(`HotS pages (${MODE} build)`, () => {
     test('best maps list only maps above neutral; harder maps get their own list', async ({ page }) => {
       for (const slug of ['abathur', 'johanna', 'xalatath']) {
         await page.goto(`hots/hero/${slug}/#maps`);
-        const best = page.locator('#maps .mlist').filter({ has: page.getByRole('heading', { name: /^Best maps for / }) }).first();
-        const scores = await best.locator('.mrow').evaluateAll((rows) => rows.map((r) => Number(/score (\d+)/.exec(r.querySelector('[aria-label*="score"], [role="img"]')?.getAttribute('aria-label') ?? '')?.[1] ?? 'NaN')));
-        for (const score of scores.filter((n) => Number.isFinite(n))) expect(score, `${slug}: best map below 50`).toBeGreaterThan(50);
+        const scoresOf = async (heading: RegExp): Promise<number[]> => {
+          const list = page.locator('#maps .flist').filter({ has: page.getByRole('heading', { name: heading }) }).first();
+          if ((await list.count()) === 0) return [];
+          const full = await list
+            .locator('.mrow')
+            .evaluateAll((rows) => rows.map((r) => Number(/score (\d+)/.exec(r.querySelector('[role="img"][aria-label*="score"]')?.getAttribute('aria-label') ?? '')?.[1] ?? 'NaN')));
+          // Folded rows are light text rows; their score is plain text.
+          const light = await list.locator('.lrow__score').evaluateAll((els) => els.map((e) => Number(/\d+/.exec(e.textContent ?? '')?.[0] ?? 'NaN')));
+          return [...full, ...light];
+        };
+        const best = await scoresOf(/^Best maps for /);
+        expect(best.every((n) => Number.isFinite(n)), `${slug}: unreadable best-map score`).toBe(true);
+        for (const score of best) expect(score, `${slug}: best map at or below 50`).toBeGreaterThan(50);
+        for (const score of await scoresOf(/^Harder maps for /)) expect(score, `${slug}: harder map at or above 50`).toBeLessThan(50);
       }
     });
 
