@@ -235,13 +235,13 @@ test.describe('damage calc', () => {
     await page.getByLabel('Weather').selectOption('');
 
     const eq = page.locator('.pk-result[data-move="earthquake"]').first();
-    await expect(eq.locator('.pk-result__pct')).toHaveText('68.3–81.2%');
+    await expect(eq.locator('.pk-result__pct')).toHaveText('68.3–81.1%');
     await expect(eq).toContainText('guaranteed 2HKO');
     await expect(eq).toContainText('spread ×0.75');
 
     // Singles drops the spread modifier.
     await page.getByRole('button', { name: 'Singles' }).click();
-    await expect(eq.locator('.pk-result__pct')).not.toHaveText('68.3–81.2%');
+    await expect(eq.locator('.pk-result__pct')).not.toHaveText('68.3–81.1%');
     await expect(page.locator('.pk-calc__results .pk-status')).toContainText('moves before');
     expect(errors).toEqual([]);
   });

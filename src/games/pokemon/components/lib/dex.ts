@@ -102,10 +102,17 @@ export function battleTypes(dex: DexIndex, speciesId: string, itemId?: string): 
   return forme?.types ?? [];
 }
 
-/** "Mega Salamence", "Mega Garchomp Z", "Mega Charizard Y"; other formes keep their name. */
+/**
+ * "Mega Salamence", "Mega Garchomp Z", "Mega Charizard Y", "Mega Meowstic F"; other formes keep
+ * their name. The "Mega" part can sit anywhere in Showdown's forme ("Mega-X", but "F-Mega").
+ */
 export function formeLabel(s: Pick<Species, 'name' | 'forme' | 'megaOf' | 'baseSpecies'>): string {
   if (!s.megaOf || !s.forme) return s.name;
   const base = s.baseSpecies ?? s.name.split('-')[0] ?? s.name;
-  const suffix = s.forme.replace(/^Mega-?/, '').replace(/-/g, ' ').trim();
+  const suffix = s.forme
+    .split('-')
+    .map((part) => part.trim())
+    .filter((part) => part !== '' && part !== 'Mega')
+    .join(' ');
   return suffix ? `Mega ${base} ${suffix}` : `Mega ${base}`;
 }

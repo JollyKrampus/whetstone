@@ -41,6 +41,15 @@ describe('URLs and names', () => {
     expect(displayName(undefined, 'x')).toBe('x');
   });
 
+  it('labels Megas whose forme puts "Mega" last (Meowstic)', () => {
+    // Showdown: Meowstic-F-Mega has forme "F-Mega"; it must not read "Mega Meowstic F Mega".
+    const mega = (id: string, name: string, forme: string, megaOf: string) => ({ id, name, forme, megaOf, baseSpecies: 'Meowstic' });
+    expect(displayName(mega('meowsticfmega', 'Meowstic-F-Mega', 'F-Mega', 'meowsticf'))).toBe('Mega Meowstic F');
+    expect(displayName(mega('meowsticmmega', 'Meowstic-M-Mega', 'M-Mega', 'meowstic'))).toBe('Mega Meowstic M');
+    expect(displayName({ id: 'absolmegaz', name: 'Absol-Mega-Z', forme: 'Mega-Z', megaOf: 'absol', baseSpecies: 'Absol' })).toBe('Mega Absol Z');
+    expect(displayName({ id: 'meowsticf', name: 'Meowstic-F', forme: 'F', baseSpecies: 'Meowstic' })).toBe('Meowstic-F');
+  });
+
   it('builds outbound links without fetching anything', () => {
     const links = outboundLinks(byId.get('indeedeef')!, 'gen9championsvgc2026regmc');
     expect(links.map((l) => l.href)).toEqual([
@@ -147,23 +156,6 @@ describe('meta sets and speed position', () => {
     expect(pos.total).toBe(4);
     expect(pos.faster + pos.slower + pos.ties).toBe(4);
   });
-});
-
-describe('compactEdges', () => {
-  it('keeps edges with n ≥ 15, rounds Δ and sorts', () => {
-    const e = (a: string, b: string, delta: number | undefined, n: number | undefined): Edge => ({
-      a,
-      b,
-      score: 50,
-      source: 'replays',
-      reasons: [],
-      ...(delta !== undefined ? { delta } : {}),
-      ...(n !== undefined ? { n } : {}),
-    });
-    const out = compactEdges({ counters: [e('b', 'a', 1.234, 40), e('a', 'c', -2, 14), e('a', 'b', 3.456, 15), e('a', 'd', undefined, 99)], synergies: [e('a', 'b', 2, 200)] });
-    expect(out).toEqual({ counters: [['a', 'b', 3.46, 15], ['b', 'a', 1.23, 40]], synergies: [['a', 'b', 2, 200]] });
-    expect(compactEdges(null)).toBeNull();
-  });
 
   it('compares against the most used Pokémon, not the fastest', () => {
     // speed.json lists entries fastest first. Ten fast but rarely used Pokémon sit at its top;
@@ -192,5 +184,22 @@ describe('compactEdges', () => {
     const rivals = speedRivals(all, 5);
     expect(rivals.map((r) => r.id)).toEqual(['rillaboom', 'sneasler', 'incineroar', 'salamencemega', 'kingambit']);
     expect(speedRivals(all).find((r) => r.id === 'gholdengo')).toEqual({ id: 'gholdengo', speed: 223, item: 'choicescarf' });
+  });
+});
+
+describe('compactEdges', () => {
+  it('keeps edges with n ≥ 15, rounds Δ and sorts', () => {
+    const e = (a: string, b: string, delta: number | undefined, n: number | undefined): Edge => ({
+      a,
+      b,
+      score: 50,
+      source: 'replays',
+      reasons: [],
+      ...(delta !== undefined ? { delta } : {}),
+      ...(n !== undefined ? { n } : {}),
+    });
+    const out = compactEdges({ counters: [e('b', 'a', 1.234, 40), e('a', 'c', -2, 14), e('a', 'b', 3.456, 15), e('a', 'd', undefined, 99)], synergies: [e('a', 'b', 2, 200)] });
+    expect(out).toEqual({ counters: [['a', 'b', 3.46, 15], ['b', 'a', 1.23, 40]], synergies: [['a', 'b', 2, 200]] });
+    expect(compactEdges(null)).toBeNull();
   });
 });

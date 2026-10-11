@@ -47,7 +47,13 @@ function moveName(id: string): string {
 }
 
 const clamp = (x: number, lo: number, hi: number): number => Math.min(hi, Math.max(lo, x));
-const round1 = (x: number): number => Math.round(x * 10) / 10;
+/**
+ * Damage as a percentage of max HP, the way @smogon/calc's desc() prints it (floored to 0.1), so
+ * the headline range and the description line under it never disagree.
+ */
+export function percentOfHp(damage: number, hp: number): number {
+  return hp > 0 ? Math.floor((damage * 1000) / hp) / 10 : 0;
+}
 
 /** A calc Pokémon at level 50 with Stat Points, boosts, status and current HP. */
 export function buildPokemon(mon: CalcMon): Pokemon {
@@ -131,8 +137,8 @@ export function calcMove(attacker: Pokemon, defender: Pokemon, moveId: string, f
     moveName: name,
     min,
     max,
-    minPct: hp ? round1((min / hp) * 100) : 0,
-    maxPct: hp ? round1((max / hp) * 100) : 0,
+    minPct: percentOfHp(min, hp),
+    maxPct: percentOfHp(max, hp),
     defenderHp: hp,
     koN,
     koChance,
