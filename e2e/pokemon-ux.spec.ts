@@ -1,11 +1,14 @@
 /**
- * Pokémon tools under poor conditions and on phones, against the production build (fixtures
+ * Pokémon tools under poor conditions and on phones, against the production build (fixture or live
  * data): text pasted before the builder hydrates is kept, a failed dex load explains itself and
  * retries, the calc and team preview do not shift the page while the dex loads, bars keep their
  * numbers readable at 360 px, regulation dates use one format, and speeds count Choice Scarf.
  * Run with SMOKE_PORT set to the port astro preview serves on.
  */
 import { expect, test, type Page } from '@playwright/test';
+
+/** Fixture builds pin exact facts (WHETSTONE_FIXTURES=1); a live-data build checks the same rules on whatever the data says. */
+const FIXTURES = process.env.WHETSTONE_FIXTURES === '1';
 
 /** Console errors and uncaught exceptions (failed requests a test provokes are left out). */
 function watch(page: Page): string[] {
@@ -147,10 +150,21 @@ test.describe('speed in battle', () => {
     // #1 in usage at Speed 105: it outspeeds the slower ones among the most used, not 0 of the fastest.
     await expect(page.locator('[data-forme="rillaboom"] [data-speed-position]')).toHaveText(/^\s*At Speed 105, it outspeeds [1-9]\d* of the other \d+ Pokémon in the top \d+/);
     await page.goto('pokemon/mon/gholdengo/');
-    await expect(page.locator('[data-forme="gholdengo"] [data-speed-position]')).toHaveText(/^\s*With Scarf \(Speed 223\), it outspeeds/);
+    const line = page.locator('[data-forme="gholdengo"] [data-speed-position]');
+    // In the fixtures its common set holds Choice Scarf; live data may differ, but the line always
+    // states the Speed in battle it compares at.
+    await expect(line).toHaveText(FIXTURES ? /^\s*With Scarf \(Speed 223\), it outspeeds/ : /^\s*(?:With Scarf \(Speed \d+\)|At Speed \d+), it outspeeds/);
   });
 
   test('team preview counts Choice Scarf on their common set', async ({ page }) => {
+    // The mon page's common-set Speed (Scarf included when it is the most used item) is the one
+    // team preview uses for their side.
+    await page.goto('pokemon/mon/gholdengo/');
+    const line = (await page.locator('[data-forme="gholdengo"] [data-speed-position]').textContent()) ?? '';
+    const scarf = /With Scarf \(Speed (\d+)\)/.exec(line);
+    const plain = /At Speed (\d+)/.exec(line);
+    const expected = scarf ? `Speed ${scarf[1]} (Scarf)` : `Speed ${plain?.[1] ?? '?'}`;
+    if (FIXTURES) expect(expected).toBe('Speed 223 (Scarf)');
     await page.goto('pokemon/builder/');
     await expect(page.locator('.pk-builder[data-ready]')).toBeVisible();
     await page.getByRole('button', { name: 'Start from the top six' }).click();
@@ -161,6 +175,6 @@ test.describe('speed in battle', () => {
       await page.locator('#pv-add-theirs').press('Enter');
     }
     const theirs = page.locator('#pv-their-h ~ .pk-bars');
-    await expect(theirs.getByText(/Gholdengo/)).toContainText('Speed 223 (Scarf)');
+    await expect(theirs.getByText(/Gholdengo/)).toContainText(expected);
   });
 });

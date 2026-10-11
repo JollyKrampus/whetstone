@@ -58,8 +58,12 @@ async function hydrated(page: Page, selector: string): Promise<void> {
 
 /** The credit next to statistics: whichever source the statistics file names (StatsCredit). */
 const statsCredit = (page: Page) => page.locator('[data-stats-credit]');
-/** Its inline credit link (SourceAttribution), whatever the source is. */
-const statsCreditLink = (page: Page) => page.locator('[data-stats-credit] [data-attribution="inline"] a');
+/**
+ * What credits the numbers on screen: the inline link of the source the statistics file names
+ * (SourceAttribution), or, for the synthetic fixture sample (source 'synthetic', no SourceRef),
+ * the label saying the numbers are a sample and not real matches.
+ */
+const statsCreditMark = (page: Page) => page.locator('[data-stats-credit] [data-attribution="inline"] a, [data-stats-credit] .scredit__sample');
 
 /** Routes every page template of this suite, with the fixture entities they are tested on. */
 const ROUTES = [
@@ -170,7 +174,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
     test('shows tier badges with the statistics credit only when statistics exist', async ({ page }) => {
       await page.goto('hots/');
       if (STATS) {
-        await expect(statsCreditLink(page).first()).toBeVisible();
+        await expect(statsCreditMark(page).first()).toBeVisible();
         await expect(page.locator('#hero-grid .badge--stats', { hasText: /^T[1-5]:/ }).first()).toBeVisible();
       } else {
         await expect(statsCredit(page)).toHaveCount(0);
@@ -287,7 +291,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
     test('statistics mode credits its source and switches mode and patch window', async ({ page }) => {
       test.skip(!STATS, 'statistics build only');
       await page.goto('hots/hero/abathur/');
-      await expect(statsCreditLink(page).first()).toBeVisible();
+      await expect(statsCreditMark(page).first()).toBeVisible();
 
       const label = page.locator('#counters .wlabel:visible');
       await expect(label).toHaveText(/Storm League · 2\.57/);
@@ -299,7 +303,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await page.locator('label.period__option', { hasText: 'Current patch' }).click();
       await page.locator('label.mswitch__option', { hasText: 'ARAM' }).click();
       await expect(label).toHaveText(/ARAM · 2\.57/);
-      await expect(statsCreditLink(page).first()).toBeVisible();
+      await expect(statsCreditMark(page).first()).toBeVisible();
       await page.locator('label.mswitch__option', { hasText: 'Storm League' }).click();
 
       await page.locator('#counters details.compare > summary').click();
@@ -311,7 +315,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(builds.locator('.tbuild__code').first()).toHaveText(/^\[T[0-7]{7},Abathur\]$/);
       await expect(builds.getByRole('button', { name: 'Copy build' }).first()).toBeVisible();
       await expect(builds.locator('.tbuild__meta').first()).toContainText('n =');
-      await expect(statsCreditLink(page).first()).toBeVisible();
+      await expect(statsCreditMark(page).first()).toBeVisible();
     });
 
     test('statistics mode loads videos only on demand from youtube-nocookie', async ({ page, context }) => {
@@ -388,7 +392,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
       await expect(page).toHaveURL(/\/hots\/map\/cursed-hollow\/$/);
       await expect(page.getByText('Ranked pool').first()).toBeVisible();
       await expect(page.locator('.mrow:visible').first()).toBeVisible();
-      if (STATS) await expect(statsCreditLink(page).first()).toBeVisible();
+      if (STATS) await expect(statsCreditMark(page).first()).toBeVisible();
       else await expect(page.locator('[data-theory-notice]').first()).toBeVisible();
       await expect(page.locator('.mapsx__source, [data-ranked-source]')).toHaveCount(0);
 
@@ -414,7 +418,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
     test('statistics build bands heroes per mode and window with the credit', async ({ page }) => {
       test.skip(!STATS, 'statistics build only');
       await page.goto('hots/tierlist/');
-      await expect(statsCreditLink(page).first()).toBeVisible();
+      await expect(statsCreditMark(page).first()).toBeVisible();
       await expect(page.locator('.wlabel:visible')).toHaveText(/Storm League · 2\.57/);
       await expect(page.getByText(/Early data/).first()).toBeVisible();
       const bans = page.locator('[data-ban-priority]:visible');
@@ -560,7 +564,7 @@ test.describe(`HotS pages (${MODE} build)`, () => {
           expect(credits, route).toBe(0);
           expect(statsShown, route).toBe(0);
         } else if (statsShown > 0) {
-          await expect(statsCreditLink(page).first(), route).toBeVisible();
+          await expect(statsCreditMark(page).first(), route).toBeVisible();
         }
       }
     });
