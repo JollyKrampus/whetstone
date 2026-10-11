@@ -12,7 +12,7 @@ import { gameById, navHref, withBase } from '../../games/registry.ts';
 import { getCurrentRegulation, getMeta } from '../../games/pokemon/load.ts';
 import { buildNow } from '../../games/pokemon/components/server.ts';
 import { PREVIEW_PRESETS, PREVIEW_PRESET_IDS, PREVIEW_SIGNAL_LABEL } from '../../games/pokemon/components/lib/preview.ts';
-import { SP_MAX_STAT, SP_MAX_TOTAL, evToSp } from '../../games/pokemon/components/lib/stats.ts';
+import { EV_TOTAL_EVIDENCE, SP_MAX_STAT, SP_MAX_TOTAL, evToSp } from '../../games/pokemon/components/lib/stats.ts';
 import GameLayout from '../../layouts/GameLayout.astro';
 
 const module = gameById('pokemon');
@@ -90,9 +90,11 @@ const toc = [
       </ul>
       <p>
         <strong>Pastes.</strong> Showdown's Champions formats keep the <code>EVs:</code> line and fill it with Stat Points, so Whetstone reads and writes
-        that line as Stat Points. Older pastes from Scarlet and Violet carry real EVs. A paste is treated as EVs when any stat in it is above {SP_MAX_STAT}
-        or any set totals more than {SP_MAX_TOTAL}, which Stat Points never can. Then every set in it is converted the way Pokémon HOME converts a visiting
-        Pokémon: 4 EVs buy the first point in a stat and every further 8 EVs buy one more, up to {SP_MAX_STAT}.
+        that line as Stat Points. Older pastes from Scarlet and Violet carry real EVs. Each set is judged on its own: its line is treated as EVs when a
+        stat in it is above {SP_MAX_STAT} or the set totals more than {EV_TOTAL_EVIDENCE}, which no Stat Point spread comes near. That set is then
+        converted the way Pokémon HOME converts a visiting Pokémon: 4 EVs buy the first point in a stat and every further 8 EVs buy one more, up to
+        {SP_MAX_STAT}. A set between {SP_MAX_TOTAL + 1} and {EV_TOTAL_EVIDENCE} points with nothing above {SP_MAX_STAT} stays Stat Points and is flagged
+        as over the {SP_MAX_TOTAL}-point budget, so one typo never rewrites the rest of the team.
       </p>
       <div class="pk-scroll">
         <table class="pk-table">

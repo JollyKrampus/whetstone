@@ -98,10 +98,47 @@ describe('parsePaste: EVs', () => {
     expect(notes.some((m) => /IVs/.test(m))).toBe(true);
   });
 
-  it('decides EV vs SP per paste, so small EV lines convert too', () => {
+  it('decides EV vs SP per set and says which sets it converted', () => {
     const mixed = parsePaste('Pelipper\nAbility: Drizzle\nEVs: 4 HP\n- Hurricane\n\nGarchomp\nEVs: 252 Atk\n- Earthquake', dex);
     expect(mixed.convertedFromEvs).toBe(true);
-    expect(mixed.team[0]!.sp[0]).toBe(1);
+    expect(mixed.team[0]!.sp).toEqual([4, 0, 0, 0, 0, 0]);
+    expect(mixed.team[1]!.sp).toEqual([0, 32, 0, 0, 0, 0]);
+    const notes = mixed.issues.filter((i) => i.level === 'info').map((i) => [i.slot, i.message]);
+    expect(notes).toContainEqual([0, 'Pelipper: EVs line read as Stat Points.']);
+    expect(notes).toContainEqual([1, 'Garchomp: EVs converted to Stat Points.']);
+  });
+});
+
+describe('parsePaste: one over-budget Stat Point set', () => {
+  // 4/32/32 = 68: an easy slip when converting 4/252/252 by eye. It must not turn the valid sets
+  // next to it into EV conversions (32 → 4).
+  const paste = `${SP_PASTE}
+Garchomp @ Life Orb
+Ability: Rough Skin
+EVs: 4 HP / 32 Atk / 32 Spe
+Jolly Nature
+- Earthquake
+`;
+  const result = parsePaste(paste, dex);
+
+  it('keeps every set as Stat Points', () => {
+    expect(result.convertedFromEvs).toBe(false);
+    expect(result.team.map((s) => s.sp)).toEqual([
+      [32, 32, 0, 0, 2, 0],
+      [32, 0, 2, 0, 32, 0],
+      [4, 32, 0, 0, 0, 32],
+    ]);
+    expect(result.issues.some((i) => /converted/.test(i.message))).toBe(false);
+  });
+
+  it('reports the over-budget set as an error', () => {
+    expect(result.issues.filter((i) => i.level === 'error')).toEqual([{ level: 'error', slot: 2, message: 'Garchomp: 68 Stat Points, more than the 66 allowed.' }]);
+  });
+
+  it('still converts a set with a stat above 32 or more than 130 points', () => {
+    const r = parsePaste('Garchomp\nEVs: 32 HP / 32 Atk / 32 Def / 32 SpD / 4 Spe\n- Earthquake', dex);
+    expect(r.convertedFromEvs).toBe(true);
+    expect(r.team[0]!.sp).toEqual([4, 4, 4, 0, 4, 1]);
   });
 });
 

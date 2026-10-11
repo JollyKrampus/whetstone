@@ -275,8 +275,9 @@ export default function TeamBuilder({ dexUrl, regulation, regulationLabel, metaS
           </div>
           <IssueList issues={pasteIssues} label="Import messages" />
           <p class="pk-subtle">
-            Stat Points go in the <code>EVs:</code> line, as Showdown's Champions formats write them. A paste with any stat above 32 or more than 66 points in
-            a set is read as EVs and converted: 4 EVs buy the first point in a stat, then every 8 more buy one, up to 32.
+            Stat Points go in the <code>EVs:</code> line, as Showdown's Champions formats write them. Each set is checked on its own: one with a stat above 32 or
+            more than 130 points is read as EVs and converted (4 EVs buy the first point in a stat, then every 8 more buy one, up to 32). A set with 67–130
+            points stays Stat Points and is flagged as over the 66-point budget.
           </p>
         </section>
 

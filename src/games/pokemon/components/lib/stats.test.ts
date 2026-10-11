@@ -1,6 +1,9 @@
+import { Field, Generations, Pokemon } from '@smogon/calc';
+import { getFinalSpeed } from '@smogon/calc/dist/mechanics/util';
 import { describe, expect, it } from 'vitest';
 import {
   checkSp,
+  effectiveSpeed,
   evToSp,
   finalStats,
   looksLikeEvs,
@@ -10,7 +13,9 @@ import {
   natureMultiplier,
   setSp,
   spToEv,
+  speedText,
   statValue,
+  type SpeedMods,
 } from './stats.ts';
 
 const GARCHOMP = { hp: 108, atk: 130, def: 95, spa: 80, spd: 85, spe: 102 };
@@ -87,10 +92,15 @@ describe('EV → Stat Point conversion (HOME rule)', () => {
     for (let sp = 0; sp <= 32; sp++) expect(evToSp(spToEv(sp))).toBe(sp);
   });
 
-  it('detects EV-style lines', () => {
+  it('detects EV-style lines only on strong evidence', () => {
     expect(looksLikeEvs([252, 4, 0, 0, 0, 252])).toBe(true);
-    expect(looksLikeEvs([20, 20, 20, 10, 0, 0])).toBe(true);
+    expect(looksLikeEvs([33, 0, 0, 0, 0, 0])).toBe(true);
+    expect(looksLikeEvs([32, 32, 32, 32, 4, 0])).toBe(true); // 132 > 130
     expect(looksLikeEvs([32, 32, 0, 0, 2, 0])).toBe(false);
+    // Over the 66-point budget but every value ≤ 32: a mistyped Stat Point spread, not EVs.
+    expect(looksLikeEvs([4, 32, 0, 0, 0, 32])).toBe(false);
+    expect(looksLikeEvs([20, 20, 20, 10, 0, 0])).toBe(false);
+    expect(looksLikeEvs([32, 32, 32, 32, 2, 0])).toBe(false); // 130
   });
 });
 
@@ -99,9 +109,50 @@ describe('speed modifiers', () => {
     expect(modifiedSpeed(169)).toBe(169);
     expect(modifiedSpeed(169, { scarf: true })).toBe(253);
     expect(modifiedSpeed(169, { tailwind: true })).toBe(338);
-    expect(modifiedSpeed(169, { scarf: true, tailwind: true })).toBe(506);
+    // Scarf and Tailwind chain to ×3 and round once: 169 → 507 (not 253 × 2 = 506).
+    expect(modifiedSpeed(169, { scarf: true, tailwind: true })).toBe(507);
     expect(modifiedSpeed(169, { paralysis: true })).toBe(84);
     expect(modifiedSpeed(100, { stage: -1 })).toBe(66);
     expect(modifiedSpeed(100, { stage: 1 })).toBe(150);
+    expect(modifiedSpeed(169, { ironBall: true })).toBe(84);
+  });
+
+  it('matches @smogon/calc getFinalSpeed for every modifier combination', () => {
+    const gen = Generations.get(0);
+    const combos: SpeedMods[] = [];
+    // Stages up to +1: the calc caps generation 0 (Champions) at 999 like the Game Boy games,
+    // which only +2 Scarf Tailwind on a fast Pokémon reaches.
+    for (const scarf of [false, true])
+      for (const tailwind of [false, true])
+        for (const paralysis of [false, true]) for (const stage of [-2, -1, 0, 1]) combos.push({ scarf, tailwind, paralysis, stage });
+    let checked = 0;
+    for (const [species, nature] of [
+      ['Garchomp', 'Jolly'],
+      ['Incineroar', 'Brave'],
+      ['Basculegion', 'Adamant'],
+      ['Whimsicott', 'Timid'],
+    ] as const) {
+      for (const sp of [0, 1, 7, 15, 31, 32]) {
+        for (const mods of combos) {
+          const options: ConstructorParameters<typeof Pokemon>[2] = { level: 50, nature, evs: { spe: sp }, boosts: { spe: mods.stage ?? 0 } };
+          if (mods.scarf) options.item = 'Choice Scarf';
+          if (mods.paralysis) options.status = 'par';
+          const mon = new Pokemon(gen, species, options);
+          const field = new Field({ attackerSide: { isTailwind: Boolean(mods.tailwind) } });
+          expect(modifiedSpeed(mon.rawStats.spe, mods), `${species} ${sp} SP ${JSON.stringify(mods)}`).toBe(getFinalSpeed(gen, mon, field, field.attackerSide));
+          checked++;
+        }
+      }
+    }
+    expect(checked).toBe(4 * 6 * combos.length);
+  });
+
+  it('applies the held item and labels the Speed it gives', () => {
+    expect(effectiveSpeed(130, 'choicescarf')).toBe(195);
+    expect(effectiveSpeed(130, 'lifeorb')).toBe(130);
+    expect(effectiveSpeed(169, 'choicescarf', { tailwind: true })).toBe(507);
+    expect(speedText(195, 'choicescarf')).toBe('195 (Scarf)');
+    expect(speedText(130, 'sitrusberry')).toBe('130');
+    expect(speedText(130)).toBe('130');
   });
 });
