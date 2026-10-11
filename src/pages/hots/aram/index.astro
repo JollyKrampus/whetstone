@@ -3,16 +3,15 @@
  * /hots/aram/: ARAM "pick 1 of 3" helper (SPEC §7). Same shard and scoring as the draft, with
  * gentler role rules; statistics only when an ARAM-mode block is present.
  */
-import { sourcesFor } from '../../../games/registry.ts';
 import AramHelper from '../../../games/hots/components/draft/AramHelper.tsx';
-import { aramMaps, draftRoster, hpCredit } from '../../../games/hots/components/draft/build.ts';
+import { aramMaps, draftRoster, sourceCredits } from '../../../games/hots/components/draft/build.ts';
 import GameLayout from '../../../layouts/GameLayout.astro';
 import { stagedUrl } from '../../../lib/stagemap.ts';
 
 const shardUrl = stagedUrl('hots', 'draft');
 const roster = draftRoster();
 const maps = aramMaps();
-const credit = hpCredit(sourcesFor('hots', ['heroesprofile'])[0]);
+const credits = sourceCredits();
 ---
 
 <GameLayout
@@ -35,7 +34,7 @@ const credit = hpCredit(sourcesFor('hots', ['heroesprofile'])[0]);
       <p class="apage__nojs">The ARAM helper needs JavaScript.</p>
     </noscript>
 
-    <AramHelper client:load shardUrl={shardUrl} roster={roster} maps={maps} credit={credit} />
+    <AramHelper client:load shardUrl={shardUrl} roster={roster} maps={maps} credits={credits} />
 
     <section class="apage__how" aria-labelledby="aram-how">
       <h2 id="aram-how">What it weighs</h2>

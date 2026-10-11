@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { HIDE_BELOW_N, ShardError, decodeShard, statHero, statMap, statPair, theoryCounter, theorySynergy } from './data.ts';
+import { HIDE_BELOW_N, ShardError, conditionText, decodeShard, statHero, statMap, statPair, theoryCounter, theorySynergy } from './data.ts';
 import { fixtureShard, idOf, statsData, theoryData } from './testkit.ts';
 
 const theory = theoryData();
@@ -12,7 +12,9 @@ describe('decodeShard', () => {
     expect(theory.byId.get('chogall')).toMatchObject({ slots: 2, members: ['CCho', 'Gall'] });
     expect(theory.maps.some((m) => m.kind === 'aram')).toBe(true);
     expect(theory.stats).toBeNull();
+    expect(theory.statsSource).toBeNull();
     expect(stats.stats?.mode).toBe('sl');
+    expect(stats.statsSource).toBe(stats.stats?.source);
   });
 
   it('rejects malformed shards with a readable message', () => {
@@ -35,6 +37,31 @@ describe('decodeShard', () => {
     const [cb] = [...row.keys()];
     expect(theoryCounter(theory, ca, cb!)).toBeDefined();
     expect(theoryCounter(theory, cb!, ca) === theoryCounter(theory, ca, cb!)).toBe(false);
+  });
+});
+
+describe('reason lines and conditions', () => {
+  it('splits each reason into its line, its shared template and its conditions', () => {
+    const link = theoryCounter(theory, index('Malfurion'), index('Li-Ming'))!;
+    const line = link.lines.find((l) => l.text.includes('interrupt channels'))!;
+    expect(line.template).toBe('{a} can interrupt channels with silence (Twilight Dream, Astral Communion), and {b} relies on channelled abilities.');
+    expect(line.conditions).toEqual(['Malfurion takes Twilight Dream.', 'Li-Ming must also take Disintegrate.']);
+    // The full lines stay exactly as theory.json words them.
+    expect(link.reasons).toContain(`${line.text} Only when Malfurion takes Twilight Dream. Li-Ming must also take Disintegrate.`);
+    expect(link.lines).toHaveLength(link.reasons.length);
+  });
+
+  it('splits inline engine conditions and keeps curated conditions as written', () => {
+    const shard = fixtureShard();
+    const at = shard.reasons.length;
+    shard.reasons.push('{a} pins {b} down. Only when {a} takes Big Net.', 'Only the line.', 'Both teams play a lane-soak game.');
+    shard.theory.counters.r[0] = [at, [at + 1, at + 2]];
+    const d = decodeShard(shard);
+    const link = theoryCounter(d, shard.theory.counters.a[0]!, shard.theory.counters.b[0]!)!;
+    const [a, b] = [d.heroes[shard.theory.counters.a[0]!]!.name, d.heroes[shard.theory.counters.b[0]!]!.name];
+    expect(link.lines[0]).toEqual({ text: `${a} pins ${b} down.`, template: '{a} pins {b} down.', conditions: [`${a} takes Big Net.`] });
+    expect(link.lines[1]).toEqual({ text: 'Only the line.', template: 'Only the line.', conditions: ['Both teams play a lane-soak game.'] });
+    expect(conditionText(' Only when X takes Y. ')).toBe('X takes Y.');
   });
 });
 

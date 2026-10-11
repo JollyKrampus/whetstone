@@ -1,8 +1,35 @@
 import { describe, expect, it } from 'vitest';
-import { WEIGHT_PRESETS, asOpponent, legalCandidates, replaySequential, sequentialContext } from '../../../core/draft.ts';
-import { banProviders } from './providers.ts';
+import {
+  WEIGHT_PRESETS,
+  asOpponent,
+  chooseSequential,
+  legalCandidates,
+  picksOf,
+  replaySequential,
+  sequentialContext,
+  startSequential,
+  type ScoredSignal,
+} from '../../../core/draft.ts';
+import { decodeShard, type DraftData } from './data.ts';
+import { banProviders, type DraftReason } from './providers.ts';
+import { teamRoles } from './roles.ts';
 import { entityRules, slConfig } from './rules.ts';
-import { banWeights, breakdown, disabledNote, presetInfo, reasonLabel, suggest, usesStats } from './suggest.ts';
+import {
+  banWeights,
+  breakdown,
+  compareSuggestions,
+  conditionsText,
+  disabledNote,
+  isFlatTop,
+  pickReasons,
+  presetInfo,
+  reasonLabel,
+  sourcesUsed,
+  suggest,
+  usesStats,
+  type Suggestion,
+} from './suggest.ts';
+import { syntheticShard } from './synthetic.ts';
 import { idOf, signalsOf, statsData, theoryData } from './testkit.ts';
 
 const theory = theoryData();
@@ -76,6 +103,37 @@ describe('suggest', () => {
     expect(usesStats(list)).toBe(true);
   });
 
+  it('never shows two lines of one edge, a repeated rule template or a breakdown-only line', () => {
+    for (const choices of [
+      [null, null, null, null, id('Muradin')],
+      [null, null, null, null, id('Valla'), id('Li-Ming'), id('Tracer')],
+      [null, null, null, null, id('Malfurion'), id('Valla'), id('Li-Ming'), id("Anub'arak"), id('Diablo'), null, null, id('Tracer')],
+    ]) {
+      const { ctx: c, candidates } = at(choices);
+      for (const s of suggest({ data: theory, ctx: c, candidates, preset: 'composite' })) {
+        const keys = s.reasons.map((r) => (r as DraftReason).dedupeKey ?? r.text);
+        expect(new Set(keys).size, s.hero.name).toBe(keys.length);
+        for (const r of s.reasons) expect((r as DraftReason).detail).toBeUndefined();
+        // Each shown theory line belongs to a different signal (edge).
+        const owners = s.reasons.map((r) => s.signals.findIndex((sig) => sig.reasons.includes(r)));
+        expect(new Set(owners).size).toBe(owners.length);
+      }
+    }
+  });
+
+  it('picks reasons by contribution, skipping details and repeats of a template', () => {
+    const sig = (contribution: number, reasons: DraftReason[]): ScoredSignal => ({ key: 'counters', value: contribution, weight: 1, contribution, reasons });
+    const out = pickReasons([
+      sig(0.9, [{ kind: 'theory', text: 'A beats X', dedupeKey: 'theory:{a} beats {b}' }, { kind: 'theory', text: 'paraphrase', detail: true }]),
+      sig(0.8, [{ kind: 'theory', text: 'A beats Y', dedupeKey: 'theory:{a} beats {b}' }]),
+      sig(0.5, [{ kind: 'stat', text: 'small', detail: true }]),
+      sig(0.4, [{ kind: 'theory', text: 'A pairs with Z' }]),
+      sig(-0.3, [{ kind: 'role', text: 'Second tank' }]),
+    ]);
+    expect(out.reasons.map((r) => r.text)).toEqual(['A beats X', 'A pairs with Z']);
+    expect(out.warning?.text).toBe('Second tank');
+  });
+
   it('breaks a score down per signal with the mode weights', () => {
     const { ctx: c, candidates } = at([null, null, null, null, id('Muradin')]);
     const [top] = suggest({ data: stats, ctx: c, candidates, preset: 'composite' });
@@ -83,6 +141,90 @@ describe('suggest', () => {
     const sum = rows.reduce((s, r) => s + r.contribution, 0);
     expect(sum).toBeCloseTo(top!.raw, 9);
     for (const r of top!.reasons) expect(['Stat', 'Theory', 'Role', 'Pool', 'Map']).toContain(reasonLabel(r, top!.keyOf.get(r)));
+  });
+});
+
+describe('order and flat lists', () => {
+  const fake = (name: string, raw: number, tiebreak = 0): Suggestion =>
+    ({
+      id: name.slice(0, 4),
+      raw,
+      score: Math.round(50 + 50 * Math.tanh(raw)),
+      signals: [{ key: 'counters', value: raw, weight: 1, contribution: raw, reasons: [], tiebreak }],
+      byKey: {},
+      reasons: [],
+      hero: { name },
+      keyOf: new Map(),
+    }) as unknown as Suggestion;
+
+  it('orders exact ties by the tie-break, then by display name, never by id', () => {
+    const list = [fake('Zeratul', 0.3), fake('Abathur', 0.3), fake('Malthael', 0.3, 5), fake('Cassia', 0.4)];
+    // Ids would put Abathur ("Abat") before Cassia ("Cass") by raw tie only; names and the tie-break decide here.
+    expect([...list].sort(compareSuggestions).map((s) => s.hero.name)).toEqual(['Cassia', 'Malthael', 'Abathur', 'Zeratul']);
+  });
+
+  it('knows a flat top when the shown scores sit within two points', () => {
+    expect(isFlatTop([fake('A', 0.3), fake('B', 0.29), fake('C', 0.28)], 6)).toBe(true);
+    expect(isFlatTop([fake('A', 0.6), fake('B', 0.3), fake('C', 0.28)], 6)).toBe(false);
+    expect(isFlatTop([fake('A', 0.3), fake('B', 0.3)], 6)).toBe(false);
+  });
+
+  it('opens with a ranked ban list, not ties in id order', () => {
+    const list = suggest({ data: theory, ctx: sequentialContext(startSequential(slConfig('a', entityRules(theory.heroes))))!, candidates: ALL, preset: 'composite' });
+    const sorted = [...list].sort(compareSuggestions);
+    expect(list.map((s) => s.id)).toEqual(sorted.map((s) => s.id));
+    // Johanna counters more of the cast than Valla, so she is the bigger blind-ban threat.
+    expect(list.findIndex((s) => s.hero.name === 'Johanna')).toBeLessThan(list.findIndex((s) => s.hero.name === 'Valla'));
+  });
+
+  it('renders conditions as one sentence run and names the sources in use', () => {
+    expect(conditionsText({ kind: 'theory', text: 'x', conditions: ['Anduin takes Lightbomb.', 'Prolific Dispersal at level 4'] })).toBe(
+      'Anduin takes Lightbomb. Prolific Dispersal at level 4.',
+    );
+    expect(conditionsText({ kind: 'theory', text: 'x' })).toBeNull();
+    expect(conditionsText({ kind: 'theory', text: 'x', conditions: ['Anduin takes Lightbomb', ' Anduin takes Lightbomb.', ''] })).toBe('Anduin takes Lightbomb.');
+    const pro = { source: 'liquipedia', label: 'w', maps: 50, bans: { [id('Valla')]: 20 } };
+    const list = suggest({ data: theory, ctx: sequentialContext(startSequential(slConfig('a', entityRules(theory.heroes))))!, candidates: ALL, preset: 'composite', pro });
+    expect(sourcesUsed(list)).toContain('liquipedia');
+    expect(sourcesUsed(suggest({ data: theory, ctx: sequentialContext(startSequential(slConfig('a', entityRules(theory.heroes))))!, candidates: ALL, preset: 'composite' }))).toEqual([]);
+  });
+});
+
+describe('regression: strong edges never bury the role guardrails', () => {
+  /** Seeded Storm League drafts: team A always takes the #1 composite suggestion, team B picks at random. */
+  function run(data: DraftData, seed: number) {
+    let x = seed;
+    const rnd = () => ((x = (x * 1103515245 + 12345) % 2147483648) / 2147483648);
+    const ids = data.heroes.map((h) => h.id);
+    let state = startSequential(slConfig(rnd() < 0.5 ? 'a' : 'b', entityRules(data.heroes)));
+    const map = rnd() < 0.5 ? 'map-one' : undefined;
+    let lastSaturated = false;
+    while (!state.complete) {
+      const c = sequentialContext(state, map ? { map } : {})!;
+      const legal = legalCandidates(state, ids);
+      let choice: string;
+      if (c.team === 'A' && c.action === 'pick') {
+        const list = suggest({ data, ctx: c, candidates: legal, preset: 'composite' });
+        if (c.picksLeft === 1) lastSaturated = list.slice(0, 6).every((s) => s.score >= 95);
+        choice = list[0]!.id;
+      } else choice = legal[Math.floor(rnd() * legal.length)]!;
+      const r = chooseSequential(state, choice);
+      if (!r.ok) throw new Error(r.message);
+      state = r.state;
+    }
+    return { roles: teamRoles(picksOf(state, 'A').map((h) => data.byId.get(h)!)), lastSaturated };
+  }
+
+  it('ends with two Healers in at most 5% of drafts, always with a Healer, and a readable last-pick list', () => {
+    // Healers get +10 on every synergy: the case where summed edges used to stack a second Healer.
+    const shards = [1, 2, 3, 4].map((seed) => decodeShard(syntheticShard({ seed, healerSynergyBonus: 10 })));
+    const N = 40;
+    const results = Array.from({ length: N }, (_, i) => run(shards[i % shards.length]!, 1000 + i));
+    const double = results.filter((r) => r.roles.healers >= 2).length;
+    expect(double / N).toBeLessThanOrEqual(0.05);
+    expect(results.every((r) => r.roles.healers + r.roles.substitutes.length >= 1)).toBe(true);
+    expect(results.every((r) => r.roles.frontline >= 1)).toBe(true);
+    expect(results.filter((r) => r.lastSaturated).length / N).toBeLessThanOrEqual(0.1);
   });
 });
 

@@ -4,8 +4,8 @@ import ScoreRing from '../../../../components/ScoreRing.tsx';
 import type { PresetId, Weights } from '../../../../core/draft.ts';
 import { fixed, int, pp, signed } from '../../../../core/format.ts';
 import type { Reason } from '../../../../core/game.ts';
-import { breakdown, disabledNote, reasonLabel, type PresetInfo, type Suggestion } from '../../draft/suggest.ts';
-import { creditParts, portraitUrl, roleText, type CreditProp } from './props.ts';
+import { breakdown, conditionsText, disabledNote, isFlatTop, reasonLabel, type PresetInfo, type Suggestion } from '../../draft/suggest.ts';
+import { creditParts, portraitUrl, roleText, sourceName, type CreditProp } from './props.ts';
 
 interface Props {
   idPrefix: string;
@@ -20,52 +20,75 @@ interface Props {
   /** Accessible action phrase, e.g. "Pick {name} for you". */
   actionLabel?: (name: string) => string;
   onChoose?: (id: string) => void;
-  /** Heroes Profile credit, rendered when any shown number comes from it. */
-  credit: CreditProp | null;
-  /** "Storm League · 2.57 …" when statistics are in use. */
+  /** Inline credits for the sources behind these suggestions (statistics, pro ban rates). */
+  credits: readonly CreditProp[];
+  /** "Storm League · 2.57 …" when match statistics are in use. */
   statsLabel: string | null;
   /** Initially visible rows (default 6). */
   limit?: number;
   /** Label of the #1 entry (ARAM: "Best pick"). */
   topLabel?: string;
   empty?: ComponentChildren;
-  /** Text sources by SourceRef id for reason meta. */
+  /** Source names by SourceRef id, for the reason meta ("n = 120 · Liquipedia"). */
   sourceNames?: Readonly<Record<string, string>>;
 }
 
-const SOURCE_NAMES: Readonly<Record<string, string>> = { heroesprofile: 'Heroes Profile' };
+/** "Only when …": the talents or situations a reason depends on, as its own visible line. */
+export function Conditions({ reason }: { reason: Reason }) {
+  const text = conditionsText(reason);
+  if (!text) return null;
+  return (
+    <span class="sg-reason__cond">
+      <span class="sg-reason__cond-label">Only when</span> {text}
+    </span>
+  );
+}
 
-function ReasonLine({ reason, label, tone }: { reason: Reason; label: string; tone?: 'warn' }) {
+function ReasonLine({ reason, label, tone, names }: { reason: Reason; label: string; tone?: 'warn'; names?: Readonly<Record<string, string>> | undefined }) {
   const meta: string[] = [];
   if (reason.delta !== undefined) meta.push(pp(reason.delta));
   if (reason.n !== undefined) meta.push(`n = ${int(reason.n)}`);
-  if (reason.source) meta.push(SOURCE_NAMES[reason.source] ?? reason.source);
+  const source = sourceName(names, reason.source);
+  if (source) meta.push(source);
   return (
     <li class={`sg-reason sg-reason--${reason.kind}${tone ? ' sg-reason--warn' : ''}`}>
       <span class="sg-reason__kind">{tone ? 'Watch out' : label}</span>
       <span class="sg-reason__body">
         <span class="sg-reason__text">{reason.text}</span>
+        <Conditions reason={reason} />
         {meta.length > 0 ? <span class="sg-reason__meta">{tone ? `${label} · ` : ''}{meta.join(' · ')}</span> : tone ? <span class="sg-reason__meta">{label}</span> : null}
       </span>
     </li>
   );
 }
 
-/** Heroes Profile's required credit: same screen as its numbers, body-size text, a working link. */
-function InlineCredit({ credit }: { credit: CreditProp }) {
+/** A source's required credit: same screen as its numbers, body-size text, a working link (and the licence for share-alike data). */
+export function InlineCredit({ credit }: { credit: CreditProp }) {
   const { before, after } = creditParts(credit);
+  const license = credit.licenseUrl ? (
+    <>
+      {' '}
+      (
+      <a href={credit.licenseUrl} rel="license noopener">
+        licence
+      </a>
+      )
+    </>
+  ) : null;
   return (
-    <p class="sg-credit" data-attribution="inline" data-source="heroesprofile">
+    <p class="sg-credit" data-attribution="inline" data-source={credit.id}>
       {before}
       <a href={credit.url} rel="noopener">
         {credit.name}
       </a>
-      {after}
+      {license ? after.replace(/\.$/, '') : after}
+      {license}
+      {license ? '.' : null}
     </p>
   );
 }
 
-function Breakdown({ s, weights, id }: { s: Suggestion; weights: Weights; id: string }) {
+function Breakdown({ s, weights, id, names }: { s: Suggestion; weights: Weights; id: string; names?: Readonly<Record<string, string>> | undefined }) {
   const rows = breakdown(s, weights);
   return (
     <div class="sg-break" id={id}>
@@ -106,15 +129,26 @@ function Breakdown({ s, weights, id }: { s: Suggestion; weights: Weights; id: st
       {rows.some((r) => r.reasons.length > 0) ? (
         <ul class="sg-break__reasons">
           {rows.flatMap((r) =>
-            r.reasons.map(({ reason, value }, i) => (
-              <li key={`${r.key}-${i}`}>
-                <span class="sg-break__val">{signed(value, 2)}</span>
-                <span>
-                  <span class="sg-break__key">{reasonLabel(reason, r.key)}</span> {reason.text}
-                  {reason.n !== undefined ? <span class="sg-break__n"> (n = {int(reason.n)}{reason.source ? `, ${SOURCE_NAMES[reason.source] ?? reason.source}` : ''})</span> : null}
-                </span>
-              </li>
-            )),
+            r.reasons.map(({ reason, value }, i) => {
+              const cond = conditionsText(reason);
+              const source = sourceName(names, reason.source);
+              return (
+                <li key={`${r.key}-${i}`}>
+                  <span class="sg-break__val">{signed(value, 2)}</span>
+                  <span>
+                    <span class="sg-break__key">{reasonLabel(reason, r.key)}</span> {reason.text}
+                    {cond ? <span class="sg-break__cond"> Only when {cond}</span> : null}
+                    {reason.n !== undefined ? (
+                      <span class="sg-break__n">
+                        {' '}
+                        (n = {int(reason.n)}
+                        {source ? `, ${source}` : ''})
+                      </span>
+                    ) : null}
+                  </span>
+                </li>
+              );
+            }),
           )}
         </ul>
       ) : (
@@ -126,15 +160,17 @@ function Breakdown({ s, weights, id }: { s: Suggestion; weights: Weights; id: st
 
 /**
  * Ranked suggestions with up to three reasons and one warning each, a sort-mode switch and a
- * tap-to-open breakdown (no hover-only information). Credits Heroes Profile inline whenever a
- * statistic is part of what is shown; otherwise labels the list as theory.
+ * tap-to-open breakdown (no hover-only information). Credits each source inline whenever its
+ * numbers are part of what is shown; otherwise labels the list as theory. Says so when the top of
+ * the list is too close to call.
  */
 export default function SuggestionList(props: Props) {
-  const { idPrefix, suggestions, weights, presets, preset, onPreset, action, actionLabel, onChoose, credit, statsLabel, limit = 6, topLabel, empty } = props;
+  const { idPrefix, suggestions, weights, presets, preset, onPreset, action, actionLabel, onChoose, credits, statsLabel, limit = 6, topLabel, empty, sourceNames } = props;
   const [open, setOpen] = useState<string | null>(null);
   const [all, setAll] = useState(false);
   const shown = all ? suggestions : suggestions.slice(0, limit);
   const disabledWhy = presets ? disabledNote(presets) : '';
+  const flat = isFlatTop(suggestions, limit);
 
   return (
     <div class="sg">
@@ -168,7 +204,7 @@ export default function SuggestionList(props: Props) {
       <p class="sg-basis">
         {statsLabel ? (
           <>
-            <span class="badge badge--stats">Stats</span> <span>{statsLabel}, with theory where data is thin.</span>
+            <span class="badge badge--stats">Stats</span> <span>Match statistics ({statsLabel}), with theory where data is thin.</span>
           </>
         ) : (
           <>
@@ -176,7 +212,15 @@ export default function SuggestionList(props: Props) {
           </>
         )}
       </p>
-      {statsLabel && credit ? <InlineCredit credit={credit} /> : null}
+      {credits.map((c) => (
+        <InlineCredit key={c.id} credit={c} />
+      ))}
+      {flat && shown.length > 0 ? (
+        <p class="sg-flat" role="note">
+          No clear favourite: the top {Math.min(limit, suggestions.length)} are within a couple of points of each other, so treat them as a shortlist
+          and go with the one you play best.
+        </p>
+      ) : null}
 
       {shown.length === 0 ? (
         <div class="sg-empty">{empty ?? 'No suggestions for this step.'}</div>
@@ -205,9 +249,9 @@ export default function SuggestionList(props: Props) {
                 {s.reasons.length > 0 || s.warning ? (
                   <ul class="sg-reasons">
                     {s.reasons.map((r, j) => (
-                      <ReasonLine key={j} reason={r} label={reasonLabel(r, s.keyOf.get(r))} />
+                      <ReasonLine key={j} reason={r} label={reasonLabel(r, s.keyOf.get(r))} names={sourceNames} />
                     ))}
-                    {s.warning ? <ReasonLine reason={s.warning} label={reasonLabel(s.warning, s.keyOf.get(s.warning))} tone="warn" /> : null}
+                    {s.warning ? <ReasonLine reason={s.warning} label={reasonLabel(s.warning, s.keyOf.get(s.warning))} tone="warn" names={sourceNames} /> : null}
                   </ul>
                 ) : (
                   <p class="sg-item__none">No strong signal either way.</p>
@@ -222,7 +266,7 @@ export default function SuggestionList(props: Props) {
                     {isOpen ? 'Hide breakdown' : 'Why this score?'}
                   </button>
                 </div>
-                {isOpen ? <Breakdown s={s} weights={weights} id={panelId} /> : null}
+                {isOpen ? <Breakdown s={s} weights={weights} id={panelId} names={sourceNames} /> : null}
               </li>
             );
           })}
@@ -234,7 +278,6 @@ export default function SuggestionList(props: Props) {
           {all ? 'Show fewer' : `Show all ${suggestions.length}`}
         </button>
       ) : null}
-
     </div>
   );
 }

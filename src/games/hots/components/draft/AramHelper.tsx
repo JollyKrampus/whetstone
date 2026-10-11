@@ -6,7 +6,7 @@ import { EMPTY_POOL, mentions, readPool, subscribePool, type HeroPool } from '..
 import { ARAM_ALLIES, ARAM_ENEMIES, ARAM_OPTIONS, createAramCodec } from '../../draft/state.ts';
 import HeroPicker, { type TileStatus } from './HeroPicker.tsx';
 import SuggestionList from './SuggestionList.tsx';
-import { joinNames, portraitUrl, roleText, useShard, type CreditProp, type MapOption, type RosterHero } from './props.ts';
+import { creditsFor, joinNames, portraitUrl, roleText, sourceNamesOf, useShard, type CreditMap, type MapOption, type RosterHero } from './props.ts';
 import './draft.css';
 
 interface Props {
@@ -15,7 +15,8 @@ interface Props {
   roster: RosterHero[];
   /** ARAM maps only. */
   maps: MapOption[];
-  credit: CreditProp;
+  /** Credits of the game's sources by id; each is shown inline whenever its numbers are in use. */
+  credits: CreditMap;
 }
 
 type ListId = 'options' | 'allies' | 'enemies';
@@ -34,7 +35,7 @@ const EMPTY: Lists = { options: [], allies: [], enemies: [] };
  * you can see) and get them ranked for your team with reasons: role needs, theory or ARAM
  * statistics against the enemies and with your teammates.
  */
-export default function AramHelper({ shardUrl, roster, maps, credit }: Props) {
+export default function AramHelper({ shardUrl, roster, maps, credits }: Props) {
   const { shard, retry } = useShard(shardUrl);
   const data = shard.status === 'ready' ? shard.data : null;
   const codec = useMemo(() => createAramCodec(roster.map((h) => h.id)), [roster]);
@@ -86,6 +87,7 @@ export default function AramHelper({ shardUrl, roster, maps, credit }: Props) {
   }, [ready, codec, lists, map]);
 
   const favorites = useMemo(() => new Set(pool.favorites), [pool]);
+  const sourceNames = useMemo(() => sourceNamesOf(credits), [credits]);
   const ranking = useMemo(
     () => (data ? rankAram(data, { ...lists, map }, { favorites }) : null),
     [data, lists, map, favorites],
@@ -207,8 +209,9 @@ export default function AramHelper({ shardUrl, roster, maps, credit }: Props) {
                 idPrefix="ar-sg"
                 suggestions={ranking.ranked}
                 weights={ARAM_WEIGHTS}
-                credit={ranking.usesStats ? credit : null}
-                statsLabel={ranking.usesStats && data?.stats ? data.stats.label : null}
+                credits={creditsFor(ranking.ranked, credits)}
+                statsLabel={ranking.usesStats && data?.stats ? `${data.stats.label}${data.stats.synthetic ? ', synthetic test numbers' : ''}` : null}
+                sourceNames={sourceNames}
                 limit={ARAM_OPTIONS}
                 {...(ranking.ranked.length > 1 ? { topLabel: 'Best pick' } : {})}
                 empty="No options yet."

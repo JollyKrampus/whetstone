@@ -1,14 +1,15 @@
 ---
 /**
- * /hots/draft/: Storm League draft helper (SPEC §7). The island gets the roster, map list and
- * free rotation as props (class A, build time) and fetches the staged draft shard for the
- * scoring tables; Heroes Profile numbers arrive only inside that shard's class-B overlay, and
- * the island credits them inline when they are used.
+ * /hots/draft/: Storm League draft helper (SPEC §7). The island gets the roster, map list, free
+ * rotation and pro ban rates as props (class A and A-SA, build time) and fetches the staged
+ * draft shard for the scoring tables. Match statistics, when a licensed source provides them,
+ * arrive only inside that shard's class-B overlay; the island credits whichever source backs
+ * the numbers it shows, on the same screen.
  */
 import { formatDayUTC } from '../../../core/format.ts';
-import { navHref, sourcesFor } from '../../../games/registry.ts';
+import { navHref } from '../../../games/registry.ts';
 import DraftTool from '../../../games/hots/components/draft/DraftTool.tsx';
-import { draftMaps, draftRoster, freeRotation, hpCredit } from '../../../games/hots/components/draft/build.ts';
+import { draftMaps, draftRoster, freeRotation, proPrior, sourceCredits } from '../../../games/hots/components/draft/build.ts';
 import GameLayout from '../../../layouts/GameLayout.astro';
 import { stagedUrl } from '../../../lib/stagemap.ts';
 
@@ -16,7 +17,8 @@ const shardUrl = stagedUrl('hots', 'draft');
 const roster = draftRoster();
 const maps = draftMaps();
 const rotation = freeRotation(roster);
-const credit = hpCredit(sourcesFor('hots', ['heroesprofile'])[0]);
+const credits = sourceCredits();
+const pro = proPrior(roster);
 const rotationLabel = rotation.window ? `Free this week: ${formatDayUTC(rotation.window.start)} to ${formatDayUTC(rotation.window.end)}` : null;
 ---
 
@@ -47,7 +49,8 @@ const rotationLabel = rotation.window ? `Free this week: ${formatDayUTC(rotation
       maps={maps}
       free={rotation.ids}
       freeLabel={rotationLabel}
-      credit={credit}
+      credits={credits}
+      pro={pro}
       poolHref={navHref('hots')}
     />
 
@@ -56,11 +59,13 @@ const rotationLabel = rotation.window ? `Free this week: ${formatDayUTC(rotation
       <ul>
         <li>
           <strong>Picks</strong> add up evidence for the team on the clock: counters against heroes already locked by the other side, synergy with
-          teammates, fit for the chosen map, and whether the team can still end up with a Healer and a frontline hero.
+          teammates, fit for the chosen map, and whether the team can still end up with a Healer and a frontline hero. The last pick also checks for
+          ranged damage, waveclear and more than one source of hard crowd control, naming the heroes that bring them.
         </li>
         <li>
           <strong>Bans</strong> are ranked as threats: how strong the hero would be for the other side, which of your locked heroes it beats, and how
-          many heroes you could still pick it counters.
+          many heroes you could still pick it counters (and how hard). Without match statistics, how often pros ban the hero adds a small prior,
+          credited next to the list.
         </li>
         <li>
           <strong>Early picks</strong> favour heroes with few hard counters still available to the other side.
@@ -70,12 +75,20 @@ const rotationLabel = rotation.window ? `Free this week: ${formatDayUTC(rotation
           are available they take over and the source is credited next to them.
         </li>
         <li>
+          Each kind of evidence is capped, so piling up counters and synergies never buries a composition problem such as a second Healer late in
+          the draft. A reason that needs a talent says so: <em>Only when</em> the hero takes it.
+        </li>
+        <li>
           Sort modes re-weigh the same signals. Tap <em>Why this score?</em> on any suggestion to see each signal, its weight and what it adds.
+        </li>
+        <li>
+          When both teams are locked, a <strong>draft review</strong> lists the key matchups, the best pair on each side, map fit and any
+          composition problems, with a plain-text summary to copy.
         </li>
       </ul>
       <p>
-        Free mode works like a team picker: put heroes on either team in any order. Your pool (owned heroes and favourites) is kept in this browser
-        only.
+        Free mode works like a team picker: put heroes on either team in any order, and tick <em>Also show suggestions for the other team</em> to
+        see both sides at once. Your pool (owned heroes and favourites) is kept in this browser only.
       </p>
     </section>
   </div>

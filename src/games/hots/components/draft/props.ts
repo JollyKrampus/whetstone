@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import { assetHref } from '../../../registry.ts';
 import { decodeShard, type DraftData } from '../../draft/data.ts';
+import { sourcesUsed, type Suggestion } from '../../draft/suggest.ts';
 import type { HeroRole } from '../../schema.ts';
 
 /** Display data for one draftable entity, in universe order (release date, id). */
@@ -27,18 +28,48 @@ export interface MapOption {
   id: string;
   name: string;
   ranked: boolean;
+  /** Map art ('img/maps/….webp', for assetHref) when the build has it. */
+  image?: string;
 }
 
-/** An inline credit (Heroes Profile) the island renders next to the numbers it uses. */
+/** A source's inline credit, built from its SourceRef; islands render it next to the numbers it backs. */
 export interface CreditProp {
+  /** SourceRef id (what Reason.source and the statistics block name). */
+  id: string;
   name: string;
   url: string;
   attribution: string;
+  /** Licence name and link, for share-alike sources. */
+  license?: string;
+  licenseUrl?: string;
+}
+
+/** Credits by SourceRef id. */
+export type CreditMap = Readonly<Record<string, CreditProp>>;
+
+/** Credits for the sources a list of suggestions uses, first seen first; ids the site has no SourceRef for are skipped. */
+export function creditsFor(list: readonly Suggestion[], credits: CreditMap): CreditProp[] {
+  return sourcesUsed(list)
+    .map((id) => credits[id])
+    .filter((c): c is CreditProp => c !== undefined);
+}
+
+/** Source names by SourceRef id, for reason meta ("n = 120 · Liquipedia"). */
+export function sourceNamesOf(credits: CreditMap): Readonly<Record<string, string>> {
+  return Object.fromEntries(Object.values(credits).map((c) => [c.id, c.name]));
+}
+
+/**
+ * Display name of a reason's source, or null when the site has no SourceRef for the id: the raw
+ * id is never shown, so only sources the site lists (and credits) are named.
+ */
+export function sourceName(names: Readonly<Record<string, string>> | undefined, id: string | undefined): string | null {
+  return id ? (names?.[id] ?? null) : null;
 }
 
 /**
  * Split a credit around the source name so the name itself is the link, as SourceAttribution
- * does: "Data provided by " + [Heroes Profile] + ".". Adds the final full stop when missing.
+ * does: "Pro draft data from " + [Liquipedia] + ", licensed …". Adds the final full stop when missing.
  */
 export function creditParts(credit: CreditProp): { before: string; after: string } {
   const at = credit.attribution.indexOf(credit.name);

@@ -2,12 +2,15 @@ import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import ShareButton from '../../../../components/ShareButton.tsx';
 import {
   applyFree,
+  bansOf,
   checkFree,
   chooseSequential,
   currentStep,
   freeContext,
   freeTeam,
   legalCandidates,
+  otherTeam,
+  picksOf,
   remainingSteps,
   removeFree,
   sequentialContext,
@@ -25,7 +28,10 @@ import {
 } from '../../../../core/draft.ts';
 import { createStore } from '../../../../core/storage.ts';
 import { onHashChange, readHash, writeHash } from '../../../../core/urlstate.ts';
+import { assetHref } from '../../../registry.ts';
 import type { DraftHero } from '../../draft/data.ts';
+import type { ProPrior } from '../../draft/providers.ts';
+import { reviewDraft, reviewText, type DraftReview } from '../../draft/review.ts';
 import { SUGGEST_FROM_LABEL, allowedFor, type SuggestFrom } from '../../draft/allowed.ts';
 import { EMPTY_POOL, mentions, readPool, subscribePool, type HeroPool } from '../../pool.ts';
 import { teamSummary, type RoleHero, type TeamSummary } from '../../draft/roles.ts';
@@ -44,9 +50,10 @@ import {
 import { createDraftCodec, freeHash, restoreFree, restoreSequential, slHash, type DraftMode } from '../../draft/state.ts';
 import { banWeights, pickWeights, presetInfo, suggest, type Suggestion } from '../../draft/suggest.ts';
 import HeroPicker, { type TileStatus } from './HeroPicker.tsx';
+import ReviewCard from './ReviewCard.tsx';
 import SuggestionList from './SuggestionList.tsx';
 import TeamPanel, { type BoardSlot } from './TeamPanel.tsx';
-import { NARROW_QUERY, useMediaQuery, useShard, type CreditProp, type MapOption, type RosterHero } from './props.ts';
+import { NARROW_QUERY, creditsFor, sourceNamesOf, useMediaQuery, useShard, type CreditMap, type MapOption, type RosterHero } from './props.ts';
 import './draft.css';
 
 interface Props {
@@ -60,8 +67,10 @@ interface Props {
   free: string[];
   /** "Free this week (8–15 Oct)", or null without rotation data. */
   freeLabel: string | null;
-  /** Heroes Profile credit, shown inline whenever its numbers are in the suggestions. */
-  credit: CreditProp;
+  /** Credits of the game's sources by id; each is shown inline whenever its numbers are in use. */
+  credits: CreditMap;
+  /** Pro ban rates (class A-SA) for the ban prior without match statistics; null without pro data. */
+  pro: ProPrior | null;
   /** Where visitors mark owned heroes and favourites (the hero grid). */
   poolHref: string;
 }
@@ -81,6 +90,7 @@ const TARGET_LABEL = (t: Target) => (t.team === OUR_TEAM ? (t.action === 'pick' 
 
 const PRESET_STORE = 'draftSort';
 const FROM_STORE = 'draftFrom';
+const BOTH_STORE = 'draftBothSides';
 const EMPTY_TAGS: ReadonlySet<string> = new Set();
 
 function illegalText(e: Illegal): string {
@@ -121,7 +131,7 @@ function stepHint(t: Target): string {
  * a personal pool filter and a shareable URL hash. Board, map list and picker render on the
  * server; suggestions appear once the draft shard has loaded.
  */
-export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, credit, poolHref }: Props) {
+export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, credits, pro, poolHref }: Props) {
   const { shard, retry } = useShard(shardUrl);
   const data = shard.status === 'ready' ? shard.data : null;
   const narrow = useMediaQuery(NARROW_QUERY);
@@ -140,6 +150,8 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
   const [target, setTarget] = useState<Target>(TARGETS[0]!);
   const [preset, setPreset] = useState<PresetId>('composite');
   const [from, setFrom] = useState<SuggestFrom>('all');
+  /** Free mode: also list suggestions for the other side of the current target. */
+  const [both, setBoth] = useState(false);
   const [pool, setPool] = useState<HeroPool>(EMPTY_POOL);
   const [notice, setNotice] = useState<string | null>(null);
   const [announce, setAnnounce] = useState('');
@@ -182,6 +194,7 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
     setPool(readPool());
     setPreset(store.get<PresetId>(PRESET_STORE, 'composite', (v) => (typeof v === 'string' && ['composite', 'winrate', 'counters', 'synergy', 'map', 'tier'].includes(v) ? (v as PresetId) : undefined)));
     setFrom(store.get<SuggestFrom>(FROM_STORE, 'all', (v) => (v === 'all' || v === 'pool' || v === 'free' ? v : undefined)));
+    setBoth(store.get<boolean>(BOTH_STORE, false, (v) => (typeof v === 'boolean' ? v : undefined)));
     const offHash = onHashChange((h) => {
       if (h !== lastHash.current) restore(h);
     });
@@ -230,12 +243,35 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
         note = 'None of the heroes you chose to suggest from is available here, so every hero is ranked.';
       }
     }
-    const out = suggest({ data, ctx, candidates, preset: activePreset, favorites, ourPool: allowed, useStats });
+    const out = suggest({ data, ctx, candidates, preset: activePreset, favorites, ourPool: allowed, useStats, pro });
     return { list: out, poolNote: note };
     // ctx is rebuilt each render from the listed state.
-  }, [data, mode, sl, freeState, target, map, activePreset, allowed, favorites, useStats, roster]);
+  }, [data, mode, sl, freeState, target, map, activePreset, allowed, favorites, useStats, roster, pro]);
+
+  // Free mode, "both sides": the same action for the other team, scored from their side.
+  const mirror: Target | null = mode === 'free' && both ? { team: otherTeam(target.team), action: target.action } : null;
+  const mirrorList = useMemo((): Suggestion[] => {
+    if (!data || !mirror) return [];
+    const mctx = freeContext(freeState, mirror.team, mirror.action, map ? { map } : {});
+    const ids = roster.filter((h) => data.byId.has(h.id)).map((h) => h.id);
+    const legal = ids.filter((id) => checkFree(freeState, { team: mirror.team, action: mirror.action, id }).ok);
+    return suggest({ data, ctx: mctx, candidates: legal, preset: activePreset, favorites, useStats, pro });
+  }, [data, mode, both, freeState, target, map, activePreset, favorites, useStats, roster, pro]);
 
   const weights = turn?.action === 'ban' ? banWeights(activePreset) : pickWeights(activePreset);
+  const sourceNames = useMemo(() => sourceNamesOf(credits), [credits]);
+  const statsCredit = data?.statsSource ? (credits[data.statsSource] ?? null) : null;
+  const statsLabel = useStats && data?.stats ? `${data.stats.label}${data.stats.synthetic ? ', synthetic test numbers' : ''}` : null;
+
+  // ---- finished draft ----------------------------------------------------------------------
+
+  const finished = mode === 'sl' ? sl.complete : freeTeam(freeState, 'A').slotsUsed >= FREE_TEAM_SIZE && freeTeam(freeState, 'B').slotsUsed >= FREE_TEAM_SIZE;
+  const review = useMemo((): DraftReview | null => {
+    if (!data || !finished) return null;
+    const team = (t: Team) => (mode === 'sl' ? picksOf(sl, t) : freeTeam(freeState, t).picks);
+    const bans = (t: Team) => (mode === 'sl' ? bansOf(sl, t) : freeTeam(freeState, t).bans);
+    return reviewDraft(data, { ours: team('A'), theirs: team('B'), oursBans: bans('A'), theirsBans: bans('B'), ...(map ? { map } : {}), useStats });
+  }, [data, finished, mode, sl, freeState, map, useStats]);
 
   // ---- actions ---------------------------------------------------------------------------
 
@@ -245,7 +281,8 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
     if (fromSuggestion) requestAnimationFrame(() => nowTitle.current?.focus());
   }
 
-  function choose(id: string | null, fromSuggestion = false) {
+  /** Make a choice: the step on the clock (Storm League) or, in free mode, the given list (default: the selected one). */
+  function choose(id: string | null, fromSuggestion = false, to: Target = target) {
     if (mode === 'sl') {
       const s = currentStep(sl);
       const r = chooseSequential(sl, id);
@@ -262,7 +299,7 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
       return;
     }
     if (id === null) return;
-    const r = applyFree(freeState, { team: target.team, action: target.action, id });
+    const r = applyFree(freeState, { team: to.team, action: to.action, id });
     if (!r.ok) {
       setAnnounce(r.message);
       return;
@@ -276,7 +313,7 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
     let nextTarget = target;
     if (full(target)) nextTarget = TARGETS.find((t) => !full(t)) ?? target;
     setTarget(nextTarget);
-    after(`${name(id)} added to ${TARGET_LABEL(target).toLowerCase()}.${nextTarget !== target ? ` Now adding to ${TARGET_LABEL(nextTarget).toLowerCase()}.` : ''}`, fromSuggestion);
+    after(`${name(id)} added to ${TARGET_LABEL(to).toLowerCase()}.${nextTarget !== target ? ` Now adding to ${TARGET_LABEL(nextTarget).toLowerCase()}.` : ''}`, fromSuggestion);
   }
 
   function undo() {
@@ -326,6 +363,18 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
   function changeFrom(v: SuggestFrom) {
     setFrom(v);
     store.set(FROM_STORE, v);
+  }
+
+  function changeBoth(v: boolean) {
+    setBoth(v);
+    store.set(BOTH_STORE, v);
+  }
+
+  /** The share link of the current draft (the hash the URL mirrors, built from state so it is never a render behind). */
+  function shareUrl(): string {
+    if (typeof window === 'undefined') return '';
+    const encoded = codec.encode(mode === 'sl' ? slHash(map, fp, sl) : freeHash(map, freeState));
+    return `${window.location.origin}${window.location.pathname}${encoded === '#v=1' ? '' : encoded}`;
   }
 
   // ---- board -----------------------------------------------------------------------------
@@ -434,6 +483,16 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
         : 'Draft complete'
       : `Add to · ${TARGET_LABEL(target)}`;
   const canUndo = mode === 'sl' ? sl.choices.length > 0 : freeState.moves.length > 0;
+  const selectedMap = map ? (maps.find((m) => m.id === map) ?? null) : null;
+  const reviewCard =
+    review && finished ? (
+      <ReviewCard
+        review={review}
+        summary={reviewText(review, { url: shareUrl(), statsLabel, statsCredit: statsCredit ? statsCredit.attribution : null })}
+        credit={statsCredit}
+        sourceNames={sourceNames}
+      />
+    ) : null;
   const fromNote =
     from === 'pool' && pool.owned.length === 0
       ? 'No owned heroes saved yet, so your pool is your favourites plus the free rotation.'
@@ -527,6 +586,15 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
           </button>
           <ShareButton title="Whetstone draft" label="Share" />
         </div>
+        {selectedMap ? (
+          <figure class="dt-mapbanner" data-map={selectedMap.id}>
+            {selectedMap.image ? <img class="dt-mapbanner__img" src={assetHref('hots', selectedMap.image)} alt="" width="320" height="90" decoding="async" /> : null}
+            <figcaption class="dt-mapbanner__text">
+              <span class="dt-mapbanner__name">{selectedMap.name}</span>
+              <span class="dt-mapbanner__pool">{selectedMap.ranked ? 'Storm League pool' : 'Not in the Storm League pool'}</span>
+            </figcaption>
+          </figure>
+        ) : null}
         {fromNote || (from !== 'all' && freeLabel) ? (
           <p class="dt-bar__note">
             {fromNote ? `${fromNote} ` : ''}
@@ -585,6 +653,12 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
           {turn ? (
             <div class="dt-suggest">
               <h3 class="dt-suggest__title">{suggestionsTitle(turn)}</h3>
+              {mode === 'free' ? (
+                <label class="dt-both">
+                  <input type="checkbox" checked={both} onChange={(e) => changeBoth((e.target as HTMLInputElement).checked)} />
+                  <span>Also show suggestions for the other team</span>
+                </label>
+              ) : null}
               {shard.status === 'loading' ? (
                 <p class="dt-loading" role="status">
                   Loading hero data…
@@ -597,30 +671,55 @@ export default function DraftTool({ shardUrl, roster, maps, free, freeLabel, cre
                   </button>
                 </div>
               ) : (
-                <SuggestionList
-                  idPrefix="dt-sg"
-                  suggestions={list}
-                  weights={weights}
-                  limit={narrow ? 3 : 6}
-                  presets={presets}
-                  preset={activePreset}
-                  onPreset={changePreset}
-                  action={turn.action === 'ban' ? 'Ban' : mode === 'free' ? 'Add' : 'Pick'}
-                  actionLabel={(n) =>
-                    turn.team === OUR_TEAM ? `${turn.action === 'ban' ? 'Ban' : 'Pick'} ${n}` : `Enter ${n} as the enemy's ${turn.action}`
-                  }
-                  onChoose={(id) => choose(id, true)}
-                  credit={useStats ? credit : null}
-                  statsLabel={useStats && data?.stats ? data.stats.label : null}
-                  empty={poolNote ?? 'No legal heroes left for this step.'}
-                />
+                <div class="dt-pair">
+                  <SuggestionList
+                    idPrefix="dt-sg"
+                    suggestions={list}
+                    weights={weights}
+                    limit={narrow ? 3 : 6}
+                    presets={presets}
+                    preset={activePreset}
+                    onPreset={changePreset}
+                    action={turn.action === 'ban' ? 'Ban' : mode === 'free' ? 'Add' : 'Pick'}
+                    actionLabel={(n) =>
+                      turn.team === OUR_TEAM ? `${turn.action === 'ban' ? 'Ban' : 'Pick'} ${n}` : `Enter ${n} as the enemy's ${turn.action}`
+                    }
+                    onChoose={(id) => choose(id, true)}
+                    credits={creditsFor(list, credits)}
+                    statsLabel={statsLabel}
+                    sourceNames={sourceNames}
+                    empty={poolNote ?? 'No legal heroes left for this step.'}
+                  />
+                  {mirror ? (
+                    <div class="dt-mirror" data-team={mirror.team}>
+                      <h4 class="dt-mirror__title">{suggestionsTitle(mirror)}</h4>
+                      <SuggestionList
+                        idPrefix="dt-sg2"
+                        suggestions={mirrorList}
+                        weights={mirror.action === 'ban' ? banWeights(activePreset) : pickWeights(activePreset)}
+                        limit={3}
+                        action={mirror.action === 'ban' ? 'Ban' : 'Add'}
+                        actionLabel={(n) => `Add ${n} to ${TARGET_LABEL(mirror).toLowerCase()}`}
+                        onChoose={(id) => choose(id, true, mirror)}
+                        credits={creditsFor(mirrorList, credits)}
+                        statsLabel={statsLabel}
+                        sourceNames={sourceNames}
+                        empty="No legal heroes left for this list."
+                      />
+                    </div>
+                  ) : null}
+                </div>
               )}
               {poolNote ? <p class="dt-note">{poolNote}</p> : null}
+              {mode === 'free' ? reviewCard : null}
             </div>
           ) : (
-            <div class="dt-done">
-              <p>Both teams are locked in. Share the link, undo a step to explore alternatives, or start a new draft.</p>
-            </div>
+            <>
+              <div class="dt-done">
+                <p>Both teams are locked in. Share the link, undo a step to explore alternatives, or start a new draft.</p>
+              </div>
+              {shard.status === 'ready' ? reviewCard : null}
+            </>
           )}
         </section>
 
