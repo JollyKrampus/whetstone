@@ -26,7 +26,7 @@ counters:
   # --- weak against ---
   - a: zeratul
     b: chromie
-    why: "Chromie cannot escape a Blink from stealth, and Cleave plus Singularity Spike kill her before Time Trap can be set up."
+    why: "Chromie has no escape in her base kit, so after a Blink from stealth, Cleave, Singularity Spike and a few Basic Attacks take most of her 1390 Health before Time Trap can be set up."
     evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Time Trap"]
     confidence: high
   - a: tracer

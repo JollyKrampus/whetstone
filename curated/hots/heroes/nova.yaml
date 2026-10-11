@@ -14,7 +14,7 @@ counters:
     confidence: low
   - a: nova
     b: sgthammer
-    why: "Siege Mode keeps Sgt. Hammer still, making Snipe from stealth trivial to land, and Triple Tap, if Nova takes it, kills her before she can unsiege and move."
+    why: "Siege Mode keeps Sgt. Hammer still, making Snipe from stealth trivial to land, and Triple Tap, if Nova takes it, takes most of her 1720 Health before she can unsiege and move."
     evidence: ["Siege Mode", "Snipe", "Triple Tap"]
     confidence: medium
   - a: nova

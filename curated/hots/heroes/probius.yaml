@@ -35,7 +35,7 @@ counters:
     confidence: medium
   - a: zeratul
     b: probius
-    why: "Zeratul approaches from angles a powered Photon Cannon does not reveal, and Singularity Spike plus Cleave kill a 1260-Health Probius."
+    why: "Zeratul approaches from angles a powered Photon Cannon does not reveal, and Singularity Spike, Cleave and a few Basic Attacks take most of a 1260-Health Probius."
     evidence: ["Permanent Cloak", "Photon Cannon", "Singularity Spike", "Cleave"]
     confidence: medium
   - a: kerrigan

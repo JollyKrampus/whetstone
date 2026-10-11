@@ -35,7 +35,7 @@ counters:
     confidence: low
   - a: nova
     b: malfurion
-    why: "Malfurion's healing is slow Regrowth ticks with no burst heal, so Snipe plus Triple Tap kills a target, or Malfurion himself, before the healing can catch up."
+    why: "Malfurion's healing is slow Regrowth ticks with no burst heal, so Snipe plus Triple Tap takes most of a target's Health, Malfurion's own 1525 included, faster than the healing can catch up."
     evidence: ["Snipe", "Triple Tap", "Regrowth"]
     conditions: "Nova takes Triple Tap (level 10)"
     confidence: low

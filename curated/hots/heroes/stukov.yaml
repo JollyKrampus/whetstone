@@ -35,7 +35,7 @@ counters:
     confidence: low
   - a: zeratul
     b: stukov
-    why: "Zeratul cloaks onto a Stukov who has no dash, and Singularity Spike plus Cleave burst him down before Bio-Kill Switch's slows can buy him time."
+    why: "Zeratul cloaks onto a Stukov who has no dash and keeps Singularity Spike, Cleave and Basic Attacks on him before Bio-Kill Switch's slows can buy him time."
     evidence: ["Permanent Cloak", "Singularity Spike", "Cleave", "Bio-Kill Switch"]
     confidence: low
 synergies:

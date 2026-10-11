@@ -29,12 +29,12 @@ counters:
     confidence: medium
   - a: zeratul
     b: tassadar
-    why: "Zeratul's cloaked approach and Vorpal Blade get around Force Wall, and Tassadar's 1650 Health melts to Cleave plus Singularity Spike."
+    why: "Zeratul's cloaked approach and Vorpal Blade get around Force Wall, so Tassadar cannot wall him off while Cleave, Singularity Spike and Basic Attacks wear down his 1650 Health."
     evidence: ["Permanent Cloak", "Vorpal Blade", "Cleave", "Singularity Spike", "Force Wall"]
     confidence: medium
   - a: zeratul
     b: stukov
-    why: "Zeratul cloaks onto a Stukov who has no dash, and Singularity Spike plus Cleave burst him down before Bio-Kill Switch's slows can buy him time."
+    why: "Zeratul cloaks onto a Stukov who has no dash and keeps Singularity Spike, Cleave and Basic Attacks on him before Bio-Kill Switch's slows can buy him time."
     evidence: ["Permanent Cloak", "Singularity Spike", "Cleave", "Bio-Kill Switch"]
     confidence: low
   # --- weak against ---

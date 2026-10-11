@@ -30,7 +30,7 @@ counters:
     confidence: medium
   - a: zeratul
     b: tassadar
-    why: "Zeratul's cloaked approach and Vorpal Blade get around Force Wall, and Tassadar's 1650 Health melts to Cleave plus Singularity Spike."
+    why: "Zeratul's cloaked approach and Vorpal Blade get around Force Wall, so Tassadar cannot wall him off while Cleave, Singularity Spike and Basic Attacks wear down his 1650 Health."
     evidence: ["Permanent Cloak", "Vorpal Blade", "Cleave", "Singularity Spike", "Force Wall"]
     confidence: medium
   - a: tracer

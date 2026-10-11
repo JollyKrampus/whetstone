@@ -27,7 +27,7 @@ counters:
   # --- weak against ---
   - a: zeratul
     b: azmodan
-    why: "Azmodan has no escape, so Zeratul Blinks onto him from stealth and Cleave plus Singularity Spike kill him before Trample is even available."
+    why: "Azmodan has no escape until Trample at level 16, so a Zeratul who Blinks onto him from stealth keeps Cleave, Singularity Spike and Basic Attacks on him with nothing Azmodan can do to leave."
     evidence: ["Permanent Cloak", "Blink", "Cleave", "Singularity Spike", "Trample"]
     confidence: medium
   - a: tracer

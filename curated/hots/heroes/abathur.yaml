@@ -30,7 +30,7 @@ counters:
   # --- weak against ---
   - a: zeratul
     b: abathur
-    why: "Permanent Cloak lets Zeratul walk straight up to Abathur's unguarded body, and Cleave plus Singularity Spike kill it before Deep Tunnel's 30-second cooldown can get him out."
+    why: "Permanent Cloak lets Zeratul walk straight up to Abathur's unguarded body, and Cleave, Singularity Spike and a couple of Basic Attacks take its 685 Health before Deep Tunnel's 30-second cooldown can get him out."
     evidence: ["Permanent Cloak", "Cleave", "Singularity Spike", "Deep Tunnel"]
     confidence: high
   - a: nova

@@ -16,7 +16,7 @@ counters:
     confidence: medium
   - a: stitches
     b: chromie
-    why: "Chromie has 1390 Health and no dash, so a Hook into Slam (and Gorge, if Stitches takes it) is usually lethal unless she took Time Out at level 13 and saved it."
+    why: "Chromie has 1390 Health and no dash, so a Hook drags her into Stitches' team, and Slam's slow (and Gorge, if Stitches takes it) holds her there for their follow-up unless she took Time Out at level 13 and saved it."
     evidence: ["Hook", "Slam", "Gorge", "Time Out"]
     confidence: medium
   - a: stitches

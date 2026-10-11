@@ -30,7 +30,7 @@ counters:
     confidence: high
   - a: genji
     b: liming
-    why: "Deflect blocks Magic Missiles (and Disintegrate, if she takes it), and Swift Strike plus Shuriken can kill a 1270-Health target before she Teleports clear."
+    why: "Deflect blocks Magic Missiles (and Disintegrate, if she takes it), and Swift Strike plus three Shuriken volleys take over half of her 1270 Health while Teleport is her only way out."
     evidence: ["Deflect", "Swift Strike", "Shuriken", "Disintegrate"]
     confidence: medium
   - a: zeratul

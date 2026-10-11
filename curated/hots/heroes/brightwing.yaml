@@ -32,7 +32,7 @@ counters:
   # --- weak against ---
   - a: nova
     b: brightwing
-    why: "Brightwing has only 1425 health and no instant escape, so a Snipe from stealth followed by Triple Tap can kill her before Phase Shift's 2-second delay finishes."
+    why: "Brightwing has only 1425 Health and no instant escape, and a Snipe from stealth followed by Triple Tap takes over 90% of it (all of it once Snipe's stacks are full) before Phase Shift's 2-second delay finishes."
     evidence: ["Snipe", "Triple Tap", "Permanent Cloak", "Phase Shift"]
     conditions: "Nova takes Triple Tap (level 10)"
     confidence: low

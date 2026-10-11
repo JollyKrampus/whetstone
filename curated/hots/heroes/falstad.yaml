@@ -35,7 +35,7 @@ counters:
     confidence: low
   - a: nova
     b: falstad
-    why: "Falstad has only 1365 health, so a Snipe from stealth followed by Triple Tap can kill him before Barrel Roll matters."
+    why: "Falstad has only 1365 Health, and a Snipe from stealth followed by Triple Tap takes nearly all of it (all of it once Snipe's stacks are full) before Barrel Roll matters."
     evidence: ["Snipe", "Triple Tap", "Barrel Roll"]
     conditions: "Nova takes Triple Tap (level 10)"
     confidence: low

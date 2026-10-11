@@ -30,7 +30,7 @@ counters:
     confidence: medium
   - a: kelthuzad
     b: thelostvikings
-    why: "Shadow Fissure can be cast anywhere on the map for 320 damage, enough to kill or chase a lone soaking Viking out of its lane from across the battleground."
+    why: "Shadow Fissure can be cast anywhere on the map for 320 damage, enough to finish a damaged Viking or chase a lone soaking one out of its lane from across the battleground."
     evidence: ["Shadow Fissure"]
     conditions: "Kel'Thuzad takes Shadow Fissure (level 10)"
     confidence: low

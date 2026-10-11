@@ -4,7 +4,7 @@ traits:
   - tag: vulnerable-body
     why: "Only 1365 Health and no dash; until her quest unlocks Ice Block she survives dives purely through positioning."
   - tag: burst
-    why: "Frostbite makes Chilled targets take 50% more damage from her Abilities, so Frostbolt into Cone of Cold deletes squishy Heroes in one rotation."
+    why: "Frostbite makes Chilled targets take 50% more damage from her Abilities, so one Frostbolt into Cone of Cold rotation takes close to half of a squishy Hero's Health."
   - tag: mana-hungry
     why: "Blizzard costs 90 Mana and her rotation is spammy, so without Arcane Intellect or Regeneration Globes she runs dry in long fights."
 counters:
