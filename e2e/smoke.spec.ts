@@ -118,9 +118,9 @@ test.describe('home', () => {
     }
     // Every game's notice comes from its registry entry, so a new game brings its own.
     for (const g of games) await expect(footer.locator(`.site-footer__notice[data-game="${g.id}"] dt`)).toHaveText(g.legalNotice.heading);
-    await expect(footer).not.toContainText('Heroes Profile');
     await expect(footer.getByRole('link', { name: 'Credits' })).toHaveAttribute('href', `${BASE_PATH}credits/`);
     await expect(footer.getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', `${BASE_PATH}privacy/`);
+    await expect(footer.getByRole('link', { name: 'Terms' })).toHaveAttribute('href', `${BASE_PATH}terms/`);
     await expect(footer.getByRole('link', { name: 'Software licences' })).toHaveAttribute('href', `${BASE_PATH}licenses.txt`);
   });
 

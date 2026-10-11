@@ -4,8 +4,7 @@
  * Slug rule (verified 91/91 on Psionic Storm and Nexus Compendium, 89/91 on Icy Veins): accents,
  * apostrophes and dots removed, spaces to dashes. Icy Veins has exactly two exceptions,
  * `e-t-c` and `kel-thuzad`. Liquipedia gets a link only where its page exists, which the
- * liquipedia source checks through the MediaWiki API. Heroes Profile is not linked (removed as a
- * source on 2026-10-10).
+ * liquipedia source checks through the MediaWiki API. Statistics sites are not linked.
  */
 import type { Link, Links } from '../../schema.ts';
 import { compareStrings, outboundSlug } from '../util.ts';

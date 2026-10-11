@@ -144,9 +144,9 @@ function sortedBy<T>(key: (x: T) => string, what: string) {
 }
 
 /**
- * Accepts last-good files written before Heroes Profile was removed as a source (2026-10-10):
- * drops keys only it used, so a data branch that still holds them parses (and the next run
- * rewrites them). The output type never has them and the pipeline never writes them.
+ * Accepts last-good files written before a statistics source was removed (2026-10-10, SPEC §12):
+ * drops keys only that source used, so a data branch that still holds them parses (and the next
+ * run rewrites them). The output type never has them and the pipeline never writes them.
  */
 function dropLegacyKeys<T extends z.ZodType>(schema: T, keys: readonly string[]) {
   return z.preprocess((value: unknown) => {
@@ -176,7 +176,7 @@ const HotsMetaExtraObject = z.strictObject({
   /** heroes-data2 has lagged the live build for more than 48 hours: hero data is from `dataBuild`. */
   dataPending: z.boolean().exactOptional(),
 });
-/** meta.json `extra`. A legacy `hpMode` (Heroes Profile switch, removed) is dropped on read. */
+/** meta.json `extra`. A legacy `hpMode` (the removed statistics source's switch) is dropped on read. */
 export const HotsMetaExtraSchema = dropLegacyKeys(HotsMetaExtraObject, ['hpMode']);
 export const HotsMetaSchema = gameMetaSchema('hots', HotsMetaExtraSchema);
 export type HotsMeta = z.infer<typeof HotsMetaSchema>;
@@ -341,7 +341,7 @@ export const MapSchema = z.strictObject({
 });
 export type GameMap = z.infer<typeof MapSchema>;
 
-/** maps.json. A legacy `hp` key (Heroes Profile map ref, removed) is dropped on read. */
+/** maps.json. A legacy `hp` key (the removed statistics source's map ref) is dropped on read. */
 export const MapsFileSchema = z.array(dropLegacyKeys(MapSchema, ['hp'])).superRefine((list, ctx) => {
   checkUnique(ctx, list.map((m) => m.id), 'map id');
   sortedBy<GameMap>((m) => m.id, 'maps (by id)')(list, ctx);
@@ -557,13 +557,16 @@ export const LinkSchema = z.strictObject({
 });
 export type Link = z.infer<typeof LinkSchema>;
 
-/** Links of a source that was removed (Heroes Profile, 2026-10-10) are dropped from last-good files. */
-const REMOVED_LINK_SITES: ReadonlySet<unknown> = new Set(['heroesprofile']);
+/**
+ * Sites the pipeline links. A last-good file may still hold links to a site that is no longer
+ * linked (a removed source); those are dropped on read instead of failing the whole file.
+ */
+const LINK_SITES: ReadonlySet<unknown> = new Set(LinkSchema.shape.site.options);
 
 function dropRemovedLinks(value: unknown): unknown {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) return value;
   const keep = (list: unknown): unknown =>
-    Array.isArray(list) ? list.filter((l) => !(typeof l === 'object' && l !== null && REMOVED_LINK_SITES.has((l as { site?: unknown }).site))) : list;
+    Array.isArray(list) ? list.filter((l) => !(typeof l === 'object' && l !== null && !LINK_SITES.has((l as { site?: unknown }).site))) : list;
   const v = value as { heroes?: unknown; general?: unknown };
   const heroes =
     typeof v.heroes === 'object' && v.heroes !== null && !Array.isArray(v.heroes)
@@ -669,9 +672,9 @@ export type Pro = z.infer<typeof ProSchema>;
 // ---- stats.json (private match statistics) ----------------------------------------------
 //
 // Generic aggregate shapes (hero win rates, pair matrices, map deltas, talent builds) for a
-// private statistics source. The public pipeline has no producer for them since Heroes Profile
-// was removed (2026-10-10); the synthetic sample in fixtures/hots/_private exercises the site's
-// statistics mode, and the private hub can reuse the shapes.
+// private statistics source. The public pipeline has no producer for them (no public HotS
+// statistics source is used, SPEC §12, 2026-10-10); the synthetic sample in fixtures/hots/_private
+// exercises the site's statistics mode, and the private hub can reuse the shapes.
 
 export const HeroStatSchema = z.strictObject({
   games: Count,
@@ -1066,11 +1069,6 @@ export const CuratedMapSchema = z.strictObject({
   lanes: MapProfileSchema.shape.lanes,
   objective: z.string().min(1),
   tags: z.array(MapTagSchema).min(1),
-  /**
-   * Deprecated: a Heroes Profile map ref from before that source was removed (2026-10-10).
-   * Accepted until curated/hots/maps.yaml drops it; never published.
-   */
-  hp: z.strictObject({ id: z.number().int().positive(), name: z.string().min(1) }).exactOptional(),
   notes: z.string().min(1).exactOptional(),
 });
 

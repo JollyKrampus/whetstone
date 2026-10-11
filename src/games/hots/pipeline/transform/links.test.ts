@@ -30,11 +30,11 @@ describe('heroLinks', () => {
     expect(urlOf(heroLinks({ id: 'Wiza', slug: 'liming', name: 'Li-Ming' }, null), 'icy-veins')).toBe('https://www.icy-veins.com/heroes/li-ming-build-guide');
   });
 
-  it('builds Psionic Storm, Nexus Compendium and Fandom links, and none to Heroes Profile', () => {
+  it('builds Psionic Storm, Nexus Compendium and Fandom links, and none to a site outside the list', () => {
     const l = heroLinks({ id: 'HXAL', slug: 'xalatath', name: "Xal'atath" }, null);
     expect(urlOf(l, 'psionic-storm')).toBe('https://psionic-storm.com/en/heroes/xalatath/');
     expect(urlOf(l, 'nexus-compendium')).toBe('https://nexuscompendium.com/heroes/xalatath');
-    expect(l.some((x) => x.url.includes('heroesprofile'))).toBe(false);
+    expect(l.map((x) => x.site).every((site) => ['icy-veins', 'psionic-storm', 'nexus-compendium', 'fandom', 'liquipedia'].includes(site))).toBe(true);
     expect(urlOf(l, 'fandom')).toBe("https://heroesofthestorm.fandom.com/wiki/Xal'atath");
     expect(urlOf(l, 'liquipedia')).toBeUndefined();
   });

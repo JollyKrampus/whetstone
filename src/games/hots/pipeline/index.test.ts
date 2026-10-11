@@ -1,7 +1,7 @@
 /**
  * End-to-end runs of the HotS pipeline through pipeline/run.ts against the recorded fixtures
  * (src/games/hots/fixtures/raw/): the offline first run, determinism, last-good fallbacks when
- * sources go down, and that nothing from a removed source (Heroes Profile) is written.
+ * sources go down, and that nothing from a removed statistics source is written.
  */
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
@@ -10,6 +10,7 @@ import { afterAll, describe, expect, it } from 'vitest';
 import { createHttp } from '../../../../pipeline/http.ts';
 import { runPipelines, type RunSummary } from '../../../../pipeline/run.ts';
 import type { Http } from '../../../core/game.ts';
+import { sourcesFor } from '../../registry.ts';
 import { HOTS_FILES, HotsMetaSchema, type HotsMeta, type Patch, type Theory } from '../schema.ts';
 import { runHots, type HotsPipelineDeps } from './index.ts';
 import { FIXTURE_NOW, REPO_ROOT, rawText } from './test-helpers.ts';
@@ -241,31 +242,32 @@ describe('offline run on recorded fixtures', () => {
   });
 });
 
-describe('no Heroes Profile output', () => {
+describe('no output from a removed source', () => {
   /** Every file under a directory, relative, with forward slashes. */
   const walk = (dir: string, base = dir): string[] =>
     existsSync(dir) ? readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name), base) : [path.relative(base, path.join(dir, e.name)).split(path.sep).join('/')])) : [];
 
-  it('writes no statistics, no private overlay and no Heroes Profile ids, links or switches, even with the old secrets set', async () => {
+  it('writes no statistics, no private overlay and only registered sources, link sites and switches', async () => {
     const out = tempOut();
-    const s = await run({ out, env: { HP_MODE: 'on', HP_API_KEY: 'test-key' } });
+    const s = await run({ out });
     expect(s.exitCode).toBe(0);
     expect(walk(path.join(out, 'private', 'hots'))).toEqual([]);
     const m = meta(out);
-    expect(m.sources.map((x) => x.id)).not.toContain('heroesprofile');
+    const registered = new Set(sourcesFor('hots').map((x) => x.id));
+    for (const x of m.sources) expect(registered.has(x.id), x.id).toBe(true);
     expect('hpMode' in m.extra).toBe(false);
     const maps = read<{ rankedSource: string }[]>(out, 'current/hots/maps.json');
     expect(maps.every((x) => x.rankedSource === 'curated' && !('hp' in x))).toBe(true);
     for (const file of walk(path.join(out, 'current', 'hots')).filter((f) => f.endsWith('.json'))) {
-      expect(readFileSync(path.join(out, 'current', 'hots', file), 'utf8'), file).not.toMatch(/heroes ?profile|hpMode/i);
+      expect(readFileSync(path.join(out, 'current', 'hots', file), 'utf8'), file).not.toMatch(/"hpMode"|"hp":|"rankedSource": ?"stats"/);
     }
   });
 
-  it('does not carry a Heroes Profile pool or map refs forward from last-good maps.json', async () => {
+  it('does not carry a measured pool or third-party map refs forward from last-good maps.json', async () => {
     const out = tempOut();
     expect((await run({ out })).exitCode).toBe(0);
     const curatedMaps = readFileSync(path.join(out, 'current/hots/maps.json'), 'utf8');
-    // A last-good file from an HP_MODE=on run: measured pool (flags flipped here) and HP map refs.
+    // A last-good file from before 2026-10-10: a measured pool (flags flipped here) and third-party map refs.
     const legacy = (JSON.parse(curatedMaps) as { id: string; kind: string; ranked: boolean }[]).map((m, i) => ({
       ...m,
       ranked: m.kind === 'standard' && !m.ranked,

@@ -25,7 +25,7 @@ describe('buildMaps', () => {
 
   it('never ranks ARAM maps and writes no third-party map ids', () => {
     expect(built.maps.filter((m) => m.kind === 'aram').every((m) => !m.ranked)).toBe(true);
-    // curated/hots/maps.yaml may still carry legacy Heroes Profile map refs; maps.json never does.
+    // No third-party map refs (the legacy `hp` key) ever reach maps.json.
     expect(built.maps.every((m) => !('hp' in m))).toBe(true);
   });
 

@@ -16,15 +16,8 @@ import { readJson, resolveRel } from './store.ts';
  * calls get 1,000 requests/hour instead of 60 per runner IP.
  */
 export function gameEnvNames(game: GameId): readonly string[] {
-  return [...(gameById(game).pipeline.env ?? []), ...(LEGACY_ENV[game] ?? [])];
+  return gameById(game).pipeline.env ?? [];
 }
-
-/**
- * Transitional: the Heroes Profile step under src/games/hots/pipeline still reads these until the
- * HotS pipeline drops it (Heroes Profile is removed, SPEC §13). No workflow passes them any more,
- * so in CI they are always unset and that step stays disabled. Delete this with the step.
- */
-const LEGACY_ENV: Partial<Record<GameId, readonly string[]>> = { hots: ['HP_API_KEY', 'HP_MODE'] };
 
 /** Every variable any game may read (for tooling that has no game context). */
 export function allGameEnvNames(): string[] {

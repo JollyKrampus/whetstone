@@ -76,9 +76,9 @@ describe('registry', () => {
     const yml = readFileSync(new URL('../../.github/workflows/data-deploy.yml', import.meta.url), 'utf8');
     expect(yml).toContain('node scripts/plan.ts');
     expect(yml).toContain('matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}');
-    // No hard-coded game list, no Heroes Profile or Twitch secrets, one game per secret.
+    // No hard-coded game list, no secrets for removed sources, one game per secret.
     expect(yml).not.toMatch(/hots mtga pokemon|"hots":90/);
-    expect(yml).not.toMatch(/HP_API_KEY|HP_MODE|TWITCH_/);
+    expect(yml).not.toMatch(/HP_[A-Z_]+|TWITCH_/);
     for (const line of yml.split('\n').filter((l) => /secrets\.(?!DATA_ARTIFACT_KEY)/.test(l))) {
       expect(line, 'secret without a per-game condition').toMatch(/matrix\.game == '[a-z]+' && secrets\./);
     }
@@ -102,8 +102,6 @@ describe('registry', () => {
   });
 
   it('declares attribution the way each source requires', () => {
-    // Heroes Profile was removed as a source (2026-10-10).
-    expect(sourcesFor('hots', ['heroesprofile'])).toEqual([]);
     expect(sourcesFor('hots', ['liquipedia'])[0]).toMatchObject({ custody: 'A-SA', license: 'CC-BY-SA 3.0' });
     expect(sourcesFor('mtga', ['17lands'])[0]).toMatchObject({ rule: 'top', license: 'CC BY 4.0' });
     expect(sourcesFor('mtga', ['scryfall'])[0]?.attribution).toBe('Card data and images courtesy of Scryfall');

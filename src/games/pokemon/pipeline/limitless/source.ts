@@ -10,6 +10,7 @@ import { compareStrings } from '../../../../../pipeline/hash.ts';
 import { TournamentsSchema, type Tournaments } from '../../schema.ts';
 import { errorMessage, failed, invalid, isoDate, json, notSelected, ok, previousFile, warn, type SourceOutcome } from '../common.ts';
 import { candidateRegulations, type RegulationPlan } from '../regulations.ts';
+import { scrubStandings } from '../scrub.ts';
 import { aggregate, anonymise, TournamentListSchema, type KnownIds, type TournamentListing, type TournamentTeams } from './aggregate.ts';
 
 export const LIMITLESS_API = 'https://play.limitlesstcg.com/api';
@@ -86,6 +87,8 @@ export async function runLimitlessSource(ctx: PipelineContext, plan: RegulationP
             spacingMs: LIMITLESS_SPACING_MS,
             ttlHours: 24,
             fixture: `limitless/standings-${t.id}`,
+            // Record mode saves placeholders, never real player names (pipeline/fixture-privacy.test.ts).
+            scrub: scrubStandings,
           });
           anon = anonymise(rows, known);
         } catch (err) {

@@ -17,6 +17,7 @@ import type { DexIndex } from '../ids.ts';
 import { candidateRegulations, type RegulationPlan } from '../regulations.ts';
 import { h2hFromGames } from './h2h.ts';
 import { decodeGames, emptyLedger, encodeLedger, LEDGER_FILE, LEDGER_WINDOW_DAYS, pruneGames, type LedgerGame } from './ledger.ts';
+import { scrubReplayLog, scrubReplaySearch } from '../scrub.ts';
 import { parseLog, type ParseFailure } from './parse.ts';
 
 export const REPLAY_API = 'https://replay.pokemonshowdown.com';
@@ -58,7 +59,7 @@ export async function searchNewReplays(ctx: PipelineContext, format: string, cur
   let before: number | null = null;
   for (let page = 0; page < MAX_SEARCH_PAGES && out.length < budget; page++) {
     const url = `${REPLAY_API}/search.json?format=${encodeURIComponent(format)}${before === null ? '' : `&before=${before}`}`;
-    const rows = SearchSchema.parse(await ctx.http.json(url, { spacingMs: REPLAY_SPACING_MS, ttlHours: 1, fixture: `replays/search-${format}${before === null ? '' : `-before-${before}`}` }));
+    const rows = SearchSchema.parse(await ctx.http.json(url, { spacingMs: REPLAY_SPACING_MS, ttlHours: 1, fixture: `replays/search-${format}${before === null ? '' : `-before-${before}`}`, scrub: scrubReplaySearch }));
     let reachedCursor = false;
     for (const r of rows.slice(0, PAGE)) {
       if (r.uploadtime <= cursor) {
@@ -112,7 +113,7 @@ export async function runReplaySource(ctx: PipelineContext, plan: RegulationPlan
       for (const row of rows) {
         let log: string;
         try {
-          log = await ctx.http.text(`${REPLAY_API}/${row.id}.log`, { spacingMs: REPLAY_SPACING_MS, ttlHours: 24 * 7, fixture: `replays/log-${row.id}` });
+          log = await ctx.http.text(`${REPLAY_API}/${row.id}.log`, { spacingMs: REPLAY_SPACING_MS, ttlHours: 24 * 7, fixture: `replays/log-${row.id}`, scrub: scrubReplayLog });
         } catch (err) {
           skipped.fetch++;
           ctx.log(`showdown-replays: ${row.id}: ${errorMessage(err)}`);

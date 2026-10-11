@@ -36,7 +36,7 @@ export async function fetchUploads(http: Http, key: string, channelIds: readonly
   const uploads = new Map<string, string>();
   for (let i = 0; i < channelIds.length; i += 50) {
     const ids = channelIds.slice(i, i + 50).join(',');
-    const raw = await http.json<unknown>(`${API}/channels?part=contentDetails,snippet&id=${ids}&maxResults=50&key=${encodeURIComponent(key)}`, { fixture: 'youtube/channels', ttlHours: 24 });
+    const raw = await http.json<unknown>(`${API}/channels?part=contentDetails,snippet&id=${ids}&maxResults=50&key=${encodeURIComponent(key)}`, { fixture: 'youtube/channels', ttlHours: 24, noRecord: true });
     for (const c of items(raw)) {
       const cd = isRecord(c.contentDetails) && isRecord(c.contentDetails.relatedPlaylists) ? c.contentDetails.relatedPlaylists : null;
       if (typeof c.id === 'string' && cd && typeof cd.uploads === 'string') uploads.set(c.id, cd.uploads);
@@ -46,7 +46,7 @@ export async function fetchUploads(http: Http, key: string, channelIds: readonly
   for (const channelId of channelIds) {
     const playlist = uploads.get(channelId);
     if (!playlist) continue;
-    const raw = await http.json<unknown>(`${API}/playlistItems?part=contentDetails&playlistId=${playlist}&maxResults=${perChannel}&key=${encodeURIComponent(key)}`, { fixture: `youtube/playlist-${channelId}`, ttlHours: 3 });
+    const raw = await http.json<unknown>(`${API}/playlistItems?part=contentDetails&playlistId=${playlist}&maxResults=${perChannel}&key=${encodeURIComponent(key)}`, { fixture: `youtube/playlist-${channelId}`, ttlHours: 3, noRecord: true });
     for (const it of items(raw)) {
       const vid = isRecord(it.contentDetails) ? it.contentDetails.videoId : undefined;
       if (typeof vid === 'string') videoIds.push(vid);
@@ -55,7 +55,7 @@ export async function fetchUploads(http: Http, key: string, channelIds: readonly
   const out: RawVideo[] = [];
   for (let i = 0; i < videoIds.length; i += 50) {
     const ids = videoIds.slice(i, i + 50).join(',');
-    const raw = await http.json<unknown>(`${API}/videos?part=contentDetails,snippet,statistics&id=${ids}&maxResults=50&key=${encodeURIComponent(key)}`, { fixture: `youtube/videos-${i / 50 + 1}`, ttlHours: 3 });
+    const raw = await http.json<unknown>(`${API}/videos?part=contentDetails,snippet,statistics&id=${ids}&maxResults=50&key=${encodeURIComponent(key)}`, { fixture: `youtube/videos-${i / 50 + 1}`, ttlHours: 3, noRecord: true });
     for (const v of items(raw)) {
       const sn = isRecord(v.snippet) ? v.snippet : {};
       const cd = isRecord(v.contentDetails) ? v.contentDetails : {};
