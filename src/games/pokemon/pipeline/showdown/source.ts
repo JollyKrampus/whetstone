@@ -2,9 +2,19 @@
  * Source `showdown`: the Champions dex (species, moves, items, abilities, type chart,
  * learnsets, browser shard) plus sprites, with the `smogon-calc` cross-check.
  *
- * Skip rule: the export is keyed by Showdown commit + exporter/tree versions + the regulation
- * formats (meta.extra.dexKey). An unchanged key re-emits the last-good dex without downloading
- * anything but the commit SHA. Offline runs use the recorded export in fixtures/raw/showdown/.
+ * The commit is the one pinned in curated/pokemon/showdown.json (pin.ts), bumped by reviewed pull
+ * requests only. Skip rule: the export is keyed by that commit + exporter/tree versions + the
+ * regulation formats (meta.extra.dexKey); an unchanged key re-emits the last-good dex without
+ * any network access. Otherwise the raw export comes, in this order, from:
+ *
+ *   1. the file named by WHETSTONE_SHOWDOWN_EXPORT: the artifact of the isolated export job
+ *      (export-job.ts), validated with RawDexExportSchema and checked against the pin;
+ *   2. a local build of the pinned commit (build.ts), only when a developer opts in with
+ *      WHETSTONE_SHOWDOWN_BUILD=local, and never on CI;
+ *   3. otherwise nothing: the data job does not run Showdown code, so the last-good dex is kept
+ *      and the source reports how to provide the export.
+ *
+ * Offline runs use the recorded export in fixtures/raw/showdown/.
  */
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -28,9 +38,10 @@ import {
 import { error, errorMessage, failed, invalid, json, notSelected, ok, previousFile, warn, type SourceOutcome } from '../common.ts';
 import type { RegulationPlan } from '../regulations.ts';
 import { collectSprites } from '../sprites.ts';
-import { buildTree, exportDex, latestSha, TREE_VERSION } from './build.ts';
+import { buildTree, exportDex, TREE_VERSION } from './build.ts';
 import { crossCheckWithCalc, type CrossCheck } from './crosscheck.ts';
 import { EXPORTER_VERSION, type ExportRequest } from './export.ts';
+import { SHOWDOWN_BUILD_ENV, SHOWDOWN_EXPORT_ENV, SHOWDOWN_PIN_FILE, checkExport, dexRequest, isCi, loadShowdownPin, readExportFile, type ShowdownPin } from './pin.ts';
 import { RawDexExportSchema, type RawDexExport } from './raw.ts';
 import { transformDex, type DexFiles } from './transform.ts';
 
@@ -50,15 +61,35 @@ export const RECORDED_EXPORT = 'src/games/pokemon/fixtures/raw/showdown/export.j
 export const MIN_SPECIES = 150;
 
 export interface DexSourceOptions {
-  /** Produces the raw export of a commit (default: build the tree and run export.ts). Tests inject one. */
+  /** Produces the raw export of a commit (default: see the header comment). Tests inject one. */
   exporter?: (ctx: PipelineContext, sha: string, request: ExportRequest) => Promise<RawDexExport>;
   /** Minimum number of entries an online export must have (default MIN_SPECIES). */
   minSpecies?: number;
+  /** The pinned commit (default: curated/pokemon/showdown.json). */
+  pin?: ShowdownPin;
+  /** Export file from the isolated job (default: $WHETSTONE_SHOWDOWN_EXPORT); null for none. */
+  exportFile?: string | null;
+  /** May this run build and run the pinned tree itself? (default: WHETSTONE_SHOWDOWN_BUILD=local, never on CI). */
+  allowLocalBuild?: boolean;
 }
 
 async function buildAndExport(ctx: PipelineContext, sha: string, request: ExportRequest): Promise<RawDexExport> {
   const dist = await buildTree({ http: ctx.http, root: ctx.root, sha, log: ctx.log });
   return exportDex(dist, request, sha);
+}
+
+/** The raw export of the pinned commit, from the isolated job's file or (locally) a build. */
+async function obtainExport(ctx: PipelineContext, sha: string, request: ExportRequest, opts: DexSourceOptions): Promise<RawDexExport> {
+  if (opts.exporter) return opts.exporter(ctx, sha, request);
+  const file = opts.exportFile === undefined ? (process.env[SHOWDOWN_EXPORT_ENV] ?? null) : opts.exportFile;
+  if (file) {
+    ctx.log(`showdown: reading the export of ${sha.slice(0, 7)} from ${file}`);
+    return readExportFile(file);
+  }
+  if (opts.allowLocalBuild ?? (process.env[SHOWDOWN_BUILD_ENV] === 'local' && !isCi())) return buildAndExport(ctx, sha, request);
+  throw new Error(
+    `no export of ${sha.slice(0, 7)} to read: the data job does not run Showdown code. Run the isolated export job (export-job.ts) and pass its file as ${SHOWDOWN_EXPORT_ENV}${isCi() ? '' : `, or set ${SHOWDOWN_BUILD_ENV}=local to build it here`}`,
+  );
 }
 
 export interface DexOutcome extends SourceOutcome {
@@ -69,12 +100,7 @@ export interface DexOutcome extends SourceOutcome {
   calc: SourceStatus;
 }
 
-export function dexRequest(regs: RegulationsFile, plan: RegulationPlan): ExportRequest {
-  return {
-    regulations: regs.regulations.map((r) => ({ id: r.id, format: r.formats.doubles })),
-    dataRegulations: [plan.current.id, ...(plan.previous ? [plan.previous.id] : [])],
-  };
-}
+export { dexRequest };
 
 export function dexKey(sha: string, request: ExportRequest): string {
   return sha256(`${sha}|exporter ${EXPORTER_VERSION}|tree ${TREE_VERSION}|${JSON.stringify(request)}`).slice(0, 16);
@@ -205,7 +231,13 @@ export async function runDexSource(ctx: PipelineContext, regs: RegulationsFile, 
       raw = readRecordedExport(ctx.root);
       key = dexKey(raw.sha, request);
     } else {
-      const sha = await latestSha(ctx.http, ctx.log);
+      let pin: ShowdownPin;
+      try {
+        pin = opts.pin ?? loadShowdownPin(ctx.root);
+      } catch (err) {
+        throw new Error(`cannot read ${SHOWDOWN_PIN_FILE}: ${errorMessage(err)}`, { cause: err });
+      }
+      const sha = pin.sha;
       key = dexKey(sha, request);
       if (previous && prev.dexKey === key) {
         ctx.log(`showdown: ${sha.slice(0, 7)} already exported; re-emitting the last-good dex`);
@@ -224,7 +256,8 @@ export async function runDexSource(ctx: PipelineContext, regs: RegulationsFile, 
           counts: countsOf(legalCounts(sprited.dex, prevRegulation)),
         };
       }
-      raw = await (opts.exporter ?? buildAndExport)(ctx, sha, request);
+      raw = await obtainExport(ctx, sha, request, opts);
+      checkExport(raw, sha, request);
     }
   } catch (err) {
     const msg = `dex export failed: ${errorMessage(err)}`;

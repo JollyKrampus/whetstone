@@ -6,7 +6,7 @@ and validated against `POKEMON_FILES` in `../schema.ts`. Player names never leav
 | Source id | What | Files | Cadence |
 |---|---|---|---|
 | (curated) | `curated/pokemon/regulations.yaml` | `regulations.json` | every run |
-| `showdown` | Champions dex exported from Pokémon Showdown at an exact commit, plus sprites | `dex/*.json`, `public/dex.json`, `img/sprites/*.webp` | when the commit changes |
+| `showdown` | Champions dex exported from Pokémon Showdown at the commit pinned in `curated/pokemon/showdown.json`, plus sprites | `dex/*.json`, `public/dex.json`, `img/sprites/*.webp` | when the pin changes (reviewed PR) |
 | `smogon-calc` | cross-check of that dex against `@smogon/calc` generation 0 | (status only) | every run |
 | `smogon` | monthly chaos usage, VGC doubles + Bo3 + Battle Stadium Singles at cutoffs 1760/1500/0 | `usage/index.json`, `usage/<format>-<cutoff>.json` | when a new month appears |
 | `limitless` | grassroots tournaments with open team lists, last 30 days | `tournaments.json` | every run |
@@ -15,9 +15,9 @@ and validated against `POKEMON_FILES` in `../schema.ts`. Player names never leav
 
 ## Dex route (`showdown/`)
 
-Chosen: download the source zip of `smogon/pokemon-showdown` at the current `master` commit, extract `sim/`, `lib/`,
-`data/` and `config/formats.ts`, transpile them to CommonJS with the TypeScript compiler already in the project, and run
-`showdown/export.ts` in a child process with an empty environment. The exporter asks Showdown's own `Dex.forFormat` and
+Chosen: download the source zip of `smogon/pokemon-showdown` at the commit pinned in `curated/pokemon/showdown.json`,
+extract `sim/`, `lib/`, `data/` and `config/formats.ts`, transpile them to CommonJS with the TypeScript compiler already in
+the project, and run `showdown/export.ts` on them in a child process. The exporter asks Showdown's own `Dex.forFormat` and
 `TeamValidator` which species, Megas, items and moves are legal in each regulation's doubles format, so mod
 inheritance, the Champions PP rules (`scripts.ts`) and format bans are applied exactly as the simulator applies them.
 
@@ -32,9 +32,22 @@ Why not the alternatives:
   dependencies on every runner. The zip of the same commit (~7 MB) goes through the pipeline's `Http` (User-Agent,
   retries, dev cache) and needs nothing new.
 
-The commit is resolved with the GitHub API and, when that is rate limited (shared runner IPs), from the git smart-HTTP
-ref advertisement. `meta.extra.dexKey` hashes the commit, the exporter and tree versions and the regulation formats;
-while it is unchanged the last-good dex is re-emitted without downloading anything else. Transpiled trees are cached
+Building the dex runs code from that tree, so it is handled like a dependency update (SEC-1):
+
+- **Pinned, reviewed commit.** `curated/pokemon/showdown.json` (`{ sha, reviewedOn, note? }`, `showdown/pin.ts`) names the
+  commit. Nothing follows `master` automatically. A bump is a pull request: `node src/games/pokemon/pipeline/showdown/pin.ts --check`
+  prints the pinned commit, master and the compare link to read; `--set <sha|latest>` rewrites the file (reviewedOn = today).
+- **Isolated export job.** On CI the tree is built and run only by `node src/games/pokemon/pipeline/showdown/export-job.ts --out <file>`,
+  meant for a workflow job with no secrets and no write token. Its only output is the raw export JSON
+  (`RawDexExportSchema`). The Pokémon data job reads that file from `WHETSTONE_SHOWDOWN_EXPORT`, validates it again and
+  checks it is the pinned commit's export for this run's regulations (`checkExport`). The data job never builds or runs
+  Showdown code; without the file it keeps the last-good dex and says why. Developers can run the export job locally, or
+  set `WHETSTONE_SHOWDOWN_BUILD=local` to let `node pipeline/run.ts` build the pinned tree itself (ignored on CI).
+- The exporter's child process gets no inherited environment variables. It still runs as the same user, so that is
+  defence in depth, not a sandbox; the separate job is the boundary.
+
+`meta.extra.dexKey` hashes the commit, the exporter and tree versions and the regulation formats;
+while it is unchanged the last-good dex is re-emitted without any network access. Transpiled trees are cached
 in `.cache/showdown/<sha>/` locally. A full rebuild takes about 30 s.
 
 Validation before a new dex replaces the last-good one: schema checks, at least 150 entries, at most a 15 % drop in

@@ -1,0 +1,5 @@
+{
+  "sha": "7332b60e22b9e8194bb53549549eba241d73cc9a",
+  "reviewedOn": "2026-10-10",
+  "note": "Pinned at the commit the published Reg M-C dex was already exported from (data of 2026-10-09). Bump only in a pull request that links the upstream compare view."
+}
