@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -70,11 +70,22 @@ describe('mtga pipeline (offline fixtures)', () => {
       ['grindstone-mcp', 'ok'],
     ]);
     const extra = MtgaMetaExtraSchema.parse(r.meta.extra);
-    expect(extra.grindstone).toBe(readGrindstoneVersion(ROOT).version);
+    expect(extra.grindstone).toBe(readGrindstoneVersion().version);
+    expect(r.meta.sources.find((s) => s.id === 'grindstone-mcp')?.detail).toBe(`grindstone-mcp ${extra.grindstone}, workspace package`);
     expect(extra.latestSet).toBe(r.meta.version.label);
     expect(extra.metaFormats).toEqual(['standard']);
-    expect(r.meta.counts).toMatchObject({ limitedSets: 1, metaDecks: 1 });
+    // The curated Standard lists are real (no example decks) and every card resolves offline.
+    expect(r.meta.counts).toMatchObject({ limitedSets: 1, metaDecks: 10 });
+    expect(r.meta.sources.find((s) => s.id === 'curated-meta')?.detail).toBe('1 format(s), 10 list(s)');
     expect(r.meta.counts.cards).toBeGreaterThan(r.meta.counts.standardCards!);
+  });
+
+  it('runs grindstone-mcp from the workspace package (packages/grindstone-mcp)', async () => {
+    const core = (await import('grindstone-mcp/core')) as Record<string, unknown>;
+    expect(typeof core.suggestUpgrades).toBe('function');
+    expect(typeof core.aggregateCards).toBe('function');
+    const pkg = JSON.parse(readFileSync(path.join(ROOT, 'packages', 'grindstone-mcp', 'package.json'), 'utf8')) as { version: string };
+    expect(readGrindstoneVersion().version).toBe(pkg.version);
   });
 
   it('computes Limited ratings from the recorded 17Lands sample, with card ids from the index', async () => {

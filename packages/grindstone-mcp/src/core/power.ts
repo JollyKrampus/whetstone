@@ -183,6 +183,16 @@ export function heuristicQuality(
   h: ConstructedRubric['cardQuality']['heuristic'],
   asOf: string,
 ): number {
+  const p = heuristicParts(card, h, asOf);
+  return p.popularity + p.rarity + p.recency;
+}
+
+/** The weighted parts of heuristicQuality, so callers can say which one made a card score higher. */
+export function heuristicParts(
+  card: CardRecord,
+  h: ConstructedRubric['cardQuality']['heuristic'],
+  asOf: string,
+): { popularity: number; rarity: number; recency: number } {
   const rank = card.edhrecRank;
   const logBest = Math.log(h.popularityBest);
   const logWorst = Math.log(h.popularityWorst);
@@ -195,7 +205,7 @@ export function heuristicQuality(
         ? 0
         : 1 - (years - h.recencyFullYears) / (h.recencyZeroYears - h.recencyFullYears);
   const rarity = h.rarityValue[wildcardRarity(card)];
-  return h.popularityWeight * popularity + h.rarityWeight * rarity + h.recencyWeight * recency;
+  return { popularity: h.popularityWeight * popularity, rarity: h.rarityWeight * rarity, recency: h.recencyWeight * recency };
 }
 
 // ---- 60-card formats -------------------------------------------------------------------

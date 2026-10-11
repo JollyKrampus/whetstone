@@ -982,7 +982,13 @@ textarea.input {
 .paste__actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--sp-2);
+}
+
+.paste__loading {
+  flex-basis: 100%;
+  font-size: var(--fs-sm);
 }
 
 .paste__summary {
@@ -1810,6 +1816,28 @@ textarea.input {
   font-size: var(--fs-xs);
 }
 
+.wc__usd,
+.wc__cardusd {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+
+.wc__cardusd {
+  margin-left: var(--sp-2);
+}
+
+.dl__companion {
+  margin: var(--sp-1) 0 0;
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+
+.dl__companion.is-broken {
+  color: var(--negative);
+  font-weight: 600;
+}
+
 .wc__owned,
 .upg__budget {
   display: grid;
@@ -2228,6 +2256,19 @@ textarea.input {
 
 .upg__apply {
   font-size: var(--fs-sm);
+}
+
+.upg__estimate {
+  font-size: var(--fs-sm);
+}
+
+.swap--required {
+  border-color: var(--warning);
+}
+
+.swap__usd {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
 }
 
 /* ---------- card dialog ---------- */
@@ -2771,9 +2812,14 @@ textarea.input {
   display: none;
 }
 
-.ltable__count {
+.ltable__count,
+.ltable__note {
   color: var(--text-muted);
   font-size: var(--fs-sm);
+}
+
+.ltable__note {
+  margin: 0;
 }
 
 .ltable__wrap {
@@ -3089,8 +3135,13 @@ th[aria-sort] .sortbtn__icon {
   font-size: var(--fs-xs);
 }
 
-.cdeck__nosrc {
+.cdeck__nosrc,
+.cdeck__notes {
   font-size: var(--fs-xs);
+}
+
+.cdeck__notes {
+  margin: 0;
 }
 
 .cdeck__list {

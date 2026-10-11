@@ -53,7 +53,8 @@ export const constructedRubricSchema = z.object({
   karsten,
   archetypes: z.object({ aggro: archetype, midrange: archetype, control: archetype, ramp: archetype }),
   inference: z.object({
-    ramp: z.object({ minRamp: z.number() }),
+    // minAvgMv / minTopEnd are optional so rubric overrides written for 0.3.0 still load.
+    ramp: z.object({ minRamp: z.number(), minAvgMv: z.number().optional(), minTopEnd: z.number().optional() }),
     control: z.object({ minInteraction: z.number(), maxCreatures: z.number() }),
     aggro: z.object({ maxAvgMv: z.number(), minCreatures: z.number() }),
   }),

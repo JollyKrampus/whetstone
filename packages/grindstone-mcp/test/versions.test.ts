@@ -52,6 +52,9 @@ describe('feel-bad cards', () => {
     expect(saltOf(index.lookup('Smothering Tithe')!).avoid[0]).toMatch(/Game Changers/);
     expect(saltOf(index.lookup('Voice of Victory')!)).toMatchObject({ avoid: [], penalize: ['no spells on your turn'] });
     expect(saltOf(index.lookup('Counterspell')!).penalize).toContain('counterspells');
+    // The reveal and the discard are separate sentences in Oracle text.
+    expect(saltOf(index.lookup('Thoughtseize')!).penalize).toContain('hand attack');
+    expect(saltOf(index.lookup('Duress')!).penalize).toContain('hand attack');
     expect(saltOf(index.lookup('Shock')!)).toMatchObject({ avoid: [], penalize: [], penalty: 0 });
   });
 

@@ -4,6 +4,7 @@ import '../../games/mtga/components/mtga.css';
 import { formatDayUTC, int } from '../../core/format.ts';
 import { LIMITED_FORMAT_LABEL } from '../../games/mtga/lib/limited.ts';
 import { getMetaSnapshots } from '../../games/mtga/load.ts';
+import { realMetaDecks } from '../../games/mtga/schema.ts';
 import { cardFacts, limitedSets } from '../../games/mtga/pagedata.ts';
 import { FORMAT_LABELS } from '../../games/mtga/worker/protocol.ts';
 import { navHref } from '../../games/registry.ts';
@@ -12,13 +13,13 @@ import GameLayout from '../../layouts/GameLayout.astro';
 const facts = cardFacts();
 const limited = limitedSets();
 const snapshots = getMetaSnapshots();
-const realMeta = snapshots.filter((s) => !s.example && s.decks.some((d) => !d.example));
+const realMeta = snapshots.filter((s) => realMetaDecks(s).length > 0);
 
 const tools = [
   {
     href: navHref('mtga', 'deck/'),
     title: 'Deck analyzer',
-    text: 'Paste an Arena export: legality in every format, curve and colour sources, a power tier with reasons, sample hands, wildcard cost and budget upgrades.',
+    text: 'Paste an Arena export: legality in every format, curve and colour sources, a power tier with reasons, sample hands, wildcard cost and upgrades for the same deck, a stronger one or a friendlier one.',
     cta: 'Analyze a deck',
     icon: 'deck',
   },
@@ -56,7 +57,7 @@ const tools = [
       <p class="mpage__lead">
         Paste a deck to see where it is legal, how its mana holds up, how strong it looks and what to craft next, or look up how cards are doing
         in Limited. Everything runs in your browser on the
-        <a href="https://github.com/JollyKrampus/grindstone-mcp" rel="noopener">grindstone-mcp</a> engine.
+        <a href="https://github.com/JollyKrampus/whetstone/tree/main/packages/grindstone-mcp" rel="noopener">grindstone-mcp</a> engine.
       </p>
       <div class="cluster mpage__cta">
         <a class="btn btn--primary" href={navHref('mtga', 'deck/')}>Analyze a deck</a>
@@ -147,7 +148,9 @@ const tools = [
             <dd>
               {
                 realMeta.length
-                  ? `Curated lists for ${realMeta.map((s) => FORMAT_LABELS[s.format]).join(', ')}`
+                  ? realMeta
+                      .map((s) => `${realMetaDecks(s).length} curated ${FORMAT_LABELS[s.format]} lists${s.date ? ` as of ${formatDayUTC(s.date)}` : ''}`)
+                      .join('; ')
                   : 'No curated lists yet: add your own on the Meta page'
               }
             </dd>

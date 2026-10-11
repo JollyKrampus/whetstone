@@ -2,8 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 import { repoRoot } from '../../../lib/datadir.ts';
-import { Engine, EngineError, applySwaps, arenaName, autoFormat, toArenaText, type ShardData } from './engine.ts';
-import { FORMAT_IDS, type LegalityView, type Pool } from './protocol.ts';
+import { PROFILES } from 'grindstone-mcp/core';
+import { Engine, EngineError, arenaName, autoFormat, toArenaText, type ShardData } from './engine.ts';
+import { FORMAT_IDS, PROFILE_CHANGE_PERCENT, type ChangeCap, type LegalityView, type Pool, type Profile } from './protocol.ts';
 
 const FIXTURES = path.join(repoRoot(), 'fixtures', 'mtga', 'public');
 const shard = (pool: Pool): ShardData => JSON.parse(fs.readFileSync(path.join(FIXTURES, `_cards.${pool}.json`), 'utf8')) as ShardData;
@@ -161,33 +162,62 @@ describe('Engine tools', () => {
     const s = await e.suggest({
       text: BOROS,
       format: 'standard',
-      mode: 'casual',
+      profile: 'casual',
+      preferPremium: false,
       intensity: 'heavy',
       wildcards: { mythic: 0 },
       keepCards: ['Shock'],
       maxSwaps: 5,
       meta: null,
     });
+    expect(s).toMatchObject({ profile: 'casual', preferPremium: false, estimateOnly: true });
     expect(s.totalCost.mythic).toBe(0);
     expect(s.swaps.every((w) => w.cut !== 'Shock')).toBe(true);
     for (const w of s.swaps) {
-      expect(s.appliedText).toContain(w.add);
-      expect(Object.values(s.cards).some((c) => c.name === w.add)).toBe(true);
+      expect(s.appliedText).toContain(w.add.split(' // ')[0]);
+      expect(s.cards[w.addOracleId]?.name).toBe(w.add);
+      expect(s.cards[w.cutOracleId]?.name).toBe(w.cut);
+      expect(['spell', 'land']).toContain(w.kind);
     }
     expect(s.appliedText.startsWith('About\nName Boros Test')).toBe(true);
   });
 
+  it("uses the version's own change cap unless the visitor picks one", async () => {
+    // The page states each version's cap without loading grindstone; it must match grindstone's.
+    for (const p of ['faithful', 'competitive', 'casual'] as const) expect(PROFILE_CHANGE_PERCENT[p]).toBe(PROFILES[p].percent);
+    const { e } = engine();
+    const run = (profile: Profile, intensity: ChangeCap) =>
+      e.suggest({ text: BOROS, format: 'standard', profile, preferPremium: false, intensity, wildcards: null, keepCards: [], maxSwaps: 5, meta: null });
+    expect((await run('faithful', 'version')).changes.limit).toBe(15); // 25% of 60
+    expect((await run('casual', 'version')).changes.limit).toBe(9); // 15% of 60
+    expect((await run('competitive', 'version')).changes.limit).toBe(60);
+    expect((await run('competitive', 'light')).changes.limit).toBe(4); // 7% of 60
+    expect((await run('casual', 'any')).changes.limit).toBe(60);
+    // A profile the page doesn't know falls back to the faithful version.
+    expect((await run('nonsense' as Profile, 'version')).profile).toBe('faithful');
+  });
+
   it('applies only the chosen swaps', async () => {
     const { e } = engine();
-    const s = await e.suggest({ text: BOROS, format: 'standard', mode: 'competitive', intensity: 'heavy', wildcards: null, keepCards: [], maxSwaps: 5, meta: null });
+    const s = await e.suggest({ text: BOROS, format: 'standard', profile: 'competitive', preferPremium: false, intensity: 'any', wildcards: null, keepCards: [], maxSwaps: 5, meta: null });
     const first = s.swaps[0];
     if (!first) return; // nothing to apply with this tiny pool
-    const r = await e.apply({ text: BOROS, swaps: [{ cut: first.cut, add: first.add, qty: first.qty }] });
-    expect(r.text).toContain(first.add);
+    const r = await e.apply({ text: BOROS, swaps: [first] });
+    expect(r.text).toContain(first.add.split(' // ')[0]);
     for (const w of s.swaps.slice(1)) if (!BOROS.includes(w.add)) expect(r.text).not.toContain(w.add);
     // Bad swaps are ignored rather than corrupting the list.
-    const same = await e.apply({ text: BOROS, swaps: [{ cut: 'Shock', add: 'Shock', qty: 99 }] });
-    expect(same.text).toBe(toArenaText(await e.resolve(BOROS)));
+    const deck = await e.resolve(BOROS);
+    const shock = deck.main.find((x) => x.name === 'Shock')!.oracleId;
+    const strike = deck.main.find((x) => x.name === 'Lightning Strike')!.oracleId;
+    const unchanged = toArenaText(deck);
+    for (const bad of [
+      { cut: 'Shock', add: 'Shock', qty: 2, cutOracleId: shock, addOracleId: shock },
+      { cut: 'Shock', add: 'Lightning Strike', qty: 99, cutOracleId: shock, addOracleId: strike },
+      { cut: 'Shock', add: 'Lightning Strike', qty: 4, cutOracleId: 'not-in-deck', addOracleId: strike },
+      { cut: 'Shock', add: '?', qty: 1, cutOracleId: shock, addOracleId: 'unknown' },
+    ]) {
+      expect((await e.apply({ text: BOROS, swaps: [bad] })).text).toBe(unchanged);
+    }
   });
 
   it('reports the rubric tier scale with the power rating', async () => {
@@ -243,13 +273,29 @@ describe('export helpers', () => {
     expect(arenaName({ name: 'Fire // Ice', layout: 'split', faces: [face('Fire'), face('Ice')] })).toBe('Fire // Ice');
   });
 
-  it('applies swaps and drops cards that reach zero copies', async () => {
+  it('applies swaps by oracle id and drops cards that reach zero copies', async () => {
     const { e } = engine();
     await e.init('arena');
-    const deck = await e.resolve('Deck\n2 Shock\n4 Mountain');
-    const idx = (e as unknown as { index: Parameters<typeof applySwaps>[2] }).index;
-    const out = applySwaps(deck, [{ cut: 'Shock', add: 'Lightning Strike', qty: 2 }], idx);
-    expect(toArenaText(out)).toBe('Deck\n4 Mountain\n2 Lightning Strike');
+    const text = 'Deck\n2 Shock\n2 Lightning Strike\n4 Mountain';
+    const deck = await e.resolve(text);
+    const id = (name: string) => deck.main.find((x) => x.name === name)!.oracleId;
+    const out = await e.apply({ text, swaps: [{ cut: 'Shock', add: 'Lightning Strike', qty: 2, cutOracleId: id('Shock'), addOracleId: id('Lightning Strike') }] });
+    expect(out.text).toBe('Deck\n4 Lightning Strike\n4 Mountain');
+  });
+
+  it('flags feel-bad cards, checks the companion and carries paper prices', async () => {
+    const { e } = engine();
+    const r = await e.analyze({ text: `Companion\n1 Sheoldred, the Apocalypse\n\n${BOROS}\n1 Thoughtseize`, format: null, meta: null });
+    const seize = r.feelBad.find((f) => f.name === 'Thoughtseize');
+    expect(seize?.penalize).toContain('hand attack');
+    expect(r.feelBad.every((f) => f.avoid.length + f.penalize.length > 0)).toBe(true);
+    // Sheoldred is no companion: grindstone knows no condition for it.
+    expect(r.companionCheck).toMatchObject({ name: 'Sheoldred, the Apocalypse', condition: null, breaking: [] });
+    // The legality section carries grindstone's companion issue in every format.
+    for (const l of r.legality) expect(l.issues.map((i) => i.code)).toContain('companion_unknown');
+    const priced = Object.values(r.cards).filter((c) => c.priceUsd !== undefined);
+    expect(priced.length).toBeGreaterThan(0);
+    for (const c of priced) expect(c.priceUsd).toBeGreaterThan(0);
   });
 
   it('auto-detects Brawl decks by their commander and otherwise falls back to the fewest errors', () => {

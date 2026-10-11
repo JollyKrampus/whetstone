@@ -35,6 +35,9 @@ export interface CuratedDeck {
   winRate?: number;
   list: string;
   sourceUrl?: string;
+  /** When the source published the list (YYYY-MM-DD). */
+  date?: string;
+  notes?: string;
   example?: true;
 }
 

@@ -84,7 +84,7 @@ export const RULES: Rule[] = [
     pattern: /search your library for (?:a|up to (?:one|two)) (?:basic )?(?:land|forest|plains|island|swamp|mountain)[^.]*onto the battlefield/,
   },
   { role: 'ramp', id: 'extra-land', pattern: /put a land card from your hand onto the battlefield|play an additional land/ },
-  { role: 'ramp', id: 'treasure', test: (c) => !isLand(c) && /create (?:a|two|three|x) (?:tapped )?treasure tokens?/.test(rulesText(c)) },
+  { role: 'ramp', id: 'treasure', test: (c) => !isLand(c) && makesTreasureOnDemand(c) },
   {
     role: 'tutor',
     id: 'search-card',
@@ -107,6 +107,29 @@ export const RULES: Rule[] = [
   { role: 'lifegain', id: 'gain-life', pattern: /you gain (?:\d+|x|that much) life|gain life equal/ },
   { role: 'lifegain', id: 'lifelink', test: (c) => c.keywords.includes('Lifelink') || /\blifelink\b/.test(rulesText(c)) },
 ];
+
+const TREASURE = /create (?:a|two|three|x) (?:tapped )?treasure tokens?/;
+/** Saga chapter lines: "I —", "II, III —". */
+const SAGA_CHAPTER = /^(?:i|ii|iii|iv|v|vi)(?:, (?:i|ii|iii|iv|v|vi))* —/;
+
+/**
+ * Treasure counts as ramp only when you can count on it: the spell itself makes it, it comes
+ * when the permanent enters (or is cast), or an activated ability makes it. Treasure from combat
+ * damage, attacks, saga chapters, upkeep or other recurring triggers, or from abilities granted
+ * to tokens, is a bonus rather than a ramp plan.
+ */
+export function makesTreasureOnDemand(c: CardRecord): boolean {
+  for (const raw of rulesText(c).split('\n')) {
+    // Abilities in quotes belong to tokens or other objects the card creates.
+    const line = raw.replace(/"[^"]*"/g, '').trim();
+    if (!TREASURE.test(line)) continue;
+    if (SAGA_CHAPTER.test(line)) continue;
+    if (/^(?:whenever|at the beginning)\b/.test(line)) continue;
+    if (/^when\b/.test(line) && !/^when [^,]*\b(?:enters|you cast)\b/.test(line)) continue;
+    return true;
+  }
+  return false;
+}
 
 export interface RoleTag {
   role: Role;

@@ -15,6 +15,7 @@ import type {
   Intensity,
   Issue,
   Mode,
+  Profile,
   Rarity,
   Role,
   SearchOrder,
@@ -24,7 +25,7 @@ import type {
   ValidationIssue,
   WildcardCounts,
   WildcardReport,
-} from '#vendor/grindstone/core.js';
+} from 'grindstone-mcp/core';
 
 /** Arena constructed formats grindstone validates, in display order. */
 export const FORMAT_IDS = ['standard', 'pioneer', 'historic', 'timeless', 'brawl', 'standardbrawl'] as const;
@@ -66,6 +67,8 @@ export interface CardView {
   power?: string;
   toughness?: string;
   faces: CardFace[];
+  /** Cheapest paper price in USD in the card data (Arena has no cash prices); absent when unknown. */
+  priceUsd?: number;
   /** Newest Arena printing, for cards.scryfall.io images and the scryfall.com link. */
   scryfallId?: string;
   set?: string;
@@ -126,6 +129,27 @@ export interface MetaCompareView {
   unresolved: { list: string; issues: Issue[] }[];
 }
 
+/** A card a casual table may find feel-bad (grindstone's rubric/salt.json). */
+export interface FeelBadView {
+  name: string;
+  oracleId: string;
+  /** Reasons the casual version cuts it and never adds it. */
+  avoid: string[];
+  /** Reasons it is only scored down in the casual version. */
+  penalize: string[];
+}
+
+/** The companion's deckbuilding condition, checked against the deck. */
+export interface CompanionCheckView {
+  name: string;
+  /** Null when grindstone does not know this card's condition. */
+  condition: string | null;
+  /** Cards in the starting deck that break the condition. */
+  breaking: string[];
+  /** The companion also sits in the sideboard (Arena needs that outside Brawl). */
+  inSideboard: boolean;
+}
+
 export interface SimOptionsView {
   iterations: number;
   seed: number;
@@ -166,6 +190,9 @@ export interface AnalyzeResult {
   wildcards: WildcardReport;
   simulation: SimReport;
   meta: MetaCompareView | null;
+  /** Cards a casual table may find feel-bad, in deck order. */
+  feelBad: FeelBadView[];
+  companionCheck: CompanionCheckView | null;
   /** Every card mentioned in this result, by oracle id. */
   cards: Record<string, CardView>;
   pool: Pool;
@@ -195,12 +222,27 @@ export interface HandResult {
   ids: Record<string, string>;
 }
 
+/**
+ * How much of the deck may change: the chosen version's own cap ('version'), one of grindstone's
+ * intensities, or 'any' for no cap.
+ */
+export type ChangeCap = 'version' | Intensity | 'any';
+
+/**
+ * Each version's own change cap in percent of the deck (grindstone's PROFILES[p].percent; 100 =
+ * no cap). Kept here so the page can say it without loading grindstone; a test pins it.
+ */
+export const PROFILE_CHANGE_PERCENT: Readonly<Record<Profile, number>> = { faithful: 25, competitive: 100, casual: 15 };
+
 export interface SuggestRequest {
   type: 'suggest';
   text: string;
   format: FormatId;
-  mode: Mode;
-  intensity: Intensity;
+  /** The deck version to build (grindstone profile). */
+  profile: Profile;
+  /** Lean toward mythics and rares when there is a choice (never past the wildcard budget). */
+  preferPremium: boolean;
+  intensity: ChangeCap;
   /** Per-rarity budget; a missing rarity is unlimited. Null = no budget. */
   wildcards: Partial<WildcardCounts> | null;
   keepCards: string[];
@@ -209,11 +251,15 @@ export interface SuggestRequest {
 }
 
 export interface SuggestView {
+  profile: Profile;
+  preferPremium: boolean;
+  /** No meta lists steered the choice: card strength is only estimated. */
+  estimateOnly: boolean;
   swaps: Swap[];
   totalCost: WildcardCounts;
   budget: Partial<WildcardCounts> | null;
   remaining: Partial<WildcardCounts> | null;
-  changes: { cards: number; limit: number; deckSize: number; intensity: Intensity };
+  changes: { cards: number; limit: number; deckSize: number };
   notes: string[];
   /** The deck with every swap applied (Arena export), ready for "Apply". */
   appliedText: string;
@@ -224,7 +270,7 @@ export interface ApplyRequest {
   type: 'apply';
   text: string;
   /** Swaps to apply to the main deck, in order (a subset of a SuggestView). */
-  swaps: { cut: string; add: string; qty: number }[];
+  swaps: Pick<Swap, 'cut' | 'add' | 'qty' | 'cutOracleId' | 'addOracleId'>[];
 }
 
 export interface ApplyResult {
@@ -326,4 +372,4 @@ export function isProgress(m: WorkerMessage): m is WorkerProgress {
   return (m as WorkerProgress).type === 'progress';
 }
 
-export type { Analysis, Color, Dimension, Intensity, Issue, Mode, Rarity, Role, SearchOrder, SimCheck, SimReport, Swap, ValidationIssue, WildcardCounts, WildcardReport };
+export type { Analysis, Color, Dimension, Intensity, Issue, Mode, Profile, Rarity, Role, SearchOrder, SimCheck, SimReport, Swap, ValidationIssue, WildcardCounts, WildcardReport };

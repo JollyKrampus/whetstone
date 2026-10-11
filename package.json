@@ -11,8 +11,7 @@
   "imports": {
     "#core/*": "./src/core/*",
     "#games/*": "./src/games/*",
-    "#pipeline/*": "./pipeline/*",
-    "#vendor/*": "./vendor/*"
+    "#pipeline/*": "./pipeline/*"
   },
   "scripts": {
     "predev": "node pipeline/stage.ts",

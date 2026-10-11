@@ -3,16 +3,21 @@
  *
  *   node pipeline/run.ts --game mtga          # live run; fills .cache/http
  *   node src/games/mtga/fixtures/make-raw.ts  # trims the cached responses into ./raw/
+ *     [--cache <dir>]                         # another checkout's .cache/http (read only)
+ *     [--only scryfall|17lands]               # rebuild one source's fixtures
  *
- * Keeps them small and deterministic: the 48 cards of fixtures/mtga plus a few cards of the
- * newest Limited set (printings stripped to the fields the pipeline reads), the first rows of
- * one 17Lands game-data and draft-data file restricted to those cards, and their cards.csv rows.
+ * Keeps them small and deterministic: the cards of fixtures/mtga, every card named in the curated
+ * meta lists (curated/mtga/meta/*.json, which the offline pipeline validates) and a few cards of
+ * the newest Limited set (printings stripped to the fields the pipeline reads, prices trimmed to
+ * usd and usd_foil), the first rows of one 17Lands game-data and draft-data file restricted to
+ * those cards, and their cards.csv rows.
  * 17Lands data is CC BY 4.0; Scryfall card data is used under Scryfall's terms (both credited).
  */
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseArgs } from 'node:util';
 import { gzipSync } from 'node:zlib';
 import { parseCsvLine } from '../pipeline/csv.ts';
 import { textLines } from '../pipeline/lines.ts';
@@ -22,7 +27,10 @@ import { CARDS_CSV_URL, draftDataUrl, gameDataUrl } from '../pipeline/seventeenl
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../../..');
 const RAW = path.join(HERE, 'raw');
-const CACHE = path.join(ROOT, '.cache', 'http');
+const ARGS = parseArgs({ options: { cache: { type: 'string' }, only: { type: 'string' } } }).values;
+const CACHE = path.resolve(ARGS.cache ?? path.join(ROOT, '.cache', 'http'));
+const ONLY = ARGS.only ?? null;
+if (ONLY !== null && ONLY !== 'scryfall' && ONLY !== '17lands') throw new Error('--only must be scryfall or 17lands');
 
 const LIMITED_SET = 'HOB';
 /** Cards of the Limited fixture (17Lands columns kept, Scryfall printings kept). */
@@ -35,8 +43,9 @@ const DRAFTS = 3;
 const KEEP = [
   'arena_id', 'card_faces', 'cmc', 'collector_number', 'color_identity', 'colors', 'edhrec_rank', 'game_changer', 'games', 'id',
   'image_status', 'image_uris', 'keywords', 'layout', 'legalities', 'mana_cost', 'name', 'oracle_id', 'oracle_text', 'power',
-  'produced_mana', 'rarity', 'released_at', 'set', 'set_name', 'set_type', 'toughness', 'type_line',
+  'prices', 'produced_mana', 'rarity', 'released_at', 'set', 'set_name', 'set_type', 'toughness', 'type_line',
 ];
+const PRICE_KEEP = ['usd', 'usd_foil'];
 const FACE_KEEP = ['colors', 'mana_cost', 'name', 'oracle_text', 'power', 'toughness', 'type_line'];
 
 function cached(url: string, method = 'GET'): Uint8Array {
@@ -58,6 +67,7 @@ function pick(o: Record<string, unknown>, keys: readonly string[]): Record<strin
 }
 
 function write(rel: string, data: string | Uint8Array): void {
+  if (ONLY !== null && !rel.startsWith(`${ONLY}/`)) return;
   const file = path.join(RAW, ...rel.split('/'));
   mkdirSync(path.dirname(file), { recursive: true });
   writeFileSync(file, data);
@@ -65,6 +75,23 @@ function write(rel: string, data: string | Uint8Array): void {
 }
 
 const csvField = (v: string) => (/[",]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
+
+/** Card names in the curated meta lists ("4 Name", optionally followed by a set code). */
+function curatedNames(): string[] {
+  const dir = path.join(ROOT, 'curated', 'mtga', 'meta');
+  if (!existsSync(dir)) return [];
+  const names = new Set<string>();
+  for (const f of readdirSync(dir).filter((x) => x.endsWith('.json')).sort()) {
+    const snap = JSON.parse(readFileSync(path.join(dir, f), 'utf8')) as { decks: { list: string }[] };
+    for (const d of snap.decks) {
+      for (const line of d.list.split(/\r?\n/)) {
+        const m = /^\s*\d+x?\s+(.+?)(?:\s+\([A-Za-z0-9]{2,6}\)(?:\s+\S+)?)?\s*$/.exec(line);
+        if (m?.[1]) names.add(m[1]);
+      }
+    }
+  }
+  return [...names];
+}
 
 async function main(): Promise<void> {
   const fixtureCards = (JSON.parse(readFileSync(path.join(ROOT, 'fixtures', 'mtga', 'public', '_cards.arena.json'), 'utf8')) as { cards: { name: string }[] }).cards.map((c) => c.name);
@@ -144,7 +171,7 @@ async function main(): Promise<void> {
   // ---- Scryfall: bulk-data entry and the printings of the chosen cards ----
   const bulk = JSON.parse(new TextDecoder().decode(cached(SCRYFALL_BULK_URL))) as Record<string, unknown>;
   write('scryfall/bulk-data-default_cards.json', `${JSON.stringify(bulk, null, 2)}\n`);
-  const wanted = new Set([...fixtureCards, ...limitedCards]);
+  const wanted = new Set([...fixtureCards, ...limitedCards, ...curatedNames()]);
   const byOracle = new Map<string, Record<string, unknown>[]>();
   for await (const raw of textLines(cached(String(bulk.jsonl_download_uri)))) {
     const line = raw.trim().replace(/,$/, '');
@@ -155,6 +182,7 @@ async function main(): Promise<void> {
     if (!names.some((n) => wanted.has(n)) || !c.oracle_id) continue;
     if (c.set_type === 'token' || c.set_type === 'memorabilia') continue;
     const slim = pick(c, KEEP);
+    if (slim.prices) slim.prices = pick(slim.prices as Record<string, unknown>, PRICE_KEEP);
     if (faces.length) slim.card_faces = faces.map((f) => pick(f, FACE_KEEP));
     if (slim.image_uris) slim.image_uris = { normal: (c.image_uris as Record<string, string>).normal };
     const list = byOracle.get(String(c.oracle_id)) ?? [];

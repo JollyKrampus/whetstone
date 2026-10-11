@@ -7,7 +7,7 @@
  * printing (so the site can hotlink its image from cards.scryfall.io without an API call) and
  * per-set statistics for sets.json. Node-only.
  */
-import { aggregateCards, type CardRecord } from '#vendor/grindstone/core.js';
+import { aggregateCards, type CardRecord } from 'grindstone-mcp/core';
 import { ARENA_FORMATS, type CardShard, type CompactCardRecord, type MtgSet } from '../schema.ts';
 
 export const SCRYFALL_BULK_URL = 'https://api.scryfall.com/bulk-data/default_cards';
@@ -125,14 +125,16 @@ export async function foldBulk(lines: AsyncIterable<string> | Iterable<string>):
 const SET_RE = /^[a-z0-9]{2,6}$/;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
-/** A grindstone record as stored in a shard: Arena legalities only, `not_legal` omitted, image extras added. */
+/** A grindstone record as stored in a shard: Arena legalities only, `not_legal` omitted, no null price, image extras added. */
 export function toShardRecord(r: CardRecord, printing: Printing | undefined): CompactCardRecord {
   const legalities: Partial<Record<(typeof ARENA_FORMATS)[number], 'legal' | 'not_legal' | 'banned' | 'restricted'>> = {};
   for (const f of ARENA_FORMATS) {
     const v = r.legalities[f];
     if (v === 'legal' || v === 'banned' || v === 'restricted') legalities[f] = v;
   }
-  const out: CompactCardRecord = { ...r, legalities };
+  const { priceUsd, ...rest } = r;
+  // A missing price stays out of the shard (hydration restores null).
+  const out: CompactCardRecord = { ...rest, legalities, ...(priceUsd !== null ? { priceUsd } : {}) };
   if (printing && UUID_RE.test(printing.id) && SET_RE.test(printing.set) && printing.cn !== '') {
     out.scryfallId = printing.id;
     out.set = printing.set;

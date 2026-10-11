@@ -32,8 +32,8 @@
     "ramp": { "avgMv": 3.4, "lowDropShare": 0.3, "lands": 25, "interaction": 6, "maxTopEnd": 10 }
   },
   "inference": {
-    "notes": "Checked in order: ramp, control, aggro; anything else is midrange. Counts are card copies in a 60-card deck.",
-    "ramp": { "minRamp": 8 },
+    "notes": "Checked in order: ramp, control, aggro; anything else is midrange. Counts are card copies in a 60-card deck. A ramp plan also needs something to ramp into: an average mana value of at least minAvgMv, or minTopEnd cards at 5+ mana.",
+    "ramp": { "minRamp": 8, "minAvgMv": 2.8, "minTopEnd": 6 },
     "control": { "minInteraction": 12, "maxCreatures": 12 },
     "aggro": { "maxAvgMv": 2.4, "minCreatures": 14 }
   },

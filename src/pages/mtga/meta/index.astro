@@ -7,7 +7,7 @@ import MetaManager from '../../../games/mtga/components/MetaManager.tsx';
 import '../../../games/mtga/components/mtga.css';
 import CopyButton from '../../../components/CopyButton.tsx';
 import EmptyState from '../../../components/EmptyState.astro';
-import { pct } from '../../../core/format.ts';
+import { formatDayUTC, pct } from '../../../core/format.ts';
 import { deckHash } from '../../../games/mtga/lib/share.ts';
 import { getMeta } from '../../../games/mtga/load.ts';
 import { curatedViews, shardUrls } from '../../../games/mtga/pagedata.ts';
@@ -16,6 +16,15 @@ import { navHref } from '../../../games/registry.ts';
 import GameLayout from '../../../layouts/GameLayout.astro';
 
 const meta = getMeta();
+
+/** "magic.gg" from a source URL, so the link says where it goes. */
+function hostOf(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return 'link';
+  }
+}
 
 /** Main-deck and sideboard card counts of an Arena export (lines after "Sideboard" are the sideboard). */
 function countCards(list: string): { main: number; side: number } {
@@ -84,7 +93,7 @@ const examples = snaps.map((s) => ({ format: s.format, decks: s.decks.filter((d)
                   {s.example && <span class="badge badge--warning">example only</span>}
                 </h3>
                 <p class="muted cmeta__src">
-                  {s.date && <>As of <time datetime={s.date}>{s.date}</time>. </>}
+                  {s.date && <>As of <time datetime={s.date}>{formatDayUTC(s.date)}</time>. </>}
                   {s.source}
                 </p>
               </div>
@@ -104,8 +113,9 @@ const examples = snaps.map((s) => ({ format: s.format, decks: s.decks.filter((d)
                         <span>
                           {d.main} cards{d.side ? ` + ${d.side} sideboard` : ''}
                         </span>
-                        {d.metaShare !== undefined && <span>{pct(d.metaShare)} of the meta</span>}
+                        {d.metaShare !== undefined && <span>meta share {pct(d.metaShare)}</span>}
                         {d.winRate !== undefined && <span>{pct(d.winRate)} win rate</span>}
+                        {d.date && <span>published <time datetime={d.date}>{formatDayUTC(d.date)}</time></span>}
                         {d.example && !s.example && <span class="badge badge--warning">example</span>}
                       </p>
                     </div>
@@ -113,11 +123,14 @@ const examples = snaps.map((s) => ({ format: s.format, decks: s.decks.filter((d)
                       <a class="btn btn--tiny" href={d.href}>Analyze</a>
                       <CopyButton client:visible text={d.list} label="Copy list" class="btn--tiny" />
                       {d.sourceUrl ? (
-                        <a class="btn btn--ghost btn--tiny" href={d.sourceUrl} rel="noopener nofollow">Source</a>
+                        <a class="btn btn--ghost btn--tiny" href={d.sourceUrl} rel="noopener nofollow">
+                          Source<span class="visually-hidden">: {d.name ?? d.archetype ?? 'deck'} on</span> ({hostOf(d.sourceUrl)})
+                        </a>
                       ) : (
                         <span class="muted cdeck__nosrc">no source: illustrative</span>
                       )}
                     </div>
+                    {d.notes && <p class="muted cdeck__notes">{d.notes}</p>}
                     <details class="disclosure">
                       <summary>Decklist</summary>
                       <pre class="cdeck__list">{d.list}</pre>

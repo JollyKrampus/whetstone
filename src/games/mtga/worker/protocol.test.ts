@@ -71,9 +71,9 @@ describe('analyzer protocol', () => {
   it('suggests and applies upgrades through the protocol', async () => {
     const client = new AnalyzerClient(fakeWorker().worker);
     await client.init({ shards: { standard: '/s', arena: '/a' }, snapshot: 'x' });
-    const s = await client.request('suggest', { text: DECK, format: 'standard', mode: 'casual', intensity: 'normal', wildcards: null, keepCards: [], maxSwaps: 3, meta: null });
+    const s = await client.request('suggest', { text: DECK, format: 'standard', profile: 'faithful', preferPremium: false, intensity: 'normal', wildcards: null, keepCards: [], maxSwaps: 3, meta: null });
     expect(s.changes.deckSize).toBe(60);
-    const applied = await client.request('apply', { text: DECK, swaps: s.swaps.slice(0, 1).map((w) => ({ cut: w.cut, add: w.add, qty: w.qty })) });
+    const applied = await client.request('apply', { text: DECK, swaps: s.swaps.slice(0, 1) });
     expect(applied.text.startsWith('Deck\n')).toBe(true);
     if (s.swaps[0]) expect(applied.text).toContain(s.swaps[0].add);
     const checks = await client.request('checkLists', { lists: [{ list: DECK, format: 'standard' }, { list: 'Deck\n4 Not A Card', format: 'standard' }] });

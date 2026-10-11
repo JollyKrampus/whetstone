@@ -1,13 +1,14 @@
 ---
 /**
  * /mtga/about/ (SPEC §8): methodology of the MTGA tools (grindstone's rubric, read from the
- * vendored rubric files so the page never drifts from the engine), sources, privacy notes and the
- * Wizards Fan Content Policy notice.
+ * grindstone-mcp package the analyzer runs, so the page never drifts from the engine), sources,
+ * privacy notes and the Wizards Fan Content Policy notice.
  */
-import { brawlRubric, constructedRubric } from '#vendor/grindstone/core.js';
+import { PROFILES, brawlRubric, constructedRubric } from 'grindstone-mcp/core';
 import SourceAttribution from '../../../components/SourceAttribution.astro';
 import '../../../games/mtga/components/mtga.css';
 import { formatDayUTC, int } from '../../../core/format.ts';
+import { LOW_SAMPLE } from '../../../games/mtga/lib/limited.ts';
 import { cardFacts } from '../../../games/mtga/pagedata.ts';
 import { navHref, withBase } from '../../../games/registry.ts';
 import GameLayout from '../../../layouts/GameLayout.astro';
@@ -16,6 +17,8 @@ const facts = cardFacts();
 const c = constructedRubric();
 const b = brawlRubric();
 const w = (x: number) => `${Math.round(x * 100)}%`;
+/** A version's change cap: 'about 25%' (of the deck), or 'no limit'. */
+const capNote = (percent: number) => (percent >= 100 ? 'no limit' : `about ${percent}%`);
 const constructedDims = [
   { name: 'Mana base', weight: c.weights.manaBase, what: 'Coloured sources against the Karsten targets, land count against the archetype, and lands that enter tapped.' },
   { name: 'Speed / curve', weight: c.weights.speed, what: 'Average mana value, the share of cheap spells and the number of expensive ones, compared with what the archetype wants.' },
@@ -41,7 +44,7 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
       <p class="kicker">About</p>
       <h1>How the MTG Arena tools work</h1>
       <p class="mpage__lead">
-        The deck tools run <a href="https://github.com/JollyKrampus/grindstone-mcp" rel="noopener">grindstone-mcp</a>'s engine (version
+        The deck tools run <a href="https://github.com/JollyKrampus/whetstone/tree/main/packages/grindstone-mcp" rel="noopener">grindstone-mcp</a>'s engine (version
         {facts.grindstone}) in your browser against a trimmed copy of Scryfall's card data. Every number below comes from the same rule files
         the engine uses.
       </p>
@@ -65,8 +68,9 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
       <h2 id="legality">Legality</h2>
       <p>
         A pasted deck is checked against Standard, Pioneer, Historic, Timeless, Brawl and Standard Brawl in one go: deck size, copy limits (with
-        cards like "any number" exceptions), sideboard size, banned and restricted cards, commander and companion rules, and whether every card
-        exists on Arena. Legality comes from Scryfall's per-format flags in the card data of
+        cards like "any number" exceptions), sideboard size, banned and restricted cards, commander rules, and whether every card exists on
+        Arena. A companion's deckbuilding condition is checked too, and the deck list names the cards that break it (Zirda's "has an
+        activated ability" test reads the rules text, so it can be fooled). Legality comes from Scryfall's per-format flags in the card data of
         <time datetime={facts.snapshot}>{formatDayUTC(facts.snapshot)}</time>. Alchemy is not supported, and a card the index cannot find is
         reported with "did you mean" suggestions instead of being guessed.
       </p>
@@ -77,7 +81,7 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         sources in the deck with Frank Karsten's targets: the number of sources needed to cast a spell on curve about 90% of the time. For a
         {c.karsten.deckSize}-card deck:
       </p>
-      <div class="tablewrap">
+      <div class="tablewrap" tabindex="0" role="region" aria-label="Coloured sources table (scrolls sideways)">
         <table class="mtable mtable--compact karsten">
           <caption>Coloured sources needed, by coloured pips (rows) and mana value (columns)</caption>
           <thead>
@@ -101,7 +105,8 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         </table>
       </div>
       <p>
-        Dual lands count for each colour they make and fetch lands for the basic types the deck runs. Modal double-faced cards with a land back
+        Dual lands count for each colour they make. A fetch land counts for what it can actually find in this deck: "an Island or Swamp card"
+        finds a Blood Crypt as well as a Swamp, and finds nothing at all in a deck without Islands or Swamps. Modal double-faced cards with a land back
         count as colour sources, and as half a land when the power tier judges the land count. Lands that always enter tapped are listed
         separately because they cost tempo.
       </p>
@@ -110,15 +115,24 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
       <p>
         Roles (removal, counterspell, sweeper, card draw, ramp, tutor, threat, protection, lifegain) come from patterns in each card's rules text,
         with reminder text removed. Every tag names the rule that matched, so you can see why a card was tagged and disagree with it. The patterns
-        are deliberately simple; an unusual card can be missed or mis-tagged.
+        are deliberately simple; an unusual card can be missed or mis-tagged. Treasure counts as ramp only when you can rely on it: the spell
+        makes it, the permanent makes it as it enters, or an ability you activate makes it. Treasure from combat damage, attacks or saga
+        chapters is a bonus, not ramp.
+      </p>
+      <p>
+        Cards a casual table tends to dislike (extra turns, mass land destruction, lock pieces, mass discard and the Commander "Game Changers")
+        are marked feel-bad in the deck list; milder ones such as counterspells, tutors and hand attack are listed as scored down. The list comes
+        from grindstone's casual-etiquette rule file and only matters for the Friendly casual upgrade version.
       </p>
 
       <h2 id="power">Power tier</h2>
       <p>
         Each part of the deck gets a score from 0 to 100 with the reasons behind it, and the weighted total sets the tier. The deck's plan
         (aggro, midrange, control or ramp) is inferred from its curve, creature count, interaction and ramp, and the targets follow that plan.
+        A ramp plan needs something to ramp into: at least {c.inference.ramp.minRamp} ramp cards and an average mana value of about
+        {(c.inference.ramp.minAvgMv ?? 2.8).toFixed(1)} or more, or {c.inference.ramp.minTopEnd ?? 6} or more cards at 5+ mana.
       </p>
-      <div class="tablewrap">
+      <div class="tablewrap" tabindex="0" role="region" aria-label={`${c.name} table (scrolls sideways)`}>
         <table class="mtable rubric">
           <caption>{c.name}: what is scored</caption>
           <thead>
@@ -142,7 +156,7 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         </table>
       </div>
       <div class="cols about__cols">
-        <div class="tablewrap">
+        <div class="tablewrap" tabindex="0" role="region" aria-label="Tiers table (scrolls sideways)">
           <table class="mtable mtable--compact">
             <caption>Tiers</caption>
             <thead>
@@ -165,7 +179,7 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
             </tbody>
           </table>
         </div>
-        <div class="tablewrap">
+        <div class="tablewrap" tabindex="0" role="region" aria-label="Targets by plan table (scrolls sideways)">
           <table class="mtable mtable--compact">
             <caption>Targets by plan (60 cards)</caption>
             <thead>
@@ -217,18 +231,35 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         rarity; basic lands are free. Whetstone cannot see your collection, so you can enter the wildcards you have to see what is still missing.
       </p>
       <p>
-        The upgrade planner looks for swaps that keep the deck recognizable: it only cuts from the weakest nonland cards and changes at most
-        about 7%, 15% or 30% of the deck (light, normal, heavy). An added card has to share a role with the card it replaces (when that card has one) and fit
-        the deck's colours (in Brawl, the commander's colour identity and themes). "Budget-minded" leans toward cheaper rarities; "Strongest" leans on meta
-        play rates. Locked cards are never cut, and every applied swap can be undone.
+        When the card data has paper prices (Scryfall's, at each card's cheapest printing), the wildcard section also shows what the same cards
+        cost on paper. Arena has no cash prices, so this is only a guide to card value.
+      </p>
+      <p>
+        The upgrade planner builds one of grindstone's three versions of your deck. <strong>Same deck, best cards</strong> keeps every card's job,
+        card type, colours and tribe, at the same or one less mana. <strong>Most competitive</strong> goes for strength and also upgrades the lands.
+        <strong>Friendly casual</strong> swaps out feel-bad cards and never asks for a rarer wildcard than the card it replaces (unless you
+        prefer mythics and rares). Cards that have to go (banned, not on Arena, breaking the companion) are replaced in every version.
+      </p>
+      <p>
+        How much of the deck may change follows the version ({capNote(PROFILES.faithful.percent)} for the same deck,
+        {capNote(PROFILES.competitive.percent)} for the most competitive, {capNote(PROFILES.casual.percent)} for friendly casual) unless you
+        pick about 7%, 15% or 30%, or no limit, yourself. You can also lock cards you want to keep and set a wildcard budget that is never
+        exceeded. "Prefer mythics and rares" leans toward premium cards when there is a choice and is remembered in this browser.
+      </p>
+      <p>
+        The planner avoids downgrades. In a low-curve deck (average mana value {c.inference.aggro.maxAvgMv} or less) a swap never costs more
+        mana, and an instant is only replaced by an instant or a card with flash. Without meta lists the new card has to beat the old one
+        clearly on the popularity, rarity and age estimate. Those swaps are not ticked for you, and each reason says what the estimate
+        preferred. "More widely played" appears only when the new card really is. Every applied swap can be undone.
       </p>
 
       <h2 id="meta">Meta lists</h2>
       <p>
-        Whetstone does not collect decklists from sites whose terms forbid it. Curated lists are added by hand to the repository, each linked to
-        the page it was read from, and checked against the card data every day. You can also keep your own lists in your browser and import or
-        export them as grindstone snapshot JSON. The comparison reports the closest list by shared nonland cards, the core cards your deck is
-        missing, and your unusual choices.
+        Whetstone does not collect decklists from sites whose terms forbid it. Curated lists are read by hand from decklists Wizards of the Coast
+        publishes on magic.gg, copied as card names and counts only, and added to the repository with the link and date of the article they
+        came from. They are refreshed about once a month and checked against the card data every day, so a ban or a rotation shows up as a
+        warning. You can also keep your own lists in your browser and import or export them as grindstone snapshot JSON. The comparison
+        reports the closest list by shared nonland cards, the core cards your deck is missing, and your unusual choices.
       </p>
 
       <h2 id="limited">Limited ratings</h2>
@@ -236,21 +267,24 @@ const archetypes = Object.entries(c.archetypes) as [string, (typeof c.archetypes
         Limited pages are built from 17Lands' public game and draft datasets (licensed CC BY 4.0), downloaded and summarised once a day when a
         file changes. For each card: games-in-hand, opening-hand, drawn and never-seen win rates, improvement when drawn, average pick when last
         seen and when taken, and colour-pair win rates. 17Lands users are stronger than the average Arena player, so win rates run high; the
-        differences between cards are what matters. Rows with fewer than 500 games in hand are marked as low sample.
+        differences between cards are what matters. Rows with fewer than {int(LOW_SAMPLE)} games in hand are marked as low sample, and
+        while you sort by a win rate they are listed after all the others, so a lucky handful of games never tops the table.
       </p>
 
       <h2 id="sources">Sources and privacy</h2>
       <ul>
         <li>
-          Card data and images: <a href="https://scryfall.com" rel="noopener">Scryfall</a>, from its daily bulk data. The trimmed card index is an
-          internal part of the tools, not a dataset. Card images load straight from Scryfall's image server (cards.scryfall.io), shown whole with
+          Card data, paper prices and images: <a href="https://scryfall.com" rel="noopener">Scryfall</a>, from its daily bulk data. The trimmed
+          card index is an internal part of the tools, not a dataset. Card images load straight from Scryfall's image server (cards.scryfall.io), shown whole with
           the artist credit.
         </li>
         <li>Limited data: <a href="https://www.17lands.com/public_datasets" rel="noopener">17Lands public datasets</a>, CC BY 4.0, credited at the top of every Limited page.</li>
-        <li>Analysis engine: <a href="https://github.com/JollyKrampus/grindstone-mcp" rel="noopener">grindstone-mcp</a>, MIT licence.</li>
+        <li>Curated meta lists: decklists published by Wizards of the Coast on <a href="https://magic.gg" rel="noopener">magic.gg</a>, linked from each list on the <a href={navHref('mtga', 'meta/')}>Meta page</a>.</li>
+        <li>Analysis engine: <a href="https://github.com/JollyKrampus/whetstone/tree/main/packages/grindstone-mcp" rel="noopener">grindstone-mcp</a>, MIT licence.</li>
         <li>
           Your browser keeps a copy of the card data in IndexedDB (database <code>whetstone-mtga</code>), replaced when the data changes, so the
-          tools don't download it on every visit. Saved meta lists and tool settings stay in local storage under <code>whetstone:mtga:</code>.
+          tools don't download it on every visit. Saved meta lists and tool settings (the meta comparison choice, the wildcards you own and
+          whether you prefer mythics and rares) stay in local storage under <code>whetstone:mtga:</code>.
           Clearing this site's data removes both.
         </li>
         <li>

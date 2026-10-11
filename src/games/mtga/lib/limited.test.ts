@@ -29,6 +29,16 @@ describe('Limited table view', () => {
     expect(names({ sort: 'colors', dir: 'asc' }).at(-1)).toBe('Golem');
   });
 
+  it('lists low-sample rows last while sorting by a win rate, in either direction', () => {
+    const rows = [...ROWS, row('Fluke', 'U', 'uncommon', 120, 0.765, { ata: 1.0 })];
+    const by = (v: Partial<LimitedView>) => viewRows(rows, { ...VIEW, ...v }).map((r) => r.name);
+    expect(by({})).toEqual(['Angel', 'Bolt', 'Boros Charm', 'Golem', 'Bear', 'Fluke', 'Newcard']);
+    expect(by({ dir: 'asc' })).toEqual(['Bear', 'Golem', 'Boros Charm', 'Bolt', 'Angel', 'Fluke', 'Newcard']);
+    // Other columns sort every row together.
+    expect(by({ sort: 'ata', dir: 'asc' })[0]).toBe('Fluke');
+    expect(by({ sort: 'name', dir: 'asc' })[4]).toBe('Fluke');
+  });
+
   it('filters to cards castable in the chosen colours, rarities, sample size and name', () => {
     expect(names({ colors: 'R' })).toEqual(['Bolt', 'Golem']);
     expect(names({ colors: 'RW' })).toEqual(['Angel', 'Bolt', 'Boros Charm', 'Golem']);

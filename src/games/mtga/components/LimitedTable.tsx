@@ -11,6 +11,7 @@ import {
   DEFAULT_DIR,
   LOW_SAMPLE,
   MIN_GAMES,
+  WIN_RATE_KEYS,
   averageGihWr,
   limitedCodec,
   normColors,
@@ -59,7 +60,7 @@ const signedPp = (v: number | null) => (v === null || !Number.isFinite(v) ? '—
 function ColorCell({ colors }: { colors: string }) {
   if (!colors) return <span class="ltable__cl">Colourless</span>;
   return (
-    <span class="pips" aria-label={[...colors].map((c) => COLOR_NAME[c as keyof typeof COLOR_NAME]).join(', ')}>
+    <span class="pips" role="img" aria-label={[...colors].map((c) => COLOR_NAME[c as keyof typeof COLOR_NAME]).join(', ')}>
       {[...colors].map((c) => (
         <span key={c} class="pip" data-c={c} aria-hidden="true">
           {c}
@@ -167,12 +168,17 @@ export default function LimitedTable({ rows, label }: Props) {
           {shown.length === rows.length ? `${int(rows.length)} cards` : `${int(shown.length)} of ${int(rows.length)} cards`}
           {avg !== null ? ` · average GIH WR ${pct01(avg)}` : ''}
         </p>
+        <p class="ltable__note muted">
+          Cards with fewer than {int(LOW_SAMPLE)} games in hand are marked "low sample"
+          {WIN_RATE_KEYS.has(view.sort) ? ' and listed after the others while you sort by a win rate' : ''}.
+        </p>
       </div>
 
-      <div class="tablewrap ltable__wrap" tabindex={0} aria-label={`${label} card ratings (scrolls sideways)`}>
+      <div class="tablewrap ltable__wrap" tabindex={0} role="region" aria-label={`${label} card ratings (scrolls sideways)`}>
         <table class="mtable ltable__table">
           <caption class="visually-hidden">
             {label} card ratings, sorted by {COLUMNS.find((c) => c.key === view.sort)?.title} ({view.dir === 'asc' ? 'ascending' : 'descending'})
+            {WIN_RATE_KEYS.has(view.sort) ? `; cards with fewer than ${int(LOW_SAMPLE)} games in hand are listed last` : ''}
           </caption>
           <thead>
             <tr>

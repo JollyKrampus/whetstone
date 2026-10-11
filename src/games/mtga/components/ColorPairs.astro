@@ -24,13 +24,16 @@ const total = ratings.totals.games;
 const best = rows[0]?.wr ?? 0.6;
 const worst = rows[rows.length - 1]?.wr ?? 0.4;
 const span = Math.max(0.01, best - worst);
+// The full table can scroll sideways on a phone: make it a named region keyboard users can scroll.
+// The compact two-column version (several per page on the Limited index) never does.
+const scrollLabel = compact ? undefined : `Win rate by colour pair, ${ratings.set.toUpperCase()} (scrolls sideways)`;
 ---
 
 {
   rows.length === 0 ? (
     <p class="muted">Not enough two-colour games to compare colour pairs.</p>
   ) : (
-    <div class="tablewrap">
+    <div class="tablewrap" tabindex={scrollLabel ? 0 : undefined} role={scrollLabel ? 'region' : undefined} aria-label={scrollLabel}>
       <table class:list={['mtable', 'cpairs', { 'mtable--compact': compact }]}>
         <caption class="visually-hidden">Win rate by colour pair, best first</caption>
         <thead>

@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { CardIndex } from '#vendor/grindstone/core.js';
+import { CardIndex } from 'grindstone-mcp/core';
 import { repoRoot } from '../../../lib/datadir.ts';
 import { CardShardSchema } from '../schema.ts';
 import { loadCurated, validateSnapshot } from './curated.ts';
@@ -10,7 +10,8 @@ import { loadCurated, validateSnapshot } from './curated.ts';
 const ROOT = repoRoot();
 const shard = CardShardSchema.parse(JSON.parse(readFileSync(path.join(ROOT, 'fixtures', 'mtga', 'public', '_cards.arena.json'), 'utf8')));
 const index = new CardIndex(shard.cards, shard.meta);
-const curated = JSON.parse(readFileSync(path.join(ROOT, 'curated', 'mtga', 'meta', 'standard.json'), 'utf8')) as { decks: { list: string }[] };
+/** The fixture's meta lists: real curated decks whose cards are all in the fixture card pool. */
+const fixtureMeta = JSON.parse(readFileSync(path.join(ROOT, 'fixtures', 'mtga', 'meta', 'standard.json'), 'utf8')) as { decks: { list: string }[] };
 
 const real = (list: string) => ({
   format: 'standard',
@@ -18,10 +19,11 @@ const real = (list: string) => ({
 });
 
 describe('validateSnapshot', () => {
-  it('accepts the curated Standard snapshot against the fixture card pool', async () => {
-    const r = await validateSnapshot('curated/mtga/meta/standard.json', curated, index);
+  it('accepts the fixture subset of the curated Standard lists against the fixture card pool', async () => {
+    // The whole curated file is validated against the raw Scryfall fixture by the pipeline tests.
+    const r = await validateSnapshot('fixtures/mtga/meta/standard.json', fixtureMeta, index);
     expect(r.issues).toEqual([]);
-    expect(r.snapshot?.decks).toHaveLength(curated.decks.length);
+    expect(r.snapshot?.decks).toHaveLength(fixtureMeta.decks.length);
   });
 
   it('fails unknown card names with a suggestion', async () => {

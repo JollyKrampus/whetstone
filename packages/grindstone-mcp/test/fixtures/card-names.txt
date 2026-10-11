@@ -148,3 +148,24 @@ Selfless Spirit
 Knight of the White Orchid
 Serra Ascendant
 Grand Abolisher
+# Treasure makers: cast, ETB and combat triggers (ramp tagging)
+Ragavan, Nimble Pilferer
+Deadly Dispute
+Prosperous Innkeeper
+Professional Face-Breaker
+# Fetch lands and the duals they can find
+Polluted Delta
+Wooded Foothills
+Bloodstained Mire
+Blood Crypt
+Sulfurous Springs
+# Rakdos and red removal (upgrade guardrails)
+Orcish Bowmasters
+Bloodtithe Harvester
+Kolaghan's Command
+Fell the Profane
+Infernal Grasp
+Feed the Swarm
+Flick a Coin
+Playful Shove
+Torch the Tower
