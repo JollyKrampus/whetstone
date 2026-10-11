@@ -40,8 +40,8 @@ const PRESENTATION: Readonly<Record<GameId, GamePresentation>> = {
       {
         key: 'whetstone:hots:*',
         text:
-          'Heroes of the Storm: your hero pool and favourites ("pool"), the hero grid\'s dimming choice, the draft tool\'s sort mode ' +
-          'and "suggest from" choice, and the game mode you last picked on stats pages.',
+          'Heroes of the Storm: your hero pool and favourites ("pool"), the hero grid\'s dimming choice, the draft tool\'s sort mode, ' +
+          '"suggest from" choice and whether it also lists suggestions for the other team, and the game mode you last picked on stats pages.',
       },
     ],
     pipeline: { timeoutMinutes: 90, env: ['YT_API_KEY', 'LIQUIPEDIA_UA_CONTACT'] },
@@ -60,7 +60,7 @@ const PRESENTATION: Readonly<Record<GameId, GamePresentation>> = {
     searchPath: 'search/',
     versionPrefix: 'Set',
     storage: [
-      { key: 'whetstone:mtga:*', text: 'MTG Arena: meta decklists you saved, your meta comparison choice and the wildcards you own.' },
+      { key: 'whetstone:mtga:*', text: 'MTG Arena: meta decklists you saved, your meta comparison choice, the wildcards you own and whether you prefer mythics and rares in upgrade suggestions.' },
       {
         key: 'whetstone-mtga',
         text:

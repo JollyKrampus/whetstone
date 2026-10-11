@@ -1,5 +1,9 @@
 ---
-/** One MatchupList row. Kept separate so the visible and "View more" lists render identically. */
+/**
+ * One MatchupList row. Kept separate so the visible and "View more" lists render identically.
+ * Its styles are global (every class is `mrow`-prefixed), so rows carry no scoped data-astro-cid
+ * attributes: long lists stay light.
+ */
 import { int, pp } from '../core/format.ts';
 import { classifySample } from '../core/stats.ts';
 import Badge from './Badge.tsx';
@@ -59,7 +63,7 @@ const score = Math.round(row.score);
   }
 </li>
 
-<style>
+<style is:global>
   .mrow {
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -166,7 +170,7 @@ const score = Math.round(row.score);
     color: var(--text);
   }
 
-  .mrow__why :global(.reasons) {
+  .mrow__why .reasons {
     padding: 0 var(--sp-3) var(--sp-3);
   }
 

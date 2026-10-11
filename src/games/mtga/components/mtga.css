@@ -241,7 +241,7 @@
   width: 100%;
   min-height: var(--tap);
   padding: var(--sp-2) var(--sp-3);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius);
   background: var(--bg);
   color: var(--text);
@@ -2654,7 +2654,7 @@ textarea.input {
   display: grid;
   min-height: var(--tap);
   padding: var(--sp-2) var(--sp-3);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius);
   background: var(--surface-2);
   color: var(--text);

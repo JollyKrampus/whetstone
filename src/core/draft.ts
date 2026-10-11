@@ -461,7 +461,14 @@ export interface ScoreOptions {
   maxReasons?: number;
   /** Contributions below −warnBelow can produce a warning (default 0.1 ≈ a 0.4 pp edge). */
   warnBelow?: number;
+  /**
+   * Display name of a candidate. Equal raw scores are then ordered by name (Intl.Collator, so
+   * visitors see an alphabetical order), and only names that are equal fall back to the id.
+   */
+  nameOf?: (id: string) => string;
 }
+
+const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
 
 /** Signal value for an effect of Δ pp (4 pp → 1.0). */
 export function valueFromDelta(deltaPp: number): number {
@@ -488,7 +495,8 @@ interface ReasonCandidate {
 
 /**
  * Score every candidate: run each provider, weight each signal, sum, and pick explanations.
- * Sorted by raw score (desc) then id, so equal scores always come out in the same order.
+ * Sorted by raw score (desc), then by display name when `opts.nameOf` is given, then id, so
+ * equal scores always come out in the same order.
  */
 export function scoreCandidates(
   state: ScoreState,
@@ -537,6 +545,7 @@ export function scoreCandidates(
     if (negatives[0]) entry.warning = negatives[0].reason;
     ranked.push(entry);
   }
-  ranked.sort((x, y) => y.raw - x.raw || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+  const byName = opts.nameOf ? (x: Ranked, y: Ranked) => collator.compare(opts.nameOf!(x.id), opts.nameOf!(y.id)) : () => 0;
+  ranked.sort((x, y) => y.raw - x.raw || byName(x, y) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
   return ranked;
 }

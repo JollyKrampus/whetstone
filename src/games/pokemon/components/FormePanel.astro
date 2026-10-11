@@ -146,6 +146,8 @@ const pid = forme.id;
 ---
 
 <div class="pk-page" data-forme={forme.id}>
+  <!-- Section headings below are h3: this keeps the outline h1 (species) > h2 (forme) > h3. -->
+  <h2 class="visually-hidden">{name}</h2>
   <div class="pk-cols pk-cols--wide-left">
     <section class="card pk-panel" aria-labelledby={`${pid}-stats`}>
       <h3 id={`${pid}-stats`}>Stats at level 50</h3>

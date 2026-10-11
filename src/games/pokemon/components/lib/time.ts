@@ -3,7 +3,7 @@
  * (build time on the server, the visitor's clock after hydration). Regulation ends are inclusive
  * to the minute ("01:59 UTC"), so the window closes at end + 59.999 s.
  */
-import { MISSING, formatDayUTC } from '../../../../core/format.ts';
+import { MISSING, formatDayTimeUTC } from '../../../../core/format.ts';
 
 export const MINUTE = 60_000;
 
@@ -58,17 +58,12 @@ export function elapsedShare(startIso: string, endIso: string, now: number): num
   return Math.min(1, Math.max(0, (now - start) / (end - start)));
 }
 
-const pad2 = (n: number): string => String(n).padStart(2, '0');
-
 /**
  * "9 Sep 2026, 02:00 UTC": the one date format the regulation banner and the about page use for
- * both ends of a window (UTC, day-month-year like the rest of the site's prose dates).
+ * both ends of a window (the site's formatDayTimeUTC; MISSING for an unparseable time).
  */
 export function dayTimeUTC(iso: string): string {
-  const t = Date.parse(iso);
-  if (!Number.isFinite(t)) return MISSING;
-  const d = new Date(t);
-  return `${formatDayUTC(t)}, ${pad2(d.getUTCHours())}:${pad2(d.getUTCMinutes())} UTC`;
+  return Number.isFinite(Date.parse(iso)) ? formatDayTimeUTC(iso) : MISSING;
 }
 
 /** "9 Sep 2026, 02:00 UTC to 2 Dec 2026, 01:59 UTC". */

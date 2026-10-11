@@ -1,0 +1,82 @@
+---
+/**
+ * /terms/: the site's terms of use. Short and plain: a free, unofficial fan site, data as is,
+ * third-party content under its owners' terms, and the clause the YouTube API Services require
+ * (LA-4): using the YouTube features means agreeing to the YouTube Terms of Service.
+ */
+import { SITE, games, listNames, rightsHolders, withBase } from '../games/registry.ts';
+import Base from '../layouts/Base.astro';
+
+const UPDATED = '2026-10-10';
+---
+
+<Base title="Terms of use" description="The terms for using Whetstone: a free, unofficial fan site; data as is; third-party content and the YouTube Terms of Service.">
+  <article class="container terms">
+    <header class="terms__head">
+      <p class="kicker">Terms of use</p>
+      <h1>Free to use, as it is.</h1>
+      <p class="terms__lead">
+        Whetstone is a free, unofficial fan site for {listNames(games.map((g) => g.name), 'and')}. By using it you accept these terms.
+      </p>
+      <p class="muted">Last updated <time datetime={UPDATED}>{UPDATED}</time>.</p>
+    </header>
+
+    <div class="prose">
+      <h2>What the site is</h2>
+      <p>
+        Whetstone is made by fans and is not affiliated with, endorsed or sponsored by {listNames(rightsHolders(), 'or')}. Game names,
+        artwork and other game content belong to their owners and are used under their fan content policies, as set out in the
+        footer of every page and on the <a href={withBase('credits/')}>Credits</a> page.
+      </p>
+
+      <h2>Data and advice as is</h2>
+      <p>
+        Numbers, tier lists, suggestions and explanations are estimates built from public data and our own analysis. They can be
+        late, incomplete or wrong, and the site is provided as is, without warranty of any kind. How the numbers are made is
+        explained on each game's methodology page.
+      </p>
+
+      <h2>Other people's content</h2>
+      <p>
+        Data, images and links from other sources stay under their owners' terms and licences, credited where they are shown and
+        listed on the <a href={withBase('credits/')}>Credits</a> page. Licences of the software the site ships are in
+        <a href={withBase('licenses.txt')}>licenses.txt</a>, and Whetstone's own code is open source in its
+        <a href={SITE.repo} rel="noopener">repository</a>.
+      </p>
+
+      <h2 id="youtube">YouTube</h2>
+      <p>
+        Heroes of the Storm pages list guide videos found with the YouTube API Services. By using those YouTube features (playing
+        a video here or following a link to YouTube) you agree to be bound by the
+        <a href="https://www.youtube.com/t/terms" rel="noopener">YouTube Terms of Service</a>. Google handles any data under the
+        <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>; what Whetstone itself fetches and
+        keeps is described on the <a href={withBase('privacy/#youtube')}>Privacy</a> page.
+      </p>
+
+      <h2>Changes and questions</h2>
+      <p>
+        These terms can change with the site; the date above shows the last change. Questions go to a
+        <a href={SITE.feedback} rel="noopener">GitHub issue</a>.
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .terms {
+    display: grid;
+    gap: var(--sp-6);
+    padding-block: var(--sp-7) var(--sp-8);
+  }
+
+  .terms__head {
+    display: grid;
+    gap: var(--sp-3);
+    max-width: 48rem;
+  }
+
+  .terms__lead {
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+  }
+</style>

@@ -74,7 +74,7 @@
   width: 100%;
   min-height: var(--tap);
   padding: 0 2rem 0 var(--sp-3);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius);
   background: var(--surface)
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238f9cad' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
@@ -279,6 +279,24 @@
   background: var(--accent);
   outline: 2px solid color-mix(in srgb, var(--accent) 40%, transparent);
   outline-offset: 1px;
+}
+
+/* Forced colours drop backgrounds: draw the steps with system colours (A11Y-3). */
+@media (forced-colors: active) {
+  .dt-progress__seg {
+    forced-color-adjust: none;
+    background: Canvas;
+    border: 1px solid CanvasText;
+  }
+
+  .dt-progress__seg.is-done {
+    background: GrayText;
+  }
+
+  .dt-progress__seg.is-now {
+    background: Highlight;
+    outline-color: Highlight;
+  }
 }
 
 .dt-targets {
@@ -653,7 +671,7 @@ button.tp-slot--filled .tp-slot__x {
   width: 100%;
   min-height: 3rem;
   padding: 0 var(--sp-3) 0 2.5rem;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius);
   background: var(--surface);
   color: var(--text);
@@ -1192,7 +1210,7 @@ button.tp-slot--filled .tp-slot__x {
   align-items: center;
   min-height: var(--tap);
   padding: var(--sp-1) 1.75rem var(--sp-1) var(--sp-1);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius);
   background: var(--surface-2);
   color: var(--text);

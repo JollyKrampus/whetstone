@@ -547,6 +547,7 @@ export function recommend(input: PreviewInput, preset: PreviewPresetId = 'balanc
         // Each candidate's allies are the rest of your six.
         providers.map((p) => (id: string, ctx: DraftContext) => p(id, { ...ctx, allies: keys.filter((k) => k !== id) })),
         weights,
+        { nameOf: (key) => b.mine.get(key)?.name ?? key },
       )
     : [];
 

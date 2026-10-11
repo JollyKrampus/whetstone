@@ -376,6 +376,15 @@ describe('scorer', () => {
     expect(b).toEqual(a);
   });
 
+  it('breaks ties by display name when names are given, then by id', () => {
+    const flat: Provider = () => ({ key: 'tier', value: 0.3, reasons: [] });
+    const names: Record<string, string> = { a: 'Zeratul', b: "Anub'arak", c: 'anubarak', d: 'Malthael' };
+    const order = scoreCandidates({ candidates: ['a', 'b', 'c', 'd'], context }, [flat], WEIGHT_PRESETS.tier, { nameOf: (id) => names[id] ?? id }).map((r) => r.id);
+    // "Anub'arak" and "anubarak" differ only in punctuation and case: base sensitivity keeps the apostrophe apart.
+    expect(order.slice(2)).toEqual(['d', 'a']);
+    expect(new Set(order.slice(0, 2))).toEqual(new Set(['b', 'c']));
+  });
+
   it('exposes presets as frozen data', () => {
     expect(PRESET_IDS).toEqual(['composite', 'winrate', 'counters', 'synergy', 'map', 'tier', 'community']);
     expect(Object.isFrozen(WEIGHT_PRESETS.composite)).toBe(true);

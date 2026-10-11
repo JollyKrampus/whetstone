@@ -113,7 +113,7 @@ a.hx-hero:hover .hx-hero__name {
 .hx-catchup__date {
   min-height: var(--tap);
   padding: 0 var(--sp-3);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius);
   background: var(--surface-2);
   color: var(--text);
@@ -302,7 +302,7 @@ a.hx-catchup__patch:hover {
   flex: 1 1 12rem;
   min-height: var(--tap);
   padding: 0 var(--sp-3);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius);
   background: var(--surface-2);
   color: var(--text);
