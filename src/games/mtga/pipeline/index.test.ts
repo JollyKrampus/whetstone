@@ -74,7 +74,9 @@ describe('mtga pipeline (offline fixtures)', () => {
     expect(r.meta.sources.find((s) => s.id === 'grindstone-mcp')?.detail).toBe(`grindstone-mcp ${extra.grindstone}, workspace package`);
     expect(extra.latestSet).toBe(r.meta.version.label);
     expect(extra.metaFormats).toEqual(['standard']);
-    expect(r.meta.counts).toMatchObject({ limitedSets: 1, metaDecks: 1 });
+    // The curated Standard lists are real (no example decks) and every card resolves offline.
+    expect(r.meta.counts).toMatchObject({ limitedSets: 1, metaDecks: 10 });
+    expect(r.meta.sources.find((s) => s.id === 'curated-meta')?.detail).toBe('1 format(s), 10 list(s)');
     expect(r.meta.counts.cards).toBeGreaterThan(r.meta.counts.standardCards!);
   });
 

@@ -320,6 +320,8 @@ export const MetaDeckSchema = z.strictObject({
   list: z.string().min(1),
   /** Where a human read this list (required unless the deck is an example). */
   sourceUrl: Url.exactOptional(),
+  /** When the source published this list (the snapshot `date` may be newer). */
+  date: IsoDate.exactOptional(),
   /** Marks illustrative decks; the UI labels them and excludes them from meta stats. */
   example: z.literal(true).exactOptional(),
   notes: z.string().min(1).exactOptional(),
@@ -343,6 +345,11 @@ export const MetaSnapshotSchema = z
     }
   });
 export type MetaSnapshot = z.infer<typeof MetaSnapshotSchema>;
+
+/** Decks that count as meta: none of an example snapshot, and no deck marked as an example. */
+export function realMetaDecks<D extends { example?: true }>(s: { example?: true; decks: D[] }): D[] {
+  return s.example ? [] : s.decks.filter((d) => !d.example);
+}
 
 // ---- file registry ---------------------------------------------------------------------
 

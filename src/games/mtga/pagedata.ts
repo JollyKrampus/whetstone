@@ -30,12 +30,14 @@ export function curatedViews(): CuratedSnapshotView[] {
       ...(d.metaShare !== undefined ? { metaShare: d.metaShare } : {}),
       ...(d.winRate !== undefined ? { winRate: d.winRate } : {}),
       ...(d.sourceUrl ? { sourceUrl: d.sourceUrl } : {}),
+      ...(d.date ? { date: d.date } : {}),
+      ...(d.notes ? { notes: d.notes } : {}),
       ...(d.example || s.example ? { example: true as const } : {}),
     })),
   }));
 }
 
-/** A deck to try on the analyzer: the first curated Standard deck (examples are fine here). */
+/** A deck to try on the analyzer: the first curated Standard deck (an example deck would do too). */
 export function sampleDeck(): { name: string; text: string } | null {
   const snaps = curatedViews();
   const snap = snaps.find((s) => s.format === 'standard') ?? snaps[0];

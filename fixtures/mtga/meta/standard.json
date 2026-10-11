@@ -1,23 +1,32 @@
 {
   "format": "standard",
   "date": "2026-10-08",
-  "source": "EXAMPLE ONLY: shows the file format; these are not real metagame lists or numbers. Curators replace them with lists read from a cited source.",
-  "example": true,
+  "source": "Decklists published by Wizards of the Coast in magic.gg's Metagame Mentor articles, read by hand (card names and counts only). Meta share is the archetype's share of the winning decks those articles counted, where they list it.",
   "curator": "whetstone",
   "decks": [
     {
-      "name": "Boros Aggro (example)",
-      "archetype": "Boros Aggro",
-      "example": true,
-      "list": "Deck\n4 Emberheart Challenger\n4 Slickshot Show-Off\n4 Voice of Victory\n4 Inti, Seneschal of the Sun\n4 Razorkin Needlehead\n4 Hired Claw\n2 Sunspine Lynx\n4 Burst Lightning\n4 Lightning Strike\n4 Shock\n2 Stroke of Midnight\n4 Sacred Foundry\n4 Inspiring Vantage\n2 Sunbillow Verge\n2 Elegant Parlor\n6 Mountain\n2 Plains\n\nSideboard\n3 Abrade\n2 Boltwave\n2 Cathar Commando\n2 Get Lost",
-      "notes": "Illustrative list built from the fixture card pool."
+      "name": "Izzet Prowess",
+      "archetype": "Izzet Prowess",
+      "metaShare": 0.038,
+      "list": "Deck\n2 Bounce Off\n4 Burst Lightning\n2 Eddymurk Crab\n4 Elusive Otter\n4 Flow State\n2 Impractical Joke\n4 Island\n1 Mountain\n2 Multiversal Passage\n4 Opt\n4 Pompous Battlemage\n4 Riverpyre Verge\n2 Secret Identity\n4 Sleight of Hand\n4 Slickshot Show-Off\n1 Spell Snare\n4 Spirebluff Canal\n1 Starting Town\n4 Steam Vents\n1 Stock Up\n1 Vibrant Outburst\n1 Wild Ride\n\nSideboard\n1 Broadside Barrage\n2 Colorstorm Stallion\n1 Disdainful Stroke\n2 Fire Magic\n1 Sear\n2 Soul-Guide Lantern\n2 Spell Pierce\n2 Spell Snare\n2 Sunspine Lynx",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture",
+      "date": "2026-10-08"
     },
     {
-      "name": "Mono-Red Aggro (example)",
-      "archetype": "Mono-Red Aggro",
-      "example": true,
-      "list": "Deck\n4 Hired Claw\n4 Razorkin Needlehead\n4 Emberheart Challenger\n4 Slickshot Show-Off\n4 Burst Lightning\n4 Shock\n4 Lightning Strike\n4 Boltwave\n2 Fear of Missing Out\n2 Sunspine Lynx\n24 Mountain\n\nSideboard\n3 Abrade\n2 Fire Elemental",
-      "notes": "Illustrative list built from the fixture card pool."
+      "name": "Rakdos Lizards",
+      "archetype": "Rakdos Lizards",
+      "metaShare": 0.038,
+      "list": "Deck\n4 Blazemire Verge\n4 Blood Crypt\n4 Burst Lightning\n2 Cavern of Souls\n4 Fireglass Mentor\n4 Flamecache Gecko\n3 Gev, Scaled Scorch\n3 Haunted Ridge\n4 Hired Claw\n3 Ingris Stingerquill\n4 Iridescent Vinelasher\n4 Master of Barbs\n4 Mountain\n2 Rockface Village\n4 Stingerquill Charm\n4 Swamp\n3 Valley Flamecaller\n\nSideboard\n2 Bitter Triumph\n4 Duress\n2 Laughing Jasper Flint\n4 Magebane Lizard\n3 Requiting Hex",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture",
+      "date": "2026-10-08"
+    },
+    {
+      "name": "Dimir Midrange",
+      "archetype": "Dimir Midrange",
+      "metaShare": 0.087,
+      "list": "Deck\n4 Watery Grave\n4 Island\n4 Gloomlake Verge\n3 Swamp\n2 Hidden Lair\n2 Shipwreck Marsh\n2 Restless Reef\n2 Soulstone Sanctuary\n4 Floodpits Drowner\n4 Dream Beavers\n4 Enduring Curiosity\n3 Spyglass Siren\n2 Azure Beastbinder\n1 Tishana's Tidebinder\n1 Preacher of the Schism\n1 The Wondrous Wasp\n1 Yuriko, Hope from the Shadows\n4 Kaito, Bane of Nightmares\n4 Requiting Hex\n2 Bitter Triumph\n2 We Say Thee Nay!\n2 Shoot the Sheriff\n1 Strategic Betrayal\n1 Spell Snare\n\nSideboard\n3 Strategic Betrayal\n2 Day of Black Sun\n1 Wan Shi Tong, Librarian\n2 Torpor Orb\n2 Vren, the Relentless\n2 Duress\n1 Annul\n2 Flashfreeze",
+      "sourceUrl": "https://magic.gg/news/metagame-mentor-the-first-standard-results-with-reality-fracture",
+      "date": "2026-10-08"
     }
   ]
 }

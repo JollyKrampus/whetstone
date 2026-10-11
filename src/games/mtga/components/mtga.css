@@ -3089,8 +3089,13 @@ th[aria-sort] .sortbtn__icon {
   font-size: var(--fs-xs);
 }
 
-.cdeck__nosrc {
+.cdeck__nosrc,
+.cdeck__notes {
   font-size: var(--fs-xs);
+}
+
+.cdeck__notes {
+  margin: 0;
 }
 
 .cdeck__list {

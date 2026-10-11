@@ -29,6 +29,7 @@ import {
   SetsFileSchema,
   hydrateCardRecord,
   limitedFile,
+  realMetaDecks,
   type CardShard,
   type ConstructedFormat,
   type LimitedFormat,
@@ -222,15 +223,16 @@ async function curatedStep(ctx: PipelineContext, index: CardIndex): Promise<Cura
     return { snapshots, status: keptStatus(ctx, 'curated-meta'), issues: [] };
   }
   const r = await loadCurated(ctx.root, index);
-  const decks = r.snapshots.reduce((n, s) => n + s.snapshot.decks.length, 0);
-  const examples = r.snapshots.every((s) => s.snapshot.example === true);
+  // Example decks only show the file format: they are never meta, so they are not counted as lists.
+  const real = r.snapshots.reduce((n, s) => n + realMetaDecks(s.snapshot).length, 0);
+  const examples = r.snapshots.reduce((n, s) => n + s.snapshot.decks.length, 0) - real;
   return {
     snapshots: r.snapshots,
     status: {
       id: 'curated-meta',
       fetchedAt: ctx.now.toISOString(),
       status: 'ok',
-      detail: `${r.snapshots.length} format(s), ${decks} list(s)${r.snapshots.length > 0 && examples ? ' (example lists only)' : ''}`,
+      detail: `${r.snapshots.length} format(s), ${real} list(s)${examples ? `, ${examples} example list(s) not used as meta` : ''}`,
     },
     issues: r.issues,
   };
@@ -434,7 +436,7 @@ export async function runMtga(ctx: PipelineContext): Promise<PipelineResult> {
         standardCards: standard.cards.length,
         sets: sets.length,
         limitedSets: new Set(limited.index.map((e) => e.set)).size,
-        metaDecks: curated.snapshots.reduce((n, s) => n + s.snapshot.decks.length, 0),
+        metaDecks: curated.snapshots.reduce((n, s) => n + realMetaDecks(s.snapshot).length, 0),
       },
       extra,
     },

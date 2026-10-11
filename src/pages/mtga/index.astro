@@ -4,6 +4,7 @@ import '../../games/mtga/components/mtga.css';
 import { formatDayUTC, int } from '../../core/format.ts';
 import { LIMITED_FORMAT_LABEL } from '../../games/mtga/lib/limited.ts';
 import { getMetaSnapshots } from '../../games/mtga/load.ts';
+import { realMetaDecks } from '../../games/mtga/schema.ts';
 import { cardFacts, limitedSets } from '../../games/mtga/pagedata.ts';
 import { FORMAT_LABELS } from '../../games/mtga/worker/protocol.ts';
 import { navHref } from '../../games/registry.ts';
@@ -12,7 +13,7 @@ import GameLayout from '../../layouts/GameLayout.astro';
 const facts = cardFacts();
 const limited = limitedSets();
 const snapshots = getMetaSnapshots();
-const realMeta = snapshots.filter((s) => !s.example && s.decks.some((d) => !d.example));
+const realMeta = snapshots.filter((s) => realMetaDecks(s).length > 0);
 
 const tools = [
   {
@@ -147,7 +148,9 @@ const tools = [
             <dd>
               {
                 realMeta.length
-                  ? `Curated lists for ${realMeta.map((s) => FORMAT_LABELS[s.format]).join(', ')}`
+                  ? realMeta
+                      .map((s) => `${realMetaDecks(s).length} curated ${FORMAT_LABELS[s.format]} lists${s.date ? ` as of ${formatDayUTC(s.date)}` : ''}`)
+                      .join('; ')
                   : 'No curated lists yet: add your own on the Meta page'
               }
             </dd>

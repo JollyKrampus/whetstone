@@ -14,6 +14,7 @@ import {
   MtgaMetaSchema,
   SetsFileSchema,
   hydrateCardRecord,
+  realMetaDecks,
   type CompactCardRecord,
 } from './schema.ts';
 
@@ -56,6 +57,23 @@ describe('mtga fixtures match the schemas', () => {
 
 describe('mtga curated files match the schemas', () => {
   const files = listDir(path.join(CURATED, 'meta'));
+
+  it('ships real Standard lists: 6 to 10 archetypes, each with its source and date, no examples', () => {
+    const snap = parseData(MetaSnapshotSchema, readJson(path.join(CURATED, 'meta', 'standard.json')), 'curated');
+    expect(snap.example).toBeUndefined();
+    expect(realMetaDecks(snap)).toHaveLength(snap.decks.length);
+    expect(new Set(snap.decks.map((d) => d.archetype)).size).toBeGreaterThanOrEqual(6);
+    expect(snap.decks.length).toBeLessThanOrEqual(10);
+    for (const d of snap.decks) {
+      expect(d.sourceUrl, d.name).toMatch(/^https:\/\/(?:www\.)?magic\.gg\//);
+      expect(d.date, d.name).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(d.date! <= snap.date!, d.name).toBe(true);
+      const { main, side } = parseList(d.list);
+      expect([...main.values()].reduce((a, b) => a + b, 0), d.name).toBe(60);
+      expect([...side.values()].reduce((a, b) => a + b, 0), d.name).toBeLessThanOrEqual(15);
+    }
+  });
+
   it('has at least the Standard snapshot', () => expect(files).toContain('standard.json'));
   for (const file of files) {
     it(`meta/${file}`, () => {
@@ -70,7 +88,7 @@ describe('mtga fixture consistency', () => {
   const standard = fixture(CardShardSchema, 'public/_cards.standard.json');
   const byName = new Map(arena.cards.map((c) => [c.name, c]));
 
-  it('holds about forty Arena cards, Standard a subset of Arena', () => {
+  it('holds the fixture cards (over forty), Standard a subset of Arena', () => {
     expect(arena.cards.length).toBeGreaterThanOrEqual(40);
     const ids = new Set(arena.cards.map((c) => c.oracleId));
     for (const c of standard.cards) expect(ids.has(c.oracleId), c.name).toBe(true);
@@ -84,28 +102,34 @@ describe('mtga fixture consistency', () => {
     for (const c of raw) expect(hydrateCardRecord(c)).toEqual(CardRecordSchema.parse(c));
     // Shards keep grindstone's empty arrays, but a compact record without them hydrates the same way.
     const compact: CompactCardRecord = { ...raw[0]! };
-    for (const key of ['manaCost', 'oracleText', 'faces', 'colors', 'colorIdentity', 'producedMana', 'keywords', 'arenaRarity', 'onArena', 'arenaIds', 'edhrecRank', 'gameChanger'] as const) delete compact[key];
+    for (const key of ['manaCost', 'oracleText', 'faces', 'colors', 'colorIdentity', 'producedMana', 'keywords', 'arenaRarity', 'onArena', 'arenaIds', 'edhrecRank', 'gameChanger', 'priceUsd'] as const) delete compact[key];
     expect(hydrateCardRecord(compact)).toEqual(CardRecordSchema.parse(compact));
-    expect(hydrateCardRecord(compact)).toMatchObject({ oracleText: '', faces: [], onArena: true, edhrecRank: null, gameChanger: false });
+    expect(hydrateCardRecord(compact)).toMatchObject({ oracleText: '', faces: [], onArena: true, edhrecRank: null, gameChanger: false, priceUsd: null });
   });
 
-  it('example meta decks resolve against the fixture card pool', () => {
+  it('fixture meta lists are real curated decks whose cards are all in the fixture pool', () => {
     const snap = fixture(MetaSnapshotSchema, 'meta/standard.json');
-    expect(snap.example).toBe(true);
-    expect(snap.decks).toHaveLength(2);
+    const curatedSnap = parseData(MetaSnapshotSchema, readJson(path.join(CURATED, 'meta', 'standard.json')), 'curated');
+    expect(snap.example).toBeUndefined();
+    expect(snap.decks.length).toBeGreaterThanOrEqual(2);
+    // Arena exports name double-faced and adventure cards by their front face.
+    const anyName = new Map(arena.cards.flatMap((c) => [[c.name, c] as const, ...c.faces.map((f) => [f.name, c] as const)]));
     for (const deck of snap.decks) {
-      expect(deck.example).toBe(true);
+      expect(curatedSnap.decks).toContainEqual(deck);
       const { main, side } = parseList(deck.list);
       expect([...main.values()].reduce((a, b) => a + b, 0), deck.name).toBe(60);
       for (const name of [...main.keys(), ...side.keys()]) {
-        const card = byName.get(name);
+        const card = anyName.get(name);
         expect(card, `${deck.name}: ${name}`).toBeDefined();
         expect(card?.legalities.standard, name).toBe('legal');
       }
     }
-    const curatedSnap = parseData(MetaSnapshotSchema, readJson(path.join(CURATED, 'meta', 'standard.json')), 'curated');
-    expect(curatedSnap.example).toBe(true);
-    for (const d of curatedSnap.decks) expect(snap.decks).toContainEqual(d);
+  });
+
+  it('carries paper prices from grindstone 0.3 for the USD budget hints', () => {
+    expect(arena.cards.every((c) => c.priceUsd === null || c.priceUsd > 0)).toBe(true);
+    expect(arena.cards.filter((c) => c.priceUsd !== null).length).toBeGreaterThan(arena.cards.length / 2);
+    expect(fixture(MtgaMetaSchema, 'meta.json').extra.grindstone).toMatch(/^0\.3\./);
   });
 
   it('keeps Limited ratings internally consistent and marked synthetic', () => {
@@ -136,6 +160,12 @@ describe('mtga fixture consistency', () => {
 });
 
 describe('mtga schema rejects bad data', () => {
+  it('counts only non-example decks as meta', () => {
+    const decks = [{ list: 'a' }, { list: 'b', example: true as const }];
+    expect(realMetaDecks({ decks })).toEqual([{ list: 'a' }]);
+    expect(realMetaDecks({ example: true, decks })).toEqual([]);
+  });
+
   it('requires a sourceUrl on non-example curated decks', () => {
     const base = { format: 'standard', decks: [{ archetype: 'Boros', list: 'Deck\n4 Shock' }] };
     expect(MetaSnapshotSchema.safeParse(base).success).toBe(false);
@@ -165,7 +195,7 @@ describe('mtga load.ts against fixtures', () => {
     expect(load.getLimitedRatings('HOB')?.cards.length).toBeGreaterThan(0);
     expect(load.getLimitedRatings('hob')?.set).toBe('HOB');
     expect(load.getLimitedRatings('HOB', 'Sealed')).toBeNull();
-    expect(load.getMetaSnapshot('standard')?.decks).toHaveLength(2);
+    expect(load.getMetaSnapshot('standard')?.decks).toHaveLength(3);
     expect(load.getMetaSnapshot('pioneer')).toBeNull();
     expect(load.getMetaSnapshots().map((s) => s.format)).toEqual(['standard']);
   });
