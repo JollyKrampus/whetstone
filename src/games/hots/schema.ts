@@ -814,7 +814,6 @@ export type Streams = z.infer<typeof StreamsSchema>;
 
 const Index = z.number().int().nonnegative();
 
-/** Sparse edge list in parallel arrays (COO). `r[i]` indexes into the shard's `reasons` table. */
 /**
  * A reason reference: an index into `reasons`, or [i, j] / [i, j, k] for those lines joined with a
  * space (a rule line and its "Only when … takes …" / "… must also take …" conditions, stored apart
@@ -823,17 +822,36 @@ const Index = z.number().int().nonnegative();
 export const ReasonRefSchema = z.union([Index, z.array(Index).min(2).max(3)]);
 export type ReasonRef = z.infer<typeof ReasonRefSchema>;
 
+/** Most conditions kept per reason in the shard. */
+export const MAX_SHARD_CONDITIONS = 8;
+
+/**
+ * Conditions of reasons (Reason.conditions: talents or situations the reason depends on), sparse:
+ * entry i says reason `k[i]` of row `e[i]` of the same table holds when all of `c[i]` hold, each
+ * an index into `reasons` (templates with the same name tokens). Absent when no reason has any;
+ * readers that predate it still decode `r` unchanged.
+ */
+export const SparseConditionsSchema = z.strictObject({
+  e: z.array(Index),
+  k: z.array(Index),
+  c: z.array(z.array(Index).min(1).max(MAX_SHARD_CONDITIONS)),
+});
+export type SparseConditions = z.infer<typeof SparseConditionsSchema>;
+
+/** Sparse edge list in parallel arrays (COO). `r[i]` indexes into the shard's `reasons` table. */
 export const SparseEdgesSchema = z.strictObject({
   a: z.array(Index),
   b: z.array(Index),
   score: z.array(Score),
   r: z.array(z.array(ReasonRefSchema)),
+  cond: SparseConditionsSchema.exactOptional(),
 });
 export const SparseMapFitSchema = z.strictObject({
   hero: z.array(Index),
   map: z.array(Index),
   score: z.array(Score),
   r: z.array(z.array(ReasonRefSchema)),
+  cond: SparseConditionsSchema.exactOptional(),
 });
 
 /** Dense row-major H×H matrix: entry [i*H + j] is "i vs j" (counters) or "i with j" (synergies). */
@@ -869,7 +887,8 @@ export const DraftStatsBlockSchema = z.strictObject({
 /**
  * Shard format version. 2: reason lines are templates in which `{a}` and `{b}` stand for the
  * edge's two heroes (map fit: `{a}` the hero, `{m}` the map), so one line serves every pair a
- * rule matches; readers fill the names back in (src/games/hots/draft/data.ts).
+ * rule matches; readers fill the names back in (src/games/hots/draft/data.ts). An optional `cond`
+ * table per edge list adds reason conditions without changing how `r` decodes (still schema 2).
  */
 export const DRAFT_SHARD_SCHEMA = 2;
 
@@ -926,7 +945,7 @@ export const DraftShardSchema = z
       if ((s === 2) !== composite) ctx.addIssue({ code: 'custom', message: 'slots must be 2 exactly for composites', path: ['heroes', 'slots', i] });
     }
     /** `from`/`to` index the hero (or map) tables; every array must have one entry per edge. */
-    const checkSparse = (name: string, from: number[], to: number[], score: number[], r: ReasonRef[][], limits: [number, number]) => {
+    const checkSparse = (name: string, from: number[], to: number[], score: number[], r: ReasonRef[][], limits: [number, number], cond?: SparseConditions) => {
       if (to.length !== from.length || score.length !== from.length || r.length !== from.length) {
         ctx.addIssue({ code: 'custom', message: `theory.${name} arrays differ in length`, path: ['theory', name] });
       }
@@ -936,11 +955,18 @@ export const DraftShardSchema = z
       if (r.some((list) => list.some((x) => (typeof x === "number" ? [x] : x).some((i) => i >= R)))) {
         ctx.addIssue({ code: 'custom', message: `theory.${name} reason index out of range`, path: ['theory', name, 'r'] });
       }
+      if (cond) {
+        if (cond.k.length !== cond.e.length || cond.c.length !== cond.e.length) {
+          ctx.addIssue({ code: 'custom', message: `theory.${name}.cond arrays differ in length`, path: ['theory', name, 'cond'] });
+        }
+        const bad = cond.e.some((row, i) => row >= r.length || (cond.k[i] ?? 0) >= (r[row]?.length ?? 0) || (cond.c[i] ?? []).some((x) => x >= R));
+        if (bad) ctx.addIssue({ code: 'custom', message: `theory.${name}.cond points outside the rows, their reasons or the reasons table`, path: ['theory', name, 'cond'] });
+      }
     };
     const t = d.theory;
-    checkSparse('counters', t.counters.a, t.counters.b, t.counters.score, t.counters.r, [H, H]);
-    checkSparse('synergies', t.synergies.a, t.synergies.b, t.synergies.score, t.synergies.r, [H, H]);
-    checkSparse('mapFit', t.mapFit.hero, t.mapFit.map, t.mapFit.score, t.mapFit.r, [H, M]);
+    checkSparse('counters', t.counters.a, t.counters.b, t.counters.score, t.counters.r, [H, H], t.counters.cond);
+    checkSparse('synergies', t.synergies.a, t.synergies.b, t.synergies.score, t.synergies.r, [H, H], t.synergies.cond);
+    checkSparse('mapFit', t.mapFit.hero, t.mapFit.map, t.mapFit.score, t.mapFit.r, [H, M], t.mapFit.cond);
     if (d.stats) {
       const s = d.stats;
       for (const [k, v] of Object.entries(s.hero)) {

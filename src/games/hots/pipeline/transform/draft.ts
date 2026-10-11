@@ -10,8 +10,14 @@
  * Reasons are stored once as templates: the edge's hero names become {a} and {b} (map fit: {a}
  * and the map name {m}), which turns ~20k pair-specific lines into a few thousand shared ones.
  * The substitution is lossless because the reader puts back exactly the names it took out.
+ *
+ * Reason.conditions (talents or situations a reason depends on, e.g. a curated pair's
+ * "conditions") are templated the same way and listed in the edge list's optional `cond` table:
+ * row, reason position, condition indices. `r` decodes as before, so readers that do not know
+ * `cond` keep working (they just do not show the conditions).
  */
-import { DRAFT_SHARD_SCHEMA, type DraftShard, type GameMap, type Hero, type ReasonRef, type Theory } from '../../schema.ts';
+import type { Reason } from '../../../../core/game.ts';
+import { DRAFT_SHARD_SCHEMA, MAX_SHARD_CONDITIONS, type DraftShard, type GameMap, type Hero, type ReasonRef, type SparseConditions, type Theory } from '../../schema.ts';
 import { compareStrings } from '../util.ts';
 
 export function entityOrder<T extends Pick<Hero, 'id' | 'releaseDate'>>(entities: readonly T[]): T[] {
@@ -69,33 +75,48 @@ export function buildDraftShard(input: DraftShardInput): DraftShard {
     const parts = splitConditions(text);
     return parts.length === 1 ? index(text) : parts.map(index);
   };
+  /** Reason refs of one row, recording its reasons' conditions in `cond`. */
+  const refs = (row: number, reasons: readonly Reason[], names: readonly (readonly [string, string])[], cond: SparseConditions): ReasonRef[] =>
+    reasons.map((r, k) => {
+      const conditions = (r.conditions ?? []).filter((c) => c.trim() !== '').slice(0, MAX_SHARD_CONDITIONS);
+      if (conditions.length > 0) {
+        cond.e.push(row);
+        cond.k.push(k);
+        cond.c.push(conditions.map((c) => index(reasonTemplate(c, names))));
+      }
+      return ri(reasonTemplate(r.text, names));
+    });
+  const withCond = <T extends object>(table: T, cond: SparseConditions): T & { cond?: SparseConditions } => (cond.e.length > 0 ? { ...table, cond } : table);
   const sparse = (edges: Theory['counters']): DraftShard['theory']['counters'] => {
     const out: DraftShard['theory']['counters'] = { a: [], b: [], score: [], r: [] };
+    const cond: SparseConditions = { e: [], k: [], c: [] };
     for (const e of edges) {
       const a = eIdx.get(e.a);
       const b = eIdx.get(e.b);
       if (a === undefined || b === undefined) continue;
       const names = [['{a}', entities[a]?.name ?? ''], ['{b}', entities[b]?.name ?? '']] as const;
+      out.r.push(refs(out.a.length, e.reasons, names, cond));
       out.a.push(a);
       out.b.push(b);
       out.score.push(e.score);
-      out.r.push(e.reasons.map((r) => ri(reasonTemplate(r.text, names))));
     }
-    return out;
+    return withCond(out, cond);
   };
   const counters = sparse(input.theory.counters);
   const synergies = sparse(input.theory.synergies);
-  const mapFit: DraftShard['theory']['mapFit'] = { hero: [], map: [], score: [], r: [] };
+  const fit: DraftShard['theory']['mapFit'] = { hero: [], map: [], score: [], r: [] };
+  const fitCond: SparseConditions = { e: [], k: [], c: [] };
   for (const f of input.theory.mapFit) {
     const h = eIdx.get(f.hero);
     const m = mIdx.get(f.map);
     if (h === undefined || m === undefined) continue;
     const names = [['{a}', entities[h]?.name ?? ''], ['{m}', input.maps[m]?.name ?? '']] as const;
-    mapFit.hero.push(h);
-    mapFit.map.push(m);
-    mapFit.score.push(f.score);
-    mapFit.r.push(f.reasons.map((r) => ri(reasonTemplate(r.text, names))));
+    fit.r.push(refs(fit.hero.length, f.reasons, names, fitCond));
+    fit.hero.push(h);
+    fit.map.push(m);
+    fit.score.push(f.score);
   }
+  const mapFit = withCond(fit, fitCond);
   return {
     schema: DRAFT_SHARD_SCHEMA,
     build: input.build,
