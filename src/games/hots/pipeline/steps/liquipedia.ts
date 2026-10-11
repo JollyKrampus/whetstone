@@ -8,7 +8,9 @@
  * pro.json and page checks are reused (1 call). Otherwise tournaments are searched and their
  * wikitext fetched in batches of 50 (about 4 calls), and only heroes that are new or whose page
  * title changed are re-checked. Every FULL_REFRESH_DAY (UTC) everything is refetched, which
- * bounds what a truncated change list or a parser update can leave stale.
+ * bounds what a truncated change list or a parser update can leave stale. A full refresh that
+ * finds no drafted maps, or loses more than half of them within the same window, keeps last-good
+ * pro.json with status 'stale' (implausiblePro).
  *
  * Liquipedia data is never merged into class-A files: links.json carries only the existence of
  * a page (a URL), not its content.
@@ -22,10 +24,26 @@ import { liquipediaTitles } from '../transform/links.ts';
 import { aggregatePro, buildEntityIndex, inheritFromParents, parseTournament, type ParsedTournament } from '../transform/pro.ts';
 import { compareStrings, warn } from '../util.ts';
 import { hoursSince } from './builds.ts';
-import { lastFetchedAt, previousFile, selected, setFallback, setNotSelected, setOk, type RunEnv } from './common.ts';
+import { lastFetchedAt, previousFile, selected, setFallback, setNotSelected, setOk, setStatus, type RunEnv } from './common.ts';
 
 /** MediaWiki keeps 30 days of recent changes by default; stay well inside that. */
 const RC_MAX_DAYS = 7;
+/**
+ * A full refresh that keeps less than this share of the last-good drafted maps in the same window
+ * is treated as a failed fetch: tournaments do not disappear, search results do (CirrusSearch lag
+ * or timeouts, `insource:` limits, a renamed infobox field).
+ */
+export const MIN_KEPT_MAPS = 0.5;
+
+/** Why a freshly aggregated pro.json cannot be right compared with last-good, or null. */
+export function implausiblePro(next: Pick<Pro, 'window' | 'totals'>, prev: Pick<Pro, 'window' | 'totals'> | null): string | null {
+  if (!prev || prev.totals.maps === 0) return null;
+  if (next.totals.maps === 0) return `no drafted maps found for ${next.window.label} (last-good has ${prev.totals.maps})`;
+  if (next.window.label === prev.window.label && next.totals.maps < prev.totals.maps * MIN_KEPT_MAPS) {
+    return `drafted maps for ${next.window.label} fell from ${prev.totals.maps} to ${next.totals.maps}`;
+  }
+  return null;
+}
 /** Weekly full refresh on this UTC weekday (1 = Monday). */
 export const FULL_REFRESH_DAY = 1;
 /** With fewer drafted maps than this in the current year, the window also covers last year. */
@@ -123,6 +141,13 @@ export async function runLiquipedia(env: RunEnv, heroes: readonly HeroInput[]): 
     const unique = [...new Map(tournaments.map((t) => [t.id, t])).values()];
     const { pro, issues } = aggregatePro(unique, { entityIndex, from: window.from, to: window.to, label: window.label });
     env.issues.push(...issues);
+    const implausible = implausiblePro(pro, prevPro);
+    if (implausible && prevPro) {
+      // Keep last-good numbers (the page checks above are separate queries and stay fresh).
+      env.issues.push(warn(`liquipedia: implausible result, ${implausible}; kept last-good pro.json`, 'liquipedia'));
+      setStatus(env, 'liquipedia', 'stale', `implausible result (${implausible}); last-good pro.json kept`.slice(0, 300));
+      return { pro: prevPro, heroPages };
+    }
     if (pro.totals.maps === 0) env.issues.push(warn(`liquipedia: no drafted maps found for ${window.label}`, 'liquipedia'));
     setOk(env, 'liquipedia', `${pro.totals.tournaments} tournaments, ${pro.totals.maps} drafted maps`);
     return { pro, heroPages };

@@ -1,13 +1,16 @@
 /**
- * Step-level fallbacks with a fake transport: a lagging or unreachable rotation source
- * (hots-logic/F4).
+ * Step-level fallbacks with a fake transport: a lagging or unreachable rotation source and an
+ * implausible Liquipedia result (pipeline-custody/F4, hots-logic/F4).
  */
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { Http, HttpInit, PipelineContext } from '../../../../core/game.ts';
-import type { Rotation } from '../../schema.ts';
+import type { Pro, Rotation } from '../../schema.ts';
 import { FIXTURE_NOW, REPO_ROOT, fixtureRelease, rawJson, testCurated } from '../test-helpers.ts';
 import { buildHeroes } from '../transform/heroes.ts';
 import { createEnv, type RunEnv } from './common.ts';
+import { implausiblePro, runLiquipedia } from './liquipedia.ts';
 import { runRotation } from './rotation.ts';
 
 const heroes = buildHeroes(fixtureRelease('2.57.0.98348'), { aliases: testCurated().aliases, now: FIXTURE_NOW }).heroes;
@@ -65,5 +68,37 @@ describe('rotation fallbacks', () => {
     const second = await runRotation(e, heroes);
     expect(second).toEqual({ ...first, lagging: true });
     expect(e.statuses.get('nexus-compendium')).toMatchObject({ status: 'ok', detail: expect.stringMatching(/not yet updated upstream/) });
+  });
+});
+
+describe('liquipedia plausibility', () => {
+  const window = (label: string) => ({ label, from: '2026-01-01', to: '2026-12-31' });
+
+  it('rejects an empty result or a large drop within the same window', () => {
+    const prev = { window: window('2026 tournaments'), totals: { tournaments: 40, maps: 766 } };
+    expect(implausiblePro({ window: window('2026 tournaments'), totals: { tournaments: 0, maps: 0 } }, prev)).toMatch(/no drafted maps/);
+    expect(implausiblePro({ window: window('2026 tournaments'), totals: { tournaments: 10, maps: 300 } }, prev)).toMatch(/fell from 766 to 300/);
+    expect(implausiblePro({ window: window('2026 tournaments'), totals: { tournaments: 39, maps: 700 } }, prev)).toBeNull();
+    // A new window (new year) may legitimately start smaller; a first run has nothing to compare.
+    expect(implausiblePro({ window: window('2027 tournaments'), totals: { tournaments: 2, maps: 60 } }, prev)).toBeNull();
+    expect(implausiblePro({ window: window('2026 tournaments'), totals: { tournaments: 0, maps: 0 } }, null)).toBeNull();
+  });
+
+  it('keeps last-good pro.json with status stale when the search comes back empty', async () => {
+    const prevPro = JSON.parse(readFileSync(path.join(REPO_ROOT, 'fixtures', 'hots', 'pro.json'), 'utf8')) as Pro;
+    const answer = (fixture: string): unknown => {
+      if (fixture.startsWith('liquipedia/search-')) return { query: { search: [] } };
+      if (fixture.startsWith('liquipedia/revisions-')) return { query: { pages: [] } };
+      if (fixture.startsWith('liquipedia/pages-')) return rawJson('liquipedia/pages-1.json');
+      return new Error(`unexpected request ${fixture}`);
+    };
+    // A Monday: the weekly full refresh, no incremental shortcut.
+    const e = env('2026-10-12T10:17:00Z', fakeHttp(answer), { 'pro.json': prevPro });
+    const r = await runLiquipedia(e, heroes);
+    expect(r.pro).toEqual(prevPro);
+    expect(e.statuses.get('liquipedia')).toMatchObject({ status: 'stale', detail: expect.stringMatching(/implausible result/) });
+    expect(e.issues.some((i) => i.level === 'warn' && i.source === 'liquipedia' && /implausible/.test(i.message))).toBe(true);
+    // The page checks are separate queries and stay fresh.
+    expect(r.heroPages.get('Abat')).toBe('Abathur');
   });
 });
