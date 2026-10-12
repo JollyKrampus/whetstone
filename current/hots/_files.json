@@ -26,9 +26,9 @@
       "sha256": "96a6bee58d8cff8091fb2017a72b054905912e50afc70d17007765aa18a44399"
     },
     "pro.json": {
-      "bytes": 21847,
+      "bytes": 21854,
       "custody": "A-SA",
-      "sha256": "49ac03bf19f62768d20dffd782121734c93056c5dfc633e5f557928a37739d2a"
+      "sha256": "c04cb00f18b52d2c6814d5acea00762d9ab4455a33eca98fadd457530f1b952a"
     },
     "public/draft.json": {
       "bytes": 533329,
