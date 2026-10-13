@@ -1,19 +1,19 @@
 {
   "counts": {
-    "cards": 16254,
+    "cards": 16284,
     "limitedSets": 2,
     "metaDecks": 10,
     "sets": 196,
     "standardCards": 5177
   },
-  "dataHash": "6617b8f3287e68b9ddaab715d5be934b35f6767d27d2c8c814ea98784504700f",
+  "dataHash": "304d913a90d5c8f5d3e69ddf17e5989af3d8506e4b2d93434cdccc3da7144fe2",
   "extra": {
     "grindstone": "0.3.1",
     "latestSet": "FRA",
     "metaFormats": [
       "standard"
     ],
-    "snapshot": "2026-10-12T09:05:45.962+00:00",
+    "snapshot": "2026-10-13T09:06:00.503+00:00",
     "standardSets": [
       "FRA",
       "HOB",
@@ -38,30 +38,30 @@
     ]
   },
   "game": "mtga",
-  "generatedAt": "2026-10-12T19:50:06.775Z",
+  "generatedAt": "2026-10-13T17:37:50.244Z",
   "schema": 1,
   "sources": [
     {
-      "detail": "default_cards 2026-10-12T09:05:45.962+00:00: 16254 Arena cards, 5177 Standard",
-      "fetchedAt": "2026-10-12T19:50:06.775Z",
+      "detail": "default_cards 2026-10-13T09:06:00.503+00:00: 16284 Arena cards, 5177 Standard",
+      "fetchedAt": "2026-10-13T17:37:50.244Z",
       "id": "scryfall",
       "status": "ok"
     },
     {
       "detail": "HOB PremierDraft, HOB TradDraft, HOB Sealed, MSH PremierDraft, MSH TradDraft, MSH Sealed",
-      "fetchedAt": "2026-10-12T19:50:06.775Z",
+      "fetchedAt": "2026-10-13T17:37:50.244Z",
       "id": "17lands",
       "status": "ok"
     },
     {
       "detail": "1 format(s), 10 list(s)",
-      "fetchedAt": "2026-10-12T19:50:06.775Z",
+      "fetchedAt": "2026-10-13T17:37:50.244Z",
       "id": "curated-meta",
       "status": "ok"
     },
     {
       "detail": "grindstone-mcp 0.3.1, workspace package",
-      "fetchedAt": "2026-10-12T19:50:06.775Z",
+      "fetchedAt": "2026-10-13T17:37:50.244Z",
       "id": "grindstone-mcp",
       "status": "ok"
     }
