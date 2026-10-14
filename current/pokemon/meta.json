@@ -1,20 +1,20 @@
 {
   "counts": {
     "abilities": 216,
-    "h2hEdges": 1129,
+    "h2hEdges": 1297,
     "items": 166,
     "legalMegas": 82,
     "legalSpecies": 269,
     "moves": 510,
-    "replays": 1969,
+    "replays": 2465,
     "species": 351,
     "speedEntries": 91,
     "sprites": 340,
-    "teams": 4399,
+    "teams": 4435,
     "tournaments": 40,
     "usageFiles": 9
   },
-  "dataHash": "35474943e40b9deb110b59842a7bd319be72184be990dca09af2537c3d4b11ca",
+  "dataHash": "1448d8f3139158afb384720f25c9210a55b1f6b0d42d11ac76cf2743dd634673",
   "extra": {
     "dexKey": "c2db56d68219dbd7",
     "formats": {
@@ -43,36 +43,36 @@
     }
   },
   "game": "pokemon",
-  "generatedAt": "2026-10-13T17:38:19.027Z",
+  "generatedAt": "2026-10-14T15:12:21.844Z",
   "schema": 1,
   "sources": [
     {
       "detail": "7332b60, data for M-C; M-B: 240 species + 76 Megas; M-C: 269 species + 82 Megas; 340/351 sprites",
-      "fetchedAt": "2026-10-13T17:38:19.027Z",
+      "fetchedAt": "2026-10-14T15:12:21.844Z",
       "id": "showdown",
       "status": "ok"
     },
     {
       "detail": "September 2026, M-C: 9 files (gen9championsbssregmc, gen9championsvgc2026regmc, gen9championsvgc2026regmcbo3; cutoffs 0/1500/1760)",
-      "fetchedAt": "2026-10-13T17:38:19.027Z",
+      "fetchedAt": "2026-10-14T15:12:21.844Z",
       "id": "smogon",
       "status": "ok"
     },
     {
-      "detail": "40 M-C events (largest of the last 30 days with team lists), 4399 teams",
-      "fetchedAt": "2026-10-13T17:38:19.027Z",
+      "detail": "40 M-C events (largest of the last 30 days with team lists), 4435 teams",
+      "fetchedAt": "2026-10-14T15:12:21.844Z",
       "id": "limitless",
       "status": "ok"
     },
     {
-      "detail": "1969 gen9championsvgc2026regmcbo3 games from 2026-10-10 to 2026-10-13; 854 counter and 275 synergy edges (n ≥ 15)",
-      "fetchedAt": "2026-10-13T17:38:19.027Z",
+      "detail": "2465 gen9championsvgc2026regmcbo3 games from 2026-10-10 to 2026-10-14; 980 counter and 317 synergy edges (n ≥ 15)",
+      "fetchedAt": "2026-10-14T15:12:21.844Z",
       "id": "showdown-replays",
       "status": "ok"
     },
     {
       "detail": "@smogon/calc 0.12.0 (Champions = generation 0): 351 species match the dex",
-      "fetchedAt": "2026-10-13T17:38:19.027Z",
+      "fetchedAt": "2026-10-14T15:12:21.844Z",
       "id": "smogon-calc",
       "status": "ok"
     }
