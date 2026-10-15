@@ -8,7 +8,7 @@
     "theoryCounters": 5025,
     "theorySynergies": 2590
   },
-  "dataHash": "5907898165934e947f2a5d835297cbb3e69fdf71d6c751df2a320ba601ffacd1",
+  "dataHash": "701d88ad6e94202a4dea487ea429679fbbfa94cfce322bbb98c069e0bbc96502",
   "extra": {
     "assetsTag": "v2.57.0.98285",
     "build": "2.57.0.98348",
@@ -23,42 +23,42 @@
     "majorSince": "2026-09-28"
   },
   "game": "hots",
-  "generatedAt": "2026-10-14T15:12:23.759Z",
+  "generatedAt": "2026-10-15T15:04:48.653Z",
   "schema": 1,
   "sources": [
     {
-      "fetchedAt": "2026-10-14T15:12:23.759Z",
+      "fetchedAt": "2026-10-15T15:04:48.653Z",
       "id": "tact",
       "status": "ok"
     },
     {
-      "fetchedAt": "2026-10-14T15:12:23.759Z",
+      "fetchedAt": "2026-10-15T15:04:48.653Z",
       "id": "heroes-data2",
       "status": "ok"
     },
     {
       "detail": "v2.57.0.98285: 1235 images",
-      "fetchedAt": "2026-10-14T15:12:23.759Z",
+      "fetchedAt": "2026-10-15T15:04:48.653Z",
       "id": "heroes-images",
       "status": "ok"
     },
     {
       "detail": "24 patch-note articles since 2025-01-01",
-      "fetchedAt": "2026-10-14T15:12:23.759Z",
+      "fetchedAt": "2026-10-15T15:04:48.653Z",
       "id": "blizzard-news",
       "status": "ok"
     },
     {
       "detail": "rotation not yet updated upstream (window ended 2026-10-08)",
-      "fetchedAt": "2026-10-14T15:12:23.759Z",
+      "fetchedAt": "2026-10-15T15:04:48.653Z",
       "id": "nexus-compendium",
       "status": "ok"
     },
     {
-      "detail": "23 tournaments, 797 drafted maps",
+      "detail": "fetch failed; last-good pro.json kept",
       "fetchedAt": "2026-10-14T15:12:23.759Z",
       "id": "liquipedia",
-      "status": "ok"
+      "status": "stale"
     },
     {
       "detail": "YT_API_KEY not set",
