@@ -31,14 +31,14 @@
       "sha256": "107cf2358b4922c0228252ebd3f894dd2b06e4a7ca1ca9140accfba76bcf8d6f"
     },
     "h2h.json": {
-      "bytes": 570443,
+      "bytes": 624041,
       "custody": "A",
-      "sha256": "5f5a8bdf7d29cb5de605ad4f675f52d41555887d5f79e9d206d939b2129bd530"
+      "sha256": "e0c0eac44ed8d15c0975d1faba7fb241f458f8854e50741892e18c0ba5b72ea5"
     },
     "ledger/showdown-replays.json": {
-      "bytes": 272014,
+      "bytes": 317322,
       "custody": "A",
-      "sha256": "dfef2aa273092fb53fce00f04600aa4ac3e7311a8e5a6793ed41dcba0e62d5b6"
+      "sha256": "40cfed1223181be9f697a87fc122c1ca79e2abbfa10b743ba822711327cbde72"
     },
     "public/dex.json": {
       "bytes": 477270,
@@ -56,9 +56,9 @@
       "sha256": "d05c771b93d5c1da048bec706295836c12aa771f96797db748f622e7da3999b4"
     },
     "tournaments.json": {
-      "bytes": 551537,
+      "bytes": 551144,
       "custody": "A",
-      "sha256": "78b5178e7f3124c780b5e8267504677568d754258fcb0b43b4f5baafa2efe910"
+      "sha256": "ddfd88d53c3e4336a09807b4138e25efcce72205273efac570a0dd2914aa189c"
     },
     "usage/gen9championsbssregmc-0.json": {
       "bytes": 1568658,
