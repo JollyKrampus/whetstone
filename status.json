@@ -1,15 +1,15 @@
 {
   "games": {
     "hots": {
-      "changed": true,
-      "checkedAt": "2026-10-16T14:54:25.226Z",
+      "changed": false,
+      "checkedAt": "2026-10-17T13:45:41.573Z",
       "dataHash": "5907898165934e947f2a5d835297cbb3e69fdf71d6c751df2a320ba601ffacd1",
-      "durationMs": 48813,
+      "durationMs": 48787,
       "files": {
         "current": 1245,
         "private": 0
       },
-      "generatedAt": "2026-10-16T14:54:25.226Z",
+      "generatedAt": "2026-10-17T13:45:41.573Z",
       "issues": [
         {
           "level": "warn",
@@ -19,36 +19,36 @@
       ],
       "sources": [
         {
-          "fetchedAt": "2026-10-16T14:54:25.226Z",
+          "fetchedAt": "2026-10-17T13:45:41.573Z",
           "id": "tact",
           "status": "ok"
         },
         {
-          "fetchedAt": "2026-10-16T14:54:25.226Z",
+          "fetchedAt": "2026-10-17T13:45:41.573Z",
           "id": "heroes-data2",
           "status": "ok"
         },
         {
           "detail": "v2.57.0.98285: 1235 images",
-          "fetchedAt": "2026-10-16T14:54:25.226Z",
+          "fetchedAt": "2026-10-17T13:45:41.573Z",
           "id": "heroes-images",
           "status": "ok"
         },
         {
           "detail": "24 patch-note articles since 2025-01-01",
-          "fetchedAt": "2026-10-16T14:54:25.226Z",
+          "fetchedAt": "2026-10-17T13:45:41.573Z",
           "id": "blizzard-news",
           "status": "ok"
         },
         {
           "detail": "rotation not yet updated upstream (window ended 2026-10-08)",
-          "fetchedAt": "2026-10-16T14:54:25.226Z",
+          "fetchedAt": "2026-10-17T13:45:41.573Z",
           "id": "nexus-compendium",
           "status": "ok"
         },
         {
           "detail": "23 tournaments, 797 drafted maps",
-          "fetchedAt": "2026-10-16T14:54:25.226Z",
+          "fetchedAt": "2026-10-17T13:45:41.573Z",
           "id": "liquipedia",
           "status": "ok"
         },
@@ -69,14 +69,14 @@
     },
     "mtga": {
       "changed": true,
-      "checkedAt": "2026-10-16T14:54:33.399Z",
-      "dataHash": "b05e31a1283713037ded6f0f9049c8b72c81f76e33d9fdaf6224a8434ab9541d",
-      "durationMs": 11601,
+      "checkedAt": "2026-10-17T13:45:48.788Z",
+      "dataHash": "c31ee5177f7863c7921abfc05a5caf2df1a10bbf3f43f3da2a299b32611aa00e",
+      "durationMs": 9871,
       "files": {
         "current": 11,
         "private": 0
       },
-      "generatedAt": "2026-10-16T14:54:33.399Z",
+      "generatedAt": "2026-10-17T13:45:48.788Z",
       "issues": [
         {
           "level": "warn",
@@ -85,26 +85,26 @@
       ],
       "sources": [
         {
-          "detail": "default_cards 2026-10-16T09:05:44.990+00:00: 16284 Arena cards, 5177 Standard",
-          "fetchedAt": "2026-10-16T14:54:33.399Z",
+          "detail": "default_cards 2026-10-17T09:05:48.905+00:00: 16284 Arena cards, 5177 Standard",
+          "fetchedAt": "2026-10-17T13:45:48.788Z",
           "id": "scryfall",
           "status": "ok"
         },
         {
           "detail": "HOB PremierDraft, HOB TradDraft, HOB Sealed, MSH PremierDraft, MSH TradDraft, MSH Sealed",
-          "fetchedAt": "2026-10-16T14:54:33.399Z",
+          "fetchedAt": "2026-10-17T13:45:48.788Z",
           "id": "17lands",
           "status": "ok"
         },
         {
           "detail": "1 format(s), 10 list(s)",
-          "fetchedAt": "2026-10-16T14:54:33.399Z",
+          "fetchedAt": "2026-10-17T13:45:48.788Z",
           "id": "curated-meta",
           "status": "ok"
         },
         {
           "detail": "grindstone-mcp 0.3.1, workspace package",
-          "fetchedAt": "2026-10-16T14:54:33.399Z",
+          "fetchedAt": "2026-10-17T13:45:48.788Z",
           "id": "grindstone-mcp",
           "status": "ok"
         }
@@ -113,43 +113,43 @@
     },
     "pokemon": {
       "changed": true,
-      "checkedAt": "2026-10-16T14:54:20.758Z",
-      "dataHash": "cb9c646b226236193659db7248fb3cb1714fd985347b166a97170b1cf17bd3dd",
-      "durationMs": 510358,
+      "checkedAt": "2026-10-17T13:45:42.741Z",
+      "dataHash": "2343f961dfee5eb1ec94f86201d89144de63d957ab8586669631e33d42653c53",
+      "durationMs": 510373,
       "files": {
         "current": 362,
         "private": 0
       },
-      "generatedAt": "2026-10-16T14:54:20.758Z",
+      "generatedAt": "2026-10-17T13:45:42.741Z",
       "issues": [],
       "sources": [
         {
           "detail": "7332b60, data for M-C; M-B: 240 species + 76 Megas; M-C: 269 species + 82 Megas; 340/351 sprites",
-          "fetchedAt": "2026-10-16T14:54:20.758Z",
+          "fetchedAt": "2026-10-17T13:45:42.741Z",
           "id": "showdown",
           "status": "ok"
         },
         {
           "detail": "September 2026, M-C: 9 files (gen9championsbssregmc, gen9championsvgc2026regmc, gen9championsvgc2026regmcbo3; cutoffs 0/1500/1760)",
-          "fetchedAt": "2026-10-16T14:54:20.758Z",
+          "fetchedAt": "2026-10-17T13:45:42.741Z",
           "id": "smogon",
           "status": "ok"
         },
         {
-          "detail": "40 M-C events (largest of the last 30 days with team lists), 4466 teams",
-          "fetchedAt": "2026-10-16T14:54:20.758Z",
+          "detail": "40 M-C events (largest of the last 30 days with team lists), 4614 teams",
+          "fetchedAt": "2026-10-17T13:45:42.741Z",
           "id": "limitless",
           "status": "ok"
         },
         {
-          "detail": "3452 gen9championsvgc2026regmcbo3 games from 2026-10-10 to 2026-10-16; 1228 counter and 380 synergy edges (n ≥ 15)",
-          "fetchedAt": "2026-10-16T14:54:20.758Z",
+          "detail": "3947 gen9championsvgc2026regmcbo3 games from 2026-10-10 to 2026-10-17; 1298 counter and 424 synergy edges (n ≥ 15)",
+          "fetchedAt": "2026-10-17T13:45:42.741Z",
           "id": "showdown-replays",
           "status": "ok"
         },
         {
           "detail": "@smogon/calc 0.12.0 (Champions = generation 0): 351 species match the dex",
-          "fetchedAt": "2026-10-16T14:54:20.758Z",
+          "fetchedAt": "2026-10-17T13:45:42.741Z",
           "id": "smogon-calc",
           "status": "ok"
         }
@@ -158,5 +158,5 @@
     }
   },
   "schema": 1,
-  "updatedAt": "2026-10-16T15:03:06.943Z"
+  "updatedAt": "2026-10-17T13:54:34.954Z"
 }

@@ -23,40 +23,40 @@
     "majorSince": "2026-09-28"
   },
   "game": "hots",
-  "generatedAt": "2026-10-16T14:54:25.226Z",
+  "generatedAt": "2026-10-17T13:45:41.573Z",
   "schema": 1,
   "sources": [
     {
-      "fetchedAt": "2026-10-16T14:54:25.226Z",
+      "fetchedAt": "2026-10-17T13:45:41.573Z",
       "id": "tact",
       "status": "ok"
     },
     {
-      "fetchedAt": "2026-10-16T14:54:25.226Z",
+      "fetchedAt": "2026-10-17T13:45:41.573Z",
       "id": "heroes-data2",
       "status": "ok"
     },
     {
       "detail": "v2.57.0.98285: 1235 images",
-      "fetchedAt": "2026-10-16T14:54:25.226Z",
+      "fetchedAt": "2026-10-17T13:45:41.573Z",
       "id": "heroes-images",
       "status": "ok"
     },
     {
       "detail": "24 patch-note articles since 2025-01-01",
-      "fetchedAt": "2026-10-16T14:54:25.226Z",
+      "fetchedAt": "2026-10-17T13:45:41.573Z",
       "id": "blizzard-news",
       "status": "ok"
     },
     {
       "detail": "rotation not yet updated upstream (window ended 2026-10-08)",
-      "fetchedAt": "2026-10-16T14:54:25.226Z",
+      "fetchedAt": "2026-10-17T13:45:41.573Z",
       "id": "nexus-compendium",
       "status": "ok"
     },
     {
       "detail": "23 tournaments, 797 drafted maps",
-      "fetchedAt": "2026-10-16T14:54:25.226Z",
+      "fetchedAt": "2026-10-17T13:45:41.573Z",
       "id": "liquipedia",
       "status": "ok"
     },
